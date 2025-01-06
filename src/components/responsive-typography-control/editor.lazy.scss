@@ -1,0 +1,183 @@
+$primary_color: #007cba;
+$secondary_color: #5f5f5f;
+$background_color: #dcdcde;
+$white_color: #ffffff;
+$border_color: #dddddd;
+
+.global-setting-typography {
+    .components-base-control__field {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        align-items: center;
+    }
+}
+
+.global-setting-dropdown-icon-wrapper {
+    .global-setting-dropdown-icon-btn {
+        margin: 0;
+        height: 28px;
+        width: 28px;
+        padding: 5px;
+        border: 1px solid #e6e7e9;
+        border-radius: 14px;
+        color: #50575e;
+        background: $white_color;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        .global-setting-dropdown-icon {
+            font-size: 15px;
+            line-height: 20px;
+        }
+    }
+}
+
+.global-setting-fontsize-wrapper {
+    .global-setting-fontsize-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .global-setting-fontsize-label {
+            display: block;
+            color: $secondary_color;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            margin: 10px 0;
+            min-height: auto;
+            text-transform: capitalize;
+        }
+        .global-setting-fontsize-units {
+
+            .global-setting-fontsize-units-wrap {
+                direction: initial;
+                display: flex;
+                align-items: center;
+                .global-setting-fontsize-units-switcher {
+                    box-shadow: unset;
+                    font-size: 10px;
+                    padding: 0;
+                    text-transform: uppercase;
+                    padding-right: 5px;
+                    &.active {
+                        color: $primary_color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.global-setting-letterspacing-wrapper {
+    .global-setting-letterspacing-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .global-setting-letterspacing-label {
+            display: block;
+            color: $secondary_color;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            margin: 10px 0;
+            min-height: auto;
+            text-transform: capitalize;
+        }
+        .global-setting-letterspacing-units {
+            .global-setting-letterspacing-units-wrap {
+                direction: initial;
+                display: flex;
+                align-items: center;
+                .global-setting-letterspacing-units-switcher {
+                    box-shadow: unset;
+                    font-size: 10px;
+                    padding: 0;
+                    text-transform: uppercase;
+                    padding-right: 5px;
+                    &.active {
+                        color: $primary_color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.global-setting-lineheight-wrapper {
+    .global-setting-lineheight-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .global-setting-lineheight-label {
+            display: block;
+            color: $secondary_color;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            margin: 10px 0;
+            min-height: auto;
+            text-transform: capitalize;
+        }
+        .global-setting-lineheight-units {
+            .global-setting-lineheight-units-wrap {
+                direction: initial;
+                display: flex;
+                align-items: center;
+                .global-setting-lineheight-units-switcher {
+                    box-shadow: unset;
+                    font-size: 10px;
+                    padding: 0;
+                    text-transform: uppercase;
+                    padding-right: 5px;
+                    &.active {
+                        color: $primary_color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.global-setting-typography-popup {
+    padding: 0.2rem;
+    min-width: 220px;
+    .global-setting-typography-popup-inner {
+        position: relative;
+        z-index: 99999;
+        .components-base-control__field {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            label {
+                display: block;
+                color: $secondary_color !important;
+                font-size: 12px !important;
+                font-weight: 500 !important;
+                line-height: 16px !important;
+                margin: 10px 0 !important;
+                min-height: auto;
+                text-transform: capitalize !important;
+            }
+        }
+    }
+}
+
+.global-setting-fontsize-wrapper, .global-setting-letterspacing-wrapper, .global-setting-lineheight-wrapper {
+    .components-range-control__reset {
+        position: absolute;
+        top: -33px;
+        right: 50px;
+        box-shadow: unset;
+        font-size: 10px;
+        &:hover {
+            box-shadow: unset !important;
+        }
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+}
