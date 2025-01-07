@@ -773,7 +773,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                                 <div className='global-advanced-btn-icon-wrapper'>
                                                     <BaseControl
-                                                        label={__("Icon", "frontis-blocks")}
+                                                        label={__("Icon", "gutenslider-blocks")}
                                                             id="global-setting-text-alignment"
                                                             className="global-setting-text-alignment"
                                                     >

@@ -43,8 +43,7 @@ if ( ! class_exists( 'GutenSlider_Blocks_Loader' ) ) {
 		 * @return void
 		 */
 		private function __construct() {
-			$this->includes();      // Includes necessary files.
-			$this->init_hooks();     // Initializes hooks for WordPress actions.
+			$this->includes();
 		}
 
 		/**
@@ -58,36 +57,10 @@ if ( ! class_exists( 'GutenSlider_Blocks_Loader' ) ) {
 		 */
 		private function includes() {
 			// Include necessary PHP files from the plugin's includes folder.
-			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . 'includes/classes/register-blocks.php';
-			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . 'includes/classes/register-category.php';
-			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . 'includes/classes/dynamic-style.php';
-			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . 'includes/classes/FontLoader.php';
-		}
-
-		/**
-		 * Initializes the hooks for registering blocks and other necessary actions.
-		 *
-		 * This method hooks into WordPress' `init` action to register blocks or perform other tasks
-		 * that should happen when WordPress initializes.
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		private function init_hooks() {
-			// Hook into the 'init' action to register blocks.
-			add_action( 'init', array( $this, 'register_blocks' ) );
-		}
-
-		/**
-		 * Registers the blocks.
-		 *
-		 * This method could include the logic to register custom blocks for the plugin.
-		 *
-		 * @since 1.0.0
-		 * @return void
-		 */
-		public function register_blocks() {
-			// Logic to register blocks can go here.
+			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . '/includes/classes/register-blocks.php';
+			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . '/includes/classes/register-category.php';
+			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . '/includes/classes/dynamic-style.php';
+			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . '/includes/classes/FontLoader.php';
 		}
 
 		/**

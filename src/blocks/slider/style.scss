@@ -1,0 +1,19 @@
+.fb-slider-content-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: clamp(300px, 60vh, 500px);
+    justify-content: center;
+    .fb-slider-content-inner {
+        box-sizing: border-box;
+        margin: 0 auto;
+        max-width: 80%;
+        padding: clamp(15px, 6vw, 30px);
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.swiper-wrapper {
+    height: auto !important;
+} 

@@ -1,1 +1,45 @@
-.bb-advanced-button-wrapper .bb-advanced-button{align-items:center;box-sizing:border-box;cursor:pointer;display:inline-flex;justify-content:center;outline:none;position:relative;text-align:center;text-decoration:none;transition:all .3s ease-in-out;white-space:nowrap}.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-text{transition:all .3s ease-in-out}.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper{align-items:center;display:flex}.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper.left{margin-right:10px}.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper.right{margin-left:10px}.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper .bb-advanced-button-icon{align-items:center;display:flex;justify-content:center;position:relative;z-index:1}.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper .bb-advanced-button-icon svg{display:block;height:16px;width:16px;fill:#fff;box-sizing:content-box}
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/button/style.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+.bb-advanced-button-wrapper .bb-advanced-button {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  white-space: nowrap;
+}
+.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-text {
+  transition: all 0.3s ease-in-out;
+}
+.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper {
+  display: flex;
+  align-items: center;
+}
+.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper.left {
+  margin-right: 10px;
+}
+.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper.right {
+  margin-left: 10px;
+}
+.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper .bb-advanced-button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.bb-advanced-button-wrapper .bb-advanced-button .bb-advanced-button-icon-wrapper .bb-advanced-button-icon svg {
+  display: block;
+  height: 16px;
+  width: 16px;
+  fill: #fff;
+  box-sizing: content-box;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

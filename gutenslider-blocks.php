@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Gutenslider Blocks
+ * Plugin Name: GutenSlider Blocks
  * Description: Enhance your site with dynamic, customizable, and multi-functional buttons to create a more engaging and functional experience.
  * Author: 		Noruzzaman
  * Author URI: 	https://github.com/noruzzamans/

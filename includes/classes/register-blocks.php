@@ -2,73 +2,76 @@
 /**
  * GutenSlider Blocks Registration
  *
- * Registers custom Gutenberg blocks for the GutenSlider plugin.
- * It checks the build directory, reads the block configurations, and registers the blocks.
+ * Handles the registration of Gutenberg blocks for the GutenSlider plugin.
  *
  * @since 1.0.0
- * @package gutenslider-blocks
+ * @package GutenSlider
  */
 
+// Exit if accessed directly to prevent security vulnerabilities.
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access to the file.
+    exit;
 }
 
+// Check if the class already exists to avoid redeclaration errors.
 if (!class_exists('GutenSlider_Blocks_Registration')) {
     /**
-     * Class for registering GutenSlider custom blocks.
+     * Class GutenSlider_Blocks_Registration
      *
-     * @since 1.0.0
-     * @package gutenslider-blocks
+     * Responsible for registering blocks for the GutenSlider plugin.
      */
     class GutenSlider_Blocks_Registration {
-        // List of blocks to register.
+        /**
+         * List of blocks to be registered.
+         *
+         * @since 1.0.0
+         */
         private const BLOCKS = [
-            'button', // Example block, you can add more blocks here.
+            'button',
+            'slider',
         ];
 
         /**
          * Singleton instance of the class.
          *
          * @var null|self
+         * @since 1.0.0
          */
         private static $instance = null;
 
         /**
-         * Constructor to initialize the block registration process.
+         * Constructor.
          *
-         * @since 1.0.0
-         * @return void
+         * Initializes the class by calling the init method.
          */
         public function __construct() {
             $this->init();
         }
 
         /**
-         * Initializes hooks for registering blocks.
+         * Initialization.
          *
-         * @since 1.0.0
-         * @return void
+         * Hooks the block registration method to the `init` action.
          */
         private function init() {
-            // Register blocks when WordPress initializes.
             add_action('init', [$this, 'register_blocks']);
         }
 
         /**
-         * Registers all blocks defined in the `BLOCKS` constant.
+         * Registers all blocks listed in the BLOCKS constant.
          *
-         * @since 1.0.0
-         * @return void
+         * Ensures the plugin directory constant is defined and readable.
+         * Logs errors for debugging if block registration fails.
          */
         public function register_blocks() {
-            // Ensure the plugin directory constant is defined.
-            if (!defined('GUTENSLIDER_BLOCKS_PLUGIN_DIR')) {
+            // Check if the plugin directory constant is defined.
+            if (!defined('GutenSlider_Blocks_PLUGIN_DIR')) {
                 error_log('GutenSlider Blocks: Plugin directory constant not defined.');
                 return;
             }
 
-            // Define the build directory path.
-            $build_dir = trailingslashit(GUTENSLIDER_BLOCKS_PLUGIN_DIR) . 'build/blocks/';
+            // Build directory for blocks.
+            $build_dir = trailingslashit(GutenSlider_Blocks_PLUGIN_DIR) . 'build/blocks/';
             
             // Check if the build directory is readable.
             if (!is_readable($build_dir)) {
@@ -76,55 +79,55 @@ if (!class_exists('GutenSlider_Blocks_Registration')) {
                 return;
             }
 
-            // Loop through all blocks and register them.
+            // Iterate over each block and register it.
             foreach (self::BLOCKS as $block) {
                 try {
-                    $this->register_single_block($build_dir, $block); // Register each block.
+                    $this->register_single_block($build_dir, $block);
                 } catch (Exception $e) {
+                    // Log errors encountered during block registration.
                     error_log('GutenSlider Blocks: Error registering block ' . $block . ': ' . $e->getMessage());
                 }
             }
         }
 
         /**
-         * Registers a single block by loading its block configuration and calling `register_block_type`.
+         * Registers a single block.
          *
-         * @param string $build_dir Path to the build directory.
+         * @param string $build_dir The base directory for block builds.
          * @param string $block The block name to register.
-         * @throws Exception If the block directory or block configuration file is missing or unreadable.
-         * @return void
+         * @throws Exception If the block directory or block.json is not found, or if registration fails.
          */
         private function register_single_block(string $build_dir, string $block): void {
-            // Define the block directory path.
+            // Construct the block directory path.
             $block_dir = trailingslashit($build_dir . sanitize_file_name($block));
-
+            
             // Check if the block directory is readable.
             if (!is_readable($block_dir)) {
                 throw new Exception("Build directory not readable: {$block_dir}");
             }
 
-            // Check if the block configuration file (`block.json`) exists.
+            // Check if the block.json file exists.
             if (!file_exists($block_dir . 'block.json')) {
                 throw new Exception("block.json not found for {$block}");
             }
 
-            // Attempt to register the block using the block directory.
+            // Attempt to register the block.
             $registration_result = register_block_type($block_dir);
-
-            // Throw an error if the block registration fails.
+            
+            // Check if registration failed.
             if (false === $registration_result) {
                 throw new Exception("Block registration failed for {$block}");
             }
         }
 
         /**
-         * Singleton method to get the instance of the class.
+         * Retrieves the singleton instance of the class.
          *
-         * @since 1.0.0
-         * @return self The instance of the class.
+         * Ensures only one instance of the class exists (singleton pattern).
+         *
+         * @return self
          */
         public static function get_instance(): self {
-            // Create a new instance if it doesn't exist.
             if (is_null(self::$instance)) {
                 self::$instance = new self();
             }
