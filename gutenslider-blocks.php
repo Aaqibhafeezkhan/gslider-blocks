@@ -64,25 +64,25 @@ if ( ! class_exists( 'GutenSlider_Blocks' ) ) {
 			if ( ! defined( 'GutenSlider_Blocks_VERSION' ) ) {
 				define( 'GutenSlider_Blocks_VERSION', '1.0.0' );
 			}
-
+		
 			// Define the file path of the plugin
 			if ( ! defined( 'GutenSlider_Blocks__FILE__' ) ) {
 				define( 'GutenSlider_Blocks__FILE__', __FILE__ );
 			}
-
-			// Define the URL of the plugin's main file
-			if ( ! defined( 'GutenSlider_Blocks_URL_FILE' ) ) {
-				define( 'GutenSlider_Blocks_URL_FILE', plugin_dir_url( GutenSlider_Blocks__FILE__ ) );
-			}
-
-			// Define the absolute directory path of the plugin
+		
+			// Define plugin base directory
 			if ( ! defined( 'GutenSlider_Blocks_PLUGIN_DIR' ) ) {
 				define( 'GutenSlider_Blocks_PLUGIN_DIR', plugin_dir_path( GutenSlider_Blocks__FILE__ ) );
 			}
-
-			// Define the plugin's URL for public access
+		
+			// Define plugin base URL
 			if ( ! defined( 'GutenSlider_Blocks_URL' ) ) {
-				define( 'GutenSlider_Blocks_URL', plugins_url( '/', GutenSlider_Blocks_PLUGIN_DIR ) );
+				define( 'GutenSlider_Blocks_URL', plugin_dir_url( GutenSlider_Blocks__FILE__ ) );
+			}
+		
+			// Define assets URL
+			if ( ! defined( 'GutenSlider_Blocks_ASSETS_URL' ) ) {
+				define( 'GutenSlider_Blocks_ASSETS_URL', GutenSlider_Blocks_URL . 'assets/' );
 			}
 		}
 

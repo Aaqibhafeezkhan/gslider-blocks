@@ -1,0 +1,1 @@
+{"version":3,"file":"blocks/slider/view.js","mappings":";;;;AAAAA,OAAO,CAACC,GAAG,CAAC,aAAa,CAAC,C","sources":["webpack://button-blocks/./src/blocks/slider/view.js"],"sourcesContent":["console.log('hello world');"],"names":["console","log"],"sourceRoot":""}

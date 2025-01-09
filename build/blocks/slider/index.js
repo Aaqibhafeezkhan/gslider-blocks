@@ -5781,7 +5781,7 @@ function Save({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper-container-outer"
+    className: "swiper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper-wrapper"
   }, sliderItems.map(item => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -18389,7 +18389,7 @@ SwiperSlide.displayName = 'SwiperSlide';
   \**************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenslider-blocks/slider","version":"1.0.0","title":"Slider","icon":"slides","category":"gutenslider-blocks","description":"Slider block","example":{},"supports":{"html":false,"align":["wide","full"],"customClassName":false},"textdomain":"gutenslider-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenslider-blocks/slider","version":"1.0.0","title":"Slider","icon":"slides","category":"gutenslider-blocks","description":"Slider block","example":{},"supports":{"html":false,"align":["wide","full"],"customClassName":false},"textdomain":"gutenslider-blocks","editorScript":["file:./index.js","gutenslider-blocks-swiper-script"],"editorStyle":["file:./index.css","gutenslider-blocks-swiper-style"],"style":["file:./style-index.css","gutenslider-blocks-swiper-style"],"viewScript":["file:./view.js","gutenslider-blocks-swiper-script"]}');
 
 /***/ })
 

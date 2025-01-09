@@ -9,7 +9,7 @@ export default function Save({ attributes }) {
 
     return (
         <div {...blockProps}>
-            <div className='swiper-container-outer'>
+            <div className='swiper'>
                 <div className='swiper-wrapper'>
                     {sliderItems.map((item) => (
                         <div key={item.id} className={`swiper-slide fb-slider-content-wrapper item-${item.id}`}>

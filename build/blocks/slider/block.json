@@ -17,7 +17,20 @@
     "customClassName": false
   },
   "textdomain": "gutenslider-blocks",
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "editorScript": [
+    "file:./index.js",
+    "gutenslider-blocks-swiper-script"
+  ],
+  "editorStyle": [
+    "file:./index.css",
+    "gutenslider-blocks-swiper-style"
+  ],
+  "style": [
+    "file:./style-index.css",
+    "gutenslider-blocks-swiper-style"
+  ],
+  "viewScript": [
+    "file:./view.js",
+    "gutenslider-blocks-swiper-script"
+  ]
 }

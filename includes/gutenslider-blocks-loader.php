@@ -61,6 +61,7 @@ if ( ! class_exists( 'GutenSlider_Blocks_Loader' ) ) {
 			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . '/includes/classes/register-category.php';
 			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . '/includes/classes/dynamic-style.php';
 			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . '/includes/classes/FontLoader.php';
+			require_once trailingslashit( GutenSlider_Blocks_PLUGIN_DIR ) . '/includes/classes/enqueue-assets.php';
 		}
 
 		/**

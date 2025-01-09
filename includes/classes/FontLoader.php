@@ -148,7 +148,7 @@ if (!class_exists('GutenSlider_Blocks_FontLoader')) {
                 'gutenslider-blocks-fonts',
                 esc_url($font_url),
                 [], // No dependencies
-                defined('GutenSlider_Blocks_VERSION') ? GutenSlider_Blocks_VERSION : '1.0.1'
+                defined('GutenSlider_Blocks_VERSION') ? GutenSlider_Blocks_VERSION : '1.0.0'
             );
 
             wp_enqueue_style('gutenslider-blocks-fonts'); // Enqueue the font stylesheet.
