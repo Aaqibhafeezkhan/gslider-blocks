@@ -1,16 +1,16 @@
-/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/image-control/editor.lazy.scss ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************/
-.global-image-control-wrapper .components-base-control__field {
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/background-image-control/editor.lazy.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+.fb-image-control-wrapper .components-base-control__field {
   display: block;
   margin-bottom: 0;
 }
-.global-image-control-wrapper .components-base-control__field .components-base-control__label {
+.fb-image-control-wrapper .components-base-control__field .components-base-control__label {
   font-size: 13px !important;
   text-transform: capitalize !important;
   margin-bottom: 8px !important;
 }
-.global-image-control-wrapper .global-image-control {
+.fb-image-control-wrapper .fb-image-control {
   background-color: #ccc;
   background-position: 50%;
   background-repeat: no-repeat;
@@ -22,7 +22,7 @@
   position: relative;
   width: 100%;
 }
-.global-image-control-wrapper .global-image-control .global-image-delete {
+.fb-image-control-wrapper .fb-image-control .fb-image-delete {
   margin: 0 8px !important;
   padding: 0 !important;
   position: absolute;
@@ -39,11 +39,11 @@
   text-decoration: none;
   transition: box-shadow 0.1s linear;
 }
-.global-image-control-wrapper .global-image-control .global-image-delete svg {
+.fb-image-control-wrapper .fb-image-control .fb-image-delete svg {
   fill: none;
   filter: drop-shadow(1px 1px 3px rgb(100, 100, 100));
 }
-.global-image-control-wrapper .global-image-control .global-image-replace-btn {
+.fb-image-control-wrapper .fb-image-control .fb-image-replace-btn {
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   background: hsla(0, 0%, 95%, 0.749);
@@ -68,10 +68,10 @@
   padding: 6px 12px;
   text-decoration: none;
 }
-.global-image-control-wrapper .global-image-control .global-image-replace-btn svg {
+.fb-image-control-wrapper .fb-image-control .fb-image-replace-btn svg {
   fill: none;
 }
-.global-image-control-wrapper .global-image-upload-btn {
+.fb-image-control-wrapper .fb-image-upload-btn {
   background-color: #f2f2f2;
   background-image: url(../../images/transparent-bg-demo.7b6d940d.png);
   border: 1px solid #e9e8eb;
@@ -91,7 +91,7 @@
   transition: box-shadow 0.1s linear;
 }
 
-.global-image-control-setting-wrapper .global-image-label label {
+.fb-image-control-setting-wrapper .fb-image-label label {
   font-size: 13px !important;
   text-transform: capitalize !important;
   margin-bottom: 8px !important;
@@ -265,21 +265,21 @@
 /*!******************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/slider/editor.scss ***!
   \******************************************************************************************************************************************************************************************************************************************************/
-.fb-setting-responsive-control-wrapper .fb-setting-responsive-control {
+.guten-slider-setting-responsive-control-wrapper .guten-slider-setting-responsive-control {
   margin-bottom: 0;
 }
 
 /** End General scss for Advanced Button **/
-.fb-slider-wrapper .dnd-items-wrapper {
+.guten-slider-wrapper .dnd-items-wrapper {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.fb-slider-wrapper .dnd-items-wrapper li.sortable-item {
+.guten-slider-wrapper .dnd-items-wrapper li.sortable-item {
   margin-bottom: 10px;
   margin-top: 10px;
 }
-.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header {
+.guten-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -287,7 +287,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-title {
+.guten-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-title {
   flex: 12;
   cursor: pointer;
   overflow: hidden;
@@ -296,23 +296,66 @@
   white-space: nowrap;
   width: 200px;
 }
-.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort {
+.guten-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort {
   border-right: 1px solid #b4b4cb;
   border-left: 1px solid #b4b4cb;
 }
-.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort button:focus {
+.guten-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort button:focus {
   box-shadow: none;
   outline: none;
 }
-.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button {
+.guten-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button {
   color: #d63638;
 }
-.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button:focus {
+.guten-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button:focus {
   box-shadow: none;
   outline: none;
 }
-.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-item-content {
+.guten-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-item-content {
   padding-top: 10px;
+}
+
+/** Start Admin Panel scss **/
+.guten-slider-inspector-control .guten-slider-tab {
+  background-color: #dcdcde;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+  font-weight: 500;
+  height: 60px;
+  padding: 3px 25px;
+}
+.guten-slider-inspector-control .guten-slider-tab.active-tab {
+  background: #ffffff;
+  border-top: 2px solid #007cba !important;
+  color: #007cba;
+}
+.guten-slider-inspector-control .components-base-control__field .components-base-control__label {
+  display: block;
+  color: #5f5f5f !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 16px !important;
+  margin: 10px 0 !important;
+  min-height: auto;
+  text-transform: capitalize !important;
+}
+.guten-slider-inspector-control .components-base-control__field .components-text-control__input,
+.guten-slider-inspector-control .components-base-control__field .components-textarea-control__input {
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.guten-slider-inspector-control .components-base-control__field label {
+  display: block;
+  color: #5f5f5f !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 16px !important;
+  margin: 10px 0 !important;
+  min-height: auto;
+  text-transform: capitalize !important;
 }
 /*!************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/swiper/swiper.css ***!

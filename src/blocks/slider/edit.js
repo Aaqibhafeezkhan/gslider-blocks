@@ -16,7 +16,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const { blockId, sliderItems } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-slider-main-wrapper ${blockId}`,
+        className: `guten-slider-main-wrapper ${blockId}`,
     });
 
 
@@ -73,13 +73,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 >
                     {sliderItems.map((item) => (
                         <SwiperSlide key={item.id}>
-                            <div className={`fb-slider-content-wrapper item-${item.id}`}>
-                                <div className='fb-slider-content-inner-wrapper'>
-                                    <div className={`fb-slider-list-item`}>
-                                        <div className="fb-slider-list-content">
+                            <div className={`guten-slider-content-wrapper item-${item.id}`}>
+                                <div className='guten-slider-content-inner-wrapper'>
+                                    <div className={`guten-slider-list-item`}>
+                                        <div className="guten-slider-list-content">
                                             <RichText
                                                 tagName="h3"
-                                                className="fb-slider-title"
+                                                className="guten-slider-title"
                                                 value={item.title}
                                                 onChange={(value) =>
                                                     setAttributes({

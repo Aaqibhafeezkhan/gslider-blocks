@@ -4,7 +4,7 @@ export default function Save({ attributes }) {
     const { blockId, sliderItems } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-slider-main-wrapper ${blockId}`,
+        className: `guten-slider-main-wrapper ${blockId}`,
     });
 
     return (
@@ -12,13 +12,13 @@ export default function Save({ attributes }) {
             <div className='swiper'>
                 <div className='swiper-wrapper'>
                     {sliderItems.map((item) => (
-                        <div key={item.id} className={`swiper-slide fb-slider-content-wrapper item-${item.id}`}>
-                            <div className='fb-slider-content-inner-wrapper'>
-                                <div className={`fb-slider-list-item`}>
-                                    <div className="fb-slider-list-content">
+                        <div key={item.id} className={`swiper-slide guten-slider-content-wrapper item-${item.id}`}>
+                            <div className='guten-slider-content-inner-wrapper'>
+                                <div className={`guten-slider-list-item`}>
+                                    <div className="guten-slider-list-content">
                                         <RichText.Content
                                             tagName="h3"
-                                            className="fb-slider-title"
+                                            className="guten-slider-title"
                                             value={item.title}
                                         />
                                     </div>

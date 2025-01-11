@@ -2408,7 +2408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Components_image_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/image-control */ "./src/components/image-control/index.js");
+/* harmony import */ var _Components_background_image_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/background-image-control */ "./src/components/background-image-control/index.js");
 /* harmony import */ var _Components_gradient_color_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/gradient-color-control */ "./src/components/gradient-color-control/index.js");
 /* harmony import */ var _Components_color_control__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Components/color-control */ "./src/components/color-control/index.js");
 /* harmony import */ var _Components_switcher_control__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @Components/switcher-control */ "./src/components/switcher-control/index.js");
@@ -2522,7 +2522,7 @@ const BackgroundColorControl = ({
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "button-blocks"),
       color: normalClassicColor,
       onChangeColor: value => setNormalClassicColor(value)
-    }), isBackgroundImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_image_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), isBackgroundImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_background_image_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "button-blocks"),
       globalBackgroundImageUrl: normalBackgroundImageUrl,
       setGlobalBackgroundImageUrl: value => setNormalBackgroundImageUrl(value),
@@ -2581,7 +2581,7 @@ const BackgroundColorControl = ({
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "button-blocks"),
       color: hoverClassicColor,
       onChangeColor: value => setHoverClassicColor(value)
-    }), isBackgroundImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_image_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), isBackgroundImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_background_image_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "button-blocks"),
       globalBackgroundImageUrl: hoverBackgroundImageUrl,
       setGlobalBackgroundImageUrl: value => setHoverBackgroundImageUrl(value),
@@ -2608,6 +2608,251 @@ const BackgroundColorControl = ({
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BackgroundColorControl);
+
+/***/ }),
+
+/***/ "./src/components/background-image-control/index.js":
+/*!**********************************************************!*\
+  !*** ./src/components/background-image-control/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/background-image-control/editor.lazy.scss");
+
+// background-color.js
+
+
+
+const BackgroundImageControl = ({
+  label = '',
+  globalBackgroundImageUrl,
+  setGlobalBackgroundImageUrl,
+  globalBackgroundImageAlt,
+  setGlobalBackgroundImageAlt,
+  globalBackgroundImageID,
+  setGlobalBackgroundImageID,
+  globalBackgroundImagePosition = '',
+  setGlobalBackgroundImagePosition,
+  globalBackgroundImageAttachment = '',
+  setGlobalBackgroundImageAttachment,
+  globalBackgroundImageRepeat = '',
+  setGlobalBackgroundImageRepeat,
+  globalBackgroundImageSize = '',
+  setGlobalBackgroundImageSize
+}) => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+    label: label,
+    className: "fb-image-control-wrapper"
+  }, globalBackgroundImageUrl ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "fb-image-control",
+    style: {
+      backgroundImage: `url(${globalBackgroundImageUrl})`
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "fb-image-delete",
+    onClick: () => {
+      setGlobalBackgroundImageUrl(null);
+      setGlobalBackgroundImageAlt(null);
+      setGlobalBackgroundImageID(null);
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z",
+    stroke: "#4D4D4D",
+    strokeWidth: "1.5"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M15 9L9 15",
+    stroke: "#4D4D4D",
+    strokeWidth: "1.5"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M9 9L15 15",
+    stroke: "#4D4D4D",
+    strokeWidth: "1.5"
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "fb-image-replace-btn",
+    onClick: () => {
+      const mediaUploader = wp.media({
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select or Upload background Image', 'frontis-blocks'),
+        button: {
+          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Use this image', 'frontis-blocks')
+        },
+        multiple: false
+      });
+      mediaUploader.on('select', function () {
+        const attachment = mediaUploader.state().get('selection').first().toJSON();
+        setGlobalBackgroundImageUrl(attachment.url);
+        setGlobalBackgroundImageAlt(attachment.alt);
+        setGlobalBackgroundImageID(attachment.id);
+      });
+      mediaUploader.open();
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    width: "25",
+    height: "24",
+    viewBox: "0 0 25 24",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z",
+    fill: "#1C274C"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z",
+    fill: "#1C274C"
+  })), "Replace")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "fb-image-upload-btn",
+    onClick: () => {
+      const mediaUploader = wp.media({
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select or Upload background Image', 'frontis-blocks'),
+        button: {
+          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Use this image', 'frontis-blocks')
+        },
+        multiple: false
+      });
+      mediaUploader.on('select', function () {
+        const attachment = mediaUploader.state().get('selection').first().toJSON();
+        setGlobalBackgroundImageUrl(attachment.url);
+        setGlobalBackgroundImageAlt(attachment.alt);
+        setGlobalBackgroundImageID(attachment.id);
+      });
+      mediaUploader.open();
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    width: "24",
+    height: "24",
+    xmlns: "http://www.w3.org/2000/svg",
+    fillRule: "evenodd",
+    clipRule: "evenodd"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"
+  })), "Upload"), globalBackgroundImageUrl && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "fb-image-control-setting-wrapper"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image Position", "frontis-blocks"),
+    className: "fb-image-label",
+    value: globalBackgroundImagePosition,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "frontis-blocks"),
+      value: ""
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Center", "frontis-blocks"),
+      value: "center center"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Left", "frontis-blocks"),
+      value: "center left"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Right", "frontis-blocks"),
+      value: "center right"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Center", "frontis-blocks"),
+      value: "top center"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Left", "frontis-blocks"),
+      value: "top left"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Right", "frontis-blocks"),
+      value: "top right"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Center", "frontis-blocks"),
+      value: "bottom center"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Left", "frontis-blocks"),
+      value: "bottom left"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Right", "frontis-blocks"),
+      value: "bottom right"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Left Center", "frontis-blocks"),
+      value: "left center"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Left Top", "frontis-blocks"),
+      value: "left top"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Left Bottom", "frontis-blocks"),
+      value: "left bottom"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Right Center", "frontis-blocks"),
+      value: "right center"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Right Top", "frontis-blocks"),
+      value: "right top"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Right Bottom", "frontis-blocks"),
+      value: "right bottom"
+    }],
+    onChange: setGlobalBackgroundImagePosition
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image Attachment", "frontis-blocks"),
+    className: "fb-image-label",
+    value: globalBackgroundImageAttachment,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "frontis-blocks"),
+      value: ""
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scroll", "frontis-blocks"),
+      value: "scroll"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fixed", "frontis-blocks"),
+      value: "fixed"
+    }],
+    onChange: setGlobalBackgroundImageAttachment
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image Repeat", "frontis-blocks"),
+    className: "fb-image-label",
+    value: globalBackgroundImageRepeat,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "frontis-blocks"),
+      value: ""
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "frontis-blocks"),
+      value: "repeat"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat X", "frontis-blocks"),
+      value: "repeat-x"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat Y", "frontis-blocks"),
+      value: "repeat-y"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("No Repeat", "frontis-blocks"),
+      value: "no-repeat"
+    }],
+    onChange: setGlobalBackgroundImageRepeat
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image Size", "frontis-blocks"),
+    className: "fb-image-label",
+    value: globalBackgroundImageSize,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "frontis-blocks"),
+      value: ""
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto", "frontis-blocks"),
+      value: "auto"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cover", "frontis-blocks"),
+      value: "cover"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Contain", "frontis-blocks"),
+      value: "contain"
+    }],
+    onChange: setGlobalBackgroundImageSize
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BackgroundImageControl);
 
 /***/ }),
 
@@ -3963,257 +4208,6 @@ function FBIconPicker(props) {
 
 /***/ }),
 
-/***/ "./src/components/image-control/index.js":
-/*!***********************************************!*\
-  !*** ./src/components/image-control/index.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/image-control/editor.lazy.scss");
-
-// background-color.js
-
-
-
-const ImageControl = ({
-  label = '',
-  globalBackgroundImageUrl,
-  setGlobalBackgroundImageUrl,
-  globalBackgroundImageAlt,
-  setGlobalBackgroundImageAlt,
-  globalBackgroundImageID,
-  setGlobalBackgroundImageID,
-  globalBackgroundImagePosition = '',
-  setGlobalBackgroundImagePosition,
-  globalBackgroundImageAttachment = '',
-  setGlobalBackgroundImageAttachment,
-  globalBackgroundImageRepeat = '',
-  setGlobalBackgroundImageRepeat,
-  globalBackgroundImageSize = '',
-  setGlobalBackgroundImageSize
-}) => {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-    label: label,
-    className: "global-image-control-wrapper"
-  }, globalBackgroundImageUrl ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "global-image-control",
-    style: {
-      backgroundImage: `url(${globalBackgroundImageUrl})`
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "global-image-delete",
-    onClick: () => {
-      setGlobalBackgroundImageUrl(null);
-      setGlobalBackgroundImageAlt(null);
-      setGlobalBackgroundImageID(null);
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    width: "24",
-    height: "24",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z",
-    stroke: "#4D4D4D",
-    strokeWidth: "1.5"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M15 9L9 15",
-    stroke: "#4D4D4D",
-    strokeWidth: "1.5"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M9 9L15 15",
-    stroke: "#4D4D4D",
-    strokeWidth: "1.5"
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "global-image-replace-btn",
-    onClick: () => {
-      const mediaUploader = wp.media({
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select or Upload background Image', 'button-blocks'),
-        button: {
-          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Use this image', 'button-blocks')
-        },
-        multiple: false
-      });
-      mediaUploader.on('select', function () {
-        const attachment = mediaUploader.state().get('selection').first().toJSON();
-        setGlobalBackgroundImageUrl(attachment.url);
-        setGlobalBackgroundImageAlt(attachment.alt);
-        setGlobalBackgroundImageID(attachment.id);
-      });
-      mediaUploader.open();
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    width: "24",
-    height: "24",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M10.827 16.379C9.77912 16.9085 8.60041 17.1235 7.43311 16.9979C6.2658 16.8722 5.15981 16.4115 4.24861 15.6711C3.33741 14.9308 2.65996 13.9426 2.29804 12.8257C1.93611 11.7088 1.90518 10.5111 2.20897 9.37703L7.62097 10.827C7.09144 9.77918 6.87652 8.60047 7.00213 7.43317C7.12774 6.26586 7.58853 5.15987 8.32886 4.24867C9.06919 3.33747 10.0574 2.66003 11.1743 2.2981C12.2912 1.93617 13.4889 1.90524 14.623 2.20903L13.173 7.62103C14.2208 7.0915 15.3995 6.87658 16.5668 7.00219C17.7341 7.1278 18.8401 7.58859 19.7513 8.32892C20.6625 9.06926 21.34 10.0575 21.7019 11.1744C22.0638 12.2912 22.0948 13.489 21.791 14.623L16.379 13.173C16.9085 14.2209 17.1234 15.3996 16.9978 16.5669C16.8722 17.7342 16.4114 18.8402 15.6711 19.7514C14.9307 20.6626 13.9425 21.34 12.8256 21.702C11.7088 22.0639 10.511 22.0948 9.37697 21.791L10.827 16.379Z",
-    stroke: "black",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M12 12V12.01",
-    stroke: "black",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })), "Replace")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "global-image-upload-btn",
-    onClick: () => {
-      const mediaUploader = wp.media({
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select or Upload background Image', 'button-blocks'),
-        button: {
-          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Use this image', 'button-blocks')
-        },
-        multiple: false
-      });
-      mediaUploader.on('select', function () {
-        const attachment = mediaUploader.state().get('selection').first().toJSON();
-        setGlobalBackgroundImageUrl(attachment.url);
-        setGlobalBackgroundImageAlt(attachment.alt);
-        setGlobalBackgroundImageID(attachment.id);
-      });
-      mediaUploader.open();
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    width: "24",
-    height: "24",
-    xmlns: "http://www.w3.org/2000/svg",
-    fillRule: "evenodd",
-    clipRule: "evenodd"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"
-  })), "Upload"), globalBackgroundImageUrl && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "global-image-control-setting-wrapper"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image Position", "button-blocks"),
-    className: "global-image-label",
-    value: globalBackgroundImagePosition,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
-      value: ""
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Center", "button-blocks"),
-      value: "center center"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Left", "button-blocks"),
-      value: "center left"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Right", "button-blocks"),
-      value: "center right"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Center", "button-blocks"),
-      value: "top center"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Left", "button-blocks"),
-      value: "top left"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Right", "button-blocks"),
-      value: "top right"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Center", "button-blocks"),
-      value: "bottom center"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Left", "button-blocks"),
-      value: "bottom left"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Right", "button-blocks"),
-      value: "bottom right"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Left Center", "button-blocks"),
-      value: "left center"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Left Top", "button-blocks"),
-      value: "left top"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Left Bottom", "button-blocks"),
-      value: "left bottom"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Right Center", "button-blocks"),
-      value: "right center"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Right Top", "button-blocks"),
-      value: "right top"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Right Bottom", "button-blocks"),
-      value: "right bottom"
-    }],
-    onChange: setGlobalBackgroundImagePosition
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image Attachment", "button-blocks"),
-    className: "global-image-label",
-    value: globalBackgroundImageAttachment,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
-      value: ""
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scroll", "button-blocks"),
-      value: "scroll"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fixed", "button-blocks"),
-      value: "fixed"
-    }],
-    onChange: setGlobalBackgroundImageAttachment
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image Repeat", "button-blocks"),
-    className: "global-image-label",
-    value: globalBackgroundImageRepeat,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
-      value: ""
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "button-blocks"),
-      value: "repeat"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat X", "button-blocks"),
-      value: "repeat-x"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat Y", "button-blocks"),
-      value: "repeat-y"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("No Repeat", "button-blocks"),
-      value: "no-repeat"
-    }],
-    onChange: setGlobalBackgroundImageRepeat
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image Size", "button-blocks"),
-    className: "global-image-label",
-    value: globalBackgroundImageSize,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
-      value: ""
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto", "button-blocks"),
-      value: "auto"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cover", "button-blocks"),
-      value: "cover"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Contain", "button-blocks"),
-      value: "contain"
-    }],
-    onChange: setGlobalBackgroundImageSize
-  }))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImageControl);
-
-/***/ }),
-
 /***/ "./src/components/responsive-device-control/index.js":
 /*!***********************************************************!*\
   !*** ./src/components/responsive-device-control/index.js ***!
@@ -4279,7 +4273,7 @@ const ResponsiveDeviceControl = ({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "global-responsive-device-inner-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: `global-device-switcher fb-responsive-desktop-device ${selectedDevice === 'Desktop' ? 'active' : ''}`,
+    className: `global-device-switcher guten-slider-responsive-desktop-device ${selectedDevice === 'Desktop' ? 'active' : ''}`,
     onClick: () => handleDevice('Desktop')
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -4293,7 +4287,7 @@ const ResponsiveDeviceControl = ({
     d: "M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z",
     fill: "#007cba"
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: `global-device-switcher fb-responsive-tablet-device ${selectedDevice === 'Tablet' ? 'active' : ''}`,
+    className: `global-device-switcher guten-slider-responsive-tablet-device ${selectedDevice === 'Tablet' ? 'active' : ''}`,
     onClick: () => handleDevice('Tablet')
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     width: "6",
@@ -4303,7 +4297,7 @@ const ResponsiveDeviceControl = ({
     d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z",
     fill: "#007cba"
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: `global-device-switcher fb-responsive-mobile-device ${selectedDevice === 'Mobile' ? 'active' : ''}`,
+    className: `global-device-switcher guten-slider-responsive-mobile-device ${selectedDevice === 'Mobile' ? 'active' : ''}`,
     onClick: () => handleDevice('Mobile')
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     width: "4",
@@ -4423,7 +4417,7 @@ const ResponsiveRangeControl = ({
     className: "global-reset-control-container",
     onClick: resetRangeValue
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "global-reset-button fb-reset-has-value"
+    className: "global-reset-button guten-slider-reset-has-value"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "16",
@@ -4646,7 +4640,7 @@ function ResponsiveSpacingControl({
     className: "global-reset-control-container",
     onClick: resetSpacingValue
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "global-reset-button fb-reset-has-value"
+    className: "global-reset-button guten-slider-reset-has-value"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "16",
@@ -11669,6 +11663,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/background-image-control/editor.lazy.scss":
+/*!******************************************************************!*\
+  !*** ./src/components/background-image-control/editor.lazy.scss ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/components/box-shadow-control/editor.lazy.scss":
 /*!************************************************************!*\
   !*** ./src/components/box-shadow-control/editor.lazy.scss ***!
@@ -11712,19 +11719,6 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./src/components/icon-picker/editor.scss ***!
   \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/components/image-control/editor.lazy.scss":
-/*!*******************************************************!*\
-  !*** ./src/components/image-control/editor.lazy.scss ***!
-  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

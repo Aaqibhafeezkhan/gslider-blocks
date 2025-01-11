@@ -2,7 +2,17 @@ import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { TextControl, Button } from '@wordpress/components';
+import { 
+    Button, 
+    ButtonGroup, 
+    BaseControl, 
+    Dropdown,
+    Dashicon, 
+    ColorPicker,
+    ColorPalette,
+    TextControl,
+
+} from '@wordpress/components';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
@@ -37,40 +47,89 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
             {isOpen && (
                 <div className="sortable-item-content">
-                    <TextControl
-                        label={__("Title", "gutenslider-blocks")}
-                        value={item.title}
-                        onChange={(value) => handleChangeItem(item.id, "title", value)}
-                    />
-                    <FB_BackgroundColorControl
-                        label={__("Item Background Color", "gutenslider-blocks")}
-                        bgColorSwitcher={item.sliderItemBgColorSwitcher}
-                        setBgColorSwitcher={(value) => handleChangeItem(item.id, 'sliderItemBgColorSwitcher', value)}
-                                
-                        normalBackgroundType={item.normalItemBackgroundType}
-                        setNormalBackgroundType={(value) => handleChangeItem(item.id, 'normalItemBackgroundType', value)}
-                        normalClassicColor={item.normalItemClassicColor}
-                        setNormalClassicColor={(value) => handleChangeItem(item.id, 'normalItemClassicColor', value)}
-                        normalGradientColor={item.normalItemGradientColor}
-                        setNormalGradientColor={(value) => handleChangeItem(item.id, 'normalItemGradientColor', value)}
-                        normalCustomGradientSwitcher={item.normalItemCustomGradientSwitcher}
-                        setNormalCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'normalItemCustomGradientSwitcher', value)}
-                        normalCustomGradientInputValue={item.normalItemCustomGradientInputValue}
-                        setNormalCustomGradientInputValue={(value) => handleChangeItem(item.id, 'normalItemCustomGradientInputValue', value)}
-                                
-                        hoverBackgroundType={item.hoverItemBackgroundType}
-                        setHoverBackgroundType={(value) => handleChangeItem(item.id, 'hoverItemBackgroundType', value)}
-                        hoverClassicColor={item.hoverItemClassicColor}
-                        setHoverClassicColor={(value) => handleChangeItem(item.id, 'hoverItemClassicColor', value)}
-                        hoverGradientColor={item.hoverItemGradientColor} 
-                        setHoverGradientColor={(value) => handleChangeItem(item.id, 'hoverItemGradientColor', value)}
-                        hoverCustomGradientSwitcher={item.hoverItemCustomGradientSwitcher}
-                        setHoverCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientSwitcher', value)}
-                        hoverCustomGradientInputValue={item.hoverItemCustomGradientInputValue}
-                        setHoverCustomGradientInputValue={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientInputValue', value)}
 
-                        isBackgroundImage={false}
+                <BaseControl
+                    className="global-setting-background-color-setting-wrapper"
+                    label={__("Slide Content", "button-blocks")}
+                >
+                    <Dropdown
+                        className="global-setting-background-color-setting-icon-dropdown"
+                        contentClassName="global-setting-background-color-setting-icon-dropdown-content"
+                        popoverProps={{ placement: 'bottom-start' }}
+                        renderToggle={({ isOpen, onToggle }) => (
+                            <Button
+                                variant="primary"
+                                onClick={onToggle}
+                                aria-expanded={isOpen}
+                                className="global-setting-background-color-setting-icon-btn"
+                            >
+                                <Dashicon icon="color-picker" className="global-setting-background-color-panel-icon" />
+                            </Button>
+                        )}
+                        renderContent={() => (
+                            <div className="global-setting-background-color-popup-wrapper">
+                                <TextControl
+                                    label={__("Title", "gutenslider-blocks")}
+                                    value={item.title}
+                                    onChange={(value) => handleChangeItem(item.id, "title", value)}
+                                />
+                            </div>
+                        )}
                     />
+                </BaseControl>
+                <BaseControl
+                    className="global-setting-background-color-setting-wrapper"
+                    label={__("Background", "button-blocks")}
+                >
+                    <Dropdown
+                        className="global-setting-background-color-setting-icon-dropdown"
+                        contentClassName="global-setting-background-color-setting-icon-dropdown-content"
+                        popoverProps={{ placement: 'bottom-start' }}
+                        renderToggle={({ isOpen, onToggle }) => (
+                            <Button
+                                variant="primary"
+                                onClick={onToggle}
+                                aria-expanded={isOpen}
+                                className="global-setting-background-color-setting-icon-btn"
+                            >
+                                <Dashicon icon="color-picker" className="global-setting-background-color-panel-icon" />
+                            </Button>
+                        )}
+                        renderContent={() => (
+                            <div className="global-setting-background-color-popup-wrapper">
+                                <FB_BackgroundColorControl
+                                    label={__("Background", "gutenslider-blocks")}
+                                    bgColorSwitcher={item.sliderItemBgColorSwitcher}
+                                    setBgColorSwitcher={(value) => handleChangeItem(item.id, 'sliderItemBgColorSwitcher', value)}
+                                            
+                                    normalBackgroundType={item.normalItemBackgroundType}
+                                    setNormalBackgroundType={(value) => handleChangeItem(item.id, 'normalItemBackgroundType', value)}
+                                    normalClassicColor={item.normalItemClassicColor}
+                                    setNormalClassicColor={(value) => handleChangeItem(item.id, 'normalItemClassicColor', value)}
+                                    normalGradientColor={item.normalItemGradientColor}
+                                    setNormalGradientColor={(value) => handleChangeItem(item.id, 'normalItemGradientColor', value)}
+                                    normalCustomGradientSwitcher={item.normalItemCustomGradientSwitcher}
+                                    setNormalCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'normalItemCustomGradientSwitcher', value)}
+                                    normalCustomGradientInputValue={item.normalItemCustomGradientInputValue}
+                                    setNormalCustomGradientInputValue={(value) => handleChangeItem(item.id, 'normalItemCustomGradientInputValue', value)}
+                                            
+                                    hoverBackgroundType={item.hoverItemBackgroundType}
+                                    setHoverBackgroundType={(value) => handleChangeItem(item.id, 'hoverItemBackgroundType', value)}
+                                    hoverClassicColor={item.hoverItemClassicColor}
+                                    setHoverClassicColor={(value) => handleChangeItem(item.id, 'hoverItemClassicColor', value)}
+                                    hoverGradientColor={item.hoverItemGradientColor} 
+                                    setHoverGradientColor={(value) => handleChangeItem(item.id, 'hoverItemGradientColor', value)}
+                                    hoverCustomGradientSwitcher={item.hoverItemCustomGradientSwitcher}
+                                    setHoverCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientSwitcher', value)}
+                                    hoverCustomGradientInputValue={item.hoverItemCustomGradientInputValue}
+                                    setHoverCustomGradientInputValue={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientInputValue', value)}
+
+                                    isBackgroundImage={false}
+                                />
+                            </div>
+                        )}
+                    />
+                </BaseControl>
                 </div>
             )}
         </li>

@@ -3,15 +3,15 @@ $secondary_color: #5f5f5f;
 $background_color: #dcdcde;
 $white_color: #ffffff;
 
-.fb-setting-responsive-control-wrapper {
-    .fb-setting-responsive-control {
+.guten-slider-setting-responsive-control-wrapper {
+    .guten-slider-setting-responsive-control {
         margin-bottom: 0;
     }
 }
 
 /** End General scss for Advanced Button **/
 
-.fb-slider-wrapper { 
+.guten-slider-wrapper { 
     .dnd-items-wrapper {
         list-style: none;
         padding: 0;
@@ -64,6 +64,61 @@ $white_color: #ffffff;
             .sortable-item-content {
                 padding-top: 10px;
             }
+        }
+    }
+}
+
+$primary_color: #007cba;
+$secondary_color: #5f5f5f;
+$background_color: #dcdcde;
+$white_color: #ffffff;
+$border_color: #dddddd;
+
+/** Start Admin Panel scss **/
+.guten-slider-inspector-control {
+    .guten-slider-tab {
+        background-color: $background_color;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        cursor: pointer;
+        font-weight: 500;
+        height: 60px;
+        padding: 3px 25px;
+
+        &.active-tab {
+            background: $white_color;
+            border-top: 2px solid $primary_color !important;
+            color: $primary_color;
+        }
+    }
+    .components-base-control__field {
+        .components-base-control__label {
+            display: block;
+            color: $secondary_color !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            line-height: 16px !important;
+            margin: 10px 0 !important;
+            min-height: auto;
+            text-transform: capitalize !important;
+        }
+        .components-text-control__input, 
+        .components-textarea-control__input {
+            border: 1px solid $border_color;
+            border-radius: 4px;
+            box-shadow: none;
+        }
+        
+        label {
+            display: block;
+            color: $secondary_color !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            line-height: 16px !important;
+            margin: 10px 0 !important;
+            min-height: auto;
+            text-transform: capitalize !important;
         }
     }
 }

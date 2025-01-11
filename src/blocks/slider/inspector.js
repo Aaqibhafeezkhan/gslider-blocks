@@ -16,7 +16,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     useEffect(() => {
         if (clientId) {
-            setAttributes({ blockId: `fb-slider-${clientId.slice(0, 8)}` });
+            setAttributes({ blockId: `guten-slider-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
 
@@ -73,13 +73,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor; // Check if gradient is empty, fallback to classic color
             
             if (normalItemBackgroundType === 'gradient') {
-                const gradientStyle = `.${blockId} .fb-slider-content-wrapper.item-${item.id}  {
+                const gradientStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id}  {
                     background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : normalItemGradientColor};
                 }`;
                 style += gradientStyle;
 
             } else {
-                const classicStyle = `.${blockId} .fb-slider-content-wrapper.item-${item.id} {
+                const classicStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id} {
                     background: ${item.normalItemClassicColor};
                 }`;
                 style += classicStyle;
@@ -89,13 +89,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             const hoverItemGradientColor = item.hoverItemGradientColor || item.hoverItemClassicColor; // Similar fallback for hover state
             
             if (hoverItemBackgroundType === 'gradient') {
-                const hoverGradientStyle = `.${blockId} .fb-slider-content-wrapper.item-${item.id}:hover {
+                const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id}:hover {
                     background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : hoverItemGradientColor};
                 }`;
                 style += hoverGradientStyle;
 
             } else {
-                const hoverClassicStyle = `.${blockId} .fb-slider-content-wrapper.item-${item.id}:hover {
+                const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id}:hover {
                     background: ${item.hoverItemClassicColor};
                 }`;
                 style += hoverClassicStyle;
@@ -120,21 +120,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             	{editorStyle}
             </style>
             <InspectorControls>
-                <div className="fb-inspector-control">
+                <div className="guten-slider-inspector-control">
                     <TabPanel
-                        className="fb-parent-tab-panel"
+                        className="guten-slider-parent-tab-panel"
                         activeClass="active-tab"
                         tabs={[
-                            { name: "general", title: __("General", "gutenslider-blocks"), className: "fb-tab general" },
-                            { name: "styles", title: __("Style", "gutenslider-blocks"), className: "fb-tab styles" },
-                            { name: "advanced", title: __("Advanced", "gutenslider-blocks"), className: "fb-tab advanced" },
+                            { name: "general", title: __("General", "gutenslider-blocks"), className: "guten-slider-tab general" },
+                            { name: "styles", title: __("Style", "gutenslider-blocks"), className: "guten-slider-tab styles" },
+                            { name: "advanced", title: __("Advanced", "gutenslider-blocks"), className: "guten-slider-tab advanced" },
                         ]}
                     >
                         {(tab) => (
-                            <div className={`fb-tab-controls ${tab.name}`}>
+                            <div className={`guten-slider-tab-controls ${tab.name}`}>
                                 {tab.name === "general" && (
                                     <PanelBody title={__("Slider", "gutenslider-blocks")} initialOpen>
-                                        <div className="fb-slider-wrapper">
+                                        <div className="guten-slider-wrapper">
                                             <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                                                 <SortableContext items={sliderItems.map((item) => item.id)}>
                                                     <ul className="dnd-items-wrapper">

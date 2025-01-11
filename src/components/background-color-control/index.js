@@ -11,7 +11,7 @@ import {
 
 } from '@wordpress/components';
 
-import ImageControl from '@Components/image-control';
+import BackgroundImageControl from '@Components/background-image-control';
 import GradientColorControl from '@Components/gradient-color-control';
 import ColorControl from '@Components/color-control';
 import SwitcherControl from '@Components/switcher-control';
@@ -137,7 +137,7 @@ const BackgroundColorControl = ({
                                         />
 
                                         {isBackgroundImage && (
-                                            <ImageControl
+                                            <BackgroundImageControl
                                                 label={__("Background Image", "button-blocks")}
                                                 globalBackgroundImageUrl={normalBackgroundImageUrl}
                                                 setGlobalBackgroundImageUrl={(value) => setNormalBackgroundImageUrl(value)}
@@ -221,7 +221,7 @@ const BackgroundColorControl = ({
                                         />
 
                                         {isBackgroundImage && (
-                                            <ImageControl
+                                            <BackgroundImageControl
                                                 label={__("Background Image", "button-blocks")}
                                                 globalBackgroundImageUrl={hoverBackgroundImageUrl}
                                                 setGlobalBackgroundImageUrl={(value) => setHoverBackgroundImageUrl(value)}
