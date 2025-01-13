@@ -18,7 +18,7 @@ import SwitcherControl from '@Components/switcher-control';
 import './editor.lazy.scss';
 
 const BackgroundColorControl = ({
-    label = __("Background Color", "button-blocks"),
+    label = __("Background Color", "gutenslider-blocks"),
     bgColorSwitcher,
     setBgColorSwitcher,
 
@@ -77,8 +77,8 @@ const BackgroundColorControl = ({
 }) => {
 
     const BACKGROUND_TYPES = [
-        { label: __('Classic', 'button-blocks'), value: 'classic' },
-        { label: __('Gradient', 'button-blocks'), value: 'gradient' },
+        { label: __('Classic', 'gutenslider-blocks'), value: 'classic' },
+        { label: __('Gradient', 'gutenslider-blocks'), value: 'gradient' },
     ];
 
     return (
@@ -93,7 +93,7 @@ const BackgroundColorControl = ({
             {bgColorSwitcher === 'normal' && (
                 <BaseControl
                     className="global-setting-background-color-setting-wrapper"
-                    label={__("Background Type", "button-blocks")}
+                    label={__("Background Type", "gutenslider-blocks")}
                 >
                     <Dropdown
                         className="global-setting-background-color-setting-icon-dropdown"
@@ -131,14 +131,14 @@ const BackgroundColorControl = ({
 
                                     <>
                                         <ColorControl
-                                            label={__("Normal Color", "button-blocks")}
+                                            label={__("Normal Color", "gutenslider-blocks")}
                                             color={normalClassicColor}
                                             onChangeColor={(value) => setNormalClassicColor(value)}
                                         />
 
                                         {isBackgroundImage && (
                                             <BackgroundImageControl
-                                                label={__("Background Image", "button-blocks")}
+                                                label={__("Background Image", "gutenslider-blocks")}
                                                 globalBackgroundImageUrl={normalBackgroundImageUrl}
                                                 setGlobalBackgroundImageUrl={(value) => setNormalBackgroundImageUrl(value)}
                                                 globalBackgroundImageAlt={normalBackgroundImageAlt}
@@ -177,7 +177,7 @@ const BackgroundColorControl = ({
             {bgColorSwitcher === 'hover' && (
                 <BaseControl
                     className="global-setting-background-color-setting-wrapper"
-                    label={__("Background Type", "button-blocks")}
+                    label={__("Background Type", "gutenslider-blocks")}
                 >
                     <Dropdown
                         className="global-setting-background-color-setting-icon-dropdown"
@@ -215,14 +215,14 @@ const BackgroundColorControl = ({
 
                                     <>
                                         <ColorControl
-                                            label={__("Hover Color", "button-blocks")}
+                                            label={__("Hover Color", "gutenslider-blocks")}
                                             color={hoverClassicColor}
                                             onChangeColor={(value) => setHoverClassicColor(value)}
                                         />
 
                                         {isBackgroundImage && (
                                             <BackgroundImageControl
-                                                label={__("Background Image", "button-blocks")}
+                                                label={__("Background Image", "gutenslider-blocks")}
                                                 globalBackgroundImageUrl={hoverBackgroundImageUrl}
                                                 setGlobalBackgroundImageUrl={(value) => setHoverBackgroundImageUrl(value)}
                                                 globalBackgroundImageAlt={hoverBackgroundImageAlt}

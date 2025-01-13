@@ -16,13 +16,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const { blockId, sliderItems } = attributes;
 
     const blockProps = useBlockProps({
-        className: `guten-slider-main-wrapper ${blockId}`,
+        className: `guten-slider-container ${blockId}`,
     });
 
 
     const handleAddItem = () => {
         const newItem = {
-            id: `item-${sliderItems.length + 1}`,
+            id: `${sliderItems.length + 1}`,
             title: `Slider Item ${sliderItems.length + 1}`,
 
             sliderItemBgColorSwitcher: 'normal',
@@ -62,7 +62,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
             <div {...blockProps}>
                 <Swiper
-                    className='swiper-container-outer'
+                    className='guten-slider-swiper-wrapper'
                     modules={[Navigation, Pagination]}
                     // spaceBetween={50}
                     slidesPerView={1}
@@ -73,7 +73,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 >
                     {sliderItems.map((item) => (
                         <SwiperSlide key={item.id}>
-                            <div className={`guten-slider-content-wrapper item-${item.id}`}>
+                            <div className={`guten-slider-content-wrapper ${item.id}`}>
                                 <div className='guten-slider-content-inner-wrapper'>
                                     <div className={`guten-slider-list-item`}>
                                         <div className="guten-slider-list-content">

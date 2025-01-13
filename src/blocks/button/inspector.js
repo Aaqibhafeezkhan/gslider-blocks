@@ -741,11 +741,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                     <>
                                         <div className="bb-advanced-button-wrapper">
                                             <PanelBody
-                                                title={__("Button", "button-blocks")}
+                                                title={__("Button", "gutenslider-blocks")}
                                                 initialOpen={true}
                                             >
                                                 <BaseControl
-                                                    label={__("Alignment", "button-blocks")}
+                                                    label={__("Alignment", "gutenslider-blocks")}
                                                     id="bb-setting-text-alignment"
                                                     className="bb-setting-text-alignment"
                                                 >
@@ -765,7 +765,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 </BaseControl>
 
                                                 <TextControl
-                                                    label={__("Text", "button-blocks")}
+                                                    label={__("Text", "gutenslider-blocks")}
                                                     value={buttonText}
                                                     onChange={(value) => setAttributes({ buttonText: value })}
                                                     className="bb-advanced-button-text"
@@ -800,14 +800,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 </div>
                                                 <div className="bb-link-control-wrapper">
                                                     <BaseControl 
-                                                        label={__("URL", "button-blocks")}
+                                                        label={__("URL", "gutenslider-blocks")}
                                                     >
                                                         <div className="bb-link-control-inner-wrapper">
                                                             <TextControl
                                                                 value={buttonUrl}
                                                                 onChange={(value) => setAttributes({ buttonUrl: value })}
                                                                 className="bb-advanced-button-url"
-                                                                placeholder={__('https://', 'button-blocks')}
+                                                                placeholder={__('https://', 'gutenslider-blocks')}
                                                             />
                                                             <Dropdown
                                                                 className="bb-setting-dropdown-icon-wrapper"
@@ -818,7 +818,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                         variant="primary"
                                                                         onClick={onToggle}
                                                                         aria-expanded={isOpen}
-                                                                        aria-label={__("Toggle Typography Settings", "button-blocks")}
+                                                                        aria-label={__("Toggle Typography Settings", "gutenslider-blocks")}
                                                                         className="bb-setting-dropdown-icon-btn"
                                                                     >
                                                                         <Dashicon icon="color-picker" className="bb-setting-dropdown-icon" />
@@ -828,7 +828,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                                     <div className="bb-advanced-button-icon-popup">
                                                                         <BaseControl className="bb-advanced-button-icon-popup-inner">
                                                                             <ToggleControl
-                                                                                label={__("Open in new tab", "button-blocks")}
+                                                                                label={__("Open in new tab", "gutenslider-blocks")}
                                                                                 checked={buttonTargetUrl}
                                                                                 onChange={(value) => setAttributes({ buttonTargetUrl: value })}
                                                                             />
@@ -847,13 +847,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody
-                                            title={__("Styles", "button-blocks")}
+                                            title={__("Styles", "gutenslider-blocks")}
                                             initialOpen={true}
                                         >
                                             <ResponsiveRangeControl
                                                 min={1}
                                                 max={100}
-                                                label={__("Width", "button-blocks")}
+                                                label={__("Width", "gutenslider-blocks")}
                                                 value={buttonWidth}
                                                 onChange={(value) => setAttributes({ buttonWidth: value })}
                                                 onUnitChange={(value) => setAttributes({ buttonWidthUnits: value })}
@@ -902,14 +902,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             />
 
                                             <SwitcherControl
-                                                label={__("Color", "button-blocks")}
+                                                label={__("Color", "gutenslider-blocks")}
                                                 globalSwitcher={buttonColorSwitcher}
                                                 setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
                                             />
 
                                             {buttonColorSwitcher === 'normal' && (
                                                 <ColorControl
-                                                    label={__("Normal Color", "button-blocks")}
+                                                    label={__("Normal Color", "gutenslider-blocks")}
                                                     color={buttonColor}
                                                     onChangeColor={(value) => setAttributes({ buttonColor: value })} 
                                                 />
@@ -917,14 +917,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                             {buttonColorSwitcher === 'hover' && (
                                                 <ColorControl
-                                                    label={__("Hover Color", "button-blocks")}
+                                                    label={__("Hover Color", "gutenslider-blocks")}
                                                     color={buttonHoverColor}
                                                     onChangeColor={(value) => setAttributes({ buttonHoverColor: value })}
                                                 />
                                             )}
 
                                             <BackgroundColorControl
-                                                label={__("Background Color", "button-blocks")}
+                                                label={__("Background Color", "gutenslider-blocks")}
                                                 bgColorSwitcher={buttonBgColorSwitcher}
                                                 setBgColorSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
                                                         
@@ -955,12 +955,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                         </PanelBody>
                                         <PanelBody
-                                            title={__("Padding and Margin", "button-blocks")}
+                                            title={__("Padding and Margin", "gutenslider-blocks")}
                                             initialOpen={false}
                                         >
 
                                             <ResponsiveSpacingControl
-                                                label={__("Padding", "button-blocks")}
+                                                label={__("Padding", "gutenslider-blocks")}
                                                 deviceType={deviceType}
                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                 units={buttonPaddingUnits}
@@ -979,7 +979,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             />
 
                                             <ResponsiveSpacingControl
-                                                label={__("Margin", "button-blocks")}
+                                                label={__("Margin", "gutenslider-blocks")}
                                                 deviceType={deviceType}
                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                 units={buttonMarginUnits}
@@ -999,11 +999,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                         </PanelBody>
                                         <PanelBody
-                                            title={__("Border and Shadow", "button-blocks")}
+                                            title={__("Border and Shadow", "gutenslider-blocks")}
                                             initialOpen={false}
                                         >
                                             <SelectControl
-                                                label={__("Border Style", "button-blocks")}
+                                                label={__("Border Style", "gutenslider-blocks")}
                                                 value={buttonBorder}
                                                 options={BORDER_STYLES}
                                                 onChange={(value) => setAttributes({ buttonBorder: value })}
@@ -1011,14 +1011,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
                                             <SwitcherControl
-                                                label={__("Border Color", "button-blocks")}
+                                                label={__("Border Color", "gutenslider-blocks")}
                                                 globalSwitcher={buttonBorderColorSwitcher}
                                                 setGlobalSwitcher={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
                                             />
 
                                             {buttonBorderColorSwitcher === 'normal' && (
                                                 <ColorControl
-                                                    label={__("Normal Color", "button-blocks")}
+                                                    label={__("Normal Color", "gutenslider-blocks")}
                                                     color={buttonBorderColor}
                                                     onChangeColor={(value) => setAttributes({ buttonBorderColor: value })}
                                                 />
@@ -1026,14 +1026,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                             {buttonBorderColorSwitcher === 'hover' && (
                                                 <ColorControl
-                                                    label={__("Hover Color", "button-blocks")}
+                                                    label={__("Hover Color", "gutenslider-blocks")}
                                                     color={buttonBorderHoverColor}
                                                     onChangeColor={(value) => setAttributes({ buttonBorderHoverColor: value })}
                                                 />
                                             )}
 
                                             <ResponsiveSpacingControl
-                                                label={__("Border", "button-blocks")}
+                                                label={__("Border", "gutenslider-blocks")}
                                                 deviceType={deviceType}
                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                 units={buttonBorderUnits}
@@ -1052,7 +1052,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             />
 
                                             <ResponsiveSpacingControl
-                                                label={__("Border Radius", "button-blocks")}
+                                                label={__("Border Radius", "gutenslider-blocks")}
                                                 deviceType={deviceType}
                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                 units={buttonBorderRadiusUnits}
@@ -1071,14 +1071,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             />
 
                                             <SwitcherControl
-                                                label={__("Box Shadow", "button-blocks")}
+                                                label={__("Box Shadow", "gutenslider-blocks")}
                                                 globalSwitcher={buttonboxShadowValuesSwitcher}
                                                 setGlobalSwitcher={(value) => setAttributes({ buttonboxShadowValuesSwitcher: value })}
                                             />
 
                                             {buttonboxShadowValuesSwitcher === 'normal' && (
                                                 <BoxShadowSettingsControl
-                                                    label={__("Normal Shadow", "button-blocks")}
+                                                    label={__("Normal Shadow", "gutenslider-blocks")}
                                                     onBoxShadowChange={(value) => setAttributes({ buttonboxShadowValues: value })}
                                                     initialShadowValue={buttonboxShadowValues}
                                                     onBoxShadowStyleChange={(value) => setAttributes({ buttonboxShadowCssValue: value })}
@@ -1087,7 +1087,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                             {buttonboxShadowValuesSwitcher === 'hover' && (
                                                 <BoxShadowSettingsControl
-                                                    label={__("Hover Shadow", "button-blocks")}
+                                                    label={__("Hover Shadow", "gutenslider-blocks")}
                                                     onBoxShadowChange={(value) => setAttributes({ buttonboxShadowHoverValues: value })}
                                                     initialShadowValue={buttonboxShadowHoverValues}
                                                     onBoxShadowStyleChange={(value) => setAttributes({ buttonboxShadowHoverCssValue: value })}
@@ -1102,14 +1102,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         <div className="bb-setting-advanced-tab-wrapper">
                                             <div className="bb-setting-z-index-wrapper">
                                                 <PanelBody
-                                                    title={__("Advanced", "button-blocks")}
+                                                    title={__("Advanced", "gutenslider-blocks")}
                                                     initialOpen={true}
                                                     className='bb-setting-z-index-header'
                                                 >
                                                     <ResponsiveRangeControl
                                                         min={0}
                                                         max={10000000}
-                                                        label={__("Z Index", "button-blocks")}
+                                                        label={__("Z Index", "gutenslider-blocks")}
                                                         value={buttonZIndex}
                                                         onChange={(value) => setAttributes({ buttonZIndex: value })}
                                                         deviceType={deviceType}
@@ -1119,7 +1119,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         isRangeUnit={false}
                                                     />
                                                     <BackgroundColorControl
-                                                        label={__("Background Color", "button-blocks")}
+                                                        label={__("Background Color", "gutenslider-blocks")}
                                                         bgColorSwitcher={buttonGlobalBgColorSwitcher}
                                                         setBgColorSwitcher={(value) => setAttributes({ buttonGlobalBgColorSwitcher: value })}
 
@@ -1150,11 +1150,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                                 </PanelBody>
                                                 <PanelBody
-                                                    title={__("Padding and Margin", "button-blocks")}
+                                                    title={__("Padding and Margin", "gutenslider-blocks")}
                                                     initialOpen={false}
                                                 >
                                                     <ResponsiveSpacingControl
-                                                        label={__("Padding", "button-blocks")}
+                                                        label={__("Padding", "gutenslider-blocks")}
                                                         deviceType={deviceType}
                                                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                         units={buttonGlobalPaddingUnits}
@@ -1173,7 +1173,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     />
 
                                                     <ResponsiveSpacingControl
-                                                        label={__("Margin", "button-blocks")}
+                                                        label={__("Margin", "gutenslider-blocks")}
                                                         deviceType={deviceType}
                                                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                         units={buttonGlobalMarginUnits}
@@ -1193,25 +1193,25 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 </PanelBody>
 
                                                 <PanelBody
-                                                    title={__("Border and Shadow", "button-blocks")}
+                                                    title={__("Border and Shadow", "gutenslider-blocks")}
                                                     initialOpen={false}
                                                 >
                                                     <SelectControl
-                                                        label={__("Border Style", "button-blocks")}
+                                                        label={__("Border Style", "gutenslider-blocks")}
                                                         value={buttonGlobalBorder}
                                                         options={BORDER_STYLES}
                                                         onChange={(value) => setAttributes({ buttonGlobalBorder: value })}
                                                     />
 
                                                     <SwitcherControl
-                                                        label={__("Border Color", "button-blocks")}
+                                                        label={__("Border Color", "gutenslider-blocks")}
                                                         globalSwitcher={buttonGlobalBorderColorSwitcher}
                                                         setGlobalSwitcher={(value) => setAttributes({ buttonGlobalBorderColorSwitcher: value })}
                                                     />
 
                                                     {buttonGlobalBorderColorSwitcher === 'normal' && (
                                                         <ColorControl
-                                                            label={__("Normal Color", "button-blocks")}
+                                                            label={__("Normal Color", "gutenslider-blocks")}
                                                             color={buttonGlobalBorderColor}
                                                             onChangeColor={(value) => setAttributes({ buttonGlobalBorderColor: value })}
                                                         />
@@ -1219,14 +1219,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                                     {buttonGlobalBorderColorSwitcher === 'hover' && (
                                                         <ColorControl
-                                                            label={__("Hover Color", "button-blocks")}
+                                                            label={__("Hover Color", "gutenslider-blocks")}
                                                             color={buttonGlobalBorderHoverColor}
                                                             onChangeColor={(value) => setAttributes({ buttonGlobalBorderHoverColor: value })}
                                                         />
                                                     )}
 
                                                     <ResponsiveSpacingControl
-                                                        label={__("Border", "button-blocks")}
+                                                        label={__("Border", "gutenslider-blocks")}
                                                         deviceType={deviceType}
                                                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                         units={buttonGlobalBorderUnits}
@@ -1245,7 +1245,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     />
 
                                                     <ResponsiveSpacingControl
-                                                        label={__("Border Radius", "button-blocks")}
+                                                        label={__("Border Radius", "gutenslider-blocks")}
                                                         deviceType={deviceType}
                                                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                         units={buttonGlobalBorderRadiusUnits}
@@ -1264,14 +1264,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     />
 
                                                     <SwitcherControl
-                                                        label={__("Box Shadow", "button-blocks")}
+                                                        label={__("Box Shadow", "gutenslider-blocks")}
                                                         globalSwitcher={buttonGlobalBoxShadowValuesSwitcher}
                                                         setGlobalSwitcher={(value) => setAttributes({ buttonGlobalBoxShadowValuesSwitcher: value })}
                                                     />
 
                                                     {buttonGlobalBoxShadowValuesSwitcher === 'normal' && (
                                                         <BoxShadowSettingsControl
-                                                            label={__("Normal Shadow", "button-blocks")}
+                                                            label={__("Normal Shadow", "gutenslider-blocks")}
                                                             onBoxShadowChange={(value) => setAttributes({ buttonGlobalBoxShadowValues: value })}
                                                             initialShadowValue={buttonGlobalBoxShadowValues}
                                                             onBoxShadowStyleChange={(value) => setAttributes({ buttonGlobalBoxShadowCssValue: value })}
@@ -1280,7 +1280,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                                     {buttonGlobalBoxShadowValuesSwitcher === 'hover' && (
                                                         <BoxShadowSettingsControl
-                                                            label={__("Hover Shadow", "button-blocks")}
+                                                            label={__("Hover Shadow", "gutenslider-blocks")}
                                                             onBoxShadowChange={(value) => setAttributes({ buttonGlobalBoxShadowHoverValues: value })}
                                                             initialShadowValue={buttonGlobalBoxShadowHoverValues}
                                                             onBoxShadowStyleChange={(value) => setAttributes({ buttonGlobalBoxShadowHoverCssValue: value })}

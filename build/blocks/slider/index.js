@@ -5456,11 +5456,11 @@ function Edit({
     sliderItems
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
-    className: `guten-slider-main-wrapper ${blockId}`
+    className: `guten-slider-container ${blockId}`
   });
   const handleAddItem = () => {
     const newItem = {
-      id: `item-${sliderItems.length + 1}`,
+      id: `${sliderItems.length + 1}`,
       title: `Slider Item ${sliderItems.length + 1}`,
       sliderItemBgColorSwitcher: 'normal',
       normalItemBackgroundType: 'classic',
@@ -5489,7 +5489,7 @@ function Edit({
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_5__.Swiper, {
-    className: "swiper-container-outer",
+    className: "guten-slider-swiper-wrapper",
     modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_6__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_6__.Pagination]
     // spaceBetween={50}
     ,
@@ -5503,7 +5503,7 @@ function Edit({
   }, sliderItems.map(item => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_5__.SwiperSlide, {
     key: item.id
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `guten-slider-content-wrapper item-${item.id}`
+    className: `guten-slider-content-wrapper ${item.id}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "guten-slider-content-inner-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -5666,12 +5666,12 @@ function Inspector({
       const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor; // Check if gradient is empty, fallback to classic color
 
       if (normalItemBackgroundType === 'gradient') {
-        const gradientStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id}  {
+        const gradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}  {
                     background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : normalItemGradientColor};
                 }`;
         style += gradientStyle;
       } else {
-        const classicStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id} {
+        const classicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};
                 }`;
         style += classicStyle;
@@ -5680,12 +5680,12 @@ function Inspector({
       const hoverItemGradientColor = item.hoverItemGradientColor || item.hoverItemClassicColor; // Similar fallback for hover state
 
       if (hoverItemBackgroundType === 'gradient') {
-        const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id}:hover {
+        const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : hoverItemGradientColor};
                 }`;
         style += hoverGradientStyle;
       } else {
-        const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id}:hover {
+        const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemClassicColor};
                 }`;
         style += hoverClassicStyle;
@@ -5776,28 +5776,31 @@ function Save({
     sliderItems
   } = attributes;
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-    className: `guten-slider-main-wrapper ${blockId}`
+    className: `guten-slider-container`,
+    'data-block-id': blockId
   });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper"
+    className: "swiper guten-slider-swiper-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper-wrapper"
+    className: "swiper-wrapper guten-slider-wrapper"
   }, sliderItems.map(item => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: item.id,
-    className: `swiper-slide guten-slider-content-wrapper item-${item.id}`
+    className: "swiper-slide"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `guten-slider-content-wrapper ${item.id}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "guten-slider-content-inner-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `guten-slider-list-item`
+    className: "guten-slider-list-item"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "guten-slider-list-content"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
     tagName: "h3",
     className: "guten-slider-title",
     value: item.title
-  }))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper-pagination"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper-button-next"
@@ -5887,7 +5890,7 @@ function SortableItem({
     className: "sortable-item-content"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
     className: "global-setting-background-color-setting-wrapper",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slide Content", "button-blocks")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slide Content", "gutenslider-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Dropdown, {
     className: "global-setting-background-color-setting-icon-dropdown",
     contentClassName: "global-setting-background-color-setting-icon-dropdown-content",
@@ -5915,7 +5918,7 @@ function SortableItem({
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
     className: "global-setting-background-color-setting-wrapper",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "button-blocks")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "gutenslider-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Dropdown, {
     className: "global-setting-background-color-setting-icon-dropdown",
     contentClassName: "global-setting-background-color-setting-icon-dropdown-content",
@@ -5998,7 +6001,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const BackgroundColorControl = ({
-  label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "button-blocks"),
+  label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "gutenslider-blocks"),
   bgColorSwitcher,
   setBgColorSwitcher,
   normalBackgroundType,
@@ -6052,10 +6055,10 @@ const BackgroundColorControl = ({
   isBackgroundImage = true
 }) => {
   const BACKGROUND_TYPES = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Classic', 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Classic', 'gutenslider-blocks'),
     value: 'classic'
   }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gradient', 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gradient', 'gutenslider-blocks'),
     value: 'gradient'
   }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_switcher_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -6064,7 +6067,7 @@ const BackgroundColorControl = ({
     setGlobalSwitcher: value => setBgColorSwitcher(value)
   }), bgColorSwitcher === 'normal' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
     className: "global-setting-background-color-setting-wrapper",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "button-blocks")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "gutenslider-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     className: "global-setting-background-color-setting-icon-dropdown",
     contentClassName: "global-setting-background-color-setting-icon-dropdown-content",
@@ -6094,11 +6097,11 @@ const BackgroundColorControl = ({
       onClick: () => setNormalBackgroundType(item.value),
       className: `global-setting-background-color-panel-btn-switcher ${normalBackgroundType === item.value ? 'active' : ''}`
     }, item.label)))), normalBackgroundType === 'classic' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "gutenslider-blocks"),
       color: normalClassicColor,
       onChangeColor: value => setNormalClassicColor(value)
     }), isBackgroundImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_background_image_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "gutenslider-blocks"),
       globalBackgroundImageUrl: normalBackgroundImageUrl,
       setGlobalBackgroundImageUrl: value => setNormalBackgroundImageUrl(value),
       globalBackgroundImageAlt: normalBackgroundImageAlt,
@@ -6123,7 +6126,7 @@ const BackgroundColorControl = ({
     }))
   })), bgColorSwitcher === 'hover' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
     className: "global-setting-background-color-setting-wrapper",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "button-blocks")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "gutenslider-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     className: "global-setting-background-color-setting-icon-dropdown",
     contentClassName: "global-setting-background-color-setting-icon-dropdown-content",
@@ -6153,11 +6156,11 @@ const BackgroundColorControl = ({
       onClick: () => setHoverBackgroundType(item.value),
       className: `global-setting-background-color-panel-btn-switcher ${hoverBackgroundType === item.value ? 'active' : ''}`
     }, item.label)))), hoverBackgroundType === 'classic' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "gutenslider-blocks"),
       color: hoverClassicColor,
       onChangeColor: value => setHoverClassicColor(value)
     }), isBackgroundImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_background_image_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "gutenslider-blocks"),
       globalBackgroundImageUrl: hoverBackgroundImageUrl,
       setGlobalBackgroundImageUrl: value => setHoverBackgroundImageUrl(value),
       globalBackgroundImageAlt: hoverBackgroundImageAlt,
@@ -6465,7 +6468,7 @@ const ColorControl = ({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "global-setting-color-container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, "gutenslider-blocks"),
     className: "global-setting-color-switcher-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     className: "global-setting-color-panel-icon-dropdown",
@@ -6497,7 +6500,7 @@ const ColorControl = ({
       enableAlpha: true
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "global-setting-color-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default Colors", "button-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default Colors", "gutenslider-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
       colors: [{
         color: '#2563eb'
       }, {
@@ -6604,7 +6607,7 @@ const ColorControl = ({
       onChange: onChangeColor
     }), themeColors.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "global-setting-color-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Theme Colors", "button-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Theme Colors", "gutenslider-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
       colors: themeColors,
       disableCustomColors: true,
       value: color,
@@ -6652,7 +6655,7 @@ const GradientColorControl = ({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "global-gradient-custom-gradient-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add Custom Gradient", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add Custom Gradient", "gutenslider-blocks"),
     checked: globalCustomGradientSwitcher,
     onChange: setGlobalCustomGradientSwitcher,
     className: "global-gradient-label"
@@ -6661,7 +6664,7 @@ const GradientColorControl = ({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
     value: globalCustomGradientInputValue,
     onChange: setGlobalCustomGradientInputValue,
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add your gradient color here.", "button-blocks"),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add your gradient color here.", "gutenslider-blocks"),
     className: "global-gradient-custom-gradient-textarea"
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
     className: "global-gradient-picker-wrapper"
@@ -6903,10 +6906,10 @@ const SwitcherControl = ({
   setGlobalSwitcher
 }) => {
   const NORMAL_HOVER = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Normal', 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Normal', 'gutenslider-blocks'),
     value: 'normal'
   }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hover', 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hover', 'gutenslider-blocks'),
     value: 'hover'
   }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -18586,7 +18589,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkbutton_blocks"] = globalThis["webpackChunkbutton_blocks"] || [];
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkgutenslider_blocks"] = globalThis["webpackChunkgutenslider_blocks"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();

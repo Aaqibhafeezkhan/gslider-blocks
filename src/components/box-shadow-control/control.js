@@ -10,7 +10,7 @@ function Control({ label, type, onChangeHandler, value }) {
 			{type === 'color' ? (
 					<>
 						<BaseControl 
-							label={__(label, "button-blocks")}
+							label={__(label, "gutenslider-blocks")}
 							className="global-box-shadow-wrapper shadow-color"
 						>
 							<Dropdown
@@ -36,7 +36,7 @@ function Control({ label, type, onChangeHandler, value }) {
 													onChange={onChangeHandler}
 													enableAlpha={true}
 												/>
-												<div className="global-box-shadow-label">{__("Default Colors", "button-blocks")}</div>
+												<div className="global-box-shadow-label">{__("Default Colors", "gutenslider-blocks")}</div>
 												<ColorPalette
 													colors={[
 														{ color: '#F72585' },

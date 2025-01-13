@@ -32,7 +32,7 @@ const ResponsiveDeviceControl = ({label, selectedDevice, onDeviceChange}) => {
 	return (
 		<>
 			<div className="global-setting-device-label-wrapper">
-				<p className="global-setting-label-text">{ __( label, 'button-blocks' ) }</p>
+				<p className="global-setting-label-text">{ __( label, 'gutenslider-blocks' ) }</p>
 				<div className="global-responsive-device-wrapper" onClick={toggleDeviceVisibility}>
 					<div className="global-responsive-device-inner-wrapper">
 						<button className={`global-device-switcher guten-slider-responsive-desktop-device ${selectedDevice === 'Desktop' ? 'active' : ''}`} onClick={() => handleDevice('Desktop')}>

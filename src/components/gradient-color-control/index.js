@@ -19,7 +19,7 @@ const GradientColorControl = ({
         >
             <div className='global-gradient-custom-gradient-wrapper'>
                 <ToggleControl
-                    label={__("Add Custom Gradient", "button-blocks")}
+                    label={__("Add Custom Gradient", "gutenslider-blocks")}
                     checked={globalCustomGradientSwitcher}
                     onChange={setGlobalCustomGradientSwitcher}
                     className='global-gradient-label'
@@ -31,7 +31,7 @@ const GradientColorControl = ({
                     <TextareaControl
                         value={globalCustomGradientInputValue}
                         onChange={setGlobalCustomGradientInputValue}
-                        help={__("Add your gradient color here.", "button-blocks")}
+                        help={__("Add your gradient color here.", "gutenslider-blocks")}
                         className='global-gradient-custom-gradient-textarea'
                     />
                 </div>

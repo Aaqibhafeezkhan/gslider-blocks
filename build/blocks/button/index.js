@@ -1040,7 +1040,7 @@ function Edit({
     onChange: value => setAttributes({
       buttonText: value
     }),
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enter button text...', 'button-blocks'),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enter button text...', 'gutenslider-blocks'),
     className: "bb-advanced-button-text"
   }), buttonIconPosition === 'right' && buttonIconAlign === 'icon-text' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `bb-advanced-button-icon-wrapper ${buttonIconPosition}`
@@ -1646,10 +1646,10 @@ function Inspector({
   }, tab.name === 'general' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bb-advanced-button-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "button-blocks"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "gutenslider-blocks"),
     initialOpen: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alignment", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alignment", "gutenslider-blocks"),
     id: "bb-setting-text-alignment",
     className: "bb-setting-text-alignment"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ButtonGroup, {
@@ -1661,7 +1661,7 @@ function Inspector({
     }),
     className: `bb-setting-text-alignment-single-btn ${buttonAlignment === item.value ? 'active' : ''}`
   }, item.label)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text", "gutenslider-blocks"),
     value: buttonText,
     onChange: value => setAttributes({
       buttonText: value
@@ -1689,7 +1689,7 @@ function Inspector({
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bb-link-control-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("URL", "button-blocks")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("URL", "gutenslider-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bb-link-control-inner-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
@@ -1698,7 +1698,7 @@ function Inspector({
       buttonUrl: value
     }),
     className: "bb-advanced-button-url",
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('https://', 'button-blocks')
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('https://', 'gutenslider-blocks')
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dropdown, {
     className: "bb-setting-dropdown-icon-wrapper",
     contentClassName: "bb-setting-dropdown-icon-content",
@@ -1712,7 +1712,7 @@ function Inspector({
       variant: "primary",
       onClick: onToggle,
       "aria-expanded": isOpen,
-      "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Toggle Typography Settings", "button-blocks"),
+      "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Toggle Typography Settings", "gutenslider-blocks"),
       className: "bb-setting-dropdown-icon-btn"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dashicon, {
       icon: "color-picker",
@@ -1723,19 +1723,19 @@ function Inspector({
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
       className: "bb-advanced-button-icon-popup-inner"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open in new tab", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open in new tab", "gutenslider-blocks"),
       checked: buttonTargetUrl,
       onChange: value => setAttributes({
         buttonTargetUrl: value
       })
     })))
   }))))))), tab.name === "styles" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Styles", "button-blocks"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Styles", "gutenslider-blocks"),
     initialOpen: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_range_control__WEBPACK_IMPORTED_MODULE_9__["default"], {
     min: 1,
     max: 100,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width", "gutenslider-blocks"),
     value: buttonWidth,
     onChange: value => setAttributes({
       buttonWidth: value
@@ -1796,25 +1796,25 @@ function Inspector({
     deviceType: deviceType,
     setAttributes: setAttributes
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_switcher_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "gutenslider-blocks"),
     globalSwitcher: buttonColorSwitcher,
     setGlobalSwitcher: value => setAttributes({
       buttonColorSwitcher: value
     })
   }), buttonColorSwitcher === 'normal' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "gutenslider-blocks"),
     color: buttonColor,
     onChangeColor: value => setAttributes({
       buttonColor: value
     })
   }), buttonColorSwitcher === 'hover' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "gutenslider-blocks"),
     color: buttonHoverColor,
     onChangeColor: value => setAttributes({
       buttonHoverColor: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_background_color_control__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "gutenslider-blocks"),
     bgColorSwitcher: buttonBgColorSwitcher,
     setBgColorSwitcher: value => setAttributes({
       buttonBgColorSwitcher: value
@@ -1861,10 +1861,10 @@ function Inspector({
     }),
     isBackgroundImage: false
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding and Margin", "button-blocks"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding and Margin", "gutenslider-blocks"),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_spacing_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "gutenslider-blocks"),
     deviceType: deviceType,
     onChangeDeviceType: value => setAttributes({
       deviceType: value
@@ -1899,7 +1899,7 @@ function Inspector({
       buttonPaddingLink: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_spacing_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Margin", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Margin", "gutenslider-blocks"),
     deviceType: deviceType,
     onChangeDeviceType: value => setAttributes({
       deviceType: value
@@ -1934,35 +1934,35 @@ function Inspector({
       buttonMarginLink: value
     })
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border and Shadow", "button-blocks"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border and Shadow", "gutenslider-blocks"),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "gutenslider-blocks"),
     value: buttonBorder,
     options: _Constants__WEBPACK_IMPORTED_MODULE_4__.BORDER_STYLES,
     onChange: value => setAttributes({
       buttonBorder: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_switcher_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "gutenslider-blocks"),
     globalSwitcher: buttonBorderColorSwitcher,
     setGlobalSwitcher: value => setAttributes({
       buttonBorderColorSwitcher: value
     })
   }), buttonBorderColorSwitcher === 'normal' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "gutenslider-blocks"),
     color: buttonBorderColor,
     onChangeColor: value => setAttributes({
       buttonBorderColor: value
     })
   }), buttonBorderColorSwitcher === 'hover' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "gutenslider-blocks"),
     color: buttonBorderHoverColor,
     onChangeColor: value => setAttributes({
       buttonBorderHoverColor: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_spacing_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "gutenslider-blocks"),
     deviceType: deviceType,
     onChangeDeviceType: value => setAttributes({
       deviceType: value
@@ -1997,7 +1997,7 @@ function Inspector({
       buttonBorderLink: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_spacing_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius", "gutenslider-blocks"),
     deviceType: deviceType,
     onChangeDeviceType: value => setAttributes({
       deviceType: value
@@ -2032,13 +2032,13 @@ function Inspector({
       buttonBorderRadiusLink: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_switcher_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Box Shadow", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Box Shadow", "gutenslider-blocks"),
     globalSwitcher: buttonboxShadowValuesSwitcher,
     setGlobalSwitcher: value => setAttributes({
       buttonboxShadowValuesSwitcher: value
     })
   }), buttonboxShadowValuesSwitcher === 'normal' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_box_shadow_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Shadow", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Shadow", "gutenslider-blocks"),
     onBoxShadowChange: value => setAttributes({
       buttonboxShadowValues: value
     }),
@@ -2047,7 +2047,7 @@ function Inspector({
       buttonboxShadowCssValue: value
     })
   }), buttonboxShadowValuesSwitcher === 'hover' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_box_shadow_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Shadow", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Shadow", "gutenslider-blocks"),
     onBoxShadowChange: value => setAttributes({
       buttonboxShadowHoverValues: value
     }),
@@ -2060,13 +2060,13 @@ function Inspector({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bb-setting-z-index-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Advanced", "button-blocks"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Advanced", "gutenslider-blocks"),
     initialOpen: true,
     className: "bb-setting-z-index-header"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_range_control__WEBPACK_IMPORTED_MODULE_9__["default"], {
     min: 0,
     max: 10000000,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Z Index", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Z Index", "gutenslider-blocks"),
     value: buttonZIndex,
     onChange: value => setAttributes({
       buttonZIndex: value
@@ -2077,7 +2077,7 @@ function Inspector({
     defaultValue: "",
     isRangeUnit: false
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_background_color_control__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "gutenslider-blocks"),
     bgColorSwitcher: buttonGlobalBgColorSwitcher,
     setBgColorSwitcher: value => setAttributes({
       buttonGlobalBgColorSwitcher: value
@@ -2124,10 +2124,10 @@ function Inspector({
     }),
     isBackgroundImage: false
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding and Margin", "button-blocks"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding and Margin", "gutenslider-blocks"),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_spacing_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "gutenslider-blocks"),
     deviceType: deviceType,
     onChangeDeviceType: value => setAttributes({
       deviceType: value
@@ -2162,7 +2162,7 @@ function Inspector({
       buttonGlobalPaddingLink: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_spacing_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Margin", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Margin", "gutenslider-blocks"),
     deviceType: deviceType,
     onChangeDeviceType: value => setAttributes({
       deviceType: value
@@ -2197,35 +2197,35 @@ function Inspector({
       buttonGlobalMarginLink: value
     })
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border and Shadow", "button-blocks"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border and Shadow", "gutenslider-blocks"),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "gutenslider-blocks"),
     value: buttonGlobalBorder,
     options: _Constants__WEBPACK_IMPORTED_MODULE_4__.BORDER_STYLES,
     onChange: value => setAttributes({
       buttonGlobalBorder: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_switcher_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "gutenslider-blocks"),
     globalSwitcher: buttonGlobalBorderColorSwitcher,
     setGlobalSwitcher: value => setAttributes({
       buttonGlobalBorderColorSwitcher: value
     })
   }), buttonGlobalBorderColorSwitcher === 'normal' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "gutenslider-blocks"),
     color: buttonGlobalBorderColor,
     onChangeColor: value => setAttributes({
       buttonGlobalBorderColor: value
     })
   }), buttonGlobalBorderColorSwitcher === 'hover' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "gutenslider-blocks"),
     color: buttonGlobalBorderHoverColor,
     onChangeColor: value => setAttributes({
       buttonGlobalBorderHoverColor: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_spacing_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "gutenslider-blocks"),
     deviceType: deviceType,
     onChangeDeviceType: value => setAttributes({
       deviceType: value
@@ -2260,7 +2260,7 @@ function Inspector({
       buttonGlobalBorderLink: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_spacing_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius", "gutenslider-blocks"),
     deviceType: deviceType,
     onChangeDeviceType: value => setAttributes({
       deviceType: value
@@ -2295,13 +2295,13 @@ function Inspector({
       buttonGlobalBorderRadiusLink: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_switcher_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Box Shadow", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Box Shadow", "gutenslider-blocks"),
     globalSwitcher: buttonGlobalBoxShadowValuesSwitcher,
     setGlobalSwitcher: value => setAttributes({
       buttonGlobalBoxShadowValuesSwitcher: value
     })
   }), buttonGlobalBoxShadowValuesSwitcher === 'normal' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_box_shadow_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Shadow", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Shadow", "gutenslider-blocks"),
     onBoxShadowChange: value => setAttributes({
       buttonGlobalBoxShadowValues: value
     }),
@@ -2310,7 +2310,7 @@ function Inspector({
       buttonGlobalBoxShadowCssValue: value
     })
   }), buttonGlobalBoxShadowValuesSwitcher === 'hover' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_box_shadow_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Shadow", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Shadow", "gutenslider-blocks"),
     onBoxShadowChange: value => setAttributes({
       buttonGlobalBoxShadowHoverValues: value
     }),
@@ -2423,7 +2423,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const BackgroundColorControl = ({
-  label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "button-blocks"),
+  label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "gutenslider-blocks"),
   bgColorSwitcher,
   setBgColorSwitcher,
   normalBackgroundType,
@@ -2477,10 +2477,10 @@ const BackgroundColorControl = ({
   isBackgroundImage = true
 }) => {
   const BACKGROUND_TYPES = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Classic', 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Classic', 'gutenslider-blocks'),
     value: 'classic'
   }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gradient', 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gradient', 'gutenslider-blocks'),
     value: 'gradient'
   }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_switcher_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -2489,7 +2489,7 @@ const BackgroundColorControl = ({
     setGlobalSwitcher: value => setBgColorSwitcher(value)
   }), bgColorSwitcher === 'normal' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
     className: "global-setting-background-color-setting-wrapper",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "button-blocks")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "gutenslider-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     className: "global-setting-background-color-setting-icon-dropdown",
     contentClassName: "global-setting-background-color-setting-icon-dropdown-content",
@@ -2519,11 +2519,11 @@ const BackgroundColorControl = ({
       onClick: () => setNormalBackgroundType(item.value),
       className: `global-setting-background-color-panel-btn-switcher ${normalBackgroundType === item.value ? 'active' : ''}`
     }, item.label)))), normalBackgroundType === 'classic' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal Color", "gutenslider-blocks"),
       color: normalClassicColor,
       onChangeColor: value => setNormalClassicColor(value)
     }), isBackgroundImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_background_image_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "gutenslider-blocks"),
       globalBackgroundImageUrl: normalBackgroundImageUrl,
       setGlobalBackgroundImageUrl: value => setNormalBackgroundImageUrl(value),
       globalBackgroundImageAlt: normalBackgroundImageAlt,
@@ -2548,7 +2548,7 @@ const BackgroundColorControl = ({
     }))
   })), bgColorSwitcher === 'hover' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
     className: "global-setting-background-color-setting-wrapper",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "button-blocks")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "gutenslider-blocks")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     className: "global-setting-background-color-setting-icon-dropdown",
     contentClassName: "global-setting-background-color-setting-icon-dropdown-content",
@@ -2578,11 +2578,11 @@ const BackgroundColorControl = ({
       onClick: () => setHoverBackgroundType(item.value),
       className: `global-setting-background-color-panel-btn-switcher ${hoverBackgroundType === item.value ? 'active' : ''}`
     }, item.label)))), hoverBackgroundType === 'classic' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_color_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Color", "gutenslider-blocks"),
       color: hoverClassicColor,
       onChangeColor: value => setHoverClassicColor(value)
     }), isBackgroundImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_background_image_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Image", "gutenslider-blocks"),
       globalBackgroundImageUrl: hoverBackgroundImageUrl,
       setGlobalBackgroundImageUrl: value => setHoverBackgroundImageUrl(value),
       globalBackgroundImageAlt: hoverBackgroundImageAlt,
@@ -2888,7 +2888,7 @@ function Control({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `paneChild ${type}`
   }, type === 'color' ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)(label, "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)(label, "gutenslider-blocks"),
     className: "global-box-shadow-wrapper shadow-color"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     className: "global-box-shadow-icon-dropdown",
@@ -2920,7 +2920,7 @@ function Control({
       enableAlpha: true
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "global-box-shadow-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Default Colors", "button-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Default Colors", "gutenslider-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       colors: [{
         color: '#F72585'
       }, {
@@ -2978,7 +2978,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function BoxShadowSettingsControl({
-  label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Box Shadow", "button-blocks"),
+  label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Box Shadow", "gutenslider-blocks"),
   onBoxShadowChange,
   initialShadowValue,
   onBoxShadowStyleChange
@@ -3109,7 +3109,7 @@ const ColorControl = ({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "global-setting-color-container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, "gutenslider-blocks"),
     className: "global-setting-color-switcher-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     className: "global-setting-color-panel-icon-dropdown",
@@ -3141,7 +3141,7 @@ const ColorControl = ({
       enableAlpha: true
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "global-setting-color-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default Colors", "button-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default Colors", "gutenslider-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
       colors: [{
         color: '#2563eb'
       }, {
@@ -3248,7 +3248,7 @@ const ColorControl = ({
       onChange: onChangeColor
     }), themeColors.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "global-setting-color-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Theme Colors", "button-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Theme Colors", "gutenslider-blocks")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
       colors: themeColors,
       disableCustomColors: true,
       value: color,
@@ -3297,7 +3297,7 @@ const GradientColorControl = ({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "global-gradient-custom-gradient-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add Custom Gradient", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add Custom Gradient", "gutenslider-blocks"),
     checked: globalCustomGradientSwitcher,
     onChange: setGlobalCustomGradientSwitcher,
     className: "global-gradient-label"
@@ -3306,7 +3306,7 @@ const GradientColorControl = ({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
     value: globalCustomGradientInputValue,
     onChange: setGlobalCustomGradientInputValue,
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add your gradient color here.", "button-blocks"),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add your gradient color here.", "gutenslider-blocks"),
     className: "global-gradient-custom-gradient-textarea"
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
     className: "global-gradient-picker-wrapper"
@@ -4267,7 +4267,7 @@ const ResponsiveDeviceControl = ({
     className: "global-setting-device-label-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "global-setting-label-text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'button-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'gutenslider-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "global-responsive-device-wrapper",
     onClick: toggleDeviceVisibility
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4406,7 +4406,7 @@ const ResponsiveRangeControl = ({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "global-setting-spacing-label-container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_device_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'gutenslider-blocks'),
     selectedDevice: deviceType,
     onDeviceChange: newDevice => setAttributes({
       deviceType: newDevice
@@ -4631,7 +4631,7 @@ function ResponsiveSpacingControl({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "global-setting-spacing-label-container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_device_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'gutenslider-blocks'),
     selectedDevice: deviceType,
     onDeviceChange: onChangeDeviceType
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4659,7 +4659,7 @@ function ResponsiveSpacingControl({
     className: "global-setting-spacing-input-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "global-setting-spacing-input-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Top', 'button-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Top', 'gutenslider-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
     name: "top",
     value: getSpacingValue('top'),
@@ -4668,7 +4668,7 @@ function ResponsiveSpacingControl({
     className: "global-setting-spacing-input-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "global-setting-spacing-input-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Right', 'button-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Right', 'gutenslider-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
     name: "right",
     value: getSpacingValue('right'),
@@ -4677,7 +4677,7 @@ function ResponsiveSpacingControl({
     className: "global-setting-spacing-input-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "global-setting-spacing-input-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bottom', 'button-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bottom', 'gutenslider-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
     name: "bottom",
     value: getSpacingValue('bottom'),
@@ -4686,7 +4686,7 @@ function ResponsiveSpacingControl({
     className: "global-setting-spacing-input-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "global-setting-spacing-input-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Left', 'button-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Left', 'gutenslider-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
     name: "left",
     value: getSpacingValue('left'),
@@ -4775,79 +4775,79 @@ const TEXT_ALIGN = [{
   value: "right"
 }];
 const HEADING = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H1", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H1", "gutenslider-blocks"),
   value: "h1"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H2", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H2", "gutenslider-blocks"),
   value: "h2"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H3", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H3", "gutenslider-blocks"),
   value: "h3"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H4", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H4", "gutenslider-blocks"),
   value: "h4"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H5", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H5", "gutenslider-blocks"),
   value: "h5"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H6", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H6", "gutenslider-blocks"),
   value: "h6"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("P", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("P", "gutenslider-blocks"),
   value: "p"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Div", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Div", "gutenslider-blocks"),
   value: "span"
 }];
 const SEPERATOR_STYLES = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solid", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solid", "gutenslider-blocks"),
   value: "solid"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dashed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dashed", "gutenslider-blocks"),
   value: "dashed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dotted", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dotted", "gutenslider-blocks"),
   value: "dotted"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Double", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Double", "gutenslider-blocks"),
   value: "double"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Groove", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Groove", "gutenslider-blocks"),
   value: "groove"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Outset", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Outset", "gutenslider-blocks"),
   value: "outset"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ridge", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ridge", "gutenslider-blocks"),
   value: "ridge"
 }];
 const BORDER_STYLES = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("None", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("None", "gutenslider-blocks"),
   value: "none"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solid", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solid", "gutenslider-blocks"),
   value: "solid"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dashed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dashed", "gutenslider-blocks"),
   value: "dashed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dotted", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dotted", "gutenslider-blocks"),
   value: "dotted"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Double", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Double", "gutenslider-blocks"),
   value: "double"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Groove", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Groove", "gutenslider-blocks"),
   value: "groove"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Outset", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Outset", "gutenslider-blocks"),
   value: "outset"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ridge", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ridge", "gutenslider-blocks"),
   value: "ridge"
 }];
 const FONT_WEIGHT = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "gutenslider-blocks"),
   value: 'inherit'
 }, {
   label: '100',
@@ -4878,3100 +4878,3100 @@ const FONT_WEIGHT = [{
   value: '900'
 }];
 const FONT_STYLE = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "gutenslider-blocks"),
   value: "inherit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Normal", "gutenslider-blocks"),
   value: "normal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italic", "gutenslider-blocks"),
   value: "italic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oblique", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oblique", "gutenslider-blocks"),
   value: "oblique"
 }];
 const TEXT_TRANSFORM = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "gutenslider-blocks"),
   value: "inherit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("None", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("None", "gutenslider-blocks"),
   value: "none"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Capitalize", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Capitalize", "gutenslider-blocks"),
   value: "capitalize"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Uppercase", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Uppercase", "gutenslider-blocks"),
   value: "uppercase"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lowercase", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lowercase", "gutenslider-blocks"),
   value: "lowercase"
 }];
 const TEXT_DECORATION = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "gutenslider-blocks"),
   value: "inherit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("None", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("None", "gutenslider-blocks"),
   value: "none"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Underline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Underline", "gutenslider-blocks"),
   value: "underline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overline", "gutenslider-blocks"),
   value: "overline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Line Through", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Line Through", "gutenslider-blocks"),
   value: "line-through"
 }];
 const FONT_FAMILYS = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "gutenslider-blocks"),
   value: "Default"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ABeeZee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ABeeZee", "gutenslider-blocks"),
   value: "ABeeZee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abel", "gutenslider-blocks"),
   value: "Abel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abhaya Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abhaya Libre", "gutenslider-blocks"),
   value: "Abhaya Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abril Fatface", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abril Fatface", "gutenslider-blocks"),
   value: "Abril Fatface"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abyssinica SIL", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abyssinica SIL", "gutenslider-blocks"),
   value: "Abyssinica SIL"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aclonica", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aclonica", "gutenslider-blocks"),
   value: "Aclonica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Acme", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Acme", "gutenslider-blocks"),
   value: "Acme"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Actor", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Actor", "gutenslider-blocks"),
   value: "Actor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Adamina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Adamina", "gutenslider-blocks"),
   value: "Adamina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Adobe Blank", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Adobe Blank", "gutenslider-blocks"),
   value: "Adobe Blank"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Advent Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Advent Pro", "gutenslider-blocks"),
   value: "Advent Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aguafina Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aguafina Script", "gutenslider-blocks"),
   value: "Aguafina Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Akronim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Akronim", "gutenslider-blocks"),
   value: "Akronim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("aksarabaligalang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("aksarabaligalang", "gutenslider-blocks"),
   value: "aksarabaligalang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aladin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aladin", "gutenslider-blocks"),
   value: "Aladin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aldrich", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aldrich", "gutenslider-blocks"),
   value: "Aldrich"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alef", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alef", "gutenslider-blocks"),
   value: "Alef"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("alefhebrew", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("alefhebrew", "gutenslider-blocks"),
   value: "alefhebrew"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya", "gutenslider-blocks"),
   value: "Alegreya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya Sans", "gutenslider-blocks"),
   value: "Alegreya Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya Sans SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya Sans SC", "gutenslider-blocks"),
   value: "Alegreya Sans SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya SC", "gutenslider-blocks"),
   value: "Alegreya SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aleo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aleo", "gutenslider-blocks"),
   value: "Aleo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alex Brush", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alex Brush", "gutenslider-blocks"),
   value: "Alex Brush"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alfa Slab One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alfa Slab One", "gutenslider-blocks"),
   value: "Alfa Slab One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alice", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alice", "gutenslider-blocks"),
   value: "Alice"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alike", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alike", "gutenslider-blocks"),
   value: "Alike"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alike Angular", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alike Angular", "gutenslider-blocks"),
   value: "Alike Angular"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allan", "gutenslider-blocks"),
   value: "Allan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allerta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allerta", "gutenslider-blocks"),
   value: "Allerta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allerta Stencil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allerta Stencil", "gutenslider-blocks"),
   value: "Allerta Stencil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allura", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allura", "gutenslider-blocks"),
   value: "Allura"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra", "gutenslider-blocks"),
   value: "Almendra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra Display", "gutenslider-blocks"),
   value: "Almendra Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra SC", "gutenslider-blocks"),
   value: "Almendra SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amarante", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amarante", "gutenslider-blocks"),
   value: "Amarante"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amaranth", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amaranth", "gutenslider-blocks"),
   value: "Amaranth"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amatic SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amatic SC", "gutenslider-blocks"),
   value: "Amatic SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amethysta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amethysta", "gutenslider-blocks"),
   value: "Amethysta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amiko", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amiko", "gutenslider-blocks"),
   value: "Amiko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amiri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amiri", "gutenslider-blocks"),
   value: "Amiri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amita", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amita", "gutenslider-blocks"),
   value: "Amita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("amstelvaralpha", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("amstelvaralpha", "gutenslider-blocks"),
   value: "amstelvaralpha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anaheim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anaheim", "gutenslider-blocks"),
   value: "Anaheim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andada", "gutenslider-blocks"),
   value: "Andada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andada SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andada SC", "gutenslider-blocks"),
   value: "Andada SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andika", "gutenslider-blocks"),
   value: "Andika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Angkor", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Angkor", "gutenslider-blocks"),
   value: "Angkor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Annie Use Your Telescope", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Annie Use Your Telescope", "gutenslider-blocks"),
   value: "Annie Use Your Telescope"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anonymous Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anonymous Pro", "gutenslider-blocks"),
   value: "Anonymous Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic", "gutenslider-blocks"),
   value: "Antic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic Didone", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic Didone", "gutenslider-blocks"),
   value: "Antic Didone"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic Slab", "gutenslider-blocks"),
   value: "Antic Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anton", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anton", "gutenslider-blocks"),
   value: "Anton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antonio", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antonio", "gutenslider-blocks"),
   value: "Antonio"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arapey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arapey", "gutenslider-blocks"),
   value: "Arapey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arbutus", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arbutus", "gutenslider-blocks"),
   value: "Arbutus"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arbutus Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arbutus Slab", "gutenslider-blocks"),
   value: "Arbutus Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Architects Daughter", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Architects Daughter", "gutenslider-blocks"),
   value: "Architects Daughter"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo", "gutenslider-blocks"),
   value: "Archivo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo Black", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo Black", "gutenslider-blocks"),
   value: "Archivo Black"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo Narrow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo Narrow", "gutenslider-blocks"),
   value: "Archivo Narrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("archivovfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("archivovfbeta", "gutenslider-blocks"),
   value: "archivovfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aref Ruqaa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aref Ruqaa", "gutenslider-blocks"),
   value: "Aref Ruqaa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arima Madurai", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arima Madurai", "gutenslider-blocks"),
   value: "Arima Madurai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arimo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arimo", "gutenslider-blocks"),
   value: "Arimo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arizonia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arizonia", "gutenslider-blocks"),
   value: "Arizonia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Armata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Armata", "gutenslider-blocks"),
   value: "Armata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arsenal", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arsenal", "gutenslider-blocks"),
   value: "Arsenal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Artifika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Artifika", "gutenslider-blocks"),
   value: "Artifika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arvo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arvo", "gutenslider-blocks"),
   value: "Arvo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arya", "gutenslider-blocks"),
   value: "Arya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asap", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asap", "gutenslider-blocks"),
   value: "Asap"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asap Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asap Condensed", "gutenslider-blocks"),
   value: "Asap Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("asapvfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("asapvfbeta", "gutenslider-blocks"),
   value: "asapvfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asar", "gutenslider-blocks"),
   value: "Asar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asset", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asset", "gutenslider-blocks"),
   value: "Asset"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Assistant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Assistant", "gutenslider-blocks"),
   value: "Assistant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Astloch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Astloch", "gutenslider-blocks"),
   value: "Astloch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asul", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asul", "gutenslider-blocks"),
   value: "Asul"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Athiti", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Athiti", "gutenslider-blocks"),
   value: "Athiti"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Atomic Age", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Atomic Age", "gutenslider-blocks"),
   value: "Atomic Age"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aubrey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aubrey", "gutenslider-blocks"),
   value: "Aubrey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Audiowide", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Audiowide", "gutenslider-blocks"),
   value: "Audiowide"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Autour One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Autour One", "gutenslider-blocks"),
   value: "Autour One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Average", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Average", "gutenslider-blocks"),
   value: "Average"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Average Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Average Sans", "gutenslider-blocks"),
   value: "Average Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Gruesa Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Gruesa Libre", "gutenslider-blocks"),
   value: "Averia Gruesa Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Libre", "gutenslider-blocks"),
   value: "Averia Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Sans Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Sans Libre", "gutenslider-blocks"),
   value: "Averia Sans Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Serif Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Serif Libre", "gutenslider-blocks"),
   value: "Averia Serif Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("B612", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("B612", "gutenslider-blocks"),
   value: "B612"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("B612 Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("B612 Mono", "gutenslider-blocks"),
   value: "B612 Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bad Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bad Script", "gutenslider-blocks"),
   value: "Bad Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bahiana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bahiana", "gutenslider-blocks"),
   value: "Bahiana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bahianita", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bahianita", "gutenslider-blocks"),
   value: "Bahianita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bai Jamjuree", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bai Jamjuree", "gutenslider-blocks"),
   value: "Bai Jamjuree"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo", "gutenslider-blocks"),
   value: "Baloo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhai", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhai", "gutenslider-blocks"),
   value: "Baloo Bhai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhaijaan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhaijaan", "gutenslider-blocks"),
   value: "Baloo Bhaijaan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhaina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhaina", "gutenslider-blocks"),
   value: "Baloo Bhaina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Chettan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Chettan", "gutenslider-blocks"),
   value: "Baloo Chettan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Da", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Da", "gutenslider-blocks"),
   value: "Baloo Da"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Paaji", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Paaji", "gutenslider-blocks"),
   value: "Baloo Paaji"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Tamma", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Tamma", "gutenslider-blocks"),
   value: "Baloo Tamma"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Tammudu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Tammudu", "gutenslider-blocks"),
   value: "Baloo Tammudu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Thambi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Thambi", "gutenslider-blocks"),
   value: "Baloo Thambi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Balthazar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Balthazar", "gutenslider-blocks"),
   value: "Balthazar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bangers", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bangers", "gutenslider-blocks"),
   value: "Bangers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow", "gutenslider-blocks"),
   value: "Barlow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow Condensed", "gutenslider-blocks"),
   value: "Barlow Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow Semi Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow Semi Condensed", "gutenslider-blocks"),
   value: "Barlow Semi Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barriecito", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barriecito", "gutenslider-blocks"),
   value: "Barriecito"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barrio", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barrio", "gutenslider-blocks"),
   value: "Barrio"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Basic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Basic", "gutenslider-blocks"),
   value: "Basic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Battambang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Battambang", "gutenslider-blocks"),
   value: "Battambang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baumans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baumans", "gutenslider-blocks"),
   value: "Baumans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bayon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bayon", "gutenslider-blocks"),
   value: "Bayon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Belgrano", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Belgrano", "gutenslider-blocks"),
   value: "Belgrano"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bellefair", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bellefair", "gutenslider-blocks"),
   value: "Bellefair"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Belleza", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Belleza", "gutenslider-blocks"),
   value: "Belleza"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("BenchNine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("BenchNine", "gutenslider-blocks"),
   value: "BenchNine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bentham", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bentham", "gutenslider-blocks"),
   value: "Bentham"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Berkshire Swash", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Berkshire Swash", "gutenslider-blocks"),
   value: "Berkshire Swash"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Beth Ellen", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Beth Ellen", "gutenslider-blocks"),
   value: "Beth Ellen"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bevan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bevan", "gutenslider-blocks"),
   value: "Bevan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bhavuka", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bhavuka", "gutenslider-blocks"),
   value: "Bhavuka"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bigelow Rules", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bigelow Rules", "gutenslider-blocks"),
   value: "Bigelow Rules"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bigshot One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bigshot One", "gutenslider-blocks"),
   value: "Bigshot One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bilbo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bilbo", "gutenslider-blocks"),
   value: "Bilbo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bilbo Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bilbo Swash Caps", "gutenslider-blocks"),
   value: "Bilbo Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bio Rhyme", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bio Rhyme", "gutenslider-blocks"),
   value: "Bio Rhyme"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bio Rhyme Expanded", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bio Rhyme Expanded", "gutenslider-blocks"),
   value: "Bio Rhyme Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Biryani", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Biryani", "gutenslider-blocks"),
   value: "Biryani"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bitter", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bitter", "gutenslider-blocks"),
   value: "Bitter"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black And White Picture", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black And White Picture", "gutenslider-blocks"),
   value: "Black And White Picture"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black Han Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black Han Sans", "gutenslider-blocks"),
   value: "Black Han Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black Ops One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black Ops One", "gutenslider-blocks"),
   value: "Black Ops One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bokor", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bokor", "gutenslider-blocks"),
   value: "Bokor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bonbon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bonbon", "gutenslider-blocks"),
   value: "Bonbon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Boogaloo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Boogaloo", "gutenslider-blocks"),
   value: "Boogaloo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bowlby One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bowlby One", "gutenslider-blocks"),
   value: "Bowlby One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bowlby One SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bowlby One SC", "gutenslider-blocks"),
   value: "Bowlby One SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Brawler", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Brawler", "gutenslider-blocks"),
   value: "Brawler"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bree Serif", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bree Serif", "gutenslider-blocks"),
   value: "Bree Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bruno Ace", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bruno Ace", "gutenslider-blocks"),
   value: "Bruno Ace"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bruno Ace SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bruno Ace SC", "gutenslider-blocks"),
   value: "Bruno Ace SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bubblegum Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bubblegum Sans", "gutenslider-blocks"),
   value: "Bubblegum Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bubbler One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bubbler One", "gutenslider-blocks"),
   value: "Bubbler One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Buda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Buda", "gutenslider-blocks"),
   value: "Buda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Buenard", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Buenard", "gutenslider-blocks"),
   value: "Buenard"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee", "gutenslider-blocks"),
   value: "Bungee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Hairline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Hairline", "gutenslider-blocks"),
   value: "Bungee Hairline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Inline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Inline", "gutenslider-blocks"),
   value: "Bungee Inline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Outline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Outline", "gutenslider-blocks"),
   value: "Bungee Outline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Shade", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Shade", "gutenslider-blocks"),
   value: "Bungee Shade"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butcherman", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butcherman", "gutenslider-blocks"),
   value: "Butcherman"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butcherman Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butcherman Caps", "gutenslider-blocks"),
   value: "Butcherman Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butterfly Kids", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butterfly Kids", "gutenslider-blocks"),
   value: "Butterfly Kids"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin", "gutenslider-blocks"),
   value: "Cabin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin Condensed", "gutenslider-blocks"),
   value: "Cabin Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin Sketch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin Sketch", "gutenslider-blocks"),
   value: "Cabin Sketch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("cabinvfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("cabinvfbeta", "gutenslider-blocks"),
   value: "cabinvfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caesar Dressing", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caesar Dressing", "gutenslider-blocks"),
   value: "Caesar Dressing"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cagliostro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cagliostro", "gutenslider-blocks"),
   value: "Cagliostro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cairo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cairo", "gutenslider-blocks"),
   value: "Cairo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Calligraffitti", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Calligraffitti", "gutenslider-blocks"),
   value: "Calligraffitti"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cambay", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cambay", "gutenslider-blocks"),
   value: "Cambay"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cambo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cambo", "gutenslider-blocks"),
   value: "Cambo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Candal", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Candal", "gutenslider-blocks"),
   value: "Candal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantarell", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantarell", "gutenslider-blocks"),
   value: "Cantarell"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantata One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantata One", "gutenslider-blocks"),
   value: "Cantata One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantora One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantora One", "gutenslider-blocks"),
   value: "Cantora One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Capriola", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Capriola", "gutenslider-blocks"),
   value: "Capriola"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cardo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cardo", "gutenslider-blocks"),
   value: "Cardo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carme", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carme", "gutenslider-blocks"),
   value: "Carme"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carrois Gothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carrois Gothic", "gutenslider-blocks"),
   value: "Carrois Gothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carrois Gothic SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carrois Gothic SC", "gutenslider-blocks"),
   value: "Carrois Gothic SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carter One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carter One", "gutenslider-blocks"),
   value: "Carter One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Catamaran", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Catamaran", "gutenslider-blocks"),
   value: "Catamaran"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caudex", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caudex", "gutenslider-blocks"),
   value: "Caudex"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caveat", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caveat", "gutenslider-blocks"),
   value: "Caveat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caveat Brush", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caveat Brush", "gutenslider-blocks"),
   value: "Caveat Brush"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cedarville Cursive", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cedarville Cursive", "gutenslider-blocks"),
   value: "Cedarville Cursive"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ceviche One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ceviche One", "gutenslider-blocks"),
   value: "Ceviche One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chakra Petch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chakra Petch", "gutenslider-blocks"),
   value: "Chakra Petch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Changa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Changa", "gutenslider-blocks"),
   value: "Changa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Changa One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Changa One", "gutenslider-blocks"),
   value: "Changa One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chango", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chango", "gutenslider-blocks"),
   value: "Chango"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Charm", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Charm", "gutenslider-blocks"),
   value: "Charm"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Charmonman", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Charmonman", "gutenslider-blocks"),
   value: "Charmonman"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chau Philomene One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chau Philomene One", "gutenslider-blocks"),
   value: "Chau Philomene One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chela One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chela One", "gutenslider-blocks"),
   value: "Chela One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chelsea Market", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chelsea Market", "gutenslider-blocks"),
   value: "Chelsea Market"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chenla", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chenla", "gutenslider-blocks"),
   value: "Chenla"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cherry Cream Soda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cherry Cream Soda", "gutenslider-blocks"),
   value: "Cherry Cream Soda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cherry Swash", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cherry Swash", "gutenslider-blocks"),
   value: "Cherry Swash"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chewy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chewy", "gutenslider-blocks"),
   value: "Chewy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chicle", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chicle", "gutenslider-blocks"),
   value: "Chicle"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chilanka", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chilanka", "gutenslider-blocks"),
   value: "Chilanka"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chivo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chivo", "gutenslider-blocks"),
   value: "Chivo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chonburi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chonburi", "gutenslider-blocks"),
   value: "Chonburi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cinzel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cinzel", "gutenslider-blocks"),
   value: "Cinzel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cinzel Decorative", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cinzel Decorative", "gutenslider-blocks"),
   value: "Cinzel Decorative"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clicker Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clicker Script", "gutenslider-blocks"),
   value: "Clicker Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coda", "gutenslider-blocks"),
   value: "Coda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coda Caption", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coda Caption", "gutenslider-blocks"),
   value: "Coda Caption"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Codystar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Codystar", "gutenslider-blocks"),
   value: "Codystar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coiny", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coiny", "gutenslider-blocks"),
   value: "Coiny"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Combo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Combo", "gutenslider-blocks"),
   value: "Combo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Comfortaa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Comfortaa", "gutenslider-blocks"),
   value: "Comfortaa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coming Soon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coming Soon", "gutenslider-blocks"),
   value: "Coming Soon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Concert One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Concert One", "gutenslider-blocks"),
   value: "Concert One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Condiment", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Condiment", "gutenslider-blocks"),
   value: "Condiment"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Content", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Content", "gutenslider-blocks"),
   value: "Content"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Contrail One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Contrail One", "gutenslider-blocks"),
   value: "Contrail One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Convergence", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Convergence", "gutenslider-blocks"),
   value: "Convergence"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cookie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cookie", "gutenslider-blocks"),
   value: "Cookie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Copse", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Copse", "gutenslider-blocks"),
   value: "Copse"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Corben", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Corben", "gutenslider-blocks"),
   value: "Corben"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant", "gutenslider-blocks"),
   value: "Cormorant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Garamond", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Garamond", "gutenslider-blocks"),
   value: "Cormorant Garamond"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Infant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Infant", "gutenslider-blocks"),
   value: "Cormorant Infant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant SC", "gutenslider-blocks"),
   value: "Cormorant SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Unicase", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Unicase", "gutenslider-blocks"),
   value: "Cormorant Unicase"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Upright", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Upright", "gutenslider-blocks"),
   value: "Cormorant Upright"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Courgette", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Courgette", "gutenslider-blocks"),
   value: "Courgette"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cousine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cousine", "gutenslider-blocks"),
   value: "Cousine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coustard", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coustard", "gutenslider-blocks"),
   value: "Coustard"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Covered By Your Grace", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Covered By Your Grace", "gutenslider-blocks"),
   value: "Covered By Your Grace"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crafty Girls", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crafty Girls", "gutenslider-blocks"),
   value: "Crafty Girls"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Creepster", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Creepster", "gutenslider-blocks"),
   value: "Creepster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Creepster Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Creepster Caps", "gutenslider-blocks"),
   value: "Creepster Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crete Round", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crete Round", "gutenslider-blocks"),
   value: "Crete Round"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crimson Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crimson Pro", "gutenslider-blocks"),
   value: "Crimson Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crimson Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crimson Text", "gutenslider-blocks"),
   value: "Crimson Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Croissant One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Croissant One", "gutenslider-blocks"),
   value: "Croissant One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crushed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crushed", "gutenslider-blocks"),
   value: "Crushed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cuprum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cuprum", "gutenslider-blocks"),
   value: "Cuprum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cute Font", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cute Font", "gutenslider-blocks"),
   value: "Cute Font"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cutive", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cutive", "gutenslider-blocks"),
   value: "Cutive"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cutive Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cutive Mono", "gutenslider-blocks"),
   value: "Cutive Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Damion", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Damion", "gutenslider-blocks"),
   value: "Damion"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dancing Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dancing Script", "gutenslider-blocks"),
   value: "Dancing Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dangrek", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dangrek", "gutenslider-blocks"),
   value: "Dangrek"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Darker Grotesque", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Darker Grotesque", "gutenslider-blocks"),
   value: "Darker Grotesque"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dawning of a New Day", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dawning of a New Day", "gutenslider-blocks"),
   value: "Dawning of a New Day"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Days One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Days One", "gutenslider-blocks"),
   value: "Days One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("decovaralpha", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("decovaralpha", "gutenslider-blocks"),
   value: "decovaralpha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dekko", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dekko", "gutenslider-blocks"),
   value: "Dekko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius", "gutenslider-blocks"),
   value: "Delius"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius Swash Caps", "gutenslider-blocks"),
   value: "Delius Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius Unicase", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius Unicase", "gutenslider-blocks"),
   value: "Delius Unicase"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Della Respira", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Della Respira", "gutenslider-blocks"),
   value: "Della Respira"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Denk One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Denk One", "gutenslider-blocks"),
   value: "Denk One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Devonshire", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Devonshire", "gutenslider-blocks"),
   value: "Devonshire"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dhurjati", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dhurjati", "gutenslider-blocks"),
   value: "Dhurjati"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dhyana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dhyana", "gutenslider-blocks"),
   value: "Dhyana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Didact Gothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Didact Gothic", "gutenslider-blocks"),
   value: "Didact Gothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Digital Numbers", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Digital Numbers", "gutenslider-blocks"),
   value: "Digital Numbers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Diplomata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Diplomata", "gutenslider-blocks"),
   value: "Diplomata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Diplomata SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Diplomata SC", "gutenslider-blocks"),
   value: "Diplomata SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Sans", "gutenslider-blocks"),
   value: "DM Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Serif Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Serif Display", "gutenslider-blocks"),
   value: "DM Serif Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Serif Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Serif Text", "gutenslider-blocks"),
   value: "DM Serif Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Do Hyeon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Do Hyeon", "gutenslider-blocks"),
   value: "Do Hyeon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dokdo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dokdo", "gutenslider-blocks"),
   value: "Dokdo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Domine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Domine", "gutenslider-blocks"),
   value: "Domine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Donegal One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Donegal One", "gutenslider-blocks"),
   value: "Donegal One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Doppio One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Doppio One", "gutenslider-blocks"),
   value: "Doppio One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dorsa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dorsa", "gutenslider-blocks"),
   value: "Dorsa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dosis", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dosis", "gutenslider-blocks"),
   value: "Dosis"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dr Sugiyama", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dr Sugiyama", "gutenslider-blocks"),
   value: "Dr Sugiyama"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Duru Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Duru Sans", "gutenslider-blocks"),
   value: "Duru Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dynalight", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dynalight", "gutenslider-blocks"),
   value: "Dynalight"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eagle Lake", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eagle Lake", "gutenslider-blocks"),
   value: "Eagle Lake"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("East Sea Dokdo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("East Sea Dokdo", "gutenslider-blocks"),
   value: "East Sea Dokdo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eater", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eater", "gutenslider-blocks"),
   value: "Eater"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eater Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eater Caps", "gutenslider-blocks"),
   value: "Eater Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("EB Garamond", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("EB Garamond", "gutenslider-blocks"),
   value: "EB Garamond"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Economica", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Economica", "gutenslider-blocks"),
   value: "Economica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eczar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eczar", "gutenslider-blocks"),
   value: "Eczar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ek Mukta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ek Mukta", "gutenslider-blocks"),
   value: "Ek Mukta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("El Messiri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("El Messiri", "gutenslider-blocks"),
   value: "El Messiri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Electrolize", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Electrolize", "gutenslider-blocks"),
   value: "Electrolize"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Elsie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Elsie", "gutenslider-blocks"),
   value: "Elsie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Elsie Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Elsie Swash Caps", "gutenslider-blocks"),
   value: "Elsie Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Emblema One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Emblema One", "gutenslider-blocks"),
   value: "Emblema One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Emilys Candy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Emilys Candy", "gutenslider-blocks"),
   value: "Emilys Candy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans", "gutenslider-blocks"),
   value: "Encode Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Condensed", "gutenslider-blocks"),
   value: "Encode Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Expanded", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Expanded", "gutenslider-blocks"),
   value: "Encode Sans Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Semi Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Semi Condensed", "gutenslider-blocks"),
   value: "Encode Sans Semi Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Semi Expanded", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Semi Expanded", "gutenslider-blocks"),
   value: "Encode Sans Semi Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Engagement", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Engagement", "gutenslider-blocks"),
   value: "Engagement"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Englebert", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Englebert", "gutenslider-blocks"),
   value: "Englebert"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enriqueta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enriqueta", "gutenslider-blocks"),
   value: "Enriqueta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Erica One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Erica One", "gutenslider-blocks"),
   value: "Erica One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Esteban", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Esteban", "gutenslider-blocks"),
   value: "Esteban"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Euphoria Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Euphoria Script", "gutenslider-blocks"),
   value: "Euphoria Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ewert", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ewert", "gutenslider-blocks"),
   value: "Ewert"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Exo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Exo", "gutenslider-blocks"),
   value: "Exo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Exo 2", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Exo 2", "gutenslider-blocks"),
   value: "Exo 2"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Expletus Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Expletus Sans", "gutenslider-blocks"),
   value: "Expletus Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fahkwang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fahkwang", "gutenslider-blocks"),
   value: "Fahkwang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fanwood Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fanwood Text", "gutenslider-blocks"),
   value: "Fanwood Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Farro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Farro", "gutenslider-blocks"),
   value: "Farro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Farsan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Farsan", "gutenslider-blocks"),
   value: "Farsan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fascinate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fascinate", "gutenslider-blocks"),
   value: "Fascinate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fascinate Inline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fascinate Inline", "gutenslider-blocks"),
   value: "Fascinate Inline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Faster One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Faster One", "gutenslider-blocks"),
   value: "Faster One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fasthand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fasthand", "gutenslider-blocks"),
   value: "Fasthand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fauna One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fauna One", "gutenslider-blocks"),
   value: "Fauna One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Faustina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Faustina", "gutenslider-blocks"),
   value: "Faustina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("faustinavfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("faustinavfbeta", "gutenslider-blocks"),
   value: "faustinavfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Federant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Federant", "gutenslider-blocks"),
   value: "Federant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Federo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Federo", "gutenslider-blocks"),
   value: "Federo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Felipa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Felipa", "gutenslider-blocks"),
   value: "Felipa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fenix", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fenix", "gutenslider-blocks"),
   value: "Fenix"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Finger Paint", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Finger Paint", "gutenslider-blocks"),
   value: "Finger Paint"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Code", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Code", "gutenslider-blocks"),
   value: "Fira Code"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Mono", "gutenslider-blocks"),
   value: "Fira Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans", "gutenslider-blocks"),
   value: "Fira Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans Condensed", "gutenslider-blocks"),
   value: "Fira Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans Extra Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans Extra Condensed", "gutenslider-blocks"),
   value: "Fira Sans Extra Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fjalla One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fjalla One", "gutenslider-blocks"),
   value: "Fjalla One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fjord One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fjord One", "gutenslider-blocks"),
   value: "Fjord One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flamenco", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flamenco", "gutenslider-blocks"),
   value: "Flamenco"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flavors", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flavors", "gutenslider-blocks"),
   value: "Flavors"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fondamento", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fondamento", "gutenslider-blocks"),
   value: "Fondamento"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fontdiner Swanky", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fontdiner Swanky", "gutenslider-blocks"),
   value: "Fontdiner Swanky"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forum", "gutenslider-blocks"),
   value: "Forum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Francois One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Francois One", "gutenslider-blocks"),
   value: "Francois One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Frank Ruhl Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Frank Ruhl Libre", "gutenslider-blocks"),
   value: "Frank Ruhl Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Freckle Face", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Freckle Face", "gutenslider-blocks"),
   value: "Freckle Face"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fredericka the Great", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fredericka the Great", "gutenslider-blocks"),
   value: "Fredericka the Great"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fredoka One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fredoka One", "gutenslider-blocks"),
   value: "Fredoka One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Freehand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Freehand", "gutenslider-blocks"),
   value: "Freehand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fresca", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fresca", "gutenslider-blocks"),
   value: "Fresca"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Frijole", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Frijole", "gutenslider-blocks"),
   value: "Frijole"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fruktur", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fruktur", "gutenslider-blocks"),
   value: "Fruktur"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fugaz One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fugaz One", "gutenslider-blocks"),
   value: "Fugaz One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gabriela", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gabriela", "gutenslider-blocks"),
   value: "Gabriela"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gaegu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gaegu", "gutenslider-blocks"),
   value: "Gaegu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gafata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gafata", "gutenslider-blocks"),
   value: "Gafata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galada", "gutenslider-blocks"),
   value: "Galada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galdeano", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galdeano", "gutenslider-blocks"),
   value: "Galdeano"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galindo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galindo", "gutenslider-blocks"),
   value: "Galindo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gamja Flower", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gamja Flower", "gutenslider-blocks"),
   value: "Gamja Flower"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gayathri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gayathri", "gutenslider-blocks"),
   value: "Gayathri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gemunu Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gemunu Libre", "gutenslider-blocks"),
   value: "Gemunu Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gentium Basic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gentium Basic", "gutenslider-blocks"),
   value: "Gentium Basic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gentium Book Basic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gentium Book Basic", "gutenslider-blocks"),
   value: "Gentium Book Basic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geo", "gutenslider-blocks"),
   value: "Geo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geostar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geostar", "gutenslider-blocks"),
   value: "Geostar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geostar Fill", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geostar Fill", "gutenslider-blocks"),
   value: "Geostar Fill"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Germania One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Germania One", "gutenslider-blocks"),
   value: "Germania One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("GFS Didot", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("GFS Didot", "gutenslider-blocks"),
   value: "GFS Didot"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("GFS Neohellenic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("GFS Neohellenic", "gutenslider-blocks"),
   value: "GFS Neohellenic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gidugu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gidugu", "gutenslider-blocks"),
   value: "Gidugu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gilda Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gilda Display", "gutenslider-blocks"),
   value: "Gilda Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Give You Glory", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Give You Glory", "gutenslider-blocks"),
   value: "Give You Glory"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Glass Antiqua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Glass Antiqua", "gutenslider-blocks"),
   value: "Glass Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Glegoo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Glegoo", "gutenslider-blocks"),
   value: "Glegoo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gloria Hallelujah", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gloria Hallelujah", "gutenslider-blocks"),
   value: "Gloria Hallelujah"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Goblin One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Goblin One", "gutenslider-blocks"),
   value: "Goblin One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gochi Hand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gochi Hand", "gutenslider-blocks"),
   value: "Gochi Hand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gorditas", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gorditas", "gutenslider-blocks"),
   value: "Gorditas"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gothic A1", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gothic A1", "gutenslider-blocks"),
   value: "Gothic A1"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Goudy Bookletter 1911", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Goudy Bookletter 1911", "gutenslider-blocks"),
   value: "Goudy Bookletter 1911"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Graduate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Graduate", "gutenslider-blocks"),
   value: "Graduate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Grand Hotel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Grand Hotel", "gutenslider-blocks"),
   value: "Grand Hotel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gravitas One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gravitas One", "gutenslider-blocks"),
   value: "Gravitas One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Great Vibes", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Great Vibes", "gutenslider-blocks"),
   value: "Great Vibes"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Grenze", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Grenze", "gutenslider-blocks"),
   value: "Grenze"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Griffy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Griffy", "gutenslider-blocks"),
   value: "Griffy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gruppo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gruppo", "gutenslider-blocks"),
   value: "Gruppo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gudea", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gudea", "gutenslider-blocks"),
   value: "Gudea"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gugi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gugi", "gutenslider-blocks"),
   value: "Gugi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gurajada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gurajada", "gutenslider-blocks"),
   value: "Gurajada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Habibi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Habibi", "gutenslider-blocks"),
   value: "Habibi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Halant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Halant", "gutenslider-blocks"),
   value: "Halant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hammersmith One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hammersmith One", "gutenslider-blocks"),
   value: "Hammersmith One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanalei", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanalei", "gutenslider-blocks"),
   value: "Hanalei"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanalei Fill", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanalei Fill", "gutenslider-blocks"),
   value: "Hanalei Fill"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Handlee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Handlee", "gutenslider-blocks"),
   value: "Handlee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("hanna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("hanna", "gutenslider-blocks"),
   value: "hanna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("hannari", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("hannari", "gutenslider-blocks"),
   value: "hannari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanuman", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanuman", "gutenslider-blocks"),
   value: "Hanuman"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Happy Monkey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Happy Monkey", "gutenslider-blocks"),
   value: "Happy Monkey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Harmattan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Harmattan", "gutenslider-blocks"),
   value: "Harmattan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Headland One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Headland One", "gutenslider-blocks"),
   value: "Headland One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Heebo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Heebo", "gutenslider-blocks"),
   value: "Heebo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Henny Penny", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Henny Penny", "gutenslider-blocks"),
   value: "Henny Penny"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hermeneus One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hermeneus One", "gutenslider-blocks"),
   value: "Hermeneus One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Herr Von Muellerhoff", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Herr Von Muellerhoff", "gutenslider-blocks"),
   value: "Herr Von Muellerhoff"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hi Melody", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hi Melody", "gutenslider-blocks"),
   value: "Hi Melody"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind", "gutenslider-blocks"),
   value: "Hind"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Colombo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Colombo", "gutenslider-blocks"),
   value: "Hind Colombo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Guntur", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Guntur", "gutenslider-blocks"),
   value: "Hind Guntur"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Jalandhar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Jalandhar", "gutenslider-blocks"),
   value: "Hind Jalandhar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Kochi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Kochi", "gutenslider-blocks"),
   value: "Hind Kochi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Madurai", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Madurai", "gutenslider-blocks"),
   value: "Hind Madurai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Mysuru", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Mysuru", "gutenslider-blocks"),
   value: "Hind Mysuru"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Siliguri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Siliguri", "gutenslider-blocks"),
   value: "Hind Siliguri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Vadodara", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Vadodara", "gutenslider-blocks"),
   value: "Hind Vadodara"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Holtwood One SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Holtwood One SC", "gutenslider-blocks"),
   value: "Holtwood One SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Homemade Apple", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Homemade Apple", "gutenslider-blocks"),
   value: "Homemade Apple"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Homenaje", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Homenaje", "gutenslider-blocks"),
   value: "Homenaje"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Mono", "gutenslider-blocks"),
   value: "IBM Plex Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Sans", "gutenslider-blocks"),
   value: "IBM Plex Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Sans Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Sans Condensed", "gutenslider-blocks"),
   value: "IBM Plex Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Serif", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Serif", "gutenslider-blocks"),
   value: "IBM Plex Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Iceberg", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Iceberg", "gutenslider-blocks"),
   value: "Iceberg"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Iceland", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Iceland", "gutenslider-blocks"),
   value: "Iceland"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Double Pica", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Double Pica", "gutenslider-blocks"),
   value: "IM Fell Double Pica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Double Pica SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Double Pica SC", "gutenslider-blocks"),
   value: "IM Fell Double Pica SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell DW Pica", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell DW Pica", "gutenslider-blocks"),
   value: "IM Fell DW Pica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell DW Pica SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell DW Pica SC", "gutenslider-blocks"),
   value: "IM Fell DW Pica SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell English", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell English", "gutenslider-blocks"),
   value: "IM Fell English"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell English SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell English SC", "gutenslider-blocks"),
   value: "IM Fell English SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell French Canon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell French Canon", "gutenslider-blocks"),
   value: "IM Fell French Canon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell French Canon SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell French Canon SC", "gutenslider-blocks"),
   value: "IM Fell French Canon SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Great Primer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Great Primer", "gutenslider-blocks"),
   value: "IM Fell Great Primer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Great Primer SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Great Primer SC", "gutenslider-blocks"),
   value: "IM Fell Great Primer SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Imprima", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Imprima", "gutenslider-blocks"),
   value: "Imprima"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inconsolata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inconsolata", "gutenslider-blocks"),
   value: "Inconsolata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inder", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inder", "gutenslider-blocks"),
   value: "Inder"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Indie Flower", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Indie Flower", "gutenslider-blocks"),
   value: "Indie Flower"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inika", "gutenslider-blocks"),
   value: "Inika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inknut Antiqua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inknut Antiqua", "gutenslider-blocks"),
   value: "Inknut Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Irish Grover", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Irish Grover", "gutenslider-blocks"),
   value: "Irish Grover"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Istok Web", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Istok Web", "gutenslider-blocks"),
   value: "Istok Web"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italiana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italiana", "gutenslider-blocks"),
   value: "Italiana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italianno", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italianno", "gutenslider-blocks"),
   value: "Italianno"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Itim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Itim", "gutenslider-blocks"),
   value: "Itim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jacques Francois", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jacques Francois", "gutenslider-blocks"),
   value: "Jacques Francois"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jacques Francois Shadow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jacques Francois Shadow", "gutenslider-blocks"),
   value: "Jacques Francois Shadow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jaldi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jaldi", "gutenslider-blocks"),
   value: "Jaldi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejugothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejugothic", "gutenslider-blocks"),
   value: "jejugothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejuhallasan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejuhallasan", "gutenslider-blocks"),
   value: "jejuhallasan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejumyeongjo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejumyeongjo", "gutenslider-blocks"),
   value: "jejumyeongjo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jim Nightshade", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jim Nightshade", "gutenslider-blocks"),
   value: "Jim Nightshade"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jockey One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jockey One", "gutenslider-blocks"),
   value: "Jockey One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jolly Lodger", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jolly Lodger", "gutenslider-blocks"),
   value: "Jolly Lodger"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jomhuria", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jomhuria", "gutenslider-blocks"),
   value: "Jomhuria"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jomolhari", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jomolhari", "gutenslider-blocks"),
   value: "jomolhari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Sans", "gutenslider-blocks"),
   value: "Josefin Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Sans Std Light", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Sans Std Light", "gutenslider-blocks"),
   value: "Josefin Sans Std Light"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Slab", "gutenslider-blocks"),
   value: "Josefin Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Joti One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Joti One", "gutenslider-blocks"),
   value: "Joti One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jua", "gutenslider-blocks"),
   value: "Jua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Judson", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Judson", "gutenslider-blocks"),
   value: "Judson"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Julee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Julee", "gutenslider-blocks"),
   value: "Julee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Julius Sans One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Julius Sans One", "gutenslider-blocks"),
   value: "Julius Sans One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Junge", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Junge", "gutenslider-blocks"),
   value: "Junge"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jura", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jura", "gutenslider-blocks"),
   value: "Jura"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Just Another Hand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Just Another Hand", "gutenslider-blocks"),
   value: "Just Another Hand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Just Me Again Down Here", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Just Me Again Down Here", "gutenslider-blocks"),
   value: "Just Me Again Down Here"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("K2D", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("K2D", "gutenslider-blocks"),
   value: "K2D"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kadwa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kadwa", "gutenslider-blocks"),
   value: "Kadwa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kalam", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kalam", "gutenslider-blocks"),
   value: "Kalam"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kameron", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kameron", "gutenslider-blocks"),
   value: "Kameron"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kanit", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kanit", "gutenslider-blocks"),
   value: "Kanit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kantumruy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kantumruy", "gutenslider-blocks"),
   value: "Kantumruy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla", "gutenslider-blocks"),
   value: "Karla"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla Tamil Inclined", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla Tamil Inclined", "gutenslider-blocks"),
   value: "Karla Tamil Inclined"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla Tamil Upright", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla Tamil Upright", "gutenslider-blocks"),
   value: "Karla Tamil Upright"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karma", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karma", "gutenslider-blocks"),
   value: "Karma"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Katibeh", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Katibeh", "gutenslider-blocks"),
   value: "Katibeh"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kaushan Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kaushan Script", "gutenslider-blocks"),
   value: "Kaushan Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kavivanar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kavivanar", "gutenslider-blocks"),
   value: "Kavivanar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kavoon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kavoon", "gutenslider-blocks"),
   value: "Kavoon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kdam Thmor", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kdam Thmor", "gutenslider-blocks"),
   value: "Kdam Thmor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Keania One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Keania One", "gutenslider-blocks"),
   value: "Keania One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kelly Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kelly Slab", "gutenslider-blocks"),
   value: "Kelly Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kenia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kenia", "gutenslider-blocks"),
   value: "Kenia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khand", "gutenslider-blocks"),
   value: "Khand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khmer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khmer", "gutenslider-blocks"),
   value: "Khmer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khula", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khula", "gutenslider-blocks"),
   value: "Khula"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("khyay", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("khyay", "gutenslider-blocks"),
   value: "khyay"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kirang Haerang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kirang Haerang", "gutenslider-blocks"),
   value: "Kirang Haerang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kite One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kite One", "gutenslider-blocks"),
   value: "Kite One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Knewave", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Knewave", "gutenslider-blocks"),
   value: "Knewave"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kodchasan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kodchasan", "gutenslider-blocks"),
   value: "Kodchasan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("KoHo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("KoHo", "gutenslider-blocks"),
   value: "KoHo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("kokoro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("kokoro", "gutenslider-blocks"),
   value: "kokoro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("kopubbatang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("kopubbatang", "gutenslider-blocks"),
   value: "kopubbatang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kotta One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kotta One", "gutenslider-blocks"),
   value: "Kotta One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Koulen", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Koulen", "gutenslider-blocks"),
   value: "Koulen"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kranky", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kranky", "gutenslider-blocks"),
   value: "Kranky"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kreon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kreon", "gutenslider-blocks"),
   value: "Kreon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kristi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kristi", "gutenslider-blocks"),
   value: "Kristi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Krona One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Krona One", "gutenslider-blocks"),
   value: "Krona One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Krub", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Krub", "gutenslider-blocks"),
   value: "Krub"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kumar One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kumar One", "gutenslider-blocks"),
   value: "Kumar One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kurale", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kurale", "gutenslider-blocks"),
   value: "Kurale"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("La Belle Aurore", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("La Belle Aurore", "gutenslider-blocks"),
   value: "La Belle Aurore"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lacquer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lacquer", "gutenslider-blocks"),
   value: "Lacquer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Laila", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Laila", "gutenslider-blocks"),
   value: "Laila"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lakki Reddy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lakki Reddy", "gutenslider-blocks"),
   value: "Lakki Reddy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lalezar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lalezar", "gutenslider-blocks"),
   value: "Lalezar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lancelot", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lancelot", "gutenslider-blocks"),
   value: "Lancelot"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laomuangdon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laomuangdon", "gutenslider-blocks"),
   value: "laomuangdon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laomuangkhong", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laomuangkhong", "gutenslider-blocks"),
   value: "laomuangkhong"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laosanspro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laosanspro", "gutenslider-blocks"),
   value: "laosanspro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lateef", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lateef", "gutenslider-blocks"),
   value: "Lateef"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lato", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lato", "gutenslider-blocks"),
   value: "Lato"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("League Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("League Script", "gutenslider-blocks"),
   value: "League Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Leckerli One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Leckerli One", "gutenslider-blocks"),
   value: "Leckerli One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ledger", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ledger", "gutenslider-blocks"),
   value: "Ledger"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lekton", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lekton", "gutenslider-blocks"),
   value: "Lekton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lemon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lemon", "gutenslider-blocks"),
   value: "Lemon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lemonada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lemonada", "gutenslider-blocks"),
   value: "Lemonada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 128", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 128", "gutenslider-blocks"),
   value: "Libre Barcode 128"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 128 Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 128 Text", "gutenslider-blocks"),
   value: "Libre Barcode 128 Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39", "gutenslider-blocks"),
   value: "Libre Barcode 39"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Extended", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Extended", "gutenslider-blocks"),
   value: "Libre Barcode 39 Extended"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Extended Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Extended Text", "gutenslider-blocks"),
   value: "Libre Barcode 39 Extended Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Text", "gutenslider-blocks"),
   value: "Libre Barcode 39 Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Baskerville", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Baskerville", "gutenslider-blocks"),
   value: "Libre Baskerville"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Caslon Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Caslon Display", "gutenslider-blocks"),
   value: "Libre Caslon Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Caslon Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Caslon Text", "gutenslider-blocks"),
   value: "Libre Caslon Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Franklin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Franklin", "gutenslider-blocks"),
   value: "Libre Franklin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Life Savers", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Life Savers", "gutenslider-blocks"),
   value: "Life Savers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lilita One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lilita One", "gutenslider-blocks"),
   value: "Lilita One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lily Script One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lily Script One", "gutenslider-blocks"),
   value: "Lily Script One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Limelight", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Limelight", "gutenslider-blocks"),
   value: "Limelight"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Linden Hill", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Linden Hill", "gutenslider-blocks"),
   value: "Linden Hill"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Literata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Literata", "gutenslider-blocks"),
   value: "Literata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Liu Jian Mao Cao", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Liu Jian Mao Cao", "gutenslider-blocks"),
   value: "Liu Jian Mao Cao"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Livvic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Livvic", "gutenslider-blocks"),
   value: "Livvic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lobster", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lobster", "gutenslider-blocks"),
   value: "Lobster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lobster Two", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lobster Two", "gutenslider-blocks"),
   value: "Lobster Two"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lohit Bengali", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lohit Bengali", "gutenslider-blocks"),
   value: "Lohit Bengali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lohit Tamil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lohit Tamil", "gutenslider-blocks"),
   value: "Lohit Tamil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("lohitdevanagari", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("lohitdevanagari", "gutenslider-blocks"),
   value: "lohitdevanagari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Outline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Outline", "gutenslider-blocks"),
   value: "Londrina Outline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Shadow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Shadow", "gutenslider-blocks"),
   value: "Londrina Shadow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Sketch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Sketch", "gutenslider-blocks"),
   value: "Londrina Sketch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Solid", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Solid", "gutenslider-blocks"),
   value: "Londrina Solid"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Long Cang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Long Cang", "gutenslider-blocks"),
   value: "Long Cang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lora", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lora", "gutenslider-blocks"),
   value: "Lora"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Love Ya Like A Sister", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Love Ya Like A Sister", "gutenslider-blocks"),
   value: "Love Ya Like A Sister"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Loved by the King", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Loved by the King", "gutenslider-blocks"),
   value: "Loved by the King"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lovers Quarrel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lovers Quarrel", "gutenslider-blocks"),
   value: "Lovers Quarrel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Luckiest Guy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Luckiest Guy", "gutenslider-blocks"),
   value: "Luckiest Guy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lusitana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lusitana", "gutenslider-blocks"),
   value: "Lusitana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lustria", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lustria", "gutenslider-blocks"),
   value: "Lustria"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ma Shan Zheng", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ma Shan Zheng", "gutenslider-blocks"),
   value: "Ma Shan Zheng"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Macondo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Macondo", "gutenslider-blocks"),
   value: "Macondo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Macondo Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Macondo Swash Caps", "gutenslider-blocks"),
   value: "Macondo Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mada", "gutenslider-blocks"),
   value: "Mada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Magra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Magra", "gutenslider-blocks"),
   value: "Magra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maiden Orange", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maiden Orange", "gutenslider-blocks"),
   value: "Maiden Orange"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maitree", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maitree", "gutenslider-blocks"),
   value: "Maitree"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Major Mono Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Major Mono Display", "gutenslider-blocks"),
   value: "Major Mono Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mako", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mako", "gutenslider-blocks"),
   value: "Mako"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mali", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mali", "gutenslider-blocks"),
   value: "Mali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mallanna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mallanna", "gutenslider-blocks"),
   value: "Mallanna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mandali", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mandali", "gutenslider-blocks"),
   value: "Mandali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Manjari", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Manjari", "gutenslider-blocks"),
   value: "Manjari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Manuale", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Manuale", "gutenslider-blocks"),
   value: "Manuale"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marcellus", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marcellus", "gutenslider-blocks"),
   value: "Marcellus"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marcellus SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marcellus SC", "gutenslider-blocks"),
   value: "Marcellus SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marck Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marck Script", "gutenslider-blocks"),
   value: "Marck Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Margarine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Margarine", "gutenslider-blocks"),
   value: "Margarine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marko One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marko One", "gutenslider-blocks"),
   value: "Marko One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marmelad", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marmelad", "gutenslider-blocks"),
   value: "Marmelad"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Martel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Martel", "gutenslider-blocks"),
   value: "Martel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Martel Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Martel Sans", "gutenslider-blocks"),
   value: "Martel Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marvel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marvel", "gutenslider-blocks"),
   value: "Marvel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mate", "gutenslider-blocks"),
   value: "Mate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mate SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mate SC", "gutenslider-blocks"),
   value: "Mate SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maven Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maven Pro", "gutenslider-blocks"),
   value: "Maven Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("mavenprovfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("mavenprovfbeta", "gutenslider-blocks"),
   value: "mavenprovfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("McLaren", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("McLaren", "gutenslider-blocks"),
   value: "McLaren"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meddon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meddon", "gutenslider-blocks"),
   value: "Meddon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("MedievalSharp", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("MedievalSharp", "gutenslider-blocks"),
   value: "MedievalSharp"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Medula One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Medula One", "gutenslider-blocks"),
   value: "Medula One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meera Inimai", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meera Inimai", "gutenslider-blocks"),
   value: "Meera Inimai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Megrim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Megrim", "gutenslider-blocks"),
   value: "Megrim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meie Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meie Script", "gutenslider-blocks"),
   value: "Meie Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merge One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merge One", "gutenslider-blocks"),
   value: "Merge One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merienda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merienda", "gutenslider-blocks"),
   value: "Merienda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merienda One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merienda One", "gutenslider-blocks"),
   value: "Merienda One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merriweather", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merriweather", "gutenslider-blocks"),
   value: "Merriweather"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merriweather Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merriweather Sans", "gutenslider-blocks"),
   value: "Merriweather Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mervale Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mervale Script", "gutenslider-blocks"),
   value: "Mervale Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metal", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metal", "gutenslider-blocks"),
   value: "Metal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metal Mania", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metal Mania", "gutenslider-blocks"),
   value: "Metal Mania"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metamorphous", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metamorphous", "gutenslider-blocks"),
   value: "Metamorphous"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metrophobic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metrophobic", "gutenslider-blocks"),
   value: "Metrophobic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miama", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miama", "gutenslider-blocks"),
   value: "Miama"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Michroma", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Michroma", "gutenslider-blocks"),
   value: "Michroma"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Milonga", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Milonga", "gutenslider-blocks"),
   value: "Milonga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miltonian", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miltonian", "gutenslider-blocks"),
   value: "Miltonian"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miltonian Tattoo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miltonian Tattoo", "gutenslider-blocks"),
   value: "Miltonian Tattoo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mina", "gutenslider-blocks"),
   value: "Mina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miniver", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miniver", "gutenslider-blocks"),
   value: "Miniver"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miriam Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miriam Libre", "gutenslider-blocks"),
   value: "Miriam Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miss Fajardose", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miss Fajardose", "gutenslider-blocks"),
   value: "Miss Fajardose"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miss Saint Delafield", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miss Saint Delafield", "gutenslider-blocks"),
   value: "Miss Saint Delafield"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Modak", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Modak", "gutenslider-blocks"),
   value: "Modak"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Modern Antiqua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Modern Antiqua", "gutenslider-blocks"),
   value: "Modern Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Molengo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Molengo", "gutenslider-blocks"),
   value: "Molengo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Molle", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Molle", "gutenslider-blocks"),
   value: "Molle"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monda", "gutenslider-blocks"),
   value: "Monda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monofett", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monofett", "gutenslider-blocks"),
   value: "Monofett"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monoton", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monoton", "gutenslider-blocks"),
   value: "Monoton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monsieur La Doulaise", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monsieur La Doulaise", "gutenslider-blocks"),
   value: "Monsieur La Doulaise"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montaga", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montaga", "gutenslider-blocks"),
   value: "Montaga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montez", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montez", "gutenslider-blocks"),
   value: "Montez"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat", "gutenslider-blocks"),
   value: "Montserrat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat Alternates", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat Alternates", "gutenslider-blocks"),
   value: "Montserrat Alternates"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat Subrayada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat Subrayada", "gutenslider-blocks"),
   value: "Montserrat Subrayada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Moul", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Moul", "gutenslider-blocks"),
   value: "Moul"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Moulpali", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Moulpali", "gutenslider-blocks"),
   value: "Moulpali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mountains of Christmas", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mountains of Christmas", "gutenslider-blocks"),
   value: "Mountains of Christmas"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mouse Memoirs", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mouse Memoirs", "gutenslider-blocks"),
   value: "Mouse Memoirs"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("mplus1p", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("mplus1p", "gutenslider-blocks"),
   value: "mplus1p"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Bedford", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Bedford", "gutenslider-blocks"),
   value: "Mr Bedford"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Bedfort", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Bedfort", "gutenslider-blocks"),
   value: "Mr Bedfort"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Dafoe", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Dafoe", "gutenslider-blocks"),
   value: "Mr Dafoe"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr De Haviland", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr De Haviland", "gutenslider-blocks"),
   value: "Mr De Haviland"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mrs Saint Delafield", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mrs Saint Delafield", "gutenslider-blocks"),
   value: "Mrs Saint Delafield"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mrs Sheppards", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mrs Sheppards", "gutenslider-blocks"),
   value: "Mrs Sheppards"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta", "gutenslider-blocks"),
   value: "Mukta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Mahee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Mahee", "gutenslider-blocks"),
   value: "Mukta Mahee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Malar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Malar", "gutenslider-blocks"),
   value: "Mukta Malar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Vaani", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Vaani", "gutenslider-blocks"),
   value: "Mukta Vaani"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Muli", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Muli", "gutenslider-blocks"),
   value: "Muli"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("myanmarsanspro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("myanmarsanspro", "gutenslider-blocks"),
   value: "myanmarsanspro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mystery Quest", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mystery Quest", "gutenslider-blocks"),
   value: "Mystery Quest"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Brush Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Brush Script", "gutenslider-blocks"),
   value: "Nanum Brush Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Gothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Gothic", "gutenslider-blocks"),
   value: "Nanum Gothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Gothic Coding", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Gothic Coding", "gutenslider-blocks"),
   value: "Nanum Gothic Coding"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Myeongjo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Myeongjo", "gutenslider-blocks"),
   value: "Nanum Myeongjo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Pen Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Pen Script", "gutenslider-blocks"),
   value: "Nanum Pen Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("NATS", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("NATS", "gutenslider-blocks"),
   value: "NATS"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Neucha", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Neucha", "gutenslider-blocks"),
   value: "Neucha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Neuton", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Neuton", "gutenslider-blocks"),
   value: "Neuton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("New Rocker", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("New Rocker", "gutenslider-blocks"),
   value: "New Rocker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("News Cycle", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("News Cycle", "gutenslider-blocks"),
   value: "News Cycle"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("nicomoji", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("nicomoji", "gutenslider-blocks"),
   value: "nicomoji"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Niconne", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Niconne", "gutenslider-blocks"),
   value: "Niconne"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("nikukyu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("nikukyu", "gutenslider-blocks"),
   value: "nikukyu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Niramit", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Niramit", "gutenslider-blocks"),
   value: "Niramit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nixie One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nixie One", "gutenslider-blocks"),
   value: "Nixie One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nobile", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nobile", "gutenslider-blocks"),
   value: "Nobile"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nokora", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nokora", "gutenslider-blocks"),
   value: "Nokora"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Norican", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Norican", "gutenslider-blocks"),
   value: "Norican"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nosifer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nosifer", "gutenslider-blocks"),
   value: "Nosifer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nosifer Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nosifer Caps", "gutenslider-blocks"),
   value: "Nosifer Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Notable", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Notable", "gutenslider-blocks"),
   value: "Notable"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nothing You Could Do", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nothing You Could Do", "gutenslider-blocks"),
   value: "Nothing You Could Do"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noticia Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noticia Text", "gutenslider-blocks"),
   value: "Noticia Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noto Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noto Sans", "gutenslider-blocks"),
   value: "Noto Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noto Serif", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noto Serif", "gutenslider-blocks"),
   value: "Noto Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("notosanstamil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("notosanstamil", "gutenslider-blocks"),
   value: "notosanstamil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Cut", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Cut", "gutenslider-blocks"),
   value: "Nova Cut"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Flat", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Flat", "gutenslider-blocks"),
   value: "Nova Flat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Mono", "gutenslider-blocks"),
   value: "Nova Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Oval", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Oval", "gutenslider-blocks"),
   value: "Nova Oval"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Round", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Round", "gutenslider-blocks"),
   value: "Nova Round"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Script", "gutenslider-blocks"),
   value: "Nova Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Slim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Slim", "gutenslider-blocks"),
   value: "Nova Slim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Square", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Square", "gutenslider-blocks"),
   value: "Nova Square"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("NTR", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("NTR", "gutenslider-blocks"),
   value: "NTR"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Numans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Numans", "gutenslider-blocks"),
   value: "Numans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nunito", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nunito", "gutenslider-blocks"),
   value: "Nunito"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nunito Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nunito Sans", "gutenslider-blocks"),
   value: "Nunito Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Odor Mean Chey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Odor Mean Chey", "gutenslider-blocks"),
   value: "Odor Mean Chey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Offside", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Offside", "gutenslider-blocks"),
   value: "Offside"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("OFL Sorts Mill Goudy TT", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("OFL Sorts Mill Goudy TT", "gutenslider-blocks"),
   value: "OFL Sorts Mill Goudy TT"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Old Standard TT", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Old Standard TT", "gutenslider-blocks"),
   value: "Old Standard TT"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oldenburg", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oldenburg", "gutenslider-blocks"),
   value: "Oldenburg"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oleo Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oleo Script", "gutenslider-blocks"),
   value: "Oleo Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oleo Script Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oleo Script Swash Caps", "gutenslider-blocks"),
   value: "Oleo Script Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Sans", "gutenslider-blocks"),
   value: "Open Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Sans Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Sans Condensed", "gutenslider-blocks"),
   value: "Open Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("opensanshebrew", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("opensanshebrew", "gutenslider-blocks"),
   value: "opensanshebrew"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("opensanshebrewcondensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("opensanshebrewcondensed", "gutenslider-blocks"),
   value: "opensanshebrewcondensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oranienbaum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oranienbaum", "gutenslider-blocks"),
   value: "Oranienbaum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Orbitron", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Orbitron", "gutenslider-blocks"),
   value: "Orbitron"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oregano", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oregano", "gutenslider-blocks"),
   value: "Oregano"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Orienta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Orienta", "gutenslider-blocks"),
   value: "Orienta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Original Surfer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Original Surfer", "gutenslider-blocks"),
   value: "Original Surfer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oswald", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oswald", "gutenslider-blocks"),
   value: "Oswald"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Over the Rainbow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Over the Rainbow", "gutenslider-blocks"),
   value: "Over the Rainbow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overlock", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overlock", "gutenslider-blocks"),
   value: "Overlock"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overlock SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overlock SC", "gutenslider-blocks"),
   value: "Overlock SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overpass", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overpass", "gutenslider-blocks"),
   value: "Overpass"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overpass Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overpass Mono", "gutenslider-blocks"),
   value: "Overpass Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ovo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ovo", "gutenslider-blocks"),
   value: "Ovo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oxygen", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oxygen", "gutenslider-blocks"),
   value: "Oxygen"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oxygen Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oxygen Mono", "gutenslider-blocks"),
   value: "Oxygen Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pacifico", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pacifico", "gutenslider-blocks"),
   value: "Pacifico"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padauk", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padauk", "gutenslider-blocks"),
   value: "Padauk"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Palanquin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Palanquin", "gutenslider-blocks"),
   value: "Palanquin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Palanquin Dark", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Palanquin Dark", "gutenslider-blocks"),
   value: "Palanquin Dark"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pangolin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pangolin", "gutenslider-blocks"),
   value: "Pangolin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Paprika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Paprika", "gutenslider-blocks"),
   value: "Paprika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Parisienne", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Parisienne", "gutenslider-blocks"),
   value: "Parisienne"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Passero One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Passero One", "gutenslider-blocks"),
   value: "Passero One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Passion One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Passion One", "gutenslider-blocks"),
   value: "Passion One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pathway Gothic One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pathway Gothic One", "gutenslider-blocks"),
   value: "Pathway Gothic One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patrick Hand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patrick Hand", "gutenslider-blocks"),
   value: "Patrick Hand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patrick Hand SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patrick Hand SC", "gutenslider-blocks"),
   value: "Patrick Hand SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pattaya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pattaya", "gutenslider-blocks"),
   value: "Pattaya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patua One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patua One", "gutenslider-blocks"),
   value: "Patua One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pavanam", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pavanam", "gutenslider-blocks"),
   value: "Pavanam"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Paytone One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Paytone One", "gutenslider-blocks"),
   value: "Paytone One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pecita", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pecita", "gutenslider-blocks"),
   value: "Pecita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Peddana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Peddana", "gutenslider-blocks"),
   value: "Peddana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Peralta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Peralta", "gutenslider-blocks"),
   value: "Peralta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Permanent Marker", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Permanent Marker", "gutenslider-blocks"),
   value: "Permanent Marker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Petit Formal Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Petit Formal Script", "gutenslider-blocks"),
   value: "Petit Formal Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Petrona", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Petrona", "gutenslider-blocks"),
   value: "Petrona"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Phetsarath", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Phetsarath", "gutenslider-blocks"),
   value: "Phetsarath"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Philosopher", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Philosopher", "gutenslider-blocks"),
   value: "Philosopher"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Piedra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Piedra", "gutenslider-blocks"),
   value: "Piedra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pinyon Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pinyon Script", "gutenslider-blocks"),
   value: "Pinyon Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pirata One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pirata One", "gutenslider-blocks"),
   value: "Pirata One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Plaster", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Plaster", "gutenslider-blocks"),
   value: "Plaster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Play", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Play", "gutenslider-blocks"),
   value: "Play"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playball", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playball", "gutenslider-blocks"),
   value: "Playball"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playfair Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playfair Display", "gutenslider-blocks"),
   value: "Playfair Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playfair Display SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playfair Display SC", "gutenslider-blocks"),
   value: "Playfair Display SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Podkova", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Podkova", "gutenslider-blocks"),
   value: "Podkova"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("podkovavfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("podkovavfbeta", "gutenslider-blocks"),
   value: "podkovavfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poetsen One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poetsen One", "gutenslider-blocks"),
   value: "Poetsen One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poiret One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poiret One", "gutenslider-blocks"),
   value: "Poiret One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poller One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poller One", "gutenslider-blocks"),
   value: "Poller One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poly", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poly", "gutenslider-blocks"),
   value: "Poly"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pompiere", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pompiere", "gutenslider-blocks"),
   value: "Pompiere"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ponnala", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ponnala", "gutenslider-blocks"),
   value: "Ponnala"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pontano Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pontano Sans", "gutenslider-blocks"),
   value: "Pontano Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poor Story", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poor Story", "gutenslider-blocks"),
   value: "Poor Story"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poppins", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poppins", "gutenslider-blocks"),
   value: "Poppins"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Port Lligat Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Port Lligat Sans", "gutenslider-blocks"),
   value: "Port Lligat Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Port Lligat Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Port Lligat Slab", "gutenslider-blocks"),
   value: "Port Lligat Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Porter Sans Block", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Porter Sans Block", "gutenslider-blocks"),
   value: "Porter Sans Block"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Post No Bills Colombo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Post No Bills Colombo", "gutenslider-blocks"),
   value: "Post No Bills Colombo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Post No Bills Jaffna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Post No Bills Jaffna", "gutenslider-blocks"),
   value: "Post No Bills Jaffna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pragati Narrow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pragati Narrow", "gutenslider-blocks"),
   value: "Pragati Narrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Preahvihear", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Preahvihear", "gutenslider-blocks"),
   value: "Preahvihear"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Press Start 2P", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Press Start 2P", "gutenslider-blocks"),
   value: "Press Start 2P"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pridi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pridi", "gutenslider-blocks"),
   value: "Pridi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Princess Sofia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Princess Sofia", "gutenslider-blocks"),
   value: "Princess Sofia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prociono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prociono", "gutenslider-blocks"),
   value: "Prociono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prompt", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prompt", "gutenslider-blocks"),
   value: "Prompt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prosto One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prosto One", "gutenslider-blocks"),
   value: "Prosto One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Proza Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Proza Libre", "gutenslider-blocks"),
   value: "Proza Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Mono", "gutenslider-blocks"),
   value: "PT Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans", "gutenslider-blocks"),
   value: "PT Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans Caption", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans Caption", "gutenslider-blocks"),
   value: "PT Sans Caption"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans Narrow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans Narrow", "gutenslider-blocks"),
   value: "PT Sans Narrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Serif", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Serif", "gutenslider-blocks"),
   value: "PT Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Serif Caption", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Serif Caption", "gutenslider-blocks"),
   value: "PT Serif Caption"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Puritan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Puritan", "gutenslider-blocks"),
   value: "Puritan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Purple Purse", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Purple Purse", "gutenslider-blocks"),
   value: "Purple Purse"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pushster", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pushster", "gutenslider-blocks"),
   value: "Pushster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quando", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quando", "gutenslider-blocks"),
   value: "Quando"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quantico", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quantico", "gutenslider-blocks"),
   value: "Quantico"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quattrocento", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quattrocento", "gutenslider-blocks"),
   value: "Quattrocento"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quattrocento Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quattrocento Sans", "gutenslider-blocks"),
   value: "Quattrocento Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Questrial", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Questrial", "gutenslider-blocks"),
   value: "Questrial"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quicksand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quicksand", "gutenslider-blocks"),
   value: "Quicksand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quintessential", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quintessential", "gutenslider-blocks"),
   value: "Quintessential"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Qwigley", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Qwigley", "gutenslider-blocks"),
   value: "Qwigley"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Racing Sans One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Racing Sans One", "gutenslider-blocks"),
   value: "Racing Sans One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Radley", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Radley", "gutenslider-blocks"),
   value: "Radley"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rajdhani", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rajdhani", "gutenslider-blocks"),
   value: "Rajdhani"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rakkas", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rakkas", "gutenslider-blocks"),
   value: "Rakkas"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Raleway", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Raleway", "gutenslider-blocks"),
   value: "Raleway"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Raleway Dots", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Raleway Dots", "gutenslider-blocks"),
   value: "Raleway Dots"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ramabhadra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ramabhadra", "gutenslider-blocks"),
   value: "Ramabhadra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ramaraja", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ramaraja", "gutenslider-blocks"),
   value: "Ramaraja"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rambla", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rambla", "gutenslider-blocks"),
   value: "Rambla"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rammetto One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rammetto One", "gutenslider-blocks"),
   value: "Rammetto One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ranchers", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ranchers", "gutenslider-blocks"),
   value: "Ranchers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rancho", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rancho", "gutenslider-blocks"),
   value: "Rancho"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ranga", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ranga", "gutenslider-blocks"),
   value: "Ranga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rasa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rasa", "gutenslider-blocks"),
   value: "Rasa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rationale", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rationale", "gutenslider-blocks"),
   value: "Rationale"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ravi Prakash", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ravi Prakash", "gutenslider-blocks"),
   value: "Ravi Prakash"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Red Hat Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Red Hat Display", "gutenslider-blocks"),
   value: "Red Hat Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Red Hat Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Red Hat Text", "gutenslider-blocks"),
   value: "Red Hat Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redacted", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redacted", "gutenslider-blocks"),
   value: "Redacted"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redacted Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redacted Script", "gutenslider-blocks"),
   value: "Redacted Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redressed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redressed", "gutenslider-blocks"),
   value: "Redressed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reem Kufi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reem Kufi", "gutenslider-blocks"),
   value: "Reem Kufi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reenie Beanie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reenie Beanie", "gutenslider-blocks"),
   value: "Reenie Beanie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Revalia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Revalia", "gutenslider-blocks"),
   value: "Revalia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rhodium Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rhodium Libre", "gutenslider-blocks"),
   value: "Rhodium Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ribeye", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ribeye", "gutenslider-blocks"),
   value: "Ribeye"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ribeye Marrow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ribeye Marrow", "gutenslider-blocks"),
   value: "Ribeye Marrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Righteous", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Righteous", "gutenslider-blocks"),
   value: "Righteous"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Risque", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Risque", "gutenslider-blocks"),
   value: "Risque"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto", "gutenslider-blocks"),
   value: "Roboto"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Condensed", "gutenslider-blocks"),
   value: "Roboto Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Mono", "gutenslider-blocks"),
   value: "Roboto Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Slab", "gutenslider-blocks"),
   value: "Roboto Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rochester", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rochester", "gutenslider-blocks"),
   value: "Rochester"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rock Salt", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rock Salt", "gutenslider-blocks"),
   value: "Rock Salt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rokkitt", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rokkitt", "gutenslider-blocks"),
   value: "Rokkitt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Romanesco", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Romanesco", "gutenslider-blocks"),
   value: "Romanesco"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ropa Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ropa Sans", "gutenslider-blocks"),
   value: "Ropa Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rosario", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rosario", "gutenslider-blocks"),
   value: "Rosario"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rosarivo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rosarivo", "gutenslider-blocks"),
   value: "Rosarivo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rouge Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rouge Script", "gutenslider-blocks"),
   value: "Rouge Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("roundedmplus1c", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("roundedmplus1c", "gutenslider-blocks"),
   value: "roundedmplus1c"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rozha One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rozha One", "gutenslider-blocks"),
   value: "Rozha One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik", "gutenslider-blocks"),
   value: "Rubik"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik Mono One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik Mono One", "gutenslider-blocks"),
   value: "Rubik Mono One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik One", "gutenslider-blocks"),
   value: "Rubik One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruda", "gutenslider-blocks"),
   value: "Ruda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rufina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rufina", "gutenslider-blocks"),
   value: "Rufina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruge Boogie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruge Boogie", "gutenslider-blocks"),
   value: "Ruge Boogie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruluko", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruluko", "gutenslider-blocks"),
   value: "Ruluko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rum Raisin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rum Raisin", "gutenslider-blocks"),
   value: "Rum Raisin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruslan Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruslan Display", "gutenslider-blocks"),
   value: "Ruslan Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Russo One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Russo One", "gutenslider-blocks"),
   value: "Russo One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruthie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruthie", "gutenslider-blocks"),
   value: "Ruthie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rye", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rye", "gutenslider-blocks"),
   value: "Rye"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sacramento", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sacramento", "gutenslider-blocks"),
   value: "Sacramento"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sahitya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sahitya", "gutenslider-blocks"),
   value: "Sahitya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sail", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sail", "gutenslider-blocks"),
   value: "Sail"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira", "gutenslider-blocks"),
   value: "Saira"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Condensed", "gutenslider-blocks"),
   value: "Saira Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Extra Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Extra Condensed", "gutenslider-blocks"),
   value: "Saira Extra Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Semi Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Semi Condensed", "gutenslider-blocks"),
   value: "Saira Semi Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Stencil One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Stencil One", "gutenslider-blocks"),
   value: "Saira Stencil One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Salsa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Salsa", "gutenslider-blocks"),
   value: "Salsa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sanchez", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sanchez", "gutenslider-blocks"),
   value: "Sanchez"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sancreek", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sancreek", "gutenslider-blocks"),
   value: "Sancreek"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansation", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansation", "gutenslider-blocks"),
   value: "Sansation"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansita", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansita", "gutenslider-blocks"),
   value: "Sansita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansita One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansita One", "gutenslider-blocks"),
   value: "Sansita One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarabun", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarabun", "gutenslider-blocks"),
   value: "Sarabun"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarala", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarala", "gutenslider-blocks"),
   value: "Sarala"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarina", "gutenslider-blocks"),
   value: "Sarina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarpanch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarpanch", "gutenslider-blocks"),
   value: "Sarpanch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Satisfy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Satisfy", "gutenslider-blocks"),
   value: "Satisfy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("sawarabigothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("sawarabigothic", "gutenslider-blocks"),
   value: "sawarabigothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("sawarabimincho", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("sawarabimincho", "gutenslider-blocks"),
   value: "sawarabimincho"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scada", "gutenslider-blocks"),
   value: "Scada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scheherazade", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scheherazade", "gutenslider-blocks"),
   value: "Scheherazade"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Schoolbell", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Schoolbell", "gutenslider-blocks"),
   value: "Schoolbell"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scope One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scope One", "gutenslider-blocks"),
   value: "Scope One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Seaweed Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Seaweed Script", "gutenslider-blocks"),
   value: "Seaweed Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Secular One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Secular One", "gutenslider-blocks"),
   value: "Secular One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedan", "gutenslider-blocks"),
   value: "Sedan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedan SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedan SC", "gutenslider-blocks"),
   value: "Sedan SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedgwick Ave", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedgwick Ave", "gutenslider-blocks"),
   value: "Sedgwick Ave"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedgwick Ave Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedgwick Ave Display", "gutenslider-blocks"),
   value: "Sedgwick Ave Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulhangang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulhangang", "gutenslider-blocks"),
   value: "seoulhangang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulhangangcondensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulhangangcondensed", "gutenslider-blocks"),
   value: "seoulhangangcondensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsan", "gutenslider-blocks"),
   value: "seoulnamsan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsancondensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsancondensed", "gutenslider-blocks"),
   value: "seoulnamsancondensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsanvertical", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsanvertical", "gutenslider-blocks"),
   value: "seoulnamsanvertical"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sevillana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sevillana", "gutenslider-blocks"),
   value: "Sevillana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Seymour One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Seymour One", "gutenslider-blocks"),
   value: "Seymour One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shadows Into Light", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shadows Into Light", "gutenslider-blocks"),
   value: "Shadows Into Light"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shadows Into Light Two", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shadows Into Light Two", "gutenslider-blocks"),
   value: "Shadows Into Light Two"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shanti", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shanti", "gutenslider-blocks"),
   value: "Shanti"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share", "gutenslider-blocks"),
   value: "Share"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share Tech", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share Tech", "gutenslider-blocks"),
   value: "Share Tech"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share Tech Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share Tech Mono", "gutenslider-blocks"),
   value: "Share Tech Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shojumaru", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shojumaru", "gutenslider-blocks"),
   value: "Shojumaru"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Short Stack", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Short Stack", "gutenslider-blocks"),
   value: "Short Stack"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shrikhand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shrikhand", "gutenslider-blocks"),
   value: "Shrikhand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Siamreap", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Siamreap", "gutenslider-blocks"),
   value: "Siamreap"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Siemreap", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Siemreap", "gutenslider-blocks"),
   value: "Siemreap"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sigmar One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sigmar One", "gutenslider-blocks"),
   value: "Sigmar One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Signika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Signika", "gutenslider-blocks"),
   value: "Signika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Signika Negative", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Signika Negative", "gutenslider-blocks"),
   value: "Signika Negative"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simonetta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simonetta", "gutenslider-blocks"),
   value: "Simonetta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Single Day", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Single Day", "gutenslider-blocks"),
   value: "Single Day"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sintony", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sintony", "gutenslider-blocks"),
   value: "Sintony"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sirin Stencil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sirin Stencil", "gutenslider-blocks"),
   value: "Sirin Stencil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sitara", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sitara", "gutenslider-blocks"),
   value: "Sitara"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Six Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Six Caps", "gutenslider-blocks"),
   value: "Six Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Skranji", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Skranji", "gutenslider-blocks"),
   value: "Skranji"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slabo 13px", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slabo 13px", "gutenslider-blocks"),
   value: "Slabo 13px"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slabo 27px", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slabo 27px", "gutenslider-blocks"),
   value: "Slabo 27px"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slackey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slackey", "gutenslider-blocks"),
   value: "Slackey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Smokum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Smokum", "gutenslider-blocks"),
   value: "Smokum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Smythe", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Smythe", "gutenslider-blocks"),
   value: "Smythe"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sniglet", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sniglet", "gutenslider-blocks"),
   value: "Sniglet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snippet", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snippet", "gutenslider-blocks"),
   value: "Snippet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snowburst One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snowburst One", "gutenslider-blocks"),
   value: "Snowburst One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sofadi One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sofadi One", "gutenslider-blocks"),
   value: "Sofadi One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sofia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sofia", "gutenslider-blocks"),
   value: "Sofia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solway", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solway", "gutenslider-blocks"),
   value: "Solway"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Song Myung", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Song Myung", "gutenslider-blocks"),
   value: "Song Myung"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sonsie One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sonsie One", "gutenslider-blocks"),
   value: "Sonsie One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sorts Mill Goudy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sorts Mill Goudy", "gutenslider-blocks"),
   value: "Sorts Mill Goudy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("souliyo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("souliyo", "gutenslider-blocks"),
   value: "souliyo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Code Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Code Pro", "gutenslider-blocks"),
   value: "Source Code Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Sans Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Sans Pro", "gutenslider-blocks"),
   value: "Source Sans Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Serif Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Serif Pro", "gutenslider-blocks"),
   value: "Source Serif Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Space Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Space Mono", "gutenslider-blocks"),
   value: "Space Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Special Elite", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Special Elite", "gutenslider-blocks"),
   value: "Special Elite"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spectral", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spectral", "gutenslider-blocks"),
   value: "Spectral"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spicy Rice", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spicy Rice", "gutenslider-blocks"),
   value: "Spicy Rice"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spinnaker", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spinnaker", "gutenslider-blocks"),
   value: "Spinnaker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spirax", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spirax", "gutenslider-blocks"),
   value: "Spirax"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Squada One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Squada One", "gutenslider-blocks"),
   value: "Squada One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sree Krushnadevaraya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sree Krushnadevaraya", "gutenslider-blocks"),
   value: "Sree Krushnadevaraya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sriracha", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sriracha", "gutenslider-blocks"),
   value: "Sriracha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Srisakdi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Srisakdi", "gutenslider-blocks"),
   value: "Srisakdi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Staatliches", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Staatliches", "gutenslider-blocks"),
   value: "Staatliches"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalemate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalemate", "gutenslider-blocks"),
   value: "Stalemate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalin One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalin One", "gutenslider-blocks"),
   value: "Stalin One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalinist One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalinist One", "gutenslider-blocks"),
   value: "Stalinist One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stardos Stencil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stardos Stencil", "gutenslider-blocks"),
   value: "Stardos Stencil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stint Ultra Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stint Ultra Condensed", "gutenslider-blocks"),
   value: "Stint Ultra Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stint Ultra Expanded", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stint Ultra Expanded", "gutenslider-blocks"),
   value: "Stint Ultra Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stoke", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stoke", "gutenslider-blocks"),
   value: "Stoke"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Strait", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Strait", "gutenslider-blocks"),
   value: "Strait"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Strong", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Strong", "gutenslider-blocks"),
   value: "Strong"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stylish", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stylish", "gutenslider-blocks"),
   value: "Stylish"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sue Ellen Francisco", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sue Ellen Francisco", "gutenslider-blocks"),
   value: "Sue Ellen Francisco"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suez One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suez One", "gutenslider-blocks"),
   value: "Suez One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sumana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sumana", "gutenslider-blocks"),
   value: "Sumana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sunflower", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sunflower", "gutenslider-blocks"),
   value: "Sunflower"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sunshiney", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sunshiney", "gutenslider-blocks"),
   value: "Sunshiney"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Supermercado One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Supermercado One", "gutenslider-blocks"),
   value: "Supermercado One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sura", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sura", "gutenslider-blocks"),
   value: "Sura"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suranna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suranna", "gutenslider-blocks"),
   value: "Suranna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suravaram", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suravaram", "gutenslider-blocks"),
   value: "Suravaram"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suwannaphum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suwannaphum", "gutenslider-blocks"),
   value: "Suwannaphum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Swanky and Moo Moo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Swanky and Moo Moo", "gutenslider-blocks"),
   value: "Swanky and Moo Moo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Syncopate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Syncopate", "gutenslider-blocks"),
   value: "Syncopate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tajawal", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tajawal", "gutenslider-blocks"),
   value: "Tajawal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tangerine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tangerine", "gutenslider-blocks"),
   value: "Tangerine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Taprom", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Taprom", "gutenslider-blocks"),
   value: "Taprom"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tauri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tauri", "gutenslider-blocks"),
   value: "Tauri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Taviraj", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Taviraj", "gutenslider-blocks"),
   value: "Taviraj"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Teko", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Teko", "gutenslider-blocks"),
   value: "Teko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Telex", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Telex", "gutenslider-blocks"),
   value: "Telex"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tenali Ramakrishna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tenali Ramakrishna", "gutenslider-blocks"),
   value: "Tenali Ramakrishna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tenor Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tenor Sans", "gutenslider-blocks"),
   value: "Tenor Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terminal Dosis", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terminal Dosis", "gutenslider-blocks"),
   value: "Terminal Dosis"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terminal Dosis Light", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terminal Dosis Light", "gutenslider-blocks"),
   value: "Terminal Dosis Light"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Me One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Me One", "gutenslider-blocks"),
   value: "Text Me One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thabit", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thabit", "gutenslider-blocks"),
   value: "Thabit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("tharlon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("tharlon", "gutenslider-blocks"),
   value: "tharlon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thasadith", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thasadith", "gutenslider-blocks"),
   value: "Thasadith"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("The Girl Next Door", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("The Girl Next Door", "gutenslider-blocks"),
   value: "The Girl Next Door"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tienne", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tienne", "gutenslider-blocks"),
   value: "Tienne"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tillana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tillana", "gutenslider-blocks"),
   value: "Tillana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Timmana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Timmana", "gutenslider-blocks"),
   value: "Timmana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tinos", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tinos", "gutenslider-blocks"),
   value: "Tinos"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Titan One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Titan One", "gutenslider-blocks"),
   value: "Titan One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Titillium Web", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Titillium Web", "gutenslider-blocks"),
   value: "Titillium Web"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trade Winds", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trade Winds", "gutenslider-blocks"),
   value: "Trade Winds"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trirong", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trirong", "gutenslider-blocks"),
   value: "Trirong"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trocchi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trocchi", "gutenslider-blocks"),
   value: "Trocchi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trochut", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trochut", "gutenslider-blocks"),
   value: "Trochut"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trykker", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trykker", "gutenslider-blocks"),
   value: "Trykker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tuffy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tuffy", "gutenslider-blocks"),
   value: "Tuffy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tulpen One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tulpen One", "gutenslider-blocks"),
   value: "Tulpen One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu", "gutenslider-blocks"),
   value: "Ubuntu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu Condensed", "gutenslider-blocks"),
   value: "Ubuntu Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu Mono", "gutenslider-blocks"),
   value: "Ubuntu Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ultra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ultra", "gutenslider-blocks"),
   value: "Ultra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Uncial Antiqua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Uncial Antiqua", "gutenslider-blocks"),
   value: "Uncial Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Underdog", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Underdog", "gutenslider-blocks"),
   value: "Underdog"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unica One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unica One", "gutenslider-blocks"),
   value: "Unica One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("UnifrakturCook", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("UnifrakturCook", "gutenslider-blocks"),
   value: "UnifrakturCook"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("UnifrakturMaguntia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("UnifrakturMaguntia", "gutenslider-blocks"),
   value: "UnifrakturMaguntia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unkempt", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unkempt", "gutenslider-blocks"),
   value: "Unkempt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unlock", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unlock", "gutenslider-blocks"),
   value: "Unlock"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unna", "gutenslider-blocks"),
   value: "Unna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vampiro One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vampiro One", "gutenslider-blocks"),
   value: "Vampiro One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varela", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varela", "gutenslider-blocks"),
   value: "Varela"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varela Round", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varela Round", "gutenslider-blocks"),
   value: "Varela Round"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varta", "gutenslider-blocks"),
   value: "Varta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vast Shadow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vast Shadow", "gutenslider-blocks"),
   value: "Vast Shadow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vesper Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vesper Libre", "gutenslider-blocks"),
   value: "Vesper Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vibur", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vibur", "gutenslider-blocks"),
   value: "Vibur"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vidaloka", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vidaloka", "gutenslider-blocks"),
   value: "Vidaloka"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Viga", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Viga", "gutenslider-blocks"),
   value: "Viga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Voces", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Voces", "gutenslider-blocks"),
   value: "Voces"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Volkhov", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Volkhov", "gutenslider-blocks"),
   value: "Volkhov"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vollkorn", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vollkorn", "gutenslider-blocks"),
   value: "Vollkorn"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vollkorn SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vollkorn SC", "gutenslider-blocks"),
   value: "Vollkorn SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Voltaire", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Voltaire", "gutenslider-blocks"),
   value: "Voltaire"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("VT323", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("VT323", "gutenslider-blocks"),
   value: "VT323"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Waiting for the Sunrise", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Waiting for the Sunrise", "gutenslider-blocks"),
   value: "Waiting for the Sunrise"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wallpoet", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wallpoet", "gutenslider-blocks"),
   value: "Wallpoet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Walter Turncoat", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Walter Turncoat", "gutenslider-blocks"),
   value: "Walter Turncoat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Warnes", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Warnes", "gutenslider-blocks"),
   value: "Warnes"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wellfleet", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wellfleet", "gutenslider-blocks"),
   value: "Wellfleet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wendy One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wendy One", "gutenslider-blocks"),
   value: "Wendy One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wire One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wire One", "gutenslider-blocks"),
   value: "Wire One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Work Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Work Sans", "gutenslider-blocks"),
   value: "Work Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yaldevi Colombo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yaldevi Colombo", "gutenslider-blocks"),
   value: "Yaldevi Colombo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yanone Kaffeesatz", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yanone Kaffeesatz", "gutenslider-blocks"),
   value: "Yanone Kaffeesatz"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yantramanav", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yantramanav", "gutenslider-blocks"),
   value: "Yantramanav"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yatra One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yatra One", "gutenslider-blocks"),
   value: "Yatra One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yellowtail", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yellowtail", "gutenslider-blocks"),
   value: "Yellowtail"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yeon Sung", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yeon Sung", "gutenslider-blocks"),
   value: "Yeon Sung"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yeseva One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yeseva One", "gutenslider-blocks"),
   value: "Yeseva One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yesteryear", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yesteryear", "gutenslider-blocks"),
   value: "Yesteryear"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yinmar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yinmar", "gutenslider-blocks"),
   value: "Yinmar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yrsa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yrsa", "gutenslider-blocks"),
   value: "Yrsa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL KuaiLe", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL KuaiLe", "gutenslider-blocks"),
   value: "ZCOOL KuaiLe"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL QingKe HuangYou", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL QingKe HuangYou", "gutenslider-blocks"),
   value: "ZCOOL QingKe HuangYou"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL XiaoWei", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL XiaoWei", "gutenslider-blocks"),
   value: "ZCOOL XiaoWei"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zeyada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zeyada", "gutenslider-blocks"),
   value: "Zeyada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zhi Mang Xing", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zhi Mang Xing", "gutenslider-blocks"),
   value: "Zhi Mang Xing"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zilla Slab Highlight", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zilla Slab Highlight", "gutenslider-blocks"),
   value: "Zilla Slab Highlight"
 }];
 
@@ -8063,7 +8063,7 @@ const ResponsiveTypographyControl = ({
     onChangeLineHeightUnit(newLineHeightUnit);
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Typography", "button-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Typography", "gutenslider-blocks"),
     className: "global-setting-typography"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     className: "global-setting-dropdown-icon-wrapper",
@@ -8078,7 +8078,7 @@ const ResponsiveTypographyControl = ({
       variant: "primary",
       onClick: onToggle,
       "aria-expanded": isOpen,
-      "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Toggle Typography Settings", "button-blocks"),
+      "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Toggle Typography Settings", "gutenslider-blocks"),
       className: "global-setting-dropdown-icon-btn"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
       icon: "edit",
@@ -8089,14 +8089,14 @@ const ResponsiveTypographyControl = ({
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
       className: "global-setting-typography-popup-inner"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Family", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Family", "gutenslider-blocks"),
       options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
       value: fontFamily,
       onChange: handleFontFamilyChange
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_range_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
       min: 1,
       max: 100,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "gutenslider-blocks"),
       value: fontSize,
       onChange: handleFontSizeChange,
       onUnitChange: handleFontSizeUnitChange,
@@ -8106,29 +8106,29 @@ const ResponsiveTypographyControl = ({
       step: 1,
       defaultValue: ""
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "gutenslider-blocks"),
       options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_WEIGHT,
       value: fontWeight,
       onChange: handleFontWeightChange
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Style", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Style", "gutenslider-blocks"),
       options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_STYLE,
       value: fontStyle,
       onChange: handleFontStyleChange
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Transform", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Transform", "gutenslider-blocks"),
       options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_TRANSFORM,
       value: textTransform,
       onChange: handleTextTransformChange
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Decoration", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Decoration", "gutenslider-blocks"),
       options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_DECORATION,
       value: textDecoration,
       onChange: handleTextDecorationChange
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_range_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
       min: 1,
       max: 100,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Letter Spacing", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Letter Spacing", "gutenslider-blocks"),
       value: letterSpacing,
       onChange: handleLetterSpacingChange,
       onUnitChange: handleLetterSpacingUnitChange,
@@ -8140,7 +8140,7 @@ const ResponsiveTypographyControl = ({
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_responsive_range_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
       min: 1,
       max: 100,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Line Height", "button-blocks"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Line Height", "gutenslider-blocks"),
       value: lineHeight,
       onChange: handleLineHeightChange,
       onUnitChange: handleLineHeightUnitChange,
@@ -8184,10 +8184,10 @@ const SwitcherControl = ({
   setGlobalSwitcher
 }) => {
   const NORMAL_HOVER = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Normal', 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Normal', 'gutenslider-blocks'),
     value: 'normal'
   }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hover', 'button-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hover', 'gutenslider-blocks'),
     value: 'hover'
   }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -8357,3105 +8357,3105 @@ const TEXT_ALIGN = [{
   value: "justify"
 }];
 const HEADING = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H1", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H1", "gutenslider-blocks"),
   value: "h1"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H2", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H2", "gutenslider-blocks"),
   value: "h2"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H3", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H3", "gutenslider-blocks"),
   value: "h3"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H4", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H4", "gutenslider-blocks"),
   value: "h4"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H5", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H5", "gutenslider-blocks"),
   value: "h5"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H6", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H6", "gutenslider-blocks"),
   value: "h6"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("P", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("P", "gutenslider-blocks"),
   value: "p"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Div", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Div", "gutenslider-blocks"),
   value: "span"
 }];
 const BORDER_STYLES = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("None", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("None", "gutenslider-blocks"),
   value: "none"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solid", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solid", "gutenslider-blocks"),
   value: "solid"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dashed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dashed", "gutenslider-blocks"),
   value: "dashed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dotted", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dotted", "gutenslider-blocks"),
   value: "dotted"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Double", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Double", "gutenslider-blocks"),
   value: "double"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Groove", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Groove", "gutenslider-blocks"),
   value: "groove"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Outset", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Outset", "gutenslider-blocks"),
   value: "outset"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ridge", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ridge", "gutenslider-blocks"),
   value: "ridge"
 }];
 const FONT_FAMILYS = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "gutenslider-blocks"),
   value: "Default"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ABeeZee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ABeeZee", "gutenslider-blocks"),
   value: "ABeeZee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abel", "gutenslider-blocks"),
   value: "Abel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abhaya Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abhaya Libre", "gutenslider-blocks"),
   value: "Abhaya Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abril Fatface", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abril Fatface", "gutenslider-blocks"),
   value: "Abril Fatface"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abyssinica SIL", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Abyssinica SIL", "gutenslider-blocks"),
   value: "Abyssinica SIL"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aclonica", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aclonica", "gutenslider-blocks"),
   value: "Aclonica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Acme", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Acme", "gutenslider-blocks"),
   value: "Acme"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Actor", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Actor", "gutenslider-blocks"),
   value: "Actor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Adamina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Adamina", "gutenslider-blocks"),
   value: "Adamina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Adobe Blank", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Adobe Blank", "gutenslider-blocks"),
   value: "Adobe Blank"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Advent Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Advent Pro", "gutenslider-blocks"),
   value: "Advent Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aguafina Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aguafina Script", "gutenslider-blocks"),
   value: "Aguafina Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Akronim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Akronim", "gutenslider-blocks"),
   value: "Akronim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("aksarabaligalang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("aksarabaligalang", "gutenslider-blocks"),
   value: "aksarabaligalang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aladin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aladin", "gutenslider-blocks"),
   value: "Aladin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aldrich", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aldrich", "gutenslider-blocks"),
   value: "Aldrich"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alef", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alef", "gutenslider-blocks"),
   value: "Alef"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("alefhebrew", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("alefhebrew", "gutenslider-blocks"),
   value: "alefhebrew"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya", "gutenslider-blocks"),
   value: "Alegreya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya Sans", "gutenslider-blocks"),
   value: "Alegreya Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya Sans SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya Sans SC", "gutenslider-blocks"),
   value: "Alegreya Sans SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alegreya SC", "gutenslider-blocks"),
   value: "Alegreya SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aleo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aleo", "gutenslider-blocks"),
   value: "Aleo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alex Brush", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alex Brush", "gutenslider-blocks"),
   value: "Alex Brush"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alfa Slab One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alfa Slab One", "gutenslider-blocks"),
   value: "Alfa Slab One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alice", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alice", "gutenslider-blocks"),
   value: "Alice"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alike", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alike", "gutenslider-blocks"),
   value: "Alike"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alike Angular", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Alike Angular", "gutenslider-blocks"),
   value: "Alike Angular"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allan", "gutenslider-blocks"),
   value: "Allan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allerta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allerta", "gutenslider-blocks"),
   value: "Allerta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allerta Stencil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allerta Stencil", "gutenslider-blocks"),
   value: "Allerta Stencil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allura", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allura", "gutenslider-blocks"),
   value: "Allura"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra", "gutenslider-blocks"),
   value: "Almendra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra Display", "gutenslider-blocks"),
   value: "Almendra Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Almendra SC", "gutenslider-blocks"),
   value: "Almendra SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amarante", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amarante", "gutenslider-blocks"),
   value: "Amarante"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amaranth", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amaranth", "gutenslider-blocks"),
   value: "Amaranth"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amatic SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amatic SC", "gutenslider-blocks"),
   value: "Amatic SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amethysta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amethysta", "gutenslider-blocks"),
   value: "Amethysta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amiko", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amiko", "gutenslider-blocks"),
   value: "Amiko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amiri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amiri", "gutenslider-blocks"),
   value: "Amiri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amita", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Amita", "gutenslider-blocks"),
   value: "Amita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("amstelvaralpha", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("amstelvaralpha", "gutenslider-blocks"),
   value: "amstelvaralpha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anaheim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anaheim", "gutenslider-blocks"),
   value: "Anaheim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andada", "gutenslider-blocks"),
   value: "Andada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andada SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andada SC", "gutenslider-blocks"),
   value: "Andada SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Andika", "gutenslider-blocks"),
   value: "Andika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Angkor", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Angkor", "gutenslider-blocks"),
   value: "Angkor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Annie Use Your Telescope", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Annie Use Your Telescope", "gutenslider-blocks"),
   value: "Annie Use Your Telescope"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anonymous Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anonymous Pro", "gutenslider-blocks"),
   value: "Anonymous Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic", "gutenslider-blocks"),
   value: "Antic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic Didone", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic Didone", "gutenslider-blocks"),
   value: "Antic Didone"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antic Slab", "gutenslider-blocks"),
   value: "Antic Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anton", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Anton", "gutenslider-blocks"),
   value: "Anton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antonio", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Antonio", "gutenslider-blocks"),
   value: "Antonio"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arapey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arapey", "gutenslider-blocks"),
   value: "Arapey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arbutus", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arbutus", "gutenslider-blocks"),
   value: "Arbutus"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arbutus Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arbutus Slab", "gutenslider-blocks"),
   value: "Arbutus Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Architects Daughter", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Architects Daughter", "gutenslider-blocks"),
   value: "Architects Daughter"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo", "gutenslider-blocks"),
   value: "Archivo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo Black", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo Black", "gutenslider-blocks"),
   value: "Archivo Black"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo Narrow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Archivo Narrow", "gutenslider-blocks"),
   value: "Archivo Narrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("archivovfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("archivovfbeta", "gutenslider-blocks"),
   value: "archivovfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aref Ruqaa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aref Ruqaa", "gutenslider-blocks"),
   value: "Aref Ruqaa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arima Madurai", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arima Madurai", "gutenslider-blocks"),
   value: "Arima Madurai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arimo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arimo", "gutenslider-blocks"),
   value: "Arimo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arizonia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arizonia", "gutenslider-blocks"),
   value: "Arizonia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Armata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Armata", "gutenslider-blocks"),
   value: "Armata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arsenal", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arsenal", "gutenslider-blocks"),
   value: "Arsenal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Artifika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Artifika", "gutenslider-blocks"),
   value: "Artifika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arvo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arvo", "gutenslider-blocks"),
   value: "Arvo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Arya", "gutenslider-blocks"),
   value: "Arya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asap", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asap", "gutenslider-blocks"),
   value: "Asap"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asap Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asap Condensed", "gutenslider-blocks"),
   value: "Asap Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("asapvfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("asapvfbeta", "gutenslider-blocks"),
   value: "asapvfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asar", "gutenslider-blocks"),
   value: "Asar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asset", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asset", "gutenslider-blocks"),
   value: "Asset"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Assistant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Assistant", "gutenslider-blocks"),
   value: "Assistant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Astloch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Astloch", "gutenslider-blocks"),
   value: "Astloch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asul", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Asul", "gutenslider-blocks"),
   value: "Asul"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Athiti", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Athiti", "gutenslider-blocks"),
   value: "Athiti"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Atomic Age", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Atomic Age", "gutenslider-blocks"),
   value: "Atomic Age"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aubrey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Aubrey", "gutenslider-blocks"),
   value: "Aubrey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Audiowide", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Audiowide", "gutenslider-blocks"),
   value: "Audiowide"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Autour One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Autour One", "gutenslider-blocks"),
   value: "Autour One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Average", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Average", "gutenslider-blocks"),
   value: "Average"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Average Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Average Sans", "gutenslider-blocks"),
   value: "Average Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Gruesa Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Gruesa Libre", "gutenslider-blocks"),
   value: "Averia Gruesa Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Libre", "gutenslider-blocks"),
   value: "Averia Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Sans Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Sans Libre", "gutenslider-blocks"),
   value: "Averia Sans Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Serif Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Averia Serif Libre", "gutenslider-blocks"),
   value: "Averia Serif Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("B612", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("B612", "gutenslider-blocks"),
   value: "B612"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("B612 Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("B612 Mono", "gutenslider-blocks"),
   value: "B612 Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bad Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bad Script", "gutenslider-blocks"),
   value: "Bad Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bahiana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bahiana", "gutenslider-blocks"),
   value: "Bahiana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bahianita", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bahianita", "gutenslider-blocks"),
   value: "Bahianita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bai Jamjuree", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bai Jamjuree", "gutenslider-blocks"),
   value: "Bai Jamjuree"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo", "gutenslider-blocks"),
   value: "Baloo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhai", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhai", "gutenslider-blocks"),
   value: "Baloo Bhai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhaijaan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhaijaan", "gutenslider-blocks"),
   value: "Baloo Bhaijaan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhaina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Bhaina", "gutenslider-blocks"),
   value: "Baloo Bhaina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Chettan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Chettan", "gutenslider-blocks"),
   value: "Baloo Chettan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Da", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Da", "gutenslider-blocks"),
   value: "Baloo Da"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Paaji", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Paaji", "gutenslider-blocks"),
   value: "Baloo Paaji"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Tamma", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Tamma", "gutenslider-blocks"),
   value: "Baloo Tamma"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Tammudu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Tammudu", "gutenslider-blocks"),
   value: "Baloo Tammudu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Thambi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baloo Thambi", "gutenslider-blocks"),
   value: "Baloo Thambi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Balthazar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Balthazar", "gutenslider-blocks"),
   value: "Balthazar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bangers", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bangers", "gutenslider-blocks"),
   value: "Bangers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow", "gutenslider-blocks"),
   value: "Barlow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow Condensed", "gutenslider-blocks"),
   value: "Barlow Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow Semi Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barlow Semi Condensed", "gutenslider-blocks"),
   value: "Barlow Semi Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barriecito", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barriecito", "gutenslider-blocks"),
   value: "Barriecito"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barrio", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Barrio", "gutenslider-blocks"),
   value: "Barrio"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Basic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Basic", "gutenslider-blocks"),
   value: "Basic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Battambang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Battambang", "gutenslider-blocks"),
   value: "Battambang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baumans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Baumans", "gutenslider-blocks"),
   value: "Baumans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bayon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bayon", "gutenslider-blocks"),
   value: "Bayon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Belgrano", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Belgrano", "gutenslider-blocks"),
   value: "Belgrano"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bellefair", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bellefair", "gutenslider-blocks"),
   value: "Bellefair"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Belleza", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Belleza", "gutenslider-blocks"),
   value: "Belleza"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("BenchNine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("BenchNine", "gutenslider-blocks"),
   value: "BenchNine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bentham", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bentham", "gutenslider-blocks"),
   value: "Bentham"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Berkshire Swash", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Berkshire Swash", "gutenslider-blocks"),
   value: "Berkshire Swash"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Beth Ellen", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Beth Ellen", "gutenslider-blocks"),
   value: "Beth Ellen"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bevan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bevan", "gutenslider-blocks"),
   value: "Bevan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bhavuka", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bhavuka", "gutenslider-blocks"),
   value: "Bhavuka"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bigelow Rules", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bigelow Rules", "gutenslider-blocks"),
   value: "Bigelow Rules"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bigshot One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bigshot One", "gutenslider-blocks"),
   value: "Bigshot One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bilbo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bilbo", "gutenslider-blocks"),
   value: "Bilbo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bilbo Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bilbo Swash Caps", "gutenslider-blocks"),
   value: "Bilbo Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bio Rhyme", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bio Rhyme", "gutenslider-blocks"),
   value: "Bio Rhyme"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bio Rhyme Expanded", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bio Rhyme Expanded", "gutenslider-blocks"),
   value: "Bio Rhyme Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Biryani", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Biryani", "gutenslider-blocks"),
   value: "Biryani"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bitter", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bitter", "gutenslider-blocks"),
   value: "Bitter"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black And White Picture", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black And White Picture", "gutenslider-blocks"),
   value: "Black And White Picture"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black Han Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black Han Sans", "gutenslider-blocks"),
   value: "Black Han Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black Ops One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Black Ops One", "gutenslider-blocks"),
   value: "Black Ops One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bokor", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bokor", "gutenslider-blocks"),
   value: "Bokor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bonbon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bonbon", "gutenslider-blocks"),
   value: "Bonbon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Boogaloo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Boogaloo", "gutenslider-blocks"),
   value: "Boogaloo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bowlby One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bowlby One", "gutenslider-blocks"),
   value: "Bowlby One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bowlby One SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bowlby One SC", "gutenslider-blocks"),
   value: "Bowlby One SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Brawler", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Brawler", "gutenslider-blocks"),
   value: "Brawler"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bree Serif", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bree Serif", "gutenslider-blocks"),
   value: "Bree Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bruno Ace", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bruno Ace", "gutenslider-blocks"),
   value: "Bruno Ace"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bruno Ace SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bruno Ace SC", "gutenslider-blocks"),
   value: "Bruno Ace SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bubblegum Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bubblegum Sans", "gutenslider-blocks"),
   value: "Bubblegum Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bubbler One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bubbler One", "gutenslider-blocks"),
   value: "Bubbler One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Buda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Buda", "gutenslider-blocks"),
   value: "Buda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Buenard", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Buenard", "gutenslider-blocks"),
   value: "Buenard"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee", "gutenslider-blocks"),
   value: "Bungee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Hairline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Hairline", "gutenslider-blocks"),
   value: "Bungee Hairline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Inline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Inline", "gutenslider-blocks"),
   value: "Bungee Inline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Outline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Outline", "gutenslider-blocks"),
   value: "Bungee Outline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Shade", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bungee Shade", "gutenslider-blocks"),
   value: "Bungee Shade"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butcherman", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butcherman", "gutenslider-blocks"),
   value: "Butcherman"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butcherman Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butcherman Caps", "gutenslider-blocks"),
   value: "Butcherman Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butterfly Kids", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Butterfly Kids", "gutenslider-blocks"),
   value: "Butterfly Kids"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin", "gutenslider-blocks"),
   value: "Cabin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin Condensed", "gutenslider-blocks"),
   value: "Cabin Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin Sketch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cabin Sketch", "gutenslider-blocks"),
   value: "Cabin Sketch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("cabinvfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("cabinvfbeta", "gutenslider-blocks"),
   value: "cabinvfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caesar Dressing", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caesar Dressing", "gutenslider-blocks"),
   value: "Caesar Dressing"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cagliostro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cagliostro", "gutenslider-blocks"),
   value: "Cagliostro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cairo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cairo", "gutenslider-blocks"),
   value: "Cairo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Calligraffitti", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Calligraffitti", "gutenslider-blocks"),
   value: "Calligraffitti"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cambay", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cambay", "gutenslider-blocks"),
   value: "Cambay"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cambo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cambo", "gutenslider-blocks"),
   value: "Cambo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Candal", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Candal", "gutenslider-blocks"),
   value: "Candal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantarell", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantarell", "gutenslider-blocks"),
   value: "Cantarell"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantata One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantata One", "gutenslider-blocks"),
   value: "Cantata One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantora One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cantora One", "gutenslider-blocks"),
   value: "Cantora One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Capriola", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Capriola", "gutenslider-blocks"),
   value: "Capriola"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cardo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cardo", "gutenslider-blocks"),
   value: "Cardo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carme", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carme", "gutenslider-blocks"),
   value: "Carme"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carrois Gothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carrois Gothic", "gutenslider-blocks"),
   value: "Carrois Gothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carrois Gothic SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carrois Gothic SC", "gutenslider-blocks"),
   value: "Carrois Gothic SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carter One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carter One", "gutenslider-blocks"),
   value: "Carter One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Catamaran", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Catamaran", "gutenslider-blocks"),
   value: "Catamaran"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caudex", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caudex", "gutenslider-blocks"),
   value: "Caudex"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caveat", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caveat", "gutenslider-blocks"),
   value: "Caveat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caveat Brush", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Caveat Brush", "gutenslider-blocks"),
   value: "Caveat Brush"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cedarville Cursive", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cedarville Cursive", "gutenslider-blocks"),
   value: "Cedarville Cursive"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ceviche One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ceviche One", "gutenslider-blocks"),
   value: "Ceviche One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chakra Petch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chakra Petch", "gutenslider-blocks"),
   value: "Chakra Petch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Changa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Changa", "gutenslider-blocks"),
   value: "Changa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Changa One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Changa One", "gutenslider-blocks"),
   value: "Changa One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chango", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chango", "gutenslider-blocks"),
   value: "Chango"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Charm", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Charm", "gutenslider-blocks"),
   value: "Charm"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Charmonman", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Charmonman", "gutenslider-blocks"),
   value: "Charmonman"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chau Philomene One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chau Philomene One", "gutenslider-blocks"),
   value: "Chau Philomene One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chela One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chela One", "gutenslider-blocks"),
   value: "Chela One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chelsea Market", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chelsea Market", "gutenslider-blocks"),
   value: "Chelsea Market"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chenla", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chenla", "gutenslider-blocks"),
   value: "Chenla"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cherry Cream Soda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cherry Cream Soda", "gutenslider-blocks"),
   value: "Cherry Cream Soda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cherry Swash", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cherry Swash", "gutenslider-blocks"),
   value: "Cherry Swash"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chewy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chewy", "gutenslider-blocks"),
   value: "Chewy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chicle", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chicle", "gutenslider-blocks"),
   value: "Chicle"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chilanka", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chilanka", "gutenslider-blocks"),
   value: "Chilanka"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chivo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chivo", "gutenslider-blocks"),
   value: "Chivo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chonburi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Chonburi", "gutenslider-blocks"),
   value: "Chonburi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cinzel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cinzel", "gutenslider-blocks"),
   value: "Cinzel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cinzel Decorative", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cinzel Decorative", "gutenslider-blocks"),
   value: "Cinzel Decorative"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clicker Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clicker Script", "gutenslider-blocks"),
   value: "Clicker Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coda", "gutenslider-blocks"),
   value: "Coda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coda Caption", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coda Caption", "gutenslider-blocks"),
   value: "Coda Caption"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Codystar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Codystar", "gutenslider-blocks"),
   value: "Codystar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coiny", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coiny", "gutenslider-blocks"),
   value: "Coiny"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Combo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Combo", "gutenslider-blocks"),
   value: "Combo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Comfortaa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Comfortaa", "gutenslider-blocks"),
   value: "Comfortaa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coming Soon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coming Soon", "gutenslider-blocks"),
   value: "Coming Soon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Concert One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Concert One", "gutenslider-blocks"),
   value: "Concert One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Condiment", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Condiment", "gutenslider-blocks"),
   value: "Condiment"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Content", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Content", "gutenslider-blocks"),
   value: "Content"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Contrail One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Contrail One", "gutenslider-blocks"),
   value: "Contrail One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Convergence", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Convergence", "gutenslider-blocks"),
   value: "Convergence"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cookie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cookie", "gutenslider-blocks"),
   value: "Cookie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Copse", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Copse", "gutenslider-blocks"),
   value: "Copse"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Corben", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Corben", "gutenslider-blocks"),
   value: "Corben"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant", "gutenslider-blocks"),
   value: "Cormorant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Garamond", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Garamond", "gutenslider-blocks"),
   value: "Cormorant Garamond"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Infant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Infant", "gutenslider-blocks"),
   value: "Cormorant Infant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant SC", "gutenslider-blocks"),
   value: "Cormorant SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Unicase", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Unicase", "gutenslider-blocks"),
   value: "Cormorant Unicase"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Upright", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cormorant Upright", "gutenslider-blocks"),
   value: "Cormorant Upright"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Courgette", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Courgette", "gutenslider-blocks"),
   value: "Courgette"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cousine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cousine", "gutenslider-blocks"),
   value: "Cousine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coustard", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Coustard", "gutenslider-blocks"),
   value: "Coustard"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Covered By Your Grace", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Covered By Your Grace", "gutenslider-blocks"),
   value: "Covered By Your Grace"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crafty Girls", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crafty Girls", "gutenslider-blocks"),
   value: "Crafty Girls"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Creepster", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Creepster", "gutenslider-blocks"),
   value: "Creepster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Creepster Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Creepster Caps", "gutenslider-blocks"),
   value: "Creepster Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crete Round", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crete Round", "gutenslider-blocks"),
   value: "Crete Round"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crimson Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crimson Pro", "gutenslider-blocks"),
   value: "Crimson Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crimson Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crimson Text", "gutenslider-blocks"),
   value: "Crimson Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Croissant One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Croissant One", "gutenslider-blocks"),
   value: "Croissant One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crushed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Crushed", "gutenslider-blocks"),
   value: "Crushed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cuprum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cuprum", "gutenslider-blocks"),
   value: "Cuprum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cute Font", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cute Font", "gutenslider-blocks"),
   value: "Cute Font"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cutive", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cutive", "gutenslider-blocks"),
   value: "Cutive"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cutive Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cutive Mono", "gutenslider-blocks"),
   value: "Cutive Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Damion", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Damion", "gutenslider-blocks"),
   value: "Damion"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dancing Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dancing Script", "gutenslider-blocks"),
   value: "Dancing Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dangrek", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dangrek", "gutenslider-blocks"),
   value: "Dangrek"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Darker Grotesque", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Darker Grotesque", "gutenslider-blocks"),
   value: "Darker Grotesque"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dawning of a New Day", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dawning of a New Day", "gutenslider-blocks"),
   value: "Dawning of a New Day"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Days One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Days One", "gutenslider-blocks"),
   value: "Days One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("decovaralpha", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("decovaralpha", "gutenslider-blocks"),
   value: "decovaralpha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dekko", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dekko", "gutenslider-blocks"),
   value: "Dekko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius", "gutenslider-blocks"),
   value: "Delius"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius Swash Caps", "gutenslider-blocks"),
   value: "Delius Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius Unicase", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delius Unicase", "gutenslider-blocks"),
   value: "Delius Unicase"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Della Respira", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Della Respira", "gutenslider-blocks"),
   value: "Della Respira"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Denk One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Denk One", "gutenslider-blocks"),
   value: "Denk One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Devonshire", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Devonshire", "gutenslider-blocks"),
   value: "Devonshire"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dhurjati", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dhurjati", "gutenslider-blocks"),
   value: "Dhurjati"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dhyana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dhyana", "gutenslider-blocks"),
   value: "Dhyana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Didact Gothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Didact Gothic", "gutenslider-blocks"),
   value: "Didact Gothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Digital Numbers", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Digital Numbers", "gutenslider-blocks"),
   value: "Digital Numbers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Diplomata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Diplomata", "gutenslider-blocks"),
   value: "Diplomata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Diplomata SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Diplomata SC", "gutenslider-blocks"),
   value: "Diplomata SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Sans", "gutenslider-blocks"),
   value: "DM Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Serif Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Serif Display", "gutenslider-blocks"),
   value: "DM Serif Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Serif Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("DM Serif Text", "gutenslider-blocks"),
   value: "DM Serif Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Do Hyeon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Do Hyeon", "gutenslider-blocks"),
   value: "Do Hyeon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dokdo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dokdo", "gutenslider-blocks"),
   value: "Dokdo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Domine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Domine", "gutenslider-blocks"),
   value: "Domine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Donegal One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Donegal One", "gutenslider-blocks"),
   value: "Donegal One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Doppio One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Doppio One", "gutenslider-blocks"),
   value: "Doppio One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dorsa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dorsa", "gutenslider-blocks"),
   value: "Dorsa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dosis", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dosis", "gutenslider-blocks"),
   value: "Dosis"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dr Sugiyama", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dr Sugiyama", "gutenslider-blocks"),
   value: "Dr Sugiyama"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Duru Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Duru Sans", "gutenslider-blocks"),
   value: "Duru Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dynalight", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dynalight", "gutenslider-blocks"),
   value: "Dynalight"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eagle Lake", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eagle Lake", "gutenslider-blocks"),
   value: "Eagle Lake"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("East Sea Dokdo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("East Sea Dokdo", "gutenslider-blocks"),
   value: "East Sea Dokdo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eater", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eater", "gutenslider-blocks"),
   value: "Eater"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eater Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eater Caps", "gutenslider-blocks"),
   value: "Eater Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("EB Garamond", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("EB Garamond", "gutenslider-blocks"),
   value: "EB Garamond"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Economica", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Economica", "gutenslider-blocks"),
   value: "Economica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eczar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Eczar", "gutenslider-blocks"),
   value: "Eczar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ek Mukta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ek Mukta", "gutenslider-blocks"),
   value: "Ek Mukta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("El Messiri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("El Messiri", "gutenslider-blocks"),
   value: "El Messiri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Electrolize", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Electrolize", "gutenslider-blocks"),
   value: "Electrolize"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Elsie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Elsie", "gutenslider-blocks"),
   value: "Elsie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Elsie Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Elsie Swash Caps", "gutenslider-blocks"),
   value: "Elsie Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Emblema One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Emblema One", "gutenslider-blocks"),
   value: "Emblema One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Emilys Candy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Emilys Candy", "gutenslider-blocks"),
   value: "Emilys Candy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans", "gutenslider-blocks"),
   value: "Encode Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Condensed", "gutenslider-blocks"),
   value: "Encode Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Expanded", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Expanded", "gutenslider-blocks"),
   value: "Encode Sans Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Semi Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Semi Condensed", "gutenslider-blocks"),
   value: "Encode Sans Semi Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Semi Expanded", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Encode Sans Semi Expanded", "gutenslider-blocks"),
   value: "Encode Sans Semi Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Engagement", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Engagement", "gutenslider-blocks"),
   value: "Engagement"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Englebert", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Englebert", "gutenslider-blocks"),
   value: "Englebert"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enriqueta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enriqueta", "gutenslider-blocks"),
   value: "Enriqueta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Erica One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Erica One", "gutenslider-blocks"),
   value: "Erica One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Esteban", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Esteban", "gutenslider-blocks"),
   value: "Esteban"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Euphoria Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Euphoria Script", "gutenslider-blocks"),
   value: "Euphoria Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ewert", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ewert", "gutenslider-blocks"),
   value: "Ewert"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Exo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Exo", "gutenslider-blocks"),
   value: "Exo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Exo 2", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Exo 2", "gutenslider-blocks"),
   value: "Exo 2"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Expletus Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Expletus Sans", "gutenslider-blocks"),
   value: "Expletus Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fahkwang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fahkwang", "gutenslider-blocks"),
   value: "Fahkwang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fanwood Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fanwood Text", "gutenslider-blocks"),
   value: "Fanwood Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Farro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Farro", "gutenslider-blocks"),
   value: "Farro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Farsan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Farsan", "gutenslider-blocks"),
   value: "Farsan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fascinate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fascinate", "gutenslider-blocks"),
   value: "Fascinate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fascinate Inline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fascinate Inline", "gutenslider-blocks"),
   value: "Fascinate Inline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Faster One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Faster One", "gutenslider-blocks"),
   value: "Faster One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fasthand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fasthand", "gutenslider-blocks"),
   value: "Fasthand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fauna One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fauna One", "gutenslider-blocks"),
   value: "Fauna One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Faustina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Faustina", "gutenslider-blocks"),
   value: "Faustina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("faustinavfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("faustinavfbeta", "gutenslider-blocks"),
   value: "faustinavfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Federant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Federant", "gutenslider-blocks"),
   value: "Federant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Federo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Federo", "gutenslider-blocks"),
   value: "Federo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Felipa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Felipa", "gutenslider-blocks"),
   value: "Felipa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fenix", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fenix", "gutenslider-blocks"),
   value: "Fenix"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Finger Paint", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Finger Paint", "gutenslider-blocks"),
   value: "Finger Paint"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Code", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Code", "gutenslider-blocks"),
   value: "Fira Code"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Mono", "gutenslider-blocks"),
   value: "Fira Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans", "gutenslider-blocks"),
   value: "Fira Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans Condensed", "gutenslider-blocks"),
   value: "Fira Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans Extra Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fira Sans Extra Condensed", "gutenslider-blocks"),
   value: "Fira Sans Extra Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fjalla One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fjalla One", "gutenslider-blocks"),
   value: "Fjalla One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fjord One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fjord One", "gutenslider-blocks"),
   value: "Fjord One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flamenco", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flamenco", "gutenslider-blocks"),
   value: "Flamenco"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flavors", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flavors", "gutenslider-blocks"),
   value: "Flavors"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fondamento", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fondamento", "gutenslider-blocks"),
   value: "Fondamento"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fontdiner Swanky", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fontdiner Swanky", "gutenslider-blocks"),
   value: "Fontdiner Swanky"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forum", "gutenslider-blocks"),
   value: "Forum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Francois One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Francois One", "gutenslider-blocks"),
   value: "Francois One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Frank Ruhl Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Frank Ruhl Libre", "gutenslider-blocks"),
   value: "Frank Ruhl Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Freckle Face", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Freckle Face", "gutenslider-blocks"),
   value: "Freckle Face"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fredericka the Great", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fredericka the Great", "gutenslider-blocks"),
   value: "Fredericka the Great"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fredoka One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fredoka One", "gutenslider-blocks"),
   value: "Fredoka One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Freehand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Freehand", "gutenslider-blocks"),
   value: "Freehand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fresca", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fresca", "gutenslider-blocks"),
   value: "Fresca"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Frijole", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Frijole", "gutenslider-blocks"),
   value: "Frijole"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fruktur", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fruktur", "gutenslider-blocks"),
   value: "Fruktur"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fugaz One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fugaz One", "gutenslider-blocks"),
   value: "Fugaz One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gabriela", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gabriela", "gutenslider-blocks"),
   value: "Gabriela"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gaegu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gaegu", "gutenslider-blocks"),
   value: "Gaegu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gafata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gafata", "gutenslider-blocks"),
   value: "Gafata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galada", "gutenslider-blocks"),
   value: "Galada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galdeano", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galdeano", "gutenslider-blocks"),
   value: "Galdeano"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galindo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Galindo", "gutenslider-blocks"),
   value: "Galindo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gamja Flower", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gamja Flower", "gutenslider-blocks"),
   value: "Gamja Flower"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gayathri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gayathri", "gutenslider-blocks"),
   value: "Gayathri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gemunu Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gemunu Libre", "gutenslider-blocks"),
   value: "Gemunu Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gentium Basic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gentium Basic", "gutenslider-blocks"),
   value: "Gentium Basic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gentium Book Basic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gentium Book Basic", "gutenslider-blocks"),
   value: "Gentium Book Basic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geo", "gutenslider-blocks"),
   value: "Geo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geostar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geostar", "gutenslider-blocks"),
   value: "Geostar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geostar Fill", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Geostar Fill", "gutenslider-blocks"),
   value: "Geostar Fill"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Germania One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Germania One", "gutenslider-blocks"),
   value: "Germania One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("GFS Didot", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("GFS Didot", "gutenslider-blocks"),
   value: "GFS Didot"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("GFS Neohellenic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("GFS Neohellenic", "gutenslider-blocks"),
   value: "GFS Neohellenic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gidugu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gidugu", "gutenslider-blocks"),
   value: "Gidugu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gilda Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gilda Display", "gutenslider-blocks"),
   value: "Gilda Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Give You Glory", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Give You Glory", "gutenslider-blocks"),
   value: "Give You Glory"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Glass Antiqua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Glass Antiqua", "gutenslider-blocks"),
   value: "Glass Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Glegoo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Glegoo", "gutenslider-blocks"),
   value: "Glegoo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gloria Hallelujah", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gloria Hallelujah", "gutenslider-blocks"),
   value: "Gloria Hallelujah"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Goblin One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Goblin One", "gutenslider-blocks"),
   value: "Goblin One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gochi Hand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gochi Hand", "gutenslider-blocks"),
   value: "Gochi Hand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gorditas", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gorditas", "gutenslider-blocks"),
   value: "Gorditas"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gothic A1", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gothic A1", "gutenslider-blocks"),
   value: "Gothic A1"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Goudy Bookletter 1911", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Goudy Bookletter 1911", "gutenslider-blocks"),
   value: "Goudy Bookletter 1911"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Graduate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Graduate", "gutenslider-blocks"),
   value: "Graduate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Grand Hotel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Grand Hotel", "gutenslider-blocks"),
   value: "Grand Hotel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gravitas One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gravitas One", "gutenslider-blocks"),
   value: "Gravitas One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Great Vibes", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Great Vibes", "gutenslider-blocks"),
   value: "Great Vibes"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Grenze", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Grenze", "gutenslider-blocks"),
   value: "Grenze"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Griffy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Griffy", "gutenslider-blocks"),
   value: "Griffy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gruppo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gruppo", "gutenslider-blocks"),
   value: "Gruppo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gudea", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gudea", "gutenslider-blocks"),
   value: "Gudea"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gugi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gugi", "gutenslider-blocks"),
   value: "Gugi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gurajada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gurajada", "gutenslider-blocks"),
   value: "Gurajada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Habibi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Habibi", "gutenslider-blocks"),
   value: "Habibi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Halant", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Halant", "gutenslider-blocks"),
   value: "Halant"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hammersmith One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hammersmith One", "gutenslider-blocks"),
   value: "Hammersmith One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanalei", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanalei", "gutenslider-blocks"),
   value: "Hanalei"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanalei Fill", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanalei Fill", "gutenslider-blocks"),
   value: "Hanalei Fill"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Handlee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Handlee", "gutenslider-blocks"),
   value: "Handlee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("hanna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("hanna", "gutenslider-blocks"),
   value: "hanna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("hannari", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("hannari", "gutenslider-blocks"),
   value: "hannari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanuman", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hanuman", "gutenslider-blocks"),
   value: "Hanuman"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Happy Monkey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Happy Monkey", "gutenslider-blocks"),
   value: "Happy Monkey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Harmattan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Harmattan", "gutenslider-blocks"),
   value: "Harmattan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Headland One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Headland One", "gutenslider-blocks"),
   value: "Headland One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Heebo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Heebo", "gutenslider-blocks"),
   value: "Heebo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Henny Penny", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Henny Penny", "gutenslider-blocks"),
   value: "Henny Penny"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hermeneus One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hermeneus One", "gutenslider-blocks"),
   value: "Hermeneus One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Herr Von Muellerhoff", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Herr Von Muellerhoff", "gutenslider-blocks"),
   value: "Herr Von Muellerhoff"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hi Melody", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hi Melody", "gutenslider-blocks"),
   value: "Hi Melody"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind", "gutenslider-blocks"),
   value: "Hind"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Colombo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Colombo", "gutenslider-blocks"),
   value: "Hind Colombo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Guntur", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Guntur", "gutenslider-blocks"),
   value: "Hind Guntur"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Jalandhar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Jalandhar", "gutenslider-blocks"),
   value: "Hind Jalandhar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Kochi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Kochi", "gutenslider-blocks"),
   value: "Hind Kochi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Madurai", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Madurai", "gutenslider-blocks"),
   value: "Hind Madurai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Mysuru", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Mysuru", "gutenslider-blocks"),
   value: "Hind Mysuru"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Siliguri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Siliguri", "gutenslider-blocks"),
   value: "Hind Siliguri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Vadodara", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hind Vadodara", "gutenslider-blocks"),
   value: "Hind Vadodara"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Holtwood One SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Holtwood One SC", "gutenslider-blocks"),
   value: "Holtwood One SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Homemade Apple", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Homemade Apple", "gutenslider-blocks"),
   value: "Homemade Apple"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Homenaje", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Homenaje", "gutenslider-blocks"),
   value: "Homenaje"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Mono", "gutenslider-blocks"),
   value: "IBM Plex Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Sans", "gutenslider-blocks"),
   value: "IBM Plex Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Sans Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Sans Condensed", "gutenslider-blocks"),
   value: "IBM Plex Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Serif", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IBM Plex Serif", "gutenslider-blocks"),
   value: "IBM Plex Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Iceberg", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Iceberg", "gutenslider-blocks"),
   value: "Iceberg"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Iceland", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Iceland", "gutenslider-blocks"),
   value: "Iceland"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Double Pica", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Double Pica", "gutenslider-blocks"),
   value: "IM Fell Double Pica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Double Pica SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Double Pica SC", "gutenslider-blocks"),
   value: "IM Fell Double Pica SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell DW Pica", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell DW Pica", "gutenslider-blocks"),
   value: "IM Fell DW Pica"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell DW Pica SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell DW Pica SC", "gutenslider-blocks"),
   value: "IM Fell DW Pica SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell English", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell English", "gutenslider-blocks"),
   value: "IM Fell English"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell English SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell English SC", "gutenslider-blocks"),
   value: "IM Fell English SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell French Canon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell French Canon", "gutenslider-blocks"),
   value: "IM Fell French Canon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell French Canon SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell French Canon SC", "gutenslider-blocks"),
   value: "IM Fell French Canon SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Great Primer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Great Primer", "gutenslider-blocks"),
   value: "IM Fell Great Primer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Great Primer SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("IM Fell Great Primer SC", "gutenslider-blocks"),
   value: "IM Fell Great Primer SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Imprima", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Imprima", "gutenslider-blocks"),
   value: "Imprima"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inconsolata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inconsolata", "gutenslider-blocks"),
   value: "Inconsolata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inder", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inder", "gutenslider-blocks"),
   value: "Inder"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Indie Flower", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Indie Flower", "gutenslider-blocks"),
   value: "Indie Flower"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inika", "gutenslider-blocks"),
   value: "Inika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inknut Antiqua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inknut Antiqua", "gutenslider-blocks"),
   value: "Inknut Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Irish Grover", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Irish Grover", "gutenslider-blocks"),
   value: "Irish Grover"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Istok Web", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Istok Web", "gutenslider-blocks"),
   value: "Istok Web"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italiana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italiana", "gutenslider-blocks"),
   value: "Italiana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italianno", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Italianno", "gutenslider-blocks"),
   value: "Italianno"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Itim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Itim", "gutenslider-blocks"),
   value: "Itim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jacques Francois", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jacques Francois", "gutenslider-blocks"),
   value: "Jacques Francois"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jacques Francois Shadow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jacques Francois Shadow", "gutenslider-blocks"),
   value: "Jacques Francois Shadow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jaldi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jaldi", "gutenslider-blocks"),
   value: "Jaldi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejugothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejugothic", "gutenslider-blocks"),
   value: "jejugothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejuhallasan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejuhallasan", "gutenslider-blocks"),
   value: "jejuhallasan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejumyeongjo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jejumyeongjo", "gutenslider-blocks"),
   value: "jejumyeongjo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jim Nightshade", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jim Nightshade", "gutenslider-blocks"),
   value: "Jim Nightshade"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jockey One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jockey One", "gutenslider-blocks"),
   value: "Jockey One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jolly Lodger", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jolly Lodger", "gutenslider-blocks"),
   value: "Jolly Lodger"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jomhuria", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jomhuria", "gutenslider-blocks"),
   value: "Jomhuria"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jomolhari", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("jomolhari", "gutenslider-blocks"),
   value: "jomolhari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Sans", "gutenslider-blocks"),
   value: "Josefin Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Sans Std Light", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Sans Std Light", "gutenslider-blocks"),
   value: "Josefin Sans Std Light"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Josefin Slab", "gutenslider-blocks"),
   value: "Josefin Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Joti One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Joti One", "gutenslider-blocks"),
   value: "Joti One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jua", "gutenslider-blocks"),
   value: "Jua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Judson", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Judson", "gutenslider-blocks"),
   value: "Judson"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Julee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Julee", "gutenslider-blocks"),
   value: "Julee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Julius Sans One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Julius Sans One", "gutenslider-blocks"),
   value: "Julius Sans One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Junge", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Junge", "gutenslider-blocks"),
   value: "Junge"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jura", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Jura", "gutenslider-blocks"),
   value: "Jura"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Just Another Hand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Just Another Hand", "gutenslider-blocks"),
   value: "Just Another Hand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Just Me Again Down Here", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Just Me Again Down Here", "gutenslider-blocks"),
   value: "Just Me Again Down Here"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("K2D", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("K2D", "gutenslider-blocks"),
   value: "K2D"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kadwa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kadwa", "gutenslider-blocks"),
   value: "Kadwa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kalam", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kalam", "gutenslider-blocks"),
   value: "Kalam"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kameron", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kameron", "gutenslider-blocks"),
   value: "Kameron"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kanit", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kanit", "gutenslider-blocks"),
   value: "Kanit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kantumruy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kantumruy", "gutenslider-blocks"),
   value: "Kantumruy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla", "gutenslider-blocks"),
   value: "Karla"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla Tamil Inclined", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla Tamil Inclined", "gutenslider-blocks"),
   value: "Karla Tamil Inclined"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla Tamil Upright", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karla Tamil Upright", "gutenslider-blocks"),
   value: "Karla Tamil Upright"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karma", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Karma", "gutenslider-blocks"),
   value: "Karma"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Katibeh", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Katibeh", "gutenslider-blocks"),
   value: "Katibeh"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kaushan Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kaushan Script", "gutenslider-blocks"),
   value: "Kaushan Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kavivanar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kavivanar", "gutenslider-blocks"),
   value: "Kavivanar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kavoon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kavoon", "gutenslider-blocks"),
   value: "Kavoon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kdam Thmor", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kdam Thmor", "gutenslider-blocks"),
   value: "Kdam Thmor"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Keania One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Keania One", "gutenslider-blocks"),
   value: "Keania One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kelly Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kelly Slab", "gutenslider-blocks"),
   value: "Kelly Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kenia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kenia", "gutenslider-blocks"),
   value: "Kenia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khand", "gutenslider-blocks"),
   value: "Khand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khmer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khmer", "gutenslider-blocks"),
   value: "Khmer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khula", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Khula", "gutenslider-blocks"),
   value: "Khula"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("khyay", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("khyay", "gutenslider-blocks"),
   value: "khyay"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kirang Haerang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kirang Haerang", "gutenslider-blocks"),
   value: "Kirang Haerang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kite One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kite One", "gutenslider-blocks"),
   value: "Kite One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Knewave", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Knewave", "gutenslider-blocks"),
   value: "Knewave"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kodchasan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kodchasan", "gutenslider-blocks"),
   value: "Kodchasan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("KoHo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("KoHo", "gutenslider-blocks"),
   value: "KoHo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("kokoro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("kokoro", "gutenslider-blocks"),
   value: "kokoro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("kopubbatang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("kopubbatang", "gutenslider-blocks"),
   value: "kopubbatang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kotta One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kotta One", "gutenslider-blocks"),
   value: "Kotta One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Koulen", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Koulen", "gutenslider-blocks"),
   value: "Koulen"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kranky", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kranky", "gutenslider-blocks"),
   value: "Kranky"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kreon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kreon", "gutenslider-blocks"),
   value: "Kreon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kristi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kristi", "gutenslider-blocks"),
   value: "Kristi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Krona One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Krona One", "gutenslider-blocks"),
   value: "Krona One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Krub", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Krub", "gutenslider-blocks"),
   value: "Krub"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kumar One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kumar One", "gutenslider-blocks"),
   value: "Kumar One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kurale", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Kurale", "gutenslider-blocks"),
   value: "Kurale"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("La Belle Aurore", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("La Belle Aurore", "gutenslider-blocks"),
   value: "La Belle Aurore"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lacquer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lacquer", "gutenslider-blocks"),
   value: "Lacquer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Laila", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Laila", "gutenslider-blocks"),
   value: "Laila"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lakki Reddy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lakki Reddy", "gutenslider-blocks"),
   value: "Lakki Reddy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lalezar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lalezar", "gutenslider-blocks"),
   value: "Lalezar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lancelot", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lancelot", "gutenslider-blocks"),
   value: "Lancelot"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laomuangdon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laomuangdon", "gutenslider-blocks"),
   value: "laomuangdon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laomuangkhong", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laomuangkhong", "gutenslider-blocks"),
   value: "laomuangkhong"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laosanspro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("laosanspro", "gutenslider-blocks"),
   value: "laosanspro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lateef", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lateef", "gutenslider-blocks"),
   value: "Lateef"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lato", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lato", "gutenslider-blocks"),
   value: "Lato"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("League Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("League Script", "gutenslider-blocks"),
   value: "League Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Leckerli One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Leckerli One", "gutenslider-blocks"),
   value: "Leckerli One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ledger", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ledger", "gutenslider-blocks"),
   value: "Ledger"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lekton", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lekton", "gutenslider-blocks"),
   value: "Lekton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lemon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lemon", "gutenslider-blocks"),
   value: "Lemon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lemonada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lemonada", "gutenslider-blocks"),
   value: "Lemonada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 128", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 128", "gutenslider-blocks"),
   value: "Libre Barcode 128"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 128 Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 128 Text", "gutenslider-blocks"),
   value: "Libre Barcode 128 Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39", "gutenslider-blocks"),
   value: "Libre Barcode 39"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Extended", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Extended", "gutenslider-blocks"),
   value: "Libre Barcode 39 Extended"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Extended Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Extended Text", "gutenslider-blocks"),
   value: "Libre Barcode 39 Extended Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Barcode 39 Text", "gutenslider-blocks"),
   value: "Libre Barcode 39 Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Baskerville", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Baskerville", "gutenslider-blocks"),
   value: "Libre Baskerville"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Caslon Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Caslon Display", "gutenslider-blocks"),
   value: "Libre Caslon Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Caslon Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Caslon Text", "gutenslider-blocks"),
   value: "Libre Caslon Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Franklin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Libre Franklin", "gutenslider-blocks"),
   value: "Libre Franklin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Life Savers", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Life Savers", "gutenslider-blocks"),
   value: "Life Savers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lilita One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lilita One", "gutenslider-blocks"),
   value: "Lilita One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lily Script One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lily Script One", "gutenslider-blocks"),
   value: "Lily Script One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Limelight", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Limelight", "gutenslider-blocks"),
   value: "Limelight"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Linden Hill", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Linden Hill", "gutenslider-blocks"),
   value: "Linden Hill"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Literata", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Literata", "gutenslider-blocks"),
   value: "Literata"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Liu Jian Mao Cao", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Liu Jian Mao Cao", "gutenslider-blocks"),
   value: "Liu Jian Mao Cao"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Livvic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Livvic", "gutenslider-blocks"),
   value: "Livvic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lobster", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lobster", "gutenslider-blocks"),
   value: "Lobster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lobster Two", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lobster Two", "gutenslider-blocks"),
   value: "Lobster Two"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lohit Bengali", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lohit Bengali", "gutenslider-blocks"),
   value: "Lohit Bengali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lohit Tamil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lohit Tamil", "gutenslider-blocks"),
   value: "Lohit Tamil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("lohitdevanagari", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("lohitdevanagari", "gutenslider-blocks"),
   value: "lohitdevanagari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Outline", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Outline", "gutenslider-blocks"),
   value: "Londrina Outline"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Shadow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Shadow", "gutenslider-blocks"),
   value: "Londrina Shadow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Sketch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Sketch", "gutenslider-blocks"),
   value: "Londrina Sketch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Solid", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Londrina Solid", "gutenslider-blocks"),
   value: "Londrina Solid"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Long Cang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Long Cang", "gutenslider-blocks"),
   value: "Long Cang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lora", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lora", "gutenslider-blocks"),
   value: "Lora"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Love Ya Like A Sister", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Love Ya Like A Sister", "gutenslider-blocks"),
   value: "Love Ya Like A Sister"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Loved by the King", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Loved by the King", "gutenslider-blocks"),
   value: "Loved by the King"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lovers Quarrel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lovers Quarrel", "gutenslider-blocks"),
   value: "Lovers Quarrel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Luckiest Guy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Luckiest Guy", "gutenslider-blocks"),
   value: "Luckiest Guy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lusitana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lusitana", "gutenslider-blocks"),
   value: "Lusitana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lustria", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Lustria", "gutenslider-blocks"),
   value: "Lustria"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ma Shan Zheng", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ma Shan Zheng", "gutenslider-blocks"),
   value: "Ma Shan Zheng"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Macondo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Macondo", "gutenslider-blocks"),
   value: "Macondo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Macondo Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Macondo Swash Caps", "gutenslider-blocks"),
   value: "Macondo Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mada", "gutenslider-blocks"),
   value: "Mada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Magra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Magra", "gutenslider-blocks"),
   value: "Magra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maiden Orange", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maiden Orange", "gutenslider-blocks"),
   value: "Maiden Orange"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maitree", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maitree", "gutenslider-blocks"),
   value: "Maitree"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Major Mono Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Major Mono Display", "gutenslider-blocks"),
   value: "Major Mono Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mako", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mako", "gutenslider-blocks"),
   value: "Mako"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mali", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mali", "gutenslider-blocks"),
   value: "Mali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mallanna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mallanna", "gutenslider-blocks"),
   value: "Mallanna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mandali", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mandali", "gutenslider-blocks"),
   value: "Mandali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Manjari", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Manjari", "gutenslider-blocks"),
   value: "Manjari"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Manuale", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Manuale", "gutenslider-blocks"),
   value: "Manuale"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marcellus", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marcellus", "gutenslider-blocks"),
   value: "Marcellus"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marcellus SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marcellus SC", "gutenslider-blocks"),
   value: "Marcellus SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marck Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marck Script", "gutenslider-blocks"),
   value: "Marck Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Margarine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Margarine", "gutenslider-blocks"),
   value: "Margarine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marko One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marko One", "gutenslider-blocks"),
   value: "Marko One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marmelad", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marmelad", "gutenslider-blocks"),
   value: "Marmelad"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Martel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Martel", "gutenslider-blocks"),
   value: "Martel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Martel Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Martel Sans", "gutenslider-blocks"),
   value: "Martel Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marvel", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Marvel", "gutenslider-blocks"),
   value: "Marvel"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mate", "gutenslider-blocks"),
   value: "Mate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mate SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mate SC", "gutenslider-blocks"),
   value: "Mate SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maven Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Maven Pro", "gutenslider-blocks"),
   value: "Maven Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("mavenprovfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("mavenprovfbeta", "gutenslider-blocks"),
   value: "mavenprovfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("McLaren", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("McLaren", "gutenslider-blocks"),
   value: "McLaren"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meddon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meddon", "gutenslider-blocks"),
   value: "Meddon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("MedievalSharp", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("MedievalSharp", "gutenslider-blocks"),
   value: "MedievalSharp"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Medula One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Medula One", "gutenslider-blocks"),
   value: "Medula One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meera Inimai", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meera Inimai", "gutenslider-blocks"),
   value: "Meera Inimai"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Megrim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Megrim", "gutenslider-blocks"),
   value: "Megrim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meie Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Meie Script", "gutenslider-blocks"),
   value: "Meie Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merge One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merge One", "gutenslider-blocks"),
   value: "Merge One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merienda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merienda", "gutenslider-blocks"),
   value: "Merienda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merienda One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merienda One", "gutenslider-blocks"),
   value: "Merienda One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merriweather", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merriweather", "gutenslider-blocks"),
   value: "Merriweather"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merriweather Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Merriweather Sans", "gutenslider-blocks"),
   value: "Merriweather Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mervale Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mervale Script", "gutenslider-blocks"),
   value: "Mervale Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metal", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metal", "gutenslider-blocks"),
   value: "Metal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metal Mania", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metal Mania", "gutenslider-blocks"),
   value: "Metal Mania"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metamorphous", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metamorphous", "gutenslider-blocks"),
   value: "Metamorphous"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metrophobic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Metrophobic", "gutenslider-blocks"),
   value: "Metrophobic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miama", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miama", "gutenslider-blocks"),
   value: "Miama"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Michroma", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Michroma", "gutenslider-blocks"),
   value: "Michroma"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Milonga", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Milonga", "gutenslider-blocks"),
   value: "Milonga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miltonian", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miltonian", "gutenslider-blocks"),
   value: "Miltonian"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miltonian Tattoo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miltonian Tattoo", "gutenslider-blocks"),
   value: "Miltonian Tattoo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mina", "gutenslider-blocks"),
   value: "Mina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miniver", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miniver", "gutenslider-blocks"),
   value: "Miniver"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miriam Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miriam Libre", "gutenslider-blocks"),
   value: "Miriam Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miss Fajardose", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miss Fajardose", "gutenslider-blocks"),
   value: "Miss Fajardose"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miss Saint Delafield", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Miss Saint Delafield", "gutenslider-blocks"),
   value: "Miss Saint Delafield"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Modak", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Modak", "gutenslider-blocks"),
   value: "Modak"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Modern Antiqua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Modern Antiqua", "gutenslider-blocks"),
   value: "Modern Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Molengo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Molengo", "gutenslider-blocks"),
   value: "Molengo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Molle", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Molle", "gutenslider-blocks"),
   value: "Molle"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monda", "gutenslider-blocks"),
   value: "Monda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monofett", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monofett", "gutenslider-blocks"),
   value: "Monofett"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monoton", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monoton", "gutenslider-blocks"),
   value: "Monoton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monsieur La Doulaise", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Monsieur La Doulaise", "gutenslider-blocks"),
   value: "Monsieur La Doulaise"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montaga", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montaga", "gutenslider-blocks"),
   value: "Montaga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montez", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montez", "gutenslider-blocks"),
   value: "Montez"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat", "gutenslider-blocks"),
   value: "Montserrat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat Alternates", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat Alternates", "gutenslider-blocks"),
   value: "Montserrat Alternates"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat Subrayada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Montserrat Subrayada", "gutenslider-blocks"),
   value: "Montserrat Subrayada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Moul", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Moul", "gutenslider-blocks"),
   value: "Moul"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Moulpali", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Moulpali", "gutenslider-blocks"),
   value: "Moulpali"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mountains of Christmas", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mountains of Christmas", "gutenslider-blocks"),
   value: "Mountains of Christmas"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mouse Memoirs", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mouse Memoirs", "gutenslider-blocks"),
   value: "Mouse Memoirs"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("mplus1p", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("mplus1p", "gutenslider-blocks"),
   value: "mplus1p"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Bedford", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Bedford", "gutenslider-blocks"),
   value: "Mr Bedford"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Bedfort", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Bedfort", "gutenslider-blocks"),
   value: "Mr Bedfort"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Dafoe", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr Dafoe", "gutenslider-blocks"),
   value: "Mr Dafoe"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr De Haviland", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mr De Haviland", "gutenslider-blocks"),
   value: "Mr De Haviland"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mrs Saint Delafield", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mrs Saint Delafield", "gutenslider-blocks"),
   value: "Mrs Saint Delafield"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mrs Sheppards", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mrs Sheppards", "gutenslider-blocks"),
   value: "Mrs Sheppards"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta", "gutenslider-blocks"),
   value: "Mukta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Mahee", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Mahee", "gutenslider-blocks"),
   value: "Mukta Mahee"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Malar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Malar", "gutenslider-blocks"),
   value: "Mukta Malar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Vaani", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mukta Vaani", "gutenslider-blocks"),
   value: "Mukta Vaani"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Muli", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Muli", "gutenslider-blocks"),
   value: "Muli"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("myanmarsanspro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("myanmarsanspro", "gutenslider-blocks"),
   value: "myanmarsanspro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mystery Quest", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mystery Quest", "gutenslider-blocks"),
   value: "Mystery Quest"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Brush Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Brush Script", "gutenslider-blocks"),
   value: "Nanum Brush Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Gothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Gothic", "gutenslider-blocks"),
   value: "Nanum Gothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Gothic Coding", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Gothic Coding", "gutenslider-blocks"),
   value: "Nanum Gothic Coding"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Myeongjo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Myeongjo", "gutenslider-blocks"),
   value: "Nanum Myeongjo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Pen Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nanum Pen Script", "gutenslider-blocks"),
   value: "Nanum Pen Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("NATS", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("NATS", "gutenslider-blocks"),
   value: "NATS"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Neucha", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Neucha", "gutenslider-blocks"),
   value: "Neucha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Neuton", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Neuton", "gutenslider-blocks"),
   value: "Neuton"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("New Rocker", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("New Rocker", "gutenslider-blocks"),
   value: "New Rocker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("News Cycle", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("News Cycle", "gutenslider-blocks"),
   value: "News Cycle"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("nicomoji", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("nicomoji", "gutenslider-blocks"),
   value: "nicomoji"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Niconne", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Niconne", "gutenslider-blocks"),
   value: "Niconne"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("nikukyu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("nikukyu", "gutenslider-blocks"),
   value: "nikukyu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Niramit", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Niramit", "gutenslider-blocks"),
   value: "Niramit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nixie One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nixie One", "gutenslider-blocks"),
   value: "Nixie One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nobile", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nobile", "gutenslider-blocks"),
   value: "Nobile"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nokora", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nokora", "gutenslider-blocks"),
   value: "Nokora"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Norican", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Norican", "gutenslider-blocks"),
   value: "Norican"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nosifer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nosifer", "gutenslider-blocks"),
   value: "Nosifer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nosifer Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nosifer Caps", "gutenslider-blocks"),
   value: "Nosifer Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Notable", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Notable", "gutenslider-blocks"),
   value: "Notable"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nothing You Could Do", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nothing You Could Do", "gutenslider-blocks"),
   value: "Nothing You Could Do"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noticia Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noticia Text", "gutenslider-blocks"),
   value: "Noticia Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noto Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noto Sans", "gutenslider-blocks"),
   value: "Noto Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noto Serif", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Noto Serif", "gutenslider-blocks"),
   value: "Noto Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("notosanstamil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("notosanstamil", "gutenslider-blocks"),
   value: "notosanstamil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Cut", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Cut", "gutenslider-blocks"),
   value: "Nova Cut"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Flat", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Flat", "gutenslider-blocks"),
   value: "Nova Flat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Mono", "gutenslider-blocks"),
   value: "Nova Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Oval", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Oval", "gutenslider-blocks"),
   value: "Nova Oval"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Round", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Round", "gutenslider-blocks"),
   value: "Nova Round"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Script", "gutenslider-blocks"),
   value: "Nova Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Slim", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Slim", "gutenslider-blocks"),
   value: "Nova Slim"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Square", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nova Square", "gutenslider-blocks"),
   value: "Nova Square"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("NTR", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("NTR", "gutenslider-blocks"),
   value: "NTR"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Numans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Numans", "gutenslider-blocks"),
   value: "Numans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nunito", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nunito", "gutenslider-blocks"),
   value: "Nunito"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nunito Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Nunito Sans", "gutenslider-blocks"),
   value: "Nunito Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Odor Mean Chey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Odor Mean Chey", "gutenslider-blocks"),
   value: "Odor Mean Chey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Offside", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Offside", "gutenslider-blocks"),
   value: "Offside"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("OFL Sorts Mill Goudy TT", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("OFL Sorts Mill Goudy TT", "gutenslider-blocks"),
   value: "OFL Sorts Mill Goudy TT"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Old Standard TT", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Old Standard TT", "gutenslider-blocks"),
   value: "Old Standard TT"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oldenburg", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oldenburg", "gutenslider-blocks"),
   value: "Oldenburg"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oleo Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oleo Script", "gutenslider-blocks"),
   value: "Oleo Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oleo Script Swash Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oleo Script Swash Caps", "gutenslider-blocks"),
   value: "Oleo Script Swash Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Sans", "gutenslider-blocks"),
   value: "Open Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Sans Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Sans Condensed", "gutenslider-blocks"),
   value: "Open Sans Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("opensanshebrew", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("opensanshebrew", "gutenslider-blocks"),
   value: "opensanshebrew"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("opensanshebrewcondensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("opensanshebrewcondensed", "gutenslider-blocks"),
   value: "opensanshebrewcondensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oranienbaum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oranienbaum", "gutenslider-blocks"),
   value: "Oranienbaum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Orbitron", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Orbitron", "gutenslider-blocks"),
   value: "Orbitron"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oregano", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oregano", "gutenslider-blocks"),
   value: "Oregano"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Orienta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Orienta", "gutenslider-blocks"),
   value: "Orienta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Original Surfer", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Original Surfer", "gutenslider-blocks"),
   value: "Original Surfer"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oswald", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oswald", "gutenslider-blocks"),
   value: "Oswald"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Over the Rainbow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Over the Rainbow", "gutenslider-blocks"),
   value: "Over the Rainbow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overlock", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overlock", "gutenslider-blocks"),
   value: "Overlock"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overlock SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overlock SC", "gutenslider-blocks"),
   value: "Overlock SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overpass", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overpass", "gutenslider-blocks"),
   value: "Overpass"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overpass Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Overpass Mono", "gutenslider-blocks"),
   value: "Overpass Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ovo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ovo", "gutenslider-blocks"),
   value: "Ovo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oxygen", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oxygen", "gutenslider-blocks"),
   value: "Oxygen"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oxygen Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Oxygen Mono", "gutenslider-blocks"),
   value: "Oxygen Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pacifico", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pacifico", "gutenslider-blocks"),
   value: "Pacifico"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padauk", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padauk", "gutenslider-blocks"),
   value: "Padauk"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Palanquin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Palanquin", "gutenslider-blocks"),
   value: "Palanquin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Palanquin Dark", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Palanquin Dark", "gutenslider-blocks"),
   value: "Palanquin Dark"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pangolin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pangolin", "gutenslider-blocks"),
   value: "Pangolin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Paprika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Paprika", "gutenslider-blocks"),
   value: "Paprika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Parisienne", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Parisienne", "gutenslider-blocks"),
   value: "Parisienne"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Passero One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Passero One", "gutenslider-blocks"),
   value: "Passero One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Passion One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Passion One", "gutenslider-blocks"),
   value: "Passion One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pathway Gothic One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pathway Gothic One", "gutenslider-blocks"),
   value: "Pathway Gothic One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patrick Hand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patrick Hand", "gutenslider-blocks"),
   value: "Patrick Hand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patrick Hand SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patrick Hand SC", "gutenslider-blocks"),
   value: "Patrick Hand SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pattaya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pattaya", "gutenslider-blocks"),
   value: "Pattaya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patua One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Patua One", "gutenslider-blocks"),
   value: "Patua One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pavanam", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pavanam", "gutenslider-blocks"),
   value: "Pavanam"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Paytone One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Paytone One", "gutenslider-blocks"),
   value: "Paytone One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pecita", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pecita", "gutenslider-blocks"),
   value: "Pecita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Peddana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Peddana", "gutenslider-blocks"),
   value: "Peddana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Peralta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Peralta", "gutenslider-blocks"),
   value: "Peralta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Permanent Marker", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Permanent Marker", "gutenslider-blocks"),
   value: "Permanent Marker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Petit Formal Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Petit Formal Script", "gutenslider-blocks"),
   value: "Petit Formal Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Petrona", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Petrona", "gutenslider-blocks"),
   value: "Petrona"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Phetsarath", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Phetsarath", "gutenslider-blocks"),
   value: "Phetsarath"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Philosopher", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Philosopher", "gutenslider-blocks"),
   value: "Philosopher"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Piedra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Piedra", "gutenslider-blocks"),
   value: "Piedra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pinyon Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pinyon Script", "gutenslider-blocks"),
   value: "Pinyon Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pirata One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pirata One", "gutenslider-blocks"),
   value: "Pirata One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Plaster", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Plaster", "gutenslider-blocks"),
   value: "Plaster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Play", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Play", "gutenslider-blocks"),
   value: "Play"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playball", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playball", "gutenslider-blocks"),
   value: "Playball"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playfair Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playfair Display", "gutenslider-blocks"),
   value: "Playfair Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playfair Display SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Playfair Display SC", "gutenslider-blocks"),
   value: "Playfair Display SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Podkova", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Podkova", "gutenslider-blocks"),
   value: "Podkova"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("podkovavfbeta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("podkovavfbeta", "gutenslider-blocks"),
   value: "podkovavfbeta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poetsen One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poetsen One", "gutenslider-blocks"),
   value: "Poetsen One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poiret One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poiret One", "gutenslider-blocks"),
   value: "Poiret One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poller One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poller One", "gutenslider-blocks"),
   value: "Poller One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poly", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poly", "gutenslider-blocks"),
   value: "Poly"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pompiere", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pompiere", "gutenslider-blocks"),
   value: "Pompiere"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ponnala", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ponnala", "gutenslider-blocks"),
   value: "Ponnala"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pontano Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pontano Sans", "gutenslider-blocks"),
   value: "Pontano Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poor Story", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poor Story", "gutenslider-blocks"),
   value: "Poor Story"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poppins", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Poppins", "gutenslider-blocks"),
   value: "Poppins"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Port Lligat Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Port Lligat Sans", "gutenslider-blocks"),
   value: "Port Lligat Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Port Lligat Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Port Lligat Slab", "gutenslider-blocks"),
   value: "Port Lligat Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Porter Sans Block", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Porter Sans Block", "gutenslider-blocks"),
   value: "Porter Sans Block"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Post No Bills Colombo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Post No Bills Colombo", "gutenslider-blocks"),
   value: "Post No Bills Colombo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Post No Bills Jaffna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Post No Bills Jaffna", "gutenslider-blocks"),
   value: "Post No Bills Jaffna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pragati Narrow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pragati Narrow", "gutenslider-blocks"),
   value: "Pragati Narrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Preahvihear", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Preahvihear", "gutenslider-blocks"),
   value: "Preahvihear"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Press Start 2P", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Press Start 2P", "gutenslider-blocks"),
   value: "Press Start 2P"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pridi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pridi", "gutenslider-blocks"),
   value: "Pridi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Princess Sofia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Princess Sofia", "gutenslider-blocks"),
   value: "Princess Sofia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prociono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prociono", "gutenslider-blocks"),
   value: "Prociono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prompt", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prompt", "gutenslider-blocks"),
   value: "Prompt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prosto One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Prosto One", "gutenslider-blocks"),
   value: "Prosto One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Proza Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Proza Libre", "gutenslider-blocks"),
   value: "Proza Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Mono", "gutenslider-blocks"),
   value: "PT Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans", "gutenslider-blocks"),
   value: "PT Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans Caption", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans Caption", "gutenslider-blocks"),
   value: "PT Sans Caption"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans Narrow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Sans Narrow", "gutenslider-blocks"),
   value: "PT Sans Narrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Serif", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Serif", "gutenslider-blocks"),
   value: "PT Serif"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Serif Caption", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("PT Serif Caption", "gutenslider-blocks"),
   value: "PT Serif Caption"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Puritan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Puritan", "gutenslider-blocks"),
   value: "Puritan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Purple Purse", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Purple Purse", "gutenslider-blocks"),
   value: "Purple Purse"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pushster", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pushster", "gutenslider-blocks"),
   value: "Pushster"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quando", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quando", "gutenslider-blocks"),
   value: "Quando"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quantico", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quantico", "gutenslider-blocks"),
   value: "Quantico"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quattrocento", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quattrocento", "gutenslider-blocks"),
   value: "Quattrocento"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quattrocento Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quattrocento Sans", "gutenslider-blocks"),
   value: "Quattrocento Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Questrial", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Questrial", "gutenslider-blocks"),
   value: "Questrial"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quicksand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quicksand", "gutenslider-blocks"),
   value: "Quicksand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quintessential", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Quintessential", "gutenslider-blocks"),
   value: "Quintessential"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Qwigley", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Qwigley", "gutenslider-blocks"),
   value: "Qwigley"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Racing Sans One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Racing Sans One", "gutenslider-blocks"),
   value: "Racing Sans One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Radley", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Radley", "gutenslider-blocks"),
   value: "Radley"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rajdhani", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rajdhani", "gutenslider-blocks"),
   value: "Rajdhani"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rakkas", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rakkas", "gutenslider-blocks"),
   value: "Rakkas"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Raleway", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Raleway", "gutenslider-blocks"),
   value: "Raleway"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Raleway Dots", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Raleway Dots", "gutenslider-blocks"),
   value: "Raleway Dots"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ramabhadra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ramabhadra", "gutenslider-blocks"),
   value: "Ramabhadra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ramaraja", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ramaraja", "gutenslider-blocks"),
   value: "Ramaraja"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rambla", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rambla", "gutenslider-blocks"),
   value: "Rambla"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rammetto One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rammetto One", "gutenslider-blocks"),
   value: "Rammetto One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ranchers", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ranchers", "gutenslider-blocks"),
   value: "Ranchers"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rancho", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rancho", "gutenslider-blocks"),
   value: "Rancho"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ranga", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ranga", "gutenslider-blocks"),
   value: "Ranga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rasa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rasa", "gutenslider-blocks"),
   value: "Rasa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rationale", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rationale", "gutenslider-blocks"),
   value: "Rationale"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ravi Prakash", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ravi Prakash", "gutenslider-blocks"),
   value: "Ravi Prakash"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Red Hat Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Red Hat Display", "gutenslider-blocks"),
   value: "Red Hat Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Red Hat Text", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Red Hat Text", "gutenslider-blocks"),
   value: "Red Hat Text"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redacted", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redacted", "gutenslider-blocks"),
   value: "Redacted"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redacted Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redacted Script", "gutenslider-blocks"),
   value: "Redacted Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redressed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redressed", "gutenslider-blocks"),
   value: "Redressed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reem Kufi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reem Kufi", "gutenslider-blocks"),
   value: "Reem Kufi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reenie Beanie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reenie Beanie", "gutenslider-blocks"),
   value: "Reenie Beanie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Revalia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Revalia", "gutenslider-blocks"),
   value: "Revalia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rhodium Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rhodium Libre", "gutenslider-blocks"),
   value: "Rhodium Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ribeye", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ribeye", "gutenslider-blocks"),
   value: "Ribeye"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ribeye Marrow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ribeye Marrow", "gutenslider-blocks"),
   value: "Ribeye Marrow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Righteous", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Righteous", "gutenslider-blocks"),
   value: "Righteous"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Risque", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Risque", "gutenslider-blocks"),
   value: "Risque"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto", "gutenslider-blocks"),
   value: "Roboto"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Condensed", "gutenslider-blocks"),
   value: "Roboto Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Mono", "gutenslider-blocks"),
   value: "Roboto Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Slab", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Roboto Slab", "gutenslider-blocks"),
   value: "Roboto Slab"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rochester", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rochester", "gutenslider-blocks"),
   value: "Rochester"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rock Salt", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rock Salt", "gutenslider-blocks"),
   value: "Rock Salt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rokkitt", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rokkitt", "gutenslider-blocks"),
   value: "Rokkitt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Romanesco", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Romanesco", "gutenslider-blocks"),
   value: "Romanesco"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ropa Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ropa Sans", "gutenslider-blocks"),
   value: "Ropa Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rosario", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rosario", "gutenslider-blocks"),
   value: "Rosario"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rosarivo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rosarivo", "gutenslider-blocks"),
   value: "Rosarivo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rouge Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rouge Script", "gutenslider-blocks"),
   value: "Rouge Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("roundedmplus1c", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("roundedmplus1c", "gutenslider-blocks"),
   value: "roundedmplus1c"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rozha One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rozha One", "gutenslider-blocks"),
   value: "Rozha One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik", "gutenslider-blocks"),
   value: "Rubik"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik Mono One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik Mono One", "gutenslider-blocks"),
   value: "Rubik Mono One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rubik One", "gutenslider-blocks"),
   value: "Rubik One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruda", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruda", "gutenslider-blocks"),
   value: "Ruda"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rufina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rufina", "gutenslider-blocks"),
   value: "Rufina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruge Boogie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruge Boogie", "gutenslider-blocks"),
   value: "Ruge Boogie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruluko", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruluko", "gutenslider-blocks"),
   value: "Ruluko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rum Raisin", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rum Raisin", "gutenslider-blocks"),
   value: "Rum Raisin"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruslan Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruslan Display", "gutenslider-blocks"),
   value: "Ruslan Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Russo One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Russo One", "gutenslider-blocks"),
   value: "Russo One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruthie", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ruthie", "gutenslider-blocks"),
   value: "Ruthie"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rye", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Rye", "gutenslider-blocks"),
   value: "Rye"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sacramento", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sacramento", "gutenslider-blocks"),
   value: "Sacramento"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sahitya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sahitya", "gutenslider-blocks"),
   value: "Sahitya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sail", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sail", "gutenslider-blocks"),
   value: "Sail"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira", "gutenslider-blocks"),
   value: "Saira"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Condensed", "gutenslider-blocks"),
   value: "Saira Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Extra Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Extra Condensed", "gutenslider-blocks"),
   value: "Saira Extra Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Semi Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Semi Condensed", "gutenslider-blocks"),
   value: "Saira Semi Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Stencil One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saira Stencil One", "gutenslider-blocks"),
   value: "Saira Stencil One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Salsa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Salsa", "gutenslider-blocks"),
   value: "Salsa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sanchez", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sanchez", "gutenslider-blocks"),
   value: "Sanchez"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sancreek", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sancreek", "gutenslider-blocks"),
   value: "Sancreek"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansation", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansation", "gutenslider-blocks"),
   value: "Sansation"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansita", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansita", "gutenslider-blocks"),
   value: "Sansita"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansita One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sansita One", "gutenslider-blocks"),
   value: "Sansita One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarabun", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarabun", "gutenslider-blocks"),
   value: "Sarabun"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarala", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarala", "gutenslider-blocks"),
   value: "Sarala"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarina", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarina", "gutenslider-blocks"),
   value: "Sarina"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarpanch", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sarpanch", "gutenslider-blocks"),
   value: "Sarpanch"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Satisfy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Satisfy", "gutenslider-blocks"),
   value: "Satisfy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("sawarabigothic", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("sawarabigothic", "gutenslider-blocks"),
   value: "sawarabigothic"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("sawarabimincho", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("sawarabimincho", "gutenslider-blocks"),
   value: "sawarabimincho"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scada", "gutenslider-blocks"),
   value: "Scada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scheherazade", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scheherazade", "gutenslider-blocks"),
   value: "Scheherazade"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Schoolbell", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Schoolbell", "gutenslider-blocks"),
   value: "Schoolbell"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scope One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Scope One", "gutenslider-blocks"),
   value: "Scope One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Seaweed Script", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Seaweed Script", "gutenslider-blocks"),
   value: "Seaweed Script"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Secular One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Secular One", "gutenslider-blocks"),
   value: "Secular One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedan", "gutenslider-blocks"),
   value: "Sedan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedan SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedan SC", "gutenslider-blocks"),
   value: "Sedan SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedgwick Ave", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedgwick Ave", "gutenslider-blocks"),
   value: "Sedgwick Ave"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedgwick Ave Display", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sedgwick Ave Display", "gutenslider-blocks"),
   value: "Sedgwick Ave Display"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulhangang", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulhangang", "gutenslider-blocks"),
   value: "seoulhangang"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulhangangcondensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulhangangcondensed", "gutenslider-blocks"),
   value: "seoulhangangcondensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsan", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsan", "gutenslider-blocks"),
   value: "seoulnamsan"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsancondensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsancondensed", "gutenslider-blocks"),
   value: "seoulnamsancondensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsanvertical", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("seoulnamsanvertical", "gutenslider-blocks"),
   value: "seoulnamsanvertical"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sevillana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sevillana", "gutenslider-blocks"),
   value: "Sevillana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Seymour One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Seymour One", "gutenslider-blocks"),
   value: "Seymour One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shadows Into Light", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shadows Into Light", "gutenslider-blocks"),
   value: "Shadows Into Light"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shadows Into Light Two", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shadows Into Light Two", "gutenslider-blocks"),
   value: "Shadows Into Light Two"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shanti", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shanti", "gutenslider-blocks"),
   value: "Shanti"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share", "gutenslider-blocks"),
   value: "Share"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share Tech", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share Tech", "gutenslider-blocks"),
   value: "Share Tech"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share Tech Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Share Tech Mono", "gutenslider-blocks"),
   value: "Share Tech Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shojumaru", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shojumaru", "gutenslider-blocks"),
   value: "Shojumaru"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Short Stack", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Short Stack", "gutenslider-blocks"),
   value: "Short Stack"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shrikhand", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Shrikhand", "gutenslider-blocks"),
   value: "Shrikhand"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Siamreap", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Siamreap", "gutenslider-blocks"),
   value: "Siamreap"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Siemreap", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Siemreap", "gutenslider-blocks"),
   value: "Siemreap"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sigmar One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sigmar One", "gutenslider-blocks"),
   value: "Sigmar One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Signika", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Signika", "gutenslider-blocks"),
   value: "Signika"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Signika Negative", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Signika Negative", "gutenslider-blocks"),
   value: "Signika Negative"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simonetta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Simonetta", "gutenslider-blocks"),
   value: "Simonetta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Single Day", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Single Day", "gutenslider-blocks"),
   value: "Single Day"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sintony", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sintony", "gutenslider-blocks"),
   value: "Sintony"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sirin Stencil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sirin Stencil", "gutenslider-blocks"),
   value: "Sirin Stencil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sitara", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sitara", "gutenslider-blocks"),
   value: "Sitara"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Six Caps", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Six Caps", "gutenslider-blocks"),
   value: "Six Caps"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Skranji", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Skranji", "gutenslider-blocks"),
   value: "Skranji"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slabo 13px", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slabo 13px", "gutenslider-blocks"),
   value: "Slabo 13px"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slabo 27px", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slabo 27px", "gutenslider-blocks"),
   value: "Slabo 27px"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slackey", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slackey", "gutenslider-blocks"),
   value: "Slackey"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Smokum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Smokum", "gutenslider-blocks"),
   value: "Smokum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Smythe", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Smythe", "gutenslider-blocks"),
   value: "Smythe"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sniglet", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sniglet", "gutenslider-blocks"),
   value: "Sniglet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snippet", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snippet", "gutenslider-blocks"),
   value: "Snippet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snowburst One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Snowburst One", "gutenslider-blocks"),
   value: "Snowburst One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sofadi One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sofadi One", "gutenslider-blocks"),
   value: "Sofadi One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sofia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sofia", "gutenslider-blocks"),
   value: "Sofia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solway", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solway", "gutenslider-blocks"),
   value: "Solway"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Song Myung", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Song Myung", "gutenslider-blocks"),
   value: "Song Myung"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sonsie One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sonsie One", "gutenslider-blocks"),
   value: "Sonsie One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sorts Mill Goudy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sorts Mill Goudy", "gutenslider-blocks"),
   value: "Sorts Mill Goudy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("souliyo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("souliyo", "gutenslider-blocks"),
   value: "souliyo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Code Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Code Pro", "gutenslider-blocks"),
   value: "Source Code Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Sans Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Sans Pro", "gutenslider-blocks"),
   value: "Source Sans Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Serif Pro", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source Serif Pro", "gutenslider-blocks"),
   value: "Source Serif Pro"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Space Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Space Mono", "gutenslider-blocks"),
   value: "Space Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Special Elite", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Special Elite", "gutenslider-blocks"),
   value: "Special Elite"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spectral", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spectral", "gutenslider-blocks"),
   value: "Spectral"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spicy Rice", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spicy Rice", "gutenslider-blocks"),
   value: "Spicy Rice"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spinnaker", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spinnaker", "gutenslider-blocks"),
   value: "Spinnaker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spirax", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spirax", "gutenslider-blocks"),
   value: "Spirax"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Squada One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Squada One", "gutenslider-blocks"),
   value: "Squada One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sree Krushnadevaraya", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sree Krushnadevaraya", "gutenslider-blocks"),
   value: "Sree Krushnadevaraya"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sriracha", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sriracha", "gutenslider-blocks"),
   value: "Sriracha"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Srisakdi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Srisakdi", "gutenslider-blocks"),
   value: "Srisakdi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Staatliches", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Staatliches", "gutenslider-blocks"),
   value: "Staatliches"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalemate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalemate", "gutenslider-blocks"),
   value: "Stalemate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalin One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalin One", "gutenslider-blocks"),
   value: "Stalin One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalinist One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stalinist One", "gutenslider-blocks"),
   value: "Stalinist One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stardos Stencil", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stardos Stencil", "gutenslider-blocks"),
   value: "Stardos Stencil"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stint Ultra Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stint Ultra Condensed", "gutenslider-blocks"),
   value: "Stint Ultra Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stint Ultra Expanded", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stint Ultra Expanded", "gutenslider-blocks"),
   value: "Stint Ultra Expanded"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stoke", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stoke", "gutenslider-blocks"),
   value: "Stoke"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Strait", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Strait", "gutenslider-blocks"),
   value: "Strait"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Strong", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Strong", "gutenslider-blocks"),
   value: "Strong"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stylish", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stylish", "gutenslider-blocks"),
   value: "Stylish"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sue Ellen Francisco", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sue Ellen Francisco", "gutenslider-blocks"),
   value: "Sue Ellen Francisco"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suez One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suez One", "gutenslider-blocks"),
   value: "Suez One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sumana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sumana", "gutenslider-blocks"),
   value: "Sumana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sunflower", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sunflower", "gutenslider-blocks"),
   value: "Sunflower"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sunshiney", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sunshiney", "gutenslider-blocks"),
   value: "Sunshiney"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Supermercado One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Supermercado One", "gutenslider-blocks"),
   value: "Supermercado One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sura", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sura", "gutenslider-blocks"),
   value: "Sura"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suranna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suranna", "gutenslider-blocks"),
   value: "Suranna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suravaram", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suravaram", "gutenslider-blocks"),
   value: "Suravaram"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suwannaphum", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Suwannaphum", "gutenslider-blocks"),
   value: "Suwannaphum"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Swanky and Moo Moo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Swanky and Moo Moo", "gutenslider-blocks"),
   value: "Swanky and Moo Moo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Syncopate", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Syncopate", "gutenslider-blocks"),
   value: "Syncopate"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tajawal", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tajawal", "gutenslider-blocks"),
   value: "Tajawal"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tangerine", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tangerine", "gutenslider-blocks"),
   value: "Tangerine"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Taprom", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Taprom", "gutenslider-blocks"),
   value: "Taprom"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tauri", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tauri", "gutenslider-blocks"),
   value: "Tauri"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Taviraj", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Taviraj", "gutenslider-blocks"),
   value: "Taviraj"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Teko", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Teko", "gutenslider-blocks"),
   value: "Teko"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Telex", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Telex", "gutenslider-blocks"),
   value: "Telex"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tenali Ramakrishna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tenali Ramakrishna", "gutenslider-blocks"),
   value: "Tenali Ramakrishna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tenor Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tenor Sans", "gutenslider-blocks"),
   value: "Tenor Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terminal Dosis", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terminal Dosis", "gutenslider-blocks"),
   value: "Terminal Dosis"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terminal Dosis Light", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terminal Dosis Light", "gutenslider-blocks"),
   value: "Terminal Dosis Light"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Me One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Me One", "gutenslider-blocks"),
   value: "Text Me One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thabit", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thabit", "gutenslider-blocks"),
   value: "Thabit"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("tharlon", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("tharlon", "gutenslider-blocks"),
   value: "tharlon"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thasadith", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thasadith", "gutenslider-blocks"),
   value: "Thasadith"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("The Girl Next Door", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("The Girl Next Door", "gutenslider-blocks"),
   value: "The Girl Next Door"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tienne", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tienne", "gutenslider-blocks"),
   value: "Tienne"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tillana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tillana", "gutenslider-blocks"),
   value: "Tillana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Timmana", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Timmana", "gutenslider-blocks"),
   value: "Timmana"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tinos", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tinos", "gutenslider-blocks"),
   value: "Tinos"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Titan One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Titan One", "gutenslider-blocks"),
   value: "Titan One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Titillium Web", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Titillium Web", "gutenslider-blocks"),
   value: "Titillium Web"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trade Winds", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trade Winds", "gutenslider-blocks"),
   value: "Trade Winds"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trirong", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trirong", "gutenslider-blocks"),
   value: "Trirong"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trocchi", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trocchi", "gutenslider-blocks"),
   value: "Trocchi"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trochut", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trochut", "gutenslider-blocks"),
   value: "Trochut"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trykker", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Trykker", "gutenslider-blocks"),
   value: "Trykker"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tuffy", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tuffy", "gutenslider-blocks"),
   value: "Tuffy"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tulpen One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tulpen One", "gutenslider-blocks"),
   value: "Tulpen One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu", "gutenslider-blocks"),
   value: "Ubuntu"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu Condensed", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu Condensed", "gutenslider-blocks"),
   value: "Ubuntu Condensed"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu Mono", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ubuntu Mono", "gutenslider-blocks"),
   value: "Ubuntu Mono"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ultra", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ultra", "gutenslider-blocks"),
   value: "Ultra"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Uncial Antiqua", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Uncial Antiqua", "gutenslider-blocks"),
   value: "Uncial Antiqua"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Underdog", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Underdog", "gutenslider-blocks"),
   value: "Underdog"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unica One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unica One", "gutenslider-blocks"),
   value: "Unica One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("UnifrakturCook", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("UnifrakturCook", "gutenslider-blocks"),
   value: "UnifrakturCook"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("UnifrakturMaguntia", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("UnifrakturMaguntia", "gutenslider-blocks"),
   value: "UnifrakturMaguntia"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unkempt", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unkempt", "gutenslider-blocks"),
   value: "Unkempt"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unlock", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unlock", "gutenslider-blocks"),
   value: "Unlock"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unna", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unna", "gutenslider-blocks"),
   value: "Unna"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vampiro One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vampiro One", "gutenslider-blocks"),
   value: "Vampiro One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varela", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varela", "gutenslider-blocks"),
   value: "Varela"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varela Round", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varela Round", "gutenslider-blocks"),
   value: "Varela Round"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varta", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Varta", "gutenslider-blocks"),
   value: "Varta"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vast Shadow", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vast Shadow", "gutenslider-blocks"),
   value: "Vast Shadow"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vesper Libre", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vesper Libre", "gutenslider-blocks"),
   value: "Vesper Libre"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vibur", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vibur", "gutenslider-blocks"),
   value: "Vibur"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vidaloka", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vidaloka", "gutenslider-blocks"),
   value: "Vidaloka"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Viga", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Viga", "gutenslider-blocks"),
   value: "Viga"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Voces", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Voces", "gutenslider-blocks"),
   value: "Voces"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Volkhov", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Volkhov", "gutenslider-blocks"),
   value: "Volkhov"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vollkorn", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vollkorn", "gutenslider-blocks"),
   value: "Vollkorn"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vollkorn SC", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Vollkorn SC", "gutenslider-blocks"),
   value: "Vollkorn SC"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Voltaire", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Voltaire", "gutenslider-blocks"),
   value: "Voltaire"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("VT323", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("VT323", "gutenslider-blocks"),
   value: "VT323"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Waiting for the Sunrise", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Waiting for the Sunrise", "gutenslider-blocks"),
   value: "Waiting for the Sunrise"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wallpoet", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wallpoet", "gutenslider-blocks"),
   value: "Wallpoet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Walter Turncoat", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Walter Turncoat", "gutenslider-blocks"),
   value: "Walter Turncoat"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Warnes", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Warnes", "gutenslider-blocks"),
   value: "Warnes"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wellfleet", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wellfleet", "gutenslider-blocks"),
   value: "Wellfleet"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wendy One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wendy One", "gutenslider-blocks"),
   value: "Wendy One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wire One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Wire One", "gutenslider-blocks"),
   value: "Wire One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Work Sans", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Work Sans", "gutenslider-blocks"),
   value: "Work Sans"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yaldevi Colombo", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yaldevi Colombo", "gutenslider-blocks"),
   value: "Yaldevi Colombo"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yanone Kaffeesatz", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yanone Kaffeesatz", "gutenslider-blocks"),
   value: "Yanone Kaffeesatz"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yantramanav", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yantramanav", "gutenslider-blocks"),
   value: "Yantramanav"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yatra One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yatra One", "gutenslider-blocks"),
   value: "Yatra One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yellowtail", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yellowtail", "gutenslider-blocks"),
   value: "Yellowtail"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yeon Sung", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yeon Sung", "gutenslider-blocks"),
   value: "Yeon Sung"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yeseva One", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yeseva One", "gutenslider-blocks"),
   value: "Yeseva One"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yesteryear", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yesteryear", "gutenslider-blocks"),
   value: "Yesteryear"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yinmar", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yinmar", "gutenslider-blocks"),
   value: "Yinmar"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yrsa", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Yrsa", "gutenslider-blocks"),
   value: "Yrsa"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL KuaiLe", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL KuaiLe", "gutenslider-blocks"),
   value: "ZCOOL KuaiLe"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL QingKe HuangYou", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL QingKe HuangYou", "gutenslider-blocks"),
   value: "ZCOOL QingKe HuangYou"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL XiaoWei", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("ZCOOL XiaoWei", "gutenslider-blocks"),
   value: "ZCOOL XiaoWei"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zeyada", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zeyada", "gutenslider-blocks"),
   value: "Zeyada"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zhi Mang Xing", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zhi Mang Xing", "gutenslider-blocks"),
   value: "Zhi Mang Xing"
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zilla Slab Highlight", "button-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Zilla Slab Highlight", "gutenslider-blocks"),
   value: "Zilla Slab Highlight"
 }];
 
@@ -24929,7 +24929,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkbutton_blocks"] = globalThis["webpackChunkbutton_blocks"] || [];
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkgutenslider_blocks"] = globalThis["webpackChunkgutenslider_blocks"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();

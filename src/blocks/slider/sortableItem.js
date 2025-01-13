@@ -50,7 +50,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
                 <BaseControl
                     className="global-setting-background-color-setting-wrapper"
-                    label={__("Slide Content", "button-blocks")}
+                    label={__("Slide Content", "gutenslider-blocks")}
                 >
                     <Dropdown
                         className="global-setting-background-color-setting-icon-dropdown"
@@ -79,7 +79,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                 </BaseControl>
                 <BaseControl
                     className="global-setting-background-color-setting-wrapper"
-                    label={__("Background", "button-blocks")}
+                    label={__("Background", "gutenslider-blocks")}
                 >
                     <Dropdown
                         className="global-setting-background-color-setting-icon-dropdown"

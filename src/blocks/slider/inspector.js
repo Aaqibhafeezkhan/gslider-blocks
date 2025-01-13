@@ -73,13 +73,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor; // Check if gradient is empty, fallback to classic color
             
             if (normalItemBackgroundType === 'gradient') {
-                const gradientStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id}  {
+                const gradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}  {
                     background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : normalItemGradientColor};
                 }`;
                 style += gradientStyle;
 
             } else {
-                const classicStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id} {
+                const classicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};
                 }`;
                 style += classicStyle;
@@ -89,13 +89,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             const hoverItemGradientColor = item.hoverItemGradientColor || item.hoverItemClassicColor; // Similar fallback for hover state
             
             if (hoverItemBackgroundType === 'gradient') {
-                const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id}:hover {
+                const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : hoverItemGradientColor};
                 }`;
                 style += hoverGradientStyle;
 
             } else {
-                const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.item-${item.id}:hover {
+                const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemClassicColor};
                 }`;
                 style += hoverClassicStyle;

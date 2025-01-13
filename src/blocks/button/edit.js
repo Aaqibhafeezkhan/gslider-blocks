@@ -83,7 +83,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 tagName="span"
                                 value={buttonText}
                                 onChange={(value) => setAttributes({ buttonText: value })}
-                                placeholder={__('Enter button text...', 'button-blocks')}
+                                placeholder={__('Enter button text...', 'gutenslider-blocks')}
                                 className="bb-advanced-button-text"
                             />
                         )}
