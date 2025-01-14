@@ -5,15 +5,50 @@ import {
     ToolbarGroup,
     ToolbarButton
 } from '@wordpress/components';
+import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
 import Inspector from './inspector';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { 
+    Navigation, 
+    Pagination, 
+    Autoplay, 
+    Manipulation,
+    Mousewheel,
+    EffectFade,
+    EffectCube,
+    EffectCoverflow,
+    EffectFlip,
+    EffectCreative,
+    EffectCards
+} from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/mousewheel';
+import 'swiper/css/effect-fade';
+import 'swiper/css/effect-cube';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/effect-flip';
+import 'swiper/css/effect-creative';
+import 'swiper/css/effect-cards';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const { blockId, sliderItems } = attributes;
+    const {
+        blockId,
+        sliderItems,
+        slidePerView,
+        spaceBetween,
+        transitionSpeed,
+        autoplay,
+        autoplaySpeed,
+        loop,
+        allowTouchMove,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        effect,
+    } = attributes;
 
     const blockProps = useBlockProps({
         className: `guten-slider-container ${blockId}`,
@@ -22,17 +57,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     const handleAddItem = () => {
         const newItem = {
-            id: `${sliderItems.length + 1}`,
+            id: `item-${sliderItems.length + 1}`, // Fixed ID format
             title: `Slider Item ${sliderItems.length + 1}`,
-
             sliderItemBgColorSwitcher: 'normal',
-
             normalItemBackgroundType: 'classic',
             normalItemClassicColor: '#399CFF',
             normalItemGradientColor: null,
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',
-
             hoverItemBackgroundType: 'classic',
             hoverItemClassicColor: '',
             hoverItemGradientColor: null,
@@ -41,6 +73,70 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
     };
+
+    // Enhanced settings for Swiper
+    const settings = useMemo(() => ({
+        slidesPerView: slidePerView,
+        spaceBetween: spaceBetween,
+        autoplay: autoplay ? {
+            delay: autoplaySpeed,
+            disableOnInteraction: false,
+            stopOnLastSlide: stopOnLastSlide,
+            reverseDirection: reverseDirection,
+            pauseOnMouseEnter: pauseOnHover,
+        } : false,
+        speed: transitionSpeed,
+        loop: loop,
+        effect: effect,
+        allowTouchMove: allowTouchMove,
+        navigation: {
+            enabled: true,
+        },
+        pagination: {
+            enabled: true,
+            clickable: true,
+        },
+        // Add effect-specific settings
+        ...(effect === 'creative' && {
+            creativeEffect: {
+                prev: {
+                    translate: [0, 0, -400],
+                },
+                next: {
+                    translate: ['100%', 0, 0],
+                },
+            },
+        }),
+        ...(effect === 'cube' && {
+            cubeEffect: {
+                shadow: true,
+                slideShadows: true,
+                shadowOffset: 20,
+                shadowScale: 0.94,
+            },
+        }),
+        ...(effect === 'coverflow' && {
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+        }),
+    }), [
+        slidePerView,
+        spaceBetween,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        pauseOnHover,
+        transitionSpeed,
+        loop,
+        allowTouchMove,
+        effect,
+    ]);
 
     return (
         <>
@@ -63,13 +159,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <div {...blockProps}>
                 <Swiper
                     className='guten-slider-swiper-wrapper'
-                    modules={[Navigation, Pagination]}
-                    // spaceBetween={50}
-                    slidesPerView={1}
-                    speed={1000}
-                    navigation
-                    pagination={{ clickable: true }}
-                    loop
+                    {...settings}
+                    modules={[
+                        Navigation,
+                        Pagination,
+                        Autoplay,
+                        Manipulation,
+                        Mousewheel,
+                        EffectFade,
+                        EffectCube,
+                        EffectCoverflow,
+                        EffectFlip,
+                        EffectCreative,
+                        EffectCards
+                    ]}
                 >
                     {sliderItems.map((item) => (
                         <SwiperSlide key={item.id}>

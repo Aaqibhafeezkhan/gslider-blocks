@@ -21,4 +21,16 @@
   height: auto !important;
 }
 
+.guten-slider-container .swiper-button-next,
+.guten-slider-container .swiper-button-prev {
+  color: #000;
+}
+.guten-slider-container .swiper-button-next:after,
+.guten-slider-container .swiper-button-prev:after {
+  font-size: 24px;
+}
+.guten-slider-container .swiper-pagination-bullet {
+  background: #000;
+}
+
 /*# sourceMappingURL=style-index.css.map*/

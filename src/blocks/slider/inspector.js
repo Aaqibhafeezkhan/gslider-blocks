@@ -23,8 +23,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         pauseOnHover,
         stopOnLastSlide,
         reverseDirection,
-        enableKeyboardControl,
-        enableMouseWheel,
         effect,
     } = attributes;
 
@@ -201,11 +199,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 label={__("Reverse Direction", "gutenslider-blocks")}
                                                 checked={reverseDirection}
                                                 onChange={(value) => setAttributes({ reverseDirection: value })}
-                                            />
-                                            <ToggleControl
-                                                label={__("Enable Mouse Wheel", "gutenslider-blocks")}
-                                                checked={enableMouseWheel}
-                                                onChange={(value) => setAttributes({ enableMouseWheel: value })}
                                             />
                                             <ToggleControl
                                                 label={ __( 'Enable Autoplay', 'gutenslider-blocks' ) }

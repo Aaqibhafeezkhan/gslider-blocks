@@ -5447,14 +5447,6 @@ const attributes = {
     "type": "boolean",
     "default": false
   },
-  enableKeyboardControl: {
-    "type": "boolean",
-    "default": true
-  },
-  enableMouseWheel: {
-    "type": "boolean",
-    "default": false
-  },
   effect: {
     type: 'string',
     default: 'creative'
@@ -5671,12 +5663,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./inspector */ "./src/blocks/slider/inspector.js");
-/* harmony import */ var swiper_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! swiper/react */ "./node_modules/swiper/swiper-react.mjs");
-/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
-/* harmony import */ var swiper_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! swiper/css */ "./node_modules/swiper/swiper.css");
-/* harmony import */ var swiper_css_navigation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! swiper/css/navigation */ "./node_modules/swiper/modules/navigation.css");
-/* harmony import */ var swiper_css_pagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! swiper/css/pagination */ "./node_modules/swiper/modules/pagination.css");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./inspector */ "./src/blocks/slider/inspector.js");
+/* harmony import */ var swiper_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! swiper/react */ "./node_modules/swiper/swiper-react.mjs");
+/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
+/* harmony import */ var swiper_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! swiper/css */ "./node_modules/swiper/swiper.css");
+/* harmony import */ var swiper_css_navigation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! swiper/css/navigation */ "./node_modules/swiper/modules/navigation.css");
+/* harmony import */ var swiper_css_pagination__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! swiper/css/pagination */ "./node_modules/swiper/modules/pagination.css");
+/* harmony import */ var swiper_css_mousewheel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! swiper/css/mousewheel */ "./node_modules/swiper/modules/mousewheel.css");
+/* harmony import */ var swiper_css_effect_fade__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! swiper/css/effect-fade */ "./node_modules/swiper/modules/effect-fade.css");
+/* harmony import */ var swiper_css_effect_cube__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! swiper/css/effect-cube */ "./node_modules/swiper/modules/effect-cube.css");
+/* harmony import */ var swiper_css_effect_coverflow__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! swiper/css/effect-coverflow */ "./node_modules/swiper/modules/effect-coverflow.css");
+/* harmony import */ var swiper_css_effect_flip__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! swiper/css/effect-flip */ "./node_modules/swiper/modules/effect-flip.css");
+/* harmony import */ var swiper_css_effect_creative__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! swiper/css/effect-creative */ "./node_modules/swiper/modules/effect-creative.css");
+/* harmony import */ var swiper_css_effect_cards__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! swiper/css/effect-cards */ "./node_modules/swiper/modules/effect-cards.css");
+
+
+
+
+
+
+
+
 
 
 
@@ -5694,14 +5703,26 @@ function Edit({
 }) {
   const {
     blockId,
-    sliderItems
+    sliderItems,
+    slidePerView,
+    spaceBetween,
+    transitionSpeed,
+    autoplay,
+    autoplaySpeed,
+    loop,
+    allowTouchMove,
+    pauseOnHover,
+    stopOnLastSlide,
+    reverseDirection,
+    effect
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
     className: `guten-slider-container ${blockId}`
   });
   const handleAddItem = () => {
     const newItem = {
-      id: `${sliderItems.length + 1}`,
+      id: `item-${sliderItems.length + 1}`,
+      // Fixed ID format
       title: `Slider Item ${sliderItems.length + 1}`,
       sliderItemBgColorSwitcher: 'normal',
       normalItemBackgroundType: 'classic',
@@ -5719,7 +5740,59 @@ function Edit({
       sliderItems: [...sliderItems, newItem]
     });
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_inspector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+
+  // Enhanced settings for Swiper
+  const settings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useMemo)(() => ({
+    slidesPerView: slidePerView,
+    spaceBetween: spaceBetween,
+    autoplay: autoplay ? {
+      delay: autoplaySpeed,
+      disableOnInteraction: false,
+      stopOnLastSlide: stopOnLastSlide,
+      reverseDirection: reverseDirection,
+      pauseOnMouseEnter: pauseOnHover
+    } : false,
+    speed: transitionSpeed,
+    loop: loop,
+    effect: effect,
+    allowTouchMove: allowTouchMove,
+    navigation: {
+      enabled: true
+    },
+    pagination: {
+      enabled: true,
+      clickable: true
+    },
+    // Add effect-specific settings
+    ...(effect === 'creative' && {
+      creativeEffect: {
+        prev: {
+          translate: [0, 0, -400]
+        },
+        next: {
+          translate: ['100%', 0, 0]
+        }
+      }
+    }),
+    ...(effect === 'cube' && {
+      cubeEffect: {
+        shadow: true,
+        slideShadows: true,
+        shadowOffset: 20,
+        shadowScale: 0.94
+      }
+    }),
+    ...(effect === 'coverflow' && {
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true
+      }
+    })
+  }), [slidePerView, spaceBetween, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, pauseOnHover, transitionSpeed, loop, allowTouchMove, effect]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_inspector__WEBPACK_IMPORTED_MODULE_5__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     clientId: clientId
@@ -5729,19 +5802,11 @@ function Edit({
     onClick: handleAddItem
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_5__.Swiper, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_6__.Swiper, {
     className: "guten-slider-swiper-wrapper",
-    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_6__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_6__.Pagination]
-    // spaceBetween={50}
-    ,
-    slidesPerView: 1,
-    speed: 1000,
-    navigation: true,
-    pagination: {
-      clickable: true
-    },
-    loop: true
-  }, sliderItems.map(item => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_5__.SwiperSlide, {
+    ...settings,
+    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Manipulation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFade, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCube, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCoverflow, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFlip, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCreative, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCards]
+  }, sliderItems.map(item => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_6__.SwiperSlide, {
     key: item.id
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `guten-slider-content-wrapper ${item.id}`
@@ -5853,8 +5918,6 @@ function Inspector({
     pauseOnHover,
     stopOnLastSlide,
     reverseDirection,
-    enableKeyboardControl,
-    enableMouseWheel,
     effect
   } = attributes;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
@@ -6036,12 +6099,6 @@ function Inspector({
     checked: reverseDirection,
     onChange: value => setAttributes({
       reverseDirection: value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable Mouse Wheel", "gutenslider-blocks"),
-    checked: enableMouseWheel,
-    onChange: value => setAttributes({
-      enableMouseWheel: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enable Autoplay', 'gutenslider-blocks'),
@@ -7284,6 +7341,90 @@ const SwitcherControl = ({
   }, item.label)))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SwitcherControl);
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/effect-cards.css":
+/*!******************************************************!*\
+  !*** ./node_modules/swiper/modules/effect-cards.css ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/effect-coverflow.css":
+/*!**********************************************************!*\
+  !*** ./node_modules/swiper/modules/effect-coverflow.css ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/effect-creative.css":
+/*!*********************************************************!*\
+  !*** ./node_modules/swiper/modules/effect-creative.css ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/effect-cube.css":
+/*!*****************************************************!*\
+  !*** ./node_modules/swiper/modules/effect-cube.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/effect-fade.css":
+/*!*****************************************************!*\
+  !*** ./node_modules/swiper/modules/effect-fade.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/effect-flip.css":
+/*!*****************************************************!*\
+  !*** ./node_modules/swiper/modules/effect-flip.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/mousewheel.css":
+/*!****************************************************!*\
+  !*** ./node_modules/swiper/modules/mousewheel.css ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 

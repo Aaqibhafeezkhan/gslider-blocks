@@ -166,14 +166,6 @@ const attributes = {
         "type": "boolean",
         "default": false
     },
-    enableKeyboardControl: {
-        "type": "boolean",
-        "default": true
-    },
-    enableMouseWheel: {
-        "type": "boolean",
-        "default": false
-    },
     effect: {
         type: 'string',
         default: 'creative'
