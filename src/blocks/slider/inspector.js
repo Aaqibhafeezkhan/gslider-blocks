@@ -3,8 +3,9 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
-import { PanelBody, TabPanel, Button } from '@wordpress/components';
+import { PanelBody, TabPanel, Button, ToggleControl, RangeControl, SelectControl } from '@wordpress/components';
 import SortableItem from './sortableItem';
+import { BORDER_STYLES,EFFECT_OPTIONS } from "./constants/constants";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -12,6 +13,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
         sliderItems,
         blockStyle,
+        slidePerView,
+        spaceBetween,
+        transitionSpeed,
+        autoplay,
+        autoplaySpeed,
+        loop,
+        allowTouchMove,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        enableKeyboardControl,
+        enableMouseWheel,
+        effect,
     } = attributes;
 
     useEffect(() => {
@@ -133,29 +147,119 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         {(tab) => (
                             <div className={`guten-slider-tab-controls ${tab.name}`}>
                                 {tab.name === "general" && (
-                                    <PanelBody title={__("Slider", "gutenslider-blocks")} initialOpen>
-                                        <div className="guten-slider-wrapper">
-                                            <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                                                <SortableContext items={sliderItems.map((item) => item.id)}>
-                                                    <ul className="dnd-items-wrapper">
-                                                        {sliderItems.map((item, index) => (
-                                                            <SortableItem
-                                                                key={item.id}
-                                                                id={item.id}
-                                                                item={item}
-                                                                handleChangeItem={handleChangeItem}
-                                                                handleDeleteItem={handleDeleteItem}
-                                                                index={index}
-                                                            />
-                                                        ))}
-                                                    </ul>
-                                                </SortableContext>
-                                            </DndContext>
-                                            <Button isPrimary onClick={handleAddItem}>
-                                                {__("Add Slider", "gutenslider-blocks")}
-                                            </Button>
-                                        </div>
-                                    </PanelBody>
+                                    <>
+                                        <PanelBody title={__("Slider", "gutenslider-blocks")} initialOpen>
+                                            <div className="guten-slider-wrapper">
+                                                <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                                                    <SortableContext items={sliderItems.map((item) => item.id)}>
+                                                        <ul className="dnd-items-wrapper">
+                                                            {sliderItems.map((item, index) => (
+                                                                <SortableItem
+                                                                    key={item.id}
+                                                                    id={item.id}
+                                                                    item={item}
+                                                                    handleChangeItem={handleChangeItem}
+                                                                    handleDeleteItem={handleDeleteItem}
+                                                                    index={index}
+                                                                />
+                                                            ))}
+                                                        </ul>
+                                                    </SortableContext>
+                                                </DndContext>
+                                                <Button isPrimary onClick={handleAddItem}>
+                                                    {__("Add Slider", "gutenslider-blocks")}
+                                                </Button>
+                                            </div>
+                                        </PanelBody>
+                                        <PanelBody title={__("Slider Options", "gutenslider-blocks")} initialOpen={false}>
+                                            <ToggleControl
+                                                label={ __( 'Enable Loop', 'gutenslider-blocks' ) }
+                                                checked={ loop }
+                                                onChange={(value) => setAttributes({ loop: value })}
+                                            />
+                                            <ToggleControl
+                                                label={ __( 'Enable Allow TouchMove', 'gutenslider-blocks' ) }
+                                                checked={ allowTouchMove }
+                                                onChange={(value) => setAttributes({ allowTouchMove: value })}
+                                            />
+                                            <ToggleControl
+                                                label={__("Pause on Hover", "gutenslider-blocks")}
+                                                checked={pauseOnHover}
+                                                onChange={(value) => setAttributes({ pauseOnHover: value })}
+                                            />
+                                            <ToggleControl
+                                                label={__("Stop on Last Slide", "gutenslider-blocks")}
+                                                checked={stopOnLastSlide}
+                                                onChange={(value) => {
+                                                    setAttributes({ stopOnLastSlide: value });
+                                                    if (value) {
+                                                        setAttributes({ loop: false });
+                                                    }
+                                                }}
+                                            />
+                                            <ToggleControl
+                                                label={__("Reverse Direction", "gutenslider-blocks")}
+                                                checked={reverseDirection}
+                                                onChange={(value) => setAttributes({ reverseDirection: value })}
+                                            />
+                                            <ToggleControl
+                                                label={__("Enable Mouse Wheel", "gutenslider-blocks")}
+                                                checked={enableMouseWheel}
+                                                onChange={(value) => setAttributes({ enableMouseWheel: value })}
+                                            />
+                                            <ToggleControl
+                                                label={ __( 'Enable Autoplay', 'gutenslider-blocks' ) }
+                                                checked={ autoplay }
+                                                onChange={(value) => setAttributes({ autoplay: value })}
+                                            />
+                                            { autoplay && (
+                                            <RangeControl
+                                                label={__('Autoplay Speed (ms)', 'gutenslider-blocks')}
+                                                value={autoplaySpeed}
+                                                onChange={(value) => setAttributes({ autoplaySpeed: value })}
+                                                min={1000}
+                                                max={10000}
+                                                step={500}
+                                                initialPosition={2000}
+                                            />
+                                            )}
+                                            <RangeControl
+                                                label={__("Transition Speed (ms)", "gutenslider-blocks")}
+                                                value={transitionSpeed}
+                                                onChange={(value) => setAttributes({ transitionSpeed: value })}
+                                                min={100}
+                                                max={3000}
+                                                step={100}
+                                                initialPosition={500}
+                                            />
+                                            <RangeControl
+                                                label={__('Slide Per View', 'gutenslider-blocks')}
+                                                value={slidePerView}
+                                                onChange={(value) => setAttributes({ slidePerView: value })}
+                                                min={1}
+                                                max={10}
+                                                step={1}
+                                                initialPosition={1}
+                                            />
+                                            <RangeControl
+                                                label={__('Space Between Slide', 'gutenslider-blocks')}
+                                                value={spaceBetween}
+                                                onChange={(value) => setAttributes({ spaceBetween: value })}
+                                                min={0}
+                                                max={200}
+                                                step={1}
+                                                initialPosition={1}
+                                            />
+                                        </PanelBody>
+                                        <PanelBody title={__("Effect", "gutenslider-blocks")} initialOpen={false}>
+                                            <SelectControl
+                                                label={__('Slide Effect', 'your-text-domain')}
+                                                value={effect}
+                                                options={EFFECT_OPTIONS}
+                                                onChange={(value) => setAttributes({ effect: value })}
+                                            />
+                                        </PanelBody>
+                                    </>
                                 )}
 
                                 {tab.name === "styles" && (

@@ -67,3 +67,13 @@ export const BORDER_STYLES = [
 	{ label: __("Ridge", "gutenslider-blocks"), value: "ridge" },
 ];
 
+export const EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'gutenslider-blocks') },
+	{ value: 'fade', label: __('Fade', 'gutenslider-blocks') },
+	{ value: 'cube', label: __('Cube', 'gutenslider-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'gutenslider-blocks') },
+	{ value: 'flip', label: __('Flip', 'gutenslider-blocks') },
+	{ value: 'creative', label: __('Creative', 'gutenslider-blocks') },
+	{ value: 'cards', label: __('Cards', 'gutenslider-blocks') }
+];
+
