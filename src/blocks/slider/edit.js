@@ -176,7 +176,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 >
                     {sliderItems.map((item) => (
                         <SwiperSlide key={item.id}>
-                            <div className={`guten-slider-content-wrapper ${item.id}`}>
+                            <div className={`${blockId} guten-slider-content-wrapper ${item.id}`}>
                                 <div className='guten-slider-content-inner-wrapper'>
                                     <div className={`guten-slider-list-item`}>
                                         <div className="guten-slider-list-content">

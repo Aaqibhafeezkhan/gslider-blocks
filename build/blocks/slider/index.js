@@ -5421,7 +5421,7 @@ const attributes = {
   },
   autoplay: {
     type: 'boolean',
-    default: true
+    default: false
   },
   autoplaySpeed: {
     type: 'number',
@@ -5809,7 +5809,7 @@ function Edit({
   }, sliderItems.map(item => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_6__.SwiperSlide, {
     key: item.id
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `guten-slider-content-wrapper ${item.id}`
+    className: `${blockId} guten-slider-content-wrapper ${item.id}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "guten-slider-content-inner-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -5985,12 +5985,12 @@ function Inspector({
       const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor; // Check if gradient is empty, fallback to classic color
 
       if (normalItemBackgroundType === 'gradient') {
-        const gradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}  {
+        const gradientStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}  {
                     background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : normalItemGradientColor};
                 }`;
         style += gradientStyle;
       } else {
-        const classicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
+        const classicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};
                 }`;
         style += classicStyle;
@@ -5999,12 +5999,12 @@ function Inspector({
       const hoverItemGradientColor = item.hoverItemGradientColor || item.hoverItemClassicColor; // Similar fallback for hover state
 
       if (hoverItemBackgroundType === 'gradient') {
-        const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
+        const hoverGradientStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : hoverItemGradientColor};
                 }`;
         style += hoverGradientStyle;
       } else {
-        const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
+        const hoverClassicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemClassicColor};
                 }`;
         style += hoverClassicStyle;
@@ -6092,14 +6092,24 @@ function Inspector({
         setAttributes({
           loop: false
         });
+        setAttributes({
+          autoplay: true
+        });
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reverse Direction", "gutenslider-blocks"),
     checked: reverseDirection,
-    onChange: value => setAttributes({
-      reverseDirection: value
-    })
+    onChange: value => {
+      setAttributes({
+        reverseDirection: value
+      });
+      if (value) {
+        setAttributes({
+          autoplay: true
+        });
+      }
+    }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enable Autoplay', 'gutenslider-blocks'),
     checked: autoplay,
@@ -6188,14 +6198,36 @@ function Save({
 }) {
   const {
     blockId,
-    sliderItems
+    sliderItems,
+    slidePerView,
+    spaceBetween,
+    transitionSpeed,
+    autoplay,
+    autoplaySpeed,
+    loop,
+    allowTouchMove,
+    pauseOnHover,
+    stopOnLastSlide,
+    reverseDirection,
+    effect
   } = attributes;
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-    className: `guten-slider-container`,
-    'data-block-id': blockId
+    className: `guten-slider-container ${blockId}`
   });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...blockProps
+    ...blockProps,
+    "data-block-id": blockId,
+    "data-transition-speed": transitionSpeed,
+    "data-autoplay": autoplay,
+    "data-autoplay-speed": autoplaySpeed,
+    "data-slides-per-view": slidePerView,
+    "data-space-between": spaceBetween,
+    "data-loop": loop,
+    "data-allow-touch-move": allowTouchMove,
+    "data-pause-on-hover": pauseOnHover,
+    "data-stop-on-last-slide": stopOnLastSlide,
+    "data-reverse-direction": reverseDirection,
+    "data-effect": effect
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper guten-slider-swiper-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6204,7 +6236,7 @@ function Save({
     key: item.id,
     className: "swiper-slide"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `guten-slider-content-wrapper ${item.id}`
+    className: `${blockId} guten-slider-content-wrapper ${item.id}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "guten-slider-content-inner-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

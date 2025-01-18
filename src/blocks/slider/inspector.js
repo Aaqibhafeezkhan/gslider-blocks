@@ -85,13 +85,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor; // Check if gradient is empty, fallback to classic color
             
             if (normalItemBackgroundType === 'gradient') {
-                const gradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}  {
+                const gradientStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}  {
                     background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : normalItemGradientColor};
                 }`;
                 style += gradientStyle;
 
             } else {
-                const classicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
+                const classicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};
                 }`;
                 style += classicStyle;
@@ -101,13 +101,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             const hoverItemGradientColor = item.hoverItemGradientColor || item.hoverItemClassicColor; // Similar fallback for hover state
             
             if (hoverItemBackgroundType === 'gradient') {
-                const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
+                const hoverGradientStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : hoverItemGradientColor};
                 }`;
                 style += hoverGradientStyle;
 
             } else {
-                const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
+                const hoverClassicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemClassicColor};
                 }`;
                 style += hoverClassicStyle;
@@ -192,13 +192,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     setAttributes({ stopOnLastSlide: value });
                                                     if (value) {
                                                         setAttributes({ loop: false });
+                                                        setAttributes({ autoplay: true });
                                                     }
                                                 }}
                                             />
                                             <ToggleControl
                                                 label={__("Reverse Direction", "gutenslider-blocks")}
                                                 checked={reverseDirection}
-                                                onChange={(value) => setAttributes({ reverseDirection: value })}
+                                                onChange={(value) => {
+                                                    setAttributes({ reverseDirection: value });
+                                                    if (value) {
+                                                        setAttributes({ autoplay: true });
+                                                    }
+                                                }}
                                             />
                                             <ToggleControl
                                                 label={ __( 'Enable Autoplay', 'gutenslider-blocks' ) }
