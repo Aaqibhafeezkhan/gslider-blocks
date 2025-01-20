@@ -136,7 +136,7 @@ const attributes = {
 	},
 	transitionSpeed: {
 		type: 'number',
-		default: 500,
+		default: 1000,
 	},
 	autoplay: {
 		type: 'boolean',
@@ -144,7 +144,7 @@ const attributes = {
 	},
     autoplaySpeed: {
         type: 'number',
-        default: 2000,
+        default: 900,
     },
 	loop: {
 		type: 'boolean',

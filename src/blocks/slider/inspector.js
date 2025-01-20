@@ -216,10 +216,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 label={__('Autoplay Speed (ms)', 'gutenslider-blocks')}
                                                 value={autoplaySpeed}
                                                 onChange={(value) => setAttributes({ autoplaySpeed: value })}
-                                                min={1000}
+                                                min={100}
                                                 max={10000}
-                                                step={500}
-                                                initialPosition={2000}
+                                                step={100}
+                                                initialPosition={900}
                                             />
                                             )}
                                             <RangeControl
@@ -229,7 +229,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 min={100}
                                                 max={3000}
                                                 step={100}
-                                                initialPosition={500}
+                                                initialPosition={1000}
                                             />
                                             <RangeControl
                                                 label={__('Slide Per View', 'gutenslider-blocks')}

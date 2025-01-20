@@ -5417,7 +5417,7 @@ const attributes = {
   },
   transitionSpeed: {
     type: 'number',
-    default: 500
+    default: 1000
   },
   autoplay: {
     type: 'boolean',
@@ -5425,7 +5425,7 @@ const attributes = {
   },
   autoplaySpeed: {
     type: 'number',
-    default: 2000
+    default: 900
   },
   loop: {
     type: 'boolean',
@@ -5627,9 +5627,6 @@ const EFFECT_OPTIONS = [{
   value: 'fade',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Fade', 'gutenslider-blocks')
 }, {
-  value: 'cube',
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cube', 'gutenslider-blocks')
-}, {
   value: 'coverflow',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Coverflow', 'gutenslider-blocks')
 }, {
@@ -5638,9 +5635,6 @@ const EFFECT_OPTIONS = [{
 }, {
   value: 'creative',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Creative', 'gutenslider-blocks')
-}, {
-  value: 'cards',
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cards', 'gutenslider-blocks')
 }];
 
 /***/ }),
@@ -6122,10 +6116,10 @@ function Inspector({
     onChange: value => setAttributes({
       autoplaySpeed: value
     }),
-    min: 1000,
+    min: 100,
     max: 10000,
-    step: 500,
-    initialPosition: 2000
+    step: 100,
+    initialPosition: 900
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Transition Speed (ms)", "gutenslider-blocks"),
     value: transitionSpeed,
@@ -6135,7 +6129,7 @@ function Inspector({
     min: 100,
     max: 3000,
     step: 100,
-    initialPosition: 500
+    initialPosition: 1000
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slide Per View', 'gutenslider-blocks'),
     value: slidePerView,
