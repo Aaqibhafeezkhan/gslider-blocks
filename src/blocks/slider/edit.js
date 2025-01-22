@@ -88,15 +88,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         speed: transitionSpeed,
         loop: loop,
         effect: effect,
-        creativeEffect: {
-            prev: {
-                shadow: true,
-                translate: ['-20%', 0, -1],
-            },
-            next: {
-                translate: ['100%', 0, 0],
-            },
-        },
         allowTouchMove: allowTouchMove,
         navigation: {
             enabled: true,
@@ -109,6 +100,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         ...(effect === 'creative' && {
             creativeEffect: {
                 prev: {
+                    shadow: true,
                     translate: [0, 0, -400],
                 },
                 next: {
@@ -167,7 +159,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
             <div {...blockProps}>
                 <Swiper
-                    className='guten-slider-swiper-wrapper'
+                    className='guten-slider-wrapper'
                     {...settings}
                     modules={[
                         Navigation,

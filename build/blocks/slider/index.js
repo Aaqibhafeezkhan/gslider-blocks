@@ -5749,15 +5749,6 @@ function Edit({
     speed: transitionSpeed,
     loop: loop,
     effect: effect,
-    creativeEffect: {
-      prev: {
-        shadow: true,
-        translate: ['-20%', 0, -1]
-      },
-      next: {
-        translate: ['100%', 0, 0]
-      }
-    },
     allowTouchMove: allowTouchMove,
     navigation: {
       enabled: true
@@ -5770,6 +5761,7 @@ function Edit({
     ...(effect === 'creative' && {
       creativeEffect: {
         prev: {
+          shadow: true,
           translate: [0, 0, -400]
         },
         next: {
@@ -5806,7 +5798,7 @@ function Edit({
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_6__.Swiper, {
-    className: "guten-slider-swiper-wrapper",
+    className: "guten-slider-wrapper",
     ...settings,
     modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Manipulation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFade, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCube, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCoverflow, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFlip, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCreative, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCards]
   }, sliderItems.map(item => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_6__.SwiperSlide, {
@@ -6235,7 +6227,7 @@ function Save({
     creativeEffect: effect === 'creative' ? {
       prev: {
         shadow: true,
-        translate: ['-20%', 0, -1]
+        translate: [0, 0, -400]
       },
       next: {
         translate: ['100%', 0, 0]
@@ -6256,7 +6248,7 @@ function Save({
     ...blockProps,
     "data-swiper-settings": swiperSettings
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper guten-slider-swiper-wrapper"
+    className: "swiper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper-wrapper guten-slider-wrapper"
   }, sliderItems.map(item => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6275,13 +6267,13 @@ function Save({
     className: "guten-slider-title",
     value: item.title
   })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper-pagination"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper-button-next",
     "aria-label": "Next slide"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper-button-prev",
     "aria-label": "Previous slide"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "swiper-pagination"
   })));
 }
 

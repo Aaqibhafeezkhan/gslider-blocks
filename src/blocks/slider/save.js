@@ -39,7 +39,7 @@ export default function Save({ attributes }) {
         creativeEffect: effect === 'creative' ? {
             prev: {
                 shadow: true,
-                translate: ['-20%', 0, -1],
+                translate: [0, 0, -400],
             },
             next: {
                 translate: ['100%', 0, 0],
@@ -62,7 +62,7 @@ export default function Save({ attributes }) {
             {...blockProps}
             data-swiper-settings={swiperSettings}
         >
-            <div className="swiper guten-slider-swiper-wrapper">
+            <div className="swiper">
                 <div className="swiper-wrapper guten-slider-wrapper">
                     {sliderItems.map((item) => (
                         <div key={item.id} className='swiper-slide'>
@@ -82,9 +82,9 @@ export default function Save({ attributes }) {
                         </div>
                     ))}
                 </div>
-                <div className="swiper-pagination"></div>
                 <div className="swiper-button-next" aria-label="Next slide"></div>
                 <div className="swiper-button-prev" aria-label="Previous slide"></div>
+                <div className="swiper-pagination"></div>
             </div>
         </div>
     );
