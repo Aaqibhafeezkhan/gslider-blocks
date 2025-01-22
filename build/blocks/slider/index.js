@@ -5749,6 +5749,15 @@ function Edit({
     speed: transitionSpeed,
     loop: loop,
     effect: effect,
+    creativeEffect: {
+      prev: {
+        shadow: true,
+        translate: ['-20%', 0, -1]
+      },
+      next: {
+        translate: ['100%', 0, 0]
+      }
+    },
     allowTouchMove: allowTouchMove,
     navigation: {
       enabled: true
@@ -6208,20 +6217,44 @@ function Save({
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
     className: `guten-slider-container ${blockId}`
   });
+
+  // Configure Swiper settings for frontend rendering
+  const swiperSettings = JSON.stringify({
+    slidesPerView: slidePerView,
+    spaceBetween: spaceBetween,
+    autoplay: autoplay ? {
+      delay: autoplaySpeed,
+      disableOnInteraction: false,
+      stopOnLastSlide,
+      reverseDirection,
+      pauseOnMouseEnter: pauseOnHover
+    } : false,
+    speed: transitionSpeed,
+    loop: loop,
+    effect: effect,
+    creativeEffect: effect === 'creative' ? {
+      prev: {
+        shadow: true,
+        translate: ['-20%', 0, -1]
+      },
+      next: {
+        translate: ['100%', 0, 0]
+      }
+    } : undefined,
+    allowTouchMove: allowTouchMove,
+    navigation: {
+      nextEl: `.${blockId} .swiper-button-next`,
+      prevEl: `.${blockId} .swiper-button-prev`
+    },
+    pagination: {
+      el: `.${blockId} .swiper-pagination`,
+      type: 'bullets',
+      clickable: true
+    }
+  });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps,
-    "data-block-id": blockId,
-    "data-transition-speed": transitionSpeed,
-    "data-autoplay": autoplay,
-    "data-autoplay-speed": autoplaySpeed,
-    "data-slides-per-view": slidePerView,
-    "data-space-between": spaceBetween,
-    "data-loop": loop,
-    "data-allow-touch-move": allowTouchMove,
-    "data-pause-on-hover": pauseOnHover,
-    "data-stop-on-last-slide": stopOnLastSlide,
-    "data-reverse-direction": reverseDirection,
-    "data-effect": effect
+    "data-swiper-settings": swiperSettings
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper guten-slider-swiper-wrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6244,9 +6277,11 @@ function Save({
   })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "swiper-pagination"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper-button-next"
+    className: "swiper-button-next",
+    "aria-label": "Next slide"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper-button-prev"
+    className: "swiper-button-prev",
+    "aria-label": "Previous slide"
   })));
 }
 
@@ -18959,7 +18994,7 @@ SwiperSlide.displayName = 'SwiperSlide';
   \**************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenslider-blocks/slider","version":"1.0.0","title":"Slider","icon":"slides","category":"gutenslider-blocks","description":"Slider block","example":{},"supports":{"html":false,"align":["wide","full"],"customClassName":false},"textdomain":"gutenslider-blocks","editorScript":["file:./index.js","gutenslider-blocks-swiper-script"],"editorStyle":["file:./index.css","gutenslider-blocks-swiper-style"],"style":["file:./style-index.css","gutenslider-blocks-swiper-style"],"viewScript":["file:./view.js","gutenslider-blocks-swiper-script"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"gutenslider-blocks/slider","version":"1.0.0","title":"Slider","icon":"slides","category":"gutenslider-blocks","description":"Slider block","example":{},"supports":{"html":false,"align":["wide","full"],"customClassName":false},"textdomain":"gutenslider-blocks","editorScript":["file:./index.js","gutenslider-blocks-swiper-script"],"editorStyle":["file:./index.css","gutenslider-blocks-swiper-style"],"style":["file:./style-index.css","gutenslider-blocks-swiper-style"],"viewScript":["file:./view.js","gutenslider-blocks-swiper-script"]}');
 
 /***/ })
 

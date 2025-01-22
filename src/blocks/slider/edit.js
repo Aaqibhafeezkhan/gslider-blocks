@@ -88,6 +88,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         speed: transitionSpeed,
         loop: loop,
         effect: effect,
+        creativeEffect: {
+            prev: {
+                shadow: true,
+                translate: ['-20%', 0, -1],
+            },
+            next: {
+                translate: ['100%', 0, 0],
+            },
+        },
         allowTouchMove: allowTouchMove,
         navigation: {
             enabled: true,
