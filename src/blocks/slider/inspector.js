@@ -24,6 +24,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         stopOnLastSlide,
         reverseDirection,
         effect,
+        enableMouseWheel,
+        displayArrows,
+        displayDots
     } = attributes;
 
     useEffect(() => {
@@ -205,6 +208,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setAttributes({ autoplay: true });
                                                     }
                                                 }}
+                                            />
+                                            <ToggleControl
+                                                label={__("Enable Mouse Wheel", "gutenslider-blocks")}
+                                                checked={enableMouseWheel}
+                                                onChange={(value) => setAttributes({ enableMouseWheel: value })}
+                                            />
+                                            <ToggleControl
+                                                label={ __( "Enable Arrows", "gutenslider-blocks" ) }
+                                                checked={ displayArrows }
+                                                onChange={(value) => setAttributes({ displayArrows: value })}
+                                            />
+                                            <ToggleControl
+                                                label={ __( "Enable Dots", "gutenslider-blocks" ) }
+                                                checked={ displayDots }
+                                                onChange={(value) => setAttributes({ displayDots: value })}
                                             />
                                             <ToggleControl
                                                 label={ __( 'Enable Autoplay', 'gutenslider-blocks' ) }

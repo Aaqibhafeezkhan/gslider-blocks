@@ -48,11 +48,256 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         stopOnLastSlide,
         reverseDirection,
         effect,
+        enableMouseWheel,
+        displayArrows,
+        displayDots,
     } = attributes;
 
     const blockProps = useBlockProps({
         className: `guten-slider-container ${blockId}`,
     });
+
+    const swiperRef = useRef();
+	const sliderPaginationRef = useRef();
+	const sliderNavPrevRef = useRef();
+	const sliderNavNextRef = useRef();
+    const [swiperInstance, setSwiperInstance] = useState(null);
+
+    const setSwiperNavigationPagination = ( swiperInst ) => {
+		if ( swiperInst?.params?.navigation ) {
+			swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
+			swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
+
+			// Re-init navigation
+			swiperInst.navigation.destroy();
+			swiperInst.navigation.init();
+			swiperInst.navigation.update();
+		}
+
+		if ( swiperInst?.params?.pagination ) {
+			swiperInst.params.pagination.el = sliderPaginationRef.current;
+			swiperInst.params.pagination.clickable = true;
+
+			// Re-init pagination
+			swiperInst.pagination.init();
+			swiperInst.pagination.render();
+			swiperInst.pagination.update();
+		}
+	};
+
+    // Get effect-specific settings
+    const getEffectSettings = () => {
+        switch (effect) {
+            case 'fade':
+                return {
+                    fadeEffect: {
+                        crossFade: true
+                    }
+                };
+            case 'coverflow':
+                return {
+                    coverflowEffect: {
+                        rotate: 50,
+                        stretch: 0,
+                        depth: 100,
+                        modifier: 1,
+                        slideShadows: true
+                    }
+                };
+            case 'flip':
+                return {
+                    flipEffect: {
+                        slideShadows: true,
+                        limitRotation: true
+                    }
+                };
+            case 'creative':
+                return {
+                    creativeEffect: {
+                        prev: {
+                            translate: [0, 0, -400],
+                        },
+                        next: {
+                            translate: ['100%', 0, 0],
+                        },
+                    }
+                };
+            default:
+                return {
+                    effect: 'slide'
+                };
+        }
+    };
+
+    // Enhanced settings for Swiper
+    const settings = useMemo(() => ({
+        slidesPerView: slidePerView,
+        spaceBetween: spaceBetween,
+        autoplay: autoplay ? {
+            delay: autoplaySpeed || 900, // Fallback to 3 seconds
+            disableOnInteraction: false,
+            pauseOnMouseEnter: pauseOnHover,
+            stopOnLastSlide: stopOnLastSlide,
+            reverseDirection: reverseDirection,
+        } : false,
+        speed: transitionSpeed,
+        loop: loop,
+        effect: effect,
+        ...getEffectSettings(),
+        allowTouchMove: allowTouchMove,
+        mousewheel: enableMouseWheel ? {
+            forceToAxis: true,
+            sensitivity: 1,
+            releaseOnEdges: true,
+        } : false,
+        onBeforeInit(swiperInst) {
+            swiperRef.current = swiperInst;
+            setSwiperInstance(swiperInst);
+        },
+        onAfterInit(swiperInst) {
+            setTimeout(() => {
+                setSwiperNavigationPagination(swiperInst);
+            });
+        },
+    }), [
+        slidePerView,
+        spaceBetween,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        pauseOnHover,
+        transitionSpeed,
+        loop,
+        allowTouchMove,
+        effect,
+        enableMouseWheel,
+    ]);
+
+    // Add useEffect to update Swiper when settings change
+    useEffect(() => {
+        if (swiperInstance) {
+            // Update general settings
+            swiperInstance.params.slidesPerView = slidePerView;
+            swiperInstance.params.spaceBetween = spaceBetween;
+            swiperInstance.params.speed = transitionSpeed;
+            swiperInstance.params.loop = loop;
+
+            // Explicitly update allowTouchMove
+            swiperInstance.params.allowTouchMove = allowTouchMove;
+            swiperInstance.allowTouchMove = allowTouchMove;
+        
+            // Comprehensive autoplay management
+            if (autoplay) {
+                // Explicit autoplay configuration
+                swiperInstance.params.autoplay = {
+                    delay: autoplaySpeed || 900,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: pauseOnHover,
+                    stopOnLastSlide: stopOnLastSlide,
+                    reverseDirection: reverseDirection,
+                };
+
+                // Conditional autoplay start
+                if (!stopOnLastSlide || swiperInstance.activeIndex < swiperInstance.slides.length - 1) {
+                    swiperInstance.autoplay.start();
+                }
+            } else {
+                swiperInstance.autoplay.stop();
+            }
+
+    
+            // Update the Swiper instance with new parameters
+            swiperInstance.update();
+
+                // Additional check to ensure touch interaction is updated
+                if (swiperInstance.touch) {
+                    swiperInstance.touch.enabled = allowTouchMove;
+                }
+    
+            // If loop setting changed, need to re-initialize
+            if (swiperInstance.params.loop !== loop) {
+                swiperInstance.loopDestroy();
+                if (loop) {
+                    swiperInstance.loopCreate();
+                }
+            }
+    
+            // Reset event listeners
+            swiperInstance.off('reachEnd');
+            if (stopOnLastSlide && !loop && autoplay) {
+                swiperInstance.on('reachEnd', () => {
+                    swiperInstance.autoplay.stop();
+                });
+            }
+        }
+    }, [
+        swiperInstance,
+        slidePerView,
+        spaceBetween,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        transitionSpeed,
+        loop,
+        allowTouchMove
+    ]);
+
+    // Existing hover pause effect (keep this)
+    useEffect(() => {
+        if (swiperInstance && autoplay && pauseOnHover) {
+            const swiperEl = swiperInstance.el;
+            
+            const handleMouseEnter = () => {
+                if (swiperInstance.autoplay.running) {
+                    swiperInstance.autoplay.stop();
+                }
+            };
+
+            const handleMouseLeave = () => {
+                if (autoplay && !stopOnLastSlide) {
+                    swiperInstance.autoplay.start();
+                }
+            };
+
+            swiperEl.addEventListener('mouseenter', handleMouseEnter);
+            swiperEl.addEventListener('mouseleave', handleMouseLeave);
+
+            return () => {
+                swiperEl.removeEventListener('mouseenter', handleMouseEnter);
+                swiperEl.removeEventListener('mouseleave', handleMouseLeave);
+            };
+        }
+    }, [swiperInstance, autoplay, pauseOnHover, stopOnLastSlide]);
+
+    // Add useEffect to handle mousewheel updates
+    useEffect(() => {
+        if (swiperInstance) {
+            // Update mousewheel settings
+            if (enableMouseWheel) {
+                swiperInstance.mousewheel.enable();
+            } else {
+                swiperInstance.mousewheel.disable();
+            }
+            swiperInstance.update();
+        }
+    }, [swiperInstance, enableMouseWheel]);
+    
+
+    useEffect( () => {
+		if ( swiperInstance ) {
+			swiperInstance.update();
+		}
+	}, [ attributes ] );
+
+    useEffect( () => {
+		if ( swiperInstance ) {
+			setSwiperNavigationPagination( swiperInstance );
+		}
+	}, [ displayArrows, displayDots ] );
+
+    console.log(swiperInstance);
 
 
     const handleAddItem = () => {
@@ -74,70 +319,35 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setAttributes({ sliderItems: [...sliderItems, newItem] });
     };
 
-    // Enhanced settings for Swiper
-    const settings = useMemo(() => ({
-        slidesPerView: slidePerView,
-        spaceBetween: spaceBetween,
-        autoplay: autoplay ? {
-            delay: autoplaySpeed,
-            disableOnInteraction: false,
-            stopOnLastSlide: stopOnLastSlide,
-            reverseDirection: reverseDirection,
-            pauseOnMouseEnter: pauseOnHover,
-        } : false,
-        speed: transitionSpeed,
-        loop: loop,
-        effect: effect,
-        allowTouchMove: allowTouchMove,
-        navigation: {
-            enabled: true,
-        },
-        pagination: {
-            enabled: true,
-            clickable: true,
-        },
-        // Add effect-specific settings
-        ...(effect === 'creative' && {
-            creativeEffect: {
-                prev: {
-                    shadow: true,
-                    translate: [0, 0, -400],
-                },
-                next: {
-                    translate: ['100%', 0, 0],
-                },
-            },
-        }),
-        ...(effect === 'cube' && {
-            cubeEffect: {
-                shadow: true,
-                slideShadows: true,
-                shadowOffset: 20,
-                shadowScale: 0.94,
-            },
-        }),
-        ...(effect === 'coverflow' && {
-            coverflowEffect: {
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: true,
-            },
-        }),
-    }), [
-        slidePerView,
-        spaceBetween,
-        autoplay,
-        autoplaySpeed,
-        stopOnLastSlide,
-        reverseDirection,
-        pauseOnHover,
-        transitionSpeed,
-        loop,
-        allowTouchMove,
-        effect,
-    ]);
+    const renderSliderToolbarControls = () => {
+        return (
+            <BlockControls>
+                <ToolbarGroup>
+                    <ToolbarButton
+                        icon="plus"
+                        label={ __( 'Add New Slide', 'gutenslider-blocks' ) }
+                        onClick={ () => {
+                            // Add new item
+                            handleAddItem();
+    
+                            // Ensure swiperInstance exists
+                            if (swiperInstance && swiperInstance.slides) {
+                                const slidesCount = swiperInstance.slides.length;
+    
+                                // Slide to an index beyond current slides to reset UI
+                                swiperInstance.slideTo(slidesCount + 1, transitionSpeed, false);
+    
+                                // Reset to avoid potential UI breaks
+                                setTimeout(() => {
+                                    swiperInstance.slideTo(slidesCount, 0, false);
+                                }, 100);
+                            }
+                        } }
+                    />
+                </ToolbarGroup>
+            </BlockControls>
+        );
+    };
 
     return (
         <>
@@ -147,18 +357,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId={clientId}
             />
 
-            <BlockControls>
-                <ToolbarGroup>
-                    <ToolbarButton
-                        icon="plus"
-                        label={__('Add Slider', 'gutenslider-blocks')}
-                        onClick={handleAddItem}
-                    />
-                </ToolbarGroup>
-            </BlockControls>
+            { renderSliderToolbarControls () }
 
             <div {...blockProps}>
                 <Swiper
+                    ref={swiperRef}
                     className='guten-slider-wrapper'
                     {...settings}
                     modules={[
@@ -174,6 +377,41 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         EffectCreative,
                         EffectCards
                     ]}
+                    navigation={
+                        displayArrows
+                            ? {
+                                    nextEl: '#block-' + clientId + '.guten-slider .swiper-button-next',
+                                    prevEl: '#block-' + clientId + '.guten-slider .swiper-button-prev',
+                            }
+                            : false
+                    }
+                    pagination={
+                        displayDots
+                            ? {
+                                    el: '#block-' + clientId + '.guten-slider .swiper-pagination',
+                                    clickable: true,
+                            }
+                            : false
+                    }
+                    onSwiper={(swiper) => {
+                        setSwiperInstance(swiper);
+
+                        // Ensure autoplay starts correctly on initialization
+                        if (autoplay) {
+                            swiper.autoplay.start();
+                        }
+
+                        swiper.on('slideChange', () => {
+                            setAttributes({ currentSlideIndex: swiper.activeIndex });
+                        });
+                        
+                        // Add reach end handler for stopOnLastSlide
+                        swiper.on('reachEnd', () => {
+                            if (stopOnLastSlide && !loop && autoplay) {
+                                swiper.autoplay.stop();
+                            }
+                        });
+                    }}
                 >
                     {sliderItems.map((item) => (
                         <SwiperSlide key={item.id}>
@@ -203,6 +441,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+                { displayDots && <div className="guten-slider swiper-pagination" ref={ sliderPaginationRef }></div> }
+                { displayArrows && (
+                    <>
+                        <div className="guten-slider swiper-button-prev" ref={ sliderNavPrevRef }></div>
+                        <div className="guten-slider swiper-button-next" ref={ sliderNavNextRef }></div>
+                    </>
+                ) }
             </div>
         </>
     );

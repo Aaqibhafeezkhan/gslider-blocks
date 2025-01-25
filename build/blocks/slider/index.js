@@ -5450,6 +5450,18 @@ const attributes = {
   effect: {
     type: 'string',
     default: 'creative'
+  },
+  enableMouseWheel: {
+    "type": "boolean",
+    "default": false
+  },
+  displayArrows: {
+    type: 'boolean',
+    default: true
+  },
+  displayDots: {
+    type: 'boolean',
+    default: true
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (attributes);
@@ -5708,11 +5720,221 @@ function Edit({
     pauseOnHover,
     stopOnLastSlide,
     reverseDirection,
-    effect
+    effect,
+    enableMouseWheel,
+    displayArrows,
+    displayDots
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
     className: `guten-slider-container ${blockId}`
   });
+  const swiperRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useRef)();
+  const sliderPaginationRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useRef)();
+  const sliderNavPrevRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useRef)();
+  const sliderNavNextRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useRef)();
+  const [swiperInstance, setSwiperInstance] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
+  const setSwiperNavigationPagination = swiperInst => {
+    if (swiperInst?.params?.navigation) {
+      swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
+      swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
+
+      // Re-init navigation
+      swiperInst.navigation.destroy();
+      swiperInst.navigation.init();
+      swiperInst.navigation.update();
+    }
+    if (swiperInst?.params?.pagination) {
+      swiperInst.params.pagination.el = sliderPaginationRef.current;
+      swiperInst.params.pagination.clickable = true;
+
+      // Re-init pagination
+      swiperInst.pagination.init();
+      swiperInst.pagination.render();
+      swiperInst.pagination.update();
+    }
+  };
+
+  // Get effect-specific settings
+  const getEffectSettings = () => {
+    switch (effect) {
+      case 'fade':
+        return {
+          fadeEffect: {
+            crossFade: true
+          }
+        };
+      case 'coverflow':
+        return {
+          coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true
+          }
+        };
+      case 'flip':
+        return {
+          flipEffect: {
+            slideShadows: true,
+            limitRotation: true
+          }
+        };
+      case 'creative':
+        return {
+          creativeEffect: {
+            prev: {
+              translate: [0, 0, -400]
+            },
+            next: {
+              translate: ['100%', 0, 0]
+            }
+          }
+        };
+      default:
+        return {
+          effect: 'slide'
+        };
+    }
+  };
+
+  // Enhanced settings for Swiper
+  const settings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useMemo)(() => ({
+    slidesPerView: slidePerView,
+    spaceBetween: spaceBetween,
+    autoplay: autoplay ? {
+      delay: autoplaySpeed || 900,
+      // Fallback to 3 seconds
+      disableOnInteraction: false,
+      pauseOnMouseEnter: pauseOnHover,
+      stopOnLastSlide: stopOnLastSlide,
+      reverseDirection: reverseDirection
+    } : false,
+    speed: transitionSpeed,
+    loop: loop,
+    effect: effect,
+    ...getEffectSettings(),
+    allowTouchMove: allowTouchMove,
+    mousewheel: enableMouseWheel ? {
+      forceToAxis: true,
+      sensitivity: 1,
+      releaseOnEdges: true
+    } : false,
+    onBeforeInit(swiperInst) {
+      swiperRef.current = swiperInst;
+      setSwiperInstance(swiperInst);
+    },
+    onAfterInit(swiperInst) {
+      setTimeout(() => {
+        setSwiperNavigationPagination(swiperInst);
+      });
+    }
+  }), [slidePerView, spaceBetween, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, pauseOnHover, transitionSpeed, loop, allowTouchMove, effect, enableMouseWheel]);
+
+  // Add useEffect to update Swiper when settings change
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
+    if (swiperInstance) {
+      // Update general settings
+      swiperInstance.params.slidesPerView = slidePerView;
+      swiperInstance.params.spaceBetween = spaceBetween;
+      swiperInstance.params.speed = transitionSpeed;
+      swiperInstance.params.loop = loop;
+
+      // Explicitly update allowTouchMove
+      swiperInstance.params.allowTouchMove = allowTouchMove;
+      swiperInstance.allowTouchMove = allowTouchMove;
+
+      // Comprehensive autoplay management
+      if (autoplay) {
+        // Explicit autoplay configuration
+        swiperInstance.params.autoplay = {
+          delay: autoplaySpeed || 900,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: pauseOnHover,
+          stopOnLastSlide: stopOnLastSlide,
+          reverseDirection: reverseDirection
+        };
+
+        // Conditional autoplay start
+        if (!stopOnLastSlide || swiperInstance.activeIndex < swiperInstance.slides.length - 1) {
+          swiperInstance.autoplay.start();
+        }
+      } else {
+        swiperInstance.autoplay.stop();
+      }
+
+      // Update the Swiper instance with new parameters
+      swiperInstance.update();
+
+      // Additional check to ensure touch interaction is updated
+      if (swiperInstance.touch) {
+        swiperInstance.touch.enabled = allowTouchMove;
+      }
+
+      // If loop setting changed, need to re-initialize
+      if (swiperInstance.params.loop !== loop) {
+        swiperInstance.loopDestroy();
+        if (loop) {
+          swiperInstance.loopCreate();
+        }
+      }
+
+      // Reset event listeners
+      swiperInstance.off('reachEnd');
+      if (stopOnLastSlide && !loop && autoplay) {
+        swiperInstance.on('reachEnd', () => {
+          swiperInstance.autoplay.stop();
+        });
+      }
+    }
+  }, [swiperInstance, slidePerView, spaceBetween, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, transitionSpeed, loop, allowTouchMove]);
+
+  // Existing hover pause effect (keep this)
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
+    if (swiperInstance && autoplay && pauseOnHover) {
+      const swiperEl = swiperInstance.el;
+      const handleMouseEnter = () => {
+        if (swiperInstance.autoplay.running) {
+          swiperInstance.autoplay.stop();
+        }
+      };
+      const handleMouseLeave = () => {
+        if (autoplay && !stopOnLastSlide) {
+          swiperInstance.autoplay.start();
+        }
+      };
+      swiperEl.addEventListener('mouseenter', handleMouseEnter);
+      swiperEl.addEventListener('mouseleave', handleMouseLeave);
+      return () => {
+        swiperEl.removeEventListener('mouseenter', handleMouseEnter);
+        swiperEl.removeEventListener('mouseleave', handleMouseLeave);
+      };
+    }
+  }, [swiperInstance, autoplay, pauseOnHover, stopOnLastSlide]);
+
+  // Add useEffect to handle mousewheel updates
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
+    if (swiperInstance) {
+      // Update mousewheel settings
+      if (enableMouseWheel) {
+        swiperInstance.mousewheel.enable();
+      } else {
+        swiperInstance.mousewheel.disable();
+      }
+      swiperInstance.update();
+    }
+  }, [swiperInstance, enableMouseWheel]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
+    if (swiperInstance) {
+      swiperInstance.update();
+    }
+  }, [attributes]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
+    if (swiperInstance) {
+      setSwiperNavigationPagination(swiperInstance);
+    }
+  }, [displayArrows, displayDots]);
+  console.log(swiperInstance);
   const handleAddItem = () => {
     const newItem = {
       id: `item-${sliderItems.length + 1}`,
@@ -5734,73 +5956,68 @@ function Edit({
       sliderItems: [...sliderItems, newItem]
     });
   };
+  const renderSliderToolbarControls = () => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
+      icon: "plus",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add New Slide', 'gutenslider-blocks'),
+      onClick: () => {
+        // Add new item
+        handleAddItem();
 
-  // Enhanced settings for Swiper
-  const settings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useMemo)(() => ({
-    slidesPerView: slidePerView,
-    spaceBetween: spaceBetween,
-    autoplay: autoplay ? {
-      delay: autoplaySpeed,
-      disableOnInteraction: false,
-      stopOnLastSlide: stopOnLastSlide,
-      reverseDirection: reverseDirection,
-      pauseOnMouseEnter: pauseOnHover
-    } : false,
-    speed: transitionSpeed,
-    loop: loop,
-    effect: effect,
-    allowTouchMove: allowTouchMove,
-    navigation: {
-      enabled: true
-    },
-    pagination: {
-      enabled: true,
-      clickable: true
-    },
-    // Add effect-specific settings
-    ...(effect === 'creative' && {
-      creativeEffect: {
-        prev: {
-          shadow: true,
-          translate: [0, 0, -400]
-        },
-        next: {
-          translate: ['100%', 0, 0]
+        // Ensure swiperInstance exists
+        if (swiperInstance && swiperInstance.slides) {
+          const slidesCount = swiperInstance.slides.length;
+
+          // Slide to an index beyond current slides to reset UI
+          swiperInstance.slideTo(slidesCount + 1, transitionSpeed, false);
+
+          // Reset to avoid potential UI breaks
+          setTimeout(() => {
+            swiperInstance.slideTo(slidesCount, 0, false);
+          }, 100);
         }
       }
-    }),
-    ...(effect === 'cube' && {
-      cubeEffect: {
-        shadow: true,
-        slideShadows: true,
-        shadowOffset: 20,
-        shadowScale: 0.94
-      }
-    }),
-    ...(effect === 'coverflow' && {
-      coverflowEffect: {
-        rotate: 50,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: true
-      }
-    })
-  }), [slidePerView, spaceBetween, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, pauseOnHover, transitionSpeed, loop, allowTouchMove, effect]);
+    })));
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_inspector__WEBPACK_IMPORTED_MODULE_5__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     clientId: clientId
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
-    icon: "plus",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add Slider', 'gutenslider-blocks'),
-    onClick: handleAddItem
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), renderSliderToolbarControls(), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_6__.Swiper, {
+    ref: swiperRef,
     className: "guten-slider-wrapper",
     ...settings,
-    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Manipulation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFade, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCube, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCoverflow, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFlip, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCreative, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCards]
+    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Manipulation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFade, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCube, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCoverflow, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFlip, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCreative, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCards],
+    navigation: displayArrows ? {
+      nextEl: '#block-' + clientId + '.guten-slider .swiper-button-next',
+      prevEl: '#block-' + clientId + '.guten-slider .swiper-button-prev'
+    } : false,
+    pagination: displayDots ? {
+      el: '#block-' + clientId + '.guten-slider .swiper-pagination',
+      clickable: true
+    } : false,
+    onSwiper: swiper => {
+      setSwiperInstance(swiper);
+
+      // Ensure autoplay starts correctly on initialization
+      if (autoplay) {
+        swiper.autoplay.start();
+      }
+      swiper.on('slideChange', () => {
+        setAttributes({
+          currentSlideIndex: swiper.activeIndex
+        });
+      });
+
+      // Add reach end handler for stopOnLastSlide
+      swiper.on('reachEnd', () => {
+        if (stopOnLastSlide && !loop && autoplay) {
+          swiper.autoplay.stop();
+        }
+      });
+    }
   }, sliderItems.map(item => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_6__.SwiperSlide, {
     key: item.id
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -5822,7 +6039,16 @@ function Edit({
       } : sliderItem)
     }),
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slider Title', 'gutenslider-blocks')
-  }))))))))));
+  })))))))), displayDots && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "guten-slider swiper-pagination",
+    ref: sliderPaginationRef
+  }), displayArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "guten-slider swiper-button-prev",
+    ref: sliderNavPrevRef
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "guten-slider swiper-button-next",
+    ref: sliderNavNextRef
+  }))));
 }
 
 /***/ }),
@@ -5913,7 +6139,10 @@ function Inspector({
     pauseOnHover,
     stopOnLastSlide,
     reverseDirection,
-    effect
+    effect,
+    enableMouseWheel,
+    displayArrows,
+    displayDots
   } = attributes;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
     if (clientId) {
@@ -6106,6 +6335,24 @@ function Inspector({
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable Mouse Wheel", "gutenslider-blocks"),
+    checked: enableMouseWheel,
+    onChange: value => setAttributes({
+      enableMouseWheel: value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable Arrows", "gutenslider-blocks"),
+    checked: displayArrows,
+    onChange: value => setAttributes({
+      displayArrows: value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable Dots", "gutenslider-blocks"),
+    checked: displayDots,
+    onChange: value => setAttributes({
+      displayDots: value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enable Autoplay', 'gutenslider-blocks'),
     checked: autoplay,
     onChange: value => setAttributes({
@@ -6204,7 +6451,10 @@ function Save({
     pauseOnHover,
     stopOnLastSlide,
     reverseDirection,
-    effect
+    effect,
+    enableMouseWheel,
+    displayArrows,
+    displayDots
   } = attributes;
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
     className: `guten-slider-container ${blockId}`
@@ -6234,12 +6484,13 @@ function Save({
       }
     } : undefined,
     allowTouchMove: allowTouchMove,
+    mousewheel: enableMouseWheel,
     navigation: {
-      nextEl: `.${blockId} .swiper-button-next`,
-      prevEl: `.${blockId} .swiper-button-prev`
+      nextEl: `.${blockId} .guten-slider.swiper-button-next`,
+      prevEl: `.${blockId} .guten-slider.swiper-button-prev`
     },
     pagination: {
-      el: `.${blockId} .swiper-pagination`,
+      el: `.${blockId} .guten-slider.swiper-pagination`,
       type: 'bullets',
       clickable: true
     }
@@ -6266,15 +6517,15 @@ function Save({
     tagName: "h3",
     className: "guten-slider-title",
     value: item.title
-  })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper-button-next",
+  })))))))), displayDots && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "guten-slider swiper-pagination"
+  }), displayArrows && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "guten-slider swiper-button-next",
     "aria-label": "Next slide"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper-button-prev",
+    className: "guten-slider swiper-button-prev",
     "aria-label": "Previous slide"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "swiper-pagination"
-  })));
+  }))));
 }
 
 /***/ }),

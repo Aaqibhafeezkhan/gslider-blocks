@@ -15,6 +15,9 @@ export default function Save({ attributes }) {
         stopOnLastSlide,
         reverseDirection,
         effect,
+        enableMouseWheel,
+        displayArrows,
+        displayDots,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -46,12 +49,13 @@ export default function Save({ attributes }) {
             },
         } : undefined,
         allowTouchMove: allowTouchMove,
+        mousewheel: enableMouseWheel,
         navigation: {
-            nextEl: `.${blockId} .swiper-button-next`,
-            prevEl: `.${blockId} .swiper-button-prev`,
+            nextEl: `.${blockId} .guten-slider.swiper-button-next`,
+            prevEl: `.${blockId} .guten-slider.swiper-button-prev`,
         },
         pagination: {
-            el: `.${blockId} .swiper-pagination`,
+            el: `.${blockId} .guten-slider.swiper-pagination`,
             type: 'bullets',
             clickable: true,
         },
@@ -82,9 +86,13 @@ export default function Save({ attributes }) {
                         </div>
                     ))}
                 </div>
-                <div className="swiper-button-next" aria-label="Next slide"></div>
-                <div className="swiper-button-prev" aria-label="Previous slide"></div>
-                <div className="swiper-pagination"></div>
+                { displayDots && <div className="guten-slider swiper-pagination"></div> }
+                { displayArrows && 
+                    <>
+                        <div className="guten-slider swiper-button-next" aria-label="Next slide"></div>
+                        <div className="guten-slider swiper-button-prev" aria-label="Previous slide"></div>
+                    </>
+                }
             </div>
         </div>
     );

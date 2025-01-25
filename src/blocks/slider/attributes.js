@@ -170,6 +170,18 @@ const attributes = {
         type: 'string',
         default: 'creative'
     },
+    enableMouseWheel: {
+        "type": "boolean",
+        "default": false
+    },
+    displayArrows: {
+		type: 'boolean',
+		default: true,
+	},
+	displayDots: {
+		type: 'boolean',
+		default: true,
+	},
 };
 
 export default attributes;
