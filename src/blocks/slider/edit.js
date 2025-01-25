@@ -37,8 +37,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         sliderItems,
-        slidePerView,
-        spaceBetween,
+        sliderType,
+        slidePerColumn,
+        slidePerColumnGap,
         transitionSpeed,
         autoplay,
         autoplaySpeed,
@@ -131,8 +132,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     // Enhanced settings for Swiper
     const settings = useMemo(() => ({
-        slidesPerView: slidePerView,
-        spaceBetween: spaceBetween,
+        ...(sliderType === 'carousel' ? {
+            slidesPerView: slidePerColumn,
+            spaceBetween: slidePerColumnGap
+        } : {
+            slidesPerView: 1,
+            spaceBetween: 0
+        }),
         autoplay: autoplay ? {
             delay: autoplaySpeed || 900, // Fallback to 3 seconds
             disableOnInteraction: false,
@@ -160,8 +166,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             });
         },
     }), [
-        slidePerView,
-        spaceBetween,
+        sliderType,
+        slidePerColumn,
+        slidePerColumnGap,
         autoplay,
         autoplaySpeed,
         stopOnLastSlide,
@@ -177,9 +184,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     // Add useEffect to update Swiper when settings change
     useEffect(() => {
         if (swiperInstance) {
-            // Update general settings
-            swiperInstance.params.slidesPerView = slidePerView;
-            swiperInstance.params.spaceBetween = spaceBetween;
+            // Update slides configuration based on slider type
+            swiperInstance.params.slidesPerView = sliderType === 'carousel' ? slidePerColumn : 1;
+            swiperInstance.params.spaceBetween = sliderType === 'carousel' ? slidePerColumnGap : 0;
+
             swiperInstance.params.speed = transitionSpeed;
             swiperInstance.params.loop = loop;
 
@@ -233,8 +241,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         }
     }, [
         swiperInstance,
-        slidePerView,
-        spaceBetween,
+        sliderType,
+        slidePerColumn,
+        slidePerColumnGap,
         autoplay,
         autoplaySpeed,
         stopOnLastSlide,
@@ -297,7 +306,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [ displayArrows, displayDots ] );
 
-    console.log(swiperInstance);
+    console.log(slidePerColumn);
+    console.log(slidePerColumnGap);
+    // console.log(transitionSpeed);
+    // console.log(autoplay);
+    // console.log(autoplaySpeed);
+    // console.log(loop);
+    // console.log(allowTouchMove);
+    // console.log(pauseOnHover);
+    // console.log(stopOnLastSlide);
+    // console.log(reverseDirection);
+    // console.log(effect);
+    // console.log(enableMouseWheel);
+    // console.log(displayArrows);
+    // console.log(displayDots);
+
+
 
 
     const handleAddItem = () => {

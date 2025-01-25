@@ -125,14 +125,19 @@ const attributes = {
             }
         }
     },
+
+    sliderType: {
+        type: "string",
+        default: "slider"
+    },
     
-    slidePerView: {
+    slidePerColumn: {
 		type: 'number',
-		default: 1,
+		default: 2,
 	},
-    spaceBetween: {
+    slidePerColumnGap: {
 		type: 'number',
-		default: 0,
+		default: 20,
 	},
 	transitionSpeed: {
 		type: 'number',
@@ -168,7 +173,7 @@ const attributes = {
     },
     effect: {
         type: 'string',
-        default: 'creative'
+        default: value => value === 'carousel' ? 'slide' : 'creative'
     },
     enableMouseWheel: {
         "type": "boolean",

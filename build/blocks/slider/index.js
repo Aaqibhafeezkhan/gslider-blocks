@@ -5407,13 +5407,17 @@ const attributes = {
       }
     }
   },
-  slidePerView: {
-    type: 'number',
-    default: 1
+  sliderType: {
+    type: "string",
+    default: "slider"
   },
-  spaceBetween: {
+  slidePerColumn: {
     type: 'number',
-    default: 0
+    default: 2
+  },
+  slidePerColumnGap: {
+    type: 'number',
+    default: 20
   },
   transitionSpeed: {
     type: 'number',
@@ -5449,7 +5453,7 @@ const attributes = {
   },
   effect: {
     type: 'string',
-    default: 'creative'
+    default: value => value === 'carousel' ? 'slide' : 'creative'
   },
   enableMouseWheel: {
     "type": "boolean",
@@ -5477,11 +5481,13 @@ const attributes = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   BORDER_STYLES: () => (/* binding */ BORDER_STYLES),
-/* harmony export */   EFFECT_OPTIONS: () => (/* binding */ EFFECT_OPTIONS),
+/* harmony export */   CAROUSEL_EFFECT_OPTIONS: () => (/* binding */ CAROUSEL_EFFECT_OPTIONS),
 /* harmony export */   HEADING: () => (/* binding */ HEADING),
 /* harmony export */   ICON_ALIGN: () => (/* binding */ ICON_ALIGN),
 /* harmony export */   NORMAL_HOVER: () => (/* binding */ NORMAL_HOVER),
 /* harmony export */   SEPERATOR_STYLES: () => (/* binding */ SEPERATOR_STYLES),
+/* harmony export */   SLIDER_EFFECT_OPTIONS: () => (/* binding */ SLIDER_EFFECT_OPTIONS),
+/* harmony export */   SLIDER_TYPE: () => (/* binding */ SLIDER_TYPE),
 /* harmony export */   SUBTITLE_MARGIN: () => (/* binding */ SUBTITLE_MARGIN),
 /* harmony export */   TEXT_ALIGN: () => (/* binding */ TEXT_ALIGN),
 /* harmony export */   TITLE_MARGIN: () => (/* binding */ TITLE_MARGIN),
@@ -5632,7 +5638,7 @@ const BORDER_STYLES = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ridge", "gutenslider-blocks"),
   value: "ridge"
 }];
-const EFFECT_OPTIONS = [{
+const SLIDER_EFFECT_OPTIONS = [{
   value: 'slide',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slide', 'gutenslider-blocks')
 }, {
@@ -5647,6 +5653,20 @@ const EFFECT_OPTIONS = [{
 }, {
   value: 'creative',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Creative', 'gutenslider-blocks')
+}];
+const CAROUSEL_EFFECT_OPTIONS = [{
+  value: 'slide',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slide', 'gutenslider-blocks')
+}, {
+  value: 'coverflow',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Coverflow', 'gutenslider-blocks')
+}];
+const SLIDER_TYPE = [{
+  value: 'slider',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slider', 'gutenslider-blocks')
+}, {
+  value: 'carousel',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Carousel', 'gutenslider-blocks')
 }];
 
 /***/ }),
@@ -5710,8 +5730,9 @@ function Edit({
   const {
     blockId,
     sliderItems,
-    slidePerView,
-    spaceBetween,
+    sliderType,
+    slidePerColumn,
+    slidePerColumnGap,
     transitionSpeed,
     autoplay,
     autoplaySpeed,
@@ -5800,8 +5821,13 @@ function Edit({
 
   // Enhanced settings for Swiper
   const settings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useMemo)(() => ({
-    slidesPerView: slidePerView,
-    spaceBetween: spaceBetween,
+    ...(sliderType === 'carousel' ? {
+      slidesPerView: slidePerColumn,
+      spaceBetween: slidePerColumnGap
+    } : {
+      slidesPerView: 1,
+      spaceBetween: 0
+    }),
     autoplay: autoplay ? {
       delay: autoplaySpeed || 900,
       // Fallback to 3 seconds
@@ -5829,14 +5855,14 @@ function Edit({
         setSwiperNavigationPagination(swiperInst);
       });
     }
-  }), [slidePerView, spaceBetween, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, pauseOnHover, transitionSpeed, loop, allowTouchMove, effect, enableMouseWheel]);
+  }), [sliderType, slidePerColumn, slidePerColumnGap, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, pauseOnHover, transitionSpeed, loop, allowTouchMove, effect, enableMouseWheel]);
 
   // Add useEffect to update Swiper when settings change
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
     if (swiperInstance) {
-      // Update general settings
-      swiperInstance.params.slidesPerView = slidePerView;
-      swiperInstance.params.spaceBetween = spaceBetween;
+      // Update slides configuration based on slider type
+      swiperInstance.params.slidesPerView = sliderType === 'carousel' ? slidePerColumn : 1;
+      swiperInstance.params.spaceBetween = sliderType === 'carousel' ? slidePerColumnGap : 0;
       swiperInstance.params.speed = transitionSpeed;
       swiperInstance.params.loop = loop;
 
@@ -5887,7 +5913,7 @@ function Edit({
         });
       }
     }
-  }, [swiperInstance, slidePerView, spaceBetween, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, transitionSpeed, loop, allowTouchMove]);
+  }, [swiperInstance, sliderType, slidePerColumn, slidePerColumnGap, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, transitionSpeed, loop, allowTouchMove]);
 
   // Existing hover pause effect (keep this)
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
@@ -5934,7 +5960,21 @@ function Edit({
       setSwiperNavigationPagination(swiperInstance);
     }
   }, [displayArrows, displayDots]);
-  console.log(swiperInstance);
+  console.log(slidePerColumn);
+  console.log(slidePerColumnGap);
+  // console.log(transitionSpeed);
+  // console.log(autoplay);
+  // console.log(autoplaySpeed);
+  // console.log(loop);
+  // console.log(allowTouchMove);
+  // console.log(pauseOnHover);
+  // console.log(stopOnLastSlide);
+  // console.log(reverseDirection);
+  // console.log(effect);
+  // console.log(enableMouseWheel);
+  // console.log(displayArrows);
+  // console.log(displayDots);
+
   const handleAddItem = () => {
     const newItem = {
       id: `item-${sliderItems.length + 1}`,
@@ -6129,8 +6169,9 @@ function Inspector({
     blockId,
     sliderItems,
     blockStyle,
-    slidePerView,
-    spaceBetween,
+    sliderType,
+    slidePerColumn,
+    slidePerColumnGap,
     transitionSpeed,
     autoplay,
     autoplaySpeed,
@@ -6285,6 +6326,45 @@ function Inspector({
     isPrimary: true,
     onClick: handleAddItem
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add Slider", "gutenslider-blocks")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Layout", "gutenslider-blocks"),
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "global-setting-switcher-container"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.BaseControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Type", "gutenslider-blocks"),
+    className: "global-setting-switcher-panel-wrapper"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ButtonGroup, {
+    className: "global-setting-switcher-panel-btn"
+  }, _constants_constants__WEBPACK_IMPORTED_MODULE_8__.SLIDER_TYPE.map((item, key) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+    key: key,
+    onClick: () => setAttributes({
+      sliderType: item.value
+    }),
+    className: `global-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`
+  }, item.label)))))), sliderType === 'carousel' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Carousel Options", "gutenslider-blocks"),
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Columns', 'gutenslider-blocks'),
+    value: slidePerColumn,
+    onChange: value => setAttributes({
+      slidePerColumn: value
+    }),
+    min: 1,
+    max: 10,
+    step: 1,
+    initialPosition: 1
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Columns Gap', 'gutenslider-blocks'),
+    value: slidePerColumnGap,
+    onChange: value => setAttributes({
+      slidePerColumnGap: value
+    }),
+    min: 0,
+    max: 200,
+    step: 1,
+    initialPosition: 1
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Options", "gutenslider-blocks"),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
@@ -6378,33 +6458,13 @@ function Inspector({
     max: 3000,
     step: 100,
     initialPosition: 1000
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slide Per View', 'gutenslider-blocks'),
-    value: slidePerView,
-    onChange: value => setAttributes({
-      slidePerView: value
-    }),
-    min: 1,
-    max: 10,
-    step: 1,
-    initialPosition: 1
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Space Between Slide', 'gutenslider-blocks'),
-    value: spaceBetween,
-    onChange: value => setAttributes({
-      spaceBetween: value
-    }),
-    min: 0,
-    max: 200,
-    step: 1,
-    initialPosition: 1
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Effect", "gutenslider-blocks"),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slide Effect', 'your-text-domain'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slide Effect', 'gutenslider-blocks'),
     value: effect,
-    options: _constants_constants__WEBPACK_IMPORTED_MODULE_8__.EFFECT_OPTIONS,
+    options: sliderType === 'carousel' ? _constants_constants__WEBPACK_IMPORTED_MODULE_8__.CAROUSEL_EFFECT_OPTIONS : _constants_constants__WEBPACK_IMPORTED_MODULE_8__.SLIDER_EFFECT_OPTIONS,
     onChange: value => setAttributes({
       effect: value
     })
@@ -6441,8 +6501,8 @@ function Save({
   const {
     blockId,
     sliderItems,
-    slidePerView,
-    spaceBetween,
+    slidePerColumn,
+    slidePerColumnGap,
     transitionSpeed,
     autoplay,
     autoplaySpeed,
@@ -6462,8 +6522,8 @@ function Save({
 
   // Configure Swiper settings for frontend rendering
   const swiperSettings = JSON.stringify({
-    slidesPerView: slidePerView,
-    spaceBetween: spaceBetween,
+    slidesPerView: slidePerColumn,
+    slidePerColumnGap: slidePerColumnGap,
     autoplay: autoplay ? {
       delay: autoplaySpeed,
       disableOnInteraction: false,

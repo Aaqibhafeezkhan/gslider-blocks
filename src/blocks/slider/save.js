@@ -4,8 +4,8 @@ export default function Save({ attributes }) {
     const {
         blockId,
         sliderItems,
-        slidePerView,
-        spaceBetween,
+        slidePerColumn,
+        slidePerColumnGap,
         transitionSpeed,
         autoplay,
         autoplaySpeed,
@@ -27,8 +27,8 @@ export default function Save({ attributes }) {
 
     // Configure Swiper settings for frontend rendering
     const swiperSettings = JSON.stringify({
-        slidesPerView: slidePerView,
-        spaceBetween: spaceBetween,
+        slidesPerView: slidePerColumn,
+        slidePerColumnGap: slidePerColumnGap,
         autoplay: autoplay ? {
             delay: autoplaySpeed,
             disableOnInteraction: false,

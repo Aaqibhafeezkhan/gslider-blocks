@@ -3,9 +3,9 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
-import { PanelBody, TabPanel, Button, ToggleControl, RangeControl, SelectControl } from '@wordpress/components';
+import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, Button, ButtonGroup } from '@wordpress/components';
 import SortableItem from './sortableItem';
-import { BORDER_STYLES,EFFECT_OPTIONS } from "./constants/constants";
+import { BORDER_STYLES, SLIDER_EFFECT_OPTIONS, CAROUSEL_EFFECT_OPTIONS, SLIDER_TYPE } from "./constants/constants";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -13,8 +13,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
         sliderItems,
         blockStyle,
-        slidePerView,
-        spaceBetween,
+        sliderType,
+        slidePerColumn,
+        slidePerColumnGap,
         transitionSpeed,
         autoplay,
         autoplaySpeed,
@@ -34,6 +35,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             setAttributes({ blockId: `guten-slider-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
+
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -126,7 +128,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [sliderItemColorStyle]);
 
     const editorStyle = sliderItemColorStyle.replace(/\s+/g, ' ').trim();
-    
+
 
     return (
 
@@ -172,6 +174,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </Button>
                                             </div>
                                         </PanelBody>
+                                        <PanelBody title={__("Slider Layout", "gutenslider-blocks")} initialOpen={false}>
+                                            <div className="global-setting-switcher-container">
+                                                <BaseControl
+                                                    label={__("Slider Type", "gutenslider-blocks")}
+                                                    className="global-setting-switcher-panel-wrapper"
+                                                >
+                                                    <ButtonGroup className="global-setting-switcher-panel-btn">
+                                                        {SLIDER_TYPE.map((item, key) => (
+                                                            <Button
+                                                                key={key}
+                                                                onClick={() => setAttributes({ sliderType: item.value })}
+                                                                className={`global-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
+                                                            >
+                                                                {item.label}
+                                                            </Button>
+                                                        ))}
+                                                    </ButtonGroup>
+                                                </BaseControl>
+                                            </div>
+                                        </PanelBody>
+                                        {sliderType === 'carousel' && (
+                                            <PanelBody title={__("Carousel Options", "gutenslider-blocks")} initialOpen={false}>
+                                                <RangeControl
+                                                    label={__('Columns', 'gutenslider-blocks')}
+                                                    value={slidePerColumn}
+                                                    onChange={(value) => setAttributes({ slidePerColumn: value })}
+                                                    min={1}
+                                                    max={10}
+                                                    step={1}
+                                                    initialPosition={1}
+                                                />
+                                                <RangeControl
+                                                    label={__('Columns Gap', 'gutenslider-blocks')}
+                                                    value={slidePerColumnGap}
+                                                    onChange={(value) => setAttributes({ slidePerColumnGap: value })}
+                                                    min={0}
+                                                    max={200}
+                                                    step={1}
+                                                    initialPosition={1}
+                                                />
+                                            </PanelBody>
+                                        )}
                                         <PanelBody title={__("Slider Options", "gutenslider-blocks")} initialOpen={false}>
                                             <ToggleControl
                                                 label={ __( 'Enable Loop', 'gutenslider-blocks' ) }
@@ -249,30 +293,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 step={100}
                                                 initialPosition={1000}
                                             />
-                                            <RangeControl
-                                                label={__('Slide Per View', 'gutenslider-blocks')}
-                                                value={slidePerView}
-                                                onChange={(value) => setAttributes({ slidePerView: value })}
-                                                min={1}
-                                                max={10}
-                                                step={1}
-                                                initialPosition={1}
-                                            />
-                                            <RangeControl
-                                                label={__('Space Between Slide', 'gutenslider-blocks')}
-                                                value={spaceBetween}
-                                                onChange={(value) => setAttributes({ spaceBetween: value })}
-                                                min={0}
-                                                max={200}
-                                                step={1}
-                                                initialPosition={1}
-                                            />
                                         </PanelBody>
                                         <PanelBody title={__("Effect", "gutenslider-blocks")} initialOpen={false}>
                                             <SelectControl
-                                                label={__('Slide Effect', 'your-text-domain')}
+                                                label={__('Slide Effect', 'gutenslider-blocks')}
                                                 value={effect}
-                                                options={EFFECT_OPTIONS}
+                                                options={
+                                                    sliderType === 'carousel' 
+                                                        ? CAROUSEL_EFFECT_OPTIONS 
+                                                        : SLIDER_EFFECT_OPTIONS
+                                                }
                                                 onChange={(value) => setAttributes({ effect: value })}
                                             />
                                         </PanelBody>

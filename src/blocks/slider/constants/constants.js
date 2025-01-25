@@ -67,11 +67,21 @@ export const BORDER_STYLES = [
 	{ label: __("Ridge", "gutenslider-blocks"), value: "ridge" },
 ];
 
-export const EFFECT_OPTIONS = [
+export const SLIDER_EFFECT_OPTIONS = [
 	{ value: 'slide', label: __('Slide', 'gutenslider-blocks') },
 	{ value: 'fade', label: __('Fade', 'gutenslider-blocks') },
 	{ value: 'coverflow', label: __('Coverflow', 'gutenslider-blocks') },
 	{ value: 'flip', label: __('Flip', 'gutenslider-blocks') },
 	{ value: 'creative', label: __('Creative', 'gutenslider-blocks') },
+];
+
+export const CAROUSEL_EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'gutenslider-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'gutenslider-blocks') },
+];
+
+export const SLIDER_TYPE = [
+	{ value: 'slider', label: __('Slider', 'gutenslider-blocks') },
+	{ value: 'carousel', label: __('Carousel', 'gutenslider-blocks') },
 ];
 
