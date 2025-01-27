@@ -4,8 +4,9 @@ export default function Save({ attributes }) {
     const {
         blockId,
         sliderItems,
-        slidePerColumn,
-        slidePerColumnGap,
+        sliderType,
+        carouselPerColumn,
+        carouselPerColumnGap,
         transitionSpeed,
         autoplay,
         autoplaySpeed,
@@ -14,7 +15,8 @@ export default function Save({ attributes }) {
         pauseOnHover,
         stopOnLastSlide,
         reverseDirection,
-        effect,
+        carouselEffect,
+        sliderEffect,
         enableMouseWheel,
         displayArrows,
         displayDots,
@@ -24,11 +26,15 @@ export default function Save({ attributes }) {
         className: `guten-slider-container ${blockId}`,
     });
 
+    // Determine the effect based on slider type
+    const effect = sliderType === 'carousel' ? carouselEffect : sliderEffect;
 
     // Configure Swiper settings for frontend rendering
     const swiperSettings = JSON.stringify({
-        slidesPerView: slidePerColumn,
-        slidePerColumnGap: slidePerColumnGap,
+        // Update slidesPerView logic to match Edit component
+        slidesPerView: sliderType === 'carousel' ? parseInt(carouselPerColumn) : 1,
+        spaceBetween: sliderType === 'carousel' ? parseInt(carouselPerColumnGap) : 0,
+        
         autoplay: autoplay ? {
             delay: autoplaySpeed,
             disableOnInteraction: false,
@@ -50,15 +56,15 @@ export default function Save({ attributes }) {
         } : undefined,
         allowTouchMove: allowTouchMove,
         mousewheel: enableMouseWheel,
-        navigation: {
+        navigation: displayArrows ? {
             nextEl: `.${blockId} .guten-slider.swiper-button-next`,
             prevEl: `.${blockId} .guten-slider.swiper-button-prev`,
-        },
-        pagination: {
+        } : false,
+        pagination: displayDots ? {
             el: `.${blockId} .guten-slider.swiper-pagination`,
             type: 'bullets',
             clickable: true,
-        },
+        } : false,
     });
 
     return (

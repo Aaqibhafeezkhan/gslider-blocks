@@ -14,8 +14,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderItems,
         blockStyle,
         sliderType,
-        slidePerColumn,
-        slidePerColumnGap,
+        carouselPerColumn,
+        carouselPerColumnGap,
         transitionSpeed,
         autoplay,
         autoplaySpeed,
@@ -24,7 +24,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         pauseOnHover,
         stopOnLastSlide,
         reverseDirection,
-        effect,
+        sliderEffect,
+        carouselEffect,
         enableMouseWheel,
         displayArrows,
         displayDots
@@ -198,8 +199,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             <PanelBody title={__("Carousel Options", "gutenslider-blocks")} initialOpen={false}>
                                                 <RangeControl
                                                     label={__('Columns', 'gutenslider-blocks')}
-                                                    value={slidePerColumn}
-                                                    onChange={(value) => setAttributes({ slidePerColumn: value })}
+                                                    value={carouselPerColumn}
+                                                    onChange={(value) => setAttributes({ carouselPerColumn: value })}
                                                     min={1}
                                                     max={10}
                                                     step={1}
@@ -207,8 +208,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                                 <RangeControl
                                                     label={__('Columns Gap', 'gutenslider-blocks')}
-                                                    value={slidePerColumnGap}
-                                                    onChange={(value) => setAttributes({ slidePerColumnGap: value })}
+                                                    value={carouselPerColumnGap}
+                                                    onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
                                                     min={0}
                                                     max={200}
                                                     step={1}
@@ -294,18 +295,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 initialPosition={1000}
                                             />
                                         </PanelBody>
-                                        <PanelBody title={__("Effect", "gutenslider-blocks")} initialOpen={false}>
-                                            <SelectControl
-                                                label={__('Slide Effect', 'gutenslider-blocks')}
-                                                value={effect}
-                                                options={
-                                                    sliderType === 'carousel' 
-                                                        ? CAROUSEL_EFFECT_OPTIONS 
-                                                        : SLIDER_EFFECT_OPTIONS
-                                                }
-                                                onChange={(value) => setAttributes({ effect: value })}
-                                            />
-                                        </PanelBody>
+                                        {sliderType === 'carousel' && (
+                                            <PanelBody title={__("Effect", "gutenslider-blocks")} initialOpen={false}>
+                                                <SelectControl
+                                                    label={__('Carousel Effect', 'gutenslider-blocks')}
+                                                    value={carouselEffect}
+                                                    options={CAROUSEL_EFFECT_OPTIONS}
+                                                    onChange={(value) => setAttributes({ carouselEffect: value })}
+                                                />
+                                            </PanelBody>
+                                        )}
+                                        {sliderType === 'slider' && (
+                                            <PanelBody title={__("Effect", "gutenslider-blocks")} initialOpen={false}>
+                                                <SelectControl
+                                                    label={__('Slide Effect', 'gutenslider-blocks')}
+                                                    value={sliderEffect}
+                                                    options={SLIDER_EFFECT_OPTIONS}
+                                                    onChange={(value) => setAttributes({ sliderEffect: value })}
+                                                />
+                                            </PanelBody>
+                                        )}
                                     </>
                                 )}
 

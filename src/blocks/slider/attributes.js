@@ -125,20 +125,18 @@ const attributes = {
             }
         }
     },
-
     sliderType: {
         type: "string",
         default: "slider"
     },
-    
-    slidePerColumn: {
-		type: 'number',
-		default: 2,
-	},
-    slidePerColumnGap: {
-		type: 'number',
-		default: 20,
-	},
+    carouselPerColumn: {
+        type: 'number',
+        default: 2,
+    },
+    carouselPerColumnGap: {
+        type: 'number',
+        default: 20,
+    },
 	transitionSpeed: {
 		type: 'number',
 		default: 1000,
@@ -171,9 +169,13 @@ const attributes = {
         "type": "boolean",
         "default": false
     },
-    effect: {
-        type: 'string',
-        default: value => value === 'carousel' ? 'slide' : 'creative'
+    sliderEffect: {
+        "type": "string",
+        "default": "creative"
+    },
+    carouselEffect: {
+        "type": "string",
+        "default": "slide"
     },
     enableMouseWheel: {
         "type": "boolean",

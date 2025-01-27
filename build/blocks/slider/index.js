@@ -5411,11 +5411,11 @@ const attributes = {
     type: "string",
     default: "slider"
   },
-  slidePerColumn: {
+  carouselPerColumn: {
     type: 'number',
     default: 2
   },
-  slidePerColumnGap: {
+  carouselPerColumnGap: {
     type: 'number',
     default: 20
   },
@@ -5451,9 +5451,13 @@ const attributes = {
     "type": "boolean",
     "default": false
   },
-  effect: {
-    type: 'string',
-    default: value => value === 'carousel' ? 'slide' : 'creative'
+  sliderEffect: {
+    "type": "string",
+    "default": "creative"
+  },
+  carouselEffect: {
+    "type": "string",
+    "default": "slide"
   },
   enableMouseWheel: {
     "type": "boolean",
@@ -5731,8 +5735,8 @@ function Edit({
     blockId,
     sliderItems,
     sliderType,
-    slidePerColumn,
-    slidePerColumnGap,
+    carouselPerColumn,
+    carouselPerColumnGap,
     transitionSpeed,
     autoplay,
     autoplaySpeed,
@@ -5741,7 +5745,8 @@ function Edit({
     pauseOnHover,
     stopOnLastSlide,
     reverseDirection,
-    effect,
+    carouselEffect,
+    sliderEffect,
     enableMouseWheel,
     displayArrows,
     displayDots
@@ -5755,7 +5760,7 @@ function Edit({
   const sliderNavNextRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useRef)();
   const [swiperInstance, setSwiperInstance] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
   const setSwiperNavigationPagination = swiperInst => {
-    if (swiperInst?.params?.navigation) {
+    if (swiperInst?.params?.navigation && displayArrows) {
       swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
       swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
 
@@ -5764,7 +5769,7 @@ function Edit({
       swiperInst.navigation.init();
       swiperInst.navigation.update();
     }
-    if (swiperInst?.params?.pagination) {
+    if (swiperInst?.params?.pagination && displayDots) {
       swiperInst.params.pagination.el = sliderPaginationRef.current;
       swiperInst.params.pagination.clickable = true;
 
@@ -5777,6 +5782,7 @@ function Edit({
 
   // Get effect-specific settings
   const getEffectSettings = () => {
+    const effect = sliderType === 'carousel' ? carouselEffect : sliderEffect;
     switch (effect) {
       case 'fade':
         return {
@@ -5821,13 +5827,9 @@ function Edit({
 
   // Enhanced settings for Swiper
   const settings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useMemo)(() => ({
-    ...(sliderType === 'carousel' ? {
-      slidesPerView: slidePerColumn,
-      spaceBetween: slidePerColumnGap
-    } : {
-      slidesPerView: 1,
-      spaceBetween: 0
-    }),
+    // Update slidesPerView logic
+    slidesPerView: sliderType === 'carousel' ? parseInt(carouselPerColumn) : 1,
+    spaceBetween: sliderType === 'carousel' ? parseInt(carouselPerColumnGap) : 0,
     autoplay: autoplay ? {
       delay: autoplaySpeed || 900,
       // Fallback to 3 seconds
@@ -5838,13 +5840,25 @@ function Edit({
     } : false,
     speed: transitionSpeed,
     loop: loop,
-    effect: effect,
+    ...(sliderType === 'carousel' ? {
+      effect: carouselEffect
+    } : {
+      effect: sliderEffect
+    }),
     ...getEffectSettings(),
     allowTouchMove: allowTouchMove,
     mousewheel: enableMouseWheel ? {
       forceToAxis: true,
       sensitivity: 1,
       releaseOnEdges: true
+    } : false,
+    navigation: displayArrows ? {
+      nextEl: sliderNavNextRef.current,
+      prevEl: sliderNavPrevRef.current
+    } : false,
+    pagination: displayDots ? {
+      el: sliderPaginationRef.current,
+      clickable: true
     } : false,
     onBeforeInit(swiperInst) {
       swiperRef.current = swiperInst;
@@ -5855,14 +5869,14 @@ function Edit({
         setSwiperNavigationPagination(swiperInst);
       });
     }
-  }), [sliderType, slidePerColumn, slidePerColumnGap, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, pauseOnHover, transitionSpeed, loop, allowTouchMove, effect, enableMouseWheel]);
+  }), [sliderType, carouselPerColumn, carouselPerColumnGap, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, pauseOnHover, transitionSpeed, loop, allowTouchMove, sliderEffect, carouselEffect, enableMouseWheel, displayArrows, displayDots]);
 
   // Add useEffect to update Swiper when settings change
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
     if (swiperInstance) {
-      // Update slides configuration based on slider type
-      swiperInstance.params.slidesPerView = sliderType === 'carousel' ? slidePerColumn : 1;
-      swiperInstance.params.spaceBetween = sliderType === 'carousel' ? slidePerColumnGap : 0;
+      // Immediately update slidesPerView when slider type changes
+      swiperInstance.params.slidesPerView = sliderType === 'carousel' ? parseInt(carouselPerColumn) : 1;
+      swiperInstance.params.spaceBetween = sliderType === 'carousel' ? parseInt(carouselPerColumnGap) : 0;
       swiperInstance.params.speed = transitionSpeed;
       swiperInstance.params.loop = loop;
 
@@ -5889,9 +5903,6 @@ function Edit({
         swiperInstance.autoplay.stop();
       }
 
-      // Update the Swiper instance with new parameters
-      swiperInstance.update();
-
       // Additional check to ensure touch interaction is updated
       if (swiperInstance.touch) {
         swiperInstance.touch.enabled = allowTouchMove;
@@ -5912,8 +5923,16 @@ function Edit({
           swiperInstance.autoplay.stop();
         });
       }
+      // Force update and re-render
+      swiperInstance.update();
+      swiperInstance.updateSlides();
+      swiperInstance.updateProgress();
+      swiperInstance.updateSlidesClasses();
+
+      // If necessary, go to first slide
+      swiperInstance.slideTo(0, 0, false);
     }
-  }, [swiperInstance, sliderType, slidePerColumn, slidePerColumnGap, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, transitionSpeed, loop, allowTouchMove]);
+  }, [swiperInstance, sliderType, carouselPerColumn, carouselPerColumnGap, autoplay, autoplaySpeed, stopOnLastSlide, reverseDirection, transitionSpeed, loop, allowTouchMove]);
 
   // Existing hover pause effect (keep this)
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
@@ -5960,8 +5979,9 @@ function Edit({
       setSwiperNavigationPagination(swiperInstance);
     }
   }, [displayArrows, displayDots]);
-  console.log(slidePerColumn);
-  console.log(slidePerColumnGap);
+
+  // console.log(carouselPerColumn);
+  // console.log(carouselPerColumnGap);
   // console.log(transitionSpeed);
   // console.log(autoplay);
   // console.log(autoplaySpeed);
@@ -5972,9 +5992,8 @@ function Edit({
   // console.log(reverseDirection);
   // console.log(effect);
   // console.log(enableMouseWheel);
-  // console.log(displayArrows);
-  // console.log(displayDots);
-
+  console.log(displayArrows);
+  console.log(displayDots);
   const handleAddItem = () => {
     const newItem = {
       id: `item-${sliderItems.length + 1}`,
@@ -6031,11 +6050,11 @@ function Edit({
     ...settings,
     modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Manipulation, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFade, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCube, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCoverflow, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectFlip, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCreative, swiper_modules__WEBPACK_IMPORTED_MODULE_7__.EffectCards],
     navigation: displayArrows ? {
-      nextEl: '#block-' + clientId + '.guten-slider .swiper-button-next',
-      prevEl: '#block-' + clientId + '.guten-slider .swiper-button-prev'
+      nextEl: sliderNavNextRef.current,
+      prevEl: sliderNavPrevRef.current
     } : false,
     pagination: displayDots ? {
-      el: '#block-' + clientId + '.guten-slider .swiper-pagination',
+      el: sliderPaginationRef.current,
       clickable: true
     } : false,
     onSwiper: swiper => {
@@ -6170,8 +6189,8 @@ function Inspector({
     sliderItems,
     blockStyle,
     sliderType,
-    slidePerColumn,
-    slidePerColumnGap,
+    carouselPerColumn,
+    carouselPerColumnGap,
     transitionSpeed,
     autoplay,
     autoplaySpeed,
@@ -6180,7 +6199,8 @@ function Inspector({
     pauseOnHover,
     stopOnLastSlide,
     reverseDirection,
-    effect,
+    sliderEffect,
+    carouselEffect,
     enableMouseWheel,
     displayArrows,
     displayDots
@@ -6346,9 +6366,9 @@ function Inspector({
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Columns', 'gutenslider-blocks'),
-    value: slidePerColumn,
+    value: carouselPerColumn,
     onChange: value => setAttributes({
-      slidePerColumn: value
+      carouselPerColumn: value
     }),
     min: 1,
     max: 10,
@@ -6356,9 +6376,9 @@ function Inspector({
     initialPosition: 1
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Columns Gap', 'gutenslider-blocks'),
-    value: slidePerColumnGap,
+    value: carouselPerColumnGap,
     onChange: value => setAttributes({
-      slidePerColumnGap: value
+      carouselPerColumnGap: value
     }),
     min: 0,
     max: 200,
@@ -6458,15 +6478,25 @@ function Inspector({
     max: 3000,
     step: 100,
     initialPosition: 1000
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+  })), sliderType === 'carousel' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Effect", "gutenslider-blocks"),
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Carousel Effect', 'gutenslider-blocks'),
+    value: carouselEffect,
+    options: _constants_constants__WEBPACK_IMPORTED_MODULE_8__.CAROUSEL_EFFECT_OPTIONS,
+    onChange: value => setAttributes({
+      carouselEffect: value
+    })
+  })), sliderType === 'slider' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Effect", "gutenslider-blocks"),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Slide Effect', 'gutenslider-blocks'),
-    value: effect,
-    options: sliderType === 'carousel' ? _constants_constants__WEBPACK_IMPORTED_MODULE_8__.CAROUSEL_EFFECT_OPTIONS : _constants_constants__WEBPACK_IMPORTED_MODULE_8__.SLIDER_EFFECT_OPTIONS,
+    value: sliderEffect,
+    options: _constants_constants__WEBPACK_IMPORTED_MODULE_8__.SLIDER_EFFECT_OPTIONS,
     onChange: value => setAttributes({
-      effect: value
+      sliderEffect: value
     })
   }))), tab.name === "styles" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider", "gutenslider-blocks"),
@@ -6501,8 +6531,9 @@ function Save({
   const {
     blockId,
     sliderItems,
-    slidePerColumn,
-    slidePerColumnGap,
+    sliderType,
+    carouselPerColumn,
+    carouselPerColumnGap,
     transitionSpeed,
     autoplay,
     autoplaySpeed,
@@ -6511,7 +6542,8 @@ function Save({
     pauseOnHover,
     stopOnLastSlide,
     reverseDirection,
-    effect,
+    carouselEffect,
+    sliderEffect,
     enableMouseWheel,
     displayArrows,
     displayDots
@@ -6520,10 +6552,14 @@ function Save({
     className: `guten-slider-container ${blockId}`
   });
 
+  // Determine the effect based on slider type
+  const effect = sliderType === 'carousel' ? carouselEffect : sliderEffect;
+
   // Configure Swiper settings for frontend rendering
   const swiperSettings = JSON.stringify({
-    slidesPerView: slidePerColumn,
-    slidePerColumnGap: slidePerColumnGap,
+    // Update slidesPerView logic to match Edit component
+    slidesPerView: sliderType === 'carousel' ? parseInt(carouselPerColumn) : 1,
+    spaceBetween: sliderType === 'carousel' ? parseInt(carouselPerColumnGap) : 0,
     autoplay: autoplay ? {
       delay: autoplaySpeed,
       disableOnInteraction: false,
@@ -6545,15 +6581,15 @@ function Save({
     } : undefined,
     allowTouchMove: allowTouchMove,
     mousewheel: enableMouseWheel,
-    navigation: {
+    navigation: displayArrows ? {
       nextEl: `.${blockId} .guten-slider.swiper-button-next`,
       prevEl: `.${blockId} .guten-slider.swiper-button-prev`
-    },
-    pagination: {
+    } : false,
+    pagination: displayDots ? {
       el: `.${blockId} .guten-slider.swiper-pagination`,
       type: 'bullets',
       clickable: true
-    }
+    } : false
   });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps,

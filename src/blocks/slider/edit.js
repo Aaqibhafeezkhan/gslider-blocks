@@ -38,8 +38,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         blockId,
         sliderItems,
         sliderType,
-        slidePerColumn,
-        slidePerColumnGap,
+        carouselPerColumn,
+        carouselPerColumnGap,
         transitionSpeed,
         autoplay,
         autoplaySpeed,
@@ -48,7 +48,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         pauseOnHover,
         stopOnLastSlide,
         reverseDirection,
-        effect,
+        carouselEffect,
+        sliderEffect,
         enableMouseWheel,
         displayArrows,
         displayDots,
@@ -64,30 +65,31 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const sliderNavNextRef = useRef();
     const [swiperInstance, setSwiperInstance] = useState(null);
 
-    const setSwiperNavigationPagination = ( swiperInst ) => {
-		if ( swiperInst?.params?.navigation ) {
-			swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
-			swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
-
-			// Re-init navigation
-			swiperInst.navigation.destroy();
-			swiperInst.navigation.init();
-			swiperInst.navigation.update();
-		}
-
-		if ( swiperInst?.params?.pagination ) {
-			swiperInst.params.pagination.el = sliderPaginationRef.current;
-			swiperInst.params.pagination.clickable = true;
-
-			// Re-init pagination
-			swiperInst.pagination.init();
-			swiperInst.pagination.render();
-			swiperInst.pagination.update();
-		}
-	};
+    const setSwiperNavigationPagination = (swiperInst) => {
+        if (swiperInst?.params?.navigation && displayArrows) {
+            swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
+            swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
+    
+            // Re-init navigation
+            swiperInst.navigation.destroy();
+            swiperInst.navigation.init();
+            swiperInst.navigation.update();
+        }
+    
+        if (swiperInst?.params?.pagination && displayDots) {
+            swiperInst.params.pagination.el = sliderPaginationRef.current;
+            swiperInst.params.pagination.clickable = true;
+    
+            // Re-init pagination
+            swiperInst.pagination.init();
+            swiperInst.pagination.render();
+            swiperInst.pagination.update();
+        }
+    };
 
     // Get effect-specific settings
     const getEffectSettings = () => {
+        const effect = sliderType === 'carousel' ? carouselEffect : sliderEffect;
         switch (effect) {
             case 'fade':
                 return {
@@ -132,13 +134,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     // Enhanced settings for Swiper
     const settings = useMemo(() => ({
-        ...(sliderType === 'carousel' ? {
-            slidesPerView: slidePerColumn,
-            spaceBetween: slidePerColumnGap
-        } : {
-            slidesPerView: 1,
-            spaceBetween: 0
-        }),
+        // Update slidesPerView logic
+        slidesPerView: sliderType === 'carousel' ? parseInt(carouselPerColumn) : 1,
+        spaceBetween: sliderType === 'carousel' ? parseInt(carouselPerColumnGap) : 0,
         autoplay: autoplay ? {
             delay: autoplaySpeed || 900, // Fallback to 3 seconds
             disableOnInteraction: false,
@@ -148,13 +146,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         } : false,
         speed: transitionSpeed,
         loop: loop,
-        effect: effect,
+        ...(sliderType === 'carousel' ? {
+            effect: carouselEffect
+        } : {
+            effect: sliderEffect
+        }),
         ...getEffectSettings(),
         allowTouchMove: allowTouchMove,
         mousewheel: enableMouseWheel ? {
             forceToAxis: true,
             sensitivity: 1,
             releaseOnEdges: true,
+        } : false,
+        navigation: displayArrows ? {
+            nextEl: sliderNavNextRef.current,
+            prevEl: sliderNavPrevRef.current,
+        } : false,
+        pagination: displayDots ? {
+            el: sliderPaginationRef.current,
+            clickable: true,
         } : false,
         onBeforeInit(swiperInst) {
             swiperRef.current = swiperInst;
@@ -167,8 +177,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         },
     }), [
         sliderType,
-        slidePerColumn,
-        slidePerColumnGap,
+        carouselPerColumn,
+        carouselPerColumnGap,
         autoplay,
         autoplaySpeed,
         stopOnLastSlide,
@@ -177,16 +187,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         transitionSpeed,
         loop,
         allowTouchMove,
-        effect,
+        sliderEffect,
+        carouselEffect,
         enableMouseWheel,
+        displayArrows,
+        displayDots,
     ]);
 
     // Add useEffect to update Swiper when settings change
     useEffect(() => {
         if (swiperInstance) {
-            // Update slides configuration based on slider type
-            swiperInstance.params.slidesPerView = sliderType === 'carousel' ? slidePerColumn : 1;
-            swiperInstance.params.spaceBetween = sliderType === 'carousel' ? slidePerColumnGap : 0;
+
+            // Immediately update slidesPerView when slider type changes
+            swiperInstance.params.slidesPerView = sliderType === 'carousel' ? parseInt(carouselPerColumn) : 1;
+            swiperInstance.params.spaceBetween = sliderType === 'carousel' ? parseInt(carouselPerColumnGap) : 0;
 
             swiperInstance.params.speed = transitionSpeed;
             swiperInstance.params.loop = loop;
@@ -214,14 +228,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 swiperInstance.autoplay.stop();
             }
 
-    
-            // Update the Swiper instance with new parameters
-            swiperInstance.update();
-
-                // Additional check to ensure touch interaction is updated
-                if (swiperInstance.touch) {
-                    swiperInstance.touch.enabled = allowTouchMove;
-                }
+            // Additional check to ensure touch interaction is updated
+            if (swiperInstance.touch) {
+                swiperInstance.touch.enabled = allowTouchMove;
+            }
     
             // If loop setting changed, need to re-initialize
             if (swiperInstance.params.loop !== loop) {
@@ -238,19 +248,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     swiperInstance.autoplay.stop();
                 });
             }
+            // Force update and re-render
+            swiperInstance.update();
+            swiperInstance.updateSlides();
+            swiperInstance.updateProgress();
+            swiperInstance.updateSlidesClasses();
+            
+            // If necessary, go to first slide
+            swiperInstance.slideTo(0, 0, false);
         }
     }, [
         swiperInstance,
         sliderType,
-        slidePerColumn,
-        slidePerColumnGap,
+        carouselPerColumn,
+        carouselPerColumnGap,
         autoplay,
         autoplaySpeed,
         stopOnLastSlide,
         reverseDirection,
         transitionSpeed,
         loop,
-        allowTouchMove
+        allowTouchMove,
     ]);
 
     // Existing hover pause effect (keep this)
@@ -300,14 +318,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [ attributes ] );
 
-    useEffect( () => {
-		if ( swiperInstance ) {
-			setSwiperNavigationPagination( swiperInstance );
-		}
-	}, [ displayArrows, displayDots ] );
+    useEffect(() => {
+        if (swiperInstance) {
+            setSwiperNavigationPagination(swiperInstance);
+        }
+    }, [displayArrows, displayDots]);
 
-    console.log(slidePerColumn);
-    console.log(slidePerColumnGap);
+    // console.log(carouselPerColumn);
+    // console.log(carouselPerColumnGap);
     // console.log(transitionSpeed);
     // console.log(autoplay);
     // console.log(autoplaySpeed);
@@ -318,8 +336,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     // console.log(reverseDirection);
     // console.log(effect);
     // console.log(enableMouseWheel);
-    // console.log(displayArrows);
-    // console.log(displayDots);
+    console.log(displayArrows);
+    console.log(displayDots);
 
 
 
@@ -404,16 +422,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     navigation={
                         displayArrows
                             ? {
-                                    nextEl: '#block-' + clientId + '.guten-slider .swiper-button-next',
-                                    prevEl: '#block-' + clientId + '.guten-slider .swiper-button-prev',
+                                nextEl: sliderNavNextRef.current,
+                                prevEl: sliderNavPrevRef.current,
                             }
                             : false
                     }
                     pagination={
                         displayDots
                             ? {
-                                    el: '#block-' + clientId + '.guten-slider .swiper-pagination',
-                                    clickable: true,
+                                el: sliderPaginationRef.current,
+                                clickable: true,
                             }
                             : false
                     }
