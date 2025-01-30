@@ -52,6 +52,9 @@ if (!class_exists('GutenSlider_Blocks_Assets')) {
                 GutenSlider_Blocks_VERSION,
                 true
             );
+             // Enqueue Swiper assets
+            wp_enqueue_style('gutenslider-blocks-swiper-style');  // Added this line
+            wp_enqueue_script('gutenslider-blocks-swiper-script'); // Added this line
         }
 
         /**

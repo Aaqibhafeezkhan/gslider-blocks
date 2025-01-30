@@ -7,19 +7,19 @@ export default function Save({ attributes }) {
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
-        transitionSpeed,
+        speed,
         autoplay,
-        autoplaySpeed,
-        loop,
+        autoplayDelay,
+        infiniteLoop,
         allowTouchMove,
         pauseOnHover,
         stopOnLastSlide,
         reverseDirection,
         carouselEffect,
-        sliderEffect,
-        enableMouseWheel,
-        displayArrows,
-        displayDots,
+        slideEffect,
+        mousewheelControl,
+        showNavigation,
+        showPagination,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -27,7 +27,7 @@ export default function Save({ attributes }) {
     });
 
     // Determine the effect based on slider type
-    const effect = sliderType === 'carousel' ? carouselEffect : sliderEffect;
+    const effect = sliderType === 'carousel' ? carouselEffect : slideEffect;
 
     // Configure Swiper settings for frontend rendering
     const swiperSettings = JSON.stringify({
@@ -36,14 +36,14 @@ export default function Save({ attributes }) {
         spaceBetween: sliderType === 'carousel' ? parseInt(carouselPerColumnGap) : 0,
         
         autoplay: autoplay ? {
-            delay: autoplaySpeed,
+            delay: autoplayDelay,
             disableOnInteraction: false,
             stopOnLastSlide,
             reverseDirection,
             pauseOnMouseEnter: pauseOnHover,
         } : false,
-        speed: transitionSpeed,
-        loop: loop,
+        speed: speed,
+        loop: infiniteLoop,
         effect: effect,
         creativeEffect: effect === 'creative' ? {
             prev: {
@@ -55,12 +55,12 @@ export default function Save({ attributes }) {
             },
         } : undefined,
         allowTouchMove: allowTouchMove,
-        mousewheel: enableMouseWheel,
-        navigation: displayArrows ? {
+        mousewheel: mousewheelControl,
+        navigation: showNavigation ? {
             nextEl: `.${blockId} .guten-slider.swiper-button-next`,
             prevEl: `.${blockId} .guten-slider.swiper-button-prev`,
         } : false,
-        pagination: displayDots ? {
+        pagination: showPagination ? {
             el: `.${blockId} .guten-slider.swiper-pagination`,
             type: 'bullets',
             clickable: true,
@@ -92,8 +92,8 @@ export default function Save({ attributes }) {
                         </div>
                     ))}
                 </div>
-                { displayDots && <div className="guten-slider swiper-pagination"></div> }
-                { displayArrows && 
+                { showPagination && <div className="guten-slider swiper-pagination"></div> }
+                { showNavigation && 
                     <>
                         <div className="guten-slider swiper-button-next" aria-label="Next slide"></div>
                         <div className="guten-slider swiper-button-prev" aria-label="Previous slide"></div>

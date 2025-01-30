@@ -137,19 +137,17 @@ const attributes = {
         type: 'number',
         default: 20,
     },
-	transitionSpeed: {
+	speed: {
 		type: 'number',
-		default: 1000,
 	},
 	autoplay: {
 		type: 'boolean',
 		default: false,
 	},
-    autoplaySpeed: {
+    autoplayDelay: {
         type: 'number',
-        default: 900,
     },
-	loop: {
+	infiniteLoop: {
 		type: 'boolean',
 		default: true,
 	},
@@ -169,7 +167,7 @@ const attributes = {
         "type": "boolean",
         "default": false
     },
-    sliderEffect: {
+    slideEffect: {
         "type": "string",
         "default": "creative"
     },
@@ -177,15 +175,15 @@ const attributes = {
         "type": "string",
         "default": "slide"
     },
-    enableMouseWheel: {
+    mousewheelControl: {
         "type": "boolean",
         "default": false
     },
-    displayArrows: {
+    showNavigation: {
 		type: 'boolean',
 		default: true,
 	},
-	displayDots: {
+	showPagination: {
 		type: 'boolean',
 		default: true,
 	},

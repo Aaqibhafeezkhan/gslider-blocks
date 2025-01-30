@@ -31,3 +31,8 @@
         background: #000;
     }
 }
+
+/* In your CSS */
+.swiper-backface-hidden .swiper-slide {
+    backface-visibility: visible !important;
+}
