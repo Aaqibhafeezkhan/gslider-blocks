@@ -9,7 +9,7 @@ import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
 import Inspector from './inspector';
 
 import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle'; // Ensure styles are applied
+import 'swiper/css/bundle';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
@@ -39,69 +39,86 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     const swiperRef = useRef();
 
-
-
     useEffect(() => {
         if (!swiperRef.current) return;
     
         const swiperOptions = {
-            slidesPerView: sliderType === 'carousel' ? parseInt(carouselPerColumn) : 1,
-            spaceBetween: sliderType === 'carousel' ? parseInt(carouselPerColumnGap) : 0,
+            // Set effect based on sliderType
+            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+            
+            // Carousel-specific settings with default values
+            slidesPerView: sliderType === 'carousel' ? (carouselPerColumn || 2) : 1,
+            spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap || 20) : 0,
+            
+            // Common settings
             loop: infiniteLoop,
             autoplay: autoplay ? {
-                delay: (autoplayDelay || 1) * 1000, // Ensure a valid delay
+                delay: (autoplayDelay || 1) * 1000,
                 pauseOnMouseEnter: pauseOnHover,
+                disableOnInteraction: false,
                 stopOnLastSlide: stopOnLastSlide,
                 reverseDirection: reverseDirection,
             } : false,
-            speed: (speed || 8) * 100, // Ensure valid speed
-            effect: slideEffect,
+            speed: (speed || 8) * 100,
             allowTouchMove: allowTouchMove,
+            
             mousewheel: mousewheelControl ? {
                 forceToAxis: true,
                 sensitivity: 1,
                 releaseOnEdges: true,
             } : false,
+            
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
-            } : undefined,
+            } : false,
+            
             pagination: showPagination ? {
                 el: '.swiper-pagination',
                 clickable: true,
-            } : undefined,
+            } : false,
+            
+            // Creative effect settings if needed
             ...(slideEffect === 'creative' && {
                 creativeEffect: {
                     prev: { shadow: true, translate: [0, 0, -400] },
                     next: { translate: ['100%', 0, 0] },
                 },
             }),
+
         };
     
         try {
-            // ✅ Destroy existing instance before creating a new one
             if (swiperRef.current.swiper) {
                 swiperRef.current.swiper.destroy(true, true);
             }
-    
-            // ✅ Properly initialize Swiper
-            swiperRef.current.swiper = new Swiper(swiperRef.current, swiperOptions);
+            
+            const swiper = new Swiper(swiperRef.current, swiperOptions);
             
         } catch (error) {
             console.error('Swiper initialization error:', error);
         }
     }, [
-        infiniteLoop, autoplay, autoplayDelay, pauseOnHover, 
-        stopOnLastSlide, reverseDirection, speed, showNavigation,
-        showPagination, sliderType, slideEffect, carouselEffect, mousewheelControl
+        sliderType,
+        infiniteLoop,
+        carouselPerColumn,
+        carouselPerColumnGap,
+        autoplay,
+        autoplayDelay,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        speed,
+        showNavigation,
+        showPagination,
+        slideEffect,
+        carouselEffect,
+        mousewheelControl,
     ]);
-
-
-
 
     const handleAddItem = () => {
         const newItem = {
-            id: `item-${sliderItems.length + 1}`, // Fixed ID format
+            id: `item-${sliderItems.length + 1}`,
             title: `Slider Item ${sliderItems.length + 1}`,
             sliderItemBgColorSwitcher: 'normal',
             normalItemBackgroundType: 'classic',
@@ -125,10 +142,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <ToolbarButton
                         icon="plus"
                         label={ __( 'Add New Slide', 'gutenslider-blocks' ) }
-                        onClick={ () => {
-                            // Add new item
-                            handleAddItem();
-                        } }
+                        onClick={handleAddItem}
                     />
                 </ToolbarGroup>
             </BlockControls>
@@ -143,7 +157,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId={clientId}
             />
 
-            { renderSliderToolbarControls () }
+            {renderSliderToolbarControls()}
 
             <div {...blockProps}>
                 <div className="swiper" ref={swiperRef}>
@@ -166,8 +180,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </div>
                         ))}
                     </div>
-                    { showPagination && <div className="guten-slider swiper-pagination"></div> }
-                    { showNavigation && 
+                    {showPagination && <div className="guten-slider swiper-pagination"></div>}
+                    {showNavigation && 
                         <>
                             <div className="guten-slider swiper-button-next" aria-label="Next slide"></div>
                             <div className="guten-slider swiper-button-prev" aria-label="Previous slide"></div>
