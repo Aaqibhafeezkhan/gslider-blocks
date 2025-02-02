@@ -17,7 +17,7 @@ const attributes = {
                 sliderItemBgColorSwitcher: 'normal',
 
                 normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#399CFF',
+                normalItemClassicColor: '#E3F2FD',
                 normalItemGradientColor: null,
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
@@ -35,7 +35,7 @@ const attributes = {
                 sliderItemBgColorSwitcher: 'normal',
 
                 normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#399CFF',
+                normalItemClassicColor: '#E3F2FD',
                 normalItemGradientColor: null,
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
@@ -53,7 +53,7 @@ const attributes = {
                 sliderItemBgColorSwitcher: 'normal',
 
                 normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#399CFF',
+                normalItemClassicColor: '#E3F2FD',
                 normalItemGradientColor: null,
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',

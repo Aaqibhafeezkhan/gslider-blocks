@@ -121,7 +121,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             title: `Slider Item ${sliderItems.length + 1}`,
             sliderItemBgColorSwitcher: 'normal',
             normalItemBackgroundType: 'classic',
-            normalItemClassicColor: '#399CFF',
+            normalItemClassicColor: '#E3F2FD',
             normalItemGradientColor: null,
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',

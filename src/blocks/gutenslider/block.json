@@ -1,17 +1,17 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "gutenslider-blocks/slider",
+	"name": "gutenslider-blocks/gutenslider",
 	"version": "1.0.0",
-	"title": "Slider",
+	"title": "GutenSlider",
 	"icon": "slides",
 	"category": "gutenslider-blocks",
 	"description": "Slider block",
 	"example": {},
 	"supports": {
 		"html": false,
-		"align": ["wide", "full"],
-		"customClassName": false
+		"anchor": true,
+		"align": ["wide", "full"]
 	},
 	"textdomain": "gutenslider-blocks",
 	"editorScript": [

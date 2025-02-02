@@ -8,6 +8,15 @@ import SortableItem from './sortableItem';
 import { BORDER_STYLES, SLIDER_EFFECT_OPTIONS, CAROUSEL_EFFECT_OPTIONS, SLIDER_TYPE } from "./constants/constants";
 import './editor.scss';
 
+import SwitcherControl from '@Components/switcher-control';
+import ResponsiveSpacingControl from '@Components/responsive-spacing-control';
+import ColorControl from '@Components/color-control';
+import ResponsiveRangeControl from '@Components/responsive-range-control';
+import ResponsiveTypographyControl from '@Components/responsive-typography-control';
+import BoxShadowSettingsControl from '@Components/box-shadow-control';
+import BackgroundColorControl from '@Components/background-color-control';
+import LoadGoogleFont from '@Utils/loadGoogleFont';
+
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
@@ -56,7 +65,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             sliderItemBgColorSwitcher: 'normal',
 
             normalItemBackgroundType: 'classic',
-            normalItemClassicColor: '#399CFF',
+            normalItemClassicColor: '#E3F2FD',
             normalItemGradientColor: null,
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',
