@@ -26,56 +26,57 @@ export default function Save({ attributes }) {
         className: `guten-slider-container ${blockId}`,
     });
 
-    // Determine the effect based on slider type
-    const effect = sliderType === 'carousel' ? carouselEffect : slideEffect;
-
     // Configure Swiper settings for frontend rendering
     const swiperSettings = JSON.stringify({
-        // Update slidesPerView logic to match Edit component
-        slidesPerView: sliderType === 'carousel' ? parseInt(carouselPerColumn) : 1,
-        spaceBetween: sliderType === 'carousel' ? parseInt(carouselPerColumnGap) : 0,
+        effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
         
+        // Carousel-specific settings
+        slidesPerView: sliderType === 'carousel' ? (carouselPerColumn || 2) : 1,
+        spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap || 20) : 0,
+        
+        // Common settings
+        loop: infiniteLoop,
         autoplay: autoplay ? {
             delay: autoplayDelay,
-            disableOnInteraction: false,
-            stopOnLastSlide,
-            reverseDirection,
             pauseOnMouseEnter: pauseOnHover,
+            disableOnInteraction: false,
+            stopOnLastSlide: stopOnLastSlide,
+            reverseDirection: reverseDirection,
         } : false,
         speed: speed,
-        loop: infiniteLoop,
-        effect: effect,
-        creativeEffect: effect === 'creative' ? {
-            prev: {
-                shadow: true,
-                translate: [0, 0, -400],
-            },
-            next: {
-                translate: ['100%', 0, 0],
-            },
-        } : undefined,
         allowTouchMove: allowTouchMove,
-        mousewheel: mousewheelControl,
+        
+        mousewheel: mousewheelControl ? {
+            forceToAxis: true,
+            sensitivity: 1,
+            releaseOnEdges: true,
+        } : false,
+        
         navigation: showNavigation ? {
             nextEl: `.${blockId} .guten-slider.swiper-button-next`,
             prevEl: `.${blockId} .guten-slider.swiper-button-prev`,
         } : false,
+        
         pagination: showPagination ? {
             el: `.${blockId} .guten-slider.swiper-pagination`,
-            type: 'bullets',
             clickable: true,
         } : false,
+        
+        // Creative effect settings if needed
+        ...(slideEffect === 'creative' && {
+            creativeEffect: {
+                prev: { shadow: true, translate: [0, 0, -400] },
+                next: { translate: ['100%', 0, 0] },
+            },
+        }),
     });
 
     return (
-        <div 
-            {...blockProps}
-            data-swiper-settings={swiperSettings}
-        >
+        <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className="swiper">
                 <div className="swiper-wrapper guten-slider-wrapper">
                     {sliderItems.map((item) => (
-                        <div key={item.id} className='swiper-slide'>
+                        <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
                             <div className={`${blockId} guten-slider-content-wrapper ${item.id}`}>
                                 <div className="guten-slider-content-inner-wrapper">
                                     <div className="guten-slider-list-item">
@@ -92,8 +93,8 @@ export default function Save({ attributes }) {
                         </div>
                     ))}
                 </div>
-                { showPagination && <div className="guten-slider swiper-pagination"></div> }
-                { showNavigation && 
+                {showPagination && <div className="guten-slider swiper-pagination"></div>}
+                {showNavigation && 
                     <>
                         <div className="guten-slider swiper-button-next" aria-label="Next slide"></div>
                         <div className="guten-slider swiper-button-prev" aria-label="Previous slide"></div>

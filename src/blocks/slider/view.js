@@ -1,17 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all slider containers
-    const sliders = document.querySelectorAll('.guten-slider-container');
+    const initializeSliders = () => {
+        // Select all slider containers
+        const sliders = document.querySelectorAll('.guten-slider-container');
+        
+        sliders.forEach((sliderContainer) => {
+            try {
+                // Get the Swiper settings from the data attribute
+                const swiperSettings = sliderContainer.dataset.swiperSettings;
+                
+                if (swiperSettings) {
+                    const settings = JSON.parse(swiperSettings);
+                    
+                    // Initialize Swiper with parsed settings
+                    new Swiper(sliderContainer.querySelector('.swiper'), settings);
+                }
+            } catch (error) {
+                console.error('Error initializing slider:', error);
+            }
+        });
+    };
 
-    sliders.forEach((sliderContainer) => {
-        // Get the Swiper settings from the data attribute
-        const swiperSettings = sliderContainer.dataset.swiperSettings;
+    // Initialize sliders on page load
+    initializeSliders();
 
-        // Parse the settings if they exist
-        if (swiperSettings) {
-            const settings = JSON.parse(swiperSettings);
-
-            // Initialize Swiper for the current slider
-            new Swiper(sliderContainer.querySelector('.swiper'), settings);
-        }
-    });
+    // Re-initialize sliders when new blocks are added (useful for dynamic content)
+    if (window.wp && window.wp.hooks) {
+        window.wp.hooks.addAction('blocks.blockRendered', 'gutenslider', () => {
+            initializeSliders();
+        });
+    }
 });

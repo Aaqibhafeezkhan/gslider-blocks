@@ -8,9 +8,6 @@ import {
 import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
 import Inspector from './inspector';
 
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
-
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
@@ -53,16 +50,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             // Common settings
             loop: infiniteLoop,
             autoplay: autoplay ? {
-                delay: (autoplayDelay || 1) * 1000,
+                delay: autoplayDelay,
                 pauseOnMouseEnter: pauseOnHover,
                 disableOnInteraction: false,
                 stopOnLastSlide: stopOnLastSlide,
                 reverseDirection: reverseDirection,
             } : false,
-            speed: (speed || 8) * 100,
+            speed: speed,
             allowTouchMove: allowTouchMove,
             
             mousewheel: mousewheelControl ? {
+                enabled: true,
                 forceToAxis: true,
                 sensitivity: 1,
                 releaseOnEdges: true,
@@ -93,7 +91,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 swiperRef.current.swiper.destroy(true, true);
             }
             
-            const swiper = new Swiper(swiperRef.current, swiperOptions);
+            new Swiper(swiperRef.current, swiperOptions);
             
         } catch (error) {
             console.error('Swiper initialization error:', error);
@@ -109,6 +107,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         stopOnLastSlide,
         reverseDirection,
         speed,
+        allowTouchMove,
         showNavigation,
         showPagination,
         slideEffect,
@@ -168,7 +167,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     <div className="guten-slider-content-inner-wrapper">
                                         <div className="guten-slider-list-item">
                                             <div className="guten-slider-list-content">
-                                                <RichText.Content
+                                                <RichText
                                                     tagName="h3"
                                                     className="guten-slider-title"
                                                     value={item.title}

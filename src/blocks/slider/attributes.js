@@ -139,6 +139,7 @@ const attributes = {
     },
 	speed: {
 		type: 'number',
+        default: 800,
 	},
 	autoplay: {
 		type: 'boolean',
@@ -146,6 +147,7 @@ const attributes = {
 	},
     autoplayDelay: {
         type: 'number',
+        default: 1000,
     },
 	infiniteLoop: {
 		type: 'boolean',
