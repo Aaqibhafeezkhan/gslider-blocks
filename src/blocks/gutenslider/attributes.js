@@ -12,12 +12,16 @@ const attributes = {
         default: [
             { 
                 id: 'item-1',
+                subTitle: 'Sub Title',
                 title: 'Slider Item 1',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
+                buttonText: 'Click Here',
+                buttonLink: '#',
 
                 sliderItemBgColorSwitcher: 'normal',
 
                 normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#E3F2FD',
+                normalItemClassicColor: '#EDEDED',
                 normalItemGradientColor: null,
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
@@ -30,12 +34,16 @@ const attributes = {
             },
             { 
                 id: 'item-2',
+                subTitle: 'Sub Title',
                 title: 'Slider Item 2',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
+                buttonText: 'Click Here',
+                buttonLink: '#',
 
                 sliderItemBgColorSwitcher: 'normal',
 
                 normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#E3F2FD',
+                normalItemClassicColor: '#EDEDED',
                 normalItemGradientColor: null,
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
@@ -48,12 +56,16 @@ const attributes = {
             },
             { 
                 id: 'item-3',
+                subTitle: 'Sub Title',
                 title: 'Slider Item 3',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
+                buttonText: 'Click Here',
+                buttonLink: '#',
 
                 sliderItemBgColorSwitcher: 'normal',
 
                 normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#E3F2FD',
+                normalItemClassicColor: '#EDEDED',
                 normalItemGradientColor: null,
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
@@ -72,9 +84,25 @@ const attributes = {
                     type: "string",
                     default: ""
                 },
+                subTitle: {
+                    type: "string",
+                    default: "Sub Title"
+                },
                 title: {
                     type: "string",
                     default: "Slider Item"
+                },
+                description: {
+                    type: "string",
+                    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum."
+                },
+                buttonText: {
+                    type: "string",
+                    default: "Click Here"
+                },
+                buttonLink: {
+                    type: "string",
+                    default: "#"
                 },
                 sliderItemBgColorSwitcher: {
                     type: "string",

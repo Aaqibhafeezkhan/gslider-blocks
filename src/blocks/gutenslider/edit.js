@@ -6,6 +6,7 @@ import {
     ToolbarButton
 } from '@wordpress/components';
 import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
+import SwitchToBlockSettings  from '@Utils/switchToBlockSettings';
 import Inspector from './inspector';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -33,6 +34,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const blockProps = useBlockProps({
         className: `guten-slider-container ${blockId}`,
     });
+
+    /**
+     * Manages tab button settings and switches to block settings on click
+     */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
 
     const swiperRef = useRef();
 
@@ -118,10 +125,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const handleAddItem = () => {
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
+            subTitle: 'Enter your subtitle here',
             title: `Slider Item ${sliderItems.length + 1}`,
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
+            buttonText: 'Click Here',
+            buttonLink: '#',
             sliderItemBgColorSwitcher: 'normal',
             normalItemBackgroundType: 'classic',
-            normalItemClassicColor: '#E3F2FD',
+            normalItemClassicColor: '#EDEDED',
             normalItemGradientColor: null,
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',
@@ -148,6 +159,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         );
     };
 
+    const handleButtonClick = (event) => {
+        event.preventDefault();
+    };
+
+    // Add this function inside the Edit component
+    const updateItem = (index, field, value) => {
+        const newItems = sliderItems.map((item, i) => {
+            if (i === index) {
+                return { ...item, [field]: value };
+            }
+            return item;
+        });
+        setAttributes({ sliderItems: newItems });
+    };
+
     return (
         <>
             <Inspector 
@@ -159,20 +185,57 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             {renderSliderToolbarControls()}
 
             <div {...blockProps}>
-                <div className="swiper" ref={swiperRef}>
+                <div className="swiper" ref={(el) => { swiperRef.current = el; panelRef.current = el; }}>
                     <div className="swiper-wrapper guten-slider-wrapper">
                         {sliderItems.map((item, index) => (
                             <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
                                 <div className={`${blockId} guten-slider-content-wrapper ${item.id}`}>
                                     <div className="guten-slider-content-inner-wrapper">
                                         <div className="guten-slider-list-item">
-                                            <div className="guten-slider-list-content">
+                                        <div className="guten-slider-list-content">
+                                            <div className="guten-slider-subtitle-wrapper">
+                                                <RichText
+                                                    tagName="span"
+                                                    className="guten-slider-subtitle"
+                                                    value={item.subTitle}
+                                                    onChange={(value) => updateItem(index, 'subTitle', value)}
+                                                    placeholder="Enter subtitle"
+                                                />
+                                            </div>
+                                            <div className="guten-slider-title-wrapper">
                                                 <RichText
                                                     tagName="h3"
                                                     className="guten-slider-title"
                                                     value={item.title}
+                                                    onChange={(value) => updateItem(index, 'title', value)}
+                                                    placeholder="Enter title"
                                                 />
                                             </div>
+                                            <div className="guten-slider-description-wrapper">
+                                                <RichText
+                                                    tagName="p"
+                                                    className="guten-slider-description"
+                                                    value={item.description}
+                                                    onChange={(value) => updateItem(index, 'description', value)}
+                                                    placeholder="Enter description"
+                                                />
+                                            </div>
+                                            <div className="guten-slider-button-container">
+                                                <a 
+                                                    className="guten-slider-button"
+                                                    href={item.buttonLink} 
+                                                    onClick={handleButtonClick}
+                                                >
+                                                    <RichText
+                                                        tagName="span"
+                                                        value={item.buttonText}
+                                                        className="guten-slider-button-text"
+                                                        onChange={(value) => updateItem(index, 'buttonText', value)}
+                                                        placeholder={__('Enter button text...')}
+                                                    />
+                                                </a>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

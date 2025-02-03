@@ -81,11 +81,39 @@ export default function Save({ attributes }) {
                                 <div className="guten-slider-content-inner-wrapper">
                                     <div className="guten-slider-list-item">
                                         <div className="guten-slider-list-content">
-                                            <RichText.Content
-                                                tagName="h3"
-                                                className="guten-slider-title"
-                                                value={item.title}
-                                            />
+                                            <div className="guten-slider-subtitle-wrapper">
+                                                <RichText.Content
+                                                    tagName="span"
+                                                    className="guten-slider-subtitle"
+                                                    value={item.subTitle}
+                                                />
+                                            </div>
+                                            <div className="guten-slider-title-wrapper">
+                                                <RichText.Content
+                                                    tagName="h3"
+                                                    className="guten-slider-title"
+                                                    value={item.title}
+                                                />
+                                            </div>
+                                            <div className="guten-slider-description-wrapper">
+                                                <RichText.Content
+                                                    tagName="p"
+                                                    className="guten-slider-description"
+                                                    value={item.description}
+                                                />
+                                            </div>
+                                            <div className="guten-slider-button-container">
+                                                <a 
+                                                    className="guten-slider-button"
+                                                    href={item.buttonLink} 
+                                                >
+                                                    <RichText.Content
+                                                        tagName="span"
+                                                        value={item.buttonText}
+                                                        className="guten-slider-button-text"
+                                                    />
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

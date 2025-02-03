@@ -11,6 +11,7 @@ import {
     ColorPicker,
     ColorPalette,
     TextControl,
+    TextareaControl,
 
 } from '@wordpress/components';
 import FB_BackgroundColorControl from '@Components/background-color-control';
@@ -69,9 +70,29 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         renderContent={() => (
                             <div className="global-setting-background-color-popup-wrapper">
                                 <TextControl
+                                    label={__("Sub Title", "gutenslider-blocks")}
+                                    value={item.subTitle}
+                                    onChange={(value) => handleChangeItem(item.id, "subTitle", value)}
+                                />
+                                <TextareaControl
                                     label={__("Title", "gutenslider-blocks")}
                                     value={item.title}
                                     onChange={(value) => handleChangeItem(item.id, "title", value)}
+                                />
+                                <TextareaControl
+                                    label={__("Description", "gutenslider-blocks")}
+                                    value={item.description}
+                                    onChange={(value) => handleChangeItem(item.id, "description", value)}
+                                />
+                                <TextControl
+                                    label={__("Button Text", "gutenslider-blocks")}
+                                    value={item.buttonText}
+                                    onChange={(value) => handleChangeItem(item.id, "buttonText", value)}
+                                />
+                                <TextControl
+                                    label={__("Button Link", "gutenslider-blocks")}
+                                    value={item.buttonLink}
+                                    onChange={(value) => handleChangeItem(item.id, "buttonLink", value)}
                                 />
                             </div>
                         )}
