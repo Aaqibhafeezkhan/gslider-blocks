@@ -29,6 +29,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         mousewheelControl,
         showNavigation,
         showPagination,
+        paginationType,
+        dynamicBullets,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -80,6 +82,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             
             pagination: showPagination ? {
                 el: '.swiper-pagination',
+                type: paginationType,
+                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false, 
                 clickable: true,
             } : false,
             
@@ -117,6 +121,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         allowTouchMove,
         showNavigation,
         showPagination,
+        paginationType,
+        dynamicBullets,
         slideEffect,
         carouselEffect,
         mousewheelControl,

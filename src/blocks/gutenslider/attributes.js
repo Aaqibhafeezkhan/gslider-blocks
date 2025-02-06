@@ -217,6 +217,14 @@ const attributes = {
 		type: 'boolean',
 		default: true,
 	},
+    paginationType: {
+        type: "string",
+        default: "bullets"
+    },
+    dynamicBullets: {
+        type: 'boolean',
+		default: false,
+    }
 };
 
 export default attributes;

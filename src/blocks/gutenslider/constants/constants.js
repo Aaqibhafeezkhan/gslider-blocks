@@ -85,3 +85,8 @@ export const SLIDER_TYPE = [
 	{ value: 'carousel', label: __('Carousel', 'gutenslider-blocks') },
 ];
 
+export const PAGINATION_TYPE = [
+	{ value: 'bullets', label: __('Bullets', 'gutenslider-blocks') },
+	{ value: 'fraction', label: __('Fraction', 'gutenslider-blocks') },
+	{ value: 'progressbar', label: __('Progress Bar', 'gutenslider-blocks') }
+  ];

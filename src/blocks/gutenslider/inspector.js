@@ -5,7 +5,7 @@ import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, Button, ButtonGroup } from '@wordpress/components';
 import SortableItem from './sortableItem';
-import { BORDER_STYLES, SLIDER_EFFECT_OPTIONS, CAROUSEL_EFFECT_OPTIONS, SLIDER_TYPE } from "./constants/constants";
+import { BORDER_STYLES, SLIDER_EFFECT_OPTIONS, CAROUSEL_EFFECT_OPTIONS, SLIDER_TYPE, PAGINATION_TYPE } from "./constants/constants";
 import './editor.scss';
 
 import SwitcherControl from '@Components/switcher-control';
@@ -37,7 +37,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         carouselEffect,
         mousewheelControl,
         showNavigation,
-        showPagination
+        showPagination,
+        paginationType,
+        dynamicBullets,
     } = attributes;
 
     useEffect(() => {
@@ -252,12 +254,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ mousewheelControl: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( "Navigation Arrows", "gutenslider-blocks" ) }
+                                                label={ __( "Show Navigation", "gutenslider-blocks" ) }
                                                 checked={ showNavigation }
                                                 onChange={(value) => setAttributes({ showNavigation: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( "Pagination Dots", "gutenslider-blocks" ) }
+                                                label={ __( "Show Pagination", "gutenslider-blocks" ) }
                                                 checked={ showPagination }
                                                 onChange={(value) => setAttributes({ showPagination: value })}
                                             />
@@ -325,6 +327,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             </PanelBody>
                                         )}
+
+                                        {showPagination && (
+                                            <PanelBody title={__("Pagination", "gutenslider-blocks")} initialOpen={false}>
+                                                <SelectControl
+                                                    label={__('Pagination Type', 'gutenslider-blocks')}
+                                                    value={paginationType}
+                                                    options={PAGINATION_TYPE}
+                                                    onChange={(value) => setAttributes({ paginationType: value })}
+                                                />
+                                                {paginationType === 'bullets' && (
+                                                    <ToggleControl
+                                                        label={__("Dynamic Bullets", "slider-blocks")}
+                                                        checked={dynamicBullets}
+                                                        onChange={(value) => setAttributes({ dynamicBullets: value })}
+                                                    />
+                                                )}
+                                            </PanelBody>
+                                        )}
+                                        
                                     </>
                                 )}
 

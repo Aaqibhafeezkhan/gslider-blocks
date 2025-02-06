@@ -20,6 +20,8 @@ export default function Save({ attributes }) {
         mousewheelControl,
         showNavigation,
         showPagination,
+        paginationType,
+        dynamicBullets,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -59,6 +61,8 @@ export default function Save({ attributes }) {
         
         pagination: showPagination ? {
             el: `.${blockId} .guten-slider.swiper-pagination`,
+            type: paginationType,
+            dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,
         } : false,
         
