@@ -55,12 +55,12 @@ export default function Save({ attributes }) {
         } : false,
         
         navigation: showNavigation ? {
-            nextEl: `.${blockId} .guten-slider.swiper-button-next`,
-            prevEl: `.${blockId} .guten-slider.swiper-button-prev`,
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
         } : false,
         
         pagination: showPagination ? {
-            el: `.${blockId} .guten-slider.swiper-pagination`,
+            el: '.swiper-pagination',
             type: paginationType,
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,
@@ -85,39 +85,47 @@ export default function Save({ attributes }) {
                                 <div className="guten-slider-content-inner-wrapper">
                                     <div className="guten-slider-list-item">
                                         <div className="guten-slider-list-content">
-                                            <div className="guten-slider-subtitle-wrapper">
-                                                <RichText.Content
-                                                    tagName="span"
-                                                    className="guten-slider-subtitle"
-                                                    value={item.subTitle}
-                                                />
-                                            </div>
-                                            <div className="guten-slider-title-wrapper">
-                                                <RichText.Content
-                                                    tagName="h3"
-                                                    className="guten-slider-title"
-                                                    value={item.title}
-                                                />
-                                            </div>
-                                            <div className="guten-slider-description-wrapper">
-                                                <RichText.Content
-                                                    tagName="p"
-                                                    className="guten-slider-description"
-                                                    value={item.description}
-                                                />
-                                            </div>
-                                            <div className="guten-slider-button-container">
-                                                <a 
-                                                    className="guten-slider-button"
-                                                    href={item.buttonLink} 
-                                                >
+                                            {item.subTitle && (
+                                                <div className="guten-slider-subtitle-wrapper">
                                                     <RichText.Content
                                                         tagName="span"
-                                                        value={item.buttonText}
-                                                        className="guten-slider-button-text"
+                                                        className="guten-slider-subtitle"
+                                                        value={item.subTitle}
                                                     />
-                                                </a>
-                                            </div>
+                                                </div>
+                                            )}
+                                            {item.title && (
+                                                <div className="guten-slider-title-wrapper">
+                                                    <RichText.Content
+                                                        tagName="h3"
+                                                        className="guten-slider-title"
+                                                        value={item.title}
+                                                    />
+                                                </div>
+                                            )}
+                                            {item.description && (
+                                                <div className="guten-slider-description-wrapper">
+                                                    <RichText.Content
+                                                        tagName="p"
+                                                        className="guten-slider-description"
+                                                        value={item.description}
+                                                    />
+                                                </div>
+                                            )}
+                                            {item.buttonText && (
+                                                <div className="guten-slider-button-container">
+                                                    <a 
+                                                        className="guten-slider-button"
+                                                        href={item.buttonLink} 
+                                                    >
+                                                        <RichText.Content
+                                                            tagName="span"
+                                                            value={item.buttonText}
+                                                            className="guten-slider-button-text"
+                                                        />
+                                                    </a>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
