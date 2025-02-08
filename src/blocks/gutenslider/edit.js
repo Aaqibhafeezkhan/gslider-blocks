@@ -229,11 +229,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             <div className="guten-slider-button-container">
                                                 <a 
                                                     className="guten-slider-button"
-                                                    href={item.buttonLink} 
+                                                    href={item.buttonLink}
+                                                    target={item.buttonTargetLink ? '_blank' : undefined}
+                                                    rel={item.buttonTargetLink ? 'noopener noreferrer' : undefined}
                                                     onClick={handleButtonClick}
                                                 >
                                                     <RichText
-                                                        tagName="span"
                                                         value={item.buttonText}
                                                         className="guten-slider-button-text"
                                                         onChange={(value) => updateItem(index, 'buttonText', value)}

@@ -28,8 +28,8 @@ $border_color: #dddddd;
     }
 }
 
-.global-setting-background-color-setting-icon-dropdown {
-    .global-setting-background-color-setting-icon-btn {
+.global-setting-icon-dropdown {
+    .global-setting-icon-btn {
         margin: 0;
         height: 28px;
         width: 28px;
@@ -42,18 +42,19 @@ $border_color: #dddddd;
             outline: none;
             box-shadow: none;
         }
-        .global-setting-background-color-panel-icon {
+        .global-setting-panel-icon {
             font-size: 15px;
             line-height: 20px;
         }
     }
 }
 
-.global-setting-background-color-setting-icon-dropdown-content {
+.global-setting-icon-dropdown-content {
     z-index: 99999;
     .components-popover__content {
-        padding: 15px;
-        min-width: 260px;
+        padding: 20px;
+        min-width: 350px;
+        margin-right: 30px;
     }
     .global-setting-background-color-popup-wrapper {
         .global-setting-background-color-popup-inner-wrapper {

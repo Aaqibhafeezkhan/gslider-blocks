@@ -24,7 +24,7 @@ function Control({ label, type, onChangeHandler, value }) {
 										aria-expanded={isOpen}
 										className="global-box-shadow-icon-btn"
 									>
-										<Dashicon icon="color-picker" className="global-box-shadow-icon" />
+										<Dashicon icon="admin-generic" className="global-box-shadow-icon" />
 									</Button>
 								)}
 								renderContent={() => (

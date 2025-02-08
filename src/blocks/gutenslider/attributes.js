@@ -17,6 +17,7 @@ const attributes = {
                 description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
                 buttonText: 'Click Here',
                 buttonLink: '#',
+                buttonTargetLink: false,
 
                 sliderItemBgColorSwitcher: 'normal',
 
@@ -39,6 +40,7 @@ const attributes = {
                 description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
                 buttonText: 'Click Here',
                 buttonLink: '#',
+                buttonTargetLink: false,
 
                 sliderItemBgColorSwitcher: 'normal',
 
@@ -61,6 +63,7 @@ const attributes = {
                 description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
                 buttonText: 'Click Here',
                 buttonLink: '#',
+                buttonTargetLink: false,
 
                 sliderItemBgColorSwitcher: 'normal',
 
@@ -103,6 +106,10 @@ const attributes = {
                 buttonLink: {
                     type: "string",
                     default: "#"
+                },
+                buttonTargetLink: {
+                    type: "boolean",
+                    default: false
                 },
                 sliderItemBgColorSwitcher: {
                     type: "string",

@@ -49,9 +49,9 @@ const BackgroundImageControl = ({
                         className='fb-image-replace-btn'
                         onClick={() => {
                             const mediaUploader = wp.media({
-                                title: __('Select or Upload background Image', 'frontis-blocks'),
+                                title: __('Select or Upload background Image', 'gutenslider-blocks'),
                                 button: {
-                                    text: __('Use this image', 'frontis-blocks'),
+                                    text: __('Use this image', 'gutenslider-blocks'),
                                 },
                                 multiple: false
                             });
@@ -75,9 +75,9 @@ const BackgroundImageControl = ({
                     className='fb-image-upload-btn'
                     onClick={() => {
                         const mediaUploader = wp.media({
-                            title: __('Select or Upload background Image', 'frontis-blocks'),
+                            title: __('Select or Upload background Image', 'gutenslider-blocks'),
                             button: {
-                                text: __('Use this image', 'frontis-blocks'),
+                                text: __('Use this image', 'gutenslider-blocks'),
                             },
                             multiple: false
                         });
@@ -100,69 +100,69 @@ const BackgroundImageControl = ({
                 <div className="fb-image-control-setting-wrapper">
                     <BaseControl>
                         <SelectControl
-                            label={__("Image Position", "frontis-blocks")}
+                            label={__("Image Position", "gutenslider-blocks")}
                             className="fb-image-label"
                             value={globalBackgroundImagePosition}
                             options={(
                                 [
-                                    {label: __("Default", "frontis-blocks"), value: ""},
-                                    {label: __("Center Center", "frontis-blocks"), value: "center center"},
-                                    {label: __("Center Left", "frontis-blocks"), value: "center left"},
-                                    {label: __("Center Right", "frontis-blocks"), value: "center right"},
-                                    {label: __("Top Center", "frontis-blocks"), value: "top center"},
-                                    {label: __("Top Left", "frontis-blocks"), value: "top left"},
-                                    {label: __("Top Right", "frontis-blocks"), value: "top right"},
-                                    {label: __("Bottom Center", "frontis-blocks"), value: "bottom center"},
-                                    {label: __("Bottom Left", "frontis-blocks"), value: "bottom left"},
-                                    {label: __("Bottom Right", "frontis-blocks"), value: "bottom right"},
-                                    {label: __("Left Center", "frontis-blocks"), value: "left center"},
-                                    {label: __("Left Top", "frontis-blocks"), value: "left top"},
-                                    {label: __("Left Bottom", "frontis-blocks"), value: "left bottom"},
-                                    {label: __("Right Center", "frontis-blocks"), value: "right center"},
-                                    {label: __("Right Top", "frontis-blocks"), value: "right top"},
-                                    {label: __("Right Bottom", "frontis-blocks"), value: "right bottom"},
+                                    {label: __("Default", "gutenslider-blocks"), value: ""},
+                                    {label: __("Center Center", "gutenslider-blocks"), value: "center center"},
+                                    {label: __("Center Left", "gutenslider-blocks"), value: "center left"},
+                                    {label: __("Center Right", "gutenslider-blocks"), value: "center right"},
+                                    {label: __("Top Center", "gutenslider-blocks"), value: "top center"},
+                                    {label: __("Top Left", "gutenslider-blocks"), value: "top left"},
+                                    {label: __("Top Right", "gutenslider-blocks"), value: "top right"},
+                                    {label: __("Bottom Center", "gutenslider-blocks"), value: "bottom center"},
+                                    {label: __("Bottom Left", "gutenslider-blocks"), value: "bottom left"},
+                                    {label: __("Bottom Right", "gutenslider-blocks"), value: "bottom right"},
+                                    {label: __("Left Center", "gutenslider-blocks"), value: "left center"},
+                                    {label: __("Left Top", "gutenslider-blocks"), value: "left top"},
+                                    {label: __("Left Bottom", "gutenslider-blocks"), value: "left bottom"},
+                                    {label: __("Right Center", "gutenslider-blocks"), value: "right center"},
+                                    {label: __("Right Top", "gutenslider-blocks"), value: "right top"},
+                                    {label: __("Right Bottom", "gutenslider-blocks"), value: "right bottom"},
                                 ]
                             )}
                             onChange={setGlobalBackgroundImagePosition} 
                         />
                         <SelectControl
-                            label={__("Image Attachment", "frontis-blocks")}
+                            label={__("Image Attachment", "gutenslider-blocks")}
                             className="fb-image-label"
                             value={globalBackgroundImageAttachment}
                             options={(
                                 [
-                                    {label: __("Default", "frontis-blocks"), value: ""},
-                                    {label: __("Scroll", "frontis-blocks"), value: "scroll"},
-                                    {label: __("Fixed", "frontis-blocks"), value: "fixed"},
+                                    {label: __("Default", "gutenslider-blocks"), value: ""},
+                                    {label: __("Scroll", "gutenslider-blocks"), value: "scroll"},
+                                    {label: __("Fixed", "gutenslider-blocks"), value: "fixed"},
                                 ]
                             )}
                             onChange={setGlobalBackgroundImageAttachment}
                         />
                         <SelectControl
-                            label={__("Image Repeat", "frontis-blocks")}
+                            label={__("Image Repeat", "gutenslider-blocks")}
                             className="fb-image-label"
                             value={globalBackgroundImageRepeat}
                             options={(
                                 [
-                                    {label: __("Default", "frontis-blocks"), value: ""},
-                                    {label: __("Repeat", "frontis-blocks"), value: "repeat"},
-                                    {label: __("Repeat X", "frontis-blocks"), value: "repeat-x"},
-                                    {label: __("Repeat Y", "frontis-blocks"), value: "repeat-y"},
-                                    {label: __("No Repeat", "frontis-blocks"), value: "no-repeat"},
+                                    {label: __("Default", "gutenslider-blocks"), value: ""},
+                                    {label: __("Repeat", "gutenslider-blocks"), value: "repeat"},
+                                    {label: __("Repeat X", "gutenslider-blocks"), value: "repeat-x"},
+                                    {label: __("Repeat Y", "gutenslider-blocks"), value: "repeat-y"},
+                                    {label: __("No Repeat", "gutenslider-blocks"), value: "no-repeat"},
                                 ]
                             )}
                             onChange={setGlobalBackgroundImageRepeat} 
                         />
                         <SelectControl
-                            label={__("Image Size", "frontis-blocks")}
+                            label={__("Image Size", "gutenslider-blocks")}
                             className="fb-image-label"
                             value={globalBackgroundImageSize}
                             options={(
                                 [
-                                    {label: __("Default", "frontis-blocks"), value: ""},
-                                    {label: __("Auto", "frontis-blocks"), value: "auto"},
-                                    {label: __("Cover", "frontis-blocks"), value: "cover"},
-                                    {label: __("Contain", "frontis-blocks"), value: "contain"},
+                                    {label: __("Default", "gutenslider-blocks"), value: ""},
+                                    {label: __("Auto", "gutenslider-blocks"), value: "auto"},
+                                    {label: __("Cover", "gutenslider-blocks"), value: "cover"},
+                                    {label: __("Contain", "gutenslider-blocks"), value: "contain"},
                                 ]
                             )}
                             onChange={setGlobalBackgroundImageSize}

@@ -116,10 +116,11 @@ export default function Save({ attributes }) {
                                                 <div className="guten-slider-button-container">
                                                     <a 
                                                         className="guten-slider-button"
-                                                        href={item.buttonLink} 
+                                                        href={item.buttonLink}
+                                                        target={item.buttonTargetLink ? '_blank' : undefined}
+                                                        rel={item.buttonTargetLink ? 'noopener noreferrer' : undefined}
                                                     >
                                                         <RichText.Content
-                                                            tagName="span"
                                                             value={item.buttonText}
                                                             className="guten-slider-button-text"
                                                         />
