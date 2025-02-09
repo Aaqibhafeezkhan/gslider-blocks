@@ -45,6 +45,7 @@ const GradientColorControl = ({
                             {gradient: 'linear-gradient(135deg, rgba(6,147,227,1) 0%, rgb(155,81,224) 100%)'},
                             {gradient: 'linear-gradient(135deg, rgb(122,220,180) 0%, rgb(0,208,130) 100%)'},
                             {gradient: 'linear-gradient(135deg, rgba(252,185,0,1) 0%, rgba(255,105,0,1) 100%)'},
+                            {gradient: 'linear-gradient(135deg, #12c2e9 0%, #c471ed 50%, #f64f59 100%)'},
                             {gradient: 'linear-gradient(135deg, rgba(255,105,0,1) 0%, rgb(207,46,46) 100%)'},
                             {gradient: 'linear-gradient(135deg, rgb(238,238,238) 0%, rgb(169,184,195) 100%)'},
                             {gradient: 'linear-gradient(135deg, rgb(74,234,220) 0%, rgb(151,120,209) 20%, rgb(207,42,186) 40%, rgb(238,44,130) 60%, rgb(251,105,98) 80%, rgb(254,248,76) 100%)'},   

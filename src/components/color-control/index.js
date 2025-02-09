@@ -24,7 +24,7 @@ const ColorControl = ({ label, color, onChangeColor }) => {
                             variant="primary"
                             onClick={onToggle}
                             aria-expanded={isOpen}
-                            className="global-setting-panel-icon-btn"
+                            className="global-setting-icon-btn"
                         >
                             <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
                         </Button>

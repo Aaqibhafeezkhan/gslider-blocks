@@ -29,14 +29,32 @@ const attributes = {
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
 
+                normalBackgroundImageUrl: '',
+                normalBackgroundImageAlt: '',
+                normalBackgroundImageID: '',
+                normalBackgroundImagePosition: '',
+                normalBackgroundImageAttachment: '',
+                normalBackgroundImageRepeat: '',
+                normalBackgroundImageSize: '',
+
                 hoverItemBackgroundType: 'classic',
                 hoverItemClassicColor: '',
                 hoverItemGradientColor: null,
                 hoverItemCustomGradientSwitcher: false,
-                hoverItemCustomGradientInputValue: ''
+                hoverItemCustomGradientInputValue: '',
+
+                hoverBackgroundImageUrl: '',
+                hoverBackgroundImageAlt: '',
+                hoverBackgroundImageID: '',
+                hoverBackgroundImagePosition: '',
+                hoverBackgroundImageAttachment: '',
+                hoverBackgroundImageRepeat: '',
+                hoverBackgroundImageSize: '',
+
             },
             { 
                 id: 'item-2',
+
                 subTitle: 'Sub Title',
                 title: 'Slider Item 2',
                 description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
@@ -55,14 +73,33 @@ const attributes = {
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
 
+                normalBackgroundImageUrl: '',
+                normalBackgroundImageAlt: '',
+                normalBackgroundImageID: '',
+                normalBackgroundImagePosition: '',
+                normalBackgroundImageAttachment: '',
+                normalBackgroundImageRepeat: '',
+                normalBackgroundImageSize: '',
+
                 hoverItemBackgroundType: 'classic',
                 hoverItemClassicColor: '',
                 hoverItemGradientColor: null,
                 hoverItemCustomGradientSwitcher: false,
-                hoverItemCustomGradientInputValue: ''
+                hoverItemCustomGradientInputValue: '',
+
+                hoverBackgroundImageUrl: '',
+                hoverBackgroundImageAlt: '',
+                hoverBackgroundImageID: '',
+                hoverBackgroundImagePosition: '',
+                hoverBackgroundImageAttachment: '',
+                hoverBackgroundImageRepeat: '',
+                hoverBackgroundImageSize: '',
+
             },
             { 
                 id: 'item-3',
+
+
                 subTitle: 'Sub Title',
                 title: 'Slider Item 3',
                 description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
@@ -81,11 +118,28 @@ const attributes = {
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
 
+                normalBackgroundImageUrl: '',
+                normalBackgroundImageAlt: '',
+                normalBackgroundImageID: '',
+                normalBackgroundImagePosition: '',
+                normalBackgroundImageAttachment: '',
+                normalBackgroundImageRepeat: '',
+                normalBackgroundImageSize: '',
+
                 hoverItemBackgroundType: 'classic',
                 hoverItemClassicColor: '',
                 hoverItemGradientColor: null,
                 hoverItemCustomGradientSwitcher: false,
-                hoverItemCustomGradientInputValue: ''
+                hoverItemCustomGradientInputValue: '',
+
+                hoverBackgroundImageUrl: '',
+                hoverBackgroundImageAlt: '',
+                hoverBackgroundImageID: '',
+                hoverBackgroundImagePosition: '',
+                hoverBackgroundImageAttachment: '',
+                hoverBackgroundImageRepeat: '',
+                hoverBackgroundImageSize: '',
+
             },
         ],
         items: {
@@ -127,6 +181,7 @@ const attributes = {
                     type: "boolean",
                     default: false
                 },
+
                 sliderItemBgColorSwitcher: {
                     type: "string",
                     default: "normal",
@@ -152,6 +207,34 @@ const attributes = {
                     type: "string",
                     default: "",
                 },
+                normalBackgroundImageUrl: {
+                    type: "string",
+                    default: ""
+                },
+                normalBackgroundImageAlt: {
+                    type: "string",
+                    default: ""
+                },
+                normalBackgroundImageID: {
+                    type: "string",
+                    default: ""
+                },
+                normalBackgroundImagePosition: {
+                    type: "string",
+                    default: ""
+                },
+                normalBackgroundImageAttachment: {
+                    type: "string",
+                    default: ""
+                },
+                normalBackgroundImageRepeat: {
+                    type: "string",
+                    default: ""
+                },
+                normalBackgroundImageSize: {
+                    type: "string",
+                    default: ""
+                },
 
                 hoverItemBackgroundType: {
                     type: "string",
@@ -173,6 +256,43 @@ const attributes = {
                     type: "string",
                     default: "",
                 },
+
+                hoverBackgroundImageUrl: {
+                    type: "string",
+                    default: ""
+                },
+
+                hoverBackgroundImageAlt: {
+                    type: "string",
+                    default: ""
+                },  
+
+                hoverBackgroundImageID: {
+                    type: "string",
+                    default: ""
+                },  
+
+                hoverBackgroundImagePosition: {
+                    type: "string",
+                    default: ""
+                },  
+
+                hoverBackgroundImageAttachment: {
+                    type: "string",
+                    default: ""
+                },    
+
+                hoverBackgroundImageRepeat: {
+                    type: "string",
+                    default: ""
+                },            
+
+                hoverBackgroundImageSize: {
+                    type: "string",
+                    default: ""
+                },
+                
+
             }
         }
     },

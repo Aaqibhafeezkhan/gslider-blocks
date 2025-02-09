@@ -40,6 +40,7 @@ $border_color: #dddddd;
         justify-content: space-between;
         margin: 0;
         align-items: center;
+        flex-direction: row;
         .components-base-control__field {
             .components-base-control__label {
                 display: block;

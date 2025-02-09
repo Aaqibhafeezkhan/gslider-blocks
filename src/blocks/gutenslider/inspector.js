@@ -68,8 +68,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             buttonText: 'Click Here',
             buttonLink: '#',
             buttonTargetLink: false,
-            nofollow: false,
-            sponsored: false,
 
             sliderItemBgColorSwitcher: 'normal',
 
