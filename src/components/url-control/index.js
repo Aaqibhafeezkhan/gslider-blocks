@@ -9,7 +9,7 @@ import {
 } from '@wordpress/components';
 import './editor.lazy.scss';
 
-const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTab }) => {
+const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTab, nofollow, onChangeNofollow, sponsored, onChangeSponsored }) => {
     const handleUrlChange = (newUrl) => {
         onChangeUrl(newUrl);
     };
@@ -18,9 +18,18 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
         onChangeOpenInNewTab(newOpenInNewTab);
     };
 
+    const handleNofollowChange = (newNofollow) => {
+        onChangeNofollow(newNofollow);
+    };
+
+    const handleSponsoredChange = (newSponsored) => {
+        onChangeSponsored(newSponsored);
+    };
+
     return (
         <BaseControl
             label={label}
+
             id="global-setting-url" 
             className="global-url-control-wrapper"
         >
@@ -53,6 +62,16 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
                                     label={__("Open in new tab", "gutenslider-blocks")}
                                     checked={openInNewTab}
                                     onChange={handleOpenInNewTabChange}
+                                />
+                                <ToggleControl
+                                    label={__("Add Nofollow rel", "gutenslider-blocks")}
+                                    checked={nofollow}
+                                    onChange={handleNofollowChange}
+                                />
+                                <ToggleControl
+                                    label={__("Add Sponsored rel", "gutenslider-blocks")}
+                                    checked={sponsored}
+                                    onChange={handleSponsoredChange}
                                 />
                             </BaseControl>
                         </div>

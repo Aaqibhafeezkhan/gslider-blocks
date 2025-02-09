@@ -18,6 +18,8 @@ const attributes = {
                 buttonText: 'Click Here',
                 buttonLink: '#',
                 buttonTargetLink: false,
+                nofollow: false,
+                sponsored: false,
 
                 sliderItemBgColorSwitcher: 'normal',
 
@@ -41,6 +43,9 @@ const attributes = {
                 buttonText: 'Click Here',
                 buttonLink: '#',
                 buttonTargetLink: false,
+                nofollow: false,
+                sponsored: false,
+
 
                 sliderItemBgColorSwitcher: 'normal',
 
@@ -64,6 +69,9 @@ const attributes = {
                 buttonText: 'Click Here',
                 buttonLink: '#',
                 buttonTargetLink: false,
+                nofollow: false,
+                sponsored: false,
+
 
                 sliderItemBgColorSwitcher: 'normal',
 
@@ -108,6 +116,14 @@ const attributes = {
                     default: "#"
                 },
                 buttonTargetLink: {
+                    type: "boolean",
+                    default: false
+                },
+                nofollow: {
+                    type: "boolean",
+                    default: false
+                },
+                sponsored: {
                     type: "boolean",
                     default: false
                 },

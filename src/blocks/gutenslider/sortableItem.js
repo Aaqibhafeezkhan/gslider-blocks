@@ -99,6 +99,10 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                     onChangeUrl={(value) => handleChangeItem(item.id, "buttonLink", value)}
                                     openInNewTab={item.buttonTargetLink}
                                     onChangeOpenInNewTab={(value) => handleChangeItem(item.id, "buttonTargetLink", value)}
+                                    nofollow={item.nofollow}
+                                    onChangeNofollow={(value) => handleChangeItem(item.id, "nofollow", value)}
+                                    sponsored={item.sponsored}
+                                    onChangeSponsored={(value) => handleChangeItem(item.id, "sponsored", value)}
                                 />
                             </div>
                         )}

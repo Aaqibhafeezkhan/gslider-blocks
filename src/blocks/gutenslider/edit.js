@@ -198,51 +198,64 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 <div className={`${blockId} guten-slider-content-wrapper ${item.id}`}>
                                     <div className="guten-slider-content-inner-wrapper">
                                         <div className="guten-slider-list-item">
-                                        <div className="guten-slider-list-content">
-                                            <div className="guten-slider-subtitle-wrapper">
-                                                <RichText
-                                                    tagName="span"
-                                                    className="guten-slider-subtitle"
-                                                    value={item.subTitle}
-                                                    onChange={(value) => updateItem(index, 'subTitle', value)}
-                                                    placeholder="Enter subtitle"
-                                                />
-                                            </div>
-                                            <div className="guten-slider-title-wrapper">
-                                                <RichText
-                                                    tagName="h3"
-                                                    className="guten-slider-title"
-                                                    value={item.title}
-                                                    onChange={(value) => updateItem(index, 'title', value)}
-                                                    placeholder="Enter title"
-                                                />
-                                            </div>
-                                            <div className="guten-slider-description-wrapper">
-                                                <RichText
-                                                    tagName="p"
-                                                    className="guten-slider-description"
-                                                    value={item.description}
-                                                    onChange={(value) => updateItem(index, 'description', value)}
-                                                    placeholder="Enter description"
-                                                />
-                                            </div>
-                                            <div className="guten-slider-button-container">
-                                                <a 
-                                                    className="guten-slider-button"
-                                                    href={item.buttonLink}
-                                                    target={item.buttonTargetLink ? '_blank' : undefined}
-                                                    rel={item.buttonTargetLink ? 'noopener noreferrer' : undefined}
-                                                    onClick={handleButtonClick}
-                                                >
+                                            <div className="guten-slider-list-content">
+                                                <div className="guten-slider-subtitle-wrapper">
                                                     <RichText
-                                                        value={item.buttonText}
-                                                        className="guten-slider-button-text"
-                                                        onChange={(value) => updateItem(index, 'buttonText', value)}
-                                                        placeholder={__('Enter button text...')}
+                                                        tagName="span"
+                                                        className="guten-slider-subtitle"
+                                                        value={item.subTitle}
+                                                        onChange={(value) => updateItem(index, 'subTitle', value)}
+                                                        placeholder="Enter subtitle"
                                                     />
-                                                </a>
+                                                </div>
+                                                <div className="guten-slider-title-wrapper">
+                                                    <RichText
+                                                        tagName="h3"
+                                                        className="guten-slider-title"
+                                                        value={item.title}
+                                                        onChange={(value) => updateItem(index, 'title', value)}
+                                                        placeholder="Enter title"
+                                                    />
+                                                </div>
+                                                <div className="guten-slider-description-wrapper">
+                                                    <RichText
+                                                        tagName="p"
+                                                        className="guten-slider-description"
+                                                        value={item.description}
+                                                        onChange={(value) => updateItem(index, 'description', value)}
+                                                        placeholder="Enter description"
+                                                    />
+                                                </div>
+                                                <div className="guten-slider-button-container">
+                                                    {item.buttonLink ? (
+                                                        <a 
+                                                            className="guten-slider-button"
+                                                            href={item.buttonLink}
+                                                            target={item.buttonTargetLink ? '_blank' : undefined}
+                                                            rel={[
+                                                                item.nofollow && 'nofollow',
+                                                                item.sponsored && 'sponsored',
+                                                                item.buttonTargetLink && 'noopener noreferrer'
+                                                            ].filter(Boolean).join(' ')}
+                                                            onClick={handleButtonClick}
+                                                        >
+                                                            <RichText
+                                                                value={item.buttonText}
+                                                                className="guten-slider-button-text"
+                                                                onChange={(value) => updateItem(index, 'buttonText', value)}
+                                                                placeholder={__('Enter button text...')}
+                                                            />
+                                                        </a>
+                                                    ) : (
+                                                        <RichText
+                                                            value={item.buttonText}
+                                                            className="guten-slider-button-text"
+                                                            onChange={(value) => updateItem(index, 'buttonText', value)}
+                                                            placeholder={__('Enter button text...')}
+                                                        />
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>

@@ -114,17 +114,27 @@ export default function Save({ attributes }) {
                                             )}
                                             {item.buttonText && (
                                                 <div className="guten-slider-button-container">
-                                                    <a 
-                                                        className="guten-slider-button"
-                                                        href={item.buttonLink}
-                                                        target={item.buttonTargetLink ? '_blank' : undefined}
-                                                        rel={item.buttonTargetLink ? 'noopener noreferrer' : undefined}
-                                                    >
-                                                        <RichText.Content
-                                                            value={item.buttonText}
-                                                            className="guten-slider-button-text"
-                                                        />
-                                                    </a>
+                                                    {item.buttonLink ? (
+                                                        <a 
+                                                            className="guten-slider-button"
+                                                            href={item.buttonLink}
+                                                            target={item.buttonTargetLink ? '_blank' : undefined}
+                                                            rel={[
+                                                                item.nofollow && 'nofollow',
+                                                                item.sponsored && 'sponsored',
+                                                                item.buttonTargetLink && 'noopener noreferrer'
+                                                            ].filter(Boolean).join(' ')}
+                                                        >
+                                                            <RichText.Content
+                                                                value={item.buttonText}
+                                                                className="guten-slider-button-text"
+                                                            />
+                                                        </a>
+                                                    ) : (
+                                                        <span className="guten-slider-button-text">
+                                                            <RichText.Content value={item.buttonText} />
+                                                        </span>
+                                                    )}
                                                 </div>
                                             )}
                                         </div>
