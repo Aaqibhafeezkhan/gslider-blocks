@@ -67,12 +67,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
             buttonText: 'Click Here',
             buttonLink: '#',
-
+            buttonTargetLink: false,
+            nofollow: false,
+            sponsored: false,
 
             sliderItemBgColorSwitcher: 'normal',
 
             normalItemBackgroundType: 'classic',
-            normalItemClassicColor: '#E3F2FD',
+            normalItemClassicColor: '#EDEDED',
             normalItemGradientColor: null,
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',

@@ -108,6 +108,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             console.error('Swiper initialization error:', error);
         }
     }, [
+        sliderItems,
         sliderType,
         infiniteLoop,
         carouselPerColumn,
@@ -136,6 +137,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
             buttonText: 'Click Here',
             buttonLink: '#',
+            nofollow: false,
+            sponsored: false,
             sliderItemBgColorSwitcher: 'normal',
             normalItemBackgroundType: 'classic',
             normalItemClassicColor: '#EDEDED',
