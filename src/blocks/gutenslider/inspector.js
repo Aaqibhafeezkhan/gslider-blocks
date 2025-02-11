@@ -5,8 +5,17 @@ import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, Button, ButtonGroup } from '@wordpress/components';
 import SortableItem from './sortableItem';
-import { BORDER_STYLES, SLIDER_EFFECT_OPTIONS, CAROUSEL_EFFECT_OPTIONS, SLIDER_TYPE } from "./constants/constants";
+import { BORDER_STYLES, SLIDER_EFFECT_OPTIONS, CAROUSEL_EFFECT_OPTIONS, SLIDER_TYPE, PAGINATION_TYPE } from "./constants/constants";
 import './editor.scss';
+
+import SwitcherControl from '@Components/switcher-control';
+import ResponsiveSpacingControl from '@Components/responsive-spacing-control';
+import ColorControl from '@Components/color-control';
+import ResponsiveRangeControl from '@Components/responsive-range-control';
+import ResponsiveTypographyControl from '@Components/responsive-typography-control';
+import BoxShadowSettingsControl from '@Components/box-shadow-control';
+import BackgroundColorControl from '@Components/background-color-control';
+import LoadGoogleFont from '@Utils/loadGoogleFont';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
@@ -16,19 +25,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
-        transitionSpeed,
+        speed,
         autoplay,
-        autoplaySpeed,
-        loop,
+        autoplayDelay,
+        infiniteLoop,
         allowTouchMove,
         pauseOnHover,
         stopOnLastSlide,
         reverseDirection,
-        sliderEffect,
+        slideEffect,
         carouselEffect,
-        enableMouseWheel,
-        displayArrows,
-        displayDots
+        mousewheelControl,
+        showNavigation,
+        showPagination,
+        paginationType,
+        dynamicBullets,
     } = attributes;
 
     useEffect(() => {
@@ -51,12 +62,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleAddItem = () => {
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
+            subTitle: 'Enter your subtitle here',
             title: `Slider Item ${sliderItems.length + 1}`,
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
+            buttonText: 'Click Here',
+            buttonLink: '#',
+            buttonTargetLink: false,
 
             sliderItemBgColorSwitcher: 'normal',
 
             normalItemBackgroundType: 'classic',
-            normalItemClassicColor: '#399CFF',
+            normalItemClassicColor: '#EDEDED',
             normalItemGradientColor: null,
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',
@@ -152,7 +168,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <div className={`guten-slider-tab-controls ${tab.name}`}>
                                 {tab.name === "general" && (
                                     <>
-                                        <PanelBody title={__("Slider", "gutenslider-blocks")} initialOpen>
+                                        <PanelBody title={__("Slider Items", "gutenslider-blocks")} initialOpen>
                                             <div className="guten-slider-wrapper">
                                                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                                                     <SortableContext items={sliderItems.map((item) => item.id)}>
@@ -171,11 +187,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     </SortableContext>
                                                 </DndContext>
                                                 <Button isPrimary onClick={handleAddItem}>
-                                                    {__("Add Slider", "gutenslider-blocks")}
+                                                    {__("Add Slide", "gutenslider-blocks")}
                                                 </Button>
                                             </div>
                                         </PanelBody>
-                                        <PanelBody title={__("Slider Layout", "gutenslider-blocks")} initialOpen={false}>
+                                        <PanelBody title={__("Slider Type", "gutenslider-blocks")} initialOpen={false}>
                                             <div className="global-setting-switcher-container">
                                                 <BaseControl
                                                     label={__("Slider Type", "gutenslider-blocks")}
@@ -195,36 +211,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </BaseControl>
                                             </div>
                                         </PanelBody>
-                                        {sliderType === 'carousel' && (
-                                            <PanelBody title={__("Carousel Options", "gutenslider-blocks")} initialOpen={false}>
-                                                <RangeControl
-                                                    label={__('Columns', 'gutenslider-blocks')}
-                                                    value={carouselPerColumn}
-                                                    onChange={(value) => setAttributes({ carouselPerColumn: value })}
-                                                    min={1}
-                                                    max={10}
-                                                    step={1}
-                                                    initialPosition={1}
-                                                />
-                                                <RangeControl
-                                                    label={__('Columns Gap', 'gutenslider-blocks')}
-                                                    value={carouselPerColumnGap}
-                                                    onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
-                                                    min={0}
-                                                    max={200}
-                                                    step={1}
-                                                    initialPosition={1}
-                                                />
-                                            </PanelBody>
-                                        )}
-                                        <PanelBody title={__("Slider Options", "gutenslider-blocks")} initialOpen={false}>
+                                        <PanelBody title={__("General Settings", "gutenslider-blocks")} initialOpen={false}>
                                             <ToggleControl
-                                                label={ __( 'Enable Loop', 'gutenslider-blocks' ) }
-                                                checked={ loop }
-                                                onChange={(value) => setAttributes({ loop: value })}
+                                                label={ __( 'Infinite Loop', 'gutenslider-blocks' ) }
+                                                checked={ infiniteLoop }
+                                                onChange={(value) => setAttributes({ infiniteLoop: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( 'Enable Allow TouchMove', 'gutenslider-blocks' ) }
+                                                label={ __( 'Touch Swipe Control', 'gutenslider-blocks' ) }
                                                 checked={ allowTouchMove }
                                                 onChange={(value) => setAttributes({ allowTouchMove: value })}
                                             />
@@ -234,18 +228,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ pauseOnHover: value })}
                                             />
                                             <ToggleControl
-                                                label={__("Stop on Last Slide", "gutenslider-blocks")}
+                                                label={__("Stop Autoplay at Last Slide", "gutenslider-blocks")}
                                                 checked={stopOnLastSlide}
                                                 onChange={(value) => {
                                                     setAttributes({ stopOnLastSlide: value });
                                                     if (value) {
-                                                        setAttributes({ loop: false });
+                                                        setAttributes({ infiniteLoop: false });
                                                         setAttributes({ autoplay: true });
                                                     }
                                                 }}
                                             />
                                             <ToggleControl
-                                                label={__("Reverse Direction", "gutenslider-blocks")}
+                                                label={__("Reverse Autoplay Direction", "gutenslider-blocks")}
                                                 checked={reverseDirection}
                                                 onChange={(value) => {
                                                     setAttributes({ reverseDirection: value });
@@ -255,50 +249,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 }}
                                             />
                                             <ToggleControl
-                                                label={__("Enable Mouse Wheel", "gutenslider-blocks")}
-                                                checked={enableMouseWheel}
-                                                onChange={(value) => setAttributes({ enableMouseWheel: value })}
+                                                label={__("Mousewheel Navigation", "gutenslider-blocks")}
+                                                checked={mousewheelControl}
+                                                onChange={(value) => setAttributes({ mousewheelControl: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( "Enable Arrows", "gutenslider-blocks" ) }
-                                                checked={ displayArrows }
-                                                onChange={(value) => setAttributes({ displayArrows: value })}
+                                                label={ __( "Show Navigation", "gutenslider-blocks" ) }
+                                                checked={ showNavigation }
+                                                onChange={(value) => setAttributes({ showNavigation: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( "Enable Dots", "gutenslider-blocks" ) }
-                                                checked={ displayDots }
-                                                onChange={(value) => setAttributes({ displayDots: value })}
+                                                label={ __( "Show Pagination", "gutenslider-blocks" ) }
+                                                checked={ showPagination }
+                                                onChange={(value) => setAttributes({ showPagination: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( 'Enable Autoplay', 'gutenslider-blocks' ) }
+                                                label={ __( 'Autoplay', 'gutenslider-blocks' ) }
                                                 checked={ autoplay }
                                                 onChange={(value) => setAttributes({ autoplay: value })}
                                             />
                                             { autoplay && (
                                             <RangeControl
-                                                label={__('Autoplay Speed (ms)', 'gutenslider-blocks')}
-                                                value={autoplaySpeed}
-                                                onChange={(value) => setAttributes({ autoplaySpeed: value })}
-                                                min={100}
+                                                label={__('Autoplay Delay (ms)', 'gutenslider-blocks')}
+                                                value={autoplayDelay}
+                                                onChange={(value) => setAttributes({ autoplayDelay: value })}
+                                                min={1000}
                                                 max={10000}
-                                                step={100}
-                                                initialPosition={900}
                                             />
                                             )}
                                             <RangeControl
                                                 label={__("Transition Speed (ms)", "gutenslider-blocks")}
-                                                value={transitionSpeed}
-                                                onChange={(value) => setAttributes({ transitionSpeed: value })}
+                                                value={speed}
+                                                onChange={(value) => setAttributes({ speed: value })}
                                                 min={100}
-                                                max={3000}
-                                                step={100}
-                                                initialPosition={1000}
+                                                max={5000}
                                             />
                                         </PanelBody>
                                         {sliderType === 'carousel' && (
-                                            <PanelBody title={__("Effect", "gutenslider-blocks")} initialOpen={false}>
+                                            <PanelBody title={__("Carousel Settings", "gutenslider-blocks")} initialOpen={false}>
+                                                <RangeControl
+                                                    label={__('Number of Columns', 'gutenslider-blocks')}
+                                                    value={carouselPerColumn}
+                                                    onChange={(value) => setAttributes({ carouselPerColumn: value })}
+                                                    min={1}
+                                                    max={10}
+                                                    step={1}
+                                                    initialPosition={1}
+                                                />
+                                                <RangeControl
+                                                    label={__('Column Gap (px)', 'gutenslider-blocks')}
+                                                    value={carouselPerColumnGap}
+                                                    onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
+                                                    min={0}
+                                                    max={200}
+                                                    step={1}
+                                                    initialPosition={1}
+                                                />
+                                            </PanelBody>
+                                        )}
+                                        {sliderType === 'carousel' && (
+                                            <PanelBody title={__("Carousel Effect", "gutenslider-blocks")} initialOpen={false}>
                                                 <SelectControl
-                                                    label={__('Carousel Effect', 'gutenslider-blocks')}
+                                                    label={__('Select Carousel Effect', 'gutenslider-blocks')}
                                                     value={carouselEffect}
                                                     options={CAROUSEL_EFFECT_OPTIONS}
                                                     onChange={(value) => setAttributes({ carouselEffect: value })}
@@ -306,15 +318,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </PanelBody>
                                         )}
                                         {sliderType === 'slider' && (
-                                            <PanelBody title={__("Effect", "gutenslider-blocks")} initialOpen={false}>
+                                            <PanelBody title={__("Slider Effect", "gutenslider-blocks")} initialOpen={false}>
                                                 <SelectControl
-                                                    label={__('Slide Effect', 'gutenslider-blocks')}
-                                                    value={sliderEffect}
+                                                    label={__('Select Slider Effect', 'gutenslider-blocks')}
+                                                    value={slideEffect}
                                                     options={SLIDER_EFFECT_OPTIONS}
-                                                    onChange={(value) => setAttributes({ sliderEffect: value })}
+                                                    onChange={(value) => setAttributes({ slideEffect: value })}
                                                 />
                                             </PanelBody>
                                         )}
+
+                                        {showPagination && (
+                                            <PanelBody title={__("Pagination", "gutenslider-blocks")} initialOpen={false}>
+                                                <SelectControl
+                                                    label={__('Pagination Type', 'gutenslider-blocks')}
+                                                    value={paginationType}
+                                                    options={PAGINATION_TYPE}
+                                                    onChange={(value) => setAttributes({ paginationType: value })}
+                                                />
+                                                {paginationType === 'bullets' && (
+                                                    <ToggleControl
+                                                        label={__("Dynamic Bullets", "slider-blocks")}
+                                                        checked={dynamicBullets}
+                                                        onChange={(value) => setAttributes({ dynamicBullets: value })}
+                                                    />
+                                                )}
+                                            </PanelBody>
+                                        )}
+                                        
                                     </>
                                 )}
 

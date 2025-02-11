@@ -4,7 +4,7 @@
     flex-direction: column;
     height: clamp(300px, 60vh, 500px);
     justify-content: center;
-    .guten-slider-content-inner {
+    .guten-slider-content-inner-wrapper {
         box-sizing: border-box;
         margin: 0 auto;
         max-width: 80%;
@@ -30,4 +30,9 @@
     .swiper-pagination-bullet {
         background: #000;
     }
+}
+
+/* In your CSS */
+.swiper-backface-hidden .swiper-slide {
+    backface-visibility: visible !important;
 }

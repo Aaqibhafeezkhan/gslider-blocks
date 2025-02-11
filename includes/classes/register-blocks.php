@@ -27,8 +27,7 @@ if (!class_exists('GutenSlider_Blocks_Registration')) {
          * @since 1.0.0
          */
         private const BLOCKS = [
-            'button',
-            'slider',
+            'gutenslider',
         ];
 
         /**

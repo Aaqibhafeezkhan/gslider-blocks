@@ -11,9 +11,11 @@ import {
     ColorPicker,
     ColorPalette,
     TextControl,
+    TextareaControl,
 
 } from '@wordpress/components';
 import FB_BackgroundColorControl from '@Components/background-color-control';
+import UrlControl from '@Components/url-control';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
@@ -53,25 +55,54 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                     label={__("Slide Content", "gutenslider-blocks")}
                 >
                     <Dropdown
-                        className="global-setting-background-color-setting-icon-dropdown"
-                        contentClassName="global-setting-background-color-setting-icon-dropdown-content"
+                        className="global-setting-icon-dropdown"
+                        contentClassName="global-setting-icon-dropdown-content"
                         popoverProps={{ placement: 'bottom-start' }}
                         renderToggle={({ isOpen, onToggle }) => (
                             <Button
                                 variant="primary"
                                 onClick={onToggle}
                                 aria-expanded={isOpen}
-                                className="global-setting-background-color-setting-icon-btn"
+                                className="global-setting-icon-btn"
                             >
-                                <Dashicon icon="color-picker" className="global-setting-background-color-panel-icon" />
+                                <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
                             </Button>
                         )}
                         renderContent={() => (
-                            <div className="global-setting-background-color-popup-wrapper">
+                            <div className="global-setting-contant-popup-wrapper">
                                 <TextControl
+                                    label={__("Sub Title", "gutenslider-blocks")}
+                                    value={item.subTitle}
+                                    onChange={(value) => handleChangeItem(item.id, "subTitle", value)}
+                                    help= "Leave blank to hide subtitle"
+                                />
+                                <TextareaControl
                                     label={__("Title", "gutenslider-blocks")}
                                     value={item.title}
                                     onChange={(value) => handleChangeItem(item.id, "title", value)}
+                                    help= "Leave blank to hide title"
+                                />
+                                <TextareaControl
+                                    label={__("Description", "gutenslider-blocks")}
+                                    value={item.description}
+                                    onChange={(value) => handleChangeItem(item.id, "description", value)}
+                                    help= "Leave blank to hide description"
+                                />
+                                <TextControl
+                                    label={__("Button Text", "gutenslider-blocks")}
+                                    value={item.buttonText}
+                                    onChange={(value) => handleChangeItem(item.id, "buttonText", value)}
+                                    help= "Leave blank to hide button text"
+                                />
+                                <UrlControl
+                                    url={item.buttonLink}
+                                    onChangeUrl={(value) => handleChangeItem(item.id, "buttonLink", value)}
+                                    openInNewTab={item.buttonTargetLink}
+                                    onChangeOpenInNewTab={(value) => handleChangeItem(item.id, "buttonTargetLink", value)}
+                                    nofollow={item.nofollow}
+                                    onChangeNofollow={(value) => handleChangeItem(item.id, "nofollow", value)}
+                                    sponsored={item.sponsored}
+                                    onChangeSponsored={(value) => handleChangeItem(item.id, "sponsored", value)}
                                 />
                             </div>
                         )}
@@ -82,17 +113,17 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                     label={__("Background", "gutenslider-blocks")}
                 >
                     <Dropdown
-                        className="global-setting-background-color-setting-icon-dropdown"
-                        contentClassName="global-setting-background-color-setting-icon-dropdown-content"
+                        className="global-setting-icon-dropdown"
+                        contentClassName="global-setting-icon-dropdown-content"
                         popoverProps={{ placement: 'bottom-start' }}
                         renderToggle={({ isOpen, onToggle }) => (
                             <Button
                                 variant="primary"
                                 onClick={onToggle}
                                 aria-expanded={isOpen}
-                                className="global-setting-background-color-setting-icon-btn"
+                                className="global-setting-icon-btn"
                             >
-                                <Dashicon icon="color-picker" className="global-setting-background-color-panel-icon" />
+                                <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
                             </Button>
                         )}
                         renderContent={() => (

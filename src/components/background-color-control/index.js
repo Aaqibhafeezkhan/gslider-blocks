@@ -96,17 +96,17 @@ const BackgroundColorControl = ({
                     label={__("Background Type", "gutenslider-blocks")}
                 >
                     <Dropdown
-                        className="global-setting-background-color-setting-icon-dropdown"
-                        contentClassName="global-setting-background-color-setting-icon-dropdown-content"
+                        className="global-setting-icon-dropdown"
+                        contentClassName="global-setting-icon-dropdown-content"
                         popoverProps={{ placement: 'bottom-start' }}
                         renderToggle={({ isOpen, onToggle }) => (
                             <Button
                                 variant="primary"
                                 onClick={onToggle}
                                 aria-expanded={isOpen}
-                                className="global-setting-background-color-setting-icon-btn"
+                                className="global-setting-icon-btn"
                             >
-                                <Dashicon icon="color-picker" className="global-setting-background-color-panel-icon" />
+                                <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
                             </Button>
                         )}
                         renderContent={() => (
@@ -180,17 +180,17 @@ const BackgroundColorControl = ({
                     label={__("Background Type", "gutenslider-blocks")}
                 >
                     <Dropdown
-                        className="global-setting-background-color-setting-icon-dropdown"
-                        contentClassName="global-setting-background-color-setting-icon-dropdown-content"
+                        className="global-setting-icon-dropdown"
+                        contentClassName="global-setting-icon-dropdown-content"
                         popoverProps={{ placement: 'bottom-start' }}
                         renderToggle={({ isOpen, onToggle }) => (
                             <Button
                                 variant="primary"
                                 onClick={onToggle}
                                 aria-expanded={isOpen}
-                                className="global-setting-background-color-setting-icon-btn"
+                                className="global-setting-icon-btn"
                             >
-                                <Dashicon icon="color-picker" className="global-setting-background-color-panel-icon" />
+                                <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
                             </Button>
                         )}
                         renderContent={() => (

@@ -42,9 +42,9 @@ const globalImageControl = ({
                         className='fb-image-replace-btn'
                         onClick={() => {
                             const mediaUploader = wp.media({
-                                title: __('Select or Upload Image', 'frontis-blocks'),
+                                title: __('Select or Upload Image', 'gutenslider-blocks'),
                                 button: {
-                                    text: __('Use this image', 'frontis-blocks'),
+                                    text: __('Use this image', 'gutenslider-blocks'),
                                 },
                                 multiple: false
                             });
@@ -68,9 +68,9 @@ const globalImageControl = ({
                     className='fb-image-upload-btn'
                     onClick={() => {
                         const mediaUploader = wp.media({
-                            title: __('Select or Upload Image', 'frontis-blocks'),
+                            title: __('Select or Upload Image', 'gutenslider-blocks'),
                             button: {
-                                text: __('Use this image', 'frontis-blocks'),
+                                text: __('Use this image', 'gutenslider-blocks'),
                             },
                             multiple: false
                         });
@@ -93,16 +93,16 @@ const globalImageControl = ({
                 <div className="fb-image-control-setting-wrapper">
                     <BaseControl>
                         <SelectControl
-                            label={__("Object Fit", "frontis-blocks")}
+                            label={__("Object Fit", "gutenslider-blocks")}
                             className="fb-image-label"
                             value={globalImageSize}
                             options={(
                                 [
-                                    {label: __("None", "frontis-blocks"), value: "none"},
-                                    {label: __("Fill", "frontis-blocks"), value: "fill"},
-                                    {label: __("Contain", "frontis-blocks"), value: "contain"},
-                                    {label: __("Cover", "frontis-blocks"), value: "cover"},
-                                    {label: __("Scale Down", "frontis-blocks"), value: "scale-down"},
+                                    {label: __("None", "gutenslider-blocks"), value: "none"},
+                                    {label: __("Fill", "gutenslider-blocks"), value: "fill"},
+                                    {label: __("Contain", "gutenslider-blocks"), value: "contain"},
+                                    {label: __("Cover", "gutenslider-blocks"), value: "cover"},
+                                    {label: __("Scale Down", "gutenslider-blocks"), value: "scale-down"},
                                 ]
                             )}
                             onChange={setglobalImageSize}

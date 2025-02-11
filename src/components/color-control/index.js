@@ -16,22 +16,23 @@ const ColorControl = ({ label, color, onChangeColor }) => {
                 className="global-setting-color-switcher-wrapper"
             >
                 <Dropdown
-                    className="global-setting-color-panel-icon-dropdown"
-                    contentClassName="global-setting-color-panel-icon-dropdown-content"
+                    className="global-setting-icon-dropdown"
+                    contentClassName="global-setting-icon-dropdown-content"
                     popoverProps={{ placement: 'bottom-start' }}
                     renderToggle={({ isOpen, onToggle }) => (
                         <Button
                             variant="primary"
                             onClick={onToggle}
                             aria-expanded={isOpen}
-                            className="global-setting-color-panel-icon-btn"
+                            className="global-setting-icon-btn"
                         >
-                            <Dashicon icon="color-picker" className="global-setting-color-panel-icon" />
+                            <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
                         </Button>
+
                     )}
                     renderContent={() => (
-                        <div className="global-setting-color-panel-icon-popup">
-                            <BaseControl className="global-setting-color-panel-icon-popup-inner">
+                        <div className="global-setting-panel-icon-popup">
+                            <BaseControl className="global-setting-panel-icon-popup-inner">
                                 <div className="global-setting-color">
                                     <ColorPicker
                                         color={color}

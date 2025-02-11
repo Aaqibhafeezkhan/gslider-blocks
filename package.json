@@ -1,7 +1,7 @@
 {
 	"name": "gutenslider-blocks",
 	"version": "1.0.0",
-	"description": "Button Blocks",
+	"description": "gutenslider Blocks",
 	"author": "Noruzzaman",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
@@ -22,6 +22,6 @@
 		"@dnd-kit/core": "^6.3.1",
 		"@dnd-kit/sortable": "^10.0.0",
 		"react-virtualized": "^9.22.5",
-		"swiper": "^11.2.0"
+		"swiper": "^11.2.1"
 	}
 }
