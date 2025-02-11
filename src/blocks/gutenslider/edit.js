@@ -145,11 +145,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             normalItemGradientColor: null,
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',
+            normalBackgroundImageUrl: '',
+            normalBackgroundImageAlt: '',
+            normalBackgroundImageID: '',
+            normalBackgroundImagePosition: '',
+            normalBackgroundImageAttachment: '',
+            normalBackgroundImageRepeat: '',
+            normalBackgroundImageSize: '',
+
             hoverItemBackgroundType: 'classic',
             hoverItemClassicColor: '',
             hoverItemGradientColor: null,
             hoverItemCustomGradientSwitcher: false,
-            hoverItemCustomGradientInputValue: ''
+            hoverItemCustomGradientInputValue: '',
+            hoverBackgroundImageUrl: '',
+            hoverBackgroundImageAlt: '',
+            hoverBackgroundImageID: '',
+            hoverBackgroundImagePosition: '',
+            hoverBackgroundImageAttachment: '',
+            hoverBackgroundImageRepeat: '',
+            hoverBackgroundImageSize: '',
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
     };
