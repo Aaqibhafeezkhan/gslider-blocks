@@ -32,10 +32,10 @@ const attributes = {
                 normalBackgroundImageUrl: '',
                 normalBackgroundImageAlt: '',
                 normalBackgroundImageID: '',
-                normalBackgroundImagePosition: '',
-                normalBackgroundImageAttachment: '',
-                normalBackgroundImageRepeat: '',
-                normalBackgroundImageSize: '',
+                normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
+                normalBackgroundImageAttachment: 'scroll',
+                normalBackgroundImageRepeat: 'no-repeat',
+                normalBackgroundImageSize: 'cover',
 
                 hoverItemBackgroundType: 'classic',
                 hoverItemClassicColor: '',
@@ -46,10 +46,10 @@ const attributes = {
                 hoverBackgroundImageUrl: '',
                 hoverBackgroundImageAlt: '',
                 hoverBackgroundImageID: '',
-                hoverBackgroundImagePosition: '',
-                hoverBackgroundImageAttachment: '',
-                hoverBackgroundImageRepeat: '',
-                hoverBackgroundImageSize: '',
+                hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
+                hoverBackgroundImageAttachment: 'scroll',
+                hoverBackgroundImageRepeat: 'no-repeat',
+                hoverBackgroundImageSize: 'cover',
 
             },
             { 
@@ -76,10 +76,10 @@ const attributes = {
                 normalBackgroundImageUrl: '',
                 normalBackgroundImageAlt: '',
                 normalBackgroundImageID: '',
-                normalBackgroundImagePosition: '',
-                normalBackgroundImageAttachment: '',
-                normalBackgroundImageRepeat: '',
-                normalBackgroundImageSize: '',
+                normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
+                normalBackgroundImageAttachment: 'scroll',
+                normalBackgroundImageRepeat: 'no-repeat',
+                normalBackgroundImageSize: 'cover',
 
                 hoverItemBackgroundType: 'classic',
                 hoverItemClassicColor: '',
@@ -90,10 +90,10 @@ const attributes = {
                 hoverBackgroundImageUrl: '',
                 hoverBackgroundImageAlt: '',
                 hoverBackgroundImageID: '',
-                hoverBackgroundImagePosition: '',
-                hoverBackgroundImageAttachment: '',
-                hoverBackgroundImageRepeat: '',
-                hoverBackgroundImageSize: '',
+                hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
+                hoverBackgroundImageAttachment: 'scroll',
+                hoverBackgroundImageRepeat: 'no-repeat',
+                hoverBackgroundImageSize: 'cover',
 
             },
             { 
@@ -121,10 +121,10 @@ const attributes = {
                 normalBackgroundImageUrl: '',
                 normalBackgroundImageAlt: '',
                 normalBackgroundImageID: '',
-                normalBackgroundImagePosition: '',
-                normalBackgroundImageAttachment: '',
-                normalBackgroundImageRepeat: '',
-                normalBackgroundImageSize: '',
+                normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
+                normalBackgroundImageAttachment: 'scroll',
+                normalBackgroundImageRepeat: 'no-repeat',
+                normalBackgroundImageSize: 'cover',
 
                 hoverItemBackgroundType: 'classic',
                 hoverItemClassicColor: '',
@@ -135,10 +135,10 @@ const attributes = {
                 hoverBackgroundImageUrl: '',
                 hoverBackgroundImageAlt: '',
                 hoverBackgroundImageID: '',
-                hoverBackgroundImagePosition: '',
-                hoverBackgroundImageAttachment: '',
-                hoverBackgroundImageRepeat: '',
-                hoverBackgroundImageSize: '',
+                hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
+                hoverBackgroundImageAttachment: 'scroll',
+                hoverBackgroundImageRepeat: 'no-repeat',
+                hoverBackgroundImageSize: 'cover',
 
             },
         ],
@@ -220,20 +220,20 @@ const attributes = {
                     default: ""
                 },
                 normalBackgroundImagePosition: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: { x: 0.5, y: 0.5 },
                 },
                 normalBackgroundImageAttachment: {
                     type: "string",
-                    default: ""
+                    default: "scroll"
                 },
                 normalBackgroundImageRepeat: {
                     type: "string",
-                    default: ""
+                    default: "no-repeat"
                 },
                 normalBackgroundImageSize: {
                     type: "string",
-                    default: ""
+                    default: "cover"
                 },
 
                 hoverItemBackgroundType: {
@@ -273,8 +273,8 @@ const attributes = {
                 },  
 
                 hoverBackgroundImagePosition: {
-                    type: "string",
-                    default: ""
+                    type: "object", 
+                    default: { x: 0.5, y: 0.5 },
                 },  
 
                 hoverBackgroundImageAttachment: {
@@ -292,7 +292,6 @@ const attributes = {
                     default: ""
                 },
                 
-
             }
         }
     },

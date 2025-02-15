@@ -82,10 +82,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             normalBackgroundImageUrl: '',
             normalBackgroundImageAlt: '',
             normalBackgroundImageID: '',
-            normalBackgroundImagePosition: '',
-            normalBackgroundImageAttachment: '',
-            normalBackgroundImageRepeat: '',
-            normalBackgroundImageSize: '',
+            normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
+            normalBackgroundImageAttachment: 'scroll',
+            normalBackgroundImageRepeat: 'no-repeat',
+            normalBackgroundImageSize: 'cover',
 
 
             hoverItemBackgroundType: 'classic',
@@ -97,10 +97,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             hoverBackgroundImageUrl: '',
             hoverBackgroundImageAlt: '',
             hoverBackgroundImageID: '',
-            hoverBackgroundImagePosition: '',
-            hoverBackgroundImageAttachment: '',
-            hoverBackgroundImageRepeat: '',
-            hoverBackgroundImageSize: '',
+            hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
+            hoverBackgroundImageAttachment: 'scroll',
+            hoverBackgroundImageRepeat: 'no-repeat',
+            hoverBackgroundImageSize: 'cover',
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
         setSliderItemList([...sliderItemList, newItem]);
@@ -177,6 +177,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }`;
                 style += gradientStyle;
 
+            } else if (item.normalBackgroundImageUrl) {
+
+                // Convert background position object to proper CSS format
+                const backgroundPosition = item.normalBackgroundImagePosition
+                ? `${item.normalBackgroundImagePosition.x * 100}% ${item.normalBackgroundImagePosition.y * 100}%`
+                : "50% 50%"; // Default to 50% 50% if not provided
+
+                const backgroundImageStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
+                    background-image: url(${item.normalBackgroundImageUrl});
+                    background-position: ${backgroundPosition};
+                    background-attachment: ${item.normalBackgroundImageAttachment};
+                    background-repeat: ${item.normalBackgroundImageRepeat};
+                    background-size: ${item.normalBackgroundImageSize};
+                }`;
+                style += backgroundImageStyle;
             } else {
                 const classicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};

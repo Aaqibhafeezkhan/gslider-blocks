@@ -14,7 +14,7 @@ import {
     TextareaControl,
 
 } from '@wordpress/components';
-import FB_BackgroundColorControl from '@Components/background-color-control';
+import BackgroundColorControl from '@Components/background-color-control';
 import UrlControl from '@Components/url-control';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
@@ -128,7 +128,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         )}
                         renderContent={() => (
                             <div className="global-setting-background-color-popup-wrapper">
-                                <FB_BackgroundColorControl
+                                <BackgroundColorControl
                                     label={__("Background", "gutenslider-blocks")}
                                     bgColorSwitcher={item.sliderItemBgColorSwitcher}
                                     setBgColorSwitcher={(value) => handleChangeItem(item.id, 'sliderItemBgColorSwitcher', value)}

@@ -148,10 +148,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             normalBackgroundImageUrl: '',
             normalBackgroundImageAlt: '',
             normalBackgroundImageID: '',
-            normalBackgroundImagePosition: '',
-            normalBackgroundImageAttachment: '',
-            normalBackgroundImageRepeat: '',
-            normalBackgroundImageSize: '',
+            normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
+            normalBackgroundImageAttachment: 'scroll',
+            normalBackgroundImageRepeat: 'no-repeat',
+            normalBackgroundImageSize: 'cover',
 
             hoverItemBackgroundType: 'classic',
             hoverItemClassicColor: '',
@@ -161,10 +161,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             hoverBackgroundImageUrl: '',
             hoverBackgroundImageAlt: '',
             hoverBackgroundImageID: '',
-            hoverBackgroundImagePosition: '',
-            hoverBackgroundImageAttachment: '',
-            hoverBackgroundImageRepeat: '',
-            hoverBackgroundImageSize: '',
+            hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
+            hoverBackgroundImageAttachment: 'scroll',
+            hoverBackgroundImageRepeat: 'no-repeat',
+            hoverBackgroundImageSize: 'cover',
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
     };

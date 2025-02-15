@@ -16,18 +16,16 @@ const BackgroundImageControl = ({
     setGlobalBackgroundImageID,
     globalBackgroundImagePosition = { x: 0.5, y: 0.5 },
     setGlobalBackgroundImagePosition,
-    globalBackgroundImageAttachment = '',
+    globalBackgroundImageAttachment = 'scroll',
     setGlobalBackgroundImageAttachment,
-    globalBackgroundImageRepeat = '',
+    globalBackgroundImageRepeat = 'no-repeat',
     setGlobalBackgroundImageRepeat,
-    globalBackgroundImageSize = '',
+    globalBackgroundImageSize = 'cover',
     setGlobalBackgroundImageSize,
 }) => {
     const handleFocalPointChange = (focalPoint) => {
         setGlobalBackgroundImagePosition(focalPoint);
     };
-
-    console.log(globalBackgroundImagePosition);
 
     return (
         <BaseControl
@@ -85,7 +83,6 @@ const BackgroundImageControl = ({
                                 className="gutenslider-image-label"
                                 value={globalBackgroundImageAttachment}
                                 options={[
-                                    {label: __("Default", "gutenslider-blocks"), value: ""},
                                     {label: __("Scroll", "gutenslider-blocks"), value: "scroll"},
                                     {label: __("Fixed", "gutenslider-blocks"), value: "fixed"},
                                 ]}
@@ -96,11 +93,10 @@ const BackgroundImageControl = ({
                                 className="gutenslider-image-label"
                                 value={globalBackgroundImageRepeat}
                                 options={[
-                                    {label: __("Default", "gutenslider-blocks"), value: ""},
+                                    {label: __("No Repeat", "gutenslider-blocks"), value: "no-repeat"},
                                     {label: __("Repeat", "gutenslider-blocks"), value: "repeat"},
                                     {label: __("Repeat X", "gutenslider-blocks"), value: "repeat-x"},
                                     {label: __("Repeat Y", "gutenslider-blocks"), value: "repeat-y"},
-                                    {label: __("No Repeat", "gutenslider-blocks"), value: "no-repeat"},
                                 ]}
                                 onChange={setGlobalBackgroundImageRepeat} 
                             />
@@ -109,9 +105,8 @@ const BackgroundImageControl = ({
                                 className="gutenslider-image-label"
                                 value={globalBackgroundImageSize}
                                 options={[
-                                    {label: __("Default", "gutenslider-blocks"), value: ""},
-                                    {label: __("Auto", "gutenslider-blocks"), value: "auto"},
                                     {label: __("Cover", "gutenslider-blocks"), value: "cover"},
+                                    {label: __("Auto", "gutenslider-blocks"), value: "auto"},
                                     {label: __("Contain", "gutenslider-blocks"), value: "contain"},
                                 ]}
                                 onChange={setGlobalBackgroundImageSize}
