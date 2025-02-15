@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, Button, ButtonGroup } from '@wordpress/components';
@@ -48,6 +48,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId]);
 
+    const [sliderItemList, setSliderItemList] = useState(sliderItems);
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -56,6 +57,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             const newIndex = sliderItems.findIndex(item => item.id === over.id);
             const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
             setAttributes({ sliderItems: updatedItems });
+            setSliderItemList(updatedItems);
         }
     };
 
@@ -77,26 +79,89 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',
 
+            normalBackgroundImageUrl: '',
+            normalBackgroundImageAlt: '',
+            normalBackgroundImageID: '',
+            normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
+            normalBackgroundImageAttachment: 'scroll',
+            normalBackgroundImageRepeat: 'no-repeat',
+            normalBackgroundImageSize: 'cover',
+
+
             hoverItemBackgroundType: 'classic',
             hoverItemClassicColor: '',
             hoverItemGradientColor: null,
             hoverItemCustomGradientSwitcher: false,
-            hoverItemCustomGradientInputValue: ''
+            hoverItemCustomGradientInputValue: '',
+
+            hoverBackgroundImageUrl: '',
+            hoverBackgroundImageAlt: '',
+            hoverBackgroundImageID: '',
+            hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
+            hoverBackgroundImageAttachment: 'scroll',
+            hoverBackgroundImageRepeat: 'no-repeat',
+            hoverBackgroundImageSize: 'cover',
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
+        setSliderItemList([...sliderItemList, newItem]);
     };
+
+    // const handleChangeItem = (id, key, value) => {
+    //     const updatedItems = sliderItems.map(item => 
+    //         item.id === id ? { ...item, [key]: value } : item
+    //     );
+    //     setAttributes({ sliderItems: updatedItems });
+    // };
+
 
     const handleChangeItem = (id, key, value) => {
-        const updatedItems = sliderItems.map(item => 
-            item.id === id ? { ...item, [key]: value } : item
-        );
+        const updatedItems = sliderItemList.map(item => {
+            if (item.id === id) {
+                if (key === 'normalBackgroundImageID') {
+                    // Get the full image data from WordPress media library
+                    const image = wp.media.attachment(value).toJSON();
+                    return {
+                        ...item,
+                        [key]: value,
+                        'normalBackgroundImageUrl': image.url,
+                        'normalBackgroundImageAlt': image.alt || ''
+                    };
+                }
+                if (key === 'hoverBackgroundImageID') {
+                    // Get the full image data from WordPress media library
+                    const image = wp.media.attachment(value).toJSON();
+                    return {
+                        ...item,
+                        [key]: value,
+                        'hoverBackgroundImageUrl': image.url,
+                        'hoverBackgroundImageAlt': image.alt || ''
+                    };
+                }
+                return { ...item, [key]: value };
+            }
+            return item;
+        });
+        
+        setSliderItemList(updatedItems);
         setAttributes({ sliderItems: updatedItems });
     };
 
+    // const handleDeleteItem = (id) => {
+    //     const updatedItems = sliderItems.filter(item => item.id !== id);
+    //     setAttributes({ sliderItems: updatedItems });
+    // };
+
+
     const handleDeleteItem = (id) => {
-        const updatedItems = sliderItems.filter(item => item.id !== id);
+        const updatedItems = sliderItemList.filter(item => item.id !== id);
         setAttributes({ sliderItems: updatedItems });
+        setSliderItemList(updatedItems);
     };
+
+    //Sync sliderItemList with attributes.sliderItems
+    useEffect(() => {
+        setAttributes({ sliderItems: sliderItemList });
+    }, [sliderItemList, setAttributes]);
 
     /** Start Slider Item Color Style */
     const sliderItemColorStyle = useMemo(() => {
@@ -112,6 +177,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }`;
                 style += gradientStyle;
 
+            } else if (item.normalBackgroundImageUrl) {
+
+                // Convert background position object to proper CSS format
+                const backgroundPosition = item.normalBackgroundImagePosition
+                ? `${item.normalBackgroundImagePosition.x * 100}% ${item.normalBackgroundImagePosition.y * 100}%`
+                : "50% 50%"; // Default to 50% 50% if not provided
+
+                const backgroundImageStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
+                    background-image: url(${item.normalBackgroundImageUrl});
+                    background-position: ${backgroundPosition};
+                    background-attachment: ${item.normalBackgroundImageAttachment};
+                    background-repeat: ${item.normalBackgroundImageRepeat};
+                    background-size: ${item.normalBackgroundImageSize};
+                }`;
+                style += backgroundImageStyle;
             } else {
                 const classicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};

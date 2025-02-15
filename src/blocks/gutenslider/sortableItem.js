@@ -14,7 +14,7 @@ import {
     TextareaControl,
 
 } from '@wordpress/components';
-import FB_BackgroundColorControl from '@Components/background-color-control';
+import BackgroundColorControl from '@Components/background-color-control';
 import UrlControl from '@Components/url-control';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
@@ -128,7 +128,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         )}
                         renderContent={() => (
                             <div className="global-setting-background-color-popup-wrapper">
-                                <FB_BackgroundColorControl
+                                <BackgroundColorControl
                                     label={__("Background", "gutenslider-blocks")}
                                     bgColorSwitcher={item.sliderItemBgColorSwitcher}
                                     setBgColorSwitcher={(value) => handleChangeItem(item.id, 'sliderItemBgColorSwitcher', value)}
@@ -143,6 +143,20 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                     setNormalCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'normalItemCustomGradientSwitcher', value)}
                                     normalCustomGradientInputValue={item.normalItemCustomGradientInputValue}
                                     setNormalCustomGradientInputValue={(value) => handleChangeItem(item.id, 'normalItemCustomGradientInputValue', value)}
+                                    normalBackgroundImageUrl={item.normalBackgroundImageUrl}
+                                    setNormalBackgroundImageUrl={(value) => handleChangeItem(item.id, 'normalBackgroundImageUrl', value)}
+                                    normalBackgroundImageAlt={item.normalBackgroundImageAlt}
+                                    setNormalBackgroundImageAlt={(value) => handleChangeItem(item.id, 'normalBackgroundImageAlt', value)}
+                                    normalBackgroundImageID={item.normalBackgroundImageID}
+                                    setNormalBackgroundImageID={(value) => handleChangeItem(item.id, 'normalBackgroundImageID', value)}
+                                    normalBackgroundImagePosition={item.normalBackgroundImagePosition}
+                                    setNormalBackgroundImagePosition={(value) => handleChangeItem(item.id, 'normalBackgroundImagePosition', value)}
+                                    normalBackgroundImageAttachment={item.normalBackgroundImageAttachment}
+                                    setNormalBackgroundImageAttachment={(value) => handleChangeItem(item.id, 'normalBackgroundImageAttachment', value)}
+                                    normalBackgroundImageRepeat={item.normalBackgroundImageRepeat}
+                                    setNormalBackgroundImageRepeat={(value) => handleChangeItem(item.id, 'normalBackgroundImageRepeat', value)}
+                                    normalBackgroundImageSize={item.normalBackgroundImageSize}
+                                    setNormalBackgroundImageSize={(value) => handleChangeItem(item.id, 'normalBackgroundImageSize', value)}
                                             
                                     hoverBackgroundType={item.hoverItemBackgroundType}
                                     setHoverBackgroundType={(value) => handleChangeItem(item.id, 'hoverItemBackgroundType', value)}
@@ -154,8 +168,20 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                     setHoverCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientSwitcher', value)}
                                     hoverCustomGradientInputValue={item.hoverItemCustomGradientInputValue}
                                     setHoverCustomGradientInputValue={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientInputValue', value)}
-
-                                    isBackgroundImage={false}
+                                    hoverBackgroundImageUrl={item.hoverBackgroundImageUrl}
+                                    setHoverBackgroundImageUrl={(value) => handleChangeItem(item.id, 'hoverBackgroundImageUrl', value)}
+                                    hoverBackgroundImageAlt={item.hoverBackgroundImageAlt}
+                                    setHoverBackgroundImageAlt={(value) => handleChangeItem(item.id, 'hoverBackgroundImageAlt', value)}
+                                    hoverBackgroundImageID={item.hoverBackgroundImageID}
+                                    setHoverBackgroundImageID={(value) => handleChangeItem(item.id, 'hoverBackgroundImageID', value)}
+                                    hoverBackgroundImagePosition={item.hoverBackgroundImagePosition}
+                                    setHoverBackgroundImagePosition={(value) => handleChangeItem(item.id, 'hoverBackgroundImagePosition', value)}
+                                    hoverBackgroundImageAttachment={item.hoverBackgroundImageAttachment}
+                                    setHoverBackgroundImageAttachment={(value) => handleChangeItem(item.id, 'hoverBackgroundImageAttachment', value)}
+                                    hoverBackgroundImageRepeat={item.hoverBackgroundImageRepeat}
+                                    setHoverBackgroundImageRepeat={(value) => handleChangeItem(item.id, 'hoverBackgroundImageRepeat', value)}
+                                    hoverBackgroundImageSize={item.hoverBackgroundImageSize}
+                                    setHoverBackgroundImageSize={(value) => handleChangeItem(item.id, 'hoverBackgroundImageSize', value)}
                                 />
                             </div>
                         )}
