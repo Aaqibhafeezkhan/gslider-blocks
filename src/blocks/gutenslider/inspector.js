@@ -208,6 +208,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }`;
                 style += hoverGradientStyle;
 
+            }else if (item.hoverBackgroundImageUrl) { 
+
+                // Convert background position object to proper CSS format
+                const backgroundPosition = item.hoverBackgroundImagePosition
+                ? `${item.hoverBackgroundImagePosition.x * 100}% ${item.hoverBackgroundImagePosition.y * 100}%`
+                : "50% 50%"; // Default to 50% 50% if not provided
+
+                const backgroundImageStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
+                    background-image: url(${item.hoverBackgroundImageUrl});
+                    background-position: ${backgroundPosition};
+                    background-attachment: ${item.hoverBackgroundImageAttachment};
+                    background-repeat: ${item.hoverBackgroundImageRepeat};
+                    background-size: ${item.hoverBackgroundImageSize};
+                }`;
+                style += backgroundImageStyle;
             } else {
                 const hoverClassicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemClassicColor};
