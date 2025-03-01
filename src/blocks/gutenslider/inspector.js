@@ -17,7 +17,7 @@ import BoxShadowSettingsControl from '@Components/box-shadow-control';
 import BackgroundColorControl from '@Components/background-color-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+export default function Inspector({ attributes, setAttributes, clientId, onAddItem}) {
     const { 
         blockId,
         sliderItems,
@@ -105,14 +105,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ sliderItems: [...sliderItems, newItem] });
         setSliderItemList([...sliderItemList, newItem]);
     };
-
-    // const handleChangeItem = (id, key, value) => {
-    //     const updatedItems = sliderItems.map(item => 
-    //         item.id === id ? { ...item, [key]: value } : item
-    //     );
-    //     setAttributes({ sliderItems: updatedItems });
-    // };
-
 
     const handleChangeItem = (id, key, value) => {
         const updatedItems = sliderItemList.map(item => {
@@ -281,7 +273,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         </ul>
                                                     </SortableContext>
                                                 </DndContext>
-                                                <Button isPrimary onClick={handleAddItem}>
+                                                <Button isPrimary onClick={onAddItem}>
                                                     {__("Add Slide", "gutenslider-blocks")}
                                                 </Button>
                                             </div>

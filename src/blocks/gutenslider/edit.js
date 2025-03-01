@@ -45,15 +45,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     
     const swiperRef = useRef();
     const prevSwiperOptions = useRef(null);
-
-
-    console.log(mousewheelControl);
     
     useEffect(() => {
         if (!swiperRef.current) return;
     
         const swiperOptions = {
-            
+
             // Set effect based on sliderType
             effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
@@ -176,6 +173,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             hoverBackgroundImageSize: 'cover',
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
+
+        // Ensure Swiper updates with new slides
+        setTimeout(() => {
+            if (swiperRef.current && swiperRef.current.swiper) {
+                swiperRef.current.swiper.update(); 
+                swiperRef.current.swiper.pagination.update();
+                swiperRef.current.swiper.navigation.update();
+            }
+        }, 100);
     };
 
     const renderSliderToolbarControls = () => {
@@ -213,6 +219,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 attributes={attributes}
                 setAttributes={setAttributes}
                 clientId={clientId}
+                onAddItem = {handleAddItem}
             />
 
             {renderSliderToolbarControls()}
