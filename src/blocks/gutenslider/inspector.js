@@ -61,50 +61,50 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
         }
     };
 
-    const handleAddItem = () => {
-        const newItem = {
-            id: `item-${sliderItems.length + 1}`,
-            subTitle: 'Enter your subtitle here',
-            title: `Slider Item ${sliderItems.length + 1}`,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-            buttonText: 'Click Here',
-            buttonLink: '#',
-            buttonTargetLink: false,
+    // const handleAddItem = () => {
+    //     const newItem = {
+    //         id: `item-${sliderItems.length + 1}`,
+    //         subTitle: 'Enter your subtitle here',
+    //         title: `Slider Item ${sliderItems.length + 1}`,
+    //         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
+    //         buttonText: 'Click Here',
+    //         buttonLink: '#',
+    //         buttonTargetLink: false,
 
-            sliderItemBgColorSwitcher: 'normal',
+    //         sliderItemBgColorSwitcher: 'normal',
 
-            normalItemBackgroundType: 'classic',
-            normalItemClassicColor: '#EDEDED',
-            normalItemGradientColor: null,
-            normalItemCustomGradientSwitcher: false,
-            normalItemCustomGradientInputValue: '',
+    //         normalItemBackgroundType: 'classic',
+    //         normalItemClassicColor: '#EDEDED',
+    //         normalItemGradientColor: null,
+    //         normalItemCustomGradientSwitcher: false,
+    //         normalItemCustomGradientInputValue: '',
 
-            normalBackgroundImageUrl: '',
-            normalBackgroundImageAlt: '',
-            normalBackgroundImageID: '',
-            normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
-            normalBackgroundImageAttachment: 'scroll',
-            normalBackgroundImageRepeat: 'no-repeat',
-            normalBackgroundImageSize: 'cover',
+    //         normalBackgroundImageUrl: '',
+    //         normalBackgroundImageAlt: '',
+    //         normalBackgroundImageID: '',
+    //         normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
+    //         normalBackgroundImageAttachment: 'scroll',
+    //         normalBackgroundImageRepeat: 'no-repeat',
+    //         normalBackgroundImageSize: 'cover',
 
 
-            hoverItemBackgroundType: 'classic',
-            hoverItemClassicColor: '',
-            hoverItemGradientColor: null,
-            hoverItemCustomGradientSwitcher: false,
-            hoverItemCustomGradientInputValue: '',
+    //         hoverItemBackgroundType: 'classic',
+    //         hoverItemClassicColor: '',
+    //         hoverItemGradientColor: null,
+    //         hoverItemCustomGradientSwitcher: false,
+    //         hoverItemCustomGradientInputValue: '',
 
-            hoverBackgroundImageUrl: '',
-            hoverBackgroundImageAlt: '',
-            hoverBackgroundImageID: '',
-            hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
-            hoverBackgroundImageAttachment: 'scroll',
-            hoverBackgroundImageRepeat: 'no-repeat',
-            hoverBackgroundImageSize: 'cover',
-        };
-        setAttributes({ sliderItems: [...sliderItems, newItem] });
-        setSliderItemList([...sliderItemList, newItem]);
-    };
+    //         hoverBackgroundImageUrl: '',
+    //         hoverBackgroundImageAlt: '',
+    //         hoverBackgroundImageID: '',
+    //         hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
+    //         hoverBackgroundImageAttachment: 'scroll',
+    //         hoverBackgroundImageRepeat: 'no-repeat',
+    //         hoverBackgroundImageSize: 'cover',
+    //     };
+    //     setAttributes({ sliderItems: [...sliderItems, newItem] });
+    //     setSliderItemList([...sliderItemList, newItem]);
+    // };
 
     const handleChangeItem = (id, key, value) => {
         const updatedItems = sliderItemList.map(item => {
