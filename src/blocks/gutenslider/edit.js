@@ -45,11 +45,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     
     const swiperRef = useRef();
     const prevSwiperOptions = useRef(null);
+
+
+    console.log(mousewheelControl);
     
     useEffect(() => {
         if (!swiperRef.current) return;
     
         const swiperOptions = {
+            
             // Set effect based on sliderType
             effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
@@ -68,13 +72,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             } : false,
             speed: speed,
             allowTouchMove: allowTouchMove,
-
-            mousewheel: mousewheelControl ? {
-                enabled: true,
-                forceToAxis: true,
-                sensitivity: 1,
-                releaseOnEdges: true,
-            } : false,
+            mousewheel: mousewheelControl,
 
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
@@ -95,9 +93,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     next: { translate: ['100%', 0, 0] },
                 },
             }),
+            
+            //FlipEffect Fix - Smooth Flip Animation
+            ...(slideEffect === 'flip' && {
+                flipEffect: {
+                    slideShadows: true,
+                    limitRotation: true,
+                },
+            }),
         };
     
-        // যদি Swiper ইনিশিয়ালাইজ করা থাকে এবং নতুন অপশন আগের অপশনের মতোই হয়, তাহলে কিছু করবো না
+        // If the Swiper is already initialized and the new options are the same as the previous options, do nothing.
         if (prevSwiperOptions.current && JSON.stringify(prevSwiperOptions.current) === JSON.stringify(swiperOptions)) {
             return;
         }

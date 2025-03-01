@@ -47,12 +47,7 @@ export default function Save({ attributes }) {
         } : false,
         speed: speed,
         allowTouchMove: allowTouchMove,
-        
-        mousewheel: mousewheelControl ? {
-            forceToAxis: true,
-            sensitivity: 1,
-            releaseOnEdges: true,
-        } : false,
+        mousewheel: mousewheelControl,
         
         navigation: showNavigation ? {
             nextEl: '.swiper-button-next',
@@ -73,6 +68,15 @@ export default function Save({ attributes }) {
                 next: { translate: ['100%', 0, 0] },
             },
         }),
+        
+        // Creative effect settings if needed
+        ...(slideEffect === 'creative' && {
+            creativeEffect: {
+                prev: { shadow: true, translate: [0, 0, -400] },
+                next: { translate: ['100%', 0, 0] },
+            },
+        }),
+        
     });
 
     return (
