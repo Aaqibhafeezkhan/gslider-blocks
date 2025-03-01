@@ -42,20 +42,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      */
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
-
+    
     const swiperRef = useRef();
-
+    const prevSwiperOptions = useRef(null);
+    
     useEffect(() => {
         if (!swiperRef.current) return;
     
         const swiperOptions = {
             // Set effect based on sliderType
             effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-            
+
             // Carousel-specific settings with default values
             slidesPerView: sliderType === 'carousel' ? (carouselPerColumn || 2) : 1,
             spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap || 20) : 0,
-            
+
             // Common settings
             loop: infiniteLoop,
             autoplay: autoplay ? {
@@ -67,26 +68,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             } : false,
             speed: speed,
             allowTouchMove: allowTouchMove,
-            
+
             mousewheel: mousewheelControl ? {
                 enabled: true,
                 forceToAxis: true,
                 sensitivity: 1,
                 releaseOnEdges: true,
             } : false,
-            
+
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             } : false,
-            
+
             pagination: showPagination ? {
                 el: '.swiper-pagination',
                 type: paginationType,
                 dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false, 
                 clickable: true,
             } : false,
-            
+
             // Creative effect settings if needed
             ...(slideEffect === 'creative' && {
                 creativeEffect: {
@@ -94,25 +95,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     next: { translate: ['100%', 0, 0] },
                 },
             }),
-
         };
+    
+        // যদি Swiper ইনিশিয়ালাইজ করা থাকে এবং নতুন অপশন আগের অপশনের মতোই হয়, তাহলে কিছু করবো না
+        if (prevSwiperOptions.current && JSON.stringify(prevSwiperOptions.current) === JSON.stringify(swiperOptions)) {
+            return;
+        }
     
         try {
             if (swiperRef.current.swiper) {
                 swiperRef.current.swiper.destroy(true, true);
             }
-            
-            new Swiper(swiperRef.current, swiperOptions);
-            
+    
+            swiperRef.current.swiper = new Swiper(swiperRef.current, swiperOptions);
+            prevSwiperOptions.current = swiperOptions; // নতুন অপশন সংরক্ষণ
+    
         } catch (error) {
             console.error('Swiper initialization error:', error);
         }
     }, [
-        sliderItems,
         sliderType,
         infiniteLoop,
-        carouselPerColumn,
-        carouselPerColumnGap,
         autoplay,
         autoplayDelay,
         pauseOnHover,
