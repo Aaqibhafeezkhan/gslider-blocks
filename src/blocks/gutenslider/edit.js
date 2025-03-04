@@ -111,7 +111,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             }
     
             swiperRef.current.swiper = new Swiper(swiperRef.current, swiperOptions);
-            prevSwiperOptions.current = swiperOptions; // নতুন অপশন সংরক্ষণ
+            prevSwiperOptions.current = swiperOptions;
     
         } catch (error) {
             console.error('Swiper initialization error:', error);
@@ -133,6 +133,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         slideEffect,
         carouselEffect,
         mousewheelControl,
+        carouselPerColumn,
+        carouselPerColumnGap,
     ]);
 
     const handleAddItem = () => {
