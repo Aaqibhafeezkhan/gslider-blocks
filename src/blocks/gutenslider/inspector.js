@@ -138,11 +138,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
         setAttributes({ sliderItems: updatedItems });
     };
 
-    // const handleDeleteItem = (id) => {
-    //     const updatedItems = sliderItems.filter(item => item.id !== id);
-    //     setAttributes({ sliderItems: updatedItems });
-    // };
-
 
     const handleDeleteItem = (id) => {
         const updatedItems = sliderItemList.filter(item => item.id !== id);

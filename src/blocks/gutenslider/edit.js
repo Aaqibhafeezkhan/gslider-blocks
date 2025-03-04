@@ -132,9 +132,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         dynamicBullets,
         slideEffect,
         carouselEffect,
-        mousewheelControl,
         carouselPerColumn,
         carouselPerColumnGap,
+        mousewheelControl,
     ]);
 
     const handleAddItem = () => {
