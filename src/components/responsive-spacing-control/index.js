@@ -163,8 +163,7 @@ export default function ResponsiveSpacingControl({
 				<div className="global-setting-spacing-label-container">
 					<ResponsiveDeviceControl
                         label={__(label, 'gutenslider-blocks')}
-                        selectedDevice={deviceType}
-                        onDeviceChange={onChangeDeviceType}
+                        device={deviceType}
                     />
 					<div className="global-unit-wrapper">
 						{getSpacingValue('top') && getSpacingValue('right') && getSpacingValue('bottom') && getSpacingValue('left') && (

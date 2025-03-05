@@ -366,7 +366,30 @@ const attributes = {
     dynamicBullets: {
         type: 'boolean',
 		default: false,
-    }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /** Start Global Setting */
+	sliderGlobalZIndex: {
+        type: "object",
+        default: {
+            Desktop: '10',
+            Tablet: '20',
+            Mobile: '30'
+        }
+    },
 };
 
 export default attributes;

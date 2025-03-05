@@ -7,6 +7,8 @@ export const UNIT_TYPES = [
 	{ label: "em", value: "em" },
 ];
 
+export const STORE_NAME = 'gutenslider-blocks';
+
 export const NORMAL_HOVER = [
 	{ label: "Normal", value: "normal" },
 	{ label: "Hover", value: "hover" },

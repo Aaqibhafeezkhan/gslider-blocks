@@ -16,6 +16,7 @@ import ResponsiveTypographyControl from '@Components/responsive-typography-contr
 import BoxShadowSettingsControl from '@Components/box-shadow-control';
 import BackgroundColorControl from '@Components/background-color-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Utils/displayType"; 
 
 export default function Inspector({ attributes, setAttributes, clientId, onAddItem}) {
     const { 
@@ -40,7 +41,62 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
         showPagination,
         paginationType,
         dynamicBullets,
+
+
+        /** Global Settings */
+        sliderGlobalZIndex,
+        
+        sliderGlobalPaddingUnits,
+        sliderGlobalPaddingDesktop,
+        sliderGlobalPaddingTablet,
+        sliderGlobalPaddingMobile,
+        sliderGlobalPaddingLink,
+
+        sliderGlobalMarginUnits,
+        sliderGlobalMarginDesktop,
+        sliderGlobalMarginTablet,
+        sliderGlobalMarginMobile,
+        sliderGlobalMarginLink,
+
+        sliderGlobalBgColorSwitcher,
+        sliderGlobalBgNormalBackgroundType,
+        sliderGlobalBgNormalClassicColor,
+        sliderGlobalBgNormalGradientColor,
+        sliderGlobalBgNormalCustomGradientSwitcher,
+        sliderGlobalBgNormalCustomGradientInputValue,
+        sliderGlobalBgHoverBackgroundType,
+        sliderGlobalBgHoverClassicColor,
+        sliderGlobalBgHoverGradientColor,
+        sliderGlobalBgHoverCustomGradientSwitcher,
+        sliderGlobalBgHoverCustomGradientInputValue,
+
+        sliderGlobalBorder,
+        sliderGlobalBorderColorSwitcher,
+        sliderGlobalBorderColor,
+        sliderGlobalBorderHoverColor,
+
+        sliderGlobalBorderUnits,
+        sliderGlobalBorderDesktop,
+        sliderGlobalBorderTablet,
+        sliderGlobalBorderMobile,
+        sliderGlobalBorderLink,
+
+        sliderGlobalBorderRadiusUnits,
+        sliderGlobalBorderRadiusDesktop,
+        sliderGlobalBorderRadiusTablet,
+        sliderGlobalBorderRadiusMobile,
+        sliderGlobalBorderRadiusLink,
+
+        sliderGlobalBoxShadowSwitcher,
+        sliderGlobalBoxShadowValues,
+        sliderGlobalBoxShadowCssValue,
+        sliderGlobalBoxShadowHoverValues,
+        sliderGlobalBoxShadowHoverCssValue,
+        /** End Global Setting */
+        
     } = attributes;
+
+    const deviceType = useDeviceType();
 
     useEffect(() => {
         if (clientId) {
@@ -438,9 +494,63 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
                                 )}
 
                                 {tab.name === "advanced" && (
-                                    <PanelBody title={__("Advanced", "gutenslider-blocks")} initialOpen>
-                                        {/* Add advanced settings here */}
-                                    </PanelBody>
+                                    <>
+                                        <PanelBody title={__("Advanced", "gutenslider-blocks")} initialOpen>
+                                            <ResponsiveRangeControl
+                                                min={0}
+                                                max={10000000}
+                                                label={__("Z Index", "button-blocks")}
+                                                rangeValue={sliderGlobalZIndex}
+                                                onChangeValue={(value) => setAttributes({ sliderGlobalZIndex: value })}
+                                                deviceType={deviceType}
+                                                step={1}
+                                                resetFallbackValue={""}
+                                                isRangeUnit={false}
+                                            />
+                                        </PanelBody>
+                                        <PanelBody
+                                            title={__("Padding and Margin", "button-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <ResponsiveSpacingControl
+                                                label={__("Padding", "button-blocks")}
+                                                deviceType={deviceType}
+                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                                units={buttonGlobalPaddingUnits}
+                                                onChangeUnits={(value) => setAttributes({ buttonGlobalPaddingUnits: value })}
+                                                desktopSpacing={buttonGlobalPaddingDesktop}
+                                                onChangeDesktopSpacing={(value) => setAttributes({ buttonGlobalPaddingDesktop: value })}
+                                                desktopSpacingStyle={(value) => setAttributes({ buttonGlobalPaddingDesktopCssStyle: value })}
+                                                tabletSpacing={buttonGlobalPaddingTablet}
+                                                onChangeTabletSpacing={(value) => setAttributes({ buttonGlobalPaddingTablet: value })}
+                                                tabletSpacingStyle={(value) => setAttributes({ buttonGlobalPaddingTabletCssStyle: value })}
+                                                mobileSpacing={buttonGlobalPaddingMobile}
+                                                onChangeMobileSpacing={(value) => setAttributes({ buttonGlobalPaddingMobile: value })}
+                                                mobileSpacingStyle={(value) => setAttributes({ buttonGlobalPaddingMobileCssStyle: value })}
+                                                isLinked={buttonGlobalPaddingLink}
+                                                onChangeLink={(value) => setAttributes({ buttonGlobalPaddingLink: value })}
+                                            />
+
+                                            <ResponsiveSpacingControl
+                                                label={__("Margin", "button-blocks")}
+                                                deviceType={deviceType}
+                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                                units={buttonGlobalMarginUnits}
+                                                onChangeUnits={(value) => setAttributes({ buttonGlobalMarginUnits: value })}
+                                                desktopSpacing={buttonGlobalMarginDesktop}
+                                                onChangeDesktopSpacing={(value) => setAttributes({ buttonGlobalMarginDesktop: value })}
+                                                desktopSpacingStyle={(value) => setAttributes({ buttonGlobalMarginDesktopCssStyle: value })}
+                                                tabletSpacing={buttonGlobalMarginTablet}
+                                                onChangeTabletSpacing={(value) => setAttributes({ buttonGlobalMarginTablet: value })}
+                                                tabletSpacingStyle={(value) => setAttributes({ buttonGlobalMarginTabletCssStyle: value })}
+                                                mobileSpacing={buttonGlobalMarginMobile}
+                                                onChangeMobileSpacing={(value) => setAttributes({ buttonGlobalMarginMobile: value })}
+                                                mobileSpacingStyle={(value) => setAttributes({ buttonGlobalMarginMobileCssStyle: value })}
+                                                isLinked={buttonGlobalMarginLink}
+                                                onChangeLink={(value) => setAttributes({ buttonGlobalMarginLink: value })}
+                                            />
+                                        </PanelBody>
+                                    </>
                                 )}
                             </div>
                         )}
