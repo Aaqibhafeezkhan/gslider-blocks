@@ -508,48 +508,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
                                                 isRangeUnit={false}
                                             />
                                         </PanelBody>
-                                        <PanelBody
-                                            title={__("Padding and Margin", "button-blocks")}
-                                            initialOpen={false}
-                                        >
-                                            <ResponsiveSpacingControl
-                                                label={__("Padding", "button-blocks")}
-                                                deviceType={deviceType}
-                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                                units={buttonGlobalPaddingUnits}
-                                                onChangeUnits={(value) => setAttributes({ buttonGlobalPaddingUnits: value })}
-                                                desktopSpacing={buttonGlobalPaddingDesktop}
-                                                onChangeDesktopSpacing={(value) => setAttributes({ buttonGlobalPaddingDesktop: value })}
-                                                desktopSpacingStyle={(value) => setAttributes({ buttonGlobalPaddingDesktopCssStyle: value })}
-                                                tabletSpacing={buttonGlobalPaddingTablet}
-                                                onChangeTabletSpacing={(value) => setAttributes({ buttonGlobalPaddingTablet: value })}
-                                                tabletSpacingStyle={(value) => setAttributes({ buttonGlobalPaddingTabletCssStyle: value })}
-                                                mobileSpacing={buttonGlobalPaddingMobile}
-                                                onChangeMobileSpacing={(value) => setAttributes({ buttonGlobalPaddingMobile: value })}
-                                                mobileSpacingStyle={(value) => setAttributes({ buttonGlobalPaddingMobileCssStyle: value })}
-                                                isLinked={buttonGlobalPaddingLink}
-                                                onChangeLink={(value) => setAttributes({ buttonGlobalPaddingLink: value })}
-                                            />
-
-                                            <ResponsiveSpacingControl
-                                                label={__("Margin", "button-blocks")}
-                                                deviceType={deviceType}
-                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                                units={buttonGlobalMarginUnits}
-                                                onChangeUnits={(value) => setAttributes({ buttonGlobalMarginUnits: value })}
-                                                desktopSpacing={buttonGlobalMarginDesktop}
-                                                onChangeDesktopSpacing={(value) => setAttributes({ buttonGlobalMarginDesktop: value })}
-                                                desktopSpacingStyle={(value) => setAttributes({ buttonGlobalMarginDesktopCssStyle: value })}
-                                                tabletSpacing={buttonGlobalMarginTablet}
-                                                onChangeTabletSpacing={(value) => setAttributes({ buttonGlobalMarginTablet: value })}
-                                                tabletSpacingStyle={(value) => setAttributes({ buttonGlobalMarginTabletCssStyle: value })}
-                                                mobileSpacing={buttonGlobalMarginMobile}
-                                                onChangeMobileSpacing={(value) => setAttributes({ buttonGlobalMarginMobile: value })}
-                                                mobileSpacingStyle={(value) => setAttributes({ buttonGlobalMarginMobileCssStyle: value })}
-                                                isLinked={buttonGlobalMarginLink}
-                                                onChangeLink={(value) => setAttributes({ buttonGlobalMarginLink: value })}
-                                            />
-                                        </PanelBody>
                                     </>
                                 )}
                             </div>
