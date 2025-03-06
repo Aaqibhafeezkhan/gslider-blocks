@@ -14,7 +14,7 @@ const ResponsiveRangeControl = ({
 	onUnitChange,
 	deviceType,
 	units,
-	rangeStep,
+	step,
 	resetFallbackValue,
 	isRangeUnit = true,
 }) => {
@@ -71,7 +71,7 @@ const ResponsiveRangeControl = ({
 					onChange={setRangeValue}
 					min={min}
 					max={max}
-					step={rangeStep}
+					step={step}
 					resetFallbackValue={resetFallbackValue}
 				/>
 			</div>

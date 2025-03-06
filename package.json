@@ -16,7 +16,7 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^30.7.0"
+		"@wordpress/scripts": "^30.12.0"
 	},
 	"dependencies": {
 		"@dnd-kit/core": "^6.3.1",

@@ -5,7 +5,7 @@ import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, Button, ButtonGroup } from '@wordpress/components';
 import SortableItem from './sortableItem';
-import { BORDER_STYLES, SLIDER_EFFECT_OPTIONS, CAROUSEL_EFFECT_OPTIONS, SLIDER_TYPE, PAGINATION_TYPE } from "./constants/constants";
+import { BORDER_STYLES, SLIDER_EFFECT_OPTIONS, CAROUSEL_EFFECT_OPTIONS, SLIDER_TYPE, PAGINATION_TYPE, NORMAL_ACTIVE } from "./constants/constants";
 import './editor.scss';
 
 import SwitcherControl from '@Components/switcher-control';
@@ -42,57 +42,169 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
         paginationType,
         dynamicBullets,
 
+        /** Start Arrows Style */
+        sliderArrowsSize,
+        sliderArrowsSizeUnits,
+
+        /** Start Arrows Color */
+        sliderArrowsColorSwitcher,
+        sliderArrowsColor,
+        sliderArrowsColorHover,
+        /** End Arrows Color */
+
+        /** Start Background */
+        sliderArrowsBackgroundColorSwitcher,
+        sliderArrowsNormalBackgroundType,
+        sliderArrowsNormalClassicColor,
+        sliderArrowsNormalGradientColor,
+        sliderArrowsNormalCustomGradientSwitcher,
+        sliderArrowsNormalCustomGradientInputValue,
+        sliderArrowsHoverBackgroundType,
+        sliderArrowsHoverClassicColor,
+        sliderArrowsHoverGradientColor,
+        sliderArrowsHoverCustomGradientSwitcher,
+        sliderArrowsHoverCustomGradientInputValue,
+        /** End Background */
+
+        /** Start Arrows Dimensions */
+        sliderArrowsWidth,
+        sliderArrowsWidthUnits,
+        sliderArrowsHeight,
+        sliderArrowsHeightUnits,
+        /** End Arrows Dimensions */
+
+        /** Start Border */
+        sliderArrowsBorder,
+        sliderArrowsBorderColorSwitcher,
+        sliderArrowsBorderColor,
+        sliderArrowsBorderHoverColor,
+        sliderArrowsBorderUnits,
+        sliderArrowsDesktopBorder,
+        sliderArrowsDesktopBorderCssStyle,
+        sliderArrowsTabletBorder,
+        sliderArrowsTabletBorderCssStyle,
+        sliderArrowsMobileBorder,
+        sliderArrowsMobileBorderCssStyle,
+        sliderArrowsBorderLink,
+        /** End Border */
+
+        /** Start Border Radius */
+        sliderArrowsBorderRadiusUnits,
+        sliderArrowsDesktopBorderRadius,
+        sliderArrowsDesktopBorderRadiusCssStyle,
+        sliderArrowsTabletBorderRadius,
+        sliderArrowsTabletBorderRadiusCssStyle,
+        sliderArrowsMobileBorderRadius,
+        sliderArrowsMobileBorderRadiusCssStyle,
+        sliderArrowsBorderRadiusLink,
+        /** End Border Radius */
+
+        /** Start Box Shadow */
+        sliderArrowsBoxShadowValuesSwitcher,
+        sliderArrowsBoxShadowValues,
+        sliderArrowsBoxShadowCssValue,
+        sliderArrowsBoxShadowHoverValues,
+        sliderArrowsBoxShadowHoverCssValue,
+        /** End Box Shadow */
+
+        /** Start Position */
+        sliderArrowsPosition,
+        sliderArrowsPositionUnits,
+        sliderArrowsRightOffset,
+        sliderArrowsRightOffsetUnits,
+        sliderArrowsLeftOffset,
+        sliderArrowsLeftOffsetUnits,
+        /** End Position */
+
+        /** Start Dots Margin */
+        sliderDotsMarginUnits,
+        sliderDotsDesktopMargin,
+        sliderDotsDesktopMarginCssStyle,
+        sliderDotsTabletMargin,
+        sliderDotsTabletMarginCssStyle,
+        sliderDotsMobileMargin,
+        sliderDotsMobileMarginCssStyle,
+        sliderDotsMarginLink,
+        /** End Dots Margin */
+
+        /** Start Dots Position */
+        sliderDotsPosition,
+        sliderDotsPositionUnits,
+        /** End Dots Position */
+
+        /** Start Dots Style */
+        sliderDotsSwitcher,
+        sliderNormalDotsBgColor,
+        sliderActiveDotsBgColor,
+        sliderNormalDotsWidth,
+        sliderNormalDotsWidthUnits,
+        sliderNormalDotsHeight,
+        sliderNormalDotsHeightUnits,
+        /** End Dots Style */
+
+        /** Start Dots Border */
+        sliderNormalDotsBorder,
+        sliderNormalDotsBorderColorSwitcher,
+        sliderNormalDotsBorderColor,
+        sliderNormalDotsBorderHoverColor,
+        sliderNormalDotsBorderUnits,
+        sliderNormalDotsDesktopBorder,
+        sliderNormalDotsDesktopBorderCssStyle,
+        sliderNormalDotsTabletBorder,
+        sliderNormalDotsTabletBorderCssStyle,
+        sliderNormalDotsMobileBorder,
+        sliderNormalDotsMobileBorderCssStyle,
+        sliderNormalDotsBorderLink,
+        /** End Dots Border */
+
+        /** Start Dots Border Radius */
+        sliderNormalDotsBorderRadius,
+        sliderNormalDotsBorderRadiusUnits,
+        sliderNormalDotsDesktopBorderRadius,
+        sliderNormalDotsDesktopBorderRadiusCssStyle,
+        sliderNormalDotsTabletBorderRadius,
+        sliderNormalDotsTabletBorderRadiusCssStyle,
+        sliderNormalDotsMobileBorderRadius,
+        sliderNormalDotsMobileBorderRadiusCssStyle,
+        sliderNormalDotsBorderRadiusLink,
+        /** End Dots Border Radius */
+
+        /** Start Active Dots */
+        sliderActiveDotsWidth,
+        sliderActiveDotsWidthUnits,
+        sliderActiveDotsHeight,
+        sliderActiveDotsHeightUnits,
+        /** End Active Dots */
+
+        /** Start Active Dots Border */
+        sliderActiveDotsBorder,
+        sliderActiveDotsBorderColorSwitcher,
+        sliderActiveDotsBorderColor,
+        sliderActiveDotsBorderHoverColor,
+        sliderActiveDotsBorderUnits,
+        sliderActiveDotsDesktopBorder,
+        sliderActiveDotsDesktopBorderCssStyle,
+        sliderActiveDotsTabletBorder,
+        sliderActiveDotsTabletBorderCssStyle,
+        sliderActiveDotsMobileBorder,
+        sliderActiveDotsMobileBorderCssStyle,
+        sliderActiveDotsBorderLink,
+        /** End Active Dots Border */
+
+        /** Start Active Dots Border Radius */
+        sliderActiveDotsBorderRadius,
+        sliderActiveDotsBorderRadiusUnits,
+        sliderActiveDotsDesktopBorderRadius,
+        sliderActiveDotsDesktopBorderRadiusCssStyle,
+        sliderActiveDotsTabletBorderRadius,
+        sliderActiveDotsTabletBorderRadiusCssStyle,
+        sliderActiveDotsMobileBorderRadius,
+        sliderActiveDotsMobileBorderRadiusCssStyle,
+        sliderActiveDotsBorderRadiusLink,
+        /** End Active Dots Border Radius */
 
         /** Global Settings */
         sliderGlobalZIndex,
-        
-        sliderGlobalPaddingUnits,
-        sliderGlobalPaddingDesktop,
-        sliderGlobalPaddingTablet,
-        sliderGlobalPaddingMobile,
-        sliderGlobalPaddingLink,
-
-        sliderGlobalMarginUnits,
-        sliderGlobalMarginDesktop,
-        sliderGlobalMarginTablet,
-        sliderGlobalMarginMobile,
-        sliderGlobalMarginLink,
-
-        sliderGlobalBgColorSwitcher,
-        sliderGlobalBgNormalBackgroundType,
-        sliderGlobalBgNormalClassicColor,
-        sliderGlobalBgNormalGradientColor,
-        sliderGlobalBgNormalCustomGradientSwitcher,
-        sliderGlobalBgNormalCustomGradientInputValue,
-        sliderGlobalBgHoverBackgroundType,
-        sliderGlobalBgHoverClassicColor,
-        sliderGlobalBgHoverGradientColor,
-        sliderGlobalBgHoverCustomGradientSwitcher,
-        sliderGlobalBgHoverCustomGradientInputValue,
-
-        sliderGlobalBorder,
-        sliderGlobalBorderColorSwitcher,
-        sliderGlobalBorderColor,
-        sliderGlobalBorderHoverColor,
-
-        sliderGlobalBorderUnits,
-        sliderGlobalBorderDesktop,
-        sliderGlobalBorderTablet,
-        sliderGlobalBorderMobile,
-        sliderGlobalBorderLink,
-
-        sliderGlobalBorderRadiusUnits,
-        sliderGlobalBorderRadiusDesktop,
-        sliderGlobalBorderRadiusTablet,
-        sliderGlobalBorderRadiusMobile,
-        sliderGlobalBorderRadiusLink,
-
-        sliderGlobalBoxShadowSwitcher,
-        sliderGlobalBoxShadowValues,
-        sliderGlobalBoxShadowCssValue,
-        sliderGlobalBoxShadowHoverValues,
-        sliderGlobalBoxShadowHoverCssValue,
-        /** End Global Setting */
         
     } = attributes;
 
@@ -206,6 +318,39 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
         setAttributes({ sliderItems: sliderItemList });
     }, [sliderItemList, setAttributes]);
 
+
+
+    /** Format Spacing */
+    const spacingFormat = (spacing, units) => {
+        return spacing.top || spacing.right || spacing.bottom || spacing.left
+            ? `${spacing.top}${units} ${spacing.right}${units} ${spacing.bottom}${units} ${spacing.left}${units}`
+            : '';
+    };
+
+    /** set the css style if have default padding */
+    useEffect(() => {
+        setAttributes({
+            sliderArrowsDesktopBorderRadiusCssStyle: spacingFormat(sliderArrowsDesktopBorderRadius, sliderArrowsBorderRadiusUnits.Desktop),
+            sliderArrowsTabletBorderRadiusCssStyle: spacingFormat(sliderArrowsTabletBorderRadius, sliderArrowsBorderRadiusUnits.Tablet),
+            sliderArrowsMobileBorderRadiusCssStyle: spacingFormat(sliderArrowsMobileBorderRadius, sliderArrowsBorderRadiusUnits.Mobile),
+
+            sliderNormalDotsDesktopBorderRadiusCssStyle: spacingFormat(sliderNormalDotsDesktopBorderRadius, sliderNormalDotsBorderRadiusUnits.Desktop),
+            sliderNormalDotsTabletBorderRadiusCssStyle: spacingFormat(sliderNormalDotsTabletBorderRadius, sliderNormalDotsBorderRadiusUnits.Tablet),
+            sliderNormalDotsMobileBorderRadiusCssStyle: spacingFormat(sliderNormalDotsMobileBorderRadius, sliderNormalDotsBorderRadiusUnits.Mobile),
+        });
+    }, [
+        sliderArrowsDesktopBorderRadius,
+        sliderArrowsTabletBorderRadius,
+        sliderArrowsMobileBorderRadius,
+        sliderArrowsBorderRadiusUnits,
+
+        sliderNormalDotsDesktopBorderRadius,
+        sliderNormalDotsTabletBorderRadius,
+        sliderNormalDotsMobileBorderRadius,
+        sliderNormalDotsBorderRadiusUnits,
+    ]);
+    /** end if have default padding then set the css style */
+
     /** Start Slider Item Color Style */
     const sliderItemColorStyle = useMemo(() => {
         let style = '';
@@ -278,11 +423,342 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
     }, [sliderItems, blockId]);
 
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${sliderItemColorStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [sliderItemColorStyle]);
 
-    const editorStyle = sliderItemColorStyle.replace(/\s+/g, ' ').trim();
+    const allBlockStyle = useMemo(() => `
+
+        .${blockId} .swiper-wrapper {
+            align-items: center;
+        }
+        .${blockId} .swiper-button-prev,
+        .${blockId} .swiper-button-next {
+            ${sliderArrowsColor ? `color: ${sliderArrowsColor};` : ''}
+            ${sliderArrowsNormalBackgroundType === 'gradient' ? `  
+                background: ${sliderArrowsNormalCustomGradientSwitcher && sliderArrowsNormalCustomGradientInputValue ? sliderArrowsNormalCustomGradientInputValue : sliderArrowsNormalGradientColor ? sliderArrowsNormalGradientColor : sliderArrowsNormalClassicColor};
+            ` : `
+                ${sliderArrowsNormalClassicColor ? `background: ${sliderArrowsNormalClassicColor};` : ''}
+            `}
+            ${sliderArrowsBorder ? `border: ${sliderArrowsBorder};` : ''}
+			${sliderArrowsDesktopBorderCssStyle ? `border-width: ${sliderArrowsDesktopBorderCssStyle};` : ''}  
+			${sliderArrowsDesktopBorderRadiusCssStyle ? `border-radius: ${sliderArrowsDesktopBorderRadiusCssStyle};` : ''}
+            ${sliderArrowsBorderColor ? `border-color: ${sliderArrowsBorderColor};` : ''}
+            ${sliderArrowsBoxShadowCssValue ? `box-shadow: ${sliderArrowsBoxShadowCssValue};` : ''}
+            ${sliderArrowsWidth.Desktop ? `width: ${sliderArrowsWidth.Desktop}${sliderArrowsWidthUnits.Desktop};` : ''}
+            ${sliderArrowsHeight.Desktop ? `height: ${sliderArrowsHeight.Desktop}${sliderArrowsHeightUnits.Desktop};` : ''}
+            ${sliderArrowsPosition.Desktop ? `top: ${sliderArrowsPosition.Desktop}${sliderArrowsPositionUnits.Desktop};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockId} .swiper-button-prev:hover,
+        .${blockId} .swiper-button-next:hover {
+            ${sliderArrowsColorHover ? `color: ${sliderArrowsColorHover};` : ''}
+            ${sliderArrowsHoverBackgroundType === 'gradient' ? `
+                background: ${sliderArrowsHoverCustomGradientSwitcher && sliderArrowsHoverCustomGradientInputValue ? sliderArrowsHoverCustomGradientInputValue : sliderArrowsHoverGradientColor ? sliderArrowsHoverGradientColor : sliderArrowsHoverClassicColor};
+            ` : `
+                ${sliderArrowsHoverClassicColor ? `background: ${sliderArrowsHoverClassicColor};` : ''}
+            `}
+            ${sliderArrowsBorderHoverColor ? `border-color: ${sliderArrowsBorderHoverColor};` : ''}
+            ${sliderArrowsBoxShadowHoverCssValue ? `box-shadow: ${sliderArrowsBoxShadowHoverCssValue};` : ''}
+        }
+
+        .${blockId} .swiper-button-prev:after,
+        .${blockId} .swiper-button-next:after {
+            ${sliderArrowsSize.Desktop ? `font-size: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .swiper-button-prev {
+            ${sliderArrowsLeftOffset.Desktop ? `left: ${sliderArrowsLeftOffset.Desktop}${sliderArrowsLeftOffsetUnits.Desktop};` : ''}
+        }
+        .${blockId} .swiper-button-next {
+            ${sliderArrowsRightOffset.Desktop ? `right: ${sliderArrowsRightOffset.Desktop}${sliderArrowsRightOffsetUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .swiper-pagination {
+            ${sliderDotsPosition.Desktop ? `bottom: ${sliderDotsPosition.Desktop}${sliderDotsPositionUnits.Desktop} !important;` : ''}
+            ${sliderDotsDesktopMarginCssStyle ? `margin: ${sliderDotsDesktopMarginCssStyle};` : ''}
+        }
+
+        .${blockId} .swiper-pagination-bullet {
+            ${sliderNormalDotsBgColor ? `background-color: ${sliderNormalDotsBgColor};` : ''}
+            ${sliderNormalDotsBorder ? `border: ${sliderNormalDotsBorder};` : ''}
+			${sliderNormalDotsDesktopBorderCssStyle ? `border-width: ${sliderNormalDotsDesktopBorderCssStyle};` : ''}   
+			${sliderNormalDotsDesktopBorderRadiusCssStyle ? `border-radius: ${sliderNormalDotsDesktopBorderRadiusCssStyle};` : ''}
+            ${sliderNormalDotsBorderColor ? `border-color: ${sliderNormalDotsBorderColor};` : ''}
+            ${sliderNormalDotsWidth.Desktop ? `width: ${sliderNormalDotsWidth.Desktop}${sliderNormalDotsWidthUnits.Desktop};` : ''}
+            ${sliderNormalDotsHeight.Desktop ? `height: ${sliderNormalDotsHeight.Desktop}${sliderNormalDotsHeightUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .swiper-pagination-bullet-active {
+            ${sliderActiveDotsBgColor ? `background-color: ${sliderActiveDotsBgColor};` : ''}
+            ${sliderActiveDotsBorder ? `border: ${sliderActiveDotsBorder};` : ''}
+			${sliderActiveDotsDesktopBorderCssStyle ? `border-width: ${sliderActiveDotsDesktopBorderCssStyle};` : ''}   
+			${sliderActiveDotsDesktopBorderRadiusCssStyle ? `border-radius: ${sliderActiveDotsDesktopBorderRadiusCssStyle};` : ''}
+            ${sliderActiveDotsBorderColor ? `border-color: ${sliderActiveDotsBorderColor};` : ''}
+            ${sliderActiveDotsWidth.Desktop ? `width: ${sliderActiveDotsWidth.Desktop}${sliderActiveDotsWidthUnits.Desktop};` : ''}
+            ${sliderActiveDotsHeight.Desktop ? `height: ${sliderActiveDotsHeight.Desktop}${sliderActiveDotsHeightUnits.Desktop};` : ''}
+        }
+
+
+        @media only screen and (max-width: 1024px) {
+            .${blockId} .swiper-button-prev,
+            .${blockId} .swiper-button-next {
+                ${sliderArrowsTabletBorderCssStyle ? `border-width: ${sliderArrowsTabletBorderCssStyle};` : ''}  
+                ${sliderArrowsTabletBorderRadiusCssStyle ? `border-radius: ${sliderArrowsTabletBorderRadiusCssStyle};` : ''}
+                ${sliderArrowsWidth.Tablet ? `width: ${sliderArrowsWidth.Tablet}${sliderArrowsWidthUnits.Tablet};` : ''}
+                ${sliderArrowsHeight.Tablet ? `height: ${sliderArrowsHeight.Tablet}${sliderArrowsHeightUnits.Tablet};` : ''}
+                ${sliderArrowsPosition.Tablet ? `top: ${sliderArrowsPosition.Tablet}${sliderArrowsPositionUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .swiper-button-prev:after,
+            .${blockId} .swiper-button-next:after {
+                ${sliderArrowsSize.Tablet ? `font-size: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .swiper-button-prev {
+                ${sliderArrowsLeftOffset.Tablet ? `left: ${sliderArrowsLeftOffset.Tablet}${sliderArrowsLeftOffsetUnits.Tablet};` : ''}
+            }
+            .${blockId} .swiper-button-next {
+                ${sliderArrowsRightOffset.Tablet ? `right: ${sliderArrowsRightOffset.Tablet}${sliderArrowsRightOffsetUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .swiper-pagination {
+                ${sliderDotsPosition.Tablet ? `bottom: ${sliderDotsPosition.Tablet}${sliderDotsPositionUnits.Tablet} !important;` : ''}
+                ${sliderDotsTabletMarginCssStyle ? `margin: ${sliderDotsTabletMarginCssStyle};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-bullet {
+                ${sliderNormalDotsTabletBorderCssStyle ? `border-width: ${sliderNormalDotsTabletBorderCssStyle};` : ''}   
+                ${sliderNormalDotsTabletBorderRadiusCssStyle ? `border-radius: ${sliderNormalDotsTabletBorderRadiusCssStyle};` : ''}
+                ${sliderNormalDotsWidth.Tablet ? `width: ${sliderNormalDotsWidth.Tablet}${sliderNormalDotsWidthUnits.Tablet};` : ''}
+                ${sliderNormalDotsHeight.Tablet ? `height: ${sliderNormalDotsHeight.Tablet}${sliderNormalDotsHeightUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-bullet-active {
+                ${sliderActiveDotsTabletBorderCssStyle ? `border-width: ${sliderActiveDotsTabletBorderCssStyle};` : ''}   
+                ${sliderActiveDotsTabletBorderRadiusCssStyle ? `border-radius: ${sliderActiveDotsTabletBorderRadiusCssStyle};` : ''}
+                ${sliderActiveDotsWidth.Tablet ? `width: ${sliderActiveDotsWidth.Tablet}${sliderActiveDotsWidthUnits.Tablet};` : ''}
+                ${sliderActiveDotsHeight.Tablet ? `height: ${sliderActiveDotsHeight.Tablet}${sliderActiveDotsHeightUnits.Tablet};` : ''}
+            }
+        }
+        
+        @media only screen and (max-width: 767px) {
+            .${blockId} .swiper-button-prev,
+            .${blockId} .swiper-button-next {
+                ${sliderArrowsMobileBorderCssStyle ? `border-width: ${sliderArrowsMobileBorderCssStyle};` : ''}  
+                ${sliderArrowsMobileBorderRadiusCssStyle ? `border-radius: ${sliderArrowsMobileBorderRadiusCssStyle};` : ''}
+                ${sliderArrowsWidth.Mobile ? `width: ${sliderArrowsWidth.Mobile}${sliderArrowsWidthUnits.Mobile};` : ''}
+                ${sliderArrowsHeight.Mobile ? `height: ${sliderArrowsHeight.Mobile}${sliderArrowsHeightUnits.Mobile};` : ''}
+                ${sliderArrowsPosition.Mobile ? `top: ${sliderArrowsPosition.Mobile}${sliderArrowsPositionUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .swiper-button-prev:after,
+            .${blockId} .swiper-button-next:after {
+                ${sliderArrowsSize.Mobile ? `font-size: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .swiper-button-prev {
+                ${sliderArrowsLeftOffset.Mobile ? `left: ${sliderArrowsLeftOffset.Mobile}${sliderArrowsLeftOffsetUnits.Mobile};` : ''}
+            }
+            .${blockId} .swiper-button-next {
+                ${sliderArrowsRightOffset.Mobile ? `right: ${sliderArrowsRightOffset.Mobile}${sliderArrowsRightOffsetUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .swiper-pagination {
+                ${sliderDotsPosition.Mobile ? `bottom: ${sliderDotsPosition.Mobile}${sliderDotsPositionUnits.Mobile} !important;` : ''}
+                ${sliderDotsMobileMarginCssStyle ? `margin: ${sliderDotsMobileMarginCssStyle};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-bullet {
+                ${sliderNormalDotsMobileBorderCssStyle ? `border-width: ${sliderNormalDotsMobileBorderCssStyle};` : ''}   
+                ${sliderNormalDotsMobileBorderRadiusCssStyle ? `border-radius: ${sliderNormalDotsMobileBorderRadiusCssStyle};` : ''}
+                ${sliderNormalDotsWidth.Mobile ? `width: ${sliderNormalDotsWidth.Mobile}${sliderNormalDotsWidthUnits.Mobile};` : ''}
+                ${sliderNormalDotsHeight.Mobile ? `height: ${sliderNormalDotsHeight.Mobile}${sliderNormalDotsHeightUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-bullet-active {
+                ${sliderActiveDotsMobileBorderCssStyle ? `border-width: ${sliderActiveDotsMobileBorderCssStyle};` : ''}   
+                ${sliderActiveDotsMobileBorderRadiusCssStyle ? `border-radius: ${sliderActiveDotsMobileBorderRadiusCssStyle};` : ''}
+                ${sliderActiveDotsWidth.Mobile ? `width: ${sliderActiveDotsWidth.Mobile}${sliderActiveDotsWidthUnits.Mobile};` : ''}
+                ${sliderActiveDotsHeight.Mobile ? `height: ${sliderActiveDotsHeight.Mobile}${sliderActiveDotsHeightUnits.Mobile};` : ''}
+            }
+        }
+
+    `, [
+        blockId,
+
+        /** Start Arrows Style */
+        sliderArrowsSize,
+        sliderArrowsSizeUnits,
+
+        /** Start Arrows Color */
+        sliderArrowsColorSwitcher,
+        sliderArrowsColor,
+        sliderArrowsColorHover,
+        /** End Arrows Color */
+
+        /** Start Background */
+        sliderArrowsBackgroundColorSwitcher,
+        sliderArrowsNormalBackgroundType,
+        sliderArrowsNormalClassicColor,
+        sliderArrowsNormalGradientColor,
+        sliderArrowsNormalCustomGradientSwitcher,
+        sliderArrowsNormalCustomGradientInputValue,
+        sliderArrowsHoverBackgroundType,
+        sliderArrowsHoverClassicColor,
+        sliderArrowsHoverGradientColor,
+        sliderArrowsHoverCustomGradientSwitcher,
+        sliderArrowsHoverCustomGradientInputValue,
+        /** End Background */
+
+        /** Start Arrows Dimensions */
+        sliderArrowsWidth,
+        sliderArrowsWidthUnits,
+        sliderArrowsHeight,
+        sliderArrowsHeightUnits,
+        /** End Arrows Dimensions */
+
+        /** Start Border */
+        sliderArrowsBorder,
+        sliderArrowsBorderColorSwitcher,
+        sliderArrowsBorderColor,
+        sliderArrowsBorderHoverColor,
+        sliderArrowsBorderUnits,
+        sliderArrowsDesktopBorder,
+        sliderArrowsDesktopBorderCssStyle,
+        sliderArrowsTabletBorder,
+        sliderArrowsTabletBorderCssStyle,
+        sliderArrowsMobileBorder,
+        sliderArrowsMobileBorderCssStyle,
+        sliderArrowsBorderLink,
+        /** End Border */
+
+        /** Start Border Radius */
+        sliderArrowsBorderRadiusUnits,
+        sliderArrowsDesktopBorderRadius,
+        sliderArrowsDesktopBorderRadiusCssStyle,
+        sliderArrowsTabletBorderRadius,
+        sliderArrowsTabletBorderRadiusCssStyle,
+        sliderArrowsMobileBorderRadius,
+        sliderArrowsMobileBorderRadiusCssStyle,
+        sliderArrowsBorderRadiusLink,
+        /** End Border Radius */
+
+        /** Start Box Shadow */
+        sliderArrowsBoxShadowValuesSwitcher,
+        sliderArrowsBoxShadowValues,
+        sliderArrowsBoxShadowCssValue,
+        sliderArrowsBoxShadowHoverValues,
+        sliderArrowsBoxShadowHoverCssValue,
+        /** End Box Shadow */
+
+        /** Start Position */
+        sliderArrowsPosition,
+        sliderArrowsPositionUnits,
+        sliderArrowsRightOffset,
+        sliderArrowsRightOffsetUnits,
+        sliderArrowsLeftOffset,
+        sliderArrowsLeftOffsetUnits,
+        /** End Position */
+
+        /** Start Dots Margin */
+        sliderDotsMarginUnits,
+        sliderDotsDesktopMargin,
+        sliderDotsDesktopMarginCssStyle,
+        sliderDotsTabletMargin,
+        sliderDotsTabletMarginCssStyle,
+        sliderDotsMobileMargin,
+        sliderDotsMobileMarginCssStyle,
+        sliderDotsMarginLink,
+        /** End Dots Margin */
+
+        /** Start Dots Position */
+        sliderDotsPosition,
+        sliderDotsPositionUnits,
+        /** End Dots Position */
+
+        /** Start Dots Style */
+        sliderDotsSwitcher,
+        sliderNormalDotsBgColor,
+        sliderActiveDotsBgColor,
+        sliderNormalDotsWidth,
+        sliderNormalDotsWidthUnits,
+        sliderNormalDotsHeight,
+        sliderNormalDotsHeightUnits,
+        /** End Dots Style */
+
+        /** Start Dots Border */
+        sliderNormalDotsBorder,
+        sliderNormalDotsBorderColorSwitcher,
+        sliderNormalDotsBorderColor,
+        sliderNormalDotsBorderHoverColor,
+        sliderNormalDotsBorderUnits,
+        sliderNormalDotsDesktopBorder,
+        sliderNormalDotsDesktopBorderCssStyle,
+        sliderNormalDotsTabletBorder,
+        sliderNormalDotsTabletBorderCssStyle,
+        sliderNormalDotsMobileBorder,
+        sliderNormalDotsMobileBorderCssStyle,
+        sliderNormalDotsBorderLink,
+        /** End Dots Border */
+
+        /** Start Dots Border Radius */
+        sliderNormalDotsBorderRadius,
+        sliderNormalDotsBorderRadiusUnits,
+        sliderNormalDotsDesktopBorderRadius,
+        sliderNormalDotsDesktopBorderRadiusCssStyle,
+        sliderNormalDotsTabletBorderRadius,
+        sliderNormalDotsTabletBorderRadiusCssStyle,
+        sliderNormalDotsMobileBorderRadius,
+        sliderNormalDotsMobileBorderRadiusCssStyle,
+        sliderNormalDotsBorderRadiusLink,
+        /** End Dots Border Radius */
+
+        /** Start Active Dots */
+        sliderActiveDotsWidth,
+        sliderActiveDotsWidthUnits,
+        sliderActiveDotsHeight,
+        sliderActiveDotsHeightUnits,
+        /** End Active Dots */
+
+        /** Start Active Dots Border */
+        sliderActiveDotsBorder,
+        sliderActiveDotsBorderColorSwitcher,
+        sliderActiveDotsBorderColor,
+        sliderActiveDotsBorderHoverColor,
+        sliderActiveDotsBorderUnits,
+        sliderActiveDotsDesktopBorder,
+        sliderActiveDotsDesktopBorderCssStyle,
+        sliderActiveDotsTabletBorder,
+        sliderActiveDotsTabletBorderCssStyle,
+        sliderActiveDotsMobileBorder,
+        sliderActiveDotsMobileBorderCssStyle,
+        sliderActiveDotsBorderLink,
+        /** End Active Dots Border */
+
+        /** Start Active Dots Border Radius */
+        sliderActiveDotsBorderRadius,
+        sliderActiveDotsBorderRadiusUnits,
+        sliderActiveDotsDesktopBorderRadius,
+        sliderActiveDotsDesktopBorderRadiusCssStyle,
+        sliderActiveDotsTabletBorderRadius,
+        sliderActiveDotsTabletBorderRadiusCssStyle,
+        sliderActiveDotsMobileBorderRadius,
+        sliderActiveDotsMobileBorderRadiusCssStyle,
+        sliderActiveDotsBorderRadiusLink,
+        /** End Active Dots Border Radius */
+
+        /** Global Settings */
+        sliderGlobalZIndex,
+
+        /** Other Styles */
+        blockStyle
+
+    ]);
+
+
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle} ${sliderItemColorStyle}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, sliderItemColorStyle]);
+
+    const editorStyle = `${allBlockStyle} ${sliderItemColorStyle}`.replace(/\s+/g, ' ').trim();
 
 
     return (
@@ -488,9 +964,497 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
                                 )}
 
                                 {tab.name === "styles" && (
-                                    <PanelBody title={__("Slider", "gutenslider-blocks")} initialOpen>
-                                        {/* Add style settings here */}
-                                    </PanelBody>
+                                    <>
+                                        <PanelBody 
+                                            title={__("Navigation Style", "gutenslider-blocks")}  
+                                            initialOpen={true}
+                                        >
+                                            <ResponsiveRangeControl
+                                                min={0}
+                                                max={100}
+                                                label={__("Icon Size", "gutenslider-blocks")}
+                                                rangeValue={sliderArrowsSize}
+                                                onChangeValue={(value) => setAttributes({ sliderArrowsSize: value })}
+                                                onUnitChange={(value) => setAttributes({ sliderArrowsSizeUnits: value })}
+                                                deviceType={deviceType}
+                                                units={sliderArrowsSizeUnits}
+                                                step={1}
+                                                resetFallbackValue={"16"}
+                                            />
+
+                                            <ResponsiveRangeControl
+                                                min={0}
+                                                max={100}
+                                                label={__("Width", "gutenslider-blocks")}
+                                                rangeValue={sliderArrowsWidth}
+                                                onChangeValue={(value) => setAttributes({ sliderArrowsWidth: value })}
+                                                onUnitChange={(value) => setAttributes({ sliderArrowsWidthUnits: value })}
+                                                deviceType={deviceType}
+                                                units={sliderArrowsWidthUnits}
+                                                step={1}
+                                                resetFallbackValue={"46"}
+                                            />
+                                            <ResponsiveRangeControl
+                                                min={0}
+                                                max={100}
+                                                label={__("Height", "gutenslider-blocks")}
+                                                rangeValue={sliderArrowsHeight}
+                                                onChangeValue={(value) => setAttributes({ sliderArrowsHeight: value })}
+                                                onUnitChange={(value) => setAttributes({ sliderArrowsHeightUnits: value })}
+                                                deviceType={deviceType}
+                                                units={sliderArrowsHeightUnits}
+                                                step={1}
+                                                resetFallbackValue={"46"}
+                                            />
+                                            <ResponsiveRangeControl
+                                                min={0}
+                                                max={100}
+                                                label={__("Position", "gutenslider-blocks")}
+                                                rangeValue={sliderArrowsPosition}
+                                                onChangeValue={(value) => setAttributes({ sliderArrowsPosition: value })}
+                                                onUnitChange={(value) => setAttributes({ sliderArrowsPositionUnits: value })}
+                                                deviceType={deviceType}
+                                                units={sliderArrowsPositionUnits}
+                                                step={1}
+                                                resetFallbackValue={"50"}
+                                            />
+
+                                            <ResponsiveRangeControl
+                                                min={-100}
+                                                max={100}
+                                                label={__("Left", "gutenslider-blocks")}
+                                                rangeValue={sliderArrowsLeftOffset}
+                                                onChangeValue={(value) => setAttributes({ sliderArrowsLeftOffset: value })}
+                                                onUnitChange={(value) => setAttributes({ sliderArrowsLeftOffsetUnits: value })}
+                                                deviceType={deviceType}
+                                                units={sliderArrowsLeftOffsetUnits}
+                                                step={1}
+                                                resetFallbackValue={"-20"}
+                                            />
+
+                                            <ResponsiveRangeControl
+                                                min={-100}
+                                                max={100}
+                                                label={__("Right", "gutenslider-blocks")}
+                                                rangeValue={sliderArrowsRightOffset}
+                                                onChangeValue={(value) => setAttributes({ sliderArrowsRightOffset: value })}
+                                                onUnitChange={(value) => setAttributes({ sliderArrowsRightOffsetUnits: value })}
+                                                deviceType={deviceType}
+                                                units={sliderArrowsRightOffsetUnits}
+                                                step={1}
+                                                resetFallbackValue={"-20"}
+                                            />
+
+                                            <SwitcherControl
+                                                label={__("Icon Color", "gutenslider-blocks")}
+                                                globalSwitcher={sliderArrowsColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ sliderArrowsColorSwitcher: value })}
+                                            />
+
+                                            {sliderArrowsColorSwitcher === 'normal' && (
+                                                <ColorControl
+                                                    label={__("Normal Color", "gutenslider-blocks")}
+                                                    color={sliderArrowsColor}
+                                                    onChangeColor={(value) => setAttributes({ sliderArrowsColor: value })} 
+                                                />
+                                            )}
+
+                                            {sliderArrowsColorSwitcher === 'hover' && (
+                                                <ColorControl
+                                                    label={__("Hover Color", "gutenslider-blocks")}
+                                                    color={sliderArrowsColorHover}
+                                                    onChangeColor={(value) => setAttributes({ sliderArrowsColorHover: value })}
+                                                />
+                                            )}
+
+                                            <BackgroundColorControl
+                                                label={__("Background Color", "gutenslider-blocks")}
+                                                bgColorSwitcher={sliderArrowsBackgroundColorSwitcher}
+                                                setBgColorSwitcher={(value) => setAttributes({ sliderArrowsBackgroundColorSwitcher: value })}
+                                                        
+                                                normalBackgroundType={sliderArrowsNormalBackgroundType}
+                                                setNormalBackgroundType={(value) => setAttributes({ sliderArrowsNormalBackgroundType: value })}
+                                                normalClassicColor={sliderArrowsNormalClassicColor}
+                                                setNormalClassicColor={(value) => setAttributes({ sliderArrowsNormalClassicColor: value })}
+                                                normalGradientColor={sliderArrowsNormalGradientColor}
+                                                setNormalGradientColor={(value) => setAttributes({ sliderArrowsNormalGradientColor: value })}
+                                                normalCustomGradientSwitcher={sliderArrowsNormalCustomGradientSwitcher}
+                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ sliderArrowsNormalCustomGradientSwitcher: value })}
+                                                normalCustomGradientInputValue={sliderArrowsNormalCustomGradientInputValue}
+                                                setNormalCustomGradientInputValue={(value) => setAttributes({ sliderArrowsNormalCustomGradientInputValue: value })}
+                                                        
+                                                hoverBackgroundType={sliderArrowsHoverBackgroundType}
+                                                setHoverBackgroundType={(value) => setAttributes({ sliderArrowsHoverBackgroundType: value })}
+                                                hoverClassicColor={sliderArrowsHoverClassicColor}
+                                                setHoverClassicColor={(value) => setAttributes({ sliderArrowsHoverClassicColor: value })}
+                                                hoverGradientColor={sliderArrowsHoverGradientColor} 
+                                                setHoverGradientColor={(value) => setAttributes({ sliderArrowsHoverGradientColor: value })}
+                                                hoverCustomGradientSwitcher={sliderArrowsHoverCustomGradientSwitcher}
+                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ sliderArrowsHoverCustomGradientSwitcher: value })}
+                                                hoverCustomGradientInputValue={sliderArrowsHoverCustomGradientInputValue}
+                                                setHoverCustomGradientInputValue={(value) => setAttributes({ sliderArrowsHoverCustomGradientInputValue: value })}
+
+                                                isBackgroundImage={false}
+                                            />
+
+                                            <SelectControl
+                                                label={__("Border Style", "gutenslider-blocks")}
+                                                value={sliderArrowsBorder}
+                                                options={BORDER_STYLES}
+                                                onChange={(value) => setAttributes({ sliderArrowsBorder: value })}
+                                            />
+
+                                            <SwitcherControl
+                                                label={__("Border Color", "gutenslider-blocks")}
+                                                globalSwitcher={sliderArrowsBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ sliderArrowsBorderColorSwitcher: value })}
+                                            />
+
+                                            {sliderArrowsBorderColorSwitcher === 'normal' && (
+                                                <ColorControl
+                                                    label={__("Normal Color", "gutenslider-blocks")}
+                                                    color={sliderArrowsBorderColor}
+                                                    onChangeColor={(value) => setAttributes({ sliderArrowsBorderColor: value })}
+                                                />
+                                            )}
+
+                                            {sliderArrowsBorderColorSwitcher === 'hover' && (
+                                                <ColorControl
+                                                    label={__("Hover Color", "gutenslider-blocks")}
+                                                    color={sliderArrowsBorderHoverColor}
+                                                    onChangeColor={(value) => setAttributes({ sliderArrowsBorderHoverColor: value })}
+                                                />
+                                            )}
+
+                                            <ResponsiveSpacingControl
+                                                label={__("Border Width", "gutenslider-blocks")}
+                                                deviceType={deviceType}
+                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                                units={sliderArrowsBorderUnits}
+                                                onChangeUnits={(value) => setAttributes({ sliderArrowsBorderUnits: value })}
+                                                desktopSpacing={sliderArrowsDesktopBorder} 
+                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderArrowsDesktopBorder: value })}
+                                                desktopSpacingStyle={(value) => setAttributes({ sliderArrowsDesktopBorderCssStyle: value })}
+                                                tabletSpacing={sliderArrowsTabletBorder} 
+                                                onChangeTabletSpacing={(value) => setAttributes({ sliderArrowsTabletBorder: value })}
+                                                tabletSpacingStyle={(value) => setAttributes({ sliderArrowsTabletBorderCssStyle: value })}
+                                                mobileSpacing={sliderArrowsMobileBorder}
+                                                onChangeMobileSpacing={(value) => setAttributes({ sliderArrowsMobileBorder: value })}
+                                                mobileSpacingStyle={(value) => setAttributes({ sliderArrowsMobileBorderCssStyle: value })}
+                                                isLinked={sliderArrowsBorderLink}
+                                                onChangeLink={(value) => setAttributes({ sliderArrowsBorderLink: value })} 
+                                            />
+
+                                            <ResponsiveSpacingControl
+                                                label={__("Border Radius", "gutenslider-blocks")}
+                                                deviceType={deviceType}
+                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                                units={sliderArrowsBorderRadiusUnits}
+                                                onChangeUnits={(value) => setAttributes({ sliderArrowsBorderRadiusUnits: value })}
+                                                desktopSpacing={sliderArrowsDesktopBorderRadius}
+                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderArrowsDesktopBorderRadius: value })}
+                                                desktopSpacingStyle={(value) => setAttributes({ sliderArrowsDesktopBorderRadiusCssStyle: value })}
+                                                tabletSpacing={sliderArrowsTabletBorderRadius}
+                                                onChangeTabletSpacing={(value) => setAttributes({ sliderArrowsTabletBorderRadius: value })}
+                                                tabletSpacingStyle={(value) => setAttributes({ sliderArrowsTabletBorderRadiusCssStyle: value })}
+                                                mobileSpacing={sliderArrowsMobileBorderRadius}
+                                                onChangeMobileSpacing={(value) => setAttributes({ sliderArrowsMobileBorderRadius: value })}
+                                                mobileSpacingStyle={(value) => setAttributes({ sliderArrowsMobileBorderRadiusCssStyle: value })}
+                                                isLinked={sliderArrowsBorderRadiusLink}
+                                                onChangeLink={(value) => setAttributes({ sliderArrowsBorderRadiusLink: value })} 
+                                            />
+
+                                            <SwitcherControl
+                                                label={__("Box Shadow", "gutenslider-blocks")}
+                                                globalSwitcher={sliderArrowsBoxShadowValuesSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ sliderArrowsBoxShadowValuesSwitcher: value })}
+                                            />
+
+                                            {sliderArrowsBoxShadowValuesSwitcher === 'normal' && (
+                                                <BoxShadowSettingsControl
+                                                    label={__("Normal Shadow", "gutenslider-blocks")}
+                                                    onBoxShadowChange={(value) => setAttributes({ sliderArrowsBoxShadowValues: value })}
+                                                    initialShadowValue={sliderArrowsBoxShadowValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ sliderArrowsBoxShadowCssValue: value })}
+                                                />
+                                            )}
+
+                                            {sliderArrowsBoxShadowValuesSwitcher === 'hover' && (
+                                                <BoxShadowSettingsControl
+                                                    label={__("Hover Shadow", "gutenslider-blocks")}
+                                                    onBoxShadowChange={(value) => setAttributes({ sliderArrowsBoxShadowHoverValues: value })}
+                                                    initialShadowValue={sliderArrowsBoxShadowHoverValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ sliderArrowsBoxShadowHoverCssValue: value })}
+                                                />
+                                            )}
+
+                                        </PanelBody>
+
+                                        <PanelBody 
+                                            title={__("Pagination Style", "gutenslider-blocks")}  
+                                            initialOpen={false}
+                                        >
+
+                                            <ResponsiveRangeControl
+                                                min={0}
+                                                max={100}
+                                                label={__("Position", "gutenslider-blocks")}
+                                                rangeValue={sliderDotsPosition}
+                                                onChangeValue={(value) => setAttributes({ sliderDotsPosition: value })}
+                                                onUnitChange={(value) => setAttributes({ sliderDotsPositionUnits: value })}
+                                                deviceType={deviceType}
+                                                units={sliderDotsPositionUnits}
+                                                step={1}
+                                                resetFallbackValue={"0"}
+                                            />
+
+                                            <ResponsiveSpacingControl
+                                                label={__("Margin", "gutenslider-blocks")}
+                                                deviceType={deviceType}
+                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                                units={sliderDotsMarginUnits}
+                                                onChangeUnits={(value) => setAttributes({ sliderDotsMarginUnits: value })}
+                                                desktopSpacing={sliderDotsDesktopMargin}
+                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderDotsDesktopMargin: value })}
+                                                desktopSpacingStyle={(value) => setAttributes({ sliderDotsDesktopMarginCssStyle: value })}
+                                                tabletSpacing={sliderDotsTabletMargin}
+                                                onChangeTabletSpacing={(value) => setAttributes({ sliderDotsTabletMargin: value })}
+                                                tabletSpacingStyle={(value) => setAttributes({ sliderDotsTabletMarginCssStyle: value })}
+                                                mobileSpacing={sliderDotsMobileMargin}
+                                                onChangeMobileSpacing={(value) => setAttributes({ sliderDotsMobileMargin: value })}
+                                                mobileSpacingStyle={(value) => setAttributes({ sliderDotsMobileMarginCssStyle: value })}
+                                                isLinked={sliderDotsMarginLink}
+                                                onChangeLink={(value) => setAttributes({ sliderDotsMarginLink: value })} 
+                                            />
+
+                                            {paginationType === 'bullets' && (
+                                                <>
+                                                    <div className="global-setting-switcher-container">
+                                                        <BaseControl
+                                                            className="global-setting-switcher-panel-wrapper"
+                                                        >
+                                                            <ButtonGroup className="global-setting-switcher-panel-btn">
+                                                                {NORMAL_ACTIVE.map((item, key) => (
+                                                                    <Button
+                                                                key={key}
+                                                                        onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
+                                                                        className={`global-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
+                                                                    >
+                                                                        {item.label}
+                                                                    </Button>
+                                                                ))}
+                                                            </ButtonGroup>
+                                                        </BaseControl>
+                                                    </div>
+                                                    {sliderDotsSwitcher === 'normal' && (
+                                                        <>
+                                                            <ResponsiveRangeControl
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Width", "gutenslider-blocks")}
+                                                                rangeValue={sliderNormalDotsWidth}
+                                                                onChangeValue={(value) => setAttributes({ sliderNormalDotsWidth: value })}
+                                                                onUnitChange={(value) => setAttributes({ sliderNormalDotsWidthUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderNormalDotsWidthUnits}
+                                                                step={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+
+                                                            <ResponsiveRangeControl
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Height", "gutenslider-blocks")}
+                                                                rangeValue={sliderNormalDotsHeight}
+                                                                onChangeValue={(value) => setAttributes({ sliderNormalDotsHeight: value })}
+                                                                onUnitChange={(value) => setAttributes({ sliderNormalDotsHeightUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderNormalDotsHeightUnits}
+                                                                step={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+
+                                                            <ColorControl
+                                                                label={__("Color", "gutenslider-blocks")}
+                                                                color={sliderNormalDotsBgColor}
+                                                                onChangeColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
+                                                            />
+
+                                                            <SelectControl
+                                                                label={__("Border Style", "gutenslider-blocks")}
+                                                                value={sliderNormalDotsBorder}
+                                                                options={BORDER_STYLES}
+                                                                onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
+                                                            />
+
+                                                            <SwitcherControl
+                                                                label={__("Border Color", "gutenslider-blocks")}
+                                                                globalSwitcher={sliderNormalDotsBorderColorSwitcher}
+                                                                setGlobalSwitcher={(value) => setAttributes({ sliderNormalDotsBorderColorSwitcher: value })}
+                                                            />
+
+                                                            {sliderNormalDotsBorderColorSwitcher === 'normal' && (
+                                                                <ColorControl
+                                                                    label={__("Normal Color", "gutenslider-blocks")}
+                                                                    color={sliderNormalDotsBorderColor}
+                                                                    onChangeColor={(value) => setAttributes({ sliderNormalDotsBorderColor: value })}
+                                                                />
+                                                            )}
+
+                                                            {sliderNormalDotsBorderColorSwitcher === 'hover' && (
+                                                                <ColorControl
+                                                                    label={__("Hover Color", "gutenslider-blocks")}
+                                                                    color={sliderNormalDotsBorderHoverColor}
+                                                                    onChangeColor={(value) => setAttributes({ sliderNormalDotsBorderHoverColor: value })}
+                                                                />
+                                                            )}
+
+                                                            <ResponsiveSpacingControl
+                                                                label={__("Border Width", "gutenslider-blocks")}
+                                                                deviceType={deviceType}
+                                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                                                units={sliderNormalDotsBorderUnits}
+                                                                onChangeUnits={(value) => setAttributes({ sliderNormalDotsBorderUnits: value })}
+                                                                desktopSpacing={sliderNormalDotsDesktopBorder} 
+                                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderNormalDotsDesktopBorder: value })}
+                                                                desktopSpacingStyle={(value) => setAttributes({ sliderNormalDotsDesktopBorderCssStyle: value })}
+                                                                tabletSpacing={sliderNormalDotsTabletBorder} 
+                                                                onChangeTabletSpacing={(value) => setAttributes({ sliderNormalDotsTabletBorder: value })}
+                                                                tabletSpacingStyle={(value) => setAttributes({ sliderNormalDotsTabletBorderCssStyle: value })}
+                                                                mobileSpacing={sliderNormalDotsMobileBorder}
+                                                                onChangeMobileSpacing={(value) => setAttributes({ sliderNormalDotsMobileBorder: value })}
+                                                                mobileSpacingStyle={(value) => setAttributes({ sliderNormalDotsMobileBorderCssStyle: value })}
+                                                                isLinked={sliderNormalDotsBorderLink}
+                                                                onChangeLink={(value) => setAttributes({ sliderNormalDotsBorderLink: value })} 
+                                                            />
+
+                                                            <ResponsiveSpacingControl
+                                                                label={__("Border Radius", "gutenslider-blocks")}
+                                                                deviceType={deviceType}
+                                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                                                units={sliderNormalDotsBorderRadiusUnits}
+                                                                onChangeUnits={(value) => setAttributes({ sliderNormalDotsBorderRadiusUnits: value })}
+                                                                desktopSpacing={sliderNormalDotsDesktopBorderRadius}
+                                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderNormalDotsDesktopBorderRadius: value })}
+                                                                desktopSpacingStyle={(value) => setAttributes({ sliderNormalDotsDesktopBorderRadiusCssStyle: value })}
+                                                                tabletSpacing={sliderNormalDotsTabletBorderRadius}
+                                                                onChangeTabletSpacing={(value) => setAttributes({ sliderNormalDotsTabletBorderRadius: value })}
+                                                                tabletSpacingStyle={(value) => setAttributes({ sliderNormalDotsTabletBorderRadiusCssStyle: value })}
+                                                                mobileSpacing={sliderNormalDotsMobileBorderRadius}
+                                                                onChangeMobileSpacing={(value) => setAttributes({ sliderNormalDotsMobileBorderRadius: value })}
+                                                                mobileSpacingStyle={(value) => setAttributes({ sliderNormalDotsMobileBorderRadiusCssStyle: value })}
+                                                                isLinked={sliderNormalDotsBorderRadiusLink}
+                                                                onChangeLink={(value) => setAttributes({ sliderNormalDotsBorderRadiusLink: value })} 
+                                                            />
+                                                        </>
+                                                    )}
+
+                                                    {sliderDotsSwitcher === 'active' && (
+                                                        <>
+                                                            <ResponsiveRangeControl
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Width", "gutenslider-blocks")}
+                                                                rangeValue={sliderActiveDotsWidth}
+                                                                onChangeValue={(value) => setAttributes({ sliderActiveDotsWidth: value })}
+                                                                onUnitChange={(value) => setAttributes({ sliderActiveDotsWidthUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderActiveDotsWidthUnits}
+                                                                step={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+
+                                                            <ResponsiveRangeControl
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Height", "gutenslider-blocks")}
+                                                                rangeValue={sliderActiveDotsHeight}
+                                                                onChangeValue={(value) => setAttributes({ sliderActiveDotsHeight: value })}
+                                                                onUnitChange={(value) => setAttributes({ sliderActiveDotsHeightUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderActiveDotsHeightUnits}
+                                                                step={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+
+                                                            <ColorControl
+                                                                label={__("Color", "gutenslider-blocks")}
+                                                                color={sliderActiveDotsBgColor}
+                                                                onChangeColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
+                                                            />
+
+                                                            <SelectControl
+                                                                label={__("Border Style", "gutenslider-blocks")}
+                                                                value={sliderActiveDotsBorder}
+                                                                options={BORDER_STYLES}
+                                                                onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
+                                                            />
+
+                                                            <SwitcherControl
+                                                                label={__("Border Color", "gutenslider-blocks")}
+                                                                globalSwitcher={sliderActiveDotsBorderColorSwitcher}
+                                                                setGlobalSwitcher={(value) => setAttributes({ sliderActiveDotsBorderColorSwitcher: value })}
+                                                            />
+
+                                                            {sliderActiveDotsBorderColorSwitcher === 'normal' && (
+                                                                <ColorControl
+                                                                    label={__("Normal Color", "gutenslider-blocks")}
+                                                                    color={sliderActiveDotsBorderColor}
+                                                                    onChangeColor={(value) => setAttributes({ sliderActiveDotsBorderColor: value })}
+                                                                />
+                                                            )}
+
+                                                            {sliderActiveDotsBorderColorSwitcher === 'hover' && (
+                                                                <ColorControl
+                                                                    label={__("Hover Color", "gutenslider-blocks")}
+                                                                    color={sliderActiveDotsBorderHoverColor}
+                                                                    onChangeColor={(value) => setAttributes({ sliderActiveDotsBorderHoverColor: value })}
+                                                                />
+                                                            )}
+
+                                                            <ResponsiveSpacingControl
+                                                                label={__("Border Width", "gutenslider-blocks")}
+                                                                deviceType={deviceType}
+                                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                                                units={sliderActiveDotsBorderUnits}
+                                                                onChangeUnits={(value) => setAttributes({ sliderActiveDotsBorderUnits: value })}
+                                                                desktopSpacing={sliderActiveDotsDesktopBorder} 
+                                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderActiveDotsDesktopBorder: value })}
+                                                                desktopSpacingStyle={(value) => setAttributes({ sliderActiveDotsDesktopBorderCssStyle: value })}
+                                                                tabletSpacing={sliderActiveDotsTabletBorder} 
+                                                                onChangeTabletSpacing={(value) => setAttributes({ sliderActiveDotsTabletBorder: value })}
+                                                                tabletSpacingStyle={(value) => setAttributes({ sliderActiveDotsTabletBorderCssStyle: value })}
+                                                                mobileSpacing={sliderActiveDotsMobileBorder}
+                                                                onChangeMobileSpacing={(value) => setAttributes({ sliderActiveDotsMobileBorder: value })}
+                                                                mobileSpacingStyle={(value) => setAttributes({ sliderActiveDotsMobileBorderCssStyle: value })}
+                                                                isLinked={sliderActiveDotsBorderLink}
+                                                                onChangeLink={(value) => setAttributes({ sliderActiveDotsBorderLink: value })} 
+                                                            />
+
+                                                            <ResponsiveSpacingControl
+                                                                label={__("Border Radius", "gutenslider-blocks")}
+                                                                deviceType={deviceType}
+                                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                                                units={sliderActiveDotsBorderRadiusUnits}
+                                                                onChangeUnits={(value) => setAttributes({ sliderActiveDotsBorderRadiusUnits: value })}
+                                                                desktopSpacing={sliderActiveDotsDesktopBorderRadius}
+                                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderActiveDotsDesktopBorderRadius: value })}
+                                                                desktopSpacingStyle={(value) => setAttributes({ sliderActiveDotsDesktopBorderRadiusCssStyle: value })}
+                                                                tabletSpacing={sliderActiveDotsTabletBorderRadius}
+                                                                onChangeTabletSpacing={(value) => setAttributes({ sliderActiveDotsTabletBorderRadius: value })}
+                                                                tabletSpacingStyle={(value) => setAttributes({ sliderActiveDotsTabletBorderRadiusCssStyle: value })}
+                                                                mobileSpacing={sliderActiveDotsMobileBorderRadius}
+                                                                onChangeMobileSpacing={(value) => setAttributes({ sliderActiveDotsMobileBorderRadius: value })}
+                                                                mobileSpacingStyle={(value) => setAttributes({ sliderActiveDotsMobileBorderRadiusCssStyle: value })}
+                                                                isLinked={sliderActiveDotsBorderRadiusLink}
+                                                                onChangeLink={(value) => setAttributes({ sliderActiveDotsBorderRadiusLink: value })} 
+                                                            />
+                                                        </>
+                                                    )}
+                                                </>
+                                            )}
+                                        </PanelBody>
+                                    </>
                                 )}
 
                                 {tab.name === "advanced" && (
@@ -499,7 +1463,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
                                             <ResponsiveRangeControl
                                                 min={0}
                                                 max={10000000}
-                                                label={__("Z Index", "button-blocks")}
+                                                label={__("Z Index", "gutenslider-blocks")}
                                                 rangeValue={sliderGlobalZIndex}
                                                 onChangeValue={(value) => setAttributes({ sliderGlobalZIndex: value })}
                                                 deviceType={deviceType}

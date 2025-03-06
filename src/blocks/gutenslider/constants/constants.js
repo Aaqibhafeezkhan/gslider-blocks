@@ -89,4 +89,9 @@ export const PAGINATION_TYPE = [
 	{ value: 'bullets', label: __('Bullets', 'gutenslider-blocks') },
 	{ value: 'fraction', label: __('Fraction', 'gutenslider-blocks') },
 	{ value: 'progressbar', label: __('Progress Bar', 'gutenslider-blocks') }
-  ];
+];
+
+export const NORMAL_ACTIVE = [
+	{ label: __('Normal', 'gutenslider-blocks'), value: 'normal' },
+	{ label: __('Active', 'gutenslider-blocks'), value: 'active' },
+];
