@@ -77,14 +77,16 @@ $border_color: #dddddd;
 /** Start Admin Panel scss **/
 .guten-slider-inspector-control {
     .guten-slider-tab {
+        display: flex;
+        flex: 1;
         background-color: $background_color;
         border: none;
         border-radius: 0;
         box-shadow: none;
         cursor: pointer;
         font-weight: 500;
-        height: 60px;
-        padding: 3px 25px;
+        height: 50px;
+        padding: 22px;
 
         &.active-tab {
             background: $white_color;
