@@ -43,66 +43,66 @@ export default function BoxShadowSettingsControl({ label = __("Box Shadow", "gut
 
 	return (
 		<>
-			<BaseControl 
-				label={label}
-				className="global-box-shadow-wrapper shadow-color"
-			>
-				<Dropdown
-					className="global-box-shadow-icon-dropdown"
-					contentClassName="global-box-shadow-icon-dropdown-content"
-					popoverProps={{ placement: 'bottom-start' }}
-					renderToggle={({ isOpen, onToggle }) => (
-						<Button
-							variant="primary"
-							onClick={onToggle}
-							aria-expanded={isOpen}
-							className="global-box-shadow-icon-btn"
-						>
-							<Dashicon icon="admin-generic" className="global-box-shadow-icon" />
-						</Button>
-					)}
-					renderContent={() => (
-						<div className="controlPane controls">
-							<Control
-								label="Inset"
-								type="checkbox"
-								value={boxShadow[4] === 'inset'}
-								onChangeHandler={(e) => onChangeHandler(e, 4)}
-							/>
-							<Control
-								label="Color"
-								type="color"
-								value={boxShadow[5]}
-								onChangeHandler={(e) => onChangeHandler(e, 5)}
-							/>
-							<Control
-								label="Offset X"
-								type="range"
-								value={boxShadow[0]}
-								onChangeHandler={(e) => onChangeHandler(e, 0)}
-							/>
-							<Control
-								label="Offset Y"
-								type="range"
-								value={boxShadow[1]}
-								onChangeHandler={(e) => onChangeHandler(e, 1)}
-							/>
-							<Control
-								label="Blur"
-								type="range"
-								value={boxShadow[2]}
-								onChangeHandler={(e) => onChangeHandler(e, 2)}
-							/>
-							<Control
-								label="Spread"
-								type="range"
-								value={boxShadow[3]}
-								onChangeHandler={(e) => onChangeHandler(e, 3)}
-							/>
-						</div>
-					)}
-				/>
-			</BaseControl>
+		    <div className="global-setting-color-container">
+				<BaseControl 
+					label={label}
+					className="global-box-shadow-wrapper shadow-color global-setting-color-switcher-wrapper"
+				>
+					<Dropdown
+						className="global-box-shadow-icon-dropdown"
+						contentClassName="global-box-shadow-icon-dropdown-content"
+						popoverProps={{ placement: 'bottom-start' }}
+						renderToggle={({ isOpen, onToggle }) => (
+							<Button
+								onClick={onToggle}
+								aria-expanded={isOpen}
+								className="color-ball"
+							>
+							</Button>
+						)}
+						renderContent={() => (
+							<div className="controlPane controls">
+								<Control
+									label="Inset"
+									type="checkbox"
+									value={boxShadow[4] === 'inset'}
+									onChangeHandler={(e) => onChangeHandler(e, 4)}
+								/>
+								<Control
+									label="Color"
+									type="color"
+									value={boxShadow[5]}
+									onChangeHandler={(e) => onChangeHandler(e, 5)}
+								/>
+								<Control
+									label="Offset X"
+									type="range"
+									value={boxShadow[0]}
+									onChangeHandler={(e) => onChangeHandler(e, 0)}
+								/>
+								<Control
+									label="Offset Y"
+									type="range"
+									value={boxShadow[1]}
+									onChangeHandler={(e) => onChangeHandler(e, 1)}
+								/>
+								<Control
+									label="Blur"
+									type="range"
+									value={boxShadow[2]}
+									onChangeHandler={(e) => onChangeHandler(e, 2)}
+								/>
+								<Control
+									label="Spread"
+									type="range"
+									value={boxShadow[3]}
+									onChangeHandler={(e) => onChangeHandler(e, 3)}
+								/>
+							</div>
+						)}
+					/>
+				</BaseControl>
+			</div>
 		</>
 	);
 }

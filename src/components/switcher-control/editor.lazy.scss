@@ -5,7 +5,10 @@ $white_color: #ffffff;
 $border_color: #dddddd;
 
 .global-setting-switcher-container {
-    margin-bottom: 16px;
+    margin: 15px 0 0 0;
+    .components-base-control__field{
+        margin-bottom: 5px;
+    }
     .global-setting-switcher-panel-wrapper {
         .global-setting-switcher-panel-btn {
             display: flex !important;
@@ -21,7 +24,6 @@ $border_color: #dddddd;
                         min-height: 30px;
                         font-size: 13px;
                         font-weight: 400;
-                        color: $secondary_color !important;
                         box-shadow: inset 0 0 0 1px $background_color;
                         &.active {
                             background-color: $background_color;

@@ -4,17 +4,6 @@ $background_color: #EDEDED;
 $white_color: #ffffff;
 $border_color: #dddddd;
 
-
-.global-setting-background-color-container {
-    .global-setting-background-color-panel-wrapper {
-        .components-base-control__field {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-    }
-}
-
 .global-setting-background-color-setting-wrapper{
     .components-base-control__field {
         display: flex;

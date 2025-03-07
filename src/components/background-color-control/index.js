@@ -88,173 +88,171 @@ const BackgroundColorControl = ({
                 setGlobalSwitcher={(value) => setBgColorSwitcher(value)}
             />
 
-            {bgColorSwitcher === 'normal' && (
-                <BaseControl
-                    className="global-setting-background-color-setting-wrapper"
-                    label={__("Background Type", "gutenslider-blocks")}
-                >
-                    <Dropdown
-                        className="global-setting-icon-dropdown"
-                        contentClassName="global-setting-icon-dropdown-content"
-                        popoverProps={{ placement: 'bottom-start' }}
-                        renderToggle={({ isOpen, onToggle }) => (
-                            <Button
-                                variant="primary"
-                                onClick={onToggle}
-                                aria-expanded={isOpen}
-                                className="global-setting-icon-btn"
-                            >
-                                <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
-                            </Button>
-                        )}
-                        renderContent={() => (
-                            <div className="global-setting-background-color-popup-wrapper">
-                                <BaseControl
-                                    className="global-setting-background-color-popup-inner-wrapper"
+            <div className="global-setting-color-container">
+                {bgColorSwitcher === 'normal' && (
+                    <BaseControl
+                        label={__("Background Type", "gutenslider-blocks")}
+                        className="global-setting-color-switcher-wrapper"
+                    >
+                        <Dropdown
+                            className="global-setting-icon-dropdown"
+                            contentClassName="global-setting-icon-dropdown-content"
+                            popoverProps={{ placement: 'bottom-start' }}
+                            renderToggle={({ isOpen, onToggle }) => (
+                                <Button
+                                    onClick={onToggle}
+                                    aria-expanded={isOpen}
+                                    className="color-ball"
                                 >
-                                    <ButtonGroup className="global-setting-background-color-panel-btn">
-                                        {BACKGROUND_TYPES.map((item) => (
-                                            <Button
-                                                key={item.value}
-                                                onClick={() => setNormalBackgroundType(item.value)}
-                                                className={`global-setting-background-color-panel-btn-switcher ${normalBackgroundType === item.value ? 'active' : ''}`}
-                                            >
-                                                {item.label}
-                                            </Button>
-                                        ))}
-                                    </ButtonGroup>
-                                </BaseControl>
+                                </Button>
+                            )}
+                            renderContent={() => (
+                                <div className="global-setting-background-color-popup-wrapper">
+                                    <BaseControl
+                                        className="global-setting-background-color-popup-inner-wrapper"
+                                    >
+                                        <ButtonGroup className="global-setting-background-color-panel-btn">
+                                            {BACKGROUND_TYPES.map((item) => (
+                                                <Button
+                                                    key={item.value}
+                                                    onClick={() => setNormalBackgroundType(item.value)}
+                                                    className={`global-setting-background-color-panel-btn-switcher ${normalBackgroundType === item.value ? 'active' : ''}`}
+                                                >
+                                                    {item.label}
+                                                </Button>
+                                            ))}
+                                        </ButtonGroup>
+                                    </BaseControl>
 
-                                {normalBackgroundType === 'classic' && (
+                                    {normalBackgroundType === 'classic' && (
 
-                                    <>
-                                        <ColorControl
-                                            label={__("Normal Color", "gutenslider-blocks")}
-                                            color={normalClassicColor}
-                                            onChangeColor={(value) => setNormalClassicColor(value)}
-                                        />
-
-                                        {isBackgroundImage && (
-                                            <BackgroundImageControl
-                                                label={__("Background Image", "gutenslider-blocks")}
-                                                globalBackgroundImageUrl={normalBackgroundImageUrl}
-                                                setGlobalBackgroundImageUrl={(value) => setNormalBackgroundImageUrl(value)}
-                                                globalBackgroundImageAlt={normalBackgroundImageAlt}
-                                                setGlobalBackgroundImageAlt={(value) => setNormalBackgroundImageAlt(value)}
-                                                globalBackgroundImageID={normalBackgroundImageID}
-                                                setGlobalBackgroundImageID={(value) => setNormalBackgroundImageID(value)}
-                                                globalBackgroundImagePosition={normalBackgroundImagePosition}
-                                                setGlobalBackgroundImagePosition={(value) => setNormalBackgroundImagePosition(value)}
-                                                globalBackgroundImageAttachment={normalBackgroundImageAttachment}
-                                                setGlobalBackgroundImageAttachment={(value) => setNormalBackgroundImageAttachment(value)}
-                                                globalBackgroundImageRepeat={normalBackgroundImageRepeat}
-                                                setGlobalBackgroundImageRepeat={(value) => setNormalBackgroundImageRepeat(value)}
-                                                globalBackgroundImageSize={normalBackgroundImageSize}
-                                                setGlobalBackgroundImageSize={(value) => setNormalBackgroundImageSize(value)}
+                                        <>
+                                            <ColorControl
+                                                label={__("Normal Color", "gutenslider-blocks")}
+                                                color={normalClassicColor}
+                                                onChangeColor={(value) => setNormalClassicColor(value)}
                                             />
-                                        )}
-                                                
-                                    </>
-                                )}
 
-                                {normalBackgroundType === 'gradient' && (
-                                    <GradientColorControl
-                                        globalCustomGradientSwitcher={normalCustomGradientSwitcher}
-                                        setGlobalCustomGradientSwitcher={(value) => setNormalCustomGradientSwitcher(value)}
-                                        globalCustomGradientInputValue={normalCustomGradientInputValue}
-                                        setGlobalCustomGradientInputValue={(value) => setNormalCustomGradientInputValue(value)}
-                                        globalGradientColor={normalGradientColor}
-                                        setGlobalGradientColor={(value) => setNormalGradientColor(value)}
-                                    />
-                                )}
-                            </div>
-                        )}
-                    />
-                </BaseControl>
-            )}
-            {bgColorSwitcher === 'hover' && (
-                <BaseControl
-                    className="global-setting-background-color-setting-wrapper"
-                    label={__("Background Type", "gutenslider-blocks")}
-                >
-                    <Dropdown
-                        className="global-setting-icon-dropdown"
-                        contentClassName="global-setting-icon-dropdown-content"
-                        popoverProps={{ placement: 'bottom-start' }}
-                        renderToggle={({ isOpen, onToggle }) => (
-                            <Button
-                                variant="primary"
-                                onClick={onToggle}
-                                aria-expanded={isOpen}
-                                className="global-setting-icon-btn"
-                            >
-                                <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
-                            </Button>
-                        )}
-                        renderContent={() => (
-                            <div className="global-setting-background-color-popup-wrapper">
-                                <BaseControl
-                                    className="global-setting-background-color-popup-inner-wrapper"
+                                            {isBackgroundImage && (
+                                                <BackgroundImageControl
+                                                    label={__("Background Image", "gutenslider-blocks")}
+                                                    globalBackgroundImageUrl={normalBackgroundImageUrl}
+                                                    setGlobalBackgroundImageUrl={(value) => setNormalBackgroundImageUrl(value)}
+                                                    globalBackgroundImageAlt={normalBackgroundImageAlt}
+                                                    setGlobalBackgroundImageAlt={(value) => setNormalBackgroundImageAlt(value)}
+                                                    globalBackgroundImageID={normalBackgroundImageID}
+                                                    setGlobalBackgroundImageID={(value) => setNormalBackgroundImageID(value)}
+                                                    globalBackgroundImagePosition={normalBackgroundImagePosition}
+                                                    setGlobalBackgroundImagePosition={(value) => setNormalBackgroundImagePosition(value)}
+                                                    globalBackgroundImageAttachment={normalBackgroundImageAttachment}
+                                                    setGlobalBackgroundImageAttachment={(value) => setNormalBackgroundImageAttachment(value)}
+                                                    globalBackgroundImageRepeat={normalBackgroundImageRepeat}
+                                                    setGlobalBackgroundImageRepeat={(value) => setNormalBackgroundImageRepeat(value)}
+                                                    globalBackgroundImageSize={normalBackgroundImageSize}
+                                                    setGlobalBackgroundImageSize={(value) => setNormalBackgroundImageSize(value)}
+                                                />
+                                            )}
+                                                    
+                                        </>
+                                    )}
+
+                                    {normalBackgroundType === 'gradient' && (
+                                        <GradientColorControl
+                                            globalCustomGradientSwitcher={normalCustomGradientSwitcher}
+                                            setGlobalCustomGradientSwitcher={(value) => setNormalCustomGradientSwitcher(value)}
+                                            globalCustomGradientInputValue={normalCustomGradientInputValue}
+                                            setGlobalCustomGradientInputValue={(value) => setNormalCustomGradientInputValue(value)}
+                                            globalGradientColor={normalGradientColor}
+                                            setGlobalGradientColor={(value) => setNormalGradientColor(value)}
+                                        />
+                                    )}
+                                </div>
+                            )}
+                        />
+                    </BaseControl>
+                )}
+                {bgColorSwitcher === 'hover' && (
+                    <BaseControl
+                        label={__("Background Type", "gutenslider-blocks")}
+                        className="global-setting-color-switcher-wrapper"
+                    >
+                        <Dropdown
+                            className="global-setting-icon-dropdown"
+                            contentClassName="global-setting-icon-dropdown-content"
+                            popoverProps={{ placement: 'bottom-start' }}
+                            renderToggle={({ isOpen, onToggle }) => (
+                                <Button
+                                    onClick={onToggle}
+                                    aria-expanded={isOpen}
+                                    className="color-ball"
                                 >
-                                    <ButtonGroup className="global-setting-background-color-panel-btn">
-                                        {BACKGROUND_TYPES.map((item) => (
-                                            <Button
-                                                key={item.value}
-                                                onClick={() => setHoverBackgroundType(item.value)}
-                                                className={`global-setting-background-color-panel-btn-switcher ${hoverBackgroundType === item.value ? 'active' : ''}`}
-                                            >
-                                                {item.label}
-                                            </Button>
-                                        ))}
-                                    </ButtonGroup>
-                                </BaseControl>
+                                </Button>
+                            )}
+                            renderContent={() => (
+                                <div className="global-setting-background-color-popup-wrapper">
+                                    <BaseControl
+                                        className="global-setting-background-color-popup-inner-wrapper"
+                                    >
+                                        <ButtonGroup className="global-setting-background-color-panel-btn">
+                                            {BACKGROUND_TYPES.map((item) => (
+                                                <Button
+                                                    key={item.value}
+                                                    onClick={() => setHoverBackgroundType(item.value)}
+                                                    className={`global-setting-background-color-panel-btn-switcher ${hoverBackgroundType === item.value ? 'active' : ''}`}
+                                                >
+                                                    {item.label}
+                                                </Button>
+                                            ))}
+                                        </ButtonGroup>
+                                    </BaseControl>
 
-                                {hoverBackgroundType === 'classic' && (
+                                    {hoverBackgroundType === 'classic' && (
 
-                                    <>
-                                        <ColorControl
-                                            label={__("Hover Color", "gutenslider-blocks")}
-                                            color={hoverClassicColor}
-                                            onChangeColor={(value) => setHoverClassicColor(value)}
-                                        />
-
-                                        {isBackgroundImage && (
-                                            <BackgroundImageControl
-                                                label={__("Background Image", "gutenslider-blocks")}
-                                                globalBackgroundImageUrl={hoverBackgroundImageUrl}
-                                                setGlobalBackgroundImageUrl={(value) => setHoverBackgroundImageUrl(value)}
-                                                globalBackgroundImageAlt={hoverBackgroundImageAlt}
-                                                setGlobalBackgroundImageAlt={(value) => setHoverBackgroundImageAlt(value)}
-                                                globalBackgroundImageID={hoverBackgroundImageID}
-                                                setGlobalBackgroundImageID={(value) => setHoverBackgroundImageID(value)}
-                                                globalBackgroundImagePosition={hoverBackgroundImagePosition}
-                                                setGlobalBackgroundImagePosition={(value) => setHoverBackgroundImagePosition(value)}
-                                                globalBackgroundImageAttachment={hoverBackgroundImageAttachment}
-                                                setGlobalBackgroundImageAttachment={(value) => setHoverBackgroundImageAttachment(value)}
-                                                globalBackgroundImageRepeat={hoverBackgroundImageRepeat}
-                                                setGlobalBackgroundImageRepeat={(value) => setHoverBackgroundImageRepeat(value)}
-                                                globalBackgroundImageSize={hoverBackgroundImageSize}
-                                                setGlobalBackgroundImageSize={(value) => setHoverBackgroundImageSize(value)}
+                                        <>
+                                            <ColorControl
+                                                label={__("Hover Color", "gutenslider-blocks")}
+                                                color={hoverClassicColor}
+                                                onChangeColor={(value) => setHoverClassicColor(value)}
                                             />
-                                        )}
-                                    </>
-                                )}
 
-                                {hoverBackgroundType === 'gradient' && (
-                                    <GradientColorControl
-                                        globalCustomGradientSwitcher={hoverCustomGradientSwitcher}
-                                        setGlobalCustomGradientSwitcher={(value) => setHoverCustomGradientSwitcher(value)}
-                                        globalCustomGradientInputValue={hoverCustomGradientInputValue}
-                                        setGlobalCustomGradientInputValue={(value) => setHoverCustomGradientInputValue(value)}
-                                        globalGradientColor={hoverGradientColor}
-                                        setGlobalGradientColor={(value) => setHoverGradientColor(value)}
-                                    />
-                                )}
-                            </div>
-                        )}
-                    />
-                </BaseControl>
-            )}
+                                            {isBackgroundImage && (
+                                                <BackgroundImageControl
+                                                    label={__("Background Image", "gutenslider-blocks")}
+                                                    globalBackgroundImageUrl={hoverBackgroundImageUrl}
+                                                    setGlobalBackgroundImageUrl={(value) => setHoverBackgroundImageUrl(value)}
+                                                    globalBackgroundImageAlt={hoverBackgroundImageAlt}
+                                                    setGlobalBackgroundImageAlt={(value) => setHoverBackgroundImageAlt(value)}
+                                                    globalBackgroundImageID={hoverBackgroundImageID}
+                                                    setGlobalBackgroundImageID={(value) => setHoverBackgroundImageID(value)}
+                                                    globalBackgroundImagePosition={hoverBackgroundImagePosition}
+                                                    setGlobalBackgroundImagePosition={(value) => setHoverBackgroundImagePosition(value)}
+                                                    globalBackgroundImageAttachment={hoverBackgroundImageAttachment}
+                                                    setGlobalBackgroundImageAttachment={(value) => setHoverBackgroundImageAttachment(value)}
+                                                    globalBackgroundImageRepeat={hoverBackgroundImageRepeat}
+                                                    setGlobalBackgroundImageRepeat={(value) => setHoverBackgroundImageRepeat(value)}
+                                                    globalBackgroundImageSize={hoverBackgroundImageSize}
+                                                    setGlobalBackgroundImageSize={(value) => setHoverBackgroundImageSize(value)}
+                                                />
+                                            )}
+                                        </>
+                                    )}
+
+                                    {hoverBackgroundType === 'gradient' && (
+                                        <GradientColorControl
+                                            globalCustomGradientSwitcher={hoverCustomGradientSwitcher}
+                                            setGlobalCustomGradientSwitcher={(value) => setHoverCustomGradientSwitcher(value)}
+                                            globalCustomGradientInputValue={hoverCustomGradientInputValue}
+                                            setGlobalCustomGradientInputValue={(value) => setHoverCustomGradientInputValue(value)}
+                                            globalGradientColor={hoverGradientColor}
+                                            setGlobalGradientColor={(value) => setHoverGradientColor(value)}
+                                        />
+                                    )}
+                                </div>
+                            )}
+                        />
+                    </BaseControl>
+                )}
+            </div>
         </>
     );
 };

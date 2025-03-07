@@ -21,12 +21,10 @@ const ColorControl = ({ label, color, onChangeColor }) => {
                     popoverProps={{ placement: 'bottom-start' }}
                     renderToggle={({ isOpen, onToggle }) => (
                         <Button
-                            variant="primary"
                             onClick={onToggle}
                             aria-expanded={isOpen}
-                            className="global-setting-icon-btn"
+                            className="color-ball"
                         >
-                            <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
                         </Button>
 
                     )}

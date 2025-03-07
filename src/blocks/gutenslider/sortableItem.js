@@ -118,7 +118,6 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         popoverProps={{ placement: 'bottom-start' }}
                         renderToggle={({ isOpen, onToggle }) => (
                             <Button
-                                variant="primary"
                                 onClick={onToggle}
                                 aria-expanded={isOpen}
                                 className="global-setting-icon-btn"

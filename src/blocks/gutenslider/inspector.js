@@ -782,7 +782,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
                             <div className={`guten-slider-tab-controls ${tab.name}`}>
                                 {tab.name === "general" && (
                                     <>
-                                        <PanelBody title={__("Slider Items", "gutenslider-blocks")} initialOpen>
+                                        <PanelBody title={__("Slider Items", "gutenslider-blocks")} initialOpen={true}>
                                             <div className="guten-slider-wrapper">
                                                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                                                     <SortableContext items={sliderItems.map((item) => item.id)}>
