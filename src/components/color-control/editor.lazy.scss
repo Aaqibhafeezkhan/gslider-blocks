@@ -100,10 +100,10 @@ $border_color: #dddddd;
 
 .guten-slider-wrapper {
     .components-button.is-primary{
-        &:hover:not(:disabled) {
-            background: transparent;
-            color: inherit;
-        }
+        // &:hover:not(:disabled) {
+        //     background: transparent;
+        //     color: inherit;
+        // }
     }
     .dashicon {
         &:focus{

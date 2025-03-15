@@ -18,7 +18,7 @@ import BackgroundColorControl from '@Components/background-color-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
 import {useDeviceType} from "@Utils/displayType"; 
 
-export default function Inspector({ attributes, setAttributes, clientId, onAddItem}) {
+export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDeleteItem, handleDragEnd }) {
     const { 
         blockId,
         sliderItems,
@@ -216,18 +216,18 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
         }
     }, [clientId]);
 
-    const [sliderItemList, setSliderItemList] = useState(sliderItems);
+    // const [sliderItemList, setSliderItemList] = useState(sliderItems);
 
-    const handleDragEnd = (event) => {
-        const { active, over } = event;
-        if (active && over && active.id !== over.id) {
-            const oldIndex = sliderItems.findIndex(item => item.id === active.id);
-            const newIndex = sliderItems.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
-            setAttributes({ sliderItems: updatedItems });
-            setSliderItemList(updatedItems);
-        }
-    };
+    // const handleDragEnd = (event) => {
+    //     const { active, over } = event;
+    //     if (active && over && active.id !== over.id) {
+    //         const oldIndex = sliderItems.findIndex(item => item.id === active.id);
+    //         const newIndex = sliderItems.findIndex(item => item.id === over.id);
+    //         const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
+    //         setAttributes({ sliderItems: updatedItems });
+    //         setSliderItemList(updatedItems);
+    //     }
+    // };
 
     // const handleAddItem = () => {
     //     const newItem = {
@@ -274,49 +274,49 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
     //     setSliderItemList([...sliderItemList, newItem]);
     // };
 
-    const handleChangeItem = (id, key, value) => {
-        const updatedItems = sliderItemList.map(item => {
-            if (item.id === id) {
-                if (key === 'normalBackgroundImageID') {
-                    // Get the full image data from WordPress media library
-                    const image = wp.media.attachment(value).toJSON();
-                    return {
-                        ...item,
-                        [key]: value,
-                        'normalBackgroundImageUrl': image.url,
-                        'normalBackgroundImageAlt': image.alt || ''
-                    };
-                }
-                if (key === 'hoverBackgroundImageID') {
-                    // Get the full image data from WordPress media library
-                    const image = wp.media.attachment(value).toJSON();
-                    return {
-                        ...item,
-                        [key]: value,
-                        'hoverBackgroundImageUrl': image.url,
-                        'hoverBackgroundImageAlt': image.alt || ''
-                    };
-                }
-                return { ...item, [key]: value };
-            }
-            return item;
-        });
+    // const handleChangeItem = (id, key, value) => {
+    //     const updatedItems = sliderItemList.map(item => {
+    //         if (item.id === id) {
+    //             if (key === 'normalBackgroundImageID') {
+    //                 // Get the full image data from WordPress media library
+    //                 const image = wp.media.attachment(value).toJSON();
+    //                 return {
+    //                     ...item,
+    //                     [key]: value,
+    //                     'normalBackgroundImageUrl': image.url,
+    //                     'normalBackgroundImageAlt': image.alt || ''
+    //                 };
+    //             }
+    //             if (key === 'hoverBackgroundImageID') {
+    //                 // Get the full image data from WordPress media library
+    //                 const image = wp.media.attachment(value).toJSON();
+    //                 return {
+    //                     ...item,
+    //                     [key]: value,
+    //                     'hoverBackgroundImageUrl': image.url,
+    //                     'hoverBackgroundImageAlt': image.alt || ''
+    //                 };
+    //             }
+    //             return { ...item, [key]: value };
+    //         }
+    //         return item;
+    //     });
         
-        setSliderItemList(updatedItems);
-        setAttributes({ sliderItems: updatedItems });
-    };
+    //     setSliderItemList(updatedItems);
+    //     setAttributes({ sliderItems: updatedItems });
+    // };
 
 
-    const handleDeleteItem = (id) => {
-        const updatedItems = sliderItemList.filter(item => item.id !== id);
-        setAttributes({ sliderItems: updatedItems });
-        setSliderItemList(updatedItems);
-    };
+    // const handleDeleteItem = (id) => {
+    //     const updatedItems = sliderItemList.filter(item => item.id !== id);
+    //     setAttributes({ sliderItems: updatedItems });
+    //     setSliderItemList(updatedItems);
+    // };
 
-    //Sync sliderItemList with attributes.sliderItems
-    useEffect(() => {
-        setAttributes({ sliderItems: sliderItemList });
-    }, [sliderItemList, setAttributes]);
+    // //Sync sliderItemList with attributes.sliderItems
+    // useEffect(() => {
+    //     setAttributes({ sliderItems: sliderItemList });
+    // }, [sliderItemList, setAttributes]);
 
 
 
@@ -800,7 +800,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
                                                         </ul>
                                                     </SortableContext>
                                                 </DndContext>
-                                                <Button isPrimary onClick={onAddItem}>
+                                                <Button isPrimary onClick={handleAddItem}>
                                                     {__("Add Slide", "gutenslider-blocks")}
                                                 </Button>
                                             </div>

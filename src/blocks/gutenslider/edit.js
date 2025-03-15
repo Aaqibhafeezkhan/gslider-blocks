@@ -7,6 +7,7 @@ import {
 } from '@wordpress/components';
 import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
 import SwitchToBlockSettings  from '@Utils/switchToBlockSettings';
+import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -36,6 +37,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const blockProps = useBlockProps({
         className: `guten-slider-container ${blockId}`,
     });
+
+    /**
+     * Manages slider item list
+     */
+    const [sliderItemList, setSliderItemList] = useState(sliderItems);
 
     /**
      * Manages tab button settings and switches to block settings on click
@@ -137,6 +143,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         mousewheelControl,
     ]);
 
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = sliderItems.findIndex(item => item.id === active.id);
+            const newIndex = sliderItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
+            setAttributes({ sliderItems: updatedItems });
+            setSliderItemList(updatedItems);
+        }
+    };
+
     const handleAddItem = () => {
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
@@ -145,14 +162,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
             buttonText: 'Click Here',
             buttonLink: '#',
-            nofollow: false,
-            sponsored: false,
+            buttonTargetLink: false,
+
             sliderItemBgColorSwitcher: 'normal',
+
             normalItemBackgroundType: 'classic',
             normalItemClassicColor: '#EDEDED',
             normalItemGradientColor: null,
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',
+
             normalBackgroundImageUrl: '',
             normalBackgroundImageAlt: '',
             normalBackgroundImageID: '',
@@ -161,11 +180,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             normalBackgroundImageRepeat: 'no-repeat',
             normalBackgroundImageSize: 'cover',
 
+
             hoverItemBackgroundType: 'classic',
             hoverItemClassicColor: '',
             hoverItemGradientColor: null,
             hoverItemCustomGradientSwitcher: false,
             hoverItemCustomGradientInputValue: '',
+
             hoverBackgroundImageUrl: '',
             hoverBackgroundImageAlt: '',
             hoverBackgroundImageID: '',
@@ -175,6 +196,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             hoverBackgroundImageSize: 'cover',
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
+        setSliderItemList([...sliderItemList, newItem]);
 
         // Ensure Swiper updates with new slides
         setTimeout(() => {
@@ -185,6 +207,50 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             }
         }, 100);
     };
+
+    const handleChangeItem = (id, key, value) => {
+        const updatedItems = sliderItemList.map(item => {
+            if (item.id === id) {
+                if (key === 'normalBackgroundImageID') {
+                    // Get the full image data from WordPress media library
+                    const image = wp.media.attachment(value).toJSON();
+                    return {
+                        ...item,
+                        [key]: value,
+                        'normalBackgroundImageUrl': image.url,
+                        'normalBackgroundImageAlt': image.alt || ''
+                    };
+                }
+                if (key === 'hoverBackgroundImageID') {
+                    // Get the full image data from WordPress media library
+                    const image = wp.media.attachment(value).toJSON();
+                    return {
+                        ...item,
+                        [key]: value,
+                        'hoverBackgroundImageUrl': image.url,
+                        'hoverBackgroundImageAlt': image.alt || ''
+                    };
+                }
+                return { ...item, [key]: value };
+            }
+            return item;
+        });
+        
+        setSliderItemList(updatedItems);
+        setAttributes({ sliderItems: updatedItems });
+    };
+
+
+    const handleDeleteItem = (id) => {
+        const updatedItems = sliderItemList.filter(item => item.id !== id);
+        setAttributes({ sliderItems: updatedItems });
+        setSliderItemList(updatedItems);
+    };
+
+    //Sync sliderItemList with attributes.sliderItems
+    useEffect(() => {
+        setAttributes({ sliderItems: sliderItemList });
+    }, [sliderItemList, setAttributes]);
 
     const renderSliderToolbarControls = () => {
         return (
@@ -221,7 +287,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 attributes={attributes}
                 setAttributes={setAttributes}
                 clientId={clientId}
-                onAddItem = {handleAddItem}
+                handleAddItem={handleAddItem}
+                handleChangeItem={handleChangeItem}
+                handleDeleteItem={handleDeleteItem}
+                handleDragEnd={handleDragEnd}
             />
 
             {renderSliderToolbarControls()}
