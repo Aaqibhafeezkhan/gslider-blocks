@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: GutenSlider Blocks
- * Description: Enhance your site with dynamic, customizable, and multi-functional buttons to create a more engaging and functional experience.
+ * Description: Enhance your site with dynamic, customizable, and multi-functional slider blocks to create a more engaging and functional experience.
  * Author: 		Noruzzaman
  * Author URI: 	https://github.com/noruzzamans/
  * Version: 	1.0.0

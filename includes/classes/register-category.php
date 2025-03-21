@@ -22,9 +22,6 @@ if (!class_exists('GutenSlider_Blocks_Category')) {
     class GutenSlider_Blocks_Category {
         // Slug for the custom block category.
         private const CATEGORY_SLUG = 'gutenslider-blocks';
-        // Text domain for the plugin, used for translations.
-        private const TEXT_DOMAIN = 'gutenslider-blocks';
-
         /**
          * Singleton instance of the class.
          *
@@ -67,9 +64,9 @@ if (!class_exists('GutenSlider_Blocks_Category')) {
 
             // Define the new custom block category.
             $new_category = [
-                'slug' => self::CATEGORY_SLUG, // Unique slug for the category.
-                'title' => esc_html__('GutenSlider Blocks', self::TEXT_DOMAIN), // Title of the category.
-                'icon' => null // You can add an icon here if desired.
+                'slug' => self::CATEGORY_SLUG,
+                'title' => esc_html__('GutenSlider Blocks', 'gutenslider-blocks'),
+                'icon' => null
             ];
 
             // Add the new category at the beginning of the list.
