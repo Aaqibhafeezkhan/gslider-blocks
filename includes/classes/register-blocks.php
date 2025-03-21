@@ -102,12 +102,18 @@ if (!class_exists('GutenSlider_Blocks_Registration')) {
             
             // Check if the block directory is readable.
             if (!is_readable($block_dir)) {
-                throw new Exception("Build directory not readable: {$block_dir}");
+                throw new Exception(sprintf(
+                    'Build directory not readable: %s',
+                    esc_html($block_dir)
+                ));
             }
 
             // Check if the block.json file exists.
             if (!file_exists($block_dir . 'block.json')) {
-                throw new Exception("block.json not found for {$block}");
+                throw new Exception(sprintf(
+                    'block.json not found for %s',
+                    esc_html($block)
+                ));
             }
 
             // Attempt to register the block.
@@ -115,7 +121,10 @@ if (!class_exists('GutenSlider_Blocks_Registration')) {
             
             // Check if registration failed.
             if (false === $registration_result) {
-                throw new Exception("Block registration failed for {$block}");
+                throw new Exception(sprintf(
+                    'Block registration failed for %s',
+                    esc_html($block)
+                ));
             }
         }
 
