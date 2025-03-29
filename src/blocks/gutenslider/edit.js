@@ -34,27 +34,44 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         dynamicBullets,
     } = attributes;
 
+    /**
+     * Manages block props with appropriate class names for the slider container
+     */
     const blockProps = useBlockProps({
         className: `guten-slider-container ${blockId}`,
     });
 
     /**
-     * Manages slider item list
+     * Manages the state of slider items for rendering and manipulation
      */
     const [sliderItemList, setSliderItemList] = useState(sliderItems);
     
-    // Track the currently selected slide index
+    /**
+     * Tracks the currently selected/active slide index for editor interactions
+     */
     const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
 
     /**
-     * Manages tab button settings and switches to block settings on click
+     * Reference to the panel element for block settings navigation
+     * Used by SwitchToBlockSettings utility to focus settings panel
      */
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
     
+    /**
+     * Reference to the Swiper instance for direct manipulation
+     */
     const swiperRef = useRef();
+
+    /**
+     * Caches previous Swiper options to prevent unnecessary re-initialization
+     */
     const prevSwiperOptions = useRef(null);
-    
+
+    /**
+     * Initializes and updates Swiper instance when slider configuration changes
+     * Handles different slider types, effects, and interactive options
+     */
     useEffect(() => {
         if (!swiperRef.current) return;
     
@@ -153,6 +170,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         mousewheelControl,
     ]);
 
+    /**
+     * Handles slide reordering via drag and drop functionality
+     * Updates slide order in both state and attributes
+     */
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
@@ -173,6 +194,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         }, 100);
     };
 
+    /**
+     * Creates a duplicate of an existing slide with a new unique ID
+     * Adds the duplicate to the slider items collection
+     */
     const handleDuplicateItem = (id) => {
         const itemToDuplicate = sliderItems.find(item => item.id === id);
         if (itemToDuplicate) {
@@ -190,6 +215,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         }, 100);
     };
 
+    /**
+     * Creates and adds a new slide with default content and settings
+     * Generates a unique ID for the new slide
+     */
     const handleAddItem = () => {
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
@@ -244,6 +273,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         }, 100);
     };
 
+    /**
+     * Updates a specific property of a slide item
+     * Handles special cases for background images with WordPress media integration
+     */
     const handleChangeItem = (id, key, value) => {
         const updatedItems = sliderItemList.map(item => {
             if (item.id === id) {
@@ -276,18 +309,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setAttributes({ sliderItems: updatedItems });
     };
 
-
+    /**
+     * Removes a slide from the slider by its ID
+     * Updates both state and block attributes
+     */
     const handleDeleteItem = (id) => {
         const updatedItems = sliderItemList.filter(item => item.id !== id);
         setAttributes({ sliderItems: updatedItems });
         setSliderItemList(updatedItems);
     };
 
-    //Sync sliderItemList with attributes.sliderItems 
+    /**
+     * Ensures sliderItems attribute stays in sync with local state
+     * Prevents state/props mismatch issues
+     */
     useEffect(() => {
         setAttributes({ sliderItems: sliderItemList });
     }, [sliderItemList, setAttributes]);
 
+    /**
+     * Renders toolbar controls for slide management
+     * Provides buttons for adding and duplicating slides
+     */
     const renderSliderToolbarControls = () => {
         return (
             <BlockControls>
@@ -313,11 +356,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         );
     };
 
+    /**
+     * Prevents default behavior for button clicks in the editor
+     * Stops navigation when editing button content
+     */
     const handleButtonClick = (event) => {
         event.preventDefault();
     };
 
-    // Add this function inside the Edit component
+    /**
+     * Updates a specific field of a slide at the given index
+     * Used for RichText component changes
+     */
     const updateItem = (index, field, value) => {
         const newItems = sliderItems.map((item, i) => {
             if (i === index) {
@@ -328,6 +378,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setAttributes({ sliderItems: newItems });
     };
 
+    /**
+     * Renders the complete slider interface with all slides and controls
+     * Includes Inspector panel, toolbar controls, and Swiper implementation
+     */
     return (
         <>
             <Inspector 
