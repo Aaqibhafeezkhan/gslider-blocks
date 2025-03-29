@@ -17,7 +17,7 @@ import {
 import BackgroundColorControl from '@Components/background-color-control';
 import UrlControl from '@Components/url-control';
 
-export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
+export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
 
@@ -36,6 +36,14 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                 </span>
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
                     <Button icon="move" label={__("Sort", "gutenslider-blocks")} aria-label={__("Move item", "gutenslider-blocks")} />
+                </span>
+                <span className="sortable-duplicate">
+                    <Button 
+                        icon="admin-page" 
+                        label={__("Duplicate", "gutenslider-blocks")} 
+                        aria-label={__("Duplicate item", "gutenslider-blocks")}
+                        onClick={() => handleDuplicateItem(item.id)} 
+                    />
                 </span>
                 <span className="sortable-delete">
                     <Button 

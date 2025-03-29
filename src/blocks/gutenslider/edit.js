@@ -42,6 +42,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      * Manages slider item list
      */
     const [sliderItemList, setSliderItemList] = useState(sliderItems);
+    
+    // Track the currently selected slide index
+    const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
 
     /**
      * Manages tab button settings and switches to block settings on click
@@ -104,6 +107,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     limitRotation: true,
                 },
             }),
+            
+            // Track active slide
+            on: {
+                slideChange: function() {
+                    setSelectedSlideIndex(this.activeIndex);
+                }
+            }
         };
     
         // If the Swiper is already initialized and the new options are the same as the previous options, do nothing.
@@ -152,6 +162,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             setAttributes({ sliderItems: updatedItems });
             setSliderItemList(updatedItems);
         }
+
+        // Ensure Swiper updates with new slides
+        setTimeout(() => {
+            if (swiperRef.current && swiperRef.current.swiper) {
+                swiperRef.current.swiper.update(); 
+                swiperRef.current.swiper.pagination.update();
+                swiperRef.current.swiper.navigation.update();
+            }
+        }, 100);
+    };
+
+    const handleDuplicateItem = (id) => {
+        const itemToDuplicate = sliderItems.find(item => item.id === id);
+        if (itemToDuplicate) {
+            const newItem = { ...itemToDuplicate, id: `item-${sliderItems.length + 1}` };
+            setAttributes({ sliderItems: [...sliderItems, newItem] });
+            setSliderItemList([...sliderItemList, newItem]);
+        }
+        // Ensure Swiper updates with new slides
+        setTimeout(() => {
+            if (swiperRef.current && swiperRef.current.swiper) {
+                swiperRef.current.swiper.update(); 
+                swiperRef.current.swiper.pagination.update();
+                swiperRef.current.swiper.navigation.update();
+            }
+        }, 100);
     };
 
     const handleAddItem = () => {
@@ -247,7 +283,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setSliderItemList(updatedItems);
     };
 
-    //Sync sliderItemList with attributes.sliderItems
+    //Sync sliderItemList with attributes.sliderItems 
     useEffect(() => {
         setAttributes({ sliderItems: sliderItemList });
     }, [sliderItemList, setAttributes]);
@@ -260,6 +296,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         icon="plus"
                         label={ __( 'Add New Slide', 'gutenslider-blocks' ) }
                         onClick={handleAddItem}
+                    />
+                    <ToolbarButton
+                        icon="admin-page"
+                        label={ __( 'Duplicate Current Slide', 'gutenslider-blocks' ) } 
+                        onClick={() => {
+                            // Get the currently visible slide's ID
+                            const currentSlideId = sliderItems[selectedSlideIndex]?.id;
+                            if (currentSlideId) {
+                                handleDuplicateItem(currentSlideId);
+                            }
+                        }}
                     />
                 </ToolbarGroup>
             </BlockControls>
@@ -291,6 +338,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 handleChangeItem={handleChangeItem}
                 handleDeleteItem={handleDeleteItem}
                 handleDragEnd={handleDragEnd}
+                handleDuplicateItem ={handleDuplicateItem}
             />
 
             {renderSliderToolbarControls()}

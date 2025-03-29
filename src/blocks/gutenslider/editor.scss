@@ -49,7 +49,15 @@ $white_color: #ffffff;
                         }
                     }
                 }
-
+                .sortable-duplicate {
+                    border-right: 1px solid #b4b4cb;
+                    button {
+                        &:focus {
+                            box-shadow: none;
+                            outline: none;
+                        }
+                    }
+                }
                 .sortable-delete {
                     button {
                         color: #d63638;

@@ -18,7 +18,7 @@ import BackgroundColorControl from '@Components/background-color-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
 import {useDeviceType} from "@Utils/displayType"; 
 
-export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDeleteItem, handleDragEnd }) {
+export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDeleteItem, handleDragEnd, handleDuplicateItem }) {
     const { 
         blockId,
         sliderItems,
@@ -690,6 +690,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                                     item={item}
                                                                     handleChangeItem={handleChangeItem}
                                                                     handleDeleteItem={handleDeleteItem}
+                                                                    handleDuplicateItem={handleDuplicateItem}
                                                                     index={index}
                                                                 />
                                                             ))}
