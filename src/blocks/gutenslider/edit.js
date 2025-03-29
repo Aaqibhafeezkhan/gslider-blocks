@@ -97,11 +97,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             allowTouchMove: allowTouchMove,
             mousewheel: mousewheelControl,
 
+            // Navigation settings
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             } : false,
 
+            // Pagination settings
             pagination: showPagination ? {
                 el: '.swiper-pagination',
                 type: paginationType,
@@ -171,6 +173,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     ]);
 
     /**
+     * Updates Swiper instance after changes
+     * Ensures slider, pagination and navigation are properly refreshed
+     */
+    const updateSwiperInstance = () => {
+        setTimeout(() => {
+            if (swiperRef.current && swiperRef.current.swiper) {
+                swiperRef.current.swiper.update(); 
+                swiperRef.current.swiper.pagination.update();
+                swiperRef.current.swiper.navigation.update();
+            }
+        }, 100);
+    };
+
+    /**
      * Handles slide reordering via drag and drop functionality
      * Updates slide order in both state and attributes
      */
@@ -185,13 +201,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         }
 
         // Ensure Swiper updates with new slides
-        setTimeout(() => {
-            if (swiperRef.current && swiperRef.current.swiper) {
-                swiperRef.current.swiper.update(); 
-                swiperRef.current.swiper.pagination.update();
-                swiperRef.current.swiper.navigation.update();
-            }
-        }, 100);
+        updateSwiperInstance();
     };
 
     /**
@@ -206,13 +216,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             setSliderItemList([...sliderItemList, newItem]);
         }
         // Ensure Swiper updates with new slides
-        setTimeout(() => {
-            if (swiperRef.current && swiperRef.current.swiper) {
-                swiperRef.current.swiper.update(); 
-                swiperRef.current.swiper.pagination.update();
-                swiperRef.current.swiper.navigation.update();
-            }
-        }, 100);
+        updateSwiperInstance();
     };
 
     /**
@@ -264,13 +268,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setSliderItemList([...sliderItemList, newItem]);
 
         // Ensure Swiper updates with new slides
-        setTimeout(() => {
-            if (swiperRef.current && swiperRef.current.swiper) {
-                swiperRef.current.swiper.update(); 
-                swiperRef.current.swiper.pagination.update();
-                swiperRef.current.swiper.navigation.update();
-            }
-        }, 100);
+        updateSwiperInstance();
     };
 
     /**
