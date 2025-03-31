@@ -58,4 +58,4 @@ Yes, GutenSlider Blocks is designed to work with any WordPress theme that suppor
 == Changelog ==
 
 = 1.0.0 =
-Initial release 
+Initial release  
