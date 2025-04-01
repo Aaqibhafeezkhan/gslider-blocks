@@ -467,13 +467,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </div>
                         ))}
                     </div>
-                    {showPagination && <div className="guten-slider swiper-pagination"></div>}
                     {showNavigation && 
                         <>
                             <div className="guten-slider swiper-button-next" aria-label="Next slide"></div>
                             <div className="guten-slider swiper-button-prev" aria-label="Previous slide"></div>
                         </>
                     }
+                    {showPagination && <div className="guten-slider swiper-pagination"></div>}
                 </div>
             </div>
         </>

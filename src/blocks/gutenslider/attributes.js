@@ -341,7 +341,7 @@ const attributes = {
     },
     slideEffect: {
         "type": "string",
-        "default": "creative"
+        "default": "slide"
     },
     carouselEffect: {
         "type": "string",

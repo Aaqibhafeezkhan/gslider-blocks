@@ -7,7 +7,12 @@
 	"icon": "slides",
 	"category": "gutenslider-blocks",
 	"description": "Slider block",
-	"example": {},
+	"example": {
+		"attributes": {
+		  "preview": true
+		},
+		"viewportWidth": 410
+	  },
 	"supports": {
 		"html": false,
 		"anchor": false,
@@ -16,19 +21,19 @@
 	},
 	"textdomain": "gutenslider-blocks",
 	"editorScript": [
-		"file:./index.js",
-		"gutenslider-blocks-swiper-script"
+		"file:./index.js"
 	],
 	"editorStyle": [
-		"file:./index.css",
-		"gutenslider-blocks-swiper-style"
+		"file:./index.css"
 	],
 	"style": [
 		"file:./style-index.css",
 		"gutenslider-blocks-swiper-style"
 	],
 	"viewScript": [
-		"file:./view.js",
+		"file:./view.js"
+	],
+	"script": [
 		"gutenslider-blocks-swiper-script"
 	]
 }
