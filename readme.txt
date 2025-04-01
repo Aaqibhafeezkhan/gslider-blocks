@@ -8,7 +8,7 @@ Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Enhance your site with dynamic, customizable, and multi-functional slider blocks to create a more engaging and functional experience.
+Enhance your site with dynamic, customizable, and multi-functional slider blocks to create a more engaging and functional experience. 
 
 == Description ==
 
