@@ -1,6 +1,6 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "gutenslider-blocks/gutenslider",
 	"version": "1.0.0",
 	"title": "GutenSlider",
@@ -31,9 +31,7 @@
 		"gutenslider-blocks-swiper-style"
 	],
 	"viewScript": [
-		"file:./view.js"
-	],
-	"script": [
+		"file:./view.js",
 		"gutenslider-blocks-swiper-script"
 	]
 }

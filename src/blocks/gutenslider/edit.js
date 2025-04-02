@@ -1,223 +1,161 @@
 import { __ } from '@wordpress/i18n';
-import {RichText, useBlockProps, BlockControls, } from '@wordpress/block-editor';
-import { 
-    Toolbar,
-    ToolbarGroup,
-    ToolbarButton
+import {
+	RichText,
+	useBlockProps,
+	BlockControls,
+} from '@wordpress/block-editor';
+import {
+	Toolbar,
+	ToolbarGroup,
+	ToolbarButton
 } from '@wordpress/components';
-import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
-import SwitchToBlockSettings  from '@Utils/switchToBlockSettings';
+import { useState, useEffect, useRef } from "@wordpress/element";
+import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';
 
+// Import Swiper React components and required modules
+import { Swiper, SwiperSlide } from 'swiper/react';
+import {
+	Navigation,
+	Pagination,
+	Manipulation,
+	Mousewheel,
+	EffectFade,
+	EffectCube,
+	EffectCoverflow,
+	EffectFlip,
+	EffectCreative,
+	EffectCards
+} from 'swiper/modules';
+
+// Import Swiper styles for all functionalities
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/mousewheel';
+import 'swiper/css/effect-fade';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/effect-flip';
+import 'swiper/css/effect-creative';
+
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const {
-        blockId,
-        sliderItems,
-        sliderType,
-        carouselPerColumn,
-        carouselPerColumnGap,
-        speed,
-        autoplay,
-        autoplayDelay,
-        infiniteLoop,
-        allowTouchMove,
-        pauseOnHover,
-        stopOnLastSlide,
-        reverseDirection,
-        carouselEffect,
-        slideEffect,
-        mousewheelControl,
-        showNavigation,
-        showPagination,
-        paginationType,
-        dynamicBullets,
-    } = attributes;
+	const {
+		blockId,
+		sliderItems,
+		sliderType,
+		carouselPerColumn,
+		carouselPerColumnGap,
+		speed,
+		autoplay,
+		autoplayDelay,
+		infiniteLoop,
+		allowTouchMove,
+		pauseOnHover,
+		stopOnLastSlide,
+		reverseDirection,
+		carouselEffect,
+		slideEffect,
+		mousewheelControl,
+		showNavigation,
+		showPagination,
+		paginationType,
+		dynamicBullets,
+	} = attributes;
 
-    /**
-     * Manages block props with appropriate class names for the slider container
-     */
-    const blockProps = useBlockProps({
-        className: `guten-slider-container ${blockId}`,
-    });
+    console.log(allowTouchMove);
 
-    /**
-     * Manages the state of slider items for rendering and manipulation
-     */
-    const [sliderItemList, setSliderItemList] = useState(sliderItems);
-    
-    /**
-     * Tracks the currently selected/active slide index for editor interactions
-     */
-    const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
+	// Block props for container
+	const blockProps = useBlockProps({
+		className: `guten-slider-container ${blockId}`,
+	});
 
-    /**
-     * Reference to the panel element for block settings navigation
-     * Used by SwitchToBlockSettings utility to focus settings panel
-     */
-    const panelRef = useRef(null);
-    SwitchToBlockSettings(panelRef);
-    
-    /**
-     * Reference to the Swiper instance for direct manipulation
-     */
-    const swiperRef = useRef();
+	// Local state management for slider items and active slide index
+	const [sliderItemList, setSliderItemList] = useState(sliderItems);
+	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
 
-    /**
-     * Caches previous Swiper options to prevent unnecessary re-initialization
-     */
-    const prevSwiperOptions = useRef(null);
+	// A key to force re-mounting of <Swiper> when critical settings change
+	const [swiperKey, setSwiperKey] = useState(0);
+
+	// Ref for panel settings focus management
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
     /**
      * Initializes and updates Swiper instance when slider configuration changes
      * Handles different slider types, effects, and interactive options
      */
-    useEffect(() => {
-        if (!swiperRef.current) return;
-    
-        const swiperOptions = {
+	const swiperOptions = {
 
-            // Set effect based on sliderType
-            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+        // Set effect based on sliderType
+		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-            // Carousel-specific settings with default values
-            slidesPerView: sliderType === 'carousel' ? (carouselPerColumn || 2) : 1,
-            spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap || 20) : 0,
+        // Carousel-specific settings with default values
+		slidesPerView: sliderType === 'carousel' ? (carouselPerColumn || 2) : 1,
+		spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap || 20) : 0,
 
-            // Common settings
-            loop: infiniteLoop,
-            autoplay: autoplay ? {
+        // Common settings
+        loop: infiniteLoop,
+        autoplay: autoplay
+        ? {
                 delay: autoplayDelay,
                 pauseOnMouseEnter: pauseOnHover,
                 disableOnInteraction: false,
                 stopOnLastSlide: stopOnLastSlide,
                 reverseDirection: reverseDirection,
-            } : false,
-            speed: speed,
-            allowTouchMove: allowTouchMove,
-            mousewheel: mousewheelControl,
+          }
+        : false,
 
-            // Navigation settings
-            navigation: showNavigation ? {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            } : false,
+        speed: speed,
+        allowTouchMove: allowTouchMove,
+        mousewheel: mousewheelControl,
 
-            // Pagination settings
-            pagination: showPagination ? {
-                el: '.swiper-pagination',
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false, 
-                clickable: true,
-            } : false,
+        // Navigation and pagination settings
+		navigation: showNavigation,
+		pagination: showPagination ? {
+			clickable: true,
+			type: paginationType,
+			dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+		} : false,
 
-            // Creative effect settings if needed
-            ...(slideEffect === 'creative' && {
-                creativeEffect: {
-                    prev: { shadow: true, translate: [0, 0, -400] },
-                    next: { translate: ['100%', 0, 0] },
-                },
-            }),
-            
-            //FlipEffect Fix - Smooth Flip Animation
-            ...(slideEffect === 'flip' && {
-                flipEffect: {
-                    slideShadows: true,
-                    limitRotation: true,
-                },
-            }),
-            
-            // Track active slide
-            on: {
-                slideChange: function() {
-                    setSelectedSlideIndex(this.activeIndex);
-                }
-            }
-        };
-    
-        // If the Swiper is already initialized and the new options are the same as the previous options, do nothing.
-        if (prevSwiperOptions.current && JSON.stringify(prevSwiperOptions.current) === JSON.stringify(swiperOptions)) {
-            return;
-        }
-    
-        try {
-            if (swiperRef.current.swiper) {
-                swiperRef.current.swiper.destroy(true, true);
-            }
-    
-            swiperRef.current.swiper = new Swiper(swiperRef.current, swiperOptions);
-            prevSwiperOptions.current = swiperOptions;
-    
-        } catch (error) {
-            console.error('Swiper initialization error:', error);
-        }
-    }, [
-        sliderType,
-        infiniteLoop,
-        autoplay,
-        autoplayDelay,
-        pauseOnHover,
-        stopOnLastSlide,
-        reverseDirection,
-        speed,
-        allowTouchMove,
-        showNavigation,
-        showPagination,
-        paginationType,
-        dynamicBullets,
-        slideEffect,
-        carouselEffect,
-        carouselPerColumn,
-        carouselPerColumnGap,
-        mousewheelControl,
-    ]);
+        // Creative effect settings if needed
+        ...(slideEffect === 'creative' && {
+            creativeEffect: {
+                prev: { shadow: true, translate: [0, 0, -400] },
+                next: { translate: ['100%', 0, 0] },
+            },
+        }),
+
+        // Event handler for slide changes
+		onSlideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
+	};
 
     /**
-     * Updates Swiper instance after changes
-     * Ensures slider, pagination and navigation are properly refreshed
+     * When any of these settings change, update the key to reinitialize Swiper
      */
-    const updateSwiperInstance = () => {
-        setTimeout(() => {
-            if (swiperRef.current && swiperRef.current.swiper) {
-                swiperRef.current.swiper.update(); 
-                swiperRef.current.swiper.pagination.update();
-                swiperRef.current.swiper.navigation.update();
-            }
-        }, 100);
-    };
+	useEffect(() => {
+		setSwiperKey(prevKey => prevKey + 1);
+	}, [
+		sliderType,
+		infiniteLoop,
+		allowTouchMove,
+		pauseOnHover,
+		stopOnLastSlide,
+		reverseDirection,
+		mousewheelControl,
+		showNavigation,
+		showPagination,
+		autoplay,
+		autoplayDelay,
+		speed,
+		slideEffect,
+		carouselEffect,
+		carouselPerColumn,
+		carouselPerColumnGap,
+		paginationType,
+		dynamicBullets
+	]);
 
-    /**
-     * Handles slide reordering via drag and drop functionality
-     * Updates slide order in both state and attributes
-     */
-    const handleDragEnd = (event) => {
-        const { active, over } = event;
-        if (active && over && active.id !== over.id) {
-            const oldIndex = sliderItems.findIndex(item => item.id === active.id);
-            const newIndex = sliderItems.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
-            setAttributes({ sliderItems: updatedItems });
-            setSliderItemList(updatedItems);
-        }
-
-        // Ensure Swiper updates with new slides
-        updateSwiperInstance();
-    };
-
-    /**
-     * Creates a duplicate of an existing slide with a new unique ID
-     * Adds the duplicate to the slider items collection
-     */
-    const handleDuplicateItem = (id) => {
-        const itemToDuplicate = sliderItems.find(item => item.id === id);
-        if (itemToDuplicate) {
-            const newItem = { ...itemToDuplicate, id: `item-${sliderItems.length + 1}` };
-            setAttributes({ sliderItems: [...sliderItems, newItem] });
-            setSliderItemList([...sliderItemList, newItem]);
-        }
-        // Ensure Swiper updates with new slides
-        updateSwiperInstance();
-    };
 
     /**
      * Creates and adds a new slide with default content and settings
@@ -266,9 +204,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
         setSliderItemList([...sliderItemList, newItem]);
-
-        // Ensure Swiper updates with new slides
-        updateSwiperInstance();
     };
 
     /**
@@ -308,6 +243,33 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     };
 
     /**
+     * Handles duplicate slide functionality
+     */
+    const handleDuplicateItem = (id) => {
+        const itemToDuplicate = sliderItems.find(item => item.id === id);
+        if (itemToDuplicate) {
+            const newItem = { ...itemToDuplicate, id: `item-${sliderItems.length + 1}` };
+            setAttributes({ sliderItems: [...sliderItems, newItem] });
+            setSliderItemList([...sliderItemList, newItem]);
+        }
+    };
+
+    /**
+     * Handles slide reordering via drag and drop functionality
+     * Updates slide order in both state and attributes
+     */
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = sliderItems.findIndex(item => item.id === active.id);
+            const newIndex = sliderItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
+            setAttributes({ sliderItems: updatedItems });
+            setSliderItemList(updatedItems);
+        }
+    };
+
+    /**
      * Removes a slide from the slider by its ID
      * Updates both state and block attributes
      */
@@ -318,12 +280,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     };
 
     /**
-     * Ensures sliderItems attribute stays in sync with local state
-     * Prevents state/props mismatch issues
+     * Keep sliderItems attribute in sync with local state
      */
-    useEffect(() => {
-        setAttributes({ sliderItems: sliderItemList });
-    }, [sliderItemList, setAttributes]);
+	useEffect(() => {
+		setAttributes({ sliderItems: sliderItemList });
+	}, [sliderItemList, setAttributes]);
+
+    /**
+     * Updates a specific field of a slide at the given index
+     * Used for RichText component changes
+     */
+    const updateItem = (index, field, value) => {
+        const newItems = sliderItems.map((item, i) => {
+            if (i === index) {
+                return { ...item, [field]: value };
+            }
+            return item;
+        });
+        setAttributes({ sliderItems: newItems });
+    };
 
     /**
      * Renders toolbar controls for slide management
@@ -355,127 +330,112 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     };
 
     /**
-     * Prevents default behavior for button clicks in the editor
-     * Stops navigation when editing button content
+     * Prevent default behavior for link clicks in the editor
      */
-    const handleButtonClick = (event) => {
-        event.preventDefault();
-    };
+	const handleButtonClick = (event) => {
+		event.preventDefault();
+	};
 
-    /**
-     * Updates a specific field of a slide at the given index
-     * Used for RichText component changes
-     */
-    const updateItem = (index, field, value) => {
-        const newItems = sliderItems.map((item, i) => {
-            if (i === index) {
-                return { ...item, [field]: value };
-            }
-            return item;
-        });
-        setAttributes({ sliderItems: newItems });
-    };
-
-    /**
-     * Renders the complete slider interface with all slides and controls
-     * Includes Inspector panel, toolbar controls, and Swiper implementation
-     */
-    return (
-        <>
-            <Inspector 
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-                handleAddItem={handleAddItem}
+	return (
+		<>
+			<Inspector 
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+				handleAddItem={handleAddItem}
                 handleChangeItem={handleChangeItem}
+                handleDuplicateItem={handleDuplicateItem}
+				handleDragEnd={handleDragEnd}
                 handleDeleteItem={handleDeleteItem}
-                handleDragEnd={handleDragEnd}
-                handleDuplicateItem ={handleDuplicateItem}
-            />
-
-            {renderSliderToolbarControls()}
-
-            <div {...blockProps}>
-                <div className="swiper" ref={(el) => { swiperRef.current = el; panelRef.current = el; }}>
-                    <div className="swiper-wrapper guten-slider-wrapper">
-                        {sliderItems.map((item, index) => (
-                            <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
-                                <div className={`${blockId} guten-slider-content-wrapper ${item.id}`}>
-                                    <div className="guten-slider-content-inner-wrapper">
-                                        <div className="guten-slider-list-item">
-                                            <div className="guten-slider-list-content">
-                                                <div className="guten-slider-subtitle-wrapper">
-                                                    <RichText
-                                                        tagName="span"
-                                                        className="guten-slider-subtitle"
-                                                        value={item.subTitle}
-                                                        onChange={(value) => updateItem(index, 'subTitle', value)}
-                                                        placeholder="Enter subtitle"
-                                                    />
-                                                </div>
-                                                <div className="guten-slider-title-wrapper">
-                                                    <RichText
-                                                        tagName="h3"
-                                                        className="guten-slider-title"
-                                                        value={item.title}
-                                                        onChange={(value) => updateItem(index, 'title', value)}
-                                                        placeholder="Enter title"
-                                                    />
-                                                </div>
-                                                <div className="guten-slider-description-wrapper">
-                                                    <RichText
-                                                        tagName="p"
-                                                        className="guten-slider-description"
-                                                        value={item.description}
-                                                        onChange={(value) => updateItem(index, 'description', value)}
-                                                        placeholder="Enter description"
-                                                    />
-                                                </div>
-                                                <div className="guten-slider-button-container">
-                                                    {item.buttonLink ? (
-                                                        <a 
-                                                            className="guten-slider-button"
-                                                            href={item.buttonLink}
-                                                            target={item.buttonTargetLink ? '_blank' : undefined}
-                                                            rel={[
-                                                                item.nofollow && 'nofollow',
-                                                                item.sponsored && 'sponsored',
-                                                                item.buttonTargetLink && 'noopener noreferrer'
-                                                            ].filter(Boolean).join(' ')}
-                                                            onClick={handleButtonClick}
-                                                        >
-                                                            <RichText
-                                                                value={item.buttonText}
-                                                                className="guten-slider-button-text"
-                                                                onChange={(value) => updateItem(index, 'buttonText', value)}
-                                                                placeholder={__('Enter button text...')}
-                                                            />
-                                                        </a>
-                                                    ) : (
-                                                        <RichText
-                                                            value={item.buttonText}
-                                                            className="guten-slider-button-text"
-                                                            onChange={(value) => updateItem(index, 'buttonText', value)}
-                                                            placeholder={__('Enter button text...')}
-                                                        />
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    {showNavigation && 
-                        <>
-                            <div className="guten-slider swiper-button-next" aria-label="Next slide"></div>
-                            <div className="guten-slider swiper-button-prev" aria-label="Previous slide"></div>
-                        </>
-                    }
-                    {showPagination && <div className="guten-slider swiper-pagination"></div>}
-                </div>
-            </div>
-        </>
-    );
+			/>
+			{renderSliderToolbarControls()}
+			<div {...blockProps}>
+				<Swiper
+					key={swiperKey}
+					{...swiperOptions}
+					modules={[
+						Navigation,
+						Pagination,
+						Manipulation,
+						Mousewheel,
+						EffectFade,
+						EffectCube,
+						EffectCoverflow,
+						EffectFlip,
+						EffectCreative,
+						EffectCards
+					]}
+				>
+					{sliderItemList.map((item, index) => (
+						<SwiperSlide key={item.id}>
+							<div className={`${blockId} guten-slider-content-wrapper ${item.id}`} ref={panelRef}>
+								<div className="guten-slider-content-inner-wrapper">
+									<div className="guten-slider-list-item">
+										<div className="guten-slider-list-content">
+											<div className="guten-slider-subtitle-wrapper">
+												<RichText
+													tagName="span"
+													className="guten-slider-subtitle"
+													value={item.subTitle}
+													onChange={(value) => updateItem(index, 'subTitle', value)}
+													placeholder="Enter subtitle"
+												/>
+											</div>
+											<div className="guten-slider-title-wrapper">
+												<RichText
+													tagName="h3"
+													className="guten-slider-title"
+													value={item.title}
+													onChange={(value) => updateItem(index, 'title', value)}
+													placeholder="Enter title"
+												/>
+											</div>
+											<div className="guten-slider-description-wrapper">
+												<RichText
+													tagName="p"
+													className="guten-slider-description"
+													value={item.description}
+													onChange={(value) => updateItem(index, 'description', value)}
+													placeholder="Enter description"
+												/>
+											</div>
+											<div className="guten-slider-button-container">
+												{item.buttonLink ? (
+													<a
+														className="guten-slider-button"
+														href={item.buttonLink}
+														target={item.buttonTargetLink ? '_blank' : undefined}
+														rel={[
+															item.nofollow && 'nofollow',
+															item.sponsored && 'sponsored',
+															item.buttonTargetLink && 'noopener noreferrer'
+														].filter(Boolean).join(' ')}
+														onClick={handleButtonClick}
+													>
+														<RichText
+															value={item.buttonText}
+															className="guten-slider-button-text"
+															onChange={(value) => updateItem(index, 'buttonText', value)}
+															placeholder={__('Enter button text...', 'gutenslider-blocks')}
+														/>
+													</a>
+												) : (
+													<RichText
+														value={item.buttonText}
+														className="guten-slider-button-text"
+														onChange={(value) => updateItem(index, 'buttonText', value)}
+														placeholder={__('Enter button text...', 'gutenslider-blocks')}
+													/>
+												)}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</div>
+		</>
+	);
 }
