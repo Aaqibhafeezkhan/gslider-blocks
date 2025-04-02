@@ -19,6 +19,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import {
 	Navigation,
 	Pagination,
+    Autoplay,
 	Manipulation,
 	Mousewheel,
 	EffectFade,
@@ -31,6 +32,7 @@ import {
 
 // Import Swiper styles for all functionalities
 import 'swiper/css';
+import 'swiper/css/bundle';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/mousewheel';
@@ -38,6 +40,7 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/effect-flip';
 import 'swiper/css/effect-creative';
+import 'swiper/css/autoplay';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -62,8 +65,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		paginationType,
 		dynamicBullets,
 	} = attributes;
-
-    console.log(allowTouchMove);
 
 	// Block props for container
 	const blockProps = useBlockProps({
