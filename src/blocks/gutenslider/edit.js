@@ -33,14 +33,14 @@ import {
 // Import Swiper styles for all functionalities
 import 'swiper/css';
 import 'swiper/css/bundle';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/mousewheel';
-import 'swiper/css/effect-fade';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/effect-flip';
-import 'swiper/css/effect-creative';
-import 'swiper/css/autoplay';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/mousewheel';
+// import 'swiper/css/effect-fade';
+// import 'swiper/css/effect-coverflow';
+// import 'swiper/css/effect-flip';
+// import 'swiper/css/effect-creative';
+// import 'swiper/css/autoplay';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -108,7 +108,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         : false,
 
         speed: speed,
-        allowTouchMove: allowTouchMove,
+        allowTouchMove: true,
         mousewheel: mousewheelControl,
 
         // Navigation and pagination settings
@@ -357,6 +357,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					modules={[
 						Navigation,
 						Pagination,
+						Autoplay,
 						Manipulation,
 						Mousewheel,
 						EffectFade,
