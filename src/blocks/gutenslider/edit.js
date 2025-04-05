@@ -31,7 +31,7 @@ import {
 } from 'swiper/modules';
 
 // Import Swiper styles for all functionalities
-import 'swiper/css';
+// import 'swiper/css';
 import 'swiper/css/bundle';
 // import 'swiper/css/navigation';
 // import 'swiper/css/pagination';
@@ -108,7 +108,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         : false,
 
         speed: speed,
-        allowTouchMove: true,
+        allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
 
         // Navigation and pagination settings
@@ -370,7 +370,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				>
 					{sliderItemList.map((item, index) => (
 						<SwiperSlide key={item.id}>
-							<div className={`${blockId} guten-slider-content-wrapper ${item.id}`} ref={panelRef}>
+							<div className={`guten-slider-content-wrapper ${item.id}`} ref={panelRef}>
 								<div className="guten-slider-content-inner-wrapper">
 									<div className="guten-slider-list-item">
 										<div className="guten-slider-list-content">

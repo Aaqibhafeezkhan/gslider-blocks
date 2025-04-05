@@ -256,7 +256,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor; // Check if gradient is empty, fallback to classic color
             
             if (normalItemBackgroundType === 'gradient') {
-                const gradientStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}  {
+                const gradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}  {
                     background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : normalItemGradientColor};
                 }`;
                 style += gradientStyle;
@@ -268,7 +268,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ? `${item.normalBackgroundImagePosition.x * 100}% ${item.normalBackgroundImagePosition.y * 100}%`
                 : "50% 50%"; // Default to 50% 50% if not provided
 
-                const backgroundImageStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
+                const backgroundImageStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
                     background-image: url(${item.normalBackgroundImageUrl});
                     background-position: ${backgroundPosition};
                     background-attachment: ${item.normalBackgroundImageAttachment};
@@ -277,7 +277,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 }`;
                 style += backgroundImageStyle;
             } else {
-                const classicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
+                const classicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};
                 }`;
                 style += classicStyle;
@@ -287,7 +287,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             const hoverItemGradientColor = item.hoverItemGradientColor || item.hoverItemClassicColor; // Similar fallback for hover state
             
             if (hoverItemBackgroundType === 'gradient') {
-                const hoverGradientStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
+                const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : hoverItemGradientColor};
                 }`;
                 style += hoverGradientStyle;
@@ -299,7 +299,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ? `${item.hoverBackgroundImagePosition.x * 100}% ${item.hoverBackgroundImagePosition.y * 100}%`
                 : "50% 50%"; // Default to 50% 50% if not provided
 
-                const backgroundImageStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
+                const backgroundImageStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
                     background-image: url(${item.hoverBackgroundImageUrl});
                     background-position: ${backgroundPosition};
                     background-attachment: ${item.hoverBackgroundImageAttachment};
@@ -308,7 +308,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 }`;
                 style += backgroundImageStyle;
             } else {
-                const hoverClassicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
+                const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemClassicColor};
                 }`;
                 style += hoverClassicStyle;
