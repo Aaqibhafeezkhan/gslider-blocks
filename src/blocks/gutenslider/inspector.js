@@ -16,6 +16,8 @@ import ResponsiveTypographyControl from '@Components/responsive-typography-contr
 import BoxShadowSettingsControl from '@Components/box-shadow-control';
 import BackgroundColorControl from '@Components/background-color-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
+import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+
 import {useDeviceType} from "@Utils/displayType"; 
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
@@ -205,6 +207,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         /** Global Settings */
         sliderGlobalZIndex,
+
+
+        /** Background Image */
+        sliderBgNormalBackgroundImageUrl,
+        sliderBgNormalBackgroundImagePosition,
+        sliderBgNormalBackgroundImageAttachment,
+        sliderBgNormalBackgroundImageRepeat,
+        sliderBgNormalBackgroundImageSize,
         
     } = attributes;
 
@@ -1367,6 +1377,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 step={1}
                                                 resetFallbackValue={""}
                                                 isRangeUnit={false}
+                                            />
+
+                                            <ResponsiveBackgroundImageControl
+                                                label={__("Background", "gutenslider-blocks")}
+                                                deviceType={deviceType}
+                                                globalBackgroundImageUrl={sliderBgNormalBackgroundImageUrl}
+                                                setGlobalBackgroundImageUrl={(value) => setAttributes({ sliderBgNormalBackgroundImageUrl: value })}
+                                                globalBackgroundImagePosition={sliderBgNormalBackgroundImagePosition}
+                                                setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ sliderBgNormalBackgroundImagePosition: newPosition })}
+                                                globalBackgroundImageAttachment={sliderBgNormalBackgroundImageAttachment}
+                                                setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ sliderBgNormalBackgroundImageAttachment: newAttachment })}
+                                                globalBackgroundImageRepeat={sliderBgNormalBackgroundImageRepeat}
+                                                setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ sliderBgNormalBackgroundImageRepeat: newRepeat })}
+                                                globalBackgroundImageSize={sliderBgNormalBackgroundImageSize} 
+                                                setGlobalBackgroundImageSize={(newSize) => setAttributes({ sliderBgNormalBackgroundImageSize: newSize })}
+                                                setAttributes={setAttributes}
                                             />
                                         </PanelBody>
                                     </>

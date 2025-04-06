@@ -1112,6 +1112,49 @@ const attributes = {
             Mobile: ''
         }
     },
+
+    	/** Bg Normal Image for fb container */
+	sliderBgNormalBackgroundImageUrl: {  
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    sliderBgNormalBackgroundImagePosition: {
+        type: 'object',
+        default: {
+            Desktop: { x: 0.5, y: 0.5 },
+            Tablet: { x: 0.5, y: 0.5 },
+            Mobile: { x: 0.5, y: 0.5 }
+        }
+    },
+    sliderBgNormalBackgroundImageAttachment: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    sliderBgNormalBackgroundImageRepeat: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    sliderBgNormalBackgroundImageSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+	/** End Global Setting */
 };
 
 export default attributes;

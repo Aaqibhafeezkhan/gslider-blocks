@@ -8,7 +8,7 @@ import ResponsiveDeviceControl from '@Components/responsive-device-control';
 import './editor.lazy.scss';
 
 const ResponsiveBackgroundImageControl = ({
-    label = '',
+    label = __("Background Image", "gutenslider-blocks"),
     deviceType,
     globalBackgroundImageUrl = '',
     setGlobalBackgroundImageUrl,
@@ -99,9 +99,9 @@ const ResponsiveBackgroundImageControl = ({
 
     const openMediaUploader = () => {
         const mediaUploader = wp.media({
-            title: __('Select or Upload background Image', 'frontis-blocks'),
+            title: __('Select or Upload background Image', 'gutenslider-blocks'), 
             button: {
-                text: __('Use this image', 'frontis-blocks'),
+                text: __('Use this image', 'gutenslider-blocks'),
             },
             multiple: false
         });
@@ -127,7 +127,7 @@ const ResponsiveBackgroundImageControl = ({
             className="gutenslider-image-control-wrapper"
         >
             <ResponsiveDeviceControl 
-                label={__("Image", "gutenslider-blocks")}
+                label={label}
                 device={deviceType}
             />
             
@@ -145,14 +145,14 @@ const ResponsiveBackgroundImageControl = ({
                             <button
                                 className='gutenslider-image-delete'
                                 onClick={handleDeleteImage}
-                                title={__('Delete Image', 'frontis-blocks')}
+                                title={__('Delete Image', 'gutenslider-blocks')}
                             >
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#4D4D4D" strokeWidth="1.5"></path><path d="M15 9L9 15" stroke="#4D4D4D" strokeWidth="1.5"></path><path d="M9 9L15 15" stroke="#4D4D4D" strokeWidth="1.5"></path></svg>
                             </button>
                             <button
                                 className='gutenslider-image-replace-btn'
                                 onClick={openMediaUploader}
-                                title={__('Replace Image', 'frontis-blocks')}
+                                title={__('Replace Image', 'gutenslider-blocks')}
                             >
                                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"></path><path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"></path></svg>
                             </button>
@@ -171,9 +171,9 @@ const ResponsiveBackgroundImageControl = ({
                                     value={globalBackgroundImageAttachment[deviceType]}
                                     options={(
                                         [
-                                            {label: __("Default", "frontis-blocks"), value: ""},
-                                            {label: __("Scroll", "frontis-blocks"), value: "scroll"},
-                                            {label: __("Fixed", "frontis-blocks"), value: "fixed"},
+                                            {label: __("Default", "gutenslider-blocks"), value: ""},
+                                            {label: __("Scroll", "gutenslider-blocks"), value: "scroll"},
+                                            {label: __("Fixed", "gutenslider-blocks"), value: "fixed"},
                                         ]
                                     )}
                                     onChange={handleAttachmentChange} 
@@ -190,11 +190,11 @@ const ResponsiveBackgroundImageControl = ({
                                     value={globalBackgroundImageRepeat[deviceType]}
                                     options={(
                                         [
-                                            {label: __("Default", "frontis-blocks"), value: ""},
-                                            {label: __("Repeat", "frontis-blocks"), value: "repeat"},
-                                            {label: __("Repeat X", "frontis-blocks"), value: "repeat-x"},
-                                            {label: __("Repeat Y", "frontis-blocks"), value: "repeat-y"},
-                                            {label: __("No Repeat", "frontis-blocks"), value: "no-repeat"},
+                                            {label: __("Default", "gutenslider-blocks"), value: ""},
+                                            {label: __("Repeat", "gutenslider-blocks"), value: "repeat"},
+                                            {label: __("Repeat X", "gutenslider-blocks"), value: "repeat-x"},
+                                            {label: __("Repeat Y", "gutenslider-blocks"), value: "repeat-y"},
+                                            {label: __("No Repeat", "gutenslider-blocks"), value: "no-repeat"},
                                         ]
                                     )}
                                     onChange={handleRepeatChange} 
@@ -211,10 +211,10 @@ const ResponsiveBackgroundImageControl = ({
                                     value={globalBackgroundImageSize[deviceType]}
                                     options={(
                                         [
-                                            {label: __("Default", "frontis-blocks"), value: ""},
-                                            {label: __("Auto", "frontis-blocks"), value: "auto"},
-                                            {label: __("Cover", "frontis-blocks"), value: "cover"},
-                                            {label: __("Contain", "frontis-blocks"), value: "contain"},
+                                            {label: __("Default", "gutenslider-blocks"), value: ""},
+                                            {label: __("Auto", "gutenslider-blocks"), value: "auto"},
+                                            {label: __("Cover", "gutenslider-blocks"), value: "cover"},
+                                            {label: __("Contain", "gutenslider-blocks"), value: "contain"},
                                         ]
                                     )}
                                     onChange={handleSizeChange} 
