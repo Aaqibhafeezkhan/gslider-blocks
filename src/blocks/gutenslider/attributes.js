@@ -1155,6 +1155,176 @@ const attributes = {
         }
     },
 	/** End Global Setting */
+
+
+
+    /** Start Global Setting */
+    globalSliderItemBgColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+
+    globalNormalItemBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    globalNormalItemClassicColor: {
+        type: "string",
+        default: "",
+    },
+    globalNormalItemGradientColor: {
+        type: "string",
+        default: null,
+    },
+    globalNormalItemCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    globalNormalItemCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    globalNormalBackgroundImageUrl: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    globalNormalBackgroundImageAlt: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    globalNormalBackgroundImageID: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    globalNormalBackgroundImagePosition: {
+        type: "object",
+        default: {
+            Desktop: { x: 0.5, y: 0.5 },
+            Tablet: { x: 0.5, y: 0.5 },
+            Mobile: { x: 0.5, y: 0.5 }
+        }
+    },
+    globalNormalBackgroundImageAttachment: {
+        type: "object",
+        default: {
+            Desktop: "scroll",
+            Tablet: "scroll",
+            Mobile: "scroll"
+        }
+    },
+    globalNormalBackgroundImageRepeat: {
+        type: "object",
+        default: {
+            Desktop: "no-repeat",
+            Tablet: "no-repeat",
+            Mobile: "no-repeat"
+        }
+    },
+    globalNormalBackgroundImageSize: {
+        type: "object",
+        default: {
+            Desktop: "cover",
+            Tablet: "cover",
+            Mobile: "cover"
+        }
+    },
+
+    globalHoverItemBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    globalHoverItemClassicColor: {
+        type: "string",
+        default: "",
+    },
+    globalHoverItemGradientColor: {
+        type: "string",
+        default: null,
+    },
+    globalHoverItemCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    globalHoverItemCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+
+    globalHoverBackgroundImageUrl: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+
+    globalHoverBackgroundImageAlt: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },  
+
+    globalHoverBackgroundImageID: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },  
+
+    globalHoverBackgroundImagePosition: {
+        type: "object", 
+        default: {
+            Desktop: { x: 0.5, y: 0.5 },
+            Tablet: { x: 0.5, y: 0.5 },
+            Mobile: { x: 0.5, y: 0.5 }
+        }
+    },  
+
+    globalHoverBackgroundImageAttachment: {
+        type: "object",
+        default: {
+            Desktop: "scroll",
+            Tablet: "scroll",
+            Mobile: "scroll"
+        }
+    },    
+
+    globalHoverBackgroundImageRepeat: {
+        type: "object",
+        default: {
+            Desktop: "no-repeat",
+            Tablet: "no-repeat",
+            Mobile: "no-repeat"
+        }
+    },            
+
+    globalHoverBackgroundImageSize: {
+        type: "object",
+        default: {
+            Desktop: "cover",
+            Tablet: "cover",
+            Mobile: "cover"
+        }
+    },
+
 };
 
 export default attributes;

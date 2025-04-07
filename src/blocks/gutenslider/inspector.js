@@ -215,6 +215,37 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         sliderBgNormalBackgroundImageAttachment,
         sliderBgNormalBackgroundImageRepeat,
         sliderBgNormalBackgroundImageSize,
+
+
+        globalSliderItemBgColorSwitcher,
+        globalNormalItemBackgroundType,
+        globalNormalItemClassicColor,
+        globalNormalItemGradientColor,
+        globalNormalItemCustomGradientSwitcher,
+        globalNormalItemCustomGradientInputValue,
+        globalNormalBackgroundImageUrl,
+        globalNormalBackgroundImageAlt,
+        globalNormalBackgroundImageID,
+        globalNormalBackgroundImagePosition,
+        globalNormalBackgroundImageAttachment,
+        globalNormalBackgroundImageRepeat,
+        globalNormalBackgroundImageSize,
+
+        globalHoverItemBackgroundType,
+        globalHoverItemClassicColor,
+        globalHoverItemGradientColor,
+        globalHoverItemCustomGradientSwitcher,
+        globalHoverItemCustomGradientInputValue,
+        globalHoverBackgroundImageUrl,
+        globalHoverBackgroundImageAlt,
+        globalHoverBackgroundImageID,
+        globalHoverBackgroundImagePosition,
+        globalHoverBackgroundImageAttachment,
+        globalHoverBackgroundImageRepeat,
+        globalHoverBackgroundImageSize,
+        /** End Global Setting */
+        
+        
         
     } = attributes;
 
@@ -1379,7 +1410,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 isRangeUnit={false}
                                             />
 
-                                            <ResponsiveBackgroundImageControl
+                                            {/* <ResponsiveBackgroundImageControl
                                                 label={__("Background", "gutenslider-blocks")}
                                                 deviceType={deviceType}
                                                 globalBackgroundImageUrl={sliderBgNormalBackgroundImageUrl}
@@ -1393,6 +1424,65 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 globalBackgroundImageSize={sliderBgNormalBackgroundImageSize} 
                                                 setGlobalBackgroundImageSize={(newSize) => setAttributes({ sliderBgNormalBackgroundImageSize: newSize })}
                                                 setAttributes={setAttributes}
+                                            /> */}
+
+                                            <BackgroundColorControl
+                                                label={__("Background Color", "gutenslider-blocks")}
+                                                deviceType={deviceType}
+                                                bgColorSwitcher={globalSliderItemBgColorSwitcher}
+                                                setBgColorSwitcher={(value) => setAttributes({ globalSliderItemBgColorSwitcher: value })}
+                                                        
+                                                normalBackgroundType={globalNormalItemBackgroundType}
+                                                setNormalBackgroundType={(value) => setAttributes({ globalNormalItemBackgroundType: value })}
+                                                normalClassicColor={globalNormalItemClassicColor}
+                                                setNormalClassicColor={(value) => setAttributes({ globalNormalItemClassicColor: value })}
+                                                normalGradientColor={globalNormalItemGradientColor}
+                                                setNormalGradientColor={(value) => setAttributes({ globalNormalItemGradientColor: value })}
+                                                normalCustomGradientSwitcher={globalNormalItemCustomGradientSwitcher}
+                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ globalNormalItemCustomGradientSwitcher: value })}
+                                                normalCustomGradientInputValue={globalNormalItemCustomGradientInputValue}
+                                                setNormalCustomGradientInputValue={(value) => setAttributes({ globalNormalItemCustomGradientInputValue: value })}
+                                                normalBackgroundImageUrl={globalNormalBackgroundImageUrl}
+                                                setNormalBackgroundImageUrl={(value) => setAttributes({ globalNormalBackgroundImageUrl: value })}
+                                                normalBackgroundImageAlt={globalNormalBackgroundImageAlt}
+                                                setNormalBackgroundImageAlt={(value) => setAttributes({ globalNormalBackgroundImageAlt: value })}
+                                                normalBackgroundImageID={globalNormalBackgroundImageID}
+                                                setNormalBackgroundImageID={(value) => setAttributes({ globalNormalBackgroundImageID: value })}
+                                                normalBackgroundImagePosition={globalNormalBackgroundImagePosition}
+                                                setNormalBackgroundImagePosition={(value) => setAttributes({ globalNormalBackgroundImagePosition: value })}
+                                                normalBackgroundImageAttachment={globalNormalBackgroundImageAttachment}
+                                                setNormalBackgroundImageAttachment={(value) => setAttributes({ globalNormalBackgroundImageAttachment: value })}
+                                                normalBackgroundImageRepeat={globalNormalBackgroundImageRepeat}
+                                                setNormalBackgroundImageRepeat={(value) => setAttributes({ globalNormalBackgroundImageRepeat: value })}
+                                                normalBackgroundImageSize={globalNormalBackgroundImageSize}
+                                                setNormalBackgroundImageSize={(value) => setAttributes({ globalNormalBackgroundImageSize: value })}
+                                                
+                                                hoverBackgroundType={globalHoverItemBackgroundType}
+                                                setHoverBackgroundType={(value) => setAttributes({ globalHoverItemBackgroundType: value })}
+                                                hoverClassicColor={globalHoverItemClassicColor}
+                                                setHoverClassicColor={(value) => setAttributes({ globalHoverItemClassicColor: value })}
+                                                hoverGradientColor={globalHoverItemGradientColor} 
+                                                setHoverGradientColor={(value) => setAttributes({ globalHoverItemGradientColor: value })}
+                                                hoverCustomGradientSwitcher={globalHoverItemCustomGradientSwitcher}
+                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ globalHoverItemCustomGradientSwitcher: value })}
+                                                hoverCustomGradientInputValue={globalHoverItemCustomGradientInputValue}
+                                                setHoverCustomGradientInputValue={(value) => setAttributes({ globalHoverItemCustomGradientInputValue: value })}
+                                                hoverBackgroundImageUrl={globalHoverBackgroundImageUrl}
+                                                setHoverBackgroundImageUrl={(value) => setAttributes({ globalHoverBackgroundImageUrl: value })}
+                                                hoverBackgroundImageAlt={globalHoverBackgroundImageAlt}
+                                                setHoverBackgroundImageAlt={(value) => setAttributes({ globalHoverBackgroundImageAlt: value })}
+                                                hoverBackgroundImageID={globalHoverBackgroundImageID}
+                                                setHoverBackgroundImageID={(value) => setAttributes({ globalHoverBackgroundImageID: value })}
+                                                hoverBackgroundImagePosition={globalHoverBackgroundImagePosition}
+                                                setHoverBackgroundImagePosition={(value) => setAttributes({ globalHoverBackgroundImagePosition: value })}
+                                                hoverBackgroundImageAttachment={globalHoverBackgroundImageAttachment}
+                                                setHoverBackgroundImageAttachment={(value) => setAttributes({ globalHoverBackgroundImageAttachment: value })}
+                                                hoverBackgroundImageRepeat={globalHoverBackgroundImageRepeat}
+                                                setHoverBackgroundImageRepeat={(value) => setAttributes({ globalHoverBackgroundImageRepeat: value })}
+                                                hoverBackgroundImageSize={globalHoverBackgroundImageSize}
+                                                setHoverBackgroundImageSize={(value) => setAttributes({ globalHoverBackgroundImageSize: value })}
+                                                setAttributes={setAttributes}
+                                                
                                             />
                                         </PanelBody>
                                     </>
