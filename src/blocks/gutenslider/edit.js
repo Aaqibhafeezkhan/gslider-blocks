@@ -180,14 +180,41 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',
 
-            normalBackgroundImageUrl: '',
-            normalBackgroundImageAlt: '',
-            normalBackgroundImageID: '',
-            normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
-            normalBackgroundImageAttachment: 'scroll',
-            normalBackgroundImageRepeat: 'no-repeat',
-            normalBackgroundImageSize: 'cover',
-
+            normalBackgroundImageUrl: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            normalBackgroundImageAlt: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            normalBackgroundImageID: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            normalBackgroundImagePosition: {
+                Desktop: { x: 0.5, y: 0.5 },
+                Tablet: { x: 0.5, y: 0.5 },
+                Mobile: { x: 0.5, y: 0.5 },
+            },
+            normalBackgroundImageAttachment: {
+                Desktop: 'scroll',
+                Tablet: 'scroll',
+                Mobile: 'scroll',
+            },
+            normalBackgroundImageRepeat: {
+                Desktop: 'no-repeat',
+                Tablet: 'no-repeat',
+                Mobile: 'no-repeat',
+            },
+            normalBackgroundImageSize: {
+                Desktop: 'cover',
+                Tablet: 'cover',
+                Mobile: 'cover',
+            },
 
             hoverItemBackgroundType: 'classic',
             hoverItemClassicColor: '',
@@ -195,13 +222,41 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             hoverItemCustomGradientSwitcher: false,
             hoverItemCustomGradientInputValue: '',
 
-            hoverBackgroundImageUrl: '',
-            hoverBackgroundImageAlt: '',
-            hoverBackgroundImageID: '',
-            hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
-            hoverBackgroundImageAttachment: 'scroll',
-            hoverBackgroundImageRepeat: 'no-repeat',
-            hoverBackgroundImageSize: 'cover',
+            hoverBackgroundImageUrl: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            hoverBackgroundImageAlt: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            hoverBackgroundImageID: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            hoverBackgroundImagePosition: {
+                Desktop: { x: 0.5, y: 0.5 },
+                Tablet: { x: 0.5, y: 0.5 },
+                Mobile: { x: 0.5, y: 0.5 },
+            },
+            hoverBackgroundImageAttachment: {
+                Desktop: 'scroll',
+                Tablet: 'scroll',
+                Mobile: 'scroll',
+            },
+            hoverBackgroundImageRepeat: {
+                Desktop: 'no-repeat',
+                Tablet: 'no-repeat',
+                Mobile: 'no-repeat',
+            },
+            hoverBackgroundImageSize: {
+                Desktop: 'cover',
+                Tablet: 'cover',
+                Mobile: 'cover',
+            },
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
         setSliderItemList([...sliderItemList, newItem]);
@@ -220,8 +275,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     return {
                         ...item,
                         [key]: value,
-                        'normalBackgroundImageUrl': image.url,
-                        'normalBackgroundImageAlt': image.alt || ''
+                        'normalBackgroundImageUrl': {
+                            Desktop: image.url,
+                            Tablet: image.url,
+                            Mobile: image.url,
+                        },
+                        'normalBackgroundImageAlt': {
+                            Desktop: image.alt || '',
+                            Tablet: image.alt || '',
+                            Mobile: image.alt || '',
+                        },
                     };
                 }
                 if (key === 'hoverBackgroundImageID') {
@@ -230,8 +293,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     return {
                         ...item,
                         [key]: value,
-                        'hoverBackgroundImageUrl': image.url,
-                        'hoverBackgroundImageAlt': image.alt || ''
+                        'hoverBackgroundImageUrl': {
+                            Desktop: image.url,
+                            Tablet: image.url,
+                            Mobile: image.url,
+                        },
+                        'hoverBackgroundImageAlt': {
+                            Desktop: image.alt || '',
+                            Tablet: image.alt || '',
+                            Mobile: image.alt || '',
+                        },
                     };
                 }
                 return { ...item, [key]: value };

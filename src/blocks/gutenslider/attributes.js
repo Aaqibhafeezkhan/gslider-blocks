@@ -29,13 +29,41 @@ const attributes = {
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
 
-                normalBackgroundImageUrl: '',
-                normalBackgroundImageAlt: '',
-                normalBackgroundImageID: '',
-                normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
-                normalBackgroundImageAttachment: 'scroll',
-                normalBackgroundImageRepeat: 'no-repeat',
-                normalBackgroundImageSize: 'cover',
+                normalBackgroundImageUrl:{
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                normalBackgroundImageAlt: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                normalBackgroundImageID: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                normalBackgroundImagePosition: {
+                    Desktop: { x: 0.5, y: 0.5 },
+                    Tablet: { x: 0.5, y: 0.5 },
+                    Mobile: { x: 0.5, y: 0.5 },
+                },
+                normalBackgroundImageAttachment: {
+                    Desktop: 'scroll',
+                    Tablet: 'scroll',
+                    Mobile: 'scroll',
+                },
+                normalBackgroundImageRepeat: {
+                    Desktop: 'no-repeat',
+                    Tablet: 'no-repeat',
+                    Mobile: 'no-repeat',
+                },
+                normalBackgroundImageSize: {
+                    Desktop: 'cover',
+                    Tablet: 'cover',
+                    Mobile: 'cover',
+                },
 
                 hoverItemBackgroundType: 'classic',
                 hoverItemClassicColor: '',
@@ -43,14 +71,41 @@ const attributes = {
                 hoverItemCustomGradientSwitcher: false,
                 hoverItemCustomGradientInputValue: '',
 
-                hoverBackgroundImageUrl: '',
-                hoverBackgroundImageAlt: '',
-                hoverBackgroundImageID: '',
-                hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
-                hoverBackgroundImageAttachment: 'scroll',
-                hoverBackgroundImageRepeat: 'no-repeat',
-                hoverBackgroundImageSize: 'cover',
-
+                hoverBackgroundImageUrl:{
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                hoverBackgroundImageAlt: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                hoverBackgroundImageID: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                hoverBackgroundImagePosition: {
+                    Desktop: { x: 0.5, y: 0.5 },
+                    Tablet: { x: 0.5, y: 0.5 },
+                    Mobile: { x: 0.5, y: 0.5 },
+                },
+                hoverBackgroundImageAttachment: {
+                    Desktop: 'scroll',
+                    Tablet: 'scroll',
+                    Mobile: 'scroll',
+                },
+                hoverBackgroundImageRepeat: {
+                    Desktop: 'no-repeat',
+                    Tablet: 'no-repeat',
+                    Mobile: 'no-repeat',
+                },
+                hoverBackgroundImageSize: {
+                    Desktop: 'cover',
+                    Tablet: 'cover',
+                    Mobile: 'cover',
+                },
             },
             { 
                 id: 'item-2',
@@ -73,13 +128,41 @@ const attributes = {
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
 
-                normalBackgroundImageUrl: '',
-                normalBackgroundImageAlt: '',
-                normalBackgroundImageID: '',
-                normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
-                normalBackgroundImageAttachment: 'scroll',
-                normalBackgroundImageRepeat: 'no-repeat',
-                normalBackgroundImageSize: 'cover',
+                normalBackgroundImageUrl:{
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                normalBackgroundImageAlt: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                normalBackgroundImageID: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                normalBackgroundImagePosition: {
+                    Desktop: { x: 0.5, y: 0.5 },
+                    Tablet: { x: 0.5, y: 0.5 },
+                    Mobile: { x: 0.5, y: 0.5 },
+                },
+                normalBackgroundImageAttachment: {
+                    Desktop: 'scroll',
+                    Tablet: 'scroll',
+                    Mobile: 'scroll',
+                },
+                normalBackgroundImageRepeat: {
+                    Desktop: 'no-repeat',
+                    Tablet: 'no-repeat',
+                    Mobile: 'no-repeat',
+                },
+                normalBackgroundImageSize: {
+                    Desktop: 'cover',
+                    Tablet: 'cover',
+                    Mobile: 'cover',
+                },
 
                 hoverItemBackgroundType: 'classic',
                 hoverItemClassicColor: '',
@@ -87,13 +170,41 @@ const attributes = {
                 hoverItemCustomGradientSwitcher: false,
                 hoverItemCustomGradientInputValue: '',
 
-                hoverBackgroundImageUrl: '',
-                hoverBackgroundImageAlt: '',
-                hoverBackgroundImageID: '',
-                hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
-                hoverBackgroundImageAttachment: 'scroll',
-                hoverBackgroundImageRepeat: 'no-repeat',
-                hoverBackgroundImageSize: 'cover',
+                hoverBackgroundImageUrl:{
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                hoverBackgroundImageAlt: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                hoverBackgroundImageID: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                hoverBackgroundImagePosition: {
+                    Desktop: { x: 0.5, y: 0.5 },
+                    Tablet: { x: 0.5, y: 0.5 },
+                    Mobile: { x: 0.5, y: 0.5 },
+                },
+                hoverBackgroundImageAttachment: {
+                    Desktop: 'scroll',
+                    Tablet: 'scroll',
+                    Mobile: 'scroll',
+                },
+                hoverBackgroundImageRepeat: {
+                    Desktop: 'no-repeat',
+                    Tablet: 'no-repeat',
+                    Mobile: 'no-repeat',
+                },
+                hoverBackgroundImageSize: {
+                    Desktop: 'cover',
+                    Tablet: 'cover',
+                    Mobile: 'cover',
+                },
 
             },
             { 
@@ -118,13 +229,41 @@ const attributes = {
                 normalItemCustomGradientSwitcher: false,
                 normalItemCustomGradientInputValue: '',
 
-                normalBackgroundImageUrl: '',
-                normalBackgroundImageAlt: '',
-                normalBackgroundImageID: '',
-                normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
-                normalBackgroundImageAttachment: 'scroll',
-                normalBackgroundImageRepeat: 'no-repeat',
-                normalBackgroundImageSize: 'cover',
+                normalBackgroundImageUrl:{
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                normalBackgroundImageAlt: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                normalBackgroundImageID: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                normalBackgroundImagePosition: {
+                    Desktop: { x: 0.5, y: 0.5 },
+                    Tablet: { x: 0.5, y: 0.5 },
+                    Mobile: { x: 0.5, y: 0.5 },
+                },
+                normalBackgroundImageAttachment: {
+                    Desktop: 'scroll',
+                    Tablet: 'scroll',
+                    Mobile: 'scroll',
+                },
+                normalBackgroundImageRepeat: {
+                    Desktop: 'no-repeat',
+                    Tablet: 'no-repeat',
+                    Mobile: 'no-repeat',
+                },
+                normalBackgroundImageSize: {
+                    Desktop: 'cover',
+                    Tablet: 'cover',
+                    Mobile: 'cover',
+                },
 
                 hoverItemBackgroundType: 'classic',
                 hoverItemClassicColor: '',
@@ -132,14 +271,41 @@ const attributes = {
                 hoverItemCustomGradientSwitcher: false,
                 hoverItemCustomGradientInputValue: '',
 
-                hoverBackgroundImageUrl: '',
-                hoverBackgroundImageAlt: '',
-                hoverBackgroundImageID: '',
-                hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
-                hoverBackgroundImageAttachment: 'scroll',
-                hoverBackgroundImageRepeat: 'no-repeat',
-                hoverBackgroundImageSize: 'cover',
-
+                hoverBackgroundImageUrl:{
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                hoverBackgroundImageAlt: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                hoverBackgroundImageID: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: '',
+                },
+                hoverBackgroundImagePosition: {
+                    Desktop: { x: 0.5, y: 0.5 },
+                    Tablet: { x: 0.5, y: 0.5 },
+                    Mobile: { x: 0.5, y: 0.5 },
+                },
+                hoverBackgroundImageAttachment: {
+                    Desktop: 'scroll',
+                    Tablet: 'scroll',
+                    Mobile: 'scroll',
+                },
+                hoverBackgroundImageRepeat: {
+                    Desktop: 'no-repeat',
+                    Tablet: 'no-repeat',
+                    Mobile: 'no-repeat',
+                },
+                hoverBackgroundImageSize: {
+                    Desktop: 'cover',
+                    Tablet: 'cover',
+                    Mobile: 'cover',
+                },
             },
         ],
         items: {
@@ -208,32 +374,60 @@ const attributes = {
                     default: "",
                 },
                 normalBackgroundImageUrl: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: {
+                        Desktop: "",
+                        Tablet: "",
+                        Mobile: ""
+                    }
                 },
                 normalBackgroundImageAlt: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: {
+                        Desktop: "",
+                        Tablet: "",
+                        Mobile: ""
+                    }
                 },
                 normalBackgroundImageID: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: {
+                        Desktop: "",
+                        Tablet: "",
+                        Mobile: ""
+                    }
                 },
                 normalBackgroundImagePosition: {
                     type: "object",
-                    default: { x: 0.5, y: 0.5 },
+                    default: {
+                        Desktop: { x: 0.5, y: 0.5 },
+                        Tablet: { x: 0.5, y: 0.5 },
+                        Mobile: { x: 0.5, y: 0.5 },
+                    }
                 },
                 normalBackgroundImageAttachment: {
-                    type: "string",
-                    default: "scroll"
+                    type: "object",
+                    default: {
+                        Desktop: "scroll",
+                        Tablet: "scroll",
+                        Mobile: "scroll",
+                    }
                 },
                 normalBackgroundImageRepeat: {
-                    type: "string",
-                    default: "no-repeat"
+                    type: "object",
+                    default: {
+                        Desktop: "no-repeat",
+                        Tablet: "no-repeat",
+                        Mobile: "no-repeat",
+                    }
                 },
                 normalBackgroundImageSize: {
-                    type: "string",
-                    default: "cover"
+                    type: "object",
+                    default: {
+                        Desktop: "cover",
+                        Tablet: "cover",
+                        Mobile: "cover",
+                    }
                 },
 
                 hoverItemBackgroundType: {
@@ -258,38 +452,66 @@ const attributes = {
                 },
 
                 hoverBackgroundImageUrl: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: {
+                        Desktop: "",
+                        Tablet: "",
+                        Mobile: ""
+                    }
                 },
 
                 hoverBackgroundImageAlt: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: {
+                        Desktop: "",
+                        Tablet: "",
+                        Mobile: ""
+                    }
                 },  
 
                 hoverBackgroundImageID: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: {
+                        Desktop: "",
+                        Tablet: "",
+                        Mobile: ""
+                    }
                 },  
 
                 hoverBackgroundImagePosition: {
                     type: "object", 
-                    default: { x: 0.5, y: 0.5 },
+                    default: {
+                        Desktop: { x: 0.5, y: 0.5 },
+                        Tablet: { x: 0.5, y: 0.5 },
+                        Mobile: { x: 0.5, y: 0.5 },
+                    }
                 },  
 
                 hoverBackgroundImageAttachment: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: {
+                        Desktop: "scroll",
+                        Tablet: "scroll",
+                        Mobile: "scroll",
+                    }
                 },    
 
                 hoverBackgroundImageRepeat: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: {
+                        Desktop: "no-repeat",
+                        Tablet: "no-repeat",
+                        Mobile: "no-repeat",
+                    }
                 },            
 
                 hoverBackgroundImageSize: {
-                    type: "string",
-                    default: ""
+                    type: "object",
+                    default: {
+                        Desktop: "cover",
+                        Tablet: "cover",
+                        Mobile: "cover",
+                    }
                 },
                 
             }
