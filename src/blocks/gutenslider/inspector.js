@@ -293,8 +293,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         let style = '';
         sliderItems.forEach(item => {
 
-            console.log(item.normalBackgroundImageUrl[deviceType]);
-
             const normalItemBackgroundType = item.normalItemBackgroundType;
             const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor; // Check if gradient is empty, fallback to classic color
             
@@ -359,7 +357,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         });
         return style;
-    }, [sliderItems, blockId]);
+    }, [sliderItems, blockId, deviceType]);
 
 
 

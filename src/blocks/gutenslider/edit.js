@@ -13,6 +13,7 @@ import { useState, useEffect, useRef } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';
+import {useDeviceType} from "@Utils/displayType"; 
 
 // Import Swiper React components and required modules
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -70,6 +71,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const blockProps = useBlockProps({
 		className: `guten-slider-container ${blockId}`,
 	});
+
+	const deviceType = useDeviceType();
 
 	// Local state management for slider items and active slide index
 	const [sliderItemList, setSliderItemList] = useState(sliderItems);
@@ -262,57 +265,68 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setSliderItemList([...sliderItemList, newItem]);
     };
 
+
     /**
      * Updates a specific property of a slide item
      * Handles special cases for background images with WordPress media integration
      */
     const handleChangeItem = (id, key, value) => {
+        // Get current device type ("Desktop", "Tablet", or "Mobile")
+        const currentDevice = deviceType; 
+
         const updatedItems = sliderItemList.map(item => {
             if (item.id === id) {
+                // Handle normal background image updates for the current device only
                 if (key === 'normalBackgroundImageID') {
                     // Get the full image data from WordPress media library
                     const image = wp.media.attachment(value).toJSON();
                     return {
                         ...item,
-                        [key]: value,
-                        'normalBackgroundImageUrl': {
-                            Desktop: image.url,
-                            Tablet: image.url,
-                            Mobile: image.url,
+                        normalBackgroundImageID: {
+                            ...item.normalBackgroundImageID,
+                            [currentDevice]: value,
                         },
-                        'normalBackgroundImageAlt': {
-                            Desktop: image.alt || '',
-                            Tablet: image.alt || '',
-                            Mobile: image.alt || '',
+                        normalBackgroundImageUrl: {
+                            ...item.normalBackgroundImageUrl,
+                            [currentDevice]: image.url,
+                        },
+                        normalBackgroundImageAlt: {
+                            ...item.normalBackgroundImageAlt,
+                            [currentDevice]: image.alt || '',
                         },
                     };
                 }
+
+                // Handle hover background image updates for the current device only
                 if (key === 'hoverBackgroundImageID') {
-                    // Get the full image data from WordPress media library
                     const image = wp.media.attachment(value).toJSON();
                     return {
                         ...item,
-                        [key]: value,
-                        'hoverBackgroundImageUrl': {
-                            Desktop: image.url,
-                            Tablet: image.url,
-                            Mobile: image.url,
+                        hoverBackgroundImageID: {
+                            ...item.hoverBackgroundImageID,
+                            [currentDevice]: value,
                         },
-                        'hoverBackgroundImageAlt': {
-                            Desktop: image.alt || '',
-                            Tablet: image.alt || '',
-                            Mobile: image.alt || '',
+                        hoverBackgroundImageUrl: {
+                            ...item.hoverBackgroundImageUrl,
+                            [currentDevice]: image.url,
+                        },
+                        hoverBackgroundImageAlt: {
+                            ...item.hoverBackgroundImageAlt,
+                            [currentDevice]: image.alt || '',
                         },
                     };
                 }
+
+                // For other properties, update as before
                 return { ...item, [key]: value };
             }
             return item;
         });
-        
+
         setSliderItemList(updatedItems);
         setAttributes({ sliderItems: updatedItems });
     };
+
 
     /**
      * Handles duplicate slide functionality
