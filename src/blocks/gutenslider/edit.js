@@ -46,6 +46,7 @@ import 'swiper/css/bundle';
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+        deviceType,
 		sliderItems,
 		sliderType,
 		carouselPerColumn,
@@ -65,6 +66,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showPagination,
 		paginationType,
 		dynamicBullets,
+        generateBackgroundStyle,
 	} = attributes;
 
 	// Block props for container
@@ -72,7 +74,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: `guten-slider-container ${blockId}`,
 	});
 
-	const deviceType = useDeviceType();
+	// const deviceType = useDeviceType();
 
 	// Local state management for slider items and active slide index
 	const [sliderItemList, setSliderItemList] = useState(sliderItems);

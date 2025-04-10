@@ -3,6 +3,10 @@ const attributes = {
         type: "string",
         default: ""
     },
+    deviceType: {
+        type: "string",
+        default: "Desktop",
+    },
     blockStyle: {
         type: "string",
         default: ""
