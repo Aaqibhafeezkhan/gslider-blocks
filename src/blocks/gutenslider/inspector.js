@@ -14,7 +14,7 @@ import ColorControl from '@Components/color-control';
 import ResponsiveRangeControl from '@Components/responsive-range-control';
 import ResponsiveTypographyControl from '@Components/responsive-typography-control';
 import BoxShadowSettingsControl from '@Components/box-shadow-control';
-import BackgroundColorControl from '@Components/background-color-control';
+import BackgroundControl from '@Components/background-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
 import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 
@@ -1107,7 +1107,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 />
                                             )}
 
-                                            <BackgroundColorControl
+                                            <BackgroundControl 
                                                 label={__("Background Color", "gutenslider-blocks")}
                                                 bgColorSwitcher={sliderArrowsBackgroundColorSwitcher}
                                                 setBgColorSwitcher={(value) => setAttributes({ sliderArrowsBackgroundColorSwitcher: value })}
@@ -1528,7 +1528,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 setAttributes={setAttributes}
                                             /> */}
 
-                                            <BackgroundColorControl
+                                            <BackgroundControl
                                                 label={__("Background Color", "gutenslider-blocks")}
                                                 deviceType={deviceType}
                                                 bgColorSwitcher={globalSliderItemBgColorSwitcher}

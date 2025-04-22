@@ -16,7 +16,7 @@ import ColorControl from '@Components/color-control';
 import SwitcherControl from '@Components/switcher-control';
 import './editor.lazy.scss';
 
-const BackgroundColorControl = ({
+const BackgroundControl = ({
     label = __("Background Color", "gutenslider-blocks"),
     deviceType,
     bgColorSwitcher,
@@ -236,4 +236,4 @@ const BackgroundColorControl = ({
     );
 };
 
-export default BackgroundColorControl;
+export default BackgroundControl;
