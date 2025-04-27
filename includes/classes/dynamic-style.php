@@ -1,30 +1,30 @@
 <?php
 /**
- * GutenSlider Blocks Dynamic Style Handler
+ * GSlider Blocks Dynamic Style Handler
  *
- * This class manages the dynamic styles generated for the GutenSlider blocks.
+ * This class manages the dynamic styles generated for the GSlider blocks.
  * It collects block styles, generates a CSS file, and enqueues it for frontend use.
  *
  * @since 1.0.0
- * @package gutenslider-blocks
+ * @package gslider-blocks
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-if (!class_exists('GutenSlider_Blocks_Dynamic_Style')) {
+if (!class_exists('GSlider_Blocks_Dynamic_Style')) {
     /**
-     * GutenSlider_Blocks_Dynamic_Style Class
+     * GSlider_Blocks_Dynamic_Style Class
      *
      * This class handles the generation and management of dynamic styles
-     * for GutenSlider blocks, including collecting styles, writing them to a CSS file,
+     * for GSlider blocks, including collecting styles, writing them to a CSS file,
      * and enqueuing the file for use on the frontend.
      *
      * @since 1.0.0
-     * @package gutenslider-blocks
+     * @package gslider-blocks
      */
-    class GutenSlider_Blocks_Dynamic_Style {
+    class GSlider_Blocks_Dynamic_Style {
         /**
          * CSS Subdirectory Path
          *
@@ -32,7 +32,7 @@ if (!class_exists('GutenSlider_Blocks_Dynamic_Style')) {
          *
          * @var string
          */
-        private const CSS_SUBDIR = '/gutenslider-blocks/css';
+        private const CSS_SUBDIR = '/gslider-blocks/css';
 
         /**
          * File Permissions for Generated CSS
@@ -159,13 +159,13 @@ if (!class_exists('GutenSlider_Blocks_Dynamic_Style')) {
                 return $block_content;
             }
 
-            // Check if the block is part of 'gutenslider-blocks'
-            if (isset($block['blockName']) && str_contains($block['blockName'], 'gutenslider-blocks/')) {
+            // Check if the block is part of 'gslider-blocks'
+            if (isset($block['blockName']) && str_contains($block['blockName'], 'gslider-blocks/')) {
                 if (isset($block['attrs']['blockStyle'])) {
                     // Generate a unique block ID based on block attributes
                     $block_id = isset($block['attrs']['blockId']) ? 
                         sanitize_key($block['attrs']['blockId']) : 
-                        'gutenslider-blocks-' . md5(serialize($block['attrs']));
+                        'gslider-blocks-' . md5(serialize($block['attrs']));
                     self::$styles[$block_id] = $block['attrs']['blockStyle'];
                 }
             }
@@ -189,7 +189,7 @@ if (!class_exists('GutenSlider_Blocks_Dynamic_Style')) {
 
             // Get the page ID for dynamically generating CSS file
             $page_id = get_queried_object_id();
-            $css_filename = 'gutenslider-blocks-dynamic-styles-' . $page_id . '.min.css';
+            $css_filename = 'gslider-blocks-dynamic-styles-' . $page_id . '.min.css';
             $css_file = $this->css_dir . '/' . $css_filename;
 
             $css_content = '';
@@ -198,7 +198,7 @@ if (!class_exists('GutenSlider_Blocks_Dynamic_Style')) {
             }
 
             // Add header with page ID and timestamp
-            $css_content = "/* GutenSlider Blocks Dynamic Styles - Page ID: $page_id - Generated on " . 
+            $css_content = "/* GSlider Blocks Dynamic Styles - Page ID: $page_id - Generated on " . 
                 current_time('mysql') . " */\n" . $this->minify_css($css_content);
 
             if (!function_exists('WP_Filesystem')) {
@@ -248,7 +248,7 @@ if (!class_exists('GutenSlider_Blocks_Dynamic_Style')) {
         
             // Get the page ID to determine the correct CSS file
             $page_id = get_queried_object_id();
-            $css_filename = 'gutenslider-blocks-dynamic-styles-' . $page_id . '.min.css';
+            $css_filename = 'gslider-blocks-dynamic-styles-' . $page_id . '.min.css';
             $css_file_path = $this->css_dir . '/' . $css_filename;
             $css_file_url = $this->css_url . '/' . $css_filename;
         
@@ -260,7 +260,7 @@ if (!class_exists('GutenSlider_Blocks_Dynamic_Style')) {
             // Enqueue the generated CSS file
             if (file_exists($css_file_path)) {
                 wp_enqueue_style(
-                    'gutenslider-blocks-dynamic-styles-' . $page_id,
+                    'gslider-blocks-dynamic-styles-' . $page_id,
                     $css_file_url,
                     array(),
                     filemtime($css_file_path)
@@ -294,4 +294,4 @@ if (!class_exists('GutenSlider_Blocks_Dynamic_Style')) {
     }
 }
 
-GutenSlider_Blocks_Dynamic_Style::get_instance();
+GSlider_Blocks_Dynamic_Style::get_instance();

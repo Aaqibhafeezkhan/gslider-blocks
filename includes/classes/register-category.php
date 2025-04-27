@@ -1,27 +1,27 @@
 <?php
 /**
- * GutenSlider Blocks Category
+ * GSlider Blocks Category
  *
- * Registers a custom category for blocks created by the GutenSlider plugin in the Gutenberg editor.
+ * Registers a custom category for blocks created by the GSlider plugin in the Gutenberg editor.
  *
  * @since 1.0.0
- * @package gutenslider-blocks
+ * @package gslider-blocks
  */
 
 if (!defined('ABSPATH')) {
     exit; // Prevent direct access to the file.
 }
 
-if (!class_exists('GutenSlider_Blocks_Category')) {
+if (!class_exists('GSlider_Blocks_Category')) {
     /**
      * Class for registering a custom block category in Gutenberg.
      *
      * @since 1.0.0
-     * @package gutenslider-blocks
+     * @package gslider-blocks
      */
-    class GutenSlider_Blocks_Category {
+    class GSlider_Blocks_Category {
         // Slug for the custom block category.
-        private const CATEGORY_SLUG = 'gutenslider-blocks';
+        private const CATEGORY_SLUG = 'gslider-blocks';
         /**
          * Singleton instance of the class.
          *
@@ -65,7 +65,7 @@ if (!class_exists('GutenSlider_Blocks_Category')) {
             // Define the new custom block category.
             $new_category = [
                 'slug' => self::CATEGORY_SLUG,
-                'title' => esc_html__('GutenSlider Blocks', 'gutenslider-blocks'),
+                'title' => esc_html__('GSlider Blocks', 'gslider-blocks'),
                 'icon' => null
             ];
 
@@ -92,4 +92,4 @@ if (!class_exists('GutenSlider_Blocks_Category')) {
 }
 
 // Initialize the block category registration process.
-GutenSlider_Blocks_Category::get_instance();
+GSlider_Blocks_Category::get_instance();

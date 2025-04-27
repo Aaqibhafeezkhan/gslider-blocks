@@ -1,0 +1,11 @@
+{
+    "name": "noruzzaman/gslider",
+    "description": "A slider block plugin for WordPress",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "GSlider\\": "includes/"
+        }
+    },
+    "require": {}
+}

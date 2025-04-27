@@ -1,11 +1,11 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "gutenslider-blocks/gutenslider",
+	"name": "gslider-blocks/gslider",
 	"version": "1.0.0",
-	"title": "GutenSlider",
+	"title": "GSlider",
 	"icon": "slides",
-	"category": "gutenslider-blocks",
+	"category": "gslider-blocks",
 	"description": "Slider block ",
 	"example": {
 		"attributes": {
@@ -19,7 +19,7 @@
 		"customClassName": false,
 		"align": ["wide", "full"]
 	},
-	"textdomain": "gutenslider-blocks",
+	"textdomain": "gslider-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",

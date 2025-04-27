@@ -1,7 +1,7 @@
 <?php
 /**
  * Enqueue Assets 
- * @package GutenSliderBlocks
+ * @package GSliderBlocks 
  */
 
 // Exit if accessed directly to prevent security vulnerabilities.
@@ -10,15 +10,15 @@ if (!defined('ABSPATH')) {
 }
 
 // Check if the class already exists to avoid redeclaration errors.
-if (!class_exists('GutenSlider_Blocks_Assets')) {
+if (!class_exists('GSlider_Blocks_Assets')) {
 
-    class GutenSlider_Blocks_Assets {
+    class GSlider_Blocks_Assets {
 
         /**
-         * Singleton instance of the GutenSlider_Blocks_Assets class.
+         * Singleton instance of the GSlider_Blocks_Assets class.
          *
          * @since 1.0.0
-         * @var GutenSlider_Blocks_Assets
+         * @var GSlider_Blocks_Assets
          */
         private static $instance = null;
 
@@ -28,6 +28,8 @@ if (!class_exists('GutenSlider_Blocks_Assets')) {
          */
         public function __construct() {
             add_action('enqueue_block_assets', [$this, 'enqueue_assets']);
+
+            var_dump(GSLIDER_PLUGIN_URL . 'assets/css/swiper-bundle.min.css');
         }
 
         /**
@@ -38,25 +40,20 @@ if (!class_exists('GutenSlider_Blocks_Assets')) {
 
             // Register styles
             wp_register_style(
-                'gutenslider-blocks-swiper-style',
-                GutenSlider_Blocks_ASSETS_URL . 'css/swiper-bundle.min.css',
+                'gslider-blocks-swiper-style',
+                GSLIDER_PLUGIN_URL . 'assets/css/swiper-bundle.min.css',
                 [],
-                GutenSlider_Blocks_VERSION
+                GSLIDER_VERSION
             );
 
             // Register scripts
             wp_register_script(
-                'gutenslider-blocks-swiper-script',
-                GutenSlider_Blocks_ASSETS_URL . 'js/swiper-bundle.min.js',
+                'gslider-blocks-swiper-script',
+                GSLIDER_PLUGIN_URL . 'assets/js/swiper-bundle.min.js',
                 [],
-                GutenSlider_Blocks_VERSION,
+                GSLIDER_VERSION,
                 true
             );
-
-            if (!is_admin()) {
-                wp_enqueue_style('gutenslider-blocks-swiper-style');
-                wp_enqueue_script('gutenslider-blocks-swiper-script');
-            }
         }
 
         /**
@@ -77,4 +74,4 @@ if (!class_exists('GutenSlider_Blocks_Assets')) {
 }
 
 // Initialize the block registration process.
-GutenSlider_Blocks_Assets::get_instance();
+GSlider_Blocks_Assets::get_instance(); 

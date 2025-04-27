@@ -1,25 +1,25 @@
 <?php
 /**
- * GutenSlider Blocks FontLoader
+ * GSlider Blocks FontLoader 
  *
- * Handles dynamic loading of Google Fonts for GutenSlider blocks.
+ * Handles dynamic loading of Google Fonts for GSlider blocks.
  *
  * @since 1.0.0
- * @package gutenslider-blocks
+ * @package gslider-blocks
  */
 
 if (!defined('ABSPATH')) {
     exit; // Prevent direct access to the file.
 }
 
-if (!class_exists('GutenSlider_Blocks_FontLoader')) {
+if (!class_exists('GSlider_Blocks_FontLoader')) {
     /**
-     * Class responsible for loading Google Fonts for GutenSlider blocks.
+     * Class responsible for loading Google Fonts for GSlider blocks.
      *
      * @since 1.0.0
-     * @package gutenslider-blocks
+     * @package gslider-blocks
      */
-    class GutenSlider_Blocks_FontLoader {
+    class GSlider_Blocks_FontLoader {
         // List of supported font weights for Google Fonts.
         private const FONT_WEIGHTS = '100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
         
@@ -145,13 +145,13 @@ if (!class_exists('GutenSlider_Blocks_FontLoader')) {
 
             // Register and enqueue the font styles.
             wp_register_style(
-                'gutenslider-blocks-fonts',
+                'gslider-blocks-fonts', 
                 esc_url($font_url),
                 [], // No dependencies
-                defined('GutenSlider_Blocks_VERSION') ? GutenSlider_Blocks_VERSION : '1.0.0'
+                defined('GSLIDER_VERSION') ? GSLIDER_VERSION : '1.0.1' 
             );
 
-            wp_enqueue_style('gutenslider-blocks-fonts'); // Enqueue the font stylesheet.
+            wp_enqueue_style('gslider-blocks-fonts'); // Enqueue the font stylesheet.
         }
 
         /**
@@ -191,4 +191,4 @@ if (!class_exists('GutenSlider_Blocks_FontLoader')) {
 }
 
 // Initialize the FontLoader singleton.
-GutenSlider_Blocks_FontLoader::get_instance();
+GSlider_Blocks_FontLoader::get_instance();

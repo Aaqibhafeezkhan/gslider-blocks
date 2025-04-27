@@ -1,11 +1,11 @@
 <?php
 /**
- * GutenSlider Blocks Registration
+ * GSlider Blocks Registration 
  *
- * Handles the registration of Gutenberg blocks for the GutenSlider plugin.
+ * Handles the registration of Gutenberg blocks for the GSlider plugin.
  *
  * @since 1.0.0
- * @package GutenSlider
+ * @package GSlider
  */
 
 // Exit if accessed directly to prevent security vulnerabilities.
@@ -14,20 +14,20 @@ if (!defined('ABSPATH')) {
 }
 
 // Check if the class already exists to avoid redeclaration errors.
-if (!class_exists('GutenSlider_Blocks_Registration')) {
+if (!class_exists('GSlider_Blocks_Registration')) {
     /**
-     * Class GutenSlider_Blocks_Registration
+     * Class GSlider_Blocks_Registration
      *
-     * Responsible for registering blocks for the GutenSlider plugin.
+     * Responsible for registering blocks for the GSlider plugin.
      */
-    class GutenSlider_Blocks_Registration {
+    class GSlider_Blocks_Registration {
         /**
          * List of blocks to be registered.
          *
          * @since 1.0.0
          */
         private const BLOCKS = [
-            'gutenslider',
+            'gslider',
         ];
 
         /**
@@ -64,17 +64,17 @@ if (!class_exists('GutenSlider_Blocks_Registration')) {
          */
         public function register_blocks() {
             // Check if the plugin directory constant is defined.
-            if (!defined('GutenSlider_Blocks_PLUGIN_DIR')) {
-                error_log('GutenSlider Blocks: Plugin directory constant not defined.');
+            if (!defined('GSLIDER_DIR_PATH')) {
+                error_log('GSlider Blocks: Plugin directory constant not defined.');
                 return;
             }
 
             // Build directory for blocks.
-            $build_dir = trailingslashit(GutenSlider_Blocks_PLUGIN_DIR) . 'build/blocks/';
+            $build_dir = trailingslashit(GSLIDER_DIR_PATH) . 'build/blocks/';
             
             // Check if the build directory is readable.
             if (!is_readable($build_dir)) {
-                error_log('GutenSlider Blocks: Main build directory is not readable: ' . $build_dir);
+                error_log('GSlider Blocks: Main build directory is not readable: ' . $build_dir);
                 return;
             }
 
@@ -84,7 +84,7 @@ if (!class_exists('GutenSlider_Blocks_Registration')) {
                     $this->register_single_block($build_dir, $block);
                 } catch (Exception $e) {
                     // Log errors encountered during block registration.
-                    error_log('GutenSlider Blocks: Error registering block ' . $block . ': ' . $e->getMessage());
+                    error_log('GSlider Blocks: Error registering block ' . $block . ': ' . $e->getMessage()); 
                 }
             }
         }
@@ -136,4 +136,4 @@ if (!class_exists('GutenSlider_Blocks_Registration')) {
 }
 
 // Initialize the block registration process.
-GutenSlider_Blocks_Registration::get_instance();
+GSlider_Blocks_Registration::get_instance();
