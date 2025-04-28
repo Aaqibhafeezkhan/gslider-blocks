@@ -28,8 +28,6 @@ if (!class_exists('GSlider_Blocks_Assets')) {
          */
         public function __construct() {
             add_action('enqueue_block_assets', [$this, 'enqueue_assets']);
-
-            var_dump(GSLIDER_PLUGIN_URL . 'assets/css/swiper-bundle.min.css');
         }
 
         /**
@@ -54,6 +52,12 @@ if (!class_exists('GSlider_Blocks_Assets')) {
                 GSLIDER_VERSION,
                 true
             );
+
+
+            if (!is_admin()) {
+                wp_enqueue_style('gslider-blocks-swiper-style');
+                wp_enqueue_script('gslider-blocks-swiper-script');
+            }
         }
 
         /**

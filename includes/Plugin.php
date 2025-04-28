@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'GSlider_Blocks_Loader' ) ) {
+if ( ! class_exists( 'Plugin' ) ) {
 
-	class GSlider_Blocks_Loader {
+	class Plugin {
 
 		private static $instance = null;
 
@@ -34,4 +34,4 @@ if ( ! class_exists( 'GSlider_Blocks_Loader' ) ) {
 
 }
 
-GSlider_Blocks_Loader::get_instance();
+Plugin::get_instance();

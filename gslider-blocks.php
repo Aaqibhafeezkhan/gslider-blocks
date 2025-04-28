@@ -77,7 +77,7 @@ if ( ! class_exists( 'GSliderBlocks' ) ) {
 		 * Include necessary files for the plugin.
 		 */
 		private function includes() {
-			require_once trailingslashit( GSLIDER_DIR_PATH ) . 'includes/gslider-blocks-loader.php';
+			require_once trailingslashit( GSLIDER_DIR_PATH ) . 'includes/Plugin.php';
 		}
 	}
 }
