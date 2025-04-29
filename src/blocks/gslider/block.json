@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "gslider-blocks/gslider",
+	"version": "1.0.0",
+	"title": "GSlider",
+	"icon": "slides",
+	"category": "gslider-blocks",
+	"description": "Slider block ",
+	"example": {
+		"attributes": {
+		  "preview": true
+		},
+		"viewportWidth": 410
+	  },
+	"supports": {
+		"html": false,
+		"anchor": false,
+		"customClassName": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "gslider-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

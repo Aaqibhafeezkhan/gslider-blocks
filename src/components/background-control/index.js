@@ -6,17 +6,19 @@ import {
     BaseControl, 
     Dropdown,
     Dashicon,
+    TabPanel,
 
 } from '@wordpress/components';
 
-import BackgroundImageControl from '@Components/background-image-control';
+import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import GradientColorControl from '@Components/gradient-color-control';
 import ColorControl from '@Components/color-control';
 import SwitcherControl from '@Components/switcher-control';
 import './editor.lazy.scss';
 
-const BackgroundColorControl = ({
+const BackgroundControl = ({
     label = __("Background Color", "gutenslider-blocks"),
+    deviceType,
     bgColorSwitcher,
     setBgColorSwitcher,
 
@@ -69,6 +71,7 @@ const BackgroundColorControl = ({
     setHoverBackgroundImageRepeat,
     hoverBackgroundImageSize = 'cover',
     setHoverBackgroundImageSize,
+    setAttributes,
 
     isBackgroundImage = true,
 
@@ -82,41 +85,32 @@ const BackgroundColorControl = ({
     return (
 
         <>
-            <SwitcherControl
-                label={label}
-                globalSwitcher={bgColorSwitcher}
-                setGlobalSwitcher={(value) => setBgColorSwitcher(value)}
-            />
-
-            <div className="global-setting-color-container">
-                {bgColorSwitcher === 'normal' && (
-                    <BaseControl
-                        label={__("Background Type", "gutenslider-blocks")}
-                        className="global-setting-color-switcher-wrapper"
-                    >
-                        <Dropdown
-                            className="global-setting-icon-dropdown"
-                            contentClassName="global-setting-icon-dropdown-content"
-                            popoverProps={{ placement: 'bottom-start' }}
-                            renderToggle={({ isOpen, onToggle }) => (
-                                <Button
-                                    onClick={onToggle}
-                                    aria-expanded={isOpen}
-                                    className="color-ball"
-                                >
-                                </Button>
-                            )}
-                            renderContent={() => (
-                                <div className="global-setting-background-color-popup-wrapper">
+            <BaseControl
+                label={__("Background", "gutenslider-blocks")}
+                    className="gutenslider-background-color-control-wrapper-label global-setting-switcher-container"
+                >
+                <TabPanel
+                    className="gutenslider-bg-tab-panel"
+                    activeClass="active-tab"
+                    tabs={[
+                        { name: "normal", title: __("Normal", "gutenslider-blocks"), className: "gutenslider-bg-tab" },
+                        { name: "hover", title: __("Hover", "gutenslider-blocks"), className: "gutenslider-bg-tab" },
+                    ]}
+                >
+                    {(tab) => (
+                        <div className={`gutenslider-tab-panel-wrapper ${tab.name}`}>
+                            {tab.name === "normal" && (
+                                <>
                                     <BaseControl
-                                        className="global-setting-background-color-popup-inner-wrapper"
+                                        label={__("Background Type", "gutenslider-blocks")}
+                                        className="global-setting-switcher-panel-wrapper"
                                     >
-                                        <ButtonGroup className="global-setting-background-color-panel-btn">
+                                        <ButtonGroup className="global-setting-switcher-panel-btn">
                                             {BACKGROUND_TYPES.map((item) => (
                                                 <Button
                                                     key={item.value}
                                                     onClick={() => setNormalBackgroundType(item.value)}
-                                                    className={`global-setting-background-color-panel-btn-switcher ${normalBackgroundType === item.value ? 'active' : ''}`}
+                                                    className={`global-setting-switcher-panel-btn-switcher ${normalBackgroundType === item.value ? 'active' : ''}`}
                                                 >
                                                     {item.label}
                                                 </Button>
@@ -134,8 +128,9 @@ const BackgroundColorControl = ({
                                             />
 
                                             {isBackgroundImage && (
-                                                <BackgroundImageControl
+                                                <ResponsiveBackgroundImageControl
                                                     label={__("Background Image", "gutenslider-blocks")}
+                                                    deviceType={deviceType}
                                                     globalBackgroundImageUrl={normalBackgroundImageUrl}
                                                     setGlobalBackgroundImageUrl={(value) => setNormalBackgroundImageUrl(value)}
                                                     globalBackgroundImageAlt={normalBackgroundImageAlt}
@@ -150,6 +145,7 @@ const BackgroundColorControl = ({
                                                     setGlobalBackgroundImageRepeat={(value) => setNormalBackgroundImageRepeat(value)}
                                                     globalBackgroundImageSize={normalBackgroundImageSize}
                                                     setGlobalBackgroundImageSize={(value) => setNormalBackgroundImageSize(value)}
+                                                    setAttributes={setAttributes}
                                                 />
                                             )}
                                                     
@@ -166,39 +162,20 @@ const BackgroundColorControl = ({
                                             setGlobalGradientColor={(value) => setNormalGradientColor(value)}
                                         />
                                     )}
-                                </div>
+                                </>
                             )}
-                        />
-                    </BaseControl>
-                )}
-                {bgColorSwitcher === 'hover' && (
-                    <BaseControl
-                        label={__("Background Type", "gutenslider-blocks")}
-                        className="global-setting-color-switcher-wrapper"
-                    >
-                        <Dropdown
-                            className="global-setting-icon-dropdown"
-                            contentClassName="global-setting-icon-dropdown-content"
-                            popoverProps={{ placement: 'bottom-start' }}
-                            renderToggle={({ isOpen, onToggle }) => (
-                                <Button
-                                    onClick={onToggle}
-                                    aria-expanded={isOpen}
-                                    className="color-ball"
-                                >
-                                </Button>
-                            )}
-                            renderContent={() => (
-                                <div className="global-setting-background-color-popup-wrapper">
+                            {tab.name === "hover" && (
+                                <>
                                     <BaseControl
-                                        className="global-setting-background-color-popup-inner-wrapper"
+                                        label={__("Background Type", "gutenslider-blocks")}
+                                        className="global-setting-switcher-panel-wrapper"
                                     >
-                                        <ButtonGroup className="global-setting-background-color-panel-btn">
+                                        <ButtonGroup className="global-setting-switcher-panel-btn"> 
                                             {BACKGROUND_TYPES.map((item) => (
                                                 <Button
                                                     key={item.value}
                                                     onClick={() => setHoverBackgroundType(item.value)}
-                                                    className={`global-setting-background-color-panel-btn-switcher ${hoverBackgroundType === item.value ? 'active' : ''}`}
+                                                    className={`global-setting-switcher-panel-btn-switcher ${hoverBackgroundType === item.value ? 'active' : ''}`}
                                                 >
                                                     {item.label}
                                                 </Button>
@@ -216,8 +193,9 @@ const BackgroundColorControl = ({
                                             />
 
                                             {isBackgroundImage && (
-                                                <BackgroundImageControl
+                                                <ResponsiveBackgroundImageControl
                                                     label={__("Background Image", "gutenslider-blocks")}
+                                                    deviceType={deviceType}
                                                     globalBackgroundImageUrl={hoverBackgroundImageUrl}
                                                     setGlobalBackgroundImageUrl={(value) => setHoverBackgroundImageUrl(value)}
                                                     globalBackgroundImageAlt={hoverBackgroundImageAlt}
@@ -232,6 +210,7 @@ const BackgroundColorControl = ({
                                                     setGlobalBackgroundImageRepeat={(value) => setHoverBackgroundImageRepeat(value)}
                                                     globalBackgroundImageSize={hoverBackgroundImageSize}
                                                     setGlobalBackgroundImageSize={(value) => setHoverBackgroundImageSize(value)}
+                                                    setAttributes={setAttributes}
                                                 />
                                             )}
                                         </>
@@ -247,14 +226,14 @@ const BackgroundColorControl = ({
                                             setGlobalGradientColor={(value) => setHoverGradientColor(value)}
                                         />
                                     )}
-                                </div>
+                                </>
                             )}
-                        />
-                    </BaseControl>
-                )}
-            </div>
+                        </div>
+                    )}
+                </TabPanel>
+            </BaseControl>
         </>
     );
 };
 
-export default BackgroundColorControl;
+export default BackgroundControl;

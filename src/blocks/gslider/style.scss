@@ -1,3 +1,35 @@
+.guten-slider-content-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: clamp(300px, 60vh, 500px);
+    justify-content: center;
+    transition: ease-in-out .3s;
+    .guten-slider-content-inner-wrapper {
+        box-sizing: border-box;
+        margin: 0 auto;
+        max-width: 80%;
+        padding: clamp(15px, 6vw, 30px);
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.swiper-wrapper {
+    height: auto !important;
+}
+
+/* In your CSS */
+.swiper-backface-hidden .swiper-slide {
+    backface-visibility: visible !important;
+}
+:where(.wp-site-blocks *:focus) {
+    outline-width: 0 !important;
+}
+
+
+
+
 $primary_color: #007cba;
 $secondary_color: #5f5f5f;
 $background_color: #EDEDED;
@@ -38,19 +70,21 @@ $border_color: #dddddd;
     }
 }
 
-.global-setting-icon-dropdown-content {
-    z-index: 99999;
-    .components-popover__content {
-        padding: 20px;
-        min-width: 350px;
-        margin-right: 30px;
-    }
-    .global-setting-background-color-popup-wrapper {
-        .global-setting-background-color-popup-inner-wrapper {
-            .components-base-control__field {
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
+.sortable-item-content-dropdown {
+    &.global-setting-icon-dropdown-content {
+        z-index: 99999;
+        .components-popover__content {
+            padding: 20px;
+            min-width: 350px;
+            margin-right: 30px;
+        }
+        .global-setting-background-color-popup-wrapper {
+            .global-setting-background-color-popup-inner-wrapper {
+                .components-base-control__field {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                }
             }
         }
     }
