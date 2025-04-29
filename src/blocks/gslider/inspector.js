@@ -14,13 +14,16 @@ import ColorControl from '@Components/color-control';
 import ResponsiveRangeControl from '@Components/responsive-range-control';
 import ResponsiveTypographyControl from '@Components/responsive-typography-control';
 import BoxShadowSettingsControl from '@Components/box-shadow-control';
-import BackgroundColorControl from '@Components/background-color-control';
+import BackgroundControl from '@Components/background-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
+import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+
 import {useDeviceType} from "@Utils/displayType"; 
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
     const { 
         blockId,
+        deviceType,
         sliderItems,
         blockStyle,
         sliderType,
@@ -205,10 +208,54 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         /** Global Settings */
         sliderGlobalZIndex,
+
+
+        /** Background Image */
+        sliderBgNormalBackgroundImageUrl,
+        sliderBgNormalBackgroundImagePosition,
+        sliderBgNormalBackgroundImageAttachment,
+        sliderBgNormalBackgroundImageRepeat,
+        sliderBgNormalBackgroundImageSize,
+
+
+        globalSliderItemBgColorSwitcher,
+        globalNormalItemBackgroundType,
+        globalNormalItemClassicColor,
+        globalNormalItemGradientColor,
+        globalNormalItemCustomGradientSwitcher,
+        globalNormalItemCustomGradientInputValue,
+        globalNormalBackgroundImageUrl,
+        globalNormalBackgroundImageAlt,
+        globalNormalBackgroundImageID,
+        globalNormalBackgroundImagePosition,
+        globalNormalBackgroundImageAttachment,
+        globalNormalBackgroundImageRepeat,
+        globalNormalBackgroundImageSize,
+
+        globalHoverItemBackgroundType,
+        globalHoverItemClassicColor,
+        globalHoverItemGradientColor,
+        globalHoverItemCustomGradientSwitcher,
+        globalHoverItemCustomGradientInputValue,
+        globalHoverBackgroundImageUrl,
+        globalHoverBackgroundImageAlt,
+        globalHoverBackgroundImageID,
+        globalHoverBackgroundImagePosition,
+        globalHoverBackgroundImageAttachment,
+        globalHoverBackgroundImageRepeat,
+        globalHoverBackgroundImageSize,
+        /** End Global Setting */
+        
+        
         
     } = attributes;
 
-    const deviceType = useDeviceType();
+
+    const currentDeviceType = useDeviceType();
+
+    useEffect(() => {
+        setAttributes({ deviceType: currentDeviceType });
+    }, [currentDeviceType]);
 
     useEffect(() => {
         if (clientId) {
@@ -251,72 +298,166 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     const sliderItemColorStyle = useMemo(() => {
         let style = '';
         sliderItems.forEach(item => {
-
+            // Desktop styles (default)
             const normalItemBackgroundType = item.normalItemBackgroundType;
-            const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor; // Check if gradient is empty, fallback to classic color
+            const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor;
             
             if (normalItemBackgroundType === 'gradient') {
-                const gradientStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}  {
-                    background: ${item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue ? item.normalItemCustomGradientInputValue : normalItemGradientColor};
-                }`;
-                style += gradientStyle;
-
-            } else if (item.normalBackgroundImageUrl) {
-
-                // Convert background position object to proper CSS format
-                const backgroundPosition = item.normalBackgroundImagePosition
-                ? `${item.normalBackgroundImagePosition.x * 100}% ${item.normalBackgroundImagePosition.y * 100}%`
-                : "50% 50%"; // Default to 50% 50% if not provided
-
-                const backgroundImageStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
-                    background-image: url(${item.normalBackgroundImageUrl});
-                    background-position: ${backgroundPosition};
-                    background-attachment: ${item.normalBackgroundImageAttachment};
-                    background-repeat: ${item.normalBackgroundImageRepeat};
-                    background-size: ${item.normalBackgroundImageSize};
+                const gradientValue = item.normalItemCustomGradientSwitcher && item.normalItemCustomGradientInputValue 
+                    ? item.normalItemCustomGradientInputValue 
+                    : normalItemGradientColor;
+                
+                if (gradientValue) {
+                    const gradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
+                        background: ${gradientValue};
+                        transition: all .3s ease-in-out;
+                    }`;
+                    style += gradientStyle;
+                }
+            } else if (item.normalBackgroundImageUrl.Desktop) {
+                let backgroundImageStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
+                    background-image: url(${item.normalBackgroundImageUrl.Desktop});`;
+                
+                if (item.normalBackgroundImagePosition.Desktop) {
+                    const backgroundPosition = `${item.normalBackgroundImagePosition.Desktop.x * 100}% ${item.normalBackgroundImagePosition.Desktop.y * 100}%`;
+                    backgroundImageStyle += `
+                    background-position: ${backgroundPosition};`;
+                }
+                
+                if (item.normalBackgroundImageAttachment.Desktop) {
+                    backgroundImageStyle += `
+                    background-attachment: ${item.normalBackgroundImageAttachment.Desktop};`;
+                }
+                
+                if (item.normalBackgroundImageRepeat.Desktop) {
+                    backgroundImageStyle += `
+                    background-repeat: ${item.normalBackgroundImageRepeat.Desktop};`;
+                }
+                
+                if (item.normalBackgroundImageSize.Desktop) {
+                    backgroundImageStyle += `
+                    background-size: ${item.normalBackgroundImageSize.Desktop};`;
+                }
+                
+                backgroundImageStyle += `
+                    transition: all .3s ease-in-out;
                 }`;
                 style += backgroundImageStyle;
-            } else {
-                const classicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id} {
+            } else if (item.normalItemClassicColor) {
+                const classicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};
+                    transition: all .3s ease-in-out;
                 }`;
                 style += classicStyle;
             }
 
+            // Hover styles (Desktop)
             const hoverItemBackgroundType = item.hoverItemBackgroundType;
-            const hoverItemGradientColor = item.hoverItemGradientColor || item.hoverItemClassicColor; // Similar fallback for hover state
+            const hoverItemGradientColor = item.hoverItemGradientColor || item.hoverItemClassicColor;
             
             if (hoverItemBackgroundType === 'gradient') {
-                const hoverGradientStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
-                    background: ${item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue ? item.hoverItemCustomGradientInputValue : hoverItemGradientColor};
-                }`;
-                style += hoverGradientStyle;
-
-            }else if (item.hoverBackgroundImageUrl) { 
-
-                // Convert background position object to proper CSS format
-                const backgroundPosition = item.hoverBackgroundImagePosition
-                ? `${item.hoverBackgroundImagePosition.x * 100}% ${item.hoverBackgroundImagePosition.y * 100}%`
-                : "50% 50%"; // Default to 50% 50% if not provided
-
-                const backgroundImageStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
-                    background-image: url(${item.hoverBackgroundImageUrl});
-                    background-position: ${backgroundPosition};
-                    background-attachment: ${item.hoverBackgroundImageAttachment};
-                    background-repeat: ${item.hoverBackgroundImageRepeat};
-                    background-size: ${item.hoverBackgroundImageSize};
+                const hoverGradientValue = item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue 
+                    ? item.hoverItemCustomGradientInputValue 
+                    : hoverItemGradientColor;
+                
+                if (hoverGradientValue) {
+                    const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
+                        background: ${hoverGradientValue};
+                        transition: all .3s ease-in-out;
+                    }`;
+                    style += hoverGradientStyle;
+                }
+            } else if (item.hoverBackgroundImageUrl.Desktop) {  
+                let backgroundImageStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
+                    background-image: url(${item.hoverBackgroundImageUrl.Desktop});`;
+                
+                if (item.hoverBackgroundImagePosition.Desktop) {
+                    const backgroundPosition = `${item.hoverBackgroundImagePosition.Desktop.x * 100}% ${item.hoverBackgroundImagePosition.Desktop.y * 100}%`;
+                    backgroundImageStyle += `
+                    background-position: ${backgroundPosition};`;
+                }
+                
+                if (item.hoverBackgroundImageAttachment.Desktop) {
+                    backgroundImageStyle += `
+                    background-attachment: ${item.hoverBackgroundImageAttachment.Desktop};`;
+                }
+                
+                if (item.hoverBackgroundImageRepeat.Desktop) {
+                    backgroundImageStyle += `
+                    background-repeat: ${item.hoverBackgroundImageRepeat.Desktop};`;
+                }
+                
+                if (item.hoverBackgroundImageSize.Desktop) {
+                    backgroundImageStyle += `
+                    background-size: ${item.hoverBackgroundImageSize.Desktop};`;
+                }
+                
+                backgroundImageStyle += `
+                    transition: all .3s ease-in-out;
                 }`;
                 style += backgroundImageStyle;
-            } else {
-                const hoverClassicStyle = `.${blockId}.guten-slider-content-wrapper.${item.id}:hover {
+            } else if (item.hoverItemClassicColor) {
+                const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
                     background: ${item.hoverItemClassicColor};
+                    transition: all .3s ease-in-out;
                 }`;
                 style += hoverClassicStyle;
             }
 
+            // Tablet styles (max-width: 1024px)
+            style += `
+            @media only screen and (max-width: 1024px) {
+                .${blockId} .guten-slider-content-wrapper.${item.id} {`;
+            
+            if (normalItemBackgroundType === 'gradient' && item.normalItemGradientColor) {
+                style += `
+                    background: ${item.normalItemGradientColor};`;
+            } else if (item.normalBackgroundImageUrl.Tablet || item.normalBackgroundImageUrl.Desktop) {
+                style += `
+                    background-image: url(${item.normalBackgroundImageUrl.Tablet || item.normalBackgroundImageUrl.Desktop});`;
+                if (item.normalBackgroundImageSize.Tablet || item.normalBackgroundImageSize.Desktop) {
+                    style += `
+                    background-size: ${item.normalBackgroundImageSize.Tablet || item.normalBackgroundImageSize.Desktop};`;
+                }
+                style += `
+                    background-position: center center;
+                    background-repeat: no-repeat;`;
+            } else if (item.normalItemClassicColor) {
+                style += `
+                    background: ${item.normalItemClassicColor};`;
+            }
+            style += `
+                }
+            }`;
+
+            // Mobile styles (max-width: 767px)
+            style += `
+            @media only screen and (max-width: 767px) {
+                .${blockId} .guten-slider-content-wrapper.${item.id} {`;
+            
+            if (normalItemBackgroundType === 'gradient' && item.normalItemGradientColor) {
+                style += `
+                    background: ${item.normalItemGradientColor};`;
+            } else if (item.normalBackgroundImageUrl.Mobile || item.normalBackgroundImageUrl.Tablet || item.normalBackgroundImageUrl.Desktop) {
+                style += `
+                    background-image: url(${item.normalBackgroundImageUrl.Mobile || item.normalBackgroundImageUrl.Tablet || item.normalBackgroundImageUrl.Desktop});`;
+                if (item.normalBackgroundImageSize.Mobile || item.normalBackgroundImageSize.Tablet || item.normalBackgroundImageSize.Desktop) {
+                    style += `
+                    background-size: ${item.normalBackgroundImageSize.Mobile || item.normalBackgroundImageSize.Tablet || item.normalBackgroundImageSize.Desktop};`;
+                }
+                style += `
+                    background-position: center center;
+                    background-repeat: no-repeat;`;
+            } else if (item.normalItemClassicColor) {
+                style += `
+                    background: ${item.normalItemClassicColor};`;
+            }
+            style += `
+                }
+            }`;
         });
         return style;
-    }, [sliderItems, blockId]);
+    }, [sliderItems, blockId, deviceType]);
 
 
 
@@ -479,7 +620,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
     `, [
         blockId,
-
+        deviceType,
         /** Start Arrows Style */
         sliderArrowsSize,
         sliderArrowsSizeUnits,
@@ -692,6 +833,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                                     handleDeleteItem={handleDeleteItem}
                                                                     handleDuplicateItem={handleDuplicateItem}
                                                                     index={index}
+                                                                    deviceType={deviceType}
+                                                                    setAttributes={setAttributes}
                                                                 />
                                                             ))}
                                                         </ul>
@@ -964,7 +1107,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 />
                                             )}
 
-                                            <BackgroundColorControl
+                                            <BackgroundControl 
                                                 label={__("Background Color", "gutenslider-blocks")}
                                                 bgColorSwitcher={sliderArrowsBackgroundColorSwitcher}
                                                 setBgColorSwitcher={(value) => setAttributes({ sliderArrowsBackgroundColorSwitcher: value })}
@@ -1367,6 +1510,81 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 step={1}
                                                 resetFallbackValue={""}
                                                 isRangeUnit={false}
+                                            />
+
+                                            {/* <ResponsiveBackgroundImageControl
+                                                label={__("Background", "gutenslider-blocks")}
+                                                deviceType={deviceType}
+                                                globalBackgroundImageUrl={sliderBgNormalBackgroundImageUrl}
+                                                setGlobalBackgroundImageUrl={(value) => setAttributes({ sliderBgNormalBackgroundImageUrl: value })}
+                                                globalBackgroundImagePosition={sliderBgNormalBackgroundImagePosition}
+                                                setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ sliderBgNormalBackgroundImagePosition: newPosition })}
+                                                globalBackgroundImageAttachment={sliderBgNormalBackgroundImageAttachment}
+                                                setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ sliderBgNormalBackgroundImageAttachment: newAttachment })}
+                                                globalBackgroundImageRepeat={sliderBgNormalBackgroundImageRepeat}
+                                                setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ sliderBgNormalBackgroundImageRepeat: newRepeat })}
+                                                globalBackgroundImageSize={sliderBgNormalBackgroundImageSize} 
+                                                setGlobalBackgroundImageSize={(newSize) => setAttributes({ sliderBgNormalBackgroundImageSize: newSize })}
+                                                setAttributes={setAttributes}
+                                            /> */}
+
+                                            <BackgroundControl
+                                                label={__("Background Color", "gutenslider-blocks")}
+                                                deviceType={deviceType}
+                                                bgColorSwitcher={globalSliderItemBgColorSwitcher}
+                                                setBgColorSwitcher={(value) => setAttributes({ globalSliderItemBgColorSwitcher: value })}
+                                                        
+                                                normalBackgroundType={globalNormalItemBackgroundType}
+                                                setNormalBackgroundType={(value) => setAttributes({ globalNormalItemBackgroundType: value })}
+                                                normalClassicColor={globalNormalItemClassicColor}
+                                                setNormalClassicColor={(value) => setAttributes({ globalNormalItemClassicColor: value })}
+                                                normalGradientColor={globalNormalItemGradientColor}
+                                                setNormalGradientColor={(value) => setAttributes({ globalNormalItemGradientColor: value })}
+                                                normalCustomGradientSwitcher={globalNormalItemCustomGradientSwitcher}
+                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ globalNormalItemCustomGradientSwitcher: value })}
+                                                normalCustomGradientInputValue={globalNormalItemCustomGradientInputValue}
+                                                setNormalCustomGradientInputValue={(value) => setAttributes({ globalNormalItemCustomGradientInputValue: value })}
+                                                normalBackgroundImageUrl={globalNormalBackgroundImageUrl}
+                                                setNormalBackgroundImageUrl={(value) => setAttributes({ globalNormalBackgroundImageUrl: value })}
+                                                normalBackgroundImageAlt={globalNormalBackgroundImageAlt}
+                                                setNormalBackgroundImageAlt={(value) => setAttributes({ globalNormalBackgroundImageAlt: value })}
+                                                normalBackgroundImageID={globalNormalBackgroundImageID}
+                                                setNormalBackgroundImageID={(value) => setAttributes({ globalNormalBackgroundImageID: value })}
+                                                normalBackgroundImagePosition={globalNormalBackgroundImagePosition}
+                                                setNormalBackgroundImagePosition={(value) => setAttributes({ globalNormalBackgroundImagePosition: value })}
+                                                normalBackgroundImageAttachment={globalNormalBackgroundImageAttachment}
+                                                setNormalBackgroundImageAttachment={(value) => setAttributes({ globalNormalBackgroundImageAttachment: value })}
+                                                normalBackgroundImageRepeat={globalNormalBackgroundImageRepeat}
+                                                setNormalBackgroundImageRepeat={(value) => setAttributes({ globalNormalBackgroundImageRepeat: value })}
+                                                normalBackgroundImageSize={globalNormalBackgroundImageSize}
+                                                setNormalBackgroundImageSize={(value) => setAttributes({ globalNormalBackgroundImageSize: value })}
+                                                
+                                                hoverBackgroundType={globalHoverItemBackgroundType}
+                                                setHoverBackgroundType={(value) => setAttributes({ globalHoverItemBackgroundType: value })}
+                                                hoverClassicColor={globalHoverItemClassicColor}
+                                                setHoverClassicColor={(value) => setAttributes({ globalHoverItemClassicColor: value })}
+                                                hoverGradientColor={globalHoverItemGradientColor} 
+                                                setHoverGradientColor={(value) => setAttributes({ globalHoverItemGradientColor: value })}
+                                                hoverCustomGradientSwitcher={globalHoverItemCustomGradientSwitcher}
+                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ globalHoverItemCustomGradientSwitcher: value })}
+                                                hoverCustomGradientInputValue={globalHoverItemCustomGradientInputValue}
+                                                setHoverCustomGradientInputValue={(value) => setAttributes({ globalHoverItemCustomGradientInputValue: value })}
+                                                hoverBackgroundImageUrl={globalHoverBackgroundImageUrl}
+                                                setHoverBackgroundImageUrl={(value) => setAttributes({ globalHoverBackgroundImageUrl: value })}
+                                                hoverBackgroundImageAlt={globalHoverBackgroundImageAlt}
+                                                setHoverBackgroundImageAlt={(value) => setAttributes({ globalHoverBackgroundImageAlt: value })}
+                                                hoverBackgroundImageID={globalHoverBackgroundImageID}
+                                                setHoverBackgroundImageID={(value) => setAttributes({ globalHoverBackgroundImageID: value })}
+                                                hoverBackgroundImagePosition={globalHoverBackgroundImagePosition}
+                                                setHoverBackgroundImagePosition={(value) => setAttributes({ globalHoverBackgroundImagePosition: value })}
+                                                hoverBackgroundImageAttachment={globalHoverBackgroundImageAttachment}
+                                                setHoverBackgroundImageAttachment={(value) => setAttributes({ globalHoverBackgroundImageAttachment: value })}
+                                                hoverBackgroundImageRepeat={globalHoverBackgroundImageRepeat}
+                                                setHoverBackgroundImageRepeat={(value) => setAttributes({ globalHoverBackgroundImageRepeat: value })}
+                                                hoverBackgroundImageSize={globalHoverBackgroundImageSize}
+                                                setHoverBackgroundImageSize={(value) => setAttributes({ globalHoverBackgroundImageSize: value })}
+                                                setAttributes={setAttributes}
+                                                
                                             />
                                         </PanelBody>
                                     </>

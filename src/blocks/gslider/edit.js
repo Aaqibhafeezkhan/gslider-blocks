@@ -13,12 +13,14 @@ import { useState, useEffect, useRef } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';
+import {useDeviceType} from "@Utils/displayType"; 
 
 // Import Swiper React components and required modules
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {
 	Navigation,
 	Pagination,
+    Autoplay,
 	Manipulation,
 	Mousewheel,
 	EffectFade,
@@ -30,18 +32,21 @@ import {
 } from 'swiper/modules';
 
 // Import Swiper styles for all functionalities
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/mousewheel';
-import 'swiper/css/effect-fade';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/effect-flip';
-import 'swiper/css/effect-creative';
+// import 'swiper/css';
+import 'swiper/css/bundle';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/mousewheel';
+// import 'swiper/css/effect-fade';
+// import 'swiper/css/effect-coverflow';
+// import 'swiper/css/effect-flip';
+// import 'swiper/css/effect-creative';
+// import 'swiper/css/autoplay';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+        deviceType,
 		sliderItems,
 		sliderType,
 		carouselPerColumn,
@@ -61,14 +66,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showPagination,
 		paginationType,
 		dynamicBullets,
+        generateBackgroundStyle,
 	} = attributes;
-
-    console.log(allowTouchMove);
 
 	// Block props for container
 	const blockProps = useBlockProps({
 		className: `guten-slider-container ${blockId}`,
 	});
+
+	// const deviceType = useDeviceType();
 
 	// Local state management for slider items and active slide index
 	const [sliderItemList, setSliderItemList] = useState(sliderItems);
@@ -179,14 +185,41 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             normalItemCustomGradientSwitcher: false,
             normalItemCustomGradientInputValue: '',
 
-            normalBackgroundImageUrl: '',
-            normalBackgroundImageAlt: '',
-            normalBackgroundImageID: '',
-            normalBackgroundImagePosition: { x: 0.5, y: 0.5 },
-            normalBackgroundImageAttachment: 'scroll',
-            normalBackgroundImageRepeat: 'no-repeat',
-            normalBackgroundImageSize: 'cover',
-
+            normalBackgroundImageUrl: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            normalBackgroundImageAlt: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            normalBackgroundImageID: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            normalBackgroundImagePosition: {
+                Desktop: { x: 0.5, y: 0.5 },
+                Tablet: { x: 0.5, y: 0.5 },
+                Mobile: { x: 0.5, y: 0.5 },
+            },
+            normalBackgroundImageAttachment: {
+                Desktop: 'scroll',
+                Tablet: 'scroll',
+                Mobile: 'scroll',
+            },
+            normalBackgroundImageRepeat: {
+                Desktop: 'no-repeat',
+                Tablet: 'no-repeat',
+                Mobile: 'no-repeat',
+            },
+            normalBackgroundImageSize: {
+                Desktop: 'cover',
+                Tablet: 'cover',
+                Mobile: 'cover',
+            },
 
             hoverItemBackgroundType: 'classic',
             hoverItemClassicColor: '',
@@ -194,53 +227,108 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             hoverItemCustomGradientSwitcher: false,
             hoverItemCustomGradientInputValue: '',
 
-            hoverBackgroundImageUrl: '',
-            hoverBackgroundImageAlt: '',
-            hoverBackgroundImageID: '',
-            hoverBackgroundImagePosition: { x: 0.5, y: 0.5 },
-            hoverBackgroundImageAttachment: 'scroll',
-            hoverBackgroundImageRepeat: 'no-repeat',
-            hoverBackgroundImageSize: 'cover',
+            hoverBackgroundImageUrl: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            hoverBackgroundImageAlt: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            hoverBackgroundImageID: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            hoverBackgroundImagePosition: {
+                Desktop: { x: 0.5, y: 0.5 },
+                Tablet: { x: 0.5, y: 0.5 },
+                Mobile: { x: 0.5, y: 0.5 },
+            },
+            hoverBackgroundImageAttachment: {
+                Desktop: 'scroll',
+                Tablet: 'scroll',
+                Mobile: 'scroll',
+            },
+            hoverBackgroundImageRepeat: {
+                Desktop: 'no-repeat',
+                Tablet: 'no-repeat',
+                Mobile: 'no-repeat',
+            },
+            hoverBackgroundImageSize: {
+                Desktop: 'cover',
+                Tablet: 'cover',
+                Mobile: 'cover',
+            },
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
         setSliderItemList([...sliderItemList, newItem]);
     };
+
 
     /**
      * Updates a specific property of a slide item
      * Handles special cases for background images with WordPress media integration
      */
     const handleChangeItem = (id, key, value) => {
+        // Get current device type ("Desktop", "Tablet", or "Mobile")
+        const currentDevice = deviceType; 
+
         const updatedItems = sliderItemList.map(item => {
             if (item.id === id) {
+                // Handle normal background image updates for the current device only
                 if (key === 'normalBackgroundImageID') {
                     // Get the full image data from WordPress media library
                     const image = wp.media.attachment(value).toJSON();
                     return {
                         ...item,
-                        [key]: value,
-                        'normalBackgroundImageUrl': image.url,
-                        'normalBackgroundImageAlt': image.alt || ''
+                        normalBackgroundImageID: {
+                            ...item.normalBackgroundImageID,
+                            [currentDevice]: value,
+                        },
+                        normalBackgroundImageUrl: {
+                            ...item.normalBackgroundImageUrl,
+                            [currentDevice]: image.url,
+                        },
+                        normalBackgroundImageAlt: {
+                            ...item.normalBackgroundImageAlt,
+                            [currentDevice]: image.alt || '',
+                        },
                     };
                 }
+
+                // Handle hover background image updates for the current device only
                 if (key === 'hoverBackgroundImageID') {
-                    // Get the full image data from WordPress media library
                     const image = wp.media.attachment(value).toJSON();
                     return {
                         ...item,
-                        [key]: value,
-                        'hoverBackgroundImageUrl': image.url,
-                        'hoverBackgroundImageAlt': image.alt || ''
+                        hoverBackgroundImageID: {
+                            ...item.hoverBackgroundImageID,
+                            [currentDevice]: value,
+                        },
+                        hoverBackgroundImageUrl: {
+                            ...item.hoverBackgroundImageUrl,
+                            [currentDevice]: image.url,
+                        },
+                        hoverBackgroundImageAlt: {
+                            ...item.hoverBackgroundImageAlt,
+                            [currentDevice]: image.alt || '',
+                        },
                     };
                 }
+
+                // For other properties, update as before
                 return { ...item, [key]: value };
             }
             return item;
         });
-        
+
         setSliderItemList(updatedItems);
         setAttributes({ sliderItems: updatedItems });
     };
+
 
     /**
      * Handles duplicate slide functionality
@@ -356,6 +444,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					modules={[
 						Navigation,
 						Pagination,
+						Autoplay,
 						Manipulation,
 						Mousewheel,
 						EffectFade,
@@ -368,7 +457,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				>
 					{sliderItemList.map((item, index) => (
 						<SwiperSlide key={item.id}>
-							<div className={`${blockId} guten-slider-content-wrapper ${item.id}`} ref={panelRef}>
+							<div className={`guten-slider-content-wrapper ${item.id}`} ref={panelRef}>
 								<div className="guten-slider-content-inner-wrapper">
 									<div className="guten-slider-list-item">
 										<div className="guten-slider-list-content">

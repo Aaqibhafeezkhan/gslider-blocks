@@ -1,129 +1,99 @@
 <?php
-/**
- * GutenSlider Blocks FontLoader
- *
- * Handles dynamic loading of Google Fonts for GutenSlider blocks.
- *
- * @since 1.0.0
- * @package gutenslider-blocks
- */
+
+namespace GSlider\Classes;
+use GSlider\Traits\SingletonTrait;
 
 if (!defined('ABSPATH')) {
-    exit; // Prevent direct access to the file.
+    exit;
 }
 
-if (!class_exists('GutenSlider_Blocks_FontLoader')) {
-    /**
-     * Class responsible for loading Google Fonts for GutenSlider blocks.
-     *
-     * @since 1.0.0
-     * @package gutenslider-blocks
-     */
-    class GutenSlider_Blocks_FontLoader {
-        // List of supported font weights for Google Fonts.
+if (!class_exists('FontLoader')) {
+
+    class FontLoader {
+
+        use SingletonTrait;
+
+        /**
+         * Font Weights
+         */
         private const FONT_WEIGHTS = '100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
         
-        // Google Fonts API URL.
+        /**
+         * Google Fonts API URL
+         */
         private const GOOGLE_FONTS_URL = '//fonts.googleapis.com/css';
 
         /**
-         * Singleton instance of the class.
-         *
-         * @var null|self
-         */
-        private static $instance = null;
-
-        /**
-         * Array to store Google Fonts that need to be loaded.
-         *
-         * @var array<string>
+         * Google Fonts
          */
         private static $gfonts = [];
 
         /**
-         * Constructor method to initialize the class.
-         *
-         * @since 1.0.0
-         * @return void
+         * Constructor
          */
         public function __construct() {
             $this->init();
         }
 
         /**
-         * Initializes hooks for rendering blocks and footer output.
-         *
-         * @since 1.0.0
-         * @return void
+         * Initialize the Class
          */
         private function init() {
-            // Hook to capture fonts when rendering blocks.
             add_filter('render_block', [$this, 'get_fonts_on_render_block'], 10, 2);
-
-            // Hook to load fonts in the footer of the page.
             add_action('wp_footer', [$this, 'fonts_loader'], 10);
         }
 
         /**
-         * Captures font families defined in block attributes.
-         *
-         * @param string $block_content Block HTML content.
-         * @param array  $block Block attributes.
-         * @return string The block content unchanged.
+         * Get Fonts on Render Block
          */
         public function get_fonts_on_render_block($block_content, $block) {
             if (!is_array($block) || empty($block['attrs'])) {
-                return $block_content; // Return block content as is if no attributes.
+                return $block_content;
             }
 
-            // Extract font families defined in the block attributes.
+            // Extract font families defined in the block attributes
             $fonts = self::get_fonts_family($block['attrs']);
             if (!empty($fonts)) {
                 self::$gfonts = array_unique(array_merge(self::$gfonts, $fonts));
             }
 
-            return $block_content; // Return the original block content.
+            return $block_content;
         }
 
         /**
-         * Extracts Google Fonts from block attributes.
-         *
-         * @param array<string, mixed> $attributes Block attributes.
-         * @return array<string> List of Google Fonts found in the block.
+         * Get Fonts Family
          */
         public static function get_fonts_family($attributes) {
             if (!is_array($attributes)) {
-                return []; // Return an empty array if attributes are not provided.
+                return [];
             }
 
-            // Find keys in the attributes that match font family names.
+            // Find keys in the attributes that match font family names
             $keys = preg_grep('/^(\w+)FontFamily$/i', array_keys($attributes));
             $googleFontFamily = [];
             
-            // Loop through found font family keys and add them to the list.
+            // Loop through found font family keys and add them to the list
             foreach ($keys as $key) {
                 if (isset($attributes[$key]) && is_string($attributes[$key])) {
                     $fontFamily = sanitize_text_field($attributes[$key]);
-                    $googleFontFamily[$fontFamily] = $fontFamily; // Store the font family in an array.
+                    $googleFontFamily[$fontFamily] = $fontFamily;
                 }
             }
 
-            return $googleFontFamily; // Return the array of font families.
+            return $googleFontFamily;
         }
 
         /**
-         * Loads Google Fonts by constructing the URL and enqueueing the stylesheet.
-         *
-         * @param array<string> $fonts List of Google Fonts to load.
+         * Load Google Fonts
          */
         private function load_google_font($fonts) {
             if (empty($fonts)) {
-                return; // Return early if no fonts are provided.
+                return;
             }
 
             $gfonts = '';
             foreach ($fonts as $font) {
-                // Construct the URL for each font with the defined weights.
+                // Construct the URL for each font with the defined weights
                 $gfonts .= sprintf(
                     '%s:%s|',
                     str_replace(' ', '+', trim($font)),
@@ -132,10 +102,10 @@ if (!class_exists('GutenSlider_Blocks_FontLoader')) {
             }
 
             if (empty($gfonts)) {
-                return; // Return early if no valid font strings are created.
+                return;
             }
 
-            // Prepare query arguments for the Google Fonts URL.
+            // Prepare query arguments for the Google Fonts URL
             $query_args = [
                 'family' => rtrim($gfonts, '|'),
                 'display' => 'swap'
@@ -143,52 +113,32 @@ if (!class_exists('GutenSlider_Blocks_FontLoader')) {
 
             $font_url = add_query_arg($query_args, self::GOOGLE_FONTS_URL);
 
-            // Register and enqueue the font styles.
+            // Register and enqueue the font styles
             wp_register_style(
-                'gutenslider-blocks-fonts',
+                'gslider-blocks-fonts', 
                 esc_url($font_url),
                 [], // No dependencies
-                defined('GutenSlider_Blocks_VERSION') ? GutenSlider_Blocks_VERSION : '1.0.0'
+                defined('GSLIDER_VERSION') ? GSLIDER_VERSION : '1.0.1' 
             );
 
-            wp_enqueue_style('gutenslider-blocks-fonts'); // Enqueue the font stylesheet.
+            wp_enqueue_style('gslider-blocks-fonts');
         }
 
         /**
-         * Loads the fonts in the footer.
-         *
-         * @since 1.0.0
-         * @return void
+         * Load Fonts in the Footer
          */
         public function fonts_loader() {
             try {
-                // Filter and remove any empty values from the fonts array.
+                // Filter and remove any empty values from the fonts array
                 $fonts = array_filter(self::$gfonts);
                 if (!empty($fonts)) {
-                    $this->load_google_font($fonts); // Load the fonts if any are present.
+                    $this->load_google_font($fonts);
                 }
-            } catch (Exception $e) {
-                // Log any errors that occur during font loading.
+            } catch (\Exception $e) {
                 error_log('Font loading error: ' . $e->getMessage());
             } finally {
-                self::$gfonts = []; // Clear the fonts array after processing.
+                self::$gfonts = [];
             }
-        }
-
-        /**
-         * Singleton method to get the class instance.
-         *
-         * @since 1.0.0
-         * @return self The instance of the class.
-         */
-        public static function get_instance() {
-            if (is_null(self::$instance)) {
-                self::$instance = new self();
-            }
-            return self::$instance;
         }
     }
 }
-
-// Initialize the FontLoader singleton.
-GutenSlider_Blocks_FontLoader::get_instance();

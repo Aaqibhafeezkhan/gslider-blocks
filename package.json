@@ -1,7 +1,7 @@
 {
-	"name": "gutenslider-blocks",
+	"name": "gslider-blocks",
 	"version": "1.0.0",
-	"description": "gutenslider Blocks",
+	"description": "gslider Blocks",
 	"author": "Noruzzaman",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",

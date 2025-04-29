@@ -85,7 +85,7 @@ export default function Save({ attributes }) {
                 <div className="swiper-wrapper guten-slider-wrapper">
                     {sliderItems.map((item) => (
                         <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
-                            <div className={`${blockId} guten-slider-content-wrapper ${item.id}`}>
+                            <div className={`guten-slider-content-wrapper ${item.id}`}>
                                 <div className="guten-slider-content-inner-wrapper">
                                     <div className="guten-slider-list-item">
                                         <div className="guten-slider-list-content">
