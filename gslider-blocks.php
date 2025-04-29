@@ -13,9 +13,10 @@
  * @package GSlider_Blocks
  */
 
- if (!defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     exit;
 }
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
@@ -28,9 +29,9 @@ if ( ! class_exists( 'GSliderBlocks' ) ) {
 		private static $instance;
 
 		/**
-		 * GSlider Blocks Instance
+		 * Get the instance
 		 */
-		public static function get_instance() {
+		public static function getInstance() {
 			if (!isset(self::$instance)) {
 				self::$instance = new self();
 			}
@@ -42,12 +43,11 @@ if ( ! class_exists( 'GSliderBlocks' ) ) {
 		 */
 		public function __construct() {
 			$this->define_constants();
-			$this->init();
 			$this->includes();
 		}
 
 		/**
-		 * Define gslider constants.
+		 * Define gslider constants
 		 */
 		public function define_constants() {
 			define('GSLIDER_FILE', __FILE__);
@@ -60,21 +60,7 @@ if ( ! class_exists( 'GSliderBlocks' ) ) {
 		}
 
 		/**
-		 * Initialize the plugin by setting up actions and filters.
-		 */
-		public function init() {
-			add_action( 'init', array( $this, 'load_textdomain' ) );
-		}
-
-		/**
-		 * Load the plugin text domain for translations.
-		 */
-		public function load_textdomain() {
-			load_plugin_textdomain( 'gslider-blocks', false, basename( GSLIDER_DIR_PATH ) . '/languages' );
-		}
-
-		/**
-		 * Include necessary files for the plugin.
+		 * Include necessary files for the plugin
 		 */
 		private function includes() {
 			require_once trailingslashit( GSLIDER_DIR_PATH ) . 'includes/Plugin.php';
@@ -82,13 +68,13 @@ if ( ! class_exists( 'GSliderBlocks' ) ) {
 	}
 }
 
-GSliderBlocks::get_instance();
+GSliderBlocks::getInstance();
 
 /**
- * Define a global function to get the instance of the plugin class.
+ * Define a global function to get the instance of the plugin class
  */
 function GSliderBlocks() {
-	return GSliderBlocks::get_instance();
+	return GSliderBlocks::getInstance();
 }
 
 /**

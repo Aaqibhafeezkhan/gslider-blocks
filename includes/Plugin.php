@@ -1,37 +1,60 @@
 <?php
+/**
+ * GSliderBlocks Plugin
+ *
+ * @package GSliderBlocks
+ */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+ use GSlider\Traits\SingletonTrait;
+ use GSlider\Classes\StyleGenerator;
+ use GSlider\Classes\Enqueues;
+ use GSlider\Classes\RegistrationBlocks;
+ use GSlider\Classes\RegistrationCategory;
+ use GSlider\Classes\FontLoader;
+ use GSlider\Classes\SupportSVG;
+
+if (! defined('ABSPATH')) {
+    exit; 
 }
 
 if ( ! class_exists( 'Plugin' ) ) {
 
 	class Plugin {
 
-		private static $instance = null;
+		use SingletonTrait;
 
-		private function __construct() {
-			$this->includes();
+		/**
+		 * Constructor
+		 */
+		public function __construct() {
+			add_action('plugins_loaded', [$this, 'plugins_loaded']);
+			add_action( 'init', [$this, 'gslider_load_textdomain'] );
 		}
 
-		private function includes() {
-			// Include necessary PHP files from the plugin's includes folder.
-			require_once trailingslashit( GSLIDER_DIR_PATH ) . '/includes/classes/register-blocks.php';
-			require_once trailingslashit( GSLIDER_DIR_PATH ) . '/includes/classes/register-category.php';
-			require_once trailingslashit( GSLIDER_DIR_PATH ) . '/includes/classes/dynamic-style.php';
-			require_once trailingslashit( GSLIDER_DIR_PATH ) . '/includes/classes/FontLoader.php';
-			require_once trailingslashit( GSLIDER_DIR_PATH ) . '/includes/classes/enqueue-assets.php';
-		}
+		/**
+		 * Initialize the plugin
+		 */
+		public function plugins_loaded() {
+			StyleGenerator::getInstance();
+			Enqueues::getInstance();
+			RegistrationBlocks::getInstance();
+			RegistrationCategory::getInstance();
+			FontLoader::getInstance();
 
-		public static function get_instance() {
-			if ( is_null( self::$instance ) ) {
-				self::$instance = new self();
+			// SVG Support
+			if (is_admin()) {
+				SupportSVG::getInstance();
 			}
+		}
 
-			return self::$instance;
+		/**
+		 * Load the plugin text domain
+		 */
+		public function gslider_load_textdomain() {
+			load_plugin_textdomain( 'gslider-blocks', false, basename( GSLIDER_DIR_PATH ) . '/languages' );
 		}
 	}
 
 }
 
-Plugin::get_instance();
+Plugin::getInstance();
