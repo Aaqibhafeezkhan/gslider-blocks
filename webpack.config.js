@@ -6,7 +6,7 @@ module.exports = {
 	resolve: {
 		alias: {
 			...defaultConfig.resolve.alias,
-            '@Controls': path.resolve(__dirname, 'blocks-config/guten-slider-controls/'),
+            '@Controls': path.resolve(__dirname, 'blocks-config/gslider-controls/'),
             '@Components': path.resolve(__dirname, 'src/components/'),
             '@Utils': path.resolve(__dirname, 'src/utils/'),
             '@Constants': path.resolve(__dirname, 'src/constants/'),
