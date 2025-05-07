@@ -12,6 +12,8 @@ import {
     ColorPalette,
     TextControl,
     TextareaControl,
+    ToggleControl,
+    RangeControl,
 
 } from '@wordpress/components';
 import BackgroundControl from '@Components/background-control';
@@ -135,12 +137,8 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             renderContent={() => (
                                 <div className="global-setting-background-color-popup-wrapper">
                                     <BackgroundControl
-                                        label={__("Background", "gutenslider-blocks")}
-                                        deviceType={deviceType}
-                                        bgColorSwitcher={item.sliderItemBgColorSwitcher}
-                                        setBgColorSwitcher={(value) => handleChangeItem(item.id, 'sliderItemBgColorSwitcher', value)}
-                                                
-                                        normalBackgroundType={item.normalItemBackgroundType}
+                                        deviceType={deviceType}  
+                                        normalBackgroundType={item.normalItemBackgroundType} 
                                         setNormalBackgroundType={(value) => handleChangeItem(item.id, 'normalItemBackgroundType', value)}
                                         normalClassicColor={item.normalItemClassicColor}
                                         setNormalClassicColor={(value) => handleChangeItem(item.id, 'normalItemClassicColor', value)}
@@ -164,33 +162,42 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                         setNormalBackgroundImageRepeat={(value) => handleChangeItem(item.id, 'normalBackgroundImageRepeat', value)}
                                         normalBackgroundImageSize={item.normalBackgroundImageSize}
                                         setNormalBackgroundImageSize={(value) => handleChangeItem(item.id, 'normalBackgroundImageSize', value)}
-                                                
-                                        hoverBackgroundType={item.hoverItemBackgroundType}
-                                        setHoverBackgroundType={(value) => handleChangeItem(item.id, 'hoverItemBackgroundType', value)}
-                                        hoverClassicColor={item.hoverItemClassicColor}
-                                        setHoverClassicColor={(value) => handleChangeItem(item.id, 'hoverItemClassicColor', value)}
-                                        hoverGradientColor={item.hoverItemGradientColor} 
-                                        setHoverGradientColor={(value) => handleChangeItem(item.id, 'hoverItemGradientColor', value)}
-                                        hoverCustomGradientSwitcher={item.hoverItemCustomGradientSwitcher}
-                                        setHoverCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientSwitcher', value)}
-                                        hoverCustomGradientInputValue={item.hoverItemCustomGradientInputValue}
-                                        setHoverCustomGradientInputValue={(value) => handleChangeItem(item.id, 'hoverItemCustomGradientInputValue', value)}
-                                        hoverBackgroundImageUrl={item.hoverBackgroundImageUrl}
-                                        setHoverBackgroundImageUrl={(value) => handleChangeItem(item.id, 'hoverBackgroundImageUrl', value)}
-                                        hoverBackgroundImageAlt={item.hoverBackgroundImageAlt}
-                                        setHoverBackgroundImageAlt={(value) => handleChangeItem(item.id, 'hoverBackgroundImageAlt', value)}
-                                        hoverBackgroundImageID={item.hoverBackgroundImageID}
-                                        setHoverBackgroundImageID={(value) => handleChangeItem(item.id, 'hoverBackgroundImageID', value)}
-                                        hoverBackgroundImagePosition={item.hoverBackgroundImagePosition}
-                                        setHoverBackgroundImagePosition={(value) => handleChangeItem(item.id, 'hoverBackgroundImagePosition', value)}
-                                        hoverBackgroundImageAttachment={item.hoverBackgroundImageAttachment}
-                                        setHoverBackgroundImageAttachment={(value) => handleChangeItem(item.id, 'hoverBackgroundImageAttachment', value)}
-                                        hoverBackgroundImageRepeat={item.hoverBackgroundImageRepeat}
-                                        setHoverBackgroundImageRepeat={(value) => handleChangeItem(item.id, 'hoverBackgroundImageRepeat', value)}
-                                        hoverBackgroundImageSize={item.hoverBackgroundImageSize}
-                                        setHoverBackgroundImageSize={(value) => handleChangeItem(item.id, 'hoverBackgroundImageSize', value)}
                                         setAttributes={setAttributes}
+                                        isHover={false}
                                     />
+                                    <ToggleControl
+                                        label={__("Enable Overlay", "gutenslider-blocks")}
+                                        checked={item.itemBackgroundOverlaySwitcher}
+                                        onChange={(value) => handleChangeItem(item.id, 'itemBackgroundOverlaySwitcher', value)}
+                                    />
+                                    { item.itemBackgroundOverlaySwitcher && (
+                                        <>
+                                            <BackgroundControl
+                                                deviceType={deviceType}  
+                                                normalBackgroundType={item.itemBackgroundOverlayType} 
+                                                setNormalBackgroundType={(value) => handleChangeItem(item.id, 'itemBackgroundOverlayType', value)}
+                                                normalClassicColor={item.itemBackgroundOverlayClassicColor}
+                                                setNormalClassicColor={(value) => handleChangeItem(item.id, 'itemBackgroundOverlayClassicColor', value)}
+                                                normalGradientColor={item.itemBackgroundOverlayGradientColor}
+                                                setNormalGradientColor={(value) => handleChangeItem(item.id, 'itemBackgroundOverlayGradientColor', value)}
+                                                normalCustomGradientSwitcher={item.itemBackgroundOverlayCustomGradientSwitcher}
+                                                setNormalCustomGradientSwitcher={(value) => handleChangeItem(item.id, 'itemBackgroundOverlayCustomGradientSwitcher', value)}
+                                                normalCustomGradientInputValue={item.itemBackgroundOverlayCustomGradientInputValue}
+                                                setNormalCustomGradientInputValue={(value) => handleChangeItem(item.id, 'itemBackgroundOverlayCustomGradientInputValue', value)}
+                                                setAttributes={setAttributes}
+                                                isBackgroundImage={false}
+                                                isHover={false}
+                                            />
+                                            <RangeControl
+                                                label={__("Opacity", "gutenslider-blocks")}
+                                                value={item.itemBackgroundOverlayOpacity}
+                                                onChange={(value) => handleChangeItem(item.id, 'itemBackgroundOverlayOpacity', value)}
+                                                min={0}
+                                                max={1}
+                                                step={0.1}
+                                            />
+                                        </>
+                                    )}
                                 </div>
                             )}
                         />

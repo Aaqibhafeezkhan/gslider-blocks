@@ -351,58 +351,36 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 style += classicStyle;
             }
 
-            // Hover styles (Desktop)
-            const hoverItemBackgroundType = item.hoverItemBackgroundType;
-            const hoverItemGradientColor = item.hoverItemGradientColor || item.hoverItemClassicColor;
+            if (item.itemBackgroundOverlaySwitcher) {
+                const overlayColor = item.itemBackgroundOverlayType === 'classic'
+                    ? item.itemBackgroundOverlayClassicColor
+                    : item.itemBackgroundOverlayGradientColor;
             
-            if (hoverItemBackgroundType === 'gradient') {
-                const hoverGradientValue = item.hoverItemCustomGradientSwitcher && item.hoverItemCustomGradientInputValue 
-                    ? item.hoverItemCustomGradientInputValue 
-                    : hoverItemGradientColor;
-                
-                if (hoverGradientValue) {
-                    const hoverGradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
-                        background: ${hoverGradientValue};
-                        transition: all .3s ease-in-out;
-                    }`;
-                    style += hoverGradientStyle;
-                }
-            } else if (item.hoverBackgroundImageUrl.Desktop) {  
-                let backgroundImageStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
-                    background-image: url(${item.hoverBackgroundImageUrl.Desktop});`;
-                
-                if (item.hoverBackgroundImagePosition.Desktop) {
-                    const backgroundPosition = `${item.hoverBackgroundImagePosition.Desktop.x * 100}% ${item.hoverBackgroundImagePosition.Desktop.y * 100}%`;
-                    backgroundImageStyle += `
-                    background-position: ${backgroundPosition};`;
-                }
-                
-                if (item.hoverBackgroundImageAttachment.Desktop) {
-                    backgroundImageStyle += `
-                    background-attachment: ${item.hoverBackgroundImageAttachment.Desktop};`;
-                }
-                
-                if (item.hoverBackgroundImageRepeat.Desktop) {
-                    backgroundImageStyle += `
-                    background-repeat: ${item.hoverBackgroundImageRepeat.Desktop};`;
-                }
-                
-                if (item.hoverBackgroundImageSize.Desktop) {
-                    backgroundImageStyle += `
-                    background-size: ${item.hoverBackgroundImageSize.Desktop};`;
-                }
-                
-                backgroundImageStyle += `
+                const overlayGradient = item.itemBackgroundOverlayCustomGradientSwitcher && item.itemBackgroundOverlayCustomGradientInputValue
+                    ? item.itemBackgroundOverlayCustomGradientInputValue
+                    : overlayColor;
+            
+                const overlayStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: ${overlayGradient || 'transparent'};
+                    opacity: ${item.itemBackgroundOverlayOpacity};
+                    z-index: -1;
+                    pointer-events: none;
                     transition: all .3s ease-in-out;
+                }
+                .${blockId} .guten-slider-content-wrapper.${item.id} {
+                    position: relative;
+                    z-index: 1;
                 }`;
-                style += backgroundImageStyle;
-            } else if (item.hoverItemClassicColor) {
-                const hoverClassicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}:hover {
-                    background: ${item.hoverItemClassicColor};
-                    transition: all .3s ease-in-out;
-                }`;
-                style += hoverClassicStyle;
+                style += overlayStyle;
             }
+
+
 
             // Tablet styles (max-width: 1024px)
             style += `
@@ -1512,24 +1490,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 isRangeUnit={false}
                                             />
 
-                                            {/* <ResponsiveBackgroundImageControl
-                                                label={__("Background", "gutenslider-blocks")}
-                                                deviceType={deviceType}
-                                                globalBackgroundImageUrl={sliderBgNormalBackgroundImageUrl}
-                                                setGlobalBackgroundImageUrl={(value) => setAttributes({ sliderBgNormalBackgroundImageUrl: value })}
-                                                globalBackgroundImagePosition={sliderBgNormalBackgroundImagePosition}
-                                                setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ sliderBgNormalBackgroundImagePosition: newPosition })}
-                                                globalBackgroundImageAttachment={sliderBgNormalBackgroundImageAttachment}
-                                                setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ sliderBgNormalBackgroundImageAttachment: newAttachment })}
-                                                globalBackgroundImageRepeat={sliderBgNormalBackgroundImageRepeat}
-                                                setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ sliderBgNormalBackgroundImageRepeat: newRepeat })}
-                                                globalBackgroundImageSize={sliderBgNormalBackgroundImageSize} 
-                                                setGlobalBackgroundImageSize={(newSize) => setAttributes({ sliderBgNormalBackgroundImageSize: newSize })}
-                                                setAttributes={setAttributes}
-                                            /> */}
-
                                             <BackgroundControl
-                                                label={__("Background Color", "gutenslider-blocks")}
+                                                label={__("Background", "gutenslider-blocks")}
                                                 deviceType={deviceType}
                                                 bgColorSwitcher={globalSliderItemBgColorSwitcher}
                                                 setBgColorSwitcher={(value) => setAttributes({ globalSliderItemBgColorSwitcher: value })}

@@ -177,8 +177,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             buttonLink: '#',
             buttonTargetLink: false,
 
-            sliderItemBgColorSwitcher: 'normal',
-
             normalItemBackgroundType: 'classic',
             normalItemClassicColor: '#EDEDED',
             normalItemGradientColor: null,
@@ -221,47 +219,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 Mobile: 'cover',
             },
 
-            hoverItemBackgroundType: 'classic',
-            hoverItemClassicColor: '',
-            hoverItemGradientColor: null,
-            hoverItemCustomGradientSwitcher: false,
-            hoverItemCustomGradientInputValue: '',
-
-            hoverBackgroundImageUrl: {
-                Desktop: '',
-                Tablet: '',
-                Mobile: '',
-            },
-            hoverBackgroundImageAlt: {
-                Desktop: '',
-                Tablet: '',
-                Mobile: '',
-            },
-            hoverBackgroundImageID: {
-                Desktop: '',
-                Tablet: '',
-                Mobile: '',
-            },
-            hoverBackgroundImagePosition: {
-                Desktop: { x: 0.5, y: 0.5 },
-                Tablet: { x: 0.5, y: 0.5 },
-                Mobile: { x: 0.5, y: 0.5 },
-            },
-            hoverBackgroundImageAttachment: {
-                Desktop: 'scroll',
-                Tablet: 'scroll',
-                Mobile: 'scroll',
-            },
-            hoverBackgroundImageRepeat: {
-                Desktop: 'no-repeat',
-                Tablet: 'no-repeat',
-                Mobile: 'no-repeat',
-            },
-            hoverBackgroundImageSize: {
-                Desktop: 'cover',
-                Tablet: 'cover',
-                Mobile: 'cover',
-            },
+            itemBackgroundOverlaySwitcher: false,
+            itemBackgroundOverlayType: 'classic',
+            itemBackgroundOverlayClassicColor: '#000',
+            itemBackgroundOverlayGradientColor: null,
+            itemBackgroundOverlayCustomGradientSwitcher: false,
+            itemBackgroundOverlayCustomGradientInputValue: '',
+            itemBackgroundOverlayOpacity: 0.5,
+            
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
         setSliderItemList([...sliderItemList, newItem]);
