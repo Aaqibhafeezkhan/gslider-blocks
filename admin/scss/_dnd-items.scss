@@ -1,0 +1,65 @@
+@use "variables" as *;
+.gslider-inspector-control { 
+    .dnd-items-wrapper {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li.sortable-item {
+            margin-bottom: 10px;
+            margin-top: 10px;
+
+            .sortable-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+
+                .sortable-title {
+                    flex: 12;
+                    cursor: pointer;
+                    overflow: hidden;
+                    padding-left: 5px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 200px;
+                }
+
+                .sortable-sort {
+                    border-right: 1px solid #b4b4cb;
+                    border-left: 1px solid #b4b4cb;
+                    button {
+                        &:focus {
+                            box-shadow: none;
+                            outline: none;
+                        }
+                    }
+                }
+                .sortable-duplicate {
+                    border-right: 1px solid #b4b4cb;
+                    button {
+                        &:focus {
+                            box-shadow: none;
+                            outline: none;
+                        }
+                    }
+                }
+                .sortable-delete {
+                    button {
+                        color: #d63638;
+                        &:focus {
+                            box-shadow: none;
+                            outline: none;
+                        }
+                    }
+                }
+            }
+
+            .sortable-item-content {
+                padding-top: 10px;
+            }
+        }
+    }
+}

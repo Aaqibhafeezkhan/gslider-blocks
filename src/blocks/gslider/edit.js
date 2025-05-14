@@ -71,7 +71,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Block props for container
 	const blockProps = useBlockProps({
-		className: `guten-slider-container ${blockId}`,
+		className: `gslider-container ${blockId}`,
 	});
 
 	// const deviceType = useDeviceType();
@@ -422,41 +422,41 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				>
 					{sliderItemList.map((item, index) => (
 						<SwiperSlide key={item.id}>
-							<div className={`guten-slider-content-wrapper ${item.id}`} ref={panelRef}>
-								<div className="guten-slider-content-inner-wrapper">
-									<div className="guten-slider-list-item">
-										<div className="guten-slider-list-content">
-											<div className="guten-slider-subtitle-wrapper">
+							<div className={`gslider-content-wrapper ${item.id}`} ref={panelRef}>
+								<div className="gslider-content-inner-wrapper">
+									<div className="gslider-list-item">
+										<div className="gslider-list-content">
+											<div className="gslider-subtitle-wrapper">
 												<RichText
 													tagName="span"
-													className="guten-slider-subtitle"
+													className="gslider-subtitle"
 													value={item.subTitle}
 													onChange={(value) => updateItem(index, 'subTitle', value)}
 													placeholder="Enter subtitle"
 												/>
 											</div>
-											<div className="guten-slider-title-wrapper">
+											<div className="gslider-title-wrapper">
 												<RichText
 													tagName="h3"
-													className="guten-slider-title"
+													className="gslider-title"
 													value={item.title}
 													onChange={(value) => updateItem(index, 'title', value)}
 													placeholder="Enter title"
 												/>
 											</div>
-											<div className="guten-slider-description-wrapper">
+											<div className="gslider-description-wrapper">
 												<RichText
 													tagName="p"
-													className="guten-slider-description"
+													className="gslider-description"
 													value={item.description}
 													onChange={(value) => updateItem(index, 'description', value)}
 													placeholder="Enter description"
 												/>
 											</div>
-											<div className="guten-slider-button-container">
+											<div className="gslider-button-container">
 												{item.buttonLink ? (
 													<a
-														className="guten-slider-button"
+														className="gslider-button"
 														href={item.buttonLink}
 														target={item.buttonTargetLink ? '_blank' : undefined}
 														rel={[
@@ -468,7 +468,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													>
 														<RichText
 															value={item.buttonText}
-															className="guten-slider-button-text"
+															className="gslider-button-text"
 															onChange={(value) => updateItem(index, 'buttonText', value)}
 															placeholder={__('Enter button text...', 'gutenslider-blocks')}
 														/>
@@ -476,7 +476,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												) : (
 													<RichText
 														value={item.buttonText}
-														className="guten-slider-button-text"
+														className="gslider-button-text"
 														onChange={(value) => updateItem(index, 'buttonText', value)}
 														placeholder={__('Enter button text...', 'gutenslider-blocks')}
 													/>

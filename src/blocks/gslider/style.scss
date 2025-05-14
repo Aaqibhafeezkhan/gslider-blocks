@@ -1,11 +1,11 @@
-.guten-slider-content-wrapper {
+.gslider-content-wrapper {
     align-items: center;
     display: flex;
     flex-direction: column;
     height: clamp(300px, 60vh, 500px);
     justify-content: center;
     transition: ease-in-out .3s;
-    .guten-slider-content-inner-wrapper {
+    .gslider-content-inner-wrapper {
         box-sizing: border-box;
         margin: 0 auto;
         max-width: 80%;

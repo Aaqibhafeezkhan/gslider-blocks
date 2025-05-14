@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const initializeSliders = () => {
         // Select all slider containers
-        const sliders = document.querySelectorAll('.guten-slider-container');
+        const sliders = document.querySelectorAll('.gslider-container');
         
         sliders.forEach((sliderContainer) => {
             try {

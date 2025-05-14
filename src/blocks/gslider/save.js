@@ -25,7 +25,7 @@ export default function Save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `guten-slider-container ${blockId}`,
+        className: `gslider-container ${blockId}`,
     });
 
     // Configure Swiper settings for frontend rendering
@@ -82,45 +82,45 @@ export default function Save({ attributes }) {
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className="swiper">
-                <div className="swiper-wrapper guten-slider-wrapper">
+                <div className="swiper-wrapper gslider-wrapper">
                     {sliderItems.map((item) => (
                         <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
-                            <div className={`guten-slider-content-wrapper ${item.id}`}>
-                                <div className="guten-slider-content-inner-wrapper">
-                                    <div className="guten-slider-list-item">
-                                        <div className="guten-slider-list-content">
+                            <div className={`gslider-content-wrapper ${item.id}`}>
+                                <div className="gslider-content-inner-wrapper">
+                                    <div className="gslider-list-item">
+                                        <div className="gslider-list-content">
                                             {item.subTitle && (
-                                                <div className="guten-slider-subtitle-wrapper">
+                                                <div className="gslider-subtitle-wrapper">
                                                     <RichText.Content
                                                         tagName="span"
-                                                        className="guten-slider-subtitle"
+                                                        className="gslider-subtitle"
                                                         value={item.subTitle}
                                                     />
                                                 </div>
                                             )}
                                             {item.title && (
-                                                <div className="guten-slider-title-wrapper">
+                                                <div className="gslider-title-wrapper">
                                                     <RichText.Content
                                                         tagName="h3"
-                                                        className="guten-slider-title"
+                                                        className="gslider-title"
                                                         value={item.title}
                                                     />
                                                 </div>
                                             )}
                                             {item.description && (
-                                                <div className="guten-slider-description-wrapper">
+                                                <div className="gslider-description-wrapper">
                                                     <RichText.Content
                                                         tagName="p"
-                                                        className="guten-slider-description"
+                                                        className="gslider-description"
                                                         value={item.description}
                                                     />
                                                 </div>
                                             )}
                                             {item.buttonText && (
-                                                <div className="guten-slider-button-container">
+                                                <div className="gslider-button-container">
                                                     {item.buttonLink ? (
                                                         <a 
-                                                            className="guten-slider-button"
+                                                            className="gslider-button"
                                                             href={item.buttonLink}
                                                             target={item.buttonTargetLink ? '_blank' : undefined}
                                                             rel={[
@@ -131,11 +131,11 @@ export default function Save({ attributes }) {
                                                         >
                                                             <RichText.Content
                                                                 value={item.buttonText}
-                                                                className="guten-slider-button-text"
+                                                                className="gslider-button-text"
                                                             />
                                                         </a>
                                                     ) : (
-                                                        <span className="guten-slider-button-text">
+                                                        <span className="gslider-button-text">
                                                             <RichText.Content value={item.buttonText} />
                                                         </span>
                                                     )}

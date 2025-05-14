@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+	mode: 'development',
 	entry: {
 		admin: path.resolve(__dirname, 'admin/scss/admin.scss'), // ✅ Corrected path
 	},

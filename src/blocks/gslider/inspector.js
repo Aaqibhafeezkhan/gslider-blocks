@@ -259,7 +259,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
     useEffect(() => {
         if (clientId) {
-            setAttributes({ blockId: `guten-slider-${clientId.slice(0, 8)}` });
+            setAttributes({ blockId: `gslider-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
 
@@ -308,14 +308,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     : normalItemGradientColor;
                 
                 if (gradientValue) {
-                    const gradientStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
+                    const gradientStyle = `.${blockId} .gslider-content-wrapper.${item.id} {
                         background: ${gradientValue};
                         transition: all .3s ease-in-out;
                     }`;
                     style += gradientStyle;
                 }
             } else if (item.normalBackgroundImageUrl.Desktop) {
-                let backgroundImageStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
+                let backgroundImageStyle = `.${blockId} .gslider-content-wrapper.${item.id} {
                     background-image: url(${item.normalBackgroundImageUrl.Desktop});`;
                 
                 if (item.normalBackgroundImagePosition.Desktop) {
@@ -344,7 +344,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 }`;
                 style += backgroundImageStyle;
             } else if (item.normalItemClassicColor) {
-                const classicStyle = `.${blockId} .guten-slider-content-wrapper.${item.id} {
+                const classicStyle = `.${blockId} .gslider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};
                     transition: all .3s ease-in-out;
                 }`;
@@ -360,7 +360,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     ? item.itemBackgroundOverlayCustomGradientInputValue
                     : overlayColor;
             
-                const overlayStyle = `.${blockId} .guten-slider-content-wrapper.${item.id}::after {
+                const overlayStyle = `.${blockId} .gslider-content-wrapper.${item.id}::after {
                     content: '';
                     position: absolute;
                     top: 0;
@@ -373,7 +373,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     pointer-events: none;
                     transition: all .3s ease-in-out;
                 }
-                .${blockId} .guten-slider-content-wrapper.${item.id} {
+                .${blockId} .gslider-content-wrapper.${item.id} {
                     position: relative;
                     z-index: 1;
                 }`;
@@ -385,7 +385,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             // Tablet styles (max-width: 1024px)
             style += `
             @media only screen and (max-width: 1024px) {
-                .${blockId} .guten-slider-content-wrapper.${item.id} {`;
+                .${blockId} .gslider-content-wrapper.${item.id} {`;
             
             if (normalItemBackgroundType === 'gradient' && item.normalItemGradientColor) {
                 style += `
@@ -411,7 +411,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             // Mobile styles (max-width: 767px)
             style += `
             @media only screen and (max-width: 767px) {
-                .${blockId} .guten-slider-content-wrapper.${item.id} {`;
+                .${blockId} .gslider-content-wrapper.${item.id} {`;
             
             if (normalItemBackgroundType === 'gradient' && item.normalItemGradientColor) {
                 style += `
@@ -783,22 +783,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             	{editorStyle}
             </style>
             <InspectorControls>
-                <div className="guten-slider-inspector-control">
+                <div className="gslider-inspector-control">
                     <TabPanel
-                        className="guten-slider-parent-tab-panel"
+                        className="gslider-parent-tab-panel"
                         activeClass="active-tab"
                         tabs={[
-                            { name: "general", title: __("General", "gutenslider-blocks"), className: "guten-slider-tab general" },
-                            { name: "styles", title: __("Style", "gutenslider-blocks"), className: "guten-slider-tab styles" },
-                            { name: "advanced", title: __("Advanced", "gutenslider-blocks"), className: "guten-slider-tab advanced" },
+                            { name: "general", title: __("General", "gutenslider-blocks"), className: "gslider-tab-panel general" },
+                            { name: "styles", title: __("Style", "gutenslider-blocks"), className: "gslider-tab-panel styles" },
+                            { name: "advanced", title: __("Advanced", "gutenslider-blocks"), className: "gslider-tab-panel advanced" },
                         ]}
                     >
                         {(tab) => (
-                            <div className={`guten-slider-tab-controls ${tab.name}`}>
+                            <div className={`gslider-tab-panel-controls ${tab.name}`}>
                                 {tab.name === "general" && (
                                     <>
                                         <PanelBody title={__("Slider Items", "gutenslider-blocks")} initialOpen={true}>
-                                            <div className="guten-slider-wrapper">
+                                            <div className="gslider-wrapper">
                                                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                                                     <SortableContext items={sliderItems.map((item) => item.id)}>
                                                         <ul className="dnd-items-wrapper">

@@ -7,7 +7,8 @@
 
  use GSlider\Traits\SingletonTrait;
  use GSlider\Classes\StyleGenerator;
- use GSlider\Classes\Enqueues;
+ use GSlider\Assets\FrontendAssets;
+ use GSlider\Assets\AdminAssets;
  use GSlider\Classes\RegistrationBlocks;
  use GSlider\Classes\RegistrationCategory;
  use GSlider\Classes\FontLoader;
@@ -36,7 +37,8 @@ if ( ! class_exists( 'Plugin' ) ) {
 		 */
 		public function plugins_loaded() {
 			StyleGenerator::getInstance();
-			Enqueues::getInstance();
+			FrontendAssets::getInstance()->register();
+			AdminAssets::getInstance()->register();
 			RegistrationBlocks::getInstance();
 			RegistrationCategory::getInstance();
 			FontLoader::getInstance();

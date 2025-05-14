@@ -98,13 +98,7 @@ $border_color: #dddddd;
     }
 }
 
-.guten-slider-wrapper {
-    .components-button.is-primary{
-        // &:hover:not(:disabled) {
-        //     background: transparent;
-        //     color: inherit;
-        // }
-    }
+.gslider-wrapper {
     .dashicon {
         &:focus{
             box-shadow: none !important;
