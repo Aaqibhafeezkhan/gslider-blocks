@@ -1,6 +1,7 @@
 <?php
 
 namespace GSlider\Classes;
+
 use GSlider\Traits\SingletonTrait;
 
 if (!defined('ABSPATH')) {
@@ -10,85 +11,94 @@ if (!defined('ABSPATH')) {
 if (!class_exists('RegistrationBlocks')) {
 
     class RegistrationBlocks {
-
         use SingletonTrait;
 
         /**
-        * List of blocks to be registered
-        */
-        private const BLOCKS = [
-            'gslider',
-        ];
-
-        /**
-         * Constructor
+         * Attach hooks for block registration.
+         *
+         * @return void
          */
-        public function __construct() {
-            $this->init();
-        }
-
-        /**
-         * Initialize the Class
-         */
-        private function init() {
+        public function register(): void {
             add_action('init', [$this, 'register_blocks']);
         }
 
         /**
-         * Register Blocks
+         * Register all blocks dynamically from build/blocks directory.
+         *
+         * @return void
          */
-        public function register_blocks() {
-            // Check if the plugin directory constant is defined
-            if (!defined('GSLIDER_DIR_PATH')) {
-                error_log('GSlider Blocks: Plugin directory constant not defined.');
-                return;
-            }
+        public function register_blocks(): void {
+            $plugin_dir = defined('GSLIDER_DIR_PATH') ? GSLIDER_DIR_PATH : plugin_dir_path(__FILE__);
+            $build_dir  = trailingslashit($plugin_dir) . 'build/blocks/';
 
-            // Build directory for blocks
-            $build_dir = trailingslashit(GSLIDER_DIR_PATH) . 'build/blocks/';
-            
-            // Check if the build directory is readable
             if (!is_readable($build_dir)) {
-                error_log('GSlider Blocks: Main build directory is not readable: ' . $build_dir);
+                error_log('GSlider Blocks: Build directory is not readable: ' . $build_dir);
                 return;
             }
 
-            // Iterate over each block and register it
-            foreach (self::BLOCKS as $block) {
+            // Get block folders dynamically
+            $blocks = apply_filters('gslider_registered_blocks', $this->get_available_blocks($build_dir));
+
+            foreach ($blocks as $block) {
                 try {
                     $this->register_single_block($build_dir, $block);
-                } catch (Exception $e) {
-                    // Log errors encountered during block registration
-                    error_log('GSlider Blocks: Error registering block ' . $block . ': ' . $e->getMessage()); 
+                } catch (\Exception $e) {
+                    error_log('GSlider Blocks: Error registering block "' . $block . '": ' . $e->getMessage());
                 }
             }
         }
 
         /**
-         * Register a single block
+         * Register a single block if valid.
+         *
+         * @param string $build_dir
+         * @param string $block
+         * @return void
+         * @throws \Exception
          */
         private function register_single_block(string $build_dir, string $block): void {
-            // Construct the block directory path
             $block_dir = trailingslashit($build_dir . sanitize_file_name($block));
-            
-            // Check if the block directory is readable
+
             if (!is_readable($block_dir)) {
-                throw new Exception(esc_html("Build directory not readable: {$block_dir}"));
+                throw new \Exception("Build directory not readable: {$block_dir}");
             }
 
-            // Check if the block.json file exists
             if (!file_exists($block_dir . 'block.json')) {
-                throw new Exception(esc_html("block.json not found for {$block}"));
+                throw new \Exception("block.json not found for {$block}");
             }
 
-            // Attempt to register the block
-            $registration_result = register_block_type($block_dir);
-            
-            // Check if registration failed
-            if (false === $registration_result) {
-                throw new Exception(esc_html("Block registration failed for {$block}"));
+            if (false === register_block_type($block_dir)) {
+                throw new \Exception("Block registration failed for {$block}");
             }
         }
 
+        /**
+         * Dynamically scan block folders inside build/blocks directory.
+         *
+         * @param string $build_dir
+         * @return array
+         */
+        private function get_available_blocks(string $build_dir): array {
+            if (!is_dir($build_dir)) {
+                return [];
+            }
+
+            $blocks = [];
+            $dirs = scandir($build_dir);
+
+            foreach ($dirs as $dir) {
+                if ($dir === '.' || $dir === '..') {
+                    continue;
+                }
+
+                $block_path = trailingslashit($build_dir . $dir);
+
+                if (is_dir($block_path) && file_exists($block_path . 'block.json')) {
+                    $blocks[] = $dir;
+                }
+            }
+
+            return $blocks;
+        }
     }
 }

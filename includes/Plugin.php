@@ -39,7 +39,7 @@ if ( ! class_exists( 'Plugin' ) ) {
 			StyleGenerator::getInstance();
 			FrontendAssets::getInstance()->register();
 			AdminAssets::getInstance()->register();
-			RegistrationBlocks::getInstance();
+			RegistrationBlocks::getInstance()->register();
 			RegistrationCategory::getInstance();
 			FontLoader::getInstance();
 
