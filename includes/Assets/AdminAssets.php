@@ -8,10 +8,10 @@ class AdminAssets {
     use SingletonTrait;
 
     public function register() {
-        add_action('admin_enqueue_scripts', [$this, 'gslider_enqueue_assets']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
     }
 
-    public function gslider_enqueue_assets() {
+    public function enqueue_assets() {
         wp_register_style(
             'gslider-admin-style',
             GSLIDER_PLUGIN_URL . 'assets/admin/css/admin.css',

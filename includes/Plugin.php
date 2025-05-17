@@ -36,16 +36,16 @@ if ( ! class_exists( 'Plugin' ) ) {
 		 * Initialize the plugin
 		 */
 		public function plugins_loaded() {
-			StyleGenerator::getInstance();
+			StyleGenerator::getInstance()->register();
 			FrontendAssets::getInstance()->register();
 			AdminAssets::getInstance()->register();
 			RegistrationBlocks::getInstance()->register();
-			RegistrationCategory::getInstance();
-			FontLoader::getInstance();
+			RegistrationCategory::getInstance()->register();
+			FontLoader::getInstance()->register();
 
 			// SVG Support
 			if (is_admin()) {
-				SupportSVG::getInstance();
+				SupportSVG::getInstance()->register();
 			}
 		}
 

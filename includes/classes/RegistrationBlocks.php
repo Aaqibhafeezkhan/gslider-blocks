@@ -15,19 +15,15 @@ if (!class_exists('RegistrationBlocks')) {
 
         /**
          * Attach hooks for block registration.
-         *
-         * @return void
          */
-        public function register(): void {
+        public function register() {
             add_action('init', [$this, 'register_blocks']);
         }
 
         /**
          * Register all blocks dynamically from build/blocks directory.
-         *
-         * @return void
          */
-        public function register_blocks(): void {
+        public function register_blocks() {
             $plugin_dir = defined('GSLIDER_DIR_PATH') ? GSLIDER_DIR_PATH : plugin_dir_path(__FILE__);
             $build_dir  = trailingslashit($plugin_dir) . 'build/blocks/';
 
@@ -53,10 +49,9 @@ if (!class_exists('RegistrationBlocks')) {
          *
          * @param string $build_dir
          * @param string $block
-         * @return void
          * @throws \Exception
          */
-        private function register_single_block(string $build_dir, string $block): void {
+        private function register_single_block(string $build_dir, string $block) {
             $block_dir = trailingslashit($build_dir . sanitize_file_name($block));
 
             if (!is_readable($block_dir)) {
@@ -78,7 +73,7 @@ if (!class_exists('RegistrationBlocks')) {
          * @param string $build_dir
          * @return array
          */
-        private function get_available_blocks(string $build_dir): array {
+        private function get_available_blocks(string $build_dir) {
             if (!is_dir($build_dir)) {
                 return [];
             }

@@ -13,28 +13,18 @@ if (!class_exists('SupportSVG')) {
 
         use SingletonTrait;
 
-        /**
-         * WP_Filesystem instance
-         */
         private $wpFilesystem;
 
         /**
-         * Constructor
+         * Register hooks and init filesystem
          */
-        public function __construct() {
-            $this->init();
-        }
-
-        /**
-         * Initialize the Class
-         */
-        private function init() {
+        public function register() {
             add_filter('upload_mimes', [$this, 'allowSvgMimeType']);
             add_filter('wp_handle_upload_prefilter', [$this, 'validateSvgUpload']);
             add_filter('wp_prepare_attachment_for_js', [$this, 'fixSvgThumbnail']);
             add_action('admin_init', [$this, 'enableSvgSupport']);
 
-            // Initialize WP_Filesystem
+            // WP Filesystem init
             if (!function_exists('WP_Filesystem')) {
                 require_once ABSPATH . 'wp-admin/includes/file.php';
             }

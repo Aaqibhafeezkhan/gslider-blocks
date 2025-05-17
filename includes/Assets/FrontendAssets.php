@@ -8,10 +8,10 @@ class FrontendAssets {
     use SingletonTrait;
 
     public function register() {
-        add_action('enqueue_block_assets', [$this, 'gslider_enqueue_assets']);
+        add_action('enqueue_block_assets', [$this, 'enqueue_assets']);
     }
 
-    public function gslider_enqueue_assets() {
+    public function enqueue_assets() {
         wp_register_style(
             'gslider-blocks-swiper-style',
             GSLIDER_PLUGIN_URL . 'assets/css/swiper-bundle.min.css',
