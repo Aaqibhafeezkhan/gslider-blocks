@@ -11,7 +11,6 @@ import {
 import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import GradientColorControl from '@Components/gradient-color-control';
 import ColorControl from '@Components/color-control';
-import './editor.lazy.scss';
 
 const BackgroundControl = ({
     label,

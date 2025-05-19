@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import { Button, BaseControl, ButtonGroup } from '@wordpress/components';
-import './editor.lazy.scss';
 
 
 const SwitcherControl = ({ label, globalSwitcher, setGlobalSwitcher }) => {

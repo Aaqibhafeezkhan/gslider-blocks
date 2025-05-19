@@ -1,5 +1,18 @@
 @use "variables" as *;
 @use "setting-panel";
 @use "components/background-control";
-@use "components/url-control";
+@use "components/box-shadow-control";
+@use "components/color-control";
 @use "components/dnd-items";
+@use "components/gradient-color-control";
+@use "components/icon-picker";
+// @use "components/image-control";
+// @use "components/responsive-background-image-control";
+@use "components/responsive-device-control";
+@use "components/responsive-range-control";
+@use "components/responsive-spacing-control";
+@use "components/responsive-typography-control";
+@use "components/switcher-control";
+@use "components/unit-control";
+@use "components/url-control";
+

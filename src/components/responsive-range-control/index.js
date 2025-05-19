@@ -3,7 +3,6 @@ import { __ } from '@wordpress/i18n';
 import { RangeControl } from '@wordpress/components';
 import ResponsiveDeviceControl from '@Components/responsive-device-control';
 import UnitsControl from '@Components/unit-control';
-import './editor.lazy.scss';
 
 const ResponsiveRangeControl = ({
 	min,

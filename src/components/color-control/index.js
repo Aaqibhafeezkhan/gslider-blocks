@@ -1,7 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { BaseControl, Dropdown, ColorPicker, ColorPalette, Dashicon, Button } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import './editor.lazy.scss';
 
 const ColorControl = ({ label, color, onChangeColor }) => {
 

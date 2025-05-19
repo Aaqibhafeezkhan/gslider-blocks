@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import { BaseControl, ToggleControl, TextareaControl, GradientPicker } from '@wordpress/components';
-import './editor.lazy.scss';
 
 const GradientColorControl = ({
     label='',

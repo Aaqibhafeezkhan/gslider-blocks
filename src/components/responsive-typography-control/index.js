@@ -16,7 +16,6 @@ import {
 } from "./constants/constants";
 
 import ResponsiveRangeControl from '@Components/responsive-range-control';
-import './editor.lazy.scss';
 
 const ResponsiveTypographyControl = ({
     fontFamily,

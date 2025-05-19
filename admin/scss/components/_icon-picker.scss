@@ -1,13 +1,4 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
-
-// .wp-block-gslider-blocks-advanced-heading {
-// 	border: 1px dotted #f00;
-// }
-
+@use "../variables" as *;
 
 .fb_icon_picker_wrapper {
 	position: relative;

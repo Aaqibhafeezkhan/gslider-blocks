@@ -2,7 +2,6 @@ import { __ } from '@wordpress/i18n';
 import React, { useState, useEffect } from 'react';
 import Control from './control';
 import { Dashicon, BaseControl, Button, Dropdown} from '@wordpress/components';
-import './editor.lazy.scss';
 
 export default function BoxShadowSettingsControl({ label = __("Box Shadow", "gslider-blocks"), onBoxShadowChange, initialShadowValue, onBoxShadowStyleChange, }) {
 	const [boxShadow, setBoxShadow] = useState(initialShadowValue || [0, 0, 0, 0, '', '#00000000']);

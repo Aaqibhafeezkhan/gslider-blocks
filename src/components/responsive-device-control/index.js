@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import { setDeviceType } from '@Utils/displayType';
-import './editor.lazy.scss';
 
 const ResponsiveDeviceControl = ({label, device}) => {
 

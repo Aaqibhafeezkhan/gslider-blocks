@@ -4,7 +4,6 @@ import {__} from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import ResponsiveDeviceControl from '@Components/responsive-device-control';
 import UnitsControl from '@Components/unit-control';
-import './editor.lazy.scss';
 
 export default function ResponsiveSpacingControl({
 	label,

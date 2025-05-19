@@ -7,7 +7,6 @@ import {
     Dashicon,
     ToggleControl
 } from '@wordpress/components';
-import './editor.lazy.scss';
 
 const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTab, nofollow, onChangeNofollow, sponsored, onChangeSponsored }) => {
     const handleUrlChange = (newUrl) => {

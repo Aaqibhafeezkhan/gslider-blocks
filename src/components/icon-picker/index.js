@@ -7,7 +7,6 @@ import fetchSvgIcons from "@Components/icon-picker/components/fetchSvgicons";
 import {
 	Button, Modal, Tooltip
 } from "@wordpress/components";
-import './editor.scss';
 
 export default function FBIconPicker(props) {
 	// const { ajaxUrl, nonce } = window.FrontisBlocksData;
