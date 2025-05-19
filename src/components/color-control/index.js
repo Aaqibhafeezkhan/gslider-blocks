@@ -12,7 +12,7 @@ const ColorControl = ({ label, color, onChangeColor }) => {
     return (
         <div className="global-setting-color-container">
             <BaseControl 
-                label={__(label, "gutenslider-blocks")}
+                label={__(label, "gslider-blocks")}
                 className="global-setting-color-switcher-wrapper"
             >
                 <Dropdown
@@ -37,7 +37,7 @@ const ColorControl = ({ label, color, onChangeColor }) => {
                                         onChange={onChangeColor}
                                         enableAlpha={true}
                                     />
-                                    <div className="global-setting-color-label">{__("Default Colors", "gutenslider-blocks")}</div>
+                                    <div className="global-setting-color-label">{__("Default Colors", "gslider-blocks")}</div>
                                     <ColorPalette
                                         colors={[
                                             { color: '#2563eb' },
@@ -97,7 +97,7 @@ const ColorControl = ({ label, color, onChangeColor }) => {
                                     />
                                     {themeColors.length > 0 && (
                                         <>
-                                            <div className="global-setting-color-label">{__("Theme Colors", "gutenslider-blocks")}</div>
+                                            <div className="global-setting-color-label">{__("Theme Colors", "gslider-blocks")}</div>
                                             <ColorPalette
                                                 colors={themeColors}
                                                 disableCustomColors={true}

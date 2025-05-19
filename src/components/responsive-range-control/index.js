@@ -45,7 +45,7 @@ const ResponsiveRangeControl = ({
 			<div className="global-setting-spacing-inner-container">
 				<div className="global-setting-spacing-label-container">
                     <ResponsiveDeviceControl
-						label={ __( label, 'gutenslider-blocks' )}
+						label={ __( label, 'gslider-blocks' )}
 						device={ deviceType }
 					/>
 					

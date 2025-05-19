@@ -74,15 +74,15 @@ const BackgroundControl = ({
 }) => {
 
     const BACKGROUND_TYPES = [
-        { label: __('Classic', 'gutenslider-blocks'), value: 'classic' },
-        { label: __('Gradient', 'gutenslider-blocks'), value: 'gradient' },
+        { label: __('Classic', 'gslider-blocks'), value: 'classic' },
+        { label: __('Gradient', 'gslider-blocks'), value: 'gradient' },
     ];
 
 
     const renderNormalControls = () => (
         <>
             <BaseControl
-                label={__("Background Type", "gutenslider-blocks")}
+                label={__("Background Type", "gslider-blocks")}
                 className="global-setting-switcher-panel-wrapper"
             >
                 <ButtonGroup className="global-setting-switcher-panel-btn">
@@ -102,14 +102,14 @@ const BackgroundControl = ({
 
                 <>
                     <ColorControl
-                        label={__("Color", "gutenslider-blocks")}
+                        label={__("Color", "gslider-blocks")}
                         color={normalClassicColor}
                         onChangeColor={(value) => setNormalClassicColor(value)}
                     />
 
                     {isBackgroundImage && (
                         <ResponsiveBackgroundImageControl
-                            label={__("Image", "gutenslider-blocks")}
+                            label={__("Image", "gslider-blocks")}
                             deviceType={deviceType}
                             globalBackgroundImageUrl={normalBackgroundImageUrl}
                             setGlobalBackgroundImageUrl={(value) => setNormalBackgroundImageUrl(value)}
@@ -148,7 +148,7 @@ const BackgroundControl = ({
     const renderHoverControls = () => (
         <>
             <BaseControl
-                label={__("Background Type", "gutenslider-blocks")}
+                label={__("Background Type", "gslider-blocks")}
                 className="global-setting-switcher-panel-wrapper"
             >
                 <ButtonGroup className="global-setting-switcher-panel-btn"> 
@@ -168,14 +168,14 @@ const BackgroundControl = ({
 
                 <>
                     <ColorControl
-                        label={__("Background Color", "gutenslider-blocks")}
+                        label={__("Background Color", "gslider-blocks")}
                         color={hoverClassicColor}
                         onChangeColor={(value) => setHoverClassicColor(value)}
                     />
 
                     {isBackgroundImage && (
                         <ResponsiveBackgroundImageControl
-                            label={__("Background Image", "gutenslider-blocks")}
+                            label={__("Background Image", "gslider-blocks")}
                             deviceType={deviceType}
                             globalBackgroundImageUrl={hoverBackgroundImageUrl}
                             setGlobalBackgroundImageUrl={(value) => setHoverBackgroundImageUrl(value)}
@@ -214,26 +214,26 @@ const BackgroundControl = ({
         <>
             <BaseControl
                 label={label}
-                className="gutenslider-background-color-control-wrapper global-setting-switcher-container"
+                className="gslider-background-color-control-wrapper global-setting-switcher-container"
             >
                 {isHover ? (
                     <TabPanel
-                        className="gutenslider-bg-tab-panel"
+                        className="gslider-bg-tab-panel"
                         activeClass="active-tab"
                         tabs={[
-                            { name: "normal", title: __("Normal", "gutenslider-blocks"), className: "gutenslider-bg-tab" },
-                            { name: "hover", title: __("Hover", "gutenslider-blocks"), className: "gutenslider-bg-tab" },
+                            { name: "normal", title: __("Normal", "gslider-blocks"), className: "gslider-bg-tab" },
+                            { name: "hover", title: __("Hover", "gslider-blocks"), className: "gslider-bg-tab" },
                         ]}
                     >
                         {(tab) => (
-                            <div className={`gutenslider-tab-panel-wrapper ${tab.name}`}>
+                            <div className={`gslider-tab-panel-wrapper ${tab.name}`}>
                                 {tab.name === "normal" && renderNormalControls()}
                                 {tab.name === "hover" && renderHoverControls()}
                             </div>
                         )}
                     </TabPanel>
                 ) : (
-                    <div className="gutenslider-tab-panel-wrapper normal">
+                    <div className="gslider-tab-panel-wrapper normal">
                         {renderNormalControls()}
                     </div>
                 )}

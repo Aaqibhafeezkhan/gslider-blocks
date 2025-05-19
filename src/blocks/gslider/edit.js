@@ -363,12 +363,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 <ToolbarGroup>
                     <ToolbarButton
                         icon="plus"
-                        label={ __( 'Add New Slide', 'gutenslider-blocks' ) }
+                        label={ __( 'Add New Slide', 'gslider-blocks' ) }
                         onClick={handleAddItem}
                     />
                     <ToolbarButton
                         icon="admin-page"
-                        label={ __( 'Duplicate Current Slide', 'gutenslider-blocks' ) } 
+                        label={ __( 'Duplicate Current Slide', 'gslider-blocks' ) } 
                         onClick={() => {
                             // Get the currently visible slide's ID
                             const currentSlideId = sliderItems[selectedSlideIndex]?.id;
@@ -470,7 +470,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															value={item.buttonText}
 															className="gslider-button-text"
 															onChange={(value) => updateItem(index, 'buttonText', value)}
-															placeholder={__('Enter button text...', 'gutenslider-blocks')}
+															placeholder={__('Enter button text...', 'gslider-blocks')}
 														/>
 													</a>
 												) : (
@@ -478,7 +478,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														value={item.buttonText}
 														className="gslider-button-text"
 														onChange={(value) => updateItem(index, 'buttonText', value)}
-														placeholder={__('Enter button text...', 'gutenslider-blocks')}
+														placeholder={__('Enter button text...', 'gslider-blocks')}
 													/>
 												)}
 											</div>

@@ -34,24 +34,24 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.title || __( `Social Item ${index + 1}`, "gutenslider-blocks" )}
+                    {item.title || __( `Social Item ${index + 1}`, "gslider-blocks" )}
                 </span>
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
-                    <Button icon="move" label={__("Sort", "gutenslider-blocks")} aria-label={__("Move item", "gutenslider-blocks")} />
+                    <Button icon="move" label={__("Sort", "gslider-blocks")} aria-label={__("Move item", "gslider-blocks")} />
                 </span>
                 <span className="sortable-duplicate">
                     <Button 
                         icon="admin-page" 
-                        label={__("Duplicate", "gutenslider-blocks")} 
-                        aria-label={__("Duplicate item", "gutenslider-blocks")}
+                        label={__("Duplicate", "gslider-blocks")} 
+                        aria-label={__("Duplicate item", "gslider-blocks")}
                         onClick={() => handleDuplicateItem(item.id)} 
                     />
                 </span>
                 <span className="sortable-delete">
                     <Button 
                         icon="trash" 
-                        label={__("Delete", "gutenslider-blocks")} 
-                        aria-label={__("Delete item", "gutenslider-blocks")}
+                        label={__("Delete", "gslider-blocks")} 
+                        aria-label={__("Delete item", "gslider-blocks")}
                         onClick={() => handleDeleteItem(item.id)} 
                     />
                 </span>
@@ -61,7 +61,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                 <div className="sortable-item-content">
                     <BaseControl
                         className="global-setting-background-color-setting-wrapper"
-                        label={__("Slide Content", "gutenslider-blocks")}
+                        label={__("Slide Content", "gslider-blocks")}
                     >
                         <Dropdown
                             className="global-setting-icon-dropdown"
@@ -80,25 +80,25 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             renderContent={() => (
                                 <div className="global-setting-contant-popup-wrapper">
                                     <TextControl
-                                        label={__("Sub Title", "gutenslider-blocks")}
+                                        label={__("Sub Title", "gslider-blocks")}
                                         value={item.subTitle}
                                         onChange={(value) => handleChangeItem(item.id, "subTitle", value)}
                                         help= "Leave blank to hide subtitle"
                                     />
                                     <TextareaControl
-                                        label={__("Title", "gutenslider-blocks")}
+                                        label={__("Title", "gslider-blocks")}
                                         value={item.title}
                                         onChange={(value) => handleChangeItem(item.id, "title", value)}
                                         help= "Leave blank to hide title"
                                     />
                                     <TextareaControl
-                                        label={__("Description", "gutenslider-blocks")}
+                                        label={__("Description", "gslider-blocks")}
                                         value={item.description}
                                         onChange={(value) => handleChangeItem(item.id, "description", value)}
                                         help= "Leave blank to hide description"
                                     />
                                     <TextControl
-                                        label={__("Button Text", "gutenslider-blocks")}
+                                        label={__("Button Text", "gslider-blocks")}
                                         value={item.buttonText}
                                         onChange={(value) => handleChangeItem(item.id, "buttonText", value)}
                                         help= "Leave blank to hide button text"
@@ -119,7 +119,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                     </BaseControl>
                     <BaseControl
                         className="global-setting-background-color-setting-wrapper"
-                        label={__("Background", "gutenslider-blocks")}
+                        label={__("Background", "gslider-blocks")}
                     >
                         <Dropdown
                             className="global-setting-icon-dropdown"
@@ -166,7 +166,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                         isHover={false}
                                     />
                                     <ToggleControl
-                                        label={__("Enable Overlay", "gutenslider-blocks")}
+                                        label={__("Enable Overlay", "gslider-blocks")}
                                         checked={item.itemBackgroundOverlaySwitcher}
                                         onChange={(value) => handleChangeItem(item.id, 'itemBackgroundOverlaySwitcher', value)}
                                     />
@@ -189,7 +189,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                                 isHover={false}
                                             />
                                             <RangeControl
-                                                label={__("Opacity", "gutenslider-blocks")}
+                                                label={__("Opacity", "gslider-blocks")}
                                                 value={item.itemBackgroundOverlayOpacity}
                                                 onChange={(value) => handleChangeItem(item.id, 'itemBackgroundOverlayOpacity', value)}
                                                 min={0}

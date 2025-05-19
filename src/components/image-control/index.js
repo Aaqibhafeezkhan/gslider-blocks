@@ -24,12 +24,12 @@ const globalImageControl = ({
 
         <BaseControl
             label={label}
-            className="gutenslider-image-control-wrapper"
+            className="gslider-image-control-wrapper"
         >
             {globalImageUrl ? ( 
-                <div className="gutenslider-image-control" style={{backgroundImage: `url(${globalImageUrl})`}}> 
+                <div className="gslider-image-control" style={{backgroundImage: `url(${globalImageUrl})`}}> 
                     <button
-                        className='gutenslider-image-delete'
+                        className='gslider-image-delete'
                         onClick={() => {
                             setglobalImageUrl(null);
                             setglobalImageAlt(null);
@@ -39,12 +39,12 @@ const globalImageControl = ({
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#4D4D4D" strokeWidth="1.5"></path><path d="M15 9L9 15" stroke="#4D4D4D" strokeWidth="1.5"></path><path d="M9 9L15 15" stroke="#4D4D4D" strokeWidth="1.5"></path></svg>
                     </button>
                     <button
-                        className='gutenslider-image-replace-btn'
+                        className='gslider-image-replace-btn'
                         onClick={() => {
                             const mediaUploader = wp.media({
-                                title: __('Select or Upload Image', 'gutenslider-blocks'),
+                                title: __('Select or Upload Image', 'gslider-blocks'),
                                 button: {
-                                    text: __('Use this image', 'gutenslider-blocks'),
+                                    text: __('Use this image', 'gslider-blocks'),
                                 },
                                 multiple: false
                             });
@@ -65,12 +65,12 @@ const globalImageControl = ({
                 </div>
             ) : (
                 <button
-                    className='gutenslider-image-upload-btn'
+                    className='gslider-image-upload-btn'
                     onClick={() => {
                         const mediaUploader = wp.media({
-                            title: __('Select or Upload Image', 'gutenslider-blocks'),
+                            title: __('Select or Upload Image', 'gslider-blocks'),
                             button: {
-                                text: __('Use this image', 'gutenslider-blocks'),
+                                text: __('Use this image', 'gslider-blocks'),
                             },
                             multiple: false
                         });
@@ -90,19 +90,19 @@ const globalImageControl = ({
                 </button>
             )}
             {globalImageUrl && (
-                <div className="gutenslider-image-control-setting-wrapper">
+                <div className="gslider-image-control-setting-wrapper">
                     <BaseControl>
                         <SelectControl
-                            label={__("Object Fit", "gutenslider-blocks")}
-                            className="gutenslider-image-label"
+                            label={__("Object Fit", "gslider-blocks")}
+                            className="gslider-image-label"
                             value={globalImageSize}
                             options={(
                                 [
-                                    {label: __("None", "gutenslider-blocks"), value: "none"},
-                                    {label: __("Fill", "gutenslider-blocks"), value: "fill"},
-                                    {label: __("Contain", "gutenslider-blocks"), value: "contain"},
-                                    {label: __("Cover", "gutenslider-blocks"), value: "cover"},
-                                    {label: __("Scale Down", "gutenslider-blocks"), value: "scale-down"},
+                                    {label: __("None", "gslider-blocks"), value: "none"},
+                                    {label: __("Fill", "gslider-blocks"), value: "fill"},
+                                    {label: __("Contain", "gslider-blocks"), value: "contain"},
+                                    {label: __("Cover", "gslider-blocks"), value: "cover"},
+                                    {label: __("Scale Down", "gslider-blocks"), value: "scale-down"},
                                 ]
                             )}
                             onChange={setglobalImageSize}

@@ -788,16 +788,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         className="gslider-parent-tab-panel"
                         activeClass="active-tab"
                         tabs={[
-                            { name: "general", title: __("General", "gutenslider-blocks"), className: "gslider-tab-panel general" },
-                            { name: "styles", title: __("Style", "gutenslider-blocks"), className: "gslider-tab-panel styles" },
-                            { name: "advanced", title: __("Advanced", "gutenslider-blocks"), className: "gslider-tab-panel advanced" },
+                            { name: "general", title: __("General", "gslider-blocks"), className: "gslider-tab-panel general" },
+                            { name: "styles", title: __("Style", "gslider-blocks"), className: "gslider-tab-panel styles" },
+                            { name: "advanced", title: __("Advanced", "gslider-blocks"), className: "gslider-tab-panel advanced" },
                         ]}
                     >
                         {(tab) => (
                             <div className={`gslider-tab-panel-controls ${tab.name}`}>
                                 {tab.name === "general" && (
                                     <>
-                                        <PanelBody title={__("Slider Items", "gutenslider-blocks")} initialOpen={true}>
+                                        <PanelBody title={__("Slider Items", "gslider-blocks")} initialOpen={true}>
                                             <div className="gslider-wrapper">
                                                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                                                     <SortableContext items={sliderItems.map((item) => item.id)}>
@@ -819,14 +819,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                     </SortableContext>
                                                 </DndContext>
                                                 <Button isPrimary onClick={handleAddItem}>
-                                                    {__("Add Slide", "gutenslider-blocks")}
+                                                    {__("Add Slide", "gslider-blocks")}
                                                 </Button>
                                             </div>
                                         </PanelBody>
-                                        <PanelBody title={__("Slider Type", "gutenslider-blocks")} initialOpen={false}>
+                                        <PanelBody title={__("Slider Type", "gslider-blocks")} initialOpen={false}>
                                             <div className="global-setting-switcher-container">
                                                 <BaseControl
-                                                    label={__("Slider Type", "gutenslider-blocks")}
+                                                    label={__("Slider Type", "gslider-blocks")}
                                                     className="global-setting-switcher-panel-wrapper"
                                                 >
                                                     <ButtonGroup className="global-setting-switcher-panel-btn">
@@ -843,24 +843,24 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 </BaseControl>
                                             </div>
                                         </PanelBody>
-                                        <PanelBody title={__("General Settings", "gutenslider-blocks")} initialOpen={false}>
+                                        <PanelBody title={__("General Settings", "gslider-blocks")} initialOpen={false}>
                                             <ToggleControl
-                                                label={ __( 'Infinite Loop', 'gutenslider-blocks' ) }
+                                                label={ __( 'Infinite Loop', 'gslider-blocks' ) }
                                                 checked={ infiniteLoop }
                                                 onChange={(value) => setAttributes({ infiniteLoop: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( 'Touch Swipe Control', 'gutenslider-blocks' ) }
+                                                label={ __( 'Touch Swipe Control', 'gslider-blocks' ) }
                                                 checked={ allowTouchMove }
                                                 onChange={(value) => setAttributes({ allowTouchMove: value })}
                                             />
                                             <ToggleControl
-                                                label={__("Pause on Hover", "gutenslider-blocks")}
+                                                label={__("Pause on Hover", "gslider-blocks")}
                                                 checked={pauseOnHover}
                                                 onChange={(value) => setAttributes({ pauseOnHover: value })}
                                             />
                                             <ToggleControl
-                                                label={__("Stop Autoplay at Last Slide", "gutenslider-blocks")}
+                                                label={__("Stop Autoplay at Last Slide", "gslider-blocks")}
                                                 checked={stopOnLastSlide}
                                                 onChange={(value) => {
                                                     setAttributes({ stopOnLastSlide: value });
@@ -871,7 +871,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 }}
                                             />
                                             <ToggleControl
-                                                label={__("Reverse Autoplay Direction", "gutenslider-blocks")}
+                                                label={__("Reverse Autoplay Direction", "gslider-blocks")}
                                                 checked={reverseDirection}
                                                 onChange={(value) => {
                                                     setAttributes({ reverseDirection: value });
@@ -881,28 +881,28 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 }}
                                             />
                                             <ToggleControl
-                                                label={__("Mousewheel Navigation", "gutenslider-blocks")}
+                                                label={__("Mousewheel Navigation", "gslider-blocks")}
                                                 checked={mousewheelControl}
                                                 onChange={(value) => setAttributes({ mousewheelControl: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( "Show Navigation", "gutenslider-blocks" ) }
+                                                label={ __( "Show Navigation", "gslider-blocks" ) }
                                                 checked={ showNavigation }
                                                 onChange={(value) => setAttributes({ showNavigation: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( "Show Pagination", "gutenslider-blocks" ) }
+                                                label={ __( "Show Pagination", "gslider-blocks" ) }
                                                 checked={ showPagination }
                                                 onChange={(value) => setAttributes({ showPagination: value })}
                                             />
                                             <ToggleControl
-                                                label={ __( 'Autoplay', 'gutenslider-blocks' ) }
+                                                label={ __( 'Autoplay', 'gslider-blocks' ) }
                                                 checked={ autoplay }
                                                 onChange={(value) => setAttributes({ autoplay: value })}
                                             />
                                             { autoplay && (
                                             <RangeControl
-                                                label={__('Autoplay Delay (ms)', 'gutenslider-blocks')}
+                                                label={__('Autoplay Delay (ms)', 'gslider-blocks')}
                                                 value={autoplayDelay}
                                                 onChange={(value) => setAttributes({ autoplayDelay: value })}
                                                 min={1000}
@@ -910,7 +910,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             />
                                             )}
                                             <RangeControl
-                                                label={__("Transition Speed (ms)", "gutenslider-blocks")}
+                                                label={__("Transition Speed (ms)", "gslider-blocks")}
                                                 value={speed}
                                                 onChange={(value) => setAttributes({ speed: value })}
                                                 min={100}
@@ -918,9 +918,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             />
                                         </PanelBody>
                                         {sliderType === 'carousel' && (
-                                            <PanelBody title={__("Carousel Settings", "gutenslider-blocks")} initialOpen={false}>
+                                            <PanelBody title={__("Carousel Settings", "gslider-blocks")} initialOpen={false}>
                                                 <RangeControl
-                                                    label={__('Number of Columns', 'gutenslider-blocks')}
+                                                    label={__('Number of Columns', 'gslider-blocks')}
                                                     value={carouselPerColumn}
                                                     onChange={(value) => setAttributes({ carouselPerColumn: value })}
                                                     min={1}
@@ -929,7 +929,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                     initialPosition={1}
                                                 />
                                                 <RangeControl
-                                                    label={__('Column Gap (px)', 'gutenslider-blocks')}
+                                                    label={__('Column Gap (px)', 'gslider-blocks')}
                                                     value={carouselPerColumnGap}
                                                     onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
                                                     min={0}
@@ -940,9 +940,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             </PanelBody>
                                         )}
                                         {sliderType === 'carousel' && (
-                                            <PanelBody title={__("Carousel Effect", "gutenslider-blocks")} initialOpen={false}>
+                                            <PanelBody title={__("Carousel Effect", "gslider-blocks")} initialOpen={false}>
                                                 <SelectControl
-                                                    label={__('Select Carousel Effect', 'gutenslider-blocks')}
+                                                    label={__('Select Carousel Effect', 'gslider-blocks')}
                                                     value={carouselEffect}
                                                     options={CAROUSEL_EFFECT_OPTIONS}
                                                     onChange={(value) => setAttributes({ carouselEffect: value })}
@@ -950,9 +950,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             </PanelBody>
                                         )}
                                         {sliderType === 'slider' && (
-                                            <PanelBody title={__("Slider Effect", "gutenslider-blocks")} initialOpen={false}>
+                                            <PanelBody title={__("Slider Effect", "gslider-blocks")} initialOpen={false}>
                                                 <SelectControl
-                                                    label={__('Select Slider Effect', 'gutenslider-blocks')}
+                                                    label={__('Select Slider Effect', 'gslider-blocks')}
                                                     value={slideEffect}
                                                     options={SLIDER_EFFECT_OPTIONS}
                                                     onChange={(value) => setAttributes({ slideEffect: value })}
@@ -961,9 +961,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                         )}
 
                                         {showPagination && (
-                                            <PanelBody title={__("Pagination", "gutenslider-blocks")} initialOpen={false}>
+                                            <PanelBody title={__("Pagination", "gslider-blocks")} initialOpen={false}>
                                                 <SelectControl
-                                                    label={__('Pagination Type', 'gutenslider-blocks')}
+                                                    label={__('Pagination Type', 'gslider-blocks')}
                                                     value={paginationType}
                                                     options={PAGINATION_TYPE}
                                                     onChange={(value) => setAttributes({ paginationType: value })}
@@ -984,13 +984,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody 
-                                            title={__("Navigation Style", "gutenslider-blocks")}  
+                                            title={__("Navigation Style", "gslider-blocks")}  
                                             initialOpen={true}
                                         >
                                             <ResponsiveRangeControl
                                                 min={0}
                                                 max={100}
-                                                label={__("Icon Size", "gutenslider-blocks")}
+                                                label={__("Icon Size", "gslider-blocks")}
                                                 rangeValue={sliderArrowsSize}
                                                 onChangeValue={(value) => setAttributes({ sliderArrowsSize: value })}
                                                 onUnitChange={(value) => setAttributes({ sliderArrowsSizeUnits: value })}
@@ -1003,7 +1003,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             <ResponsiveRangeControl
                                                 min={0}
                                                 max={100}
-                                                label={__("Width", "gutenslider-blocks")}
+                                                label={__("Width", "gslider-blocks")}
                                                 rangeValue={sliderArrowsWidth}
                                                 onChangeValue={(value) => setAttributes({ sliderArrowsWidth: value })}
                                                 onUnitChange={(value) => setAttributes({ sliderArrowsWidthUnits: value })}
@@ -1015,7 +1015,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             <ResponsiveRangeControl
                                                 min={0}
                                                 max={100}
-                                                label={__("Height", "gutenslider-blocks")}
+                                                label={__("Height", "gslider-blocks")}
                                                 rangeValue={sliderArrowsHeight}
                                                 onChangeValue={(value) => setAttributes({ sliderArrowsHeight: value })}
                                                 onUnitChange={(value) => setAttributes({ sliderArrowsHeightUnits: value })}
@@ -1027,7 +1027,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             <ResponsiveRangeControl
                                                 min={0}
                                                 max={100}
-                                                label={__("Position", "gutenslider-blocks")}
+                                                label={__("Position", "gslider-blocks")}
                                                 rangeValue={sliderArrowsPosition}
                                                 onChangeValue={(value) => setAttributes({ sliderArrowsPosition: value })}
                                                 onUnitChange={(value) => setAttributes({ sliderArrowsPositionUnits: value })}
@@ -1040,7 +1040,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             <ResponsiveRangeControl
                                                 min={-100}
                                                 max={100}
-                                                label={__("Left", "gutenslider-blocks")}
+                                                label={__("Left", "gslider-blocks")}
                                                 rangeValue={sliderArrowsLeftOffset}
                                                 onChangeValue={(value) => setAttributes({ sliderArrowsLeftOffset: value })}
                                                 onUnitChange={(value) => setAttributes({ sliderArrowsLeftOffsetUnits: value })}
@@ -1053,7 +1053,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             <ResponsiveRangeControl
                                                 min={-100}
                                                 max={100}
-                                                label={__("Right", "gutenslider-blocks")}
+                                                label={__("Right", "gslider-blocks")}
                                                 rangeValue={sliderArrowsRightOffset}
                                                 onChangeValue={(value) => setAttributes({ sliderArrowsRightOffset: value })}
                                                 onUnitChange={(value) => setAttributes({ sliderArrowsRightOffsetUnits: value })}
@@ -1064,14 +1064,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             />
 
                                             <SwitcherControl
-                                                label={__("Icon Color", "gutenslider-blocks")}
+                                                label={__("Icon Color", "gslider-blocks")}
                                                 globalSwitcher={sliderArrowsColorSwitcher}
                                                 setGlobalSwitcher={(value) => setAttributes({ sliderArrowsColorSwitcher: value })}
                                             />
 
                                             {sliderArrowsColorSwitcher === 'normal' && (
                                                 <ColorControl
-                                                    label={__("Normal Color", "gutenslider-blocks")}
+                                                    label={__("Normal Color", "gslider-blocks")}
                                                     color={sliderArrowsColor}
                                                     onChangeColor={(value) => setAttributes({ sliderArrowsColor: value })} 
                                                 />
@@ -1079,14 +1079,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                             {sliderArrowsColorSwitcher === 'hover' && (
                                                 <ColorControl
-                                                    label={__("Hover Color", "gutenslider-blocks")}
+                                                    label={__("Hover Color", "gslider-blocks")}
                                                     color={sliderArrowsColorHover}
                                                     onChangeColor={(value) => setAttributes({ sliderArrowsColorHover: value })}
                                                 />
                                             )}
 
                                             <BackgroundControl 
-                                                label={__("Background Color", "gutenslider-blocks")}
+                                                label={__("Background Color", "gslider-blocks")}
                                                 bgColorSwitcher={sliderArrowsBackgroundColorSwitcher}
                                                 setBgColorSwitcher={(value) => setAttributes({ sliderArrowsBackgroundColorSwitcher: value })}
                                                         
@@ -1116,21 +1116,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             />
 
                                             <SelectControl
-                                                label={__("Border Style", "gutenslider-blocks")}
+                                                label={__("Border Style", "gslider-blocks")}
                                                 value={sliderArrowsBorder}
                                                 options={BORDER_STYLES}
                                                 onChange={(value) => setAttributes({ sliderArrowsBorder: value })}
                                             />
 
                                             <SwitcherControl
-                                                label={__("Border Color", "gutenslider-blocks")}
+                                                label={__("Border Color", "gslider-blocks")}
                                                 globalSwitcher={sliderArrowsBorderColorSwitcher}
                                                 setGlobalSwitcher={(value) => setAttributes({ sliderArrowsBorderColorSwitcher: value })}
                                             />
 
                                             {sliderArrowsBorderColorSwitcher === 'normal' && (
                                                 <ColorControl
-                                                    label={__("Normal Color", "gutenslider-blocks")}
+                                                    label={__("Normal Color", "gslider-blocks")}
                                                     color={sliderArrowsBorderColor}
                                                     onChangeColor={(value) => setAttributes({ sliderArrowsBorderColor: value })}
                                                 />
@@ -1138,14 +1138,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                             {sliderArrowsBorderColorSwitcher === 'hover' && (
                                                 <ColorControl
-                                                    label={__("Hover Color", "gutenslider-blocks")}
+                                                    label={__("Hover Color", "gslider-blocks")}
                                                     color={sliderArrowsBorderHoverColor}
                                                     onChangeColor={(value) => setAttributes({ sliderArrowsBorderHoverColor: value })}
                                                 />
                                             )}
 
                                             <ResponsiveSpacingControl
-                                                label={__("Border Width", "gutenslider-blocks")}
+                                                label={__("Border Width", "gslider-blocks")}
                                                 deviceType={deviceType}
                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                 units={sliderArrowsBorderUnits}
@@ -1164,7 +1164,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             />
 
                                             <ResponsiveSpacingControl
-                                                label={__("Border Radius", "gutenslider-blocks")}
+                                                label={__("Border Radius", "gslider-blocks")}
                                                 deviceType={deviceType}
                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                 units={sliderArrowsBorderRadiusUnits}
@@ -1183,14 +1183,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             />
 
                                             <SwitcherControl
-                                                label={__("Box Shadow", "gutenslider-blocks")}
+                                                label={__("Box Shadow", "gslider-blocks")}
                                                 globalSwitcher={sliderArrowsBoxShadowValuesSwitcher}
                                                 setGlobalSwitcher={(value) => setAttributes({ sliderArrowsBoxShadowValuesSwitcher: value })}
                                             />
 
                                             {sliderArrowsBoxShadowValuesSwitcher === 'normal' && (
                                                 <BoxShadowSettingsControl
-                                                    label={__("Normal Shadow", "gutenslider-blocks")}
+                                                    label={__("Normal Shadow", "gslider-blocks")}
                                                     onBoxShadowChange={(value) => setAttributes({ sliderArrowsBoxShadowValues: value })}
                                                     initialShadowValue={sliderArrowsBoxShadowValues}
                                                     onBoxShadowStyleChange={(value) => setAttributes({ sliderArrowsBoxShadowCssValue: value })}
@@ -1199,7 +1199,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                             {sliderArrowsBoxShadowValuesSwitcher === 'hover' && (
                                                 <BoxShadowSettingsControl
-                                                    label={__("Hover Shadow", "gutenslider-blocks")}
+                                                    label={__("Hover Shadow", "gslider-blocks")}
                                                     onBoxShadowChange={(value) => setAttributes({ sliderArrowsBoxShadowHoverValues: value })}
                                                     initialShadowValue={sliderArrowsBoxShadowHoverValues}
                                                     onBoxShadowStyleChange={(value) => setAttributes({ sliderArrowsBoxShadowHoverCssValue: value })}
@@ -1209,14 +1209,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                         </PanelBody>
 
                                         <PanelBody 
-                                            title={__("Pagination Style", "gutenslider-blocks")}  
+                                            title={__("Pagination Style", "gslider-blocks")}  
                                             initialOpen={false}
                                         >
 
                                             <ResponsiveRangeControl
                                                 min={0}
                                                 max={100}
-                                                label={__("Position", "gutenslider-blocks")}
+                                                label={__("Position", "gslider-blocks")}
                                                 rangeValue={sliderDotsPosition}
                                                 onChangeValue={(value) => setAttributes({ sliderDotsPosition: value })}
                                                 onUnitChange={(value) => setAttributes({ sliderDotsPositionUnits: value })}
@@ -1227,7 +1227,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             />
 
                                             <ResponsiveSpacingControl
-                                                label={__("Margin", "gutenslider-blocks")}
+                                                label={__("Margin", "gslider-blocks")}
                                                 deviceType={deviceType}
                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                 units={sliderDotsMarginUnits}
@@ -1269,7 +1269,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                             <ResponsiveRangeControl
                                                                 min={0}
                                                                 max={100}
-                                                                label={__("Width", "gutenslider-blocks")}
+                                                                label={__("Width", "gslider-blocks")}
                                                                 rangeValue={sliderNormalDotsWidth}
                                                                 onChangeValue={(value) => setAttributes({ sliderNormalDotsWidth: value })}
                                                                 onUnitChange={(value) => setAttributes({ sliderNormalDotsWidthUnits: value })}
@@ -1282,7 +1282,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                             <ResponsiveRangeControl
                                                                 min={0}
                                                                 max={100}
-                                                                label={__("Height", "gutenslider-blocks")}
+                                                                label={__("Height", "gslider-blocks")}
                                                                 rangeValue={sliderNormalDotsHeight}
                                                                 onChangeValue={(value) => setAttributes({ sliderNormalDotsHeight: value })}
                                                                 onUnitChange={(value) => setAttributes({ sliderNormalDotsHeightUnits: value })}
@@ -1293,27 +1293,27 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                             />
 
                                                             <ColorControl
-                                                                label={__("Color", "gutenslider-blocks")}
+                                                                label={__("Color", "gslider-blocks")}
                                                                 color={sliderNormalDotsBgColor}
                                                                 onChangeColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
                                                             />
 
                                                             <SelectControl
-                                                                label={__("Border Style", "gutenslider-blocks")}
+                                                                label={__("Border Style", "gslider-blocks")}
                                                                 value={sliderNormalDotsBorder}
                                                                 options={BORDER_STYLES}
                                                                 onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
                                                             />
 
                                                             <SwitcherControl
-                                                                label={__("Border Color", "gutenslider-blocks")}
+                                                                label={__("Border Color", "gslider-blocks")}
                                                                 globalSwitcher={sliderNormalDotsBorderColorSwitcher}
                                                                 setGlobalSwitcher={(value) => setAttributes({ sliderNormalDotsBorderColorSwitcher: value })}
                                                             />
 
                                                             {sliderNormalDotsBorderColorSwitcher === 'normal' && (
                                                                 <ColorControl
-                                                                    label={__("Normal Color", "gutenslider-blocks")}
+                                                                    label={__("Normal Color", "gslider-blocks")}
                                                                     color={sliderNormalDotsBorderColor}
                                                                     onChangeColor={(value) => setAttributes({ sliderNormalDotsBorderColor: value })}
                                                                 />
@@ -1321,14 +1321,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                                             {sliderNormalDotsBorderColorSwitcher === 'hover' && (
                                                                 <ColorControl
-                                                                    label={__("Hover Color", "gutenslider-blocks")}
+                                                                    label={__("Hover Color", "gslider-blocks")}
                                                                     color={sliderNormalDotsBorderHoverColor}
                                                                     onChangeColor={(value) => setAttributes({ sliderNormalDotsBorderHoverColor: value })}
                                                                 />
                                                             )}
 
                                                             <ResponsiveSpacingControl
-                                                                label={__("Border Width", "gutenslider-blocks")}
+                                                                label={__("Border Width", "gslider-blocks")}
                                                                 deviceType={deviceType}
                                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                                 units={sliderNormalDotsBorderUnits}
@@ -1347,7 +1347,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                             />
 
                                                             <ResponsiveSpacingControl
-                                                                label={__("Border Radius", "gutenslider-blocks")}
+                                                                label={__("Border Radius", "gslider-blocks")}
                                                                 deviceType={deviceType}
                                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                                 units={sliderNormalDotsBorderRadiusUnits}
@@ -1372,7 +1372,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                             <ResponsiveRangeControl
                                                                 min={0}
                                                                 max={100}
-                                                                label={__("Width", "gutenslider-blocks")}
+                                                                label={__("Width", "gslider-blocks")}
                                                                 rangeValue={sliderActiveDotsWidth}
                                                                 onChangeValue={(value) => setAttributes({ sliderActiveDotsWidth: value })}
                                                                 onUnitChange={(value) => setAttributes({ sliderActiveDotsWidthUnits: value })}
@@ -1385,7 +1385,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                             <ResponsiveRangeControl
                                                                 min={0}
                                                                 max={100}
-                                                                label={__("Height", "gutenslider-blocks")}
+                                                                label={__("Height", "gslider-blocks")}
                                                                 rangeValue={sliderActiveDotsHeight}
                                                                 onChangeValue={(value) => setAttributes({ sliderActiveDotsHeight: value })}
                                                                 onUnitChange={(value) => setAttributes({ sliderActiveDotsHeightUnits: value })}
@@ -1396,27 +1396,27 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                             />
 
                                                             <ColorControl
-                                                                label={__("Color", "gutenslider-blocks")}
+                                                                label={__("Color", "gslider-blocks")}
                                                                 color={sliderActiveDotsBgColor}
                                                                 onChangeColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
                                                             />
 
                                                             <SelectControl
-                                                                label={__("Border Style", "gutenslider-blocks")}
+                                                                label={__("Border Style", "gslider-blocks")}
                                                                 value={sliderActiveDotsBorder}
                                                                 options={BORDER_STYLES}
                                                                 onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
                                                             />
 
                                                             <SwitcherControl
-                                                                label={__("Border Color", "gutenslider-blocks")}
+                                                                label={__("Border Color", "gslider-blocks")}
                                                                 globalSwitcher={sliderActiveDotsBorderColorSwitcher}
                                                                 setGlobalSwitcher={(value) => setAttributes({ sliderActiveDotsBorderColorSwitcher: value })}
                                                             />
 
                                                             {sliderActiveDotsBorderColorSwitcher === 'normal' && (
                                                                 <ColorControl
-                                                                    label={__("Normal Color", "gutenslider-blocks")}
+                                                                    label={__("Normal Color", "gslider-blocks")}
                                                                     color={sliderActiveDotsBorderColor}
                                                                     onChangeColor={(value) => setAttributes({ sliderActiveDotsBorderColor: value })}
                                                                 />
@@ -1424,14 +1424,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                                             {sliderActiveDotsBorderColorSwitcher === 'hover' && (
                                                                 <ColorControl
-                                                                    label={__("Hover Color", "gutenslider-blocks")}
+                                                                    label={__("Hover Color", "gslider-blocks")}
                                                                     color={sliderActiveDotsBorderHoverColor}
                                                                     onChangeColor={(value) => setAttributes({ sliderActiveDotsBorderHoverColor: value })}
                                                                 />
                                                             )}
 
                                                             <ResponsiveSpacingControl
-                                                                label={__("Border Width", "gutenslider-blocks")}
+                                                                label={__("Border Width", "gslider-blocks")}
                                                                 deviceType={deviceType}
                                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                                 units={sliderActiveDotsBorderUnits}
@@ -1450,7 +1450,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                             />
 
                                                             <ResponsiveSpacingControl
-                                                                label={__("Border Radius", "gutenslider-blocks")}
+                                                                label={__("Border Radius", "gslider-blocks")}
                                                                 deviceType={deviceType}
                                                                 onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                                                 units={sliderActiveDotsBorderRadiusUnits}
@@ -1477,11 +1477,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                 {tab.name === "advanced" && (
                                     <>
-                                        <PanelBody title={__("Advanced", "gutenslider-blocks")} initialOpen>
+                                        <PanelBody title={__("Advanced", "gslider-blocks")} initialOpen>
                                             <ResponsiveRangeControl
                                                 min={0}
                                                 max={10000000}
-                                                label={__("Z Index", "gutenslider-blocks")}
+                                                label={__("Z Index", "gslider-blocks")}
                                                 rangeValue={sliderGlobalZIndex}
                                                 onChangeValue={(value) => setAttributes({ sliderGlobalZIndex: value })}
                                                 deviceType={deviceType}
@@ -1491,7 +1491,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             />
 
                                             <BackgroundControl
-                                                label={__("Background", "gutenslider-blocks")}
+                                                label={__("Background", "gslider-blocks")}
                                                 deviceType={deviceType}
                                                 bgColorSwitcher={globalSliderItemBgColorSwitcher}
                                                 setBgColorSwitcher={(value) => setAttributes({ globalSliderItemBgColorSwitcher: value })}

@@ -1,4 +1,5 @@
 @use "variables" as *;
 @use "setting-panel";
-@use "dnd-items";
-
+@use "components/background-control";
+@use "components/url-control";
+@use "components/dnd-items";

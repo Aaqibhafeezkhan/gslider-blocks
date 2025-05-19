@@ -299,7 +299,7 @@ export default function FBIconPicker(props) {
 		<Fragment>
 			<div className='fb_icon_picker_wrapper' onClick={() => iconPickerModal()}>
 				<div className={'fb_icon_picker'}>
-					<div className={'Change icon'}>{__('Change icon', 'gutenslider-blocks')}</div>
+					<div className={'Change icon'}>{__('Change icon', 'gslider-blocks')}</div>
 					{insertIcon !== '' &&
 						<div onClick={() => setInsertIcon('')} className={'remove'}>
 							<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -329,13 +329,13 @@ export default function FBIconPicker(props) {
 						<div className={'fb_icon_picker_modal_wrapper'}>
 							<div className={'fb_icon_picker_wrapper_inner'}>
 								<div className={'fb_icon_picker_wrapper_header'}>
-									<h2>{__('Icon Library', 'gutenslider-blocks')}</h2>
+									<h2>{__('Icon Library', 'gslider-blocks')}</h2>
 									<div className={'fb_icon_picker_wrapper_search'}>
 										<span>
 											<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512"><path
 												d="M448 449L301.2 300.2c20-27.9 31.9-62.2 31.9-99.2 0-93.1-74.7-168.9-166.5-168.9C74.7 32 0 107.8 0 200.9s74.7 168.9 166.5 168.9c39.8 0 76.3-14.2 105-37.9l146 148.1 30.5-31zM166.5 330.8c-70.6 0-128.1-58.3-128.1-129.9S95.9 71 166.5 71s128.1 58.3 128.1 129.9-57.4 129.9-128.1 129.9z"></path></svg>
 										</span>
-										<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'gutenslider-blocks')}/>
+										<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'gslider-blocks')}/>
 									</div>
 								</div>
 								<div className={'fb_icon_picker_wrapper_body'}>
@@ -352,7 +352,7 @@ export default function FBIconPicker(props) {
 								</div>
 								<div className={'fb_icon_picker_wrapper_footer'}>
 									<Button variant="secondary"
-											onClick={fbInsertIcon}>{__('Insert icon', 'gutenslider-blocks')}</Button>
+											onClick={fbInsertIcon}>{__('Insert icon', 'gslider-blocks')}</Button>
 								</div>
 							</div>
 						</div>

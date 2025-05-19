@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Re-initialize sliders when new blocks are added (useful for dynamic content)
     if (window.wp && window.wp.hooks) {
-        window.wp.hooks.addAction('blocks.blockRendered', 'gutenslider', () => {
+        window.wp.hooks.addAction('blocks.blockRendered', 'gslider', () => {
             initializeSliders();
         });
     }

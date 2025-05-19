@@ -162,7 +162,7 @@ export default function ResponsiveSpacingControl({
 			<div className="global-setting-spacing-inner-container">
 				<div className="global-setting-spacing-label-container">
 					<ResponsiveDeviceControl
-                        label={__(label, 'gutenslider-blocks')}
+                        label={__(label, 'gslider-blocks')}
                         device={deviceType}
                     />
 					<div className="global-unit-wrapper">
@@ -183,7 +183,7 @@ export default function ResponsiveSpacingControl({
 				</div>
 				<div className="global-setting-spacing-input-container">
 					<div className="global-setting-spacing-input-wrapper">
-						<label className="global-setting-spacing-input-label">{__( 'Top', 'gutenslider-blocks' )}</label>
+						<label className="global-setting-spacing-input-label">{__( 'Top', 'gslider-blocks' )}</label>
 						<input
 							type="number"
 							name="top"
@@ -192,7 +192,7 @@ export default function ResponsiveSpacingControl({
 						/>
 					</div>
 					<div className="global-setting-spacing-input-wrapper">
-						<label className="global-setting-spacing-input-label">{__( 'Right', 'gutenslider-blocks' )}</label>
+						<label className="global-setting-spacing-input-label">{__( 'Right', 'gslider-blocks' )}</label>
 						<input
 							type="number"
 							name="right"
@@ -201,7 +201,7 @@ export default function ResponsiveSpacingControl({
 						/>
 					</div>
 					<div className="global-setting-spacing-input-wrapper">
-						<label className="global-setting-spacing-input-label">{__( 'Bottom', 'gutenslider-blocks' )}</label>
+						<label className="global-setting-spacing-input-label">{__( 'Bottom', 'gslider-blocks' )}</label>
 						<input
 							type="number"
 							name="bottom"
@@ -210,7 +210,7 @@ export default function ResponsiveSpacingControl({
 						/>
 					</div>
 					<div className="global-setting-spacing-input-wrapper">
-						<label className="global-setting-spacing-input-label">{__( 'Left', 'gutenslider-blocks' )}</label>
+						<label className="global-setting-spacing-input-label">{__( 'Left', 'gslider-blocks' )}</label>
 						<input
 							type="number"
 							name="left"

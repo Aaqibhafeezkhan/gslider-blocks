@@ -38,7 +38,7 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
                     value={url}
                     onChange={handleUrlChange}
                     className="global-url-control-input"
-                    placeholder={__('https://', 'gutenslider-blocks')}
+                    placeholder={__('https://', 'gslider-blocks')}
                 />
                 <Dropdown
                     className="global-url-control-dropdown-wrapper"
@@ -49,7 +49,7 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
                             variant="primary"
                             onClick={onToggle}
                             aria-expanded={isOpen}
-                            aria-label={__("Toggle URL Settings", "gutenslider-blocks")}
+                            aria-label={__("Toggle URL Settings", "gslider-blocks")}
                                 className="global-setting-icon-btn"
                         >
                             <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
@@ -59,17 +59,17 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
                         <div className="global-url-control-dropdown-popup">
                             <BaseControl className="global-url-control-dropdown-popup-inner">
                                 <ToggleControl
-                                    label={__("Open in new tab", "gutenslider-blocks")}
+                                    label={__("Open in new tab", "gslider-blocks")}
                                     checked={openInNewTab}
                                     onChange={handleOpenInNewTabChange}
                                 />
                                 <ToggleControl
-                                    label={__("Add Nofollow rel", "gutenslider-blocks")}
+                                    label={__("Add Nofollow rel", "gslider-blocks")}
                                     checked={nofollow}
                                     onChange={handleNofollowChange}
                                 />
                                 <ToggleControl
-                                    label={__("Add Sponsored rel", "gutenslider-blocks")}
+                                    label={__("Add Sponsored rel", "gslider-blocks")}
                                     checked={sponsored}
                                     onChange={handleSponsoredChange}
                                 />

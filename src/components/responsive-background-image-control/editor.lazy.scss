@@ -4,13 +4,13 @@ $background_color: #dcdcde;
 $white_color: #ffffff;
 $border_color: #dddddd;
 
-.gutenslider-image-control-wrapper {
-    .gutenslider-image-upload-btn {
+.gslider-image-control-wrapper {
+    .gslider-image-upload-btn {
         background-image: url(transparent-bg-demo.png);
     }
 }
 
-.gutenslider-image-control-wrapper {
+.gslider-image-control-wrapper {
     .global-setting-device-label-wrapper {
         display: inline-flex;
         align-items: center;
@@ -26,7 +26,7 @@ $border_color: #dddddd;
             margin-bottom: 8px !important;
         }
     }
-    .gutenslider-image-control {
+    .gslider-image-control {
         background-color: #ccc;
         background-position: 50%;
         background-repeat: no-repeat;
@@ -38,7 +38,7 @@ $border_color: #dddddd;
         position: relative;
         width: 100%;
     }
-    .gutenslider-image-upload-btn {
+    .gslider-image-upload-btn {
         width: 100%;
         padding: 0;
         background-color: #f0f0f0;
@@ -67,13 +67,13 @@ $border_color: #dddddd;
     }
 }
 
-.gutenslider-image-control-setting-wrapper {
+.gslider-image-control-setting-wrapper {
     .global-setting-device-label-wrapper {
         display: inline-flex;
         align-items: center;
         margin-bottom: 10px;
     }
-    .gutenslider-image-control-setting-item {
+    .gslider-image-control-setting-item {
         margin: 25px 0;
         display: flex;
         align-items: center;
@@ -88,11 +88,11 @@ $border_color: #dddddd;
     }
 }
 
-.gutenslider-image-control-integrated {
+.gslider-image-control-integrated {
     display: flex;
     flex-direction: column;
 
-    .gutenslider-image-focal-point-wrapper {
+    .gslider-image-focal-point-wrapper {
         position: relative;
 
         /* Target WordPress's FocalPointPicker */
@@ -111,7 +111,7 @@ $border_color: #dddddd;
         }
     }
 
-    .gutenslider-image-overlay-buttons {
+    .gslider-image-overlay-buttons {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -142,7 +142,7 @@ $border_color: #dddddd;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
 
-            &.gutenslider-image-replace-btn {
+            &.gslider-image-replace-btn {
                 width: auto;
                 border-radius: 16px;
                 padding: 0 12px;

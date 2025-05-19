@@ -44,6 +44,88 @@
   text-transform: capitalize !important;
 }
 
+.gslider-bg-tab-panel {
+  box-sizing: border-box;
+  width: 100%;
+}
+.gslider-bg-tab-panel .components-tab-panel__tabs {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+.gslider-bg-tab-panel .components-tab-panel__tabs::before {
+  background-color: #EDEDED;
+  bottom: 0;
+  content: "";
+  height: 1px;
+  left: -16px;
+  position: absolute;
+  right: 0;
+  width: 113%;
+}
+.gslider-bg-tab-panel .components-tab-panel__tabs .gslider-bg-tab {
+  align-items: center;
+  background-color: #EDEDED;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  color: #000;
+  font-size: 12px !important;
+  height: 35px !important;
+  justify-content: center;
+  line-height: 1;
+  text-align: center;
+  width: 100%;
+}
+.gslider-bg-tab-panel .components-tab-panel__tabs .gslider-bg-tab.active-tab {
+  background-color: transparent;
+  border: 1px solid #ededed;
+  border-bottom-color: #fff;
+  color: #007cba;
+}
+
+/** Start General scss for URL Control **/
+.gslider-url-control-wrapper .gslider-url-control-inner-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gslider-url-control-wrapper .gslider-url-control-inner-wrapper .gslider-url-control-input {
+  flex: 1;
+  margin-bottom: 0;
+}
+.gslider-url-control-wrapper .gslider-url-control-inner-wrapper .gslider-url-control-input .components-base-control__field {
+  margin-bottom: 0;
+}
+
+.gslider-url-control-dropdown-popup {
+  padding: 0.2rem;
+  min-width: 220px;
+}
+.gslider-url-control-dropdown-popup .gslider-url-control-dropdown-popup-inner {
+  position: relative;
+  z-index: 99999;
+}
+.gslider-url-control-dropdown-popup .gslider-url-control-dropdown-popup-inner .components-base-control__field {
+  margin-bottom: 0;
+}
+.gslider-url-control-dropdown-popup .gslider-url-control-dropdown-popup-inner .components-base-control__field label {
+  display: block;
+  color: #5f5f5f !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 16px !important;
+  margin: 10px 0 !important;
+  min-height: auto;
+  text-transform: capitalize !important;
+}
+.gslider-url-control-dropdown-popup .gslider-url-control-dropdown-popup-inner .components-base-control__field .components-toggle-control {
+  margin-bottom: 0 !important;
+}
+
+/** End General scss for URL Control **/
 .gslider-inspector-control .dnd-items-wrapper {
   list-style: none;
   padding: 0;

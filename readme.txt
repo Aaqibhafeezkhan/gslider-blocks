@@ -1,4 +1,4 @@
-=== GutenSlider Blocks ===
+=== gslider Blocks ===      
 Contributors: noruzzaman,
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
@@ -12,7 +12,7 @@ Enhance your site with dynamic, customizable, and multi-functional slider blocks
 
 == Description ==
 
-The **GutenSlider Blocks** plugin allows you to easily add customizable and responsive sliders to your WordPress website. Perfect for both beginners and developers, this plugin provides a simple yet powerful slider block for the WordPress editor (Gutenberg). Customize slider content, transitions, navigation, and more, while enjoying full control over slider styling and functionality.
+The **gslider Blocks** plugin allows you to easily add customizable and responsive sliders to your WordPress website. Perfect for both beginners and developers, this plugin provides a simple yet powerful slider block for the WordPress editor (Gutenberg). Customize slider content, transitions, navigation, and more, while enjoying full control over slider styling and functionality.
 
 == Key Features: ==
 
@@ -32,11 +32,11 @@ If you have any questions, please email us at **[noruzzaman19@gmail.com](mailto:
 
 == Installation ==
 
-There are no prerequisites for installing **GutenSlider Blocks**. You can follow the steps below to complete the installation.
+There are no prerequisites for installing **gslider Blocks**. You can follow the steps below to complete the installation.
 
 = Automatic Installation =
 1.  Go to `Plugins > Add New` screen from your WordPress website dashboard.
-2.  Search for `GutenSlider Blocks`.
+2.  Search for `gslider Blocks`.
 3.  Install and activate the plugin, that's it!
 
 == Frequently Asked Questions ==
@@ -49,9 +49,9 @@ Yes, it's completely free.
 
 Yes, each slide can be customized independently with different content, backgrounds, and styling options.
 
-= Does GutenSlider work with any WordPress theme? =
+= Does gslider work with any WordPress theme? =
 
-Yes, GutenSlider Blocks is designed to work with any WordPress theme that supports the block editor.
+Yes, gslider Blocks is designed to work with any WordPress theme that supports the block editor.
 
 == Screenshots ==
 

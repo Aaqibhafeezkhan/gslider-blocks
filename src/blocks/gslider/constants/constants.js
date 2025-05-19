@@ -36,62 +36,62 @@ export const TEXT_ALIGN = [
 ];
 
 export const HEADING = [
-	{ label: __("H1", "gutenslider-blocks"), value: "h1" },
-	{ label: __("H2", "gutenslider-blocks"), value: "h2" },
-	{ label: __("H3", "gutenslider-blocks"), value: "h3" },
-	{ label: __("H4", "gutenslider-blocks"), value: "h4" },
-	{ label: __("H5", "gutenslider-blocks"), value: "h5" },
-	{ label: __("H6", "gutenslider-blocks"), value: "h6" },
-	{ label: __("P", "gutenslider-blocks"), value: "p" },
-	{ label: __("Div", "gutenslider-blocks"), value: "span" },
+	{ label: __("H1", "gslider-blocks"), value: "h1" },
+	{ label: __("H2", "gslider-blocks"), value: "h2" },
+	{ label: __("H3", "gslider-blocks"), value: "h3" },
+	{ label: __("H4", "gslider-blocks"), value: "h4" },
+	{ label: __("H5", "gslider-blocks"), value: "h5" },
+	{ label: __("H6", "gslider-blocks"), value: "h6" },
+	{ label: __("P", "gslider-blocks"), value: "p" },
+	{ label: __("Div", "gslider-blocks"), value: "span" },
 ];
 
 export const SEPERATOR_STYLES = [
-	{ label: __("Solid", "gutenslider-blocks"), value: "solid" },
-	{ label: __("Dashed", "gutenslider-blocks"), value: "dashed" },
-	{ label: __("Dotted", "gutenslider-blocks"), value: "dotted" },
-	{ label: __("Double", "gutenslider-blocks"), value: "double" },
-	{ label: __("Groove", "gutenslider-blocks"), value: "groove" },
-	{ label: __("Outset", "gutenslider-blocks"), value: "outset" },
-	{ label: __("Ridge", "gutenslider-blocks"), value: "ridge" },
+	{ label: __("Solid", "gslider-blocks"), value: "solid" },
+	{ label: __("Dashed", "gslider-blocks"), value: "dashed" },
+	{ label: __("Dotted", "gslider-blocks"), value: "dotted" },
+	{ label: __("Double", "gslider-blocks"), value: "double" },
+	{ label: __("Groove", "gslider-blocks"), value: "groove" },
+	{ label: __("Outset", "gslider-blocks"), value: "outset" },
+	{ label: __("Ridge", "gslider-blocks"), value: "ridge" },
 ];
 
 export const BORDER_STYLES = [
-	{ label: __("None", "gutenslider-blocks"), value: "none" },
-	{ label: __("Solid", "gutenslider-blocks"), value: "solid" },
-	{ label: __("Dashed", "gutenslider-blocks"), value: "dashed" },
-	{ label: __("Dotted", "gutenslider-blocks"), value: "dotted" },
-	{ label: __("Double", "gutenslider-blocks"), value: "double" },
-	{ label: __("Groove", "gutenslider-blocks"), value: "groove" },
-	{ label: __("Outset", "gutenslider-blocks"), value: "outset" },
-	{ label: __("Ridge", "gutenslider-blocks"), value: "ridge" },
+	{ label: __("None", "gslider-blocks"), value: "none" },
+	{ label: __("Solid", "gslider-blocks"), value: "solid" },
+	{ label: __("Dashed", "gslider-blocks"), value: "dashed" },
+	{ label: __("Dotted", "gslider-blocks"), value: "dotted" },
+	{ label: __("Double", "gslider-blocks"), value: "double" },
+	{ label: __("Groove", "gslider-blocks"), value: "groove" },
+	{ label: __("Outset", "gslider-blocks"), value: "outset" },
+	{ label: __("Ridge", "gslider-blocks"), value: "ridge" },
 ];
 
 export const SLIDER_EFFECT_OPTIONS = [
-	{ value: 'slide', label: __('Slide', 'gutenslider-blocks') },
-	{ value: 'fade', label: __('Fade', 'gutenslider-blocks') },
-	{ value: 'coverflow', label: __('Coverflow', 'gutenslider-blocks') },
-	{ value: 'flip', label: __('Flip', 'gutenslider-blocks') },
-	{ value: 'creative', label: __('Creative', 'gutenslider-blocks') },
+	{ value: 'slide', label: __('Slide', 'gslider-blocks') },
+	{ value: 'fade', label: __('Fade', 'gslider-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'gslider-blocks') },
+	{ value: 'flip', label: __('Flip', 'gslider-blocks') },
+	{ value: 'creative', label: __('Creative', 'gslider-blocks') },
 ];
 
 export const CAROUSEL_EFFECT_OPTIONS = [
-	{ value: 'slide', label: __('Slide', 'gutenslider-blocks') },
-	{ value: 'coverflow', label: __('Coverflow', 'gutenslider-blocks') },
+	{ value: 'slide', label: __('Slide', 'gslider-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'gslider-blocks') },
 ];
 
 export const SLIDER_TYPE = [
-	{ value: 'slider', label: __('Slider', 'gutenslider-blocks') },
-	{ value: 'carousel', label: __('Carousel', 'gutenslider-blocks') },
+	{ value: 'slider', label: __('Slider', 'gslider-blocks') },
+	{ value: 'carousel', label: __('Carousel', 'gslider-blocks') },
 ];
 
 export const PAGINATION_TYPE = [
-	{ value: 'bullets', label: __('Bullets', 'gutenslider-blocks') },
-	{ value: 'fraction', label: __('Fraction', 'gutenslider-blocks') },
-	{ value: 'progressbar', label: __('Progress Bar', 'gutenslider-blocks') }
+	{ value: 'bullets', label: __('Bullets', 'gslider-blocks') },
+	{ value: 'fraction', label: __('Fraction', 'gslider-blocks') },
+	{ value: 'progressbar', label: __('Progress Bar', 'gslider-blocks') }
 ];
 
 export const NORMAL_ACTIVE = [
-	{ label: __('Normal', 'gutenslider-blocks'), value: 'normal' },
-	{ label: __('Active', 'gutenslider-blocks'), value: 'active' },
+	{ label: __('Normal', 'gslider-blocks'), value: 'normal' },
+	{ label: __('Active', 'gslider-blocks'), value: 'active' },
 ];

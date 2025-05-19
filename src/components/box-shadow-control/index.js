@@ -4,7 +4,7 @@ import Control from './control';
 import { Dashicon, BaseControl, Button, Dropdown} from '@wordpress/components';
 import './editor.lazy.scss';
 
-export default function BoxShadowSettingsControl({ label = __("Box Shadow", "gutenslider-blocks"), onBoxShadowChange, initialShadowValue, onBoxShadowStyleChange, }) {
+export default function BoxShadowSettingsControl({ label = __("Box Shadow", "gslider-blocks"), onBoxShadowChange, initialShadowValue, onBoxShadowStyleChange, }) {
 	const [boxShadow, setBoxShadow] = useState(initialShadowValue || [0, 0, 0, 0, '', '#00000000']);
 
 	useEffect(() => {

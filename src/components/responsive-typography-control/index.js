@@ -90,7 +90,7 @@ const ResponsiveTypographyControl = ({
 
     return (
         <BaseControl
-            label={__("Typography", "gutenslider-blocks")}
+            label={__("Typography", "gslider-blocks")}
             className="global-setting-typography"
         >
             <Dropdown
@@ -102,7 +102,7 @@ const ResponsiveTypographyControl = ({
                         variant="primary"
                         onClick={onToggle}
                         aria-expanded={isOpen}
-                        aria-label={__("Toggle Typography Settings", "gutenslider-blocks")}
+                        aria-label={__("Toggle Typography Settings", "gslider-blocks")}
                         className="global-setting-dropdown-icon-btn"
                     >
                         <Dashicon icon="edit" className="global-setting-dropdown-icon" />
@@ -112,7 +112,7 @@ const ResponsiveTypographyControl = ({
                     <div className="global-setting-typography-popup">
                         <BaseControl className="global-setting-typography-popup-inner">
                             <SelectControl
-                                label={__("Font Family", "gutenslider-blocks")}
+                                label={__("Font Family", "gslider-blocks")}
                                 options={FONT_FAMILYS}
                                 value={fontFamily}
                                 onChange={handleFontFamilyChange}
@@ -120,7 +120,7 @@ const ResponsiveTypographyControl = ({
                             <ResponsiveRangeControl
                                 min={1}
                                 max={100}
-                                label={__("Font Size", "gutenslider-blocks")}
+                                label={__("Font Size", "gslider-blocks")}
                                 value={fontSize}
                                 onChange={handleFontSizeChange}
                                 onUnitChange={handleFontSizeUnitChange}
@@ -131,25 +131,25 @@ const ResponsiveTypographyControl = ({
                                 defaultValue={""}
                             />
                             <SelectControl
-                                label={__("Font Weight", "gutenslider-blocks")}
+                                label={__("Font Weight", "gslider-blocks")}
 								options={FONT_WEIGHT}
                                 value={fontWeight}
                                 onChange={handleFontWeightChange}
                             />
                             <SelectControl
-                                label={__("Font Style", "gutenslider-blocks")}
+                                label={__("Font Style", "gslider-blocks")}
                                 options={FONT_STYLE}
                                 value={fontStyle}
                                 onChange={handleFontStyleChange}
                             />
                             <SelectControl
-                                label={__("Text Transform", "gutenslider-blocks")}
+                                label={__("Text Transform", "gslider-blocks")}
                                 options={TEXT_TRANSFORM}
                                 value={textTransform}
                                 onChange={handleTextTransformChange}
                             />
                             <SelectControl
-                                label={__("Text Decoration", "gutenslider-blocks")}
+                                label={__("Text Decoration", "gslider-blocks")}
                                 options={TEXT_DECORATION}
                                 value={textDecoration}
                                 onChange={handleTextDecorationChange}
@@ -157,7 +157,7 @@ const ResponsiveTypographyControl = ({
                             <ResponsiveRangeControl
                                 min={1}
                                 max={100}
-                                label={__("Letter Spacing", "gutenslider-blocks")}
+                                label={__("Letter Spacing", "gslider-blocks")}
                                 value={letterSpacing}
                                 onChange={handleLetterSpacingChange}
                                 onUnitChange={handleLetterSpacingUnitChange}
@@ -170,7 +170,7 @@ const ResponsiveTypographyControl = ({
                             <ResponsiveRangeControl
                                 min={1}
                                 max={100}
-                                label={__("Line Height", "gutenslider-blocks")}
+                                label={__("Line Height", "gslider-blocks")}
                                 value={lineHeight}
                                 onChange={handleLineHeightChange}
                                 onUnitChange={handleLineHeightUnitChange}

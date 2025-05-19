@@ -6,8 +6,8 @@ import './editor.lazy.scss';
 const SwitcherControl = ({ label, globalSwitcher, setGlobalSwitcher }) => {
 
     const NORMAL_HOVER = [
-        { label: __('Normal', 'gutenslider-blocks'), value: 'normal' },
-        { label: __('Hover', 'gutenslider-blocks'), value: 'hover' },
+        { label: __('Normal', 'gslider-blocks'), value: 'normal' },
+        { label: __('Hover', 'gslider-blocks'), value: 'hover' },
     ];
 
     return (
