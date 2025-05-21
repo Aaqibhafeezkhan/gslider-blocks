@@ -824,17 +824,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             </div>
                                         </PanelBody>
                                         <PanelBody title={__("Slider Type", "gslider-blocks")} initialOpen={false}>
-                                            <div className="global-setting-switcher-container">
+                                            <div className="gslider-setting-switcher-container">
                                                 <BaseControl
                                                     label={__("Slider Type", "gslider-blocks")}
-                                                    className="global-setting-switcher-panel-wrapper"
+                                                    className="gslider-setting-switcher-panel-wrapper"
                                                 >
-                                                    <ButtonGroup className="global-setting-switcher-panel-btn">
+                                                    <ButtonGroup className="gslider-setting-switcher-panel-btn">
                                                         {SLIDER_TYPE.map((item, key) => (
                                                             <Button
                                                                 key={key}
                                                                 onClick={() => setAttributes({ sliderType: item.value })}
-                                                                className={`global-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
+                                                                className={`gslider-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
                                                             >
                                                                 {item.label}
                                                             </Button>
@@ -1247,16 +1247,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                             {paginationType === 'bullets' && (
                                                 <>
-                                                    <div className="global-setting-switcher-container">
+                                                    <div className="gslider-setting-switcher-container">
                                                         <BaseControl
-                                                            className="global-setting-switcher-panel-wrapper"
+                                                            className="gslider-setting-switcher-panel-wrapper"
                                                         >
-                                                            <ButtonGroup className="global-setting-switcher-panel-btn">
+                                                            <ButtonGroup className="gslider-setting-switcher-panel-btn">
                                                                 {NORMAL_ACTIVE.map((item, key) => (
                                                                     <Button
                                                                 key={key}
                                                                         onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
-                                                                        className={`global-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
+                                                                        className={`gslider-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
                                                                     >
                                                                         {item.label}
                                                                     </Button>

@@ -1,11 +1,11 @@
 @use "../variables" as *;
 
-.fb_icon_picker_wrapper {
+.gslider_icon_picker_wrapper {
 	position: relative;
 	cursor: pointer;
 }
 
-.fb_icon_picker_wrapper .fb_icon_picker {
+.gslider_icon_picker_wrapper .gslider_icon_picker {
 	width: 256px;
 	max-width: 100%;
 	min-height: 96px;
@@ -17,7 +17,7 @@
 	overflow: hidden;
 }
 
-.fb_icon_picker_wrapper .fb_icon_picker .remove {
+.gslider_icon_picker_wrapper .gslider_icon_picker .remove {
 	position: absolute;
 	right: 5px;
 	top: 5px;
@@ -26,7 +26,7 @@
 	z-index: 6;
 }
 
-.fb_icon_picker_wrapper .fb_icon_picker .remove svg {
+.gslider_icon_picker_wrapper .gslider_icon_picker .remove svg {
 	fill: #ffffff;
 	width: 18px;
 	height: 18px;
@@ -36,7 +36,7 @@
 	transition: 0.3s background-color linear;
 }
 
-.fb_icon_picker_wrapper .fb_icon_picker .icon_placeholder {
+.gslider_icon_picker_wrapper .gslider_icon_picker .icon_placeholder {
 	position: absolute;
 	z-index: 1;
 	width: 100%;
@@ -46,13 +46,13 @@
 	justify-content: center;
 }
 
-.fb_icon_picker_wrapper .fb_icon_picker .icon_placeholder svg {
+.gslider_icon_picker_wrapper .gslider_icon_picker .icon_placeholder svg {
 	height: 30px;
 	width: 30px;
 	fill: #50575e;
 }
 
-.fb_icon_picker_wrapper .fb_icon_picker .Change.icon {
+.gslider_icon_picker_wrapper .gslider_icon_picker .Change.icon {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -71,17 +71,17 @@
 	justify-content: center;
 }
 
-.fb_icon_picker_wrapper:hover .Change.icon {
+.gslider_icon_picker_wrapper:hover .Change.icon {
 	transform: translate(0, 0);
 }
 // Modal scss
 
-.fb_icon_picker_wrapper_header {
+.gslider_icon_picker_wrapper_header {
 	display: flex;
 	align-items: center;
 }
 
-.fb_icon_picker_wrapper_header h2 {
+.gslider_icon_picker_wrapper_header h2 {
 	font-size: 17px;
 	font-weight: 600;
 	flex-shrink: 0;
@@ -89,7 +89,7 @@
 	width: 100%;
 }
 
-.fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search {
+.gslider_icon_picker_wrapper_header .gslider_icon_picker_wrapper_search {
 	display: flex;
 	align-items: center;
 	position: relative;
@@ -97,7 +97,7 @@
 	width: 100%;
 }
 
-.fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search svg {
+.gslider_icon_picker_wrapper_header .gslider_icon_picker_wrapper_search svg {
 	z-index: 9999;
 	width: 14px;
 	height: 14px;
@@ -109,7 +109,7 @@
 	left: 12px;
 }
 
-.fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search input[type="text"] {
+.gslider_icon_picker_wrapper_header .gslider_icon_picker_wrapper_search input[type="text"] {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -124,24 +124,18 @@
 	top: 0;
 }
 
-//.fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search span {
-//	position: relative;
-//	z-index: 99;
-//	margin-left: 10px;
-//}
-
-.fb_icon_picker_wrapper_body {
+.gslider_icon_picker_wrapper_body {
 	display: flex;
 	margin-top: 30px;
 }
 
-.fb_icon_picker_wrapper_body .fb_icon_picker_wrapper_categories {
+.gslider_icon_picker_wrapper_body .gslider_icon_picker_wrapper_categories {
 	max-width: 130px;
 	width: 100%;
 	flex-shrink: 0;
 }
 
-.fb_icon_picker_wrapper_body .fb_icon_picker_wrapper_categories .fb_icon_picker_wrapper_category {
+.gslider_icon_picker_wrapper_body .gslider_icon_picker_wrapper_categories .gslider_icon_picker_wrapper_category {
 	padding: 9px 10px;
 	cursor: pointer;
 	border-radius: 2px;
@@ -157,12 +151,12 @@
 	}
 }
 
-.fb_icon_picker_icons_list .fb_icon svg {
+.gslider_icon_picker_icons_list .fb_icon svg {
 	width: 20px;
 	height: 20px;
 }
 
-.fb_icon_picker_icons_list .fb_icon {
+.gslider_icon_picker_icons_list .fb_icon {
 	width: 80px;
 	height: 80px;
 	background-color: #ffffff;
@@ -191,7 +185,7 @@
 	}
 }
 
-.fb_icon_picker_icons_list {
+.gslider_icon_picker_icons_list {
 	flex: 1;
 	padding: 14px;
 	padding-right: 0;
@@ -199,10 +193,10 @@
 	border-radius: 2px;
 }
 
-.fb_icon_picker_wrapper_footer {
+.gslider_icon_picker_wrapper_footer {
 	text-align: right;
 }
 
-.fb_icon_picker_wrapper_modal {
+.gslider_icon_picker_wrapper_modal {
 	min-width: 615px !important;
 }

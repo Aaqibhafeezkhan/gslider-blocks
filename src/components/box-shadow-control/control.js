@@ -9,14 +9,14 @@ function Control({ label, type, onChangeHandler, value }) {
 		<div className={`paneChild ${type}`}>
 			{type === 'color' ? (
 					<>
-						<div className="global-setting-color-container">
+						<div className="gslider-setting-color-container">
 							<BaseControl 
 								label={__(label, "gslider-blocks")}
-								className="global-box-shadow-wrapper shadow-color global-setting-color-switcher-wrapper"
+								className="gslider-box-shadow-wrapper shadow-color gslider-setting-color-switcher-wrapper"
 							>
 								<Dropdown
-									className="global-box-shadow-icon-dropdown"
-									contentClassName="global-box-shadow-icon-dropdown-content"
+									className="gslider-box-shadow-icon-dropdown"
+									contentClassName="gslider-box-shadow-icon-dropdown-content"
 									popoverProps={{ placement: 'bottom-start' }}
 									renderToggle={({ isOpen, onToggle }) => (
 										<Button
@@ -27,15 +27,15 @@ function Control({ label, type, onChangeHandler, value }) {
 										</Button>
 									)}
 									renderContent={() => (
-										<div className="global-box-shadow-icon-popup">
-											<BaseControl className="global-box-shadow-popup-inner">
-												<div className="global-box-shadow-color">
+										<div className="gslider-box-shadow-icon-popup">
+											<BaseControl className="gslider-box-shadow-popup-inner">
+												<div className="gslider-box-shadow-color">
 													<ColorPicker
 														color={value}
 														onChange={onChangeHandler}
 														enableAlpha={true}
 													/>
-													<div className="global-box-shadow-label">{__("Default Colors", "gslider-blocks")}</div>
+													<div className="gslider-box-shadow-label">{__("Default Colors", "gslider-blocks")}</div>
 													<ColorPalette
 														colors={[
 															{ color: '#F72585' },

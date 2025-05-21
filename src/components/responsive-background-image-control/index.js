@@ -5,7 +5,6 @@ import {
     FocalPointPicker,
 } from '@wordpress/components';
 import ResponsiveDeviceControl from '@Components/responsive-device-control';
-import './editor.lazy.scss';
 
 const ResponsiveBackgroundImageControl = ({
     label = __("Background Image", "gslider-blocks"),

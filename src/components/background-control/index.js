@@ -82,14 +82,14 @@ const BackgroundControl = ({
         <>
             <BaseControl
                 label={__("Background Type", "gslider-blocks")}
-                className="global-setting-switcher-panel-wrapper"
+                className="gslider-setting-switcher-panel-wrapper"
             >
-                <ButtonGroup className="global-setting-switcher-panel-btn">
+                <ButtonGroup className="gslider-setting-switcher-panel-btn">
                     {BACKGROUND_TYPES.map((item) => (
                         <Button
                             key={item.value}
                             onClick={() => setNormalBackgroundType(item.value)}
-                            className={`global-setting-switcher-panel-btn-switcher ${normalBackgroundType === item.value ? 'active' : ''}`}
+                            className={`gslider-setting-switcher-panel-btn-switcher ${normalBackgroundType === item.value ? 'active' : ''}`}
                         >
                             {item.label}
                         </Button>
@@ -148,14 +148,14 @@ const BackgroundControl = ({
         <>
             <BaseControl
                 label={__("Background Type", "gslider-blocks")}
-                className="global-setting-switcher-panel-wrapper"
+                className="gslider-setting-switcher-panel-wrapper"
             >
-                <ButtonGroup className="global-setting-switcher-panel-btn"> 
+                <ButtonGroup className="gslider-setting-switcher-panel-btn"> 
                     {BACKGROUND_TYPES.map((item) => (
                         <Button
                             key={item.value}
                             onClick={() => setHoverBackgroundType(item.value)}
-                            className={`global-setting-switcher-panel-btn-switcher ${hoverBackgroundType === item.value ? 'active' : ''}`}
+                            className={`gslider-setting-switcher-panel-btn-switcher ${hoverBackgroundType === item.value ? 'active' : ''}`}
                         >
                             {item.label}
                         </Button>
@@ -213,7 +213,7 @@ const BackgroundControl = ({
         <>
             <BaseControl
                 label={label}
-                className="gslider-background-color-control-wrapper global-setting-switcher-container"
+                className="gslider-background-color-control-wrapper gslider-setting-switcher-container"
             >
                 {isHover ? (
                     <TabPanel

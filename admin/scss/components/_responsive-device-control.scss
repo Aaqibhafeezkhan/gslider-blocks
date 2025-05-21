@@ -1,6 +1,6 @@
 @use "../variables" as *;
 
-.global-setting-device-label-wrapper {
+.gslider-setting-device-label-wrapper {
 	display: inline-flex;
 	align-items: center;
 	p {
@@ -8,7 +8,7 @@
 		margin-right: 5px;
 		margin-top: 0;
 
-		&.global-setting-label-text {
+		&.gslider-setting-label-text {
 			flex: 1;
             font-size: 13px;
             font-weight: 400;
@@ -17,25 +17,25 @@
 		}
 	}
 }
-.global-responsive-device-wrapper {
+.gslider-responsive-device-wrapper {
     height: 26px;
     position: relative;
     width: 26px;
-    &.global-device-switchers-open {
-        .global-responsive-device-inner-wrapper {
+    &.gslider-device-switchers-open {
+        .gslider-responsive-device-inner-wrapper {
             background: $background_color; 
             border-radius: 2px;
             position: relative;
             z-index: 11;
         }
-        .global-device-switcher {
+        .gslider-device-switcher {
             height: 26px;
             opacity: 1;
             transform: scale(1);
             
         }
     }
-    .global-device-switcher {
+    .gslider-device-switcher {
         align-items: center;
         border: none !important;
         color: gray;

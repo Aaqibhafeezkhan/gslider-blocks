@@ -1,25 +1,25 @@
 @use "../variables" as *;
 
-.global-setting-spacing-container {
+.gslider-setting-spacing-container {
     display: flex;
     flex-direction: column;
     margin: 15px 0;
-    .global-setting-spacing-inner-container {
+    .gslider-setting-spacing-inner-container {
       margin-bottom: 20px;
       &:last-child {
         margin-bottom: 0;
       }
-      .global-setting-spacing-input-container {
+      .gslider-setting-spacing-input-container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
 
-        .global-setting-spacing-input-wrapper {
+        .gslider-setting-spacing-input-wrapper {
           display: flex;
           flex-direction: column;
           width: 20%;
 
-          .global-setting-spacing-input-label {
+          .gslider-setting-spacing-input-label {
             text-align: center;
             font-size: 11px;
             margin-right: 5px;
@@ -85,7 +85,7 @@
           }
         }
       }
-      .global-setting-spacing-label-container {
+      .gslider-setting-spacing-label-container {
         display: flex;
         align-items: center;
         justify-content: space-between;

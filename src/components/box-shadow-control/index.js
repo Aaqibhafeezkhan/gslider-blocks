@@ -42,14 +42,14 @@ export default function BoxShadowSettingsControl({ label = __("Box Shadow", "gsl
 
 	return (
 		<>
-		    <div className="global-setting-color-container">
+		    <div className="gslider-setting-color-container">
 				<BaseControl 
 					label={label}
-					className="global-box-shadow-wrapper shadow-color global-setting-color-switcher-wrapper"
+					className="gslider-box-shadow-wrapper shadow-color gslider-setting-color-switcher-wrapper"
 				>
 					<Dropdown
-						className="global-box-shadow-icon-dropdown"
-						contentClassName="global-box-shadow-icon-dropdown-content"
+						className="gslider-box-shadow-icon-dropdown"
+						contentClassName="gslider-box-shadow-icon-dropdown-content"
 						popoverProps={{ placement: 'bottom-start' }}
 						renderToggle={({ isOpen, onToggle }) => (
 							<Button
@@ -60,7 +60,7 @@ export default function BoxShadowSettingsControl({ label = __("Box Shadow", "gsl
 							</Button>
 						)}
 						renderContent={() => (
-							<div className="controlPane controls">
+							<div className="gslider-controlPane controls">
 								<Control
 									label="Inset"
 									type="checkbox"

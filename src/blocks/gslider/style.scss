@@ -36,7 +36,7 @@ $background_color: #EDEDED;
 $white_color: #ffffff;
 $border_color: #dddddd;
 
-.global-setting-background-color-setting-wrapper{
+.gslider-setting-background-color-setting-wrapper{
     .components-base-control__field {
         display: flex;
         align-items: center;
@@ -49,8 +49,8 @@ $border_color: #dddddd;
     }
 }
 
-.global-setting-icon-dropdown {
-    .global-setting-icon-btn {
+.gslider-setting-icon-dropdown {
+    .gslider-setting-icon-btn {
         margin: 0;
         height: 28px;
         width: 28px;
@@ -63,7 +63,7 @@ $border_color: #dddddd;
             outline: none;
             box-shadow: none;
         }
-        .global-setting-panel-icon {
+        .gslider-setting-panel-icon {
             font-size: 15px;
             line-height: 20px;
         }
@@ -71,15 +71,15 @@ $border_color: #dddddd;
 }
 
 .sortable-item-content-dropdown {
-    &.global-setting-icon-dropdown-content {
+    &.gslider-setting-icon-dropdown-content {
         z-index: 99999;
         .components-popover__content {
             padding: 20px;
             min-width: 350px;
             margin-right: 30px;
         }
-        .global-setting-background-color-popup-wrapper {
-            .global-setting-background-color-popup-inner-wrapper {
+        .gslider-setting-background-color-popup-wrapper {
+            .gslider-setting-background-color-popup-inner-wrapper {
                 .components-base-control__field {
                     display: flex;
                     flex-direction: column;
@@ -90,12 +90,12 @@ $border_color: #dddddd;
     }
 }
 
-.global-setting-background-color-panel-btn {
+.gslider-setting-background-color-panel-btn {
     display: flex !important;
     width: 100%;
     button {
         &.components-button {
-            &.global-setting-background-color-panel-btn-switcher {
+            &.gslider-setting-background-color-panel-btn-switcher {
                 width: 100%;
                 justify-content: center;
                 height: unset;

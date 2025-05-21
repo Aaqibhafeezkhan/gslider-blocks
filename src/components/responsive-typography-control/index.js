@@ -9,11 +9,11 @@ import {
 
 import {
     FONT_FAMILYS,
-	FONT_WEIGHT,
+    FONT_WEIGHT,
     FONT_STYLE,
     TEXT_TRANSFORM,
     TEXT_DECORATION,
-} from "./constants/constants";
+} from '@Constants';
 
 import ResponsiveRangeControl from '@Components/responsive-range-control';
 
@@ -90,11 +90,11 @@ const ResponsiveTypographyControl = ({
     return (
         <BaseControl
             label={__("Typography", "gslider-blocks")}
-            className="global-setting-typography"
+            className="gslider-setting-typography"
         >
             <Dropdown
-                className="global-setting-dropdown-icon-wrapper"
-                contentClassName="global-setting-dropdown-icon-content"
+                className="gslider-setting-dropdown-icon-wrapper"
+                contentClassName="gslider-setting-dropdown-icon-content"
                 popoverProps={{ placement: 'bottom-start' }}
                 renderToggle={({ isOpen, onToggle }) => (
                     <Button
@@ -102,14 +102,14 @@ const ResponsiveTypographyControl = ({
                         onClick={onToggle}
                         aria-expanded={isOpen}
                         aria-label={__("Toggle Typography Settings", "gslider-blocks")}
-                        className="global-setting-dropdown-icon-btn"
+                        className="gslider-setting-dropdown-icon-btn"
                     >
-                        <Dashicon icon="edit" className="global-setting-dropdown-icon" />
+                        <Dashicon icon="edit" className="gslider-setting-dropdown-icon" />
                     </Button>
                 )}
                 renderContent={() => (
-                    <div className="global-setting-typography-popup">
-                        <BaseControl className="global-setting-typography-popup-inner">
+                    <div className="gslider-setting-typography-popup">
+                        <BaseControl className="gslider-setting-typography-popup-inner">
                             <SelectControl
                                 label={__("Font Family", "gslider-blocks")}
                                 options={FONT_FAMILYS}
@@ -155,7 +155,7 @@ const ResponsiveTypographyControl = ({
                             />
                             <ResponsiveRangeControl
                                 min={1}
-                                max={100}
+                                max={20}
                                 label={__("Letter Spacing", "gslider-blocks")}
                                 value={letterSpacing}
                                 onChange={handleLetterSpacingChange}
@@ -163,7 +163,7 @@ const ResponsiveTypographyControl = ({
                                 deviceType={deviceType}
                                 units={letterSpacingUnits}
                                 setAttributes={setAttributes}
-                                step={1}
+                                step={.1}
                                 defaultValue={""}
                             />
                             <ResponsiveRangeControl

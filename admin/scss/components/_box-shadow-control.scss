@@ -1,6 +1,6 @@
 @use "../variables" as *;
 
-.controlPane {
+.gslider-controlPane {
 	&.controls {
 		width: 250px;
 		padding: 10px;
@@ -65,7 +65,7 @@
 	}
 }
 
-.global-box-shadow-wrapper {
+.gslider-box-shadow-wrapper {
 	&.shadow-color {
 		margin-bottom: 10px;
 	}
@@ -91,8 +91,8 @@
     }
 }
 
-.global-box-shadow-icon-dropdown {
-    .global-box-shadow-icon-btn {
+.gslider-box-shadow-icon-dropdown {
+    .gslider-box-shadow-icon-btn {
         margin: 0;
         height: 28px;
         width: 28px;
@@ -103,13 +103,13 @@
             outline: none;
             box-shadow: none;
         }
-        .global-box-shadow-icon {
+        .gslider-box-shadow-icon {
             font-size: 15px;
             line-height: 20px;
         }
     }
 }
 
-.global-box-shadow-label {
+.gslider-box-shadow-label {
     margin-bottom: 15px;
 }

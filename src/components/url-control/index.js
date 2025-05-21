@@ -28,20 +28,18 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
     return (
         <BaseControl
             label={label}
-
-            id="global-setting-url" 
-            className="global-url-control-wrapper"
+            className="gslider-control-wrapper"
         >
-            <div className="global-url-control-inner-wrapper">
+            <div className="gslider-control-inner-wrapper">
                 <TextControl
                     value={url}
                     onChange={handleUrlChange}
-                    className="global-url-control-input"
+                    className="gslider-control-input"
                     placeholder={__('https://', 'gslider-blocks')}
                 />
                 <Dropdown
-                    className="global-url-control-dropdown-wrapper"
-                    contentClassName="global-url-control-dropdown-content"
+                    className="gslider-control-dropdown-wrapper"
+                    contentClassName="gslider-control-dropdown-content"
                     popoverProps={{ placement: 'bottom-start' }}
                     renderToggle={({ isOpen, onToggle }) => (
                         <Button
@@ -49,14 +47,14 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
                             onClick={onToggle}
                             aria-expanded={isOpen}
                             aria-label={__("Toggle URL Settings", "gslider-blocks")}
-                                className="global-setting-icon-btn"
+                                className="gslider-setting-icon-btn"
                         >
-                            <Dashicon icon="admin-generic" className="global-setting-panel-icon" />
+                            <Dashicon icon="admin-generic" className="gslider-setting-panel-icon" />
                         </Button>
                     )}
                     renderContent={() => (
-                        <div className="global-url-control-dropdown-popup">
-                            <BaseControl className="global-url-control-dropdown-popup-inner">
+                        <div className="gslider-control-dropdown-popup">
+                            <BaseControl className="gslider-control-dropdown-popup-inner">
                                 <ToggleControl
                                     label={__("Open in new tab", "gslider-blocks")}
                                     checked={openInNewTab}

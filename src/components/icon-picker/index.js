@@ -251,7 +251,7 @@ export default function FBIconPicker(props) {
 				: '';
 
 			return (
-				<div key={ key } style={ style } className={'fb_icon_box'}>
+				<div key={ key } style={ style } className={'gslider_icon_box'}>
 					<div
 						className={`fb_icon ${iconClass}`}
 						onClick={ () => {
@@ -270,7 +270,7 @@ export default function FBIconPicker(props) {
 		}
 		const heightAndWidth = 400 / 8;
 		return (
-			<div className="fb_icon_picker_icons_list">
+			<div className="gslider_icon_picker_icons_list">
 				<Grid
 					cellRenderer={ cellRenderer }
 					columnCount={ filteredDefaultIcons.length }
@@ -296,8 +296,8 @@ export default function FBIconPicker(props) {
 
 	return (
 		<Fragment>
-			<div className='fb_icon_picker_wrapper' onClick={() => iconPickerModal()}>
-				<div className={'fb_icon_picker'}>
+			<div className='gslider_icon_picker_wrapper' onClick={() => iconPickerModal()}>
+				<div className={'gslider_icon_picker'}>
 					<div className={'Change icon'}>{__('Change icon', 'gslider-blocks')}</div>
 					{insertIcon !== '' &&
 						<div onClick={() => setInsertIcon('')} className={'remove'}>
@@ -324,12 +324,12 @@ export default function FBIconPicker(props) {
 			</div>
 			<div>
 				{showIconPicker && (
-					<Modal onRequestClose={closeModal} className={'fb_icon_picker_wrapper_modal'}>
-						<div className={'fb_icon_picker_modal_wrapper'}>
-							<div className={'fb_icon_picker_wrapper_inner'}>
-								<div className={'fb_icon_picker_wrapper_header'}>
+					<Modal onRequestClose={closeModal} className={'gslider_icon_picker_wrapper_modal'}>
+						<div className={'gslider_icon_picker_modal_wrapper'}>
+							<div className={'gslider_icon_picker_wrapper_inner'}>
+								<div className={'gslider_icon_picker_wrapper_header'}>
 									<h2>{__('Icon Library', 'gslider-blocks')}</h2>
-									<div className={'fb_icon_picker_wrapper_search'}>
+									<div className={'gslider_icon_picker_wrapper_search'}>
 										<span>
 											<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512"><path
 												d="M448 449L301.2 300.2c20-27.9 31.9-62.2 31.9-99.2 0-93.1-74.7-168.9-166.5-168.9C74.7 32 0 107.8 0 200.9s74.7 168.9 166.5 168.9c39.8 0 76.3-14.2 105-37.9l146 148.1 30.5-31zM166.5 330.8c-70.6 0-128.1-58.3-128.1-129.9S95.9 71 166.5 71s128.1 58.3 128.1 129.9-57.4 129.9-128.1 129.9z"></path></svg>
@@ -337,19 +337,19 @@ export default function FBIconPicker(props) {
 										<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'gslider-blocks')}/>
 									</div>
 								</div>
-								<div className={'fb_icon_picker_wrapper_body'}>
-									<div className={'fb_icon_picker_wrapper_categories'}>
+								<div className={'gslider_icon_picker_wrapper_body'}>
+									<div className={'gslider_icon_picker_wrapper_categories'}>
 										{categories.map((category, index) => (
 											<div onClick={() => filterIconList(category)}
-												 className={`fb_icon_picker_wrapper_category ${selectedCat === category.slug ? 'selected' : ''}`}
+												 className={`gslider_icon_picker_wrapper_category ${selectedCat === category.slug ? 'selected' : ''}`}
 												 key={index}>{category.title}</div>
 										))}
 									</div>
-									<div className={'fb_icon_picker_wrapper_icons_list'}>
+									<div className={'gslider_icon_picker_wrapper_icons_list'}>
 										{renderIconList()}
 									</div>
 								</div>
-								<div className={'fb_icon_picker_wrapper_footer'}>
+								<div className={'gslider_icon_picker_wrapper_footer'}>
 									<Button variant="secondary"
 											onClick={fbInsertIcon}>{__('Insert icon', 'gslider-blocks')}</Button>
 								</div>

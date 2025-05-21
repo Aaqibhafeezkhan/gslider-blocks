@@ -60,25 +60,25 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
             {isOpen && (
                 <div className="sortable-item-content">
                     <BaseControl
-                        className="global-setting-background-color-setting-wrapper"
+                        className="gslider-setting-background-color-setting-wrapper"
                         label={__("Slide Content", "gslider-blocks")}
                     >
                         <Dropdown
-                            className="global-setting-icon-dropdown"
-                            contentClassName="global-setting-icon-dropdown-content sortable-item-content-dropdown"
+                            className="gslider-setting-icon-dropdown"
+                            contentClassName="gslider-setting-icon-dropdown-content sortable-item-content-dropdown"
                             popoverProps={{ placement: 'bottom-start' }}
                             renderToggle={({ isOpen, onToggle }) => (
                                 <Button
                                     variant="primary"
                                     onClick={onToggle}
                                     aria-expanded={isOpen}
-                                    className="global-setting-icon-btn"
+                                    className="gslider-setting-icon-btn"
                                 >
-                                    <Dashicon icon="edit" className="global-setting-panel-icon" />
+                                    <Dashicon icon="edit" className="gslider-setting-panel-icon" />
                                 </Button>
                             )}
                             renderContent={() => (
-                                <div className="global-setting-contant-popup-wrapper">
+                                <div className="gslider-setting-contant-popup-wrapper">
                                     <TextControl
                                         label={__("Sub Title", "gslider-blocks")}
                                         value={item.subTitle}
@@ -118,24 +118,24 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         />
                     </BaseControl>
                     <BaseControl
-                        className="global-setting-background-color-setting-wrapper"
+                        className="gslider-setting-background-color-setting-wrapper"
                         label={__("Background", "gslider-blocks")}
                     >
                         <Dropdown
-                            className="global-setting-icon-dropdown"
-                            contentClassName="global-setting-icon-dropdown-content sortable-item-content-dropdown"
+                            className="gslider-setting-icon-dropdown"
+                            contentClassName="gslider-setting-icon-dropdown-content sortable-item-content-dropdown"
                             popoverProps={{ placement: 'bottom-start' }}
                             renderToggle={({ isOpen, onToggle }) => (
                                 <Button
                                     onClick={onToggle}
                                     aria-expanded={isOpen}
-                                    className="global-setting-icon-btn"
+                                    className="gslider-setting-icon-btn"
                                 >
-                                    <Dashicon icon="edit" className="global-setting-panel-icon" />
+                                    <Dashicon icon="edit" className="gslider-setting-panel-icon" />
                                 </Button>
                             )}
                             renderContent={() => (
-                                <div className="global-setting-background-color-popup-wrapper">
+                                <div className="gslider-setting-background-color-popup-wrapper">
                                     <BackgroundControl
                                         deviceType={deviceType}  
                                         normalBackgroundType={item.normalItemBackgroundType} 

@@ -1,15 +1,15 @@
 @use "../variables" as *;
 
-.global-unit-wrapper {
+.gslider-unit-wrapper {
 	display: flex;
 	align-items: center;
     border-radius: 4px;
     background: $background_color;
 	height: 26px;
-	.global-reset-control-container {
+	.gslider-reset-control-container {
         padding: 6px 10px;
         border-right: 1px solid #FFFFFF;
-		.global-reset-button {
+		.gslider-reset-button {
             background-color: unset;
 			align-items: center;
 			border: 0;
@@ -26,11 +26,11 @@
 	}
 }
 
-.global-setting-units-type {
+.gslider-setting-units-type {
 	position: relative;
 	display: inline-block;
     padding: 6px 10px;
-	.global-setting-units-current {
+	.gslider-setting-units-current {
         font-size: 11px;
 		border: none;
 		cursor: pointer;
@@ -41,7 +41,7 @@
 		color: $primary_color;
 	}
 
-	.global-setting-units-dropdown {
+	.gslider-setting-units-dropdown {
 		position: absolute;
 		top: 2px;
 		left: 0;
@@ -50,7 +50,7 @@
 		overflow: hidden;
 		width: 100%;
 		border-radius: 4px;
-		.global-setting-units-option {
+		.gslider-setting-units-option {
 			cursor: pointer;
 			transition: background 0.2s;
 			height: 26px;

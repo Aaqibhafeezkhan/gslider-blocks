@@ -9,14 +9,14 @@ const ColorControl = ({ label, color, onChangeColor }) => {
 	}, []);
 
     return (
-        <div className="global-setting-color-container">
+        <div className="gslider-setting-color-container">
             <BaseControl 
                 label={__(label, "gslider-blocks")}
-                className="global-setting-color-switcher-wrapper"
+                className="gslider-setting-color-switcher-wrapper"
             >
                 <Dropdown
-                    className="global-setting-icon-dropdown"
-                    contentClassName="global-setting-icon-dropdown-content"
+                    className="gslider-setting-icon-dropdown"
+                    contentClassName="gslider-setting-icon-dropdown-content"
                     popoverProps={{ placement: 'bottom-start' }}
                     renderToggle={({ isOpen, onToggle }) => (
                         <Button
@@ -28,15 +28,15 @@ const ColorControl = ({ label, color, onChangeColor }) => {
 
                     )}
                     renderContent={() => (
-                        <div className="global-setting-panel-icon-popup">
-                            <BaseControl className="global-setting-panel-icon-popup-inner">
-                                <div className="global-setting-color">
+                        <div className="gslider-setting-panel-icon-popup">
+                            <BaseControl className="gslider-setting-panel-icon-popup-inner">
+                                <div className="gslider-setting-color">
                                     <ColorPicker
                                         color={color}
                                         onChange={onChangeColor}
                                         enableAlpha={true}
                                     />
-                                    <div className="global-setting-color-label">{__("Default Colors", "gslider-blocks")}</div>
+                                    <div className="gslider-setting-color-label">{__("Default Colors", "gslider-blocks")}</div>
                                     <ColorPalette
                                         colors={[
                                             { color: '#2563eb' },
@@ -96,7 +96,7 @@ const ColorControl = ({ label, color, onChangeColor }) => {
                                     />
                                     {themeColors.length > 0 && (
                                         <>
-                                            <div className="global-setting-color-label">{__("Theme Colors", "gslider-blocks")}</div>
+                                            <div className="gslider-setting-color-label">{__("Theme Colors", "gslider-blocks")}</div>
                                             <ColorPalette
                                                 colors={themeColors}
                                                 disableCustomColors={true}

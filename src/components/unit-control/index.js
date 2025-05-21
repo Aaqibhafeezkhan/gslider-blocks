@@ -29,19 +29,19 @@ const UnitsControl = ({
 
 	return (
 		<>
-			<div className="global-setting-units-type">
+			<div className="gslider-setting-units-type">
 				<div
-					className="global-setting-units-current"
+					className="gslider-setting-units-current"
 					onClick={toggleDropdown}
 				>
 					{currentUnit}
 				</div>
 				{isDropdownOpen && (
-					<div className="global-setting-units-dropdown">
+					<div className="gslider-setting-units-dropdown">
 						{UNIT_TYPES.map((item, key) => (
 							<div
 								key={key}
-								className={`global-setting-units-option ${
+								className={`gslider-setting-units-option ${
 									currentUnit === item.value ? 'active' : ''
 								}`}
 								onClick={() => selectUnit(item.value)}

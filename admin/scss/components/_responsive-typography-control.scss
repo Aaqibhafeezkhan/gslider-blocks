@@ -1,6 +1,6 @@
 @use "../variables" as *;
 
-.global-setting-typography {
+.gslider-setting-typography {
     .components-base-control__field {
         position: relative;
         display: flex;
@@ -10,8 +10,8 @@
     }
 }
 
-.global-setting-dropdown-icon-wrapper {
-    .global-setting-dropdown-icon-btn {
+.gslider-setting-dropdown-icon-wrapper {
+    .gslider-setting-dropdown-icon-btn {
         margin: 0;
         height: 28px;
         width: 28px;
@@ -24,19 +24,19 @@
             outline: none;
             box-shadow: none;
         }
-        .global-setting-dropdown-icon {
+        .gslider-setting-dropdown-icon {
             font-size: 15px;
             line-height: 20px;
         }
     }
 }
 
-.global-setting-fontsize-wrapper {
-    .global-setting-fontsize-header {
+.gslider-setting-fontsize-wrapper {
+    .gslider-setting-fontsize-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        .global-setting-fontsize-label {
+        .gslider-setting-fontsize-label {
             display: block;
             color: $secondary_color;
             font-size: 12px;
@@ -46,13 +46,13 @@
             min-height: auto;
             text-transform: capitalize;
         }
-        .global-setting-fontsize-units {
+        .gslider-setting-fontsize-units {
 
-            .global-setting-fontsize-units-wrap {
+            .gslider-setting-fontsize-units-wrap {
                 direction: initial;
                 display: flex;
                 align-items: center;
-                .global-setting-fontsize-units-switcher {
+                .gslider-setting-fontsize-units-switcher {
                     box-shadow: unset;
                     font-size: 10px;
                     padding: 0;
@@ -67,12 +67,12 @@
     }
 }
 
-.global-setting-letterspacing-wrapper {
-    .global-setting-letterspacing-header {
+.gslider-setting-letterspacing-wrapper {
+    .gslider-setting-letterspacing-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        .global-setting-letterspacing-label {
+        .gslider-setting-letterspacing-label {
             display: block;
             color: $secondary_color;
             font-size: 12px;
@@ -82,12 +82,12 @@
             min-height: auto;
             text-transform: capitalize;
         }
-        .global-setting-letterspacing-units {
-            .global-setting-letterspacing-units-wrap {
+        .gslider-setting-letterspacing-units {
+            .gslider-setting-letterspacing-units-wrap {
                 direction: initial;
                 display: flex;
                 align-items: center;
-                .global-setting-letterspacing-units-switcher {
+                .gslider-setting-letterspacing-units-switcher {
                     box-shadow: unset;
                     font-size: 10px;
                     padding: 0;
@@ -102,12 +102,12 @@
     }
 }
 
-.global-setting-lineheight-wrapper {
-    .global-setting-lineheight-header {
+.gslider-setting-lineheight-wrapper {
+    .gslider-setting-lineheight-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        .global-setting-lineheight-label {
+        .gslider-setting-lineheight-label {
             display: block;
             color: $secondary_color;
             font-size: 12px;
@@ -117,12 +117,12 @@
             min-height: auto;
             text-transform: capitalize;
         }
-        .global-setting-lineheight-units {
-            .global-setting-lineheight-units-wrap {
+        .gslider-setting-lineheight-units {
+            .gslider-setting-lineheight-units-wrap {
                 direction: initial;
                 display: flex;
                 align-items: center;
-                .global-setting-lineheight-units-switcher {
+                .gslider-setting-lineheight-units-switcher {
                     box-shadow: unset;
                     font-size: 10px;
                     padding: 0;
@@ -137,10 +137,10 @@
     }
 }
 
-.global-setting-typography-popup {
+.gslider-setting-typography-popup {
     padding: 0.2rem;
     min-width: 220px;
-    .global-setting-typography-popup-inner {
+    .gslider-setting-typography-popup-inner {
         position: relative;
         z-index: 99999;
         .components-base-control__field {
@@ -161,7 +161,7 @@
     }
 }
 
-.global-setting-fontsize-wrapper, .global-setting-letterspacing-wrapper, .global-setting-lineheight-wrapper {
+.gslider-setting-fontsize-wrapper, .gslider-setting-letterspacing-wrapper, .gslider-setting-lineheight-wrapper {
     .components-range-control__reset {
         position: absolute;
         top: -33px;

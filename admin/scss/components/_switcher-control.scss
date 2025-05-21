@@ -1,17 +1,17 @@
 @use "../variables" as *;
 
-.global-setting-switcher-container {
+.gslider-setting-switcher-container {
     margin: 15px 0 0 0;
     .components-base-control__field{
         margin-bottom: 5px;
     }
-    .global-setting-switcher-panel-wrapper {
-        .global-setting-switcher-panel-btn {
+    .gslider-setting-switcher-panel-wrapper {
+        .gslider-setting-switcher-panel-btn {
             display: flex !important;
             width: 100%;
             button {
                 &.components-button {
-                    &.global-setting-switcher-panel-btn-switcher {
+                    &.gslider-setting-switcher-panel-btn-switcher {
                         width: 100%;
                         justify-content: center;
                         height: unset;
