@@ -10,7 +10,7 @@
 	max-width: 100%;
 	min-height: 96px;
 	display: flex;
-	background-color: #ffffff;
+	background-color: $white_color;
 	border: 1px solid #e6e7e9;
 	border-radius: 3px;
 	position: relative;
@@ -27,7 +27,7 @@
 }
 
 .gslider_icon_picker_wrapper .gslider_icon_picker .remove svg {
-	fill: #ffffff;
+	fill: $white_color;
 	width: 18px;
 	height: 18px;
 	background-color: #cccccc;
@@ -159,7 +159,7 @@
 .gslider_icon_picker_icons_list .fb_icon {
 	width: 80px;
 	height: 80px;
-	background-color: #ffffff;
+	background-color: $white_color;
 	border: 1px solid #e6e7e9;
 	border-radius: 3px;
 	display: flex;

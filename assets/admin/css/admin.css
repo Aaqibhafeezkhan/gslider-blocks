@@ -15,9 +15,9 @@
   padding: 22px;
 }
 .gslider-inspector-control .gslider-tab-panel.active-tab {
-  background: #ffffff;
-  border-top: 2px solid #007cba !important;
-  color: #007cba;
+  background: #FFFFFF;
+  border-top: 2px solid #007CBA !important;
+  color: #007CBA;
 }
 .gslider-inspector-control .components-base-control__field .components-base-control__label {
   display: block;
@@ -30,7 +30,7 @@
 }
 .gslider-inspector-control .components-base-control__field .components-text-control__input,
 .gslider-inspector-control .components-base-control__field .components-textarea-control__input {
-  border: 1px solid #dddddd;
+  border: 1px solid #DDDDDD;
   border-radius: 4px;
   box-shadow: none;
 }
@@ -82,7 +82,7 @@
 .gslider-bg-tab-panel .components-tab-panel__tabs .gslider-bg-tab.active-tab {
   background-color: transparent;
   border: 1px solid #ededed;
-  border-bottom-color: #fff;
+  border-bottom-color: #FFFFFF;
   color: #007cba;
 }
 
@@ -165,7 +165,7 @@
   width: 28px;
   padding: 5px;
   color: #50575e;
-  background: #ffffff;
+  background: #FFFFFF;
 }
 .gslider-box-shadow-icon-dropdown .gslider-box-shadow-icon-btn:focus {
   outline: none;
@@ -196,7 +196,7 @@
   min-height: 30px;
   font-size: 13px;
   font-weight: 400;
-  color: #5f5f5f !important;
+  color: #5F5F5F !important;
   box-shadow: inset 0 0 0 1px #EDEDED;
 }
 .gslider-setting-color-container .gslider-setting-color-panel-wrapper .gslider-setting-color-panel-btn button.components-button.gslider-setting-color-panel-btn-switcher.active {
@@ -240,7 +240,7 @@
   border: 1px solid #e6e7e9;
   border-radius: 14px;
   color: #50575e;
-  background: #ffffff;
+  background: #FFFFFF;
 }
 .gslider-setting-panel-icon-dropdown .gslider-setting-panel-icon-btn:focus {
   outline: none;
@@ -327,7 +327,7 @@
   max-width: 100%;
   min-height: 96px;
   display: flex;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   border: 1px solid #e6e7e9;
   border-radius: 3px;
   position: relative;
@@ -344,7 +344,7 @@
 }
 
 .gslider_icon_picker_wrapper .gslider_icon_picker .remove svg {
-  fill: #ffffff;
+  fill: #FFFFFF;
   width: 18px;
   height: 18px;
   background-color: #cccccc;
@@ -474,7 +474,7 @@
 .gslider_icon_picker_icons_list .fb_icon {
   width: 80px;
   height: 80px;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   border: 1px solid #e6e7e9;
   border-radius: 3px;
   display: flex;
@@ -793,11 +793,11 @@
   transform: scale(1);
 }
 .gslider-responsive-device-wrapper .gslider-device-switcher.active path {
-  fill: #007cba;
-  stroke: #007cba;
+  fill: #007CBA;
+  stroke: #007CBA;
 }
 .gslider-responsive-device-wrapper .gslider-device-switcher.active rect {
-  stroke: #007cba;
+  stroke: #007CBA;
 }
 .gslider-responsive-device-wrapper .gslider-device-switcher svg {
   width: 10px;
@@ -904,7 +904,7 @@
 }
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper .dashicons-admin-links::before,
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper .dashicons-editor-unlink::before {
-  color: #007cba;
+  color: #007CBA;
 }
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-label-container {
   display: flex;
@@ -932,7 +932,7 @@
   border: 1px solid #e6e7e9;
   border-radius: 14px;
   color: #50575e;
-  background: #ffffff;
+  background: #FFFFFF;
 }
 .gslider-setting-dropdown-icon-wrapper .gslider-setting-dropdown-icon-btn:focus {
   outline: none;
@@ -950,7 +950,7 @@
 }
 .gslider-setting-fontsize-wrapper .gslider-setting-fontsize-header .gslider-setting-fontsize-label {
   display: block;
-  color: #5f5f5f;
+  color: #5F5F5F;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -971,7 +971,7 @@
   padding-right: 5px;
 }
 .gslider-setting-fontsize-wrapper .gslider-setting-fontsize-header .gslider-setting-fontsize-units .gslider-setting-fontsize-units-wrap .gslider-setting-fontsize-units-switcher.active {
-  color: #007cba;
+  color: #007CBA;
 }
 
 .gslider-setting-letterspacing-wrapper .gslider-setting-letterspacing-header {
@@ -981,7 +981,7 @@
 }
 .gslider-setting-letterspacing-wrapper .gslider-setting-letterspacing-header .gslider-setting-letterspacing-label {
   display: block;
-  color: #5f5f5f;
+  color: #5F5F5F;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -1002,7 +1002,7 @@
   padding-right: 5px;
 }
 .gslider-setting-letterspacing-wrapper .gslider-setting-letterspacing-header .gslider-setting-letterspacing-units .gslider-setting-letterspacing-units-wrap .gslider-setting-letterspacing-units-switcher.active {
-  color: #007cba;
+  color: #007CBA;
 }
 
 .gslider-setting-lineheight-wrapper .gslider-setting-lineheight-header {
@@ -1012,7 +1012,7 @@
 }
 .gslider-setting-lineheight-wrapper .gslider-setting-lineheight-header .gslider-setting-lineheight-label {
   display: block;
-  color: #5f5f5f;
+  color: #5F5F5F;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -1033,7 +1033,7 @@
   padding-right: 5px;
 }
 .gslider-setting-lineheight-wrapper .gslider-setting-lineheight-header .gslider-setting-lineheight-units .gslider-setting-lineheight-units-wrap .gslider-setting-lineheight-units-switcher.active {
-  color: #007cba;
+  color: #007CBA;
 }
 
 .gslider-setting-typography-popup {
@@ -1051,7 +1051,7 @@
 }
 .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control__field label {
   display: block;
-  color: #5f5f5f !important;
+  color: #5F5F5F !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   line-height: 16px !important;
@@ -1146,7 +1146,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #007cba;
+  color: #007CBA;
 }
 .gslider-setting-units-type .gslider-setting-units-dropdown {
   position: absolute;
@@ -1169,7 +1169,7 @@
 }
 .gslider-setting-units-type .gslider-setting-units-dropdown .gslider-setting-units-option.active {
   font-weight: 400;
-  color: #007cba;
+  color: #007CBA;
 }
 
 /** Start General scss for URL Control **/
@@ -1199,7 +1199,7 @@
 }
 .gslider-url-control-dropdown-popup .gslider-url-control-dropdown-popup-inner .components-base-control__field label {
   display: block;
-  color: #5f5f5f !important;
+  color: #5F5F5F !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   line-height: 16px !important;
