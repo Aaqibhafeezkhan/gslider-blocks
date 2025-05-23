@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
+import { useState, useEffect } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { 
@@ -16,6 +16,10 @@ import {
     RangeControl,
 
 } from '@wordpress/components';
+
+/**
+ * Internal Dependencies
+ */
 import BackgroundControl from '@Components/background-control';
 import UrlControl from '@Components/url-control';
 

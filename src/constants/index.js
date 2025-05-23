@@ -1,13 +1,13 @@
 import { __ } from "@wordpress/i18n";
 import { Dashicon } from "@wordpress/components";
 
+export const STORE_NAME = 'gslider-blocks';
+
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "%", value: "%" },
 	{ label: "em", value: "em" },
 ];
-
-export const STORE_NAME = 'gslider-blocks';
 
 export const NORMAL_HOVER = [
 	{ label: "Normal", value: "normal" },
@@ -16,15 +16,13 @@ export const NORMAL_HOVER = [
 
 export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
-	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon-text" },
-	{ label: __(<Dashicon icon={"info"} />), value: "icon-only" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
 ];
 
 export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
-	{ label: __(<Dashicon icon={"menu"} />), value: "justify" }
 ];
 
 export const HEADING = [
@@ -35,7 +33,7 @@ export const HEADING = [
 	{ label: __("H5", "gslider-blocks"), value: "h5" },
 	{ label: __("H6", "gslider-blocks"), value: "h6" },
 	{ label: __("P", "gslider-blocks"), value: "p" },
-	{ label: __("Div", "gslider-blocks"), value: "span" },
+	{ label: __("Span", "gslider-blocks"), value: "span" },
 ];
 
 export const BORDER_STYLES = [
@@ -47,6 +45,35 @@ export const BORDER_STYLES = [
 	{ label: __("Groove", "gslider-blocks"), value: "groove" },
 	{ label: __("Outset", "gslider-blocks"), value: "outset" },
 	{ label: __("Ridge", "gslider-blocks"), value: "ridge" },
+];
+
+export const SLIDER_EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'gslider-blocks') },
+	{ value: 'fade', label: __('Fade', 'gslider-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'gslider-blocks') },
+	{ value: 'flip', label: __('Flip', 'gslider-blocks') },
+	{ value: 'creative', label: __('Creative', 'gslider-blocks') },
+];
+
+export const CAROUSEL_EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'gslider-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'gslider-blocks') },
+];
+
+export const SLIDER_TYPE = [
+	{ value: 'slider', label: __('Slider', 'gslider-blocks') },
+	{ value: 'carousel', label: __('Carousel', 'gslider-blocks') },
+];
+
+export const PAGINATION_TYPE = [
+	{ value: 'bullets', label: __('Bullets', 'gslider-blocks') },
+	{ value: 'fraction', label: __('Fraction', 'gslider-blocks') },
+	{ value: 'progressbar', label: __('Progress Bar', 'gslider-blocks') }
+];
+
+export const NORMAL_ACTIVE = [
+	{ label: __('Normal', 'gslider-blocks'), value: 'normal' },
+	{ label: __('Active', 'gslider-blocks'), value: 'active' },
 ];
 
 export const FONT_FAMILYS = [

@@ -351,6 +351,8 @@ const attributes = {
             }
         }
     },
+
+    /** Start Slider Settings */
     sliderType: {
         type: "string",
         default: "slider"
@@ -423,8 +425,9 @@ const attributes = {
         type: 'boolean',
 		default: false,
     },
+    /** End Slider Settings */
     
-	/** Start Arrows Style */
+    /** Start Arrows Size */
 	sliderArrowsSize: {
 		type: 'object',
 		default: {
@@ -458,12 +461,11 @@ const attributes = {
 	},
     /** End Arrows Color */
 
-    /** Start Background */
+    /** Start Arrows Background */
     sliderArrowsBackgroundColorSwitcher: {  
         type: "string",
         default: "normal",
     },
-
     sliderArrowsNormalBackgroundType: {
         type: "string",
         default: "classic",
@@ -504,9 +506,9 @@ const attributes = {
         type: "string",
         default: "",
     },
-	/** End Background */
+    /** End Arrows Background */
 
-    /** Start Arrows Size */
+    /** Start Arrows Width & Height */
 	sliderArrowsWidth: {
 		type: 'object',
 		default: {
@@ -539,9 +541,9 @@ const attributes = {
 			Mobile: 'px',
 		},
 	},
-    /** End Arrows Size */
+    /** End Arrows Width & Height */
 
-    /** Start Border */
+    /** Start Arrows Border */
 	sliderArrowsBorder: {
 		type: 'string',
 		default: 'none',
@@ -609,9 +611,9 @@ const attributes = {
 		type : 'boolean',
 		default: true
 	},
-	/** End Border */
+    /** End Arrows Border */
 
-	/** Start Border Radius */
+    /** Start Arrows Border Radius */
 	sliderArrowsBorderRadiusUnits: {
 		type: 'object',
 		default: {
@@ -663,9 +665,9 @@ const attributes = {
 		type : 'boolean',
 		default: true
 	},
-	/** End Border Radius */
+    /** End Arrows Border Radius */
 
-	/** Start Box Shadow */
+    /** Start Arrows Box Shadow */
     sliderArrowsBoxShadowValuesSwitcher : {
 		type: 'string',
 		default: 'normal'
@@ -686,9 +688,9 @@ const attributes = {
         type: 'string',
         default: '',
     },
-	/** End Box Shadow */
+    /** End Arrows Box Shadow */
 
-    /** Start Position */
+    /** Start Arrows Position */
     sliderArrowsPosition: {
 		type: 'object',
 		default: {
@@ -737,7 +739,7 @@ const attributes = {
 			Mobile: 'px',
 		},
 	},  
-	/** End Position */
+    /** End Arrows Position */
 
 
     /** Start Dots Margin */
@@ -992,7 +994,7 @@ const attributes = {
 	},
     /** End Dots Border Radius */
 
-    /** Start Active Dots */
+    /** Start Active Dots Width & Height */
     sliderActiveDotsWidth: {
 		type: 'object',
 		default: {
@@ -1025,6 +1027,7 @@ const attributes = {
 			Mobile: 'px',
 		},
 	},
+    /** End Active Dots Width & Height */
 
     /** Start Active Dots Border */
     sliderActiveDotsBorder: { 
@@ -1212,9 +1215,7 @@ const attributes = {
     },
 	/** End Global Setting */
 
-
-
-    /** Start Global Setting */
+    /** Start Global Item Background */
     globalSliderItemBgColorSwitcher: {
         type: "string",
         default: "normal",

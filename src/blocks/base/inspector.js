@@ -4,10 +4,22 @@ import { useState, useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, Button, ButtonGroup } from '@wordpress/components';
-import SortableItem from './sortableItem';
-import { BORDER_STYLES, SLIDER_EFFECT_OPTIONS, CAROUSEL_EFFECT_OPTIONS, SLIDER_TYPE, PAGINATION_TYPE, NORMAL_ACTIVE } from "./constants/constants";
-import './editor.scss';
 
+/**
+ * Internal Dependencies
+ */
+import { 
+    BORDER_STYLES,
+    SLIDER_EFFECT_OPTIONS,
+    CAROUSEL_EFFECT_OPTIONS,
+    SLIDER_TYPE,
+    PAGINATION_TYPE,
+    NORMAL_ACTIVE
+
+} from "@Constants";
+
+import './editor.scss';
+import SortableItem from './sortableItem';
 import SwitcherControl from '@Components/switcher-control';
 import ResponsiveSpacingControl from '@Components/responsive-spacing-control';
 import ColorControl from '@Components/color-control';
@@ -17,8 +29,7 @@ import BoxShadowSettingsControl from '@Components/box-shadow-control';
 import BackgroundControl from '@Components/background-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
 import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
-
-import {useDeviceType} from "@Utils/displayType"; 
+import {useDeviceType} from "@Utils/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
     const { 
