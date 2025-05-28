@@ -28,18 +28,18 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
     return (
         <BaseControl
             label={label}
-            className="gslider-control-wrapper"
+            className="gslider-url-control-wrapper"
         >
-            <div className="gslider-control-inner-wrapper">
+            <div className="gslider-url-control-inner-wrapper">
                 <TextControl
                     value={url}
                     onChange={handleUrlChange}
-                    className="gslider-control-input"
+                    className="gslider-url-control-input"
                     placeholder={__('https://', 'gslider-blocks')}
                 />
                 <Dropdown
-                    className="gslider-control-dropdown-wrapper"
-                    contentClassName="gslider-control-dropdown-content"
+                    className="gslider-url-control-dropdown-wrapper"
+                    contentClassName="gslider-url-control-dropdown-content"
                     popoverProps={{ placement: 'bottom-start' }}
                     renderToggle={({ isOpen, onToggle }) => (
                         <Button
@@ -53,8 +53,8 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
                         </Button>
                     )}
                     renderContent={() => (
-                        <div className="gslider-control-dropdown-popup">
-                            <BaseControl className="gslider-control-dropdown-popup-inner">
+                        <div className="gslider-url-control-dropdown-popup">
+                            <BaseControl className="gslider-url-control-dropdown-popup-inner">
                                 <ToggleControl
                                     label={__("Open in new tab", "gslider-blocks")}
                                     checked={openInNewTab}

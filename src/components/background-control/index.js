@@ -1,4 +1,3 @@
-// background-color.js
 import { __ } from '@wordpress/i18n';
 import { 
     Button, 
@@ -40,6 +39,7 @@ const BackgroundControl = ({
     setNormalBackgroundImageRepeat,
     normalBackgroundImageSize = 'cover',
     setNormalBackgroundImageSize,
+    normalClassicDefaultColor = '',
 
     hoverBackgroundType,
     setHoverBackgroundType,
@@ -65,6 +65,7 @@ const BackgroundControl = ({
     setHoverBackgroundImageRepeat,
     hoverBackgroundImageSize = 'cover',
     setHoverBackgroundImageSize,
+    hoverClassicDefaultColor = '',
     setAttributes,
 
     isBackgroundImage = true,
@@ -104,6 +105,7 @@ const BackgroundControl = ({
                         label={__("Color", "gslider-blocks")}
                         color={normalClassicColor}
                         onChangeColor={(value) => setNormalClassicColor(value)}
+                        defaultColor={normalClassicDefaultColor}
                     />
 
                     {isBackgroundImage && (
@@ -170,6 +172,7 @@ const BackgroundControl = ({
                         label={__("Background Color", "gslider-blocks")}
                         color={hoverClassicColor}
                         onChangeColor={(value) => setHoverClassicColor(value)}
+                        defaultColor={hoverClassicDefaultColor}
                     />
 
                     {isBackgroundImage && (

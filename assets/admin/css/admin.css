@@ -180,27 +180,10 @@
   margin-bottom: 15px;
 }
 
-.gslider-setting-color-container .gslider-setting-color-panel-wrapper {
-  margin-bottom: 0;
-}
-.gslider-setting-color-container .gslider-setting-color-panel-wrapper .gslider-setting-color-panel-btn {
-  display: flex !important;
-  width: 100%;
-}
-.gslider-setting-color-container .gslider-setting-color-panel-wrapper .gslider-setting-color-panel-btn button.components-button.gslider-setting-color-panel-btn-switcher {
-  width: 100%;
-  justify-content: center;
-  height: unset;
-  padding: 10px;
-  line-height: 16px;
-  min-height: 30px;
-  font-size: 13px;
-  font-weight: 400;
-  color: #5F5F5F !important;
-  box-shadow: inset 0 0 0 1px #EDEDED;
-}
-.gslider-setting-color-container .gslider-setting-color-panel-wrapper .gslider-setting-color-panel-btn button.components-button.gslider-setting-color-panel-btn-switcher.active {
-  background-color: #EDEDED;
+.gslider-setting-color-dropdown {
+  display: flex;
+  align-items: center;
+  height: 26px;
 }
 
 .gslider-setting-color-switcher-wrapper .components-base-control__field {
@@ -1114,11 +1097,12 @@
   background: #EDEDED;
   height: 26px;
 }
-.gslider-unit-wrapper .gslider-reset-control-container {
+
+.gslider-reset-control-container {
   padding: 6px 10px;
   border-right: 1px solid #FFFFFF;
 }
-.gslider-unit-wrapper .gslider-reset-control-container .gslider-reset-button {
+.gslider-reset-control-container .gslider-reset-button {
   background-color: unset;
   align-items: center;
   border: 0;
@@ -1127,8 +1111,9 @@
   justify-content: center;
   min-width: auto !important;
   opacity: 1 !important;
+  padding: 0;
 }
-.gslider-unit-wrapper .gslider-reset-control-container .gslider-reset-button svg {
+.gslider-reset-control-container .gslider-reset-button svg {
   display: block;
   fill: none;
 }

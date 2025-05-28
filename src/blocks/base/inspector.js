@@ -1084,7 +1084,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 <ColorControl
                                                     label={__("Normal Color", "gslider-blocks")}
                                                     color={sliderArrowsColor}
-                                                    onChangeColor={(value) => setAttributes({ sliderArrowsColor: value })} 
+                                                    onChangeColor={(value) => setAttributes({ sliderArrowsColor: value })}
+                                                    defaultColor='#333333'
                                                 />
                                             )}
 
@@ -1307,6 +1308,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                                 label={__("Color", "gslider-blocks")}
                                                                 color={sliderNormalDotsBgColor}
                                                                 onChangeColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
+                                                                defaultColor='#333333'
                                                             />
 
                                                             <SelectControl

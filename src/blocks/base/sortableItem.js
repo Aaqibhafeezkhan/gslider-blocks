@@ -141,7 +141,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             renderContent={() => (
                                 <div className="gslider-setting-background-color-popup-wrapper">
                                     <BackgroundControl
-                                        deviceType={deviceType}  
+                                        deviceType={deviceType}
                                         normalBackgroundType={item.normalItemBackgroundType} 
                                         setNormalBackgroundType={(value) => handleChangeItem(item.id, 'normalItemBackgroundType', value)}
                                         normalClassicColor={item.normalItemClassicColor}
@@ -166,6 +166,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                         setNormalBackgroundImageRepeat={(value) => handleChangeItem(item.id, 'normalBackgroundImageRepeat', value)}
                                         normalBackgroundImageSize={item.normalBackgroundImageSize}
                                         setNormalBackgroundImageSize={(value) => handleChangeItem(item.id, 'normalBackgroundImageSize', value)}
+                                        normalClassicDefaultColor={'#EDEDED'}
                                         setAttributes={setAttributes}
                                         isHover={false}
                                     />
