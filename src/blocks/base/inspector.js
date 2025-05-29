@@ -1,5 +1,4 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
 import { useState, useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
@@ -29,6 +28,7 @@ import BoxShadowSettingsControl from '@Components/box-shadow-control';
 import BackgroundControl from '@Components/background-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
 import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+import InspectorControl from '@Components/inspector-controls';
 import {useDeviceType} from "@Utils/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
@@ -260,12 +260,15 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     } = attributes;
 
 
+    /** Get Current Device Type */
     const currentDeviceType = useDeviceType();
 
+    /** Set Device Type */
     useEffect(() => {
         setAttributes({ deviceType: currentDeviceType });
     }, [currentDeviceType]);
 
+    /** Set Block ID */
     useEffect(() => {
         if (clientId) {
             setAttributes({ blockId: `gslider-${clientId.slice(0, 8)}` });
@@ -303,11 +306,776 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     ]);
     /** end if have default padding then set the css style */
 
+    /**
+	 * Inspector General Controls
+	 */
+	const generalControls = (
+        <>
+            <PanelBody title={__("Slider Items", "gslider-blocks")} initialOpen={true}>
+                <div className="gslider-wrapper">
+                    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                        <SortableContext items={sliderItems.map((item) => item.id)}>
+                            <ul className="dnd-items-wrapper">
+                                {sliderItems.map((item, index) => (
+                                    <SortableItem
+                                        key={item.id}
+                                        id={item.id}
+                                        item={item}
+                                        handleChangeItem={handleChangeItem}
+                                        handleDeleteItem={handleDeleteItem}
+                                        handleDuplicateItem={handleDuplicateItem}
+                                        index={index}
+                                        deviceType={deviceType}
+                                        setAttributes={setAttributes}
+                                    />
+                                ))}
+                            </ul>
+                        </SortableContext>
+                    </DndContext>
+                    <Button isPrimary onClick={handleAddItem}>
+                        {__("Add Slide", "gslider-blocks")}
+                    </Button>
+                </div>
+            </PanelBody>
+            <PanelBody title={__("Slider Type", "gslider-blocks")} initialOpen={false}>
+                <div className="gslider-setting-switcher-container">
+                    <BaseControl
+                        label={__("Slider Type", "gslider-blocks")}
+                        className="gslider-setting-switcher-panel-wrapper"
+                    >
+                        <ButtonGroup className="gslider-setting-switcher-panel-btn">
+                            {SLIDER_TYPE.map((item, key) => (
+                                <Button
+                                    key={key}
+                                    onClick={() => setAttributes({ sliderType: item.value })}
+                                    className={`gslider-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
+                                >
+                                    {item.label}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                    </BaseControl>
+                </div>
+            </PanelBody>
+            <PanelBody title={__("General Settings", "gslider-blocks")} initialOpen={false}>
+                <ToggleControl
+                    label={ __( 'Infinite Loop', 'gslider-blocks' ) }
+                    checked={ infiniteLoop }
+                    onChange={(value) => setAttributes({ infiniteLoop: value })}
+                />
+                <ToggleControl
+                    label={ __( 'Touch Swipe Control', 'gslider-blocks' ) }
+                    checked={ allowTouchMove }
+                    onChange={(value) => setAttributes({ allowTouchMove: value })}
+                />
+                <ToggleControl
+                    label={__("Pause on Hover", "gslider-blocks")}
+                    checked={pauseOnHover}
+                    onChange={(value) => setAttributes({ pauseOnHover: value })}
+                />
+                <ToggleControl
+                    label={__("Stop Autoplay at Last Slide", "gslider-blocks")}
+                    checked={stopOnLastSlide}
+                    onChange={(value) => {
+                        setAttributes({ stopOnLastSlide: value });
+                        if (value) {
+                            setAttributes({ infiniteLoop: false });
+                            setAttributes({ autoplay: true });
+                        }
+                    }}
+                />
+                <ToggleControl
+                    label={__("Reverse Autoplay Direction", "gslider-blocks")}
+                    checked={reverseDirection}
+                    onChange={(value) => {
+                        setAttributes({ reverseDirection: value });
+                        if (value) {
+                            setAttributes({ autoplay: true });
+                        }
+                    }}
+                />
+                <ToggleControl
+                    label={__("Mousewheel Navigation", "gslider-blocks")}
+                    checked={mousewheelControl}
+                    onChange={(value) => setAttributes({ mousewheelControl: value })}
+                />
+                <ToggleControl
+                    label={ __( "Show Navigation", "gslider-blocks" ) }
+                    checked={ showNavigation }
+                    onChange={(value) => setAttributes({ showNavigation: value })}
+                />
+                <ToggleControl
+                    label={ __( "Show Pagination", "gslider-blocks" ) }
+                    checked={ showPagination }
+                    onChange={(value) => setAttributes({ showPagination: value })}
+                />
+                <ToggleControl
+                    label={ __( 'Autoplay', 'gslider-blocks' ) }
+                    checked={ autoplay }
+                    onChange={(value) => setAttributes({ autoplay: value })}
+                />
+                { autoplay && (
+                <RangeControl
+                    label={__('Autoplay Delay (ms)', 'gslider-blocks')}
+                    value={autoplayDelay}
+                    onChange={(value) => setAttributes({ autoplayDelay: value })}
+                    min={1000}
+                    max={10000}
+                />
+                )}
+                <RangeControl
+                    label={__("Transition Speed (ms)", "gslider-blocks")}
+                    value={speed}
+                    onChange={(value) => setAttributes({ speed: value })}
+                    min={100}
+                    max={5000}
+                />
+            </PanelBody>
+            {sliderType === 'carousel' && (
+                <PanelBody title={__("Carousel Settings", "gslider-blocks")} initialOpen={false}>
+                    <RangeControl
+                        label={__('Number of Columns', 'gslider-blocks')}
+                        value={carouselPerColumn}
+                        onChange={(value) => setAttributes({ carouselPerColumn: value })}
+                        min={1}
+                        max={10}
+                        step={1}
+                        initialPosition={1}
+                    />
+                    <RangeControl
+                        label={__('Column Gap (px)', 'gslider-blocks')}
+                        value={carouselPerColumnGap}
+                        onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
+                        min={0}
+                        max={200}
+                        step={1}
+                        initialPosition={1}
+                    />
+                </PanelBody>
+            )}
+            {sliderType === 'carousel' && (
+                <PanelBody title={__("Carousel Effect", "gslider-blocks")} initialOpen={false}>
+                    <SelectControl
+                        label={__('Select Carousel Effect', 'gslider-blocks')}
+                        value={carouselEffect}
+                        options={CAROUSEL_EFFECT_OPTIONS}
+                        onChange={(value) => setAttributes({ carouselEffect: value })}
+                    />
+                </PanelBody>
+            )}
+            {sliderType === 'slider' && (
+                <PanelBody title={__("Slider Effect", "gslider-blocks")} initialOpen={false}>
+                    <SelectControl
+                        label={__('Select Slider Effect', 'gslider-blocks')}
+                        value={slideEffect}
+                        options={SLIDER_EFFECT_OPTIONS}
+                        onChange={(value) => setAttributes({ slideEffect: value })}
+                    />
+                </PanelBody>
+            )}
+
+            {showPagination && (
+                <PanelBody title={__("Pagination", "gslider-blocks")} initialOpen={false}>
+                    <SelectControl
+                        label={__('Pagination Type', 'gslider-blocks')}
+                        value={paginationType}
+                        options={PAGINATION_TYPE}
+                        onChange={(value) => setAttributes({ paginationType: value })}
+                    />
+                    {paginationType === 'bullets' && (
+                        <ToggleControl
+                            label={__("Dynamic Bullets", "slider-blocks")}
+                            checked={dynamicBullets}
+                            onChange={(value) => setAttributes({ dynamicBullets: value })}
+                        />
+                    )}
+                </PanelBody>
+            )}
+            
+        </>
+    );
+
+    /**
+	 * Inspector Style Controls
+	 */
+	const styleControls = (
+        <>
+            <PanelBody 
+                title={__("Navigation Style", "gslider-blocks")}  
+                initialOpen={true}
+            >
+                <ResponsiveRangeControl
+                    min={0}
+                    max={100}
+                    label={__("Icon Size", "gslider-blocks")}
+                    rangeValue={sliderArrowsSize}
+                    onChangeValue={(value) => setAttributes({ sliderArrowsSize: value })}
+                    onUnitChange={(value) => setAttributes({ sliderArrowsSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={sliderArrowsSizeUnits}
+                    step={1}
+                    resetFallbackValue={"16"}
+                />
+
+                <ResponsiveRangeControl
+                    min={0}
+                    max={100}
+                    label={__("Width", "gslider-blocks")}
+                    rangeValue={sliderArrowsWidth}
+                    onChangeValue={(value) => setAttributes({ sliderArrowsWidth: value })}
+                    onUnitChange={(value) => setAttributes({ sliderArrowsWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={sliderArrowsWidthUnits}
+                    step={1}
+                    resetFallbackValue={"46"}
+                />
+                <ResponsiveRangeControl
+                    min={0}
+                    max={100}
+                    label={__("Height", "gslider-blocks")}
+                    rangeValue={sliderArrowsHeight}
+                    onChangeValue={(value) => setAttributes({ sliderArrowsHeight: value })}
+                    onUnitChange={(value) => setAttributes({ sliderArrowsHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={sliderArrowsHeightUnits}
+                    step={1}
+                    resetFallbackValue={"46"}
+                />
+                <ResponsiveRangeControl
+                    min={0}
+                    max={100}
+                    label={__("Position", "gslider-blocks")}
+                    rangeValue={sliderArrowsPosition}
+                    onChangeValue={(value) => setAttributes({ sliderArrowsPosition: value })}
+                    onUnitChange={(value) => setAttributes({ sliderArrowsPositionUnits: value })}
+                    deviceType={deviceType}
+                    units={sliderArrowsPositionUnits}
+                    step={1}
+                    resetFallbackValue={"50"}
+                />
+
+                <ResponsiveRangeControl
+                    min={-100}
+                    max={100}
+                    label={__("Left", "gslider-blocks")}
+                    rangeValue={sliderArrowsLeftOffset}
+                    onChangeValue={(value) => setAttributes({ sliderArrowsLeftOffset: value })}
+                    onUnitChange={(value) => setAttributes({ sliderArrowsLeftOffsetUnits: value })}
+                    deviceType={deviceType}
+                    units={sliderArrowsLeftOffsetUnits}
+                    step={1}
+                    resetFallbackValue={"-20"}
+                />
+
+                <ResponsiveRangeControl
+                    min={-100}
+                    max={100}
+                    label={__("Right", "gslider-blocks")}
+                    rangeValue={sliderArrowsRightOffset}
+                    onChangeValue={(value) => setAttributes({ sliderArrowsRightOffset: value })}
+                    onUnitChange={(value) => setAttributes({ sliderArrowsRightOffsetUnits: value })}
+                    deviceType={deviceType}
+                    units={sliderArrowsRightOffsetUnits}
+                    step={1}
+                    resetFallbackValue={"-20"}
+                />
+
+                <SwitcherControl
+                    label={__("Icon Color", "gslider-blocks")}
+                    globalSwitcher={sliderArrowsColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ sliderArrowsColorSwitcher: value })}
+                />
+
+                {sliderArrowsColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={sliderArrowsColor}
+                        onChangeColor={(value) => setAttributes({ sliderArrowsColor: value })}
+                        defaultColor='#333333'
+                    />
+                )}
+
+                {sliderArrowsColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={sliderArrowsColorHover}
+                        onChangeColor={(value) => setAttributes({ sliderArrowsColorHover: value })}
+                    />
+                )}
+
+                <BackgroundControl 
+                    label={__("Background Color", "gslider-blocks")}
+                            
+                    normalBackgroundType={sliderArrowsNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ sliderArrowsNormalBackgroundType: value })}
+                    normalClassicColor={sliderArrowsNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ sliderArrowsNormalClassicColor: value })}
+                    normalGradientColor={sliderArrowsNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ sliderArrowsNormalGradientColor: value })}
+                    normalCustomGradientSwitcher={sliderArrowsNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ sliderArrowsNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={sliderArrowsNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ sliderArrowsNormalCustomGradientInputValue: value })}
+                    normalClassicDefaultColor={'#d2d2d2c7'}
+
+                    hoverBackgroundType={sliderArrowsHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ sliderArrowsHoverBackgroundType: value })}
+                    hoverClassicColor={sliderArrowsHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ sliderArrowsHoverClassicColor: value })}
+                    hoverGradientColor={sliderArrowsHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ sliderArrowsHoverGradientColor: value })}
+                    hoverCustomGradientSwitcher={sliderArrowsHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ sliderArrowsHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={sliderArrowsHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ sliderArrowsHoverCustomGradientInputValue: value })}
+                    hoverClassicDefaultColor={'#787878b8'}
+                    isBackgroundImage={false}
+                />
+
+                <SelectControl
+                    label={__("Border Style", "gslider-blocks")}
+                    value={sliderArrowsBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ sliderArrowsBorder: value })}
+                />
+
+                <SwitcherControl
+                    label={__("Border Color", "gslider-blocks")}
+                    globalSwitcher={sliderArrowsBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ sliderArrowsBorderColorSwitcher: value })}
+                />
+
+                {sliderArrowsBorderColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={sliderArrowsBorderColor}
+                        onChangeColor={(value) => setAttributes({ sliderArrowsBorderColor: value })}
+                    />
+                )}
+
+                {sliderArrowsBorderColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={sliderArrowsBorderHoverColor}
+                        onChangeColor={(value) => setAttributes({ sliderArrowsBorderHoverColor: value })}
+                    />
+                )}
+
+                <ResponsiveSpacingControl
+                    label={__("Border Width", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={sliderArrowsBorderUnits}
+                    onChangeUnits={(value) => setAttributes({ sliderArrowsBorderUnits: value })}
+                    desktopSpacing={sliderArrowsDesktopBorder} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ sliderArrowsDesktopBorder: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ sliderArrowsDesktopBorderCssStyle: value })}
+                    tabletSpacing={sliderArrowsTabletBorder} 
+                    onChangeTabletSpacing={(value) => setAttributes({ sliderArrowsTabletBorder: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ sliderArrowsTabletBorderCssStyle: value })}
+                    mobileSpacing={sliderArrowsMobileBorder}
+                    onChangeMobileSpacing={(value) => setAttributes({ sliderArrowsMobileBorder: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ sliderArrowsMobileBorderCssStyle: value })}
+                    isLinked={sliderArrowsBorderLink}
+                    onChangeLink={(value) => setAttributes({ sliderArrowsBorderLink: value })} 
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Border Radius", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={sliderArrowsBorderRadiusUnits}
+                    onChangeUnits={(value) => setAttributes({ sliderArrowsBorderRadiusUnits: value })}
+                    desktopSpacing={sliderArrowsDesktopBorderRadius}
+                    onChangeDesktopSpacing={(value) => setAttributes({ sliderArrowsDesktopBorderRadius: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ sliderArrowsDesktopBorderRadiusCssStyle: value })}
+                    tabletSpacing={sliderArrowsTabletBorderRadius}
+                    onChangeTabletSpacing={(value) => setAttributes({ sliderArrowsTabletBorderRadius: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ sliderArrowsTabletBorderRadiusCssStyle: value })}
+                    mobileSpacing={sliderArrowsMobileBorderRadius}
+                    onChangeMobileSpacing={(value) => setAttributes({ sliderArrowsMobileBorderRadius: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ sliderArrowsMobileBorderRadiusCssStyle: value })}
+                    isLinked={sliderArrowsBorderRadiusLink}
+                    onChangeLink={(value) => setAttributes({ sliderArrowsBorderRadiusLink: value })} 
+                />
+
+                <SwitcherControl
+                    label={__("Box Shadow", "gslider-blocks")}
+                    globalSwitcher={sliderArrowsBoxShadowValuesSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ sliderArrowsBoxShadowValuesSwitcher: value })}
+                />
+
+                {sliderArrowsBoxShadowValuesSwitcher === 'normal' && (
+                    <BoxShadowSettingsControl
+                        label={__("Normal Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ sliderArrowsBoxShadowValues: value })}
+                        initialShadowValue={sliderArrowsBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ sliderArrowsBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {sliderArrowsBoxShadowValuesSwitcher === 'hover' && (
+                    <BoxShadowSettingsControl
+                        label={__("Hover Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ sliderArrowsBoxShadowHoverValues: value })}
+                        initialShadowValue={sliderArrowsBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ sliderArrowsBoxShadowHoverCssValue: value })}
+                    />
+                )}
+
+            </PanelBody>
+
+            <PanelBody 
+                title={__("Pagination Style", "gslider-blocks")}  
+                initialOpen={false}
+            >
+
+                <ResponsiveRangeControl
+                    min={0}
+                    max={100}
+                    label={__("Position", "gslider-blocks")}
+                    rangeValue={sliderDotsPosition}
+                    onChangeValue={(value) => setAttributes({ sliderDotsPosition: value })}
+                    onUnitChange={(value) => setAttributes({ sliderDotsPositionUnits: value })}
+                    deviceType={deviceType}
+                    units={sliderDotsPositionUnits}
+                    step={1}
+                    resetFallbackValue={"0"}
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Margin", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={sliderDotsMarginUnits}
+                    onChangeUnits={(value) => setAttributes({ sliderDotsMarginUnits: value })}
+                    desktopSpacing={sliderDotsDesktopMargin}
+                    onChangeDesktopSpacing={(value) => setAttributes({ sliderDotsDesktopMargin: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ sliderDotsDesktopMarginCssStyle: value })}
+                    tabletSpacing={sliderDotsTabletMargin}
+                    onChangeTabletSpacing={(value) => setAttributes({ sliderDotsTabletMargin: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ sliderDotsTabletMarginCssStyle: value })}
+                    mobileSpacing={sliderDotsMobileMargin}
+                    onChangeMobileSpacing={(value) => setAttributes({ sliderDotsMobileMargin: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ sliderDotsMobileMarginCssStyle: value })}
+                    isLinked={sliderDotsMarginLink}
+                    onChangeLink={(value) => setAttributes({ sliderDotsMarginLink: value })} 
+                />
+
+                {paginationType === 'bullets' && (
+                    <>
+                        <div className="gslider-setting-switcher-container">
+                            <BaseControl
+                                className="gslider-setting-switcher-panel-wrapper"
+                            >
+                                <ButtonGroup className="gslider-setting-switcher-panel-btn">
+                                    {NORMAL_ACTIVE.map((item, key) => (
+                                        <Button
+                                    key={key}
+                                            onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
+                                            className={`gslider-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
+                                        >
+                                            {item.label}
+                                        </Button>
+                                    ))}
+                                </ButtonGroup>
+                            </BaseControl>
+                        </div>
+                        {sliderDotsSwitcher === 'normal' && (
+                            <>
+                                <ResponsiveRangeControl
+                                    min={0}
+                                    max={100}
+                                    label={__("Width", "gslider-blocks")}
+                                    rangeValue={sliderNormalDotsWidth}
+                                    onChangeValue={(value) => setAttributes({ sliderNormalDotsWidth: value })}
+                                    onUnitChange={(value) => setAttributes({ sliderNormalDotsWidthUnits: value })}
+                                    deviceType={deviceType}
+                                    units={sliderNormalDotsWidthUnits}
+                                    step={1}
+                                    resetFallbackValue={"8"}
+                                />
+
+                                <ResponsiveRangeControl
+                                    min={0}
+                                    max={100}
+                                    label={__("Height", "gslider-blocks")}
+                                    rangeValue={sliderNormalDotsHeight}
+                                    onChangeValue={(value) => setAttributes({ sliderNormalDotsHeight: value })}
+                                    onUnitChange={(value) => setAttributes({ sliderNormalDotsHeightUnits: value })}
+                                    deviceType={deviceType}
+                                    units={sliderNormalDotsHeightUnits}
+                                    step={1}
+                                    resetFallbackValue={"8"}
+                                />
+
+                                <ColorControl
+                                    label={__("Color", "gslider-blocks")}
+                                    color={sliderNormalDotsBgColor}
+                                    onChangeColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
+                                    defaultColor='#333333'
+                                />
+
+                                <SelectControl
+                                    label={__("Border Style", "gslider-blocks")}
+                                    value={sliderNormalDotsBorder}
+                                    options={BORDER_STYLES}
+                                    onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
+                                />
+
+                                <SwitcherControl
+                                    label={__("Border Color", "gslider-blocks")}
+                                    globalSwitcher={sliderNormalDotsBorderColorSwitcher}
+                                    setGlobalSwitcher={(value) => setAttributes({ sliderNormalDotsBorderColorSwitcher: value })}
+                                />
+
+                                {sliderNormalDotsBorderColorSwitcher === 'normal' && (
+                                    <ColorControl
+                                        label={__("Normal Color", "gslider-blocks")}
+                                        color={sliderNormalDotsBorderColor}
+                                        onChangeColor={(value) => setAttributes({ sliderNormalDotsBorderColor: value })}
+                                    />
+                                )}
+
+                                {sliderNormalDotsBorderColorSwitcher === 'hover' && (
+                                    <ColorControl
+                                        label={__("Hover Color", "gslider-blocks")}
+                                        color={sliderNormalDotsBorderHoverColor}
+                                        onChangeColor={(value) => setAttributes({ sliderNormalDotsBorderHoverColor: value })}
+                                    />
+                                )}
+
+                                <ResponsiveSpacingControl
+                                    label={__("Border Width", "gslider-blocks")}
+                                    deviceType={deviceType}
+                                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                    units={sliderNormalDotsBorderUnits}
+                                    onChangeUnits={(value) => setAttributes({ sliderNormalDotsBorderUnits: value })}
+                                    desktopSpacing={sliderNormalDotsDesktopBorder} 
+                                    onChangeDesktopSpacing={(value) => setAttributes({ sliderNormalDotsDesktopBorder: value })}
+                                    desktopSpacingStyle={(value) => setAttributes({ sliderNormalDotsDesktopBorderCssStyle: value })}
+                                    tabletSpacing={sliderNormalDotsTabletBorder} 
+                                    onChangeTabletSpacing={(value) => setAttributes({ sliderNormalDotsTabletBorder: value })}
+                                    tabletSpacingStyle={(value) => setAttributes({ sliderNormalDotsTabletBorderCssStyle: value })}
+                                    mobileSpacing={sliderNormalDotsMobileBorder}
+                                    onChangeMobileSpacing={(value) => setAttributes({ sliderNormalDotsMobileBorder: value })}
+                                    mobileSpacingStyle={(value) => setAttributes({ sliderNormalDotsMobileBorderCssStyle: value })}
+                                    isLinked={sliderNormalDotsBorderLink}
+                                    onChangeLink={(value) => setAttributes({ sliderNormalDotsBorderLink: value })} 
+                                />
+
+                                <ResponsiveSpacingControl
+                                    label={__("Border Radius", "gslider-blocks")}
+                                    deviceType={deviceType}
+                                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                    units={sliderNormalDotsBorderRadiusUnits}
+                                    onChangeUnits={(value) => setAttributes({ sliderNormalDotsBorderRadiusUnits: value })}
+                                    desktopSpacing={sliderNormalDotsDesktopBorderRadius}
+                                    onChangeDesktopSpacing={(value) => setAttributes({ sliderNormalDotsDesktopBorderRadius: value })}
+                                    desktopSpacingStyle={(value) => setAttributes({ sliderNormalDotsDesktopBorderRadiusCssStyle: value })}
+                                    tabletSpacing={sliderNormalDotsTabletBorderRadius}
+                                    onChangeTabletSpacing={(value) => setAttributes({ sliderNormalDotsTabletBorderRadius: value })}
+                                    tabletSpacingStyle={(value) => setAttributes({ sliderNormalDotsTabletBorderRadiusCssStyle: value })}
+                                    mobileSpacing={sliderNormalDotsMobileBorderRadius}
+                                    onChangeMobileSpacing={(value) => setAttributes({ sliderNormalDotsMobileBorderRadius: value })}
+                                    mobileSpacingStyle={(value) => setAttributes({ sliderNormalDotsMobileBorderRadiusCssStyle: value })}
+                                    isLinked={sliderNormalDotsBorderRadiusLink}
+                                    onChangeLink={(value) => setAttributes({ sliderNormalDotsBorderRadiusLink: value })} 
+                                />
+                            </>
+                        )}
+
+                        {sliderDotsSwitcher === 'active' && (
+                            <>
+                                <ResponsiveRangeControl
+                                    min={0}
+                                    max={100}
+                                    label={__("Width", "gslider-blocks")}
+                                    rangeValue={sliderActiveDotsWidth}
+                                    onChangeValue={(value) => setAttributes({ sliderActiveDotsWidth: value })}
+                                    onUnitChange={(value) => setAttributes({ sliderActiveDotsWidthUnits: value })}
+                                    deviceType={deviceType}
+                                    units={sliderActiveDotsWidthUnits}
+                                    step={1}
+                                    resetFallbackValue={"8"}
+                                />
+
+                                <ResponsiveRangeControl
+                                    min={0}
+                                    max={100}
+                                    label={__("Height", "gslider-blocks")}
+                                    rangeValue={sliderActiveDotsHeight}
+                                    onChangeValue={(value) => setAttributes({ sliderActiveDotsHeight: value })}
+                                    onUnitChange={(value) => setAttributes({ sliderActiveDotsHeightUnits: value })}
+                                    deviceType={deviceType}
+                                    units={sliderActiveDotsHeightUnits}
+                                    step={1}
+                                    resetFallbackValue={"8"}
+                                />
+
+                                <ColorControl
+                                    label={__("Color", "gslider-blocks")}
+                                    color={sliderActiveDotsBgColor}
+                                    onChangeColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
+                                />
+
+                                <SelectControl
+                                    label={__("Border Style", "gslider-blocks")}
+                                    value={sliderActiveDotsBorder}
+                                    options={BORDER_STYLES}
+                                    onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
+                                />
+
+                                <SwitcherControl
+                                    label={__("Border Color", "gslider-blocks")}
+                                    globalSwitcher={sliderActiveDotsBorderColorSwitcher}
+                                    setGlobalSwitcher={(value) => setAttributes({ sliderActiveDotsBorderColorSwitcher: value })}
+                                />
+
+                                {sliderActiveDotsBorderColorSwitcher === 'normal' && (
+                                    <ColorControl
+                                        label={__("Normal Color", "gslider-blocks")}
+                                        color={sliderActiveDotsBorderColor}
+                                        onChangeColor={(value) => setAttributes({ sliderActiveDotsBorderColor: value })}
+                                    />
+                                )}
+
+                                {sliderActiveDotsBorderColorSwitcher === 'hover' && (
+                                    <ColorControl
+                                        label={__("Hover Color", "gslider-blocks")}
+                                        color={sliderActiveDotsBorderHoverColor}
+                                        onChangeColor={(value) => setAttributes({ sliderActiveDotsBorderHoverColor: value })}
+                                    />
+                                )}
+
+                                <ResponsiveSpacingControl
+                                    label={__("Border Width", "gslider-blocks")}
+                                    deviceType={deviceType}
+                                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                    units={sliderActiveDotsBorderUnits}
+                                    onChangeUnits={(value) => setAttributes({ sliderActiveDotsBorderUnits: value })}
+                                    desktopSpacing={sliderActiveDotsDesktopBorder} 
+                                    onChangeDesktopSpacing={(value) => setAttributes({ sliderActiveDotsDesktopBorder: value })}
+                                    desktopSpacingStyle={(value) => setAttributes({ sliderActiveDotsDesktopBorderCssStyle: value })}
+                                    tabletSpacing={sliderActiveDotsTabletBorder} 
+                                    onChangeTabletSpacing={(value) => setAttributes({ sliderActiveDotsTabletBorder: value })}
+                                    tabletSpacingStyle={(value) => setAttributes({ sliderActiveDotsTabletBorderCssStyle: value })}
+                                    mobileSpacing={sliderActiveDotsMobileBorder}
+                                    onChangeMobileSpacing={(value) => setAttributes({ sliderActiveDotsMobileBorder: value })}
+                                    mobileSpacingStyle={(value) => setAttributes({ sliderActiveDotsMobileBorderCssStyle: value })}
+                                    isLinked={sliderActiveDotsBorderLink}
+                                    onChangeLink={(value) => setAttributes({ sliderActiveDotsBorderLink: value })} 
+                                />
+
+                                <ResponsiveSpacingControl
+                                    label={__("Border Radius", "gslider-blocks")}
+                                    deviceType={deviceType}
+                                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                    units={sliderActiveDotsBorderRadiusUnits}
+                                    onChangeUnits={(value) => setAttributes({ sliderActiveDotsBorderRadiusUnits: value })}
+                                    desktopSpacing={sliderActiveDotsDesktopBorderRadius}
+                                    onChangeDesktopSpacing={(value) => setAttributes({ sliderActiveDotsDesktopBorderRadius: value })}
+                                    desktopSpacingStyle={(value) => setAttributes({ sliderActiveDotsDesktopBorderRadiusCssStyle: value })}
+                                    tabletSpacing={sliderActiveDotsTabletBorderRadius}
+                                    onChangeTabletSpacing={(value) => setAttributes({ sliderActiveDotsTabletBorderRadius: value })}
+                                    tabletSpacingStyle={(value) => setAttributes({ sliderActiveDotsTabletBorderRadiusCssStyle: value })}
+                                    mobileSpacing={sliderActiveDotsMobileBorderRadius}
+                                    onChangeMobileSpacing={(value) => setAttributes({ sliderActiveDotsMobileBorderRadius: value })}
+                                    mobileSpacingStyle={(value) => setAttributes({ sliderActiveDotsMobileBorderRadiusCssStyle: value })}
+                                    isLinked={sliderActiveDotsBorderRadiusLink}
+                                    onChangeLink={(value) => setAttributes({ sliderActiveDotsBorderRadiusLink: value })} 
+                                />
+                            </>
+                        )}
+                    </>
+                )}
+            </PanelBody>
+        </>
+    );  
+
+    /**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+        <>
+            <PanelBody title={__("Advanced", "gslider-blocks")} initialOpen>
+                <ResponsiveRangeControl
+                    min={0}
+                    max={10000000}
+                    label={__("Z Index", "gslider-blocks")}
+                    rangeValue={sliderGlobalZIndex}
+                    onChangeValue={(value) => setAttributes({ sliderGlobalZIndex: value })}
+                    deviceType={deviceType}
+                    step={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                />
+
+                <BackgroundControl
+                    label={__("Background", "gslider-blocks")}
+                    deviceType={deviceType}
+                            
+                    normalBackgroundType={globalNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ globalNormalBackgroundType: value })}
+                    normalClassicColor={globalNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ globalNormalClassicColor: value })}
+                    normalGradientColor={globalNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ globalNormalGradientColor: value })}
+                    normalCustomGradientSwitcher={globalNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ globalNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={globalNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ globalNormalCustomGradientInputValue: value })}
+                    normalBackgroundImageUrl={globalNormalBackgroundImageUrl}
+                    setNormalBackgroundImageUrl={(value) => setAttributes({ globalNormalBackgroundImageUrl: value })}
+                    normalBackgroundImageAlt={globalNormalBackgroundImageAlt}
+                    setNormalBackgroundImageAlt={(value) => setAttributes({ globalNormalBackgroundImageAlt: value })}
+                    normalBackgroundImageID={globalNormalBackgroundImageID}
+                    setNormalBackgroundImageID={(value) => setAttributes({ globalNormalBackgroundImageID: value })}
+                    normalBackgroundImagePosition={globalNormalBackgroundImagePosition}
+                    setNormalBackgroundImagePosition={(value) => setAttributes({ globalNormalBackgroundImagePosition: value })}
+                    normalBackgroundImageAttachment={globalNormalBackgroundImageAttachment}
+                    setNormalBackgroundImageAttachment={(value) => setAttributes({ globalNormalBackgroundImageAttachment: value })}
+                    normalBackgroundImageRepeat={globalNormalBackgroundImageRepeat}
+                    setNormalBackgroundImageRepeat={(value) => setAttributes({ globalNormalBackgroundImageRepeat: value })}
+                    normalBackgroundImageSize={globalNormalBackgroundImageSize}
+                    setNormalBackgroundImageSize={(value) => setAttributes({ globalNormalBackgroundImageSize: value })}
+                    
+                    hoverBackgroundType={globalHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ globalHoverBackgroundType: value })}
+                    hoverClassicColor={globalHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ globalHoverClassicColor: value })}
+                    hoverGradientColor={globalHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ globalHoverGradientColor: value })}
+                    hoverCustomGradientSwitcher={globalHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ globalHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={globalHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ globalHoverCustomGradientInputValue: value })}
+                    hoverBackgroundImageUrl={globalHoverBackgroundImageUrl}
+                    setHoverBackgroundImageUrl={(value) => setAttributes({ globalHoverBackgroundImageUrl: value })}
+                    hoverBackgroundImageAlt={globalHoverBackgroundImageAlt}
+                    setHoverBackgroundImageAlt={(value) => setAttributes({ globalHoverBackgroundImageAlt: value })}
+                    hoverBackgroundImageID={globalHoverBackgroundImageID}
+                    setHoverBackgroundImageID={(value) => setAttributes({ globalHoverBackgroundImageID: value })}
+                    hoverBackgroundImagePosition={globalHoverBackgroundImagePosition}
+                    setHoverBackgroundImagePosition={(value) => setAttributes({ globalHoverBackgroundImagePosition: value })}
+                    hoverBackgroundImageAttachment={globalHoverBackgroundImageAttachment}
+                    setHoverBackgroundImageAttachment={(value) => setAttributes({ globalHoverBackgroundImageAttachment: value })}
+                    hoverBackgroundImageRepeat={globalHoverBackgroundImageRepeat}
+                    setHoverBackgroundImageRepeat={(value) => setAttributes({ globalHoverBackgroundImageRepeat: value })}
+                    hoverBackgroundImageSize={globalHoverBackgroundImageSize}
+                    setHoverBackgroundImageSize={(value) => setAttributes({ globalHoverBackgroundImageSize: value })}
+                    setAttributes={setAttributes}
+                    
+                />
+            </PanelBody>
+        </>
+    );      
+
+
     /** Start Slider Item Color Style */
     const sliderItemColorStyle = useMemo(() => {
         let style = '';
         sliderItems.forEach(item => {
-            // Desktop styles (default)
             const normalItemBackgroundType = item.normalItemBackgroundType;
             const normalItemGradientColor = item.normalItemGradientColor || item.normalItemClassicColor;
             
@@ -446,8 +1214,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         return style;
     }, [sliderItems, blockId, deviceType]);
 
-
-
+    /** Start Block Style */
     const allBlockStyle = useMemo(() => `
 
         .${blockId} .swiper-wrapper {
@@ -776,793 +1543,24 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
     ]);
 
-
+    /** Set Block Style */
     useEffect(() => {
         setAttributes({blockStyle: `${allBlockStyle} ${sliderItemColorStyle}`.replace(/\s+/g, ' ').trim()});
     }, [allBlockStyle, sliderItemColorStyle]);
 
+    /** Set Editor Style */
     const editorStyle = `${allBlockStyle} ${sliderItemColorStyle}`.replace(/\s+/g, ' ').trim();
 
-
     return (
-
         <>
             <style>
             	{editorStyle}
             </style>
-            <InspectorControls>
-                <div className="gslider-inspector-control">
-                    <TabPanel
-                        className="gslider-parent-tab-panel"
-                        activeClass="active-tab"
-                        tabs={[
-                            { name: "general", title: __("General", "gslider-blocks"), className: "gslider-tab-panel general" },
-                            { name: "styles", title: __("Style", "gslider-blocks"), className: "gslider-tab-panel styles" },
-                            { name: "advanced", title: __("Advanced", "gslider-blocks"), className: "gslider-tab-panel advanced" },
-                        ]}
-                    >
-                        {(tab) => (
-                            <div className={`gslider-tab-panel-controls ${tab.name}`}>
-                                {tab.name === "general" && (
-                                    <>
-                                        <PanelBody title={__("Slider Items", "gslider-blocks")} initialOpen={true}>
-                                            <div className="gslider-wrapper">
-                                                <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                                                    <SortableContext items={sliderItems.map((item) => item.id)}>
-                                                        <ul className="dnd-items-wrapper">
-                                                            {sliderItems.map((item, index) => (
-                                                                <SortableItem
-                                                                    key={item.id}
-                                                                    id={item.id}
-                                                                    item={item}
-                                                                    handleChangeItem={handleChangeItem}
-                                                                    handleDeleteItem={handleDeleteItem}
-                                                                    handleDuplicateItem={handleDuplicateItem}
-                                                                    index={index}
-                                                                    deviceType={deviceType}
-                                                                    setAttributes={setAttributes}
-                                                                />
-                                                            ))}
-                                                        </ul>
-                                                    </SortableContext>
-                                                </DndContext>
-                                                <Button isPrimary onClick={handleAddItem}>
-                                                    {__("Add Slide", "gslider-blocks")}
-                                                </Button>
-                                            </div>
-                                        </PanelBody>
-                                        <PanelBody title={__("Slider Type", "gslider-blocks")} initialOpen={false}>
-                                            <div className="gslider-setting-switcher-container">
-                                                <BaseControl
-                                                    label={__("Slider Type", "gslider-blocks")}
-                                                    className="gslider-setting-switcher-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                                                        {SLIDER_TYPE.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ sliderType: item.value })}
-                                                                className={`gslider-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-                                            </div>
-                                        </PanelBody>
-                                        <PanelBody title={__("General Settings", "gslider-blocks")} initialOpen={false}>
-                                            <ToggleControl
-                                                label={ __( 'Infinite Loop', 'gslider-blocks' ) }
-                                                checked={ infiniteLoop }
-                                                onChange={(value) => setAttributes({ infiniteLoop: value })}
-                                            />
-                                            <ToggleControl
-                                                label={ __( 'Touch Swipe Control', 'gslider-blocks' ) }
-                                                checked={ allowTouchMove }
-                                                onChange={(value) => setAttributes({ allowTouchMove: value })}
-                                            />
-                                            <ToggleControl
-                                                label={__("Pause on Hover", "gslider-blocks")}
-                                                checked={pauseOnHover}
-                                                onChange={(value) => setAttributes({ pauseOnHover: value })}
-                                            />
-                                            <ToggleControl
-                                                label={__("Stop Autoplay at Last Slide", "gslider-blocks")}
-                                                checked={stopOnLastSlide}
-                                                onChange={(value) => {
-                                                    setAttributes({ stopOnLastSlide: value });
-                                                    if (value) {
-                                                        setAttributes({ infiniteLoop: false });
-                                                        setAttributes({ autoplay: true });
-                                                    }
-                                                }}
-                                            />
-                                            <ToggleControl
-                                                label={__("Reverse Autoplay Direction", "gslider-blocks")}
-                                                checked={reverseDirection}
-                                                onChange={(value) => {
-                                                    setAttributes({ reverseDirection: value });
-                                                    if (value) {
-                                                        setAttributes({ autoplay: true });
-                                                    }
-                                                }}
-                                            />
-                                            <ToggleControl
-                                                label={__("Mousewheel Navigation", "gslider-blocks")}
-                                                checked={mousewheelControl}
-                                                onChange={(value) => setAttributes({ mousewheelControl: value })}
-                                            />
-                                            <ToggleControl
-                                                label={ __( "Show Navigation", "gslider-blocks" ) }
-                                                checked={ showNavigation }
-                                                onChange={(value) => setAttributes({ showNavigation: value })}
-                                            />
-                                            <ToggleControl
-                                                label={ __( "Show Pagination", "gslider-blocks" ) }
-                                                checked={ showPagination }
-                                                onChange={(value) => setAttributes({ showPagination: value })}
-                                            />
-                                            <ToggleControl
-                                                label={ __( 'Autoplay', 'gslider-blocks' ) }
-                                                checked={ autoplay }
-                                                onChange={(value) => setAttributes({ autoplay: value })}
-                                            />
-                                            { autoplay && (
-                                            <RangeControl
-                                                label={__('Autoplay Delay (ms)', 'gslider-blocks')}
-                                                value={autoplayDelay}
-                                                onChange={(value) => setAttributes({ autoplayDelay: value })}
-                                                min={1000}
-                                                max={10000}
-                                            />
-                                            )}
-                                            <RangeControl
-                                                label={__("Transition Speed (ms)", "gslider-blocks")}
-                                                value={speed}
-                                                onChange={(value) => setAttributes({ speed: value })}
-                                                min={100}
-                                                max={5000}
-                                            />
-                                        </PanelBody>
-                                        {sliderType === 'carousel' && (
-                                            <PanelBody title={__("Carousel Settings", "gslider-blocks")} initialOpen={false}>
-                                                <RangeControl
-                                                    label={__('Number of Columns', 'gslider-blocks')}
-                                                    value={carouselPerColumn}
-                                                    onChange={(value) => setAttributes({ carouselPerColumn: value })}
-                                                    min={1}
-                                                    max={10}
-                                                    step={1}
-                                                    initialPosition={1}
-                                                />
-                                                <RangeControl
-                                                    label={__('Column Gap (px)', 'gslider-blocks')}
-                                                    value={carouselPerColumnGap}
-                                                    onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
-                                                    min={0}
-                                                    max={200}
-                                                    step={1}
-                                                    initialPosition={1}
-                                                />
-                                            </PanelBody>
-                                        )}
-                                        {sliderType === 'carousel' && (
-                                            <PanelBody title={__("Carousel Effect", "gslider-blocks")} initialOpen={false}>
-                                                <SelectControl
-                                                    label={__('Select Carousel Effect', 'gslider-blocks')}
-                                                    value={carouselEffect}
-                                                    options={CAROUSEL_EFFECT_OPTIONS}
-                                                    onChange={(value) => setAttributes({ carouselEffect: value })}
-                                                />
-                                            </PanelBody>
-                                        )}
-                                        {sliderType === 'slider' && (
-                                            <PanelBody title={__("Slider Effect", "gslider-blocks")} initialOpen={false}>
-                                                <SelectControl
-                                                    label={__('Select Slider Effect', 'gslider-blocks')}
-                                                    value={slideEffect}
-                                                    options={SLIDER_EFFECT_OPTIONS}
-                                                    onChange={(value) => setAttributes({ slideEffect: value })}
-                                                />
-                                            </PanelBody>
-                                        )}
-
-                                        {showPagination && (
-                                            <PanelBody title={__("Pagination", "gslider-blocks")} initialOpen={false}>
-                                                <SelectControl
-                                                    label={__('Pagination Type', 'gslider-blocks')}
-                                                    value={paginationType}
-                                                    options={PAGINATION_TYPE}
-                                                    onChange={(value) => setAttributes({ paginationType: value })}
-                                                />
-                                                {paginationType === 'bullets' && (
-                                                    <ToggleControl
-                                                        label={__("Dynamic Bullets", "slider-blocks")}
-                                                        checked={dynamicBullets}
-                                                        onChange={(value) => setAttributes({ dynamicBullets: value })}
-                                                    />
-                                                )}
-                                            </PanelBody>
-                                        )}
-                                        
-                                    </>
-                                )}
-
-                                {tab.name === "styles" && (
-                                    <>
-                                        <PanelBody 
-                                            title={__("Navigation Style", "gslider-blocks")}  
-                                            initialOpen={true}
-                                        >
-                                            <ResponsiveRangeControl
-                                                min={0}
-                                                max={100}
-                                                label={__("Icon Size", "gslider-blocks")}
-                                                rangeValue={sliderArrowsSize}
-                                                onChangeValue={(value) => setAttributes({ sliderArrowsSize: value })}
-                                                onUnitChange={(value) => setAttributes({ sliderArrowsSizeUnits: value })}
-                                                deviceType={deviceType}
-                                                units={sliderArrowsSizeUnits}
-                                                step={1}
-                                                resetFallbackValue={"16"}
-                                            />
-
-                                            <ResponsiveRangeControl
-                                                min={0}
-                                                max={100}
-                                                label={__("Width", "gslider-blocks")}
-                                                rangeValue={sliderArrowsWidth}
-                                                onChangeValue={(value) => setAttributes({ sliderArrowsWidth: value })}
-                                                onUnitChange={(value) => setAttributes({ sliderArrowsWidthUnits: value })}
-                                                deviceType={deviceType}
-                                                units={sliderArrowsWidthUnits}
-                                                step={1}
-                                                resetFallbackValue={"46"}
-                                            />
-                                            <ResponsiveRangeControl
-                                                min={0}
-                                                max={100}
-                                                label={__("Height", "gslider-blocks")}
-                                                rangeValue={sliderArrowsHeight}
-                                                onChangeValue={(value) => setAttributes({ sliderArrowsHeight: value })}
-                                                onUnitChange={(value) => setAttributes({ sliderArrowsHeightUnits: value })}
-                                                deviceType={deviceType}
-                                                units={sliderArrowsHeightUnits}
-                                                step={1}
-                                                resetFallbackValue={"46"}
-                                            />
-                                            <ResponsiveRangeControl
-                                                min={0}
-                                                max={100}
-                                                label={__("Position", "gslider-blocks")}
-                                                rangeValue={sliderArrowsPosition}
-                                                onChangeValue={(value) => setAttributes({ sliderArrowsPosition: value })}
-                                                onUnitChange={(value) => setAttributes({ sliderArrowsPositionUnits: value })}
-                                                deviceType={deviceType}
-                                                units={sliderArrowsPositionUnits}
-                                                step={1}
-                                                resetFallbackValue={"50"}
-                                            />
-
-                                            <ResponsiveRangeControl
-                                                min={-100}
-                                                max={100}
-                                                label={__("Left", "gslider-blocks")}
-                                                rangeValue={sliderArrowsLeftOffset}
-                                                onChangeValue={(value) => setAttributes({ sliderArrowsLeftOffset: value })}
-                                                onUnitChange={(value) => setAttributes({ sliderArrowsLeftOffsetUnits: value })}
-                                                deviceType={deviceType}
-                                                units={sliderArrowsLeftOffsetUnits}
-                                                step={1}
-                                                resetFallbackValue={"-20"}
-                                            />
-
-                                            <ResponsiveRangeControl
-                                                min={-100}
-                                                max={100}
-                                                label={__("Right", "gslider-blocks")}
-                                                rangeValue={sliderArrowsRightOffset}
-                                                onChangeValue={(value) => setAttributes({ sliderArrowsRightOffset: value })}
-                                                onUnitChange={(value) => setAttributes({ sliderArrowsRightOffsetUnits: value })}
-                                                deviceType={deviceType}
-                                                units={sliderArrowsRightOffsetUnits}
-                                                step={1}
-                                                resetFallbackValue={"-20"}
-                                            />
-
-                                            <SwitcherControl
-                                                label={__("Icon Color", "gslider-blocks")}
-                                                globalSwitcher={sliderArrowsColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ sliderArrowsColorSwitcher: value })}
-                                            />
-
-                                            {sliderArrowsColorSwitcher === 'normal' && (
-                                                <ColorControl
-                                                    label={__("Normal Color", "gslider-blocks")}
-                                                    color={sliderArrowsColor}
-                                                    onChangeColor={(value) => setAttributes({ sliderArrowsColor: value })}
-                                                    defaultColor='#333333'
-                                                />
-                                            )}
-
-                                            {sliderArrowsColorSwitcher === 'hover' && (
-                                                <ColorControl
-                                                    label={__("Hover Color", "gslider-blocks")}
-                                                    color={sliderArrowsColorHover}
-                                                    onChangeColor={(value) => setAttributes({ sliderArrowsColorHover: value })}
-                                                />
-                                            )}
-
-                                            <BackgroundControl 
-                                                label={__("Background Color", "gslider-blocks")}
-                                                        
-                                                normalBackgroundType={sliderArrowsNormalBackgroundType}
-                                                setNormalBackgroundType={(value) => setAttributes({ sliderArrowsNormalBackgroundType: value })}
-                                                normalClassicColor={sliderArrowsNormalClassicColor}
-                                                setNormalClassicColor={(value) => setAttributes({ sliderArrowsNormalClassicColor: value })}
-                                                normalGradientColor={sliderArrowsNormalGradientColor}
-                                                setNormalGradientColor={(value) => setAttributes({ sliderArrowsNormalGradientColor: value })}
-                                                normalCustomGradientSwitcher={sliderArrowsNormalCustomGradientSwitcher}
-                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ sliderArrowsNormalCustomGradientSwitcher: value })}
-                                                normalCustomGradientInputValue={sliderArrowsNormalCustomGradientInputValue}
-                                                setNormalCustomGradientInputValue={(value) => setAttributes({ sliderArrowsNormalCustomGradientInputValue: value })}
-                                                normalClassicDefaultColor={'#d2d2d2c7'}
-
-                                                hoverBackgroundType={sliderArrowsHoverBackgroundType}
-                                                setHoverBackgroundType={(value) => setAttributes({ sliderArrowsHoverBackgroundType: value })}
-                                                hoverClassicColor={sliderArrowsHoverClassicColor}
-                                                setHoverClassicColor={(value) => setAttributes({ sliderArrowsHoverClassicColor: value })}
-                                                hoverGradientColor={sliderArrowsHoverGradientColor} 
-                                                setHoverGradientColor={(value) => setAttributes({ sliderArrowsHoverGradientColor: value })}
-                                                hoverCustomGradientSwitcher={sliderArrowsHoverCustomGradientSwitcher}
-                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ sliderArrowsHoverCustomGradientSwitcher: value })}
-                                                hoverCustomGradientInputValue={sliderArrowsHoverCustomGradientInputValue}
-                                                setHoverCustomGradientInputValue={(value) => setAttributes({ sliderArrowsHoverCustomGradientInputValue: value })}
-                                                hoverClassicDefaultColor={'#787878b8'}
-                                                isBackgroundImage={false}
-                                            />
-
-                                            <SelectControl
-                                                label={__("Border Style", "gslider-blocks")}
-                                                value={sliderArrowsBorder}
-                                                options={BORDER_STYLES}
-                                                onChange={(value) => setAttributes({ sliderArrowsBorder: value })}
-                                            />
-
-                                            <SwitcherControl
-                                                label={__("Border Color", "gslider-blocks")}
-                                                globalSwitcher={sliderArrowsBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ sliderArrowsBorderColorSwitcher: value })}
-                                            />
-
-                                            {sliderArrowsBorderColorSwitcher === 'normal' && (
-                                                <ColorControl
-                                                    label={__("Normal Color", "gslider-blocks")}
-                                                    color={sliderArrowsBorderColor}
-                                                    onChangeColor={(value) => setAttributes({ sliderArrowsBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {sliderArrowsBorderColorSwitcher === 'hover' && (
-                                                <ColorControl
-                                                    label={__("Hover Color", "gslider-blocks")}
-                                                    color={sliderArrowsBorderHoverColor}
-                                                    onChangeColor={(value) => setAttributes({ sliderArrowsBorderHoverColor: value })}
-                                                />
-                                            )}
-
-                                            <ResponsiveSpacingControl
-                                                label={__("Border Width", "gslider-blocks")}
-                                                deviceType={deviceType}
-                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                                units={sliderArrowsBorderUnits}
-                                                onChangeUnits={(value) => setAttributes({ sliderArrowsBorderUnits: value })}
-                                                desktopSpacing={sliderArrowsDesktopBorder} 
-                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderArrowsDesktopBorder: value })}
-                                                desktopSpacingStyle={(value) => setAttributes({ sliderArrowsDesktopBorderCssStyle: value })}
-                                                tabletSpacing={sliderArrowsTabletBorder} 
-                                                onChangeTabletSpacing={(value) => setAttributes({ sliderArrowsTabletBorder: value })}
-                                                tabletSpacingStyle={(value) => setAttributes({ sliderArrowsTabletBorderCssStyle: value })}
-                                                mobileSpacing={sliderArrowsMobileBorder}
-                                                onChangeMobileSpacing={(value) => setAttributes({ sliderArrowsMobileBorder: value })}
-                                                mobileSpacingStyle={(value) => setAttributes({ sliderArrowsMobileBorderCssStyle: value })}
-                                                isLinked={sliderArrowsBorderLink}
-                                                onChangeLink={(value) => setAttributes({ sliderArrowsBorderLink: value })} 
-                                            />
-
-                                            <ResponsiveSpacingControl
-                                                label={__("Border Radius", "gslider-blocks")}
-                                                deviceType={deviceType}
-                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                                units={sliderArrowsBorderRadiusUnits}
-                                                onChangeUnits={(value) => setAttributes({ sliderArrowsBorderRadiusUnits: value })}
-                                                desktopSpacing={sliderArrowsDesktopBorderRadius}
-                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderArrowsDesktopBorderRadius: value })}
-                                                desktopSpacingStyle={(value) => setAttributes({ sliderArrowsDesktopBorderRadiusCssStyle: value })}
-                                                tabletSpacing={sliderArrowsTabletBorderRadius}
-                                                onChangeTabletSpacing={(value) => setAttributes({ sliderArrowsTabletBorderRadius: value })}
-                                                tabletSpacingStyle={(value) => setAttributes({ sliderArrowsTabletBorderRadiusCssStyle: value })}
-                                                mobileSpacing={sliderArrowsMobileBorderRadius}
-                                                onChangeMobileSpacing={(value) => setAttributes({ sliderArrowsMobileBorderRadius: value })}
-                                                mobileSpacingStyle={(value) => setAttributes({ sliderArrowsMobileBorderRadiusCssStyle: value })}
-                                                isLinked={sliderArrowsBorderRadiusLink}
-                                                onChangeLink={(value) => setAttributes({ sliderArrowsBorderRadiusLink: value })} 
-                                            />
-
-                                            <SwitcherControl
-                                                label={__("Box Shadow", "gslider-blocks")}
-                                                globalSwitcher={sliderArrowsBoxShadowValuesSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ sliderArrowsBoxShadowValuesSwitcher: value })}
-                                            />
-
-                                            {sliderArrowsBoxShadowValuesSwitcher === 'normal' && (
-                                                <BoxShadowSettingsControl
-                                                    label={__("Normal Shadow", "gslider-blocks")}
-                                                    onBoxShadowChange={(value) => setAttributes({ sliderArrowsBoxShadowValues: value })}
-                                                    initialShadowValue={sliderArrowsBoxShadowValues}
-                                                    onBoxShadowStyleChange={(value) => setAttributes({ sliderArrowsBoxShadowCssValue: value })}
-                                                />
-                                            )}
-
-                                            {sliderArrowsBoxShadowValuesSwitcher === 'hover' && (
-                                                <BoxShadowSettingsControl
-                                                    label={__("Hover Shadow", "gslider-blocks")}
-                                                    onBoxShadowChange={(value) => setAttributes({ sliderArrowsBoxShadowHoverValues: value })}
-                                                    initialShadowValue={sliderArrowsBoxShadowHoverValues}
-                                                    onBoxShadowStyleChange={(value) => setAttributes({ sliderArrowsBoxShadowHoverCssValue: value })}
-                                                />
-                                            )}
-
-                                        </PanelBody>
-
-                                        <PanelBody 
-                                            title={__("Pagination Style", "gslider-blocks")}  
-                                            initialOpen={false}
-                                        >
-
-                                            <ResponsiveRangeControl
-                                                min={0}
-                                                max={100}
-                                                label={__("Position", "gslider-blocks")}
-                                                rangeValue={sliderDotsPosition}
-                                                onChangeValue={(value) => setAttributes({ sliderDotsPosition: value })}
-                                                onUnitChange={(value) => setAttributes({ sliderDotsPositionUnits: value })}
-                                                deviceType={deviceType}
-                                                units={sliderDotsPositionUnits}
-                                                step={1}
-                                                resetFallbackValue={"0"}
-                                            />
-
-                                            <ResponsiveSpacingControl
-                                                label={__("Margin", "gslider-blocks")}
-                                                deviceType={deviceType}
-                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                                units={sliderDotsMarginUnits}
-                                                onChangeUnits={(value) => setAttributes({ sliderDotsMarginUnits: value })}
-                                                desktopSpacing={sliderDotsDesktopMargin}
-                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderDotsDesktopMargin: value })}
-                                                desktopSpacingStyle={(value) => setAttributes({ sliderDotsDesktopMarginCssStyle: value })}
-                                                tabletSpacing={sliderDotsTabletMargin}
-                                                onChangeTabletSpacing={(value) => setAttributes({ sliderDotsTabletMargin: value })}
-                                                tabletSpacingStyle={(value) => setAttributes({ sliderDotsTabletMarginCssStyle: value })}
-                                                mobileSpacing={sliderDotsMobileMargin}
-                                                onChangeMobileSpacing={(value) => setAttributes({ sliderDotsMobileMargin: value })}
-                                                mobileSpacingStyle={(value) => setAttributes({ sliderDotsMobileMarginCssStyle: value })}
-                                                isLinked={sliderDotsMarginLink}
-                                                onChangeLink={(value) => setAttributes({ sliderDotsMarginLink: value })} 
-                                            />
-
-                                            {paginationType === 'bullets' && (
-                                                <>
-                                                    <div className="gslider-setting-switcher-container">
-                                                        <BaseControl
-                                                            className="gslider-setting-switcher-panel-wrapper"
-                                                        >
-                                                            <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                                                                {NORMAL_ACTIVE.map((item, key) => (
-                                                                    <Button
-                                                                key={key}
-                                                                        onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
-                                                                        className={`gslider-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                ))}
-                                                            </ButtonGroup>
-                                                        </BaseControl>
-                                                    </div>
-                                                    {sliderDotsSwitcher === 'normal' && (
-                                                        <>
-                                                            <ResponsiveRangeControl
-                                                                min={0}
-                                                                max={100}
-                                                                label={__("Width", "gslider-blocks")}
-                                                                rangeValue={sliderNormalDotsWidth}
-                                                                onChangeValue={(value) => setAttributes({ sliderNormalDotsWidth: value })}
-                                                                onUnitChange={(value) => setAttributes({ sliderNormalDotsWidthUnits: value })}
-                                                                deviceType={deviceType}
-                                                                units={sliderNormalDotsWidthUnits}
-                                                                step={1}
-                                                                resetFallbackValue={"8"}
-                                                            />
-
-                                                            <ResponsiveRangeControl
-                                                                min={0}
-                                                                max={100}
-                                                                label={__("Height", "gslider-blocks")}
-                                                                rangeValue={sliderNormalDotsHeight}
-                                                                onChangeValue={(value) => setAttributes({ sliderNormalDotsHeight: value })}
-                                                                onUnitChange={(value) => setAttributes({ sliderNormalDotsHeightUnits: value })}
-                                                                deviceType={deviceType}
-                                                                units={sliderNormalDotsHeightUnits}
-                                                                step={1}
-                                                                resetFallbackValue={"8"}
-                                                            />
-
-                                                            <ColorControl
-                                                                label={__("Color", "gslider-blocks")}
-                                                                color={sliderNormalDotsBgColor}
-                                                                onChangeColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
-                                                                defaultColor='#333333'
-                                                            />
-
-                                                            <SelectControl
-                                                                label={__("Border Style", "gslider-blocks")}
-                                                                value={sliderNormalDotsBorder}
-                                                                options={BORDER_STYLES}
-                                                                onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
-                                                            />
-
-                                                            <SwitcherControl
-                                                                label={__("Border Color", "gslider-blocks")}
-                                                                globalSwitcher={sliderNormalDotsBorderColorSwitcher}
-                                                                setGlobalSwitcher={(value) => setAttributes({ sliderNormalDotsBorderColorSwitcher: value })}
-                                                            />
-
-                                                            {sliderNormalDotsBorderColorSwitcher === 'normal' && (
-                                                                <ColorControl
-                                                                    label={__("Normal Color", "gslider-blocks")}
-                                                                    color={sliderNormalDotsBorderColor}
-                                                                    onChangeColor={(value) => setAttributes({ sliderNormalDotsBorderColor: value })}
-                                                                />
-                                                            )}
-
-                                                            {sliderNormalDotsBorderColorSwitcher === 'hover' && (
-                                                                <ColorControl
-                                                                    label={__("Hover Color", "gslider-blocks")}
-                                                                    color={sliderNormalDotsBorderHoverColor}
-                                                                    onChangeColor={(value) => setAttributes({ sliderNormalDotsBorderHoverColor: value })}
-                                                                />
-                                                            )}
-
-                                                            <ResponsiveSpacingControl
-                                                                label={__("Border Width", "gslider-blocks")}
-                                                                deviceType={deviceType}
-                                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                                                units={sliderNormalDotsBorderUnits}
-                                                                onChangeUnits={(value) => setAttributes({ sliderNormalDotsBorderUnits: value })}
-                                                                desktopSpacing={sliderNormalDotsDesktopBorder} 
-                                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderNormalDotsDesktopBorder: value })}
-                                                                desktopSpacingStyle={(value) => setAttributes({ sliderNormalDotsDesktopBorderCssStyle: value })}
-                                                                tabletSpacing={sliderNormalDotsTabletBorder} 
-                                                                onChangeTabletSpacing={(value) => setAttributes({ sliderNormalDotsTabletBorder: value })}
-                                                                tabletSpacingStyle={(value) => setAttributes({ sliderNormalDotsTabletBorderCssStyle: value })}
-                                                                mobileSpacing={sliderNormalDotsMobileBorder}
-                                                                onChangeMobileSpacing={(value) => setAttributes({ sliderNormalDotsMobileBorder: value })}
-                                                                mobileSpacingStyle={(value) => setAttributes({ sliderNormalDotsMobileBorderCssStyle: value })}
-                                                                isLinked={sliderNormalDotsBorderLink}
-                                                                onChangeLink={(value) => setAttributes({ sliderNormalDotsBorderLink: value })} 
-                                                            />
-
-                                                            <ResponsiveSpacingControl
-                                                                label={__("Border Radius", "gslider-blocks")}
-                                                                deviceType={deviceType}
-                                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                                                units={sliderNormalDotsBorderRadiusUnits}
-                                                                onChangeUnits={(value) => setAttributes({ sliderNormalDotsBorderRadiusUnits: value })}
-                                                                desktopSpacing={sliderNormalDotsDesktopBorderRadius}
-                                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderNormalDotsDesktopBorderRadius: value })}
-                                                                desktopSpacingStyle={(value) => setAttributes({ sliderNormalDotsDesktopBorderRadiusCssStyle: value })}
-                                                                tabletSpacing={sliderNormalDotsTabletBorderRadius}
-                                                                onChangeTabletSpacing={(value) => setAttributes({ sliderNormalDotsTabletBorderRadius: value })}
-                                                                tabletSpacingStyle={(value) => setAttributes({ sliderNormalDotsTabletBorderRadiusCssStyle: value })}
-                                                                mobileSpacing={sliderNormalDotsMobileBorderRadius}
-                                                                onChangeMobileSpacing={(value) => setAttributes({ sliderNormalDotsMobileBorderRadius: value })}
-                                                                mobileSpacingStyle={(value) => setAttributes({ sliderNormalDotsMobileBorderRadiusCssStyle: value })}
-                                                                isLinked={sliderNormalDotsBorderRadiusLink}
-                                                                onChangeLink={(value) => setAttributes({ sliderNormalDotsBorderRadiusLink: value })} 
-                                                            />
-                                                        </>
-                                                    )}
-
-                                                    {sliderDotsSwitcher === 'active' && (
-                                                        <>
-                                                            <ResponsiveRangeControl
-                                                                min={0}
-                                                                max={100}
-                                                                label={__("Width", "gslider-blocks")}
-                                                                rangeValue={sliderActiveDotsWidth}
-                                                                onChangeValue={(value) => setAttributes({ sliderActiveDotsWidth: value })}
-                                                                onUnitChange={(value) => setAttributes({ sliderActiveDotsWidthUnits: value })}
-                                                                deviceType={deviceType}
-                                                                units={sliderActiveDotsWidthUnits}
-                                                                step={1}
-                                                                resetFallbackValue={"8"}
-                                                            />
-
-                                                            <ResponsiveRangeControl
-                                                                min={0}
-                                                                max={100}
-                                                                label={__("Height", "gslider-blocks")}
-                                                                rangeValue={sliderActiveDotsHeight}
-                                                                onChangeValue={(value) => setAttributes({ sliderActiveDotsHeight: value })}
-                                                                onUnitChange={(value) => setAttributes({ sliderActiveDotsHeightUnits: value })}
-                                                                deviceType={deviceType}
-                                                                units={sliderActiveDotsHeightUnits}
-                                                                step={1}
-                                                                resetFallbackValue={"8"}
-                                                            />
-
-                                                            <ColorControl
-                                                                label={__("Color", "gslider-blocks")}
-                                                                color={sliderActiveDotsBgColor}
-                                                                onChangeColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
-                                                            />
-
-                                                            <SelectControl
-                                                                label={__("Border Style", "gslider-blocks")}
-                                                                value={sliderActiveDotsBorder}
-                                                                options={BORDER_STYLES}
-                                                                onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
-                                                            />
-
-                                                            <SwitcherControl
-                                                                label={__("Border Color", "gslider-blocks")}
-                                                                globalSwitcher={sliderActiveDotsBorderColorSwitcher}
-                                                                setGlobalSwitcher={(value) => setAttributes({ sliderActiveDotsBorderColorSwitcher: value })}
-                                                            />
-
-                                                            {sliderActiveDotsBorderColorSwitcher === 'normal' && (
-                                                                <ColorControl
-                                                                    label={__("Normal Color", "gslider-blocks")}
-                                                                    color={sliderActiveDotsBorderColor}
-                                                                    onChangeColor={(value) => setAttributes({ sliderActiveDotsBorderColor: value })}
-                                                                />
-                                                            )}
-
-                                                            {sliderActiveDotsBorderColorSwitcher === 'hover' && (
-                                                                <ColorControl
-                                                                    label={__("Hover Color", "gslider-blocks")}
-                                                                    color={sliderActiveDotsBorderHoverColor}
-                                                                    onChangeColor={(value) => setAttributes({ sliderActiveDotsBorderHoverColor: value })}
-                                                                />
-                                                            )}
-
-                                                            <ResponsiveSpacingControl
-                                                                label={__("Border Width", "gslider-blocks")}
-                                                                deviceType={deviceType}
-                                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                                                units={sliderActiveDotsBorderUnits}
-                                                                onChangeUnits={(value) => setAttributes({ sliderActiveDotsBorderUnits: value })}
-                                                                desktopSpacing={sliderActiveDotsDesktopBorder} 
-                                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderActiveDotsDesktopBorder: value })}
-                                                                desktopSpacingStyle={(value) => setAttributes({ sliderActiveDotsDesktopBorderCssStyle: value })}
-                                                                tabletSpacing={sliderActiveDotsTabletBorder} 
-                                                                onChangeTabletSpacing={(value) => setAttributes({ sliderActiveDotsTabletBorder: value })}
-                                                                tabletSpacingStyle={(value) => setAttributes({ sliderActiveDotsTabletBorderCssStyle: value })}
-                                                                mobileSpacing={sliderActiveDotsMobileBorder}
-                                                                onChangeMobileSpacing={(value) => setAttributes({ sliderActiveDotsMobileBorder: value })}
-                                                                mobileSpacingStyle={(value) => setAttributes({ sliderActiveDotsMobileBorderCssStyle: value })}
-                                                                isLinked={sliderActiveDotsBorderLink}
-                                                                onChangeLink={(value) => setAttributes({ sliderActiveDotsBorderLink: value })} 
-                                                            />
-
-                                                            <ResponsiveSpacingControl
-                                                                label={__("Border Radius", "gslider-blocks")}
-                                                                deviceType={deviceType}
-                                                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                                                units={sliderActiveDotsBorderRadiusUnits}
-                                                                onChangeUnits={(value) => setAttributes({ sliderActiveDotsBorderRadiusUnits: value })}
-                                                                desktopSpacing={sliderActiveDotsDesktopBorderRadius}
-                                                                onChangeDesktopSpacing={(value) => setAttributes({ sliderActiveDotsDesktopBorderRadius: value })}
-                                                                desktopSpacingStyle={(value) => setAttributes({ sliderActiveDotsDesktopBorderRadiusCssStyle: value })}
-                                                                tabletSpacing={sliderActiveDotsTabletBorderRadius}
-                                                                onChangeTabletSpacing={(value) => setAttributes({ sliderActiveDotsTabletBorderRadius: value })}
-                                                                tabletSpacingStyle={(value) => setAttributes({ sliderActiveDotsTabletBorderRadiusCssStyle: value })}
-                                                                mobileSpacing={sliderActiveDotsMobileBorderRadius}
-                                                                onChangeMobileSpacing={(value) => setAttributes({ sliderActiveDotsMobileBorderRadius: value })}
-                                                                mobileSpacingStyle={(value) => setAttributes({ sliderActiveDotsMobileBorderRadiusCssStyle: value })}
-                                                                isLinked={sliderActiveDotsBorderRadiusLink}
-                                                                onChangeLink={(value) => setAttributes({ sliderActiveDotsBorderRadiusLink: value })} 
-                                                            />
-                                                        </>
-                                                    )}
-                                                </>
-                                            )}
-                                        </PanelBody>
-                                    </>
-                                )}
-
-                                {tab.name === "advanced" && (
-                                    <>
-                                        <PanelBody title={__("Advanced", "gslider-blocks")} initialOpen>
-                                            <ResponsiveRangeControl
-                                                min={0}
-                                                max={10000000}
-                                                label={__("Z Index", "gslider-blocks")}
-                                                rangeValue={sliderGlobalZIndex}
-                                                onChangeValue={(value) => setAttributes({ sliderGlobalZIndex: value })}
-                                                deviceType={deviceType}
-                                                step={1}
-                                                resetFallbackValue={""}
-                                                isRangeUnit={false}
-                                            />
-
-                                            <BackgroundControl
-                                                label={__("Background", "gslider-blocks")}
-                                                deviceType={deviceType}
-                                                        
-                                                normalBackgroundType={globalNormalBackgroundType}
-                                                setNormalBackgroundType={(value) => setAttributes({ globalNormalBackgroundType: value })}
-                                                normalClassicColor={globalNormalClassicColor}
-                                                setNormalClassicColor={(value) => setAttributes({ globalNormalClassicColor: value })}
-                                                normalGradientColor={globalNormalGradientColor}
-                                                setNormalGradientColor={(value) => setAttributes({ globalNormalGradientColor: value })}
-                                                normalCustomGradientSwitcher={globalNormalCustomGradientSwitcher}
-                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ globalNormalCustomGradientSwitcher: value })}
-                                                normalCustomGradientInputValue={globalNormalCustomGradientInputValue}
-                                                setNormalCustomGradientInputValue={(value) => setAttributes({ globalNormalCustomGradientInputValue: value })}
-                                                normalBackgroundImageUrl={globalNormalBackgroundImageUrl}
-                                                setNormalBackgroundImageUrl={(value) => setAttributes({ globalNormalBackgroundImageUrl: value })}
-                                                normalBackgroundImageAlt={globalNormalBackgroundImageAlt}
-                                                setNormalBackgroundImageAlt={(value) => setAttributes({ globalNormalBackgroundImageAlt: value })}
-                                                normalBackgroundImageID={globalNormalBackgroundImageID}
-                                                setNormalBackgroundImageID={(value) => setAttributes({ globalNormalBackgroundImageID: value })}
-                                                normalBackgroundImagePosition={globalNormalBackgroundImagePosition}
-                                                setNormalBackgroundImagePosition={(value) => setAttributes({ globalNormalBackgroundImagePosition: value })}
-                                                normalBackgroundImageAttachment={globalNormalBackgroundImageAttachment}
-                                                setNormalBackgroundImageAttachment={(value) => setAttributes({ globalNormalBackgroundImageAttachment: value })}
-                                                normalBackgroundImageRepeat={globalNormalBackgroundImageRepeat}
-                                                setNormalBackgroundImageRepeat={(value) => setAttributes({ globalNormalBackgroundImageRepeat: value })}
-                                                normalBackgroundImageSize={globalNormalBackgroundImageSize}
-                                                setNormalBackgroundImageSize={(value) => setAttributes({ globalNormalBackgroundImageSize: value })}
-                                                
-                                                hoverBackgroundType={globalHoverBackgroundType}
-                                                setHoverBackgroundType={(value) => setAttributes({ globalHoverBackgroundType: value })}
-                                                hoverClassicColor={globalHoverClassicColor}
-                                                setHoverClassicColor={(value) => setAttributes({ globalHoverClassicColor: value })}
-                                                hoverGradientColor={globalHoverGradientColor} 
-                                                setHoverGradientColor={(value) => setAttributes({ globalHoverGradientColor: value })}
-                                                hoverCustomGradientSwitcher={globalHoverCustomGradientSwitcher}
-                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ globalHoverCustomGradientSwitcher: value })}
-                                                hoverCustomGradientInputValue={globalHoverCustomGradientInputValue}
-                                                setHoverCustomGradientInputValue={(value) => setAttributes({ globalHoverCustomGradientInputValue: value })}
-                                                hoverBackgroundImageUrl={globalHoverBackgroundImageUrl}
-                                                setHoverBackgroundImageUrl={(value) => setAttributes({ globalHoverBackgroundImageUrl: value })}
-                                                hoverBackgroundImageAlt={globalHoverBackgroundImageAlt}
-                                                setHoverBackgroundImageAlt={(value) => setAttributes({ globalHoverBackgroundImageAlt: value })}
-                                                hoverBackgroundImageID={globalHoverBackgroundImageID}
-                                                setHoverBackgroundImageID={(value) => setAttributes({ globalHoverBackgroundImageID: value })}
-                                                hoverBackgroundImagePosition={globalHoverBackgroundImagePosition}
-                                                setHoverBackgroundImagePosition={(value) => setAttributes({ globalHoverBackgroundImagePosition: value })}
-                                                hoverBackgroundImageAttachment={globalHoverBackgroundImageAttachment}
-                                                setHoverBackgroundImageAttachment={(value) => setAttributes({ globalHoverBackgroundImageAttachment: value })}
-                                                hoverBackgroundImageRepeat={globalHoverBackgroundImageRepeat}
-                                                setHoverBackgroundImageRepeat={(value) => setAttributes({ globalHoverBackgroundImageRepeat: value })}
-                                                hoverBackgroundImageSize={globalHoverBackgroundImageSize}
-                                                setHoverBackgroundImageSize={(value) => setAttributes({ globalHoverBackgroundImageSize: value })}
-                                                setAttributes={setAttributes}
-                                                
-                                            />
-                                        </PanelBody>
-                                    </>
-                                )}
-                            </div>
-                        )}
-                    </TabPanel>
-                </div>
-            </InspectorControls>
+            <InspectorControl
+                generalControls={generalControls}
+                styleControls={styleControls}
+                advancedControls={advancedControls}
+            />
         </>
     );
 }
