@@ -67,7 +67,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Arrows Color */
 
         /** Start Background */
-        sliderArrowsBackgroundColorSwitcher,
         sliderArrowsNormalBackgroundType,
         sliderArrowsNormalClassicColor,
         sliderArrowsNormalGradientColor,
@@ -229,12 +228,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         sliderBgNormalBackgroundImageSize,
 
 
-        globalSliderItemBgColorSwitcher,
-        globalNormalItemBackgroundType,
-        globalNormalItemClassicColor,
-        globalNormalItemGradientColor,
-        globalNormalItemCustomGradientSwitcher,
-        globalNormalItemCustomGradientInputValue,
+        globalNormalBackgroundType, 
+        globalNormalClassicColor,
+        globalNormalGradientColor,
+        globalNormalCustomGradientSwitcher,
+        globalNormalCustomGradientInputValue,
         globalNormalBackgroundImageUrl,
         globalNormalBackgroundImageAlt,
         globalNormalBackgroundImageID,
@@ -243,11 +241,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         globalNormalBackgroundImageRepeat,
         globalNormalBackgroundImageSize,
 
-        globalHoverItemBackgroundType,
-        globalHoverItemClassicColor,
-        globalHoverItemGradientColor,
-        globalHoverItemCustomGradientSwitcher,
-        globalHoverItemCustomGradientInputValue,
+        globalHoverBackgroundType,
+        globalHoverClassicColor,
+        globalHoverGradientColor,
+        globalHoverCustomGradientSwitcher,
+        globalHoverCustomGradientInputValue,
         globalHoverBackgroundImageUrl,
         globalHoverBackgroundImageAlt,
         globalHoverBackgroundImageID,
@@ -621,7 +619,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Arrows Color */
 
         /** Start Background */
-        sliderArrowsBackgroundColorSwitcher,
         sliderArrowsNormalBackgroundType,
         sliderArrowsNormalClassicColor,
         sliderArrowsNormalGradientColor,
@@ -1099,8 +1096,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                             <BackgroundControl 
                                                 label={__("Background Color", "gslider-blocks")}
-                                                bgColorSwitcher={sliderArrowsBackgroundColorSwitcher}
-                                                setBgColorSwitcher={(value) => setAttributes({ sliderArrowsBackgroundColorSwitcher: value })}
                                                         
                                                 normalBackgroundType={sliderArrowsNormalBackgroundType}
                                                 setNormalBackgroundType={(value) => setAttributes({ sliderArrowsNormalBackgroundType: value })}
@@ -1112,7 +1107,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 setNormalCustomGradientSwitcher={(value) => setAttributes({ sliderArrowsNormalCustomGradientSwitcher: value })}
                                                 normalCustomGradientInputValue={sliderArrowsNormalCustomGradientInputValue}
                                                 setNormalCustomGradientInputValue={(value) => setAttributes({ sliderArrowsNormalCustomGradientInputValue: value })}
-                                                        
+                                                normalClassicDefaultColor={'#d2d2d2c7'}
+
                                                 hoverBackgroundType={sliderArrowsHoverBackgroundType}
                                                 setHoverBackgroundType={(value) => setAttributes({ sliderArrowsHoverBackgroundType: value })}
                                                 hoverClassicColor={sliderArrowsHoverClassicColor}
@@ -1123,7 +1119,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 setHoverCustomGradientSwitcher={(value) => setAttributes({ sliderArrowsHoverCustomGradientSwitcher: value })}
                                                 hoverCustomGradientInputValue={sliderArrowsHoverCustomGradientInputValue}
                                                 setHoverCustomGradientInputValue={(value) => setAttributes({ sliderArrowsHoverCustomGradientInputValue: value })}
-
+                                                hoverClassicDefaultColor={'#787878b8'}
                                                 isBackgroundImage={false}
                                             />
 
@@ -1506,19 +1502,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             <BackgroundControl
                                                 label={__("Background", "gslider-blocks")}
                                                 deviceType={deviceType}
-                                                bgColorSwitcher={globalSliderItemBgColorSwitcher}
-                                                setBgColorSwitcher={(value) => setAttributes({ globalSliderItemBgColorSwitcher: value })}
                                                         
-                                                normalBackgroundType={globalNormalItemBackgroundType}
-                                                setNormalBackgroundType={(value) => setAttributes({ globalNormalItemBackgroundType: value })}
-                                                normalClassicColor={globalNormalItemClassicColor}
-                                                setNormalClassicColor={(value) => setAttributes({ globalNormalItemClassicColor: value })}
-                                                normalGradientColor={globalNormalItemGradientColor}
-                                                setNormalGradientColor={(value) => setAttributes({ globalNormalItemGradientColor: value })}
-                                                normalCustomGradientSwitcher={globalNormalItemCustomGradientSwitcher}
-                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ globalNormalItemCustomGradientSwitcher: value })}
-                                                normalCustomGradientInputValue={globalNormalItemCustomGradientInputValue}
-                                                setNormalCustomGradientInputValue={(value) => setAttributes({ globalNormalItemCustomGradientInputValue: value })}
+                                                normalBackgroundType={globalNormalBackgroundType}
+                                                setNormalBackgroundType={(value) => setAttributes({ globalNormalBackgroundType: value })}
+                                                normalClassicColor={globalNormalClassicColor}
+                                                setNormalClassicColor={(value) => setAttributes({ globalNormalClassicColor: value })}
+                                                normalGradientColor={globalNormalGradientColor}
+                                                setNormalGradientColor={(value) => setAttributes({ globalNormalGradientColor: value })}
+                                                normalCustomGradientSwitcher={globalNormalCustomGradientSwitcher}
+                                                setNormalCustomGradientSwitcher={(value) => setAttributes({ globalNormalCustomGradientSwitcher: value })}
+                                                normalCustomGradientInputValue={globalNormalCustomGradientInputValue}
+                                                setNormalCustomGradientInputValue={(value) => setAttributes({ globalNormalCustomGradientInputValue: value })}
                                                 normalBackgroundImageUrl={globalNormalBackgroundImageUrl}
                                                 setNormalBackgroundImageUrl={(value) => setAttributes({ globalNormalBackgroundImageUrl: value })}
                                                 normalBackgroundImageAlt={globalNormalBackgroundImageAlt}
@@ -1534,16 +1528,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                                 normalBackgroundImageSize={globalNormalBackgroundImageSize}
                                                 setNormalBackgroundImageSize={(value) => setAttributes({ globalNormalBackgroundImageSize: value })}
                                                 
-                                                hoverBackgroundType={globalHoverItemBackgroundType}
-                                                setHoverBackgroundType={(value) => setAttributes({ globalHoverItemBackgroundType: value })}
-                                                hoverClassicColor={globalHoverItemClassicColor}
-                                                setHoverClassicColor={(value) => setAttributes({ globalHoverItemClassicColor: value })}
-                                                hoverGradientColor={globalHoverItemGradientColor} 
-                                                setHoverGradientColor={(value) => setAttributes({ globalHoverItemGradientColor: value })}
-                                                hoverCustomGradientSwitcher={globalHoverItemCustomGradientSwitcher}
-                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ globalHoverItemCustomGradientSwitcher: value })}
-                                                hoverCustomGradientInputValue={globalHoverItemCustomGradientInputValue}
-                                                setHoverCustomGradientInputValue={(value) => setAttributes({ globalHoverItemCustomGradientInputValue: value })}
+                                                hoverBackgroundType={globalHoverBackgroundType}
+                                                setHoverBackgroundType={(value) => setAttributes({ globalHoverBackgroundType: value })}
+                                                hoverClassicColor={globalHoverClassicColor}
+                                                setHoverClassicColor={(value) => setAttributes({ globalHoverClassicColor: value })}
+                                                hoverGradientColor={globalHoverGradientColor} 
+                                                setHoverGradientColor={(value) => setAttributes({ globalHoverGradientColor: value })}
+                                                hoverCustomGradientSwitcher={globalHoverCustomGradientSwitcher}
+                                                setHoverCustomGradientSwitcher={(value) => setAttributes({ globalHoverCustomGradientSwitcher: value })}
+                                                hoverCustomGradientInputValue={globalHoverCustomGradientInputValue}
+                                                setHoverCustomGradientInputValue={(value) => setAttributes({ globalHoverCustomGradientInputValue: value })}
                                                 hoverBackgroundImageUrl={globalHoverBackgroundImageUrl}
                                                 setHoverBackgroundImageUrl={(value) => setAttributes({ globalHoverBackgroundImageUrl: value })}
                                                 hoverBackgroundImageAlt={globalHoverBackgroundImageAlt}

@@ -462,10 +462,6 @@ const attributes = {
     /** End Arrows Color */
 
     /** Start Arrows Background */
-    sliderArrowsBackgroundColorSwitcher: {  
-        type: "string",
-        default: "normal",
-    },
     sliderArrowsNormalBackgroundType: {
         type: "string",
         default: "classic",
@@ -1216,28 +1212,24 @@ const attributes = {
 	/** End Global Setting */
 
     /** Start Global Item Background */
-    globalSliderItemBgColorSwitcher: {
-        type: "string",
-        default: "normal",
-    },
 
-    globalNormalItemBackgroundType: {
+    globalNormalBackgroundType: {
         type: "string",
         default: "classic",
     },
-    globalNormalItemClassicColor: {
+    globalNormalClassicColor: {
         type: "string",
         default: "",
     },
-    globalNormalItemGradientColor: {
+    globalNormalGradientColor: {
         type: "string",
         default: null,
     },
-    globalNormalItemCustomGradientSwitcher: {
+    globalNormalCustomGradientSwitcher: {
         type: "boolean",
         default: false,
     },
-    globalNormalItemCustomGradientInputValue: {
+    globalNormalCustomGradientInputValue: {
         type: "string",
         default: "",
     },
@@ -1298,23 +1290,23 @@ const attributes = {
         }
     },
 
-    globalHoverItemBackgroundType: {
+    globalHoverBackgroundType: {
         type: "string",
         default: "classic",
     },
-    globalHoverItemClassicColor: {
+    globalHoverClassicColor: {
         type: "string",
         default: "",
     },
-    globalHoverItemGradientColor: {
+    globalHoverGradientColor: {
         type: "string",
         default: null,
     },
-    globalHoverItemCustomGradientSwitcher: {
+    globalHoverCustomGradientSwitcher: {
         type: "boolean",
         default: false,
     },
-    globalHoverItemCustomGradientInputValue: {
+    globalHoverCustomGradientInputValue: {
         type: "string",
         default: "",
     },

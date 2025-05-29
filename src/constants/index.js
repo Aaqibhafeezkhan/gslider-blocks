@@ -76,6 +76,42 @@ export const NORMAL_ACTIVE = [
 	{ label: __('Active', 'gslider-blocks'), value: 'active' },
 ];
 
+export const FONT_WEIGHT = [
+    { label: __("Default", "gslider-blocks"), value: 'inherit' },
+    { label: __("100", "gslider-blocks"), value: '100' }, 
+    { label: __("200", "gslider-blocks"), value: '200' },
+    { label: __("300", "gslider-blocks"), value: '300' },
+    { label: __("400", "gslider-blocks"), value: '400' },
+    { label: __("500", "gslider-blocks"), value: '500' },
+    { label: __("600", "gslider-blocks"), value: '600' },
+    { label: __("700", "gslider-blocks"), value: '700' },
+    { label: __("800", "gslider-blocks"), value: '800' },
+    { label: __("900", "gslider-blocks"), value: '900' }
+];
+
+export const FONT_STYLE = [
+    { label: __("Default", "gslider-blocks"), value: "inherit" },
+    { label: __("Normal", "gslider-blocks"), value: "normal" },
+    { label: __("Italic", "gslider-blocks"), value: "italic" },
+    { label: __("Oblique", "gslider-blocks"), value: "oblique" },
+];
+
+export const TEXT_TRANSFORM = [
+    { label: __("Default", "gslider-blocks"), value: "inherit" },
+    { label: __("None", "gslider-blocks"), value: "none" },
+    { label: __("Capitalize", "gslider-blocks"), value: "capitalize" },
+    { label: __("Uppercase", "gslider-blocks"), value: "uppercase" },
+    { label: __("Lowercase", "gslider-blocks"), value: "lowercase" },
+];
+
+export const TEXT_DECORATION = [
+    { label: __("Default", "gslider-blocks"), value: "inherit" },
+    { label: __("None", "gslider-blocks"), value: "none" },
+    { label: __("Underline", "gslider-blocks"), value: "underline" },
+    { label: __("Overline", "gslider-blocks"), value: "overline" },
+    { label: __("Line Through", "gslider-blocks"), value: "line-through" },
+];
+
 export const FONT_FAMILYS = [
     { label: __("Default", "gslider-blocks"), value: "Default" },
     { label: __("ABeeZee", "gslider-blocks"), value: "ABeeZee" },
