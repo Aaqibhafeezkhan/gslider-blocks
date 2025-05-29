@@ -1096,14 +1096,6 @@ const attributes = {
     /** End Active Dots Border */
 
     /** Start Active Dots Border Radius */
-    sliderActiveDotsBorderRadius: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: '',
-        },
-    },
     sliderActiveDotsBorderRadiusUnits: {
         type: 'object',
         default: {  
@@ -1159,6 +1151,116 @@ const attributes = {
 
 
     /** Start Global Setting */
+
+    /** Start Global Margin */
+    globalMarginUnits: {
+        type: 'object',
+        default: {  
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    globalMarginDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    globalMarginDesktopCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    globalMarginTablet: {
+        type: 'object',  
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    globalMarginTabletCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    globalMarginMobile: {
+        type: 'object',  
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    globalMarginMobileCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    globalMarginLink : {
+        type : 'boolean',
+        default: true
+    },
+    /** End Global Margin */
+
+    /** Start Global Padding */
+    globalPaddingUnits: {
+        type: 'object',
+        default: {  
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    globalPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    globalPaddingDesktopCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    globalPaddingTablet: {
+        type: 'object',  
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    globalPaddingTabletCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    globalPaddingMobile: {
+        type: 'object',  
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    globalPaddingMobileCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    globalPaddingLink : {
+        type : 'boolean',
+        default: true
+    },
+    /** End Global Padding */
+
+    /** Start Global Z-Index */
 	sliderGlobalZIndex: {
         type: 'object',
         default: {

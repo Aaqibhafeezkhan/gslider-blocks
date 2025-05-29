@@ -194,6 +194,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         sliderActiveDotsBorderColorSwitcher,
         sliderActiveDotsBorderColor,
         sliderActiveDotsBorderHoverColor,
+        /** End Active Dots Border */
+
+        /** Start Active Dots Border */
         sliderActiveDotsBorderUnits,
         sliderActiveDotsDesktopBorder,
         sliderActiveDotsDesktopBorderCssStyle,
@@ -205,7 +208,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Active Dots Border */
 
         /** Start Active Dots Border Radius */
-        sliderActiveDotsBorderRadius,
         sliderActiveDotsBorderRadiusUnits,
         sliderActiveDotsDesktopBorderRadius,
         sliderActiveDotsDesktopBorderRadiusCssStyle,
@@ -217,7 +219,32 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Active Dots Border Radius */
 
         /** Global Settings */
+
+        /** Start Global Margin */
+        globalMarginUnits,
+        globalMarginDesktop,
+        globalMarginDesktopCssStyle,
+        globalMarginTablet,
+        globalMarginTabletCssStyle,
+        globalMarginMobile,
+        globalMarginMobileCssStyle,
+        globalMarginLink,
+        /** End Global Margin */
+
+        /** Start Global Padding */
+        globalPaddingUnits,
+        globalPaddingDesktop,
+        globalPaddingDesktopCssStyle,
+        globalPaddingTablet,
+        globalPaddingTabletCssStyle,
+        globalPaddingMobile,
+        globalPaddingMobileCssStyle,
+        globalPaddingLink,
+        /** End Global Padding */
+
+        /** Start Global Z-Index */
         sliderGlobalZIndex,
+        /** End Global Z-Index */
 
 
         /** Background Image */
@@ -998,7 +1025,48 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 	 */
 	const advancedControls = (
         <>
-            <PanelBody title={__("Advanced", "gslider-blocks")} initialOpen>
+            <PanelBody 
+                title={__("Layout", "gslider-blocks")} 
+                initialOpen={true}
+            >
+                <ResponsiveSpacingControl
+                    label={__("Margin", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={globalMarginUnits}
+                    onChangeUnits={(value) => setAttributes({ globalMarginUnits: value })}
+                    desktopSpacing={globalMarginDesktop}
+                    onChangeDesktopSpacing={(value) => setAttributes({ globalMarginDesktop: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ globalMarginDesktopCssStyle: value })}
+                    tabletSpacing={globalMarginTablet}
+                    onChangeTabletSpacing={(value) => setAttributes({ globalMarginTablet: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ globalMarginTabletCssStyle: value })}
+                    mobileSpacing={globalMarginMobile}
+                    onChangeMobileSpacing={(value) => setAttributes({ globalMarginMobile: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ globalMarginMobileCssStyle: value })}
+                    isLinked={globalMarginLink}
+                    onChangeLink={(value) => setAttributes({ globalMarginLink: value })} 
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Padding", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={globalPaddingUnits}
+                    onChangeUnits={(value) => setAttributes({ globalPaddingUnits: value })}
+                    desktopSpacing={globalPaddingDesktop}
+                    onChangeDesktopSpacing={(value) => setAttributes({ globalPaddingDesktop: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ globalPaddingDesktopCssStyle: value })}
+                    tabletSpacing={globalPaddingTablet}
+                    onChangeTabletSpacing={(value) => setAttributes({ globalPaddingTablet: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ globalPaddingTabletCssStyle: value })}
+                    mobileSpacing={globalPaddingMobile}
+                    onChangeMobileSpacing={(value) => setAttributes({ globalPaddingMobile: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ globalPaddingMobileCssStyle: value })}
+                    isLinked={globalPaddingLink}
+                    onChangeLink={(value) => setAttributes({ globalPaddingLink: value })}
+                />
+
                 <ResponsiveRangeControl
                     min={0}
                     max={10000000}
@@ -1010,7 +1078,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     resetFallbackValue={""}
                     isRangeUnit={false}
                 />
-
+            </PanelBody>
+            
+            <PanelBody 
+                title={__("Background", "gslider-blocks")} 
+                initialOpen={false}
+            >
                 <BackgroundControl
                     label={__("Background", "gslider-blocks")}
                     deviceType={deviceType}
@@ -1524,7 +1597,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Active Dots Border */
 
         /** Start Active Dots Border Radius */
-        sliderActiveDotsBorderRadius,
         sliderActiveDotsBorderRadiusUnits,
         sliderActiveDotsDesktopBorderRadius,
         sliderActiveDotsDesktopBorderRadiusCssStyle,
@@ -1536,7 +1608,31 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Active Dots Border Radius */
 
         /** Global Settings */
+        /** Start Global Margin */
+        globalMarginUnits,
+        globalMarginDesktop,
+        globalMarginDesktopCssStyle,
+        globalMarginTablet,
+        globalMarginTabletCssStyle,
+        globalMarginMobile,
+        globalMarginMobileCssStyle,
+        globalMarginLink,
+        /** End Global Margin */
+
+        /** Start Global Padding */
+        globalPaddingUnits,
+        globalPaddingDesktop,
+        globalPaddingDesktopCssStyle,
+        globalPaddingTablet,
+        globalPaddingTabletCssStyle,
+        globalPaddingMobile,
+        globalPaddingMobileCssStyle,
+        globalPaddingLink,
+        /** End Global Padding */
+
+        /** Start Global Z-Index */
         sliderGlobalZIndex,
+        /** End Global Z-Index */
 
         /** Other Styles */
         blockStyle
