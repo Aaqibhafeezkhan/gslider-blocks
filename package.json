@@ -24,7 +24,8 @@
 		"sass": "^1.88.0",
 		"sass-loader": "^16.0.5",
 		"webpack": "^5.99.8",
-		"webpack-cli": "^6.0.1"
+		"webpack-cli": "^6.0.1",
+		"@monaco-editor/react": "^4.6.0"
 	},
 	"dependencies": {
 		"@dnd-kit/core": "^6.3.1",

@@ -29,6 +29,8 @@ import BackgroundControl from '@Components/background-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
 import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import InspectorControl from '@Components/inspector-controls';
+import CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Utils/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
@@ -243,17 +245,10 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Global Padding */
 
         /** Start Global Z-Index */
-        sliderGlobalZIndex,
+        globalZIndex,
         /** End Global Z-Index */
 
-        /** Background Image */
-        sliderBgNormalBackgroundImageUrl,
-        sliderBgNormalBackgroundImagePosition,
-        sliderBgNormalBackgroundImageAttachment,
-        sliderBgNormalBackgroundImageRepeat,
-        sliderBgNormalBackgroundImageSize,
-
-
+        /** Start Global Background */
         globalNormalBackgroundType, 
         globalNormalClassicColor,
         globalNormalGradientColor,
@@ -280,8 +275,45 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         globalHoverBackgroundImageRepeat,
         globalHoverBackgroundImageSize,
         /** End Global Setting */
+
+        /** Start Global Border */
+        globalBorder,
+        globalBorderColorSwitcher,
+        globalBorderColor,
+        globalBorderHoverColor,
         
-        
+        globalBorderUnits,
+        globalBorderDesktop,
+        globalBorderDesktopCssStyle,
+        globalBorderTablet,
+        globalBorderTabletCssStyle,
+        globalBorderMobile,
+        globalBorderMobileCssStyle,
+        globalBorderLink,
+        /** End Global Border */    
+
+        /** Start Global Border Radius */
+        globalBorderRadiusUnits,
+        globalBorderRadiusDesktop,
+        globalBorderRadiusDesktopCssStyle,
+        globalBorderRadiusTablet,
+        globalBorderRadiusTabletCssStyle,
+        globalBorderRadiusMobile,
+        globalBorderRadiusMobileCssStyle,
+        globalBorderRadiusLink,
+        /** End Global Border Radius */
+
+        /** Start Global Box Shadow */
+        globalboxShadowValuesSwitcher,
+        globalboxShadowValues,
+        globalboxShadowCssValue,
+        globalboxShadowHoverValues,
+        globalboxShadowHoverCssValue,
+        /** End Global Box Shadow */
+
+        /** Start Global Custom CSS */
+        globalCustomCSS,
+        /** End Global Custom CSS */
         
     } = attributes;
 
@@ -1116,8 +1148,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     min={0}
                     max={10000000}
                     label={__("Z Index", "gslider-blocks")}
-                    rangeValue={sliderGlobalZIndex}
-                    onChangeValue={(value) => setAttributes({ sliderGlobalZIndex: value })}
+                    rangeValue={globalZIndex}
+                    onChangeValue={(value) => setAttributes({ globalZIndex: value })}
                     deviceType={deviceType}
                     step={1}
                     resetFallbackValue={""}
@@ -1185,6 +1217,114 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     setHoverBackgroundImageSize={(value) => setAttributes({ globalHoverBackgroundImageSize: value })}
                     setAttributes={setAttributes}
                     
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Border and Shadow", "gslider-blocks")}
+                opened={openPanels.advanced === "a3"}
+                onToggle={() => togglePanel("advanced", "a3")}
+            >
+                <SelectControl
+                    label={__("Border Style", "gslider-blocks")}
+                    value={globalBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ globalBorder: value })}
+                />
+
+                <SwitcherControl
+                    label={__("Border Color", "gslider-blocks")}
+                    globalSwitcher={globalBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
+                />
+
+                {globalBorderColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={globalBorderColor}
+                        onChangeColor={(value) => setAttributes({ globalBorderColor: value })}
+                    />
+                )}
+
+                {globalBorderColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={globalBorderHoverColor}
+                        onChangeColor={(value) => setAttributes({ globalBorderHoverColor: value })}
+                    />
+                )}
+
+                <ResponsiveSpacingControl
+                    label={__("Border", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={globalBorderUnits}
+                    onChangeUnits={(value) => setAttributes({ globalBorderUnits: value })}
+                    desktopSpacing={globalBorderDesktop}
+                    onChangeDesktopSpacing={(value) => setAttributes({ globalBorderDesktop: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ globalBorderDesktopCssStyle: value })}
+                    tabletSpacing={globalBorderTablet}
+                    onChangeTabletSpacing={(value) => setAttributes({ globalBorderTablet: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ globalBorderTabletCssStyle: value })}
+                    mobileSpacing={globalBorderMobile}
+                    onChangeMobileSpacing={(value) => setAttributes({ globalBorderMobile: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ globalBorderMobileCssStyle: value })}
+                    isLinked={globalBorderLink}
+                    onChangeLink={(value) => setAttributes({ globalBorderLink: value })}
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Border Radius", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={globalBorderRadiusUnits}
+                    onChangeUnits={(value) => setAttributes({ globalBorderRadiusUnits: value })}
+                    desktopSpacing={globalBorderRadiusDesktop}
+                    onChangeDesktopSpacing={(value) => setAttributes({ globalBorderRadiusDesktop: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ globalBorderRadiusDesktopCssStyle: value })}
+                    tabletSpacing={globalBorderRadiusTablet}
+                    onChangeTabletSpacing={(value) => setAttributes({ globalBorderRadiusTablet: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ globalBorderRadiusTabletCssStyle: value })}
+                    mobileSpacing={globalBorderRadiusMobile}
+                    onChangeMobileSpacing={(value) => setAttributes({ globalBorderRadiusMobile: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ globalBorderRadiusMobileCssStyle: value })}
+                    isLinked={globalBorderRadiusLink}
+                    onChangeLink={(value) => setAttributes({ globalBorderRadiusLink: value })}
+                />
+
+                <SwitcherControl
+                    label={__("Box Shadow", "gslider-blocks")}
+                    globalSwitcher={globalboxShadowValuesSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ globalboxShadowValuesSwitcher: value })}
+                />
+
+                {globalboxShadowValuesSwitcher === 'normal' && (
+                    <BoxShadowSettingsControl
+                        label={__("Normal Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ globalboxShadowValues: value })}
+                        initialShadowValue={globalboxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ globalboxShadowCssValue: value })}
+                    />
+                )}
+
+                {globalboxShadowValuesSwitcher === 'hover' && (
+                    <BoxShadowSettingsControl
+                        label={__("Hover Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ globalboxShadowHoverValues: value })}
+                        initialShadowValue={globalboxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ globalboxShadowHoverCssValue: value })}
+                    />
+                )}
+            </PanelBody>
+
+            <PanelBody
+                title={__("Custom CSS", "gslider-blocks")}
+                opened={openPanels.advanced === "a4"}
+                onToggle={() => togglePanel("advanced", "a4")}
+            >
+                <CustomCSSEditor  
+                    value={globalCustomCSS}
+                    onChangeValue={(value) => setAttributes({ globalCustomCSS: value })}
                 />
             </PanelBody>
         </>
@@ -1677,7 +1817,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Global Padding */
 
         /** Start Global Z-Index */
-        sliderGlobalZIndex,
+        globalZIndex,
         /** End Global Z-Index */
 
         /** Other Styles */

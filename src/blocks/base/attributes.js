@@ -15,36 +15,36 @@ const attributes = {
         type: "array",
         default: [
             { 
-                id: 'item-1',
-                subTitle: 'Sub Title',
-                title: 'Slider Item 1',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-                buttonText: 'Click Here',
-                buttonLink: '#',
+                id: "item-1",
+                subTitle: "Sub Title",
+                title: "Slider Item 1",
+                description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
+                buttonText: "Click Here",
+                buttonLink: "#",
                 buttonTargetLink: false,
                 nofollow: false,
                 sponsored: false,
 
-                normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#EDEDED',
+                normalItemBackgroundType: "classic",
+                normalItemClassicColor: "#EDEDED",
                 normalItemGradientColor: null,
                 normalItemCustomGradientSwitcher: false,
-                normalItemCustomGradientInputValue: '',
+                normalItemCustomGradientInputValue: "",
 
                 normalBackgroundImageUrl:{
-                    Desktop: '',
-                    Tablet: '',
-                    Mobile: '',
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
                 },
                 normalBackgroundImageAlt: {
-                    Desktop: '',
-                    Tablet: '',
-                    Mobile: '',
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
                 },
                 normalBackgroundImageID: {
-                    Desktop: '',
-                    Tablet: '',
-                    Mobile: '',
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
                 },
                 normalBackgroundImagePosition: {
                     Desktop: { x: 0.5, y: 0.5 },
@@ -52,61 +52,61 @@ const attributes = {
                     Mobile: { x: 0.5, y: 0.5 },
                 },
                 normalBackgroundImageAttachment: {
-                    Desktop: 'scroll',
-                    Tablet: 'scroll',
-                    Mobile: 'scroll',
+                    Desktop: "scroll",
+                    Tablet: "scroll",
+                    Mobile: "scroll",
                 },
                 normalBackgroundImageRepeat: {
-                    Desktop: 'no-repeat',
-                    Tablet: 'no-repeat',
-                    Mobile: 'no-repeat',
+                    Desktop: "no-repeat",
+                    Tablet: "no-repeat",
+                    Mobile: "no-repeat",
                 },
                 normalBackgroundImageSize: {
-                    Desktop: 'cover',
-                    Tablet: 'cover',
-                    Mobile: 'cover',
+                    Desktop: "cover",
+                    Tablet: "cover",
+                    Mobile: "cover",
                 },
 
                 itemBackgroundOverlaySwitcher: false,
-                itemBackgroundOverlayType: 'classic',
-                itemBackgroundOverlayClassicColor: '#000',
+                itemBackgroundOverlayType: "classic",
+                itemBackgroundOverlayClassicColor: "#000",
                 itemBackgroundOverlayGradientColor: null,
                 itemBackgroundOverlayCustomGradientSwitcher: false,
-                itemBackgroundOverlayCustomGradientInputValue: '',
+                itemBackgroundOverlayCustomGradientInputValue: "",
                 itemBackgroundOverlayOpacity: 0.5,
             },
             { 
-                id: 'item-2',
+                id: "item-2",
 
-                subTitle: 'Sub Title',
-                title: 'Slider Item 2',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-                buttonText: 'Click Here',
-                buttonLink: '#',
+                subTitle: "Sub Title",
+                title: "Slider Item 2",
+                description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
+                buttonText: "Click Here",
+                buttonLink: "#",
                 buttonTargetLink: false,
                 nofollow: false,
                 sponsored: false,
 
-                normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#EDEDED',
+                normalItemBackgroundType: "classic",
+                normalItemClassicColor: "#EDEDED",
                 normalItemGradientColor: null,
                 normalItemCustomGradientSwitcher: false,
-                normalItemCustomGradientInputValue: '',
+                normalItemCustomGradientInputValue: "",
 
                 normalBackgroundImageUrl:{
-                    Desktop: '',
-                    Tablet: '',
-                    Mobile: '',
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
                 },
                 normalBackgroundImageAlt: {
-                    Desktop: '',
-                    Tablet: '',
-                    Mobile: '',
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
                 },
                 normalBackgroundImageID: {
-                    Desktop: '',
-                    Tablet: '',
-                    Mobile: '',
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
                 },
                 normalBackgroundImagePosition: {
                     Desktop: { x: 0.5, y: 0.5 },
@@ -114,63 +114,62 @@ const attributes = {
                     Mobile: { x: 0.5, y: 0.5 },
                 },
                 normalBackgroundImageAttachment: {
-                    Desktop: 'scroll',
-                    Tablet: 'scroll',
-                    Mobile: 'scroll',
+                    Desktop: "scroll",
+                    Tablet: "scroll",
+                    Mobile: "scroll",
                 },
                 normalBackgroundImageRepeat: {
-                    Desktop: 'no-repeat',
-                    Tablet: 'no-repeat',
-                    Mobile: 'no-repeat',
+                    Desktop: "no-repeat",
+                    Tablet: "no-repeat",
+                    Mobile: "no-repeat",
                 },
                 normalBackgroundImageSize: {
-                    Desktop: 'cover',
-                    Tablet: 'cover',
-                    Mobile: 'cover',
+                    Desktop: "cover",
+                    Tablet: "cover",
+                    Mobile: "cover",
                 },
                 
                 itemBackgroundOverlaySwitcher: false,
-                itemBackgroundOverlayType: 'classic',
-                itemBackgroundOverlayClassicColor: '#000',
+                itemBackgroundOverlayType: "classic",
+                itemBackgroundOverlayClassicColor: "#000",
                 itemBackgroundOverlayGradientColor: null,
                 itemBackgroundOverlayCustomGradientSwitcher: false,
-                itemBackgroundOverlayCustomGradientInputValue: '',
+                itemBackgroundOverlayCustomGradientInputValue: "",
                 itemBackgroundOverlayOpacity: 0.5,
 
             },
             { 
-                id: 'item-3',
+                id: "item-3",
 
-
-                subTitle: 'Sub Title',
-                title: 'Slider Item 3',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-                buttonText: 'Click Here',
-                buttonLink: '#',
+                subTitle: "Sub Title",
+                title: "Slider Item 3",
+                description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
+                buttonText: "Click Here",
+                buttonLink: "#",
                 buttonTargetLink: false,
                 nofollow: false,
                 sponsored: false,
 
-                normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#EDEDED',
+                normalItemBackgroundType: "classic",
+                normalItemClassicColor: "#EDEDED",
                 normalItemGradientColor: null,
                 normalItemCustomGradientSwitcher: false,
-                normalItemCustomGradientInputValue: '',
+                normalItemCustomGradientInputValue: "",
 
                 normalBackgroundImageUrl:{
-                    Desktop: '',
-                    Tablet: '',
-                    Mobile: '',
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
                 },
                 normalBackgroundImageAlt: {
-                    Desktop: '',
-                    Tablet: '',
-                    Mobile: '',
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
                 },
                 normalBackgroundImageID: {
-                    Desktop: '',
-                    Tablet: '',
-                    Mobile: '',
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
                 },
                 normalBackgroundImagePosition: {
                     Desktop: { x: 0.5, y: 0.5 },
@@ -178,27 +177,27 @@ const attributes = {
                     Mobile: { x: 0.5, y: 0.5 },
                 },
                 normalBackgroundImageAttachment: {
-                    Desktop: 'scroll',
-                    Tablet: 'scroll',
-                    Mobile: 'scroll',
+                    Desktop: "scroll",
+                    Tablet: "scroll",
+                    Mobile: "scroll",
                 },
                 normalBackgroundImageRepeat: {
-                    Desktop: 'no-repeat',
-                    Tablet: 'no-repeat',
-                    Mobile: 'no-repeat',
+                    Desktop: "no-repeat",
+                    Tablet: "no-repeat",
+                    Mobile: "no-repeat",
                 },
                 normalBackgroundImageSize: {
-                    Desktop: 'cover',
-                    Tablet: 'cover',
-                    Mobile: 'cover',
+                    Desktop: "cover",
+                    Tablet: "cover",
+                    Mobile: "cover",
                 },
                 
                 itemBackgroundOverlaySwitcher: false,
-                itemBackgroundOverlayType: 'classic',
-                itemBackgroundOverlayClassicColor: '#000',
+                itemBackgroundOverlayType: "classic",
+                itemBackgroundOverlayClassicColor: "#000",
                 itemBackgroundOverlayGradientColor: null,
                 itemBackgroundOverlayCustomGradientSwitcher: false,
-                itemBackgroundOverlayCustomGradientInputValue: '',
+                itemBackgroundOverlayCustomGradientInputValue: "",
                 itemBackgroundOverlayOpacity: 0.5,
             },
         ],
@@ -358,23 +357,23 @@ const attributes = {
         default: "slider"
     },
     carouselPerColumn: {
-        type: 'number',
+        type: "number",
         default: 2,
     },
     carouselPerColumnGap: {
-        type: 'number',
+        type: "number",
         default: 20,
     },
 	speed: {
-		type: 'number',
+		type: "number",
         default: 800,
 	},
 	autoplay: {
-		type: 'boolean',
+		type: "boolean",
 		default: false,
 	},
     autoplayDelay: {
-        type: 'number',
+        type: "number",
         default: 1000,
     },
 	infiniteLoop: {
@@ -386,35 +385,35 @@ const attributes = {
 		default: true,
 	},
     pauseOnHover: {
-        "type": "boolean",
-        "default": false
+        type: "boolean",
+        default: false
     },
     stopOnLastSlide: {
-        "type": "boolean",
-        "default": false
+        type: "boolean",
+        default: false
     },
     reverseDirection: {
-        "type": "boolean",
-        "default": false
+        type: "boolean",
+        default: false
     },
     slideEffect: {
-        "type": "string",
-        "default": "slide"
+        type: "string",
+        default: "slide"
     },
     carouselEffect: {
-        "type": "string",
-        "default": "slide"
+        type: "string",
+        default: "slide"
     },
     mousewheelControl: {
-        "type": "boolean",
-        "default": false
+        type: "boolean",
+        default: false
     },
     showNavigation: {
-		type: 'boolean',
+		type: "boolean",
 		default: true,
 	},
 	showPagination: {
-		type: 'boolean',
+		type: "boolean",
 		default: true,
 	},
     paginationType: {
@@ -422,42 +421,42 @@ const attributes = {
         default: "bullets"
     },
     dynamicBullets: {
-        type: 'boolean',
+        type: "boolean",
 		default: false,
     },
     /** End Slider Settings */
     
     /** Start Arrows Size */
 	sliderArrowsSize: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16',
+			Desktop: "16",
+			Tablet: "16",
+			Mobile: "16",
 		},
 	},
 	sliderArrowsSizeUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
     /** End Arrows Size */
 
     /** Start Arrows Color */
 	sliderArrowsColorSwitcher: {
-		type: 'string',
-		default: 'normal',
+		type: "string",
+		default: "normal",
 	},
 	sliderArrowsColor: {
-		type: 'string',
-		default: '#333333',
+		type: "string",
+		default: "#333333",
 	},
 	sliderArrowsColorHover: {
-		type: 'string',
-		default: '',
+		type: "string",
+		default: "",
 	},
     /** End Arrows Color */
 
@@ -506,233 +505,233 @@ const attributes = {
 
     /** Start Arrows Width & Height */
 	sliderArrowsWidth: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '46',
-			Tablet: '46',
-			Mobile: '46',
+			Desktop: "46",
+			Tablet: "46",
+			Mobile: "46",
 		},
 	},
 	sliderArrowsWidthUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
 	sliderArrowsHeight: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '46',
-			Tablet: '46',
-			Mobile: '46',
+			Desktop: "46",
+			Tablet: "46",
+			Mobile: "46",
 		},
 	},
 	sliderArrowsHeightUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
     /** End Arrows Width & Height */
 
     /** Start Arrows Border */
 	sliderArrowsBorder: {
-		type: 'string',
-		default: 'none',
+		type: "string",
+		default: "none",
 	},
 	sliderArrowsBorderColorSwitcher : {
-		type: 'string',
-		default: 'normal'
+		type: "string",
+		default: "normal"
 	},
 	sliderArrowsBorderColor: {
-		type: 'string',
-		default: '' 
+		type: "string",
+		default: "",
 	},
 	sliderArrowsBorderHoverColor: {
-		type: 'string',
-		default: ''
+		type: "string",
+		default: "",
 	},
 	sliderArrowsBorderUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	sliderArrowsDesktopBorder: {
-		type: 'object', 
+		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
     sliderArrowsDesktopBorderCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
 	sliderArrowsTabletBorder: {
-		type: 'object',  
+		type: "object",  
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
     sliderArrowsTabletBorderCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
 	sliderArrowsMobileBorder: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
     sliderArrowsMobileBorderCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
 	sliderArrowsBorderLink : {
-		type : 'boolean',
+		type : "boolean",
 		default: true
 	},
     /** End Arrows Border */
 
     /** Start Arrows Border Radius */
 	sliderArrowsBorderRadiusUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	sliderArrowsDesktopBorderRadius: {
-		type: 'object', 
+		type: "object", 
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: "50",
+			bottom: "50",
+			left: "50",
+			right: "50",
 		},
 	},
     sliderArrowsDesktopBorderRadiusCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
 	sliderArrowsTabletBorderRadius: {
-		type: 'object',  
+		type: "object",  
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: "50",
+			bottom: "50",
+			left: "50",
+			right: "50",
 		},
 	},
     sliderArrowsTabletBorderRadiusCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
 	sliderArrowsMobileBorderRadius: {
-		type: 'object',  
+		type: "object",  
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: "50",
+			bottom: "50",
+			left: "50",
+			right: "50",
 		},
 	},
     sliderArrowsMobileBorderRadiusCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
 	sliderArrowsBorderRadiusLink : {
-		type : 'boolean',
+		type : "boolean",
 		default: true
 	},
     /** End Arrows Border Radius */
 
     /** Start Arrows Box Shadow */
     sliderArrowsBoxShadowValuesSwitcher : {
-		type: 'string',
-		default: 'normal'
+		type: "string",
+		default: "normal"
 	},
 	sliderArrowsBoxShadowValues: {
-        type: 'array',
+        type: "array",
         default: [],
     },
     sliderArrowsBoxShadowCssValue: {
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderArrowsBoxShadowHoverValues: {
-        type: 'array',
+        type: "array",
         default: [],
     },
     sliderArrowsBoxShadowHoverCssValue: {
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     /** End Arrows Box Shadow */
 
     /** Start Arrows Position */
     sliderArrowsPosition: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '50',
-			Tablet: '50',
-			Mobile: '50',
+			Desktop: "50",
+			Tablet: "50",
+			Mobile: "50",
 		},
 	},
 	sliderArrowsPositionUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%',
+			Desktop: "%",
+			Tablet: "%",
+			Mobile: "%",
 		},
 	},
 	sliderArrowsRightOffset: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		},
 	},
 	sliderArrowsRightOffsetUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
 	sliderArrowsLeftOffset: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		},
 	},
 	sliderArrowsLeftOffsetUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},  
     /** End Arrows Position */
@@ -740,127 +739,127 @@ const attributes = {
 
     /** Start Dots Margin */
 	sliderDotsMarginUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	sliderDotsDesktopMargin: {
-		type: 'object', 
+		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
     sliderDotsDesktopMarginCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
 	sliderDotsTabletMargin: {
-		type: 'object',  
+		type: "object",  
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
     sliderDotsTabletMarginCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
 	sliderDotsMobileMargin: {
-		type: 'object',  
+		type: "object",  
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
     sliderDotsMobileMarginCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
 	sliderDotsMarginLink : {
-		type : 'boolean',
+		type : "boolean",
 		default: true
 	},
     /** End Dots Margin */
 
     /** Start Dots Position */
     sliderDotsPosition: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		},
 	},
 	sliderDotsPositionUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%',
+			Desktop: "%",
+			Tablet: "%",
+			Mobile: "%",
 		},
 	},
     /** End Dots Position */
 
     /** Start Dots Style */
     sliderDotsSwitcher: {
-		type: 'string',
-		default: 'normal',
+		type: "string",
+		default: "normal",
 	},
 	sliderNormalDotsBgColor: {
-		type: 'string',
-		default: '#333333',
+		type: "string",
+		default: "#333333",
 	},
 	sliderActiveDotsBgColor: {
-		type: 'string',
-		default: '',
+		type: "string",
+		default: "",
 	},
 	sliderNormalDotsWidth: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '8',
-			Tablet: '8',
-			Mobile: '8',
+			Desktop: "8",
+			Tablet: "8",
+			Mobile: "8",
 		},
 	},
 	sliderNormalDotsWidthUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
 	sliderNormalDotsHeight: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '8',
-			Tablet: '8',
-			Mobile: '8',
+			Desktop: "8",
+			Tablet: "8",
+			Mobile: "8",
 		},
 	},
 	sliderNormalDotsHeightUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
     /** End Dots Style */
 
     /** Start Dots Border */
     sliderNormalDotsBorder: { 
-		type: 'string',
+		type: "string",
 		default: "none",
 	},
 	sliderNormalDotsBorderColorSwitcher : {
@@ -868,166 +867,166 @@ const attributes = {
 		default: "normal"
 	},
 	sliderNormalDotsBorderColor: {
-		type: 'string',
+		type: "string",
 		default: ""
 	},
 	sliderNormalDotsBorderHoverColor: {
-		type: 'string',
+		type: "string",
 	},
     
     sliderNormalDotsBorderUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	sliderNormalDotsDesktopBorder: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
     sliderNormalDotsDesktopBorderCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderNormalDotsTabletBorder: {
-		type: 'object',  
+		type: "object",  
 		default: {  
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
     sliderNormalDotsTabletBorderCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderNormalDotsMobileBorder: {
-		type: 'object',  
+		type: "object",  
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
     sliderNormalDotsMobileBorderCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderNormalDotsBorderLink : {
-		type : 'boolean',
+		type : "boolean",
 		default: true
 	},
     /** End Dots Border */
 
     /** Start Dots Border Radius */
     sliderNormalDotsBorderRadius: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		},
 	},
     sliderNormalDotsBorderRadiusUnits: {
-		type: 'object',
+		type: "object",
 		default: {  
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
 		}
 	},
     sliderNormalDotsDesktopBorderRadius: {
 		type: "object", 
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: "50",
+			bottom: "50",
+			left: "50",
+			right: "50",
 		},
 	},
     sliderNormalDotsDesktopBorderRadiusCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderNormalDotsTabletBorderRadius: {
-		type: 'object',  
+		type: "object",  
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: "50",
+			bottom: "50",
+			left: "50",
+			right: "50",
 		},
 	},
     sliderNormalDotsTabletBorderRadiusCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderNormalDotsMobileBorderRadius: {
-		type: 'object',  
+		type: "object",  
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: "50",
+			bottom: "50",
+			left: "50",
+			right: "50",
 		},
 	},
     sliderNormalDotsMobileBorderRadiusCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderNormalDotsBorderRadiusLink : {
-		type : 'boolean',
+		type : "boolean",
 		default: true
 	},
     /** End Dots Border Radius */
 
     /** Start Active Dots Width & Height */
     sliderActiveDotsWidth: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		},
 	},
 	sliderActiveDotsWidthUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
 	sliderActiveDotsHeight: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		},
 	},
 	sliderActiveDotsHeightUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
     /** End Active Dots Width & Height */
 
     /** Start Active Dots Border */
     sliderActiveDotsBorder: { 
-        type: 'string',
+        type: "string",
         default: "none",
     },
     sliderActiveDotsBorderColorSwitcher : {
@@ -1035,116 +1034,116 @@ const attributes = {
         default: "normal"
     },
     sliderActiveDotsBorderColor: {
-        type: 'string',
+        type: "string",
         default: ""
     },
     sliderActiveDotsBorderHoverColor: {
-        type: 'string',
+        type: "string",
     },
     
     sliderActiveDotsBorderUnits: {
-        type: 'object',
+        type: "object",
         default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
         }
     },
     sliderActiveDotsDesktopBorder: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     sliderActiveDotsDesktopBorderCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderActiveDotsTabletBorder: {
-        type: 'object',  
+        type: "object",  
         default: {  
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     sliderActiveDotsTabletBorderCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderActiveDotsMobileBorder: {
-        type: 'object',  
+        type: "object",  
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     sliderActiveDotsMobileBorderCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderActiveDotsBorderLink : {
-        type : 'boolean',
+        type : "boolean",
         default: true
     },
     /** End Active Dots Border */
 
     /** Start Active Dots Border Radius */
     sliderActiveDotsBorderRadiusUnits: {
-        type: 'object',
+        type: "object",
         default: {  
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
         }
     },
     sliderActiveDotsDesktopBorderRadius: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     sliderActiveDotsDesktopBorderRadiusCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderActiveDotsTabletBorderRadius: {
-        type: 'object',  
+        type: "object",  
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     sliderActiveDotsTabletBorderRadiusCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderActiveDotsMobileBorderRadius: {
-        type: 'object',  
+        type: "object",  
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     sliderActiveDotsMobileBorderRadiusCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     sliderActiveDotsBorderRadiusLink : {
-        type : 'boolean',
+        type : "boolean",
         default: true
     },
     /** End Active Dots Border Radius */
@@ -1154,124 +1153,114 @@ const attributes = {
 
     /** Start Global Margin */
     globalMarginUnits: {
-        type: 'object',
+        type: "object",
         default: {  
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
         }
     },
     globalMarginDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     globalMarginDesktopCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     globalMarginTablet: {
-        type: 'object',  
+        type: "object",  
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     globalMarginTabletCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     globalMarginMobile: {
-        type: 'object',  
+        type: "object",  
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     globalMarginMobileCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     globalMarginLink : {
-        type : 'boolean',
+        type : "boolean",
         default: true
     },
     /** End Global Margin */
 
     /** Start Global Padding */
     globalPaddingUnits: {
-        type: 'object',
+        type: "object",
         default: {  
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
         }
     },
     globalPaddingDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     globalPaddingDesktopCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     globalPaddingTablet: {
-        type: 'object',  
+        type: "object",  
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     globalPaddingTabletCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     globalPaddingMobile: {
-        type: 'object',  
+        type: "object",  
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
     globalPaddingMobileCssStyle: { 
-        type: 'string',
-        default: '',
+        type: "string",
+        default: "",
     },
     globalPaddingLink : {
-        type : 'boolean',
+        type : "boolean",
         default: true
     },
     /** End Global Padding */
 
     /** Start Global Z-Index */
-	sliderGlobalZIndex: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-
-    	/** Bg Normal Image for fb container */
-	sliderBgNormalBackgroundImageUrl: {  
+	globalZIndex: {
         type: "object",
         default: {
             Desktop: "",
@@ -1279,42 +1268,9 @@ const attributes = {
             Mobile: ""
         }
     },
-    sliderBgNormalBackgroundImagePosition: {
-        type: 'object',
-        default: {
-            Desktop: { x: 0.5, y: 0.5 },
-            Tablet: { x: 0.5, y: 0.5 },
-            Mobile: { x: 0.5, y: 0.5 }
-        }
-    },
-    sliderBgNormalBackgroundImageAttachment: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    sliderBgNormalBackgroundImageRepeat: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    sliderBgNormalBackgroundImageSize: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-	/** End Global Setting */
+    /** End Global Z-Index */
 
-    /** Start Global Item Background */
-
+    /** Start Global Background */     
     globalNormalBackgroundType: {
         type: "string",
         default: "classic",
@@ -1412,7 +1368,6 @@ const attributes = {
         type: "string",
         default: "",
     },
-
     globalHoverBackgroundImageUrl: {
         type: "object",
         default: {
@@ -1421,7 +1376,6 @@ const attributes = {
             Mobile: ""
         }
     },
-
     globalHoverBackgroundImageAlt: {
         type: "object",
         default: {
@@ -1430,7 +1384,6 @@ const attributes = {
             Mobile: ""
         }
     },  
-
     globalHoverBackgroundImageID: {
         type: "object",
         default: {
@@ -1439,7 +1392,6 @@ const attributes = {
             Mobile: ""
         }
     },  
-
     globalHoverBackgroundImagePosition: {
         type: "object", 
         default: {
@@ -1448,7 +1400,6 @@ const attributes = {
             Mobile: { x: 0.5, y: 0.5 }
         }
     },  
-
     globalHoverBackgroundImageAttachment: {
         type: "object",
         default: {
@@ -1457,7 +1408,6 @@ const attributes = {
             Mobile: "scroll"
         }
     },    
-
     globalHoverBackgroundImageRepeat: {
         type: "object",
         default: {
@@ -1466,7 +1416,6 @@ const attributes = {
             Mobile: "no-repeat"
         }
     },            
-
     globalHoverBackgroundImageSize: {
         type: "object",
         default: {
@@ -1475,7 +1424,154 @@ const attributes = {
             Mobile: "cover"
         }
     },
+    /** End Global Background */
 
+    /** Start Global Border */
+    globalBorder: {
+        type: "string",
+        default: "none",
+    },
+    globalBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    globalBorderColor: {
+        type: "string",
+    },
+    globalBorderHoverColor: {
+        type: "string",
+    },
+    globalBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    globalBorderDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    globalBorderDesktopCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    globalBorderTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    globalBorderTabletCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    globalBorderMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    globalBorderMobileCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    globalBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    globalBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    globalBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    globalBorderRadiusDesktopCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    globalBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    globalBorderRadiusTabletCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    globalBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    globalBorderRadiusMobileCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    globalBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    globalboxShadowValuesSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    globalboxShadowValues: {
+        type: "array",
+        default: [],
+    },
+    globalboxShadowCssValue: {
+        type: "string",
+        default: "",
+    },
+    globalboxShadowHoverValues: {
+        type: "array",
+        default: [],
+    },
+    globalboxShadowHoverCssValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Global Border */
+
+
+    /** Start Global Custom CSS */
+    globalCustomCSS: {
+        type: "string",
+        default: "",
+    },
+    /** End Global Custom CSS */
 };
 
 export default attributes;

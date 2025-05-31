@@ -44,6 +44,12 @@
   text-transform: capitalize !important;
 }
 
+.gslider-custom-css-editor-wrapper .monaco-editor {
+  border-radius: 6px !important;
+  border: 1px solid #DDDDDD !important;
+  overflow: hidden;
+}
+
 .gslider-bg-tab-panel {
   box-sizing: border-box;
   width: 100%;

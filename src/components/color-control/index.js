@@ -34,7 +34,7 @@ const ColorControl = ({ label, color, onChangeColor, defaultColor = '' }) => {
                             onClick={onToggle}
                             aria-expanded={isOpen}
                             className="color-ball"
-                            style={{ background: color || 'transparent' }}
+                            style={{ background: color || '' }}
                         >
                         </Button>
                         </>
