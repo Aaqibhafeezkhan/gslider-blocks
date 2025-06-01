@@ -374,6 +374,7 @@
   transform: translate(0, 0);
 }
 
+/** Modal scss **/
 .gslider_icon_picker_wrapper_header {
   display: flex;
   align-items: center;
