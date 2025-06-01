@@ -61,3 +61,13 @@
 		overflow: hidden;
 	}
 }
+
+
+.gslider-border-style-control {
+    .components-base-control__field {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0 !important;
+    }
+}

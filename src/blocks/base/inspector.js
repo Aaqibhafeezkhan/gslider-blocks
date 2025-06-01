@@ -734,12 +734,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     isBackgroundImage={false}
                 />
 
-                <SelectControl
-                    label={__("Border Style", "gslider-blocks")}
-                    value={sliderArrowsBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ sliderArrowsBorder: value })}
-                />
+                <BaseControl
+                    className="gslider-border-style-control"
+                >
+                    <>
+                        <span className="gslider-border-style-control-label">
+                            {__("Border Style", "gslider-blocks")}
+                        </span>
+                        <SelectControl
+                            className='gslider-border-style-control-select'
+                            value={sliderArrowsBorder}
+                            options={BORDER_STYLES}
+                            onChange={(value) => setAttributes({ sliderArrowsBorder: value })}
+                        />
+                    </>
+                </BaseControl>
 
                 <SwitcherControl
                     label={__("Border Color", "gslider-blocks")}
@@ -919,12 +928,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                     defaultColor='#333333'
                                 />
 
-                                <SelectControl
-                                    label={__("Border Style", "gslider-blocks")}
-                                    value={sliderNormalDotsBorder}
-                                    options={BORDER_STYLES}
-                                    onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
-                                />
+                                <BaseControl
+                                    className="gslider-border-style-control"
+                                >
+                                    <>
+                                        <span className="gslider-border-style-control-label">
+                                            {__("Border Style", "gslider-blocks")}
+                                        </span>
+                                        <SelectControl
+                                            className='gslider-border-style-control-select'
+                                            value={sliderNormalDotsBorder}
+                                            options={BORDER_STYLES}
+                                            onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
+                                        />
+                                    </>
+                                </BaseControl>
 
                                 <SwitcherControl
                                     label={__("Border Color", "gslider-blocks")}
@@ -1022,12 +1040,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                     onChangeColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
                                 />
 
-                                <SelectControl
-                                    label={__("Border Style", "gslider-blocks")}
-                                    value={sliderActiveDotsBorder}
-                                    options={BORDER_STYLES}
-                                    onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
-                                />
+                                <BaseControl
+                                    className="gslider-border-style-control"
+                                >
+                                    <>
+                                        <span className="gslider-border-style-control-label">
+                                            {__("Border Style", "gslider-blocks")}
+                                        </span>
+                                        <SelectControl
+                                            className='gslider-border-style-control-select'
+                                            value={sliderActiveDotsBorder}
+                                            options={BORDER_STYLES}
+                                            onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
+                                        />
+                                    </>
+                                </BaseControl>
 
                                 <SwitcherControl
                                     label={__("Border Color", "gslider-blocks")}
@@ -1225,12 +1252,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 opened={openPanels.advanced === "a3"}
                 onToggle={() => togglePanel("advanced", "a3")}
             >
-                <SelectControl
-                    label={__("Border Style", "gslider-blocks")}
-                    value={globalBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ globalBorder: value })}
-                />
+                <BaseControl
+                    className="gslider-border-style-control"
+                >
+                    <>
+                        <span className="gslider-border-style-control-label">
+                            {__("Border Style", "gslider-blocks")}
+                        </span>
+                        <SelectControl
+                            className="gslider-border-style-control-select"
+                            value={globalBorder}
+                            options={BORDER_STYLES}
+                            onChange={(value) => setAttributes({ globalBorder: value })}
+                        />
+                    </>
+                </BaseControl>
 
                 <SwitcherControl
                     label={__("Border Color", "gslider-blocks")}
