@@ -78,7 +78,6 @@ const BackgroundControl = ({
         { label: __('Gradient', 'gslider-blocks'), value: 'gradient' },
     ];
 
-
     const renderNormalControls = () => (
         <>
             <BaseControl
