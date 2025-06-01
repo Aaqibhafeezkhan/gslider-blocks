@@ -1,179 +1,208 @@
 @use "../variables" as *;
 
 .gslider-setting-typography {
-    .components-base-control__field {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        margin: 0;
-        align-items: center;
-    }
+
+	.components-base-control__field {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		margin: 0;
+		align-items: center;
+	}
 }
 
 .gslider-setting-dropdown-icon-wrapper {
-    .gslider-setting-dropdown-icon-btn {
-        margin: 0;
-        height: 28px;
-        width: 28px;
-        padding: 5px;
-        border: 1px solid #e6e7e9;
-        border-radius: 14px;
-        color: #50575e;
-        background: $white_color;
-        &:focus {
-            outline: none;
-            box-shadow: none;
-        }
-        .gslider-setting-dropdown-icon {
-            font-size: 15px;
-            line-height: 20px;
-        }
-    }
+
+	.gslider-setting-dropdown-icon-btn {
+		margin: 0;
+		height: 28px;
+		width: 28px;
+		padding: 5px;
+		border: 1px solid #e6e7e9;
+		border-radius: 14px;
+		color: #50575e;
+		background: $white_color;
+
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+
+		.gslider-setting-dropdown-icon {
+			font-size: 15px;
+			line-height: 20px;
+		}
+	}
 }
 
 .gslider-setting-fontsize-wrapper {
-    .gslider-setting-fontsize-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .gslider-setting-fontsize-label {
-            display: block;
-            color: $secondary_color;
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 16px;
-            margin: 10px 0;
-            min-height: auto;
-            text-transform: capitalize;
-        }
-        .gslider-setting-fontsize-units {
 
-            .gslider-setting-fontsize-units-wrap {
-                direction: initial;
-                display: flex;
-                align-items: center;
-                .gslider-setting-fontsize-units-switcher {
-                    box-shadow: unset;
-                    font-size: 10px;
-                    padding: 0;
-                    text-transform: uppercase;
-                    padding-right: 5px;
-                    &.active {
-                        color: $primary_color;
-                    }
-                }
-            }
-        }
-    }
+	.gslider-setting-fontsize-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.gslider-setting-fontsize-label {
+			display: block;
+			color: $secondary_color;
+			font-size: 12px;
+			font-weight: 500;
+			line-height: 16px;
+			margin: 10px 0;
+			min-height: auto;
+			text-transform: capitalize;
+		}
+
+		.gslider-setting-fontsize-units {
+
+			.gslider-setting-fontsize-units-wrap {
+				direction: initial;
+				display: flex;
+				align-items: center;
+
+				.gslider-setting-fontsize-units-switcher {
+					box-shadow: unset;
+					font-size: 10px;
+					padding: 0;
+					text-transform: uppercase;
+					padding-right: 5px;
+
+					&.active {
+						color: $primary_color;
+					}
+				}
+			}
+		}
+	}
 }
 
 .gslider-setting-letterspacing-wrapper {
-    .gslider-setting-letterspacing-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .gslider-setting-letterspacing-label {
-            display: block;
-            color: $secondary_color;
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 16px;
-            margin: 10px 0;
-            min-height: auto;
-            text-transform: capitalize;
-        }
-        .gslider-setting-letterspacing-units {
-            .gslider-setting-letterspacing-units-wrap {
-                direction: initial;
-                display: flex;
-                align-items: center;
-                .gslider-setting-letterspacing-units-switcher {
-                    box-shadow: unset;
-                    font-size: 10px;
-                    padding: 0;
-                    text-transform: uppercase;
-                    padding-right: 5px;
-                    &.active {
-                        color: $primary_color;
-                    }
-                }
-            }
-        }
-    }
+
+	.gslider-setting-letterspacing-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.gslider-setting-letterspacing-label {
+			display: block;
+			color: $secondary_color;
+			font-size: 12px;
+			font-weight: 500;
+			line-height: 16px;
+			margin: 10px 0;
+			min-height: auto;
+			text-transform: capitalize;
+		}
+
+		.gslider-setting-letterspacing-units {
+
+			.gslider-setting-letterspacing-units-wrap {
+				direction: initial;
+				display: flex;
+				align-items: center;
+
+				.gslider-setting-letterspacing-units-switcher {
+					box-shadow: unset;
+					font-size: 10px;
+					padding: 0;
+					text-transform: uppercase;
+					padding-right: 5px;
+
+					&.active {
+						color: $primary_color;
+					}
+				}
+			}
+		}
+	}
 }
 
 .gslider-setting-lineheight-wrapper {
-    .gslider-setting-lineheight-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .gslider-setting-lineheight-label {
-            display: block;
-            color: $secondary_color;
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 16px;
-            margin: 10px 0;
-            min-height: auto;
-            text-transform: capitalize;
-        }
-        .gslider-setting-lineheight-units {
-            .gslider-setting-lineheight-units-wrap {
-                direction: initial;
-                display: flex;
-                align-items: center;
-                .gslider-setting-lineheight-units-switcher {
-                    box-shadow: unset;
-                    font-size: 10px;
-                    padding: 0;
-                    text-transform: uppercase;
-                    padding-right: 5px;
-                    &.active {
-                        color: $primary_color;
-                    }
-                }
-            }
-        }
-    }
+
+	.gslider-setting-lineheight-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.gslider-setting-lineheight-label {
+			display: block;
+			color: $secondary_color;
+			font-size: 12px;
+			font-weight: 500;
+			line-height: 16px;
+			margin: 10px 0;
+			min-height: auto;
+			text-transform: capitalize;
+		}
+
+		.gslider-setting-lineheight-units {
+
+			.gslider-setting-lineheight-units-wrap {
+				direction: initial;
+				display: flex;
+				align-items: center;
+
+				.gslider-setting-lineheight-units-switcher {
+					box-shadow: unset;
+					font-size: 10px;
+					padding: 0;
+					text-transform: uppercase;
+					padding-right: 5px;
+
+					&.active {
+						color: $primary_color;
+					}
+				}
+			}
+		}
+	}
 }
 
 .gslider-setting-typography-popup {
-    padding: 0.2rem;
-    min-width: 220px;
-    .gslider-setting-typography-popup-inner {
-        position: relative;
-        z-index: 99999;
-        .components-base-control__field {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            label {
-                display: block;
-                color: $secondary_color !important;
-                font-size: 12px !important;
-                font-weight: 500 !important;
-                line-height: 16px !important;
-                margin: 10px 0 !important;
-                min-height: auto;
-                text-transform: capitalize !important;
-            }
-        }
-    }
+	padding: 0.2rem;
+	min-width: 220px;
+
+	.gslider-setting-typography-popup-inner {
+		position: relative;
+		z-index: 99999;
+
+		.components-base-control__field {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+
+			label {
+				display: block;
+				color: $secondary_color !important;
+				font-size: 12px !important;
+				font-weight: 500 !important;
+				line-height: 16px !important;
+				margin: 10px 0 !important;
+				min-height: auto;
+				text-transform: capitalize !important;
+			}
+		}
+	}
 }
 
-.gslider-setting-fontsize-wrapper, .gslider-setting-letterspacing-wrapper, .gslider-setting-lineheight-wrapper {
-    .components-range-control__reset {
-        position: absolute;
-        top: -33px;
-        right: 50px;
-        box-shadow: unset;
-        font-size: 10px;
-        &:hover {
-            box-shadow: unset !important;
-        }
-        &:focus {
-            outline: none !important;
-            box-shadow: none !important;
-        }
-    }
+.gslider-setting-fontsize-wrapper,
+.gslider-setting-letterspacing-wrapper,
+.gslider-setting-lineheight-wrapper {
+
+	.components-range-control__reset {
+		position: absolute;
+		top: -33px;
+		right: 50px;
+		box-shadow: unset;
+		font-size: 10px;
+
+		&:hover {
+			box-shadow: unset !important;
+		}
+
+		&:focus {
+			outline: none !important;
+			box-shadow: none !important;
+		}
+	}
 }

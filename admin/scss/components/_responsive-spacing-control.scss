@@ -1,100 +1,107 @@
 @use "../variables" as *;
 
 .gslider-setting-spacing-container {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-    .gslider-setting-spacing-inner-container {
-      margin-bottom: 20px;
-      &:last-child {
-        margin-bottom: 0;
-      }
-      .gslider-setting-spacing-input-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0;
 
-        .gslider-setting-spacing-input-wrapper {
-          display: flex;
-          flex-direction: column;
-          width: 20%;
+	.gslider-setting-spacing-inner-container {
+		margin-bottom: 20px;
 
-          .gslider-setting-spacing-input-label {
-            text-align: center;
-            font-size: 11px;
-            margin-right: 5px;
-          }
+		&:last-child {
+			margin-bottom: 0;
+		}
 
-          &:first-child {
-            input {
-              border-bottom-left-radius: 5px;
-              border-top-left-radius: 5px;
-              border-width: 1px;
-            }
-          }
+		.gslider-setting-spacing-input-container {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
 
-          input {
-            border-color: #ebebeb !important;
-            color: #1e1e1e;
-            height: 30px !important;
-            border: 1px solid #8d96a0;
-            border-left-width: 0;
-            border-radius: 0;
-            height: 24px;
-            margin: 0;
-            min-height: 24px;
-            padding: 0;
-            text-align: center;
-            width: 100%;
-            font-size: 14px;
-            &:focus {
-              outline: none !important;
-              box-shadow: none !important;
-            }
-          }
+			.gslider-setting-spacing-input-wrapper {
+				display: flex;
+				flex-direction: column;
+				width: 20%;
 
-          span {
-            border-color: #ebebeb !important;
-            color: #1e1e1e;
-            height: 30px !important;
-            border: 1px solid #8d96a0;
-            border-left-width: 0;
-            border-radius: 0;
-            height: 24px;
-            margin: 0;
-            min-height: 24px;
-            padding: 0;
-            text-align: center;
-            width: 100%;
-            margin-top: 18px;
-            border-bottom-right-radius: 5px;
-            border-top-right-radius: 5px;
-            align-items: center;
-            display: flex;
-            justify-content: center;
-            cursor: pointer;
-            &.is-checked{
-              background-color: #8d96a02b;
-            }
-          }
-          .dashicons-admin-links,
-          .dashicons-editor-unlink {
-            &::before {
-              color: $primary_color;
-            }
-          }
-        }
-      }
-      .gslider-setting-spacing-label-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 5px;
-      }
-    }
-    .components-base-control{
-      .components-base-control__field {
-        margin-bottom: 0 !important;
-      }
-    }
+				.gslider-setting-spacing-input-label {
+					text-align: center;
+					font-size: 11px;
+					margin-right: 5px;
+				}
+
+				input {
+					border-color: #ebebeb !important;
+					color: #1e1e1e;
+					height: 30px !important;
+					border-left-width: 0;
+					border-radius: 0;
+					margin: 0;
+					min-height: 24px;
+					padding: 0;
+					text-align: center;
+					width: 100%;
+					font-size: 14px;
+
+					&:focus {
+						outline: none !important;
+						box-shadow: none !important;
+					}
+				}
+
+				&:first-child {
+
+					input {
+						border-bottom-left-radius: 5px;
+						border-top-left-radius: 5px;
+						border-width: 1px;
+					}
+				}
+
+				span {
+					color: #1e1e1e;
+					height: 30px !important;
+					border: 1px solid #ebebeb !important;
+					border-left-width: 0 !important;
+					border-radius: 0;
+					margin: 0;
+					min-height: 24px;
+					padding: 0;
+					text-align: center;
+					width: 100%;
+					margin-top: 18px;
+					border-bottom-right-radius: 5px;
+					border-top-right-radius: 5px;
+					align-items: center;
+					display: flex;
+					justify-content: center;
+					cursor: pointer;
+
+					&.is-checked {
+						background-color: #8d96a02b;
+					}
+				}
+
+				.dashicons-admin-links,
+				.dashicons-editor-unlink {
+
+					&::before {
+						color: $primary_color;
+					}
+				}
+			}
+		}
+
+		.gslider-setting-spacing-label-container {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 5px;
+		}
+	}
+
+	.components-base-control {
+
+		.components-base-control__field {
+			margin-bottom: 0 !important;
+		}
+	}
 }

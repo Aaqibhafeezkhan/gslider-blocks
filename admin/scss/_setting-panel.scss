@@ -2,57 +2,62 @@
 
 /** Start Admin Panel scss **/
 .gslider-inspector-control {
-    .gslider-tab-panel {
-        display: flex;
-        flex: 1;
-        background-color: $background_color;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        cursor: pointer;
-        font-weight: 500;
-        height: 50px;
-        padding: 22px;
 
-        &.active-tab {
-            background: $white_color;
-            border-top: 2px solid $primary_color !important;
-            color: $primary_color;
-        }
-    }
-    .components-base-control__field {
-        .components-base-control__label {
-            display: block;
-            font-size: 13px !important;
-            font-weight: 400 !important;
-            line-height: 1.3 !important;
-            margin: 5px 0 !important;
-            min-height: auto;
-            text-transform: capitalize !important;
-        }
-        .components-text-control__input, 
-        .components-textarea-control__input {
-            border: 1px solid $border_color;
-            border-radius: 4px;
-            box-shadow: none;
-        }
-        
-        label {
-            display: block;
-            font-size: 13px !important;
-            font-weight: 400 !important;
-            line-height: 1.3 !important;
-            margin: 10px 0 0 !important;
-            min-height: auto;
-            text-transform: capitalize !important;
-        }
-    }
+	.gslider-tab-panel {
+		display: flex;
+		flex: 1;
+		background-color: $background_color;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
+		cursor: pointer;
+		font-weight: 500;
+		height: 50px;
+		padding: 22px;
+
+		&.active-tab {
+			background: $white_color;
+			border-top: 2px solid $primary_color !important;
+			color: $primary_color;
+		}
+	}
+
+	.components-base-control__field {
+
+		.components-base-control__label {
+			display: block;
+			font-size: 13px !important;
+			font-weight: 400 !important;
+			line-height: 1.3 !important;
+			margin: 5px 0 !important;
+			min-height: auto;
+			text-transform: capitalize !important;
+		}
+
+		.components-text-control__input,
+		.components-textarea-control__input {
+			border: 1px solid $border_color;
+			border-radius: 4px;
+			box-shadow: none;
+		}
+
+		label {
+			display: block;
+			font-size: 13px !important;
+			font-weight: 400 !important;
+			line-height: 1.3 !important;
+			margin: 10px 0 0 !important;
+			min-height: auto;
+			text-transform: capitalize !important;
+		}
+	}
 }
 
 .gslider-custom-css-editor-wrapper {
-    .monaco-editor {
-        border-radius: 6px !important;
-        border: 1px solid $border_color !important;
-        overflow: hidden;
-    }
+
+	.monaco-editor {
+		border-radius: 6px !important;
+		border: 1px solid $border_color !important;
+		overflow: hidden;
+	}
 }

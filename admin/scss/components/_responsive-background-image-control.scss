@@ -1,147 +1,154 @@
 @use "../variables" as *;
 
 .gslider-image-control-wrapper {
-    .gslider-image-upload-btn {
-        background-image: url(../../assets/images/transparent-bg-demo.png);
-    }
-}
 
-.gslider-image-control-wrapper {
-    .gslider-setting-device-label-wrapper {
-        display: inline-flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
+	.gslider-setting-device-label-wrapper {
+		display: inline-flex;
+		align-items: center;
+		margin-bottom: 10px;
+	}
 
-    .components-base-control__field {
-        display: block;
-        margin-bottom: 0;
-        .components-base-control__label {
-            font-size: 13px !important;
-            text-transform: capitalize !important;
-            margin-bottom: 8px !important;
-        }
-    }
-    .gslider-image-control {
-        background-color: #ccc;
-        background-position: 50%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        border-radius: 6px;
-        height: 150px;
-        margin-bottom: 16px;
-        padding: 2px;
-        position: relative;
-        width: 100%;
-    }
-    .gslider-image-upload-btn {
-        width: 100%;
-        padding: 0;
-        background-color: #f0f0f0;
-        border: 1px dashed #ccc;
-        border-radius: 6px;
-        height: 130px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        font-weight: 400;
-        margin: 0;
-        text-decoration: none;
-        transition: all 0.2s;
+	.components-base-control__field {
+		display: block;
+		margin-bottom: 0;
 
-        svg {
-            margin-bottom: 8px;
-            fill: #555;
-        }
+		.components-base-control__label {
+			font-size: 13px !important;
+			text-transform: capitalize !important;
+			margin-bottom: 8px !important;
+		}
+	}
 
-        &:hover {
-            background-color: #e8e8e8;
-        }
-    }
+	.gslider-image-control {
+		background-color: #ccc;
+		background-position: 50%;
+		background-repeat: no-repeat;
+		background-size: cover;
+		border-radius: 6px;
+		height: 150px;
+		margin-bottom: 16px;
+		padding: 2px;
+		position: relative;
+		width: 100%;
+	}
+
+	.gslider-image-upload-btn {
+		background-image: url(../../assets/images/transparent-bg-demo.png);
+		width: 100%;
+		padding: 0;
+		background-color: #f0f0f0;
+		border: 1px dashed #ccc;
+		border-radius: 6px;
+		height: 130px;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		font-weight: 400;
+		margin: 0;
+		text-decoration: none;
+		transition: all 0.2s;
+
+		svg {
+			margin-bottom: 8px;
+			fill: #555;
+		}
+
+		&:hover {
+			background-color: #e8e8e8;
+		}
+	}
 }
 
 .gslider-image-control-setting-wrapper {
-    .gslider-setting-device-label-wrapper {
-        display: inline-flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-    .gslider-image-control-setting-item {
-        margin: 25px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .components-base-control {
-            width: 45%;
-        }
-        .gslider-setting-device-label-wrapper {
-            display: inline-flex;
-            align-items: center;
-        }
-    }
+
+	.gslider-setting-device-label-wrapper {
+		display: inline-flex;
+		align-items: center;
+		margin-bottom: 10px;
+	}
+
+	.gslider-image-control-setting-item {
+		margin: 25px 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.components-base-control {
+			width: 45%;
+		}
+
+		.gslider-setting-device-label-wrapper {
+			display: inline-flex;
+			align-items: center;
+		}
+	}
 }
 
 .gslider-image-control-integrated {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    .gslider-image-focal-point-wrapper {
-        position: relative;
+	.gslider-image-focal-point-wrapper {
+		position: relative;
 
-        .components-focal-point-picker-wrapper {
-            width: 100%;
-        }
-        .components-flex {
-            &.focal-point-picker__controls {
-                padding-bottom: 3px;
-            }
-        }
-        .components-base-control {
-            &:where(:not(:last-child)) {
-                margin-bottom: 0;
-            }
-        }
-    }
+		.components-focal-point-picker-wrapper {
+			width: 100%;
+		}
 
-    .gslider-image-overlay-buttons {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        display: flex;
-        gap: 8px;
-        z-index: 10;
+		.components-flex {
 
-        button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            padding: 0;
-            transition: all 0.2s;
+			&.focal-point-picker__controls {
+				padding-bottom: 3px;
+			}
+		}
 
-            svg {
-                width: 16px;
-                height: 16px;
-            }
+		.components-base-control {
 
-            &:hover {
-                background: rgba(255, 255, 255, 1);
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
+			&:where(:not(:last-child)) {
+				margin-bottom: 0;
+			}
+		}
+	}
 
-            &.gslider-image-replace-btn {
-                width: auto;
-                border-radius: 16px;
-                padding: 0 12px;
-            }
-        }
-    }
+	.gslider-image-overlay-buttons {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		display: flex;
+		gap: 8px;
+		z-index: 10;
+
+		button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.9);
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			cursor: pointer;
+			padding: 0;
+			transition: all 0.2s;
+
+			svg {
+				width: 16px;
+				height: 16px;
+			}
+
+			&:hover {
+				background: rgba(255, 255, 255, 1);
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			}
+
+			&.gslider-image-replace-btn {
+				width: auto;
+				border-radius: 16px;
+				padding: 0 12px;
+			}
+		}
+	}
 }

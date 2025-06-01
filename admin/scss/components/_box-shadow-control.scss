@@ -1,36 +1,18 @@
 @use "../variables" as *;
 
 .gslider-controlPane {
+
 	&.controls {
 		width: 250px;
 		padding: 10px;
 
 		.paneChild {
+
 			&.color {
 				flex-direction: column;
 			}
 
 			&.checkbox {
-				.switch {
-					display: inline-block;
-					width: 48px;
-					height: 18px;
-					transform: translateY(0);
-					position: relative;
-
-					input {
-						display: none;
-					}
-
-					input:checked + .slider:before {
-						transform: translateX(30px);
-						background-color: limeGreen;
-					}
-
-					input:checked + .slider {
-						box-shadow: 0 0 0 2px green, 0 0 8px green;
-					}
-				}
 
 				.slider {
 					position: absolute;
@@ -45,7 +27,7 @@
 					overflow: hidden;
 					transition: 0.2s;
 
-					&:before {
+					&::before {
 						position: absolute;
 						content: "";
 						width: 100%;
@@ -54,6 +36,27 @@
 						border-radius: 30px;
 						transform: translateX(-30px);
 						transition: 0.2s;
+					}
+				}
+
+				.switch {
+					display: inline-block;
+					width: 48px;
+					height: 18px;
+					transform: translateY(0);
+					position: relative;
+
+					input {
+						display: none;
+					}
+
+					input:checked + .slider::before {
+						transform: translateX(30px);
+						background-color: #32cd32;
+					}
+
+					input:checked + .slider {
+						box-shadow: 0 0 0 2px #008000, 0 0 8px #008000;
 					}
 				}
 			}
@@ -66,50 +69,57 @@
 }
 
 .gslider-box-shadow-wrapper {
+
 	&.shadow-color {
 		margin-bottom: 10px;
 	}
-    .components-base-control__field {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
+
+	.components-base-control__field {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
 		flex-direction: row;
-        margin: 0;
-        align-items: center;
-        .components-base-control__field {
-            .components-base-control__label {
-                display: block;
-                color: #5f5f5f !important;
-                font-size: 12px !important;
-                font-weight: 500 !important;
-                line-height: 16px !important;
-                margin: 10px 0 !important;
-                min-height: auto;
-                text-transform: capitalize !important;
-            }
-        }
-    }
+		margin: 0;
+		align-items: center;
+
+		.components-base-control__field {
+
+			.components-base-control__label {
+				display: block;
+				color: #5f5f5f !important;
+				font-size: 12px !important;
+				font-weight: 500 !important;
+				line-height: 16px !important;
+				margin: 10px 0 !important;
+				min-height: auto;
+				text-transform: capitalize !important;
+			}
+		}
+	}
 }
 
 .gslider-box-shadow-icon-dropdown {
-    .gslider-box-shadow-icon-btn {
-        margin: 0;
-        height: 28px;
-        width: 28px;
-        padding: 5px;
-        color: #50575e;
-        background: $white_color;
-        &:focus {
-            outline: none;
-            box-shadow: none;
-        }
-        .gslider-box-shadow-icon {
-            font-size: 15px;
-            line-height: 20px;
-        }
-    }
+
+	.gslider-box-shadow-icon-btn {
+		margin: 0;
+		height: 28px;
+		width: 28px;
+		padding: 5px;
+		color: #50575e;
+		background: $white_color;
+
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+
+		.gslider-box-shadow-icon {
+			font-size: 15px;
+			line-height: 20px;
+		}
+	}
 }
 
 .gslider-box-shadow-label {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }

@@ -1,66 +1,78 @@
 @use "../variables" as *;
 
-.gslider-inspector-control { 
-    .dnd-items-wrapper {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+.gslider-inspector-control {
 
-        li.sortable-item {
-            margin-bottom: 10px;
-            margin-top: 10px;
+	.dnd-items-wrapper {
+		list-style: none;
+		padding: 0;
+		margin: 0;
 
-            .sortable-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background: #f9f9f9;
-                border: 1px solid #ddd;
-                border-radius: 4px;
+		li.sortable-item {
+			margin-bottom: 10px;
+			margin-top: 10px;
 
-                .sortable-title {
-                    flex: 12;
-                    cursor: pointer;
-                    overflow: hidden;
-                    padding-left: 5px;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    width: 200px;
-                }
+			.sortable-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background: #f9f9f9;
+				border: 1px solid #ddd;
+				border-radius: 4px;
 
-                .sortable-sort {
-                    border-right: 1px solid #b4b4cb;
-                    border-left: 1px solid #b4b4cb;
-                    button {
-                        &:focus {
-                            box-shadow: none;
-                            outline: none;
-                        }
-                    }
-                }
-                .sortable-duplicate {
-                    border-right: 1px solid #b4b4cb;
-                    button {
-                        &:focus {
-                            box-shadow: none;
-                            outline: none;
-                        }
-                    }
-                }
-                .sortable-delete {
-                    button {
-                        color: #d63638;
-                        &:focus {
-                            box-shadow: none;
-                            outline: none;
-                        }
-                    }
-                }
-            }
+				.sortable-title {
+					flex: 12;
+					cursor: pointer;
+					overflow: hidden;
+					padding-left: 5px;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					width: 200px;
+				}
 
-            .sortable-item-content {
-                padding-top: 10px;
-            }
-        }
-    }
+				.sortable-sort {
+					border-right: 1px solid #b4b4cb;
+					border-left: 1px solid #b4b4cb;
+
+					button {
+
+						&:focus {
+							box-shadow: none;
+							outline: none;
+						}
+					}
+				}
+
+				.sortable-duplicate {
+					border-right: 1px solid #b4b4cb;
+
+					button {
+
+						&:focus {
+							box-shadow: none;
+							outline: none;
+						}
+					}
+				}
+
+				.sortable-delete {
+
+					button {
+
+						&.components-button {
+							color: #d63638;
+
+							&:focus {
+								box-shadow: none;
+								outline: none;
+							}
+						}
+					}
+				}
+			}
+
+			.sortable-item-content {
+				padding-top: 10px;
+			}
+		}
+	}
 }

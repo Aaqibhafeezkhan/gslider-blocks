@@ -1,41 +1,49 @@
 @use "../variables" as *;
 
 .gslider-setting-switcher-container {
-    margin: 15px 0 0 0;
-    .components-base-control__field{
-        margin-bottom: 5px;
-    }
-    .gslider-setting-switcher-panel-wrapper {
-        .gslider-setting-switcher-panel-btn {
-            display: flex !important;
-            width: 100%;
-            button {
-                &.components-button {
-                    &.gslider-setting-switcher-panel-btn-switcher {
-                        width: 100%;
-                        justify-content: center;
-                        height: unset;
-                        line-height: 16px;
-                        min-height: 30px;
-                        font-size: 13px;
-                        font-weight: 400;
-                        box-shadow: inset 0 0 0 1px $background_color;
-                        transition: all 0.3s ease;
-                        &.active {
+	margin: 15px 0 0 0;
 
-                            color: #007cba;
-                            background-color: #dcf2ff;
-                        }
-                    }
+	.components-base-control__field {
+		margin-bottom: 5px;
+	}
 
-                    &:first-child {
-                        border-radius: 4px 0 0 4px;
-                    }
-                    &:last-child {
-                        border-radius: 0 4px 4px 0;
-                    }
-                }
-            }
-        }
-    }
+	.gslider-setting-switcher-panel-wrapper {
+
+		.gslider-setting-switcher-panel-btn {
+			display: flex !important;
+			width: 100%;
+
+			button {
+
+				&.components-button {
+
+					&.gslider-setting-switcher-panel-btn-switcher {
+						width: 100%;
+						justify-content: center;
+						height: unset;
+						line-height: 16px;
+						min-height: 30px;
+						font-size: 13px;
+						font-weight: 400;
+						box-shadow: inset 0 0 0 1px $background_color;
+						transition: all 0.3s ease;
+
+						&.active {
+
+							color: #007cba;
+							background-color: #dcf2ff;
+						}
+					}
+
+					&:first-child {
+						border-radius: 4px 0 0 4px;
+					}
+
+					&:last-child {
+						border-radius: 0 4px 4px 0;
+					}
+				}
+			}
+		}
+	}
 }
