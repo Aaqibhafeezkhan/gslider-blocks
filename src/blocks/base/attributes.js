@@ -408,14 +408,6 @@ const attributes = {
         type: "boolean",
         default: false
     },
-    showNavigation: {
-		type: "boolean",
-		default: true,
-	},
-	showPagination: {
-		type: "boolean",
-		default: true,
-	},
     paginationType: {
         type: "string",
         default: "bullets"
@@ -425,7 +417,34 @@ const attributes = {
 		default: false,
     },
     /** End Slider Settings */
-    
+
+    /** Start Show/Hide Elements */
+    showSubTitle: {
+        type: "boolean",
+        default: true,
+    },
+    showTitle: {
+        type: "boolean",
+        default: true,
+    },
+    showDescription: {
+        type: "boolean",
+        default: true,
+    },
+    showButton: {
+        type: "boolean",
+        default: true,
+    },
+    showNavigation: {
+		type: "boolean",
+		default: true,
+	},
+	showPagination: {
+		type: "boolean",
+		default: true,
+	},
+    /** End Show/Hide Elements */
+
     /** Start Arrows Size */
 	sliderArrowsSize: {
 		type: "object",

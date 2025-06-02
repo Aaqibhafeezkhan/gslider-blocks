@@ -62,11 +62,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		carouselEffect,
 		slideEffect,
 		mousewheelControl,
-		showNavigation,
-		showPagination,
 		paginationType,
 		dynamicBullets,
         generateBackgroundStyle,
+
+        showSubTitle,
+        showTitle,
+        showDescription,
+        showButton,
+        showNavigation,
+		showPagination,
 	} = attributes;
 
 	// Block props for container
@@ -426,62 +431,70 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className="gslider-content-inner-wrapper">
 									<div className="gslider-list-item">
 										<div className="gslider-list-content">
-											<div className="gslider-subtitle-wrapper">
-												<RichText
-													tagName="span"
-													className="gslider-subtitle"
-													value={item.subTitle}
-													onChange={(value) => updateItem(index, 'subTitle', value)}
-													placeholder="Enter subtitle"
-												/>
-											</div>
-											<div className="gslider-title-wrapper">
-												<RichText
-													tagName="h3"
-													className="gslider-title"
-													value={item.title}
-													onChange={(value) => updateItem(index, 'title', value)}
-													placeholder="Enter title"
-												/>
-											</div>
-											<div className="gslider-description-wrapper">
-												<RichText
-													tagName="p"
-													className="gslider-description"
-													value={item.description}
-													onChange={(value) => updateItem(index, 'description', value)}
-													placeholder="Enter description"
-												/>
-											</div>
-											<div className="gslider-button-container">
-												{item.buttonLink ? (
-													<a
-														className="gslider-button"
-														href={item.buttonLink}
-														target={item.buttonTargetLink ? '_blank' : undefined}
-														rel={[
-															item.nofollow && 'nofollow',
-															item.sponsored && 'sponsored',
-															item.buttonTargetLink && 'noopener noreferrer'
-														].filter(Boolean).join(' ')}
-														onClick={handleButtonClick}
-													>
-														<RichText
-															value={item.buttonText}
-															className="gslider-button-text"
-															onChange={(value) => updateItem(index, 'buttonText', value)}
-															placeholder={__('Enter button text...', 'gslider-blocks')}
-														/>
-													</a>
-												) : (
-													<RichText
-														value={item.buttonText}
-														className="gslider-button-text"
-														onChange={(value) => updateItem(index, 'buttonText', value)}
-														placeholder={__('Enter button text...', 'gslider-blocks')}
-													/>
-												)}
-											</div>
+											{ showSubTitle && item.subTitle && (
+                                                <div className="gslider-subtitle-wrapper">
+                                                    <RichText
+                                                        tagName="span"
+                                                        className="gslider-subtitle"
+                                                        value={item.subTitle}
+                                                        onChange={(value) => updateItem(index, 'subTitle', value)}
+                                                        placeholder="Enter subtitle"
+                                                    />
+                                                </div>
+											)}
+											{ showTitle && item.title && (
+                                                <div className="gslider-title-wrapper">
+                                                    <RichText
+                                                        tagName="h3"
+                                                        className="gslider-title"
+                                                        value={item.title}
+                                                        onChange={(value) => updateItem(index, 'title', value)}
+                                                        placeholder="Enter title"
+                                                    />
+                                                </div>
+											)}
+											{ showDescription && item.description && (
+                                                <div className="gslider-description-wrapper">
+                                                    <RichText
+                                                        tagName="p"
+                                                        className="gslider-description"
+                                                        value={item.description}
+                                                        onChange={(value) => updateItem(index, 'description', value)}
+                                                        placeholder="Enter description"
+                                                    />
+                                                </div>
+											)}
+											{ showButton && item.buttonText && (
+                                                <div className="gslider-button-container">
+                                                    {item.buttonLink ? (
+                                                        <a
+                                                            className="gslider-button"
+                                                            href={item.buttonLink}
+                                                            target={item.buttonTargetLink ? '_blank' : undefined}
+                                                            rel={[
+                                                                item.nofollow && 'nofollow',
+                                                                item.sponsored && 'sponsored',
+                                                                item.buttonTargetLink && 'noopener noreferrer'
+                                                            ].filter(Boolean).join(' ')}
+                                                            onClick={handleButtonClick}
+                                                        >
+                                                            <RichText
+                                                                value={item.buttonText}
+                                                                className="gslider-button-text"
+                                                                onChange={(value) => updateItem(index, 'buttonText', value)}
+                                                                placeholder={__('Enter button text...', 'gslider-blocks')}
+                                                            />
+                                                        </a>
+                                                    ) : (
+                                                        <RichText
+                                                            value={item.buttonText}
+                                                            className="gslider-button-text"
+                                                            onChange={(value) => updateItem(index, 'buttonText', value)}
+                                                            placeholder={__('Enter button text...', 'gslider-blocks')}
+                                                        />
+                                                    )}
+                                                </div>
+											)}
 										</div>
 									</div>
 								</div>

@@ -18,10 +18,15 @@ export default function Save({ attributes }) {
         carouselEffect,
         slideEffect,
         mousewheelControl,
-        showNavigation,
-        showPagination,
         paginationType,
         dynamicBullets,
+
+        showSubTitle,
+        showTitle,
+        showDescription,
+        showButton,
+        showNavigation,
+        showPagination,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -89,7 +94,7 @@ export default function Save({ attributes }) {
                                 <div className="gslider-content-inner-wrapper">
                                     <div className="gslider-list-item">
                                         <div className="gslider-list-content">
-                                            {item.subTitle && (
+                                            {showSubTitle && item.subTitle && (
                                                 <div className="gslider-subtitle-wrapper">
                                                     <RichText.Content
                                                         tagName="span"
@@ -98,7 +103,7 @@ export default function Save({ attributes }) {
                                                     />
                                                 </div>
                                             )}
-                                            {item.title && (
+                                            {showTitle && item.title && (
                                                 <div className="gslider-title-wrapper">
                                                     <RichText.Content
                                                         tagName="h3"
@@ -107,7 +112,7 @@ export default function Save({ attributes }) {
                                                     />
                                                 </div>
                                             )}
-                                            {item.description && (
+                                            {showDescription && item.description && (
                                                 <div className="gslider-description-wrapper">
                                                     <RichText.Content
                                                         tagName="p"
@@ -116,7 +121,7 @@ export default function Save({ attributes }) {
                                                     />
                                                 </div>
                                             )}
-                                            {item.buttonText && (
+                                            {showButton && item.buttonText && (
                                                 <div className="gslider-button-container">
                                                     {item.buttonLink ? (
                                                         <a 
