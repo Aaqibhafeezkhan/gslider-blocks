@@ -491,6 +491,25 @@ const attributes = {
 	},
     /** End Show/Hide Elements */
 
+    /** Layout & Content Setting */
+    layoutHeight: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    layoutHeightUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    /** End Layout & Content Setting */
+
     /** Start Arrows Size */
 	sliderArrowsSize: {
 		type: "object",

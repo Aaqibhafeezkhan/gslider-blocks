@@ -65,6 +65,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         showPagination,
         /** End Show/Hide Elements */
 
+        /** Start Layout & Content Setting */
+        layoutHeight,
+        layoutHeightUnits,
+        /** End Layout & Content Setting */
+
         /** Start Arrows Style */
         sliderArrowsSize,
         sliderArrowsSizeUnits,
@@ -428,9 +433,30 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
             </PanelBody>
             <PanelBody
-                title={__("Slider Items", "gslider-blocks")}
+                title={__("Layout & Content Setting", "gslider-blocks")}
                 opened={openPanels.general === "g2"}
                 onToggle={() => togglePanel("general", "g2")}
+            >
+
+                <ResponsiveRangeControl
+                    min={0}
+                    max={1000}
+                    label={__("Layout Height", "gslider-blocks")}
+                    rangeValue={layoutHeight}
+                    onChangeValue={(value) => setAttributes({ layoutHeight: value })}
+                    onUnitChange={(value) => setAttributes({ layoutHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={layoutHeightUnits}
+                    step={1}
+                    resetFallbackValue={""}
+                />
+                
+
+            </PanelBody>
+            <PanelBody
+                title={__("Slider Items", "gslider-blocks")}
+                opened={openPanels.general === "g3"}
+                onToggle={() => togglePanel("general", "g3")}
             >
                 <div className="gslider-wrapper">
                     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
@@ -459,8 +485,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             </PanelBody>
             <PanelBody 
                 title={__("Slider Type", "gslider-blocks")} 
-                opened={openPanels.general === "g3"}
-                onToggle={() => togglePanel("general", "g3")}
+                opened={openPanels.general === "g4"}
+                onToggle={() => togglePanel("general", "g4")}
             >
                 <div className="gslider-setting-switcher-container">
                     <BaseControl
@@ -482,9 +508,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 </div>
             </PanelBody>
             <PanelBody 
-                title={__("General Settings", "gslider-blocks")} 
-                opened={openPanels.general === "g4"}
-                onToggle={() => togglePanel("general", "g4")}
+                title={__("Slider Settings", "gslider-blocks")} 
+                opened={openPanels.general === "g5"}
+                onToggle={() => togglePanel("general", "g5")}
             >
                 <ToggleControl
                     label={ __( 'Infinite Loop', 'gslider-blocks' ) }
@@ -552,8 +578,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             {sliderType === 'carousel' && (
                 <PanelBody 
                     title={__("Carousel Settings", "gslider-blocks")} 
-                    opened={openPanels.general === "g5"}
-                    onToggle={() => togglePanel("general", "g5")}
+                    opened={openPanels.general === "g6"}
+                    onToggle={() => togglePanel("general", "g6")}
                 >
                     <RangeControl
                         label={__('Number of Columns', 'gslider-blocks')}
@@ -578,8 +604,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             {sliderType === 'carousel' && (
                 <PanelBody 
                     title={__("Carousel Effect", "gslider-blocks")} 
-                    opened={openPanels.general === "g6"}
-                    onToggle={() => togglePanel("general", "g6")}
+                    opened={openPanels.general === "g7"}
+                    onToggle={() => togglePanel("general", "g7")}
                 >
                     <SelectControl
                         label={__('Select Carousel Effect', 'gslider-blocks')}
@@ -592,8 +618,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             {sliderType === 'slider' && (
                 <PanelBody 
                     title={__("Slider Effect", "gslider-blocks")} 
-                    opened={openPanels.general === "g7"}
-                    onToggle={() => togglePanel("general", "g7")}
+                    opened={openPanels.general === "g8"}
+                    onToggle={() => togglePanel("general", "g8")}
                 >
                     <SelectControl
                         label={__('Select Slider Effect', 'gslider-blocks')}
@@ -607,8 +633,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             {showPagination && (
                 <PanelBody 
                     title={__("Pagination", "gslider-blocks")} 
-                    opened={openPanels.general === "g8"}
-                    onToggle={() => togglePanel("general", "g8")}
+                    opened={openPanels.general === "g9"}
+                    onToggle={() => togglePanel("general", "g9")}
                 >
                     <SelectControl
                         label={__('Pagination Type', 'gslider-blocks')}
