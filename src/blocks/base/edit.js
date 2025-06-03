@@ -178,9 +178,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             subTitle: 'Enter your subtitle here',
             title: `Slider Item ${sliderItems.length + 1}`,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-            buttonText: 'Click Here',
-            buttonLink: '#',
-            buttonTargetLink: false,
+            primaryButtonText: 'Click Here',
+            primaryButtonLink: '#',
+            primaryButtonTargetLink: true,
+            primaryButtonNofollow: false,
+            primaryButtonSponsored: false,
+
+            secondaryButtonSwitcher: false,
+            secondaryButtonText: 'Click Here',
+            secondaryButtonLink: '#',
+            secondaryButtonTargetLink: true,
+            secondaryButtonNofollow: false,
+            secondaryButtonSponsored: false,
+
 
             normalItemBackgroundType: 'classic',
             normalItemClassicColor: '#EDEDED',
@@ -464,37 +474,71 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     />
                                                 </div>
 											)}
-											{ showButton && item.buttonText && (
-                                                <div className="gslider-button-container">
-                                                    {item.buttonLink ? (
-                                                        <a
-                                                            className="gslider-button"
-                                                            href={item.buttonLink}
-                                                            target={item.buttonTargetLink ? '_blank' : undefined}
-                                                            rel={[
-                                                                item.nofollow && 'nofollow',
-                                                                item.sponsored && 'sponsored',
-                                                                item.buttonTargetLink && 'noopener noreferrer'
-                                                            ].filter(Boolean).join(' ')}
-                                                            onClick={handleButtonClick}
-                                                        >
+                                            {showButton && (
+                                                <div className="gslider-btn-container">
+                                                    <>
+                                                        {item.primaryButtonLink ? (
+                                                            <a
+                                                                className="gslider-btn primary-btn" 
+                                                                href={item.primaryButtonLink}
+                                                                target={item.primaryButtonTargetLink ? '_blank' : undefined}
+                                                                rel={[
+                                                                    item.primaryButtonNofollow && 'nofollow',
+                                                                    item.primaryButtonSponsored && 'sponsored',
+                                                                    item.primaryButtonTargetLink && 'noopener noreferrer'
+                                                                ].filter(Boolean).join(' ')}
+                                                                onClick={handleButtonClick}
+                                                            >
+                                                                <RichText
+                                                                    value={item.primaryButtonText}
+                                                                    className="gslider-btn primary-btn text"
+                                                                    onChange={(value) => updateItem(index, 'primaryButtonText', value)}
+                                                                    placeholder={__('Enter button text...', 'gslider-blocks')}
+                                                                />
+                                                            </a>
+                                                        ) : (
                                                             <RichText
-                                                                value={item.buttonText}
-                                                                className="gslider-button-text"
-                                                                onChange={(value) => updateItem(index, 'buttonText', value)}
+                                                                value={item.primaryButtonText}
+                                                                className="gslider-btn primary-btn text"
+                                                                onChange={(value) => updateItem(index, 'primaryButtonText', value)}
                                                                 placeholder={__('Enter button text...', 'gslider-blocks')}
                                                             />
-                                                        </a>
-                                                    ) : (
-                                                        <RichText
-                                                            value={item.buttonText}
-                                                            className="gslider-button-text"
-                                                            onChange={(value) => updateItem(index, 'buttonText', value)}
-                                                            placeholder={__('Enter button text...', 'gslider-blocks')}
-                                                        />
-                                                    )}
+                                                        )}
+
+                                                        {item.secondaryButtonSwitcher && (
+                                                            item.secondaryButtonLink ? (
+                                                                <a
+                                                                    className="gslider-btn secondary-btn"
+                                                                    href={item.secondaryButtonLink}
+                                                                    target={item.secondaryButtonTargetLink ? '_blank' : undefined}
+                                                                    rel={[
+                                                                        item.secondaryButtonNofollow && 'nofollow',
+                                                                        item.secondaryButtonSponsored && 'sponsored',
+                                                                        item.secondaryButtonTargetLink && 'noopener noreferrer'
+                                                                    ].filter(Boolean).join(' ')}
+                                                                    onClick={handleButtonClick}
+                                                                >
+                                                                    <RichText
+                                                                        value={item.secondaryButtonText}
+                                                                        className="gslider-btn secondary-btn text"
+                                                                        onChange={(value) => updateItem(index, 'secondaryButtonText', value)}
+                                                                        placeholder={__('Enter button text...', 'gslider-blocks')}
+                                                                    />
+                                                                </a>
+                                                            ) : (
+                                                                <RichText
+                                                                    value={item.secondaryButtonText}
+                                                                    className="gslider-btn secondary-btn text"
+                                                                    onChange={(value) => updateItem(index, 'secondaryButtonText', value)}
+                                                                    placeholder={__('Enter button text...', 'gslider-blocks')}
+                                                                />
+                                                            )
+                                                        )}
+
+                                                    </>
                                                 </div>
-											)}
+                                            )}
+
 										</div>
 									</div>
 								</div>

@@ -19,11 +19,18 @@ const attributes = {
                 subTitle: "Sub Title",
                 title: "Slider Item 1",
                 description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
-                buttonText: "Click Here",
-                buttonLink: "#",
-                buttonTargetLink: false,
-                nofollow: false,
-                sponsored: false,
+                primaryButtonText: "Click Here",
+                primaryButtonLink: "#",
+                primaryButtonTargetLink: true,
+                primaryButtonNofollow: false,
+                primaryButtonSponsored: false,
+
+                secondaryButtonSwitcher: false,
+                secondaryButtonText: "Click Here",
+                secondaryButtonLink: "#",
+                secondaryButtonTargetLink: true,
+                secondaryButtonNofollow: false,
+                secondaryButtonSponsored: false,
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -81,11 +88,18 @@ const attributes = {
                 subTitle: "Sub Title",
                 title: "Slider Item 2",
                 description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
-                buttonText: "Click Here",
-                buttonLink: "#",
-                buttonTargetLink: false,
-                nofollow: false,
-                sponsored: false,
+                primaryButtonText: "Click Here",
+                primaryButtonLink: "#",
+                primaryButtonTargetLink: true,
+                primaryButtonNofollow: false,
+                primaryButtonSponsored: false,
+
+                secondaryButtonSwitcher: false,
+                secondaryButtonText: "Click Here",
+                secondaryButtonLink: "#",
+                secondaryButtonTargetLink: true,
+                secondaryButtonNofollow: false,
+                secondaryButtonSponsored: false,
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -144,11 +158,18 @@ const attributes = {
                 subTitle: "Sub Title",
                 title: "Slider Item 3",
                 description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
-                buttonText: "Click Here",
-                buttonLink: "#",
-                buttonTargetLink: false,
-                nofollow: false,
-                sponsored: false,
+                primaryButtonText: "Click Here",
+                primaryButtonLink: "#",
+                primaryButtonTargetLink: true,
+                primaryButtonNofollow: false,
+                primaryButtonSponsored: false,
+
+                secondaryButtonSwitcher: false,
+                secondaryButtonText: "Click Here",
+                secondaryButtonLink: "#",
+                secondaryButtonTargetLink: true,
+                secondaryButtonNofollow: false,
+                secondaryButtonSponsored: false,
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -220,23 +241,48 @@ const attributes = {
                     type: "string",
                     default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum."
                 },
-                buttonText: {
+                primaryButtonText: {
                     type: "string",
                     default: "Click Here"
                 },
-                buttonLink: {
+                primaryButtonLink: {
                     type: "string",
                     default: "#"
                 },
-                buttonTargetLink: {
+                primaryButtonTargetLink: {
+                    type: "boolean",
+                    default: true
+                },
+                primaryButtonNofollow: {
                     type: "boolean",
                     default: false
                 },
-                nofollow: {
+                primaryButtonSponsored: {
                     type: "boolean",
                     default: false
                 },
-                sponsored: {
+
+                secondaryButtonSwitcher: {
+                    type: "boolean",
+                    default: false
+                },
+                secondaryButtonText: {
+                    type: "string",
+                    default: "Click Here"
+                },
+                secondaryButtonLink: {
+                    type: "string",
+                    default: "#"
+                },
+                secondaryButtonTargetLink: {
+                    type: "boolean",
+                    default: true
+                },
+                secondaryButtonNofollow: {
+                    type: "boolean",
+                    default: false
+                },
+                secondaryButtonSponsored: {
                     type: "boolean",
                     default: false
                 },
