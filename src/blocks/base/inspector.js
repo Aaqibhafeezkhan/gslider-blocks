@@ -31,6 +31,7 @@ import ResponsiveBackgroundImageControl from '@Components/responsive-background-
 import InspectorControl from '@Components/inspector-controls';
 import CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
+import ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import {useDeviceType} from "@Utils/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
@@ -70,6 +71,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         layoutHeightUnits,
         contentWidth,
         contentWidthUnits,
+        contentAlignment,
+        contentVerticalAlignment,
+        contentHorizontalAlignment,
         /** End Layout & Content Setting */
 
         /** Start Arrows Style */
@@ -465,6 +469,37 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     resetFallbackValue={""}
                 /> 
 
+                <ResponsiveAlignmentControl
+                    label={__("Content Vertical Alignment", "gslider-blocks")}
+                    globalAlignment={contentVerticalAlignment}
+                    setGlobalAlignment={(value) => setAttributes({ contentVerticalAlignment: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    textAlignment={false}
+                    verticalAlignment={true}
+                    horizontalAlignment={false}
+                />
+
+                <ResponsiveAlignmentControl
+                    label={__("Content Horizontal Alignment", "gslider-blocks")}
+                    globalAlignment={contentHorizontalAlignment}
+                    setGlobalAlignment={(value) => setAttributes({ contentHorizontalAlignment: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    textAlignment={false}
+                    verticalAlignment={false}
+                    horizontalAlignment={true}
+                />
+
+                <ResponsiveAlignmentControl
+                    label={__("Content Alignment", "gslider-blocks")}
+                    globalAlignment={contentAlignment}
+                    setGlobalAlignment={(value) => setAttributes({ contentAlignment: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    verticalAlignment={false}
+                    horizontalAlignment={false}
+                />
             </PanelBody>
             <PanelBody
                 title={__("Slider Items", "gslider-blocks")}
@@ -1590,15 +1625,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         }
         
         .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
-        	display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
             height: ${layoutHeight?.Desktop ? `${layoutHeight.Desktop}${layoutHeightUnits?.Desktop}` : 'clamp(300px, 60vh, 500px)'};
+            ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }
 
         .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
-            max-width: ${contentWidth?.Desktop ? `${contentWidth.Desktop}${contentWidthUnits?.Desktop}` : '80%'};
+            ${contentWidth?.Desktop ? `max-width: ${contentWidth.Desktop}${contentWidthUnits?.Desktop};` : ''}
+            ${contentAlignment?.Desktop ? `text-align: ${contentAlignment.Desktop};` : ''}
+
+            ${contentHorizontalAlignment?.Desktop === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
+            ${contentHorizontalAlignment?.Desktop === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
+            ${contentHorizontalAlignment?.Desktop === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
         }
         
         .${blockId} .swiper-button-prev,
@@ -1673,10 +1710,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
                 height: ${layoutHeight?.Tablet ? `${layoutHeight.Tablet}${layoutHeightUnits?.Tablet}` : 'clamp(300px, 60vh, 500px)'};
+                ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
-                max-width: ${contentWidth?.Tablet ? `${contentWidth.Tablet}${contentWidthUnits?.Tablet}` : '80%'};
+                ${contentWidth?.Tablet ? `max-width: ${contentWidth.Tablet}${contentWidthUnits?.Tablet};` : ''}
+                ${contentAlignment?.Tablet ? `text-align: ${contentAlignment.Tablet};` : ''}
+
+                ${contentHorizontalAlignment?.Tablet === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
+                ${contentHorizontalAlignment?.Tablet === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
+                ${contentHorizontalAlignment?.Tablet === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
             }
 
             .${blockId} .swiper-button-prev,
@@ -1724,10 +1767,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
                 height: ${layoutHeight?.Mobile ? `${layoutHeight.Mobile}${layoutHeightUnits?.Mobile}` : 'clamp(300px, 60vh, 500px)'};
+                ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
-                max-width: ${contentWidth?.Mobile ? `${contentWidth.Mobile}${contentWidthUnits?.Mobile}` : '80%'};
+                ${contentWidth?.Mobile ? `max-width: ${contentWidth.Mobile}${contentWidthUnits?.Mobile};` : ''}
+                ${contentAlignment?.Mobile ? `text-align: ${contentAlignment.Mobile};` : ''}
+
+                ${contentHorizontalAlignment?.Mobile === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
+                ${contentHorizontalAlignment?.Mobile === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
+                ${contentHorizontalAlignment?.Mobile === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
             }
 
             .${blockId} .swiper-button-prev,
@@ -1783,6 +1832,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** Start Content Width */
         contentWidth,
         contentWidthUnits,
+        contentAlignment,
+        contentVerticalAlignment,
+        contentHorizontalAlignment,
         /** End Content Width */
 
         /** Start Arrows Style */

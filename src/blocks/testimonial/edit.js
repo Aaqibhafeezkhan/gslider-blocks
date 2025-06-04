@@ -71,7 +71,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Block props for container
 	const blockProps = useBlockProps({
-		className: `gslider-container ${blockId}`,
+		className: `gslider-testimonial-wrapper ${blockId}`,
 	});
 
 	// const deviceType = useDeviceType();

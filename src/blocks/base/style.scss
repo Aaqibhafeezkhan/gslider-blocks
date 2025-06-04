@@ -1,11 +1,16 @@
 .gslider-base-wrapper {
 	.gslider-content-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
 		.gslider-content-inner-wrapper {
-			box-sizing: border-box;
+        	box-sizing: border-box;
 			margin: 0 auto;
 			padding: clamp(15px, 6vw, 30px);
-			text-align: center;
+			max-width: 80%;
 			width: 100%;
+			text-align: center;
 		}
 	}
 }

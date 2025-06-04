@@ -1,6 +1,43 @@
 /*!****************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./admin/scss/admin.scss ***!
   \****************************************************************************************************************/
+/** Global alignment or select tag style */
+.gslider-alignment-control-wrapper .gslider-alignment-group-btn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-radius: 4px;
+  background: #F8F8F8;
+  margin-bottom: 24px;
+}
+.gslider-alignment-control-wrapper .gslider-alignment-group-btn.gslider-vertical-alignment svg {
+  transform: rotate(90deg) !important;
+}
+.gslider-alignment-control-wrapper .gslider-alignment-group-btn .gslider-alignment-single-btn {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: 6px;
+  height: unset;
+  line-height: 16px;
+  box-shadow: inset 0 0 0 1px #ededed;
+  color: #5f5f5f;
+}
+.gslider-alignment-control-wrapper .gslider-alignment-group-btn .gslider-alignment-single-btn.active {
+  background-color: #ededed !important;
+  color: #5f5f5f !important;
+}
+.gslider-alignment-control-wrapper .gslider-alignment-group-btn .gslider-alignment-single-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.gslider-alignment-control-wrapper .gslider-alignment-group-btn .gslider-alignment-single-btn:hover {
+  background-color: #ededed;
+  color: #5f5f5f;
+}
+
+/** End Admin Panel scss **/
 /** Start Admin Panel scss **/
 .gslider-inspector-control .gslider-tab-panel {
   display: flex;

@@ -25,6 +25,55 @@ export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
 ];
 
+
+export const VERTICAL_POSITION_ICONS = {
+  top: (
+    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M9 9v6h11V9H9zM4 20h1.5V4H4v16z"></path>
+    </svg>
+  ),
+  middle: (
+    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12.5 15v5H11v-5H4V9h7V4h1.5v5h7v6h-7Z"></path>
+    </svg>
+  ),
+  bottom: (
+    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M4 15h11V9H4v6zM18.5 4v16H20V4h-1.5z"></path>
+    </svg>
+  )
+};
+
+export const HORIZONTAL_POSITION_ICONS = {
+    left: (
+      <svg  width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M9 9v6h11V9H9zM4 20h1.5V4H4v16z"></path>
+      </svg>
+    ),
+    center: (
+      <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12.5 15v5H11v-5H4V9h7V4h1.5v5h7v6h-7Z"></path>
+      </svg>
+    ),
+    right: (
+      <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M4 15h11V9H4v6zM18.5 4v16H20V4h-1.5z"></path>
+      </svg>
+    )
+  };
+
+export const VERTICAL_ALIGN = [
+	{ label: __(VERTICAL_POSITION_ICONS.top), value: "flex-start" },
+	{ label: __(VERTICAL_POSITION_ICONS.middle), value: "center" },
+	{ label: __(VERTICAL_POSITION_ICONS.bottom), value: "flex-end" },
+];
+
+export const HORIZONTAL_ALIGN = [
+	{ label: __(HORIZONTAL_POSITION_ICONS.left), value: "left" },
+	{ label: __(HORIZONTAL_POSITION_ICONS.center), value: "center" },
+	{ label: __(HORIZONTAL_POSITION_ICONS.right), value: "right" },
+];
+
 export const HEADING = [
 	{ label: __("H1", "gslider-blocks"), value: "h1" },
 	{ label: __("H2", "gslider-blocks"), value: "h2" },

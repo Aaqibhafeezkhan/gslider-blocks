@@ -524,6 +524,30 @@ const attributes = {
             Mobile: "%",
         },
     },
+    contentAlignment: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    contentVerticalAlignment: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    contentHorizontalAlignment: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
     /** End Layout & Content Setting */
 
     /** Start Arrows Size */
