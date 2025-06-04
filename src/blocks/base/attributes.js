@@ -508,6 +508,22 @@ const attributes = {
             Mobile: "px",
         },
     },
+    contentWidth: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    contentWidthUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
     /** End Layout & Content Setting */
 
     /** Start Arrows Size */

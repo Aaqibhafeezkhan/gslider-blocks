@@ -68,6 +68,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** Start Layout & Content Setting */
         layoutHeight,
         layoutHeightUnits,
+        contentWidth,
+        contentWidthUnits,
         /** End Layout & Content Setting */
 
         /** Start Arrows Style */
@@ -437,7 +439,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 opened={openPanels.general === "g2"}
                 onToggle={() => togglePanel("general", "g2")}
             >
-
                 <ResponsiveRangeControl
                     min={0}
                     max={1000}
@@ -450,7 +451,19 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     step={1}
                     resetFallbackValue={""}
                 />
-                
+
+                <ResponsiveRangeControl
+                    min={0}
+                    max={contentWidthUnits?.[deviceType] === '%' ? 100 : 1000}
+                    label={__("Content Width", "gslider-blocks")}
+                    rangeValue={contentWidth}
+                    onChangeValue={(value) => setAttributes({ contentWidth: value })}
+                    onUnitChange={(value) => setAttributes({ contentWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={contentWidthUnits}
+                    step={1}
+                    resetFallbackValue={""}
+                /> 
 
             </PanelBody>
             <PanelBody
@@ -1568,12 +1581,26 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         return style;
     }, [sliderItems, blockId, deviceType]);
 
+
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
 
         .${blockId} .swiper-wrapper {
             align-items: center;
         }
+        
+        .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+        	display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            height: ${layoutHeight?.Desktop ? `${layoutHeight.Desktop}${layoutHeightUnits?.Desktop}` : 'clamp(300px, 60vh, 500px)'};
+        }
+
+        .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+            max-width: ${contentWidth?.Desktop ? `${contentWidth.Desktop}${contentWidthUnits?.Desktop}` : '80%'};
+        }
+        
         .${blockId} .swiper-button-prev,
         .${blockId} .swiper-button-next {
             ${sliderArrowsColor ? `color: ${sliderArrowsColor};` : ''}
@@ -1643,6 +1670,15 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
 
         @media only screen and (max-width: 1024px) {
+
+            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+                height: ${layoutHeight?.Tablet ? `${layoutHeight.Tablet}${layoutHeightUnits?.Tablet}` : 'clamp(300px, 60vh, 500px)'};
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+                max-width: ${contentWidth?.Tablet ? `${contentWidth.Tablet}${contentWidthUnits?.Tablet}` : '80%'};
+            }
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${sliderArrowsTabletBorderCssStyle ? `border-width: ${sliderArrowsTabletBorderCssStyle};` : ''}  
@@ -1685,6 +1721,15 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         }
         
         @media only screen and (max-width: 767px) {
+
+            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+                height: ${layoutHeight?.Mobile ? `${layoutHeight.Mobile}${layoutHeightUnits?.Mobile}` : 'clamp(300px, 60vh, 500px)'};
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+                max-width: ${contentWidth?.Mobile ? `${contentWidth.Mobile}${contentWidthUnits?.Mobile}` : '80%'};
+            }
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${sliderArrowsMobileBorderCssStyle ? `border-width: ${sliderArrowsMobileBorderCssStyle};` : ''}  
@@ -1729,6 +1774,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     `, [
         blockId,
         deviceType,
+
+        /** Start Layout Height */
+        layoutHeight,
+        layoutHeightUnits,
+        /** End Layout Height */
+
+        /** Start Content Width */
+        contentWidth,
+        contentWidthUnits,
+        /** End Content Width */
+
         /** Start Arrows Style */
         sliderArrowsSize,
         sliderArrowsSizeUnits,
