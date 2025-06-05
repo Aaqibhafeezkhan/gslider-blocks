@@ -25,7 +25,7 @@ export default function Save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `gslider-container ${blockId}`,
+        className: `gslider-testimonial-wrapper ${blockId}`,
     });
 
     // Configure Swiper settings for frontend rendering

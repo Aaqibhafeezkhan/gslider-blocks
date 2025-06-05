@@ -3,26 +3,30 @@
 .gslider-setting-spacing-container,
 .paneChild {
 
-	.components-range-control__wrapper {
+	.components-range-control {
+		.components-range-control__root {
+			.components-range-control__wrapper {
 
-		span[aria-hidden="true"] {
-			height: 2px !important;
-		}
-	}
-
-	.components-range-control__thumb-wrapper {
-		top: 0 !important;
-		height: 8px !important;
-		margin-top: 10px !important;
-		width: 8px !important;
-
-		span {
-
-			&::before {
-				height: 12px !important;
-				left: -2px !important;
-				top: -5px !important;
-				width: 12px !important;
+				span[aria-hidden="true"] {
+					height: 2px !important;
+					background-color: $primary_color !important;
+				}
+			}
+			.components-range-control__thumb-wrapper {
+				top: 0 !important;
+				height: 8px !important;
+				margin-top: 10px !important;
+				width: 8px !important;
+		
+				span {
+		
+					&::before {
+						height: 12px !important;
+						left: -2px !important;
+						top: -5px !important;
+						width: 12px !important;
+					}
+				}
 			}
 		}
 	}

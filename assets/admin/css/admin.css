@@ -820,19 +820,20 @@
   transform: scale(1);
 }
 
-.gslider-setting-spacing-container .components-range-control__wrapper span[aria-hidden=true],
-.paneChild .components-range-control__wrapper span[aria-hidden=true] {
+.gslider-setting-spacing-container .components-range-control .components-range-control__root .components-range-control__wrapper span[aria-hidden=true],
+.paneChild .components-range-control .components-range-control__root .components-range-control__wrapper span[aria-hidden=true] {
   height: 2px !important;
+  background-color: #007cba !important;
 }
-.gslider-setting-spacing-container .components-range-control__thumb-wrapper,
-.paneChild .components-range-control__thumb-wrapper {
+.gslider-setting-spacing-container .components-range-control .components-range-control__root .components-range-control__thumb-wrapper,
+.paneChild .components-range-control .components-range-control__root .components-range-control__thumb-wrapper {
   top: 0 !important;
   height: 8px !important;
   margin-top: 10px !important;
   width: 8px !important;
 }
-.gslider-setting-spacing-container .components-range-control__thumb-wrapper span::before,
-.paneChild .components-range-control__thumb-wrapper span::before {
+.gslider-setting-spacing-container .components-range-control .components-range-control__root .components-range-control__thumb-wrapper span::before,
+.paneChild .components-range-control .components-range-control__root .components-range-control__thumb-wrapper span::before {
   height: 12px !important;
   left: -2px !important;
   top: -5px !important;
