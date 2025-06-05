@@ -874,6 +874,10 @@
   font-size: 11px;
   margin-right: 5px;
 }
+.gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper .gslider-setting-spacing-input-label.link-label {
+  visibility: hidden;
+  opacity: 0;
+}
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper input {
   border-color: #ebebeb !important;
   color: #1e1e1e;
@@ -907,7 +911,6 @@
   padding: 0;
   text-align: center;
   width: 100%;
-  margin-top: 18px;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   align-items: center;

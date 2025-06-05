@@ -97,7 +97,7 @@ export default function Save({ attributes }) {
                                             {showSubTitle && item.subTitle && (
                                                 <div className="gslider-subtitle-wrapper">
                                                     <RichText.Content
-                                                        tagName="span"
+                                                        tagName="h5"
                                                         className="gslider-subtitle"
                                                         value={item.subTitle}
                                                     />

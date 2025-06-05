@@ -4,7 +4,6 @@
 	"name": "gslider-blocks/testimonial",
 	"version": "1.0.0",
 	"title": "Testimonial",
-	"icon": "slides",
 	"category": "gslider-blocks",
 	"description": "Display customer testimonials in a sliding layout.",
 	"example": {

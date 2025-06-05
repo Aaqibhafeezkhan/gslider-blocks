@@ -218,7 +218,7 @@ export default function ResponsiveSpacingControl({
 						/>
 					</div>
 					<div className="gslider-setting-spacing-input-wrapper">
-						<label className="gslider-setting-spacing-input-label"></label>
+						<label className="gslider-setting-spacing-input-label link-label">Link</label>
 						<span
 							className={`dashicons ${isLinked ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${isLinked ? 'is-checked' : ''}`}
 							onClick={handleLinkToggle}

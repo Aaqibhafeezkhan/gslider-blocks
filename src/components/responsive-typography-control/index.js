@@ -41,7 +41,6 @@ const ResponsiveTypographyControl = ({
 	lineHeightUnits,
 	onChangeLineHeightUnit,
     deviceType,
-    setAttributes,
 }) => {
 	const handleFontFamilyChange = (newFontFamily) => {
 		onChangeFontFamily(newFontFamily);
@@ -120,14 +119,13 @@ const ResponsiveTypographyControl = ({
                                 min={1}
                                 max={100}
                                 label={__("Font Size", "gslider-blocks")}
-                                value={fontSize}
-                                onChange={handleFontSizeChange}
+                                rangeValue={fontSize}
+                                onChangeValue={handleFontSizeChange}
                                 onUnitChange={handleFontSizeUnitChange}
                                 deviceType={deviceType}
                                 units={fontSizeUnits}
-                                setAttributes={setAttributes}
                                 step={1}
-                                defaultValue={""}
+                                resetFallbackValue={""}
                             />
                             <SelectControl
                                 label={__("Font Weight", "gslider-blocks")}
@@ -154,30 +152,28 @@ const ResponsiveTypographyControl = ({
                                 onChange={handleTextDecorationChange}
                             />
                             <ResponsiveRangeControl
-                                min={1}
+                                min={-20}
                                 max={20}
                                 label={__("Letter Spacing", "gslider-blocks")}
-                                value={letterSpacing}
-                                onChange={handleLetterSpacingChange}
+                                rangeValue={letterSpacing}
+                                onChangeValue={handleLetterSpacingChange}
                                 onUnitChange={handleLetterSpacingUnitChange}
                                 deviceType={deviceType}
                                 units={letterSpacingUnits}
-                                setAttributes={setAttributes}
                                 step={.1}
-                                defaultValue={""}
+                                resetFallbackValue={""}
                             />
                             <ResponsiveRangeControl
                                 min={1}
                                 max={100}
                                 label={__("Line Height", "gslider-blocks")}
-                                value={lineHeight}
-                                onChange={handleLineHeightChange}
+                                rangeValue={lineHeight}
+                                onChangeValue={handleLineHeightChange}
                                 onUnitChange={handleLineHeightUnitChange}
                                 deviceType={deviceType}
                                 units={lineHeightUnits}
-                                setAttributes={setAttributes}
                                 step={1}
-                                defaultValue={""}
+                                resetFallbackValue={""}
                             />
                         </BaseControl>
                     </div>

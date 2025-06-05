@@ -444,7 +444,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											{ showSubTitle && item.subTitle && (
                                                 <div className="gslider-subtitle-wrapper">
                                                     <RichText
-                                                        tagName="span"
+                                                        tagName="h5"
                                                         className="gslider-subtitle"
                                                         value={item.subTitle}
                                                         onChange={(value) => updateItem(index, 'subTitle', value)}

@@ -76,6 +76,114 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         contentHorizontalAlignment,
         /** End Layout & Content Setting */
 
+        /** Start Subtitle Typography, Color, Margin & Padding */
+        subtitleFontFamily,
+        subtitleFontSize,
+        subtitleFontSizeUnits,
+        subtitleFontWeight,
+        subtitleFontStyle,
+        subtitleTextTransform,
+        subtitleTextDecoration,
+        subtitleLetterSpacing,
+        subtitleLetterSpacingUnits,
+        subtitleLineHeight,
+        subtitleLineHeightUnits,
+
+        subtitleColorSwitcher,
+        subtitleColor,
+        subtitleColorHover,
+
+        subtitleMarginUnits,
+        subtitleDesktopMargin,
+        subtitleDesktopMarginCssStyle,
+        subtitleTabletMargin,
+        subtitleTabletMarginCssStyle,
+        subtitleMobileMargin,
+        subtitleMobileMarginCssStyle,
+        subtitleMarginLink,
+
+        subtitlePaddingUnits,
+        subtitleDesktopPadding,
+        subtitleDesktopPaddingCssStyle,
+        subtitleTabletPadding,
+        subtitleTabletPaddingCssStyle,
+        subtitleMobilePadding,
+        subtitleMobilePaddingCssStyle,
+        subtitlePaddingLink,
+        /** End Subtitle Typography, Color, Margin & Padding */
+
+        /** Start Title Typography, Color, Margin & Padding */
+        titleFontFamily,
+        titleFontSize,
+        titleFontSizeUnits,
+        titleFontWeight,
+        titleFontStyle,
+        titleTextTransform,
+        titleTextDecoration,
+        titleLetterSpacing,
+        titleLetterSpacingUnits,
+        titleLineHeight,
+        titleLineHeightUnits,
+
+        titleColorSwitcher,
+        titleColor,
+        titleColorHover,
+
+        titleMarginUnits,
+        titleDesktopMargin,
+        titleDesktopMarginCssStyle,
+        titleTabletMargin,
+        titleTabletMarginCssStyle,
+        titleMobileMargin,
+        titleMobileMarginCssStyle,
+        titleMarginLink,
+
+        titlePaddingUnits,
+        titleDesktopPadding,
+        titleDesktopPaddingCssStyle,
+        titleTabletPadding,
+        titleTabletPaddingCssStyle,
+        titleMobilePadding,
+        titleMobilePaddingCssStyle,
+        titlePaddingLink,
+        /** End Title Typography, Color, Margin & Padding */
+
+        /** Start Description Typography, Color, Margin & Padding */
+        descriptionFontFamily,
+        descriptionFontSize,
+        descriptionFontSizeUnits,
+        descriptionFontWeight,
+        descriptionFontStyle,
+        descriptionTextTransform,
+        descriptionTextDecoration,
+        descriptionLetterSpacing,
+        descriptionLetterSpacingUnits,
+        descriptionLineHeight,
+        descriptionLineHeightUnits,
+
+        descriptionColorSwitcher,
+        descriptionColor,
+        descriptionColorHover,
+
+        descriptionMarginUnits,
+        descriptionDesktopMargin,
+        descriptionDesktopMarginCssStyle,
+        descriptionTabletMargin,
+        descriptionTabletMarginCssStyle,
+        descriptionMobileMargin,
+        descriptionMobileMarginCssStyle,
+        descriptionMarginLink,
+
+        descriptionPaddingUnits,
+        descriptionDesktopPadding,
+        descriptionDesktopPaddingCssStyle,
+        descriptionTabletPadding,
+        descriptionTabletPaddingCssStyle,
+        descriptionMobilePadding,
+        descriptionMobilePaddingCssStyle,
+        descriptionPaddingLink,
+        /** End Description Typography, Color, Margin & Padding */
+
         /** Start Arrows Style */
         sliderArrowsSize,
         sliderArrowsSizeUnits,
@@ -397,6 +505,20 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     ]);
     /** end if have default padding then set the css style */
 
+    /** Load Google Font */
+    // useEffect(() => {
+    //     if (subtitleFontFamily !== 'Default') {
+    //         LoadGoogleFont(subtitleFontFamily);
+    //     }
+    //     if (titleFontFamily !== 'Default') {
+    //         LoadGoogleFont(titleFontFamily);
+    //     }
+    //     if (descriptionFontFamily !== 'Default') {
+    //         LoadGoogleFont(descriptionFontFamily);
+    //     }
+    // }, [subtitleFontFamily, titleFontFamily, descriptionFontFamily]);
+
+
     /**
 	 * Inspector General Controls
 	 */
@@ -708,10 +830,322 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 	 */
 	const styleControls = (
         <>
+
             <PanelBody 
-                title={__("Navigation Style", "gslider-blocks")}  
+                title={__("Subtitle", "gslider-blocks")}  
                 opened={openPanels.styles === "s1"}
                 onToggle={() => togglePanel("styles", "s1")}
+            >
+                <ResponsiveTypographyControl 
+                    fontFamily={subtitleFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ subtitleFontFamily: value })}
+                    
+                    fontSize={subtitleFontSize}
+                    onChangeFontSize={(value) => setAttributes({ subtitleFontSize: value })}
+                    
+                    fontSizeUnits={subtitleFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ subtitleFontSizeUnits: value })}
+                    
+                    fontWeight={subtitleFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ subtitleFontWeight: value })}
+                    
+                    fontStyle={subtitleFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ subtitleFontStyle: value })}
+                    
+                    textTransform={subtitleTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ subtitleTextTransform: value })}
+                    
+                    textDecoration={subtitleTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ subtitleTextDecoration: value })}
+                    
+                    letterSpacing={subtitleLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ subtitleLetterSpacing: value })}
+                    
+                    letterSpacingUnits={subtitleLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ subtitleLetterSpacingUnits: value })}
+                    
+                    lineHeight={subtitleLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ subtitleLineHeight: value })}
+                    
+                    lineHeightUnits={subtitleLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ subtitleLineHeightUnits: value })}
+                    
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+                <SwitcherControl
+                    label={__("Color", "gslider-blocks")}
+                    globalSwitcher={subtitleColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ subtitleColorSwitcher: value })}
+                />
+
+                {subtitleColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={subtitleColor}
+                        onChangeColor={(value) => setAttributes({ subtitleColor: value })}
+                        defaultColor=''
+                    />
+                )}
+
+                {subtitleColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={subtitleColorHover}
+                        onChangeColor={(value) => setAttributes({ subtitleColorHover: value })}
+                        defaultColor=''
+                    />
+                )}
+                <ResponsiveSpacingControl
+                    label={__("Margin", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={subtitleMarginUnits}
+                    onChangeUnits={(value) => setAttributes({ subtitleMarginUnits: value })}
+                    desktopSpacing={subtitleDesktopMargin} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ subtitleDesktopMargin: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ subtitleDesktopMarginCssStyle: value })}
+                    tabletSpacing={subtitleTabletMargin} 
+                    onChangeTabletSpacing={(value) => setAttributes({ subtitleTabletMargin: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ subtitleTabletMarginCssStyle: value })}
+                    mobileSpacing={subtitleMobileMargin}
+                    onChangeMobileSpacing={(value) => setAttributes({ subtitleMobileMargin: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ subtitleMobileMarginCssStyle: value })}
+                    isLinked={subtitleMarginLink}
+                    onChangeLink={(value) => setAttributes({ subtitleMarginLink: value })} 
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Padding", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={subtitlePaddingUnits}
+                    onChangeUnits={(value) => setAttributes({ subtitlePaddingUnits: value })}
+                    desktopSpacing={subtitleDesktopPadding} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ subtitleDesktopPadding: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ subtitleDesktopPaddingCssStyle: value })}
+                    tabletSpacing={subtitleTabletPadding} 
+                    onChangeTabletSpacing={(value) => setAttributes({ subtitleTabletPadding: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ subtitleTabletPaddingCssStyle: value })}
+                    mobileSpacing={subtitleMobilePadding}
+                    onChangeMobileSpacing={(value) => setAttributes({ subtitleMobilePadding: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ subtitleMobilePaddingCssStyle: value })}
+                    isLinked={subtitlePaddingLink}
+                    onChangeLink={(value) => setAttributes({ subtitlePaddingLink: value })} 
+                />
+            </PanelBody>
+
+            <PanelBody 
+                title={__("Title", "gslider-blocks")}  
+                opened={openPanels.styles === "s2"}
+                onToggle={() => togglePanel("styles", "s2")}
+            >
+                <ResponsiveTypographyControl 
+                    fontFamily={titleFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ titleFontFamily: value })}
+                    
+                    fontSize={titleFontSize}
+                    onChangeFontSize={(value) => setAttributes({ titleFontSize: value })}
+                    
+                    fontSizeUnits={titleFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ titleFontSizeUnits: value })}
+                    
+                    fontWeight={titleFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ titleFontWeight: value })}
+                    
+                    fontStyle={titleFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ titleFontStyle: value })}
+                    
+                    textTransform={titleTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ titleTextTransform: value })}
+                    
+                    textDecoration={titleTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ titleTextDecoration: value })}
+                    
+                    letterSpacing={titleLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ titleLetterSpacing: value })}
+                    
+                    letterSpacingUnits={titleLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ titleLetterSpacingUnits: value })}
+                    
+                    lineHeight={titleLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
+                    
+                    lineHeightUnits={titleLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
+                    
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+                <SwitcherControl
+                    label={__("Color", "gslider-blocks")}
+                    globalSwitcher={titleColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ titleColorSwitcher: value })}
+                />
+
+                {titleColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={titleColor}
+                        onChangeColor={(value) => setAttributes({ titleColor: value })}
+                        defaultColor=''
+                    />
+                )}
+
+                {titleColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={titleColorHover}
+                        onChangeColor={(value) => setAttributes({ titleColorHover: value })}
+                        defaultColor=''
+                    />
+                )}
+                <ResponsiveSpacingControl
+                    label={__("Margin", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={titleMarginUnits}
+                    onChangeUnits={(value) => setAttributes({ titleMarginUnits: value })}
+                    desktopSpacing={titleDesktopMargin} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ titleDesktopMargin: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ titleDesktopMarginCssStyle: value })}
+                    tabletSpacing={titleTabletMargin} 
+                    onChangeTabletSpacing={(value) => setAttributes({ titleTabletMargin: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ titleTabletMarginCssStyle: value })}
+                    mobileSpacing={titleMobileMargin}
+                    onChangeMobileSpacing={(value) => setAttributes({ titleMobileMargin: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ titleMobileMarginCssStyle: value })}
+                    isLinked={titleMarginLink}
+                    onChangeLink={(value) => setAttributes({ titleMarginLink: value })} 
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Padding", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={titlePaddingUnits}
+                    onChangeUnits={(value) => setAttributes({ titlePaddingUnits: value })}
+                    desktopSpacing={titleDesktopPadding} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ titleDesktopPadding: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ titleDesktopPaddingCssStyle: value })}
+                    tabletSpacing={titleTabletPadding} 
+                    onChangeTabletSpacing={(value) => setAttributes({ titleTabletPadding: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ titleTabletPaddingCssStyle: value })}
+                    mobileSpacing={titleMobilePadding}
+                    onChangeMobileSpacing={(value) => setAttributes({ titleMobilePadding: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ titleMobilePaddingCssStyle: value })}
+                    isLinked={titlePaddingLink}
+                    onChangeLink={(value) => setAttributes({ titlePaddingLink: value })} 
+                />
+            </PanelBody>
+
+            <PanelBody 
+                title={__("Description", "gslider-blocks")}  
+                opened={openPanels.styles === "s3"}
+                onToggle={() => togglePanel("styles", "s3")}
+            >
+                <ResponsiveTypographyControl 
+                    fontFamily={descriptionFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ descriptionFontFamily: value })}
+                    
+                    fontSize={descriptionFontSize}
+                    onChangeFontSize={(value) => setAttributes({ descriptionFontSize: value })}
+                    
+                    fontSizeUnits={descriptionFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ descriptionFontSizeUnits: value })}
+                    
+                    fontWeight={descriptionFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ descriptionFontWeight: value })}
+                    
+                    fontStyle={descriptionFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ descriptionFontStyle: value })}
+                    
+                    textTransform={descriptionTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ descriptionTextTransform: value })}
+                    
+                    textDecoration={descriptionTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ descriptionTextDecoration: value })}
+                    
+                    letterSpacing={descriptionLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ descriptionLetterSpacing: value })}
+                    
+                    letterSpacingUnits={descriptionLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ descriptionLetterSpacingUnits: value })}
+                    
+                    lineHeight={descriptionLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
+                    
+                    lineHeightUnits={descriptionLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ descriptionLineHeightUnits: value })}
+                    
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+                <SwitcherControl
+                    label={__("Color", "gslider-blocks")}
+                    globalSwitcher={descriptionColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ descriptionColorSwitcher: value })}
+                />
+
+                {descriptionColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={descriptionColor}
+                        onChangeColor={(value) => setAttributes({ descriptionColor: value })}
+                        defaultColor=''
+                    />
+                )}
+
+                {descriptionColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={descriptionColorHover}
+                        onChangeColor={(value) => setAttributes({ descriptionColorHover: value })}
+                        defaultColor=''
+                    />
+                )}
+                <ResponsiveSpacingControl
+                    label={__("Margin", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={descriptionMarginUnits}
+                    onChangeUnits={(value) => setAttributes({ descriptionMarginUnits: value })}
+                    desktopSpacing={descriptionDesktopMargin} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ descriptionDesktopMargin: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ descriptionDesktopMarginCssStyle: value })}
+                    tabletSpacing={descriptionTabletMargin} 
+                    onChangeTabletSpacing={(value) => setAttributes({ descriptionTabletMargin: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ descriptionTabletMarginCssStyle: value })}
+                    mobileSpacing={descriptionMobileMargin}
+                    onChangeMobileSpacing={(value) => setAttributes({ descriptionMobileMargin: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ descriptionMobileMarginCssStyle: value })}
+                    isLinked={descriptionMarginLink}
+                    onChangeLink={(value) => setAttributes({ descriptionMarginLink: value })} 
+                />
+                <ResponsiveSpacingControl
+                    label={__("Padding", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={descriptionPaddingUnits}
+                    onChangeUnits={(value) => setAttributes({ descriptionPaddingUnits: value })}
+                    desktopSpacing={descriptionDesktopPadding} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ descriptionDesktopPadding: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ descriptionDesktopPaddingCssStyle: value })}
+                    tabletSpacing={descriptionTabletPadding} 
+                    onChangeTabletSpacing={(value) => setAttributes({ descriptionTabletPadding: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ descriptionTabletPaddingCssStyle: value })}
+                    mobileSpacing={descriptionMobilePadding}
+                    onChangeMobileSpacing={(value) => setAttributes({ descriptionMobilePadding: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ descriptionMobilePaddingCssStyle: value })}
+                    isLinked={descriptionPaddingLink}
+                    onChangeLink={(value) => setAttributes({ descriptionPaddingLink: value })} 
+                />
+            </PanelBody>
+
+            <PanelBody 
+                title={__("Navigation", "gslider-blocks")}  
+                opened={openPanels.styles === "sdxjk"}
+                onToggle={() => togglePanel("styles", "sdxjk")}
             >
                 <ResponsiveRangeControl
                     min={0}
@@ -944,9 +1378,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             </PanelBody>
 
             <PanelBody 
-                title={__("Pagination Style", "gslider-blocks")}  
-                opened={openPanels.styles === "s2"}
-                onToggle={() => togglePanel("styles", "s2")}
+                title={__("Pagination", "gslider-blocks")}  
+                opened={openPanels.styles === "fgkjf"}
+                onToggle={() => togglePanel("styles", "fgkjf")}
             >
 
                 <ResponsiveRangeControl
@@ -1637,6 +2071,60 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${contentHorizontalAlignment?.Desktop === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
             ${contentHorizontalAlignment?.Desktop === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
         }
+
+        .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
+            ${subtitleFontFamily ? `font-family: ${subtitleFontFamily};` : ''}
+            ${subtitleFontSize.Desktop && subtitleFontSizeUnits.Desktop ? `font-size: ${subtitleFontSize.Desktop}${subtitleFontSizeUnits.Desktop};` : ''}
+            ${subtitleFontWeight ? `font-weight: ${subtitleFontWeight};` : ''}
+            ${subtitleFontStyle ? `font-style: ${subtitleFontStyle};` : ''}
+            ${subtitleTextTransform ? `text-transform: ${subtitleTextTransform};` : ''}
+            ${subtitleTextDecoration ? `text-decoration: ${subtitleTextDecoration};` : ''}
+            ${subtitleLetterSpacing.Desktop && subtitleLetterSpacingUnits.Desktop ? `letter-spacing: ${subtitleLetterSpacing.Desktop}${subtitleLetterSpacingUnits.Desktop};` : ''}
+            ${subtitleLineHeight.Desktop && subtitleLineHeightUnits.Desktop ? `line-height: ${subtitleLineHeight.Desktop}${subtitleLineHeightUnits.Desktop};` : ''}
+            ${subtitleColor ? `color: ${subtitleColor};` : ''}
+            ${subtitleDesktopMarginCssStyle ? `margin: ${subtitleDesktopMarginCssStyle};` : ''} 
+            ${subtitleDesktopPaddingCssStyle ? `padding: ${subtitleDesktopPaddingCssStyle};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle:hover {
+            ${subtitleColorHover ? `color: ${subtitleColorHover};` : ''}
+        }
+
+        .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title {
+            ${titleFontFamily ? `font-family: ${titleFontFamily};` : ''}
+            ${titleFontSize.Desktop && titleFontSizeUnits.Desktop ? `font-size: ${titleFontSize.Desktop}${titleFontSizeUnits.Desktop};` : ''}
+            ${titleFontWeight ? `font-weight: ${titleFontWeight};` : ''}
+            ${titleFontStyle ? `font-style: ${titleFontStyle};` : ''}
+            ${titleTextTransform ? `text-transform: ${titleTextTransform};` : ''}
+            ${titleTextDecoration ? `text-decoration: ${titleTextDecoration};` : ''}
+            ${titleLetterSpacing.Desktop && titleLetterSpacingUnits.Desktop ? `letter-spacing: ${titleLetterSpacing.Desktop}${titleLetterSpacingUnits.Desktop};` : ''}
+            ${titleLineHeight.Desktop && titleLineHeightUnits.Desktop ? `line-height: ${titleLineHeight.Desktop}${titleLineHeightUnits.Desktop};` : ''}
+            ${titleColor ? `color: ${titleColor};` : ''}
+            ${titleDesktopMarginCssStyle ? `margin: ${titleDesktopMarginCssStyle};` : ''} 
+            ${titleDesktopPaddingCssStyle ? `padding: ${titleDesktopPaddingCssStyle};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title:hover {
+            ${titleColorHover ? `color: ${titleColorHover};` : ''}
+        }
+
+        .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description {
+            ${descriptionFontFamily ? `font-family: ${descriptionFontFamily};` : ''}
+            ${descriptionFontSize.Desktop && descriptionFontSizeUnits.Desktop ? `font-size: ${descriptionFontSize.Desktop}${descriptionFontSizeUnits.Desktop};` : ''}
+            ${descriptionFontWeight ? `font-weight: ${descriptionFontWeight};` : ''}
+            ${descriptionFontStyle ? `font-style: ${descriptionFontStyle};` : ''}
+            ${descriptionTextTransform ? `text-transform: ${descriptionTextTransform};` : ''}
+            ${descriptionTextDecoration ? `text-decoration: ${descriptionTextDecoration};` : ''}
+            ${descriptionLetterSpacing.Desktop && descriptionLetterSpacingUnits.Desktop ? `letter-spacing: ${descriptionLetterSpacing.Desktop}${descriptionLetterSpacingUnits.Desktop};` : ''}
+            ${descriptionLineHeight.Desktop && descriptionLineHeightUnits.Desktop ? `line-height: ${descriptionLineHeight.Desktop}${descriptionLineHeightUnits.Desktop};` : ''}
+            ${descriptionColor ? `color: ${descriptionColor};` : ''}
+            ${descriptionDesktopMarginCssStyle ? `margin: ${descriptionDesktopMarginCssStyle};` : ''} 
+            ${descriptionDesktopPaddingCssStyle ? `padding: ${descriptionDesktopPaddingCssStyle};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description:hover {
+            ${descriptionColorHover ? `color: ${descriptionColorHover};` : ''}
+        }
         
         .${blockId} .swiper-button-prev,
         .${blockId} .swiper-button-next {
@@ -1722,6 +2210,30 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${contentHorizontalAlignment?.Tablet === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
             }
 
+            .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
+                ${subtitleFontSize.Tablet && subtitleFontSizeUnits.Tablet ? `font-size: ${subtitleFontSize.Tablet}${subtitleFontSizeUnits.Tablet};` : ''}
+                ${subtitleLetterSpacing.Tablet && subtitleLetterSpacingUnits.Tablet ? `letter-spacing: ${subtitleLetterSpacing.Tablet}${subtitleLetterSpacingUnits.Tablet};` : ''}
+                ${subtitleLineHeight.Tablet && subtitleLineHeightUnits.Tablet ? `line-height: ${subtitleLineHeight.Tablet}${subtitleLineHeightUnits.Tablet};` : ''}
+                ${subtitleTabletMarginCssStyle ? `margin: ${subtitleTabletMarginCssStyle};` : ''} 
+                ${subtitleTabletPaddingCssStyle ? `padding: ${subtitleTabletPaddingCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title {
+                ${titleFontSize.Tablet && titleFontSizeUnits.Tablet ? `font-size: ${titleFontSize.Tablet}${titleFontSizeUnits.Tablet};` : ''}
+                ${titleLetterSpacing.Tablet && titleLetterSpacingUnits.Tablet ? `letter-spacing: ${titleLetterSpacing.Tablet}${titleLetterSpacingUnits.Tablet};` : ''}
+                ${titleLineHeight.Tablet && titleLineHeightUnits.Tablet ? `line-height: ${titleLineHeight.Tablet}${titleLineHeightUnits.Tablet};` : ''}
+                ${titleTabletMarginCssStyle ? `margin: ${titleTabletMarginCssStyle};` : ''} 
+                ${titleTabletPaddingCssStyle ? `padding: ${titleTabletPaddingCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description {
+                ${descriptionFontSize.Tablet && descriptionFontSizeUnits.Tablet ? `font-size: ${descriptionFontSize.Tablet}${descriptionFontSizeUnits.Tablet};` : ''}
+                ${descriptionLetterSpacing.Tablet && descriptionLetterSpacingUnits.Tablet ? `letter-spacing: ${descriptionLetterSpacing.Tablet}${descriptionLetterSpacingUnits.Tablet};` : ''}
+                ${descriptionLineHeight.Tablet && descriptionLineHeightUnits.Tablet ? `line-height: ${descriptionLineHeight.Tablet}${descriptionLineHeightUnits.Tablet};` : ''}
+                ${descriptionTabletMarginCssStyle ? `margin: ${descriptionTabletMarginCssStyle};` : ''} 
+                ${descriptionTabletPaddingCssStyle ? `padding: ${descriptionTabletPaddingCssStyle};` : ''}
+            }
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${sliderArrowsTabletBorderCssStyle ? `border-width: ${sliderArrowsTabletBorderCssStyle};` : ''}  
@@ -1777,6 +2289,30 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${contentHorizontalAlignment?.Mobile === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
                 ${contentHorizontalAlignment?.Mobile === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
                 ${contentHorizontalAlignment?.Mobile === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
+                ${subtitleFontSize.Mobile && subtitleFontSizeUnits.Mobile ? `font-size: ${subtitleFontSize.Mobile}${subtitleFontSizeUnits.Mobile};` : ''}
+                ${subtitleLetterSpacing.Mobile && subtitleLetterSpacingUnits.Mobile ? `letter-spacing: ${subtitleLetterSpacing.Mobile}${subtitleLetterSpacingUnits.Mobile};` : ''}
+                ${subtitleLineHeight.Mobile && subtitleLineHeightUnits.Mobile ? `line-height: ${subtitleLineHeight.Mobile}${subtitleLineHeightUnits.Mobile};` : ''}
+                ${subtitleMobileMarginCssStyle ? `margin: ${subtitleMobileMarginCssStyle};` : ''} 
+                ${subtitleMobilePaddingCssStyle ? `padding: ${subtitleMobilePaddingCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title {
+                ${titleFontSize.Mobile && titleFontSizeUnits.Mobile ? `font-size: ${titleFontSize.Mobile}${titleFontSizeUnits.Mobile};` : ''}
+                ${titleLetterSpacing.Mobile && titleLetterSpacingUnits.Mobile ? `letter-spacing: ${titleLetterSpacing.Mobile}${titleLetterSpacingUnits.Mobile};` : ''}
+                ${titleLineHeight.Mobile && titleLineHeightUnits.Mobile ? `line-height: ${titleLineHeight.Mobile}${titleLineHeightUnits.Mobile};` : ''}
+                ${titleMobileMarginCssStyle ? `margin: ${titleMobileMarginCssStyle};` : ''} 
+                ${titleMobilePaddingCssStyle ? `padding: ${titleMobilePaddingCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description {
+                ${descriptionFontSize.Mobile && descriptionFontSizeUnits.Mobile ? `font-size: ${descriptionFontSize.Mobile}${descriptionFontSizeUnits.Mobile};` : ''}
+                ${descriptionLetterSpacing.Mobile && descriptionLetterSpacingUnits.Mobile ? `letter-spacing: ${descriptionLetterSpacing.Mobile}${descriptionLetterSpacingUnits.Mobile};` : ''}
+                ${descriptionLineHeight.Mobile && descriptionLineHeightUnits.Mobile ? `line-height: ${descriptionLineHeight.Mobile}${descriptionLineHeightUnits.Mobile};` : ''}
+                ${descriptionMobileMarginCssStyle ? `margin: ${descriptionMobileMarginCssStyle};` : ''} 
+                ${descriptionMobilePaddingCssStyle ? `padding: ${descriptionMobilePaddingCssStyle};` : ''}
             }
 
             .${blockId} .swiper-button-prev,
@@ -1836,6 +2372,114 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         contentVerticalAlignment,
         contentHorizontalAlignment,
         /** End Content Width */
+
+        /** Start Subtitle Typography, Color, Margin & Padding */
+        subtitleFontFamily,
+        subtitleFontSize,
+        subtitleFontSizeUnits,
+        subtitleFontWeight,
+        subtitleFontStyle,
+        subtitleTextTransform,
+        subtitleTextDecoration,
+        subtitleLetterSpacing,
+        subtitleLetterSpacingUnits,
+        subtitleLineHeight,
+        subtitleLineHeightUnits,
+
+        subtitleColorSwitcher,
+        subtitleColor,
+        subtitleColorHover,
+
+        subtitleMarginUnits,
+        subtitleDesktopMargin,
+        subtitleDesktopMarginCssStyle,
+        subtitleTabletMargin,
+        subtitleTabletMarginCssStyle,
+        subtitleMobileMargin,
+        subtitleMobileMarginCssStyle,
+        subtitleMarginLink,
+
+        subtitlePaddingUnits,
+        subtitleDesktopPadding,
+        subtitleDesktopPaddingCssStyle,
+        subtitleTabletPadding,
+        subtitleTabletPaddingCssStyle,
+        subtitleMobilePadding,
+        subtitleMobilePaddingCssStyle,
+        subtitlePaddingLink,
+        /** End Subtitle Typography, Color, Margin & Padding */
+
+        /** Start Title Typography, Color, Margin & Padding */
+        titleFontFamily,
+        titleFontSize,
+        titleFontSizeUnits,
+        titleFontWeight,
+        titleFontStyle,
+        titleTextTransform,
+        titleTextDecoration,
+        titleLetterSpacing,
+        titleLetterSpacingUnits,
+        titleLineHeight,
+        titleLineHeightUnits,
+
+        titleColorSwitcher,
+        titleColor,
+        titleColorHover,
+
+        titleMarginUnits,
+        titleDesktopMargin,
+        titleDesktopMarginCssStyle,
+        titleTabletMargin,
+        titleTabletMarginCssStyle,
+        titleMobileMargin,
+        titleMobileMarginCssStyle,
+        titleMarginLink,
+
+        titlePaddingUnits,
+        titleDesktopPadding,
+        titleDesktopPaddingCssStyle,
+        titleTabletPadding,
+        titleTabletPaddingCssStyle,
+        titleMobilePadding,
+        titleMobilePaddingCssStyle,
+        titlePaddingLink,
+        /** End Title Typography, Color, Margin & Padding */
+
+        /** Start Description Typography, Color, Margin & Padding */
+        descriptionFontFamily,
+        descriptionFontSize,
+        descriptionFontSizeUnits,
+        descriptionFontWeight,
+        descriptionFontStyle,
+        descriptionTextTransform,
+        descriptionTextDecoration,
+        descriptionLetterSpacing,
+        descriptionLetterSpacingUnits,
+        descriptionLineHeight,
+        descriptionLineHeightUnits,
+
+        descriptionColorSwitcher,
+        descriptionColor,
+        descriptionColorHover,
+
+        descriptionMarginUnits,
+        descriptionDesktopMargin,
+        descriptionDesktopMarginCssStyle,
+        descriptionTabletMargin,
+        descriptionTabletMarginCssStyle,
+        descriptionMobileMargin,
+        descriptionMobileMarginCssStyle,
+        descriptionMarginLink,
+
+        descriptionPaddingUnits,
+        descriptionDesktopPadding,
+        descriptionDesktopPaddingCssStyle,
+        descriptionTabletPadding,
+        descriptionTabletPaddingCssStyle,
+        descriptionMobilePadding,
+        descriptionMobilePaddingCssStyle,
+        descriptionPaddingLink,
+        /** End Description Typography, Color, Margin & Padding */
 
         /** Start Arrows Style */
         sliderArrowsSize,

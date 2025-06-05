@@ -550,6 +550,594 @@ const attributes = {
     },
     /** End Layout & Content Setting */
 
+    /** Start Subtitle Typography */
+    subtitleFontFamily: {
+        type: "string",
+        default: "",
+    },
+    subtitleFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subtitleFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    subtitleFontWeight: {
+        type: "string",
+        default: "",
+    },
+    subtitleFontStyle: {
+        type: "string",
+        default: "",
+    },
+    subtitleTextTransform: {
+        type: "string",
+        default: "",
+    },
+    subtitleTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    subtitleLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subtitleLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    subtitleLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subtitleLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Subtitle Typography */
+
+    /** Start Subtitle Color */
+    subtitleColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	subtitleColor: {
+		type: "string",
+		default: "",
+	},
+	subtitleColorHover: {
+		type: "string",
+		default: "",
+	},
+    /** End Subtitle Color */
+
+    /** Start Subtitle Margin */
+	subtitleMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	subtitleDesktopMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    subtitleDesktopMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	subtitleTabletMargin: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    subtitleTabletMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	subtitleMobileMargin: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    subtitleMobileMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	subtitleMarginLink : {
+		type : "boolean",
+		default: true
+	},
+    /** End Subtitle Margin */
+
+    /** Start Subtitle Padding */
+	subtitlePaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	subtitleDesktopPadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    subtitleDesktopPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	subtitleTabletPadding: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    subtitleTabletPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	subtitleMobilePadding: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    subtitleMobilePaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	subtitlePaddingLink : {
+		type : "boolean",
+		default: true
+	},
+    /** End Subtitle Padding */
+    
+    /** End Subtitle     */
+
+    /** Start Title Typography */
+    titleFontFamily: {
+        type: "string",
+        default: "",
+    },
+    titleFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    titleFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    titleFontWeight: {
+        type: "string",
+        default: "",
+    },
+    titleFontStyle: {
+        type: "string",
+        default: "",
+    },
+    titleTextTransform: {
+        type: "string",
+        default: "",
+    },
+    titleTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    titleLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    titleLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    titleLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    titleLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Title Typography */
+
+    /** Start Title Color */
+    titleColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    titleColor: {
+        type: "string",
+        default: "",
+    },
+    titleColorHover: {
+        type: "string",
+        default: "",
+    },
+    /** End Title Color */
+
+    /** Start Title Margin */
+    titleMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    titleDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    titleDesktopMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    titleTabletMargin: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    titleTabletMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    titleMobileMargin: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    titleMobileMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    titleMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Title Margin */
+
+    /** Start Title Padding */
+    titlePaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    titleDesktopPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    titleDesktopPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    titleTabletPadding: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    titleTabletPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    titleMobilePadding: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    titleMobilePaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    titlePaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Title Padding */
+    
+    /** End Title     */
+
+    /** Start Description Typography */
+    descriptionFontFamily: {
+        type: "string",
+        default: "",
+    },
+    descriptionFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    descriptionFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    descriptionFontWeight: {
+        type: "string",
+        default: "",
+    },
+    descriptionFontStyle: {
+        type: "string",
+        default: "",
+    },
+    descriptionTextTransform: {
+        type: "string",
+        default: "",
+    },
+    descriptionTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    descriptionLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    descriptionLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    descriptionLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    descriptionLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Description Typography */
+
+    /** Start Description Color */
+    descriptionColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    descriptionColor: {
+        type: "string",
+        default: "",
+    },
+    descriptionColorHover: {
+        type: "string",
+        default: "",
+    },
+    /** End Description Color */
+
+    /** Start Description Margin */
+    descriptionMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    descriptionDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    descriptionDesktopMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    descriptionTabletMargin: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    descriptionTabletMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    descriptionMobileMargin: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    descriptionMobileMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    descriptionMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Description Margin */
+
+    /** Start Description Padding */
+    descriptionPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    descriptionDesktopPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    descriptionDesktopPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    descriptionTabletPadding: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    descriptionTabletPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    descriptionMobilePadding: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    descriptionMobilePaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    descriptionPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Description Padding */
+    
+    /** End Description     */
+
     /** Start Arrows Size */
 	sliderArrowsSize: {
 		type: "object",
