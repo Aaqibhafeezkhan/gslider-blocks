@@ -1980,6 +1980,14 @@ const attributes = {
             Mobile: ""
         }
     },
+    globalID: {
+        type: "string",
+        default: "",
+    },
+    globalClass: {
+        type: "string",
+        default: "",
+    },
     /** End Global Z-Index */
 
     /** Start Global Background */     

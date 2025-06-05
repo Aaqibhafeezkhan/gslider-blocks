@@ -72,6 +72,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showButton,
         showNavigation,
 		showPagination,
+        globalID,
+        globalClass,
 	} = attributes;
 
 	// Block props for container
@@ -437,7 +439,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				>
 					{sliderItemList.map((item, index) => (
 						<SwiperSlide key={item.id}>
-							<div className={`gslider-content-wrapper ${item.id}`} ref={panelRef}>
+							<div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
 								<div className="gslider-content-inner-wrapper">
 									<div className="gslider-list-item">
 										<div className="gslider-list-content">

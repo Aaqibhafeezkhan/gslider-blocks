@@ -27,6 +27,8 @@ export default function Save({ attributes }) {
         showButton,
         showNavigation,
         showPagination,
+        globalID,
+        globalClass,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -90,7 +92,7 @@ export default function Save({ attributes }) {
                 <div className="swiper-wrapper gslider-wrapper">
                     {sliderItems.map((item) => (
                         <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
-                            <div className={`gslider-content-wrapper ${item.id}`}>
+                            <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})}>
                                 <div className="gslider-content-inner-wrapper">
                                     <div className="gslider-list-item">
                                         <div className="gslider-list-content">

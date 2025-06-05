@@ -33,6 +33,8 @@ import CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import {useDeviceType} from "@Utils/displayType";
+import InputControls from '@Components/input-control';
+
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
     const { 
@@ -372,6 +374,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         /** Start Global Z-Index */
         globalZIndex,
+        globalID,
+        globalClass,
         /** End Global Z-Index */
 
         /** Start Global Background */
@@ -1723,6 +1727,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     resetFallbackValue={""}
                     isRangeUnit={false}
                 />
+
+                <InputControls
+                    label={__("CSS ID", "gslider-blocks")}
+                    value={globalID}
+                    onChangeValue={(value) => setAttributes({ globalID: value })}
+                    helpText={__("Add an ID to the block wrapper.", "gslider-blocks")}
+                />
+
+                <InputControls
+                    label={__("CSS Classes", "gslider-blocks")}
+                    value={globalClass}
+                    onChangeValue={(value) => setAttributes({ globalClass: value })}
+                    helpText={__("Separate with spaces key.", "gslider-blocks")}
+                />
+                
             </PanelBody>
             
             <PanelBody 
@@ -2057,6 +2076,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         .${blockId} .swiper-wrapper {
             align-items: center;
         }
+
+         .${blockId}.gslider-base-wrapper {
+            ${globalZIndex ? `z-index: ${globalZIndex};` : ''}
+            ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ''} 
+            ${globalPaddingDesktopCssStyle ? `padding: ${globalPaddingDesktopCssStyle};` : ''}
+            
+         }
         
         .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
             height: ${layoutHeight?.Desktop ? `${layoutHeight.Desktop}${layoutHeightUnits?.Desktop}` : 'clamp(300px, 60vh, 500px)'};
@@ -2359,19 +2385,43 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     `, [
         blockId,
         deviceType,
+        sliderItems,
+        blockStyle,
+        sliderType,
+        carouselPerColumn,
+        carouselPerColumnGap,
+        speed,
+        autoplay,
+        autoplayDelay,
+        infiniteLoop,
+        allowTouchMove,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        slideEffect,
+        carouselEffect,
+        mousewheelControl,
+        paginationType,
+        dynamicBullets,
 
-        /** Start Layout Height */
+        /** Start Show/Hide Elements */
+        showSubTitle,
+        showTitle,
+        showDescription,
+        showButton,
+        showNavigation,
+        showPagination,
+        /** End Show/Hide Elements */
+
+        /** Start Layout & Content Setting */
         layoutHeight,
         layoutHeightUnits,
-        /** End Layout Height */
-
-        /** Start Content Width */
         contentWidth,
         contentWidthUnits,
         contentAlignment,
         contentVerticalAlignment,
         contentHorizontalAlignment,
-        /** End Content Width */
+        /** End Layout & Content Setting */
 
         /** Start Subtitle Typography, Color, Margin & Padding */
         subtitleFontFamily,
@@ -2619,6 +2669,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         sliderActiveDotsBorderColorSwitcher,
         sliderActiveDotsBorderColor,
         sliderActiveDotsBorderHoverColor,
+        /** End Active Dots Border */
+
+        /** Start Active Dots Border */
         sliderActiveDotsBorderUnits,
         sliderActiveDotsDesktopBorder,
         sliderActiveDotsDesktopBorderCssStyle,
@@ -2641,6 +2694,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Active Dots Border Radius */
 
         /** Global Settings */
+
         /** Start Global Margin */
         globalMarginUnits,
         globalMarginDesktop,
@@ -2665,10 +2719,76 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         /** Start Global Z-Index */
         globalZIndex,
+        globalID,
+        globalClass,
         /** End Global Z-Index */
 
-        /** Other Styles */
-        blockStyle
+        /** Start Global Background */
+        globalNormalBackgroundType, 
+        globalNormalClassicColor,
+        globalNormalGradientColor,
+        globalNormalCustomGradientSwitcher,
+        globalNormalCustomGradientInputValue,
+        globalNormalBackgroundImageUrl,
+        globalNormalBackgroundImageAlt,
+        globalNormalBackgroundImageID,
+        globalNormalBackgroundImagePosition,
+        globalNormalBackgroundImageAttachment,
+        globalNormalBackgroundImageRepeat,
+        globalNormalBackgroundImageSize,
+
+        globalHoverBackgroundType,
+        globalHoverClassicColor,
+        globalHoverGradientColor,
+        globalHoverCustomGradientSwitcher,
+        globalHoverCustomGradientInputValue,
+        globalHoverBackgroundImageUrl,
+        globalHoverBackgroundImageAlt,
+        globalHoverBackgroundImageID,
+        globalHoverBackgroundImagePosition,
+        globalHoverBackgroundImageAttachment,
+        globalHoverBackgroundImageRepeat,
+        globalHoverBackgroundImageSize,
+        /** End Global Setting */
+
+        /** Start Global Border */
+        globalBorder,
+        globalBorderColorSwitcher,
+        globalBorderColor,
+        globalBorderHoverColor,
+        
+        globalBorderUnits,
+        globalBorderDesktop,
+        globalBorderDesktopCssStyle,
+        globalBorderTablet,
+        globalBorderTabletCssStyle,
+        globalBorderMobile,
+        globalBorderMobileCssStyle,
+        globalBorderLink,
+        /** End Global Border */    
+
+        /** Start Global Border Radius */
+        globalBorderRadiusUnits,
+        globalBorderRadiusDesktop,
+        globalBorderRadiusDesktopCssStyle,
+        globalBorderRadiusTablet,
+        globalBorderRadiusTabletCssStyle,
+        globalBorderRadiusMobile,
+        globalBorderRadiusMobileCssStyle,
+        globalBorderRadiusLink,
+        /** End Global Border Radius */
+
+        /** Start Global Box Shadow */
+        globalboxShadowValuesSwitcher,
+        globalboxShadowValues,
+        globalboxShadowCssValue,
+        globalboxShadowHoverValues,
+        globalboxShadowHoverCssValue,
+        /** End Global Box Shadow */
+
+        /** Start Global Custom CSS */
+        globalCustomCSS,
+        /** End Global Custom CSS */
 
     ]);
 
