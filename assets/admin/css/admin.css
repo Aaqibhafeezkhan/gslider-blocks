@@ -80,6 +80,10 @@
   min-height: auto;
   text-transform: capitalize !important;
 }
+.gslider-inspector-control .components-button {
+  color: #000;
+  font-size: 13px;
+}
 
 .gslider-custom-css-editor-wrapper .monaco-editor {
   border-radius: 6px !important;
