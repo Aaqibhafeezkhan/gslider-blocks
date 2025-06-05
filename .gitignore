@@ -26,6 +26,7 @@ build/
 
 # Output of `wp-scripts plugin-zip`
 *.zip
+*.DS_Store
 
 # dotenv environment variables file
 .env
