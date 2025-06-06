@@ -548,6 +548,18 @@ const attributes = {
             Mobile: "",
         },
     },
+    subTitleHtmlTag: {
+        type: "string",
+        default: "h3",
+    },
+    titleHtmlTag: {
+        type: "string",
+        default: "h2",
+    },
+    descriptionHtmlTag: {
+        type: "string",
+        default: "p",
+    },
     /** End Layout & Content Setting */
 
     /** Start Subtitle Typography */

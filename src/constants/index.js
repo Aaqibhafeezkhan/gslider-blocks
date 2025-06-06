@@ -74,7 +74,7 @@ export const HORIZONTAL_ALIGN = [
 	{ label: __(HORIZONTAL_POSITION_ICONS.right), value: "right" },
 ];
 
-export const HEADING = [
+export const HTML_TAGS = [
 	{ label: __("H1", "gslider-blocks"), value: "h1" },
 	{ label: __("H2", "gslider-blocks"), value: "h2" },
 	{ label: __("H3", "gslider-blocks"), value: "h3" },

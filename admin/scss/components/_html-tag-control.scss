@@ -1,0 +1,26 @@
+@use "../variables" as *;
+
+.gslider-html-tag-control {
+    .gslider-html-tag-control-btn-group {
+        display: flex !important;
+        width: 100%;
+        .gslider-html-tag-control-single-btn {
+            font-size: 13px;
+            font-weight: 400;
+            width: 100%;
+            justify-content: center;
+            height: unset;
+            padding: 6px;
+            line-height: 16px;
+            min-height: 30px;
+            color: #50575e;
+            box-shadow: inset 0 0 0 1px #e6e7e9;
+            &.active {
+                color: #007cba;
+                background-color: #dcf2ff;
+                border-color: #cde9f9;
+                box-shadow: inset 0 0 0 1px #cde9f9;
+            }
+        }
+    }
+}

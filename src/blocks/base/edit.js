@@ -72,6 +72,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showButton,
         showNavigation,
 		showPagination,
+        subTitleHtmlTag,
+        titleHtmlTag,
+        descriptionHtmlTag,
         globalID,
         globalClass,
 	} = attributes;
@@ -446,7 +449,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											{ showSubTitle && item.subTitle && (
                                                 <div className="gslider-subtitle-wrapper">
                                                     <RichText
-                                                        tagName="h5"
+                                                        tagName={subTitleHtmlTag}
                                                         className="gslider-subtitle"
                                                         value={item.subTitle}
                                                         onChange={(value) => updateItem(index, 'subTitle', value)}
@@ -457,7 +460,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											{ showTitle && item.title && (
                                                 <div className="gslider-title-wrapper">
                                                     <RichText
-                                                        tagName="h3"
+                                                        tagName={titleHtmlTag}
                                                         className="gslider-title"
                                                         value={item.title}
                                                         onChange={(value) => updateItem(index, 'title', value)}
@@ -468,7 +471,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											{ showDescription && item.description && (
                                                 <div className="gslider-description-wrapper">
                                                     <RichText
-                                                        tagName="p"
+                                                        tagName={descriptionHtmlTag}
                                                         className="gslider-description"
                                                         value={item.description}
                                                         onChange={(value) => updateItem(index, 'description', value)}

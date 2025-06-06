@@ -31,7 +31,7 @@ const ResponsiveDeviceControl = ({label, device}) => {
 	return (
 		<>
 			<div className="gslider-setting-device-label-wrapper">
-				<p className="gslider-setting-label-text">{ __( label, 'gslider-blocks' ) }</p>
+				<span className="gslider-setting-label-text">{ __( label, 'gslider-blocks' ) }</span>
 				<div className="gslider-responsive-device-wrapper" onClick={toggleDeviceVisibility}>
 					<div className="gslider-responsive-device-inner-wrapper">
 						<button className={`gslider-device-switcher gslider-responsive-desktop-device ${device === 'Desktop' ? 'active' : ''}`} onClick={() => handleDevice('Desktop')}>

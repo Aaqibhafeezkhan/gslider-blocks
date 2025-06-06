@@ -34,6 +34,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import {useDeviceType} from "@Utils/displayType";
 import InputControls from '@Components/input-control';
+import HtmlTagControl from '@Components/html-tag-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
@@ -76,6 +77,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         contentAlignment,
         contentVerticalAlignment,
         contentHorizontalAlignment,
+        subTitleHtmlTag,
+        titleHtmlTag,
+        descriptionHtmlTag,
         /** End Layout & Content Setting */
 
         /** Start Subtitle Typography, Color, Margin & Padding */
@@ -621,6 +625,25 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     verticalAlignment={false}
                     horizontalAlignment={false}
                 />
+
+                <HtmlTagControl
+                    label={__("Sub Title Tag", "gslider-blocks")}
+                    globalHtmlTag={subTitleHtmlTag}
+                    setGlobalHtmlTag={(value) => setAttributes({ subTitleHtmlTag: value })}
+                />
+
+                <HtmlTagControl
+                    label={__("Title Tag", "gslider-blocks")}
+                    globalHtmlTag={titleHtmlTag}
+                    setGlobalHtmlTag={(value) => setAttributes({ titleHtmlTag: value })}
+                />
+
+                <HtmlTagControl
+                    label={__("Description Tag", "gslider-blocks")}
+                    globalHtmlTag={descriptionHtmlTag}
+                    setGlobalHtmlTag={(value) => setAttributes({ descriptionHtmlTag: value })}
+                />
+                
             </PanelBody>
             <PanelBody
                 title={__("Slider Items", "gslider-blocks")}

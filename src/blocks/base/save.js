@@ -27,6 +27,9 @@ export default function Save({ attributes }) {
         showButton,
         showNavigation,
         showPagination,
+        subTitleHtmlTag,
+        titleHtmlTag,
+        descriptionHtmlTag,
         globalID,
         globalClass,
     } = attributes;
@@ -99,7 +102,7 @@ export default function Save({ attributes }) {
                                             {showSubTitle && item.subTitle && (
                                                 <div className="gslider-subtitle-wrapper">
                                                     <RichText.Content
-                                                        tagName="h5"
+                                                        tagName={subTitleHtmlTag}
                                                         className="gslider-subtitle"
                                                         value={item.subTitle}
                                                     />
@@ -108,7 +111,7 @@ export default function Save({ attributes }) {
                                             {showTitle && item.title && (
                                                 <div className="gslider-title-wrapper">
                                                     <RichText.Content
-                                                        tagName="h3"
+                                                        tagName={titleHtmlTag}
                                                         className="gslider-title"
                                                         value={item.title}
                                                     />
@@ -117,7 +120,7 @@ export default function Save({ attributes }) {
                                             {showDescription && item.description && (
                                                 <div className="gslider-description-wrapper">
                                                     <RichText.Content
-                                                        tagName="p"
+                                                        tagName={descriptionHtmlTag}
                                                         className="gslider-description"
                                                         value={item.description}
                                                     />

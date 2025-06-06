@@ -21,34 +21,36 @@
 			color: $primary_color;
 		}
 	}
+	.components-base-control {
+		margin-bottom: 24px;
+		.components-base-control__field {
 
-	.components-base-control__field {
-
-		.components-base-control__label {
-			display: block;
-			font-size: 13px !important;
-			font-weight: 400 !important;
-			line-height: 1.3 !important;
-			margin: 5px 0 !important;
-			min-height: auto;
-			text-transform: capitalize !important;
-		}
-
-		.components-text-control__input,
-		.components-textarea-control__input {
-			border: 1px solid $border_color;
-			border-radius: 4px;
-			box-shadow: none;
-		}
-
-		label {
-			display: block;
-			font-size: 13px !important;
-			font-weight: 400 !important;
-			line-height: 1.3 !important;
-			margin: 10px 0 0 !important;
-			min-height: auto;
-			text-transform: capitalize !important;
+			.components-base-control__label {
+				display: block;
+				font-size: 13px !important;
+				font-weight: 400 !important;
+				line-height: 1.3 !important;
+				margin: 5px 0 10px !important;
+				min-height: auto;
+				text-transform: capitalize !important;
+			}
+	
+			.components-text-control__input,
+			.components-textarea-control__input {
+				border: 1px solid $border_color;
+				border-radius: 4px;
+				box-shadow: none;
+			}
+	
+			label {
+				display: block;
+				font-size: 13px !important;
+				font-weight: 400 !important;
+				line-height: 1.3 !important;
+				margin: 10px 0 0 !important;
+				min-height: auto;
+				text-transform: capitalize !important;
+			}
 		}
 	}
 
