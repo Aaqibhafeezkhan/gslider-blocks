@@ -2019,22 +2019,6 @@ const attributes = {
             Mobile: ""
         }
     },
-    globalNormalBackgroundImageAlt: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: ""
-        }
-    },
-    globalNormalBackgroundImageID: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: ""
-        }
-    },
     globalNormalBackgroundImagePosition: {
         type: "object",
         default: {
@@ -2089,22 +2073,6 @@ const attributes = {
         default: "",
     },
     globalHoverBackgroundImageUrl: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: ""
-        }
-    },
-    globalHoverBackgroundImageAlt: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: ""
-        }
-    },  
-    globalHoverBackgroundImageID: {
         type: "object",
         default: {
             Desktop: "",
@@ -2263,23 +2231,23 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    globalboxShadowValuesSwitcher : {
+    globalBoxShadowValuesSwitcher : {
         type: "string",
         default: "normal"
     },
-    globalboxShadowValues: {
+    globalBoxShadowValues: {
         type: "array",
         default: [],
     },
-    globalboxShadowCssValue: {
+    globalBoxShadowCssValue: {
         type: "string",
         default: "",
     },
-    globalboxShadowHoverValues: {
+    globalBoxShadowHoverValues: {
         type: "array",
         default: [],
     },
-    globalboxShadowHoverCssValue: {
+    globalBoxShadowHoverCssValue: {
         type: "string",
         default: "",
     },

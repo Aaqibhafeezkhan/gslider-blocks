@@ -385,8 +385,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         globalNormalCustomGradientSwitcher,
         globalNormalCustomGradientInputValue,
         globalNormalBackgroundImageUrl,
-        globalNormalBackgroundImageAlt,
-        globalNormalBackgroundImageID,
         globalNormalBackgroundImagePosition,
         globalNormalBackgroundImageAttachment,
         globalNormalBackgroundImageRepeat,
@@ -398,8 +396,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         globalHoverCustomGradientSwitcher,
         globalHoverCustomGradientInputValue,
         globalHoverBackgroundImageUrl,
-        globalHoverBackgroundImageAlt,
-        globalHoverBackgroundImageID,
         globalHoverBackgroundImagePosition,
         globalHoverBackgroundImageAttachment,
         globalHoverBackgroundImageRepeat,
@@ -434,11 +430,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Global Border Radius */
 
         /** Start Global Box Shadow */
-        globalboxShadowValuesSwitcher,
-        globalboxShadowValues,
-        globalboxShadowCssValue,
-        globalboxShadowHoverValues,
-        globalboxShadowHoverCssValue,
+        globalBoxShadowValuesSwitcher,
+        globalBoxShadowValues,
+        globalBoxShadowCssValue,
+        globalBoxShadowHoverValues,
+        globalBoxShadowHoverCssValue,
         /** End Global Box Shadow */
 
         /** Start Global Custom CSS */
@@ -446,7 +442,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Global Custom CSS */
         
     } = attributes;
-
 
     /** Get Current Device Type */
     const currentDeviceType = useDeviceType();
@@ -1765,10 +1760,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     setNormalCustomGradientInputValue={(value) => setAttributes({ globalNormalCustomGradientInputValue: value })}
                     normalBackgroundImageUrl={globalNormalBackgroundImageUrl}
                     setNormalBackgroundImageUrl={(value) => setAttributes({ globalNormalBackgroundImageUrl: value })}
-                    normalBackgroundImageAlt={globalNormalBackgroundImageAlt}
-                    setNormalBackgroundImageAlt={(value) => setAttributes({ globalNormalBackgroundImageAlt: value })}
-                    normalBackgroundImageID={globalNormalBackgroundImageID}
-                    setNormalBackgroundImageID={(value) => setAttributes({ globalNormalBackgroundImageID: value })}
                     normalBackgroundImagePosition={globalNormalBackgroundImagePosition}
                     setNormalBackgroundImagePosition={(value) => setAttributes({ globalNormalBackgroundImagePosition: value })}
                     normalBackgroundImageAttachment={globalNormalBackgroundImageAttachment}
@@ -1790,10 +1781,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     setHoverCustomGradientInputValue={(value) => setAttributes({ globalHoverCustomGradientInputValue: value })}
                     hoverBackgroundImageUrl={globalHoverBackgroundImageUrl}
                     setHoverBackgroundImageUrl={(value) => setAttributes({ globalHoverBackgroundImageUrl: value })}
-                    hoverBackgroundImageAlt={globalHoverBackgroundImageAlt}
-                    setHoverBackgroundImageAlt={(value) => setAttributes({ globalHoverBackgroundImageAlt: value })}
-                    hoverBackgroundImageID={globalHoverBackgroundImageID}
-                    setHoverBackgroundImageID={(value) => setAttributes({ globalHoverBackgroundImageID: value })}
                     hoverBackgroundImagePosition={globalHoverBackgroundImagePosition}
                     setHoverBackgroundImagePosition={(value) => setAttributes({ globalHoverBackgroundImagePosition: value })}
                     hoverBackgroundImageAttachment={globalHoverBackgroundImageAttachment}
@@ -1890,25 +1877,25 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <SwitcherControl
                     label={__("Box Shadow", "gslider-blocks")}
-                    globalSwitcher={globalboxShadowValuesSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ globalboxShadowValuesSwitcher: value })}
+                    globalSwitcher={globalBoxShadowValuesSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowValuesSwitcher: value })}
                 />
 
-                {globalboxShadowValuesSwitcher === 'normal' && (
+                {globalBoxShadowValuesSwitcher === 'normal' && (
                     <BoxShadowSettingsControl
                         label={__("Normal Shadow", "gslider-blocks")}
-                        onBoxShadowChange={(value) => setAttributes({ globalboxShadowValues: value })}
-                        initialShadowValue={globalboxShadowValues}
-                        onBoxShadowStyleChange={(value) => setAttributes({ globalboxShadowCssValue: value })}
+                        onBoxShadowChange={(value) => setAttributes({ globalBoxShadowValues: value })}
+                        initialShadowValue={globalBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ globalBoxShadowCssValue: value })}
                     />
                 )}
 
-                {globalboxShadowValuesSwitcher === 'hover' && (
+                {globalBoxShadowValuesSwitcher === 'hover' && (
                     <BoxShadowSettingsControl
                         label={__("Hover Shadow", "gslider-blocks")}
-                        onBoxShadowChange={(value) => setAttributes({ globalboxShadowHoverValues: value })}
-                        initialShadowValue={globalboxShadowHoverValues}
-                        onBoxShadowStyleChange={(value) => setAttributes({ globalboxShadowHoverCssValue: value })}
+                        onBoxShadowChange={(value) => setAttributes({ globalBoxShadowHoverValues: value })}
+                        initialShadowValue={globalBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ globalBoxShadowHoverCssValue: value })}
                     />
                 )}
             </PanelBody>
@@ -2069,6 +2056,115 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         return style;
     }, [sliderItems, blockId, deviceType]);
 
+    /**
+     * Get global background normal styles
+     */
+    const getGlobalBackgroundNormalStyles = (device) => {
+        const bgType = globalNormalBackgroundType;
+        const bgColor = globalNormalClassicColor;
+        const bgGradient = globalNormalGradientColor;
+        const customGradient = globalNormalCustomGradientInputValue;
+        const customGradientEnabled = globalNormalCustomGradientSwitcher;
+
+        const bgImageUrl = globalNormalBackgroundImageUrl?.[device];
+        const bgImagePosition = globalNormalBackgroundImagePosition?.[device];
+        const bgAttachment = globalNormalBackgroundImageAttachment?.[device];
+        const bgRepeat = globalNormalBackgroundImageRepeat?.[device];
+        const bgSize = globalNormalBackgroundImageSize?.[device];
+
+        if (bgType === 'gradient') {
+            if (customGradientEnabled && customGradient) {
+                return { background: customGradient };
+            } else if (bgGradient) {
+                return { background: bgGradient };
+            } else if (bgColor) {
+                return { background: bgColor };
+            }
+            return {};
+        }
+
+        let styles = bgColor ? { background: bgColor } : {};
+
+        if (bgType !== 'gradient' && bgImageUrl) {
+            styles = {
+                ...styles,
+                'background-image': `url(${bgImageUrl})`,
+                'background-position': bgImagePosition 
+                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+                    : "50% 50%",
+                'background-attachment': bgAttachment || undefined,
+                'background-repeat': bgRepeat || undefined,
+                'background-size': bgSize || undefined,
+            };
+        }
+
+        return styles;
+    };
+
+    /**
+     * Get global background hover styles
+     */
+    const getGlobalBackgroundHoverStyles = (device) => {
+        const bgType = globalHoverBackgroundType;
+        const bgColor = globalHoverClassicColor;
+        const bgGradient = globalHoverGradientColor;
+        const customGradient = globalHoverCustomGradientInputValue;
+        const customGradientEnabled = globalHoverCustomGradientSwitcher;
+
+        const bgImageUrl = globalHoverBackgroundImageUrl?.[device];
+        const bgImagePosition = globalHoverBackgroundImagePosition?.[device];
+        const bgAttachment = globalHoverBackgroundImageAttachment?.[device];
+        const bgRepeat = globalHoverBackgroundImageRepeat?.[device];
+        const bgSize = globalHoverBackgroundImageSize?.[device];
+
+        if (bgType === 'gradient') {
+            if (customGradientEnabled && customGradient) {
+                return { background: customGradient };
+            } else if (bgGradient) {
+                return { background: bgGradient };
+            } else if (bgColor) {
+                return { background: bgColor };
+            }
+            return {};
+        }
+
+        let styles = bgColor ? { background: bgColor } : {};
+
+        if (bgType !== 'gradient' && bgImageUrl) {
+            styles = {
+                ...styles,
+                'background-image': `url(${bgImageUrl})`,
+                'background-position': bgImagePosition 
+                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+                    : "50% 50%",
+                'background-attachment': bgAttachment || undefined,
+                'background-repeat': bgRepeat || undefined,
+                'background-size': bgSize || undefined,
+            };
+        }
+
+        return styles;
+    };
+
+
+    /**
+     * Convert object to string
+     */
+    const globalBackgroundStyleObjectToString = (styleObj) =>
+        Object.entries(styleObj)
+          .map(([key, value]) => `${key}: ${value};`)
+          .join(' ');
+      
+    /**
+     * Get global background styles
+     */
+    const globalDesktopBackgroundNormalStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundNormalStyles('Desktop'));
+    const globalTabletBackgroundNormalStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundNormalStyles('Tablet'));
+    const globalMobileBackgroundNormalStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundNormalStyles('Mobile'));
+
+    const globalDesktopBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Desktop'));
+    const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Tablet'));
+    const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Mobile'));
 
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
@@ -2077,12 +2173,24 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             align-items: center;
         }
 
-         .${blockId}.gslider-base-wrapper {
-            ${globalZIndex ? `z-index: ${globalZIndex};` : ''}
+        .${blockId}.gslider-base-wrapper {
+            ${globalDesktopBackgroundNormalStyles}
             ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ''} 
             ${globalPaddingDesktopCssStyle ? `padding: ${globalPaddingDesktopCssStyle};` : ''}
-            
-         }
+            ${globalBorder ? `border: ${globalBorder};` : ''}
+			${globalBorderDesktopCssStyle ? `border-width: ${globalBorderDesktopCssStyle};` : ''}  
+			${globalBorderRadiusDesktopCssStyle ? `border-radius: ${globalBorderRadiusDesktopCssStyle} !important;` : ''}
+            ${globalBorderColor ? `border-color: ${globalBorderColor};` : ''}
+            ${globalBoxShadowCssValue ? `box-shadow: ${globalBoxShadowCssValue} !important;` : ''}
+            ${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
+            box-sizing: border-box;
+            position: relative;
+        }
+        .${blockId}.gslider-base-wrapper:hover {
+            ${globalDesktopBackgroundHoverStyles}
+            ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ''}
+            ${globalBoxShadowHoverCssValue ? `box-shadow: ${globalBoxShadowHoverCssValue} !important;` : ''}
+        }
         
         .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
             height: ${layoutHeight?.Desktop ? `${layoutHeight.Desktop}${layoutHeightUnits?.Desktop}` : 'clamp(300px, 60vh, 500px)'};
@@ -2222,6 +2330,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         @media only screen and (max-width: 1024px) {
 
+            .${blockId}.gslider-base-wrapper {
+                ${globalTabletBackgroundNormalStyles}
+                ${globalMarginTabletCssStyle ? `margin: ${globalMarginTabletCssStyle};` : ''} 
+                ${globalPaddingTabletCssStyle ? `padding: ${globalPaddingTabletCssStyle};` : ''}
+                ${globalBorderTabletCssStyle ? `border-width: ${globalBorderTabletCssStyle};` : ''}  
+                ${globalBorderRadiusTabletCssStyle ? `border-radius: ${globalBorderRadiusTabletCssStyle};` : ''}
+                ${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
+            }
+            .${blockId}.gslider-base-wrapper:hover { 
+                ${globalTabletBackgroundHoverStyles}
+            }
+
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
                 height: ${layoutHeight?.Tablet ? `${layoutHeight.Tablet}${layoutHeightUnits?.Tablet}` : 'clamp(300px, 60vh, 500px)'};
                 ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
@@ -2302,6 +2422,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         }
         
         @media only screen and (max-width: 767px) {
+
+            .${blockId}.gslider-base-wrapper {
+                ${globalMobileBackgroundNormalStyles}
+                ${globalMarginMobileCssStyle ? `margin: ${globalMarginMobileCssStyle};` : ''} 
+                ${globalPaddingMobileCssStyle ? `padding: ${globalPaddingMobileCssStyle};` : ''}
+                ${globalBorderMobileCssStyle ? `border-width: ${globalBorderMobileCssStyle};` : ''}  
+                ${globalBorderRadiusMobileCssStyle ? `border-radius: ${globalBorderRadiusMobileCssStyle};` : ''}
+                ${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
+            }
+            .${blockId}.gslider-base-wrapper:hover { 
+                ${globalMobileBackgroundHoverStyles}
+            }
 
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
                 height: ${layoutHeight?.Mobile ? `${layoutHeight.Mobile}${layoutHeightUnits?.Mobile}` : 'clamp(300px, 60vh, 500px)'};
@@ -2730,8 +2862,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         globalNormalCustomGradientSwitcher,
         globalNormalCustomGradientInputValue,
         globalNormalBackgroundImageUrl,
-        globalNormalBackgroundImageAlt,
-        globalNormalBackgroundImageID,
         globalNormalBackgroundImagePosition,
         globalNormalBackgroundImageAttachment,
         globalNormalBackgroundImageRepeat,
@@ -2743,8 +2873,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         globalHoverCustomGradientSwitcher,
         globalHoverCustomGradientInputValue,
         globalHoverBackgroundImageUrl,
-        globalHoverBackgroundImageAlt,
-        globalHoverBackgroundImageID,
         globalHoverBackgroundImagePosition,
         globalHoverBackgroundImageAttachment,
         globalHoverBackgroundImageRepeat,
@@ -2779,11 +2907,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Global Border Radius */
 
         /** Start Global Box Shadow */
-        globalboxShadowValuesSwitcher,
-        globalboxShadowValues,
-        globalboxShadowCssValue,
-        globalboxShadowHoverValues,
-        globalboxShadowHoverCssValue,
+        globalBoxShadowValuesSwitcher,
+        globalBoxShadowValues,
+        globalBoxShadowCssValue,
+        globalBoxShadowHoverValues,
+        globalBoxShadowHoverCssValue,
         /** End Global Box Shadow */
 
         /** Start Global Custom CSS */
@@ -2792,13 +2920,15 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
     ]);
 
+    const customCss = getCustomCss(globalCustomCSS, `.${blockId}`);
+
     /** Set Block Style */
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle} ${sliderItemColorStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle, sliderItemColorStyle]);
+        setAttributes({blockStyle: `${allBlockStyle} ${sliderItemColorStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, sliderItemColorStyle, customCss]);
 
     /** Set Editor Style */
-    const editorStyle = `${allBlockStyle} ${sliderItemColorStyle}`.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle} ${sliderItemColorStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>

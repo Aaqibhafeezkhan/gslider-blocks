@@ -2,7 +2,7 @@ import React from "react";
 
 const Icon = () => {
   return (
-    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 24" fill="none" class="gslider-editor-icons" aria-hidden="true" focusable="false">
+    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 24" fill="none" className="gslider-editor-icons" aria-hidden="true" focusable="false">
     <rect x="5.5" y="5.5" width="15" height="11" rx="2" fill="none" stroke="#007cba" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
     <path d="M9.5 9H16.5" stroke="#007cba" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
     <path d="M9.5 11H16.5" stroke="#007cba" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
