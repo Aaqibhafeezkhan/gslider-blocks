@@ -13,22 +13,17 @@ const InputControls = ({ label, value, onChangeValue, helpText }) => {
     };
     
     return (
-        <>
-        <div className="gslider-setting-input-control-wrapper">
-            <BaseControl
-                label={label}
-                className="gslider-setting-label-text"
-            >
-                <InputControl
-                    value={value}
-                    onChange={handleChange}
-                    help={helpText}
-                    className="gslider-setting-input-control"
-                />
-            </BaseControl>
-            
-        </div>
-        </>
+        <BaseControl
+            label={label}
+            className="gslider-setting-label-text"
+        >
+            <InputControl
+                value={value}
+                onChange={handleChange}
+                help={helpText}
+                className="gslider-setting-input-control"
+            />
+        </BaseControl>
     );
 };
 

@@ -10,24 +10,22 @@ const SwitcherControl = ({ label, globalSwitcher, setGlobalSwitcher }) => {
     ];
 
     return (
-        <div className="gslider-setting-switcher-container">
-            <BaseControl
-                label={label}
-                className="gslider-setting-switcher-panel-wrapper"
-            >
-                <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                    {NORMAL_HOVER.map((item, key) => (
-                        <Button
-                            key={key}
-                            onClick={() => setGlobalSwitcher(item.value)} 
-                            className={`gslider-setting-switcher-panel-btn-switcher ${globalSwitcher === item.value ? 'active' : ''}`}
-                        >
-                            {item.label}
-                        </Button>
-                    ))}
-                </ButtonGroup>
-            </BaseControl>
-        </div>
+        <BaseControl
+            label={label}
+            className="gslider-setting-switcher-panel-wrapper"
+        >
+            <ButtonGroup className="gslider-setting-switcher-panel-btn">
+                {NORMAL_HOVER.map((item, key) => (
+                    <Button
+                        key={key}
+                        onClick={() => setGlobalSwitcher(item.value)} 
+                        className={`gslider-setting-switcher-panel-btn-switcher ${globalSwitcher === item.value ? 'active' : ''}`}
+                    >
+                        {item.label}
+                    </Button>
+                ))}
+            </ButtonGroup>
+        </BaseControl>
     );
 };
 

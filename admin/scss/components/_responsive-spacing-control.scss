@@ -3,7 +3,7 @@
 .gslider-setting-spacing-container {
 	display: flex;
 	flex-direction: column;
-	margin: 15px 0;
+	// margin: 15px 0;
 
 	.gslider-setting-spacing-inner-container {
 		margin-bottom: 20px;
@@ -24,8 +24,8 @@
 
 				.gslider-setting-spacing-input-label {
 					text-align: center;
-					font-size: 11px;
-					margin-right: 5px;
+					font-size: 11px !important;
+					margin-right: 5px !important;
 					&.link-label {
 						visibility: hidden;
 						opacity: 0;
@@ -97,13 +97,14 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			margin-bottom: 5px;
+			&.spacing {
+				margin-bottom: 0;
+			}
+			&.range {
+				margin-bottom: 10px;
+			}
 		}
-	}
-
-	.components-base-control {
-
-		.components-base-control__field {
+		.components-base-control {
 			margin-bottom: 0 !important;
 		}
 	}

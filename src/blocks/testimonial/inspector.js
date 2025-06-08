@@ -824,24 +824,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                             </div>
                                         </PanelBody>
                                         <PanelBody title={__("Slider Type", "gslider-blocks")} initialOpen={false}>
-                                            <div className="gslider-setting-switcher-container">
-                                                <BaseControl
-                                                    label={__("Slider Type", "gslider-blocks")}
-                                                    className="gslider-setting-switcher-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                                                        {SLIDER_TYPE.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ sliderType: item.value })}
-                                                                className={`gslider-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-                                            </div>
+                                            <BaseControl
+                                                label={__("Slider Type", "gslider-blocks")}
+                                                className="gslider-setting-switcher-panel-wrapper"
+                                            >
+                                                <ButtonGroup className="gslider-setting-switcher-panel-btn">
+                                                    {SLIDER_TYPE.map((item, key) => (
+                                                        <Button
+                                                            key={key}
+                                                            onClick={() => setAttributes({ sliderType: item.value })}
+                                                            className={`gslider-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
+                                                </ButtonGroup>
+                                            </BaseControl>
                                         </PanelBody>
                                         <PanelBody title={__("General Settings", "gslider-blocks")} initialOpen={false}>
                                             <ToggleControl
@@ -1247,23 +1245,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                             {paginationType === 'bullets' && (
                                                 <>
-                                                    <div className="gslider-setting-switcher-container">
-                                                        <BaseControl
-                                                            className="gslider-setting-switcher-panel-wrapper"
-                                                        >
-                                                            <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                                                                {NORMAL_ACTIVE.map((item, key) => (
-                                                                    <Button
-                                                                key={key}
-                                                                        onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
-                                                                        className={`gslider-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                ))}
-                                                            </ButtonGroup>
-                                                        </BaseControl>
-                                                    </div>
+                                                    <BaseControl
+                                                        className="gslider-setting-switcher-panel-wrapper"
+                                                    >
+                                                        <ButtonGroup className="gslider-setting-switcher-panel-btn">
+                                                            {NORMAL_ACTIVE.map((item, key) => (
+                                                                <Button
+                                                            key={key}
+                                                                    onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
+                                                                    className={`gslider-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
+                                                        </ButtonGroup>
+                                                    </BaseControl>
                                                     {sliderDotsSwitcher === 'normal' && (
                                                         <>
                                                             <ResponsiveRangeControl

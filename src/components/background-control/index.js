@@ -215,7 +215,7 @@ const BackgroundControl = ({
         <>
             <BaseControl
                 label={label}
-                className="gslider-background-color-control-wrapper gslider-setting-switcher-container"
+                className="gslider-background-color-control-wrapper"
             >
                 {isHover ? (
                     <TabPanel

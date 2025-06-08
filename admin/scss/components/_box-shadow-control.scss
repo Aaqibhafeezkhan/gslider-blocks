@@ -70,10 +70,6 @@
 
 .gslider-box-shadow-wrapper {
 
-	&.shadow-color {
-		margin-bottom: 10px;
-	}
-
 	.components-base-control__field {
 		position: relative;
 		display: flex;
@@ -81,20 +77,6 @@
 		flex-direction: row;
 		margin: 0;
 		align-items: center;
-
-		.components-base-control__field {
-
-			.components-base-control__label {
-				display: block;
-				color: #5f5f5f !important;
-				font-size: 12px !important;
-				font-weight: 500 !important;
-				line-height: 16px !important;
-				margin: 10px 0 !important;
-				min-height: auto;
-				text-transform: capitalize !important;
-			}
-		}
 	}
 }
 

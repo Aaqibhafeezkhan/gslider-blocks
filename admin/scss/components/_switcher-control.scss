@@ -1,47 +1,39 @@
 @use "../variables" as *;
 
-.gslider-setting-switcher-container {
-	margin: 15px 0 0 0;
+.gslider-setting-switcher-panel-wrapper {
 
-	.components-base-control__field {
-		margin-bottom: 5px;
-	}
+	.gslider-setting-switcher-panel-btn {
+		display: flex !important;
+		width: 100%;
 
-	.gslider-setting-switcher-panel-wrapper {
+		button {
 
-		.gslider-setting-switcher-panel-btn {
-			display: flex !important;
-			width: 100%;
+			&.components-button {
 
-			button {
+				&.gslider-setting-switcher-panel-btn-switcher {
+					width: 100%;
+					justify-content: center;
+					height: unset;
+					line-height: 16px;
+					min-height: 30px;
+					font-size: 13px;
+					font-weight: 400;
+					box-shadow: inset 0 0 0 1px $background_color;
+					transition: all 0.3s ease;
 
-				&.components-button {
+					&.active {
 
-					&.gslider-setting-switcher-panel-btn-switcher {
-						width: 100%;
-						justify-content: center;
-						height: unset;
-						line-height: 16px;
-						min-height: 30px;
-						font-size: 13px;
-						font-weight: 400;
-						box-shadow: inset 0 0 0 1px $background_color;
-						transition: all 0.3s ease;
-
-						&.active {
-
-							color: #007cba;
-							background-color: #dcf2ff;
-						}
+						color: #007cba;
+						background-color: #dcf2ff;
 					}
+				}
 
-					&:first-child {
-						border-radius: 4px 0 0 4px;
-					}
+				&:first-child {
+					border-radius: 4px 0 0 4px;
+				}
 
-					&:last-child {
-						border-radius: 0 4px 4px 0;
-					}
+				&:last-child {
+					border-radius: 0 4px 4px 0;
 				}
 			}
 		}

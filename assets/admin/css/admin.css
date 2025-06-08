@@ -58,12 +58,16 @@
 .gslider-inspector-control .components-base-control {
   margin-bottom: 24px;
 }
+.gslider-inspector-control .components-base-control .components-base-control__field {
+  margin-bottom: 0 !important;
+}
 .gslider-inspector-control .components-base-control .components-base-control__field .components-base-control__label {
   display: block;
+  color: #1e1e1e !important;
   font-size: 13px !important;
   font-weight: 400 !important;
   line-height: 1.3 !important;
-  margin: 5px 0 10px !important;
+  margin-bottom: 10px !important;
   min-height: auto;
   text-transform: capitalize !important;
 }
@@ -82,22 +86,35 @@
   min-height: auto;
   text-transform: capitalize !important;
 }
+.gslider-inspector-control .components-base-control .components-base-control__field .components-base-control__help {
+  color: #1e1e1e !important;
+  font-size: 11px !important;
+}
 .gslider-inspector-control .components-button {
   color: #000;
   font-size: 13px;
+}
+.gslider-inspector-control .gslider-border-style-control .components-base-control__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0 !important;
+}
+.gslider-inspector-control .gslider-border-style-control .components-base-control__field .components-base-control__label {
+  margin-bottom: 0 !important;
+}
+.gslider-inspector-control .gslider-border-style-control .components-base-control__field .components-base-control {
+  margin-bottom: 0 !important;
+  width: 50%;
+}
+.gslider-inspector-control .gslider-border-style-control .components-base-control__field .components-base-control .gslider-border-style-control-select {
+  width: 100%;
 }
 
 .gslider-custom-css-editor-wrapper .monaco-editor {
   border-radius: 6px !important;
   border: 1px solid #ddd !important;
   overflow: hidden;
-}
-
-.gslider-border-style-control .components-base-control__field {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0 !important;
 }
 
 .gslider-bg-tab-panel {
@@ -193,9 +210,6 @@
   font-weight: 500;
 }
 
-.gslider-box-shadow-wrapper.shadow-color {
-  margin-bottom: 10px;
-}
 .gslider-box-shadow-wrapper .components-base-control__field {
   position: relative;
   display: flex;
@@ -203,16 +217,6 @@
   flex-direction: row;
   margin: 0;
   align-items: center;
-}
-.gslider-box-shadow-wrapper .components-base-control__field .components-base-control__field .components-base-control__label {
-  display: block;
-  color: #5f5f5f !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  line-height: 16px !important;
-  margin: 10px 0 !important;
-  min-height: auto;
-  text-transform: capitalize !important;
 }
 
 .gslider-box-shadow-icon-dropdown .gslider-box-shadow-icon-btn {
@@ -249,16 +253,6 @@
   margin: 0;
   align-items: center;
   flex-direction: row;
-}
-.gslider-setting-color-switcher-wrapper .components-base-control__field .components-base-control__field .components-base-control__label {
-  display: block;
-  color: #5f5f5f !important;
-  font-size: 12px !important;
-  font-weight: 400 !important;
-  line-height: 16px !important;
-  margin: 10px 0 !important;
-  min-height: auto;
-  text-transform: capitalize !important;
 }
 .gslider-setting-color-switcher-wrapper .color-ball {
   background-image: linear-gradient(45deg, #e9e9e9 25%, transparent 0), linear-gradient(-45deg, #e9e9e9 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e9e9e9 0), linear-gradient(-45deg, transparent 75%, #e9e9e9 0);
@@ -542,11 +536,6 @@
   display: block;
   margin-bottom: 0;
 }
-.gslider-image-control-wrapper .components-base-control__field .components-base-control__label {
-  font-size: 13px !important;
-  text-transform: capitalize !important;
-  margin-bottom: 8px !important;
-}
 .gslider-image-control-wrapper .gslider-image-control {
   background-color: #ccc;
   background-position: 50%;
@@ -637,16 +626,10 @@
 .gslider-image-control-wrapper .gslider-setting-device-label-wrapper {
   display: inline-flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 .gslider-image-control-wrapper .components-base-control__field {
   display: block;
   margin-bottom: 0;
-}
-.gslider-image-control-wrapper .components-base-control__field .components-base-control__label {
-  font-size: 13px !important;
-  text-transform: capitalize !important;
-  margin-bottom: 8px !important;
 }
 .gslider-image-control-wrapper .gslider-image-control {
   background-color: #ccc;
@@ -690,7 +673,6 @@
 .gslider-image-control-setting-wrapper .gslider-setting-device-label-wrapper {
   display: inline-flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 .gslider-image-control-setting-wrapper .gslider-image-control-setting-item {
   margin: 25px 0;
@@ -704,7 +686,6 @@
 .gslider-image-control-setting-wrapper .gslider-image-control-setting-item .gslider-setting-device-label-wrapper {
   display: inline-flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .gslider-image-control-integrated {
@@ -761,7 +742,6 @@
 .gslider-setting-device-label-wrapper {
   display: inline-flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 .gslider-setting-device-label-wrapper span.gslider-setting-label-text {
   color: #1e1e1e;
@@ -851,7 +831,6 @@
 .gslider-setting-spacing-container {
   display: flex;
   flex-direction: column;
-  margin: 15px 0;
 }
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container {
   margin-bottom: 20px;
@@ -871,8 +850,8 @@
 }
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper .gslider-setting-spacing-input-label {
   text-align: center;
-  font-size: 11px;
-  margin-right: 5px;
+  font-size: 11px !important;
+  margin-right: 5px !important;
 }
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper .gslider-setting-spacing-input-label.link-label {
   visibility: hidden;
@@ -929,9 +908,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 5px;
 }
-.gslider-setting-spacing-container .components-base-control .components-base-control__field {
+.gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-label-container.spacing {
+  margin-bottom: 0;
+}
+.gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-label-container.range {
+  margin-bottom: 10px;
+}
+.gslider-setting-spacing-container .gslider-setting-spacing-inner-container .components-base-control {
   margin-bottom: 0 !important;
 }
 
@@ -1100,17 +1084,11 @@
   box-shadow: none !important;
 }
 
-.gslider-setting-switcher-container {
-  margin: 15px 0 0 0;
-}
-.gslider-setting-switcher-container .components-base-control__field {
-  margin-bottom: 5px;
-}
-.gslider-setting-switcher-container .gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn {
+.gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn {
   display: flex !important;
   width: 100%;
 }
-.gslider-setting-switcher-container .gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn button.components-button.gslider-setting-switcher-panel-btn-switcher {
+.gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn button.components-button.gslider-setting-switcher-panel-btn-switcher {
   width: 100%;
   justify-content: center;
   height: unset;
@@ -1121,14 +1099,14 @@
   box-shadow: inset 0 0 0 1px #ededed;
   transition: all 0.3s ease;
 }
-.gslider-setting-switcher-container .gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn button.components-button.gslider-setting-switcher-panel-btn-switcher.active {
+.gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn button.components-button.gslider-setting-switcher-panel-btn-switcher.active {
   color: #007cba;
   background-color: #dcf2ff;
 }
-.gslider-setting-switcher-container .gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn button.components-button:first-child {
+.gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn button.components-button:first-child {
   border-radius: 4px 0 0 4px;
 }
-.gslider-setting-switcher-container .gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn button.components-button:last-child {
+.gslider-setting-switcher-panel-wrapper .gslider-setting-switcher-panel-btn button.components-button:last-child {
   border-radius: 0 4px 4px 0;
 }
 
