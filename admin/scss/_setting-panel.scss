@@ -58,6 +58,24 @@
 				font-size: 11px !important;
 			}
 		}
+		&.gslider-setting-color-switcher-wrapper {
+			.components-base-control__field {
+				position: relative;
+				display: flex;
+				justify-content: space-between;
+				margin: 0;
+				align-items: center;
+				flex-direction: row;
+				.components-base-control__label {
+					margin-bottom: 0 !important;
+				}
+			}
+		}
+		&.gslider-image-control-wrapper{
+			.gslider-setting-device-label-wrapper{
+				margin-bottom: 10px !important;
+			}
+		}
 	}
 
 	.components-button {
