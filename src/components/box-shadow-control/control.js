@@ -14,7 +14,7 @@ function Control({ label, type, onChangeHandler, value }) {
 			{type === 'color' ? (
 				<BaseControl 
 					label={__(label, "gslider-blocks")}
-					className="gslider-box-shadow-wrapper shadow-color gslider-setting-color-switcher-wrapper"
+					className="gslider-setting-color-switcher-wrapper"
 				>
 					<Dropdown
 						className="gslider-box-shadow-icon-dropdown gslider-setting-color-dropdown"

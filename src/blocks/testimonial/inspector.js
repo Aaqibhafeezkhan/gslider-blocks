@@ -826,7 +826,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                         <PanelBody title={__("Slider Type", "gslider-blocks")} initialOpen={false}>
                                             <BaseControl
                                                 label={__("Slider Type", "gslider-blocks")}
-                                                className="gslider-setting-switcher-panel-wrapper"
                                             >
                                                 <ButtonGroup className="gslider-setting-switcher-panel-btn">
                                                     {SLIDER_TYPE.map((item, key) => (
@@ -1245,9 +1244,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                             {paginationType === 'bullets' && (
                                                 <>
-                                                    <BaseControl
-                                                        className="gslider-setting-switcher-panel-wrapper"
-                                                    >
+                                                    <BaseControl>
                                                         <ButtonGroup className="gslider-setting-switcher-panel-btn">
                                                             {NORMAL_ACTIVE.map((item, key) => (
                                                                 <Button

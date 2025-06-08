@@ -37,7 +37,7 @@ const ResponsiveAlignmentControl = ({
 
 	return (
 		<BaseControl
-			className="gslider-alignment-control-wrapper"
+			className="gslider-alignment-control"
 		>
 			<ResponsiveDeviceControl
 				label={label}

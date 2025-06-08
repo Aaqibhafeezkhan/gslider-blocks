@@ -10,7 +10,7 @@
 		min-height: 96px;
 		display: flex;
 		background-color: $white_color;
-		border: 1px solid #e6e7e9;
+		border: 1px solid $background_color;
 		border-radius: 3px;
 		position: relative;
 		overflow: hidden;
@@ -46,7 +46,7 @@
 			svg {
 				height: 30px;
 				width: 30px;
-				fill: #50575e;
+				fill: $secondary_color;
 			}
 		}
 
@@ -64,7 +64,7 @@
 			font-weight: 400;
 			text-align: center;
 			line-height: 24px;
-			color: #50575e;
+			color: $secondary_color;
 			cursor: pointer;
 			justify-content: center;
 		}
@@ -116,10 +116,10 @@
 			height: 36px;
 			width: 100%;
 			padding: 7px 12px 7px calc(12px * 2 + 14px);
-			border: 1px solid #e6e7e9;
+			border: 1px solid $background_color;
 			margin: 0;
 			border-radius: 2px;
-			color: #1d2327;
+			color: $secondary_color;
 			top: 0;
 		}
 	}
@@ -137,15 +137,15 @@
 		.gslider_icon_picker_wrapper_category {
 			padding: 9px 10px;
 			border-radius: 2px;
-			color: #1d2327;
+			color: $secondary_color;
 			display: flex;
 			justify-content: space-between;
 			font-size: 13px;
 			cursor: pointer;
 
 			&.selected {
-				background-color: #dcf2ff;
-				color: #0063a1;
+				background-color: $active_bg_color;
+				color: $primary_color;
 			}
 		}
 	}
@@ -155,14 +155,14 @@
 	flex: 1;
 	padding: 14px;
 	padding-right: 0;
-	border: 1px solid #e6e7e9;
+	border: 1px solid $background_color;
 	border-radius: 2px;
 
 	.fb_icon {
 		width: 80px;
 		height: 80px;
 		background-color: $white_color;
-		border: 1px solid #e6e7e9;
+		border: 1px solid $background_color;
 		border-radius: 3px;
 		display: flex;
 		align-items: center;
@@ -180,14 +180,14 @@
 		}
 
 		&.default {
-			border-color: #007cba;
-			box-shadow: 0 0 0 2px #007cba;
+			border-color: $primary_color;
+			box-shadow: 0 0 0 2px $primary_color;
 			pointer-events: none;
 		}
 
 		&.selected {
-			border-color: #007cba;
-			box-shadow: 0 0 0 2px #dcf2ff;
+			border-color: $primary_color;
+			box-shadow: 0 0 0 2px $active_bg_color;
 			pointer-events: none;
 		}
 	}

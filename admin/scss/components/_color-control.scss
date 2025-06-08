@@ -26,9 +26,9 @@
 		height: 28px;
 		width: 28px;
 		padding: 5px;
-		border: 1px solid #e6e7e9;
+		border: 1px solid $background_color;
 		border-radius: 14px;
-		color: #50575e;
+		color: $secondary_color;
 		background: $white_color;
 
 		&:focus {

@@ -25,7 +25,8 @@
 				.gslider-setting-spacing-input-label {
 					text-align: center;
 					font-size: 11px !important;
-					margin-right: 5px !important;
+					margin:0 4px 4px 0 !important;
+
 					&.link-label {
 						visibility: hidden;
 						opacity: 0;
@@ -33,17 +34,17 @@
 				}
 
 				input {
-					border-color: #ebebeb !important;
-					color: #1e1e1e;
+					border-color: $border_color !important;
+					color: $secondary_color;
 					height: 30px !important;
 					border-left-width: 0;
 					border-radius: 0;
 					margin: 0;
-					min-height: 24px;
+					min-height: 30px;
 					padding: 0;
 					text-align: center;
 					width: 100%;
-					font-size: 14px;
+					font-size: 13px;
 
 					&:focus {
 						outline: none !important;
@@ -54,8 +55,8 @@
 				&:first-child {
 
 					input {
-						border-bottom-left-radius: 5px;
-						border-top-left-radius: 5px;
+						border-bottom-left-radius: 4px;
+						border-top-left-radius: 4px;
 						border-width: 1px;
 					}
 				}
@@ -71,8 +72,8 @@
 					padding: 0;
 					text-align: center;
 					width: 100%;
-					border-bottom-right-radius: 5px;
-					border-top-right-radius: 5px;
+					border-bottom-right-radius: 4px;
+					border-top-right-radius: 4px;
 					align-items: center;
 					display: flex;
 					justify-content: center;
@@ -97,12 +98,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			&.spacing {
-				margin-bottom: 0;
-			}
-			&.range {
-				margin-bottom: 10px;
-			}
+			margin-bottom: 8px;
 		}
 		.components-base-control {
 			margin-bottom: 0 !important;

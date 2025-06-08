@@ -82,7 +82,6 @@ const BackgroundControl = ({
         <>
             <BaseControl
                 label={__("Background Type", "gslider-blocks")}
-                className="gslider-setting-switcher-panel-wrapper"
             >
                 <ButtonGroup className="gslider-setting-switcher-panel-btn">
                     {BACKGROUND_TYPES.map((item) => (
@@ -149,7 +148,6 @@ const BackgroundControl = ({
         <>
             <BaseControl
                 label={__("Background Type", "gslider-blocks")}
-                className="gslider-setting-switcher-panel-wrapper"
             >
                 <ButtonGroup className="gslider-setting-switcher-panel-btn"> 
                     {BACKGROUND_TYPES.map((item) => (
@@ -215,7 +213,6 @@ const BackgroundControl = ({
         <>
             <BaseControl
                 label={label}
-                className="gslider-background-color-control-wrapper"
             >
                 {isHover ? (
                     <TabPanel

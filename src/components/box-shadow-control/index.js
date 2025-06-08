@@ -50,7 +50,7 @@ export default function BoxShadowSettingsControl({ label = __("Box Shadow", "gsl
 	return (
 		<BaseControl 
 			label={label}
-			className="gslider-box-shadow-wrapper shadow-color gslider-setting-color-switcher-wrapper"
+			className="gslider-setting-color-switcher-wrapper"
 		>
 			<Dropdown
 				className="gslider-box-shadow-icon-dropdown gslider-setting-color-dropdown"

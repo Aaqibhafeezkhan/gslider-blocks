@@ -584,7 +584,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 <ResponsiveRangeControl
                     min={0}
                     max={contentWidthUnits?.[deviceType] === '%' ? 100 : 1000}
-                    label={__("Content Width", "gslider-blocks")}
+                    label={__("Max Width", "gslider-blocks")}
                     rangeValue={contentWidth}
                     onChangeValue={(value) => setAttributes({ contentWidth: value })}
                     onUnitChange={(value) => setAttributes({ contentWidthUnits: value })}
@@ -595,7 +595,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 /> 
 
                 <ResponsiveAlignmentControl
-                    label={__("Content Vertical Alignment", "gslider-blocks")}
+                    label={__("Vertical Alignment", "gslider-blocks")}
                     globalAlignment={contentVerticalAlignment}
                     setGlobalAlignment={(value) => setAttributes({ contentVerticalAlignment: value })}
                     deviceType={deviceType}
@@ -606,7 +606,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
 
                 <ResponsiveAlignmentControl
-                    label={__("Content Horizontal Alignment", "gslider-blocks")}
+                    label={__("Horizontal Alignment", "gslider-blocks")}
                     globalAlignment={contentHorizontalAlignment}
                     setGlobalAlignment={(value) => setAttributes({ contentHorizontalAlignment: value })}
                     deviceType={deviceType}
@@ -617,7 +617,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
 
                 <ResponsiveAlignmentControl
-                    label={__("Content Alignment", "gslider-blocks")}
+                    label={__("Text Alignment", "gslider-blocks")}
                     globalAlignment={contentAlignment}
                     setGlobalAlignment={(value) => setAttributes({ contentAlignment: value })}
                     deviceType={deviceType}
@@ -682,7 +682,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             >
                 <BaseControl
                     label={__("Slider Type", "gslider-blocks")}
-                    className="gslider-setting-switcher-panel-wrapper"
                 >
                     <ButtonGroup className="gslider-setting-switcher-panel-btn">
                         {SLIDER_TYPE.map((item, key) => (
@@ -826,12 +825,19 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     opened={openPanels.general === "g9"}
                     onToggle={() => togglePanel("general", "g9")}
                 >
-                    <SelectControl
-                        label={__('Pagination Type', 'gslider-blocks')}
-                        value={paginationType}
-                        options={PAGINATION_TYPE}
-                        onChange={(value) => setAttributes({ paginationType: value })}
-                    />
+                    <BaseControl
+                        className="gslider-pagination-type-control"
+                        label={__("Pagination Type", "gslider-blocks")}
+                    >
+                        <>
+                            <SelectControl
+                                className='gslider-pagination-type-control-select'
+                                value={paginationType}
+                                options={PAGINATION_TYPE}
+                                onChange={(value) => setAttributes({ paginationType: value })}
+                            />
+                        </>
+                    </BaseControl>
                     {paginationType === 'bullets' && (
                         <ToggleControl
                             label={__("Dynamic Bullets", "slider-blocks")}
@@ -1300,9 +1306,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     label={__("Border Style", "gslider-blocks")}
                 >
                     <>
-                        {/* <span className="gslider-border-style-control-label">
-                            {__("Border Style", "gslider-blocks")}
-                        </span> */}
                         <SelectControl
                             className='gslider-border-style-control-select'
                             value={sliderArrowsBorder}
@@ -1438,9 +1441,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 {paginationType === 'bullets' && (
                     <>
-                        <BaseControl
-                            className="gslider-setting-switcher-panel-wrapper"
-                        >
+                        <BaseControl>
                             <ButtonGroup className="gslider-setting-switcher-panel-btn">
                                 {NORMAL_ACTIVE.map((item, key) => (
                                     <Button
@@ -1493,9 +1494,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                     label={__("Border Style", "gslider-blocks")}
                                 >
                                     <>
-                                        {/* <span className="gslider-border-style-control-label">
-                                            {__("Border Style", "gslider-blocks")}
-                                        </span> */}
                                         <SelectControl
                                             className='gslider-border-style-control-select'
                                             value={sliderNormalDotsBorder}
@@ -1605,9 +1603,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                     className="gslider-border-style-control"
                                 >
                                     <>
-                                        {/* <span className="gslider-border-style-control-label">
-                                            {__("Border Style", "gslider-blocks")}
-                                        </span> */}
                                         <SelectControl
                                             className='gslider-border-style-control-select'
                                             value={sliderActiveDotsBorder}

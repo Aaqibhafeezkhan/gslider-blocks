@@ -5,7 +5,6 @@
 	.gslider-setting-device-label-wrapper {
 		display: inline-flex;
 		align-items: center;
-		// margin-bottom: 10px;
 	}
 
 	.components-base-control__field {
@@ -30,9 +29,9 @@
 		background-image: url(../../assets/images/transparent-bg-demo.png);
 		width: 100%;
 		padding: 0;
-		background-color: #f0f0f0;
-		border: 1px dashed #ccc;
-		border-radius: 6px;
+		background-color: $background_color;
+		border: 1px dashed $border_color;
+		border-radius: 4px;
 		height: 130px;
 		display: flex;
 		flex-direction: column;
@@ -47,11 +46,11 @@
 
 		svg {
 			margin-bottom: 8px;
-			fill: #555;
+			fill: $label_color;
 		}
 
 		&:hover {
-			background-color: #e8e8e8;
+			background-color: $active_bg_color;
 		}
 	}
 }
@@ -61,23 +60,21 @@
 	.gslider-setting-device-label-wrapper {
 		display: inline-flex;
 		align-items: center;
-		// margin-bottom: 10px;
 	}
 
 	.gslider-image-control-setting-item {
-		margin: 25px 0;
+		margin: 24px 0;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 
 		.components-base-control {
-			width: 45%;
+			width: 47%;
 		}
 
 		.gslider-setting-device-label-wrapper {
 			display: inline-flex;
 			align-items: center;
-			// margin-bottom: 10px;
 		}
 	}
 }
@@ -91,6 +88,9 @@
 
 		.components-focal-point-picker-wrapper {
 			width: 100%;
+			.components-focal-point-picker {
+				border-radius: 4px;
+			}
 		}
 
 		.components-flex {

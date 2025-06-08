@@ -32,7 +32,7 @@
 				font-size: $label_font_size !important;
 				font-weight: $label_font_weight !important;
 				line-height: $label_line_height !important;
-				margin-bottom: 10px !important;
+				margin-bottom: 8px !important;
 				min-height: auto;
 				text-transform: $label_text_transform !important;
 			}
@@ -49,7 +49,6 @@
 				font-size: $label_font_size !important;
 				font-weight: $label_font_weight !important;
 				line-height: $label_line_height !important;
-				margin: 10px 0 0 !important;
 				min-height: auto;
 				text-transform: $label_text_transform !important;
 			}
@@ -57,24 +56,57 @@
 				color: $label_color !important;
 				font-size: 11px !important;
 			}
+			.components-input-control__container {
+				input {
+					color: $label_color;
+					font-weight: $label_font_weight;
+					font-size: $label_font_size;
+					line-height: $label_line_height;
+					height: 30px !important;
+					min-height: 30px;
+				}
+				.components-input-control__backdrop {
+					border-color: $border_color !important;
+					border-radius: 4px !important;
+					box-shadow: unset !important;
+				}
+			}
+			.gslider-image-control-setting-item {
+				.gslider-setting-device-label-wrapper {
+					margin-bottom: 0 !important;
+				}
+				.components-base-control {
+					margin-bottom: 0 !important;
+				}
+			}
 		}
+		&.gslider-setting-typography,
 		&.gslider-setting-color-switcher-wrapper {
 			.components-base-control__field {
 				position: relative;
 				display: flex;
-				justify-content: space-between;
-				margin: 0;
 				align-items: center;
+				justify-content: space-between;
 				flex-direction: row;
 				.components-base-control__label {
 					margin-bottom: 0 !important;
 				}
 			}
 		}
+		&.gslider-alignment-control,
 		&.gslider-image-control-wrapper{
 			.gslider-setting-device-label-wrapper{
-				margin-bottom: 10px !important;
+				margin-bottom: 8px !important;
 			}
+		}
+		.components-select-control__input {
+			font-size: $label_font_size !important;
+			font-weight: $label_font_weight !important;
+			line-height: $label_line_height !important;
+			color: $label_color !important;
+			min-height: 30px !important;
+			height: 30px !important;
+			border-radius: 4px !important;
 		}
 	}
 
@@ -83,12 +115,12 @@
 		font-size: 13px;
 	}
 
-	.gslider-border-style-control {
+	.gslider-border-style-control,
+	.gslider-pagination-type-control {
 		.components-base-control__field {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			margin-bottom: 0 !important;
 			.components-base-control__label {
 				margin-bottom: 0 !important;
 			}
@@ -106,7 +138,7 @@
 .gslider-custom-css-editor-wrapper {
 
 	.monaco-editor {
-		border-radius: 6px !important;
+		border-radius: 4px !important;
 		border: 1px solid $border_color !important;
 		overflow: hidden;
 	}

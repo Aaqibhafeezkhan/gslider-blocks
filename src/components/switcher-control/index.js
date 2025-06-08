@@ -12,7 +12,6 @@ const SwitcherControl = ({ label, globalSwitcher, setGlobalSwitcher }) => {
     return (
         <BaseControl
             label={label}
-            className="gslider-setting-switcher-panel-wrapper"
         >
             <ButtonGroup className="gslider-setting-switcher-panel-btn">
                 {NORMAL_HOVER.map((item, key) => (

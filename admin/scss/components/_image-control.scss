@@ -8,11 +8,11 @@
 	}
 
 	.gslider-image-control {
-		background-color: #ccc;
+		background-color: $background_color;
 		background-position: 50%;
 		background-repeat: no-repeat;
 		background-size: cover;
-		border-radius: 6px;
+		border-radius: 4px;
 		height: 150px;
 		margin-bottom: 16px;
 		padding: 2px;
@@ -47,7 +47,7 @@
 			-webkit-backdrop-filter: blur(2px);
 			backdrop-filter: blur(2px);
 			background: hsla(0, 0%, 95%, 0.749);
-			border-radius: 0 0 6px 6px;
+			border-radius: 0 0 4px 4px;
 			bottom: 0;
 			display: flex;
 			gap: 10px;
@@ -56,14 +56,14 @@
 			position: absolute;
 			transition: 0.3s;
 			width: 100%;
-			color: #000;
-			font-size: 13px;
+			color: $black_color;
+			font-size: $label_font_size;
 
 			align-items: center;
 			border: 0;
 			cursor: pointer;
 			font-family: inherit;
-			font-weight: 400;
+			font-weight: $label_font_weight;
 			height: 36px;
 			margin: 0;
 			padding: 6px 12px;
@@ -76,10 +76,10 @@
 	}
 
 	.gslider-image-upload-btn {
-		background-color: #f2f2f2;
+		background-color: $background_color;
 		background-image: url(../../assets/images/transparent-bg-demo.png);
-		border: 1px solid #e9e8eb;
-		border-radius: 6px;
+		border: 1px solid $border_color;
+		border-radius: 4px;
 		height: 130px;
 		width: 100%;
 		display: flex;
@@ -101,7 +101,7 @@
 	.gslider-image-label {
 
 		label {
-			font-size: 13px !important;
+			font-size: $label_font_size !important;
 			text-transform: capitalize !important;
 			margin-bottom: 8px !important;
 		}
