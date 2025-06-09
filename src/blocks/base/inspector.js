@@ -35,7 +35,7 @@ import ResponsiveAlignmentControl from '@Components/responsive-alignment-control
 import {useDeviceType} from "@Utils/displayType";
 import InputControls from '@Components/input-control';
 import HtmlTagControl from '@Components/html-tag-control';
-
+import SelectControls from '@Components/select-controls';
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
     const { 
@@ -810,8 +810,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     opened={openPanels.general === "g8"}
                     onToggle={() => togglePanel("general", "g8")}
                 >
-                    <SelectControl
-                        label={__('Select Slider Effect', 'gslider-blocks')}
+                    <SelectControls
+                        label={__('Effect Type', 'gslider-blocks')}
                         value={slideEffect}
                         options={SLIDER_EFFECT_OPTIONS}
                         onChange={(value) => setAttributes({ slideEffect: value })}
@@ -825,19 +825,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     opened={openPanels.general === "g9"}
                     onToggle={() => togglePanel("general", "g9")}
                 >
-                    <BaseControl
-                        className="gslider-pagination-type-control"
+                    <SelectControls
                         label={__("Pagination Type", "gslider-blocks")}
-                    >
-                        <>
-                            <SelectControl
-                                className='gslider-pagination-type-control-select'
-                                value={paginationType}
-                                options={PAGINATION_TYPE}
-                                onChange={(value) => setAttributes({ paginationType: value })}
-                            />
-                        </>
-                    </BaseControl>
+                        value={paginationType}
+                        options={PAGINATION_TYPE}
+                        onChange={(value) => setAttributes({ paginationType: value })}
+                    />
+
                     {paginationType === 'bullets' && (
                         <ToggleControl
                             label={__("Dynamic Bullets", "slider-blocks")}
@@ -1301,19 +1295,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     isBackgroundImage={false}
                 />
 
-                <BaseControl
-                    className="gslider-border-style-control"
+                <SelectControls
                     label={__("Border Style", "gslider-blocks")}
-                >
-                    <>
-                        <SelectControl
-                            className='gslider-border-style-control-select'
-                            value={sliderArrowsBorder}
-                            options={BORDER_STYLES}
-                            onChange={(value) => setAttributes({ sliderArrowsBorder: value })}
-                        />
-                    </>
-                </BaseControl>
+                    value={sliderArrowsBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ sliderArrowsBorder: value })}
+                />
 
                 <SwitcherControl
                     label={__("Border Color", "gslider-blocks")}
@@ -1417,7 +1404,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     deviceType={deviceType}
                     units={sliderDotsPositionUnits}
                     step={1}
-                    resetFallbackValue={"0"}
+                    resetFallbackValue={""}
                 />
 
                 <ResponsiveSpacingControl
@@ -1489,19 +1476,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                     defaultColor='#333333'
                                 />
 
-                                <BaseControl
-                                    className="gslider-border-style-control"
+                                <SelectControls
                                     label={__("Border Style", "gslider-blocks")}
-                                >
-                                    <>
-                                        <SelectControl
-                                            className='gslider-border-style-control-select'
-                                            value={sliderNormalDotsBorder}
-                                            options={BORDER_STYLES}
-                                            onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
-                                        />
-                                    </>
-                                </BaseControl>
+                                    value={sliderNormalDotsBorder}
+                                    options={BORDER_STYLES}
+                                    onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
+                                />
 
                                 <SwitcherControl
                                     label={__("Border Color", "gslider-blocks")}
@@ -1599,18 +1579,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                     onChangeColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
                                 />
 
-                                <BaseControl
-                                    className="gslider-border-style-control"
-                                >
-                                    <>
-                                        <SelectControl
-                                            className='gslider-border-style-control-select'
-                                            value={sliderActiveDotsBorder}
-                                            options={BORDER_STYLES}
-                                            onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
-                                        />
-                                    </>
-                                </BaseControl>
+                                <SelectControls
+                                    label={__("Border Style", "gslider-blocks")}
+                                    value={sliderActiveDotsBorder}
+                                    options={BORDER_STYLES}
+                                    onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
+                                />
 
                                 <SwitcherControl
                                     label={__("Border Color", "gslider-blocks")}
@@ -1815,20 +1789,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 opened={openPanels.advanced === "a3"}
                 onToggle={() => togglePanel("advanced", "a3")}
             >
-                <BaseControl
-                    className="gslider-border-style-control"
+                <SelectControls
                     label={__("Border Style", "gslider-blocks")}
-                    
-                >
-                    <>
-                        <SelectControl
-                            className="gslider-border-style-control-select"
-                            value={globalBorder}
-                            options={BORDER_STYLES}
-                            onChange={(value) => setAttributes({ globalBorder: value })}
-                        />
-                    </>
-                </BaseControl>
+                    value={globalBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ globalBorder: value })}
+                />
 
                 <SwitcherControl
                     label={__("Border Color", "gslider-blocks")}

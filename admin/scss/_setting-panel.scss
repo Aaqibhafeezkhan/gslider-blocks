@@ -115,8 +115,7 @@
 		font-size: 13px;
 	}
 
-	.gslider-border-style-control,
-	.gslider-pagination-type-control {
+	.gslider-select-control{
 		.components-base-control__field {
 			display: flex;
 			align-items: center;
@@ -127,7 +126,7 @@
 			.components-base-control {
 				margin-bottom: 0 !important;
 				width: 50%;
-				.gslider-border-style-control-select {
+				.gslider-select-control-options {
 					width: 100%;
 				}
 			}

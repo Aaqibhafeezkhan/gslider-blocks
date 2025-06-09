@@ -16,6 +16,7 @@ import {
 } from '@Constants';
 
 import ResponsiveRangeControl from '@Components/responsive-range-control';
+import SelectControls from '@Components/select-controls';
 
 const ResponsiveTypographyControl = ({
     fontFamily,
@@ -127,28 +128,28 @@ const ResponsiveTypographyControl = ({
                                 step={1}
                                 resetFallbackValue={""}
                             />
-                            <SelectControl
+                            <SelectControls
                                 label={__("Font Weight", "gslider-blocks")}
-								options={FONT_WEIGHT}
                                 value={fontWeight}
+                                options={FONT_WEIGHT}
                                 onChange={handleFontWeightChange}
                             />
-                            <SelectControl
+                            <SelectControls
                                 label={__("Font Style", "gslider-blocks")}
-                                options={FONT_STYLE}
                                 value={fontStyle}
+                                options={FONT_STYLE}
                                 onChange={handleFontStyleChange}
                             />
-                            <SelectControl
+                            <SelectControls
                                 label={__("Text Transform", "gslider-blocks")}
-                                options={TEXT_TRANSFORM}
                                 value={textTransform}
+                                options={TEXT_TRANSFORM}
                                 onChange={handleTextTransformChange}
                             />
-                            <SelectControl
+                            <SelectControls
                                 label={__("Text Decoration", "gslider-blocks")}
-                                options={TEXT_DECORATION}
                                 value={textDecoration}
+                                options={TEXT_DECORATION}
                                 onChange={handleTextDecorationChange}
                             />
                             <ResponsiveRangeControl
