@@ -21,6 +21,7 @@
 			color: $primary_color;
 		}
 	}
+
 	.components-base-control {
 		margin-bottom: 24px;
 		.components-base-control__field {
@@ -121,10 +122,10 @@
 			align-items: center;
 			justify-content: space-between;
 			.components-base-control__label {
-				margin-bottom: 0 !important;
+				margin: 0 !important;
 			}
 			.components-base-control {
-				margin-bottom: 0 !important;
+				margin: 0 !important;
 				width: 50%;
 				.gslider-select-control-options {
 					width: 100%;

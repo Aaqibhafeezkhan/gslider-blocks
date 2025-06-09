@@ -599,6 +599,22 @@ const attributes = {
         type: "string",
         default: "",
     },
+    subtitleLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subtitleLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     subtitleLetterSpacing: {
         type: 'object',
         default: {
@@ -615,15 +631,15 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    subtitleLineHeight: {
+    subtitleWordSpacing: {
         type: 'object',
         default: {
             Desktop: '',
             Tablet: '',
             Mobile: ''
         }
-    },
-    subtitleLineHeightUnits: {
+    },  
+    subtitleWordSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -795,6 +811,22 @@ const attributes = {
         type: "string",
         default: "",
     },
+    titleLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    titleLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     titleLetterSpacing: {
         type: 'object',
         default: {
@@ -811,7 +843,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    titleLineHeight: {
+    titleWordSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -819,7 +851,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    titleLineHeightUnits: {
+    titleWordSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -991,6 +1023,22 @@ const attributes = {
         type: "string",
         default: "",
     },
+    descriptionLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    descriptionLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     descriptionLetterSpacing: {
         type: 'object',
         default: {
@@ -1007,7 +1055,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    descriptionLineHeight: {
+    descriptionWordSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -1015,7 +1063,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    descriptionLineHeightUnits: {
+    descriptionWordSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',

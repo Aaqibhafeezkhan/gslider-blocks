@@ -14,9 +14,9 @@ import {
     TEXT_TRANSFORM,
     TEXT_DECORATION,
 } from '@Constants';
-
-import ResponsiveRangeControl from '@Components/responsive-range-control';
+import Select2 from "react-select";
 import SelectControls from '@Components/select-controls';
+import ResponsiveRangeControl from '@Components/responsive-range-control';
 
 const ResponsiveTypographyControl = ({
     fontFamily,
@@ -33,14 +33,18 @@ const ResponsiveTypographyControl = ({
     onChangeTextTransform,
     textDecoration,
     onChangeTextDecoration,
-    letterSpacing,
-	onChangeLetterSpacing,
-	letterSpacingUnits,
-	onChangeLetterSpacingUnit,
     lineHeight,
 	onChangeLineHeight,
 	lineHeightUnits,
 	onChangeLineHeightUnit,
+    letterSpacing,
+	onChangeLetterSpacing,
+	letterSpacingUnits,
+	onChangeLetterSpacingUnit,
+    wordSpacing,
+	onChangeWordSpacing,
+	wordSpacingUnits,
+	onChangeWordSpacingUnit,
     deviceType,
 }) => {
 	const handleFontFamilyChange = (newFontFamily) => {
@@ -70,6 +74,14 @@ const ResponsiveTypographyControl = ({
     const handleTextDecorationChange = (newTextDecoration) => {
 		onChangeTextDecoration(newTextDecoration);
 	};
+    
+    const handleLineHeightChange = (newLineHeight) => {
+        onChangeLineHeight(newLineHeight);
+    };
+
+    const handleLineHeightUnitChange = (newLineHeightUnit) => {
+        onChangeLineHeightUnit(newLineHeightUnit);
+    };
 
     const handleLetterSpacingChange = (newLetterSpacing) => {
         onChangeLetterSpacing(newLetterSpacing);
@@ -78,13 +90,13 @@ const ResponsiveTypographyControl = ({
     const handleLetterSpacingUnitChange = (newLetterSpacingUnit) => {
         onChangeLetterSpacingUnit(newLetterSpacingUnit);
     };
-    
-    const handleLineHeightChange = (newLineHeight) => {
-        onChangeLineHeight(newLineHeight);
+
+    const handleWordSpacingChange = (newWordSpacing) => {
+        onChangeWordSpacing(newWordSpacing);
     };
 
-    const handleLineHeightUnitChange = (newLineHeightUnit) => {
-        onChangeLineHeightUnit(newLineHeightUnit);
+    const handleWordSpacingUnitChange = (newWordSpacingUnit) => {
+        onChangeWordSpacingUnit(newWordSpacingUnit);
     };
 
     return (
@@ -109,17 +121,22 @@ const ResponsiveTypographyControl = ({
                 )}
                 renderContent={() => (
                     <div className="gslider-setting-typography-popup">
-                        <BaseControl className="gslider-setting-typography-popup-inner">
-                            <SelectControl
-                                label={__("Font Family", "gslider-blocks")}
-                                options={FONT_FAMILYS}
-                                value={fontFamily}
-                                onChange={handleFontFamilyChange}
-                            />
+                        <div className="gslider-setting-typography-popup-inner">
+
+                            <BaseControl
+                                label={__("Family", "gslider-blocks")}
+                            >
+                                <Select2 
+                                    options={FONT_FAMILYS}
+                                    value={fontFamily}
+                                    onChange={handleFontFamilyChange}
+                                    className="gslider-select2-control"
+                                />
+                            </BaseControl>
                             <ResponsiveRangeControl
                                 min={1}
                                 max={100}
-                                label={__("Font Size", "gslider-blocks")}
+                                label={__("Size", "gslider-blocks")}
                                 rangeValue={fontSize}
                                 onChangeValue={handleFontSizeChange}
                                 onUnitChange={handleFontSizeUnitChange}
@@ -129,28 +146,40 @@ const ResponsiveTypographyControl = ({
                                 resetFallbackValue={""}
                             />
                             <SelectControls
-                                label={__("Font Weight", "gslider-blocks")}
+                                label={__("Weight", "gslider-blocks")}
                                 value={fontWeight}
                                 options={FONT_WEIGHT}
                                 onChange={handleFontWeightChange}
                             />
                             <SelectControls
-                                label={__("Font Style", "gslider-blocks")}
-                                value={fontStyle}
-                                options={FONT_STYLE}
-                                onChange={handleFontStyleChange}
-                            />
-                            <SelectControls
-                                label={__("Text Transform", "gslider-blocks")}
+                                label={__("Transform", "gslider-blocks")}
                                 value={textTransform}
                                 options={TEXT_TRANSFORM}
                                 onChange={handleTextTransformChange}
                             />
                             <SelectControls
-                                label={__("Text Decoration", "gslider-blocks")}
+                                label={__("Style", "gslider-blocks")}
+                                value={fontStyle}
+                                options={FONT_STYLE}
+                                onChange={handleFontStyleChange}
+                            />
+                            <SelectControls
+                                label={__("Decoration", "gslider-blocks")}
                                 value={textDecoration}
                                 options={TEXT_DECORATION}
                                 onChange={handleTextDecorationChange}
+                            />
+                            <ResponsiveRangeControl
+                                min={1}
+                                max={100}
+                                label={__("Line Height", "gslider-blocks")}
+                                rangeValue={lineHeight}
+                                onChangeValue={handleLineHeightChange}
+                                onUnitChange={handleLineHeightUnitChange}
+                                deviceType={deviceType}
+                                units={lineHeightUnits}
+                                step={1}
+                                resetFallbackValue={""}
                             />
                             <ResponsiveRangeControl
                                 min={-20}
@@ -165,18 +194,18 @@ const ResponsiveTypographyControl = ({
                                 resetFallbackValue={""}
                             />
                             <ResponsiveRangeControl
-                                min={1}
+                                min={0}
                                 max={100}
-                                label={__("Line Height", "gslider-blocks")}
-                                rangeValue={lineHeight}
-                                onChangeValue={handleLineHeightChange}
-                                onUnitChange={handleLineHeightUnitChange}
+                                label={__("Word Spacing", "gslider-blocks")}
+                                rangeValue={wordSpacing}
+                                onChangeValue={handleWordSpacingChange}
+                                onUnitChange={handleWordSpacingUnitChange}
                                 deviceType={deviceType}
-                                units={lineHeightUnits}
+                                units={wordSpacingUnits}
                                 step={1}
                                 resetFallbackValue={""}
                             />
-                        </BaseControl>
+                        </div>
                     </div>
                 )}
             />

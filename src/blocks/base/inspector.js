@@ -90,10 +90,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         subtitleFontStyle,
         subtitleTextTransform,
         subtitleTextDecoration,
-        subtitleLetterSpacing,
-        subtitleLetterSpacingUnits,
         subtitleLineHeight,
         subtitleLineHeightUnits,
+        subtitleLetterSpacing,
+        subtitleLetterSpacingUnits,
+        subtitleWordSpacing,
+        subtitleWordSpacingUnits,
+
 
         subtitleColorSwitcher,
         subtitleColor,
@@ -126,10 +129,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         titleFontStyle,
         titleTextTransform,
         titleTextDecoration,
-        titleLetterSpacing,
-        titleLetterSpacingUnits,
         titleLineHeight,
         titleLineHeightUnits,
+        titleLetterSpacing,
+        titleLetterSpacingUnits,
+        titleWordSpacing,
+        titleWordSpacingUnits,
 
         titleColorSwitcher,
         titleColor,
@@ -162,10 +167,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         descriptionFontStyle,
         descriptionTextTransform,
         descriptionTextDecoration,
-        descriptionLetterSpacing,
-        descriptionLetterSpacingUnits,
         descriptionLineHeight,
         descriptionLineHeightUnits,
+        descriptionLetterSpacing,
+        descriptionLetterSpacingUnits,
+        descriptionWordSpacing,
+        descriptionWordSpacingUnits,
 
         descriptionColorSwitcher,
         descriptionColor,
@@ -878,20 +885,25 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     textDecoration={subtitleTextDecoration}
                     onChangeTextDecoration={(value) => setAttributes({ subtitleTextDecoration: value })}
                     
-                    letterSpacing={subtitleLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ subtitleLetterSpacing: value })}
-                    
-                    letterSpacingUnits={subtitleLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ subtitleLetterSpacingUnits: value })}
-                    
                     lineHeight={subtitleLineHeight}
                     onChangeLineHeight={(value) => setAttributes({ subtitleLineHeight: value })}
                     
                     lineHeightUnits={subtitleLineHeightUnits}
                     onChangeLineHeightUnit={(value) => setAttributes({ subtitleLineHeightUnits: value })}
+
+                    letterSpacing={subtitleLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ subtitleLetterSpacing: value })}
+                    
+                    letterSpacingUnits={subtitleLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ subtitleLetterSpacingUnits: value })}
+
+                    wordSpacing={subtitleWordSpacing}
+                    onChangeWordSpacing={(value) => setAttributes({ subtitleWordSpacing: value })}
+                    
+                    wordSpacingUnits={subtitleWordSpacingUnits}
+                    onChangeWordSpacingUnit={(value) => setAttributes({ subtitleWordSpacingUnits: value })}
                     
                     deviceType={deviceType}
-                    setAttributes={setAttributes}
                 />
                 <SwitcherControl
                     label={__("Color", "gslider-blocks")}
@@ -982,20 +994,25 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     textDecoration={titleTextDecoration}
                     onChangeTextDecoration={(value) => setAttributes({ titleTextDecoration: value })}
                     
-                    letterSpacing={titleLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ titleLetterSpacing: value })}
-                    
-                    letterSpacingUnits={titleLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ titleLetterSpacingUnits: value })}
-                    
                     lineHeight={titleLineHeight}
                     onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
                     
                     lineHeightUnits={titleLineHeightUnits}
                     onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
+
+                    letterSpacing={titleLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ titleLetterSpacing: value })}
+                    
+                    letterSpacingUnits={titleLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ titleLetterSpacingUnits: value })}
+
+                    wordSpacing={titleWordSpacing}
+                    onChangeWordSpacing={(value) => setAttributes({ titleWordSpacing: value })}
+                    
+                    wordSpacingUnits={titleWordSpacingUnits}
+                    onChangeWordSpacingUnit={(value) => setAttributes({ titleWordSpacingUnits: value })}
                     
                     deviceType={deviceType}
-                    setAttributes={setAttributes}
                 />
                 <SwitcherControl
                     label={__("Color", "gslider-blocks")}
@@ -1086,20 +1103,25 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     textDecoration={descriptionTextDecoration}
                     onChangeTextDecoration={(value) => setAttributes({ descriptionTextDecoration: value })}
                     
-                    letterSpacing={descriptionLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ descriptionLetterSpacing: value })}
-                    
-                    letterSpacingUnits={descriptionLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ descriptionLetterSpacingUnits: value })}
-                    
                     lineHeight={descriptionLineHeight}
                     onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
                     
                     lineHeightUnits={descriptionLineHeightUnits}
                     onChangeLineHeightUnit={(value) => setAttributes({ descriptionLineHeightUnits: value })}
+
+                    letterSpacing={descriptionLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ descriptionLetterSpacing: value })}
+                    
+                    letterSpacingUnits={descriptionLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ descriptionLetterSpacingUnits: value })}
+
+                    wordSpacing={descriptionWordSpacing}
+                    onChangeWordSpacing={(value) => setAttributes({ descriptionWordSpacing: value })}
+                    
+                    wordSpacingUnits={descriptionWordSpacingUnits}
+                    onChangeWordSpacingUnit={(value) => setAttributes({ descriptionWordSpacingUnits: value })}
                     
                     deviceType={deviceType}
-                    setAttributes={setAttributes}
                 />
                 <SwitcherControl
                     label={__("Color", "gslider-blocks")}
@@ -2194,8 +2216,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${subtitleFontStyle ? `font-style: ${subtitleFontStyle};` : ''}
             ${subtitleTextTransform ? `text-transform: ${subtitleTextTransform};` : ''}
             ${subtitleTextDecoration ? `text-decoration: ${subtitleTextDecoration};` : ''}
-            ${subtitleLetterSpacing.Desktop && subtitleLetterSpacingUnits.Desktop ? `letter-spacing: ${subtitleLetterSpacing.Desktop}${subtitleLetterSpacingUnits.Desktop};` : ''}
             ${subtitleLineHeight.Desktop && subtitleLineHeightUnits.Desktop ? `line-height: ${subtitleLineHeight.Desktop}${subtitleLineHeightUnits.Desktop};` : ''}
+            ${subtitleLetterSpacing.Desktop && subtitleLetterSpacingUnits.Desktop ? `letter-spacing: ${subtitleLetterSpacing.Desktop}${subtitleLetterSpacingUnits.Desktop};` : ''}
+            ${subtitleWordSpacing.Desktop && subtitleWordSpacingUnits.Desktop ? `word-spacing: ${subtitleWordSpacing.Desktop}${subtitleWordSpacingUnits.Desktop};` : ''}
             ${subtitleColor ? `color: ${subtitleColor};` : ''}
             ${subtitleDesktopMarginCssStyle ? `margin: ${subtitleDesktopMarginCssStyle};` : ''} 
             ${subtitleDesktopPaddingCssStyle ? `padding: ${subtitleDesktopPaddingCssStyle};` : ''}
@@ -2212,8 +2235,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${titleFontStyle ? `font-style: ${titleFontStyle};` : ''}
             ${titleTextTransform ? `text-transform: ${titleTextTransform};` : ''}
             ${titleTextDecoration ? `text-decoration: ${titleTextDecoration};` : ''}
-            ${titleLetterSpacing.Desktop && titleLetterSpacingUnits.Desktop ? `letter-spacing: ${titleLetterSpacing.Desktop}${titleLetterSpacingUnits.Desktop};` : ''}
             ${titleLineHeight.Desktop && titleLineHeightUnits.Desktop ? `line-height: ${titleLineHeight.Desktop}${titleLineHeightUnits.Desktop};` : ''}
+            ${titleLetterSpacing.Desktop && titleLetterSpacingUnits.Desktop ? `letter-spacing: ${titleLetterSpacing.Desktop}${titleLetterSpacingUnits.Desktop};` : ''}
+            ${titleWordSpacing.Desktop && titleWordSpacingUnits.Desktop ? `word-spacing: ${titleWordSpacing.Desktop}${titleWordSpacingUnits.Desktop};` : ''}
             ${titleColor ? `color: ${titleColor};` : ''}
             ${titleDesktopMarginCssStyle ? `margin: ${titleDesktopMarginCssStyle};` : ''} 
             ${titleDesktopPaddingCssStyle ? `padding: ${titleDesktopPaddingCssStyle};` : ''}
@@ -2230,8 +2254,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${descriptionFontStyle ? `font-style: ${descriptionFontStyle};` : ''}
             ${descriptionTextTransform ? `text-transform: ${descriptionTextTransform};` : ''}
             ${descriptionTextDecoration ? `text-decoration: ${descriptionTextDecoration};` : ''}
-            ${descriptionLetterSpacing.Desktop && descriptionLetterSpacingUnits.Desktop ? `letter-spacing: ${descriptionLetterSpacing.Desktop}${descriptionLetterSpacingUnits.Desktop};` : ''}
             ${descriptionLineHeight.Desktop && descriptionLineHeightUnits.Desktop ? `line-height: ${descriptionLineHeight.Desktop}${descriptionLineHeightUnits.Desktop};` : ''}
+            ${descriptionLetterSpacing.Desktop && descriptionLetterSpacingUnits.Desktop ? `letter-spacing: ${descriptionLetterSpacing.Desktop}${descriptionLetterSpacingUnits.Desktop};` : ''}
+            ${descriptionWordSpacing.Desktop && descriptionWordSpacingUnits.Desktop ? `word-spacing: ${descriptionWordSpacing.Desktop}${descriptionWordSpacingUnits.Desktop};` : ''}
             ${descriptionColor ? `color: ${descriptionColor};` : ''}
             ${descriptionDesktopMarginCssStyle ? `margin: ${descriptionDesktopMarginCssStyle};` : ''} 
             ${descriptionDesktopPaddingCssStyle ? `padding: ${descriptionDesktopPaddingCssStyle};` : ''}
@@ -2339,24 +2364,27 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
             .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
                 ${subtitleFontSize.Tablet && subtitleFontSizeUnits.Tablet ? `font-size: ${subtitleFontSize.Tablet}${subtitleFontSizeUnits.Tablet};` : ''}
-                ${subtitleLetterSpacing.Tablet && subtitleLetterSpacingUnits.Tablet ? `letter-spacing: ${subtitleLetterSpacing.Tablet}${subtitleLetterSpacingUnits.Tablet};` : ''}
                 ${subtitleLineHeight.Tablet && subtitleLineHeightUnits.Tablet ? `line-height: ${subtitleLineHeight.Tablet}${subtitleLineHeightUnits.Tablet};` : ''}
+                ${subtitleLetterSpacing.Tablet && subtitleLetterSpacingUnits.Tablet ? `letter-spacing: ${subtitleLetterSpacing.Tablet}${subtitleLetterSpacingUnits.Tablet};` : ''}
+                ${subtitleWordSpacing.Tablet && subtitleWordSpacingUnits.Tablet ? `word-spacing: ${subtitleWordSpacing.Tablet}${subtitleWordSpacingUnits.Tablet};` : ''}
                 ${subtitleTabletMarginCssStyle ? `margin: ${subtitleTabletMarginCssStyle};` : ''} 
                 ${subtitleTabletPaddingCssStyle ? `padding: ${subtitleTabletPaddingCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title {
                 ${titleFontSize.Tablet && titleFontSizeUnits.Tablet ? `font-size: ${titleFontSize.Tablet}${titleFontSizeUnits.Tablet};` : ''}
-                ${titleLetterSpacing.Tablet && titleLetterSpacingUnits.Tablet ? `letter-spacing: ${titleLetterSpacing.Tablet}${titleLetterSpacingUnits.Tablet};` : ''}
                 ${titleLineHeight.Tablet && titleLineHeightUnits.Tablet ? `line-height: ${titleLineHeight.Tablet}${titleLineHeightUnits.Tablet};` : ''}
+                ${titleLetterSpacing.Tablet && titleLetterSpacingUnits.Tablet ? `letter-spacing: ${titleLetterSpacing.Tablet}${titleLetterSpacingUnits.Tablet};` : ''}
+                ${titleWordSpacing.Tablet && titleWordSpacingUnits.Tablet ? `word-spacing: ${titleWordSpacing.Tablet}${titleWordSpacingUnits.Tablet};` : ''}
                 ${titleTabletMarginCssStyle ? `margin: ${titleTabletMarginCssStyle};` : ''} 
                 ${titleTabletPaddingCssStyle ? `padding: ${titleTabletPaddingCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description {
                 ${descriptionFontSize.Tablet && descriptionFontSizeUnits.Tablet ? `font-size: ${descriptionFontSize.Tablet}${descriptionFontSizeUnits.Tablet};` : ''}
-                ${descriptionLetterSpacing.Tablet && descriptionLetterSpacingUnits.Tablet ? `letter-spacing: ${descriptionLetterSpacing.Tablet}${descriptionLetterSpacingUnits.Tablet};` : ''}
                 ${descriptionLineHeight.Tablet && descriptionLineHeightUnits.Tablet ? `line-height: ${descriptionLineHeight.Tablet}${descriptionLineHeightUnits.Tablet};` : ''}
+                ${descriptionLetterSpacing.Tablet && descriptionLetterSpacingUnits.Tablet ? `letter-spacing: ${descriptionLetterSpacing.Tablet}${descriptionLetterSpacingUnits.Tablet};` : ''}
+                ${descriptionWordSpacing.Tablet && descriptionWordSpacingUnits.Tablet ? `word-spacing: ${descriptionWordSpacing.Tablet}${descriptionWordSpacingUnits.Tablet};` : ''}
                 ${descriptionTabletMarginCssStyle ? `margin: ${descriptionTabletMarginCssStyle};` : ''} 
                 ${descriptionTabletPaddingCssStyle ? `padding: ${descriptionTabletPaddingCssStyle};` : ''}
             }
@@ -2432,24 +2460,27 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
             .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
                 ${subtitleFontSize.Mobile && subtitleFontSizeUnits.Mobile ? `font-size: ${subtitleFontSize.Mobile}${subtitleFontSizeUnits.Mobile};` : ''}
-                ${subtitleLetterSpacing.Mobile && subtitleLetterSpacingUnits.Mobile ? `letter-spacing: ${subtitleLetterSpacing.Mobile}${subtitleLetterSpacingUnits.Mobile};` : ''}
                 ${subtitleLineHeight.Mobile && subtitleLineHeightUnits.Mobile ? `line-height: ${subtitleLineHeight.Mobile}${subtitleLineHeightUnits.Mobile};` : ''}
+                ${subtitleLetterSpacing.Mobile && subtitleLetterSpacingUnits.Mobile ? `letter-spacing: ${subtitleLetterSpacing.Mobile}${subtitleLetterSpacingUnits.Mobile};` : ''}
+                ${subtitleWordSpacing.Mobile && subtitleWordSpacingUnits.Mobile ? `word-spacing: ${subtitleWordSpacing.Mobile}${subtitleWordSpacingUnits.Mobile};` : ''}
                 ${subtitleMobileMarginCssStyle ? `margin: ${subtitleMobileMarginCssStyle};` : ''} 
                 ${subtitleMobilePaddingCssStyle ? `padding: ${subtitleMobilePaddingCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title {
                 ${titleFontSize.Mobile && titleFontSizeUnits.Mobile ? `font-size: ${titleFontSize.Mobile}${titleFontSizeUnits.Mobile};` : ''}
-                ${titleLetterSpacing.Mobile && titleLetterSpacingUnits.Mobile ? `letter-spacing: ${titleLetterSpacing.Mobile}${titleLetterSpacingUnits.Mobile};` : ''}
                 ${titleLineHeight.Mobile && titleLineHeightUnits.Mobile ? `line-height: ${titleLineHeight.Mobile}${titleLineHeightUnits.Mobile};` : ''}
+                ${titleLetterSpacing.Mobile && titleLetterSpacingUnits.Mobile ? `letter-spacing: ${titleLetterSpacing.Mobile}${titleLetterSpacingUnits.Mobile};` : ''}
+                ${titleWordSpacing.Mobile && titleWordSpacingUnits.Mobile ? `word-spacing: ${titleWordSpacing.Mobile}${titleWordSpacingUnits.Mobile};` : ''}
                 ${titleMobileMarginCssStyle ? `margin: ${titleMobileMarginCssStyle};` : ''} 
                 ${titleMobilePaddingCssStyle ? `padding: ${titleMobilePaddingCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description {
                 ${descriptionFontSize.Mobile && descriptionFontSizeUnits.Mobile ? `font-size: ${descriptionFontSize.Mobile}${descriptionFontSizeUnits.Mobile};` : ''}
-                ${descriptionLetterSpacing.Mobile && descriptionLetterSpacingUnits.Mobile ? `letter-spacing: ${descriptionLetterSpacing.Mobile}${descriptionLetterSpacingUnits.Mobile};` : ''}
                 ${descriptionLineHeight.Mobile && descriptionLineHeightUnits.Mobile ? `line-height: ${descriptionLineHeight.Mobile}${descriptionLineHeightUnits.Mobile};` : ''}
+                ${descriptionLetterSpacing.Mobile && descriptionLetterSpacingUnits.Mobile ? `letter-spacing: ${descriptionLetterSpacing.Mobile}${descriptionLetterSpacingUnits.Mobile};` : ''}
+                ${descriptionWordSpacing.Mobile && descriptionWordSpacingUnits.Mobile ? `word-spacing: ${descriptionWordSpacing.Mobile}${descriptionWordSpacingUnits.Mobile};` : ''}
                 ${descriptionMobileMarginCssStyle ? `margin: ${descriptionMobileMarginCssStyle};` : ''} 
                 ${descriptionMobilePaddingCssStyle ? `padding: ${descriptionMobilePaddingCssStyle};` : ''}
             }
@@ -2544,10 +2575,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         subtitleFontStyle,
         subtitleTextTransform,
         subtitleTextDecoration,
-        subtitleLetterSpacing,
-        subtitleLetterSpacingUnits,
         subtitleLineHeight,
         subtitleLineHeightUnits,
+        subtitleLetterSpacing,
+        subtitleLetterSpacingUnits,
+        subtitleWordSpacing,
+        subtitleWordSpacingUnits,
 
         subtitleColorSwitcher,
         subtitleColor,
@@ -2580,10 +2613,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         titleFontStyle,
         titleTextTransform,
         titleTextDecoration,
-        titleLetterSpacing,
-        titleLetterSpacingUnits,
         titleLineHeight,
         titleLineHeightUnits,
+        titleLetterSpacing,
+        titleLetterSpacingUnits,
+        titleWordSpacing,
+        titleWordSpacingUnits,
 
         titleColorSwitcher,
         titleColor,
@@ -2616,10 +2651,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         descriptionFontStyle,
         descriptionTextTransform,
         descriptionTextDecoration,
-        descriptionLetterSpacing,
-        descriptionLetterSpacingUnits,
         descriptionLineHeight,
         descriptionLineHeightUnits,
+        descriptionLetterSpacing,
+        descriptionLetterSpacingUnits,
+        descriptionWordSpacing,
+        descriptionWordSpacingUnits,
 
         descriptionColorSwitcher,
         descriptionColor,
