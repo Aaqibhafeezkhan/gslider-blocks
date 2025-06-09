@@ -1131,11 +1131,27 @@
   box-shadow: unset !important;
 }
 
+.gslider-select2-control .react-select__menu-list {
+  scrollbar-width: thin;
+  scrollbar-color: #ededed transparent;
+}
+.gslider-select2-control .react-select__menu-list::-webkit-scrollbar {
+  width: 6px;
+}
+.gslider-select2-control .react-select__menu-list::-webkit-scrollbar-thumb {
+  background: #ededed;
+  border-radius: 4px;
+}
+.gslider-select2-control .react-select__menu-list::-webkit-scrollbar-track {
+  background: #ededed;
+}
 .gslider-select2-control input {
   box-shadow: unset;
+  outline: none !important;
 }
 .gslider-select2-control input:focus {
   box-shadow: unset;
+  outline: none !important;
 }
 
 .gslider-setting-fontsize-wrapper .components-range-control__reset,

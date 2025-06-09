@@ -99,6 +99,121 @@ const ResponsiveTypographyControl = ({
         onChangeWordSpacingUnit(newWordSpacingUnit);
     };
 
+    const gsliderSelect2ControlStyles = {
+        control: (base, state) => ({
+          ...base,
+          backgroundColor: '#fff',
+          borderColor: '#ededed',
+          borderWidth: '1px',
+          boxShadow: 'none',
+          borderRadius: '4px',
+          minHeight: '30px', // total height match
+          height: '30px',
+          outline: 'none',
+          '&:hover': {
+            borderColor: '#ededed',
+          },
+        }),
+      
+        valueContainer: (base) => ({
+          ...base,
+          padding: '0 8px',
+          height: '30px',
+          display: 'flex',
+          alignItems: 'center',
+        }),
+      
+        indicatorsContainer: (base) => ({
+          ...base,
+          height: '30px',
+        }),
+
+
+        dropdownIndicator: (base, state) => ({
+            ...base,
+            color: '#1e1e1e',
+            transition: 'all 0.2s ease',
+            '&:hover': {
+                color: '#007cba',
+            },
+            
+            svg: {
+              width: 16,
+              height: 16,
+              fill: 'currentColor',
+            },
+        }),
+      
+        input: (base) => ({
+          ...base,
+          color: '#1e1e1e',
+          fontSize: '12px',
+          padding: 0,
+          margin: 0,
+          height: '30px',
+          lineHeight: 1,
+          outline: 'none',
+          boxShadow: 'none',
+          '&:focus': {
+            outline: 'none',
+            boxShadow: 'none',
+          },
+        }),
+      
+        singleValue: (base) => ({
+          ...base,
+          color: '#1e1e1e',
+          lineHeight: 1,
+        }),
+      
+        menu: (base) => ({
+          ...base,
+          backgroundColor: '#fff',
+          border: '1px solid #ededed',
+          borderRadius: '4px',
+          boxShadow: 'none',
+          marginTop: '2px',
+          zIndex: 999,
+        }),
+      
+        menuList: (base) => ({
+          ...base,
+          paddingTop: 0,
+          paddingBottom: 0,
+          borderRadius: '4px',
+          border: 'none',
+          maxHeight: '200px',
+          overflowY: 'auto',
+          scrollbarWidth: 'thin',
+        }),
+      
+        option: (base, state) => ({
+          ...base,
+          backgroundColor: state.isSelected
+            ? '#ededed'
+            : state.isFocused
+            ? '#dcf2ff'
+            : '#fff',
+          color: state.isFocused ? '#007cba' : '#1e1e1e',
+          fontSize: '12px',
+          fontWeight: 400,
+          textTransform: 'capitalize',
+          lineHeight: 1.3,
+          padding: '6px 12px',
+          cursor: 'pointer',
+          outline: 'none',
+        }),
+      
+        placeholder: (base) => ({
+          ...base,
+          color: '#1e1e1e',
+          fontSize: '12px',
+        }),
+      };
+      
+       
+      
+
     return (
         <BaseControl
             label={__("Typography", "gslider-blocks")}
@@ -131,6 +246,8 @@ const ResponsiveTypographyControl = ({
                                     value={fontFamily}
                                     onChange={handleFontFamilyChange}
                                     className="gslider-select2-control"
+                                     classNamePrefix="react-select"
+                                    styles={gsliderSelect2ControlStyles}
                                 />
                             </BaseControl>
                             <ResponsiveRangeControl
@@ -145,6 +262,7 @@ const ResponsiveTypographyControl = ({
                                 step={1}
                                 resetFallbackValue={""}
                             />
+
                             <SelectControls
                                 label={__("Weight", "gslider-blocks")}
                                 value={fontWeight}

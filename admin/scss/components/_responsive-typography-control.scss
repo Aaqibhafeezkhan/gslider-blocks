@@ -233,14 +233,36 @@
 }
 
 .gslider-select2-control {
+
+	.react-select__menu-list {
+		scrollbar-width: thin;
+		scrollbar-color: $border_color transparent;
+	
+		&::-webkit-scrollbar {
+		  width: 6px;
+		}
+	
+		&::-webkit-scrollbar-thumb {
+		  background: $border_color;
+		  border-radius: 4px;
+		}
+	
+		&::-webkit-scrollbar-track {
+		  background: $background_color;
+		}
+	}
+
 	input {
 		box-shadow: unset;
+		outline: none !important;
 
 		&:focus {
 			box-shadow: unset;
+			outline: none !important;
 		}
 	}
 }
+  
 
 .gslider-setting-fontsize-wrapper,
 .gslider-setting-letterspacing-wrapper,
