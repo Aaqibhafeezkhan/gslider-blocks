@@ -36,15 +36,15 @@
 				input {
 					border-color: $border_color !important;
 					color: $secondary_color;
-					height: 30px !important;
+					height: 32px !important;
 					border-left-width: 0;
 					border-radius: 0;
 					margin: 0;
-					min-height: 30px;
+					min-height: 32px;
 					padding: 0;
 					text-align: center;
 					width: 100%;
-					font-size: 13px;
+					font-size: $input_font_size;
 
 					&:focus {
 						outline: none !important;
@@ -63,12 +63,12 @@
 
 				span {
 					color: #1e1e1e;
-					height: 30px !important;
+					height: 32px !important;
 					border: 1px solid #ebebeb !important;
 					border-left-width: 0 !important;
 					border-radius: 0;
 					margin: 0;
-					min-height: 24px;
+					min-height: 32px;
 					padding: 0;
 					text-align: center;
 					width: 100%;

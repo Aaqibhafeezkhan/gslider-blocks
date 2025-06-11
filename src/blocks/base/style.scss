@@ -107,10 +107,10 @@ $border_color: #ddd;
 			&.gslider-setting-background-color-panel-btn-switcher {
 				width: 100%;
 				justify-content: center;
-				height: unset;
+				height: 32px;
 				padding: 10px;
 				line-height: 16px;
-				min-height: 30px;
+				min-height: 32px;
 				font-size: 13px;
 				font-weight: 400;
 				color: $secondary_color !important;

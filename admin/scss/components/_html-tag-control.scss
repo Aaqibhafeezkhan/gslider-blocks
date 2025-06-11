@@ -9,10 +9,10 @@
             font-weight: $label_font_weight;
             width: 100%;
             justify-content: center;
-            height: 30px;
+            height: 32px;
             padding: 6px;
             line-height: $label_line_height;
-            min-height: 30px;
+            min-height: 32px;
             color: $label_color;
             box-shadow: inset 0 0 0 1px $border_color;
             &.active {

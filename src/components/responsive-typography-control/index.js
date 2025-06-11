@@ -107,8 +107,8 @@ const ResponsiveTypographyControl = ({
           borderWidth: '1px',
           boxShadow: 'none',
           borderRadius: '4px',
-          minHeight: '30px', // total height match
-          height: '30px',
+          minHeight: '32px', // total height match
+          height: '32px',
           outline: 'none',
           '&:hover': {
             borderColor: '#ededed',
@@ -118,14 +118,14 @@ const ResponsiveTypographyControl = ({
         valueContainer: (base) => ({
           ...base,
           padding: '0 8px',
-          height: '30px',
+          height: '32px',
           display: 'flex',
           alignItems: 'center',
         }),
       
         indicatorsContainer: (base) => ({
           ...base,
-          height: '30px',
+          height: '32px',
         }),
 
 
@@ -150,7 +150,7 @@ const ResponsiveTypographyControl = ({
           fontSize: '12px',
           padding: 0,
           margin: 0,
-          height: '30px',
+          height: '32px',
           lineHeight: 1,
           outline: 'none',
           boxShadow: 'none',
@@ -248,6 +248,7 @@ const ResponsiveTypographyControl = ({
                                     className="gslider-select2-control"
                                      classNamePrefix="react-select"
                                     styles={gsliderSelect2ControlStyles}
+                                    placeholder={__("Select Font Family", "gslider-blocks")}
                                 />
                             </BaseControl>
                             <ResponsiveRangeControl

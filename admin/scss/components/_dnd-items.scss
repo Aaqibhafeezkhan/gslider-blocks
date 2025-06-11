@@ -2,76 +2,103 @@
 
 .gslider-inspector-control {
 
-	.dnd-items-wrapper {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-
-		li.sortable-item {
-			margin-bottom: 10px;
-			margin-top: 10px;
-
-			.sortable-header {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				background: #f9f9f9;
-				border: 1px solid #ddd;
-				border-radius: 4px;
-
-				.sortable-title {
-					flex: 12;
-					cursor: pointer;
-					overflow: hidden;
-					padding-left: 5px;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-					width: 200px;
-				}
-
-				.sortable-sort {
-					border-right: 1px solid #b4b4cb;
-					border-left: 1px solid #b4b4cb;
-
-					button {
-
-						&:focus {
-							box-shadow: none;
-							outline: none;
-						}
+	.gslider-repeat-item-wrapper {
+		.dnd-items-wrapper {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+	
+			li.sortable-item {
+				margin-bottom: 8px;
+				margin-top: 8px;
+	
+				.sortable-header {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					background: $background_color;
+					border: 1px solid $border_color;
+					border-radius: 4px;
+					padding: 0 0 0 10px;
+					height: 38px;
+	
+					.sortable-title {
+						flex: 12;
+						cursor: pointer;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						width: 200px;
+						font-size: $label_font_size;
+						color: $label_color;
+						font-weight: 500;
+						line-height: $label_line_height;
+						text-transform: $label_text_transform;
 					}
-				}
-
-				.sortable-duplicate {
-					border-right: 1px solid #b4b4cb;
-
-					button {
-
-						&:focus {
-							box-shadow: none;
-							outline: none;
-						}
-					}
-				}
-
-				.sortable-delete {
-
-					button {
-
-						&.components-button {
-							color: #d63638;
-
-							&:focus {
-								box-shadow: none;
-								outline: none;
+	
+					.sortable-sort {
+						button {
+	
+							&.components-button {
+								color: $label_color;
+	
+								&:focus {
+									box-shadow: none;
+									outline: none;
+								}
 							}
 						}
 					}
+	
+					.sortable-duplicate {
+						button {
+	
+							&.components-button {
+								color: $label_color;
+	
+								&:focus {
+									box-shadow: none;
+									outline: none;
+								}
+							}
+						}
+					}
+	
+					.sortable-delete {
+	
+						button {
+	
+							&.components-button {
+								color: $danger_color;
+	
+								&:focus {
+									box-shadow: none;
+									outline: none;
+								}
+							}
+						}
+					}
+					.dashicon {
+						&:before {
+							font-size: 16px;
+						}
+					}
+				}
+	
+				.sortable-item-content {
+					margin: 24px 0;
+					.components-base-control__label {
+						margin-bottom: 0 !important;
+						padding-left: 10px !important;
+					}
 				}
 			}
-
-			.sortable-item-content {
-				padding-top: 10px;
+		}
+		button {
+			&.gslider-add-item-btn {
+				background: $primary_color;
+				color: $white_color;
+				border-radius: 4px;
 			}
 		}
 	}

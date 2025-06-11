@@ -657,7 +657,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 opened={openPanels.general === "g3"}
                 onToggle={() => togglePanel("general", "g3")}
             >
-                <div className="gslider-wrapper">
+                <div className="gslider-repeat-item-wrapper">
                     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                         <SortableContext items={sliderItems.map((item) => item.id)}>
                             <ul className="dnd-items-wrapper">
@@ -677,7 +677,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                             </ul>
                         </SortableContext>
                     </DndContext>
-                    <Button isPrimary onClick={handleAddItem}>
+                    <Button isPrimary onClick={handleAddItem}
+                        className="gslider-add-item-btn"
+                    >
                         {__("Add Slide", "gslider-blocks")}
                     </Button>
                 </div>

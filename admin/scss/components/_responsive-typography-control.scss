@@ -179,8 +179,8 @@
 								.gslider-select-control-options {
 									width: 100% !important;
 									.components-input-control__backdrop {
-										height: 30px !important;
-										min-height: 30px !important;
+										height: 32px !important;
+										min-height: 32px !important;
 										border-color: $border_color !important;
 										border-radius: 4px !important;
 										box-shadow: unset !important;
@@ -210,14 +210,14 @@
 									input {
 										color: $label_color;
 										font-weight: $label_font_weight;
-										font-size: $label_font_size;
+										font-size: $input_font_size;
 										line-height: $label_line_height;
-										height: 30px !important;
-										min-height: 30px !important;
+										height: 32px !important;
+										min-height: 32px !important;
 									}
 									.components-input-control__backdrop {
-										height: 30px !important;
-										min-height: 30px !important;
+										height: 32px !important;
+										min-height: 32px !important;
 										border-color: $border_color !important;
 										border-radius: 4px !important;
 										box-shadow: unset !important;
