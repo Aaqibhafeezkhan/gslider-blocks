@@ -185,6 +185,33 @@
   background-color: #ededed;
 }
 
+/* Target the textarea using its class or a more specific selector if needed */
+.components-textarea-control__input::-webkit-scrollbar {
+  width: 6px;
+}
+
+.components-textarea-control__input::-webkit-scrollbar-track {
+  background: #ededed;
+  border-radius: 4px;
+}
+
+.components-textarea-control__input::-webkit-scrollbar-thumb {
+  background-color: #ededed;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+
+.components-textarea-control__input::-webkit-scrollbar-thumb:hover {
+  background-color: #ededed;
+}
+
+/* Optional Firefox support */
+.components-textarea-control__input {
+  scrollbar-width: thin;
+  scrollbar-color: #ededed;
+}
+
 .gslider-bg-tab-panel {
   box-sizing: border-box;
   width: 100%;
@@ -1549,7 +1576,7 @@
 .gslider-url-control-wrapper .gslider-url-control-inner-wrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
 }
 .gslider-url-control-wrapper .gslider-url-control-inner-wrapper .gslider-url-control-input {
   flex: 1;
