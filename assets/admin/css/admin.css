@@ -1151,9 +1151,11 @@
   justify-content: space-between;
   flex-direction: row;
   gap: unset;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control .components-base-control__field {
   margin-bottom: 24px;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control.gslider-setting-color-switcher-wrapper .components-base-control__field .components-base-control__label {
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control .components-base-control__field .components-base-control__label {
   display: block;
   color: #1e1e1e !important;
   font-size: 13px !important;
@@ -1161,9 +1163,68 @@
   line-height: 1.3 !important;
   min-height: auto;
   text-transform: capitalize !important;
+  margin: 0 !important;
 }
 .components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control.gslider-image-control-wrapper .components-base-control__field .gslider-setting-device-label-wrapper {
   margin-bottom: 8px !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .gslider-tab-panel-wrapper .components-base-control .components-base-control__field .components-base-control__label {
+  margin-bottom: 8px !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-toggle-control {
+  margin-bottom: 8px !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-toggle-control .components-toggle-control__label {
+  display: block;
+  color: #1e1e1e !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  min-height: auto;
+  text-transform: capitalize !important;
+  margin: 0 !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-base-control__label {
+  display: block;
+  color: #1e1e1e !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  min-height: auto;
+  text-transform: capitalize !important;
+  margin-bottom: 8px !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field {
+  margin-bottom: 0 !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field .components-input-control__container input {
+  color: #1e1e1e;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.3;
+  height: 30px !important;
+  min-height: 30px;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field .components-input-control__container .components-input-control__backdrop {
+  border-color: #ededed !important;
+  border-radius: 4px !important;
+  box-shadow: unset !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-range-control__wrapper span[aria-hidden=true] {
+  height: 2px !important;
+  background-color: #007cba !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-range-control__thumb-wrapper {
+  top: 0 !important;
+  height: 8px !important;
+  margin-top: 10px !important;
+  width: 8px !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-range-control__thumb-wrapper span::before {
+  height: 12px !important;
+  left: -2px !important;
+  top: -5px !important;
+  width: 12px !important;
 }
 .components-popover.gslider-box-shadow-icon-dropdown-content .components-popover__content .gslider-box-shadow-controlPane .paneChild .components-base-control .components-base-control__field {
   display: flex;
@@ -1258,11 +1319,12 @@
 .gslider-setting-switcher-panel-btn button.components-button.gslider-setting-switcher-panel-btn-switcher {
   width: 100%;
   justify-content: center;
-  line-height: 16px;
+  line-height: 1.3;
   height: 30px;
   min-height: 30px;
   font-size: 13px;
   font-weight: 400;
+  color: #1e1e1e;
   box-shadow: inset 0 0 0 1px #ededed;
   transition: all 0.3s ease;
 }
