@@ -158,8 +158,6 @@
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 		background: #fff;
 		.gslider-setting-typography-popup {
-			// padding: 0.2rem;
-			// min-width: 220px;
 			.gslider-setting-typography-popup-inner {
 				position: relative;
 				z-index: 99999;
@@ -212,12 +210,12 @@
 										font-weight: $label_font_weight;
 										font-size: $input_font_size;
 										line-height: $label_line_height;
-										height: 32px !important;
-										min-height: 32px !important;
+										height: 30px !important;
+										min-height: 30px !important;
 									}
 									.components-input-control__backdrop {
-										height: 32px !important;
-										min-height: 32px !important;
+										height: 30px !important;
+										min-height: 30px !important;
 										border-color: $border_color !important;
 										border-radius: 4px !important;
 										box-shadow: unset !important;
@@ -227,6 +225,107 @@
 						}
 					}
 				}
+			}
+		}
+		.gslider-setting-background-color-popup-wrapper {
+			.components-base-control {
+				.components-base-control__field {
+					.components-base-control {
+						&.gslider-setting-color-switcher-wrapper {
+							.components-base-control__field {
+								display: flex;
+								align-items: center;
+								justify-content: space-between;
+								flex-direction: row;
+								gap: unset;
+								margin-bottom: 24px;
+								.components-base-control__label {
+									display: block;
+									color: $label_color !important;
+									font-size: $label_font_size !important;
+									font-weight: $label_font_weight !important;
+									line-height: $label_line_height !important;
+									min-height: auto;
+									text-transform: $label_text_transform !important;
+								}
+							}
+						}
+						&.gslider-image-control-wrapper {
+							.components-base-control__field {
+								.gslider-setting-device-label-wrapper {
+									margin-bottom: 8px !important;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	&.gslider-box-shadow-icon-dropdown-content {
+		.components-popover__content {
+			.gslider-box-shadow-controlPane {
+				.paneChild {
+					.components-base-control {
+						.components-base-control__field {
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							flex-direction: row;
+							gap: unset;
+							margin-bottom: 24px;
+							.components-base-control__label  {
+								display: block;
+								color: $label_color !important;
+								font-size: $label_font_size !important;
+								font-weight: $label_font_weight !important;
+								line-height: $label_line_height !important;
+								min-height: auto;
+								text-transform: $label_text_transform !important;
+								margin: 0 !important;
+							}
+						}
+					}
+					&.range {
+						.components-base-control {
+							.components-base-control__field {
+								flex-direction: column;
+								align-items: flex-start;
+								gap: 8px;
+								.components-base-control__label {
+
+								}
+								.components-range-control__root {
+									.components-range-control__wrapper {
+
+									}
+									.components-base-control {
+										.components-base-control__field {
+											margin-bottom: 0 !important;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.components-input-control__container {
+			.components-input-control__input {
+				color: $label_color;
+				font-weight: $label_font_weight;
+				font-size: $input_font_size;
+				line-height: $label_line_height;
+				height: 30px !important;
+				min-height: 30px !important;
+			}
+			.components-input-control__backdrop {
+				height: 30px !important;
+				min-height: 30px !important;
+				border-color: $border_color !important;
+				border-radius: 4px !important;
+				box-shadow: unset !important;
 			}
 		}
 	}

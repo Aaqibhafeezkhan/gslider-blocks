@@ -96,8 +96,8 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 1.3;
-  height: 32px !important;
-  min-height: 32px;
+  height: 30px !important;
+  min-height: 30px;
 }
 .gslider-inspector-control .components-base-control .components-base-control__field .components-input-control__container .components-input-control__backdrop {
   border-color: #ededed !important;
@@ -200,14 +200,10 @@
   color: #007cba;
 }
 
-.gslider-controlPane.controls {
-  width: 250px;
-  padding: 10px;
-}
-.gslider-controlPane.controls .paneChild.color {
+.gslider-box-shadow-controlPane.controls .paneChild.color {
   flex-direction: column;
 }
-.gslider-controlPane.controls .paneChild.checkbox .slider {
+.gslider-box-shadow-controlPane.controls .paneChild.checkbox .slider {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -220,7 +216,7 @@
   overflow: hidden;
   transition: 0.2s;
 }
-.gslider-controlPane.controls .paneChild.checkbox .slider::before {
+.gslider-box-shadow-controlPane.controls .paneChild.checkbox .slider::before {
   position: absolute;
   content: "";
   width: 100%;
@@ -230,24 +226,24 @@
   transform: translateX(-30px);
   transition: 0.2s;
 }
-.gslider-controlPane.controls .paneChild.checkbox .switch {
+.gslider-box-shadow-controlPane.controls .paneChild.checkbox .switch {
   display: inline-block;
   width: 48px;
   height: 18px;
   transform: translateY(0);
   position: relative;
 }
-.gslider-controlPane.controls .paneChild.checkbox .switch input {
+.gslider-box-shadow-controlPane.controls .paneChild.checkbox .switch input {
   display: none;
 }
-.gslider-controlPane.controls .paneChild.checkbox .switch input:checked + .slider::before {
+.gslider-box-shadow-controlPane.controls .paneChild.checkbox .switch input:checked + .slider::before {
   transform: translateX(30px);
   background-color: #32cd32;
 }
-.gslider-controlPane.controls .paneChild.checkbox .switch input:checked + .slider {
+.gslider-box-shadow-controlPane.controls .paneChild.checkbox .switch input:checked + .slider {
   box-shadow: 0 0 0 2px #008000, 0 0 8px #008000;
 }
-.gslider-controlPane.controls .paneChild label {
+.gslider-box-shadow-controlPane.controls .paneChild label {
   font-weight: 500;
 }
 
@@ -395,9 +391,9 @@
   padding-left: 10px !important;
 }
 .gslider-inspector-control .gslider-repeat-item-wrapper button.gslider-add-item-btn {
-  background: #007cba;
-  color: #fff;
-  border-radius: 4px;
+  background: #007cba !important;
+  color: #fff !important;
+  border-radius: 4px !important;
 }
 
 .gslider_icon_picker_wrapper {
@@ -913,11 +909,11 @@
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper input {
   border-color: #ededed !important;
   color: #1e1e1e;
-  height: 32px !important;
+  height: 30px !important;
   border-left-width: 0;
   border-radius: 0;
   margin: 0;
-  min-height: 32px;
+  min-height: 30px;
   padding: 0;
   text-align: center;
   width: 100%;
@@ -934,12 +930,12 @@
 }
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper span {
   color: #1e1e1e;
-  height: 32px !important;
-  border: 1px solid #ebebeb !important;
+  border: 1px solid #ededed !important;
   border-left-width: 0 !important;
   border-radius: 0;
   margin: 0;
-  min-height: 32px;
+  height: 30px !important;
+  min-height: 30px;
   padding: 0;
   text-align: center;
   width: 100%;
@@ -951,7 +947,7 @@
   cursor: pointer;
 }
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper span.is-checked {
-  background-color: rgba(141, 150, 160, 0.168627451);
+  background-color: #ededed;
 }
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper .dashicons-admin-links::before,
 .gslider-setting-spacing-container .gslider-setting-spacing-inner-container .gslider-setting-spacing-input-container .gslider-setting-spacing-input-wrapper .dashicons-editor-unlink::before {
@@ -1139,12 +1135,73 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 1.3;
-  height: 32px !important;
-  min-height: 32px !important;
+  height: 30px !important;
+  min-height: 30px !important;
 }
 .components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field .gslider-setting-spacing-container .components-base-control .components-input-control__container .components-input-control__backdrop {
-  height: 32px !important;
-  min-height: 32px !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  border-color: #ededed !important;
+  border-radius: 4px !important;
+  box-shadow: unset !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control.gslider-setting-color-switcher-wrapper .components-base-control__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: unset;
+  margin-bottom: 24px;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control.gslider-setting-color-switcher-wrapper .components-base-control__field .components-base-control__label {
+  display: block;
+  color: #1e1e1e !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  min-height: auto;
+  text-transform: capitalize !important;
+}
+.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control.gslider-image-control-wrapper .components-base-control__field .gslider-setting-device-label-wrapper {
+  margin-bottom: 8px !important;
+}
+.components-popover.gslider-box-shadow-icon-dropdown-content .components-popover__content .gslider-box-shadow-controlPane .paneChild .components-base-control .components-base-control__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: unset;
+  margin-bottom: 24px;
+}
+.components-popover.gslider-box-shadow-icon-dropdown-content .components-popover__content .gslider-box-shadow-controlPane .paneChild .components-base-control .components-base-control__field .components-base-control__label {
+  display: block;
+  color: #1e1e1e !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  min-height: auto;
+  text-transform: capitalize !important;
+  margin: 0 !important;
+}
+.components-popover.gslider-box-shadow-icon-dropdown-content .components-popover__content .gslider-box-shadow-controlPane .paneChild.range .components-base-control .components-base-control__field {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.components-popover.gslider-box-shadow-icon-dropdown-content .components-popover__content .gslider-box-shadow-controlPane .paneChild.range .components-base-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field {
+  margin-bottom: 0 !important;
+}
+.components-popover.gslider-box-shadow-icon-dropdown-content .components-input-control__container .components-input-control__input {
+  color: #1e1e1e;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.3;
+  height: 30px !important;
+  min-height: 30px !important;
+}
+.components-popover.gslider-box-shadow-icon-dropdown-content .components-input-control__container .components-input-control__backdrop {
+  height: 30px !important;
+  min-height: 30px !important;
   border-color: #ededed !important;
   border-radius: 4px !important;
   box-shadow: unset !important;
@@ -1201,9 +1258,9 @@
 .gslider-setting-switcher-panel-btn button.components-button.gslider-setting-switcher-panel-btn-switcher {
   width: 100%;
   justify-content: center;
-  height: 32px;
   line-height: 16px;
-  min-height: 32px;
+  height: 30px;
+  min-height: 30px;
   font-size: 13px;
   font-weight: 400;
   box-shadow: inset 0 0 0 1px #ededed;

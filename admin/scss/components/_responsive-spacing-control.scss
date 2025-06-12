@@ -3,7 +3,6 @@
 .gslider-setting-spacing-container {
 	display: flex;
 	flex-direction: column;
-	// margin: 15px 0;
 
 	.gslider-setting-spacing-inner-container {
 		margin-bottom: 20px;
@@ -36,11 +35,11 @@
 				input {
 					border-color: $border_color !important;
 					color: $secondary_color;
-					height: 32px !important;
+					height: 30px !important;
 					border-left-width: 0;
 					border-radius: 0;
 					margin: 0;
-					min-height: 32px;
+					min-height: 30px;
 					padding: 0;
 					text-align: center;
 					width: 100%;
@@ -62,13 +61,13 @@
 				}
 
 				span {
-					color: #1e1e1e;
-					height: 32px !important;
-					border: 1px solid #ebebeb !important;
+					color: $label_color;
+					border: 1px solid $border_color !important;
 					border-left-width: 0 !important;
 					border-radius: 0;
 					margin: 0;
-					min-height: 32px;
+					height: 30px !important;
+					min-height: 30px;
 					padding: 0;
 					text-align: center;
 					width: 100%;
@@ -80,7 +79,7 @@
 					cursor: pointer;
 
 					&.is-checked {
-						background-color: #8d96a02b;
+						background-color: $background_color;
 					}
 				}
 

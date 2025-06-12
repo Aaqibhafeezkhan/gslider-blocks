@@ -73,39 +73,39 @@ export default function BoxShadowSettingsControl({ label = __("Box Shadow", "gsl
 					</>
 				)}
 				renderContent={() => (
-					<div className="gslider-controlPane controls">
+					<div className="gslider-box-shadow-controlPane controls">
 						<Control
-							label="Inset"
+							label={__("Inset", "gslider-blocks")}
 							type="checkbox"
 							value={boxShadow[4] === 'inset'}
 							onChangeHandler={(e) => onChangeHandler(e, 4)}
 						/>
 						<Control
-							label="Color"
+							label={__("Color", "gslider-blocks")}
 							type="color"
 							value={boxShadow[5]}
 							onChangeHandler={(e) => onChangeHandler(e, 5)}
 						/>
 						<Control
-							label="Offset X"
+							label={__("Offset X", "gslider-blocks")}
 							type="range"
 							value={boxShadow[0]}
 							onChangeHandler={(e) => onChangeHandler(e, 0)}
 						/>
 						<Control
-							label="Offset Y"
+							label={__("Offset Y", "gslider-blocks")}
 							type="range"
 							value={boxShadow[1]}
 							onChangeHandler={(e) => onChangeHandler(e, 1)}
 						/>
 						<Control
-							label="Blur"
+							label={__("Blur", "gslider-blocks")}
 							type="range"
 							value={boxShadow[2]}
 							onChangeHandler={(e) => onChangeHandler(e, 2)}
 						/>
 						<Control
-							label="Spread"
+							label={__("Spread", "gslider-blocks")}
 							type="range"
 							value={boxShadow[3]}
 							onChangeHandler={(e) => onChangeHandler(e, 3)}

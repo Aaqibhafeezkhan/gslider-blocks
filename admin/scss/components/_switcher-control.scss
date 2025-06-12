@@ -11,18 +11,18 @@
 			&.gslider-setting-switcher-panel-btn-switcher {
 				width: 100%;
 				justify-content: center;
-				height: 32px;
 				line-height: 16px;
-				min-height: 32px;
-				font-size: 13px;
+				height: 30px;	
+				min-height: 30px;
+				font-size: $label_font_size;
 				font-weight: 400;
-				box-shadow: inset 0 0 0 1px $background_color;
+				box-shadow: inset 0 0 0 1px $border_color;
 				transition: all 0.3s ease;
 
 				&.active {
 
-					color: #007cba;
-					background-color: #dcf2ff;
+					color: $primary_color;
+					background-color: $active_bg_color;
 				}
 			}
 
