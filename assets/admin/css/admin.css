@@ -1075,7 +1075,7 @@
   color: #007cba;
 }
 
-.components-popover .components-popover__content {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content {
   position: relative;
   top: 15px;
   width: 250px;
@@ -1085,39 +1085,39 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   background: #fff;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner {
   position: relative;
   z-index: 99999;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control {
   margin-bottom: 24px !important;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control.gslider-select-control .components-base-control__field {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control.gslider-select-control .components-base-control__field {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   flex-direction: row !important;
   gap: unset !important;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control.gslider-select-control .components-base-control__field .components-base-control {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control.gslider-select-control .components-base-control__field .components-base-control {
   width: 50% !important;
   margin-bottom: 0 !important;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control.gslider-select-control .components-base-control__field .components-base-control .gslider-select-control-options {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control.gslider-select-control .components-base-control__field .components-base-control .gslider-select-control-options {
   width: 100% !important;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control.gslider-select-control .components-base-control__field .components-base-control .gslider-select-control-options .components-input-control__backdrop {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control.gslider-select-control .components-base-control__field .components-base-control .gslider-select-control-options .components-input-control__backdrop {
   height: 32px !important;
   min-height: 32px !important;
   border-color: #ededed !important;
   border-radius: 4px !important;
   box-shadow: unset !important;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field {
   margin-bottom: 0 !important;
   gap: 8px;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field .components-base-control__label {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field .components-base-control__label {
   display: block;
   color: #1e1e1e !important;
   font-size: 13px !important;
@@ -1127,10 +1127,10 @@
   text-transform: capitalize !important;
   margin: 0 !important;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field .gslider-setting-spacing-container .components-base-control {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field .gslider-setting-spacing-container .components-base-control {
   margin-bottom: 0 !important;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field .gslider-setting-spacing-container .components-base-control .components-input-control__container input {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field .gslider-setting-spacing-container .components-base-control .components-input-control__container input {
   color: #1e1e1e;
   font-weight: 400;
   font-size: 12px;
@@ -1138,24 +1138,24 @@
   height: 30px !important;
   min-height: 30px !important;
 }
-.components-popover .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field .gslider-setting-spacing-container .components-base-control .components-input-control__container .components-input-control__backdrop {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-typography-popup .gslider-setting-typography-popup-inner .components-base-control .components-base-control__field .gslider-setting-spacing-container .components-base-control .components-input-control__container .components-input-control__backdrop {
   height: 30px !important;
   min-height: 30px !important;
   border-color: #ededed !important;
   border-radius: 4px !important;
   box-shadow: unset !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control.gslider-setting-color-switcher-wrapper .components-base-control__field {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control.gslider-setting-color-switcher-wrapper .components-base-control__field {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   gap: unset;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control .components-base-control__field {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control .components-base-control__field {
   margin-bottom: 24px;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control .components-base-control__field .components-base-control__label {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control .components-base-control__field .components-base-control__label {
   display: block;
   color: #1e1e1e !important;
   font-size: 13px !important;
@@ -1165,16 +1165,16 @@
   text-transform: capitalize !important;
   margin: 0 !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control.gslider-image-control-wrapper .components-base-control__field .gslider-setting-device-label-wrapper {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .components-base-control.gslider-image-control-wrapper .components-base-control__field .gslider-setting-device-label-wrapper {
   margin-bottom: 8px !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .gslider-tab-panel-wrapper .components-base-control .components-base-control__field .components-base-control__label {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control .components-base-control__field .gslider-tab-panel-wrapper .components-base-control .components-base-control__field .components-base-control__label {
   margin-bottom: 8px !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-toggle-control {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-toggle-control {
   margin-bottom: 8px !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-toggle-control .components-toggle-control__label {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-toggle-control .components-toggle-control__label {
   display: block;
   color: #1e1e1e !important;
   font-size: 13px !important;
@@ -1184,7 +1184,7 @@
   text-transform: capitalize !important;
   margin: 0 !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-base-control__label {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-base-control__label {
   display: block;
   color: #1e1e1e !important;
   font-size: 13px !important;
@@ -1194,10 +1194,10 @@
   text-transform: capitalize !important;
   margin-bottom: 8px !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field {
   margin-bottom: 0 !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field .components-input-control__container input {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field .components-input-control__container input {
   color: #1e1e1e;
   font-weight: 400;
   font-size: 12px;
@@ -1205,26 +1205,36 @@
   height: 30px !important;
   min-height: 30px;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field .components-input-control__container .components-input-control__backdrop {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-base-control .components-base-control__field .components-input-control__container .components-input-control__backdrop {
   border-color: #ededed !important;
   border-radius: 4px !important;
   box-shadow: unset !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-range-control__wrapper span[aria-hidden=true] {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-range-control__wrapper span[aria-hidden=true] {
   height: 2px !important;
   background-color: #007cba !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-range-control__thumb-wrapper {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-range-control__thumb-wrapper {
   top: 0 !important;
   height: 8px !important;
   margin-top: 10px !important;
   width: 8px !important;
 }
-.components-popover .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-range-control__thumb-wrapper span::before {
+.components-popover.gslider-setting-dropdown-icon-content .components-popover__content .gslider-setting-background-color-popup-wrapper .components-base-control.components-range-control .components-base-control__field .components-range-control__root .components-range-control__thumb-wrapper span::before {
   height: 12px !important;
   left: -2px !important;
   top: -5px !important;
   width: 12px !important;
+}
+.components-popover.gslider-box-shadow-icon-dropdown-content .components-popover__content {
+  position: relative;
+  top: 15px;
+  width: 250px;
+  border-radius: 2px;
+  padding: 16px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background: #fff;
 }
 .components-popover.gslider-box-shadow-icon-dropdown-content .components-popover__content .gslider-box-shadow-controlPane .paneChild .components-base-control .components-base-control__field {
   display: flex;
