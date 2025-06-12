@@ -113,8 +113,17 @@
 	}
 
 	.components-button {
-		color: $black_color;
-		font-size: 13px;
+		color: $secondary_color;
+		font-size: $label_font_size;
+		font-weight: $label_font_weight;
+		line-height: $label_line_height;
+		text-transform: $label_text_transform;
+		
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+		
 	}
 
 	.gslider-select-control{
@@ -145,4 +154,22 @@
 	}
 }
 
+/* For WebKit browsers like Chrome, Edge, Safari */
+.components-popover__content::-webkit-scrollbar {
+	width: 8px;
+}
   
+.components-popover__content::-webkit-scrollbar-track {
+background: transparent;
+}
+
+.components-popover__content::-webkit-scrollbar-thumb {
+background-color: $background_color;
+border-radius: 4px;
+border: 2px solid transparent;
+background-clip: content-box;
+}
+
+.components-popover__content::-webkit-scrollbar-thumb:hover {
+background-color: $background_color;
+}

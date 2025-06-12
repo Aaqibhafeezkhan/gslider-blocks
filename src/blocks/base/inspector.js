@@ -571,9 +571,41 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
             </PanelBody>
             <PanelBody
-                title={__("Layout & Content Setting", "gslider-blocks")}
+                title={__("Slider Items", "gslider-blocks")}
                 opened={openPanels.general === "g2"}
                 onToggle={() => togglePanel("general", "g2")}
+            >
+                <div className="gslider-repeat-item-wrapper">
+                    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                        <SortableContext items={sliderItems.map((item) => item.id)}>
+                            <ul className="dnd-items-wrapper">
+                                {sliderItems.map((item, index) => (
+                                    <SortableItem
+                                        key={item.id}
+                                        id={item.id}
+                                        item={item}
+                                        handleChangeItem={handleChangeItem}
+                                        handleDeleteItem={handleDeleteItem}
+                                        handleDuplicateItem={handleDuplicateItem}
+                                        index={index}
+                                        deviceType={deviceType}
+                                        setAttributes={setAttributes}
+                                    />
+                                ))}
+                            </ul>
+                        </SortableContext>
+                    </DndContext>
+                    <Button isPrimary onClick={handleAddItem}
+                        className="gslider-add-item-btn"
+                    >
+                        {__("Add Slide", "gslider-blocks")}
+                    </Button>
+                </div>
+            </PanelBody>
+            <PanelBody
+                title={__("Layout & Content Setting", "gslider-blocks")}
+                opened={openPanels.general === "g3"}
+                onToggle={() => togglePanel("general", "g3")}
             >
                 <ResponsiveRangeControl
                     min={0}
@@ -651,38 +683,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     setGlobalHtmlTag={(value) => setAttributes({ descriptionHtmlTag: value })}
                 />
                 
-            </PanelBody>
-            <PanelBody
-                title={__("Slider Items", "gslider-blocks")}
-                opened={openPanels.general === "g3"}
-                onToggle={() => togglePanel("general", "g3")}
-            >
-                <div className="gslider-repeat-item-wrapper">
-                    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                        <SortableContext items={sliderItems.map((item) => item.id)}>
-                            <ul className="dnd-items-wrapper">
-                                {sliderItems.map((item, index) => (
-                                    <SortableItem
-                                        key={item.id}
-                                        id={item.id}
-                                        item={item}
-                                        handleChangeItem={handleChangeItem}
-                                        handleDeleteItem={handleDeleteItem}
-                                        handleDuplicateItem={handleDuplicateItem}
-                                        index={index}
-                                        deviceType={deviceType}
-                                        setAttributes={setAttributes}
-                                    />
-                                ))}
-                            </ul>
-                        </SortableContext>
-                    </DndContext>
-                    <Button isPrimary onClick={handleAddItem}
-                        className="gslider-add-item-btn"
-                    >
-                        {__("Add Slide", "gslider-blocks")}
-                    </Button>
-                </div>
             </PanelBody>
             <PanelBody 
                 title={__("Slider Type", "gslider-blocks")} 
