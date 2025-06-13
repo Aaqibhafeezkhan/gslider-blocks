@@ -6,9 +6,7 @@ import {
 	Dropdown,
 	Dashicon,
 } from '@wordpress/components';
-
 import { useState, useEffect } from '@wordpress/element';
-
 import {
     FONT_FAMILYS,
     FONT_WEIGHT,
@@ -69,7 +67,6 @@ const ResponsiveTypographyControl = ({
         }
     }, []);
 
-
     const handleFontFamilyChange = (selectedOption) => {
         setSelectedFontFamilyOption(selectedOption);
     
@@ -78,10 +75,6 @@ const ResponsiveTypographyControl = ({
     
         // Update font weight list
         setAvailableFontWeights(selectedOption?.weights || []);
-    
-        // if (newFontFamily !== 'Default') {
-        //     loadGoogleFont(newFontFamily);
-        // }
     };
 
 	const handleFontSizeChange = (newFontSize) => {
@@ -243,9 +236,6 @@ const ResponsiveTypographyControl = ({
           fontSize: '12px',
         }),
       };
-      
-       
-      
 
     return (
         <BaseControl
