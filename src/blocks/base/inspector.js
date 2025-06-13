@@ -454,9 +454,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         
     } = attributes;
 
-    console.log(subtitleFontFamily);
-    console.log(subtitleFontWeight);
-
     /** Get Current Device Type */
     const currentDeviceType = useDeviceType();
 
@@ -519,18 +516,15 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     /** end if have default padding then set the css style */
 
     /** Load Google Font */
-    // useEffect(() => {
-    //     if (subtitleFontFamily !== 'Default') {
-    //         LoadGoogleFont(subtitleFontFamily);
-    //     }
-    //     if (titleFontFamily !== 'Default') {
-    //         LoadGoogleFont(titleFontFamily);
-    //     }
-    //     if (descriptionFontFamily !== 'Default') {
-    //         LoadGoogleFont(descriptionFontFamily);
-    //     }
-    // }, [subtitleFontFamily, titleFontFamily, descriptionFontFamily]);
-
+    if (subtitleFontFamily !== 'Default') {
+        LoadGoogleFont(subtitleFontFamily);
+    }
+    if (titleFontFamily !== 'Default') {
+        LoadGoogleFont(titleFontFamily);
+    }
+    if (descriptionFontFamily !== 'Default') {
+        LoadGoogleFont(descriptionFontFamily);
+    }
 
     /**
 	 * Inspector General Controls
