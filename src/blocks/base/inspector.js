@@ -454,6 +454,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         
     } = attributes;
 
+    console.log(subtitleFontFamily);
+    console.log(subtitleFontWeight);
+
     /** Get Current Device Type */
     const currentDeviceType = useDeviceType();
 

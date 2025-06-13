@@ -1,5 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { Dashicon } from "@wordpress/components";
+import googleFonts from './google-fonts.json';
 
 export const STORE_NAME = 'gslider-blocks';
 
@@ -159,6 +160,19 @@ export const TEXT_DECORATION = [
     { label: __("Underline", "gslider-blocks"), value: "underline" },
     { label: __("Overline", "gslider-blocks"), value: "overline" },
     { label: __("Line Through", "gslider-blocks"), value: "line-through" },
+];
+
+export const GOOGLE_FONTS = [
+  {
+    label: "Default",
+    value: "Default",
+    weights: [],
+  },
+  ...Object.keys(googleFonts).map(family => ({
+    label: family,
+    value: family,
+    weights: googleFonts[family],
+  })),
 ];
 
 export const FONT_FAMILYS = [

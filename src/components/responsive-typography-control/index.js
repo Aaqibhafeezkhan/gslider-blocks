@@ -7,12 +7,15 @@ import {
 	Dashicon,
 } from '@wordpress/components';
 
+import { useState, useEffect } from '@wordpress/element';
+
 import {
     FONT_FAMILYS,
     FONT_WEIGHT,
     FONT_STYLE,
     TEXT_TRANSFORM,
     TEXT_DECORATION,
+    GOOGLE_FONTS,
 } from '@Constants';
 import Select2 from "react-select";
 import SelectControls from '@Components/select-controls';
@@ -47,9 +50,39 @@ const ResponsiveTypographyControl = ({
 	onChangeWordSpacingUnit,
     deviceType,
 }) => {
-	const handleFontFamilyChange = (newFontFamily) => {
-		onChangeFontFamily(newFontFamily);
-	};
+    
+    const [fontOptions, setFontOptions] = useState([]);
+    const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(null);
+    const [availableFontWeights, setAvailableFontWeights] = useState([]);
+
+    useEffect(() => {
+        setFontOptions(GOOGLE_FONTS);
+    
+        const current = GOOGLE_FONTS.find(f => f.value === fontFamily);
+    
+        if (current) {
+            setSelectedFontFamilyOption(current);
+            setAvailableFontWeights(current.weights || []);
+        } else {
+            setSelectedFontFamilyOption({ label: 'Default', value: 'Default' });
+            setAvailableFontWeights([]);
+        }
+    }, []);
+
+
+    const handleFontFamilyChange = (selectedOption) => {
+        setSelectedFontFamilyOption(selectedOption);
+    
+        const newFontFamily = selectedOption?.value || 'Default';
+        onChangeFontFamily(newFontFamily);
+    
+        // Update font weight list
+        setAvailableFontWeights(selectedOption?.weights || []);
+    
+        // if (newFontFamily !== 'Default') {
+        //     loadGoogleFont(newFontFamily);
+        // }
+    };
 
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
@@ -242,11 +275,11 @@ const ResponsiveTypographyControl = ({
                                 label={__("Family", "gslider-blocks")}
                             >
                                 <Select2 
-                                    options={FONT_FAMILYS}
-                                    value={fontFamily}
+                                    options={fontOptions} 
+                                    value={selectedFontFamilyOption}
                                     onChange={handleFontFamilyChange}
                                     className="gslider-select2-control"
-                                     classNamePrefix="react-select"
+                                    classNamePrefix="react-select"
                                     styles={gsliderSelect2ControlStyles}
                                     placeholder={__("Select Font Family", "gslider-blocks")}
                                 />
@@ -265,11 +298,17 @@ const ResponsiveTypographyControl = ({
                             />
 
                             <SelectControls
-                                label={__("Weight", "gslider-blocks")}
+                                label={__("Font Weight", "gslider-blocks")}
+                                options={[
+                                    { label: __("Default", "gslider-blocks"), value: 'inherit' },
+                                    ...(availableFontWeights.length > 0
+                                        ? availableFontWeights.map(weight => ({ label: weight, value: weight }))
+                                        : FONT_WEIGHT.filter(item => item.value !== 'inherit'))
+                                ]}
                                 value={fontWeight}
-                                options={FONT_WEIGHT}
                                 onChange={handleFontWeightChange}
                             />
+
                             <SelectControls
                                 label={__("Transform", "gslider-blocks")}
                                 value={textTransform}
