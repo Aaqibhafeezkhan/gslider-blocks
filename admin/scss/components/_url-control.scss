@@ -25,13 +25,12 @@
 
 		label {
 			display: block;
-			color: $secondary_color !important;
-			font-size: 12px !important;
-			font-weight: 500 !important;
-			line-height: 16px !important;
-			margin: 10px 0 !important;
+			color: $label_color !important;
+			font-size: $font_size_13 !important;
+			font-weight: $font_weight_400 !important;
+			line-height: $line_height_3 !important;
 			min-height: auto;
-			text-transform: capitalize !important;
+			text-transform: $text_transform_capitalize !important; 
 		}
 
 		.components-toggle-control {
@@ -40,15 +39,14 @@
 	}
 }
 
-
-.gslider-url-control-dropdown-popup {
-	padding: 0.2rem;
-	min-width: 220px;
-
-	.gslider-url-control-dropdown-popup-inner {
-		position: relative;
-		z-index: 99999;
+.components-popover {
+	&.gslider-url-control-dropdown-content {
+		.components-popover__content {
+			.gslider-url-control-dropdown-popup {
+				padding: 0.2rem;
+				min-width: 220px;
+			}
+		}
 	}
 }
-
 /** End General scss for URL Control **/

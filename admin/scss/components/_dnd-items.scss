@@ -29,11 +29,11 @@
 						text-overflow: ellipsis;
 						white-space: nowrap;
 						width: 200px;
-						font-size: $label_font_size;
+						font-size: $font_size_13;
 						color: $label_color;
-						font-weight: 500;
-						line-height: $label_line_height;
-						text-transform: $label_text_transform;
+						font-weight: $font_weight_500;
+						line-height: $line_height_3;
+						text-transform: $text_transform_capitalize;
 					}
 	
 					.sortable-sort {
@@ -149,15 +149,16 @@
 				.components-base-control {
 					margin-bottom: 24px;
 					.components-base-control__field {
+						gap: 0 !important;
 						.components-base-control__label {
 							display: block;
 							color: $label_color !important;
-							font-size: $label_font_size !important;
-							font-weight: $label_font_weight !important;
-							line-height: $label_line_height !important;
+							font-size: $font_size_13 !important;
+							font-weight: $font_weight_400 !important;
+							line-height: $line_height_3 !important;
 							margin-bottom: 8px !important;
 							min-height: auto;
-							text-transform: $label_text_transform !important;
+							text-transform: $text_transform_capitalize !important; 
 						}
 						.components-text-control__input,
 						.components-textarea-control__input {
@@ -203,11 +204,11 @@
 						.components-toggle-control__label {
 							display: block;
 							color: $label_color !important;
-							font-size: $label_font_size !important;
-							font-weight: $label_font_weight !important;
-							line-height: $label_line_height !important;
+							font-size: $font_size_13 !important;
+							font-weight: $font_weight_400 !important;
+							line-height: $line_height_3 !important;
 							min-height: auto;
-							text-transform: $label_text_transform !important;
+							text-transform: $text_transform_capitalize !important;
 							margin: 0 !important;
 						}
 					}
@@ -217,16 +218,83 @@
 					}
 				}
 			}
-		}
-
-		.gslider-setting-background-color-popup-wrapper {
-
-			.gslider-setting-background-color-popup-inner-wrapper {
-
-				.components-base-control__field {
-					display: flex;
-					flex-direction: column;
-					gap: 15px;
+			.gslider-setting-background-color-popup-wrapper {
+				.components-base-control {
+					.components-base-control__field {
+						display: flex;
+						flex-direction: column;
+						gap: 0;
+						margin-bottom: 0 !important;
+						.components-base-control {
+							margin-bottom: 24px !important;
+							.components-base-control__field {
+								.components-base-control__label {
+									display: block;
+									color: $label_color !important;
+									font-size: $font_size_13 !important;
+									font-weight: $font_weight_400 !important;
+									line-height: $line_height_3 !important;
+									margin-bottom: 8px;
+									min-height: auto;
+									text-transform: $text_transform_capitalize !important; 
+								}
+							}
+						}
+					}
+					&.gslider-setting-color-switcher-wrapper {
+						.components-base-control__field {
+							position: relative;
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							flex-direction: row;
+							margin-bottom: 0 !important;
+							.components-base-control__label {
+								margin-bottom: 0 !important;
+							}
+						}
+					}
+					&.gslider-image-control-wrapper{
+						.gslider-setting-device-label-wrapper{
+							margin-bottom: 8px !important;
+						}
+					}
+					&.components-range-control {
+						margin-bottom: 0 !important;
+						.components-base-control__field {
+							.components-base-control__label {
+								display: block;
+								color: $label_color !important;
+								font-size: $font_size_13 !important;
+								font-weight: $font_weight_400 !important;
+								line-height: $line_height_3 !important;
+								min-height: auto;
+								text-transform: $text_transform_capitalize !important; 
+							}
+						}
+						.components-range-control__root {
+							.components-base-control {
+								.components-base-control__field {
+									margin-bottom: 0 !important;
+									.components-input-control__container {
+										input {
+											color: $label_color;
+											font-weight: $font_weight_400;
+											font-size: $font_size_12;
+											line-height: $line_height_3;
+											height: 30px !important;
+											min-height: 30px;
+										}
+										.components-input-control__backdrop {
+											border-color: $border_color !important;
+											border-radius: 4px !important;
+											box-shadow: unset !important;
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}

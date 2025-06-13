@@ -30,12 +30,12 @@
 			.components-base-control__label {
 				display: block;
 				color: $label_color !important;
-				font-size: $label_font_size !important;
-				font-weight: $label_font_weight !important;
-				line-height: $label_line_height !important;
+				font-size: $font_size_13 !important;
+				font-weight: $font_weight_400 !important;
+				line-height: $line_height_3 !important;
 				margin-bottom: 8px !important;
 				min-height: auto;
-				text-transform: $label_text_transform !important;
+				text-transform: $text_transform_capitalize !important;
 			}
 	
 			.components-text-control__input,
@@ -47,12 +47,12 @@
 	
 			label {
 				display: block;
-				font-size: $label_font_size !important;
+				font-size: $font_size_13 !important;
 				color: $label_color !important;
-				font-weight: $label_font_weight !important;
-				line-height: $label_line_height !important;
+				font-weight: $font_weight_400 !important;
+				line-height: $line_height_3 !important;
 				min-height: auto;
-				text-transform: $label_text_transform !important;
+				text-transform: $text_transform_capitalize !important;
 			}
 			.components-base-control__help {
 				color: $label_color !important;
@@ -61,9 +61,9 @@
 			.components-input-control__container {
 				input {
 					color: $label_color;
-					font-weight: $label_font_weight;
-					font-size: $input_font_size;
-					line-height: $label_line_height;
+					font-weight: $font_weight_400;
+					font-size: $font_size_12;
+					line-height: $line_height_3;
 					height: 30px !important;
 					min-height: 30px;
 				}
@@ -102,9 +102,9 @@
 			}
 		}
 		.components-select-control__input {
-			font-size: $input_font_size !important;
-			font-weight: $label_font_weight !important;
-			line-height: $label_line_height !important;
+			font-size: $font_size_12 !important;
+			font-weight: $font_weight_400 !important;
+			line-height: $line_height_3 !important;
 			color: $label_color !important;
 			min-height: 32px !important;
 			height: 32px !important;
@@ -114,10 +114,10 @@
 
 	.components-button {
 		color: $secondary_color;
-		font-size: $label_font_size;
-		font-weight: $label_font_weight;
-		line-height: $label_line_height;
-		text-transform: $label_text_transform;
+		font-size: $font_size_13;
+		font-weight: $font_weight_500;
+		line-height: $line_height_3;
+		text-transform: $text_transform_capitalize;
 
 		&:focus {
 			outline: none;

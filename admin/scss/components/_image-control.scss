@@ -57,13 +57,13 @@
 			transition: 0.3s;
 			width: 100%;
 			color: $black_color;
-			font-size: $label_font_size;
+			font-size: $font_size_13;
 
 			align-items: center;
 			border: 0;
 			cursor: pointer;
 			font-family: inherit;
-			font-weight: $label_font_weight;
+			font-weight: $font_weight_400;
 			height: 36px;
 			margin: 0;
 			padding: 6px 12px;
@@ -101,7 +101,7 @@
 	.gslider-image-label {
 
 		label {
-			font-size: $label_font_size !important;
+			font-size: $font_size_13 !important;
 			text-transform: capitalize !important;
 			margin-bottom: 8px !important;
 		}

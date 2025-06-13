@@ -7,10 +7,10 @@
 	span {
 		&.gslider-setting-label-text {
 			color: $label_color;
-			font-size: $label_font_size;
-			line-height: $label_line_height;
-			text-transform: $label_text_transform;
-			font-weight: $label_font_weight;
+			font-size: $font_size_13;
+			line-height: $line_height_3;
+			text-transform: $text_transform_capitalize;
+			font-weight: $font_weight_400;
 			margin-right: 8px;
 		}
 	}
