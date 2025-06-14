@@ -24,16 +24,16 @@
   height: 32px;
 }
 .gslider-alignment-control .gslider-alignment-group-btn .gslider-alignment-single-btn.active {
-  background-color: #dcf2ff !important;
+  background-color: #ededed !important;
   color: #007cba !important;
-  box-shadow: inset 0 0 0 1px #dcf2ff !important;
+  box-shadow: inset 0 0 0 1px #ededed !important;
 }
 .gslider-alignment-control .gslider-alignment-group-btn .gslider-alignment-single-btn:focus {
   outline: none;
   box-shadow: none;
 }
 .gslider-alignment-control .gslider-alignment-group-btn .gslider-alignment-single-btn:hover {
-  background-color: #dcf2ff;
+  background-color: #ededed;
   color: #007cba;
 }
 
@@ -739,7 +739,7 @@
   cursor: pointer;
 }
 .gslider_icon_picker_wrapper_body .gslider_icon_picker_wrapper_categories .gslider_icon_picker_wrapper_category.selected {
-  background-color: #dcf2ff;
+  background-color: #ededed;
   color: #007cba;
 }
 
@@ -777,7 +777,7 @@
 }
 .gslider_icon_picker_icons_list .fb_icon.selected {
   border-color: #007cba;
-  box-shadow: 0 0 0 2px #dcf2ff;
+  box-shadow: 0 0 0 2px #ededed;
   pointer-events: none;
 }
 
@@ -924,7 +924,7 @@
   fill: #1e1e1e;
 }
 .gslider-image-control-wrapper .gslider-image-upload-btn:hover {
-  background-color: #dcf2ff;
+  background-color: #ededed;
 }
 
 .gslider-image-control-setting-wrapper .gslider-setting-device-label-wrapper {
@@ -1555,7 +1555,7 @@
 }
 .gslider-setting-switcher-panel-btn button.components-button.gslider-setting-switcher-panel-btn-switcher.active {
   color: #007cba;
-  background-color: #dcf2ff;
+  background-color: #ededed;
 }
 .gslider-setting-switcher-panel-btn button.components-button:first-child {
   border-radius: 4px 0 0 4px;
@@ -1685,12 +1685,12 @@
 }
 .gslider-html-tag-control .gslider-html-tag-control-btn-group .gslider-html-tag-control-single-btn.active {
   color: #007cba;
-  background-color: #dcf2ff;
-  border-color: #dcf2ff;
-  box-shadow: inset 0 0 0 1px #dcf2ff;
+  background-color: #ededed;
+  border-color: #ededed;
+  box-shadow: inset 0 0 0 1px #ededed;
 }
 .gslider-html-tag-control .gslider-html-tag-control-btn-group .gslider-html-tag-control-single-btn:hover {
-  background-color: #dcf2ff;
-  border-color: #dcf2ff;
-  box-shadow: inset 0 0 0 1px #dcf2ff;
+  background-color: #ededed;
+  border-color: #ededed;
+  box-shadow: inset 0 0 0 1px #ededed;
 }
