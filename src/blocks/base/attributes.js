@@ -1904,10 +1904,10 @@ const attributes = {
     secondaryButtonDesktopMargin: {
         type: "object", 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "0",
+            bottom: "0",
+            left: "12",
+            right: "0",
         },
     },
     secondaryButtonDesktopMarginCssStyle: { 
@@ -1917,10 +1917,10 @@ const attributes = {
     secondaryButtonTabletMargin: {
         type: "object",  
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "0",
+            bottom: "0",
+            left: "12",
+            right: "0",
         },
     },
     secondaryButtonTabletMarginCssStyle: { 
@@ -1930,10 +1930,10 @@ const attributes = {
     secondaryButtonMobileMargin: {
         type: "object",  
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "12",
+            bottom: "0",
+            left: "0",
+            right: "0",
         },
     },
     secondaryButtonMobileMarginCssStyle: { 

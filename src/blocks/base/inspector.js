@@ -661,6 +661,10 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             secondaryButtonTabletBorderRadiusCssStyle: spacingFormat(secondaryButtonTabletBorderRadius, secondaryButtonBorderRadiusUnits.Tablet),
             secondaryButtonMobileBorderRadiusCssStyle: spacingFormat(secondaryButtonMobileBorderRadius, secondaryButtonBorderRadiusUnits.Mobile),
 
+            secondaryButtonDesktopMarginCssStyle: spacingFormat(secondaryButtonDesktopMargin, secondaryButtonMarginUnits.Desktop), 
+            secondaryButtonTabletMarginCssStyle: spacingFormat(secondaryButtonTabletMargin, secondaryButtonMarginUnits.Tablet),
+            secondaryButtonMobileMarginCssStyle: spacingFormat(secondaryButtonMobileMargin, secondaryButtonMarginUnits.Mobile),
+
             secondaryButtonDesktopPaddingCssStyle: spacingFormat(secondaryButtonDesktopPadding, secondaryButtonPaddingUnits.Desktop), 
             secondaryButtonTabletPaddingCssStyle: spacingFormat(secondaryButtonTabletPadding, secondaryButtonPaddingUnits.Tablet),
             secondaryButtonMobilePaddingCssStyle: spacingFormat(secondaryButtonMobilePadding, secondaryButtonPaddingUnits.Mobile),
@@ -685,6 +689,10 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         secondaryButtonDesktopBorderRadius,
         secondaryButtonTabletBorderRadius,
         secondaryButtonMobileBorderRadius,
+
+        secondaryButtonDesktopMargin,
+        secondaryButtonTabletMargin,
+        secondaryButtonMobileMargin,
 
         secondaryButtonDesktopPadding,
         secondaryButtonTabletPadding,
@@ -722,6 +730,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     if (secondaryButtonFontFamily !== 'Default') {
         LoadGoogleFont(secondaryButtonFontFamily);
     }
+    /** End Load Google Font */
+
+    /** Show Secondary Button Style if have secondary button enabled in slider items */
+    const [secondaryButtonSwitcher, setSecondaryButtonSwitcher] = useState([]);
+
+    useEffect(() => {
+        if (Array.isArray(sliderItems)) {
+            const updatedSwitchers = sliderItems.map(item => item.secondaryButtonSwitcher);
+            setSecondaryButtonSwitcher(updatedSwitchers);
+        }
+    }, [sliderItems]);
+    
+    const showSecondarybtnStyle = secondaryButtonSwitcher.includes(true);
+
+    /** End Secondary Button Style */ 
 
     /**
 	 * Inspector General Controls
@@ -1610,235 +1633,237 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
             </PanelBody>
 
-            <PanelBody 
-                title={__("Secondary Button", "gslider-blocks")}  
-                opened={openPanels.styles === "s5"}
-                onToggle={() => togglePanel("styles", "s5")}
-            >
-                <ResponsiveTypographyControl 
-                    fontFamily={secondaryButtonFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ secondaryButtonFontFamily: value })}
-                    
-                    fontSize={secondaryButtonFontSize}
-                    onChangeFontSize={(value) => setAttributes({ secondaryButtonFontSize: value })}
-                    
-                    fontSizeUnits={secondaryButtonFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ secondaryButtonFontSizeUnits: value })}
-                    
-                    fontWeight={secondaryButtonFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ secondaryButtonFontWeight: value })}
-                    
-                    fontStyle={secondaryButtonFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ secondaryButtonFontStyle: value })}
-                    
-                    textTransform={secondaryButtonTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ secondaryButtonTextTransform: value })}
-                    
-                    textDecoration={secondaryButtonTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ secondaryButtonTextDecoration: value })}
-                    
-                    lineHeight={secondaryButtonLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ secondaryButtonLineHeight: value })}
-                    
-                    lineHeightUnits={secondaryButtonLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ secondaryButtonLineHeightUnits: value })}
+            {showSecondarybtnStyle && (
+                <PanelBody 
+                    title={__("Secondary Button", "gslider-blocks")}  
+                    opened={openPanels.styles === "s5"}
+                    onToggle={() => togglePanel("styles", "s5")}
+                >
+                    <ResponsiveTypographyControl 
+                        fontFamily={secondaryButtonFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ secondaryButtonFontFamily: value })}
+                        
+                        fontSize={secondaryButtonFontSize}
+                        onChangeFontSize={(value) => setAttributes({ secondaryButtonFontSize: value })}
+                        
+                        fontSizeUnits={secondaryButtonFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ secondaryButtonFontSizeUnits: value })}
+                        
+                        fontWeight={secondaryButtonFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ secondaryButtonFontWeight: value })}
+                        
+                        fontStyle={secondaryButtonFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ secondaryButtonFontStyle: value })}
+                        
+                        textTransform={secondaryButtonTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ secondaryButtonTextTransform: value })}
+                        
+                        textDecoration={secondaryButtonTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ secondaryButtonTextDecoration: value })}
+                        
+                        lineHeight={secondaryButtonLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ secondaryButtonLineHeight: value })}
+                        
+                        lineHeightUnits={secondaryButtonLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ secondaryButtonLineHeightUnits: value })}
 
-                    letterSpacing={secondaryButtonLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ secondaryButtonLetterSpacing: value })}
-                    
-                    letterSpacingUnits={secondaryButtonLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ secondaryButtonLetterSpacingUnits: value })}
+                        letterSpacing={secondaryButtonLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ secondaryButtonLetterSpacing: value })}
+                        
+                        letterSpacingUnits={secondaryButtonLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ secondaryButtonLetterSpacingUnits: value })}
 
-                    wordSpacing={secondaryButtonWordSpacing}
-                    onChangeWordSpacing={(value) => setAttributes({ secondaryButtonWordSpacing: value })}
-                    
-                    wordSpacingUnits={secondaryButtonWordSpacingUnits}
-                    onChangeWordSpacingUnit={(value) => setAttributes({ secondaryButtonWordSpacingUnits: value })}
-                    
-                    deviceType={deviceType}
-                />
-                <SwitcherControl
-                    label={__("Color", "gslider-blocks")}
-                    globalSwitcher={secondaryButtonColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ secondaryButtonColorSwitcher: value })}
-                />
-
-                {secondaryButtonColorSwitcher === 'normal' && (
-                    <ColorControl
-                        label={__("Normal Color", "gslider-blocks")}
-                        color={secondaryButtonColor}
-                        onChangeColor={(value) => setAttributes({ secondaryButtonColor: value })}
-                        defaultColor=''
+                        wordSpacing={secondaryButtonWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ secondaryButtonWordSpacing: value })}
+                        
+                        wordSpacingUnits={secondaryButtonWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ secondaryButtonWordSpacingUnits: value })}
+                        
+                        deviceType={deviceType}
                     />
-                )}
-
-                {secondaryButtonColorSwitcher === 'hover' && (
-                    <ColorControl
-                        label={__("Hover Color", "gslider-blocks")}
-                        color={secondaryButtonColorHover}
-                        onChangeColor={(value) => setAttributes({ secondaryButtonColorHover: value })}
-                        defaultColor=''
+                    <SwitcherControl
+                        label={__("Color", "gslider-blocks")}
+                        globalSwitcher={secondaryButtonColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ secondaryButtonColorSwitcher: value })}
                     />
-                )}
 
-                <BackgroundControl 
-                    label={__("Background Color", "gslider-blocks")}
-                            
-                    normalBackgroundType={secondaryButtonNormalBackgroundType}
-                    setNormalBackgroundType={(value) => setAttributes({ secondaryButtonNormalBackgroundType: value })}
-                    normalClassicColor={secondaryButtonNormalClassicColor}
-                    setNormalClassicColor={(value) => setAttributes({ secondaryButtonNormalClassicColor: value })}
-                    normalGradientColor={secondaryButtonNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ secondaryButtonNormalGradientColor: value })}
-                    normalCustomGradientSwitcher={secondaryButtonNormalCustomGradientSwitcher}
-                    setNormalCustomGradientSwitcher={(value) => setAttributes({ secondaryButtonNormalCustomGradientSwitcher: value })}
-                    normalCustomGradientInputValue={secondaryButtonNormalCustomGradientInputValue}
-                    setNormalCustomGradientInputValue={(value) => setAttributes({ secondaryButtonNormalCustomGradientInputValue: value })}
-                    normalClassicDefaultColor={'#d2d2d2c7'}
+                    {secondaryButtonColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={secondaryButtonColor}
+                            onChangeColor={(value) => setAttributes({ secondaryButtonColor: value })}
+                            defaultColor=''
+                        />
+                    )}
 
-                    hoverBackgroundType={secondaryButtonHoverBackgroundType} 
-                    setHoverBackgroundType={(value) => setAttributes({ secondaryButtonHoverBackgroundType: value })}
-                    hoverClassicColor={secondaryButtonHoverClassicColor}
-                    setHoverClassicColor={(value) => setAttributes({ secondaryButtonHoverClassicColor: value })}
-                    hoverGradientColor={secondaryButtonHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ secondaryButtonHoverGradientColor: value })}
-                    hoverCustomGradientSwitcher={secondaryButtonHoverCustomGradientSwitcher}
-                    setHoverCustomGradientSwitcher={(value) => setAttributes({ secondaryButtonHoverCustomGradientSwitcher: value })}
-                    hoverCustomGradientInputValue={secondaryButtonHoverCustomGradientInputValue}
-                    setHoverCustomGradientInputValue={(value) => setAttributes({ secondaryButtonHoverCustomGradientInputValue: value })}
-                    hoverClassicDefaultColor={'#787878b8'}
-                    isBackgroundImage={false}
-                />
+                    {secondaryButtonColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={secondaryButtonColorHover}
+                            onChangeColor={(value) => setAttributes({ secondaryButtonColorHover: value })}
+                            defaultColor=''
+                        />
+                    )}
 
-                <SelectControls
-                    label={__("Border Style", "gslider-blocks")}
-                    value={secondaryButtonBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ secondaryButtonBorder: value })}
-                />
+                    <BackgroundControl 
+                        label={__("Background Color", "gslider-blocks")}
+                                
+                        normalBackgroundType={secondaryButtonNormalBackgroundType}
+                        setNormalBackgroundType={(value) => setAttributes({ secondaryButtonNormalBackgroundType: value })}
+                        normalClassicColor={secondaryButtonNormalClassicColor}
+                        setNormalClassicColor={(value) => setAttributes({ secondaryButtonNormalClassicColor: value })}
+                        normalGradientColor={secondaryButtonNormalGradientColor}
+                        setNormalGradientColor={(value) => setAttributes({ secondaryButtonNormalGradientColor: value })}
+                        normalCustomGradientSwitcher={secondaryButtonNormalCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => setAttributes({ secondaryButtonNormalCustomGradientSwitcher: value })}
+                        normalCustomGradientInputValue={secondaryButtonNormalCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => setAttributes({ secondaryButtonNormalCustomGradientInputValue: value })}
+                        normalClassicDefaultColor={'#d2d2d2c7'}
 
-                <SwitcherControl
-                    label={__("Border Color", "gslider-blocks")}
-                    globalSwitcher={secondaryButtonBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ secondaryButtonBorderColorSwitcher: value })}
-                />
-
-                {secondaryButtonBorderColorSwitcher === 'normal' && (
-                    <ColorControl
-                        label={__("Normal Color", "gslider-blocks")}
-                        color={secondaryButtonBorderColor}
-                        onChangeColor={(value) => setAttributes({ secondaryButtonBorderColor: value })}
+                        hoverBackgroundType={secondaryButtonHoverBackgroundType} 
+                        setHoverBackgroundType={(value) => setAttributes({ secondaryButtonHoverBackgroundType: value })}
+                        hoverClassicColor={secondaryButtonHoverClassicColor}
+                        setHoverClassicColor={(value) => setAttributes({ secondaryButtonHoverClassicColor: value })}
+                        hoverGradientColor={secondaryButtonHoverGradientColor} 
+                        setHoverGradientColor={(value) => setAttributes({ secondaryButtonHoverGradientColor: value })}
+                        hoverCustomGradientSwitcher={secondaryButtonHoverCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => setAttributes({ secondaryButtonHoverCustomGradientSwitcher: value })}
+                        hoverCustomGradientInputValue={secondaryButtonHoverCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => setAttributes({ secondaryButtonHoverCustomGradientInputValue: value })}
+                        hoverClassicDefaultColor={'#787878b8'}
+                        isBackgroundImage={false}
                     />
-                )}
 
-                {secondaryButtonBorderColorSwitcher === 'hover' && (
-                    <ColorControl
-                        label={__("Hover Color", "gslider-blocks")}
-                        color={secondaryButtonBorderHoverColor}
-                        onChangeColor={(value) => setAttributes({ secondaryButtonBorderHoverColor: value })}
+                    <SelectControls
+                        label={__("Border Style", "gslider-blocks")}
+                        value={secondaryButtonBorder}
+                        options={BORDER_STYLES}
+                        onChange={(value) => setAttributes({ secondaryButtonBorder: value })}
                     />
-                )}
 
-                <ResponsiveSpacingControl
-                    label={__("Border Width", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={secondaryButtonBorderUnits}
-                    onChangeUnits={(value) => setAttributes({ secondaryButtonBorderUnits: value })}
-                    desktopSpacing={secondaryButtonDesktopBorder} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopBorder: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopBorderCssStyle: value })}
-                    tabletSpacing={secondaryButtonTabletBorder} 
-                    onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletBorder: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletBorderCssStyle: value })}
-                    mobileSpacing={secondaryButtonMobileBorder}
-                    onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobileBorder: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobileBorderCssStyle: value })}
-                    isLinked={secondaryButtonBorderLink}
-                    onChangeLink={(value) => setAttributes({ secondaryButtonBorderLink: value })} 
-                />
-
-                <ResponsiveSpacingControl
-                    label={__("Border Radius", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={secondaryButtonBorderRadiusUnits}
-                    onChangeUnits={(value) => setAttributes({ secondaryButtonBorderRadiusUnits: value })}
-                    desktopSpacing={secondaryButtonDesktopBorderRadius}
-                    onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopBorderRadius: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopBorderRadiusCssStyle: value })}
-                    tabletSpacing={secondaryButtonTabletBorderRadius}
-                    onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletBorderRadius: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletBorderRadiusCssStyle: value })}
-                    mobileSpacing={secondaryButtonMobileBorderRadius}
-                    onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobileBorderRadius: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobileBorderRadiusCssStyle: value })}
-                    isLinked={secondaryButtonBorderRadiusLink}
-                    onChangeLink={(value) => setAttributes({ secondaryButtonBorderRadiusLink: value })} 
-                />
-
-                <SwitcherControl
-                    label={__("Box Shadow", "gslider-blocks")}
-                    globalSwitcher={secondaryButtonBoxShadowValuesSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ secondaryButtonBoxShadowValuesSwitcher: value })}
-                />
-
-                {secondaryButtonBoxShadowValuesSwitcher === 'normal' && (
-                    <BoxShadowSettingsControl
-                        label={__("Normal Shadow", "gslider-blocks")}
-                        onBoxShadowChange={(value) => setAttributes({ secondaryButtonBoxShadowValues: value })}
-                        initialShadowValue={secondaryButtonBoxShadowValues}
-                        onBoxShadowStyleChange={(value) => setAttributes({ secondaryButtonBoxShadowCssValue: value })}
+                    <SwitcherControl
+                        label={__("Border Color", "gslider-blocks")}
+                        globalSwitcher={secondaryButtonBorderColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ secondaryButtonBorderColorSwitcher: value })}
                     />
-                )}
 
-                {secondaryButtonBoxShadowValuesSwitcher === 'hover' && (
-                    <BoxShadowSettingsControl
-                        label={__("Hover Shadow", "gslider-blocks")}
-                        onBoxShadowChange={(value) => setAttributes({ secondaryButtonBoxShadowHoverValues: value })}
-                        initialShadowValue={secondaryButtonBoxShadowHoverValues}
-                        onBoxShadowStyleChange={(value) => setAttributes({ secondaryButtonBoxShadowHoverCssValue: value })}
+                    {secondaryButtonBorderColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={secondaryButtonBorderColor}
+                            onChangeColor={(value) => setAttributes({ secondaryButtonBorderColor: value })}
+                        />
+                    )}
+
+                    {secondaryButtonBorderColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={secondaryButtonBorderHoverColor}
+                            onChangeColor={(value) => setAttributes({ secondaryButtonBorderHoverColor: value })}
+                        />
+                    )}
+
+                    <ResponsiveSpacingControl
+                        label={__("Border Width", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={secondaryButtonBorderUnits}
+                        onChangeUnits={(value) => setAttributes({ secondaryButtonBorderUnits: value })}
+                        desktopSpacing={secondaryButtonDesktopBorder} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopBorder: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopBorderCssStyle: value })}
+                        tabletSpacing={secondaryButtonTabletBorder} 
+                        onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletBorder: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletBorderCssStyle: value })}
+                        mobileSpacing={secondaryButtonMobileBorder}
+                        onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobileBorder: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobileBorderCssStyle: value })}
+                        isLinked={secondaryButtonBorderLink}
+                        onChangeLink={(value) => setAttributes({ secondaryButtonBorderLink: value })} 
                     />
-                )}
 
-                <ResponsiveSpacingControl
-                    label={__("Margin", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={secondaryButtonMarginUnits}
-                    onChangeUnits={(value) => setAttributes({ secondaryButtonMarginUnits: value })}
-                    desktopSpacing={secondaryButtonDesktopMargin} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopMargin: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopMarginCssStyle: value })}
-                    tabletSpacing={secondaryButtonTabletMargin} 
-                    onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletMargin: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletMarginCssStyle: value })}
-                    mobileSpacing={secondaryButtonMobileMargin}
-                    onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobileMargin: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobileMarginCssStyle: value })}
-                    isLinked={secondaryButtonMarginLink}
-                    onChangeLink={(value) => setAttributes({ secondaryButtonMarginLink: value })} 
-                />
+                    <ResponsiveSpacingControl
+                        label={__("Border Radius", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={secondaryButtonBorderRadiusUnits}
+                        onChangeUnits={(value) => setAttributes({ secondaryButtonBorderRadiusUnits: value })}
+                        desktopSpacing={secondaryButtonDesktopBorderRadius}
+                        onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopBorderRadius: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopBorderRadiusCssStyle: value })}
+                        tabletSpacing={secondaryButtonTabletBorderRadius}
+                        onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletBorderRadius: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletBorderRadiusCssStyle: value })}
+                        mobileSpacing={secondaryButtonMobileBorderRadius}
+                        onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobileBorderRadius: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobileBorderRadiusCssStyle: value })}
+                        isLinked={secondaryButtonBorderRadiusLink}
+                        onChangeLink={(value) => setAttributes({ secondaryButtonBorderRadiusLink: value })} 
+                    />
 
-                <ResponsiveSpacingControl
-                    label={__("Padding", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={secondaryButtonPaddingUnits}
-                    onChangeUnits={(value) => setAttributes({ secondaryButtonPaddingUnits: value })}
-                    desktopSpacing={secondaryButtonDesktopPadding} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopPadding: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopPaddingCssStyle: value })}
-                    tabletSpacing={secondaryButtonTabletPadding} 
-                    onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletPadding: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletPaddingCssStyle: value })}
-                    mobileSpacing={secondaryButtonMobilePadding}
-                    onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobilePadding: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobilePaddingCssStyle: value })}
-                    isLinked={secondaryButtonPaddingLink}
-                    onChangeLink={(value) => setAttributes({ secondaryButtonPaddingLink: value })} 
-                />
-            </PanelBody>
+                    <SwitcherControl
+                        label={__("Box Shadow", "gslider-blocks")}
+                        globalSwitcher={secondaryButtonBoxShadowValuesSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ secondaryButtonBoxShadowValuesSwitcher: value })}
+                    />
+
+                    {secondaryButtonBoxShadowValuesSwitcher === 'normal' && (
+                        <BoxShadowSettingsControl
+                            label={__("Normal Shadow", "gslider-blocks")}
+                            onBoxShadowChange={(value) => setAttributes({ secondaryButtonBoxShadowValues: value })}
+                            initialShadowValue={secondaryButtonBoxShadowValues}
+                            onBoxShadowStyleChange={(value) => setAttributes({ secondaryButtonBoxShadowCssValue: value })}
+                        />
+                    )}
+
+                    {secondaryButtonBoxShadowValuesSwitcher === 'hover' && (
+                        <BoxShadowSettingsControl
+                            label={__("Hover Shadow", "gslider-blocks")}
+                            onBoxShadowChange={(value) => setAttributes({ secondaryButtonBoxShadowHoverValues: value })}
+                            initialShadowValue={secondaryButtonBoxShadowHoverValues}
+                            onBoxShadowStyleChange={(value) => setAttributes({ secondaryButtonBoxShadowHoverCssValue: value })}
+                        />
+                    )}
+
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={secondaryButtonMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ secondaryButtonMarginUnits: value })}
+                        desktopSpacing={secondaryButtonDesktopMargin} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopMarginCssStyle: value })}
+                        tabletSpacing={secondaryButtonTabletMargin} 
+                        onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletMarginCssStyle: value })}
+                        mobileSpacing={secondaryButtonMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobileMarginCssStyle: value })}
+                        isLinked={secondaryButtonMarginLink}
+                        onChangeLink={(value) => setAttributes({ secondaryButtonMarginLink: value })} 
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={secondaryButtonPaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ secondaryButtonPaddingUnits: value })}
+                        desktopSpacing={secondaryButtonDesktopPadding} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopPaddingCssStyle: value })}
+                        tabletSpacing={secondaryButtonTabletPadding} 
+                        onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletPaddingCssStyle: value })}
+                        mobileSpacing={secondaryButtonMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobilePaddingCssStyle: value })}
+                        isLinked={secondaryButtonPaddingLink}
+                        onChangeLink={(value) => setAttributes({ secondaryButtonPaddingLink: value })} 
+                    />
+                </PanelBody>
+            )}
 
             <PanelBody 
                 title={__("Navigation", "gslider-blocks")}  
@@ -2657,8 +2682,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 }`;
                 style += overlayStyle;
             }
-
-
 
             // Tablet styles (max-width: 1024px)
             style += `
