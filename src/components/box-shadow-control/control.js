@@ -18,7 +18,7 @@ function Control({ label, type, onChangeHandler, value }) {
 				>
 					<Dropdown
 						className="gslider-box-shadow-icon-dropdown gslider-setting-color-dropdown"
-						contentClassName="gslider-box-shadow-icon-dropdown-content"
+						contentClassName="gslider-setting-icon-dropdown-content"
 						popoverProps={{ placement: 'bottom-start' }}
 						renderToggle={({ isOpen, onToggle }) => (
 							<>

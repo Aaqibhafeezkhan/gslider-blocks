@@ -38,21 +38,6 @@ const UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTa
                     placeholder={__('https://', 'gslider-blocks')}
                 />
                 <Dropdown
-                    // className="gslider-url-control-dropdown-wrapper"
-                    // contentClassName="gslider-url-control-dropdown-content"
-                    // popoverProps={{ placement: 'bottom-start' }}
-                    // renderToggle={({ isOpen, onToggle }) => (
-                    //     <Button
-                    //         variant="primary"
-                    //         onClick={onToggle}
-                    //         aria-expanded={isOpen}
-                    //         aria-label={__("Toggle URL Settings", "gslider-blocks")}
-                    //         className="gslider-setting-icon-btn"
-                    //     >
-                    //         <Dashicon icon="admin-generic" className="gslider-setting-panel-icon" />
-                    //     </Button>
-                    // )}
-
                     className="gslider-setting-icon-dropdown gslider-url-control-dropdown-wrapper"
                     contentClassName="gslider-setting-icon-dropdown-content gslider-url-control-dropdown-content"
                     popoverProps={{ placement: 'bottom-start' }}

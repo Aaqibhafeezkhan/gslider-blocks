@@ -118,14 +118,14 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                         onChangeSponsored={(value) => handleChangeItem(item.id, "primaryButtonSponsored", value)}
                                     />
                                     <ToggleControl
-                                        label={__("Secondary Button", "gslider-blocks")}
+                                        label={__("Enable Secondary Button", "gslider-blocks")}
                                         checked={item.secondaryButtonSwitcher}
                                         onChange={(value) => handleChangeItem(item.id, "secondaryButtonSwitcher", value)}
                                     />  
                                     { item.secondaryButtonSwitcher && (
                                         <>
                                             <TextControl
-                                                label={__("Secondary Button", "gslider-blocks")}
+                                                label={__("Button Text", "gslider-blocks")}
                                                 value={item.secondaryButtonText}
                                                 onChange={(value) => handleChangeItem(item.id, "secondaryButtonText", value)}
                                                 help= "Leave blank to hide button text"

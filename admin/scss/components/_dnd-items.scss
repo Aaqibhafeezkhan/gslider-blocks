@@ -31,7 +31,7 @@
 						width: 200px;
 						font-size: $font_size_13;
 						color: $label_color;
-						font-weight: $font_weight_500;
+						font-weight: $font_weight_400;
 						line-height: $line_height_3;
 						text-transform: $text_transform_capitalize;
 					}
@@ -119,7 +119,7 @@
 		z-index: 99999;
 
 		.components-popover__content {
-			padding: 20px;
+			padding: 16px;
 			min-width: 350px;
 			margin-right: 30px;
 			.gslider-setting-contant-popup-wrapper {
@@ -182,7 +182,7 @@
 							display: block;
 							color: $label_color !important;
 							font-size: $font_size_13 !important;
-							font-weight: $font_weight_400 !important;
+							font-weight: $font_weight_400 !important; 
 							line-height: $line_height_3 !important;
 							min-height: auto;
 							text-transform: $text_transform_capitalize !important;
@@ -234,6 +234,9 @@
 					&.gslider-image-control-wrapper{
 						.gslider-setting-device-label-wrapper{
 							margin-bottom: 8px !important;
+							.gslider-setting-label-text {
+								font-weight: $font_weight_400 !important;
+							}
 						}
 					}
 					&.components-range-control {
