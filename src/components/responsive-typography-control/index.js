@@ -218,7 +218,7 @@ const ResponsiveTypographyControl = ({
           backgroundColor: state.isSelected
             ? '#ededed'
             : state.isFocused
-            ? '#dcf2ff'
+            ? '#ededed'
             : '#fff',
           color: state.isFocused ? '#007cba' : '#1e1e1e',
           fontSize: '12px',
@@ -243,18 +243,17 @@ const ResponsiveTypographyControl = ({
             className="gslider-setting-typography"
         >
             <Dropdown
-                className="gslider-setting-dropdown-icon-wrapper"
-                contentClassName="gslider-setting-dropdown-icon-content"
+                className="gslider-setting-icon-dropdown"
+                contentClassName="gslider-setting-icon-dropdown-content"
                 popoverProps={{ placement: 'bottom-start' }}
                 renderToggle={({ isOpen, onToggle }) => (
                     <Button
                         variant="primary"
                         onClick={onToggle}
                         aria-expanded={isOpen}
-                        aria-label={__("Toggle Typography Settings", "gslider-blocks")}
-                        className="gslider-setting-dropdown-icon-btn"
+                        className="gslider-setting-icon-btn"
                     >
-                        <Dashicon icon="edit" className="gslider-setting-dropdown-icon" />
+                        <Dashicon icon="edit" className="gslider-setting-panel-icon" />
                     </Button>
                 )}
                 renderContent={() => (

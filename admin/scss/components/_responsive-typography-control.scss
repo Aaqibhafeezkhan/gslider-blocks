@@ -1,8 +1,8 @@
 @use "../variables" as *;
 
-.gslider-setting-dropdown-icon-wrapper {
+.gslider-setting-icon-dropdown {
 
-	.gslider-setting-dropdown-icon-btn {
+	.gslider-setting-icon-btn {
 		margin: 0;
 		height: 28px;
 		width: 28px;
@@ -16,14 +16,15 @@
 			outline: none;
 			box-shadow: none;
 		}
+
+		.gslider-setting-panel-icon {
+			font-size: 15px;
+			line-height: 20px;
+		}
 		&:hover {
 			color: $secondary_color !important;
 			background: $white_color !important;
-		}
-
-		.gslider-setting-dropdown-icon {
-			font-size: 15px;
-			line-height: 20px;
+			border-color: $border_color !important;
 		}
 	}
 }
@@ -152,12 +153,12 @@
 }
 
 .components-popover {
-	&.gslider-setting-dropdown-icon-content {
+	&.gslider-setting-icon-dropdown-content {
 		.components-popover__content {
 			position: relative;
 			top: 15px;
 			width: 250px;
-			border-radius: 2px;
+			border-radius: 4px;
 			padding: 16px;
 			margin-bottom: 40px;
 			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
