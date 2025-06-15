@@ -19,14 +19,14 @@ const attributes = {
                 subTitle: "Sub Title",
                 title: "Slider Item 1",
                 description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
-                primaryButtonText: "Click Here",
+                primaryButtonText: "Get Started",
                 primaryButtonLink: "#",
                 primaryButtonTargetLink: true,
                 primaryButtonNofollow: false,
                 primaryButtonSponsored: false,
 
                 secondaryButtonSwitcher: false,
-                secondaryButtonText: "Click Here",
+                secondaryButtonText: "Get Started",
                 secondaryButtonLink: "#",
                 secondaryButtonTargetLink: true,
                 secondaryButtonNofollow: false,
@@ -88,14 +88,14 @@ const attributes = {
                 subTitle: "Sub Title",
                 title: "Slider Item 2",
                 description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
-                primaryButtonText: "Click Here",
+                primaryButtonText: "Get Started",
                 primaryButtonLink: "#",
                 primaryButtonTargetLink: true,
                 primaryButtonNofollow: false,
                 primaryButtonSponsored: false,
 
                 secondaryButtonSwitcher: false,
-                secondaryButtonText: "Click Here",
+                secondaryButtonText: "Get Started",
                 secondaryButtonLink: "#",
                 secondaryButtonTargetLink: true,
                 secondaryButtonNofollow: false,
@@ -158,14 +158,14 @@ const attributes = {
                 subTitle: "Sub Title",
                 title: "Slider Item 3",
                 description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
-                primaryButtonText: "Click Here",
+                primaryButtonText: "Get Started",
                 primaryButtonLink: "#",
                 primaryButtonTargetLink: true,
                 primaryButtonNofollow: false,
                 primaryButtonSponsored: false,
 
                 secondaryButtonSwitcher: false,
-                secondaryButtonText: "Click Here",
+                secondaryButtonText: "Get Started",
                 secondaryButtonLink: "#",
                 secondaryButtonTargetLink: true,
                 secondaryButtonNofollow: false,
@@ -243,7 +243,7 @@ const attributes = {
                 },
                 primaryButtonText: {
                     type: "string",
-                    default: "Click Here"
+                    default: "Get Started"
                 },
                 primaryButtonLink: {
                     type: "string",
@@ -268,7 +268,7 @@ const attributes = {
                 },
                 secondaryButtonText: {
                     type: "string",
-                    default: "Click Here"
+                    default: "Get Started"
                 },
                 secondaryButtonLink: {
                     type: "string",
@@ -1198,6 +1198,808 @@ const attributes = {
     
     /** End Description     */
 
+    /** Start Primary Button Typography */
+    primaryButtonFontFamily: {
+        type: "string",
+        default: "",
+    },
+    primaryButtonFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    primaryButtonFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    primaryButtonFontWeight: {
+        type: "string",
+        default: "",
+    },
+    primaryButtonFontStyle: {
+        type: "string",
+        default: "",
+    },
+    primaryButtonTextTransform: {
+        type: "string",
+        default: "",
+    },
+    primaryButtonTextDecoration: {
+        type: "string",
+        default: "none",
+    },
+    primaryButtonLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    primaryButtonLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    primaryButtonLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    primaryButtonLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    primaryButtonWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    primaryButtonWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Primary Button Typography */
+
+    /** Start Primary Button Color */
+    primaryButtonColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    primaryButtonColor: {
+        type: "string",
+        default: "",
+    },
+    primaryButtonColorHover: {
+        type: "string",
+        default: "",
+    },
+    /** End Primary Button Color */
+
+    /** Start Primary Button Background */
+    primaryButtonNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    primaryButtonNormalClassicColor: {
+        type: "string",
+        default: "#d2d2d2c7",
+    },
+    primaryButtonNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    primaryButtonNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    primaryButtonNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    primaryButtonHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    primaryButtonHoverClassicColor: {
+        type: "string",
+        default: "#787878b8",
+    },
+    primaryButtonHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    primaryButtonHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    primaryButtonHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Primary Button Background */
+
+    /** Start Primary Button Border */
+    primaryButtonBorder: {
+        type: "string",
+        default: "none",
+    },
+    primaryButtonBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    primaryButtonBorderColor: {
+        type: "string",
+        default: "",
+    },
+    primaryButtonBorderHoverColor: {
+        type: "string",
+        default: "",
+    },
+    primaryButtonBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    primaryButtonDesktopBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    primaryButtonDesktopBorderCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonTabletBorder: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    primaryButtonTabletBorderCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonMobileBorder: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    primaryButtonMobileBorderCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Primary Button Border */
+
+    /** Start Primary Button Border Radius */
+    primaryButtonBorderRadiusUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    primaryButtonDesktopBorderRadius: {
+        type: "object", 
+        default: {
+            top: "4",
+            bottom: "4",
+            left: "4",
+            right: "4",
+        },
+    },
+    primaryButtonDesktopBorderRadiusCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonTabletBorderRadius: {
+        type: "object",  
+        default: {
+            top: "4",
+            bottom: "4",
+            left: "4",
+            right: "4",
+        },
+    },
+    primaryButtonTabletBorderRadiusCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonMobileBorderRadius: {
+        type: "object",  
+        default: {
+            top: "4",
+            bottom: "4",
+            left: "4",
+            right: "4",
+        },
+    },
+    primaryButtonMobileBorderRadiusCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Primary Button Border Radius */
+
+    /** Start Primary Button Box Shadow */
+    primaryButtonBoxShadowValuesSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    primaryButtonBoxShadowValues: {
+        type: "array",
+        default: [],
+    },
+    primaryButtonBoxShadowCssValue: {
+        type: "string",
+        default: "",
+    },
+    primaryButtonBoxShadowHoverValues: {
+        type: "array",
+        default: [],
+    },
+    primaryButtonBoxShadowHoverCssValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Primary Button Box Shadow */
+
+    /** Start Primary Button Margin */
+    primaryButtonMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    primaryButtonDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    primaryButtonDesktopMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonTabletMargin: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    primaryButtonTabletMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonMobileMargin: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    primaryButtonMobileMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Primary Button Margin */
+
+    /** Start Primary Button Padding */
+    primaryButtonPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    primaryButtonDesktopPadding: {
+        type: "object", 
+        default: {
+            top: "12",
+            bottom: "12",
+            left: "24",
+            right: "24",
+        },
+    },
+    primaryButtonDesktopPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonTabletPadding: {
+        type: "object",  
+        default: {
+            top: "12",
+            bottom: "12",
+            left: "24",
+            right: "24",
+        },
+    },
+    primaryButtonTabletPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonMobilePadding: {
+        type: "object",  
+        default: {
+            top: "12",
+            bottom: "12",
+            left: "24",
+            right: "24",
+        },
+    },
+    primaryButtonMobilePaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    primaryButtonPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Primary Button Padding */
+    
+    /** End Primary Button     */
+
+    /** Start Secondary Button Typography */
+    secondaryButtonFontFamily: {
+        type: "string",
+        default: "",
+    },
+    secondaryButtonFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    secondaryButtonFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    secondaryButtonFontWeight: {
+        type: "string",
+        default: "",
+    },
+    secondaryButtonFontStyle: {
+        type: "string",
+        default: "",
+    },
+    secondaryButtonTextTransform: {
+        type: "string",
+        default: "",
+    },
+    secondaryButtonTextDecoration: {
+        type: "string",
+        default: "none",
+    },
+    secondaryButtonLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    secondaryButtonLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    secondaryButtonLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    secondaryButtonLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    secondaryButtonWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    secondaryButtonWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Secondary Button Typography */
+
+    /** Start Secondary Button Color */
+    secondaryButtonColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    secondaryButtonColor: {
+        type: "string",
+        default: "",
+    },
+    secondaryButtonColorHover: {
+        type: "string",
+        default: "",
+    },
+    /** End Secondary Button Color */
+
+    /** Start Secondary Button Background */
+    secondaryButtonNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    secondaryButtonNormalClassicColor: {
+        type: "string",
+        default: "#d2d2d2c7",
+    },
+    secondaryButtonNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    secondaryButtonNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    secondaryButtonNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    secondaryButtonHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    secondaryButtonHoverClassicColor: {
+        type: "string",
+        default: "#787878b8",
+    },
+    secondaryButtonHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    secondaryButtonHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    secondaryButtonHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Secondary Button Background */
+
+    /** Start Secondary Button Border */
+    secondaryButtonBorder: {
+        type: "string",
+        default: "none",
+    },
+    secondaryButtonBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    secondaryButtonBorderColor: {
+        type: "string",
+        default: "",
+    },
+    secondaryButtonBorderHoverColor: {
+        type: "string",
+        default: "",
+    },
+    secondaryButtonBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    secondaryButtonDesktopBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    secondaryButtonDesktopBorderCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonTabletBorder: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    secondaryButtonTabletBorderCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonMobileBorder: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    secondaryButtonMobileBorderCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Secondary Button Border */
+
+    /** Start Secondary Button Border Radius */
+    secondaryButtonBorderRadiusUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    secondaryButtonDesktopBorderRadius: {
+        type: "object", 
+        default: {
+            top: "4",
+            bottom: "4",
+            left: "4",
+            right: "4",
+        },
+    },
+    secondaryButtonDesktopBorderRadiusCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonTabletBorderRadius: {
+        type: "object",  
+        default: {
+            top: "4",
+            bottom: "4",
+            left: "4",
+            right: "4",
+        },
+    },
+    secondaryButtonTabletBorderRadiusCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonMobileBorderRadius: {
+        type: "object",  
+        default: {
+            top: "4",
+            bottom: "4",
+            left: "4",
+            right: "4",
+        },
+    },
+    secondaryButtonMobileBorderRadiusCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Secondary Button Border Radius */
+
+    /** Start Secondary Button Box Shadow */
+    secondaryButtonBoxShadowValuesSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    secondaryButtonBoxShadowValues: {
+        type: "array",
+        default: [],
+    },
+    secondaryButtonBoxShadowCssValue: {
+        type: "string",
+        default: "",
+    },
+    secondaryButtonBoxShadowHoverValues: {
+        type: "array",
+        default: [],
+    },
+    secondaryButtonBoxShadowHoverCssValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Secondary Button Box Shadow */
+
+    /** Start Secondary Button Margin */
+    secondaryButtonMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    secondaryButtonDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    secondaryButtonDesktopMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonTabletMargin: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    secondaryButtonTabletMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonMobileMargin: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    secondaryButtonMobileMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Secondary Button Margin */
+
+    /** Start Secondary Button Padding */
+    secondaryButtonPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    secondaryButtonDesktopPadding: {
+        type: "object", 
+        default: {
+            top: "12",
+            bottom: "12",
+            left: "24",
+            right: "24",
+        },
+    },
+    secondaryButtonDesktopPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonTabletPadding: {
+        type: "object",  
+        default: {
+            top: "12",
+            bottom: "12",
+            left: "24",
+            right: "24",
+        },
+    },
+    secondaryButtonTabletPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonMobilePadding: {
+        type: "object",  
+        default: {
+            top: "12",
+            bottom: "12",
+            left: "24",
+            right: "24",
+        },
+    },
+    secondaryButtonMobilePaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    secondaryButtonPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Secondary Button Padding */
+    
     /** Start Arrows Size */
 	sliderArrowsSize: {
 		type: "object",

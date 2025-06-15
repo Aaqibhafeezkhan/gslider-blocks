@@ -197,6 +197,160 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         descriptionPaddingLink,
         /** End Description Typography, Color, Margin & Padding */
 
+        /** Start Primary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
+        primaryButtonFontFamily,
+        primaryButtonFontSize,
+        primaryButtonFontSizeUnits,
+        primaryButtonFontWeight,
+        primaryButtonFontStyle,
+        primaryButtonTextTransform,
+        primaryButtonTextDecoration,
+        primaryButtonLineHeight,
+        primaryButtonLineHeightUnits,
+        primaryButtonLetterSpacing,
+        primaryButtonLetterSpacingUnits,
+        primaryButtonWordSpacing,
+        primaryButtonWordSpacingUnits,
+
+        primaryButtonColorSwitcher,
+        primaryButtonColor,
+        primaryButtonColorHover,
+
+        primaryButtonNormalBackgroundType,
+        primaryButtonNormalClassicColor,
+        primaryButtonNormalGradientColor,
+        primaryButtonNormalCustomGradientSwitcher,
+        primaryButtonNormalCustomGradientInputValue,
+        primaryButtonHoverBackgroundType,
+        primaryButtonHoverClassicColor,
+        primaryButtonHoverGradientColor,
+        primaryButtonHoverCustomGradientSwitcher,
+        primaryButtonHoverCustomGradientInputValue,
+
+        primaryButtonBorder,
+        primaryButtonBorderColorSwitcher,
+        primaryButtonBorderColor,
+        primaryButtonBorderHoverColor,
+        primaryButtonBorderUnits,
+        primaryButtonDesktopBorder,
+        primaryButtonDesktopBorderCssStyle,
+        primaryButtonTabletBorder,
+        primaryButtonTabletBorderCssStyle,
+        primaryButtonMobileBorder,
+        primaryButtonMobileBorderCssStyle,
+        primaryButtonBorderLink,
+
+        primaryButtonBorderRadiusUnits,
+        primaryButtonDesktopBorderRadius,
+        primaryButtonDesktopBorderRadiusCssStyle,
+        primaryButtonTabletBorderRadius,
+        primaryButtonTabletBorderRadiusCssStyle,
+        primaryButtonMobileBorderRadius,
+        primaryButtonMobileBorderRadiusCssStyle,
+        primaryButtonBorderRadiusLink,
+
+        primaryButtonBoxShadowValuesSwitcher,
+        primaryButtonBoxShadowValues,
+        primaryButtonBoxShadowCssValue,
+        primaryButtonBoxShadowHoverValues,
+        primaryButtonBoxShadowHoverCssValue,
+
+        primaryButtonMarginUnits,
+        primaryButtonDesktopMargin,
+        primaryButtonDesktopMarginCssStyle,
+        primaryButtonTabletMargin,
+        primaryButtonTabletMarginCssStyle,
+        primaryButtonMobileMargin,
+        primaryButtonMobileMarginCssStyle,
+        primaryButtonMarginLink,
+
+        primaryButtonPaddingUnits,
+        primaryButtonDesktopPadding,
+        primaryButtonDesktopPaddingCssStyle,
+        primaryButtonTabletPadding,
+        primaryButtonTabletPaddingCssStyle,
+        primaryButtonMobilePadding,
+        primaryButtonMobilePaddingCssStyle,
+        primaryButtonPaddingLink,
+        /** End Primary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
+
+        /** Start Secondary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
+        secondaryButtonFontFamily,
+        secondaryButtonFontSize,
+        secondaryButtonFontSizeUnits,
+        secondaryButtonFontWeight,
+        secondaryButtonFontStyle,
+        secondaryButtonTextTransform,
+        secondaryButtonTextDecoration,
+        secondaryButtonLineHeight,
+        secondaryButtonLineHeightUnits,
+        secondaryButtonLetterSpacing,
+        secondaryButtonLetterSpacingUnits,
+        secondaryButtonWordSpacing,
+        secondaryButtonWordSpacingUnits,
+
+        secondaryButtonColorSwitcher,
+        secondaryButtonColor,
+        secondaryButtonColorHover,
+
+        secondaryButtonNormalBackgroundType,
+        secondaryButtonNormalClassicColor,
+        secondaryButtonNormalGradientColor,
+        secondaryButtonNormalCustomGradientSwitcher,
+        secondaryButtonNormalCustomGradientInputValue,
+        secondaryButtonHoverBackgroundType,
+        secondaryButtonHoverClassicColor,
+        secondaryButtonHoverGradientColor,
+        secondaryButtonHoverCustomGradientSwitcher,
+        secondaryButtonHoverCustomGradientInputValue,
+
+        secondaryButtonBorder,
+        secondaryButtonBorderColorSwitcher,
+        secondaryButtonBorderColor,
+        secondaryButtonBorderHoverColor,
+        secondaryButtonBorderUnits,
+        secondaryButtonDesktopBorder,
+        secondaryButtonDesktopBorderCssStyle,
+        secondaryButtonTabletBorder,
+        secondaryButtonTabletBorderCssStyle,
+        secondaryButtonMobileBorder,
+        secondaryButtonMobileBorderCssStyle,
+        secondaryButtonBorderLink,
+
+        secondaryButtonBorderRadiusUnits,
+        secondaryButtonDesktopBorderRadius,
+        secondaryButtonDesktopBorderRadiusCssStyle,
+        secondaryButtonTabletBorderRadius,
+        secondaryButtonTabletBorderRadiusCssStyle,
+        secondaryButtonMobileBorderRadius,
+        secondaryButtonMobileBorderRadiusCssStyle,
+        secondaryButtonBorderRadiusLink,
+
+        secondaryButtonBoxShadowValuesSwitcher,
+        secondaryButtonBoxShadowValues,
+        secondaryButtonBoxShadowCssValue,
+        secondaryButtonBoxShadowHoverValues,
+        secondaryButtonBoxShadowHoverCssValue,
+
+        secondaryButtonMarginUnits,
+        secondaryButtonDesktopMargin,
+        secondaryButtonDesktopMarginCssStyle,
+        secondaryButtonTabletMargin,
+        secondaryButtonTabletMarginCssStyle,
+        secondaryButtonMobileMargin,
+        secondaryButtonMobileMarginCssStyle,
+        secondaryButtonMarginLink,
+
+        secondaryButtonPaddingUnits,
+        secondaryButtonDesktopPadding,
+        secondaryButtonDesktopPaddingCssStyle,
+        secondaryButtonTabletPadding,
+        secondaryButtonTabletPaddingCssStyle,
+        secondaryButtonMobilePadding,
+        secondaryButtonMobilePaddingCssStyle,
+        secondaryButtonPaddingLink,
+        /** End Secondary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
+
         /** Start Arrows Style */
         sliderArrowsSize,
         sliderArrowsSizeUnits,
@@ -494,6 +648,23 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     /** set the css style if have default padding */
     useEffect(() => {
         setAttributes({
+
+            primaryButtonDesktopBorderRadiusCssStyle: spacingFormat(primaryButtonDesktopBorderRadius, primaryButtonBorderRadiusUnits.Desktop),
+            primaryButtonTabletBorderRadiusCssStyle: spacingFormat(primaryButtonTabletBorderRadius, primaryButtonBorderRadiusUnits.Tablet),
+            primaryButtonMobileBorderRadiusCssStyle: spacingFormat(primaryButtonMobileBorderRadius, primaryButtonBorderRadiusUnits.Mobile),
+
+            primaryButtonDesktopPaddingCssStyle: spacingFormat(primaryButtonDesktopPadding, primaryButtonPaddingUnits.Desktop), 
+            primaryButtonTabletPaddingCssStyle: spacingFormat(primaryButtonTabletPadding, primaryButtonPaddingUnits.Tablet),
+            primaryButtonMobilePaddingCssStyle: spacingFormat(primaryButtonMobilePadding, primaryButtonPaddingUnits.Mobile),
+
+            secondaryButtonDesktopBorderRadiusCssStyle: spacingFormat(secondaryButtonDesktopBorderRadius, secondaryButtonBorderRadiusUnits.Desktop),
+            secondaryButtonTabletBorderRadiusCssStyle: spacingFormat(secondaryButtonTabletBorderRadius, secondaryButtonBorderRadiusUnits.Tablet),
+            secondaryButtonMobileBorderRadiusCssStyle: spacingFormat(secondaryButtonMobileBorderRadius, secondaryButtonBorderRadiusUnits.Mobile),
+
+            secondaryButtonDesktopPaddingCssStyle: spacingFormat(secondaryButtonDesktopPadding, secondaryButtonPaddingUnits.Desktop), 
+            secondaryButtonTabletPaddingCssStyle: spacingFormat(secondaryButtonTabletPadding, secondaryButtonPaddingUnits.Tablet),
+            secondaryButtonMobilePaddingCssStyle: spacingFormat(secondaryButtonMobilePadding, secondaryButtonPaddingUnits.Mobile),
+
             sliderArrowsDesktopBorderRadiusCssStyle: spacingFormat(sliderArrowsDesktopBorderRadius, sliderArrowsBorderRadiusUnits.Desktop),
             sliderArrowsTabletBorderRadiusCssStyle: spacingFormat(sliderArrowsTabletBorderRadius, sliderArrowsBorderRadiusUnits.Tablet),
             sliderArrowsMobileBorderRadiusCssStyle: spacingFormat(sliderArrowsMobileBorderRadius, sliderArrowsBorderRadiusUnits.Mobile),
@@ -503,6 +674,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             sliderNormalDotsMobileBorderRadiusCssStyle: spacingFormat(sliderNormalDotsMobileBorderRadius, sliderNormalDotsBorderRadiusUnits.Mobile),
         });
     }, [
+        primaryButtonDesktopBorderRadius,
+        primaryButtonTabletBorderRadius,
+        primaryButtonMobileBorderRadius,
+
+        primaryButtonDesktopPadding,
+        primaryButtonTabletPadding,
+        primaryButtonMobilePadding,
+
+        secondaryButtonDesktopBorderRadius,
+        secondaryButtonTabletBorderRadius,
+        secondaryButtonMobileBorderRadius,
+
+        secondaryButtonDesktopPadding,
+        secondaryButtonTabletPadding,
+        secondaryButtonMobilePadding,
+
         sliderArrowsDesktopBorderRadius,
         sliderArrowsTabletBorderRadius,
         sliderArrowsMobileBorderRadius,
@@ -519,11 +706,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     if (subtitleFontFamily !== 'Default') {
         LoadGoogleFont(subtitleFontFamily);
     }
+
     if (titleFontFamily !== 'Default') {
         LoadGoogleFont(titleFontFamily);
     }
+
     if (descriptionFontFamily !== 'Default') {
         LoadGoogleFont(descriptionFontFamily);
+    }
+
+    if (primaryButtonFontFamily !== 'Default') {
+        LoadGoogleFont(primaryButtonFontFamily);
+    }
+
+    if (secondaryButtonFontFamily !== 'Default') {
+        LoadGoogleFont(secondaryButtonFontFamily);
     }
 
     /**
@@ -1180,6 +1377,466 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     mobileSpacingStyle={(value) => setAttributes({ descriptionMobilePaddingCssStyle: value })}
                     isLinked={descriptionPaddingLink}
                     onChangeLink={(value) => setAttributes({ descriptionPaddingLink: value })} 
+                />
+            </PanelBody>
+
+            <PanelBody 
+                title={__("Primary Button", "gslider-blocks")}  
+                opened={openPanels.styles === "s4"}
+                onToggle={() => togglePanel("styles", "s4")}
+            >
+                <ResponsiveTypographyControl 
+                    fontFamily={primaryButtonFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ primaryButtonFontFamily: value })}
+                    
+                    fontSize={primaryButtonFontSize}
+                    onChangeFontSize={(value) => setAttributes({ primaryButtonFontSize: value })}
+                    
+                    fontSizeUnits={primaryButtonFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ primaryButtonFontSizeUnits: value })}
+                    
+                    fontWeight={primaryButtonFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ primaryButtonFontWeight: value })}
+                    
+                    fontStyle={primaryButtonFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ primaryButtonFontStyle: value })}
+                    
+                    textTransform={primaryButtonTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ primaryButtonTextTransform: value })}
+                    
+                    textDecoration={primaryButtonTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ primaryButtonTextDecoration: value })}
+                    
+                    lineHeight={primaryButtonLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ primaryButtonLineHeight: value })}
+                    
+                    lineHeightUnits={primaryButtonLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ primaryButtonLineHeightUnits: value })}
+
+                    letterSpacing={primaryButtonLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ primaryButtonLetterSpacing: value })}
+                    
+                    letterSpacingUnits={primaryButtonLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ primaryButtonLetterSpacingUnits: value })}
+
+                    wordSpacing={primaryButtonWordSpacing}
+                    onChangeWordSpacing={(value) => setAttributes({ primaryButtonWordSpacing: value })}
+                    
+                    wordSpacingUnits={primaryButtonWordSpacingUnits}
+                    onChangeWordSpacingUnit={(value) => setAttributes({ primaryButtonWordSpacingUnits: value })}
+                    
+                    deviceType={deviceType}
+                />
+                <SwitcherControl
+                    label={__("Color", "gslider-blocks")}
+                    globalSwitcher={primaryButtonColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ primaryButtonColorSwitcher: value })}
+                />
+
+                {primaryButtonColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={primaryButtonColor}
+                        onChangeColor={(value) => setAttributes({ primaryButtonColor: value })}
+                        defaultColor=''
+                    />
+                )}
+
+                {primaryButtonColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={primaryButtonColorHover}
+                        onChangeColor={(value) => setAttributes({ primaryButtonColorHover: value })}
+                        defaultColor=''
+                    />
+                )}
+
+                <BackgroundControl 
+                    label={__("Background Color", "gslider-blocks")}
+                            
+                    normalBackgroundType={primaryButtonNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ primaryButtonNormalBackgroundType: value })}
+                    normalClassicColor={primaryButtonNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ primaryButtonNormalClassicColor: value })}
+                    normalGradientColor={primaryButtonNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ primaryButtonNormalGradientColor: value })}
+                    normalCustomGradientSwitcher={primaryButtonNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ primaryButtonNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={primaryButtonNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ primaryButtonNormalCustomGradientInputValue: value })}
+                    normalClassicDefaultColor={'#d2d2d2c7'}
+
+                    hoverBackgroundType={primaryButtonHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ primaryButtonHoverBackgroundType: value })}
+                    hoverClassicColor={primaryButtonHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ primaryButtonHoverClassicColor: value })}
+                    hoverGradientColor={primaryButtonHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ primaryButtonHoverGradientColor: value })}
+                    hoverCustomGradientSwitcher={primaryButtonHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ primaryButtonHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={primaryButtonHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ primaryButtonHoverCustomGradientInputValue: value })}
+                    hoverClassicDefaultColor={'#787878b8'}
+                    isBackgroundImage={false}
+                />
+
+                <SelectControls
+                    label={__("Border Style", "gslider-blocks")}
+                    value={primaryButtonBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ primaryButtonBorder: value })}
+                />
+
+                <SwitcherControl
+                    label={__("Border Color", "gslider-blocks")}
+                    globalSwitcher={primaryButtonBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ primaryButtonBorderColorSwitcher: value })}
+                />
+
+                {primaryButtonBorderColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={primaryButtonBorderColor}
+                        onChangeColor={(value) => setAttributes({ primaryButtonBorderColor: value })}
+                    />
+                )}
+
+                {primaryButtonBorderColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={primaryButtonBorderHoverColor}
+                        onChangeColor={(value) => setAttributes({ primaryButtonBorderHoverColor: value })}
+                    />
+                )}
+
+                <ResponsiveSpacingControl
+                    label={__("Border Width", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={primaryButtonBorderUnits}
+                    onChangeUnits={(value) => setAttributes({ primaryButtonBorderUnits: value })}
+                    desktopSpacing={primaryButtonDesktopBorder} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ primaryButtonDesktopBorder: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ primaryButtonDesktopBorderCssStyle: value })}
+                    tabletSpacing={primaryButtonTabletBorder} 
+                    onChangeTabletSpacing={(value) => setAttributes({ primaryButtonTabletBorder: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ primaryButtonTabletBorderCssStyle: value })}
+                    mobileSpacing={primaryButtonMobileBorder}
+                    onChangeMobileSpacing={(value) => setAttributes({ primaryButtonMobileBorder: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ primaryButtonMobileBorderCssStyle: value })}
+                    isLinked={primaryButtonBorderLink}
+                    onChangeLink={(value) => setAttributes({ primaryButtonBorderLink: value })} 
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Border Radius", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={primaryButtonBorderRadiusUnits}
+                    onChangeUnits={(value) => setAttributes({ primaryButtonBorderRadiusUnits: value })}
+                    desktopSpacing={primaryButtonDesktopBorderRadius}
+                    onChangeDesktopSpacing={(value) => setAttributes({ primaryButtonDesktopBorderRadius: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ primaryButtonDesktopBorderRadiusCssStyle: value })}
+                    tabletSpacing={primaryButtonTabletBorderRadius}
+                    onChangeTabletSpacing={(value) => setAttributes({ primaryButtonTabletBorderRadius: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ primaryButtonTabletBorderRadiusCssStyle: value })}
+                    mobileSpacing={primaryButtonMobileBorderRadius}
+                    onChangeMobileSpacing={(value) => setAttributes({ primaryButtonMobileBorderRadius: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ primaryButtonMobileBorderRadiusCssStyle: value })}
+                    isLinked={primaryButtonBorderRadiusLink}
+                    onChangeLink={(value) => setAttributes({ primaryButtonBorderRadiusLink: value })} 
+                />
+
+                <SwitcherControl
+                    label={__("Box Shadow", "gslider-blocks")}
+                    globalSwitcher={primaryButtonBoxShadowValuesSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ primaryButtonBoxShadowValuesSwitcher: value })}
+                />
+
+                {primaryButtonBoxShadowValuesSwitcher === 'normal' && (
+                    <BoxShadowSettingsControl
+                        label={__("Normal Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ primaryButtonBoxShadowValues: value })}
+                        initialShadowValue={primaryButtonBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ primaryButtonBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {primaryButtonBoxShadowValuesSwitcher === 'hover' && (
+                    <BoxShadowSettingsControl
+                        label={__("Hover Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ primaryButtonBoxShadowHoverValues: value })}
+                        initialShadowValue={primaryButtonBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ primaryButtonBoxShadowHoverCssValue: value })}
+                    />
+                )}
+
+                <ResponsiveSpacingControl
+                    label={__("Margin", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={primaryButtonMarginUnits}
+                    onChangeUnits={(value) => setAttributes({ primaryButtonMarginUnits: value })}
+                    desktopSpacing={primaryButtonDesktopMargin} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ primaryButtonDesktopMargin: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ primaryButtonDesktopMarginCssStyle: value })}
+                    tabletSpacing={primaryButtonTabletMargin} 
+                    onChangeTabletSpacing={(value) => setAttributes({ primaryButtonTabletMargin: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ primaryButtonTabletMarginCssStyle: value })}
+                    mobileSpacing={primaryButtonMobileMargin}
+                    onChangeMobileSpacing={(value) => setAttributes({ primaryButtonMobileMargin: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ primaryButtonMobileMarginCssStyle: value })}
+                    isLinked={primaryButtonMarginLink}
+                    onChangeLink={(value) => setAttributes({ primaryButtonMarginLink: value })} 
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Padding", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={primaryButtonPaddingUnits}
+                    onChangeUnits={(value) => setAttributes({ primaryButtonPaddingUnits: value })}
+                    desktopSpacing={primaryButtonDesktopPadding} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ primaryButtonDesktopPadding: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ primaryButtonDesktopPaddingCssStyle: value })}
+                    tabletSpacing={primaryButtonTabletPadding} 
+                    onChangeTabletSpacing={(value) => setAttributes({ primaryButtonTabletPadding: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ primaryButtonTabletPaddingCssStyle: value })}
+                    mobileSpacing={primaryButtonMobilePadding}
+                    onChangeMobileSpacing={(value) => setAttributes({ primaryButtonMobilePadding: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ primaryButtonMobilePaddingCssStyle: value })}
+                    isLinked={primaryButtonPaddingLink}
+                    onChangeLink={(value) => setAttributes({ primaryButtonPaddingLink: value })} 
+                />
+            </PanelBody>
+
+            <PanelBody 
+                title={__("Secondary Button", "gslider-blocks")}  
+                opened={openPanels.styles === "s5"}
+                onToggle={() => togglePanel("styles", "s5")}
+            >
+                <ResponsiveTypographyControl 
+                    fontFamily={secondaryButtonFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ secondaryButtonFontFamily: value })}
+                    
+                    fontSize={secondaryButtonFontSize}
+                    onChangeFontSize={(value) => setAttributes({ secondaryButtonFontSize: value })}
+                    
+                    fontSizeUnits={secondaryButtonFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ secondaryButtonFontSizeUnits: value })}
+                    
+                    fontWeight={secondaryButtonFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ secondaryButtonFontWeight: value })}
+                    
+                    fontStyle={secondaryButtonFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ secondaryButtonFontStyle: value })}
+                    
+                    textTransform={secondaryButtonTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ secondaryButtonTextTransform: value })}
+                    
+                    textDecoration={secondaryButtonTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ secondaryButtonTextDecoration: value })}
+                    
+                    lineHeight={secondaryButtonLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ secondaryButtonLineHeight: value })}
+                    
+                    lineHeightUnits={secondaryButtonLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ secondaryButtonLineHeightUnits: value })}
+
+                    letterSpacing={secondaryButtonLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ secondaryButtonLetterSpacing: value })}
+                    
+                    letterSpacingUnits={secondaryButtonLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ secondaryButtonLetterSpacingUnits: value })}
+
+                    wordSpacing={secondaryButtonWordSpacing}
+                    onChangeWordSpacing={(value) => setAttributes({ secondaryButtonWordSpacing: value })}
+                    
+                    wordSpacingUnits={secondaryButtonWordSpacingUnits}
+                    onChangeWordSpacingUnit={(value) => setAttributes({ secondaryButtonWordSpacingUnits: value })}
+                    
+                    deviceType={deviceType}
+                />
+                <SwitcherControl
+                    label={__("Color", "gslider-blocks")}
+                    globalSwitcher={secondaryButtonColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ secondaryButtonColorSwitcher: value })}
+                />
+
+                {secondaryButtonColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={secondaryButtonColor}
+                        onChangeColor={(value) => setAttributes({ secondaryButtonColor: value })}
+                        defaultColor=''
+                    />
+                )}
+
+                {secondaryButtonColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={secondaryButtonColorHover}
+                        onChangeColor={(value) => setAttributes({ secondaryButtonColorHover: value })}
+                        defaultColor=''
+                    />
+                )}
+
+                <BackgroundControl 
+                    label={__("Background Color", "gslider-blocks")}
+                            
+                    normalBackgroundType={secondaryButtonNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ secondaryButtonNormalBackgroundType: value })}
+                    normalClassicColor={secondaryButtonNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ secondaryButtonNormalClassicColor: value })}
+                    normalGradientColor={secondaryButtonNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ secondaryButtonNormalGradientColor: value })}
+                    normalCustomGradientSwitcher={secondaryButtonNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ secondaryButtonNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={secondaryButtonNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ secondaryButtonNormalCustomGradientInputValue: value })}
+                    normalClassicDefaultColor={'#d2d2d2c7'}
+
+                    hoverBackgroundType={secondaryButtonHoverBackgroundType} 
+                    setHoverBackgroundType={(value) => setAttributes({ secondaryButtonHoverBackgroundType: value })}
+                    hoverClassicColor={secondaryButtonHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ secondaryButtonHoverClassicColor: value })}
+                    hoverGradientColor={secondaryButtonHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ secondaryButtonHoverGradientColor: value })}
+                    hoverCustomGradientSwitcher={secondaryButtonHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ secondaryButtonHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={secondaryButtonHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ secondaryButtonHoverCustomGradientInputValue: value })}
+                    hoverClassicDefaultColor={'#787878b8'}
+                    isBackgroundImage={false}
+                />
+
+                <SelectControls
+                    label={__("Border Style", "gslider-blocks")}
+                    value={secondaryButtonBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ secondaryButtonBorder: value })}
+                />
+
+                <SwitcherControl
+                    label={__("Border Color", "gslider-blocks")}
+                    globalSwitcher={secondaryButtonBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ secondaryButtonBorderColorSwitcher: value })}
+                />
+
+                {secondaryButtonBorderColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={secondaryButtonBorderColor}
+                        onChangeColor={(value) => setAttributes({ secondaryButtonBorderColor: value })}
+                    />
+                )}
+
+                {secondaryButtonBorderColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={secondaryButtonBorderHoverColor}
+                        onChangeColor={(value) => setAttributes({ secondaryButtonBorderHoverColor: value })}
+                    />
+                )}
+
+                <ResponsiveSpacingControl
+                    label={__("Border Width", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={secondaryButtonBorderUnits}
+                    onChangeUnits={(value) => setAttributes({ secondaryButtonBorderUnits: value })}
+                    desktopSpacing={secondaryButtonDesktopBorder} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopBorder: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopBorderCssStyle: value })}
+                    tabletSpacing={secondaryButtonTabletBorder} 
+                    onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletBorder: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletBorderCssStyle: value })}
+                    mobileSpacing={secondaryButtonMobileBorder}
+                    onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobileBorder: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobileBorderCssStyle: value })}
+                    isLinked={secondaryButtonBorderLink}
+                    onChangeLink={(value) => setAttributes({ secondaryButtonBorderLink: value })} 
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Border Radius", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={secondaryButtonBorderRadiusUnits}
+                    onChangeUnits={(value) => setAttributes({ secondaryButtonBorderRadiusUnits: value })}
+                    desktopSpacing={secondaryButtonDesktopBorderRadius}
+                    onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopBorderRadius: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopBorderRadiusCssStyle: value })}
+                    tabletSpacing={secondaryButtonTabletBorderRadius}
+                    onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletBorderRadius: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletBorderRadiusCssStyle: value })}
+                    mobileSpacing={secondaryButtonMobileBorderRadius}
+                    onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobileBorderRadius: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobileBorderRadiusCssStyle: value })}
+                    isLinked={secondaryButtonBorderRadiusLink}
+                    onChangeLink={(value) => setAttributes({ secondaryButtonBorderRadiusLink: value })} 
+                />
+
+                <SwitcherControl
+                    label={__("Box Shadow", "gslider-blocks")}
+                    globalSwitcher={secondaryButtonBoxShadowValuesSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ secondaryButtonBoxShadowValuesSwitcher: value })}
+                />
+
+                {secondaryButtonBoxShadowValuesSwitcher === 'normal' && (
+                    <BoxShadowSettingsControl
+                        label={__("Normal Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ secondaryButtonBoxShadowValues: value })}
+                        initialShadowValue={secondaryButtonBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ secondaryButtonBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {secondaryButtonBoxShadowValuesSwitcher === 'hover' && (
+                    <BoxShadowSettingsControl
+                        label={__("Hover Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ secondaryButtonBoxShadowHoverValues: value })}
+                        initialShadowValue={secondaryButtonBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ secondaryButtonBoxShadowHoverCssValue: value })}
+                    />
+                )}
+
+                <ResponsiveSpacingControl
+                    label={__("Margin", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={secondaryButtonMarginUnits}
+                    onChangeUnits={(value) => setAttributes({ secondaryButtonMarginUnits: value })}
+                    desktopSpacing={secondaryButtonDesktopMargin} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopMargin: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopMarginCssStyle: value })}
+                    tabletSpacing={secondaryButtonTabletMargin} 
+                    onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletMargin: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletMarginCssStyle: value })}
+                    mobileSpacing={secondaryButtonMobileMargin}
+                    onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobileMargin: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobileMarginCssStyle: value })}
+                    isLinked={secondaryButtonMarginLink}
+                    onChangeLink={(value) => setAttributes({ secondaryButtonMarginLink: value })} 
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Padding", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={secondaryButtonPaddingUnits}
+                    onChangeUnits={(value) => setAttributes({ secondaryButtonPaddingUnits: value })}
+                    desktopSpacing={secondaryButtonDesktopPadding} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ secondaryButtonDesktopPadding: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ secondaryButtonDesktopPaddingCssStyle: value })}
+                    tabletSpacing={secondaryButtonTabletPadding} 
+                    onChangeTabletSpacing={(value) => setAttributes({ secondaryButtonTabletPadding: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ secondaryButtonTabletPaddingCssStyle: value })}
+                    mobileSpacing={secondaryButtonMobilePadding}
+                    onChangeMobileSpacing={(value) => setAttributes({ secondaryButtonMobilePadding: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ secondaryButtonMobilePaddingCssStyle: value })}
+                    isLinked={secondaryButtonPaddingLink}
+                    onChangeLink={(value) => setAttributes({ secondaryButtonPaddingLink: value })} 
                 />
             </PanelBody>
 
@@ -2264,6 +2921,82 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description:hover {
             ${descriptionColorHover ? `color: ${descriptionColorHover};` : ''}
         }
+
+        .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn {
+            ${primaryButtonFontFamily ? `font-family: ${primaryButtonFontFamily};` : ''}
+            ${primaryButtonFontSize.Desktop && primaryButtonFontSizeUnits.Desktop ? `font-size: ${primaryButtonFontSize.Desktop}${primaryButtonFontSizeUnits.Desktop};` : ''}
+            ${primaryButtonFontWeight ? `font-weight: ${primaryButtonFontWeight};` : ''}
+            ${primaryButtonFontStyle ? `font-style: ${primaryButtonFontStyle};` : ''}
+            ${primaryButtonTextTransform ? `text-transform: ${primaryButtonTextTransform};` : ''}
+            ${primaryButtonTextDecoration ? `text-decoration: ${primaryButtonTextDecoration};` : ''}
+            ${primaryButtonLineHeight.Desktop && primaryButtonLineHeightUnits.Desktop ? `line-height: ${primaryButtonLineHeight.Desktop}${primaryButtonLineHeightUnits.Desktop};` : ''}
+            ${primaryButtonLetterSpacing.Desktop && primaryButtonLetterSpacingUnits.Desktop ? `letter-spacing: ${primaryButtonLetterSpacing.Desktop}${primaryButtonLetterSpacingUnits.Desktop};` : ''}
+            ${primaryButtonWordSpacing.Desktop && primaryButtonWordSpacingUnits.Desktop ? `word-spacing: ${primaryButtonWordSpacing.Desktop}${primaryButtonWordSpacingUnits.Desktop};` : ''}
+            ${primaryButtonColor ? `color: ${primaryButtonColor};` : ''}
+            ${primaryButtonNormalBackgroundType === 'gradient' ? `  
+                background: ${primaryButtonNormalCustomGradientSwitcher && primaryButtonNormalCustomGradientInputValue ? primaryButtonNormalCustomGradientInputValue : primaryButtonNormalGradientColor ? primaryButtonNormalGradientColor : primaryButtonNormalClassicColor};
+            ` : `
+                ${primaryButtonNormalClassicColor ? `background: ${primaryButtonNormalClassicColor};` : ''}
+            `}
+            ${primaryButtonBorder ? `border: ${primaryButtonBorder};` : ''}
+            ${primaryButtonBorderColor ? `border-color: ${primaryButtonBorderColor};` : ''}
+			${primaryButtonDesktopBorderCssStyle ? `border-width: ${primaryButtonDesktopBorderCssStyle};` : ''}  
+			${primaryButtonDesktopBorderRadiusCssStyle ? `border-radius: ${primaryButtonDesktopBorderRadiusCssStyle};` : ''}
+            ${primaryButtonBoxShadowCssValue ? `box-shadow: ${primaryButtonBoxShadowCssValue};` : ''}
+            ${primaryButtonDesktopMarginCssStyle ? `margin: ${primaryButtonDesktopMarginCssStyle};` : ''} 
+            ${primaryButtonDesktopPaddingCssStyle ? `padding: ${primaryButtonDesktopPaddingCssStyle};` : ''}
+            display: inline-block;
+            transition: all .3s ease-in-out;
+        }
+
+        .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn:hover {
+            ${primaryButtonColorHover ? `color: ${primaryButtonColorHover};` : ''}
+            ${primaryButtonHoverBackgroundType === 'gradient' ? `   
+                background: ${primaryButtonHoverCustomGradientSwitcher && primaryButtonHoverCustomGradientInputValue ? primaryButtonHoverCustomGradientInputValue : primaryButtonHoverGradientColor ? primaryButtonHoverGradientColor : primaryButtonHoverClassicColor};
+            ` : `
+                ${primaryButtonHoverClassicColor ? `background: ${primaryButtonHoverClassicColor};` : ''}
+            `}
+            ${primaryButtonBorderHoverColor ? `border-color: ${primaryButtonBorderHoverColor};` : ''}
+            ${primaryButtonBoxShadowHoverCssValue ? `box-shadow: ${primaryButtonBoxShadowHoverCssValue};` : ''}
+        }
+
+        .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn {
+            ${secondaryButtonFontFamily ? `font-family: ${secondaryButtonFontFamily};` : ''}
+            ${secondaryButtonFontSize.Desktop && secondaryButtonFontSizeUnits.Desktop ? `font-size: ${secondaryButtonFontSize.Desktop}${secondaryButtonFontSizeUnits.Desktop};` : ''}
+            ${secondaryButtonFontWeight ? `font-weight: ${secondaryButtonFontWeight};` : ''}
+            ${secondaryButtonFontStyle ? `font-style: ${secondaryButtonFontStyle};` : ''}
+            ${secondaryButtonTextTransform ? `text-transform: ${secondaryButtonTextTransform};` : ''}
+            ${secondaryButtonTextDecoration ? `text-decoration: ${secondaryButtonTextDecoration};` : ''}
+            ${secondaryButtonLineHeight.Desktop && secondaryButtonLineHeightUnits.Desktop ? `line-height: ${secondaryButtonLineHeight.Desktop}${secondaryButtonLineHeightUnits.Desktop};` : ''}
+            ${secondaryButtonLetterSpacing.Desktop && secondaryButtonLetterSpacingUnits.Desktop ? `letter-spacing: ${secondaryButtonLetterSpacing.Desktop}${secondaryButtonLetterSpacingUnits.Desktop};` : ''}
+            ${secondaryButtonWordSpacing.Desktop && secondaryButtonWordSpacingUnits.Desktop ? `word-spacing: ${secondaryButtonWordSpacing.Desktop}${secondaryButtonWordSpacingUnits.Desktop};` : ''}
+            ${secondaryButtonColor ? `color: ${secondaryButtonColor};` : ''}
+            ${secondaryButtonNormalBackgroundType === 'gradient' ? `  
+                background: ${secondaryButtonNormalCustomGradientSwitcher && secondaryButtonNormalCustomGradientInputValue ? secondaryButtonNormalCustomGradientInputValue : secondaryButtonNormalGradientColor ? secondaryButtonNormalGradientColor : secondaryButtonNormalClassicColor};
+            ` : `
+                ${secondaryButtonNormalClassicColor ? `background: ${secondaryButtonNormalClassicColor};` : ''}
+            `}
+            ${secondaryButtonBorder ? `border: ${secondaryButtonBorder};` : ''}
+            ${secondaryButtonBorderColor ? `border-color: ${secondaryButtonBorderColor};` : ''}
+			${secondaryButtonDesktopBorderCssStyle ? `border-width: ${secondaryButtonDesktopBorderCssStyle};` : ''}  
+			${secondaryButtonDesktopBorderRadiusCssStyle ? `border-radius: ${secondaryButtonDesktopBorderRadiusCssStyle};` : ''}
+            ${secondaryButtonBoxShadowCssValue ? `box-shadow: ${secondaryButtonBoxShadowCssValue};` : ''}
+            ${secondaryButtonDesktopMarginCssStyle ? `margin: ${secondaryButtonDesktopMarginCssStyle};` : ''} 
+            ${secondaryButtonDesktopPaddingCssStyle ? `padding: ${secondaryButtonDesktopPaddingCssStyle};` : ''}
+            display: inline-block;
+            transition: all .3s ease-in-out;
+        }
+
+        .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn:hover {
+            ${secondaryButtonColorHover ? `color: ${secondaryButtonColorHover};` : ''}
+            ${secondaryButtonHoverBackgroundType === 'gradient' ? `   
+                background: ${secondaryButtonHoverCustomGradientSwitcher && secondaryButtonHoverCustomGradientInputValue ? secondaryButtonHoverCustomGradientInputValue : secondaryButtonHoverGradientColor ? secondaryButtonHoverGradientColor : secondaryButtonHoverClassicColor};
+            ` : `
+                ${secondaryButtonHoverClassicColor ? `background: ${secondaryButtonHoverClassicColor};` : ''}
+            `}
+            ${secondaryButtonBorderHoverColor ? `border-color: ${secondaryButtonBorderHoverColor};` : ''}
+            ${secondaryButtonBoxShadowHoverCssValue ? `box-shadow: ${secondaryButtonBoxShadowHoverCssValue};` : ''}
+        }
         
         .${blockId} .swiper-button-prev,
         .${blockId} .swiper-button-next {
@@ -2388,6 +3121,28 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${descriptionTabletPaddingCssStyle ? `padding: ${descriptionTabletPaddingCssStyle};` : ''}
             }
 
+            .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn {
+                ${primaryButtonFontSize.Tablet && primaryButtonFontSizeUnits.Tablet ? `font-size: ${primaryButtonFontSize.Tablet}${primaryButtonFontSizeUnits.Tablet};` : ''}
+                ${primaryButtonLineHeight.Tablet && primaryButtonLineHeightUnits.Tablet ? `line-height: ${primaryButtonLineHeight.Tablet}${primaryButtonLineHeightUnits.Tablet};` : ''}
+                ${primaryButtonLetterSpacing.Tablet && primaryButtonLetterSpacingUnits.Tablet ? `letter-spacing: ${primaryButtonLetterSpacing.Tablet}${primaryButtonLetterSpacingUnits.Tablet};` : ''}
+                ${primaryButtonWordSpacing.Tablet && primaryButtonWordSpacingUnits.Tablet ? `word-spacing: ${primaryButtonWordSpacing.Tablet}${primaryButtonWordSpacingUnits.Tablet};` : ''}
+                ${primaryButtonTabletBorderCssStyle ? `border-width: ${primaryButtonTabletBorderCssStyle};` : ''}  
+                ${primaryButtonTabletBorderRadiusCssStyle ? `border-radius: ${primaryButtonTabletBorderRadiusCssStyle};` : ''}
+                ${primaryButtonTabletMarginCssStyle ? `margin: ${primaryButtonTabletMarginCssStyle};` : ''} 
+                ${primaryButtonTabletPaddingCssStyle ? `padding: ${primaryButtonTabletPaddingCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn {
+                ${secondaryButtonFontSize.Tablet && secondaryButtonFontSizeUnits.Tablet ? `font-size: ${secondaryButtonFontSize.Tablet}${secondaryButtonFontSizeUnits.Tablet};` : ''}
+                ${secondaryButtonLineHeight.Tablet && secondaryButtonLineHeightUnits.Tablet ? `line-height: ${secondaryButtonLineHeight.Tablet}${secondaryButtonLineHeightUnits.Tablet};` : ''}
+                ${secondaryButtonLetterSpacing.Tablet && secondaryButtonLetterSpacingUnits.Tablet ? `letter-spacing: ${secondaryButtonLetterSpacing.Tablet}${secondaryButtonLetterSpacingUnits.Tablet};` : ''}
+                ${secondaryButtonWordSpacing.Tablet && secondaryButtonWordSpacingUnits.Tablet ? `word-spacing: ${secondaryButtonWordSpacing.Tablet}${secondaryButtonWordSpacingUnits.Tablet};` : ''}
+                ${secondaryButtonTabletBorderCssStyle ? `border-width: ${secondaryButtonTabletBorderCssStyle};` : ''}  
+                ${secondaryButtonTabletBorderRadiusCssStyle ? `border-radius: ${secondaryButtonTabletBorderRadiusCssStyle};` : ''}
+                ${secondaryButtonTabletMarginCssStyle ? `margin: ${secondaryButtonTabletMarginCssStyle};` : ''} 
+                ${secondaryButtonTabletPaddingCssStyle ? `padding: ${secondaryButtonTabletPaddingCssStyle};` : ''}
+            }
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${sliderArrowsTabletBorderCssStyle ? `border-width: ${sliderArrowsTabletBorderCssStyle};` : ''}  
@@ -2482,6 +3237,28 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${descriptionWordSpacing.Mobile && descriptionWordSpacingUnits.Mobile ? `word-spacing: ${descriptionWordSpacing.Mobile}${descriptionWordSpacingUnits.Mobile};` : ''}
                 ${descriptionMobileMarginCssStyle ? `margin: ${descriptionMobileMarginCssStyle};` : ''} 
                 ${descriptionMobilePaddingCssStyle ? `padding: ${descriptionMobilePaddingCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn {
+                ${primaryButtonFontSize.Mobile && primaryButtonFontSizeUnits.Mobile ? `font-size: ${primaryButtonFontSize.Mobile}${primaryButtonFontSizeUnits.Mobile};` : ''}
+                ${primaryButtonLineHeight.Mobile && primaryButtonLineHeightUnits.Mobile ? `line-height: ${primaryButtonLineHeight.Mobile}${primaryButtonLineHeightUnits.Mobile};` : ''}
+                ${primaryButtonLetterSpacing.Mobile && primaryButtonLetterSpacingUnits.Mobile ? `letter-spacing: ${primaryButtonLetterSpacing.Mobile}${primaryButtonLetterSpacingUnits.Mobile};` : ''}
+                ${primaryButtonWordSpacing.Mobile && primaryButtonWordSpacingUnits.Mobile ? `word-spacing: ${primaryButtonWordSpacing.Mobile}${primaryButtonWordSpacingUnits.Mobile};` : ''}
+                ${primaryButtonMobileBorderCssStyle ? `border-width: ${primaryButtonMobileBorderCssStyle};` : ''}  
+                ${primaryButtonMobileBorderRadiusCssStyle ? `border-radius: ${primaryButtonMobileBorderRadiusCssStyle};` : ''}
+                ${primaryButtonMobileMarginCssStyle ? `margin: ${primaryButtonMobileMarginCssStyle};` : ''} 
+                ${primaryButtonMobilePaddingCssStyle ? `padding: ${primaryButtonMobilePaddingCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn {
+                ${secondaryButtonFontSize.Mobile && secondaryButtonFontSizeUnits.Mobile ? `font-size: ${secondaryButtonFontSize.Mobile}${secondaryButtonFontSizeUnits.Mobile};` : ''}
+                ${secondaryButtonLineHeight.Mobile && secondaryButtonLineHeightUnits.Mobile ? `line-height: ${secondaryButtonLineHeight.Mobile}${secondaryButtonLineHeightUnits.Mobile};` : ''}
+                ${secondaryButtonLetterSpacing.Mobile && secondaryButtonLetterSpacingUnits.Mobile ? `letter-spacing: ${secondaryButtonLetterSpacing.Mobile}${secondaryButtonLetterSpacingUnits.Mobile};` : ''}
+                ${secondaryButtonWordSpacing.Mobile && secondaryButtonWordSpacingUnits.Mobile ? `word-spacing: ${secondaryButtonWordSpacing.Mobile}${secondaryButtonWordSpacingUnits.Mobile};` : ''}
+                ${secondaryButtonMobileBorderCssStyle ? `border-width: ${secondaryButtonMobileBorderCssStyle};` : ''}  
+                ${secondaryButtonMobileBorderRadiusCssStyle ? `border-radius: ${secondaryButtonMobileBorderRadiusCssStyle};` : ''}
+                ${secondaryButtonMobileMarginCssStyle ? `margin: ${secondaryButtonMobileMarginCssStyle};` : ''} 
+                ${secondaryButtonMobilePaddingCssStyle ? `padding: ${secondaryButtonMobilePaddingCssStyle};` : ''}
             }
 
             .${blockId} .swiper-button-prev,
@@ -2679,6 +3456,160 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         descriptionMobilePaddingCssStyle,
         descriptionPaddingLink,
         /** End Description Typography, Color, Margin & Padding */
+
+        /** Start Primary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
+        primaryButtonFontFamily,
+        primaryButtonFontSize,
+        primaryButtonFontSizeUnits,
+        primaryButtonFontWeight,
+        primaryButtonFontStyle,
+        primaryButtonTextTransform,
+        primaryButtonTextDecoration,
+        primaryButtonLineHeight,
+        primaryButtonLineHeightUnits,
+        primaryButtonLetterSpacing,
+        primaryButtonLetterSpacingUnits,
+        primaryButtonWordSpacing,
+        primaryButtonWordSpacingUnits,
+
+        primaryButtonColorSwitcher,
+        primaryButtonColor,
+        primaryButtonColorHover,
+
+        primaryButtonNormalBackgroundType,
+        primaryButtonNormalClassicColor,
+        primaryButtonNormalGradientColor,
+        primaryButtonNormalCustomGradientSwitcher,
+        primaryButtonNormalCustomGradientInputValue,
+        primaryButtonHoverBackgroundType,
+        primaryButtonHoverClassicColor,
+        primaryButtonHoverGradientColor,
+        primaryButtonHoverCustomGradientSwitcher,
+        primaryButtonHoverCustomGradientInputValue,
+
+        primaryButtonBorder,
+        primaryButtonBorderColorSwitcher,
+        primaryButtonBorderColor,
+        primaryButtonBorderHoverColor,
+        primaryButtonBorderUnits,
+        primaryButtonDesktopBorder,
+        primaryButtonDesktopBorderCssStyle,
+        primaryButtonTabletBorder,
+        primaryButtonTabletBorderCssStyle,
+        primaryButtonMobileBorder,
+        primaryButtonMobileBorderCssStyle,
+        primaryButtonBorderLink,
+
+        primaryButtonBorderRadiusUnits,
+        primaryButtonDesktopBorderRadius,
+        primaryButtonDesktopBorderRadiusCssStyle,
+        primaryButtonTabletBorderRadius,
+        primaryButtonTabletBorderRadiusCssStyle,
+        primaryButtonMobileBorderRadius,
+        primaryButtonMobileBorderRadiusCssStyle,
+        primaryButtonBorderRadiusLink,
+
+        primaryButtonBoxShadowValuesSwitcher,
+        primaryButtonBoxShadowValues,
+        primaryButtonBoxShadowCssValue,
+        primaryButtonBoxShadowHoverValues,
+        primaryButtonBoxShadowHoverCssValue,
+
+        primaryButtonMarginUnits,
+        primaryButtonDesktopMargin,
+        primaryButtonDesktopMarginCssStyle,
+        primaryButtonTabletMargin,
+        primaryButtonTabletMarginCssStyle,
+        primaryButtonMobileMargin,
+        primaryButtonMobileMarginCssStyle,
+        primaryButtonMarginLink,
+
+        primaryButtonPaddingUnits,
+        primaryButtonDesktopPadding,
+        primaryButtonDesktopPaddingCssStyle,
+        primaryButtonTabletPadding,
+        primaryButtonTabletPaddingCssStyle,
+        primaryButtonMobilePadding,
+        primaryButtonMobilePaddingCssStyle,
+        primaryButtonPaddingLink,
+        /** End Primary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
+
+        /** Start Secondary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
+        secondaryButtonFontFamily,
+        secondaryButtonFontSize,
+        secondaryButtonFontSizeUnits,
+        secondaryButtonFontWeight,
+        secondaryButtonFontStyle,
+        secondaryButtonTextTransform,
+        secondaryButtonTextDecoration,
+        secondaryButtonLineHeight,
+        secondaryButtonLineHeightUnits,
+        secondaryButtonLetterSpacing,
+        secondaryButtonLetterSpacingUnits,
+        secondaryButtonWordSpacing,
+        secondaryButtonWordSpacingUnits,
+
+        secondaryButtonColorSwitcher,
+        secondaryButtonColor,
+        secondaryButtonColorHover,
+
+        secondaryButtonNormalBackgroundType,
+        secondaryButtonNormalClassicColor,
+        secondaryButtonNormalGradientColor,
+        secondaryButtonNormalCustomGradientSwitcher,
+        secondaryButtonNormalCustomGradientInputValue,
+        secondaryButtonHoverBackgroundType,
+        secondaryButtonHoverClassicColor,
+        secondaryButtonHoverGradientColor,
+        secondaryButtonHoverCustomGradientSwitcher,
+        secondaryButtonHoverCustomGradientInputValue,
+
+        secondaryButtonBorder,
+        secondaryButtonBorderColorSwitcher,
+        secondaryButtonBorderColor,
+        secondaryButtonBorderHoverColor,
+        secondaryButtonBorderUnits,
+        secondaryButtonDesktopBorder,
+        secondaryButtonDesktopBorderCssStyle,
+        secondaryButtonTabletBorder,
+        secondaryButtonTabletBorderCssStyle,
+        secondaryButtonMobileBorder,
+        secondaryButtonMobileBorderCssStyle,
+        secondaryButtonBorderLink,
+
+        secondaryButtonBorderRadiusUnits,
+        secondaryButtonDesktopBorderRadius,
+        secondaryButtonDesktopBorderRadiusCssStyle,
+        secondaryButtonTabletBorderRadius,
+        secondaryButtonTabletBorderRadiusCssStyle,
+        secondaryButtonMobileBorderRadius,
+        secondaryButtonMobileBorderRadiusCssStyle,
+        secondaryButtonBorderRadiusLink,
+
+        secondaryButtonBoxShadowValuesSwitcher,
+        secondaryButtonBoxShadowValues,
+        secondaryButtonBoxShadowCssValue,
+        secondaryButtonBoxShadowHoverValues,
+        secondaryButtonBoxShadowHoverCssValue,
+
+        secondaryButtonMarginUnits,
+        secondaryButtonDesktopMargin,
+        secondaryButtonDesktopMarginCssStyle,
+        secondaryButtonTabletMargin,
+        secondaryButtonTabletMarginCssStyle,
+        secondaryButtonMobileMargin,
+        secondaryButtonMobileMarginCssStyle,
+        secondaryButtonMarginLink,
+
+        secondaryButtonPaddingUnits,
+        secondaryButtonDesktopPadding,
+        secondaryButtonDesktopPaddingCssStyle,
+        secondaryButtonTabletPadding,
+        secondaryButtonTabletPaddingCssStyle,
+        secondaryButtonMobilePadding,
+        secondaryButtonMobilePaddingCssStyle,
+        secondaryButtonPaddingLink,
+        /** End Secondary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
 
         /** Start Arrows Style */
         sliderArrowsSize,

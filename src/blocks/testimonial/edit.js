@@ -173,7 +173,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             subTitle: 'Enter your subtitle here',
             title: `Slider Item ${sliderItems.length + 1}`,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-            buttonText: 'Click Here',
+            buttonText: 'Get Started',
             buttonLink: '#',
             buttonTargetLink: false,
 

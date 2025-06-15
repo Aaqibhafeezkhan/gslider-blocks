@@ -127,60 +127,56 @@ export default function Save({ attributes }) {
                                                 </div>
                                             )}
                                             {showButton && (
-                                                <div className="gslider-btn-container">
-                                                    <>
-                                                        {item.primaryButtonLink ? (
-                                                            <a
-                                                                className="gslider-btn primary-btn"
-                                                                href={item.primaryButtonLink}
-                                                                target={item.primaryButtonTargetLink ? '_blank' : undefined}
-                                                                rel={[
-                                                                    item.primaryButtonNofollow && 'nofollow',
-                                                                    item.primaryButtonSponsored && 'sponsored',
-                                                                    item.primaryButtonTargetLink && 'noopener noreferrer'
-                                                                ].filter(Boolean).join(' ')}
-                                                            >
-                                                                <RichText.Content
-                                                                    value={item.primaryButtonText}
-                                                                    className="gslider-btn primary-btn text"
-                                                                    tagName="span"
-                                                                />
-                                                            </a>
-                                                        ) : (
-                                                            <RichText.Content
-                                                                value={item.primaryButtonText}
-                                                                className="gslider-btn primary-btn text"
-                                                                tagName="span"
-                                                            />
-                                                        )}
-
-                                                        {item.secondaryButtonSwitcher && (
-                                                            item.secondaryButtonLink ? (
+                                                <div className="gslider-btn-wrapper">
+                                                    <div className="gslider-btn-inner-wrapper">
+                                                        <>
+                                                            {item.primaryButtonLink ? (
                                                                 <a
-                                                                    className="gslider-btn secondary-btn"
-                                                                    href={item.secondaryButtonLink}
-                                                                    target={item.secondaryButtonTargetLink ? '_blank' : undefined}
+                                                                    className="gslider-btn primary-btn"
+                                                                    href={item.primaryButtonLink}
+                                                                    target={item.primaryButtonTargetLink ? '_blank' : undefined}
                                                                     rel={[
-                                                                        item.secondaryButtonNofollow && 'nofollow',
-                                                                        item.secondaryButtonSponsored && 'sponsored',
-                                                                        item.secondaryButtonTargetLink && 'noopener noreferrer'
+                                                                        item.primaryButtonNofollow && 'nofollow',
+                                                                        item.primaryButtonSponsored && 'sponsored',
+                                                                        item.primaryButtonTargetLink && 'noopener noreferrer'
                                                                     ].filter(Boolean).join(' ')}
                                                                 >
                                                                     <RichText.Content
-                                                                        value={item.secondaryButtonText}
-                                                                        className="gslider-btn secondary-btn text"
-                                                                        tagName="span"
+                                                                        value={item.primaryButtonText}
                                                                     />
                                                                 </a>
                                                             ) : (
                                                                 <RichText.Content
-                                                                    value={item.secondaryButtonText}
-                                                                    className="gslider-btn secondary-btn text"
-                                                                    tagName="span"
+                                                                    value={item.primaryButtonText}
+                                                                    className="gslider-btn primary-btn"
                                                                 />
-                                                            )
-                                                        )}
-                                                    </>
+                                                            )}
+
+                                                            {item.secondaryButtonSwitcher && (
+                                                                item.secondaryButtonLink ? (
+                                                                    <a
+                                                                        className="gslider-btn secondary-btn"
+                                                                        href={item.secondaryButtonLink}
+                                                                        target={item.secondaryButtonTargetLink ? '_blank' : undefined}
+                                                                        rel={[
+                                                                            item.secondaryButtonNofollow && 'nofollow',
+                                                                            item.secondaryButtonSponsored && 'sponsored',
+                                                                            item.secondaryButtonTargetLink && 'noopener noreferrer'
+                                                                        ].filter(Boolean).join(' ')}
+                                                                    >
+                                                                        <RichText.Content
+                                                                            value={item.secondaryButtonText}
+                                                                        />
+                                                                    </a>
+                                                                ) : (
+                                                                    <RichText.Content
+                                                                        value={item.secondaryButtonText}
+                                                                        className="gslider-btn secondary-btn"
+                                                                    />
+                                                                )
+                                                            )}
+                                                        </>
+                                                    </div>
                                                 </div>
                                             )}
                                         </div>
