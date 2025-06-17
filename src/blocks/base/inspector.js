@@ -648,6 +648,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     /** set the css style if have default padding */
     useEffect(() => {
         setAttributes({
+            subtitleDesktopMarginCssStyle: spacingFormat(subtitleDesktopMargin, subtitleMarginUnits.Desktop),
+            subtitleTabletMarginCssStyle: spacingFormat(subtitleTabletMargin, subtitleMarginUnits.Tablet),
+            subtitleMobileMarginCssStyle: spacingFormat(subtitleMobileMargin, subtitleMarginUnits.Mobile),
+            
+            titleDesktopMarginCssStyle: spacingFormat(titleDesktopMargin, titleMarginUnits.Desktop),
+            titleTabletMarginCssStyle: spacingFormat(titleTabletMargin, titleMarginUnits.Tablet),
+            titleMobileMarginCssStyle: spacingFormat(titleMobileMargin, titleMarginUnits.Mobile),
+            
+            descriptionDesktopMarginCssStyle: spacingFormat(descriptionDesktopMargin, descriptionMarginUnits.Desktop),
+            descriptionTabletMarginCssStyle: spacingFormat(descriptionTabletMargin, descriptionMarginUnits.Tablet),
+            descriptionMobileMarginCssStyle: spacingFormat(descriptionMobileMargin, descriptionMarginUnits.Mobile),
 
             primaryButtonDesktopBorderRadiusCssStyle: spacingFormat(primaryButtonDesktopBorderRadius, primaryButtonBorderRadiusUnits.Desktop),
             primaryButtonTabletBorderRadiusCssStyle: spacingFormat(primaryButtonTabletBorderRadius, primaryButtonBorderRadiusUnits.Tablet),
@@ -678,6 +689,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             sliderNormalDotsMobileBorderRadiusCssStyle: spacingFormat(sliderNormalDotsMobileBorderRadius, sliderNormalDotsBorderRadiusUnits.Mobile),
         });
     }, [
+        subtitleDesktopMargin,
+        subtitleTabletMargin,
+        subtitleMobileMargin,
+
+        titleDesktopMargin,
+        titleTabletMargin,
+        titleMobileMargin,
+
+        descriptionDesktopMargin,
+        descriptionTabletMargin,
+        descriptionMobileMargin,
+        
         primaryButtonDesktopBorderRadius,
         primaryButtonTabletBorderRadius,
         primaryButtonMobileBorderRadius,

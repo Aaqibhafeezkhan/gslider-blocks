@@ -676,10 +676,10 @@ const attributes = {
 	subtitleDesktopMargin: {
 		type: "object", 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "0",
+			bottom: "16",
+			left: "0",
+			right: "0",
 		},
 	},
     subtitleDesktopMarginCssStyle: { 
@@ -689,10 +689,10 @@ const attributes = {
 	subtitleTabletMargin: {
 		type: "object",  
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "0",
+			bottom: "16",
+			left: "0",
+			right: "0",
 		},
 	},
     subtitleTabletMarginCssStyle: { 
@@ -702,10 +702,10 @@ const attributes = {
 	subtitleMobileMargin: {
 		type: "object",  
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "0",
+			bottom: "16",
+			left: "0",
+			right: "0",
 		},
 	},
     subtitleMobileMarginCssStyle: { 
@@ -888,10 +888,10 @@ const attributes = {
     titleDesktopMargin: {
         type: "object", 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "0",
+            bottom: "16",
+            left: "0",
+            right: "0",
         },
     },
     titleDesktopMarginCssStyle: { 
@@ -901,10 +901,10 @@ const attributes = {
     titleTabletMargin: {
         type: "object",  
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "0",
+            bottom: "16",
+            left: "0",
+            right: "0",
         },
     },
     titleTabletMarginCssStyle: { 
@@ -914,10 +914,10 @@ const attributes = {
     titleMobileMargin: {
         type: "object",  
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "0",
+            bottom: "16",
+            left: "0",
+            right: "0",
         },
     },
     titleMobileMarginCssStyle: { 
@@ -1100,10 +1100,10 @@ const attributes = {
     descriptionDesktopMargin: {
         type: "object", 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "0",
+            bottom: "16",
+            left: "0",
+            right: "0",
         },
     },
     descriptionDesktopMarginCssStyle: { 
@@ -1113,10 +1113,10 @@ const attributes = {
     descriptionTabletMargin: {
         type: "object",  
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "0",
+            bottom: "16",
+            left: "0",
+            right: "0",
         },
     },
     descriptionTabletMarginCssStyle: { 
@@ -1126,10 +1126,10 @@ const attributes = {
     descriptionMobileMargin: {
         type: "object",  
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "0",
+            bottom: "16",
+            left: "0",
+            right: "0",
         },
     },
     descriptionMobileMarginCssStyle: { 
