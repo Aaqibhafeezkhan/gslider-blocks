@@ -29,6 +29,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
+        carouselPerColumnGapUnits,
         speed,
         autoplay,
         autoplayDelay,

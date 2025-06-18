@@ -403,12 +403,20 @@ const attributes = {
         default: "slider"
     },
     carouselPerColumn: {
-        type: "number",
-        default: 2,
+        type: "object",
+        default: {
+            Desktop: 2,
+            Tablet: 2,
+            Mobile: 1,
+        },
     },
     carouselPerColumnGap: {
-        type: "number",
-        default: 20,
+        type: "object",
+        default: {
+            Desktop: 20,
+            Tablet: 20,
+            Mobile: 0,
+        },
     },
 	speed: {
 		type: "number",
@@ -1208,7 +1216,7 @@ const attributes = {
         default: {
             Desktop: '16',
             Tablet: '16',
-            Mobile: '16'
+            Mobile: '14'
         }
     },
     primaryButtonFontSizeUnits: {
@@ -1582,10 +1590,10 @@ const attributes = {
     primaryButtonMobilePadding: {
         type: "object",  
         default: {
-            top: "12",
-            bottom: "12",
-            left: "24",
-            right: "24",
+            top: "8",
+            bottom: "8",
+            left: "16",
+            right: "16",
         },
     },
     primaryButtonMobilePaddingCssStyle: { 
@@ -1610,7 +1618,7 @@ const attributes = {
         default: {
             Desktop: '16',
             Tablet: '16',
-            Mobile: '16'
+            Mobile: '14'
         }
     },
     secondaryButtonFontSizeUnits: {
@@ -1904,7 +1912,7 @@ const attributes = {
     secondaryButtonDesktopMargin: {
         type: "object", 
         default: {
-            top: "0",
+            top: "12",
             bottom: "0",
             left: "12",
             right: "0",
@@ -1917,7 +1925,7 @@ const attributes = {
     secondaryButtonTabletMargin: {
         type: "object",  
         default: {
-            top: "0",
+            top: "12",
             bottom: "0",
             left: "12",
             right: "0",
@@ -1984,10 +1992,10 @@ const attributes = {
     secondaryButtonMobilePadding: {
         type: "object",  
         default: {
-            top: "12",
-            bottom: "12",
-            left: "24",
-            right: "24",
+            top: "8",
+            bottom: "8",
+            left: "16",
+            right: "16",
         },
     },
     secondaryButtonMobilePaddingCssStyle: { 
@@ -2006,7 +2014,7 @@ const attributes = {
 		default: {
 			Desktop: "16",
 			Tablet: "16",
-			Mobile: "16",
+			Mobile: "14",
 		},
 	},
 	sliderArrowsSizeUnits: {
@@ -2083,7 +2091,7 @@ const attributes = {
 		default: {
 			Desktop: "46",
 			Tablet: "46",
-			Mobile: "46",
+			Mobile: "32",
 		},
 	},
 	sliderArrowsWidthUnits: {
@@ -2099,7 +2107,7 @@ const attributes = {
 		default: {
 			Desktop: "46",
 			Tablet: "46",
-			Mobile: "46",
+			Mobile: "32",
 		},
 	},
 	sliderArrowsHeightUnits: {

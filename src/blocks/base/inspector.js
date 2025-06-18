@@ -1019,7 +1019,30 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     opened={openPanels.general === "g6"}
                     onToggle={() => togglePanel("general", "g6")}
                 >
-                    <RangeControl
+
+                    <ResponsiveRangeControl
+                        min={1}
+                        max={10}
+                        label={__("Number of Columns", "gslider-blocks")}
+                        rangeValue={carouselPerColumn}
+                        onChangeValue={(value) => setAttributes({ carouselPerColumn: value })}
+                        deviceType={deviceType}
+                        step={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
+                    />
+                    <ResponsiveRangeControl
+                        min={0}
+                        max={200}
+                        label={__("Column Gap (px)", "gslider-blocks")}
+                        rangeValue={carouselPerColumnGap}
+                        onChangeValue={(value) => setAttributes({ carouselPerColumnGap: value })}
+                        deviceType={deviceType}
+                        step={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
+                    />
+                    {/* <RangeControl
                         label={__('Number of Columns', 'gslider-blocks')}
                         value={carouselPerColumn}
                         onChange={(value) => setAttributes({ carouselPerColumn: value })}
@@ -1027,8 +1050,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         max={10}
                         step={1}
                         initialPosition={1}
-                    />
-                    <RangeControl
+                    /> */}
+                    {/* <RangeControl
                         label={__('Column Gap (px)', 'gslider-blocks')}
                         value={carouselPerColumnGap}
                         onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
@@ -1036,7 +1059,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         max={200}
                         step={1}
                         initialPosition={1}
-                    />
+                    /> */}
                 </PanelBody>
             )}
             {sliderType === 'carousel' && (

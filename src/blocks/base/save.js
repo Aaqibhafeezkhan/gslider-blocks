@@ -43,8 +43,30 @@ export default function Save({ attributes }) {
         effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
         
         // Carousel-specific settings
-        slidesPerView: sliderType === 'carousel' ? (carouselPerColumn || 2) : 1,
-        spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap || 20) : 0,
+        // slidesPerView: sliderType === 'carousel' ? (carouselPerColumn?.Desktop || 2) : 1,
+        // spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap?.Desktop || 20) : 0,
+
+        // Responsive breakpoints for Desktop, Tablet, and Mobile
+        ...(sliderType === 'carousel' && {
+            breakpoints: {
+            // Mobile (e.g., screens < 768px)
+            0: {
+                slidesPerView: carouselPerColumn?.Mobile || 1,
+                spaceBetween: carouselPerColumnGap?.Mobile || 0,
+            },
+            // Tablet (e.g., screens >= 768px)
+            768: {
+                slidesPerView: carouselPerColumn?.Tablet || 2,
+                spaceBetween: carouselPerColumnGap?.Tablet || 20,
+            },
+            // Desktop (e.g., screens >= 1025px)
+            1025: {
+                slidesPerView: carouselPerColumn?.Desktop || 3,
+                spaceBetween: carouselPerColumnGap?.Desktop || 20,
+            },
+            },
+        }),
+        
         
         // Common settings
         loop: infiniteLoop,

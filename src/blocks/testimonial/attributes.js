@@ -19,7 +19,7 @@ const attributes = {
                 subTitle: 'Sub Title',
                 title: 'Slider Item 1',
                 description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-                buttonText: 'Get Started',
+                buttonText: 'Click Here',
                 buttonLink: '#',
                 buttonTargetLink: false,
                 nofollow: false,
@@ -81,7 +81,7 @@ const attributes = {
                 subTitle: 'Sub Title',
                 title: 'Slider Item 2',
                 description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-                buttonText: 'Get Started',
+                buttonText: 'Click Here',
                 buttonLink: '#',
                 buttonTargetLink: false,
                 nofollow: false,
@@ -145,7 +145,7 @@ const attributes = {
                 subTitle: 'Sub Title',
                 title: 'Slider Item 3',
                 description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-                buttonText: 'Get Started',
+                buttonText: 'Click Here',
                 buttonLink: '#',
                 buttonTargetLink: false,
                 nofollow: false,
@@ -223,7 +223,7 @@ const attributes = {
                 },
                 buttonText: {
                     type: "string",
-                    default: "Get Started"
+                    default: "Click Here"
                 },
                 buttonLink: {
                     type: "string",
