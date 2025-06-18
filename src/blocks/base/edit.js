@@ -99,7 +99,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      * Initializes and updates Swiper instance when slider configuration changes
      * Handles different slider types, effects, and interactive options
      */
-	const swiperOptions = {
+	const swiperSettings = {
 
         // Set effect based on sliderType
 		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
@@ -190,8 +190,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		paginationType,
 		dynamicBullets
 	]);
-
-    console.log(carouselPerColumn[deviceType]);
 
 
     /**
@@ -446,7 +444,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<div {...blockProps}>
 				<Swiper
 					key={swiperKey}
-					{...swiperOptions}
+					{...swiperSettings}
 					modules={[
 						Navigation,
 						Pagination,
