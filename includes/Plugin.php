@@ -5,14 +5,16 @@
  * @package GSliderBlocks
  */
 
- use GSlider\Traits\SingletonTrait;
- use GSlider\Classes\StyleGenerator;
- use GSlider\Assets\FrontendAssets;
- use GSlider\Assets\AdminAssets;
- use GSlider\Classes\RegistrationBlocks;
- use GSlider\Classes\RegistrationCategory;
- use GSlider\Classes\FontLoader;
- use GSlider\Classes\SupportSVG;
+namespace GSlider;
+
+use GSlider\Traits\SingletonTrait;
+use GSlider\Classes\StyleGenerator;
+use GSlider\Assets\FrontendAssets;
+use GSlider\Assets\AdminAssets;
+use GSlider\Classes\RegistrationBlocks;
+use GSlider\Classes\RegistrationCategory;
+use GSlider\Classes\FontLoader;
+use GSlider\Classes\SupportSVG;
 
 if (! defined('ABSPATH')) {
     exit; 
