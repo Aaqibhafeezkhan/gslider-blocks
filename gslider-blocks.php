@@ -17,11 +17,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Autoload Composer classes
+/**
+ * Check if the autoload file exists and include it
+ */
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
-
 
 /**
  * Final Class for GSlider Blocks
