@@ -1,5 +1,5 @@
-=== gslider Blocks ===      
-Contributors: noruzzaman,
+=== GSlider Blocks ===      
+Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.8

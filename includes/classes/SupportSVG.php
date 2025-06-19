@@ -53,19 +53,19 @@ if (!class_exists('SupportSVG')) {
             // Validate file extension
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
             if (!in_array($extension, ['svg', 'svgz'], true)) {
-                $file['error'] = __('Invalid SVG file extension.', 'frontis-blocks');
+                $file['error'] = __('Invalid SVG file extension.', 'gslider-blocks'); 
                 return $file;
             }
 
             // Read file content
             if (!$this->wpFilesystem->exists($file['tmp_name'])) {
-                $file['error'] = __('Unable to locate uploaded file.', 'frontis-blocks');
+                $file['error'] = __('Unable to locate uploaded file.', 'gslider-blocks'); 
                 return $file;
             }
 
             $content = $this->wpFilesystem->get_contents($file['tmp_name']);
             if (!$content) {
-                $file['error'] = __('Unable to read SVG file.', 'frontis-blocks');
+                $file['error'] = __('Unable to read SVG file.', 'gslider-blocks');
                 return $file;
             }
 
@@ -73,7 +73,7 @@ if (!class_exists('SupportSVG')) {
             libxml_use_internal_errors(true);
             $doc = new \DOMDocument();
             if (!$doc->loadXML($content, LIBXML_NOENT | LIBXML_DTDLOAD | LIBXML_NOERROR | LIBXML_NOWARNING)) {
-                $file['error'] = __('Invalid SVG XML structure.', 'frontis-blocks');
+                $file['error'] = __('Invalid SVG XML structure.', 'gslider-blocks');
                 libxml_clear_errors();
                 return $file;
             }
@@ -81,14 +81,14 @@ if (!class_exists('SupportSVG')) {
             // Check for prohibited elements and attributes
             $isValid = $this->validateSvgContent($doc);
             if (!$isValid) {
-                $file['error'] = __('SVG contains prohibited elements or attributes.', 'frontis-blocks');
+                $file['error'] = __('SVG contains prohibited elements or attributes.', 'gslider-blocks');
                 return $file;
             }
 
             // Sanitize SVG content
             $sanitizedContent = $this->sanitizeSvgContent($content);
             if (!$this->wpFilesystem->put_contents($file['tmp_name'], $sanitizedContent)) {
-                $file['error'] = __('Unable to save sanitized SVG file.', 'frontis-blocks');
+                $file['error'] = __('Unable to save sanitized SVG file.', 'gslider-blocks');
                 return $file;
             }
 
