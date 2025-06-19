@@ -10,8 +10,6 @@ const zip = async () => {
         'languages',
         'vendor',
         'gslider-blocks.php',
-        'changelog.txt',
-        'gslider-blocks.pot',
         'readme.txt'
     ];
 
