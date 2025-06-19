@@ -2,8 +2,8 @@
 Contributors: noruzzaman,
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
-Tested up to: 6.7
-Stable tag: 1.0.0
+Tested up to: 6.8
+Stable tag: 1.0.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,23 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 == Screenshots ==
 
 == Changelog ==
+
+= 1.0.2 June 19 2025 =
+New Features:
+Element Toggles: Added options to show/hide Subtitle, Title, Description, Button, Navigation, and Pagination directly from the General tab.
+
+Style Sections: New grouped style controls for each element (Title, Subtitle, Button, etc.) for easier customization.
+
+Advanced Options: Added Layout, Background, Border & Shadow, and Custom CSS sections under the Advanced tab.
+
+Improvements:
+Unified Control Panel: Settings are now context-aware and cleaner, combining all slider options into one organized panel.
+
+Better UX: Enhanced slider item management and updated tab structure (General, Style, Advanced) for smoother workflow.
+
+Replaced the old Z-index-only Advanced tab with full design control options.
+
+Retired the basic layout for a modern, component-based settings UI.
 
 = 1.0.0 =
 Initial release
