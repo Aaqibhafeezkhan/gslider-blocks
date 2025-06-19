@@ -41,10 +41,6 @@ export default function Save({ attributes }) {
     // Configure Swiper settings for frontend rendering
     const swiperSettings = JSON.stringify({
         effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-        
-        // Carousel-specific settings
-        // slidesPerView: sliderType === 'carousel' ? (carouselPerColumn?.Desktop || 2) : 1,
-        // spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap?.Desktop || 20) : 0,
 
         // Responsive breakpoints for Desktop, Tablet, and Mobile
         ...(sliderType === 'carousel' && {
@@ -54,19 +50,18 @@ export default function Save({ attributes }) {
                 slidesPerView: carouselPerColumn?.Mobile || 1,
                 spaceBetween: carouselPerColumnGap?.Mobile || 0,
             },
-            // Tablet (e.g., screens >= 768px)
+            // Tablet (e.g., screens 768px - 1024px)
             768: {
                 slidesPerView: carouselPerColumn?.Tablet || 2,
                 spaceBetween: carouselPerColumnGap?.Tablet || 20,
             },
-            // Desktop (e.g., screens >= 1025px)
+            // Desktop (e.g., screens > 1024px)
             1025: {
-                slidesPerView: carouselPerColumn?.Desktop || 3,
+                slidesPerView: carouselPerColumn?.Desktop || 2,
                 spaceBetween: carouselPerColumnGap?.Desktop || 20,
             },
             },
         }),
-        
         
         // Common settings
         loop: infiniteLoop,

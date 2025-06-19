@@ -1,38 +1,42 @@
 const getCustomCss = (css, prefix) => {
-    if (!css || typeof css !== 'string') return ''; // Ensure css is a valid string
+    if (!css || typeof css !== 'string') return '';
 
-    return css
+    const mediaRegex = /@media[^{]+\{([^{}]*\{[^{}]*\})+[^}]*\}/g;
+    let mediaMatches = css.match(mediaRegex) || [];
+    mediaMatches.forEach(mq => {
+        css = css.replace(mq, '');
+    });
+
+    const normalRules = css
         .split('}')
-        .map(rule => {
-            const trimmedRule = rule.trim();
-            if (!trimmedRule) return ''; // Skip empty rules
+        .map(rule => rule.trim())
+        .filter(Boolean);
 
-            if (trimmedRule.startsWith('@media')) {
-                // Handle media queries properly
-                const openBraceIndex = trimmedRule.indexOf('{');
-                if (openBraceIndex === -1) return ''; // Skip invalid media query
+    const result = [];
 
-                const mediaQuery = trimmedRule.substring(0, openBraceIndex).trim();
-                const innerCss = trimmedRule.substring(openBraceIndex + 1).trim();
+    normalRules.forEach(rule => {
+        const [selectors, properties] = rule.split('{').map(part => part.trim());
+        if (!selectors || !properties) return;
 
-                const processedInnerCss = getCustomCss(innerCss, prefix); // Recursively process inner CSS
+        const prefixedSelectors = selectors
+            .split(',')
+            .map(sel => `${prefix} ${sel.trim()}`)
+            .join(', ');
+        result.push(`${prefixedSelectors} { ${properties} }`);
+    });
 
-                return processedInnerCss ? `${mediaQuery} { ${processedInnerCss} }` : '';
-            } else {
-                // Handle normal CSS rules
-                const [selectors, properties] = trimmedRule.split('{').map(part => part.trim());
-                if (!selectors || !properties) return ''; // Skip if invalid
+    mediaMatches.forEach(media => {
+        const openIndex = media.indexOf('{');
+        const mediaQuery = media.slice(0, openIndex).trim();
+        const inner = media.slice(openIndex + 1, -1).trim();
 
-                const prefixedSelectors = selectors
-                    .split(',')
-                    .map(selector => `${prefix} ${selector.trim()}`)
-                    .join(', ');
+        const processedInner = getCustomCss(inner, prefix);
+        if (processedInner) {
+            result.push(`${mediaQuery} {\n${processedInner}\n}`);
+        }
+    });
 
-                return `${prefixedSelectors} { ${properties} }`;
-            }
-        })
-        .filter(Boolean)
-        .join('\n'); // Ensure proper formatting
+    return result.join('\n');
 };
 
 export default getCustomCss;

@@ -9,7 +9,7 @@ import {
 	ToolbarGroup,
 	ToolbarButton
 } from '@wordpress/components';
-import { useState, useEffect, useRef } from "@wordpress/element";
+import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';
@@ -29,18 +29,7 @@ import {
 	EffectCreative,
 	EffectCards
 } from 'swiper/modules';
-
-// Import Swiper styles for all functionalities
-// import 'swiper/css';
 import 'swiper/css/bundle';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-// import 'swiper/css/mousewheel';
-// import 'swiper/css/effect-fade';
-// import 'swiper/css/effect-coverflow';
-// import 'swiper/css/effect-flip';
-// import 'swiper/css/effect-creative';
-// import 'swiper/css/autoplay';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -82,8 +71,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: `gslider-base-wrapper ${blockId}`,
 	});
 
-	// const deviceType = useDeviceType();
-
 	// Local state management for slider items and active slide index
 	const [sliderItemList, setSliderItemList] = useState(sliderItems);
 	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
@@ -99,61 +86,58 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      * Initializes and updates Swiper instance when slider configuration changes
      * Handles different slider types, effects, and interactive options
      */
-	const swiperSettings = {
-
+    const swiperSettings = useMemo(() => ({
         // Set effect based on sliderType
-		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-
-        // Carousel-specific settings with default values
-		// slidesPerView: sliderType === 'carousel' ? (carouselPerColumn?.Desktop || 2) : 1,
-		// spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap?.Desktop || 20) : 0,
-
+        effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+    
         // Responsive breakpoints for Desktop, Tablet, and Mobile
         ...(sliderType === 'carousel' && {
             breakpoints: {
-            // Mobile (e.g., screens < 768px)
-            0: {
-                slidesPerView: carouselPerColumn?.Mobile || 1,
-                spaceBetween: carouselPerColumnGap?.Mobile || 0,
-            },
-            // Tablet (e.g., screens >= 768px)
-            768: {
-                slidesPerView: carouselPerColumn?.Tablet || 2,
-                spaceBetween: carouselPerColumnGap?.Tablet || 20,
-            },
-            // Desktop (e.g., screens >= 1025px)
-            1025: {
-                slidesPerView: carouselPerColumn?.Desktop || 3,
-                spaceBetween: carouselPerColumnGap?.Desktop || 20,
-            },
+                 // Mobile (e.g., screens < 768px)
+                0: {
+                    slidesPerView: carouselPerColumn?.[deviceType] || 1,
+                    spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
+                },
+                // Tablet (e.g., screens 768px - 1024px)
+                768: {
+                    slidesPerView: carouselPerColumn?.[deviceType] || 2,
+                    spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+                },
+                // Desktop (e.g., screens > 1024px)
+                1025: {
+                    slidesPerView: carouselPerColumn?.[deviceType] || 2,
+                    spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+                },
             },
         }),
-
+    
         // Common settings
         loop: infiniteLoop,
         autoplay: autoplay
-        ? {
-                delay: autoplayDelay,
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-                stopOnLastSlide: stopOnLastSlide,
-                reverseDirection: reverseDirection,
-          }
-        : false,
-
+            ? {
+                  delay: autoplayDelay,
+                  pauseOnMouseEnter: pauseOnHover,
+                  disableOnInteraction: false,
+                  stopOnLastSlide: stopOnLastSlide,
+                  reverseDirection: reverseDirection,
+              }
+            : false,
+    
         speed: speed,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
-
+    
         // Navigation and pagination settings
-		navigation: showNavigation,
-		pagination: showPagination ? {
-			clickable: true,
-			type: paginationType,
-			dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-		} : false,
-
-        // Creative effect settings if needed
+        navigation: showNavigation,
+        pagination: showPagination
+            ? {
+                  clickable: true,
+                  type: paginationType,
+                  dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+              }
+            : false,
+    
+        // Creative effect settings for slideEffect
         ...(slideEffect === 'creative' && {
             creativeEffect: {
                 prev: { shadow: true, translate: [0, 0, -400] },
@@ -161,9 +145,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             },
         }),
 
-        // Event handler for slide changes
-		onSlideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
-	};
+        // Handle slide change event to update selected slide index
+        onSlideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
+
+    }), [
+        deviceType,
+        sliderType,
+        carouselEffect,
+        slideEffect,
+        carouselPerColumn,
+        carouselPerColumnGap,
+        infiniteLoop,
+        autoplay,
+        autoplayDelay,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        speed,
+        allowTouchMove,
+        mousewheelControl,
+        showNavigation,
+        showPagination,
+        paginationType,
+        dynamicBullets,
+        setSelectedSlideIndex
+    ]);
+    
 
     /**
      * When any of these settings change, update the key to reinitialize Swiper
@@ -171,6 +178,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	useEffect(() => {
 		setSwiperKey(prevKey => prevKey + 1);
 	}, [
+        deviceType,
 		sliderType,
 		infiniteLoop,
 		allowTouchMove,
@@ -214,7 +222,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             secondaryButtonTargetLink: true,
             secondaryButtonNofollow: false,
             secondaryButtonSponsored: false,
-
 
             normalItemBackgroundType: 'classic',
             normalItemClassicColor: '#EDEDED',
