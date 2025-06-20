@@ -129,7 +129,7 @@ const ResponsiveTypographyControl = ({
         control: (base, state) => ({
           ...base,
           backgroundColor: '#fff',
-          borderColor: '#ededed',
+          borderColor: '#f0f0f0',
           borderWidth: '1px',
           boxShadow: 'none',
           borderRadius: '4px',
@@ -137,7 +137,7 @@ const ResponsiveTypographyControl = ({
           height: '32px',
           outline: 'none',
           '&:hover': {
-            borderColor: '#ededed',
+            borderColor: '#f0f0f0',
           },
         }),
       
@@ -195,7 +195,7 @@ const ResponsiveTypographyControl = ({
         menu: (base) => ({
           ...base,
           backgroundColor: '#fff',
-          border: '1px solid #ededed',
+          border: '1px solid #f0f0f0',
           borderRadius: '4px',
           boxShadow: 'none',
           marginTop: '2px',
@@ -216,9 +216,9 @@ const ResponsiveTypographyControl = ({
         option: (base, state) => ({
           ...base,
           backgroundColor: state.isSelected
-            ? '#ededed'
+            ? '#f0f0f0'
             : state.isFocused
-            ? '#ededed'
+            ? '#f0f0f0'
             : '#fff',
           color: state.isFocused ? '#007cba' : '#1e1e1e',
           fontSize: '12px',
