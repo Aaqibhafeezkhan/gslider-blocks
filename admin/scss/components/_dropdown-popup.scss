@@ -13,6 +13,13 @@
 					z-index: 99999;
 					.components-base-control {
 						margin-bottom: 24px !important;
+						&.gslider-setting-typography-family {
+							.components-base-control__field {
+								.components-base-control__label {
+									margin-bottom: 8px !important;
+								}
+							}
+						}
 						&.gslider-select-control {
 							.components-base-control__field {
 								display: flex !important;

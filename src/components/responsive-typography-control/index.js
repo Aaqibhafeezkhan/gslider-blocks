@@ -262,6 +262,7 @@ const ResponsiveTypographyControl = ({
 
                             <BaseControl
                                 label={__("Family", "gslider-blocks")}
+                                className="gslider-setting-typography-family"
                             >
                                 <Select2 
                                     options={fontOptions} 
@@ -287,7 +288,7 @@ const ResponsiveTypographyControl = ({
                             />
 
                             <SelectControls
-                                label={__("Font Weight", "gslider-blocks")}
+                                label={__("Weight", "gslider-blocks")}
                                 options={[
                                     { label: __("Default", "gslider-blocks"), value: 'inherit' },
                                     ...(availableFontWeights.length > 0
