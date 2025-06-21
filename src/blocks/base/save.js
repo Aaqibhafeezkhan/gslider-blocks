@@ -3,6 +3,7 @@ import { RichText, useBlockProps } from '@wordpress/block-editor';
 export default function Save({ attributes }) {
     const {
         blockId,
+        deviceType,
         sliderItems,
         sliderType,
         carouselPerColumn,
@@ -43,36 +44,47 @@ export default function Save({ attributes }) {
         effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
         // Responsive breakpoints for Desktop, Tablet, and Mobile
-        ...(sliderType === 'carousel' && {
-            breakpoints: {
-            // Mobile (e.g., screens < 768px)
+        breakpoints: {
             0: {
-                slidesPerView: carouselPerColumn?.Mobile || 1,
-                spaceBetween: carouselPerColumnGap?.Mobile || 0,
+                ...(sliderType === 'carousel' && {
+                    slidesPerView: carouselPerColumn?.Mobile || 1,
+                    spaceBetween: carouselPerColumnGap?.Mobile || 0,
+                }),
+                speed: speed?.Mobile || 800,
+                autoplay: autoplay ? {
+                    delay: autoplayDelay?.Mobile || 1000,
+                } : false,
             },
-            // Tablet (e.g., screens 768px - 1024px)
             768: {
-                slidesPerView: carouselPerColumn?.Tablet || 2,
-                spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                ...(sliderType === 'carousel' && {
+                    slidesPerView: carouselPerColumn?.Tablet || 2,
+                    spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                }),
+                speed: speed?.Tablet || 800,
+                autoplay: autoplay ? {
+                    delay: autoplayDelay?.Tablet || 1000,
+                } : false,
             },
-            // Desktop (e.g., screens > 1024px)
             1025: {
-                slidesPerView: carouselPerColumn?.Desktop || 2,
-                spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                ...(sliderType === 'carousel' && {
+                    slidesPerView: carouselPerColumn?.Desktop || 2,
+                    spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                }),
+                speed: speed?.Desktop || 800,
+                autoplay: autoplay ? {
+                    delay: autoplayDelay?.Desktop || 1000,
+                } : false,
             },
-            },
-        }),
+        },
         
         // Common settings
         loop: infiniteLoop,
         autoplay: autoplay ? {
-            delay: autoplayDelay,
             pauseOnMouseEnter: pauseOnHover,
             disableOnInteraction: false,
             stopOnLastSlide: stopOnLastSlide,
             reverseDirection: reverseDirection,
         } : false,
-        speed: speed,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
         

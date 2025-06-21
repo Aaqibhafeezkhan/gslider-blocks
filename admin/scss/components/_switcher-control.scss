@@ -25,6 +25,10 @@
 					color: $primary_color;
 					background-color: $active_bg_color;
 				}
+
+				&:hover {
+					color: $primary_color;
+				}
 			}
 
 			&:first-child {

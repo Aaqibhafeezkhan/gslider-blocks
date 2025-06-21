@@ -997,20 +997,29 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     onChange={(value) => setAttributes({ autoplay: value })}
                 />
                 { autoplay && (
-                <RangeControl
-                    label={__('Autoplay Delay (ms)', 'gslider-blocks')}
-                    value={autoplayDelay}
-                    onChange={(value) => setAttributes({ autoplayDelay: value })}
-                    min={1000}
-                    max={10000}
-                />
+                    <ResponsiveRangeControl
+                        min={1000}
+                        max={10000}
+                        label={__("Autoplay Delay (ms)", "gslider-blocks")}
+                        rangeValue={autoplayDelay} 
+                        onChangeValue={(value) => setAttributes({ autoplayDelay: value })}
+                        deviceType={deviceType}
+                        step={1}
+                        resetFallbackValue={"1000"}
+                        isRangeUnit={false}
+                    />
                 )}
-                <RangeControl
-                    label={__("Transition Speed (ms)", "gslider-blocks")}
-                    value={speed}
-                    onChange={(value) => setAttributes({ speed: value })}
+
+                <ResponsiveRangeControl
                     min={100}
                     max={5000}
+                    label={__("Transition Speed (ms)", "gslider-blocks")}
+                    rangeValue={speed} 
+                    onChangeValue={(value) => setAttributes({ speed: value })}
+                    deviceType={deviceType}
+                    step={1}
+                    resetFallbackValue={"800"}
+                    isRangeUnit={false}
                 />
             </PanelBody>
             {sliderType === 'carousel' && (
@@ -1042,24 +1051,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         resetFallbackValue={""}
                         isRangeUnit={false}
                     />
-                    {/* <RangeControl
-                        label={__('Number of Columns', 'gslider-blocks')}
-                        value={carouselPerColumn}
-                        onChange={(value) => setAttributes({ carouselPerColumn: value })}
-                        min={1}
-                        max={10}
-                        step={1}
-                        initialPosition={1}
-                    /> */}
-                    {/* <RangeControl
-                        label={__('Column Gap (px)', 'gslider-blocks')}
-                        value={carouselPerColumnGap}
-                        onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
-                        min={0}
-                        max={200}
-                        step={1}
-                        initialPosition={1}
-                    /> */}
                 </PanelBody>
             )}
             {sliderType === 'carousel' && (
@@ -1068,8 +1059,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     opened={openPanels.general === "g7"}
                     onToggle={() => togglePanel("general", "g7")}
                 >
-                    <SelectControl
-                        label={__('Select Carousel Effect', 'gslider-blocks')}
+                    <SelectControls
+                        label={__('Effect Type', 'gslider-blocks')}
                         value={carouselEffect}
                         options={CAROUSEL_EFFECT_OPTIONS}
                         onChange={(value) => setAttributes({ carouselEffect: value })}

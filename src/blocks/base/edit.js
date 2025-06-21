@@ -115,7 +115,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         loop: infiniteLoop,
         autoplay: autoplay
             ? {
-                  delay: autoplayDelay,
+                  delay: autoplayDelay?.[deviceType] || 1000,
                   pauseOnMouseEnter: pauseOnHover,
                   disableOnInteraction: false,
                   stopOnLastSlide: stopOnLastSlide,
@@ -123,7 +123,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
               }
             : false,
     
-        speed: speed,
+        speed: speed?.[deviceType] || 800,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
     

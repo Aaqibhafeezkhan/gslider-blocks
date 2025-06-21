@@ -1339,6 +1339,9 @@
   color: #007cba;
   background-color: #f0f0f0;
 }
+.gslider-setting-switcher-panel-btn button.components-button.gslider-setting-switcher-panel-btn-switcher:hover {
+  color: #007cba;
+}
 .gslider-setting-switcher-panel-btn button.components-button:first-child {
   border-radius: 4px 0 0 4px;
 }

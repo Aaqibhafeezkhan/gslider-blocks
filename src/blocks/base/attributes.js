@@ -419,16 +419,24 @@ const attributes = {
         },
     },
 	speed: {
-		type: "number",
-        default: 800,
+		type: "object",
+        default: {
+            Desktop: 800,
+            Tablet: 800,
+            Mobile: 800,
+        },
 	},
 	autoplay: {
 		type: "boolean",
 		default: false,
 	},
     autoplayDelay: {
-        type: "number",
-        default: 1000,
+        type: "object",
+        default: {
+            Desktop: 1000,
+            Tablet: 1000,
+            Mobile: 1000,
+        },
     },
 	infiniteLoop: {
 		type: 'boolean',
