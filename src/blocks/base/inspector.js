@@ -437,6 +437,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** Start Dots Position */
         paginationDotsPosition,
         paginationDotsPositionUnits,
+        paginationProgressbarPosition,
+        paginationProgressbarPositionUnits,
         /** End Dots Position */
 
         /** Start Dots Style */
@@ -511,6 +513,33 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         paginationActiveDotsMobileBorderRadiusCssStyle,
         paginationActiveDotsBorderRadiusLink,
         /** End Active Dots Border Radius */
+
+        /** start Fraction Typography and Color */
+        paginationFractionFontFamily,
+        paginationFractionFontSize,
+        paginationFractionFontSizeUnits,
+        paginationFractionFontWeight,
+        paginationFractionFontStyle,
+        paginationFractionTextTransform,
+        paginationFractionTextDecoration,
+        paginationFractionLineHeight,
+        paginationFractionLineHeightUnits,
+        paginationFractionLetterSpacing,
+        paginationFractionLetterSpacingUnits,
+        paginationFractionWordSpacing,
+        paginationFractionWordSpacingUnits,
+        paginationFractionColorSwitcher,
+        paginationFractionColor,
+        paginationFractionColorHover,
+        /** End Fraction Typography and Color */
+
+        /** start pagination Progressbar Color */
+        paginationProgressbarBGColorSwitcher,
+        paginationProgressbarBGColor,
+        paginationProgressbarBGActiveColor,
+        paginationProgressbarHeight,
+        paginationProgressbarHeightUnits,
+        /** End pagination Progressbar Color */  
 
         /** Global Settings */
 
@@ -2133,18 +2162,35 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 onToggle={() => togglePanel("styles", "pagination")}
             >
 
-                <ResponsiveRangeControl
-                    min={0}
-                    max={100}
-                    label={__("Position", "gslider-blocks")}
-                    rangeValue={paginationDotsPosition}
-                    onChangeValue={(value) => setAttributes({ paginationDotsPosition: value })}
-                    onUnitChange={(value) => setAttributes({ paginationDotsPositionUnits: value })}
-                    deviceType={deviceType}
-                    units={paginationDotsPositionUnits}
-                    step={1}
-                    resetFallbackValue={""}
-                />
+                {(paginationType === 'bullets' || paginationType === 'fraction') && (
+                    <ResponsiveRangeControl
+                        min={0}
+                        max={100}
+                        label={__("Position", "gslider-blocks")}
+                        rangeValue={paginationDotsPosition}
+                        onChangeValue={(value) => setAttributes({ paginationDotsPosition: value })}
+                        onUnitChange={(value) => setAttributes({ paginationDotsPositionUnits: value })}
+                        deviceType={deviceType}
+                        units={paginationDotsPositionUnits}
+                        step={1}
+                        resetFallbackValue={""}
+                    />
+                )}
+
+                {paginationType === 'progressbar' && (
+                    <ResponsiveRangeControl
+                        min={0}
+                        max={100}
+                        label={__("Position", "gslider-blocks")}
+                        rangeValue={paginationProgressbarPosition}
+                        onChangeValue={(value) => setAttributes({ paginationProgressbarPosition: value })}
+                        onUnitChange={(value) => setAttributes({ paginationProgressbarPositionUnits: value })}
+                        deviceType={deviceType}
+                        units={paginationProgressbarPositionUnits}
+                        step={1}
+                        resetFallbackValue={""}
+                    />
+                )}
 
                 <ResponsiveSpacingControl
                     label={__("Margin", "gslider-blocks")}
@@ -2388,6 +2434,129 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         )}
                     </>
                 )}
+
+                {paginationType === 'fraction' && (
+                    <>
+                        <ResponsiveTypographyControl 
+                            fontFamily={paginationFractionFontFamily}
+                            onChangeFontFamily={(value) => setAttributes({ paginationFractionFontFamily: value })}
+                            
+                            fontSize={paginationFractionFontSize}
+                            onChangeFontSize={(value) => setAttributes({ paginationFractionFontSize: value })}
+                            
+                            fontSizeUnits={paginationFractionFontSizeUnits}
+                            onChangeFontSizeUnit={(value) => setAttributes({ paginationFractionFontSizeUnits: value })}
+                            
+                            fontWeight={paginationFractionFontWeight}
+                            onChangeFontWeight={(value) => setAttributes({ paginationFractionFontWeight: value })}
+                            
+                            fontStyle={paginationFractionFontStyle}
+                            onChangeFontStyle={(value) => setAttributes({ paginationFractionFontStyle: value })}
+                            
+                            textTransform={paginationFractionTextTransform}
+                            onChangeTextTransform={(value) => setAttributes({ paginationFractionTextTransform: value })}
+                            
+                            textDecoration={paginationFractionTextDecoration}
+                            onChangeTextDecoration={(value) => setAttributes({ paginationFractionTextDecoration: value })}
+                            
+                            lineHeight={paginationFractionLineHeight}
+                            onChangeLineHeight={(value) => setAttributes({ paginationFractionLineHeight: value })}
+                            
+                            lineHeightUnits={paginationFractionLineHeightUnits}
+                            onChangeLineHeightUnit={(value) => setAttributes({ paginationFractionLineHeightUnits: value })}
+
+                            letterSpacing={paginationFractionLetterSpacing}
+                            onChangeLetterSpacing={(value) => setAttributes({ paginationFractionLetterSpacing: value })}
+                            
+                            letterSpacingUnits={paginationFractionLetterSpacingUnits}
+                            onChangeLetterSpacingUnit={(value) => setAttributes({ paginationFractionLetterSpacingUnits: value })}
+
+                            wordSpacing={paginationFractionWordSpacing} 
+                            onChangeWordSpacing={(value) => setAttributes({ paginationFractionWordSpacing: value })}
+                            
+                            wordSpacingUnits={paginationFractionWordSpacingUnits}
+                            onChangeWordSpacingUnit={(value) => setAttributes({ paginationFractionWordSpacingUnits: value })}
+                            
+                            deviceType={deviceType}
+                        />
+                        
+                        <SwitcherControl
+                            label={__("Color", "gslider-blocks")}
+                            globalSwitcher={paginationFractionColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ paginationFractionColorSwitcher: value })}
+                        />
+
+                        {paginationFractionColorSwitcher === 'normal' && (
+                            <ColorControl
+                                label={__("Normal Color", "gslider-blocks")}
+                                color={paginationFractionColor}
+                                onChangeColor={(value) => setAttributes({ paginationFractionColor: value })}
+                                defaultColor=''
+                            />
+                        )}
+
+                        {paginationFractionColorSwitcher === 'hover' && ( 
+                            <ColorControl
+                                label={__("Hover Color", "gslider-blocks")}
+                                color={paginationFractionColorHover}
+                                onChangeColor={(value) => setAttributes({ paginationFractionColorHover: value })}
+                                defaultColor=''
+                            />
+                        )}
+                        
+                    </>
+                )}
+
+                {paginationType === 'progressbar' && (
+                    <>
+                        <BaseControl>
+                            <ButtonGroup className="gslider-setting-switcher-panel-btn">
+                                {NORMAL_ACTIVE.map((item, key) => (
+                                    <Button
+                                key={key}
+                                        onClick={() => setAttributes({ paginationProgressbarBGColorSwitcher: item.value })} 
+                                        className={`gslider-setting-switcher-panel-btn-switcher ${paginationProgressbarBGColorSwitcher === item.value ? 'active' : ''}`}
+                                    >
+                                        {item.label}
+                                    </Button>
+                                ))}
+                            </ButtonGroup>
+                        </BaseControl>
+
+                        {paginationProgressbarBGColorSwitcher === 'normal' && (
+                            <ColorControl
+                                label={__("Background Color", "gslider-blocks")}
+                                color={paginationProgressbarBGColor}
+                                onChangeColor={(value) => setAttributes({ paginationProgressbarBGColor: value })}
+                                defaultColor=''
+                            />
+                        )}
+
+                        {paginationProgressbarBGColorSwitcher === 'active' && ( 
+                            <ColorControl
+                                label={__("Active Color", "gslider-blocks")}
+                                color={paginationProgressbarBGActiveColor}
+                                onChangeColor={(value) => setAttributes({ paginationProgressbarBGActiveColor: value })}
+                                defaultColor=''
+                            />
+                        )}
+
+                        <ResponsiveRangeControl
+                            min={1}
+                            max={100}
+                            label={__("Height", "gslider-blocks")}
+                            rangeValue={paginationProgressbarHeight}
+                            onChangeValue={(value) => setAttributes({ paginationProgressbarHeight: value })}
+                            onUnitChange={(value) => setAttributes({ paginationProgressbarHeightUnits: value })}
+                            deviceType={deviceType}
+                            units={paginationProgressbarHeightUnits}
+                            step={1}
+                            resetFallbackValue={"4"}
+                        />
+                        
+                    </>
+                )}
+
             </PanelBody>
         </>
     );  
@@ -2864,7 +3033,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         return styles;
     };
 
-
     /**
      * Convert object to string
      */
@@ -3100,7 +3268,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         }
 
         .${blockId} .swiper-pagination {
-            ${paginationDotsPosition.Desktop ? `bottom: ${paginationDotsPosition.Desktop}${paginationDotsPositionUnits.Desktop} !important;` : ''}
+            ${paginationType === 'progressbar' ? (
+                paginationProgressbarPosition.Desktop ? `top: ${paginationProgressbarPosition.Desktop}${paginationProgressbarPositionUnits.Desktop} !important;` : '' 
+            ) : (
+                paginationDotsPosition.Desktop ? `bottom: ${paginationDotsPosition.Desktop}${paginationDotsPositionUnits.Desktop} !important;` : ''
+            )}
             ${paginationDotsDesktopMarginCssStyle ? `margin: ${paginationDotsDesktopMarginCssStyle};` : ''}
         }
 
@@ -3122,6 +3294,33 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${paginationActiveDotsBorderColor ? `border-color: ${paginationActiveDotsBorderColor};` : ''}
             ${paginationActiveDotsWidth.Desktop ? `width: ${paginationActiveDotsWidth.Desktop}${paginationActiveDotsWidthUnits.Desktop};` : ''}
             ${paginationActiveDotsHeight.Desktop ? `height: ${paginationActiveDotsHeight.Desktop}${paginationActiveDotsHeightUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .swiper-pagination-fraction { 
+            ${paginationFractionFontFamily ? `font-family: ${paginationFractionFontFamily};` : ''}
+            ${paginationFractionFontSize.Desktop && paginationFractionFontSizeUnits.Desktop ? `font-size: ${paginationFractionFontSize.Desktop}${paginationFractionFontSizeUnits.Desktop};` : ''}
+            ${paginationFractionFontWeight ? `font-weight: ${paginationFractionFontWeight};` : ''}
+            ${paginationFractionFontStyle ? `font-style: ${paginationFractionFontStyle};` : ''}
+            ${paginationFractionTextTransform ? `text-transform: ${paginationFractionTextTransform};` : ''}
+            ${paginationFractionTextDecoration ? `text-decoration: ${paginationFractionTextDecoration};` : ''}
+            ${paginationFractionLineHeight.Desktop && paginationFractionLineHeightUnits.Desktop ? `line-height: ${paginationFractionLineHeight.Desktop}${paginationFractionLineHeightUnits.Desktop};` : ''}
+            ${paginationFractionLetterSpacing.Desktop && paginationFractionLetterSpacingUnits.Desktop ? `letter-spacing: ${paginationFractionLetterSpacing.Desktop}${paginationFractionLetterSpacingUnits.Desktop};` : ''}
+            ${paginationFractionWordSpacing.Desktop && paginationFractionWordSpacingUnits.Desktop ? `word-spacing: ${paginationFractionWordSpacing.Desktop}${paginationFractionWordSpacingUnits.Desktop};` : ''}
+            ${paginationFractionColor ? `color: ${paginationFractionColor};` : ''}
+            transition: all .3s ease-in-out;
+        }
+
+        .${blockId} .swiper-pagination-fraction:hover {
+            ${paginationFractionColorHover ? `color: ${paginationFractionColorHover};` : ''}
+        }
+
+        .${blockId} .swiper-pagination-progressbar {
+            ${paginationProgressbarBGColor ? `background-color: ${paginationProgressbarBGColor};` : ''}
+            ${paginationProgressbarHeight.Desktop ? `height: ${paginationProgressbarHeight.Desktop}${paginationProgressbarHeightUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+            ${paginationProgressbarBGActiveColor ? `background-color: ${paginationProgressbarBGActiveColor};` : ''}
         }
 
 
@@ -3224,7 +3423,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             }
 
             .${blockId} .swiper-pagination {
-                ${paginationDotsPosition.Tablet ? `bottom: ${paginationDotsPosition.Tablet}${paginationDotsPositionUnits.Tablet} !important;` : ''}
+                ${paginationType === 'progressbar' ? (
+                    paginationProgressbarPosition.Tablet ? `top: ${paginationProgressbarPosition.Tablet}${paginationProgressbarPositionUnits.Tablet} !important;` : ''
+                ) : (
+                    paginationDotsPosition.Tablet ? `bottom: ${paginationDotsPosition.Tablet}${paginationDotsPositionUnits.Tablet} !important;` : ''
+                )}
                 ${paginationDotsTabletMarginCssStyle ? `margin: ${paginationDotsTabletMarginCssStyle};` : ''}
             }
 
@@ -3240,6 +3443,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${paginationActiveDotsTabletBorderRadiusCssStyle ? `border-radius: ${paginationActiveDotsTabletBorderRadiusCssStyle};` : ''}
                 ${paginationActiveDotsWidth.Tablet ? `width: ${paginationActiveDotsWidth.Tablet}${paginationActiveDotsWidthUnits.Tablet};` : ''}
                 ${paginationActiveDotsHeight.Tablet ? `height: ${paginationActiveDotsHeight.Tablet}${paginationActiveDotsHeightUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-fraction { 
+                ${paginationFractionFontSize.Tablet && paginationFractionFontSizeUnits.Tablet ? `font-size: ${paginationFractionFontSize.Tablet}${paginationFractionFontSizeUnits.Tablet};` : ''}
+                ${paginationFractionLineHeight.Tablet && paginationFractionLineHeightUnits.Tablet ? `line-height: ${paginationFractionLineHeight.Tablet}${paginationFractionLineHeightUnits.Tablet};` : ''}
+                ${paginationFractionLetterSpacing.Tablet && paginationFractionLetterSpacingUnits.Tablet ? `letter-spacing: ${paginationFractionLetterSpacing.Tablet}${paginationFractionLetterSpacingUnits.Tablet};` : ''}
+                ${paginationFractionWordSpacing.Tablet && paginationFractionWordSpacingUnits.Tablet ? `word-spacing: ${paginationFractionWordSpacing.Tablet}${paginationFractionWordSpacingUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-progressbar {
+                ${paginationProgressbarHeight.Tablet ? `height: ${paginationProgressbarHeight.Tablet}${paginationProgressbarHeightUnits.Tablet};` : ''}
             }
         }
         
@@ -3342,7 +3556,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             }
 
             .${blockId} .swiper-pagination {
-                ${paginationDotsPosition.Mobile ? `bottom: ${paginationDotsPosition.Mobile}${paginationDotsPositionUnits.Mobile} !important;` : ''}
+                ${paginationType === 'progressbar' ? (
+                    paginationProgressbarPosition.Mobile ? `top: ${paginationProgressbarPosition.Mobile}${paginationProgressbarPositionUnits.Mobile} !important;` : ''
+                ) : (
+                    paginationDotsPosition.Mobile ? `bottom: ${paginationDotsPosition.Mobile}${paginationDotsPositionUnits.Mobile} !important;` : ''
+                )}
                 ${paginationDotsMobileMarginCssStyle ? `margin: ${paginationDotsMobileMarginCssStyle};` : ''}
             }
 
@@ -3358,6 +3576,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${paginationActiveDotsMobileBorderRadiusCssStyle ? `border-radius: ${paginationActiveDotsMobileBorderRadiusCssStyle};` : ''}
                 ${paginationActiveDotsWidth.Mobile ? `width: ${paginationActiveDotsWidth.Mobile}${paginationActiveDotsWidthUnits.Mobile};` : ''}
                 ${paginationActiveDotsHeight.Mobile ? `height: ${paginationActiveDotsHeight.Mobile}${paginationActiveDotsHeightUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-fraction { 
+                ${paginationFractionFontSize.Mobile && paginationFractionFontSizeUnits.Mobile ? `font-size: ${paginationFractionFontSize.Mobile}${paginationFractionFontSizeUnits.Mobile};` : ''}
+                ${paginationFractionLineHeight.Mobile && paginationFractionLineHeightUnits.Mobile ? `line-height: ${paginationFractionLineHeight.Mobile}${paginationFractionLineHeightUnits.Mobile};` : ''}
+                ${paginationFractionLetterSpacing.Mobile && paginationFractionLetterSpacingUnits.Mobile ? `letter-spacing: ${paginationFractionLetterSpacing.Mobile}${paginationFractionLetterSpacingUnits.Mobile};` : ''}
+                ${paginationFractionWordSpacing.Mobile && paginationFractionWordSpacingUnits.Mobile ? `word-spacing: ${paginationFractionWordSpacing.Mobile}${paginationFractionWordSpacingUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-progressbar {
+                ${paginationProgressbarHeight.Mobile ? `height: ${paginationProgressbarHeight.Mobile}${paginationProgressbarHeightUnits.Mobile};` : ''}
             }
         }
 
@@ -3757,6 +3986,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** Start Dots Position */
         paginationDotsPosition,
         paginationDotsPositionUnits,
+        paginationProgressbarPosition,
+        paginationProgressbarPositionUnits,
         /** End Dots Position */
 
         /** Start Dots Style */
@@ -3831,6 +4062,33 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         paginationActiveDotsMobileBorderRadiusCssStyle,
         paginationActiveDotsBorderRadiusLink,
         /** End Active Dots Border Radius */
+
+        /** start Fraction Typography and Color */
+        paginationFractionFontFamily,
+        paginationFractionFontSize,
+        paginationFractionFontSizeUnits,
+        paginationFractionFontWeight,
+        paginationFractionFontStyle,
+        paginationFractionTextTransform,
+        paginationFractionTextDecoration,
+        paginationFractionLineHeight,
+        paginationFractionLineHeightUnits,
+        paginationFractionLetterSpacing,
+        paginationFractionLetterSpacingUnits,
+        paginationFractionWordSpacing,
+        paginationFractionWordSpacingUnits,
+        paginationFractionColorSwitcher,
+        paginationFractionColor,
+        paginationFractionColorHover,
+        /** End Fraction Typography and Color */
+
+        /** start pagination Progressbar Color */
+        paginationProgressbarBGColorSwitcher,
+        paginationProgressbarBGColor,
+        paginationProgressbarBGActiveColor,
+        paginationProgressbarHeight,
+        paginationProgressbarHeightUnits,
+        /** End pagination Progressbar Color */  
 
         /** Global Settings */
 

@@ -2397,6 +2397,22 @@ const attributes = {
 			Mobile: "%",
 		},
 	},
+    paginationProgressbarPosition: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	paginationProgressbarPositionUnits: {
+		type: "object",
+		default: {
+			Desktop: "%",
+			Tablet: "%",
+			Mobile: "%",
+		},
+	},
     /** End Pagination Dots Position */
 
     /** Start Pagination Dots Style */
@@ -2736,6 +2752,138 @@ const attributes = {
         default: true
     },
     /** End Active Pagination Dots Border Radius */
+
+    /** Start Fraction Typography */
+    paginationFractionFontFamily: {
+        type: "string",
+        default: "",
+    },
+    paginationFractionFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    paginationFractionFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    paginationFractionFontWeight: {
+        type: "string",
+        default: "",
+    },
+    paginationFractionFontStyle: {
+        type: "string",
+        default: "",
+    },
+    paginationFractionTextTransform: {
+        type: "string",
+        default: "",
+    },
+    paginationFractionTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    paginationFractionLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    paginationFractionLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    paginationFractionLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    paginationFractionLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    paginationFractionWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },  
+    paginationFractionWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Fraction Typography */
+
+    /** Start Fraction Color */
+    paginationFractionColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    paginationFractionColor: {
+        type: "string",
+        default: "",
+    },
+    paginationFractionColorHover: {
+        type: "string",
+        default: "",
+    },
+    /** End Fraction Color */
+
+    /** Start Progressbar */
+	paginationProgressbarBGColorSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	paginationProgressbarBGColor: {
+		type: 'string',
+		default: '',
+	},
+	paginationProgressbarBGActiveColor: {
+		type: 'string',
+	},
+	paginationProgressbarHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	paginationProgressbarHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	/** End Progressbar */
 
 
     /** Start Global Setting */

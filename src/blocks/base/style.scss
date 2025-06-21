@@ -14,16 +14,14 @@
 			text-align: center;
 		}
 	}
-}
-
-
-.swiper-wrapper {
-	height: auto !important;
-}
-
-/* In your CSS */
-.swiper-backface-hidden .swiper-slide {
-	backface-visibility: visible !important;
+	.swiper-wrapper {
+		height: auto !important;
+	}
+	.swiper-backface-hidden {
+		.swiper-slide {
+			backface-visibility: visible !important;
+		}
+	}
 }
 
 :where(.wp-site-blocks *:focus) {
