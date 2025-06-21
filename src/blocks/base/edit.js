@@ -170,7 +170,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         dynamicBullets,
         setSelectedSlideIndex
     ]);
-    
 
     /**
      * When any of these settings change, update the key to reinitialize Swiper
@@ -198,7 +197,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		paginationType,
 		dynamicBullets
 	]);
-
 
     /**
      * Creates and adds a new slide with default content and settings
@@ -339,7 +337,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setSliderItemList(updatedItems);
         setAttributes({ sliderItems: updatedItems });
     };
-
 
     /**
      * Handles duplicate slide functionality
