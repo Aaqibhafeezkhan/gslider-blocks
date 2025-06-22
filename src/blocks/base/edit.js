@@ -82,6 +82,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
+    // Refs for navigation buttons
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
+    const paginationRef = useRef(null);
+
     /**
      * Initializes and updates Swiper instance when slider configuration changes
      * Handles different slider types, effects, and interactive options
@@ -128,12 +133,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         mousewheel: mousewheelControl,
     
         // Navigation and pagination settings
-        navigation: showNavigation,
+        // navigation: showNavigation,
+        navigation: showNavigation
+        ? {
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
+        }
+        : false,
+
         pagination: showPagination
             ? {
-                  clickable: true,
-                  type: paginationType,
-                  dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+                el: paginationRef.current,
+                type: paginationType,
+                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+                clickable: true,
               }
             : false,
     
@@ -197,6 +210,35 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		paginationType,
 		dynamicBullets
 	]);
+
+    /**
+     * Updates navigation button references when showNavigation changes
+     */
+    useEffect(() => {
+        setTimeout(() => {
+            const swiper = document.querySelector('.swiper')?.swiper;
+    
+            if (!swiper) return;
+    
+            // Handle Navigation
+            if (showNavigation && prevRef.current && nextRef.current) {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+                swiper.navigation.destroy();
+                swiper.navigation.init();
+                swiper.navigation.update();
+            }
+    
+            // Handle Pagination
+            if (showPagination && paginationRef.current) {
+                swiper.params.pagination.el = paginationRef.current;
+                swiper.pagination.destroy();
+                swiper.pagination.init();
+                swiper.pagination.update();
+            }
+        }, 0);
+    }, [swiperKey, showNavigation, showPagination]);
+    
 
     /**
      * Creates and adds a new slide with default content and settings
@@ -573,6 +615,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							</div>
 						</SwiperSlide>
 					))}
+
+                    {showNavigation && (
+                        <>
+                            <div className="gslider-navigation-wrapper">
+                                <div ref={prevRef} className="swiper-button-prev" aria-label="Previous slide"></div>
+                                <div ref={nextRef} className="swiper-button-next" aria-label="Next slide"></div>
+                            </div>
+                        </>
+                    )}
+                    {showPagination && (
+                        <>
+                            <div className="gslider-pagination-wrapper">
+                                <div ref={paginationRef} className="swiper-pagination"></div>
+                            </div>
+                        </>
+                    )}
 				</Swiper>
 			</div>
 		</>

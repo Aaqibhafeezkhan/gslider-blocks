@@ -217,11 +217,19 @@ export default function Save({ attributes }) {
                 </div>
                 {showNavigation && 
                     <>
-                        <div className="guten-slider swiper-button-next" aria-label="Next slide"></div>
-                        <div className="guten-slider swiper-button-prev" aria-label="Previous slide"></div>
+                        <div className="gslider-navigation-wrapper">
+                            <div className="swiper-button-prev" aria-label="Previous slide"></div>
+                            <div className="swiper-button-next" aria-label="Next slide"></div>
+                        </div>
                     </>
                 }
-                {showPagination && <div className="guten-slider swiper-pagination"></div>}
+                {showPagination && (
+                    <>
+                        <div className="gslider-pagination-wrapper">
+                            <div className="swiper-pagination"></div>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );

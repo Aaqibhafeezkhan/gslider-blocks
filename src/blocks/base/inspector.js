@@ -1995,7 +1995,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     deviceType={deviceType}
                     units={navigationArrowLeftOffsetUnits}
                     step={1}
-                    resetFallbackValue={"-20"}
+                    resetFallbackValue={""}
                 />
 
                 <ResponsiveRangeControl
@@ -2008,7 +2008,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     deviceType={deviceType}
                     units={navigationArrowRightOffsetUnits}
                     step={1}
-                    resetFallbackValue={"-20"}
+                    resetFallbackValue={""}
                 />
 
                 <SwitcherControl

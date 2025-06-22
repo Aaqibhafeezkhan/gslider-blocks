@@ -121,6 +121,16 @@ export const PAGINATION_TYPE = [
 	{ value: 'progressbar', label: __('Progress Bar', 'gslider-blocks') }
 ];
 
+export const NAVIGATION_POSITION = [
+	{ label: __('Center Center', 'gslider-blocks'), value: 'center' },
+	{ label: __('Top Left', 'gslider-blocks'), value: 'top-left' },
+	{ label: __('Top Center', 'gslider-blocks'), value: 'top-center' },
+	{ label: __('Top Right', 'gslider-blocks'), value: 'top-right' },
+	{ label: __('Bottom Left', 'gslider-blocks'), value: 'bottom-left' },
+	{ label: __('Bottom Center', 'gslider-blocks'), value: 'bottom-center' },
+	{ label: __('Bottom Right', 'gslider-blocks'), value: 'bottom-right' },
+];
+
 export const NORMAL_ACTIVE = [
 	{ label: __('Normal', 'gslider-blocks'), value: 'normal' },
 	{ label: __('Active', 'gslider-blocks'), value: 'active' },

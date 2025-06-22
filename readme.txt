@@ -57,7 +57,7 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 
 == Changelog ==
 
-= 1.0.2 June 19 2025 =
+= 1.0.2 June 21 2025 =
 New Features:
 Element Toggles: Added options to show/hide Subtitle, Title, Description, Button, Navigation, and Pagination directly from the General tab.
 
