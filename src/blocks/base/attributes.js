@@ -2275,56 +2275,62 @@ const attributes = {
     },
     /** End Arrow Box Shadow */
 
-    /** Start Arrow Position */
+
     navigationArrowPosition: {
-		type: "object",
-		default: {
-			Desktop: "50",
-			Tablet: "50",
-			Mobile: "50",
-		},
-	},
-	navigationArrowPositionUnits: {
-		type: "object",
-		default: {
-			Desktop: "%",
-			Tablet: "%",
-			Mobile: "%",
-		},
-	},
-	navigationArrowRightOffset: {
-		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
-	},
-	navigationArrowRightOffsetUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	navigationArrowLeftOffset: {
-		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
-	},
-	navigationArrowLeftOffsetUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},  
-    /** End Arrow Position */
+        type: "string",
+        default: "center",
+    },
+
+    // /** Start Arrow Position */
+    // navigationArrowPosition: {
+	// 	type: "object",
+	// 	default: {
+	// 		Desktop: "50",
+	// 		Tablet: "50",
+	// 		Mobile: "50",
+	// 	},
+	// },
+	// navigationArrowPositionUnits: {
+	// 	type: "object",
+	// 	default: {
+	// 		Desktop: "%",
+	// 		Tablet: "%",
+	// 		Mobile: "%",
+	// 	},
+	// },
+	// navigationArrowRightOffset: {
+	// 	type: "object",
+	// 	default: {
+	// 		Desktop: "",
+	// 		Tablet: "",
+	// 		Mobile: "",
+	// 	},
+	// },
+	// navigationArrowRightOffsetUnits: {
+	// 	type: "object",
+	// 	default: {
+	// 		Desktop: "px",
+	// 		Tablet: "px",
+	// 		Mobile: "px",
+	// 	},
+	// },
+	// navigationArrowLeftOffset: {
+	// 	type: "object",
+	// 	default: {
+	// 		Desktop: "",
+	// 		Tablet: "",
+	// 		Mobile: "",
+	// 	},
+	// },
+	// navigationArrowLeftOffsetUnits: {
+	// 	type: "object",
+	// 	default: {
+	// 		Desktop: "px",
+	// 		Tablet: "px",
+	// 		Mobile: "px",
+	// 	},
+	// },  
+    // /** End Arrow Position */
 
     /** Start Pagination Dots Margin */
 	paginationDotsMarginUnits: {

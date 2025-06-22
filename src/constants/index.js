@@ -121,7 +121,7 @@ export const PAGINATION_TYPE = [
 	{ value: 'progressbar', label: __('Progress Bar', 'gslider-blocks') }
 ];
 
-export const NAVIGATION_POSITION = [
+export const NAVIGATION_ARROW_POSITION = [
 	{ label: __('Center Center', 'gslider-blocks'), value: 'center' },
 	{ label: __('Top Left', 'gslider-blocks'), value: 'top-left' },
 	{ label: __('Top Center', 'gslider-blocks'), value: 'top-center' },

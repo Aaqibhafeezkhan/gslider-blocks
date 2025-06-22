@@ -13,7 +13,8 @@ import {
     CAROUSEL_EFFECT_OPTIONS,
     SLIDER_TYPE,
     PAGINATION_TYPE,
-    NORMAL_ACTIVE
+    NORMAL_ACTIVE,
+    NAVIGATION_ARROW_POSITION
 
 } from "@Constants";
 
@@ -414,13 +415,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         navigationArrowBoxShadowHoverCssValue,
         /** End Box Shadow */
 
+
         /** Start Position */
         navigationArrowPosition,
-        navigationArrowPositionUnits,
-        navigationArrowRightOffset,
-        navigationArrowRightOffsetUnits,
-        navigationArrowLeftOffset,
-        navigationArrowLeftOffsetUnits,
         /** End Position */
 
         /** Start Dots Margin */
@@ -1106,6 +1103,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         value={slideEffect}
                         options={SLIDER_EFFECT_OPTIONS}
                         onChange={(value) => setAttributes({ slideEffect: value })}
+                    />
+                </PanelBody>
+            )}
+
+            {showNavigation && (
+                <PanelBody 
+                    title={__("Navigation", "gslider-blocks")} 
+                    opened={openPanels.general === "navigation"}
+                    onToggle={() => togglePanel("general", "navigation")}
+                >
+                    <SelectControls
+                        label={__("Navigation Type", "gslider-blocks")}
+                        value={navigationArrowPosition}
+                        options={NAVIGATION_ARROW_POSITION}
+                        onChange={(value) => setAttributes({ navigationArrowPosition: value })}
                     />
                 </PanelBody>
             )}
@@ -1971,44 +1983,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     units={navigationArrowHeightUnits}
                     step={1}
                     resetFallbackValue={"46"}
-                />
-                <ResponsiveRangeControl
-                    min={0}
-                    max={100}
-                    label={__("Position", "gslider-blocks")}
-                    rangeValue={navigationArrowPosition}
-                    onChangeValue={(value) => setAttributes({ navigationArrowPosition: value })}
-                    onUnitChange={(value) => setAttributes({ navigationArrowPositionUnits: value })}
-                    deviceType={deviceType}
-                    units={navigationArrowPositionUnits}
-                    step={1}
-                    resetFallbackValue={"50"}
-                />
-
-                <ResponsiveRangeControl
-                    min={-100}
-                    max={100}
-                    label={__("Left", "gslider-blocks")}
-                    rangeValue={navigationArrowLeftOffset}
-                    onChangeValue={(value) => setAttributes({ navigationArrowLeftOffset: value })}
-                    onUnitChange={(value) => setAttributes({ navigationArrowLeftOffsetUnits: value })}
-                    deviceType={deviceType}
-                    units={navigationArrowLeftOffsetUnits}
-                    step={1}
-                    resetFallbackValue={""}
-                />
-
-                <ResponsiveRangeControl
-                    min={-100}
-                    max={100}
-                    label={__("Right", "gslider-blocks")}
-                    rangeValue={navigationArrowRightOffset}
-                    onChangeValue={(value) => setAttributes({ navigationArrowRightOffset: value })}
-                    onUnitChange={(value) => setAttributes({ navigationArrowRightOffsetUnits: value })}
-                    deviceType={deviceType}
-                    units={navigationArrowRightOffsetUnits}
-                    step={1}
-                    resetFallbackValue={""}
                 />
 
                 <SwitcherControl
@@ -3224,6 +3198,62 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${secondaryButtonBorderHoverColor ? `border-color: ${secondaryButtonBorderHoverColor};` : ''}
             ${secondaryButtonBoxShadowHoverCssValue ? `box-shadow: ${secondaryButtonBoxShadowHoverCssValue};` : ''}
         }
+
+
+        ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
+
+            .${blockId} .gslider-navigation-wrapper.${navigationArrowPosition} {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                position: absolute;
+                z-index: 100;
+        
+                ${navigationArrowPosition === 'top-left' ? `
+                    top: 0;
+                    left: 0;
+                ` : ''}
+        
+                ${navigationArrowPosition === 'top-center' ? `
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                ` : ''}
+        
+                ${navigationArrowPosition === 'top-right' ? `
+                    top: 0;
+                    right: 0;
+                ` : ''}
+        
+                ${navigationArrowPosition === 'bottom-left' ? `
+                    bottom: 0;
+                    left: 0;
+                ` : ''}
+        
+                ${navigationArrowPosition === 'bottom-center' ? `
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                ` : ''}
+        
+                ${navigationArrowPosition === 'bottom-right' ? `
+                    bottom: 0;
+                    right: 0;
+                ` : ''}
+            }
+        
+            .${blockId} .gslider-navigation-wrapper.${navigationArrowPosition} .swiper-button-prev,
+            .${blockId} .gslider-navigation-wrapper.${navigationArrowPosition} .swiper-button-next {
+                position: relative;
+                top: auto;
+                right: auto;
+                bottom: auto;
+                left: auto;
+                margin: 0 !important;
+            }
+        ` : ''}
+        
         
         .${blockId} .swiper-button-prev,
         .${blockId} .swiper-button-next {
@@ -3240,7 +3270,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${navigationArrowBoxShadowCssValue ? `box-shadow: ${navigationArrowBoxShadowCssValue};` : ''}
             ${navigationArrowWidth.Desktop ? `width: ${navigationArrowWidth.Desktop}${navigationArrowWidthUnits.Desktop};` : ''}
             ${navigationArrowHeight.Desktop ? `height: ${navigationArrowHeight.Desktop}${navigationArrowHeightUnits.Desktop};` : ''}
-            ${navigationArrowPosition.Desktop ? `top: ${navigationArrowPosition.Desktop}${navigationArrowPositionUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
         .${blockId} .swiper-button-prev:hover,
@@ -3258,13 +3287,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         .${blockId} .swiper-button-prev:after,
         .${blockId} .swiper-button-next:after {
             ${navigationArrowSize.Desktop ? `font-size: ${navigationArrowSize.Desktop}${navigationArrowSizeUnits.Desktop};` : ''}
-        }
-
-        .${blockId} .swiper-button-prev {
-            ${navigationArrowLeftOffset.Desktop ? `left: ${navigationArrowLeftOffset.Desktop}${navigationArrowLeftOffsetUnits.Desktop};` : ''}
-        }
-        .${blockId} .swiper-button-next {
-            ${navigationArrowRightOffset.Desktop ? `right: ${navigationArrowRightOffset.Desktop}${navigationArrowRightOffsetUnits.Desktop};` : ''}
         }
 
         .${blockId} .swiper-pagination {
@@ -3407,19 +3429,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${navigationArrowTabletBorderRadiusCssStyle ? `border-radius: ${navigationArrowTabletBorderRadiusCssStyle};` : ''}
                 ${navigationArrowWidth.Tablet ? `width: ${navigationArrowWidth.Tablet}${navigationArrowWidthUnits.Tablet};` : ''}
                 ${navigationArrowHeight.Tablet ? `height: ${navigationArrowHeight.Tablet}${navigationArrowHeightUnits.Tablet};` : ''}
-                ${navigationArrowPosition.Tablet ? `top: ${navigationArrowPosition.Tablet}${navigationArrowPositionUnits.Tablet};` : ''}
             }
 
             .${blockId} .swiper-button-prev:after,
             .${blockId} .swiper-button-next:after {
                 ${navigationArrowSize.Tablet ? `font-size: ${navigationArrowSize.Tablet}${navigationArrowSizeUnits.Tablet};` : ''}
-            }
-
-            .${blockId} .swiper-button-prev {
-                ${navigationArrowLeftOffset.Tablet ? `left: ${navigationArrowLeftOffset.Tablet}${navigationArrowLeftOffsetUnits.Tablet};` : ''}
-            }
-            .${blockId} .swiper-button-next {
-                ${navigationArrowRightOffset.Tablet ? `right: ${navigationArrowRightOffset.Tablet}${navigationArrowRightOffsetUnits.Tablet};` : ''}
             }
 
             .${blockId} .swiper-pagination {
@@ -3540,19 +3554,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${navigationArrowMobileBorderRadiusCssStyle ? `border-radius: ${navigationArrowMobileBorderRadiusCssStyle};` : ''}
                 ${navigationArrowWidth.Mobile ? `width: ${navigationArrowWidth.Mobile}${navigationArrowWidthUnits.Mobile};` : ''}
                 ${navigationArrowHeight.Mobile ? `height: ${navigationArrowHeight.Mobile}${navigationArrowHeightUnits.Mobile};` : ''}
-                ${navigationArrowPosition.Mobile ? `top: ${navigationArrowPosition.Mobile}${navigationArrowPositionUnits.Mobile};` : ''}
             }
 
             .${blockId} .swiper-button-prev:after,
             .${blockId} .swiper-button-next:after {
                 ${navigationArrowSize.Mobile ? `font-size: ${navigationArrowSize.Mobile}${navigationArrowSizeUnits.Mobile};` : ''}
-            }
-
-            .${blockId} .swiper-button-prev {
-                ${navigationArrowLeftOffset.Mobile ? `left: ${navigationArrowLeftOffset.Mobile}${navigationArrowLeftOffsetUnits.Mobile};` : ''}
-            }
-            .${blockId} .swiper-button-next {
-                ${navigationArrowRightOffset.Mobile ? `right: ${navigationArrowRightOffset.Mobile}${navigationArrowRightOffsetUnits.Mobile};` : ''}
             }
 
             .${blockId} .swiper-pagination {
@@ -3965,11 +3971,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         /** Start Position */
         navigationArrowPosition,
-        navigationArrowPositionUnits,
-        navigationArrowRightOffset,
-        navigationArrowRightOffsetUnits,
-        navigationArrowLeftOffset,
-        navigationArrowLeftOffsetUnits,
         /** End Position */
 
         /** Start Dots Margin */

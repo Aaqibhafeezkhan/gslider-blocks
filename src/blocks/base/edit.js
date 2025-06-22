@@ -64,6 +64,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         descriptionHtmlTag,
         globalID,
         globalClass,
+        navigationArrowPosition,
 	} = attributes;
 
 	// Block props for container
@@ -85,7 +86,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     // Refs for navigation buttons
     const prevRef = useRef(null);
     const nextRef = useRef(null);
-    const paginationRef = useRef(null);
 
     /**
      * Initializes and updates Swiper instance when slider configuration changes
@@ -143,7 +143,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         pagination: showPagination
             ? {
-                el: paginationRef.current,
+                el: '.swiper-pagination',
                 type: paginationType,
                 dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
                 clickable: true,
@@ -228,16 +228,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 swiper.navigation.init();
                 swiper.navigation.update();
             }
-    
-            // Handle Pagination
-            if (showPagination && paginationRef.current) {
-                swiper.params.pagination.el = paginationRef.current;
-                swiper.pagination.destroy();
-                swiper.pagination.init();
-                swiper.pagination.update();
-            }
+
         }, 0);
-    }, [swiperKey, showNavigation, showPagination]);
+    }, [swiperKey, showNavigation]);
     
 
     /**
@@ -618,7 +611,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
                     {showNavigation && (
                         <>
-                            <div className="gslider-navigation-wrapper">
+                            <div className={`gslider-navigation-wrapper ${navigationArrowPosition}`}>
                                 <div ref={prevRef} className="swiper-button-prev" aria-label="Previous slide"></div>
                                 <div ref={nextRef} className="swiper-button-next" aria-label="Next slide"></div>
                             </div>
@@ -627,7 +620,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     {showPagination && (
                         <>
                             <div className="gslider-pagination-wrapper">
-                                <div ref={paginationRef} className="swiper-pagination"></div>
+                                <div className="swiper-pagination"></div>
                             </div>
                         </>
                     )}

@@ -33,6 +33,7 @@ export default function Save({ attributes }) {
         descriptionHtmlTag,
         globalID,
         globalClass,
+        navigationArrowPosition,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -217,7 +218,7 @@ export default function Save({ attributes }) {
                 </div>
                 {showNavigation && 
                     <>
-                        <div className="gslider-navigation-wrapper">
+                        <div className={`gslider-navigation-wrapper ${navigationArrowPosition}`}>
                             <div className="swiper-button-prev" aria-label="Previous slide"></div>
                             <div className="swiper-button-next" aria-label="Next slide"></div>
                         </div>
