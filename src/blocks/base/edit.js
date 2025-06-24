@@ -64,6 +64,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         descriptionHtmlTag,
         globalID,
         globalClass,
+        navigationArrowPositionType,
         navigationArrowPosition,
 	} = attributes;
 
@@ -609,9 +610,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						</SwiperSlide>
 					))}
 
-                    {showNavigation && (
+                    {showNavigation && navigationArrowPositionType === 'inside' && (
                         <>
-                            <div className={`gslider-navigation-wrapper ${navigationArrowPosition}`}>
+                            <div className={`gslider-navigation-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                                 <div ref={prevRef} className="swiper-button-prev" aria-label="Previous slide"></div>
                                 <div ref={nextRef} className="swiper-button-next" aria-label="Next slide"></div>
                             </div>
@@ -625,6 +626,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         </>
                     )}
 				</Swiper>
+
+                {showNavigation && navigationArrowPositionType === 'outside' && (
+                    <>
+                        <div className={`gslider-navigation-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                            <div ref={prevRef} className="swiper-button-prev" aria-label="Previous slide"></div>
+                            <div ref={nextRef} className="swiper-button-next" aria-label="Next slide"></div>
+                        </div>
+                    </>
+                )}
 			</div>
 		</>
 	);

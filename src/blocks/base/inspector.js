@@ -14,6 +14,7 @@ import {
     SLIDER_TYPE,
     PAGINATION_TYPE,
     NORMAL_ACTIVE,
+    NAVIGATION_ARROW_POSITION_TYPE,
     NAVIGATION_ARROW_POSITION
 
 } from "@Constants";
@@ -417,6 +418,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
 
         /** Start Position */
+        navigationArrowPositionType,
         navigationArrowPosition,
         /** End Position */
 
@@ -1113,8 +1115,23 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     opened={openPanels.general === "navigation"}
                     onToggle={() => togglePanel("general", "navigation")}
                 >
+                    <BaseControl
+                        label={__("Position Type", "gslider-blocks")}
+                    >
+                        <ButtonGroup className="gslider-setting-switcher-panel-btn">
+                            {NAVIGATION_ARROW_POSITION_TYPE.map((item, key) => (
+                                <Button
+                                    key={key}
+                                    onClick={() => setAttributes({ navigationArrowPositionType: item.value })}
+                                    className={`gslider-setting-switcher-panel-btn-switcher ${navigationArrowPositionType === item.value ? 'active' : ''}`}
+                                >
+                                    {item.label}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                    </BaseControl>
                     <SelectControls
-                        label={__("Navigation Type", "gslider-blocks")}
+                        label={__("Position", "gslider-blocks")}
                         value={navigationArrowPosition}
                         options={NAVIGATION_ARROW_POSITION}
                         onChange={(value) => setAttributes({ navigationArrowPosition: value })}
@@ -3970,6 +3987,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Box Shadow */
 
         /** Start Position */
+        navigationArrowPositionType,
         navigationArrowPosition,
         /** End Position */
 

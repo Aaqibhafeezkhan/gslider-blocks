@@ -33,6 +33,7 @@ export default function Save({ attributes }) {
         descriptionHtmlTag,
         globalID,
         globalClass,
+        navigationArrowPositionType,
         navigationArrowPosition,
     } = attributes;
 
@@ -216,14 +217,14 @@ export default function Save({ attributes }) {
                         </div>
                     ))}
                 </div>
-                {showNavigation && 
+                {showNavigation && navigationArrowPositionType === 'inside' && (
                     <>
-                        <div className={`gslider-navigation-wrapper ${navigationArrowPosition}`}>
+                        <div className={`gslider-navigation-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                             <div className="swiper-button-prev" aria-label="Previous slide"></div>
                             <div className="swiper-button-next" aria-label="Next slide"></div>
                         </div>
                     </>
-                }
+                )}
                 {showPagination && (
                     <>
                         <div className="gslider-pagination-wrapper">
@@ -232,6 +233,14 @@ export default function Save({ attributes }) {
                     </>
                 )}
             </div>
+            {showNavigation && navigationArrowPositionType === 'outside' && (
+                <>
+                    <div className={`gslider-navigation-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                        <div className="swiper-button-prev" aria-label="Previous slide"></div>
+                        <div className="swiper-button-next" aria-label="Next slide"></div>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

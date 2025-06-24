@@ -98,27 +98,32 @@ export const BORDER_STYLES = [
 ];
 
 export const SLIDER_EFFECT_OPTIONS = [
-	{ value: 'slide', label: __('Slide', 'gslider-blocks') },
-	{ value: 'fade', label: __('Fade', 'gslider-blocks') },
-	{ value: 'coverflow', label: __('Coverflow', 'gslider-blocks') },
-	{ value: 'flip', label: __('Flip', 'gslider-blocks') },
-	{ value: 'creative', label: __('Creative', 'gslider-blocks') },
+	{ label: __('Slide', 'gslider-blocks'), value: 'slide' },
+	{ label: __('Fade', 'gslider-blocks'), value: 'fade' },
+	{ label: __('Coverflow', 'gslider-blocks'), value: 'coverflow' },
+	{ label: __('Flip', 'gslider-blocks'), value: 'flip' },
+	{ label: __('Creative', 'gslider-blocks'), value: 'creative' },
 ];
 
 export const CAROUSEL_EFFECT_OPTIONS = [
-	{ value: 'slide', label: __('Slide', 'gslider-blocks') },
-	{ value: 'coverflow', label: __('Coverflow', 'gslider-blocks') },
+	{ label: __('Slide', 'gslider-blocks'), value: 'slide' },
+	{ label: __('Coverflow', 'gslider-blocks'), value: 'coverflow' },
 ];
 
 export const SLIDER_TYPE = [
-	{ value: 'slider', label: __('Slider', 'gslider-blocks') },
-	{ value: 'carousel', label: __('Carousel', 'gslider-blocks') },
+	{ label: __('Slider', 'gslider-blocks'), value: 'slider' },
+	{ label: __('Carousel', 'gslider-blocks'), value: 'carousel' },
 ];
 
 export const PAGINATION_TYPE = [
-	{ value: 'bullets', label: __('Bullets', 'gslider-blocks') },
-	{ value: 'fraction', label: __('Fraction', 'gslider-blocks') },
-	{ value: 'progressbar', label: __('Progress Bar', 'gslider-blocks') }
+	{ label: __('Bullets', 'gslider-blocks'), value: 'bullets' },
+	{ label: __('Fraction', 'gslider-blocks'), value: 'fraction' },
+	{ label: __('Progress Bar', 'gslider-blocks'), value: 'progressbar' }
+];
+
+export const NAVIGATION_ARROW_POSITION_TYPE = [
+	{ label: __('Inside', 'gslider-blocks'), value: 'inside' },
+	{ label: __('Outside', 'gslider-blocks'), value: 'outside' },
 ];
 
 export const NAVIGATION_ARROW_POSITION = [

@@ -2274,7 +2274,11 @@ const attributes = {
         default: "",
     },
     /** End Arrow Box Shadow */
-
+    
+    navigationArrowPositionType: {
+        type: "string",
+        default: "inside",
+    },
 
     navigationArrowPosition: {
         type: "string",
