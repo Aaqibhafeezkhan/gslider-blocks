@@ -3217,9 +3217,39 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         }
 
 
+        .${blockId}.gslider-base-wrapper.outside {
+                ${navigationArrowPosition === 'top-left' ? `
+                    padding: clamp(40px, 6vw, 60px) 0 0;
+                ` : ''}
+        
+                ${navigationArrowPosition === 'top-center' ? `
+                    padding: clamp(40px, 6vw, 60px) 0 0;
+                ` : ''}
+        
+                ${navigationArrowPosition === 'top-right' ? `
+                    padding: clamp(40px, 6vw, 60px) 0 0;
+                ` : ''}
+        
+                ${navigationArrowPosition === 'bottom-left' ? `
+                    padding: 0 0 clamp(40px, 6vw, 60px);
+                ` : ''}
+        
+                ${navigationArrowPosition === 'bottom-center' ? `
+                    padding: 0 0 clamp(40px, 6vw, 60px);
+                ` : ''}
+        
+                ${navigationArrowPosition === 'bottom-right' ? `
+                    padding: 0 0 clamp(40px, 6vw, 60px);
+                ` : ''}
+                ${navigationArrowPosition === 'center' ? `
+                    padding: 0 clamp(40px, 6vw, 60px);
+
+                ` : ''}
+        }
+
         ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
-            .${blockId} .gslider-navigation-wrapper.${navigationArrowPosition} {
+            .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -3260,8 +3290,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ` : ''}
             }
         
-            .${blockId} .gslider-navigation-wrapper.${navigationArrowPosition} .swiper-button-prev,
-            .${blockId} .gslider-navigation-wrapper.${navigationArrowPosition} .swiper-button-next {
+            .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} .swiper-button-prev,
+            .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} .swiper-button-next {
                 position: relative;
                 top: auto;
                 right: auto;

@@ -70,7 +70,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Block props for container
 	const blockProps = useBlockProps({
-		className: `gslider-base-wrapper ${blockId}`,
+		className: `gslider-base-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
 	});
 
 	// Local state management for slider items and active slide index
@@ -134,7 +134,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         mousewheel: mousewheelControl,
     
         // Navigation and pagination settings
-        // navigation: showNavigation,
         navigation: showNavigation
         ? {
             prevEl: prevRef.current,
@@ -144,7 +143,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         pagination: showPagination
             ? {
-                el: '.swiper-pagination',
                 type: paginationType,
                 dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
                 clickable: true,
@@ -182,7 +180,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showPagination,
         paginationType,
         dynamicBullets,
-        setSelectedSlideIndex
+        setSelectedSlideIndex,
+        navigationArrowPositionType,
+        navigationArrowPosition,
     ]);
 
     /**
@@ -209,29 +209,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		carouselPerColumn,
 		carouselPerColumnGap,
 		paginationType,
-		dynamicBullets
+		dynamicBullets,
+        navigationArrowPositionType,
+        navigationArrowPosition
 	]);
-
-    /**
-     * Updates navigation button references when showNavigation changes
-     */
-    useEffect(() => {
-        setTimeout(() => {
-            const swiper = document.querySelector('.swiper')?.swiper;
-    
-            if (!swiper) return;
-    
-            // Handle Navigation
-            if (showNavigation && prevRef.current && nextRef.current) {
-                swiper.params.navigation.prevEl = prevRef.current;
-                swiper.params.navigation.nextEl = nextRef.current;
-                swiper.navigation.destroy();
-                swiper.navigation.init();
-                swiper.navigation.update();
-            }
-
-        }, 0);
-    }, [swiperKey, showNavigation]);
     
 
     /**
@@ -498,6 +479,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						EffectCreative,
 						EffectCards
 					]}
+
+                    onSwiper={(swiper) => {
+                        setTimeout(() => {
+                            if (showNavigation && prevRef.current && nextRef.current) {
+                                swiper.params.navigation.prevEl = prevRef.current;
+                                swiper.params.navigation.nextEl = nextRef.current;
+                                
+                                swiper.navigation.destroy();
+                                swiper.navigation.init();
+                                swiper.navigation.update();
+                            }
+                        }, 100); // delay ensures DOM refs are ready
+                    }}
 				>
 					{sliderItemList.map((item, index) => (
 						<SwiperSlide key={item.id}>
@@ -615,13 +609,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             <div className={`gslider-navigation-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                                 <div ref={prevRef} className="swiper-button-prev" aria-label="Previous slide"></div>
                                 <div ref={nextRef} className="swiper-button-next" aria-label="Next slide"></div>
-                            </div>
-                        </>
-                    )}
-                    {showPagination && (
-                        <>
-                            <div className="gslider-pagination-wrapper">
-                                <div className="swiper-pagination"></div>
                             </div>
                         </>
                     )}
