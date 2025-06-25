@@ -420,6 +420,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** Start Position */
         navigationArrowPositionType,
         navigationArrowPosition,
+
+        navigationArrowPositionTopOffset,
+        navigationArrowPositionTopOffsetUnits,
+        navigationArrowPositionLeftOffset,
+        navigationArrowPositionLeftOffsetUnits,
+        navigationArrowPositionRightOffset,
+        navigationArrowPositionRightOffsetUnits,
+        navigationArrowPositionBottomOffset,
+        navigationArrowPositionBottomOffsetUnits,
+
+        navigationArrowPositionOutsidePadding,
+        navigationArrowPositionOutsidePaddingUnits,
         /** End Position */
 
         /** Start Dots Margin */
@@ -1136,6 +1148,194 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         options={NAVIGATION_ARROW_POSITION}
                         onChange={(value) => setAttributes({ navigationArrowPosition: value })}
                     />
+
+                    {navigationArrowPosition === 'top-left' && (
+                        <>
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Top Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionTopOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionTopOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionTopOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionTopOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Left Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionLeftOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionLeftOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionLeftOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionLeftOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+                    {navigationArrowPosition === 'top-center' && (
+                        <>
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Top Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionTopOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionTopOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionTopOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionTopOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Left Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionLeftOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionLeftOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionLeftOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionLeftOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+
+                    {navigationArrowPosition === 'top-right' && (
+                        <>
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Top Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionTopOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionTopOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionTopOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionTopOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Right Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionRightOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionRightOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionRightOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionRightOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+
+                    {navigationArrowPosition === 'bottom-left' && (
+                        <>
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Bottom Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionBottomOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionBottomOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionBottomOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionBottomOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Left Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionLeftOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionLeftOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionLeftOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionLeftOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+                    {navigationArrowPosition === 'bottom-center' && (
+                        <>
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Top Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionBottomOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionBottomOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionBottomOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionBottomOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Left Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionLeftOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionLeftOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionLeftOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionLeftOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+
+                    {navigationArrowPosition === 'bottom-right' && (
+                        <>
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Top Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionBottomOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionBottomOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionBottomOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionBottomOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <ResponsiveRangeControl
+                                min={0}
+                                max={100}
+                                label={__("Right Offset", "gslider-blocks")}
+                                rangeValue={navigationArrowPositionRightOffset}
+                                onChangeValue={(value) => setAttributes({ navigationArrowPositionRightOffset: value })}
+                                onUnitChange={(value) => setAttributes({ navigationArrowPositionRightOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={navigationArrowPositionRightOffsetUnits}
+                                step={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+
+                    {navigationArrowPositionType === 'outside' && (
+                        <ResponsiveRangeControl
+                            min={0}
+                            max={100}
+                            label={__("Padding", "gslider-blocks")}
+                            rangeValue={navigationArrowPositionOutsidePadding}
+                            onChangeValue={(value) => setAttributes({ navigationArrowPositionOutsidePadding: value })}
+                            onUnitChange={(value) => setAttributes({ navigationArrowPositionOutsidePaddingUnits: value })}
+                            deviceType={deviceType}
+                            units={navigationArrowPositionOutsidePaddingUnits}
+                            step={1}
+                            resetFallbackValue={"60"}
+                        /> 
+                    )}
+
                 </PanelBody>
             )}
 
@@ -3043,6 +3243,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Tablet'));
     const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Mobile'));
 
+
+    /** Start Navigation Arrow Position */
+    const navigationTopOffsetValue = navigationArrowPositionTopOffset?.[deviceType] || "0";
+    const navigationTopOffsetUnit = navigationArrowPositionTopOffsetUnits?.[deviceType] || "%";
+
+    const navigationBottomOffsetValue = navigationArrowPositionBottomOffset?.[deviceType] || "0";
+    const navigationBottomOffsetUnit = navigationArrowPositionBottomOffsetUnits?.[deviceType] || "%";
+
+    const navigationLeftOffsetValue = navigationArrowPositionLeftOffset?.[deviceType] || "0";
+    const navigationLeftOffsetUnit = navigationArrowPositionLeftOffsetUnits?.[deviceType] || "%";
+
+    const navigationRightOffsetValue = navigationArrowPositionRightOffset?.[deviceType] || "0";
+    const navigationRightOffsetUnit = navigationArrowPositionRightOffsetUnits?.[deviceType] || "%";
+    /** End Navigation Arrow Position */    
+
+
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
 
@@ -3216,35 +3432,19 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${secondaryButtonBoxShadowHoverCssValue ? `box-shadow: ${secondaryButtonBoxShadowHoverCssValue};` : ''}
         }
 
-
         .${blockId}.gslider-base-wrapper.outside {
-                ${navigationArrowPosition === 'top-left' ? `
-                    padding: clamp(40px, 6vw, 60px) 0 0;
-                ` : ''}
-        
-                ${navigationArrowPosition === 'top-center' ? `
-                    padding: clamp(40px, 6vw, 60px) 0 0;
-                ` : ''}
-        
-                ${navigationArrowPosition === 'top-right' ? `
-                    padding: clamp(40px, 6vw, 60px) 0 0;
-                ` : ''}
-        
-                ${navigationArrowPosition === 'bottom-left' ? `
-                    padding: 0 0 clamp(40px, 6vw, 60px);
-                ` : ''}
-        
-                ${navigationArrowPosition === 'bottom-center' ? `
-                    padding: 0 0 clamp(40px, 6vw, 60px);
-                ` : ''}
-        
-                ${navigationArrowPosition === 'bottom-right' ? `
-                    padding: 0 0 clamp(40px, 6vw, 60px);
-                ` : ''}
-                ${navigationArrowPosition === 'center' ? `
-                    padding: 0 clamp(40px, 6vw, 60px);
+            ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
+                padding: ${navigationArrowPositionOutsidePadding.Desktop}${navigationArrowPositionOutsidePaddingUnits.Desktop} 0 0;
+            ` : ''}
+    
+            ${navigationArrowPosition === 'bottom-left' || navigationArrowPosition === 'bottom-center' || navigationArrowPosition === 'bottom-right' ? `
+                padding: 0 0 ${navigationArrowPositionOutsidePadding.Desktop}${navigationArrowPositionOutsidePaddingUnits.Desktop};
+            ` : ''}
 
-                ` : ''}
+            ${navigationArrowPosition === 'center' ? `
+                padding: 0 ${navigationArrowPositionOutsidePadding.Desktop}${navigationArrowPositionOutsidePaddingUnits.Desktop};
+
+            ` : ''}
         }
 
         ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
@@ -3470,6 +3670,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${secondaryButtonTabletPaddingCssStyle ? `padding: ${secondaryButtonTabletPaddingCssStyle};` : ''}
             }
 
+            .${blockId}.gslider-base-wrapper.outside {
+                ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
+                    padding: ${navigationArrowPositionOutsidePadding.Tablet}${navigationArrowPositionOutsidePaddingUnits.Tablet} 0 0;
+                ` : ''}
+        
+                ${navigationArrowPosition === 'bottom-left' || navigationArrowPosition === 'bottom-center' || navigationArrowPosition === 'bottom-right' ? `
+                    padding: 0 0 ${navigationArrowPositionOutsidePadding.Tablet}${navigationArrowPositionOutsidePaddingUnits.Tablet};
+                ` : ''}
+        
+                ${navigationArrowPosition === 'center' ? `
+                    padding: 0 ${navigationArrowPositionOutsidePadding.Tablet}${navigationArrowPositionOutsidePaddingUnits.Tablet};
+
+                ` : ''}
+            }
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${navigationArrowTabletBorderCssStyle ? `border-width: ${navigationArrowTabletBorderCssStyle};` : ''}  
@@ -3593,6 +3808,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${secondaryButtonMobileBorderRadiusCssStyle ? `border-radius: ${secondaryButtonMobileBorderRadiusCssStyle};` : ''}
                 ${secondaryButtonMobileMarginCssStyle ? `margin: ${secondaryButtonMobileMarginCssStyle};` : ''} 
                 ${secondaryButtonMobilePaddingCssStyle ? `padding: ${secondaryButtonMobilePaddingCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper.outside {
+                ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
+                    padding: ${navigationArrowPositionOutsidePadding.Mobile}${navigationArrowPositionOutsidePaddingUnits.Mobile} 0 0;
+                ` : ''}
+        
+                ${navigationArrowPosition === 'bottom-left' || navigationArrowPosition === 'bottom-center' || navigationArrowPosition === 'bottom-right' ? `
+                    padding: 0 0 ${navigationArrowPositionOutsidePadding.Mobile}${navigationArrowPositionOutsidePaddingUnits.Mobile};
+                ` : ''}
+        
+                ${navigationArrowPosition === 'center' ? `
+                    padding: 0 ${navigationArrowPositionOutsidePadding.Mobile}${navigationArrowPositionOutsidePaddingUnits.Mobile};
+
+                ` : ''}
             }
 
             .${blockId} .swiper-button-prev,
@@ -4019,6 +4249,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** Start Position */
         navigationArrowPositionType,
         navigationArrowPosition,
+
+        navigationArrowPositionTopOffset,
+        navigationArrowPositionTopOffsetUnits,
+        navigationArrowPositionLeftOffset,
+        navigationArrowPositionLeftOffsetUnits,
+        navigationArrowPositionRightOffset,
+        navigationArrowPositionRightOffsetUnits,
+        navigationArrowPositionBottomOffset,
+        navigationArrowPositionBottomOffsetUnits,
+
+        navigationArrowPositionOutsidePadding,
+        navigationArrowPositionOutsidePaddingUnits,
         /** End Position */
 
         /** Start Dots Margin */

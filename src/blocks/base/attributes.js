@@ -2284,7 +2284,86 @@ const attributes = {
         type: "string",
         default: "center",
     },
-
+    navigationArrowPositionTopOffset: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    navigationArrowPositionTopOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    navigationArrowPositionLeftOffset: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    navigationArrowPositionLeftOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    navigationArrowPositionRightOffset: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    navigationArrowPositionRightOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    navigationArrowPositionBottomOffset: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    navigationArrowPositionBottomOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    navigationArrowPositionOutsidePadding: {
+        type: "object",
+        default: {
+            Desktop: "60",
+            Tablet: "60",
+            Mobile: "45",
+        },
+    },
+    navigationArrowPositionOutsidePaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
     // /** Start Arrow Position */
     // navigationArrowPosition: {
 	// 	type: "object",
