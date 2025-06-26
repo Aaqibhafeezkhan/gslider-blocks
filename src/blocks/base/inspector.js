@@ -15,7 +15,8 @@ import {
     PAGINATION_TYPE,
     NORMAL_ACTIVE,
     NAVIGATION_ARROW_POSITION_TYPE,
-    NAVIGATION_ARROW_POSITION
+    NAVIGATION_ARROW_POSITION,
+    NAVIGATION_ARROW_DIRECTION
 
 } from "@Constants";
 
@@ -420,6 +421,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** Start Position */
         navigationArrowPositionType,
         navigationArrowPosition,
+        navigationArrowDirection,
 
         navigationArrowPositionTopOffset,
         navigationArrowPositionTopOffsetUnits,
@@ -429,6 +431,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         navigationArrowPositionRightOffsetUnits,
         navigationArrowPositionBottomOffset,
         navigationArrowPositionBottomOffsetUnits,
+
+        navigationArrowGap,
+        navigationArrowGapUnits,
 
         navigationArrowPositionOutsidePadding,
         navigationArrowPositionOutsidePaddingUnits,
@@ -1149,6 +1154,15 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         onChange={(value) => setAttributes({ navigationArrowPosition: value })}
                     />
 
+                    {navigationArrowPosition !== 'center' && (
+                        <SelectControls
+                            label={__("Arrow Direction", "gslider-blocks")}
+                            value={navigationArrowDirection}
+                            options={NAVIGATION_ARROW_DIRECTION}
+                            onChange={(value) => setAttributes({ navigationArrowDirection: value })}
+                        />
+                    )}
+
                     {navigationArrowPosition === 'top-left' && (
                         <>
                             <ResponsiveRangeControl
@@ -1319,6 +1333,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                                 resetFallbackValue={"0"}
                             />
                         </>
+                    )}
+
+                    {navigationArrowPosition !== 'center' && (
+                        <ResponsiveRangeControl
+                            min={0}
+                            max={100}
+                            label={__("Gap", "gslider-blocks")}
+                            rangeValue={navigationArrowGap} 
+                            onChangeValue={(value) => setAttributes({ navigationArrowGap: value })}
+                            onUnitChange={(value) => setAttributes({ navigationArrowGapUnits: value })}
+                            deviceType={deviceType}
+                            units={navigationArrowGapUnits}
+                            step={1}
+                            resetFallbackValue={"10"}
+                        />
                     )}
 
                     {navigationArrowPositionType === 'outside' && (
@@ -3241,22 +3270,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
     const globalDesktopBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Desktop'));
     const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Tablet'));
-    const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Mobile'));
-
-
-    /** Start Navigation Arrow Position */
-    const navigationTopOffsetValue = navigationArrowPositionTopOffset?.[deviceType] || "0";
-    const navigationTopOffsetUnit = navigationArrowPositionTopOffsetUnits?.[deviceType] || "%";
-
-    const navigationBottomOffsetValue = navigationArrowPositionBottomOffset?.[deviceType] || "0";
-    const navigationBottomOffsetUnit = navigationArrowPositionBottomOffsetUnits?.[deviceType] || "%";
-
-    const navigationLeftOffsetValue = navigationArrowPositionLeftOffset?.[deviceType] || "0";
-    const navigationLeftOffsetUnit = navigationArrowPositionLeftOffsetUnits?.[deviceType] || "%";
-
-    const navigationRightOffsetValue = navigationArrowPositionRightOffset?.[deviceType] || "0";
-    const navigationRightOffsetUnit = navigationArrowPositionRightOffsetUnits?.[deviceType] || "%";
-    /** End Navigation Arrow Position */    
+    const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Mobile'));   
 
 
     /** Start Block Style */
@@ -3453,40 +3467,41 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 10px;
+                flex-direction: ${navigationArrowDirection};
+                gap: ${navigationArrowGap.Desktop ? `${navigationArrowGap.Desktop}${navigationArrowGapUnits.Desktop}` : '10px'};
                 position: absolute;
                 z-index: 100;
         
                 ${navigationArrowPosition === 'top-left' ? `
-                    top: 0;
-                    left: 0;
+                    top: ${navigationArrowPositionTopOffset.Desktop ? `${navigationArrowPositionTopOffset.Desktop}${navigationArrowPositionTopOffsetUnits.Desktop}` : '0'};
+                    left: ${navigationArrowPositionLeftOffset.Desktop ? `${navigationArrowPositionLeftOffset.Desktop}${navigationArrowPositionLeftOffsetUnits.Desktop}` : '0'};
                 ` : ''}
         
                 ${navigationArrowPosition === 'top-center' ? `
-                    top: 0;
-                    left: 50%;
+                    top: ${navigationArrowPositionTopOffset.Desktop ? `${navigationArrowPositionTopOffset.Desktop}${navigationArrowPositionTopOffsetUnits.Desktop}` : '0'};
+                    left: ${navigationArrowPositionLeftOffset.Desktop ? `${navigationArrowPositionLeftOffset.Desktop}${navigationArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
                     transform: translateX(-50%);
                 ` : ''}
         
                 ${navigationArrowPosition === 'top-right' ? `
-                    top: 0;
-                    right: 0;
+                    top: ${navigationArrowPositionTopOffset.Desktop ? `${navigationArrowPositionTopOffset.Desktop}${navigationArrowPositionTopOffsetUnits.Desktop}` : '0'};
+                    right: ${navigationArrowPositionRightOffset.Desktop ? `${navigationArrowPositionRightOffset.Desktop}${navigationArrowPositionRightOffsetUnits.Desktop}` : '0'};
                 ` : ''}
         
                 ${navigationArrowPosition === 'bottom-left' ? `
-                    bottom: 0;
-                    left: 0;
+                    bottom: ${navigationArrowPositionBottomOffset.Desktop ? `${navigationArrowPositionBottomOffset.Desktop}${navigationArrowPositionBottomOffsetUnits.Desktop}` : '0'};
+                    left: ${navigationArrowPositionLeftOffset.Desktop ? `${navigationArrowPositionLeftOffset.Desktop}${navigationArrowPositionLeftOffsetUnits.Desktop}` : '0'};
                 ` : ''}
         
                 ${navigationArrowPosition === 'bottom-center' ? `
-                    bottom: 0;
-                    left: 50%;
+                    bottom: ${navigationArrowPositionBottomOffset.Desktop ? `${navigationArrowPositionBottomOffset.Desktop}${navigationArrowPositionBottomOffsetUnits.Desktop}` : '0'};
+                    left: ${navigationArrowPositionLeftOffset.Desktop ? `${navigationArrowPositionLeftOffset.Desktop}${navigationArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
                     transform: translateX(-50%);
                 ` : ''}
         
                 ${navigationArrowPosition === 'bottom-right' ? `
-                    bottom: 0;
-                    right: 0;
+                    bottom: ${navigationArrowPositionBottomOffset.Desktop ? `${navigationArrowPositionBottomOffset.Desktop}${navigationArrowPositionBottomOffsetUnits.Desktop}` : '0'};
+                    right: ${navigationArrowPositionRightOffset.Desktop ? `${navigationArrowPositionRightOffset.Desktop}${navigationArrowPositionRightOffsetUnits.Desktop}` : '0'};
                 ` : ''}
             }
         
@@ -3500,7 +3515,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 margin: 0 !important;
             }
         ` : ''}
-        
         
         .${blockId} .swiper-button-prev,
         .${blockId} .swiper-button-next {
@@ -3685,6 +3699,45 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ` : ''}
             }
 
+            ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
+
+                .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
+                    gap: ${navigationArrowGap.Tablet ? `${navigationArrowGap.Tablet}${navigationArrowGapUnits.Tablet}` : '10px'};
+                    ${navigationArrowPosition === 'top-left' ? `
+                        top: ${navigationArrowPositionTopOffset.Tablet ? `${navigationArrowPositionTopOffset.Tablet}${navigationArrowPositionTopOffsetUnits.Tablet}` : '0'};
+                        left: ${navigationArrowPositionLeftOffset.Tablet ? `${navigationArrowPositionLeftOffset.Tablet}${navigationArrowPositionLeftOffsetUnits.Tablet}` : '0'};
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'top-center' ? `
+                        top: ${navigationArrowPositionTopOffset.Tablet ? `${navigationArrowPositionTopOffset.Tablet}${navigationArrowPositionTopOffsetUnits.Tablet}` : '0'};
+                        left: ${navigationArrowPositionLeftOffset.Tablet ? `${navigationArrowPositionLeftOffset.Tablet}${navigationArrowPositionLeftOffsetUnits.Tablet}` : '50%'};
+                        transform: translateX(-50%);
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'top-right' ? `
+                        top: ${navigationArrowPositionTopOffset.Tablet ? `${navigationArrowPositionTopOffset.Tablet}${navigationArrowPositionTopOffsetUnits.Tablet}` : '0'};
+                        right: ${navigationArrowPositionRightOffset.Tablet ? `${navigationArrowPositionRightOffset.Tablet}${navigationArrowPositionRightOffsetUnits.Tablet}` : '0'};
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'bottom-left' ? `
+                        bottom: ${navigationArrowPositionBottomOffset.Tablet ? `${navigationArrowPositionBottomOffset.Tablet}${navigationArrowPositionBottomOffsetUnits.Tablet}` : '0'};
+                        left: ${navigationArrowPositionLeftOffset.Tablet ? `${navigationArrowPositionLeftOffset.Tablet}${navigationArrowPositionLeftOffsetUnits.Tablet}` : '0'};
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'bottom-center' ? `
+                        bottom: ${navigationArrowPositionBottomOffset.Tablet ? `${navigationArrowPositionBottomOffset.Tablet}${navigationArrowPositionBottomOffsetUnits.Tablet}` : '0'};
+                        left: ${navigationArrowPositionLeftOffset.Tablet ? `${navigationArrowPositionLeftOffset.Tablet}${navigationArrowPositionLeftOffsetUnits.Tablet}` : '50%'};
+                        transform: translateX(-50%);
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'bottom-right' ? `
+                        bottom: ${navigationArrowPositionBottomOffset.Tablet ? `${navigationArrowPositionBottomOffset.Tablet}${navigationArrowPositionBottomOffsetUnits.Tablet}` : '0'};
+                        right: ${navigationArrowPositionRightOffset.Tablet ? `${navigationArrowPositionRightOffset.Tablet}${navigationArrowPositionRightOffsetUnits.Tablet}` : '0'};
+                    ` : ''}
+                }
+                    
+            ` : ''}
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${navigationArrowTabletBorderCssStyle ? `border-width: ${navigationArrowTabletBorderCssStyle};` : ''}  
@@ -3824,6 +3877,45 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 ` : ''}
             }
+
+            ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
+
+                .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
+                    gap: ${navigationArrowGap.Mobile ? `${navigationArrowGap.Mobile}${navigationArrowGapUnits.Mobile}` : '10px'};
+                    ${navigationArrowPosition === 'top-left' ? `
+                        top: ${navigationArrowPositionTopOffset.Mobile ? `${navigationArrowPositionTopOffset.Mobile}${navigationArrowPositionTopOffsetUnits.Mobile}` : '0'};
+                        left: ${navigationArrowPositionLeftOffset.Mobile ? `${navigationArrowPositionLeftOffset.Mobile}${navigationArrowPositionLeftOffsetUnits.Mobile}` : '0'};
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'top-center' ? `
+                        top: ${navigationArrowPositionTopOffset.Mobile ? `${navigationArrowPositionTopOffset.Mobile}${navigationArrowPositionTopOffsetUnits.Mobile}` : '0'};
+                        left: ${navigationArrowPositionLeftOffset.Mobile ? `${navigationArrowPositionLeftOffset.Mobile}${navigationArrowPositionLeftOffsetUnits.Mobile}` : '50%'};
+                        transform: translateX(-50%);
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'top-right' ? `
+                        top: ${navigationArrowPositionTopOffset.Mobile ? `${navigationArrowPositionTopOffset.Mobile}${navigationArrowPositionTopOffsetUnits.Mobile}` : '0'};
+                        right: ${navigationArrowPositionRightOffset.Mobile ? `${navigationArrowPositionRightOffset.Mobile}${navigationArrowPositionRightOffsetUnits.Mobile}` : '0'};
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'bottom-left' ? `
+                        bottom: ${navigationArrowPositionBottomOffset.Mobile ? `${navigationArrowPositionBottomOffset.Mobile}${navigationArrowPositionBottomOffsetUnits.Mobile}` : '0'};
+                        left: ${navigationArrowPositionLeftOffset.Mobile ? `${navigationArrowPositionLeftOffset.Mobile}${navigationArrowPositionLeftOffsetUnits.Mobile}` : '0'};
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'bottom-center' ? `
+                        bottom: ${navigationArrowPositionBottomOffset.Mobile ? `${navigationArrowPositionBottomOffset.Mobile}${navigationArrowPositionBottomOffsetUnits.Mobile}` : '0'};
+                        left: ${navigationArrowPositionLeftOffset.Mobile ? `${navigationArrowPositionLeftOffset.Mobile}${navigationArrowPositionLeftOffsetUnits.Mobile}` : '50%'};
+                        transform: translateX(-50%);
+                    ` : ''}
+            
+                    ${navigationArrowPosition === 'bottom-right' ? `
+                        bottom: ${navigationArrowPositionBottomOffset.Mobile ? `${navigationArrowPositionBottomOffset.Mobile}${navigationArrowPositionBottomOffsetUnits.Mobile}` : '0'};
+                        right: ${navigationArrowPositionRightOffset.Mobile ? `${navigationArrowPositionRightOffset.Mobile}${navigationArrowPositionRightOffsetUnits.Mobile}` : '0'};
+                    ` : ''}
+                }
+                    
+            ` : ''}
 
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
@@ -4249,6 +4341,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** Start Position */
         navigationArrowPositionType,
         navigationArrowPosition,
+        navigationArrowDirection,
 
         navigationArrowPositionTopOffset,
         navigationArrowPositionTopOffsetUnits,
@@ -4258,6 +4351,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         navigationArrowPositionRightOffsetUnits,
         navigationArrowPositionBottomOffset,
         navigationArrowPositionBottomOffsetUnits,
+
+        navigationArrowGap,
+        navigationArrowGapUnits,
 
         navigationArrowPositionOutsidePadding,
         navigationArrowPositionOutsidePaddingUnits,

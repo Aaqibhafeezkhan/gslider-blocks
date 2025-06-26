@@ -2284,6 +2284,10 @@ const attributes = {
         type: "string",
         default: "center",
     },
+    navigationArrowDirection: {
+        type: "string",
+        default: "row",
+    },
     navigationArrowPositionTopOffset: {
         type: "object",
         default: {
@@ -2346,6 +2350,22 @@ const attributes = {
             Desktop: "%",
             Tablet: "%",
             Mobile: "%",
+        },
+    },
+    navigationArrowGap: {
+        type: "object",
+        default: {
+            Desktop: "10",
+            Tablet: "10",
+            Mobile: "10",
+        },
+    },
+    navigationArrowGapUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
         },
     },
     navigationArrowPositionOutsidePadding: {

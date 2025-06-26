@@ -135,6 +135,12 @@ export const NAVIGATION_ARROW_POSITION = [
 	{ label: __('Bottom Center', 'gslider-blocks'), value: 'bottom-center' },
 	{ label: __('Bottom Right', 'gslider-blocks'), value: 'bottom-right' },
 ];
+export const NAVIGATION_ARROW_DIRECTION = [
+  { label: __('Row', 'gslider-blocks'), value: 'row' },
+  { label: __('Column', 'gslider-blocks'), value: 'column' },
+  { label: __('Row Reverse', 'gslider-blocks'), value: 'row-reverse' },
+  { label: __('Column Reverse', 'gslider-blocks'), value: 'column-reverse' },
+];
 
 export const NORMAL_ACTIVE = [
 	{ label: __('Normal', 'gslider-blocks'), value: 'normal' },
