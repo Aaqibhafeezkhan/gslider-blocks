@@ -482,15 +482,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
                     onSwiper={(swiper) => {
                         setTimeout(() => {
-                            if (showNavigation && prevRef.current && nextRef.current) {
+                            if (
+                                showNavigation &&
+                                prevRef.current &&
+                                nextRef.current &&
+                                swiper?.params?.navigation &&
+                                swiper.navigation
+                            ) {
                                 swiper.params.navigation.prevEl = prevRef.current;
                                 swiper.params.navigation.nextEl = nextRef.current;
-                                
+
                                 swiper.navigation.destroy();
                                 swiper.navigation.init();
                                 swiper.navigation.update();
                             }
-                        }, 100); // delay ensures DOM refs are ready
+                        }, 100);
                     }}
 				>
 					{sliderItemList.map((item, index) => (
