@@ -5,8 +5,12 @@ import {
 
 } from '@wordpress/components';
 
-
-const InputControls = ({ label, value, onChangeValue, helpText }) => {
+const InputControls = ({ 
+    label='', 
+    value, 
+    onChangeValue, 
+    helpText='',
+}) => {
 
     const handleChange = (newValue) => {
         onChangeValue(newValue);

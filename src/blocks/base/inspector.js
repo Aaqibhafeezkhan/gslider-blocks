@@ -8,6 +8,9 @@ import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseCo
  * Internal Dependencies
  */
 import { 
+    TEXT_ALIGN,
+    VERTICAL_ALIGN,
+    HORIZONTAL_ALIGN,
     HTML_TAGS,
     NORMAL_HOVER,
     BORDER_STYLES,
@@ -921,34 +924,30 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <ResponsiveAlignmentControl
                     label={__("Vertical Alignment", "gslider-blocks")}
+                    options={VERTICAL_ALIGN}
                     globalAlignment={contentVerticalAlignment}
                     setGlobalAlignment={(value) => setAttributes({ contentVerticalAlignment: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
-                    textAlignment={false}
-                    verticalAlignment={true}
-                    horizontalAlignment={false}
+                    className="gslider-vertical-alignment"
                 />
 
                 <ResponsiveAlignmentControl
                     label={__("Horizontal Alignment", "gslider-blocks")}
+                    options={HORIZONTAL_ALIGN}
                     globalAlignment={contentHorizontalAlignment}
                     setGlobalAlignment={(value) => setAttributes({ contentHorizontalAlignment: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
-                    textAlignment={false}
-                    verticalAlignment={false}
-                    horizontalAlignment={true}
                 />
 
                 <ResponsiveAlignmentControl
                     label={__("Text Alignment", "gslider-blocks")}
+                    options={TEXT_ALIGN}
                     globalAlignment={contentAlignment}
                     setGlobalAlignment={(value) => setAttributes({ contentAlignment: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
-                    verticalAlignment={false}
-                    horizontalAlignment={false}
                 />
 
                 <HtmlTagControl
