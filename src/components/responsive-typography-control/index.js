@@ -301,20 +301,20 @@ const ResponsiveTypographyControl = ({
 
                             <SelectControls
                                 label={__("Transform", "gslider-blocks")}
-                                value={textTransform}
                                 options={TEXT_TRANSFORM}
+                                value={textTransform}
                                 onChange={handleTextTransformChange}
                             />
                             <SelectControls
                                 label={__("Style", "gslider-blocks")}
-                                value={fontStyle}
                                 options={FONT_STYLE}
+                                value={fontStyle}
                                 onChange={handleFontStyleChange}
                             />
                             <SelectControls
                                 label={__("Decoration", "gslider-blocks")}
-                                value={textDecoration}
                                 options={TEXT_DECORATION}
+                                value={textDecoration}
                                 onChange={handleTextDecorationChange}
                             />
                             <ResponsiveRangeControl

@@ -5,7 +5,6 @@ import {
     FocalPointPicker,
 } from '@wordpress/components';
 import ResponsiveDeviceControl from '@Components/responsive-device-control';
-import SelectControls from '@Components/select-controls';
 
 const ResponsiveBackgroundImageControl = ({
     label = __("Background Image", "gslider-blocks"),

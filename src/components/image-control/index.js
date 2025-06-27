@@ -4,16 +4,17 @@ import {
     SelectControl,
 } from '@wordpress/components';
 
-const globalImageControl = ({
+const ImageControl = ({
     label = '',
-    globalImageUrl,
-    setglobalImageUrl,
-    globalImageAlt,
-    setglobalImageAlt,
-    globalImageID,
-    setglobalImageID,
-    globalImageSize = '',
-    setglobalImageSize,
+    imageUrl,
+    setImageUrl,
+    imageAlt,
+    setImageAlt,
+    imageID,
+    setImageID,
+    imageSize = '',
+    setImageSize,
+    isImageSize = true,
 
 }) => {
 
@@ -25,14 +26,14 @@ const globalImageControl = ({
             label={label}
             className="gslider-image-control-wrapper"
         >
-            {globalImageUrl ? ( 
-                <div className="gslider-image-control" style={{backgroundImage: `url(${globalImageUrl})`}}> 
+            {imageUrl ? ( 
+                <div className="gslider-image-control" style={{backgroundImage: `url(${imageUrl})`}}> 
                     <button
                         className='gslider-image-delete'
                         onClick={() => {
-                            setglobalImageUrl(null);
-                            setglobalImageAlt(null);
-                            setglobalImageID(null);
+                            setImageUrl(null);
+                            setImageAlt(null);
+                            setImageID(null);
                         }}
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#4D4D4D" strokeWidth="1.5"></path><path d="M15 9L9 15" stroke="#4D4D4D" strokeWidth="1.5"></path><path d="M9 9L15 15" stroke="#4D4D4D" strokeWidth="1.5"></path></svg>
@@ -50,9 +51,9 @@ const globalImageControl = ({
 
                             mediaUploader.on('select', function() {
                                 const attachment = mediaUploader.state().get('selection').first().toJSON();
-                                setglobalImageUrl(attachment.url);
-                                setglobalImageAlt(attachment.alt);
-                                setglobalImageID(attachment.id);
+                                setImageUrl(attachment.url);
+                                setImageAlt(attachment.alt);
+                                setImageID(attachment.id);
                             });
 
                             mediaUploader.open();
@@ -76,9 +77,9 @@ const globalImageControl = ({
 
                         mediaUploader.on('select', function() {
                             const attachment = mediaUploader.state().get('selection').first().toJSON();
-                            setglobalImageUrl(attachment.url);
-                            setglobalImageAlt(attachment.alt);
-                            setglobalImageID(attachment.id);
+                            setImageUrl(attachment.url);
+                            setImageAlt(attachment.alt);
+                            setImageID(attachment.id);
                         });
 
                         mediaUploader.open();
@@ -88,13 +89,13 @@ const globalImageControl = ({
                     Upload
                 </button>
             )}
-            {globalImageUrl && (
+            {imageUrl && isImageSize && (
                 <div className="gslider-image-control-setting-wrapper">
                     <BaseControl>
                         <SelectControl
                             label={__("Object Fit", "gslider-blocks")}
                             className="gslider-image-label"
-                            value={globalImageSize}
+                            value={imageSize}
                             options={(
                                 [
                                     {label: __("None", "gslider-blocks"), value: "none"},
@@ -104,7 +105,7 @@ const globalImageControl = ({
                                     {label: __("Scale Down", "gslider-blocks"), value: "scale-down"},
                                 ]
                             )}
-                            onChange={setglobalImageSize}
+                            onChange={setImageSize}
                         />
                     </BaseControl>
                     
@@ -115,4 +116,4 @@ const globalImageControl = ({
     );
 };
 
-export default globalImageControl;
+export default ImageControl;

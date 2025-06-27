@@ -2,23 +2,22 @@ import { __ } from '@wordpress/i18n';
 import { Button, BaseControl, ButtonGroup } from '@wordpress/components';
 
 
-const SwitcherControl = ({ label, globalSwitcher, setGlobalSwitcher }) => {
-
-    const NORMAL_HOVER = [
-        { label: __('Normal', 'gslider-blocks'), value: 'normal' },
-        { label: __('Hover', 'gslider-blocks'), value: 'hover' },
-    ];
-
+const SwitcherControl = ({
+    label='',
+    options,
+    value,
+    onChange,
+}) => {
     return (
         <BaseControl
             label={label}
         >
             <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                {NORMAL_HOVER.map((item, key) => (
+                {options.map((item, key) => (
                     <Button
                         key={key}
-                        onClick={() => setGlobalSwitcher(item.value)} 
-                        className={`gslider-setting-switcher-panel-btn-switcher ${globalSwitcher === item.value ? 'active' : ''}`}
+                        onClick={() => onChange(item.value)} 
+                        className={`gslider-setting-switcher-panel-btn-switcher ${value === item.value ? 'active' : ''}`}
                     >
                         {item.label}
                     </Button>

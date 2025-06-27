@@ -1,7 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { BaseControl, SelectControl } from '@wordpress/components';
 
-const SelectControls = ({ label, value, options, onChange }) => {
+const SelectControls = ({ 
+    label='',
+    options,
+    value,
+    onChange,
+}) => {
 
     return (
         <BaseControl

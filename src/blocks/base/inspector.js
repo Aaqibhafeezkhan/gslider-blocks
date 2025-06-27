@@ -8,6 +8,8 @@ import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseCo
  * Internal Dependencies
  */
 import { 
+    HTML_TAGS,
+    NORMAL_HOVER,
     BORDER_STYLES,
     SLIDER_EFFECT_OPTIONS,
     CAROUSEL_EFFECT_OPTIONS,
@@ -951,20 +953,23 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <HtmlTagControl
                     label={__("Sub Title Tag", "gslider-blocks")}
-                    globalHtmlTag={subTitleHtmlTag}
-                    setGlobalHtmlTag={(value) => setAttributes({ subTitleHtmlTag: value })}
+                    options={HTML_TAGS}
+                    value={subTitleHtmlTag}
+                    onChange={(value) => setAttributes({ subTitleHtmlTag: value })}
                 />
 
                 <HtmlTagControl
                     label={__("Title Tag", "gslider-blocks")}
-                    globalHtmlTag={titleHtmlTag}
-                    setGlobalHtmlTag={(value) => setAttributes({ titleHtmlTag: value })}
+                    options={HTML_TAGS}
+                    value={titleHtmlTag}
+                    onChange={(value) => setAttributes({ titleHtmlTag: value })}
                 />
 
                 <HtmlTagControl
                     label={__("Description Tag", "gslider-blocks")}
-                    globalHtmlTag={descriptionHtmlTag}
-                    setGlobalHtmlTag={(value) => setAttributes({ descriptionHtmlTag: value })}
+                    options={HTML_TAGS}
+                    value={descriptionHtmlTag}
+                    onChange={(value) => setAttributes({ descriptionHtmlTag: value })}
                 />
                 
             </PanelBody>
@@ -973,21 +978,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 opened={openPanels.general === "slider-type"}
                 onToggle={() => togglePanel("general", "slider-type")}
             >
-                <BaseControl
+                <SwitcherControl
                     label={__("Slider Type", "gslider-blocks")}
-                >
-                    <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                        {SLIDER_TYPE.map((item, key) => (
-                            <Button
-                                key={key}
-                                onClick={() => setAttributes({ sliderType: item.value })}
-                                className={`gslider-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
-                            >
-                                {item.label}
-                            </Button>
-                        ))}
-                    </ButtonGroup>
-                </BaseControl>
+                    options={SLIDER_TYPE}
+                    value={sliderType}
+                    onChange={(value) => setAttributes({ sliderType: value })}
+                />
             </PanelBody>
             <PanelBody 
                 title={__("Slider Settings", "gslider-blocks")} 
@@ -1105,8 +1101,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 >
                     <SelectControls
                         label={__('Effect Type', 'gslider-blocks')}
-                        value={carouselEffect}
                         options={CAROUSEL_EFFECT_OPTIONS}
+                        value={carouselEffect}
                         onChange={(value) => setAttributes({ carouselEffect: value })}
                     />
                 </PanelBody>
@@ -1119,8 +1115,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 >
                     <SelectControls
                         label={__('Effect Type', 'gslider-blocks')}
-                        value={slideEffect}
                         options={SLIDER_EFFECT_OPTIONS}
+                        value={slideEffect}
                         onChange={(value) => setAttributes({ slideEffect: value })}
                     />
                 </PanelBody>
@@ -1132,33 +1128,24 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     opened={openPanels.general === "navigation"}
                     onToggle={() => togglePanel("general", "navigation")}
                 >
-                    <BaseControl
+                    <SwitcherControl
                         label={__("Position Type", "gslider-blocks")}
-                    >
-                        <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                            {NAVIGATION_ARROW_POSITION_TYPE.map((item, key) => (
-                                <Button
-                                    key={key}
-                                    onClick={() => setAttributes({ navigationArrowPositionType: item.value })}
-                                    className={`gslider-setting-switcher-panel-btn-switcher ${navigationArrowPositionType === item.value ? 'active' : ''}`}
-                                >
-                                    {item.label}
-                                </Button>
-                            ))}
-                        </ButtonGroup>
-                    </BaseControl>
+                        options={NAVIGATION_ARROW_POSITION_TYPE}
+                        value={navigationArrowPositionType}
+                        onChange={(value) => setAttributes({ navigationArrowPositionType: value })}
+                    />
                     <SelectControls
                         label={__("Position", "gslider-blocks")}
-                        value={navigationArrowPosition}
                         options={NAVIGATION_ARROW_POSITION}
+                        value={navigationArrowPosition}
                         onChange={(value) => setAttributes({ navigationArrowPosition: value })}
                     />
 
                     {navigationArrowPosition !== 'center' && (
                         <SelectControls
                             label={__("Arrow Direction", "gslider-blocks")}
-                            value={navigationArrowDirection}
                             options={NAVIGATION_ARROW_DIRECTION}
+                            value={navigationArrowDirection}
                             onChange={(value) => setAttributes({ navigationArrowDirection: value })}
                         />
                     )}
@@ -1376,8 +1363,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 >
                     <SelectControls
                         label={__("Pagination Type", "gslider-blocks")}
-                        value={paginationType}
                         options={PAGINATION_TYPE}
+                        value={paginationType}
                         onChange={(value) => setAttributes({ paginationType: value })}
                     />
 
@@ -1449,8 +1436,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
                 <SwitcherControl
                     label={__("Color", "gslider-blocks")}
-                    globalSwitcher={subtitleColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ subtitleColorSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={subtitleColorSwitcher}
+                    onChange={(value) => setAttributes({ subtitleColorSwitcher: value })}
                 />
 
                 {subtitleColorSwitcher === 'normal' && (
@@ -1558,8 +1546,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
                 <SwitcherControl
                     label={__("Color", "gslider-blocks")}
-                    globalSwitcher={titleColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ titleColorSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={titleColorSwitcher}
+                    onChange={(value) => setAttributes({ titleColorSwitcher: value })}
                 />
 
                 {titleColorSwitcher === 'normal' && (
@@ -1667,8 +1656,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
                 <SwitcherControl
                     label={__("Color", "gslider-blocks")}
-                    globalSwitcher={descriptionColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ descriptionColorSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={descriptionColorSwitcher}
+                    onChange={(value) => setAttributes({ descriptionColorSwitcher: value })}
                 />
 
                 {descriptionColorSwitcher === 'normal' && (
@@ -1775,8 +1765,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
                 <SwitcherControl
                     label={__("Color", "gslider-blocks")}
-                    globalSwitcher={primaryButtonColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ primaryButtonColorSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={primaryButtonColorSwitcher}
+                    onChange={(value) => setAttributes({ primaryButtonColorSwitcher: value })}
                 />
 
                 {primaryButtonColorSwitcher === 'normal' && (
@@ -1828,15 +1819,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <SelectControls
                     label={__("Border Style", "gslider-blocks")}
-                    value={primaryButtonBorder}
                     options={BORDER_STYLES}
+                    value={primaryButtonBorder}
                     onChange={(value) => setAttributes({ primaryButtonBorder: value })}
                 />
 
                 <SwitcherControl
                     label={__("Border Color", "gslider-blocks")}
-                    globalSwitcher={primaryButtonBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ primaryButtonBorderColorSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={primaryButtonBorderColorSwitcher}
+                    onChange={(value) => setAttributes({ primaryButtonBorderColorSwitcher: value })}
                 />
 
                 {primaryButtonBorderColorSwitcher === 'normal' && (
@@ -1895,8 +1887,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <SwitcherControl
                     label={__("Box Shadow", "gslider-blocks")}
-                    globalSwitcher={primaryButtonBoxShadowValuesSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ primaryButtonBoxShadowValuesSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={primaryButtonBoxShadowValuesSwitcher}
+                    onChange={(value) => setAttributes({ primaryButtonBoxShadowValuesSwitcher: value })}
                 />
 
                 {primaryButtonBoxShadowValuesSwitcher === 'normal' && (
@@ -2006,8 +1999,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     />
                     <SwitcherControl
                         label={__("Color", "gslider-blocks")}
-                        globalSwitcher={secondaryButtonColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ secondaryButtonColorSwitcher: value })}
+                        options={NORMAL_HOVER}
+                        value={secondaryButtonColorSwitcher}
+                        onChange={(value) => setAttributes({ secondaryButtonColorSwitcher: value })}
                     />
 
                     {secondaryButtonColorSwitcher === 'normal' && (
@@ -2059,15 +2053,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                     <SelectControls
                         label={__("Border Style", "gslider-blocks")}
-                        value={secondaryButtonBorder}
                         options={BORDER_STYLES}
+                        value={secondaryButtonBorder}
                         onChange={(value) => setAttributes({ secondaryButtonBorder: value })}
                     />
 
                     <SwitcherControl
                         label={__("Border Color", "gslider-blocks")}
-                        globalSwitcher={secondaryButtonBorderColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ secondaryButtonBorderColorSwitcher: value })}
+                        options={NORMAL_HOVER}
+                        value={secondaryButtonBorderColorSwitcher}
+                        onChange={(value) => setAttributes({ secondaryButtonBorderColorSwitcher: value })}
                     />
 
                     {secondaryButtonBorderColorSwitcher === 'normal' && (
@@ -2126,8 +2121,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                     <SwitcherControl
                         label={__("Box Shadow", "gslider-blocks")}
-                        globalSwitcher={secondaryButtonBoxShadowValuesSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ secondaryButtonBoxShadowValuesSwitcher: value })}
+                        options={NORMAL_HOVER}
+                        value={secondaryButtonBoxShadowValuesSwitcher}
+                        onChange={(value) => setAttributes({ secondaryButtonBoxShadowValuesSwitcher: value })}
                     />
 
                     {secondaryButtonBoxShadowValuesSwitcher === 'normal' && (
@@ -2233,8 +2229,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <SwitcherControl
                     label={__("Icon Color", "gslider-blocks")}
-                    globalSwitcher={navigationArrowColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ navigationArrowColorSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={navigationArrowColorSwitcher}
+                    onChange={(value) => setAttributes({ navigationArrowColorSwitcher: value })}
                 />
 
                 {navigationArrowColorSwitcher === 'normal' && (
@@ -2285,15 +2282,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <SelectControls
                     label={__("Border Style", "gslider-blocks")}
-                    value={navigationArrowBorder}
                     options={BORDER_STYLES}
+                    value={navigationArrowBorder}
                     onChange={(value) => setAttributes({ navigationArrowBorder: value })}
                 />
 
                 <SwitcherControl
                     label={__("Border Color", "gslider-blocks")}
-                    globalSwitcher={navigationArrowBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ navigationArrowBorderColorSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={navigationArrowBorderColorSwitcher}
+                    onChange={(value) => setAttributes({ navigationArrowBorderColorSwitcher: value })}
                 />
 
                 {navigationArrowBorderColorSwitcher === 'normal' && (
@@ -2352,8 +2350,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <SwitcherControl
                     label={__("Box Shadow", "gslider-blocks")}
-                    globalSwitcher={navigationArrowBoxShadowValuesSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ navigationArrowBoxShadowValuesSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={navigationArrowBoxShadowValuesSwitcher}
+                    onChange={(value) => setAttributes({ navigationArrowBoxShadowValuesSwitcher: value })}
                 />
 
                 {navigationArrowBoxShadowValuesSwitcher === 'normal' && (
@@ -2433,19 +2432,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 {paginationType === 'bullets' && (
                     <>
-                        <BaseControl>
-                            <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                                {NORMAL_ACTIVE.map((item, key) => (
-                                    <Button
-                                key={key}
-                                        onClick={() => setAttributes({ paginationDotsSwitcher: item.value })} 
-                                        className={`gslider-setting-switcher-panel-btn-switcher ${paginationDotsSwitcher === item.value ? 'active' : ''}`}
-                                    >
-                                        {item.label}
-                                    </Button>
-                                ))}
-                            </ButtonGroup>
-                        </BaseControl>
+                        <SwitcherControl
+                            label={__("Bullets Style", "gslider-blocks")}
+                            options={NORMAL_ACTIVE}
+                            value={paginationDotsSwitcher}
+                            onChange={(value) => setAttributes({ paginationDotsSwitcher: value })}
+                        />
                         {paginationDotsSwitcher === 'normal' && (
                             <>
                                 <ResponsiveRangeControl
@@ -2483,15 +2475,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                 <SelectControls
                                     label={__("Border Style", "gslider-blocks")}
-                                    value={paginationNormalDotsBorder}
                                     options={BORDER_STYLES}
+                                    value={paginationNormalDotsBorder}
                                     onChange={(value) => setAttributes({ paginationNormalDotsBorder: value })}
                                 />
 
                                 <SwitcherControl
                                     label={__("Border Color", "gslider-blocks")}
-                                    globalSwitcher={paginationNormalDotsBorderColorSwitcher}
-                                    setGlobalSwitcher={(value) => setAttributes({ paginationNormalDotsBorderColorSwitcher: value })}
+                                    options={NORMAL_HOVER}
+                                    value={paginationNormalDotsBorderColorSwitcher}
+                                    onChange={(value) => setAttributes({ paginationNormalDotsBorderColorSwitcher: value })}
                                 />
 
                                 {paginationNormalDotsBorderColorSwitcher === 'normal' && (
@@ -2586,15 +2579,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                                 <SelectControls
                                     label={__("Border Style", "gslider-blocks")}
-                                    value={paginationActiveDotsBorder}
                                     options={BORDER_STYLES}
+                                    value={paginationActiveDotsBorder}
                                     onChange={(value) => setAttributes({ paginationActiveDotsBorder: value })}
                                 />
 
                                 <SwitcherControl
                                     label={__("Border Color", "gslider-blocks")}
-                                    globalSwitcher={paginationActiveDotsBorderColorSwitcher}
-                                    setGlobalSwitcher={(value) => setAttributes({ paginationActiveDotsBorderColorSwitcher: value })}
+                                    options={NORMAL_HOVER}
+                                    value={paginationActiveDotsBorderColorSwitcher}
+                                    onChange={(value) => setAttributes({ paginationActiveDotsBorderColorSwitcher: value })}
                                 />
 
                                 {paginationActiveDotsBorderColorSwitcher === 'normal' && (
@@ -2702,8 +2696,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         
                         <SwitcherControl
                             label={__("Color", "gslider-blocks")}
-                            globalSwitcher={paginationFractionColorSwitcher}
-                            setGlobalSwitcher={(value) => setAttributes({ paginationFractionColorSwitcher: value })}
+                            options={NORMAL_HOVER}
+                            value={paginationFractionColorSwitcher}
+                            onChange={(value) => setAttributes({ paginationFractionColorSwitcher: value })}
                         />
 
                         {paginationFractionColorSwitcher === 'normal' && (
@@ -2729,23 +2724,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 {paginationType === 'progressbar' && (
                     <>
-                        <BaseControl>
-                            <ButtonGroup className="gslider-setting-switcher-panel-btn">
-                                {NORMAL_ACTIVE.map((item, key) => (
-                                    <Button
-                                key={key}
-                                        onClick={() => setAttributes({ paginationProgressbarBGColorSwitcher: item.value })} 
-                                        className={`gslider-setting-switcher-panel-btn-switcher ${paginationProgressbarBGColorSwitcher === item.value ? 'active' : ''}`}
-                                    >
-                                        {item.label}
-                                    </Button>
-                                ))}
-                            </ButtonGroup>
-                        </BaseControl>
+                        <SwitcherControl
+                            label={__("Background Color", "gslider-blocks")}
+                            options={NORMAL_ACTIVE}
+                            value={paginationProgressbarBGColorSwitcher}
+                            onChange={(value) => setAttributes({ paginationProgressbarBGColorSwitcher: value })}
+                        />
 
                         {paginationProgressbarBGColorSwitcher === 'normal' && (
                             <ColorControl
-                                label={__("Background Color", "gslider-blocks")}
+                                label={__("Normal Color", "gslider-blocks")}
                                 color={paginationProgressbarBGColor}
                                 onChangeColor={(value) => setAttributes({ paginationProgressbarBGColor: value })}
                                 defaultColor=''
@@ -2919,15 +2907,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             >
                 <SelectControls
                     label={__("Border Style", "gslider-blocks")}
-                    value={globalBorder}
                     options={BORDER_STYLES}
+                    value={globalBorder}
                     onChange={(value) => setAttributes({ globalBorder: value })}
                 />
 
                 <SwitcherControl
                     label={__("Border Color", "gslider-blocks")}
-                    globalSwitcher={globalBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={globalBorderColorSwitcher}
+                    onChange={(value) => setAttributes({ globalBorderColorSwitcher: value })}
                 />
 
                 {globalBorderColorSwitcher === 'normal' && (
@@ -2986,8 +2975,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <SwitcherControl
                     label={__("Box Shadow", "gslider-blocks")}
-                    globalSwitcher={globalBoxShadowValuesSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowValuesSwitcher: value })}
+                    options={NORMAL_HOVER}
+                    value={globalBoxShadowValuesSwitcher}
+                    onChange={(value) => setAttributes({ globalBoxShadowValuesSwitcher: value })}
                 />
 
                 {globalBoxShadowValuesSwitcher === 'normal' && (

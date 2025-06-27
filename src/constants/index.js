@@ -11,8 +11,8 @@ export const UNIT_TYPES = [
 ];
 
 export const NORMAL_HOVER = [
-	{ label: "Normal", value: "normal" },
-	{ label: "Hover", value: "hover" },
+  { label: __('Normal', 'gslider-blocks'), value: 'normal' },
+  { label: __('Hover', 'gslider-blocks'), value: 'hover' },
 ];
 
 export const ICON_ALIGN = [
