@@ -5,9 +5,12 @@ import googleFonts from './google-fonts.json';
 export const STORE_NAME = 'gslider-blocks';
 
 export const UNIT_TYPES = [
-	{ label: "px", value: "px" },
-	{ label: "%", value: "%" },
-	{ label: "em", value: "em" },
+  { label: __('px', 'gslider-blocks'), value: 'px' },
+  { label: __('%', 'gslider-blocks'), value: '%' },
+  { label: __('em', 'gslider-blocks'), value: 'em' },
+  { label: __('rem', 'gslider-blocks'), value: 'rem' },
+  { label: __('vh', 'gslider-blocks'), value: 'vh' },
+  { label: __('vw', 'gslider-blocks'), value: 'vw' },
 ];
 
 export const NORMAL_HOVER = [
