@@ -1,9 +1,9 @@
-=== GSlider Blocks ===      
+=== Slider Block for Gutenberg - Gutenslider by GSlider ===      
 Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,26 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 == Screenshots ==
 
 == Changelog ==
+= 1.0.3 June 27 2025 =
+Enhancements:
+
+Updated the Navigation settings panel for greater layout flexibility.
+
+Added Position Type toggle with options: Inside and Outside.
+
+Introduced Arrow Direction dropdown (e.g., Row, Column) for custom navigation layout.
+
+New Offset Controls: Added adjustable Top, Right, Bottom, and Left Offset sliders with support for both % and px units.
+
+Added Gap setting to control spacing between navigation elements, with unit selection and reset capability.
+
+Added Padding control to define spacing around the entire navigation component.
+
+UI Improvements:
+
+Enhanced slider responsiveness and alignment for a smoother user experience.
+
+Grouped controls more logically to improve usability and clarity.
 
 = 1.0.2 June 21 2025 =
 New Features:
