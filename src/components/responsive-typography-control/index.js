@@ -8,7 +8,6 @@ import {
 } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 import {
-    FONT_FAMILYS,
     FONT_WEIGHT,
     FONT_STYLE,
     TEXT_TRANSFORM,

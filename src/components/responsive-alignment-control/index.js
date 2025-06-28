@@ -2,26 +2,28 @@ import React from 'react';
 import { __ } from '@wordpress/i18n';
 import { BaseControl, Button, ButtonGroup } from '@wordpress/components';
 import ResponsiveDeviceControl from '@Components/responsive-device-control';
+import { Dashicon } from '@wordpress/components';
+
 
 const ResponsiveAlignmentControl = ({ 
 	label='',
 	options,
-	globalAlignment,
-	setGlobalAlignment,
+	alignmentValue,
+	setAlignmentValue,
 	deviceType,
 	setAttributes,
 	className='',
  }) => {
 
 	const handleAlignmentChange = (value) => {
-		setGlobalAlignment({
-			...globalAlignment,
+		setAlignmentValue({
+			...alignmentValue,
 			[deviceType]: value
 		});
 
 		setAttributes({
-			globalAlignment: {
-				...globalAlignment,
+			alignmentValue: {
+				...alignmentValue,
 				[deviceType]: value
 			}
 		});
@@ -40,7 +42,7 @@ const ResponsiveAlignmentControl = ({
 					<Button
 						key={item.value}
 						onClick={() => handleAlignmentChange(item.value)}
-						className={`gslider-alignment-single-btn ${globalAlignment[deviceType] === item.value ? 'active' : ''}`}
+						className={`gslider-alignment-single-btn ${alignmentValue[deviceType] === item.value ? 'active' : ''}`}
 					>
 						{item.label}
 					</Button>

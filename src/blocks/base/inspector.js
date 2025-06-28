@@ -925,8 +925,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 <ResponsiveAlignmentControl
                     label={__("Vertical Alignment", "gslider-blocks")}
                     options={VERTICAL_ALIGN}
-                    globalAlignment={contentVerticalAlignment}
-                    setGlobalAlignment={(value) => setAttributes({ contentVerticalAlignment: value })}
+                    alignmentValue={contentVerticalAlignment}
+                    setAlignmentValue={(value) => setAttributes({ contentVerticalAlignment: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                     className="gslider-vertical-alignment"
@@ -935,8 +935,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 <ResponsiveAlignmentControl
                     label={__("Horizontal Alignment", "gslider-blocks")}
                     options={HORIZONTAL_ALIGN}
-                    globalAlignment={contentHorizontalAlignment}
-                    setGlobalAlignment={(value) => setAttributes({ contentHorizontalAlignment: value })}
+                    alignmentValue={contentHorizontalAlignment}
+                    setAlignmentValue={(value) => setAttributes({ contentHorizontalAlignment: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />
@@ -944,8 +944,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 <ResponsiveAlignmentControl
                     label={__("Text Alignment", "gslider-blocks")}
                     options={TEXT_ALIGN}
-                    globalAlignment={contentAlignment}
-                    setGlobalAlignment={(value) => setAttributes({ contentAlignment: value })}
+                    alignmentValue={contentAlignment}
+                    setAlignmentValue={(value) => setAttributes({ contentAlignment: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />

@@ -1,4 +1,4 @@
-=== Slider Block for Gutenberg - Gutenslider by GSlider ===      
+=== Slider Block for Gutenberg Gutenslider by GSlider ===      
 Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
