@@ -9,7 +9,7 @@ import {
 } from "@wordpress/components";
 
 export default function FBIconPicker(props) {
-	// const { ajaxUrl, nonce } = window.FrontisBlocksData;
+	const { ajaxUrl, nonce } = window.FrontisBlocksData;
 	const { value, setIconHandler } = props;
 	const [showIconPicker, setIconPickerModal] = useState(false);
 	const closeModal = () => setIconPickerModal( false );
@@ -23,50 +23,50 @@ export default function FBIconPicker(props) {
 			slug: 'all-icons',
 			title: __('All Icons', 'ultimate-addons-for-gutenberg')
 		},
-		// {
-		// 	slug: 'brands',
-		// 	title: __('Brands', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'business',
-		// 	title: __('Business', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'communication',
-		// 	title: __('Communication', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'design',
-		// 	title: __('Design', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'education',
-		// 	title: __('Education', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'environment',
-		// 	title: __('Environment', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'lifestyle-and-hobbies',
-		// 	title: __('Lifestyle', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'science-and-technology',
-		// 	title: __('Science', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'social',
-		// 	title: __('Social', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'travel',
-		// 	title: __('Travel', 'ultimate-addons-for-gutenberg')
-		// },
-		// {
-		// 	slug: 'others',
-		// 	title: __('Others', 'ultimate-addons-for-gutenberg')
-		// }
+		{
+			slug: 'brands',
+			title: __('Brands', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'business',
+			title: __('Business', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'communication',
+			title: __('Communication', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'design',
+			title: __('Design', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'education',
+			title: __('Education', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'environment',
+			title: __('Environment', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'lifestyle-and-hobbies',
+			title: __('Lifestyle', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'science-and-technology',
+			title: __('Science', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'social',
+			title: __('Social', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'travel',
+			title: __('Travel', 'ultimate-addons-for-gutenberg')
+		},
+		{
+			slug: 'others',
+			title: __('Others', 'ultimate-addons-for-gutenberg')
+		}
 	]);
 
 	const iconPickerModal = () => {
@@ -116,30 +116,30 @@ export default function FBIconPicker(props) {
 		}
 	}
 
-	// const fetchCustomIcons = () => {
-	// 	try {
-	// 		const response = jQuery.ajax({
-	// 			url: ajaxUrl,
-	// 			type: 'POST',
-	// 			data: {
-	// 				action: 'fb_get_custom_icons_category',
-	// 				security: nonce
-	// 			}
-	// 		});
+	const fetchCustomIcons = () => {
+		try {
+			const response = jQuery.ajax({
+				url: ajaxUrl,
+				type: 'POST',
+				data: {
+					action: 'fb_get_custom_icons_category',
+					security: nonce
+				}
+			});
 
-	// 		response.done((resData) => {
-	// 			if (resData) {
-	// 				updateCustomIcons(resData.data);
-	// 			}
-	// 		});
+			response.done((resData) => {
+				if (resData) {
+					updateCustomIcons(resData.data);
+				}
+			});
 
-	// 		response.fail((jqXHR, textStatus, errorThrown) => {
-	// 			console.error('Error fetching custom icons:', textStatus, errorThrown);
-	// 		});
-	// 	} catch (error) {
-	// 		console.error('Unexpected error:', error);
-	// 	}
-	// };
+			response.fail((jqXHR, textStatus, errorThrown) => {
+				console.error('Error fetching custom icons:', textStatus, errorThrown);
+			});
+		} catch (error) {
+			console.error('Unexpected error:', error);
+		}
+	};
 
 	// Filter icon list
 	const filterIconList = (cat) => {
@@ -251,7 +251,7 @@ export default function FBIconPicker(props) {
 				: '';
 
 			return (
-				<div key={ key } style={ style } className={'gslider_icon_box'}>
+				<div key={ key } style={ style } className={'fb_icon_box'}>
 					<div
 						className={`fb_icon ${iconClass}`}
 						onClick={ () => {
@@ -270,7 +270,7 @@ export default function FBIconPicker(props) {
 		}
 		const heightAndWidth = 400 / 8;
 		return (
-			<div className="gslider_icon_picker_icons_list">
+			<div className="fb_icon_picker_icons_list">
 				<Grid
 					cellRenderer={ cellRenderer }
 					columnCount={ filteredDefaultIcons.length }
@@ -285,20 +285,20 @@ export default function FBIconPicker(props) {
 		);
 	}
 
-	// useEffect(  () => {
-	// 	fetchCustomIcons();
-	// 	fetchSvgIcons().then(icons => {
-	// 		if (icons) {
-	// 			setSvgIcon(icons);
-	// 		}
-	// 	});
-	// }, []);
+	useEffect(  () => {
+		fetchCustomIcons();
+		fetchSvgIcons().then(icons => {
+			if (icons) {
+				setSvgIcon(icons);
+			}
+		});
+	}, []);
 
 	return (
 		<Fragment>
-			<div className='gslider_icon_picker_wrapper' onClick={() => iconPickerModal()}>
-				<div className={'gslider_icon_picker'}>
-					<div className={'Change icon'}>{__('Change icon', 'gslider-blocks')}</div>
+			<div className='fb_icon_picker_wrapper' onClick={() => iconPickerModal()}>
+				<div className={'fb_icon_picker'}>
+					<div className={'Change icon'}>{__('Change icon', 'frontis-blocks')}</div>
 					{insertIcon !== '' &&
 						<div onClick={() => setInsertIcon('')} className={'remove'}>
 							<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -324,34 +324,34 @@ export default function FBIconPicker(props) {
 			</div>
 			<div>
 				{showIconPicker && (
-					<Modal onRequestClose={closeModal} className={'gslider_icon_picker_wrapper_modal'}>
-						<div className={'gslider_icon_picker_modal_wrapper'}>
-							<div className={'gslider_icon_picker_wrapper_inner'}>
-								<div className={'gslider_icon_picker_wrapper_header'}>
-									<h2>{__('Icon Library', 'gslider-blocks')}</h2>
-									<div className={'gslider_icon_picker_wrapper_search'}>
+					<Modal onRequestClose={closeModal} className={'fb_icon_picker_wrapper_modal'}>
+						<div className={'fb_icon_picker_modal_wrapper'}>
+							<div className={'fb_icon_picker_wrapper_inner'}>
+								<div className={'fb_icon_picker_wrapper_header'}>
+									<h2>{__('Icon Library', 'frontis-blocks')}</h2>
+									<div className={'fb_icon_picker_wrapper_search'}>
 										<span>
 											<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512"><path
 												d="M448 449L301.2 300.2c20-27.9 31.9-62.2 31.9-99.2 0-93.1-74.7-168.9-166.5-168.9C74.7 32 0 107.8 0 200.9s74.7 168.9 166.5 168.9c39.8 0 76.3-14.2 105-37.9l146 148.1 30.5-31zM166.5 330.8c-70.6 0-128.1-58.3-128.1-129.9S95.9 71 166.5 71s128.1 58.3 128.1 129.9-57.4 129.9-128.1 129.9z"></path></svg>
 										</span>
-										<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'gslider-blocks')}/>
+										<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'frontis-blocks')}/>
 									</div>
 								</div>
-								<div className={'gslider_icon_picker_wrapper_body'}>
-									<div className={'gslider_icon_picker_wrapper_categories'}>
+								<div className={'fb_icon_picker_wrapper_body'}>
+									<div className={'fb_icon_picker_wrapper_categories'}>
 										{categories.map((category, index) => (
 											<div onClick={() => filterIconList(category)}
-												 className={`gslider_icon_picker_wrapper_category ${selectedCat === category.slug ? 'selected' : ''}`}
+												 className={`fb_icon_picker_wrapper_category ${selectedCat === category.slug ? 'selected' : ''}`}
 												 key={index}>{category.title}</div>
 										))}
 									</div>
-									<div className={'gslider_icon_picker_wrapper_icons_list'}>
+									<div className={'fb_icon_picker_wrapper_icons_list'}>
 										{renderIconList()}
 									</div>
 								</div>
-								<div className={'gslider_icon_picker_wrapper_footer'}>
+								<div className={'fb_icon_picker_wrapper_footer'}>
 									<Button variant="secondary"
-											onClick={fbInsertIcon}>{__('Insert icon', 'gslider-blocks')}</Button>
+											onClick={fbInsertIcon}>{__('Insert icon', 'frontis-blocks')}</Button>
 								</div>
 							</div>
 						</div>

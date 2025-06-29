@@ -1,8 +1,8 @@
 const fetchSvgIcons = async () => {
-	const url = 'https://github.com/noruzzamans/icons';
+	const url = 'https://svg-icons.boomdevs.com/';
 	const token = 'b9e9d7516943744aed44d0be39217694a92784ce737e07c9e12397eca99fded0';
 
-	// const { ajaxUrl, nonce } = window.FrontisBlocksData;
+	const { ajaxUrl, nonce } = window.FrontisBlocksData;
 
 	const mergeOldNewArray = (data, iconCustomData) => {
 		const chunkSize = 8; // Maximum items per sub-array
