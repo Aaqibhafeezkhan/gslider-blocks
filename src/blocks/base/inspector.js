@@ -1387,335 +1387,340 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 	 */
 	const styleControls = (
         <>
+            {showSubTitle && (
+                <PanelBody 
+                    title={__("Subtitle", "gslider-blocks")}  
+                    opened={openPanels.styles === "subtitle"}
+                    onToggle={() => togglePanel("styles", "subtitle")}
+                >
+                    <ResponsiveTypographyControl 
+                        fontFamily={subtitleFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ subtitleFontFamily: value })}
+                        
+                        fontSize={subtitleFontSize}
+                        onChangeFontSize={(value) => setAttributes({ subtitleFontSize: value })}
+                        
+                        fontSizeUnits={subtitleFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ subtitleFontSizeUnits: value })}
+                        
+                        fontWeight={subtitleFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ subtitleFontWeight: value })}
+                        
+                        fontStyle={subtitleFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ subtitleFontStyle: value })}
+                        
+                        textTransform={subtitleTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ subtitleTextTransform: value })}
+                        
+                        textDecoration={subtitleTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ subtitleTextDecoration: value })}
+                        
+                        lineHeight={subtitleLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ subtitleLineHeight: value })}
+                        
+                        lineHeightUnits={subtitleLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ subtitleLineHeightUnits: value })}
 
-            <PanelBody 
-                title={__("Subtitle", "gslider-blocks")}  
-                opened={openPanels.styles === "subtitle"}
-                onToggle={() => togglePanel("styles", "subtitle")}
-            >
-                <ResponsiveTypographyControl 
-                    fontFamily={subtitleFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ subtitleFontFamily: value })}
-                    
-                    fontSize={subtitleFontSize}
-                    onChangeFontSize={(value) => setAttributes({ subtitleFontSize: value })}
-                    
-                    fontSizeUnits={subtitleFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ subtitleFontSizeUnits: value })}
-                    
-                    fontWeight={subtitleFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ subtitleFontWeight: value })}
-                    
-                    fontStyle={subtitleFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ subtitleFontStyle: value })}
-                    
-                    textTransform={subtitleTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ subtitleTextTransform: value })}
-                    
-                    textDecoration={subtitleTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ subtitleTextDecoration: value })}
-                    
-                    lineHeight={subtitleLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ subtitleLineHeight: value })}
-                    
-                    lineHeightUnits={subtitleLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ subtitleLineHeightUnits: value })}
+                        letterSpacing={subtitleLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ subtitleLetterSpacing: value })}
+                        
+                        letterSpacingUnits={subtitleLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ subtitleLetterSpacingUnits: value })}
 
-                    letterSpacing={subtitleLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ subtitleLetterSpacing: value })}
-                    
-                    letterSpacingUnits={subtitleLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ subtitleLetterSpacingUnits: value })}
-
-                    wordSpacing={subtitleWordSpacing}
-                    onChangeWordSpacing={(value) => setAttributes({ subtitleWordSpacing: value })}
-                    
-                    wordSpacingUnits={subtitleWordSpacingUnits}
-                    onChangeWordSpacingUnit={(value) => setAttributes({ subtitleWordSpacingUnits: value })}
-                    
-                    deviceType={deviceType}
-                />
-                <SwitcherControl
-                    label={__("Color", "gslider-blocks")}
-                    options={NORMAL_HOVER}
-                    value={subtitleColorSwitcher}
-                    onChange={(value) => setAttributes({ subtitleColorSwitcher: value })}
-                />
-
-                {subtitleColorSwitcher === 'normal' && (
-                    <ColorControl
-                        label={__("Normal Color", "gslider-blocks")}
-                        color={subtitleColor}
-                        onChangeColor={(value) => setAttributes({ subtitleColor: value })}
-                        defaultColor=''
+                        wordSpacing={subtitleWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ subtitleWordSpacing: value })}
+                        
+                        wordSpacingUnits={subtitleWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ subtitleWordSpacingUnits: value })}
+                        
+                        deviceType={deviceType}
                     />
-                )}
-
-                {subtitleColorSwitcher === 'hover' && (
-                    <ColorControl
-                        label={__("Hover Color", "gslider-blocks")}
-                        color={subtitleColorHover}
-                        onChangeColor={(value) => setAttributes({ subtitleColorHover: value })}
-                        defaultColor=''
+                    <SwitcherControl
+                        label={__("Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={subtitleColorSwitcher}
+                        onChange={(value) => setAttributes({ subtitleColorSwitcher: value })}
                     />
-                )}
-                <ResponsiveSpacingControl
-                    label={__("Margin", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={subtitleMarginUnits}
-                    onChangeUnits={(value) => setAttributes({ subtitleMarginUnits: value })}
-                    desktopSpacing={subtitleDesktopMargin} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ subtitleDesktopMargin: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ subtitleDesktopMarginCssStyle: value })}
-                    tabletSpacing={subtitleTabletMargin} 
-                    onChangeTabletSpacing={(value) => setAttributes({ subtitleTabletMargin: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ subtitleTabletMarginCssStyle: value })}
-                    mobileSpacing={subtitleMobileMargin}
-                    onChangeMobileSpacing={(value) => setAttributes({ subtitleMobileMargin: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ subtitleMobileMarginCssStyle: value })}
-                    isLinked={subtitleMarginLink}
-                    onChangeLink={(value) => setAttributes({ subtitleMarginLink: value })} 
-                />
 
-                <ResponsiveSpacingControl
-                    label={__("Padding", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={subtitlePaddingUnits}
-                    onChangeUnits={(value) => setAttributes({ subtitlePaddingUnits: value })}
-                    desktopSpacing={subtitleDesktopPadding} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ subtitleDesktopPadding: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ subtitleDesktopPaddingCssStyle: value })}
-                    tabletSpacing={subtitleTabletPadding} 
-                    onChangeTabletSpacing={(value) => setAttributes({ subtitleTabletPadding: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ subtitleTabletPaddingCssStyle: value })}
-                    mobileSpacing={subtitleMobilePadding}
-                    onChangeMobileSpacing={(value) => setAttributes({ subtitleMobilePadding: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ subtitleMobilePaddingCssStyle: value })}
-                    isLinked={subtitlePaddingLink}
-                    onChangeLink={(value) => setAttributes({ subtitlePaddingLink: value })} 
-                />
-            </PanelBody>
+                    {subtitleColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={subtitleColor}
+                            onChangeColor={(value) => setAttributes({ subtitleColor: value })}
+                            defaultColor=''
+                        />
+                    )}
 
-            <PanelBody 
-                title={__("Title", "gslider-blocks")}  
-                opened={openPanels.styles === "title"}
-                onToggle={() => togglePanel("styles", "title")}
-            >
-                <ResponsiveTypographyControl 
-                    fontFamily={titleFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ titleFontFamily: value })}
-                    
-                    fontSize={titleFontSize}
-                    onChangeFontSize={(value) => setAttributes({ titleFontSize: value })}
-                    
-                    fontSizeUnits={titleFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ titleFontSizeUnits: value })}
-                    
-                    fontWeight={titleFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ titleFontWeight: value })}
-                    
-                    fontStyle={titleFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ titleFontStyle: value })}
-                    
-                    textTransform={titleTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ titleTextTransform: value })}
-                    
-                    textDecoration={titleTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ titleTextDecoration: value })}
-                    
-                    lineHeight={titleLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
-                    
-                    lineHeightUnits={titleLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
-
-                    letterSpacing={titleLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ titleLetterSpacing: value })}
-                    
-                    letterSpacingUnits={titleLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ titleLetterSpacingUnits: value })}
-
-                    wordSpacing={titleWordSpacing}
-                    onChangeWordSpacing={(value) => setAttributes({ titleWordSpacing: value })}
-                    
-                    wordSpacingUnits={titleWordSpacingUnits}
-                    onChangeWordSpacingUnit={(value) => setAttributes({ titleWordSpacingUnits: value })}
-                    
-                    deviceType={deviceType}
-                />
-                <SwitcherControl
-                    label={__("Color", "gslider-blocks")}
-                    options={NORMAL_HOVER}
-                    value={titleColorSwitcher}
-                    onChange={(value) => setAttributes({ titleColorSwitcher: value })}
-                />
-
-                {titleColorSwitcher === 'normal' && (
-                    <ColorControl
-                        label={__("Normal Color", "gslider-blocks")}
-                        color={titleColor}
-                        onChangeColor={(value) => setAttributes({ titleColor: value })}
-                        defaultColor=''
+                    {subtitleColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={subtitleColorHover}
+                            onChangeColor={(value) => setAttributes({ subtitleColorHover: value })}
+                            defaultColor=''
+                        />
+                    )}
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={subtitleMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ subtitleMarginUnits: value })}
+                        desktopSpacing={subtitleDesktopMargin} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ subtitleDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ subtitleDesktopMarginCssStyle: value })}
+                        tabletSpacing={subtitleTabletMargin} 
+                        onChangeTabletSpacing={(value) => setAttributes({ subtitleTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ subtitleTabletMarginCssStyle: value })}
+                        mobileSpacing={subtitleMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ subtitleMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ subtitleMobileMarginCssStyle: value })}
+                        isLinked={subtitleMarginLink}
+                        onChangeLink={(value) => setAttributes({ subtitleMarginLink: value })} 
                     />
-                )}
 
-                {titleColorSwitcher === 'hover' && (
-                    <ColorControl
-                        label={__("Hover Color", "gslider-blocks")}
-                        color={titleColorHover}
-                        onChangeColor={(value) => setAttributes({ titleColorHover: value })}
-                        defaultColor=''
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={subtitlePaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ subtitlePaddingUnits: value })}
+                        desktopSpacing={subtitleDesktopPadding} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ subtitleDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ subtitleDesktopPaddingCssStyle: value })}
+                        tabletSpacing={subtitleTabletPadding} 
+                        onChangeTabletSpacing={(value) => setAttributes({ subtitleTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ subtitleTabletPaddingCssStyle: value })}
+                        mobileSpacing={subtitleMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ subtitleMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ subtitleMobilePaddingCssStyle: value })}
+                        isLinked={subtitlePaddingLink}
+                        onChangeLink={(value) => setAttributes({ subtitlePaddingLink: value })} 
                     />
-                )}
-                <ResponsiveSpacingControl
-                    label={__("Margin", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={titleMarginUnits}
-                    onChangeUnits={(value) => setAttributes({ titleMarginUnits: value })}
-                    desktopSpacing={titleDesktopMargin} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ titleDesktopMargin: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ titleDesktopMarginCssStyle: value })}
-                    tabletSpacing={titleTabletMargin} 
-                    onChangeTabletSpacing={(value) => setAttributes({ titleTabletMargin: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ titleTabletMarginCssStyle: value })}
-                    mobileSpacing={titleMobileMargin}
-                    onChangeMobileSpacing={(value) => setAttributes({ titleMobileMargin: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ titleMobileMarginCssStyle: value })}
-                    isLinked={titleMarginLink}
-                    onChangeLink={(value) => setAttributes({ titleMarginLink: value })} 
-                />
+                </PanelBody>
+            )}
 
-                <ResponsiveSpacingControl
-                    label={__("Padding", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={titlePaddingUnits}
-                    onChangeUnits={(value) => setAttributes({ titlePaddingUnits: value })}
-                    desktopSpacing={titleDesktopPadding} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ titleDesktopPadding: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ titleDesktopPaddingCssStyle: value })}
-                    tabletSpacing={titleTabletPadding} 
-                    onChangeTabletSpacing={(value) => setAttributes({ titleTabletPadding: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ titleTabletPaddingCssStyle: value })}
-                    mobileSpacing={titleMobilePadding}
-                    onChangeMobileSpacing={(value) => setAttributes({ titleMobilePadding: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ titleMobilePaddingCssStyle: value })}
-                    isLinked={titlePaddingLink}
-                    onChangeLink={(value) => setAttributes({ titlePaddingLink: value })} 
-                />
-            </PanelBody>
+            {showTitle && (
+                <PanelBody 
+                    title={__("Title", "gslider-blocks")}  
+                    opened={openPanels.styles === "title"}
+                    onToggle={() => togglePanel("styles", "title")}
+                >
+                    <ResponsiveTypographyControl 
+                        fontFamily={titleFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ titleFontFamily: value })}
+                        
+                        fontSize={titleFontSize}
+                        onChangeFontSize={(value) => setAttributes({ titleFontSize: value })}
+                        
+                        fontSizeUnits={titleFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ titleFontSizeUnits: value })}
+                        
+                        fontWeight={titleFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ titleFontWeight: value })}
+                        
+                        fontStyle={titleFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ titleFontStyle: value })}
+                        
+                        textTransform={titleTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ titleTextTransform: value })}
+                        
+                        textDecoration={titleTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ titleTextDecoration: value })}
+                        
+                        lineHeight={titleLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
+                        
+                        lineHeightUnits={titleLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
 
-            <PanelBody 
-                title={__("Description", "gslider-blocks")}  
-                opened={openPanels.styles === "description"}
-                onToggle={() => togglePanel("styles", "description")}
-            >
-                <ResponsiveTypographyControl 
-                    fontFamily={descriptionFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ descriptionFontFamily: value })}
-                    
-                    fontSize={descriptionFontSize}
-                    onChangeFontSize={(value) => setAttributes({ descriptionFontSize: value })}
-                    
-                    fontSizeUnits={descriptionFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ descriptionFontSizeUnits: value })}
-                    
-                    fontWeight={descriptionFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ descriptionFontWeight: value })}
-                    
-                    fontStyle={descriptionFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ descriptionFontStyle: value })}
-                    
-                    textTransform={descriptionTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ descriptionTextTransform: value })}
-                    
-                    textDecoration={descriptionTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ descriptionTextDecoration: value })}
-                    
-                    lineHeight={descriptionLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
-                    
-                    lineHeightUnits={descriptionLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ descriptionLineHeightUnits: value })}
+                        letterSpacing={titleLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ titleLetterSpacing: value })}
+                        
+                        letterSpacingUnits={titleLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ titleLetterSpacingUnits: value })}
 
-                    letterSpacing={descriptionLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ descriptionLetterSpacing: value })}
-                    
-                    letterSpacingUnits={descriptionLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ descriptionLetterSpacingUnits: value })}
-
-                    wordSpacing={descriptionWordSpacing}
-                    onChangeWordSpacing={(value) => setAttributes({ descriptionWordSpacing: value })}
-                    
-                    wordSpacingUnits={descriptionWordSpacingUnits}
-                    onChangeWordSpacingUnit={(value) => setAttributes({ descriptionWordSpacingUnits: value })}
-                    
-                    deviceType={deviceType}
-                />
-                <SwitcherControl
-                    label={__("Color", "gslider-blocks")}
-                    options={NORMAL_HOVER}
-                    value={descriptionColorSwitcher}
-                    onChange={(value) => setAttributes({ descriptionColorSwitcher: value })}
-                />
-
-                {descriptionColorSwitcher === 'normal' && (
-                    <ColorControl
-                        label={__("Normal Color", "gslider-blocks")}
-                        color={descriptionColor}
-                        onChangeColor={(value) => setAttributes({ descriptionColor: value })}
-                        defaultColor=''
+                        wordSpacing={titleWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ titleWordSpacing: value })}
+                        
+                        wordSpacingUnits={titleWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ titleWordSpacingUnits: value })}
+                        
+                        deviceType={deviceType}
                     />
-                )}
-
-                {descriptionColorSwitcher === 'hover' && (
-                    <ColorControl
-                        label={__("Hover Color", "gslider-blocks")}
-                        color={descriptionColorHover}
-                        onChangeColor={(value) => setAttributes({ descriptionColorHover: value })}
-                        defaultColor=''
+                    <SwitcherControl
+                        label={__("Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={titleColorSwitcher}
+                        onChange={(value) => setAttributes({ titleColorSwitcher: value })}
                     />
-                )}
-                <ResponsiveSpacingControl
-                    label={__("Margin", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={descriptionMarginUnits}
-                    onChangeUnits={(value) => setAttributes({ descriptionMarginUnits: value })}
-                    desktopSpacing={descriptionDesktopMargin} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ descriptionDesktopMargin: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ descriptionDesktopMarginCssStyle: value })}
-                    tabletSpacing={descriptionTabletMargin} 
-                    onChangeTabletSpacing={(value) => setAttributes({ descriptionTabletMargin: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ descriptionTabletMarginCssStyle: value })}
-                    mobileSpacing={descriptionMobileMargin}
-                    onChangeMobileSpacing={(value) => setAttributes({ descriptionMobileMargin: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ descriptionMobileMarginCssStyle: value })}
-                    isLinked={descriptionMarginLink}
-                    onChangeLink={(value) => setAttributes({ descriptionMarginLink: value })} 
-                />
-                <ResponsiveSpacingControl
-                    label={__("Padding", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={descriptionPaddingUnits}
-                    onChangeUnits={(value) => setAttributes({ descriptionPaddingUnits: value })}
-                    desktopSpacing={descriptionDesktopPadding} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ descriptionDesktopPadding: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ descriptionDesktopPaddingCssStyle: value })}
-                    tabletSpacing={descriptionTabletPadding} 
-                    onChangeTabletSpacing={(value) => setAttributes({ descriptionTabletPadding: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ descriptionTabletPaddingCssStyle: value })}
-                    mobileSpacing={descriptionMobilePadding}
-                    onChangeMobileSpacing={(value) => setAttributes({ descriptionMobilePadding: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ descriptionMobilePaddingCssStyle: value })}
-                    isLinked={descriptionPaddingLink}
-                    onChangeLink={(value) => setAttributes({ descriptionPaddingLink: value })} 
-                />
-            </PanelBody>
+
+                    {titleColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={titleColor}
+                            onChangeColor={(value) => setAttributes({ titleColor: value })}
+                            defaultColor=''
+                        />
+                    )}
+
+                    {titleColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={titleColorHover}
+                            onChangeColor={(value) => setAttributes({ titleColorHover: value })}
+                            defaultColor=''
+                        />
+                    )}
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={titleMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ titleMarginUnits: value })}
+                        desktopSpacing={titleDesktopMargin} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ titleDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ titleDesktopMarginCssStyle: value })}
+                        tabletSpacing={titleTabletMargin} 
+                        onChangeTabletSpacing={(value) => setAttributes({ titleTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ titleTabletMarginCssStyle: value })}
+                        mobileSpacing={titleMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ titleMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ titleMobileMarginCssStyle: value })}
+                        isLinked={titleMarginLink}
+                        onChangeLink={(value) => setAttributes({ titleMarginLink: value })} 
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={titlePaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ titlePaddingUnits: value })}
+                        desktopSpacing={titleDesktopPadding} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ titleDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ titleDesktopPaddingCssStyle: value })}
+                        tabletSpacing={titleTabletPadding} 
+                        onChangeTabletSpacing={(value) => setAttributes({ titleTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ titleTabletPaddingCssStyle: value })}
+                        mobileSpacing={titleMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ titleMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ titleMobilePaddingCssStyle: value })}
+                        isLinked={titlePaddingLink}
+                        onChangeLink={(value) => setAttributes({ titlePaddingLink: value })} 
+                    />
+                </PanelBody>
+            )}
+            
+            {showDescription && (
+                <PanelBody 
+                    title={__("Description", "gslider-blocks")}  
+                    opened={openPanels.styles === "description"}
+                    onToggle={() => togglePanel("styles", "description")}
+                >
+                    <ResponsiveTypographyControl 
+                        fontFamily={descriptionFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ descriptionFontFamily: value })}
+                        
+                        fontSize={descriptionFontSize}
+                        onChangeFontSize={(value) => setAttributes({ descriptionFontSize: value })}
+                        
+                        fontSizeUnits={descriptionFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ descriptionFontSizeUnits: value })}
+                        
+                        fontWeight={descriptionFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ descriptionFontWeight: value })}
+                        
+                        fontStyle={descriptionFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ descriptionFontStyle: value })}
+                        
+                        textTransform={descriptionTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ descriptionTextTransform: value })}
+                        
+                        textDecoration={descriptionTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ descriptionTextDecoration: value })}
+                        
+                        lineHeight={descriptionLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
+                        
+                        lineHeightUnits={descriptionLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ descriptionLineHeightUnits: value })}
+
+                        letterSpacing={descriptionLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ descriptionLetterSpacing: value })}
+                        
+                        letterSpacingUnits={descriptionLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ descriptionLetterSpacingUnits: value })}
+
+                        wordSpacing={descriptionWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ descriptionWordSpacing: value })}
+                        
+                        wordSpacingUnits={descriptionWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ descriptionWordSpacingUnits: value })}
+                        
+                        deviceType={deviceType}
+                    />
+                    <SwitcherControl
+                        label={__("Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={descriptionColorSwitcher}
+                        onChange={(value) => setAttributes({ descriptionColorSwitcher: value })}
+                    />
+
+                    {descriptionColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={descriptionColor}
+                            onChangeColor={(value) => setAttributes({ descriptionColor: value })}
+                            defaultColor=''
+                        />
+                    )}
+
+                    {descriptionColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={descriptionColorHover}
+                            onChangeColor={(value) => setAttributes({ descriptionColorHover: value })}
+                            defaultColor=''
+                        />
+                    )}
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={descriptionMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ descriptionMarginUnits: value })}
+                        desktopSpacing={descriptionDesktopMargin} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ descriptionDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ descriptionDesktopMarginCssStyle: value })}
+                        tabletSpacing={descriptionTabletMargin} 
+                        onChangeTabletSpacing={(value) => setAttributes({ descriptionTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ descriptionTabletMarginCssStyle: value })}
+                        mobileSpacing={descriptionMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ descriptionMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ descriptionMobileMarginCssStyle: value })}
+                        isLinked={descriptionMarginLink}
+                        onChangeLink={(value) => setAttributes({ descriptionMarginLink: value })} 
+                    />
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={descriptionPaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ descriptionPaddingUnits: value })}
+                        desktopSpacing={descriptionDesktopPadding} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ descriptionDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ descriptionDesktopPaddingCssStyle: value })}
+                        tabletSpacing={descriptionTabletPadding} 
+                        onChangeTabletSpacing={(value) => setAttributes({ descriptionTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ descriptionTabletPaddingCssStyle: value })}
+                        mobileSpacing={descriptionMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ descriptionMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ descriptionMobilePaddingCssStyle: value })}
+                        isLinked={descriptionPaddingLink}
+                        onChangeLink={(value) => setAttributes({ descriptionPaddingLink: value })} 
+                    />
+                </PanelBody>
+            )}
 
             <PanelBody 
                 title={__("Primary Button", "gslider-blocks")}  
@@ -2185,588 +2190,592 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 </PanelBody>
             )}
 
-            <PanelBody 
-                title={__("Navigation", "gslider-blocks")}  
-                opened={openPanels.styles === "navigation"}
-                onToggle={() => togglePanel("styles", "navigation")}
-            >
-                <ResponsiveRangeControl
-                    min={0}
-                    max={100}
-                    label={__("Icon Size", "gslider-blocks")}
-                    rangeValue={navigationArrowSize}
-                    onChangeValue={(value) => setAttributes({ navigationArrowSize: value })}
-                    onUnitChange={(value) => setAttributes({ navigationArrowSizeUnits: value })}
-                    deviceType={deviceType}
-                    units={navigationArrowSizeUnits}
-                    step={1}
-                    resetFallbackValue={"16"}
-                />
-
-                <ResponsiveRangeControl
-                    min={0}
-                    max={100}
-                    label={__("Width", "gslider-blocks")}
-                    rangeValue={navigationArrowWidth}
-                    onChangeValue={(value) => setAttributes({ navigationArrowWidth: value })}
-                    onUnitChange={(value) => setAttributes({ navigationArrowWidthUnits: value })}
-                    deviceType={deviceType}
-                    units={navigationArrowWidthUnits}
-                    step={1}
-                    resetFallbackValue={"46"}
-                />
-                <ResponsiveRangeControl
-                    min={0}
-                    max={100}
-                    label={__("Height", "gslider-blocks")}
-                    rangeValue={navigationArrowHeight}
-                    onChangeValue={(value) => setAttributes({ navigationArrowHeight: value })}
-                    onUnitChange={(value) => setAttributes({ navigationArrowHeightUnits: value })}
-                    deviceType={deviceType}
-                    units={navigationArrowHeightUnits}
-                    step={1}
-                    resetFallbackValue={"46"}
-                />
-
-                <SwitcherControl
-                    label={__("Icon Color", "gslider-blocks")}
-                    options={NORMAL_HOVER}
-                    value={navigationArrowColorSwitcher}
-                    onChange={(value) => setAttributes({ navigationArrowColorSwitcher: value })}
-                />
-
-                {navigationArrowColorSwitcher === 'normal' && (
-                    <ColorControl
-                        label={__("Normal Color", "gslider-blocks")}
-                        color={navigationArrowColor}
-                        onChangeColor={(value) => setAttributes({ navigationArrowColor: value })}
-                        defaultColor='#333333'
-                    />
-                )}
-
-                {navigationArrowColorSwitcher === 'hover' && (
-                    <ColorControl
-                        label={__("Hover Color", "gslider-blocks")}
-                        color={navigationArrowColorHover}
-                        onChangeColor={(value) => setAttributes({ navigationArrowColorHover: value })}
-                    />
-                )}
-
-                <BackgroundControl 
-                    label={__("Background Color", "gslider-blocks")}
-                            
-                    normalBackgroundType={navigationArrowNormalBackgroundType}
-                    setNormalBackgroundType={(value) => setAttributes({ navigationArrowNormalBackgroundType: value })}
-                    normalClassicColor={navigationArrowNormalClassicColor}
-                    setNormalClassicColor={(value) => setAttributes({ navigationArrowNormalClassicColor: value })}
-                    normalGradientColor={navigationArrowNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ navigationArrowNormalGradientColor: value })}
-                    normalCustomGradientSwitcher={navigationArrowNormalCustomGradientSwitcher}
-                    setNormalCustomGradientSwitcher={(value) => setAttributes({ navigationArrowNormalCustomGradientSwitcher: value })}
-                    normalCustomGradientInputValue={navigationArrowNormalCustomGradientInputValue}
-                    setNormalCustomGradientInputValue={(value) => setAttributes({ navigationArrowNormalCustomGradientInputValue: value })}
-                    normalClassicDefaultColor={'#d2d2d2c7'}
-
-                    hoverBackgroundType={navigationArrowHoverBackgroundType}
-                    setHoverBackgroundType={(value) => setAttributes({ navigationArrowHoverBackgroundType: value })}
-                    hoverClassicColor={navigationArrowHoverClassicColor}
-                    setHoverClassicColor={(value) => setAttributes({ navigationArrowHoverClassicColor: value })}
-                    hoverGradientColor={navigationArrowHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ navigationArrowHoverGradientColor: value })}
-                    hoverCustomGradientSwitcher={navigationArrowHoverCustomGradientSwitcher}
-                    setHoverCustomGradientSwitcher={(value) => setAttributes({ navigationArrowHoverCustomGradientSwitcher: value })}
-                    hoverCustomGradientInputValue={navigationArrowHoverCustomGradientInputValue}
-                    setHoverCustomGradientInputValue={(value) => setAttributes({ navigationArrowHoverCustomGradientInputValue: value })}
-                    hoverClassicDefaultColor={'#787878b8'}
-                    isBackgroundImage={false}
-                />
-
-                <SelectControls
-                    label={__("Border Style", "gslider-blocks")}
-                    options={BORDER_STYLES}
-                    value={navigationArrowBorder}
-                    onChange={(value) => setAttributes({ navigationArrowBorder: value })}
-                />
-
-                <SwitcherControl
-                    label={__("Border Color", "gslider-blocks")}
-                    options={NORMAL_HOVER}
-                    value={navigationArrowBorderColorSwitcher}
-                    onChange={(value) => setAttributes({ navigationArrowBorderColorSwitcher: value })}
-                />
-
-                {navigationArrowBorderColorSwitcher === 'normal' && (
-                    <ColorControl
-                        label={__("Normal Color", "gslider-blocks")}
-                        color={navigationArrowBorderColor}
-                        onChangeColor={(value) => setAttributes({ navigationArrowBorderColor: value })}
-                    />
-                )}
-
-                {navigationArrowBorderColorSwitcher === 'hover' && (
-                    <ColorControl
-                        label={__("Hover Color", "gslider-blocks")}
-                        color={navigationArrowBorderHoverColor}
-                        onChangeColor={(value) => setAttributes({ navigationArrowBorderHoverColor: value })}
-                    />
-                )}
-
-                <ResponsiveSpacingControl
-                    label={__("Border Width", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={navigationArrowBorderUnits}
-                    onChangeUnits={(value) => setAttributes({ navigationArrowBorderUnits: value })}
-                    desktopSpacing={navigationArrowDesktopBorder} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ navigationArrowDesktopBorder: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ navigationArrowDesktopBorderCssStyle: value })}
-                    tabletSpacing={navigationArrowTabletBorder} 
-                    onChangeTabletSpacing={(value) => setAttributes({ navigationArrowTabletBorder: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ navigationArrowTabletBorderCssStyle: value })}
-                    mobileSpacing={navigationArrowMobileBorder}
-                    onChangeMobileSpacing={(value) => setAttributes({ navigationArrowMobileBorder: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ navigationArrowMobileBorderCssStyle: value })}
-                    isLinked={navigationArrowBorderLink}
-                    onChangeLink={(value) => setAttributes({ navigationArrowBorderLink: value })} 
-                />
-
-                <ResponsiveSpacingControl
-                    label={__("Border Radius", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={navigationArrowBorderRadiusUnits}
-                    onChangeUnits={(value) => setAttributes({ navigationArrowBorderRadiusUnits: value })}
-                    desktopSpacing={navigationArrowDesktopBorderRadius}
-                    onChangeDesktopSpacing={(value) => setAttributes({ navigationArrowDesktopBorderRadius: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ navigationArrowDesktopBorderRadiusCssStyle: value })}
-                    tabletSpacing={navigationArrowTabletBorderRadius}
-                    onChangeTabletSpacing={(value) => setAttributes({ navigationArrowTabletBorderRadius: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ navigationArrowTabletBorderRadiusCssStyle: value })}
-                    mobileSpacing={navigationArrowMobileBorderRadius}
-                    onChangeMobileSpacing={(value) => setAttributes({ navigationArrowMobileBorderRadius: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ navigationArrowMobileBorderRadiusCssStyle: value })}
-                    isLinked={navigationArrowBorderRadiusLink}
-                    onChangeLink={(value) => setAttributes({ navigationArrowBorderRadiusLink: value })} 
-                />
-
-                <SwitcherControl
-                    label={__("Box Shadow", "gslider-blocks")}
-                    options={NORMAL_HOVER}
-                    value={navigationArrowBoxShadowValuesSwitcher}
-                    onChange={(value) => setAttributes({ navigationArrowBoxShadowValuesSwitcher: value })}
-                />
-
-                {navigationArrowBoxShadowValuesSwitcher === 'normal' && (
-                    <BoxShadowSettingsControl
-                        label={__("Normal Shadow", "gslider-blocks")}
-                        onBoxShadowChange={(value) => setAttributes({ navigationArrowBoxShadowValues: value })}
-                        initialShadowValue={navigationArrowBoxShadowValues}
-                        onBoxShadowStyleChange={(value) => setAttributes({ navigationArrowBoxShadowCssValue: value })}
-                    />
-                )}
-
-                {navigationArrowBoxShadowValuesSwitcher === 'hover' && (
-                    <BoxShadowSettingsControl
-                        label={__("Hover Shadow", "gslider-blocks")}
-                        onBoxShadowChange={(value) => setAttributes({ navigationArrowBoxShadowHoverValues: value })}
-                        initialShadowValue={navigationArrowBoxShadowHoverValues}
-                        onBoxShadowStyleChange={(value) => setAttributes({ navigationArrowBoxShadowHoverCssValue: value })}
-                    />
-                )}
-
-            </PanelBody>
-
-            <PanelBody 
-                title={__("Pagination", "gslider-blocks")}  
-                opened={openPanels.styles === "pagination"}
-                onToggle={() => togglePanel("styles", "pagination")}
-            >
-
-                {(paginationType === 'bullets' || paginationType === 'fraction') && (
+            {showNavigation && (
+                <PanelBody 
+                    title={__("Navigation", "gslider-blocks")}  
+                    opened={openPanels.styles === "navigation"}
+                    onToggle={() => togglePanel("styles", "navigation")}
+                >
                     <ResponsiveRangeControl
                         min={0}
                         max={100}
-                        label={__("Position", "gslider-blocks")}
-                        rangeValue={paginationDotsPosition}
-                        onChangeValue={(value) => setAttributes({ paginationDotsPosition: value })}
-                        onUnitChange={(value) => setAttributes({ paginationDotsPositionUnits: value })}
+                        label={__("Icon Size", "gslider-blocks")}
+                        rangeValue={navigationArrowSize}
+                        onChangeValue={(value) => setAttributes({ navigationArrowSize: value })}
+                        onUnitChange={(value) => setAttributes({ navigationArrowSizeUnits: value })}
                         deviceType={deviceType}
-                        units={paginationDotsPositionUnits}
+                        units={navigationArrowSizeUnits}
                         step={1}
-                        resetFallbackValue={""}
+                        resetFallbackValue={"16"}
                     />
-                )}
 
-                {paginationType === 'progressbar' && (
                     <ResponsiveRangeControl
                         min={0}
                         max={100}
-                        label={__("Position", "gslider-blocks")}
-                        rangeValue={paginationProgressbarPosition}
-                        onChangeValue={(value) => setAttributes({ paginationProgressbarPosition: value })}
-                        onUnitChange={(value) => setAttributes({ paginationProgressbarPositionUnits: value })}
+                        label={__("Width", "gslider-blocks")}
+                        rangeValue={navigationArrowWidth}
+                        onChangeValue={(value) => setAttributes({ navigationArrowWidth: value })}
+                        onUnitChange={(value) => setAttributes({ navigationArrowWidthUnits: value })}
                         deviceType={deviceType}
-                        units={paginationProgressbarPositionUnits}
+                        units={navigationArrowWidthUnits}
                         step={1}
-                        resetFallbackValue={""}
+                        resetFallbackValue={"46"}
                     />
-                )}
+                    <ResponsiveRangeControl
+                        min={0}
+                        max={100}
+                        label={__("Height", "gslider-blocks")}
+                        rangeValue={navigationArrowHeight}
+                        onChangeValue={(value) => setAttributes({ navigationArrowHeight: value })}
+                        onUnitChange={(value) => setAttributes({ navigationArrowHeightUnits: value })}
+                        deviceType={deviceType}
+                        units={navigationArrowHeightUnits}
+                        step={1}
+                        resetFallbackValue={"46"}
+                    />
 
-                <ResponsiveSpacingControl
-                    label={__("Margin", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={paginationDotsMarginUnits}
-                    onChangeUnits={(value) => setAttributes({ paginationDotsMarginUnits: value })}
-                    desktopSpacing={paginationDotsDesktopMargin}
-                    onChangeDesktopSpacing={(value) => setAttributes({ paginationDotsDesktopMargin: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ paginationDotsDesktopMarginCssStyle: value })}
-                    tabletSpacing={paginationDotsTabletMargin}
-                    onChangeTabletSpacing={(value) => setAttributes({ paginationDotsTabletMargin: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ paginationDotsTabletMarginCssStyle: value })}
-                    mobileSpacing={paginationDotsMobileMargin}
-                    onChangeMobileSpacing={(value) => setAttributes({ paginationDotsMobileMargin: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ paginationDotsMobileMarginCssStyle: value })}
-                    isLinked={paginationDotsMarginLink}
-                    onChangeLink={(value) => setAttributes({ paginationDotsMarginLink: value })} 
-                />
+                    <SwitcherControl
+                        label={__("Icon Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={navigationArrowColorSwitcher}
+                        onChange={(value) => setAttributes({ navigationArrowColorSwitcher: value })}
+                    />
 
-                {paginationType === 'bullets' && (
-                    <>
-                        <SwitcherControl
-                            label={__("Bullets Style", "gslider-blocks")}
-                            options={NORMAL_ACTIVE}
-                            value={paginationDotsSwitcher}
-                            onChange={(value) => setAttributes({ paginationDotsSwitcher: value })}
+                    {navigationArrowColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={navigationArrowColor}
+                            onChangeColor={(value) => setAttributes({ navigationArrowColor: value })}
+                            defaultColor='#333333'
                         />
-                        {paginationDotsSwitcher === 'normal' && (
-                            <>
-                                <ResponsiveRangeControl
-                                    min={0}
-                                    max={100}
-                                    label={__("Width", "gslider-blocks")}
-                                    rangeValue={paginationNormalDotsWidth}
-                                    onChangeValue={(value) => setAttributes({ paginationNormalDotsWidth: value })}
-                                    onUnitChange={(value) => setAttributes({ paginationNormalDotsWidthUnits: value })}
-                                    deviceType={deviceType}
-                                    units={paginationNormalDotsWidthUnits}
-                                    step={1}
-                                    resetFallbackValue={"8"}
-                                />
+                    )}
 
-                                <ResponsiveRangeControl
-                                    min={0}
-                                    max={100}
-                                    label={__("Height", "gslider-blocks")}
-                                    rangeValue={paginationNormalDotsHeight}
-                                    onChangeValue={(value) => setAttributes({ paginationNormalDotsHeight: value })}
-                                    onUnitChange={(value) => setAttributes({ paginationNormalDotsHeightUnits: value })}
-                                    deviceType={deviceType}
-                                    units={paginationNormalDotsHeightUnits}
-                                    step={1}
-                                    resetFallbackValue={"8"}
-                                />
-
-                                <ColorControl
-                                    label={__("Color", "gslider-blocks")}
-                                    color={paginationNormalDotsBgColor}
-                                    onChangeColor={(value) => setAttributes({ paginationNormalDotsBgColor: value })}
-                                    defaultColor='#333333'
-                                />
-
-                                <SelectControls
-                                    label={__("Border Style", "gslider-blocks")}
-                                    options={BORDER_STYLES}
-                                    value={paginationNormalDotsBorder}
-                                    onChange={(value) => setAttributes({ paginationNormalDotsBorder: value })}
-                                />
-
-                                <SwitcherControl
-                                    label={__("Border Color", "gslider-blocks")}
-                                    options={NORMAL_HOVER}
-                                    value={paginationNormalDotsBorderColorSwitcher}
-                                    onChange={(value) => setAttributes({ paginationNormalDotsBorderColorSwitcher: value })}
-                                />
-
-                                {paginationNormalDotsBorderColorSwitcher === 'normal' && (
-                                    <ColorControl
-                                        label={__("Normal Color", "gslider-blocks")}
-                                        color={paginationNormalDotsBorderColor}
-                                        onChangeColor={(value) => setAttributes({ paginationNormalDotsBorderColor: value })}
-                                    />
-                                )}
-
-                                {paginationNormalDotsBorderColorSwitcher === 'hover' && (
-                                    <ColorControl
-                                        label={__("Hover Color", "gslider-blocks")}
-                                        color={paginationNormalDotsBorderHoverColor}
-                                        onChangeColor={(value) => setAttributes({ paginationNormalDotsBorderHoverColor: value })}
-                                    />
-                                )}
-
-                                <ResponsiveSpacingControl
-                                    label={__("Border Width", "gslider-blocks")}
-                                    deviceType={deviceType}
-                                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                    units={paginationNormalDotsBorderUnits}
-                                    onChangeUnits={(value) => setAttributes({ paginationNormalDotsBorderUnits: value })}
-                                    desktopSpacing={paginationNormalDotsDesktopBorder} 
-                                    onChangeDesktopSpacing={(value) => setAttributes({ paginationNormalDotsDesktopBorder: value })}
-                                    desktopSpacingStyle={(value) => setAttributes({ paginationNormalDotsDesktopBorderCssStyle: value })}
-                                    tabletSpacing={paginationNormalDotsTabletBorder} 
-                                    onChangeTabletSpacing={(value) => setAttributes({ paginationNormalDotsTabletBorder: value })}
-                                    tabletSpacingStyle={(value) => setAttributes({ paginationNormalDotsTabletBorderCssStyle: value })}
-                                    mobileSpacing={paginationNormalDotsMobileBorder}
-                                    onChangeMobileSpacing={(value) => setAttributes({ paginationNormalDotsMobileBorder: value })}
-                                    mobileSpacingStyle={(value) => setAttributes({ paginationNormalDotsMobileBorderCssStyle: value })}
-                                    isLinked={paginationNormalDotsBorderLink}
-                                    onChangeLink={(value) => setAttributes({ paginationNormalDotsBorderLink: value })} 
-                                />
-
-                                <ResponsiveSpacingControl
-                                    label={__("Border Radius", "gslider-blocks")}
-                                    deviceType={deviceType}
-                                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                    units={paginationNormalDotsBorderRadiusUnits}
-                                    onChangeUnits={(value) => setAttributes({ paginationNormalDotsBorderRadiusUnits: value })}
-                                    desktopSpacing={paginationNormalDotsDesktopBorderRadius}
-                                    onChangeDesktopSpacing={(value) => setAttributes({ paginationNormalDotsDesktopBorderRadius: value })}
-                                    desktopSpacingStyle={(value) => setAttributes({ paginationNormalDotsDesktopBorderRadiusCssStyle: value })}
-                                    tabletSpacing={paginationNormalDotsTabletBorderRadius}
-                                    onChangeTabletSpacing={(value) => setAttributes({ paginationNormalDotsTabletBorderRadius: value })}
-                                    tabletSpacingStyle={(value) => setAttributes({ paginationNormalDotsTabletBorderRadiusCssStyle: value })}
-                                    mobileSpacing={paginationNormalDotsMobileBorderRadius}
-                                    onChangeMobileSpacing={(value) => setAttributes({ paginationNormalDotsMobileBorderRadius: value })}
-                                    mobileSpacingStyle={(value) => setAttributes({ paginationNormalDotsMobileBorderRadiusCssStyle: value })}
-                                    isLinked={paginationNormalDotsBorderRadiusLink}
-                                    onChangeLink={(value) => setAttributes({ paginationNormalDotsBorderRadiusLink: value })} 
-                                />
-                            </>
-                        )}
-
-                        {paginationDotsSwitcher === 'active' && (
-                            <>
-                                <ResponsiveRangeControl
-                                    min={0}
-                                    max={100}
-                                    label={__("Width", "gslider-blocks")}
-                                    rangeValue={paginationActiveDotsWidth}
-                                    onChangeValue={(value) => setAttributes({ paginationActiveDotsWidth: value })}
-                                    onUnitChange={(value) => setAttributes({ paginationActiveDotsWidthUnits: value })}
-                                    deviceType={deviceType}
-                                    units={paginationActiveDotsWidthUnits}
-                                    step={1}
-                                    resetFallbackValue={"8"}
-                                />
-
-                                <ResponsiveRangeControl
-                                    min={0}
-                                    max={100}
-                                    label={__("Height", "gslider-blocks")}
-                                    rangeValue={paginationActiveDotsHeight}
-                                    onChangeValue={(value) => setAttributes({ paginationActiveDotsHeight: value })}
-                                    onUnitChange={(value) => setAttributes({ paginationActiveDotsHeightUnits: value })}
-                                    deviceType={deviceType}
-                                    units={paginationActiveDotsHeightUnits}
-                                    step={1}
-                                    resetFallbackValue={"8"}
-                                />
-
-                                <ColorControl
-                                    label={__("Color", "gslider-blocks")}
-                                    color={paginationActiveDotsBgColor}
-                                    onChangeColor={(value) => setAttributes({ paginationActiveDotsBgColor: value })}
-                                />
-
-                                <SelectControls
-                                    label={__("Border Style", "gslider-blocks")}
-                                    options={BORDER_STYLES}
-                                    value={paginationActiveDotsBorder}
-                                    onChange={(value) => setAttributes({ paginationActiveDotsBorder: value })}
-                                />
-
-                                <SwitcherControl
-                                    label={__("Border Color", "gslider-blocks")}
-                                    options={NORMAL_HOVER}
-                                    value={paginationActiveDotsBorderColorSwitcher}
-                                    onChange={(value) => setAttributes({ paginationActiveDotsBorderColorSwitcher: value })}
-                                />
-
-                                {paginationActiveDotsBorderColorSwitcher === 'normal' && (
-                                    <ColorControl
-                                        label={__("Normal Color", "gslider-blocks")}
-                                        color={paginationActiveDotsBorderColor}
-                                        onChangeColor={(value) => setAttributes({ paginationActiveDotsBorderColor: value })}
-                                    />
-                                )}
-
-                                {paginationActiveDotsBorderColorSwitcher === 'hover' && (
-                                    <ColorControl
-                                        label={__("Hover Color", "gslider-blocks")}
-                                        color={paginationActiveDotsBorderHoverColor}
-                                        onChangeColor={(value) => setAttributes({ paginationActiveDotsBorderHoverColor: value })}
-                                    />
-                                )}
-
-                                <ResponsiveSpacingControl
-                                    label={__("Border Width", "gslider-blocks")}
-                                    deviceType={deviceType}
-                                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                    units={paginationActiveDotsBorderUnits}
-                                    onChangeUnits={(value) => setAttributes({ paginationActiveDotsBorderUnits: value })}
-                                    desktopSpacing={paginationActiveDotsDesktopBorder} 
-                                    onChangeDesktopSpacing={(value) => setAttributes({ paginationActiveDotsDesktopBorder: value })}
-                                    desktopSpacingStyle={(value) => setAttributes({ paginationActiveDotsDesktopBorderCssStyle: value })}
-                                    tabletSpacing={paginationActiveDotsTabletBorder} 
-                                    onChangeTabletSpacing={(value) => setAttributes({ paginationActiveDotsTabletBorder: value })}
-                                    tabletSpacingStyle={(value) => setAttributes({ paginationActiveDotsTabletBorderCssStyle: value })}
-                                    mobileSpacing={paginationActiveDotsMobileBorder}
-                                    onChangeMobileSpacing={(value) => setAttributes({ paginationActiveDotsMobileBorder: value })}
-                                    mobileSpacingStyle={(value) => setAttributes({ paginationActiveDotsMobileBorderCssStyle: value })}
-                                    isLinked={paginationActiveDotsBorderLink}
-                                    onChangeLink={(value) => setAttributes({ paginationActiveDotsBorderLink: value })} 
-                                />
-
-                                <ResponsiveSpacingControl
-                                    label={__("Border Radius", "gslider-blocks")}
-                                    deviceType={deviceType}
-                                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                                    units={paginationActiveDotsBorderRadiusUnits}
-                                    onChangeUnits={(value) => setAttributes({ paginationActiveDotsBorderRadiusUnits: value })}
-                                    desktopSpacing={paginationActiveDotsDesktopBorderRadius}
-                                    onChangeDesktopSpacing={(value) => setAttributes({ paginationActiveDotsDesktopBorderRadius: value })}
-                                    desktopSpacingStyle={(value) => setAttributes({ paginationActiveDotsDesktopBorderRadiusCssStyle: value })}
-                                    tabletSpacing={paginationActiveDotsTabletBorderRadius}
-                                    onChangeTabletSpacing={(value) => setAttributes({ paginationActiveDotsTabletBorderRadius: value })}
-                                    tabletSpacingStyle={(value) => setAttributes({ paginationActiveDotsTabletBorderRadiusCssStyle: value })}
-                                    mobileSpacing={paginationActiveDotsMobileBorderRadius}
-                                    onChangeMobileSpacing={(value) => setAttributes({ paginationActiveDotsMobileBorderRadius: value })}
-                                    mobileSpacingStyle={(value) => setAttributes({ paginationActiveDotsMobileBorderRadiusCssStyle: value })}
-                                    isLinked={paginationActiveDotsBorderRadiusLink}
-                                    onChangeLink={(value) => setAttributes({ paginationActiveDotsBorderRadiusLink: value })} 
-                                />
-                            </>
-                        )}
-                    </>
-                )}
-
-                {paginationType === 'fraction' && (
-                    <>
-                        <ResponsiveTypographyControl 
-                            fontFamily={paginationFractionFontFamily}
-                            onChangeFontFamily={(value) => setAttributes({ paginationFractionFontFamily: value })}
-                            
-                            fontSize={paginationFractionFontSize}
-                            onChangeFontSize={(value) => setAttributes({ paginationFractionFontSize: value })}
-                            
-                            fontSizeUnits={paginationFractionFontSizeUnits}
-                            onChangeFontSizeUnit={(value) => setAttributes({ paginationFractionFontSizeUnits: value })}
-                            
-                            fontWeight={paginationFractionFontWeight}
-                            onChangeFontWeight={(value) => setAttributes({ paginationFractionFontWeight: value })}
-                            
-                            fontStyle={paginationFractionFontStyle}
-                            onChangeFontStyle={(value) => setAttributes({ paginationFractionFontStyle: value })}
-                            
-                            textTransform={paginationFractionTextTransform}
-                            onChangeTextTransform={(value) => setAttributes({ paginationFractionTextTransform: value })}
-                            
-                            textDecoration={paginationFractionTextDecoration}
-                            onChangeTextDecoration={(value) => setAttributes({ paginationFractionTextDecoration: value })}
-                            
-                            lineHeight={paginationFractionLineHeight}
-                            onChangeLineHeight={(value) => setAttributes({ paginationFractionLineHeight: value })}
-                            
-                            lineHeightUnits={paginationFractionLineHeightUnits}
-                            onChangeLineHeightUnit={(value) => setAttributes({ paginationFractionLineHeightUnits: value })}
-
-                            letterSpacing={paginationFractionLetterSpacing}
-                            onChangeLetterSpacing={(value) => setAttributes({ paginationFractionLetterSpacing: value })}
-                            
-                            letterSpacingUnits={paginationFractionLetterSpacingUnits}
-                            onChangeLetterSpacingUnit={(value) => setAttributes({ paginationFractionLetterSpacingUnits: value })}
-
-                            wordSpacing={paginationFractionWordSpacing} 
-                            onChangeWordSpacing={(value) => setAttributes({ paginationFractionWordSpacing: value })}
-                            
-                            wordSpacingUnits={paginationFractionWordSpacingUnits}
-                            onChangeWordSpacingUnit={(value) => setAttributes({ paginationFractionWordSpacingUnits: value })}
-                            
-                            deviceType={deviceType}
+                    {navigationArrowColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={navigationArrowColorHover}
+                            onChangeColor={(value) => setAttributes({ navigationArrowColorHover: value })}
                         />
-                        
-                        <SwitcherControl
-                            label={__("Color", "gslider-blocks")}
-                            options={NORMAL_HOVER}
-                            value={paginationFractionColorSwitcher}
-                            onChange={(value) => setAttributes({ paginationFractionColorSwitcher: value })}
+                    )}
+
+                    <BackgroundControl 
+                        label={__("Background Color", "gslider-blocks")}
+                                
+                        normalBackgroundType={navigationArrowNormalBackgroundType}
+                        setNormalBackgroundType={(value) => setAttributes({ navigationArrowNormalBackgroundType: value })}
+                        normalClassicColor={navigationArrowNormalClassicColor}
+                        setNormalClassicColor={(value) => setAttributes({ navigationArrowNormalClassicColor: value })}
+                        normalGradientColor={navigationArrowNormalGradientColor}
+                        setNormalGradientColor={(value) => setAttributes({ navigationArrowNormalGradientColor: value })}
+                        normalCustomGradientSwitcher={navigationArrowNormalCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => setAttributes({ navigationArrowNormalCustomGradientSwitcher: value })}
+                        normalCustomGradientInputValue={navigationArrowNormalCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => setAttributes({ navigationArrowNormalCustomGradientInputValue: value })}
+                        normalClassicDefaultColor={'#d2d2d2c7'}
+
+                        hoverBackgroundType={navigationArrowHoverBackgroundType}
+                        setHoverBackgroundType={(value) => setAttributes({ navigationArrowHoverBackgroundType: value })}
+                        hoverClassicColor={navigationArrowHoverClassicColor}
+                        setHoverClassicColor={(value) => setAttributes({ navigationArrowHoverClassicColor: value })}
+                        hoverGradientColor={navigationArrowHoverGradientColor} 
+                        setHoverGradientColor={(value) => setAttributes({ navigationArrowHoverGradientColor: value })}
+                        hoverCustomGradientSwitcher={navigationArrowHoverCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => setAttributes({ navigationArrowHoverCustomGradientSwitcher: value })}
+                        hoverCustomGradientInputValue={navigationArrowHoverCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => setAttributes({ navigationArrowHoverCustomGradientInputValue: value })}
+                        hoverClassicDefaultColor={'#787878b8'}
+                        isBackgroundImage={false}
+                    />
+
+                    <SelectControls
+                        label={__("Border Style", "gslider-blocks")}
+                        options={BORDER_STYLES}
+                        value={navigationArrowBorder}
+                        onChange={(value) => setAttributes({ navigationArrowBorder: value })}
+                    />
+
+                    <SwitcherControl
+                        label={__("Border Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={navigationArrowBorderColorSwitcher}
+                        onChange={(value) => setAttributes({ navigationArrowBorderColorSwitcher: value })}
+                    />
+
+                    {navigationArrowBorderColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={navigationArrowBorderColor}
+                            onChangeColor={(value) => setAttributes({ navigationArrowBorderColor: value })}
                         />
+                    )}
 
-                        {paginationFractionColorSwitcher === 'normal' && (
-                            <ColorControl
-                                label={__("Normal Color", "gslider-blocks")}
-                                color={paginationFractionColor}
-                                onChangeColor={(value) => setAttributes({ paginationFractionColor: value })}
-                                defaultColor=''
-                            />
-                        )}
-
-                        {paginationFractionColorSwitcher === 'hover' && ( 
-                            <ColorControl
-                                label={__("Hover Color", "gslider-blocks")}
-                                color={paginationFractionColorHover}
-                                onChangeColor={(value) => setAttributes({ paginationFractionColorHover: value })}
-                                defaultColor=''
-                            />
-                        )}
-                        
-                    </>
-                )}
-
-                {paginationType === 'progressbar' && (
-                    <>
-                        <SwitcherControl
-                            label={__("Background Color", "gslider-blocks")}
-                            options={NORMAL_ACTIVE}
-                            value={paginationProgressbarBGColorSwitcher}
-                            onChange={(value) => setAttributes({ paginationProgressbarBGColorSwitcher: value })}
+                    {navigationArrowBorderColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={navigationArrowBorderHoverColor}
+                            onChangeColor={(value) => setAttributes({ navigationArrowBorderHoverColor: value })}
                         />
+                    )}
 
-                        {paginationProgressbarBGColorSwitcher === 'normal' && (
-                            <ColorControl
-                                label={__("Normal Color", "gslider-blocks")}
-                                color={paginationProgressbarBGColor}
-                                onChangeColor={(value) => setAttributes({ paginationProgressbarBGColor: value })}
-                                defaultColor=''
-                            />
-                        )}
+                    <ResponsiveSpacingControl
+                        label={__("Border Width", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={navigationArrowBorderUnits}
+                        onChangeUnits={(value) => setAttributes({ navigationArrowBorderUnits: value })}
+                        desktopSpacing={navigationArrowDesktopBorder} 
+                        onChangeDesktopSpacing={(value) => setAttributes({ navigationArrowDesktopBorder: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ navigationArrowDesktopBorderCssStyle: value })}
+                        tabletSpacing={navigationArrowTabletBorder} 
+                        onChangeTabletSpacing={(value) => setAttributes({ navigationArrowTabletBorder: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ navigationArrowTabletBorderCssStyle: value })}
+                        mobileSpacing={navigationArrowMobileBorder}
+                        onChangeMobileSpacing={(value) => setAttributes({ navigationArrowMobileBorder: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ navigationArrowMobileBorderCssStyle: value })}
+                        isLinked={navigationArrowBorderLink}
+                        onChangeLink={(value) => setAttributes({ navigationArrowBorderLink: value })} 
+                    />
 
-                        {paginationProgressbarBGColorSwitcher === 'active' && ( 
-                            <ColorControl
-                                label={__("Active Color", "gslider-blocks")}
-                                color={paginationProgressbarBGActiveColor}
-                                onChangeColor={(value) => setAttributes({ paginationProgressbarBGActiveColor: value })}
-                                defaultColor=''
-                            />
-                        )}
+                    <ResponsiveSpacingControl
+                        label={__("Border Radius", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={navigationArrowBorderRadiusUnits}
+                        onChangeUnits={(value) => setAttributes({ navigationArrowBorderRadiusUnits: value })}
+                        desktopSpacing={navigationArrowDesktopBorderRadius}
+                        onChangeDesktopSpacing={(value) => setAttributes({ navigationArrowDesktopBorderRadius: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ navigationArrowDesktopBorderRadiusCssStyle: value })}
+                        tabletSpacing={navigationArrowTabletBorderRadius}
+                        onChangeTabletSpacing={(value) => setAttributes({ navigationArrowTabletBorderRadius: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ navigationArrowTabletBorderRadiusCssStyle: value })}
+                        mobileSpacing={navigationArrowMobileBorderRadius}
+                        onChangeMobileSpacing={(value) => setAttributes({ navigationArrowMobileBorderRadius: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ navigationArrowMobileBorderRadiusCssStyle: value })}
+                        isLinked={navigationArrowBorderRadiusLink}
+                        onChangeLink={(value) => setAttributes({ navigationArrowBorderRadiusLink: value })} 
+                    />
 
+                    <SwitcherControl
+                        label={__("Box Shadow", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={navigationArrowBoxShadowValuesSwitcher}
+                        onChange={(value) => setAttributes({ navigationArrowBoxShadowValuesSwitcher: value })}
+                    />
+
+                    {navigationArrowBoxShadowValuesSwitcher === 'normal' && (
+                        <BoxShadowSettingsControl
+                            label={__("Normal Shadow", "gslider-blocks")}
+                            onBoxShadowChange={(value) => setAttributes({ navigationArrowBoxShadowValues: value })}
+                            initialShadowValue={navigationArrowBoxShadowValues}
+                            onBoxShadowStyleChange={(value) => setAttributes({ navigationArrowBoxShadowCssValue: value })}
+                        />
+                    )}
+
+                    {navigationArrowBoxShadowValuesSwitcher === 'hover' && (
+                        <BoxShadowSettingsControl
+                            label={__("Hover Shadow", "gslider-blocks")}
+                            onBoxShadowChange={(value) => setAttributes({ navigationArrowBoxShadowHoverValues: value })}
+                            initialShadowValue={navigationArrowBoxShadowHoverValues}
+                            onBoxShadowStyleChange={(value) => setAttributes({ navigationArrowBoxShadowHoverCssValue: value })}
+                        />
+                    )}
+
+                </PanelBody>
+            )}
+
+            {showPagination && (
+                <PanelBody 
+                    title={__("Pagination", "gslider-blocks")}  
+                    opened={openPanels.styles === "pagination"}
+                    onToggle={() => togglePanel("styles", "pagination")}
+                >
+
+                    {(paginationType === 'bullets' || paginationType === 'fraction') && (
                         <ResponsiveRangeControl
-                            min={1}
+                            min={0}
                             max={100}
-                            label={__("Height", "gslider-blocks")}
-                            rangeValue={paginationProgressbarHeight}
-                            onChangeValue={(value) => setAttributes({ paginationProgressbarHeight: value })}
-                            onUnitChange={(value) => setAttributes({ paginationProgressbarHeightUnits: value })}
+                            label={__("Position", "gslider-blocks")}
+                            rangeValue={paginationDotsPosition}
+                            onChangeValue={(value) => setAttributes({ paginationDotsPosition: value })}
+                            onUnitChange={(value) => setAttributes({ paginationDotsPositionUnits: value })}
                             deviceType={deviceType}
-                            units={paginationProgressbarHeightUnits}
+                            units={paginationDotsPositionUnits}
                             step={1}
-                            resetFallbackValue={"4"}
+                            resetFallbackValue={""}
                         />
-                        
-                    </>
-                )}
+                    )}
 
-            </PanelBody>
+                    {paginationType === 'progressbar' && (
+                        <ResponsiveRangeControl
+                            min={0}
+                            max={100}
+                            label={__("Position", "gslider-blocks")}
+                            rangeValue={paginationProgressbarPosition}
+                            onChangeValue={(value) => setAttributes({ paginationProgressbarPosition: value })}
+                            onUnitChange={(value) => setAttributes({ paginationProgressbarPositionUnits: value })}
+                            deviceType={deviceType}
+                            units={paginationProgressbarPositionUnits}
+                            step={1}
+                            resetFallbackValue={""}
+                        />
+                    )}
+
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={paginationDotsMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ paginationDotsMarginUnits: value })}
+                        desktopSpacing={paginationDotsDesktopMargin}
+                        onChangeDesktopSpacing={(value) => setAttributes({ paginationDotsDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ paginationDotsDesktopMarginCssStyle: value })}
+                        tabletSpacing={paginationDotsTabletMargin}
+                        onChangeTabletSpacing={(value) => setAttributes({ paginationDotsTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ paginationDotsTabletMarginCssStyle: value })}
+                        mobileSpacing={paginationDotsMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ paginationDotsMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ paginationDotsMobileMarginCssStyle: value })}
+                        isLinked={paginationDotsMarginLink}
+                        onChangeLink={(value) => setAttributes({ paginationDotsMarginLink: value })} 
+                    />
+
+                    {paginationType === 'bullets' && (
+                        <>
+                            <SwitcherControl
+                                label={__("Bullets Style", "gslider-blocks")}
+                                options={NORMAL_ACTIVE}
+                                value={paginationDotsSwitcher}
+                                onChange={(value) => setAttributes({ paginationDotsSwitcher: value })}
+                            />
+                            {paginationDotsSwitcher === 'normal' && (
+                                <>
+                                    <ResponsiveRangeControl
+                                        min={0}
+                                        max={100}
+                                        label={__("Width", "gslider-blocks")}
+                                        rangeValue={paginationNormalDotsWidth}
+                                        onChangeValue={(value) => setAttributes({ paginationNormalDotsWidth: value })}
+                                        onUnitChange={(value) => setAttributes({ paginationNormalDotsWidthUnits: value })}
+                                        deviceType={deviceType}
+                                        units={paginationNormalDotsWidthUnits}
+                                        step={1}
+                                        resetFallbackValue={"8"}
+                                    />
+
+                                    <ResponsiveRangeControl
+                                        min={0}
+                                        max={100}
+                                        label={__("Height", "gslider-blocks")}
+                                        rangeValue={paginationNormalDotsHeight}
+                                        onChangeValue={(value) => setAttributes({ paginationNormalDotsHeight: value })}
+                                        onUnitChange={(value) => setAttributes({ paginationNormalDotsHeightUnits: value })}
+                                        deviceType={deviceType}
+                                        units={paginationNormalDotsHeightUnits}
+                                        step={1}
+                                        resetFallbackValue={"8"}
+                                    />
+
+                                    <ColorControl
+                                        label={__("Color", "gslider-blocks")}
+                                        color={paginationNormalDotsBgColor}
+                                        onChangeColor={(value) => setAttributes({ paginationNormalDotsBgColor: value })}
+                                        defaultColor='#333333'
+                                    />
+
+                                    <SelectControls
+                                        label={__("Border Style", "gslider-blocks")}
+                                        options={BORDER_STYLES}
+                                        value={paginationNormalDotsBorder}
+                                        onChange={(value) => setAttributes({ paginationNormalDotsBorder: value })}
+                                    />
+
+                                    <SwitcherControl
+                                        label={__("Border Color", "gslider-blocks")}
+                                        options={NORMAL_HOVER}
+                                        value={paginationNormalDotsBorderColorSwitcher}
+                                        onChange={(value) => setAttributes({ paginationNormalDotsBorderColorSwitcher: value })}
+                                    />
+
+                                    {paginationNormalDotsBorderColorSwitcher === 'normal' && (
+                                        <ColorControl
+                                            label={__("Normal Color", "gslider-blocks")}
+                                            color={paginationNormalDotsBorderColor}
+                                            onChangeColor={(value) => setAttributes({ paginationNormalDotsBorderColor: value })}
+                                        />
+                                    )}
+
+                                    {paginationNormalDotsBorderColorSwitcher === 'hover' && (
+                                        <ColorControl
+                                            label={__("Hover Color", "gslider-blocks")}
+                                            color={paginationNormalDotsBorderHoverColor}
+                                            onChangeColor={(value) => setAttributes({ paginationNormalDotsBorderHoverColor: value })}
+                                        />
+                                    )}
+
+                                    <ResponsiveSpacingControl
+                                        label={__("Border Width", "gslider-blocks")}
+                                        deviceType={deviceType}
+                                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                        units={paginationNormalDotsBorderUnits}
+                                        onChangeUnits={(value) => setAttributes({ paginationNormalDotsBorderUnits: value })}
+                                        desktopSpacing={paginationNormalDotsDesktopBorder} 
+                                        onChangeDesktopSpacing={(value) => setAttributes({ paginationNormalDotsDesktopBorder: value })}
+                                        desktopSpacingStyle={(value) => setAttributes({ paginationNormalDotsDesktopBorderCssStyle: value })}
+                                        tabletSpacing={paginationNormalDotsTabletBorder} 
+                                        onChangeTabletSpacing={(value) => setAttributes({ paginationNormalDotsTabletBorder: value })}
+                                        tabletSpacingStyle={(value) => setAttributes({ paginationNormalDotsTabletBorderCssStyle: value })}
+                                        mobileSpacing={paginationNormalDotsMobileBorder}
+                                        onChangeMobileSpacing={(value) => setAttributes({ paginationNormalDotsMobileBorder: value })}
+                                        mobileSpacingStyle={(value) => setAttributes({ paginationNormalDotsMobileBorderCssStyle: value })}
+                                        isLinked={paginationNormalDotsBorderLink}
+                                        onChangeLink={(value) => setAttributes({ paginationNormalDotsBorderLink: value })} 
+                                    />
+
+                                    <ResponsiveSpacingControl
+                                        label={__("Border Radius", "gslider-blocks")}
+                                        deviceType={deviceType}
+                                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                        units={paginationNormalDotsBorderRadiusUnits}
+                                        onChangeUnits={(value) => setAttributes({ paginationNormalDotsBorderRadiusUnits: value })}
+                                        desktopSpacing={paginationNormalDotsDesktopBorderRadius}
+                                        onChangeDesktopSpacing={(value) => setAttributes({ paginationNormalDotsDesktopBorderRadius: value })}
+                                        desktopSpacingStyle={(value) => setAttributes({ paginationNormalDotsDesktopBorderRadiusCssStyle: value })}
+                                        tabletSpacing={paginationNormalDotsTabletBorderRadius}
+                                        onChangeTabletSpacing={(value) => setAttributes({ paginationNormalDotsTabletBorderRadius: value })}
+                                        tabletSpacingStyle={(value) => setAttributes({ paginationNormalDotsTabletBorderRadiusCssStyle: value })}
+                                        mobileSpacing={paginationNormalDotsMobileBorderRadius}
+                                        onChangeMobileSpacing={(value) => setAttributes({ paginationNormalDotsMobileBorderRadius: value })}
+                                        mobileSpacingStyle={(value) => setAttributes({ paginationNormalDotsMobileBorderRadiusCssStyle: value })}
+                                        isLinked={paginationNormalDotsBorderRadiusLink}
+                                        onChangeLink={(value) => setAttributes({ paginationNormalDotsBorderRadiusLink: value })} 
+                                    />
+                                </>
+                            )}
+
+                            {paginationDotsSwitcher === 'active' && (
+                                <>
+                                    <ResponsiveRangeControl
+                                        min={0}
+                                        max={100}
+                                        label={__("Width", "gslider-blocks")}
+                                        rangeValue={paginationActiveDotsWidth}
+                                        onChangeValue={(value) => setAttributes({ paginationActiveDotsWidth: value })}
+                                        onUnitChange={(value) => setAttributes({ paginationActiveDotsWidthUnits: value })}
+                                        deviceType={deviceType}
+                                        units={paginationActiveDotsWidthUnits}
+                                        step={1}
+                                        resetFallbackValue={"8"}
+                                    />
+
+                                    <ResponsiveRangeControl
+                                        min={0}
+                                        max={100}
+                                        label={__("Height", "gslider-blocks")}
+                                        rangeValue={paginationActiveDotsHeight}
+                                        onChangeValue={(value) => setAttributes({ paginationActiveDotsHeight: value })}
+                                        onUnitChange={(value) => setAttributes({ paginationActiveDotsHeightUnits: value })}
+                                        deviceType={deviceType}
+                                        units={paginationActiveDotsHeightUnits}
+                                        step={1}
+                                        resetFallbackValue={"8"}
+                                    />
+
+                                    <ColorControl
+                                        label={__("Color", "gslider-blocks")}
+                                        color={paginationActiveDotsBgColor}
+                                        onChangeColor={(value) => setAttributes({ paginationActiveDotsBgColor: value })}
+                                    />
+
+                                    <SelectControls
+                                        label={__("Border Style", "gslider-blocks")}
+                                        options={BORDER_STYLES}
+                                        value={paginationActiveDotsBorder}
+                                        onChange={(value) => setAttributes({ paginationActiveDotsBorder: value })}
+                                    />
+
+                                    <SwitcherControl
+                                        label={__("Border Color", "gslider-blocks")}
+                                        options={NORMAL_HOVER}
+                                        value={paginationActiveDotsBorderColorSwitcher}
+                                        onChange={(value) => setAttributes({ paginationActiveDotsBorderColorSwitcher: value })}
+                                    />
+
+                                    {paginationActiveDotsBorderColorSwitcher === 'normal' && (
+                                        <ColorControl
+                                            label={__("Normal Color", "gslider-blocks")}
+                                            color={paginationActiveDotsBorderColor}
+                                            onChangeColor={(value) => setAttributes({ paginationActiveDotsBorderColor: value })}
+                                        />
+                                    )}
+
+                                    {paginationActiveDotsBorderColorSwitcher === 'hover' && (
+                                        <ColorControl
+                                            label={__("Hover Color", "gslider-blocks")}
+                                            color={paginationActiveDotsBorderHoverColor}
+                                            onChangeColor={(value) => setAttributes({ paginationActiveDotsBorderHoverColor: value })}
+                                        />
+                                    )}
+
+                                    <ResponsiveSpacingControl
+                                        label={__("Border Width", "gslider-blocks")}
+                                        deviceType={deviceType}
+                                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                        units={paginationActiveDotsBorderUnits}
+                                        onChangeUnits={(value) => setAttributes({ paginationActiveDotsBorderUnits: value })}
+                                        desktopSpacing={paginationActiveDotsDesktopBorder} 
+                                        onChangeDesktopSpacing={(value) => setAttributes({ paginationActiveDotsDesktopBorder: value })}
+                                        desktopSpacingStyle={(value) => setAttributes({ paginationActiveDotsDesktopBorderCssStyle: value })}
+                                        tabletSpacing={paginationActiveDotsTabletBorder} 
+                                        onChangeTabletSpacing={(value) => setAttributes({ paginationActiveDotsTabletBorder: value })}
+                                        tabletSpacingStyle={(value) => setAttributes({ paginationActiveDotsTabletBorderCssStyle: value })}
+                                        mobileSpacing={paginationActiveDotsMobileBorder}
+                                        onChangeMobileSpacing={(value) => setAttributes({ paginationActiveDotsMobileBorder: value })}
+                                        mobileSpacingStyle={(value) => setAttributes({ paginationActiveDotsMobileBorderCssStyle: value })}
+                                        isLinked={paginationActiveDotsBorderLink}
+                                        onChangeLink={(value) => setAttributes({ paginationActiveDotsBorderLink: value })} 
+                                    />
+
+                                    <ResponsiveSpacingControl
+                                        label={__("Border Radius", "gslider-blocks")}
+                                        deviceType={deviceType}
+                                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                        units={paginationActiveDotsBorderRadiusUnits}
+                                        onChangeUnits={(value) => setAttributes({ paginationActiveDotsBorderRadiusUnits: value })}
+                                        desktopSpacing={paginationActiveDotsDesktopBorderRadius}
+                                        onChangeDesktopSpacing={(value) => setAttributes({ paginationActiveDotsDesktopBorderRadius: value })}
+                                        desktopSpacingStyle={(value) => setAttributes({ paginationActiveDotsDesktopBorderRadiusCssStyle: value })}
+                                        tabletSpacing={paginationActiveDotsTabletBorderRadius}
+                                        onChangeTabletSpacing={(value) => setAttributes({ paginationActiveDotsTabletBorderRadius: value })}
+                                        tabletSpacingStyle={(value) => setAttributes({ paginationActiveDotsTabletBorderRadiusCssStyle: value })}
+                                        mobileSpacing={paginationActiveDotsMobileBorderRadius}
+                                        onChangeMobileSpacing={(value) => setAttributes({ paginationActiveDotsMobileBorderRadius: value })}
+                                        mobileSpacingStyle={(value) => setAttributes({ paginationActiveDotsMobileBorderRadiusCssStyle: value })}
+                                        isLinked={paginationActiveDotsBorderRadiusLink}
+                                        onChangeLink={(value) => setAttributes({ paginationActiveDotsBorderRadiusLink: value })} 
+                                    />
+                                </>
+                            )}
+                        </>
+                    )}
+
+                    {paginationType === 'fraction' && (
+                        <>
+                            <ResponsiveTypographyControl 
+                                fontFamily={paginationFractionFontFamily}
+                                onChangeFontFamily={(value) => setAttributes({ paginationFractionFontFamily: value })}
+                                
+                                fontSize={paginationFractionFontSize}
+                                onChangeFontSize={(value) => setAttributes({ paginationFractionFontSize: value })}
+                                
+                                fontSizeUnits={paginationFractionFontSizeUnits}
+                                onChangeFontSizeUnit={(value) => setAttributes({ paginationFractionFontSizeUnits: value })}
+                                
+                                fontWeight={paginationFractionFontWeight}
+                                onChangeFontWeight={(value) => setAttributes({ paginationFractionFontWeight: value })}
+                                
+                                fontStyle={paginationFractionFontStyle}
+                                onChangeFontStyle={(value) => setAttributes({ paginationFractionFontStyle: value })}
+                                
+                                textTransform={paginationFractionTextTransform}
+                                onChangeTextTransform={(value) => setAttributes({ paginationFractionTextTransform: value })}
+                                
+                                textDecoration={paginationFractionTextDecoration}
+                                onChangeTextDecoration={(value) => setAttributes({ paginationFractionTextDecoration: value })}
+                                
+                                lineHeight={paginationFractionLineHeight}
+                                onChangeLineHeight={(value) => setAttributes({ paginationFractionLineHeight: value })}
+                                
+                                lineHeightUnits={paginationFractionLineHeightUnits}
+                                onChangeLineHeightUnit={(value) => setAttributes({ paginationFractionLineHeightUnits: value })}
+
+                                letterSpacing={paginationFractionLetterSpacing}
+                                onChangeLetterSpacing={(value) => setAttributes({ paginationFractionLetterSpacing: value })}
+                                
+                                letterSpacingUnits={paginationFractionLetterSpacingUnits}
+                                onChangeLetterSpacingUnit={(value) => setAttributes({ paginationFractionLetterSpacingUnits: value })}
+
+                                wordSpacing={paginationFractionWordSpacing} 
+                                onChangeWordSpacing={(value) => setAttributes({ paginationFractionWordSpacing: value })}
+                                
+                                wordSpacingUnits={paginationFractionWordSpacingUnits}
+                                onChangeWordSpacingUnit={(value) => setAttributes({ paginationFractionWordSpacingUnits: value })}
+                                
+                                deviceType={deviceType}
+                            />
+                            
+                            <SwitcherControl
+                                label={__("Color", "gslider-blocks")}
+                                options={NORMAL_HOVER}
+                                value={paginationFractionColorSwitcher}
+                                onChange={(value) => setAttributes({ paginationFractionColorSwitcher: value })}
+                            />
+
+                            {paginationFractionColorSwitcher === 'normal' && (
+                                <ColorControl
+                                    label={__("Normal Color", "gslider-blocks")}
+                                    color={paginationFractionColor}
+                                    onChangeColor={(value) => setAttributes({ paginationFractionColor: value })}
+                                    defaultColor=''
+                                />
+                            )}
+
+                            {paginationFractionColorSwitcher === 'hover' && ( 
+                                <ColorControl
+                                    label={__("Hover Color", "gslider-blocks")}
+                                    color={paginationFractionColorHover}
+                                    onChangeColor={(value) => setAttributes({ paginationFractionColorHover: value })}
+                                    defaultColor=''
+                                />
+                            )}
+                            
+                        </>
+                    )}
+
+                    {paginationType === 'progressbar' && (
+                        <>
+                            <SwitcherControl
+                                label={__("Background Color", "gslider-blocks")}
+                                options={NORMAL_ACTIVE}
+                                value={paginationProgressbarBGColorSwitcher}
+                                onChange={(value) => setAttributes({ paginationProgressbarBGColorSwitcher: value })}
+                            />
+
+                            {paginationProgressbarBGColorSwitcher === 'normal' && (
+                                <ColorControl
+                                    label={__("Normal Color", "gslider-blocks")}
+                                    color={paginationProgressbarBGColor}
+                                    onChangeColor={(value) => setAttributes({ paginationProgressbarBGColor: value })}
+                                    defaultColor=''
+                                />
+                            )}
+
+                            {paginationProgressbarBGColorSwitcher === 'active' && ( 
+                                <ColorControl
+                                    label={__("Active Color", "gslider-blocks")}
+                                    color={paginationProgressbarBGActiveColor}
+                                    onChangeColor={(value) => setAttributes({ paginationProgressbarBGActiveColor: value })}
+                                    defaultColor=''
+                                />
+                            )}
+
+                            <ResponsiveRangeControl
+                                min={1}
+                                max={100}
+                                label={__("Height", "gslider-blocks")}
+                                rangeValue={paginationProgressbarHeight}
+                                onChangeValue={(value) => setAttributes({ paginationProgressbarHeight: value })}
+                                onUnitChange={(value) => setAttributes({ paginationProgressbarHeightUnits: value })}
+                                deviceType={deviceType}
+                                units={paginationProgressbarHeightUnits}
+                                step={1}
+                                resetFallbackValue={"4"}
+                            />
+                            
+                        </>
+                    )}
+
+                </PanelBody>
+            )}
         </>
     );  
 
