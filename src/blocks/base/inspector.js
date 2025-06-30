@@ -44,6 +44,8 @@ import {useDeviceType} from "@Utils/displayType";
 import InputControls from '@Components/input-control';
 import HtmlTagControl from '@Components/html-tag-control';
 import SelectControls from '@Components/select-controls';
+import IconPicker from '@Components/icon-picker'; 
+
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
     const { 

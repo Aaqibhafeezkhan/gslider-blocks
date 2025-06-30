@@ -4,68 +4,67 @@ import { Grid } from 'react-virtualized';
 import renderSVG from "./components/icon-picker/controls/renderIcon";
 import defaultSvgIcon from "./components/defaultSvgIcon";
 import fetchSvgIcons from "@Components/icon-picker/components/fetchSvgicons";
+
 import {
 	Button, Modal, Tooltip
 } from "@wordpress/components";
 
-export default function FBIconPicker(props) {
-	const { ajaxUrl, nonce } = window.FrontisBlocksData;
+export default function IconPicker(props) {
 	const { value, setIconHandler } = props;
 	const [showIconPicker, setIconPickerModal] = useState(false);
 	const closeModal = () => setIconPickerModal( false );
-	const [ insertIcon, setInsertIcon ] = useState( value );
-	const [defaultIcons, setDefaultIcons] = useState(defaultSvgIcon);
+	const [insertIcon, setInsertIcon ] = useState( value );
 	const [filteredDefaultIcons, setFilteredDefaultIcons] = useState(defaultSvgIcon);
 	const [selectedCat, setSelectedCat] = useState('all-icons');
 	const [svgIcon, setSvgIcon] = useState([]);
 	const [categories, setCategories] = useState([
 		{
 			slug: 'all-icons',
-			title: __('All Icons', 'ultimate-addons-for-gutenberg')
+			title: __('All Icons', 'gslider-blocks')
 		},
 		{
 			slug: 'brands',
-			title: __('Brands', 'ultimate-addons-for-gutenberg')
+			title: __('Brands', 'gslider-blocks')
 		},
 		{
 			slug: 'business',
-			title: __('Business', 'ultimate-addons-for-gutenberg')
+			title: __('Business', 'gslider-blocks')
 		},
 		{
 			slug: 'communication',
-			title: __('Communication', 'ultimate-addons-for-gutenberg')
+			title: __('Communication', 'gslider-blocks')
 		},
 		{
 			slug: 'design',
-			title: __('Design', 'ultimate-addons-for-gutenberg')
+			title: __('Design', 'gslider-blocks')
 		},
 		{
 			slug: 'education',
-			title: __('Education', 'ultimate-addons-for-gutenberg')
+			title: __('Education', 'gslider-blocks')
 		},
 		{
 			slug: 'environment',
-			title: __('Environment', 'ultimate-addons-for-gutenberg')
+			title: __('Environment', 'gslider-blocks')
 		},
 		{
 			slug: 'lifestyle-and-hobbies',
-			title: __('Lifestyle', 'ultimate-addons-for-gutenberg')
+			title: __('Lifestyle', 'gslider-blocks')
 		},
 		{
 			slug: 'science-and-technology',
-			title: __('Science', 'ultimate-addons-for-gutenberg')
+			title: __('Science', 'gslider-blocks')
 		},
 		{
 			slug: 'social',
-			title: __('Social', 'ultimate-addons-for-gutenberg')
+			title: __('Social', 'gslider-blocks')
 		},
 		{
 			slug: 'travel',
-			title: __('Travel', 'ultimate-addons-for-gutenberg')
+			title: __('Travel', 'gslider-blocks')
 		},
 		{
 			slug: 'others',
-			title: __('Others', 'ultimate-addons-for-gutenberg')
+			title: __('Others', 'gslider-blocks')
 		}
 	]);
 
@@ -79,68 +78,6 @@ export default function FBIconPicker(props) {
 		setIconPickerModal(false);
 	}
 
-	const updateCustomIcons = (categoriesData) => {
-		if(categoriesData) {
-			// Merge arrays without duplicates in slug or title
-			const mergedCategoryArray = [...categories];
-
-			categoriesData.categories.forEach((newItem) => {
-				const isDuplicate = mergedCategoryArray.some(
-					(item) => item.slug === newItem.slug || item.title === newItem.title
-				);
-
-				if (!isDuplicate) {
-					mergedCategoryArray.push(newItem);
-				}
-			});
-
-			if(categoriesData.names.length > 0) {
-				const chunkSize = 8; // Maximum items per sub-array
-				const customNamesArray = [];
-
-				for (let i = 0; i < categoriesData.names.length; i += chunkSize) {
-					customNamesArray.push(categoriesData.names.slice(i, i + chunkSize));
-				}
-
-				const newDefaultIcons = defaultIcons.concat(customNamesArray);
-				setDefaultIcons(newDefaultIcons);
-				setFilteredDefaultIcons(newDefaultIcons);
-			}
-
-			mergedCategoryArray.sort((a, b) => {
-				if (a.title === "Others") return 1; // push "Others" to the end
-				if (b.title === "Others") return -1; // push "Others" to the end
-				return a.title.localeCompare(b.title); // normal alphabetical sorting
-			});
-			setCategories(mergedCategoryArray);
-		}
-	}
-
-	const fetchCustomIcons = () => {
-		try {
-			const response = jQuery.ajax({
-				url: ajaxUrl,
-				type: 'POST',
-				data: {
-					action: 'fb_get_custom_icons_category',
-					security: nonce
-				}
-			});
-
-			response.done((resData) => {
-				if (resData) {
-					updateCustomIcons(resData.data);
-				}
-			});
-
-			response.fail((jqXHR, textStatus, errorThrown) => {
-				console.error('Error fetching custom icons:', textStatus, errorThrown);
-			});
-		} catch (error) {
-			console.error('Unexpected error:', error);
-		}
-	};
-
 	// Filter icon list
 	const filterIconList = (cat) => {
 		let filteredIcons = [];
@@ -148,17 +85,15 @@ export default function FBIconPicker(props) {
 		setSelectedCat(cat.slug);
 
 		if ( 'all-icons' === cat.slug ) {
-			setFilteredDefaultIcons(defaultIcons);
+			setFilteredDefaultIcons(defaultSvgIcon);
 		} else if ( 'others' === cat.slug ) {
 			for ( const defaultIcon in svgIcon ) {
 				if ( 0 === svgIcon[ defaultIcon ].custom_categories.length ) {
-					// Add matching icon to the current group
 					currentGroup.push(defaultIcon);
 
-					// If the current group is full (like 8 icons), push it to filteredIcons
 					if (currentGroup.length === 8) {
 						filteredIcons.push(currentGroup);
-						currentGroup = []; // Start a new group
+						currentGroup = [];
 					}
 				}
 			}
@@ -170,16 +105,13 @@ export default function FBIconPicker(props) {
 			setFilteredDefaultIcons(filteredIcons)
 		} else {
 			for ( const defaultIcon in svgIcon ) {
-				// Loop through each icon group in svgIcon
 				if (svgIcon[defaultIcon].custom_categories.includes(cat.slug)) {
-					// Add matching icon to the current group
 					currentGroup.push(defaultIcon);
 				}
 
-				// If the current group is full (like 8 icons), push it to filteredIcons
 				if (currentGroup.length === 8) {
 					filteredIcons.push(currentGroup);
-					currentGroup = []; // Start a new group
+					currentGroup = [];
 				}
 			}
 
@@ -197,7 +129,7 @@ export default function FBIconPicker(props) {
 		if(searchKey.target.value !== '') {
 			const data = filteredDefaultIcons;
 
-			const searchKeyword = searchKey.target.value;  // Replace with your search keyword
+			const searchKeyword = searchKey.target.value;
 
 			const filteredData = data.map(subArray =>
 				subArray.filter(item =>
@@ -207,7 +139,7 @@ export default function FBIconPicker(props) {
 
 			setFilteredDefaultIcons(filteredData);
 		} else {
-			setFilteredDefaultIcons(defaultIcons);
+			setFilteredDefaultIcons(defaultSvgIcon);
 		}
 	}
 
@@ -215,9 +147,9 @@ export default function FBIconPicker(props) {
 	const renderIconList = () => {
 		if ( ! filteredDefaultIcons.length ) {
 			return (
-				<div className="uagb-ip-icons icon-not-found">
-					<div className="uagb-icon-not-available">
-						<span>{ __( 'No Icons Found', 'ultimate-addons-for-gutenberg' ) }</span>
+				<div className="gslider-blocks-icon-not-available">
+					<div className="gslider-blocks-icon-not-available">
+						<span>{ __( 'No Icons Found', 'gslider-blocks' ) }</span>
 					</div>
 				</div>
 			);
@@ -251,9 +183,9 @@ export default function FBIconPicker(props) {
 				: '';
 
 			return (
-				<div key={ key } style={ style } className={'fb_icon_box'}>
+				<div key={ key } style={ style } className={'gslider_icon_box'}>
 					<div
-						className={`fb_icon ${iconClass}`}
+						className={`gslider_icon ${iconClass}`}
 						onClick={ () => {
 							if ( value !== currentIcon ) {
 								setInsertIcon( currentIcon );
@@ -270,7 +202,7 @@ export default function FBIconPicker(props) {
 		}
 		const heightAndWidth = 400 / 8;
 		return (
-			<div className="fb_icon_picker_icons_list">
+			<div className="gslider_icon_picker_icons_list">
 				<Grid
 					cellRenderer={ cellRenderer }
 					columnCount={ filteredDefaultIcons.length }
@@ -286,7 +218,6 @@ export default function FBIconPicker(props) {
 	}
 
 	useEffect(  () => {
-		fetchCustomIcons();
 		fetchSvgIcons().then(icons => {
 			if (icons) {
 				setSvgIcon(icons);
@@ -296,9 +227,9 @@ export default function FBIconPicker(props) {
 
 	return (
 		<Fragment>
-			<div className='fb_icon_picker_wrapper' onClick={() => iconPickerModal()}>
-				<div className={'fb_icon_picker'}>
-					<div className={'Change icon'}>{__('Change icon', 'frontis-blocks')}</div>
+			<div className='gslider_icon_picker_wrapper' onClick={() => iconPickerModal()}>
+				<div className={'gslider_icon_picker'}>
+					<div className={'Change icon'}>{__('Change icon', 'gslider-blocks')}</div>
 					{insertIcon !== '' &&
 						<div onClick={() => setInsertIcon('')} className={'remove'}>
 							<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -324,34 +255,34 @@ export default function FBIconPicker(props) {
 			</div>
 			<div>
 				{showIconPicker && (
-					<Modal onRequestClose={closeModal} className={'fb_icon_picker_wrapper_modal'}>
-						<div className={'fb_icon_picker_modal_wrapper'}>
-							<div className={'fb_icon_picker_wrapper_inner'}>
-								<div className={'fb_icon_picker_wrapper_header'}>
-									<h2>{__('Icon Library', 'frontis-blocks')}</h2>
-									<div className={'fb_icon_picker_wrapper_search'}>
+					<Modal onRequestClose={closeModal} className={'gslider_icon_picker_wrapper_modal'}>
+						<div className={'gslider_icon_picker_modal_wrapper'}>
+							<div className={'gslider_icon_picker_wrapper_inner'}>
+								<div className={'gslider_icon_picker_wrapper_header'}>
+									<h2>{__('Icon Library', 'gslider-blocks')}</h2>
+									<div className={'gslider_icon_picker_wrapper_search'}>
 										<span>
 											<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512"><path
 												d="M448 449L301.2 300.2c20-27.9 31.9-62.2 31.9-99.2 0-93.1-74.7-168.9-166.5-168.9C74.7 32 0 107.8 0 200.9s74.7 168.9 166.5 168.9c39.8 0 76.3-14.2 105-37.9l146 148.1 30.5-31zM166.5 330.8c-70.6 0-128.1-58.3-128.1-129.9S95.9 71 166.5 71s128.1 58.3 128.1 129.9-57.4 129.9-128.1 129.9z"></path></svg>
 										</span>
-										<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'frontis-blocks')}/>
+										<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'gslider-blocks')}/>
 									</div>
 								</div>
-								<div className={'fb_icon_picker_wrapper_body'}>
-									<div className={'fb_icon_picker_wrapper_categories'}>
+								<div className={'gslider_icon_picker_wrapper_body'}>
+									<div className={'gslider_icon_picker_wrapper_categories'}>
 										{categories.map((category, index) => (
 											<div onClick={() => filterIconList(category)}
-												 className={`fb_icon_picker_wrapper_category ${selectedCat === category.slug ? 'selected' : ''}`}
+												 className={`gslider_icon_picker_wrapper_category ${selectedCat === category.slug ? 'selected' : ''}`}
 												 key={index}>{category.title}</div>
 										))}
 									</div>
-									<div className={'fb_icon_picker_wrapper_icons_list'}>
+									<div className={'gslider_icon_picker_wrapper_icons_list'}>
 										{renderIconList()}
 									</div>
 								</div>
-								<div className={'fb_icon_picker_wrapper_footer'}>
+								<div className={'gslider_icon_picker_wrapper_footer'}>
 									<Button variant="secondary"
-											onClick={fbInsertIcon}>{__('Insert icon', 'frontis-blocks')}</Button>
+											onClick={fbInsertIcon}>{__('Insert icon', 'gslider-blocks')}</Button>
 								</div>
 							</div>
 						</div>

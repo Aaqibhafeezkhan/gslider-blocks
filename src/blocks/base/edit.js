@@ -10,6 +10,7 @@ import {
 	ToolbarButton
 } from '@wordpress/components';
 import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
+import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';

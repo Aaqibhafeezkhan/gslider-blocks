@@ -1,4 +1,4 @@
-const fb_icons_name = [
+const defaultSvgIcon = [
 	[
 		"0",
 		"1",
@@ -2309,4 +2309,4 @@ const fb_icons_name = [
 		"zhihu"
 	]
 ];
-export default fb_icons_name;
+export default defaultSvgIcon;

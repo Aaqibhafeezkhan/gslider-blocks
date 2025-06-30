@@ -1,16 +1,5 @@
-/**
- * Set inline CSS class.
- *
- * @param {Object} props - The block object.
- * @return {Array} The inline CSS class.
- */
-
 import parseSVG from './parseIcon';
-const { ajaxUrl, nonce, site_url } = window.FrontisBlocksData;
-
-// Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
-const url = `${site_url}/wp-json/wp/v2/frontis-blocks/icons`;
-const token = 'b9e9d7516943744aed44d0be39217694a92784ce737e07c9e12397eca99fded0';
+import icon_Data from '../../icons.json';
 
 // Function to check if data exists in localStorage
 const getDataFromLocalStorage = () => {
@@ -19,56 +8,20 @@ const getDataFromLocalStorage = () => {
 	return data;
 };
 
-// Fetch SVG icons from the API
-const fetchFromApi = () => {
-	return fetch(url, {
-		method: 'GET',
-		headers: {
-			'Authorization': `Bearer ${token}`,
-			'Content-Type': 'application/json',
-		},
-	})
-		.then(response => {
-			if (!response.ok) {
-				throw new Error('Network response was not ok');
-			}
-			return response.json();
-		})
-		.then(data => {
-			localStorage.setItem('iconData', JSON.stringify(data));
-			return data;
-		})
-		.catch(error => {
-			console.error('Error fetching SVG icons:', error);
-			return null;
-		});
+// Fetch SVG icons from the json file
+const fetchFromApi = async () => {
+	try {
+		const data = icon_Data;
+		console.log(data);
+		localStorage.setItem('iconData', JSON.stringify(data));
+		return data;
+	} catch (error) {
+		console.error(__('Error inserting icon data:', 'gslider-blocks'), error);
+		return null;
+	}
 };
 
-const fetchCustomIcons = () => {
-	return new Promise((resolve, reject) => {
-		jQuery.ajax({
-			url: ajaxUrl,
-			type: 'POST',
-			data: {
-				action: 'fb_get_custom_icons_category',
-				security: nonce
-			}
-		})
-			.done((response) => {
-				if (response && response.data) {
-					localStorage.setItem('iconCustomData', JSON.stringify(response.data.icons));
-					resolve(response.data.icons);
-				} else {
-					resolve(null); // Resolve with null if no icons data
-				}
-			})
-			.fail((error) => {
-				console.error('Error fetching custom icons:', error);
-				reject(error); // Reject the promise if there is an error
-			});
-	});
-};
-
+// Generate SVG from the json file
 function generateSvg(svgArgData) {
 	const svgData = svgArgData.svg.solid;
 	const width = svgData.width;
@@ -111,13 +64,6 @@ function renderSVG( svg, setAttributes = false, extraProps = {} ) {
 
 	let data = getDataFromLocalStorage();
 	if (!data) {
-		// let customIconData = '';
-		// fetchCustomIcons()
-		// 	.then((icons) => {
-		// 		if (icons) {
-		// 			customIconData = icons;
-		// 		}
-		// 	});
 		fetchFromApi().then(fetchedData => {
 			data = fetchedData;
 		});
