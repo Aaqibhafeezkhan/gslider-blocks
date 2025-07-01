@@ -780,6 +780,9 @@
   display: block;
   margin-bottom: 0;
 }
+.gslider-image-control-wrapper .components-base-control__field .components-base-control__help {
+  margin: 8px 0 0;
+}
 .gslider-image-control-wrapper .gslider-image-control {
   background-color: #f0f0f0;
   background-position: 50%;

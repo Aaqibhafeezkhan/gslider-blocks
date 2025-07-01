@@ -9,6 +9,7 @@ import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseCo
  */
 import { 
     TEXT_ALIGN,
+    ARROW_ICON_ALIGN,
     VERTICAL_ALIGN,
     HORIZONTAL_ALIGN,
     HTML_TAGS,
@@ -36,6 +37,7 @@ import BoxShadowSettingsControl from '@Components/box-shadow-control';
 import BackgroundControl from '@Components/background-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
 import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+import ImageControl from '@Components/image-control';
 import InspectorControl from '@Components/inspector-controls';
 import CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -359,6 +361,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         secondaryButtonMobilePaddingCssStyle,
         secondaryButtonPaddingLink,
         /** End Secondary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
+
+        /** Start Navigation Custom Arrows */
+        navigationArrowsIconSwitcher,
+        navigationArrowsIconLeftAlign,
+        navigationArrowsIconLeft,
+        navigationArrowsIconLeftImageUrl,
+        navigationArrowsIconLeftImageAlt,
+        navigationArrowsIconLeftImageID,
+
+        navigationArrowsIconRightAlign,
+        navigationArrowsIconRight,
+        navigationArrowsIconRightImageUrl,
+        navigationArrowsIconRightImageAlt,
+        navigationArrowsIconRightImageID,
+        /** End Navigation Custom Arrows */
 
         /** Start Arrows Style */
         navigationArrowSize,
@@ -820,6 +837,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
     /** End Secondary Button Style */ 
 
+    /** Navigation Custom Arrows */
+    const navigationArrowsIconLeftHandler = (IconName) => {
+		setAttributes({navigationArrowsIconLeft: IconName})
+
+	}
+    const navigationArrowsIconRightHandler = (IconName) => {
+		setAttributes({navigationArrowsIconRight: IconName})
+	}
+    /** End Navigation Custom Arrows */
+
     /**
 	 * Inspector General Controls
 	 */
@@ -1129,12 +1156,73 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     opened={openPanels.general === "navigation"}
                     onToggle={() => togglePanel("general", "navigation")}
                 >
+                    <ToggleControl
+                        label={ __( 'Custom Icon', 'gslider-blocks' ) }
+                        checked={ navigationArrowsIconSwitcher }
+                        onChange={(value) => setAttributes({ navigationArrowsIconSwitcher: value })}
+                    />
+
+                    {navigationArrowsIconSwitcher && (
+                        <>
+                            <BaseControl>
+                                <SwitcherControl
+                                    label={__("Left Icon", "gslider-blocks")}
+                                    options={ARROW_ICON_ALIGN}
+                                    value={navigationArrowsIconLeftAlign}
+                                    onChange={(value) => setAttributes({ navigationArrowsIconLeftAlign: value })}
+                                />
+
+                                {navigationArrowsIconLeftAlign === 'icon' && (
+                                    <IconPicker value={navigationArrowsIconLeft} setIconHandler={navigationArrowsIconLeftHandler} />
+                                )}
+
+                                {navigationArrowsIconLeftAlign === 'image' && (
+                                    <ImageControl 
+                                        imageUrl={navigationArrowsIconLeftImageUrl}
+                                        setImageUrl={(value) => setAttributes({ navigationArrowsIconLeftImageUrl: value })}
+                                        imageAlt={navigationArrowsIconLeftImageAlt}
+                                        setImageAlt={(value) => setAttributes({ navigationArrowsIconLeftImageAlt: value })}
+                                        imageID={navigationArrowsIconLeftImageID}
+                                        setImageID={(value) => setAttributes({ navigationArrowsIconLeftImageID: value })}
+                                        isImageSize={false}
+                                    />
+                                )}
+                            </BaseControl>
+
+                            <BaseControl>
+                                <SwitcherControl
+                                    label={__("Right Icon", "gslider-blocks")}
+                                    options={ARROW_ICON_ALIGN}
+                                    value={navigationArrowsIconRightAlign}
+                                    onChange={(value) => setAttributes({ navigationArrowsIconRightAlign: value })}
+                                />
+
+                                {navigationArrowsIconRightAlign === 'icon' && (
+                                    <IconPicker value={navigationArrowsIconRight} setIconHandler={navigationArrowsIconRightHandler} />
+                                )}
+
+                                {navigationArrowsIconRightAlign === 'image' && (
+                                    <ImageControl 
+                                        imageUrl={navigationArrowsIconRightImageUrl}
+                                        setImageUrl={(value) => setAttributes({ navigationArrowsIconRightImageUrl: value })}
+                                        imageAlt={navigationArrowsIconRightImageAlt}
+                                        setImageAlt={(value) => setAttributes({ navigationArrowsIconRightImageAlt: value })}
+                                        imageID={navigationArrowsIconRightImageID}
+                                        setImageID={(value) => setAttributes({ navigationArrowsIconRightImageID: value })}
+                                        isImageSize={false}
+                                    />
+                                )}
+                            </BaseControl>
+                        </>
+                    )}
+
                     <SwitcherControl
                         label={__("Position Type", "gslider-blocks")}
                         options={NAVIGATION_ARROW_POSITION_TYPE}
                         value={navigationArrowPositionType}
                         onChange={(value) => setAttributes({ navigationArrowPositionType: value })}
                     />
+
                     <SelectControls
                         label={__("Position", "gslider-blocks")}
                         options={NAVIGATION_ARROW_POSITION}
@@ -3465,7 +3553,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
-            .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
+            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition}
+            .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -3507,8 +3596,10 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ` : ''}
             }
         
-            .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} .swiper-button-prev,
-            .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} .swiper-button-next {
+            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} .swiper-button-prev,
+            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} .swiper-button-next,
+            .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} .swiper-button-prev,
+            .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} .swiper-button-next {
                 position: relative;
                 top: auto;
                 right: auto;
@@ -3517,6 +3608,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 margin: 0 !important;
             }
         ` : ''}
+
+        .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-prev:after,
+        .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-next:after {
+            display: none !important;
+        }
         
         .${blockId} .swiper-button-prev,
         .${blockId} .swiper-button-next {
@@ -3545,6 +3641,24 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             `}
             ${navigationArrowBorderHoverColor ? `border-color: ${navigationArrowBorderHoverColor};` : ''}
             ${navigationArrowBoxShadowHoverCssValue ? `box-shadow: ${navigationArrowBoxShadowHoverCssValue};` : ''}
+        }
+
+        .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-prev svg,
+        .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-next svg {
+            ${navigationArrowColor ? `fill: ${navigationArrowColor};` : ''}
+            ${navigationArrowSize.Desktop ? `width: ${navigationArrowSize.Desktop}${navigationArrowSizeUnits.Desktop};` : ''}
+            ${navigationArrowSize.Desktop ? `height: ${navigationArrowSize.Desktop}${navigationArrowSizeUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-prev img,
+        .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-next img {
+            ${navigationArrowSize.Desktop ? `width: ${navigationArrowSize.Desktop}${navigationArrowSizeUnits.Desktop};` : ''}
+            ${navigationArrowSize.Desktop ? `height: ${navigationArrowSize.Desktop}${navigationArrowSizeUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-prev:hover svg,
+        .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-next:hover svg {
+            ${navigationArrowColorHover ? `fill: ${navigationArrowColorHover};` : ''}
         }
 
         .${blockId} .swiper-button-prev:after,
@@ -3703,7 +3817,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
             ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
-                .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
+                .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
+                .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} { 
                     gap: ${navigationArrowGap.Tablet ? `${navigationArrowGap.Tablet}${navigationArrowGapUnits.Tablet}` : '10px'};
                     ${navigationArrowPosition === 'top-left' ? `
                         top: ${navigationArrowPositionTopOffset.Tablet ? `${navigationArrowPositionTopOffset.Tablet}${navigationArrowPositionTopOffsetUnits.Tablet}` : '0'};
@@ -3746,6 +3861,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${navigationArrowTabletBorderRadiusCssStyle ? `border-radius: ${navigationArrowTabletBorderRadiusCssStyle};` : ''}
                 ${navigationArrowWidth.Tablet ? `width: ${navigationArrowWidth.Tablet}${navigationArrowWidthUnits.Tablet};` : ''}
                 ${navigationArrowHeight.Tablet ? `height: ${navigationArrowHeight.Tablet}${navigationArrowHeightUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-prev svg,
+            .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-next svg {
+                ${navigationArrowSize.Tablet ? `width: ${navigationArrowSize.Tablet}${navigationArrowSizeUnits.Tablet};` : ''}
+                ${navigationArrowSize.Tablet ? `height: ${navigationArrowSize.Tablet}${navigationArrowSizeUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-prev img,
+            .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-next img {
+                ${navigationArrowSize.Tablet ? `width: ${navigationArrowSize.Tablet}${navigationArrowSizeUnits.Tablet};` : ''}
+                ${navigationArrowSize.Tablet ? `height: ${navigationArrowSize.Tablet}${navigationArrowSizeUnits.Tablet};` : ''}
             }
 
             .${blockId} .swiper-button-prev:after,
@@ -3882,7 +4009,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
             ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
-                .${blockId} .gslider-navigation-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
+                .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition}
+                .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
                     gap: ${navigationArrowGap.Mobile ? `${navigationArrowGap.Mobile}${navigationArrowGapUnits.Mobile}` : '10px'};
                     ${navigationArrowPosition === 'top-left' ? `
                         top: ${navigationArrowPositionTopOffset.Mobile ? `${navigationArrowPositionTopOffset.Mobile}${navigationArrowPositionTopOffsetUnits.Mobile}` : '0'};
@@ -3925,6 +4053,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${navigationArrowMobileBorderRadiusCssStyle ? `border-radius: ${navigationArrowMobileBorderRadiusCssStyle};` : ''}
                 ${navigationArrowWidth.Mobile ? `width: ${navigationArrowWidth.Mobile}${navigationArrowWidthUnits.Mobile};` : ''}
                 ${navigationArrowHeight.Mobile ? `height: ${navigationArrowHeight.Mobile}${navigationArrowHeightUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-prev svg,
+            .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-next svg {
+                ${navigationArrowSize.Mobile ? `width: ${navigationArrowSize.Mobile}${navigationArrowSizeUnits.Mobile};` : ''}
+                ${navigationArrowSize.Mobile ? `height: ${navigationArrowSize.Mobile}${navigationArrowSizeUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-prev img,
+            .${blockId} .gslider-navigation-custom-icon-wrapper .swiper-button-next img {
+                ${navigationArrowSize.Mobile ? `width: ${navigationArrowSize.Mobile}${navigationArrowSizeUnits.Mobile};` : ''}
+                ${navigationArrowSize.Mobile ? `height: ${navigationArrowSize.Mobile}${navigationArrowSizeUnits.Mobile};` : ''}
             }
 
             .${blockId} .swiper-button-prev:after,
@@ -4275,6 +4415,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         secondaryButtonMobilePaddingCssStyle,
         secondaryButtonPaddingLink,
         /** End Secondary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
+
+        /** Start Navigation Custom Arrows */
+        navigationArrowsIconSwitcher,
+        navigationArrowsIconLeftAlign,
+        navigationArrowsIconLeft,
+        navigationArrowsIconLeftImageUrl,
+        navigationArrowsIconLeftImageAlt,
+        navigationArrowsIconLeftImageID,
+        
+        navigationArrowsIconRightAlign,
+        navigationArrowsIconRight,
+        navigationArrowsIconRightImageUrl,
+        navigationArrowsIconRightImageAlt,
+        navigationArrowsIconRightImageID,
+        /** End Navigation Custom Arrows */
 
         /** Start Arrows Style */
         navigationArrowSize,

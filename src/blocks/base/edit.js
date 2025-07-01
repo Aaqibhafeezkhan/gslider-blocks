@@ -67,6 +67,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         globalClass,
         navigationArrowPositionType,
         navigationArrowPosition,
+
+        navigationArrowsIconSwitcher,
+        navigationArrowsIconLeftAlign,
+        navigationArrowsIconLeft,
+        navigationArrowsIconLeftImageUrl,
+        navigationArrowsIconLeftImageAlt,
+        navigationArrowsIconLeftImageID,
+
+        navigationArrowsIconRightAlign,
+        navigationArrowsIconRight,
+        navigationArrowsIconRightImageUrl,
+        navigationArrowsIconRightImageAlt,
+        navigationArrowsIconRightImageID,
+        
 	} = attributes;
 
 	// Block props for container
@@ -77,6 +91,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	// Local state management for slider items and active slide index
 	const [sliderItemList, setSliderItemList] = useState(sliderItems);
 	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
+    const [swiperInstance, setSwiperInstance] = useState(null);
 
 	// A key to force re-mounting of <Swiper> when critical settings change
 	const [swiperKey, setSwiperKey] = useState(0);
@@ -184,6 +199,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setSelectedSlideIndex,
         navigationArrowPositionType,
         navigationArrowPosition,
+        navigationArrowsIconSwitcher,
+        navigationArrowsIconLeft,
+        navigationArrowsIconRight,
     ]);
 
     /**
@@ -213,7 +231,45 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		dynamicBullets,
         navigationArrowPositionType,
         navigationArrowPosition,
+        navigationArrowsIconSwitcher,
+        navigationArrowsIconLeft,
+        navigationArrowsIconRight,
 	]);
+
+
+    /* Custom Icon */
+    useEffect(() => {
+        if (!swiperInstance || !showNavigation) return;
+    
+        const prevEl = prevRef.current;
+        const nextEl = nextRef.current;
+    
+        if (prevEl && nextEl && swiperInstance.navigation) {
+            swiperInstance.params.navigation.prevEl = prevEl;
+            swiperInstance.params.navigation.nextEl = nextEl;
+    
+            setTimeout(() => {
+                // Check again in case swiperInstance.navigation was reloaded in the meantime
+                if (swiperInstance.navigation) {
+                    swiperInstance.navigation.destroy();
+                    swiperInstance.navigation.init();
+                    swiperInstance.navigation.update();
+                }
+            }, 100);
+        }
+    }, [
+        swiperInstance,
+        showNavigation,
+        navigationArrowsIconSwitcher,
+        navigationArrowPositionType,
+        navigationArrowPosition,
+        navigationArrowsIconLeft,
+        navigationArrowsIconRight,
+        navigationArrowsIconLeftAlign,
+        navigationArrowsIconRightAlign,
+        navigationArrowsIconLeftImageUrl,
+        navigationArrowsIconRightImageUrl
+    ]);
     
 
     /**
@@ -482,22 +538,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					]}
 
                     onSwiper={(swiper) => {
-                        setTimeout(() => {
-                            if (
-                                showNavigation &&
-                                prevRef.current &&
-                                nextRef.current &&
-                                swiper?.params?.navigation &&
-                                swiper.navigation
-                            ) {
-                                swiper.params.navigation.prevEl = prevRef.current;
-                                swiper.params.navigation.nextEl = nextRef.current;
-
-                                swiper.navigation.destroy();
-                                swiper.navigation.init();
-                                swiper.navigation.update();
-                            }
-                        }, 100);
+                        setSwiperInstance(swiper);
                     }}
 				>
 					{sliderItemList.map((item, index) => (
@@ -611,24 +652,62 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						</SwiperSlide>
 					))}
 
-                    {showNavigation && navigationArrowPositionType === 'inside' && (
+                    {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                         <>
-                            <div className={`gslider-navigation-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                                 <div ref={prevRef} className="swiper-button-prev" aria-label="Previous slide"></div>
                                 <div ref={nextRef} className="swiper-button-next" aria-label="Next slide"></div>
                             </div>
                         </>
                     )}
+
+                    {navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
+                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                            <div className="swiper-button-prev" ref={ prevRef }>{renderSVG(navigationArrowsIconLeft)}</div>
+                            <div className="swiper-button-next" ref={ nextRef }>{renderSVG(navigationArrowsIconRight)}</div>
+                        </div>
+                    )}
+
+                    {navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                            <div className="swiper-button-prev" ref={ prevRef }>
+                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
+                            </div>
+                            <div className="swiper-button-next" ref={ nextRef }>
+                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
+                            </div>
+                        </div>
+                    )}
+
 				</Swiper>
 
-                {showNavigation && navigationArrowPositionType === 'outside' && (
+                {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
                     <>
-                        <div className={`gslider-navigation-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                             <div ref={prevRef} className="swiper-button-prev" aria-label="Previous slide"></div>
                             <div ref={nextRef} className="swiper-button-next" aria-label="Next slide"></div>
                         </div>
                     </>
                 )}
+
+                {navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
+                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                        <div className="swiper-button-prev" ref={ prevRef }>{renderSVG(navigationArrowsIconLeft)}</div>
+                        <div className="swiper-button-next" ref={ nextRef }>{renderSVG(navigationArrowsIconRight)}</div>
+                    </div>
+                )}
+
+                {navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                        <div className="swiper-button-prev" ref={ prevRef }>
+                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
+                        </div>
+                        <div className="swiper-button-next" ref={ nextRef }>
+                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
+                        </div>
+                    </div>
+                )}
+
 			</div>
 		</>
 	);

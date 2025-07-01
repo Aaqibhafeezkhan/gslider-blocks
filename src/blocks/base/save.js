@@ -36,6 +36,19 @@ export default function Save({ attributes }) {
         globalClass,
         navigationArrowPositionType,
         navigationArrowPosition,
+
+        navigationArrowsIconSwitcher,
+        navigationArrowsIconLeftAlign,
+        navigationArrowsIconLeft,
+        navigationArrowsIconLeftImageUrl,
+        navigationArrowsIconLeftImageAlt,
+        navigationArrowsIconLeftImageID,
+
+        navigationArrowsIconRightAlign,
+        navigationArrowsIconRight,
+        navigationArrowsIconRightImageUrl,
+        navigationArrowsIconRightImageAlt,
+        navigationArrowsIconRightImageID,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -218,14 +231,33 @@ export default function Save({ attributes }) {
                         </div>
                     ))}
                 </div>
-                {showNavigation && navigationArrowPositionType === 'inside' && (
+                {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                     <>
-                        <div className={`gslider-navigation-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                             <div className="swiper-button-prev" aria-label="Previous slide"></div>
                             <div className="swiper-button-next" aria-label="Next slide"></div>
                         </div>
                     </>
                 )}
+
+                {navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
+                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                        <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
+                        <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
+                    </div>
+                )}
+
+                {navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                        <div className="swiper-button-prev">
+                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
+                        </div>
+                        <div className="swiper-button-next">
+                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
+                        </div>
+                    </div>
+                )}
+
                 {showPagination && (
                     <>
                         <div className="gslider-pagination-wrapper">
@@ -234,13 +266,31 @@ export default function Save({ attributes }) {
                     </>
                 )}
             </div>
-            {showNavigation && navigationArrowPositionType === 'outside' && (
+            {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
                 <>
-                    <div className={`gslider-navigation-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                    <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                         <div className="swiper-button-prev" aria-label="Previous slide"></div>
                         <div className="swiper-button-next" aria-label="Next slide"></div>
                     </div>
                 </>
+            )}
+
+            {navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
+                <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                    <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
+                    <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
+                </div>
+            )}
+
+            {navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+                <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                    <div className="swiper-button-prev">
+                        <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
+                    </div>
+                    <div className="swiper-button-next">
+                        <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
+                    </div>
+                </div>
             )}
         </div>
     );

@@ -18,6 +18,11 @@ export const NORMAL_HOVER = [
   { label: __('Hover', 'gslider-blocks'), value: 'hover' },
 ];
 
+export const ARROW_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
+];
+
 export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },

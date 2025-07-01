@@ -2015,8 +2015,61 @@ const attributes = {
         default: true
     },
     /** End Secondary Button Padding */
-    
-    /** Start Arrow Size */
+
+    /** Start Navigation Custom Arrows */
+    navigationArrowsIconSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+	navigationArrowsIconLeftAlign: {
+		type: "string",
+		default: "icon",
+	},
+
+	navigationArrowsIconLeft: {
+		type: 'string',
+		default: 'arrow-left',
+	},
+
+	navigationArrowsIconLeftImageUrl: {
+		type: 'string',
+		default: '',
+	},
+	navigationArrowsIconLeftImageAlt: {
+		type: 'string',
+		default: '',
+	},
+	navigationArrowsIconLeftImageID: {
+		type: 'string',
+		default: '',
+	},
+
+	navigationArrowsIconRightAlign: {
+		type: "string",
+		default: "icon",
+	},
+
+	navigationArrowsIconRight: {
+		type: 'string',
+		default: 'arrow-right',
+	},
+
+	navigationArrowsIconRightImageUrl: {
+		type: 'string',
+		default: '',
+	},
+	navigationArrowsIconRightImageAlt: {
+		type: 'string',
+		default: '',
+	},
+	navigationArrowsIconRightImageID: {
+		type: 'string',
+		default: '',
+	},
+    /** End Navigation Custom Arrows */
+
+    /** Start Navigation Arrow Size */
 	navigationArrowSize: {
 		type: "object",
 		default: {
@@ -2033,9 +2086,9 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
-    /** End Arrow Size */
+    /** End Navigation Arrow Size */
 
-    /** Start Arrow Color */
+    /** Start Navigation Arrow Color */
 	navigationArrowColorSwitcher: {
 		type: "string",
 		default: "normal",
@@ -2048,9 +2101,9 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-    /** End Arrow Color */
+    /** End Navigation Arrow Color */
 
-    /** Start Arrow Background */
+    /** Start Navigation Arrow Background */
     navigationArrowNormalBackgroundType: {
         type: "string",
         default: "classic",
@@ -2091,9 +2144,9 @@ const attributes = {
         type: "string",
         default: "",
     },
-    /** End Arrow Background */
+    /** End Navigation Arrow Background */
 
-    /** Start Arrow Width & Height */
+    /** Start Navigation Arrow Width & Height */
 	navigationArrowWidth: {
 		type: "object",
 		default: {
@@ -2126,9 +2179,9 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
-    /** End Arrow Width & Height */
+    /** End Navigation Arrow Width & Height */
 
-    /** Start Arrow Border */
+    /** Start Navigation Arrow Border */
 	navigationArrowBorder: {
 		type: "string",
 		default: "none",
@@ -2196,9 +2249,9 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
-    /** End Arrow Border */
+    /** End Navigation Arrow Border */
 
-    /** Start Arrow Border Radius */
+    /** Start Navigation Arrow Border Radius */
 	navigationArrowBorderRadiusUnits: {
 		type: "object",
 		default: {
@@ -2250,9 +2303,9 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
-    /** End Arrow Border Radius */
+    /** End Navigation Arrow Border Radius */
 
-    /** Start Arrow Box Shadow */
+    /** Start Navigation Arrow Box Shadow */
     navigationArrowBoxShadowValuesSwitcher : {
 		type: "string",
 		default: "normal"
@@ -2273,8 +2326,9 @@ const attributes = {
         type: "string",
         default: "",
     },
-    /** End Arrow Box Shadow */
+    /** End Navigation Arrow Box Shadow */
     
+    /** Start Navigation Arrow Position */
     navigationArrowPositionType: {
         type: "string",
         default: "inside",
@@ -2384,56 +2438,7 @@ const attributes = {
             Mobile: "px",
         },
     },
-    // /** Start Arrow Position */
-    // navigationArrowPosition: {
-	// 	type: "object",
-	// 	default: {
-	// 		Desktop: "50",
-	// 		Tablet: "50",
-	// 		Mobile: "50",
-	// 	},
-	// },
-	// navigationArrowPositionUnits: {
-	// 	type: "object",
-	// 	default: {
-	// 		Desktop: "%",
-	// 		Tablet: "%",
-	// 		Mobile: "%",
-	// 	},
-	// },
-	// navigationArrowRightOffset: {
-	// 	type: "object",
-	// 	default: {
-	// 		Desktop: "",
-	// 		Tablet: "",
-	// 		Mobile: "",
-	// 	},
-	// },
-	// navigationArrowRightOffsetUnits: {
-	// 	type: "object",
-	// 	default: {
-	// 		Desktop: "px",
-	// 		Tablet: "px",
-	// 		Mobile: "px",
-	// 	},
-	// },
-	// navigationArrowLeftOffset: {
-	// 	type: "object",
-	// 	default: {
-	// 		Desktop: "",
-	// 		Tablet: "",
-	// 		Mobile: "",
-	// 	},
-	// },
-	// navigationArrowLeftOffsetUnits: {
-	// 	type: "object",
-	// 	default: {
-	// 		Desktop: "px",
-	// 		Tablet: "px",
-	// 		Mobile: "px",
-	// 	},
-	// },  
-    // /** End Arrow Position */
+    /** End Navigation Arrow Position */
 
     /** Start Pagination Dots Margin */
 	paginationDotsMarginUnits: {

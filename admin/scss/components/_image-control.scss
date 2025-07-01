@@ -5,6 +5,10 @@
 	.components-base-control__field {
 		display: block;
 		margin-bottom: 0;
+
+		.components-base-control__help {
+			margin: 8px 0 0;
+		}
 	}
 
 	.gslider-image-control {
@@ -93,6 +97,7 @@
 		margin: 0;
 		text-decoration: none;
 		transition: box-shadow 0.1s linear;
+
 	}
 }
 
