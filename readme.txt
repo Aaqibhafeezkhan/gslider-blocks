@@ -3,7 +3,7 @@ Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,14 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 == Screenshots ==
 
 == Changelog ==
+
+= 1.0.4 July 02 2025 =
+Added: Custom Navigation Icon option for sliders.
+Users can now set custom left and right navigation icons from the Navigation settings for improved design flexibility.
+
+Added: Support for custom icon images or SVG uploads.
+Users can upload their own image files or SVG icons as navigation arrows to better match their site branding and design systems.
+
 = 1.0.3 June 27 2025 =
 Enhancements:
 
