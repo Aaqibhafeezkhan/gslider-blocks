@@ -1,0 +1,29 @@
+.gslider-base-wrapper {
+	.gslider-content-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		.gslider-content-inner-wrapper {
+        	box-sizing: border-box;
+			margin: 0 auto;
+			padding: clamp(15px, 6vw, 30px);
+			max-width: 80%;
+			width: 100%;
+			text-align: center;
+		}
+	}
+	.swiper-wrapper {
+		height: auto !important;
+	}
+	.swiper-backface-hidden {
+		.swiper-slide {
+			backface-visibility: visible !important;
+		}
+	}
+}
+
+:where(.wp-site-blocks *:focus) {
+	outline-width: 0 !important;
+}
