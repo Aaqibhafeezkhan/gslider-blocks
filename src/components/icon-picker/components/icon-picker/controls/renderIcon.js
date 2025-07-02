@@ -1,5 +1,4 @@
 import parseSVG from './parseIcon';
-import icon_Data from '../../icons.json';
 
 // Function to check if data exists in localStorage
 const getDataFromLocalStorage = () => {
@@ -8,15 +7,17 @@ const getDataFromLocalStorage = () => {
 	return data;
 };
 
-// Fetch SVG icons from the json file
-const fetchFromApi = async () => {
+const fetchFromJson = async () => {
 	try {
-		const data = icon_Data;
-		console.log(data);
+		const response = await fetch('https://raw.githubusercontent.com/noruzzamans/plugins-demo-content/master/icons.json');
+		if (!response.ok) {
+			throw new Error('Network response was not ok');
+		}
+		const data = await response.json();
 		localStorage.setItem('iconData', JSON.stringify(data));
 		return data;
 	} catch (error) {
-		console.error(__('Error inserting icon data:', 'gslider-blocks'), error);
+		console.error(__('Error fetching icon data:', 'gslider-blocks'), error);
 		return null;
 	}
 };
@@ -64,7 +65,7 @@ function renderSVG( svg, setAttributes = false, extraProps = {} ) {
 
 	let data = getDataFromLocalStorage();
 	if (!data) {
-		fetchFromApi().then(fetchedData => {
+		fetchFromJson().then(fetchedData => {
 			data = fetchedData;
 		});
 	}

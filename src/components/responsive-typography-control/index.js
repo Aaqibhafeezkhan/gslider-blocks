@@ -53,17 +53,19 @@ const ResponsiveTypographyControl = ({
     const [availableFontWeights, setAvailableFontWeights] = useState([]);
 
     useEffect(() => {
-        setFontOptions(GOOGLE_FONTS);
+        GOOGLE_FONTS().then((fetchedFonts) => {
+            setFontOptions(fetchedFonts);
     
-        const current = GOOGLE_FONTS.find(f => f.value === fontFamily);
+            const current = fetchedFonts.find(f => f.value === fontFamily);
     
-        if (current) {
-            setSelectedFontFamilyOption(current);
-            setAvailableFontWeights(current.weights || []);
-        } else {
-            setSelectedFontFamilyOption({ label: 'Default', value: 'Default' });
-            setAvailableFontWeights([]);
-        }
+            if (current) {
+                setSelectedFontFamilyOption(current);
+                setAvailableFontWeights(current.weights || []);
+            } else {
+                setSelectedFontFamilyOption({ label: 'Default', value: 'Default' });
+                setAvailableFontWeights([]);
+            }
+        });
     }, []);
 
     const handleFontFamilyChange = (selectedOption) => {
@@ -71,8 +73,7 @@ const ResponsiveTypographyControl = ({
     
         const newFontFamily = selectedOption?.value || 'Default';
         onChangeFontFamily(newFontFamily);
-    
-        // Update font weight list
+
         setAvailableFontWeights(selectedOption?.weights || []);
     };
 
