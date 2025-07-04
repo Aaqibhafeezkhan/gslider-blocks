@@ -5,7 +5,6 @@ export default function Save({ attributes }) {
     const {
         blockId,
         deviceType,
-        sliderItems,
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
@@ -23,15 +22,9 @@ export default function Save({ attributes }) {
         paginationType,
         dynamicBullets,
 
-        showSubTitle,
-        showTitle,
-        showDescription,
-        showButton,
         showNavigation,
         showPagination,
-        subTitleHtmlTag,
-        titleHtmlTag,
-        descriptionHtmlTag,
+
         globalID,
         globalClass,
         navigationArrowPositionType,
@@ -138,98 +131,7 @@ export default function Save({ attributes }) {
         <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className="swiper">
                 <div className="swiper-wrapper gslider-wrapper">
-                    {sliderItems.map((item) => (
-                        <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
-                            <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})}>
-                                <div className="gslider-content-inner-wrapper">
-                                    <div className="gslider-list-item">
-                                        <div className="gslider-list-content">
-                                            {showSubTitle && item.subTitle && (
-                                                <div className="gslider-subtitle-wrapper">
-                                                    <RichText.Content
-                                                        tagName={subTitleHtmlTag}
-                                                        className="gslider-subtitle"
-                                                        value={item.subTitle}
-                                                    />
-                                                </div>
-                                            )}
-                                            {showTitle && item.title && (
-                                                <div className="gslider-title-wrapper">
-                                                    <RichText.Content
-                                                        tagName={titleHtmlTag}
-                                                        className="gslider-title"
-                                                        value={item.title}
-                                                    />
-                                                </div>
-                                            )}
-                                            {showDescription && item.description && (
-                                                <div className="gslider-description-wrapper">
-                                                    <RichText.Content
-                                                        tagName={descriptionHtmlTag}
-                                                        className="gslider-description"
-                                                        value={item.description}
-                                                    />
-                                                </div>
-                                            )}
-                                            {showButton && (
-                                                <div className="gslider-btn-wrapper">
-                                                    <div className="gslider-btn-inner-wrapper">
-                                                        <>
-                                                            {item.primaryButtonLink ? (
-                                                                <a
-                                                                    className="gslider-btn primary-btn"
-                                                                    href={item.primaryButtonLink}
-                                                                    target={item.primaryButtonTargetLink ? '_blank' : undefined}
-                                                                    rel={[
-                                                                        item.primaryButtonNofollow && 'nofollow',
-                                                                        item.primaryButtonSponsored && 'sponsored',
-                                                                        item.primaryButtonTargetLink && 'noopener noreferrer'
-                                                                    ].filter(Boolean).join(' ')}
-                                                                >
-                                                                    <RichText.Content
-                                                                        value={item.primaryButtonText}
-                                                                    />
-                                                                </a>
-                                                            ) : (
-                                                                <RichText.Content
-                                                                    value={item.primaryButtonText}
-                                                                    className="gslider-btn primary-btn"
-                                                                />
-                                                            )}
 
-                                                            {item.secondaryButtonSwitcher && (
-                                                                item.secondaryButtonLink ? (
-                                                                    <a
-                                                                        className="gslider-btn secondary-btn"
-                                                                        href={item.secondaryButtonLink}
-                                                                        target={item.secondaryButtonTargetLink ? '_blank' : undefined}
-                                                                        rel={[
-                                                                            item.secondaryButtonNofollow && 'nofollow',
-                                                                            item.secondaryButtonSponsored && 'sponsored',
-                                                                            item.secondaryButtonTargetLink && 'noopener noreferrer'
-                                                                        ].filter(Boolean).join(' ')}
-                                                                    >
-                                                                        <RichText.Content
-                                                                            value={item.secondaryButtonText}
-                                                                        />
-                                                                    </a>
-                                                                ) : (
-                                                                    <RichText.Content
-                                                                        value={item.secondaryButtonText}
-                                                                        className="gslider-btn secondary-btn"
-                                                                    />
-                                                                )
-                                                            )}
-                                                        </>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
                 </div>
                 {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                     <>

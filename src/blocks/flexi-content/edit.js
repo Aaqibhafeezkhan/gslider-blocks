@@ -36,7 +36,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
         deviceType,
-		sliderItems,
 		sliderType,
 		carouselPerColumn,
 		carouselPerColumnGap,
@@ -54,15 +53,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		paginationType,
 		dynamicBullets,
 
-        showSubTitle,
-        showTitle,
-        showDescription,
-        showButton,
         showNavigation,
 		showPagination,
-        subTitleHtmlTag,
-        titleHtmlTag,
-        descriptionHtmlTag,
+
         globalID,
         globalClass,
         navigationArrowPositionType,
@@ -89,7 +82,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	});
 
 	// Local state management for slider items and active slide index
-	const [sliderItemList, setSliderItemList] = useState(sliderItems);
+	const [sliderItemList, setSliderItemList] = useState([]);
 	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
     const [swiperInstance, setSwiperInstance] = useState(null);
 
@@ -270,205 +263,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconLeftImageUrl,
         navigationArrowsIconRightImageUrl
     ]);
-    
-
-    /**
-     * Creates and adds a new slide with default content and settings
-     * Generates a unique ID for the new slide
-     */
-    const handleAddItem = () => {
-        const newItem = {
-            id: `item-${sliderItems.length + 1}`,
-            subTitle: 'Sub Title',
-            title: `Slider Item ${sliderItems.length + 1}`,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-            primaryButtonText: 'Get Started',
-            primaryButtonLink: '#',
-            primaryButtonTargetLink: true,
-            primaryButtonNofollow: false,
-            primaryButtonSponsored: false,
-
-            secondaryButtonSwitcher: false,
-            secondaryButtonText: 'Get Started',
-            secondaryButtonLink: '#',
-            secondaryButtonTargetLink: true,
-            secondaryButtonNofollow: false,
-            secondaryButtonSponsored: false,
-
-            normalItemBackgroundType: 'classic',
-            normalItemClassicColor: '#EDEDED',
-            normalItemGradientColor: null,
-            normalItemCustomGradientSwitcher: false,
-            normalItemCustomGradientInputValue: '',
-
-            normalBackgroundImageUrl: {
-                Desktop: '',
-                Tablet: '',
-                Mobile: '',
-            },
-            normalBackgroundImageAlt: {
-                Desktop: '',
-                Tablet: '',
-                Mobile: '',
-            },
-            normalBackgroundImageID: {
-                Desktop: '',
-                Tablet: '',
-                Mobile: '',
-            },
-            normalBackgroundImagePosition: {
-                Desktop: { x: 0.5, y: 0.5 },
-                Tablet: { x: 0.5, y: 0.5 },
-                Mobile: { x: 0.5, y: 0.5 },
-            },
-            normalBackgroundImageAttachment: {
-                Desktop: 'scroll',
-                Tablet: 'scroll',
-                Mobile: 'scroll',
-            },
-            normalBackgroundImageRepeat: {
-                Desktop: 'no-repeat',
-                Tablet: 'no-repeat',
-                Mobile: 'no-repeat',
-            },
-            normalBackgroundImageSize: {
-                Desktop: 'cover',
-                Tablet: 'cover',
-                Mobile: 'cover',
-            },
-
-            itemBackgroundOverlaySwitcher: false,
-            itemBackgroundOverlayType: 'classic',
-            itemBackgroundOverlayClassicColor: '#000',
-            itemBackgroundOverlayGradientColor: null,
-            itemBackgroundOverlayCustomGradientSwitcher: false,
-            itemBackgroundOverlayCustomGradientInputValue: '',
-            itemBackgroundOverlayOpacity: 0.5,
-            
-        };
-        setAttributes({ sliderItems: [...sliderItems, newItem] });
-        setSliderItemList([...sliderItemList, newItem]);
-    };
-
-
-    /**
-     * Updates a specific property of a slide item
-     * Handles special cases for background images with WordPress media integration
-     */
-    const handleChangeItem = (id, key, value) => {
-        // Get current device type ("Desktop", "Tablet", or "Mobile")
-        const currentDevice = deviceType; 
-
-        const updatedItems = sliderItemList.map(item => {
-            if (item.id === id) {
-                // Handle normal background image updates for the current device only
-                if (key === 'normalBackgroundImageID') {
-                    // Get the full image data from WordPress media library
-                    const image = wp.media.attachment(value).toJSON();
-                    return {
-                        ...item,
-                        normalBackgroundImageID: {
-                            ...item.normalBackgroundImageID,
-                            [currentDevice]: value,
-                        },
-                        normalBackgroundImageUrl: {
-                            ...item.normalBackgroundImageUrl,
-                            [currentDevice]: image.url,
-                        },
-                        normalBackgroundImageAlt: {
-                            ...item.normalBackgroundImageAlt,
-                            [currentDevice]: image.alt || '',
-                        },
-                    };
-                }
-
-                // Handle hover background image updates for the current device only
-                if (key === 'hoverBackgroundImageID') {
-                    const image = wp.media.attachment(value).toJSON();
-                    return {
-                        ...item,
-                        hoverBackgroundImageID: {
-                            ...item.hoverBackgroundImageID,
-                            [currentDevice]: value,
-                        },
-                        hoverBackgroundImageUrl: {
-                            ...item.hoverBackgroundImageUrl,
-                            [currentDevice]: image.url,
-                        },
-                        hoverBackgroundImageAlt: {
-                            ...item.hoverBackgroundImageAlt,
-                            [currentDevice]: image.alt || '',
-                        },
-                    };
-                }
-
-                // For other properties, update as before
-                return { ...item, [key]: value };
-            }
-            return item;
-        });
-
-        setSliderItemList(updatedItems);
-        setAttributes({ sliderItems: updatedItems });
-    };
-
-    /**
-     * Handles duplicate slide functionality
-     */
-    const handleDuplicateItem = (id) => {
-        const itemToDuplicate = sliderItems.find(item => item.id === id);
-        if (itemToDuplicate) {
-            const newItem = { ...itemToDuplicate, id: `item-${sliderItems.length + 1}` };
-            setAttributes({ sliderItems: [...sliderItems, newItem] });
-            setSliderItemList([...sliderItemList, newItem]);
-        }
-    };
-
-    /**
-     * Handles slide reordering via drag and drop functionality
-     * Updates slide order in both state and attributes
-     */
-    const handleDragEnd = (event) => {
-        const { active, over } = event;
-        if (active && over && active.id !== over.id) {
-            const oldIndex = sliderItems.findIndex(item => item.id === active.id);
-            const newIndex = sliderItems.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
-            setAttributes({ sliderItems: updatedItems });
-            setSliderItemList(updatedItems);
-        }
-    };
-
-    /**
-     * Removes a slide from the slider by its ID
-     * Updates both state and block attributes
-     */
-    const handleDeleteItem = (id) => {
-        const updatedItems = sliderItemList.filter(item => item.id !== id);
-        setAttributes({ sliderItems: updatedItems });
-        setSliderItemList(updatedItems);
-    };
-
-    /**
-     * Keep sliderItems attribute in sync with local state
-     */
-	useEffect(() => {
-		setAttributes({ sliderItems: sliderItemList });
-	}, [sliderItemList, setAttributes]);
-
-    /**
-     * Updates a specific field of a slide at the given index
-     * Used for RichText component changes
-     */
-    const updateItem = (index, field, value) => {
-        const newItems = sliderItems.map((item, i) => {
-            if (i === index) {
-                return { ...item, [field]: value };
-            }
-            return item;
-        });
-        setAttributes({ sliderItems: newItems });
-    };
 
     /**
      * Renders toolbar controls for slide management
@@ -481,17 +275,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <ToolbarButton
                         icon="plus"
                         label={ __( 'Add New Slide', 'gslider-blocks' ) }
-                        onClick={handleAddItem}
+                        onClick={() => {
+
+                        }}
                     />
                     <ToolbarButton
                         icon="admin-page"
                         label={ __( 'Duplicate Current Slide', 'gslider-blocks' ) } 
                         onClick={() => {
-                            // Get the currently visible slide's ID
-                            const currentSlideId = sliderItems[selectedSlideIndex]?.id;
-                            if (currentSlideId) {
-                                handleDuplicateItem(currentSlideId);
-                            }
+
                         }}
                     />
                 </ToolbarGroup>
@@ -499,24 +291,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         );
     };
 
-    /**
-     * Prevent default behavior for link clicks in the editor
-     */
-	const handleButtonClick = (event) => {
-		event.preventDefault();
-	};
-
 	return (
 		<>
 			<Inspector 
 				attributes={attributes}
 				setAttributes={setAttributes}
 				clientId={clientId}
-				handleAddItem={handleAddItem}
-                handleChangeItem={handleChangeItem}
-                handleDuplicateItem={handleDuplicateItem}
-				handleDragEnd={handleDragEnd}
-                handleDeleteItem={handleDeleteItem}
 			/>
 			{renderSliderToolbarControls()}
 			<div {...blockProps}>
@@ -542,108 +322,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     }}
 				>
 					{sliderItemList.map((item, index) => (
-						<SwiperSlide key={item.id}>
-							<div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
+						<SwiperSlide key={index}>
+							<div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
 								<div className="gslider-content-inner-wrapper">
 									<div className="gslider-list-item">
 										<div className="gslider-list-content">
-											{ showSubTitle && item.subTitle && (
-                                                <div className="gslider-subtitle-wrapper">
-                                                    <RichText
-                                                        tagName={subTitleHtmlTag}
-                                                        className="gslider-subtitle"
-                                                        value={item.subTitle}
-                                                        onChange={(value) => updateItem(index, 'subTitle', value)}
-                                                        placeholder="Enter subtitle"
-                                                    />
-                                                </div>
-											)}
-											{ showTitle && item.title && (
-                                                <div className="gslider-title-wrapper">
-                                                    <RichText
-                                                        tagName={titleHtmlTag}
-                                                        className="gslider-title"
-                                                        value={item.title}
-                                                        onChange={(value) => updateItem(index, 'title', value)}
-                                                        placeholder="Enter title"
-                                                    />
-                                                </div>
-											)}
-											{ showDescription && item.description && (
-                                                <div className="gslider-description-wrapper">
-                                                    <RichText
-                                                        tagName={descriptionHtmlTag}
-                                                        className="gslider-description"
-                                                        value={item.description}
-                                                        onChange={(value) => updateItem(index, 'description', value)}
-                                                        placeholder="Enter description"
-                                                    />
-                                                </div>
-											)}
-                                            {showButton && (
-                                                <div className="gslider-btn-wrapper">
-                                                    <div className="gslider-btn-inner-wrapper">
-                                                        <>
-                                                            {item.primaryButtonLink ? (
-                                                                <a
-                                                                    className="gslider-btn primary-btn" 
-                                                                    href={item.primaryButtonLink}
-                                                                    target={item.primaryButtonTargetLink ? '_blank' : undefined}
-                                                                    rel={[
-                                                                        item.primaryButtonNofollow && 'nofollow',
-                                                                        item.primaryButtonSponsored && 'sponsored',
-                                                                        item.primaryButtonTargetLink && 'noopener noreferrer'
-                                                                    ].filter(Boolean).join(' ')}
-                                                                    onClick={handleButtonClick}
-                                                                >
-                                                                    <RichText
-                                                                        value={item.primaryButtonText}
-                                                                        onChange={(value) => updateItem(index, 'primaryButtonText', value)}
-                                                                        placeholder={__('Enter button text...', 'gslider-blocks')}
-                                                                    />
-                                                                </a>
-                                                            ) : (
-                                                                <RichText
-                                                                    value={item.primaryButtonText}
-                                                                    className="gslider-btn primary-btn"
-                                                                    onChange={(value) => updateItem(index, 'primaryButtonText', value)}
-                                                                    placeholder={__('Enter button text...', 'gslider-blocks')}
-                                                                />
-                                                            )}
 
-                                                            {item.secondaryButtonSwitcher && (
-                                                                item.secondaryButtonLink ? (
-                                                                    <a
-                                                                        className="gslider-btn secondary-btn"
-                                                                        href={item.secondaryButtonLink}
-                                                                        target={item.secondaryButtonTargetLink ? '_blank' : undefined}
-                                                                        rel={[
-                                                                            item.secondaryButtonNofollow && 'nofollow',
-                                                                            item.secondaryButtonSponsored && 'sponsored',
-                                                                            item.secondaryButtonTargetLink && 'noopener noreferrer'
-                                                                        ].filter(Boolean).join(' ')}
-                                                                        onClick={handleButtonClick}
-                                                                    >
-                                                                        <RichText
-                                                                            value={item.secondaryButtonText}
-                                                                            onChange={(value) => updateItem(index, 'secondaryButtonText', value)}
-                                                                            placeholder={__('Enter button text...', 'gslider-blocks')}
-                                                                        />
-                                                                    </a>
-                                                                ) : (
-                                                                    <RichText
-                                                                        value={item.secondaryButtonText}
-                                                                        className="gslider-btn secondary-btn"
-                                                                        onChange={(value) => updateItem(index, 'secondaryButtonText', value)}
-                                                                        placeholder={__('Enter button text...', 'gslider-blocks')}
-                                                                    />
-                                                                )
-                                                            )}
-
-                                                        </>
-                                                    </div>
-                                                </div>
-                                            )}
 
 										</div>
 									</div>
