@@ -3,6 +3,8 @@ import {
 	RichText,
 	useBlockProps,
 	BlockControls,
+    InnerBlocks,
+    useInnerBlocksProps,
 } from '@wordpress/block-editor';
 import {
 	Toolbar,
@@ -31,6 +33,8 @@ import {
 	EffectCards
 } from 'swiper/modules';
 import 'swiper/css/bundle';
+
+const ALLOWED_BLOCKS = ['gslider-blocks/slider-item'];
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -264,6 +268,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconRightImageUrl
     ]);
 
+    const getSliderTemplate = useMemo(() => [
+        ['gslider-blocks/slider-item'],
+        ['gslider-blocks/slider-item'],
+        ['gslider-blocks/slider-item'],
+    ], []);
+
+    const innerBlocksProps = useInnerBlocksProps(
+		{
+			className: `swiper-wrapper gslider-swiper-wrapper`,
+			slot: 'container-start',
+		},
+		{
+			allowedBlocks: ALLOWED_BLOCKS,
+			template: getSliderTemplate,
+			renderAppender: false,
+			orientation: 'horizontal',
+		}
+	);
+
     /**
      * Renders toolbar controls for slide management
      * Provides buttons for adding and duplicating slides
@@ -321,20 +344,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         setSwiperInstance(swiper);
                     }}
 				>
-					{sliderItemList.map((item, index) => (
-						<SwiperSlide key={index}>
-							<div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
-								<div className="gslider-content-inner-wrapper">
-									<div className="gslider-list-item">
-										<div className="gslider-list-content">
-
-
-										</div>
-									</div>
-								</div>
-							</div>
-						</SwiperSlide>
-					))}
+                    <div className="gslider-slider-content-wrapper" {...innerBlocksProps} />
 
                     {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                         <>

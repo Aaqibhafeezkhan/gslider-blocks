@@ -1,0 +1,26 @@
+$primary_color: #007cba;
+$secondary_color: #5f5f5f;
+$background_color: #dcdcde;
+$white_color: #ffffff;
+
+/** End General scss for Advanced Button **/
+
+.gslider-slider-content-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: clamp(300px, 60vh, 500px);
+    justify-content: center;
+    .gslider-slider-content-inner {
+        box-sizing: border-box;
+        margin: 0 auto;
+        max-width: 80%;
+        padding: clamp(15px, 6vw, 30px);
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.swiper-wrapper {
+    height: auto !important;
+} 
