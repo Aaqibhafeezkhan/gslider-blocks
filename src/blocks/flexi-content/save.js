@@ -1,4 +1,4 @@
-import { RichText, useBlockProps, InnerBlocks  } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Save({ attributes }) {
@@ -130,8 +130,8 @@ export default function Save({ attributes }) {
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className="swiper">
-                <div className="swiper-wrapper gslider-wrapper">
-                    <InnerBlocks.Content />
+                <div className="swiper-wrapper gslider-swiper-wrapper">
+                    <InnerBlocks.Content /> 
                 </div>
                 {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                     <>
