@@ -1976,7 +1976,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             align-items: center;
         }
 
-        .${blockId}.gslider-base-wrapper {
+        .${blockId}.gslider-flexi-content-wrapper {
             ${globalDesktopBackgroundNormalStyles}
             ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ''} 
             ${globalPaddingDesktopCssStyle ? `padding: ${globalPaddingDesktopCssStyle};` : ''}
@@ -1989,18 +1989,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             box-sizing: border-box;
             position: relative;
         }
-        .${blockId}.gslider-base-wrapper:hover {
+        .${blockId}.gslider-flexi-content-wrapper:hover {
             ${globalDesktopBackgroundHoverStyles}
             ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ''}
             ${globalBoxShadowHoverCssValue ? `box-shadow: ${globalBoxShadowHoverCssValue} !important;` : ''}
         }
         
-        .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+        .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
             height: ${layoutHeight?.Desktop ? `${layoutHeight.Desktop}${layoutHeightUnits?.Desktop}` : 'clamp(300px, 60vh, 500px)'};
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }
 
-        .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+        .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
             ${contentWidth?.Desktop ? `max-width: ${contentWidth.Desktop}${contentWidthUnits?.Desktop};` : ''}
             ${contentAlignment?.Desktop ? `text-align: ${contentAlignment.Desktop};` : ''}
 
@@ -2009,7 +2009,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${contentHorizontalAlignment?.Desktop === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
         }
 
-        .${blockId}.gslider-base-wrapper.outside {
+        .${blockId}.gslider-flexi-content-wrapper.outside {
             ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                 padding: ${navigationArrowPositionOutsidePadding.Desktop}${navigationArrowPositionOutsidePaddingUnits.Desktop} 0 0;
             ` : ''}
@@ -2198,7 +2198,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         @media only screen and (max-width: 1024px) {
 
-            .${blockId}.gslider-base-wrapper {
+            .${blockId}.gslider-flexi-content-wrapper {
                 ${globalTabletBackgroundNormalStyles}
                 ${globalMarginTabletCssStyle ? `margin: ${globalMarginTabletCssStyle};` : ''} 
                 ${globalPaddingTabletCssStyle ? `padding: ${globalPaddingTabletCssStyle};` : ''}
@@ -2206,16 +2206,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${globalBorderRadiusTabletCssStyle ? `border-radius: ${globalBorderRadiusTabletCssStyle};` : ''}
                 ${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
             }
-            .${blockId}.gslider-base-wrapper:hover { 
+            .${blockId}.gslider-flexi-content-wrapper:hover { 
                 ${globalTabletBackgroundHoverStyles}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+            .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
                 height: ${layoutHeight?.Tablet ? `${layoutHeight.Tablet}${layoutHeightUnits?.Tablet}` : 'clamp(300px, 60vh, 500px)'};
                 ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+            .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
                 ${contentWidth?.Tablet ? `max-width: ${contentWidth.Tablet}${contentWidthUnits?.Tablet};` : ''}
                 ${contentAlignment?.Tablet ? `text-align: ${contentAlignment.Tablet};` : ''}
 
@@ -2224,7 +2224,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${contentHorizontalAlignment?.Tablet === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper.outside {
+            .${blockId}.gslider-flexi-content-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Tablet}${navigationArrowPositionOutsidePaddingUnits.Tablet} 0 0;
                 ` : ''}
@@ -2341,7 +2341,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         
         @media only screen and (max-width: 767px) {
 
-            .${blockId}.gslider-base-wrapper {
+            .${blockId}.gslider-flexi-content-wrapper {
                 ${globalMobileBackgroundNormalStyles}
                 ${globalMarginMobileCssStyle ? `margin: ${globalMarginMobileCssStyle};` : ''} 
                 ${globalPaddingMobileCssStyle ? `padding: ${globalPaddingMobileCssStyle};` : ''}
@@ -2349,16 +2349,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${globalBorderRadiusMobileCssStyle ? `border-radius: ${globalBorderRadiusMobileCssStyle};` : ''}
                 ${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
             }
-            .${blockId}.gslider-base-wrapper:hover { 
+            .${blockId}.gslider-flexi-content-wrapper:hover { 
                 ${globalMobileBackgroundHoverStyles}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+            .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
                 height: ${layoutHeight?.Mobile ? `${layoutHeight.Mobile}${layoutHeightUnits?.Mobile}` : 'clamp(300px, 60vh, 500px)'};
                 ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+            .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
                 ${contentWidth?.Mobile ? `max-width: ${contentWidth.Mobile}${contentWidthUnits?.Mobile};` : ''}
                 ${contentAlignment?.Mobile ? `text-align: ${contentAlignment.Mobile};` : ''}
 
@@ -2367,7 +2367,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${contentHorizontalAlignment?.Mobile === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper.outside {
+            .${blockId}.gslider-flexi-content-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Mobile}${navigationArrowPositionOutsidePaddingUnits.Mobile} 0 0;
                 ` : ''}

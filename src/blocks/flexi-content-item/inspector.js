@@ -11,7 +11,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     useEffect(() => {
         if (clientId && typeof clientId === "string") {
-            setAttributes({ blockId: `fb-slider-item-${clientId.slice(0, 8)}` });
+            setAttributes({ blockId: `gslider-flexi-content-item-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
 

@@ -34,7 +34,7 @@ import {
 } from 'swiper/modules';
 import 'swiper/css/bundle';
 
-const ALLOWED_BLOCKS = ['gslider-blocks/slider-item'];
+const ALLOWED_BLOCKS = ['gslider-blocks/flexi-content-item'];
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -82,7 +82,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Block props for container
 	const blockProps = useBlockProps({
-		className: `gslider-base-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
+		className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
 	});
 
 	// Local state management for slider items and active slide index
@@ -269,9 +269,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     ]);
 
     const getSliderTemplate = useMemo(() => [
-        ['gslider-blocks/slider-item'],
-        ['gslider-blocks/slider-item'],
-        ['gslider-blocks/slider-item'],
+        ['gslider-blocks/flexi-content-item'], 
+        ['gslider-blocks/flexi-content-item'],
+        ['gslider-blocks/flexi-content-item'],
     ], []);
 
     const innerBlocksProps = useInnerBlocksProps(
@@ -299,7 +299,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         icon="plus"
                         label={ __( 'Add New Slide', 'gslider-blocks' ) }
                         onClick={() => {
-
+                            
                         }}
                     />
                     <ToolbarButton
@@ -344,7 +344,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         setSwiperInstance(swiper);
                     }}
 				>
-                    <div className="gslider-slider-content-wrapper" {...innerBlocksProps} />
+                    <div {...innerBlocksProps} />
 
                     {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                         <>
