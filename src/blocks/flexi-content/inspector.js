@@ -410,7 +410,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     /** Set Block ID */
     useEffect(() => {
         if (clientId) {
-            setAttributes({ blockId: `gslider-${clientId.slice(0, 8)}` });
+            setAttributes({ blockId: `gslider-flexi-content-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
 
@@ -2026,7 +2026,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
-            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition}
+            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
             .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
                 display: flex;
                 align-items: center;
@@ -2102,6 +2102,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${navigationArrowBoxShadowCssValue ? `box-shadow: ${navigationArrowBoxShadowCssValue};` : ''}
             ${navigationArrowWidth.Desktop ? `width: ${navigationArrowWidth.Desktop}${navigationArrowWidthUnits.Desktop};` : ''}
             ${navigationArrowHeight.Desktop ? `height: ${navigationArrowHeight.Desktop}${navigationArrowHeightUnits.Desktop};` : ''}
+            outline: none !important;
             transition: all .3s ease-in-out;
         }
         .${blockId} .swiper-button-prev:hover,

@@ -3362,6 +3362,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Tablet'));
     const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Mobile'));   
 
+    console.log(navigationArrowPosition);
 
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
@@ -3553,7 +3554,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
-            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition}
+            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
             .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
                 display: flex;
                 align-items: center;
