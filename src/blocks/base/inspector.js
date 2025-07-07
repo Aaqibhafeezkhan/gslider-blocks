@@ -3362,8 +3362,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Tablet'));
     const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Mobile'));   
 
-    console.log(navigationArrowPosition);
-
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
 
