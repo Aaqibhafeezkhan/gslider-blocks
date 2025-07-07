@@ -1,4 +1,4 @@
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks, useInnerBlocksProps } from '@wordpress/block-editor';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Save({ attributes }) {
@@ -46,6 +46,10 @@ export default function Save({ attributes }) {
 
     const blockProps = useBlockProps.save({
         className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
+    });
+
+    const innerBlocksProps = useInnerBlocksProps.save({
+        className: 'swiper-wrapper gslider-swiper-wrapper',
     });
 
     // Configure Swiper settings for frontend rendering
@@ -130,9 +134,8 @@ export default function Save({ attributes }) {
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className="swiper">
-                <div className="swiper-wrapper gslider-swiper-wrapper">
-                    <InnerBlocks.Content /> 
-                </div>
+                <div {...innerBlocksProps} />
+
                 {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                     <>
                         <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
