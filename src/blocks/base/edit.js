@@ -85,7 +85,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Block props for container
 	const blockProps = useBlockProps({
-		className: `gslider-base-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
+		className: `gslider-base-wrapper ${blockId} ${showNavigation ? navigationArrowPositionType : ''} ${navigationArrowPosition}`,
 	});
 
 	// Local state management for slider items and active slide index

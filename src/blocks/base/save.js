@@ -52,7 +52,7 @@ export default function Save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `gslider-base-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
+        className: `gslider-base-wrapper ${blockId} ${showNavigation ? navigationArrowPositionType : ''} ${navigationArrowPosition}`,
     });
 
     // Configure Swiper settings for frontend rendering
