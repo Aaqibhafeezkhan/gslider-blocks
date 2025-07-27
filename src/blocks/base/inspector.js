@@ -1492,7 +1492,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 onToggle={() => togglePanel("styles", "content")}
             >
                 <ResponsiveSpacingControl
-                    label={__("Content Padding", "gslider-blocks")}
+                    label={__("Padding", "gslider-blocks")}
                     deviceType={deviceType}
                     onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                     units={contentPaddingUnits}

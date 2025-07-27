@@ -14,11 +14,10 @@ import {
 import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
-import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';
 
 // Import Swiper React components and required modules
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 import {
 	Navigation,
 	Pagination,
@@ -85,12 +84,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
 	});
 
-	// Local state management for slider items and active slide index
-	const [sliderItemList, setSliderItemList] = useState([]);
-	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
+	// Local state management for swiper instance
     const [swiperInstance, setSwiperInstance] = useState(null);
-
-	// A key to force re-mounting of <Swiper> when critical settings change
 	const [swiperKey, setSwiperKey] = useState(0);
 
 	// Ref for panel settings focus management
@@ -170,9 +165,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             },
         }),
 
-        // Handle slide change event to update selected slide index
-        onSlideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
-
     }), [
         deviceType,
         sliderType,
@@ -193,7 +185,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showPagination,
         paginationType,
         dynamicBullets,
-        setSelectedSlideIndex,
         navigationArrowPositionType,
         navigationArrowPosition,
         navigationArrowsIconSwitcher,
@@ -321,7 +312,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
-			{renderSliderToolbarControls()}
 			<div {...blockProps}>
 				<Swiper
 					key={swiperKey}
