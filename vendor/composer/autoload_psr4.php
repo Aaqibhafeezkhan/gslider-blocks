@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'GSlider\\' => array($baseDir . '/includes'),
+    'Appsero\\' => array($vendorDir . '/appsero/client/src'),
 );

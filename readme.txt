@@ -3,7 +3,7 @@ Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,10 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 == Screenshots ==
 
 == Changelog ==
+
+= 1.0.7 – July 27, 2025 =
+- **Added**: Base Slider Content Padding Options
+- **New**: Introduced **"Flexi Content"** block support inside sliders using `gslider-blocks/flexi-content-item` with dynamic InnerBlocks integration.
 
 = 1.0.6 – July 16, 2025 =
 - **Fixed**: Resolved deprecated code issues to ensure compatibility with the latest standards.

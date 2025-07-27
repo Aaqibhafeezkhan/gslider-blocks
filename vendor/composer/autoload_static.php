@@ -11,12 +11,20 @@ class ComposerStaticInit1515cd7e8136c5df6671f4636329d50f
         array (
             'GSlider\\' => 8,
         ),
+        'A' => 
+        array (
+            'Appsero\\' => 8,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'GSlider\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
+        ),
+        'Appsero\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/appsero/client/src',
         ),
     );
 

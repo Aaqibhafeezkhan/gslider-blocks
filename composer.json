@@ -7,5 +7,7 @@
             "GSlider\\": "includes/"
         }
     },
-    "require": {}
+    "require": {
+        "appsero/client": "^2.0"
+    }
 }

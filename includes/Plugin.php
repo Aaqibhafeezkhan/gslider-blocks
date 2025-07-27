@@ -15,6 +15,7 @@ use GSlider\Classes\RegistrationBlocks;
 use GSlider\Classes\RegistrationCategory;
 use GSlider\Classes\FontLoader;
 use GSlider\Classes\SupportSVG;
+use GSlider\Utils\Utils;
 
 if (! defined('ABSPATH')) {
     exit; 
@@ -44,6 +45,7 @@ if ( ! class_exists( 'Plugin' ) ) {
 			RegistrationBlocks::getInstance()->register();
 			RegistrationCategory::getInstance()->register();
 			FontLoader::getInstance()->register();
+			Utils::getInstance()->register();
 
 			// SVG Support
 			if (is_admin()) {
