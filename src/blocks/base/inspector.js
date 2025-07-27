@@ -94,6 +94,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         descriptionHtmlTag,
         /** End Layout & Content Setting */
 
+        /** Start Content Padding */
+        contentPaddingUnits,
+        contentPaddingDesktop,
+        contentPaddingDesktopCssStyle,
+        contentPaddingTablet,
+        contentPaddingTabletCssStyle,
+        contentPaddingMobile,
+        contentPaddingMobileCssStyle,
+        contentPaddingLink,
+        /** End Content Padding */
+
         /** Start Subtitle Typography, Color, Margin & Padding */
         subtitleFontFamily,
         subtitleFontSize,
@@ -693,7 +704,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
     const defaultOpenPanels = {
         general: 'show-hide-elements',
-        styles: 'subtitle',
+        styles: 'content',
         advanced: 'layout',
     };
 
@@ -1475,6 +1486,30 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 	 */
 	const styleControls = (
         <>
+            <PanelBody
+                title={__("Content", "gslider-blocks")}
+                opened={openPanels.styles === "content"}
+                onToggle={() => togglePanel("styles", "content")}
+            >
+                <ResponsiveSpacingControl
+                    label={__("Padding", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={contentPaddingUnits}
+                    onChangeUnits={(value) => setAttributes({ contentPaddingUnits: value })}
+                    desktopSpacing={contentPaddingDesktop} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ contentPaddingDesktop: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ contentPaddingDesktopCssStyle: value })}
+                    tabletSpacing={contentPaddingTablet} 
+                    onChangeTabletSpacing={(value) => setAttributes({ contentPaddingTablet: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ contentPaddingTabletCssStyle: value })}
+                    mobileSpacing={contentPaddingMobile}
+                    onChangeMobileSpacing={(value) => setAttributes({ contentPaddingMobile: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ contentPaddingMobileCssStyle: value })}
+                    isLinked={contentPaddingLink}
+                    onChangeLink={(value) => setAttributes({ contentPaddingLink: value })} 
+                />
+            </PanelBody>
             {showSubTitle && (
                 <PanelBody 
                     title={__("Subtitle", "gslider-blocks")}  
@@ -1659,6 +1694,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                             defaultColor=''
                         />
                     )}
+
                     <ResponsiveSpacingControl
                         label={__("Margin", "gslider-blocks")}
                         deviceType={deviceType}
@@ -3400,6 +3436,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${contentHorizontalAlignment?.Desktop === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
             ${contentHorizontalAlignment?.Desktop === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
             ${contentHorizontalAlignment?.Desktop === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
+            ${contentPaddingDesktopCssStyle ? `padding: ${contentPaddingDesktopCssStyle};` : ''}
         }
 
         .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
@@ -3748,6 +3785,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${contentHorizontalAlignment?.Tablet === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
                 ${contentHorizontalAlignment?.Tablet === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
                 ${contentHorizontalAlignment?.Tablet === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
+                ${contentPaddingTabletCssStyle ? `padding: ${contentPaddingTabletCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
@@ -3940,6 +3978,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${contentHorizontalAlignment?.Mobile === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
                 ${contentHorizontalAlignment?.Mobile === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
                 ${contentHorizontalAlignment?.Mobile === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
+                ${contentPaddingMobileCssStyle ? `padding: ${contentPaddingMobileCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
@@ -4146,6 +4185,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         contentVerticalAlignment,
         contentHorizontalAlignment,
         /** End Layout & Content Setting */
+
+        /** Start Content Padding */
+        contentPaddingUnits,
+        contentPaddingDesktop,
+        contentPaddingDesktopCssStyle,
+        contentPaddingTablet,
+        contentPaddingTabletCssStyle,
+        contentPaddingMobile,
+        contentPaddingMobileCssStyle,
+        contentPaddingLink,
+        /** End Content Padding */
 
         /** Start Subtitle Typography, Color, Margin & Padding */
         subtitleFontFamily,

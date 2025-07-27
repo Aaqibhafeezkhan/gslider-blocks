@@ -578,6 +578,60 @@ const attributes = {
     },
     /** End Layout & Content Setting */
 
+    /** Start Content Padding */
+    contentPaddingUnits: {
+        type: "object",
+        default: {  
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    contentPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    contentPaddingDesktopCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    contentPaddingTablet: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    contentPaddingTabletCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    contentPaddingMobile: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    contentPaddingMobileCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    contentPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Content Padding */
+
     /** Start Subtitle Typography */
     subtitleFontFamily: {
         type: "string",
