@@ -87,6 +87,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	// Local state management for swiper instance
     const [swiperInstance, setSwiperInstance] = useState(null);
 	const [swiperKey, setSwiperKey] = useState(0);
+	// A key to force re-mounting of <Swiper> when critical settings change
+
 
 	// Ref for panel settings focus management
 	const panelRef = useRef(null);
@@ -312,6 +314,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
+			{renderSliderToolbarControls()}
 			<div {...blockProps}>
 				<Swiper
 					key={swiperKey}
