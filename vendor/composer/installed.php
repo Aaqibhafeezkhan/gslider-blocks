@@ -3,7 +3,7 @@
         'name' => 'noruzzaman/gslider',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'abefc7d04bcfcccb3622cdc2e7d08f7e14477f68',
+        'reference' => 'cd5fa01fc0338cdf02245017e6fd26dc35a69283',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'noruzzaman/gslider' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'abefc7d04bcfcccb3622cdc2e7d08f7e14477f68',
+            'reference' => 'cd5fa01fc0338cdf02245017e6fd26dc35a69283',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
