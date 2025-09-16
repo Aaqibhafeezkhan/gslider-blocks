@@ -511,9 +511,9 @@ const attributes = {
     layoutHeight: {
         type: "object",
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: "500",
+            Tablet: "400",
+            Mobile: "300",
         },
     },
     layoutHeightUnits: {
@@ -527,9 +527,9 @@ const attributes = {
     contentWidth: {
         type: "object",
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: "80",
+            Tablet: "80",
+            Mobile: "80",
         },
     },
     contentWidthUnits: {
@@ -590,10 +590,10 @@ const attributes = {
     contentPaddingDesktop: {
         type: "object", 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "30",
+            bottom: "30",
+            left: "30",
+            right: "30",
         },
     },
     contentPaddingDesktopCssStyle: { 
@@ -603,10 +603,10 @@ const attributes = {
     contentPaddingTablet: {
         type: "object",  
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "20",
+            bottom: "20",
+            left: "20",
+            right: "20",
         },
     },
     contentPaddingTabletCssStyle: { 
@@ -616,10 +616,10 @@ const attributes = {
     contentPaddingMobile: {
         type: "object",  
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: "15",
+            bottom: "15",
+            left: "15",
+            right: "15",
         },
     },
     contentPaddingMobileCssStyle: { 

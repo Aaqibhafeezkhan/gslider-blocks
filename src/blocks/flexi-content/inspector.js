@@ -511,7 +511,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             >
                 <ResponsiveRangeControl
                     min={0}
-                    max={1000}
+                    max={layoutHeightUnits?.[deviceType] === '%' ? 100 : 1000}
                     label={__("Layout Height", "gslider-blocks")}
                     rangeValue={layoutHeight}
                     onChangeValue={(value) => setAttributes({ layoutHeight: value })}
@@ -519,7 +519,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     deviceType={deviceType}
                     units={layoutHeightUnits}
                     step={1}
-                    resetFallbackValue={""}
+                    resetFallbackValue={"500"}
                 />
 
                 <ResponsiveRangeControl
@@ -532,7 +532,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     deviceType={deviceType}
                     units={contentWidthUnits}
                     step={1}
-                    resetFallbackValue={""}
+                    resetFallbackValue={"80"}
                 /> 
 
                 <ResponsiveAlignmentControl
