@@ -190,6 +190,11 @@ export const TEXT_DECORATION = [
     { label: __("Line Through", "gslider-blocks"), value: "line-through" },
 ];
 
+export const LAYOUT_HEIGHT_SWITCHER = [
+    { label: __("Fixed", "gslider-blocks"), value: "fixed" },
+    { label: __("Auto", "gslider-blocks"), value: "auto" },
+];
+
 export const GOOGLE_FONTS = async () => {
     const res = await fetch(GsliderBlocksData.plugin_url + 'assets/google-fonts/google-fonts.json');
     const data = await res.json();

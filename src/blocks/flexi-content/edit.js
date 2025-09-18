@@ -76,7 +76,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
         navigationArrowsIconRightImageID,
-        
+
+        layoutHeightSwitcher,
 	} = attributes;
 
 	// Block props for container
@@ -125,6 +126,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
                 },
             },
+        }),
+
+        ...(layoutHeightSwitcher === 'auto' && {
+            autoHeight: true,
         }),
     
         // Common settings
@@ -192,6 +197,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconSwitcher,
         navigationArrowsIconLeft,
         navigationArrowsIconRight,
+        layoutHeightSwitcher,
     ]);
 
     /**
@@ -224,6 +230,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconSwitcher,
         navigationArrowsIconLeft,
         navigationArrowsIconRight,
+        layoutHeightSwitcher,
 	]);
 
 

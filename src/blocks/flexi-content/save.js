@@ -42,6 +42,8 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
         navigationArrowsIconRightImageID,
+
+        layoutHeightSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -89,7 +91,11 @@ export default function Save({ attributes }) {
                 } : false,
             },
         },
-        
+
+        ...(layoutHeightSwitcher === 'auto' && {
+            autoHeight: true,
+        }),
+
         // Common settings
         loop: infiniteLoop,
         autoplay: autoplay ? {
