@@ -149,7 +149,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         mousewheel: mousewheelControl,
     
         // Navigation and pagination settings
-        navigation: showNavigation
+        navigation: showNavigation?.[deviceType]
         ? {
             prevEl: prevRef.current,
             nextEl: nextRef.current,
@@ -236,7 +236,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     /* Custom Icon */
     useEffect(() => {
-        if (!swiperInstance || !showNavigation) return;
+        if (!swiperInstance || !showNavigation?.[deviceType]) return;
     
         const prevEl = prevRef.current;
         const nextEl = nextRef.current;
@@ -346,7 +346,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				>
                     <div {...innerBlocksProps} />
 
-                    {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
+                    {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                         <>
                             <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                                 <div ref={prevRef} className="swiper-button-prev" aria-label="Previous slide"></div>
@@ -375,7 +375,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 				</Swiper>
 
-                {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
+                {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
                     <>
                         <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                             <div ref={prevRef} className="swiper-button-prev" aria-label="Previous slide"></div>

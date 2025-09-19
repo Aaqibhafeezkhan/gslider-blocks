@@ -97,9 +97,13 @@ const attributes = {
 
     /** Start Show/Hide Elements */
     showNavigation: {
-		type: "boolean",
-		default: true,
-	},
+        type: "object",
+        default: {
+            Desktop: true,
+            Tablet: true,
+            Mobile: true,
+        },
+    },
 	showPagination: {
 		type: "boolean",
 		default: true,

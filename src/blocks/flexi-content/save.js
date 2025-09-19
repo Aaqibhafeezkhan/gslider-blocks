@@ -107,7 +107,7 @@ export default function Save({ attributes }) {
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
         
-        navigation: showNavigation ? {
+        navigation: showNavigation?.[deviceType] ? {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         } : false,
@@ -142,7 +142,7 @@ export default function Save({ attributes }) {
             <div className="swiper">
                 <div {...innerBlocksProps} />
 
-                {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
+                {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                     <>
                         <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                             <div className="swiper-button-prev" aria-label="Previous slide"></div>
@@ -177,7 +177,7 @@ export default function Save({ attributes }) {
                     </>
                 )}
             </div>
-            {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
+            {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
                 <>
                     <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                         <div className="swiper-button-prev" aria-label="Previous slide"></div>

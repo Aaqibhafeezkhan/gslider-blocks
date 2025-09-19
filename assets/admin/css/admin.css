@@ -157,6 +157,16 @@
 .gslider-inspector-control .gslider-select-control .components-base-control__field .components-base-control .gslider-select-control-options {
   width: 100%;
 }
+.gslider-inspector-control .gslider-responsive-toggle-control-wrapper.components-base-control .components-base-control__field {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+}
+.gslider-inspector-control .gslider-responsive-toggle-control-wrapper.components-base-control .gslider-responsive-toggle-control {
+  margin-bottom: 0 !important;
+}
 
 .gslider-custom-css-editor-wrapper .monaco-editor {
   border-radius: 4px !important;

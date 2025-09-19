@@ -47,6 +47,7 @@ import InputControls from '@Components/input-control';
 import HtmlTagControl from '@Components/html-tag-control';
 import SelectControls from '@Components/select-controls';
 import IconPicker from '@Components/icon-picker'; 
+import ResponsiveToggleControl from '@Components/responsive-toggle-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
@@ -495,10 +496,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 opened={openPanels.general === "show-hide-elements"}
                 onToggle={() => togglePanel("general", "show-hide-elements")}
             >
-                <ToggleControl
+                <ResponsiveToggleControl
                     label={ __( "Show Navigation", "gslider-blocks" ) }
-                    checked={ showNavigation }
-                    onChange={(value) => setAttributes({ showNavigation: value })}
+                    toggleValue={showNavigation}
+                    setToggleValue={(value) => setAttributes({ showNavigation: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
                 />
                 <ToggleControl
                     label={ __( "Show Pagination", "gslider-blocks" ) }
@@ -728,7 +731,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 </PanelBody>
             )}
 
-            {showNavigation && (
+            {showNavigation?.[deviceType] && (
                 <PanelBody 
                     title={__("Navigation", "gslider-blocks")} 
                     opened={openPanels.general === "navigation"}
@@ -1077,7 +1080,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     onChangeLink={(value) => setAttributes({ contentPaddingLink: value })} 
                 />
             </PanelBody>
-            {showNavigation && (
+            {showNavigation?.[deviceType] && (
                 <PanelBody 
                     title={__("Navigation", "gslider-blocks")}  
                     opened={openPanels.styles === "navigation"}

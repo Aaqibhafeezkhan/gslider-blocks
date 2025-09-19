@@ -143,6 +143,20 @@
 			}
 		}
 	}
+	.gslider-responsive-toggle-control-wrapper {
+		&.components-base-control {
+			.components-base-control__field {
+				display: flex;
+				align-items: center;
+				flex-direction: row;
+				justify-content: flex-start;
+				width: 100%;
+			}
+			.gslider-responsive-toggle-control {
+				margin-bottom: 0 !important;
+			}
+		}
+	}
 }
 
 .gslider-custom-css-editor-wrapper {
