@@ -11,11 +11,13 @@
 			padding: clamp(15px, 6vw, 30px);
 			width: 100%;
 			text-align: center;
+
+			figure {
+				margin: 0;
+			}
 		}
 	}
-	.swiper-wrapper {
-		height: auto !important;
-	}
+
 	.swiper-backface-hidden {
 		.swiper-slide {
 			backface-visibility: visible !important;

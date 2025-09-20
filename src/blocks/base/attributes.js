@@ -516,6 +516,10 @@ const attributes = {
     /** End Show/Hide Elements */
 
     /** Layout & Content Setting */
+    layoutHeightSwitcher: {
+        type: "string",
+        default: "fixed",
+    },
     layoutHeight: {
         type: "object",
         default: {
@@ -2100,7 +2104,7 @@ const attributes = {
 	},
 	navigationArrowsIconLeftImageAlt: {
 		type: 'string',
-		default: '',
+		default: 'Left Arrow',
 	},
 	navigationArrowsIconLeftImageID: {
 		type: 'string',
@@ -2123,7 +2127,7 @@ const attributes = {
 	},
 	navigationArrowsIconRightImageAlt: {
 		type: 'string',
-		default: '',
+		default: 'Right Arrow',
 	},
 	navigationArrowsIconRightImageID: {
 		type: 'string',

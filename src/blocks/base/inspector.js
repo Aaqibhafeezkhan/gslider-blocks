@@ -22,7 +22,8 @@ import {
     NORMAL_ACTIVE,
     NAVIGATION_ARROW_POSITION_TYPE,
     NAVIGATION_ARROW_POSITION,
-    NAVIGATION_ARROW_DIRECTION
+    NAVIGATION_ARROW_DIRECTION,
+    LAYOUT_HEIGHT_SWITCHER,
 
 } from "@Constants";
 
@@ -81,7 +82,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         showPagination,
         /** End Show/Hide Elements */
 
-        /** Start Layout & Content Setting */
+        /** Start Layout & Content Setting */   
+        layoutHeightSwitcher,
         layoutHeight,
         layoutHeightUnits,
         contentWidth,
@@ -451,7 +453,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         navigationArrowBoxShadowHoverValues,
         navigationArrowBoxShadowHoverCssValue,
         /** End Box Shadow */
-
 
         /** Start Position */
         navigationArrowPositionType,
@@ -940,18 +941,32 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 opened={openPanels.general === "layout-content-setting"}
                 onToggle={() => togglePanel("general", "layout-content-setting")}
             >
-                <ResponsiveRangeControl
-                    min={0}
-                    max={layoutHeightUnits?.[deviceType] === '%' ? 100 : 1000}
-                    label={__("Layout Height", "gslider-blocks")}
-                    rangeValue={layoutHeight}
-                    onChangeValue={(value) => setAttributes({ layoutHeight: value })}
-                    onUnitChange={(value) => setAttributes({ layoutHeightUnits: value })}
-                    deviceType={deviceType}
-                    units={layoutHeightUnits}
-                    step={1}
-                    resetFallbackValue={"500"}
+
+                <SwitcherControl
+                    label={__("Layout Height Switcher", "gslider-blocks")}
+                    options={LAYOUT_HEIGHT_SWITCHER}
+                    value={layoutHeightSwitcher}
+                    onChange={(value) => setAttributes({ layoutHeightSwitcher: value })}
                 />
+
+                {layoutHeightSwitcher === 'fixed' && (
+                    <ResponsiveRangeControl
+                        min={0}
+                        max={layoutHeightUnits?.[deviceType] === '%' ? 100 : 1000}
+                        label={__("Layout Height", "gslider-blocks")}
+                        rangeValue={layoutHeight}
+                        onChangeValue={(value) => setAttributes({ layoutHeight: value })}
+                        onUnitChange={(value) => setAttributes({ layoutHeightUnits: value })}
+                        deviceType={deviceType}
+                        units={layoutHeightUnits}
+                        step={1}
+                        resetFallbackValue={"500"}
+                    />
+                )}
+
+                {layoutHeightSwitcher === 'auto' && (
+                    <p>Slides adapt their height to the inside content.</p>
+                )}
 
                 <ResponsiveRangeControl
                     min={0}
@@ -3409,6 +3424,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             align-items: center;
         }
 
+        ${layoutHeightSwitcher === 'fixed' ? `
+            .${blockId} .swiper-wrapper {
+                height: auto !important;
+            }
+        ` : ''}
+
         .${blockId}.gslider-base-wrapper {
             ${globalDesktopBackgroundNormalStyles}
             ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ''} 
@@ -3430,7 +3451,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         }
         
         .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
-            height: ${layoutHeight?.Desktop ? `${layoutHeight.Desktop}${layoutHeightUnits?.Desktop}` : 'clamp(300px, 60vh, 500px)'};
+            height: ${layoutHeight?.Desktop && layoutHeightSwitcher === 'fixed' ? `${layoutHeight.Desktop}${layoutHeightUnits?.Desktop}` : 'auto'};
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }
 
@@ -3779,7 +3800,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             }
 
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
-                height: ${layoutHeight?.Tablet ? `${layoutHeight.Tablet}${layoutHeightUnits?.Tablet}` : 'clamp(300px, 60vh, 500px)'};
+                height: ${layoutHeight?.Tablet && layoutHeightSwitcher === 'fixed' ? `${layoutHeight.Tablet}${layoutHeightUnits?.Tablet}` : 'auto'};
                 ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
             }
 
@@ -3972,7 +3993,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             }
 
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
-                height: ${layoutHeight?.Mobile ? `${layoutHeight.Mobile}${layoutHeightUnits?.Mobile}` : 'clamp(300px, 60vh, 500px)'};
+                height: ${layoutHeight?.Mobile && layoutHeightSwitcher === 'fixed' ? `${layoutHeight.Mobile}${layoutHeightUnits?.Mobile}` : 'auto'};
                 ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ''}
             }
 
@@ -4182,6 +4203,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         /** End Show/Hide Elements */
 
         /** Start Layout & Content Setting */
+        layoutHeightSwitcher,
         layoutHeight,
         layoutHeightUnits,
         contentWidth,

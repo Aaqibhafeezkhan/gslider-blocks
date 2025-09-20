@@ -152,7 +152,7 @@ export default function Save({ attributes }) {
 
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
-            <div className="swiper">
+            <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
                 <div {...innerBlocksProps} />
 
                 {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (

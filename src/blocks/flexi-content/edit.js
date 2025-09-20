@@ -326,6 +326,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<Swiper
 					key={swiperKey}
 					{...swiperSettings}
+                    className={globalClass}
+                    {...(globalID && {id: globalID})}
 					modules={[
 						Navigation,
 						Pagination,

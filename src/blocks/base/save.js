@@ -4,7 +4,6 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 export default function Save({ attributes }) {
     const {
         blockId,
-        deviceType,
         sliderItems,
         sliderType,
         carouselPerColumn,
@@ -49,6 +48,8 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
         navigationArrowsIconRightImageID,
+
+        layoutHeightSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -112,6 +113,10 @@ export default function Save({ attributes }) {
                 pagination: { enabled: paginationEnabled.Desktop },
             },
         },
+
+        ...(layoutHeightSwitcher === 'auto' && {
+            autoHeight: true,
+        }),
         
         // Common settings
         loop: infiniteLoop,
