@@ -498,12 +498,20 @@ const attributes = {
         default: true,
     },
     showNavigation: {
-		type: "boolean",
-		default: true,
-	},
+        type: "object",
+        default: {
+            Desktop: true,
+            Tablet: true,
+            Mobile: true,
+        },
+    },
 	showPagination: {
-		type: "boolean",
-		default: true,
+        type: "object",
+        default: {
+            Desktop: true,
+            Tablet: true,
+            Mobile: true,
+        },
 	},
     /** End Show/Hide Elements */
 

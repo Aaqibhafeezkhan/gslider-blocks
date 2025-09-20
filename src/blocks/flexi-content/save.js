@@ -1,4 +1,4 @@
-import { useBlockProps, InnerBlocks, useInnerBlocksProps } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks, useInnerBlocksProps } from '@wordpress/block-editor'; 
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Save({ attributes }) {
@@ -53,12 +53,19 @@ export default function Save({ attributes }) {
         className: 'swiper-wrapper gslider-swiper-wrapper',
     });
 
-    const navEnabled = {
+    const navigationEnabled = {
         Mobile:  !!showNavigation?.Mobile,
         Tablet:  !!showNavigation?.Tablet,
         Desktop: !!showNavigation?.Desktop,
     };
-  const anyNavEnabled = navEnabled.Mobile || navEnabled.Tablet || navEnabled.Desktop;
+    const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
+
+    const paginationEnabled = {
+        Mobile:  !!showPagination?.Mobile,
+        Tablet:  !!showPagination?.Tablet,
+        Desktop: !!showPagination?.Desktop,
+    };
+    const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
 
     // Configure Swiper settings for frontend rendering
     const swiperSettings = JSON.stringify({
@@ -75,7 +82,8 @@ export default function Save({ attributes }) {
                 autoplay: autoplay ? {
                     delay: autoplayDelay?.Mobile || 1000,
                 } : false,
-                navigation: { enabled: navEnabled.Mobile },
+                navigation: { enabled: navigationEnabled.Mobile },
+                pagination: { enabled: paginationEnabled.Mobile },
             },
             768: {
                 ...(sliderType === 'carousel' && {
@@ -86,7 +94,8 @@ export default function Save({ attributes }) {
                 autoplay: autoplay ? {
                     delay: autoplayDelay?.Tablet || 1000,
                 } : false,
-                navigation: { enabled: navEnabled.Tablet },
+                navigation: { enabled: navigationEnabled.Tablet }, 
+                pagination: { enabled: paginationEnabled.Tablet },
             },
             1025: {
                 ...(sliderType === 'carousel' && {
@@ -97,7 +106,8 @@ export default function Save({ attributes }) {
                 autoplay: autoplay ? {
                     delay: autoplayDelay?.Desktop || 1000,
                 } : false,
-                navigation: { enabled: navEnabled.Desktop },
+                navigation: { enabled: navigationEnabled.Desktop },
+                pagination: { enabled: paginationEnabled.Desktop },
             },
         },
 
@@ -117,25 +127,18 @@ export default function Save({ attributes }) {
         mousewheel: mousewheelControl,
         
         navigation: {
-        enabled: anyNavEnabled,
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+            enabled: anyNavigationEnabled,
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
         },
         
-        pagination: showPagination ? {
+        pagination: {
+            enabled: anyPaginationEnabled,
             el: '.swiper-pagination',
             type: paginationType,
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,
-        } : false,
-        
-        // Creative effect settings if needed
-        ...(slideEffect === 'creative' && {
-            creativeEffect: {
-                prev: { shadow: true, translate: [0, 0, -400] },
-                next: { translate: ['100%', 0, 0] },
-            },
-        }),
+        },
         
         // Creative effect settings if needed
         ...(slideEffect === 'creative' && {
@@ -152,7 +155,7 @@ export default function Save({ attributes }) {
             <div className="swiper">
                 <div {...innerBlocksProps} />
 
-                {anyNavEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
+                {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                     <>
                         <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                             <div className="swiper-button-prev" aria-label="Previous slide"></div>
@@ -161,14 +164,14 @@ export default function Save({ attributes }) {
                     </>
                 )}
 
-                { anyNavEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
+                { anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
                     <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                         <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
                         <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
                     </div>
                 )}
 
-                {anyNavEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
                     <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                         <div className="swiper-button-prev">
                             <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
@@ -179,7 +182,7 @@ export default function Save({ attributes }) {
                     </div>
                 )}
 
-                {showPagination && (
+                {anyPaginationEnabled && (
                     <>
                         <div className="gslider-pagination-wrapper">
                             <div className="swiper-pagination"></div>
@@ -187,7 +190,7 @@ export default function Save({ attributes }) {
                     </>
                 )}
             </div>
-            { anyNavEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
+            { anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
                 <>
                     <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                         <div className="swiper-button-prev" aria-label="Previous slide"></div>
@@ -196,14 +199,14 @@ export default function Save({ attributes }) {
                 </>
             )}
 
-            {anyNavEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
+            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
                 <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                     <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
                     <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
                 </div>
             )}
 
-            {anyNavEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
                 <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                     <div className="swiper-button-prev">
                         <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />

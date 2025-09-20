@@ -46,8 +46,8 @@ import {useDeviceType} from "@Utils/displayType";
 import InputControls from '@Components/input-control';
 import HtmlTagControl from '@Components/html-tag-control';
 import SelectControls from '@Components/select-controls';
-import IconPicker from '@Components/icon-picker'; 
-
+import IconPicker from '@Components/icon-picker';
+import ResponsiveToggleControl from '@Components/responsive-toggle-control';
 
 export default function Inspector({ attributes, setAttributes, clientId, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) {
     const { 
@@ -888,15 +888,19 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     checked={ showButton }
                     onChange={(value) => setAttributes({ showButton: value })}
                 />
-                <ToggleControl
+                <ResponsiveToggleControl
                     label={ __( "Show Navigation", "gslider-blocks" ) }
-                    checked={ showNavigation }
-                    onChange={(value) => setAttributes({ showNavigation: value })}
+                    toggleValue={showNavigation}
+                    setToggleValue={(value) => setAttributes({ showNavigation: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
                 />
-                <ToggleControl
+                <ResponsiveToggleControl
                     label={ __( "Show Pagination", "gslider-blocks" ) }
-                    checked={ showPagination }
-                    onChange={(value) => setAttributes({ showPagination: value })}
+                    toggleValue={showPagination}
+                    setToggleValue={(value) => setAttributes({ showPagination: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
                 />
             </PanelBody>
             <PanelBody

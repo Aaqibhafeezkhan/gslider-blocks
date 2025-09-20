@@ -105,8 +105,12 @@ const attributes = {
         },
     },
 	showPagination: {
-		type: "boolean",
-		default: true,
+        type: "object",
+        default: {
+            Desktop: true,
+            Tablet: true,
+            Mobile: true,
+        },
 	},
     /** End Show/Hide Elements */
 
@@ -249,7 +253,7 @@ const attributes = {
 	},
 	navigationArrowsIconLeftImageAlt: {
 		type: 'string',
-		default: '',
+		default: 'Left Arrow',
 	},
 	navigationArrowsIconLeftImageID: {
 		type: 'string',
@@ -272,7 +276,7 @@ const attributes = {
 	},
 	navigationArrowsIconRightImageAlt: {
 		type: 'string',
-		default: '',
+		default: 'Right Arrow',
 	},
 	navigationArrowsIconRightImageID: {
 		type: 'string',

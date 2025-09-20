@@ -503,10 +503,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />
-                <ToggleControl
+                <ResponsiveToggleControl
                     label={ __( "Show Pagination", "gslider-blocks" ) }
-                    checked={ showPagination }
-                    onChange={(value) => setAttributes({ showPagination: value })}
+                    toggleValue={showPagination}
+                    setToggleValue={(value) => setAttributes({ showPagination: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
                 />
             </PanelBody>
             <PanelBody
