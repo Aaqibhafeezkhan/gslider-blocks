@@ -4,6 +4,7 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 export default function Save({ attributes }) {
     const {
         blockId,
+        blockStyle,
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
@@ -151,7 +152,6 @@ export default function Save({ attributes }) {
     });
 
     return (
-        <>
         <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
                 <div {...innerBlocksProps} />
@@ -218,6 +218,5 @@ export default function Save({ attributes }) {
                 </div>
             )}
         </div>
-        </>
     );
 }
