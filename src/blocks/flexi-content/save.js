@@ -4,7 +4,6 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 export default function Save({ attributes }) {
     const {
         blockId,
-        blockStyle,
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
