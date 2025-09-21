@@ -2,7 +2,7 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import attributes from './attributes';
 
-const v1_0_5 = {
+const v1_0_7 = {
 	attributes,
 	supports: {
 		html: false,
@@ -210,4 +210,4 @@ const v1_0_5 = {
 	},
 };
 
-export default [v1_0_5];
+export default [v1_0_7];
