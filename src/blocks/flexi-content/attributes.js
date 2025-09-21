@@ -122,9 +122,9 @@ const attributes = {
     layoutHeight: {
         type: "object",
         default: {
-            Desktop: "500",
-            Tablet: "400",
-            Mobile: "300",
+            Desktop: "350",
+            Tablet: "350",
+            Mobile: "350",
         },
     },
     layoutHeightUnits: {

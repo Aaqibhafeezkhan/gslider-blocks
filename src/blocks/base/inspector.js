@@ -3424,12 +3424,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             align-items: center;
         }
 
-        ${layoutHeightSwitcher === 'fixed' ? `
-            .${blockId} .swiper-wrapper {
-                height: auto !important;
-            }
-        ` : ''}
-
         .${blockId}.gslider-base-wrapper {
             ${globalDesktopBackgroundNormalStyles}
             ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ''} 
@@ -3440,7 +3434,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${globalBorderColor ? `border-color: ${globalBorderColor};` : ''}
             ${globalBoxShadowCssValue ? `box-shadow: ${globalBoxShadowCssValue} !important;` : ''}
             ${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
-            width: 100%;
             box-sizing: border-box;
             position: relative;
         }

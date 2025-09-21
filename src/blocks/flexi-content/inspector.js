@@ -527,7 +527,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     <ResponsiveRangeControl
                         min={0}
                         max={layoutHeightUnits?.[deviceType] === '%' ? 100 : 1000}
-                        label={__("Layout Height", "gslider-blocks")}
+                        label={__("Minimum Height", "gslider-blocks")}
                         rangeValue={layoutHeight}
                         onChangeValue={(value) => setAttributes({ layoutHeight: value })}
                         onUnitChange={(value) => setAttributes({ layoutHeightUnits: value })}
@@ -544,7 +544,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 <ResponsiveRangeControl
                     min={0}
-                    max={contentWidthUnits?.[deviceType] === '%' ? 100 : 1000}
+                    max={contentWidthUnits?.[deviceType] === '%' ? 100 : 2000}
                     label={__("Max Width", "gslider-blocks")}
                     rangeValue={contentWidth}
                     onChangeValue={(value) => setAttributes({ contentWidth: value })}
@@ -552,7 +552,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     deviceType={deviceType}
                     units={contentWidthUnits}
                     step={1}
-                    resetFallbackValue={"80"}
+                    resetFallbackValue={"100"}
                 /> 
 
                 <ResponsiveAlignmentControl
@@ -2027,16 +2027,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
 
-        .${blockId} .swiper-wrapper {
-            align-items: center;
-        }
-
-        ${layoutHeightSwitcher === 'fixed' ? `
-            .${blockId} .swiper-wrapper {
-                height: auto !important;
-            }
-        ` : ''}
-
         .${blockId}.gslider-flexi-content-wrapper {
             ${globalDesktopBackgroundNormalStyles}
             ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ''} 
@@ -2047,7 +2037,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${globalBorderColor ? `border-color: ${globalBorderColor};` : ''}
             ${globalBoxShadowCssValue ? `box-shadow: ${globalBoxShadowCssValue} !important;` : ''}
             ${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
-            width: 100%;
             box-sizing: border-box;
             position: relative;
         }
@@ -2056,9 +2045,14 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ''}
             ${globalBoxShadowHoverCssValue ? `box-shadow: ${globalBoxShadowHoverCssValue} !important;` : ''}
         }
+
+        .${blockId} .swiper-wrapper.gslider-swiper-wrapper {
+            align-items: center;
+            height: auto !important;
+            ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
+        }
         
         .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
-            height: ${layoutHeight?.Desktop && layoutHeightSwitcher === 'fixed' ? `${layoutHeight.Desktop}${layoutHeightUnits?.Desktop}` : 'auto'};
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }
 
@@ -2274,8 +2268,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${globalTabletBackgroundHoverStyles}
             }
 
+            .${blockId} .swiper-wrapper.gslider-swiper-wrapper {
+                ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
+            }
+
             .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
-                height: ${layoutHeight?.Tablet && layoutHeightSwitcher === 'fixed' ? `${layoutHeight.Tablet}${layoutHeightUnits?.Tablet}` : 'auto'};
                 ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
             }
 
@@ -2418,8 +2415,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${globalMobileBackgroundHoverStyles}
             }
 
+            .${blockId} .swiper-wrapper.gslider-swiper-wrapper {
+                ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
+            }
+
             .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
-                height: ${layoutHeight?.Mobile && layoutHeightSwitcher === 'fixed' ? `${layoutHeight.Mobile}${layoutHeightUnits?.Mobile}` : 'auto'};
                 ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ''}
             }
 

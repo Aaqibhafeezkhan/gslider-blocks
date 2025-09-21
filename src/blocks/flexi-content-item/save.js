@@ -1,4 +1,3 @@
-// Child Block (Flexi Content Item) - Save Component
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 export default function Save({ attributes }) {

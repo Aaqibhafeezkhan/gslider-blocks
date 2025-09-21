@@ -16,6 +16,15 @@
 			}
 		}
 	}
+
+	.swiper-wrapper {
+		height: auto !important;
+	}
+	
+	.swiper {
+		position: relative !important;
+		overflow: hidden !important;
+	}
 	
 	.swiper-backface-hidden {
 		.swiper-slide {

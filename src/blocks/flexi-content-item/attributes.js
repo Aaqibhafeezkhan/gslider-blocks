@@ -19,7 +19,7 @@ const attributes = {
     },
     sliderItemNormalClassicColor: {
         type: "string",
-        default: "#EDEDED",
+        default: "",
     },
     sliderItemNormalGradientColor: {
         type: "string",
