@@ -2053,6 +2053,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         }
         
         .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
+            ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }
 
@@ -2273,6 +2274,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             }
 
             .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
+                ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
                 ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
             }
 
@@ -2420,6 +2422,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             }
 
             .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
+                ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
                 ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ''}
             }
 
