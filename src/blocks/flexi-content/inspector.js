@@ -2048,11 +2048,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         .${blockId} .swiper-wrapper.gslider-swiper-wrapper {
             align-items: center;
-            height: auto !important;
+            height: auto;
             ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
         }
         
         .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
+            height: auto;
             ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }
