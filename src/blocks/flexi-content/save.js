@@ -151,6 +151,7 @@ export default function Save({ attributes }) {
     });
 
     return (
+        <>
         <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
                 <div {...innerBlocksProps} />
@@ -217,5 +218,6 @@ export default function Save({ attributes }) {
                 </div>
             )}
         </div>
+        </>
     );
 }

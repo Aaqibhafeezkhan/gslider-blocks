@@ -113,7 +113,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     hoverBackgroundImageAttachment={sliderItemHoverBackgroundImageAttachment}
                     setHoverBackgroundImageAttachment={(value) => setAttributes({ sliderItemHoverBackgroundImageAttachment: value })}
                     hoverBackgroundImageRepeat={sliderItemHoverBackgroundImageRepeat}
-                    setHoverBackgroundImageRepeat={(value) => setAttributes({ globalHoverBackgroundImageRepeat: value })}
+                    setHoverBackgroundImageRepeat={(value) => setAttributes({ sliderItemHoverBackgroundImageRepeat: value })}
                     hoverBackgroundImageSize={sliderItemHoverBackgroundImageSize}
                     setHoverBackgroundImageSize={(value) => setAttributes({ sliderItemHoverBackgroundImageSize: value })}
                     setAttributes={setAttributes}
