@@ -951,9 +951,9 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 {layoutHeightSwitcher === 'fixed' && (
                     <ResponsiveRangeControl
-                        min={0}
+                        min={100}
                         max={layoutHeightUnits?.[deviceType] === '%' ? 100 : 1000}
-                        label={__("Layout Height", "gslider-blocks")}
+                        label={__("Minimum Height", "gslider-blocks")} 
                         rangeValue={layoutHeight}
                         onChangeValue={(value) => setAttributes({ layoutHeight: value })}
                         onUnitChange={(value) => setAttributes({ layoutHeightUnits: value })}
@@ -3420,10 +3420,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
 
-        .${blockId} .swiper-wrapper {
-            align-items: center;
-        }
-
         .${blockId}.gslider-base-wrapper {
             ${globalDesktopBackgroundNormalStyles}
             ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ''} 
@@ -3442,9 +3438,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
             ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ''}
             ${globalBoxShadowHoverCssValue ? `box-shadow: ${globalBoxShadowHoverCssValue} !important;` : ''}
         }
+
+        .${blockId} .swiper-wrapper {
+            align-items: center;
+            height: auto;
+            ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
+        }
         
         .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
-            height: ${layoutHeight?.Desktop && layoutHeightSwitcher === 'fixed' ? `${layoutHeight.Desktop}${layoutHeightUnits?.Desktop}` : 'auto'};
+            height: auto;
+            ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }
 
@@ -3792,8 +3795,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${globalTabletBackgroundHoverStyles}
             }
 
+            .${blockId} .swiper-wrapper {
+                ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
+            }
+
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
-                height: ${layoutHeight?.Tablet && layoutHeightSwitcher === 'fixed' ? `${layoutHeight.Tablet}${layoutHeightUnits?.Tablet}` : 'auto'};
+                ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
                 ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
             }
 
@@ -3985,8 +3992,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${globalMobileBackgroundHoverStyles}
             }
 
+            .${blockId} .swiper-wrapper {
+                ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
+            }
+
             .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
-                height: ${layoutHeight?.Mobile && layoutHeightSwitcher === 'fixed' ? `${layoutHeight.Mobile}${layoutHeightUnits?.Mobile}` : 'auto'};
+                ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
                 ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ''}
             }
 

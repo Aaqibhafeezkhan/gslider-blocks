@@ -156,7 +156,7 @@ export default function Save({ attributes }) {
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className="swiper">
-                <div className="swiper-wrapper gslider-wrapper">
+                <div className="swiper-wrapper">
                     {sliderItems.map((item) => (
                         <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
                             <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})}>

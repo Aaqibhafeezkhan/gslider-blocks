@@ -525,7 +525,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 {layoutHeightSwitcher === 'fixed' && (
                     <ResponsiveRangeControl
-                        min={0}
+                        min={100}
                         max={layoutHeightUnits?.[deviceType] === '%' ? 100 : 1000}
                         label={__("Minimum Height", "gslider-blocks")}
                         rangeValue={layoutHeight}
@@ -534,7 +534,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                         deviceType={deviceType}
                         units={layoutHeightUnits}
                         step={1}
-                        resetFallbackValue={"500"}
+                        resetFallbackValue={"350"}
                     />
                 )}
 
