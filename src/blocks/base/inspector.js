@@ -1,8 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect, useMemo, useCallback } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext, arrayMove } from '@dnd-kit/sortable';
-import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, Button, ButtonGroup } from '@wordpress/components';
+import { SortableContext, } from '@dnd-kit/sortable';
+import { PanelBody, ToggleControl, BaseControl, Button, } from '@wordpress/components';
 
 /**
  * Internal Dependencies
@@ -951,16 +951,20 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                 {layoutHeightSwitcher === 'fixed' && (
                     <ResponsiveRangeControl
-                        min={100}
-                        max={layoutHeightUnits?.[deviceType] === '%' ? 100 : 1000}
-                        label={__("Minimum Height", "gslider-blocks")} 
+                        label={__("Minimum Height", "gslider-blocks")}
                         rangeValue={layoutHeight}
                         onChangeValue={(value) => setAttributes({ layoutHeight: value })}
                         onUnitChange={(value) => setAttributes({ layoutHeightUnits: value })}
                         deviceType={deviceType}
                         units={layoutHeightUnits}
-                        step={1}
-                        resetFallbackValue={"500"}
+                        resetFallbackValue={{
+                            px: "500",
+                            "%": "50",
+                            vh: "50",
+                            vw: "50",
+                            em: "20",
+                            rem:"20",
+                        }}
                     />
                 )}
 
@@ -969,16 +973,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 )}
 
                 <ResponsiveRangeControl
-                    min={0}
-                    max={contentWidthUnits?.[deviceType] === '%' ? 100 : 1000}
                     label={__("Max Width", "gslider-blocks")}
                     rangeValue={contentWidth}
                     onChangeValue={(value) => setAttributes({ contentWidth: value })}
                     onUnitChange={(value) => setAttributes({ contentWidthUnits: value })}
                     deviceType={deviceType}
                     units={contentWidthUnits}
-                    step={1}
-                    resetFallbackValue={"80"}
+                    resetFallbackValue={{
+                        px: "1200",
+                        "%": "80",
+                        vw: "100",
+                        em: "60",
+                        rem:"60",
+                    }}
+                    unitBounds={{
+                        px:  { min: 0,   max: 3000, step: 1 },
+                    }}
                 /> 
 
                 <ResponsiveAlignmentControl
@@ -1096,13 +1106,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
                 { autoplay && (
                     <ResponsiveRangeControl
-                        min={1000}
-                        max={10000}
+                        min={500}
+                        max={20000}
                         label={__("Autoplay Delay (ms)", "gslider-blocks")}
                         rangeValue={autoplayDelay} 
                         onChangeValue={(value) => setAttributes({ autoplayDelay: value })}
                         deviceType={deviceType}
-                        step={1}
+                        step={100}
                         resetFallbackValue={"1000"}
                         isRangeUnit={false}
                     />
@@ -1115,7 +1125,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     rangeValue={speed} 
                     onChangeValue={(value) => setAttributes({ speed: value })}
                     deviceType={deviceType}
-                    step={1}
+                    step={50}
                     resetFallbackValue={"800"}
                     isRangeUnit={false}
                 />
@@ -1129,13 +1139,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                     <ResponsiveRangeControl
                         min={1}
-                        max={10}
+                        max={12}
                         label={__("Number of Columns", "gslider-blocks")}
                         rangeValue={carouselPerColumn}
                         onChangeValue={(value) => setAttributes({ carouselPerColumn: value })}
                         deviceType={deviceType}
                         step={1}
-                        resetFallbackValue={""}
+                        resetFallbackValue={"2"}
                         isRangeUnit={false}
                     />
                     <ResponsiveRangeControl
@@ -1272,56 +1282,56 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     {navigationArrowPosition === 'top-left' && (
                         <>
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Top Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionTopOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionTopOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionTopOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionTopOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Left Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionLeftOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionLeftOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionLeftOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionLeftOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                         </>
                     )}
                     {navigationArrowPosition === 'top-center' && (
                         <>
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Top Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionTopOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionTopOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionTopOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionTopOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Left Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionLeftOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionLeftOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionLeftOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionLeftOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                         </>
                     )}
@@ -1329,28 +1339,28 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     {navigationArrowPosition === 'top-right' && (
                         <>
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Top Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionTopOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionTopOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionTopOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionTopOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Right Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionRightOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionRightOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionRightOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionRightOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                         </>
                     )}
@@ -1358,56 +1368,56 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     {navigationArrowPosition === 'bottom-left' && (
                         <>
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Bottom Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionBottomOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionBottomOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionBottomOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionBottomOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Left Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionLeftOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionLeftOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionLeftOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionLeftOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                         </>
                     )}
                     {navigationArrowPosition === 'bottom-center' && (
                         <>
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Top Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionBottomOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionBottomOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionBottomOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionBottomOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Left Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionLeftOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionLeftOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionLeftOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionLeftOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                         </>
                     )}
@@ -1415,59 +1425,73 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     {navigationArrowPosition === 'bottom-right' && (
                         <>
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Top Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionBottomOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionBottomOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionBottomOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionBottomOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Right Offset", "gslider-blocks")}
                                 rangeValue={navigationArrowPositionRightOffset}
                                 onChangeValue={(value) => setAttributes({ navigationArrowPositionRightOffset: value })}
                                 onUnitChange={(value) => setAttributes({ navigationArrowPositionRightOffsetUnits: value })}
                                 deviceType={deviceType}
                                 units={navigationArrowPositionRightOffsetUnits}
-                                step={1}
-                                resetFallbackValue={"0"}
+                                resetFallbackValue={""}
+                                unitBounds={{
+                                    px:  { min: 0, max: 1000, step: 1 },
+                                }}
                             />
                         </>
                     )}
 
                     {navigationArrowPosition !== 'center' && (
                         <ResponsiveRangeControl
-                            min={0}
-                            max={100}
                             label={__("Gap", "gslider-blocks")}
                             rangeValue={navigationArrowGap} 
                             onChangeValue={(value) => setAttributes({ navigationArrowGap: value })}
                             onUnitChange={(value) => setAttributes({ navigationArrowGapUnits: value })}
                             deviceType={deviceType}
                             units={navigationArrowGapUnits}
-                            step={1}
-                            resetFallbackValue={"10"}
+                            resetFallbackValue={{
+                                px: "10",
+                                "%": "2",
+                                vh: "2",
+                                vw: "2",
+                                em: "0.75",
+                                rem:"0.75",
+                            }}
+                            unitBounds={{
+                                px: { min: 0,  max: 200, step: 1 },
+                            }}
                         />
                     )}
 
                     {navigationArrowPositionType === 'outside' && (
                         <ResponsiveRangeControl
-                            min={0}
-                            max={100}
                             label={__("Padding", "gslider-blocks")}
                             rangeValue={navigationArrowPositionOutsidePadding}
                             onChangeValue={(value) => setAttributes({ navigationArrowPositionOutsidePadding: value })}
                             onUnitChange={(value) => setAttributes({ navigationArrowPositionOutsidePaddingUnits: value })}
                             deviceType={deviceType}
                             units={navigationArrowPositionOutsidePaddingUnits}
-                            step={1}
-                            resetFallbackValue={"60"}
+                            resetFallbackValue={{
+                                px: "60",
+                                "%": "5",
+                                vh: "5",
+                                vw: "5",
+                                em: "3.75",
+                                rem:"3.75",
+                            }}
+                            unitBounds={{
+                                px: { min: 0,  max: 200, step: 1 },
+                            }}
                         /> 
                     )}
 
@@ -2342,41 +2366,62 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     onToggle={() => togglePanel("styles", "navigation")}
                 >
                     <ResponsiveRangeControl
-                        min={0}
-                        max={100}
                         label={__("Icon Size", "gslider-blocks")}
                         rangeValue={navigationArrowSize}
                         onChangeValue={(value) => setAttributes({ navigationArrowSize: value })}
                         onUnitChange={(value) => setAttributes({ navigationArrowSizeUnits: value })}
                         deviceType={deviceType}
                         units={navigationArrowSizeUnits}
-                        step={1}
-                        resetFallbackValue={"16"}
+                        resetFallbackValue={{
+                            px: "16",
+                            "%": "5",
+                            vh: "",
+                            vw: "",
+                            em: "1",
+                            rem:"1",
+                        }}
+                        unitBounds={{
+                            px: { min: 0,  max: 200, step: 1 },
+                        }}
                     />
 
                     <ResponsiveRangeControl
-                        min={0}
-                        max={100}
                         label={__("Width", "gslider-blocks")}
                         rangeValue={navigationArrowWidth}
                         onChangeValue={(value) => setAttributes({ navigationArrowWidth: value })}
                         onUnitChange={(value) => setAttributes({ navigationArrowWidthUnits: value })}
                         deviceType={deviceType}
                         units={navigationArrowWidthUnits}
-                        step={1}
-                        resetFallbackValue={"46"}
+                        resetFallbackValue={{
+                            px: "46",
+                            "%": "5",
+                            vh: "",
+                            vw: "",
+                            em: "2.875",
+                            rem:"2.875",
+                        }}
+                        unitBounds={{
+                            px: { min: 0,  max: 200, step: 1 },
+                        }}
                     />
                     <ResponsiveRangeControl
-                        min={0}
-                        max={100}
                         label={__("Height", "gslider-blocks")}
                         rangeValue={navigationArrowHeight}
                         onChangeValue={(value) => setAttributes({ navigationArrowHeight: value })}
                         onUnitChange={(value) => setAttributes({ navigationArrowHeightUnits: value })}
                         deviceType={deviceType}
                         units={navigationArrowHeightUnits}
-                        step={1}
-                        resetFallbackValue={"46"}
+                        resetFallbackValue={{
+                            px: "46",
+                            "%": "5",
+                            vh: "",
+                            vw: "",
+                            em: "2.875",
+                            rem:"2.875",
+                        }}
+                        unitBounds={{
+                            px: { min: 0,  max: 200, step: 1 },
+                        }}
                     />
 
                     <SwitcherControl
@@ -2537,31 +2582,31 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
                     {(paginationType === 'bullets' || paginationType === 'fraction') && (
                         <ResponsiveRangeControl
-                            min={0}
-                            max={100}
                             label={__("Position", "gslider-blocks")}
                             rangeValue={paginationDotsPosition}
                             onChangeValue={(value) => setAttributes({ paginationDotsPosition: value })}
                             onUnitChange={(value) => setAttributes({ paginationDotsPositionUnits: value })}
                             deviceType={deviceType}
                             units={paginationDotsPositionUnits}
-                            step={1}
                             resetFallbackValue={""}
+                            unitBounds={{
+                                px: { min: 0,  max: 200, step: 1 },
+                            }}
                         />
                     )}
 
                     {paginationType === 'progressbar' && (
                         <ResponsiveRangeControl
-                            min={0}
-                            max={100}
                             label={__("Position", "gslider-blocks")}
                             rangeValue={paginationProgressbarPosition}
                             onChangeValue={(value) => setAttributes({ paginationProgressbarPosition: value })}
                             onUnitChange={(value) => setAttributes({ paginationProgressbarPositionUnits: value })}
                             deviceType={deviceType}
                             units={paginationProgressbarPositionUnits}
-                            step={1}
                             resetFallbackValue={""}
+                            unitBounds={{
+                                px: { min: 0,  max: 200, step: 1 },
+                            }}
                         />
                     )}
 
@@ -2595,29 +2640,43 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                             {paginationDotsSwitcher === 'normal' && (
                                 <>
                                     <ResponsiveRangeControl
-                                        min={0}
-                                        max={100}
                                         label={__("Width", "gslider-blocks")}
                                         rangeValue={paginationNormalDotsWidth}
                                         onChangeValue={(value) => setAttributes({ paginationNormalDotsWidth: value })}
                                         onUnitChange={(value) => setAttributes({ paginationNormalDotsWidthUnits: value })}
                                         deviceType={deviceType}
                                         units={paginationNormalDotsWidthUnits}
-                                        step={1}
-                                        resetFallbackValue={"8"}
+                                        resetFallbackValue={{
+                                            px: "8",
+                                            "%": "",
+                                            vh: "",
+                                            vw: "",
+                                            em: "0.5",
+                                            rem:"0.5",
+                                        }}
+                                        unitBounds={{
+                                            px: { min: 0,  max: 200, step: 1 },
+                                        }}
                                     />
 
                                     <ResponsiveRangeControl
-                                        min={0}
-                                        max={100}
                                         label={__("Height", "gslider-blocks")}
                                         rangeValue={paginationNormalDotsHeight}
                                         onChangeValue={(value) => setAttributes({ paginationNormalDotsHeight: value })}
                                         onUnitChange={(value) => setAttributes({ paginationNormalDotsHeightUnits: value })}
                                         deviceType={deviceType}
                                         units={paginationNormalDotsHeightUnits}
-                                        step={1}
-                                        resetFallbackValue={"8"}
+                                        resetFallbackValue={{
+                                            px: "8",
+                                            "%": "",
+                                            vh: "",
+                                            vw: "",
+                                            em: "0.5",
+                                            rem:"0.5",
+                                        }}
+                                        unitBounds={{
+                                            px: { min: 0,  max: 200, step: 1 },
+                                        }}
                                     />
 
                                     <ColorControl
@@ -2700,29 +2759,43 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                             {paginationDotsSwitcher === 'active' && (
                                 <>
                                     <ResponsiveRangeControl
-                                        min={0}
-                                        max={100}
                                         label={__("Width", "gslider-blocks")}
                                         rangeValue={paginationActiveDotsWidth}
                                         onChangeValue={(value) => setAttributes({ paginationActiveDotsWidth: value })}
                                         onUnitChange={(value) => setAttributes({ paginationActiveDotsWidthUnits: value })}
                                         deviceType={deviceType}
                                         units={paginationActiveDotsWidthUnits}
-                                        step={1}
-                                        resetFallbackValue={"8"}
+                                        resetFallbackValue={{
+                                            px: "8",
+                                            "%": "",
+                                            vh: "",
+                                            vw: "",
+                                            em: "0.5",
+                                            rem:"0.5",
+                                        }}
+                                        unitBounds={{
+                                            px: { min: 0,  max: 200, step: 1 },
+                                        }}
                                     />
 
                                     <ResponsiveRangeControl
-                                        min={0}
-                                        max={100}
                                         label={__("Height", "gslider-blocks")}
                                         rangeValue={paginationActiveDotsHeight}
                                         onChangeValue={(value) => setAttributes({ paginationActiveDotsHeight: value })}
                                         onUnitChange={(value) => setAttributes({ paginationActiveDotsHeightUnits: value })}
                                         deviceType={deviceType}
                                         units={paginationActiveDotsHeightUnits}
-                                        step={1}
-                                        resetFallbackValue={"8"}
+                                        resetFallbackValue={{
+                                            px: "8",
+                                            "%": "",
+                                            vh: "",
+                                            vw: "",
+                                            em: "0.5",
+                                            rem:"0.5",
+                                        }}
+                                        unitBounds={{
+                                            px: { min: 0,  max: 200, step: 1 },
+                                        }}
                                     />
 
                                     <ColorControl
@@ -2904,16 +2977,23 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                             )}
 
                             <ResponsiveRangeControl
-                                min={1}
-                                max={100}
                                 label={__("Height", "gslider-blocks")}
                                 rangeValue={paginationProgressbarHeight}
                                 onChangeValue={(value) => setAttributes({ paginationProgressbarHeight: value })}
                                 onUnitChange={(value) => setAttributes({ paginationProgressbarHeightUnits: value })}
                                 deviceType={deviceType}
                                 units={paginationProgressbarHeightUnits}
-                                step={1}
-                                resetFallbackValue={"4"}
+                                resetFallbackValue={{
+                                    px: "4",
+                                    "%": "",
+                                    vh: "",
+                                    vw: "",
+                                    em: "0.25",
+                                    rem:"0.25",
+                                }}
+                                unitBounds={{
+                                    px: { min: 0,  max: 200, step: 1 },
+                                }}
                             />
                             
                         </>
@@ -2973,8 +3053,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 />
 
                 <ResponsiveRangeControl
-                    min={0}
-                    max={10000000}
+                    min={-999}
+                    max={9999}
                     label={__("Z Index", "gslider-blocks")}
                     rangeValue={globalZIndex}
                     onChangeValue={(value) => setAttributes({ globalZIndex: value })}

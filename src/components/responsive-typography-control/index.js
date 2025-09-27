@@ -275,16 +275,16 @@ const ResponsiveTypographyControl = ({
                                 />
                             </BaseControl>
                             <ResponsiveRangeControl
-                                min={1}
-                                max={100}
                                 label={__("Size", "gslider-blocks")}
                                 rangeValue={fontSize}
                                 onChangeValue={handleFontSizeChange}
                                 onUnitChange={handleFontSizeUnitChange}
                                 deviceType={deviceType}
                                 units={fontSizeUnits}
-                                step={1}
                                 resetFallbackValue={""}
+                                unitBounds={{
+                                    px: { min: 0,  max: 200, step: 1 },
+                                }}
                             />
 
                             <SelectControls
@@ -318,40 +318,45 @@ const ResponsiveTypographyControl = ({
                                 onChange={handleTextDecorationChange}
                             />
                             <ResponsiveRangeControl
-                                min={1}
-                                max={100}
                                 label={__("Line Height", "gslider-blocks")}
                                 rangeValue={lineHeight}
                                 onChangeValue={handleLineHeightChange}
                                 onUnitChange={handleLineHeightUnitChange}
                                 deviceType={deviceType}
                                 units={lineHeightUnits}
-                                step={1}
                                 resetFallbackValue={""}
+                                unitBounds={{
+                                    px: { min: 0,  max: 200, step: 1 },
+                                }}
                             />
                             <ResponsiveRangeControl
-                                min={-20}
-                                max={20}
                                 label={__("Letter Spacing", "gslider-blocks")}
                                 rangeValue={letterSpacing}
                                 onChangeValue={handleLetterSpacingChange}
                                 onUnitChange={handleLetterSpacingUnitChange}
                                 deviceType={deviceType}
                                 units={letterSpacingUnits}
-                                step={.1}
                                 resetFallbackValue={""}
+                                unitBounds={{
+                                    px: { min: -20,  max: 20, step: 0.1 },
+                                    '%': { min: -20, max: 20,  step: 0.1 },
+                                    vh: { min: -20,  max: 20,  step: 0.1 },
+                                    vw: { min: -20,  max: 20,  step: 0.1 },
+                                    em: { min: -20,  max: 20,  step: 0.1 },
+                                    rem:{ min: -20,  max: 20,  step: 0.1 },
+                                }}
                             />
                             <ResponsiveRangeControl
-                                min={0}
-                                max={100}
                                 label={__("Word Spacing", "gslider-blocks")}
                                 rangeValue={wordSpacing}
                                 onChangeValue={handleWordSpacingChange}
                                 onUnitChange={handleWordSpacingUnitChange}
                                 deviceType={deviceType}
                                 units={wordSpacingUnits}
-                                step={1}
                                 resetFallbackValue={""}
+                                unitBounds={{
+                                    px: { min: 0,  max: 200, step: 1 },
+                                }}
                             />
                         </div>
                     </div>

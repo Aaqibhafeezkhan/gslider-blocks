@@ -12,6 +12,15 @@ export const UNIT_TYPES = [
   { label: __('vw', 'gslider-blocks'), value: 'vw' },
 ];
 
+export const DEFAULT_UNIT_BOUNDS = {
+	px: { min: 0,  max: 2000, step: 1 },
+	'%': { min: 0, max: 100,  step: 1 },
+	vh: { min: 0,  max: 100,  step: 1 },
+	vw: { min: 0,  max: 100,  step: 1 },
+	em: { min: 0,  max: 100,  step: 0.1 },
+	rem:{ min: 0,  max: 100,  step: 0.1 },
+};
+
 export const NORMAL_HOVER = [
   { label: __('Normal', 'gslider-blocks'), value: 'normal' },
   { label: __('Hover', 'gslider-blocks'), value: 'hover' },
