@@ -164,7 +164,6 @@ const ResponsiveRangeControl = ({
           </div>
 
           <RangeControl
-            aria-label={typeof label === 'string' ? label : 'range'}
             value={
               rangeValue[deviceType] !== '' && rangeValue[deviceType] !== undefined
                 ? Number(rangeValue[deviceType])
