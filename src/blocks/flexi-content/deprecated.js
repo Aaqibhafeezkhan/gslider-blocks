@@ -51,7 +51,6 @@ const v1_0_7 = {
             navigationArrowsIconRightImageID,
 		} = attributes;
 
-		// 👇 This is the OLD className logic that had issues
         const blockProps = useBlockProps.save({
             className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
         });
