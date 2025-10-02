@@ -114,7 +114,7 @@ export default function Save({ attributes }) {
             },
         },
 
-        ...(layoutHeightSwitcher === 'auto' && {
+        ...(layoutHeightSwitcher === 'adapt' && {
             autoHeight: true,
         }),
         

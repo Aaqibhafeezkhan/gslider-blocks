@@ -537,7 +537,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     />
                 )}
 
-                {layoutHeightSwitcher === 'auto' && (
+                {layoutHeightSwitcher === 'adapt' && (
                     <p>Slides adapt their height to the inside content.</p>
                 )}
 
@@ -560,15 +560,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     }}
                 />
 
-                <ResponsiveAlignmentControl
-                    label={__("Vertical Alignment", "gslider-blocks")}
-                    options={VERTICAL_ALIGN}
-                    alignmentValue={contentVerticalAlignment}
-                    setAlignmentValue={(value) => setAttributes({ contentVerticalAlignment: value })}
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                    className="gslider-vertical-alignment"
-                />
+                {layoutHeightSwitcher !== 'adapt' && (
+                    <ResponsiveAlignmentControl
+                        label={__("Vertical Alignment", "gslider-blocks")}
+                        options={VERTICAL_ALIGN}
+                        alignmentValue={contentVerticalAlignment}
+                        setAlignmentValue={(value) => setAttributes({ contentVerticalAlignment: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        className="gslider-vertical-alignment"
+                    />
+                )}
 
                 <ResponsiveAlignmentControl
                     label={__("Horizontal Alignment", "gslider-blocks")}
@@ -2123,12 +2125,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
 
         .${blockId} .swiper-wrapper.gslider-swiper-wrapper {
             align-items: center;
-            height: auto;
+            ${layoutHeightSwitcher !== 'adapt' ? `height: auto;` : ''}
             ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
         }
         
         .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
-            height: auto;
+            ${layoutHeightSwitcher !== 'adapt' ? `height: auto;` : ''}
             ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }

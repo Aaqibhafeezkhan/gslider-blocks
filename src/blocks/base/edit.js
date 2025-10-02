@@ -134,7 +134,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             },
         }),
 
-        ...(layoutHeightSwitcher === 'auto' && {
+        ...(layoutHeightSwitcher === 'adapt' && {
             autoHeight: true,
         }),
     

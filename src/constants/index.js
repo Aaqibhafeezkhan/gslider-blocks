@@ -201,7 +201,7 @@ export const TEXT_DECORATION = [
 
 export const LAYOUT_HEIGHT_SWITCHER = [
     { label: __("Fixed", "gslider-blocks"), value: "fixed" },
-    { label: __("Auto", "gslider-blocks"), value: "auto" },
+    { label: __("Adapt", "gslider-blocks"), value: "adapt" },
 ];
 
 export const GOOGLE_FONTS = async () => {
