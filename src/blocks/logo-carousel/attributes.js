@@ -26,11 +26,7 @@ const attributes = {
         }
     },
 
-    /** Start Slider Settings */
-    sliderType: {
-        type: "string",
-        default: "slider"
-    },
+    /** Start Carousel Settings */
     carouselPerColumn: {
         type: "object",
         default: {
@@ -87,10 +83,6 @@ const attributes = {
         type: "boolean",
         default: false
     },
-    slideEffect: {
-        type: "string",
-        default: "slide"
-    },
     carouselEffect: {
         type: "string",
         default: "slide"
@@ -107,7 +99,7 @@ const attributes = {
         type: "boolean",
         default: false,
     },
-    /** End Slider Settings */
+    /** End Carousel Settings */
 
     /** Start Show/Hide Elements */
     showNavigation: {
@@ -136,9 +128,9 @@ const attributes = {
     layoutHeight: {
         type: "object",
         default: {
-            Desktop: "350",
-            Tablet: "350",
-            Mobile: "350",
+            Desktop: "100",
+            Tablet: "100",
+            Mobile: "100",
         },
     },
     layoutHeightUnits: {

@@ -48,7 +48,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
         deviceType,
         blockStyle,
-        sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
         speed,
@@ -59,7 +58,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         pauseOnHover,
         stopOnLastSlide,
         reverseDirection,
-        slideEffect,
         carouselEffect,
         mousewheelControl,
         paginationType,
@@ -589,23 +587,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
                 
             </PanelBody>
+
             <PanelBody 
-                title={__("Slider Type", "gslider-blocks")} 
-                opened={openPanels.general === "slider-type"}
-                onToggle={() => togglePanel("general", "slider-type")}
+                title={__("Carousel Settings", "gslider-blocks")} 
+                opened={openPanels.general === "carousel-settings"}
+                onToggle={() => togglePanel("general", "carousel-settings")}
             >
-                <SwitcherControl
-                    label={__("Slider Type", "gslider-blocks")}
-                    options={SLIDER_TYPE}
-                    value={sliderType}
-                    onChange={(value) => setAttributes({ sliderType: value })}
+                <ResponsiveRangeControl
+                    min={1}
+                    max={12}
+                    label={__("Number of Columns", "gslider-blocks")}
+                    rangeValue={carouselPerColumn}
+                    onChangeValue={(value) => setAttributes({ carouselPerColumn: value })}
+                    deviceType={deviceType}
+                    step={1}
+                    resetFallbackValue={"2"}
+                    isRangeUnit={false}
                 />
-            </PanelBody>
-            <PanelBody 
-                title={__("Slider Settings", "gslider-blocks")} 
-                opened={openPanels.general === "slider-settings"}
-                onToggle={() => togglePanel("general", "slider-settings")}
-            >
+                <ResponsiveRangeControl
+                    min={0}
+                    max={200}
+                    label={__("Column Gap (px)", "gslider-blocks")}
+                    rangeValue={carouselPerColumnGap}
+                    onChangeValue={(value) => setAttributes({ carouselPerColumnGap: value })}
+                    deviceType={deviceType}
+                    step={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                />
                 <ToggleControl
                     label={ __( 'Infinite Loop', 'gslider-blocks' ) }
                     checked={ infiniteLoop }
@@ -678,65 +687,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     isRangeUnit={false}
                 />
             </PanelBody>
-            {sliderType === 'carousel' && (
-                <PanelBody 
-                    title={__("Carousel Settings", "gslider-blocks")} 
-                    opened={openPanels.general === "carousel-settings"}
-                    onToggle={() => togglePanel("general", "carousel-settings")}
-                >
-
-                    <ResponsiveRangeControl
-                        min={1}
-                        max={12}
-                        label={__("Number of Columns", "gslider-blocks")}
-                        rangeValue={carouselPerColumn}
-                        onChangeValue={(value) => setAttributes({ carouselPerColumn: value })}
-                        deviceType={deviceType}
-                        step={1}
-                        resetFallbackValue={"2"}
-                        isRangeUnit={false}
-                    />
-                    <ResponsiveRangeControl
-                        min={0}
-                        max={200}
-                        label={__("Column Gap (px)", "gslider-blocks")}
-                        rangeValue={carouselPerColumnGap}
-                        onChangeValue={(value) => setAttributes({ carouselPerColumnGap: value })}
-                        deviceType={deviceType}
-                        step={1}
-                        resetFallbackValue={""}
-                        isRangeUnit={false}
-                    />
-                </PanelBody>
-            )}
-            {sliderType === 'carousel' && (
-                <PanelBody 
-                    title={__("Carousel Effect", "gslider-blocks")} 
-                    opened={openPanels.general === "carousel-effect"}
-                    onToggle={() => togglePanel("general", "carousel-effect")}
-                >
-                    <SelectControls
-                        label={__('Effect Type', 'gslider-blocks')}
-                        options={CAROUSEL_EFFECT_OPTIONS}
-                        value={carouselEffect}
-                        onChange={(value) => setAttributes({ carouselEffect: value })}
-                    />
-                </PanelBody>
-            )}
-            {sliderType === 'slider' && (
-                <PanelBody 
-                    title={__("Slider Effect", "gslider-blocks")} 
-                    opened={openPanels.general === "slider-effect"}
-                    onToggle={() => togglePanel("general", "slider-effect")}
-                >
-                    <SelectControls
-                        label={__('Effect Type', 'gslider-blocks')}
-                        options={SLIDER_EFFECT_OPTIONS}
-                        value={slideEffect}
-                        onChange={(value) => setAttributes({ slideEffect: value })}
-                    />
-                </PanelBody>
-            )}
+            <PanelBody 
+                title={__("Carousel Effect", "gslider-blocks")} 
+                opened={openPanels.general === "carousel-effect"}
+                onToggle={() => togglePanel("general", "carousel-effect")}
+            >
+                <SelectControls
+                    label={__('Effect Type', 'gslider-blocks')}
+                    options={CAROUSEL_EFFECT_OPTIONS}
+                    value={carouselEffect}
+                    onChange={(value) => setAttributes({ carouselEffect: value })}
+                />
+            </PanelBody>
 
             {showNavigation && (
                 <PanelBody 
@@ -2631,7 +2593,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         deviceType,
         logos,
         blockStyle,
-        sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
         speed,
@@ -2642,7 +2603,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         pauseOnHover,
         stopOnLastSlide,
         reverseDirection,
-        slideEffect,
         carouselEffect,
         mousewheelControl,
         paginationType,

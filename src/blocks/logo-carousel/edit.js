@@ -44,7 +44,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
         deviceType,
-		sliderType,
 		carouselPerColumn,
 		carouselPerColumnGap,
 		speed,
@@ -56,7 +55,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		stopOnLastSlide,
 		reverseDirection,
 		carouselEffect,
-		slideEffect,
 		mousewheelControl,
 		paginationType,
 		dynamicBullets,
@@ -128,29 +126,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      * Handles different slider types, effects, and interactive options
      */
     const swiperSettings = useMemo(() => ({
-        // Set effect based on sliderType
-        effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-    
+
+        // Set effect based on carouselEffect
+        effect: carouselEffect,
+
         // Responsive breakpoints for Desktop, Tablet, and Mobile
-        ...(sliderType === 'carousel' && {
-            breakpoints: {
-                 // Mobile (e.g., screens < 768px)
-                0: {
-                    slidesPerView: carouselPerColumn?.[deviceType] || 1,
-                    spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
-                },
-                // Tablet (e.g., screens 768px - 1024px)
-                768: {
-                    slidesPerView: carouselPerColumn?.[deviceType] || 2,
-                    spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
-                },
-                // Desktop (e.g., screens > 1024px)
-                1025: {
-                    slidesPerView: carouselPerColumn?.[deviceType] || 2,
-                    spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
-                },
-            },
-        }),
+		breakpoints: {
+			// Mobile (e.g., screens < 768px)
+		   0: {
+			   slidesPerView: carouselPerColumn?.[deviceType] || 1,
+			   spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
+		   },
+		   // Tablet (e.g., screens 768px - 1024px)
+		   768: {
+			   slidesPerView: carouselPerColumn?.[deviceType] || 2,
+			   spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+		   },
+		   // Desktop (e.g., screens > 1024px)
+		   1025: {
+			   slidesPerView: carouselPerColumn?.[deviceType] || 2,
+			   spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+		   },
+	   	},
 
         ...(layoutHeightSwitcher === 'adapt' && {
             autoHeight: true,
@@ -188,22 +185,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
               }
             : false,
     
-        // Creative effect settings for slideEffect
-        ...(slideEffect === 'creative' && {
-            creativeEffect: {
-                prev: { shadow: true, translate: [0, 0, -400] },
-                next: { translate: ['100%', 0, 0] },
-            },
-        }),
 
         // Handle slide change event to update selected slide index
         onSlideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
 
     }), [
         deviceType,
-        sliderType,
         carouselEffect,
-        slideEffect,
         carouselPerColumn,
         carouselPerColumnGap,
         infiniteLoop,
@@ -235,7 +223,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		setSwiperKey(prevKey => prevKey + 1);
 	}, [
         deviceType,
-		sliderType,
 		infiniteLoop,
 		allowTouchMove,
 		pauseOnHover,
@@ -247,7 +234,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		autoplay,
 		autoplayDelay,
 		speed,
-		slideEffect,
 		carouselEffect,
 		carouselPerColumn,
 		carouselPerColumnGap,
@@ -331,29 +317,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			/>
 			{renderSliderToolbarControls()}
 			<div {...blockProps}>
-				<Swiper
-					key={swiperKey}
-					{...swiperSettings}
-					modules={[
-						Navigation,
-						Pagination,
-						Autoplay,
-						Manipulation,
-						Mousewheel,
-						EffectFade,
-						EffectCube,
-						EffectCoverflow,
-						EffectFlip,
-						EffectCreative,
-						EffectCards
-					]}
 
-                    onSwiper={(swiper) => {
-                        setSwiperInstance(swiper);
-                    }}
-				>
-					{!logos.length && (
-						<MediaPlaceholder
+				{!logos.length && (
+					<MediaPlaceholder
 						icon={<span className="dashicons dashicons-format-gallery" />}
 						labels={{
 							title: __('Upload Clients Logos', 'logo-carousel'),
@@ -363,49 +329,72 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						accept="image/*"
 						allowedTypes={['image']}
 						multiple
-						className="is-large"
-						/>
-					)}
+						className='gslider-logo-carousel-placeholder'
+					/>
+				)}
 
-					{logos.map((item) => (
-						<SwiperSlide key={item.id}>
-							<div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
-								<div className="gslider-content-inner-wrapper">
-									<img src={item.url} alt={item.alt || ''}/> 
+				{logos?.length > 0 && (
+					<Swiper
+						key={swiperKey}
+						{...swiperSettings}
+						modules={[
+							Navigation,
+							Pagination,
+							Autoplay,
+							Manipulation,
+							Mousewheel,
+							EffectFade,
+							EffectCube,
+							EffectCoverflow,
+							EffectFlip,
+							EffectCreative,
+							EffectCards
+						]}
+
+						onSwiper={(swiper) => {
+							setSwiperInstance(swiper);
+						}}
+					>
+						{logos.map((item) => (
+							<SwiperSlide key={item.id}>
+								<div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
+									<div className="gslider-content-inner-wrapper">
+										<img src={item.url} alt={item.alt || ''}/> 
+									</div>
+								</div>
+							</SwiperSlide>
+						))}
+
+						{showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
+							<>
+								<div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+									<div ref={prevRef} className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
+									<div ref={nextRef} className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
+								</div>
+							</>
+						)}
+
+						{showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
+							<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+								<div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
+								<div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
+							</div>
+						)}
+
+						{showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+							<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+								<div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">
+									<img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
+								</div>
+								<div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">
+									<img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
 								</div>
 							</div>
-						</SwiperSlide>
-					))}
+						)}
 
-                    {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                        <>
-                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                                <div ref={prevRef} className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                                <div ref={nextRef} className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                            </div>
-                        </>
-                    )}
-
-                    {showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                            <div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                        </div>
-                    )}
-
-                    {showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">
-                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                            </div>
-                            <div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">
-                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                            </div>
-                        </div>
-                    )}
-
-				</Swiper>
-
+					</Swiper>
+				)}
+				
                 {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
                     <>
                         <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
