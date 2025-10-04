@@ -74,13 +74,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconLeft,
         navigationArrowsIconLeftImageUrl,
         navigationArrowsIconLeftImageAlt,
-        navigationArrowsIconLeftImageID,
 
         navigationArrowsIconRightAlign,
         navigationArrowsIconRight,
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
-        navigationArrowsIconRightImageID,
 
         layoutHeightSwitcher,
 	} = attributes;
@@ -299,7 +297,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						value={logos.map((l) => l.id)}
 						onSelect={onSelectGallery}
 						render={({ open }) => (
-							<ToolbarButton icon="edit" label={__('Edit Photos', 'logo-carousel')} onClick={open} />
+							<ToolbarButton icon="edit" label={__('Edit Logos', 'logo-carousel')} onClick={open} />
 						)}
 						/>
 					</MediaUploadCheck>

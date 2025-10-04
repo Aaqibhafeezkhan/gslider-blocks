@@ -12,9 +12,7 @@ import {
     HORIZONTAL_ALIGN,
     NORMAL_HOVER,
     BORDER_STYLES,
-    SLIDER_EFFECT_OPTIONS,
     CAROUSEL_EFFECT_OPTIONS,
-    SLIDER_TYPE,
     PAGINATION_TYPE,
     NORMAL_ACTIVE,
     NAVIGATION_ARROW_POSITION_TYPE,
@@ -2064,7 +2062,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
 
-        .${blockId}.gslider-base-wrapper {
+        .${blockId}.gslider-logo-carousel-wrapper {
             ${globalDesktopBackgroundNormalStyles}
             ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ''} 
             ${globalPaddingDesktopCssStyle ? `padding: ${globalPaddingDesktopCssStyle};` : ''}
@@ -2077,7 +2075,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             box-sizing: border-box;
             position: relative;
         }
-        .${blockId}.gslider-base-wrapper:hover {
+        .${blockId}.gslider-logo-carousel-wrapper:hover {
             ${globalDesktopBackgroundHoverStyles}
             ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ''}
             ${globalBoxShadowHoverCssValue ? `box-shadow: ${globalBoxShadowHoverCssValue} !important;` : ''}
@@ -2089,13 +2087,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
         }
         
-        .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
             ${layoutHeightSwitcher !== 'adapt' ? `height: auto;` : ''}
             ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }
 
-        .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
             ${contentWidth?.Desktop ? `max-width: ${contentWidth.Desktop}${contentWidthUnits?.Desktop};` : ''}
             ${contentAlignment?.Desktop ? `text-align: ${contentAlignment.Desktop};` : ''}
 
@@ -2105,7 +2103,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contentPaddingDesktopCssStyle ? `padding: ${contentPaddingDesktopCssStyle};` : ''}
         }
 
-        .${blockId}.gslider-base-wrapper.outside {
+        .${blockId}.gslider-logo-carousel-wrapper.outside {
             ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                 padding: ${navigationArrowPositionOutsidePadding.Desktop}${navigationArrowPositionOutsidePaddingUnits.Desktop} 0 0;
             ` : ''}
@@ -2294,7 +2292,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 1024px) {
 
-            .${blockId}.gslider-base-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper {
                 ${globalTabletBackgroundNormalStyles}
                 ${globalMarginTabletCssStyle ? `margin: ${globalMarginTabletCssStyle};` : ''} 
                 ${globalPaddingTabletCssStyle ? `padding: ${globalPaddingTabletCssStyle};` : ''}
@@ -2302,7 +2300,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalBorderRadiusTabletCssStyle ? `border-radius: ${globalBorderRadiusTabletCssStyle};` : ''}
                 ${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
             }
-            .${blockId}.gslider-base-wrapper:hover { 
+            .${blockId}.gslider-logo-carousel-wrapper:hover { 
                 ${globalTabletBackgroundHoverStyles}
             }
 
@@ -2310,12 +2308,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
                 ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
                 ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
                 ${contentWidth?.Tablet ? `max-width: ${contentWidth.Tablet}${contentWidthUnits?.Tablet};` : ''}
                 ${contentAlignment?.Tablet ? `text-align: ${contentAlignment.Tablet};` : ''}
 
@@ -2325,7 +2323,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${contentPaddingTabletCssStyle ? `padding: ${contentPaddingTabletCssStyle};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper.outside {
+            .${blockId}.gslider-logo-carousel-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Tablet}${navigationArrowPositionOutsidePaddingUnits.Tablet} 0 0;
                 ` : ''}
@@ -2442,7 +2440,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
         @media only screen and (max-width: 767px) {
 
-            .${blockId}.gslider-base-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper {
                 ${globalMobileBackgroundNormalStyles}
                 ${globalMarginMobileCssStyle ? `margin: ${globalMarginMobileCssStyle};` : ''} 
                 ${globalPaddingMobileCssStyle ? `padding: ${globalPaddingMobileCssStyle};` : ''}
@@ -2450,7 +2448,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalBorderRadiusMobileCssStyle ? `border-radius: ${globalBorderRadiusMobileCssStyle};` : ''}
                 ${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
             }
-            .${blockId}.gslider-base-wrapper:hover { 
+            .${blockId}.gslider-logo-carousel-wrapper:hover { 
                 ${globalMobileBackgroundHoverStyles}
             }
 
@@ -2458,12 +2456,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
                 ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
                 ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
                 ${contentWidth?.Mobile ? `max-width: ${contentWidth.Mobile}${contentWidthUnits?.Mobile};` : ''}
                 ${contentAlignment?.Mobile ? `text-align: ${contentAlignment.Mobile};` : ''}
 
@@ -2473,7 +2471,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${contentPaddingMobileCssStyle ? `padding: ${contentPaddingMobileCssStyle};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper.outside {
+            .${blockId}.gslider-logo-carousel-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Mobile}${navigationArrowPositionOutsidePaddingUnits.Mobile} 0 0;
                 ` : ''}
