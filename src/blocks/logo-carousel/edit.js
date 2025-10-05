@@ -355,7 +355,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					>
 						{logos.map((item) => (
 							<SwiperSlide key={item.id}>
-								<div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
+								<div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
 									<div className="gslider-content-inner-wrapper">
 										<img src={item.url} alt={item.alt || ''}/> 
 									</div>

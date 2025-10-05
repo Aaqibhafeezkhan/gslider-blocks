@@ -135,7 +135,7 @@ export default function Save({ attributes }) {
                 <div className="swiper-wrapper">
                     {logos.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
-                            <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})}>
+                            <div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})}>
                                 <div className="gslider-content-inner-wrapper">
                                     <img src={item.url} alt={item.alt || ''} />
                                 </div>

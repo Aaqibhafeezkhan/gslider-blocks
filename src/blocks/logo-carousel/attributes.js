@@ -128,9 +128,9 @@ const attributes = {
     layoutHeight: {
         type: "object",
         default: {
-            Desktop: "100",
-            Tablet: "100",
-            Mobile: "100",
+            Desktop: "350",
+            Tablet: "350",
+            Mobile: "350",
         },
     },
     layoutHeightUnits: {
@@ -155,14 +155,6 @@ const attributes = {
             Desktop: "%",
             Tablet: "%",
             Mobile: "%",
-        },
-    },
-    contentAlignment: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
         },
     },
     contentVerticalAlignment: {
