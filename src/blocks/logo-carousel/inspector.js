@@ -9,6 +9,7 @@ import {
     TEXT_ALIGN,
     ARROW_ICON_ALIGN,
     VERTICAL_ALIGN,
+    VERTICAL_ALIGN_SELF,
     HORIZONTAL_ALIGN,
     NORMAL_HOVER,
     BORDER_STYLES,
@@ -75,7 +76,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentWidth,
         contentWidthUnits,
         contentVerticalAlignment,
-        contentHorizontalAlignment,
         /** End Layout & Content Setting */
 
         /** Start Content Padding */
@@ -556,7 +556,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 {layoutHeightSwitcher !== 'adapt' && (
                     <ResponsiveAlignmentControl
                         label={__("Vertical Alignment", "gslider-blocks")}
-                        options={VERTICAL_ALIGN}
+                        options={VERTICAL_ALIGN_SELF}
                         alignmentValue={contentVerticalAlignment}
                         setAlignmentValue={(value) => setAttributes({ contentVerticalAlignment: value })}
                         deviceType={deviceType}
@@ -564,15 +564,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         className="gslider-vertical-alignment"
                     />
                 )}
-
-                <ResponsiveAlignmentControl
-                    label={__("Horizontal Alignment", "gslider-blocks")}
-                    options={HORIZONTAL_ALIGN}
-                    alignmentValue={contentHorizontalAlignment}
-                    setAlignmentValue={(value) => setAttributes({ contentHorizontalAlignment: value })}
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                />
                 
             </PanelBody>
 
@@ -2070,18 +2061,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ''}
             ${globalBoxShadowHoverCssValue ? `box-shadow: ${globalBoxShadowHoverCssValue} !important;` : ''}
         }
+        .${blockId}.gslider-logo-carousel-wrapper .swiper-wrapper .swiper-slide {
+            ${contentVerticalAlignment?.Desktop ? `align-self: ${contentVerticalAlignment.Desktop};` : ''}
+        }
         
         .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
             ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
-            ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
-        }
-
-        .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
             ${contentWidth?.Desktop ? `max-width: ${contentWidth.Desktop}${contentWidthUnits?.Desktop};` : ''}
-
-            ${contentHorizontalAlignment?.Desktop === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
-            ${contentHorizontalAlignment?.Desktop === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
-            ${contentHorizontalAlignment?.Desktop === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
             ${contentPaddingDesktopCssStyle ? `padding: ${contentPaddingDesktopCssStyle};` : ''}
         }
 
@@ -2271,6 +2257,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${paginationProgressbarBGActiveColor ? `background-color: ${paginationProgressbarBGActiveColor};` : ''}
         }
 
+        .wp-block-gslider-blocks-logo-carousel.has-pagination {
+            margin-bottom: 30px;
+        }
+
 
         @media only screen and (max-width: 1024px) {
 
@@ -2288,15 +2278,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
                 ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
-                ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
-            }
-
-            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+                ${contentVerticalAlignment?.Tablet ? `align-self: ${contentVerticalAlignment.Tablet};` : ''}
                 ${contentWidth?.Tablet ? `max-width: ${contentWidth.Tablet}${contentWidthUnits?.Tablet};` : ''}
-
-                ${contentHorizontalAlignment?.Tablet === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
-                ${contentHorizontalAlignment?.Tablet === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
-                ${contentHorizontalAlignment?.Tablet === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
                 ${contentPaddingTabletCssStyle ? `padding: ${contentPaddingTabletCssStyle};` : ''}
             }
 
@@ -2431,15 +2414,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
                 ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
-                ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ''}
-            }
-
-            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
+                ${contentVerticalAlignment?.Mobile ? `align-self: ${contentVerticalAlignment.Mobile};` : ''}
                 ${contentWidth?.Mobile ? `max-width: ${contentWidth.Mobile}${contentWidthUnits?.Mobile};` : ''}
-
-                ${contentHorizontalAlignment?.Mobile === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
-                ${contentHorizontalAlignment?.Mobile === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
-                ${contentHorizontalAlignment?.Mobile === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
                 ${contentPaddingMobileCssStyle ? `padding: ${contentPaddingMobileCssStyle};` : ''}
             }
 
@@ -2590,7 +2566,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentWidth,
         contentWidthUnits,
         contentVerticalAlignment,
-        contentHorizontalAlignment,
         /** End Layout & Content Setting */
 
         /** Start Content Padding */

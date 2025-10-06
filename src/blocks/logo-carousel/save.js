@@ -43,7 +43,7 @@ export default function Save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`, 
+        className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination?'has-pagination':''}`, 
     });
 
     const navigationEnabled = {
@@ -136,9 +136,7 @@ export default function Save({ attributes }) {
                     {logos.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
                             <div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})}>
-                                <div className="gslider-content-inner-wrapper">
-                                    <img src={item.url} alt={item.alt || ''} />
-                                </div>
+                                <img src={item.url} alt={item.alt || ''} />
                             </div>
                         </div>
                     ))}

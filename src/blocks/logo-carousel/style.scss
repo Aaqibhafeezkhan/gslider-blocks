@@ -1,33 +1,13 @@
 .gslider-logo-carousel-wrapper {
 	.gslider-content-wrapper {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-
-		.gslider-content-inner-wrapper {
-        	box-sizing: border-box;
-			margin: 0 auto;
-			padding: clamp(15px, 6vw, 30px);
-			width: 100%;
-			text-align: center;
-
-			figure {
-				margin: 0;
-			}
-		}
+		box-sizing: border-box;
+		height: clamp(150px, 60vh, 150px);
+		overflow: hidden;
+		position: relative;
+		text-align: center;
+		z-index: 1;
 	}
 	
-	.swiper {
-		position: relative !important;
-		overflow: hidden !important;
-	}
-
-	.swiper-backface-hidden {
-		.swiper-slide {
-			backface-visibility: visible !important;
-		}
-	}
 }
 
 :where(.wp-site-blocks *:focus) {

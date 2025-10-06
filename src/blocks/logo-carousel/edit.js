@@ -85,7 +85,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Block props for container
 	const blockProps = useBlockProps({
-        className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`, 
+        className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination?'has-pagination':''}`, 
 	});
 
 	const onSelectFromPlaceholder = (selection) => {
@@ -356,9 +356,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						{logos.map((item) => (
 							<SwiperSlide key={item.id}>
 								<div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
-									<div className="gslider-content-inner-wrapper">
-										<img src={item.url} alt={item.alt || ''}/> 
-									</div>
+									<img src={item.url} alt={item.alt || ''}/> 
 								</div>
 							</SwiperSlide>
 						))}

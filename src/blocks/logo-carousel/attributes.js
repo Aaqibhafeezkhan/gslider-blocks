@@ -38,9 +38,9 @@ const attributes = {
     carouselPerColumnGap: {
         type: "object",
         default: {
-            Desktop: 20,
-            Tablet: 20,
-            Mobile: 0,
+            Desktop: 10,
+            Tablet: 10,
+            Mobile: 10,
         },
     },
     speed: {
@@ -165,14 +165,6 @@ const attributes = {
             Mobile: "",
         },
     },
-    contentHorizontalAlignment: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
     /** End Layout & Content Setting */
 
     /** Start Content Padding */
@@ -187,10 +179,10 @@ const attributes = {
     contentPaddingDesktop: {
         type: "object", 
         default: {
-            top: "30",
-            bottom: "30",
-            left: "30",
-            right: "30",
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
         },
     },
     contentPaddingDesktopCssStyle: { 
@@ -200,10 +192,10 @@ const attributes = {
     contentPaddingTablet: {
         type: "object",  
         default: {
-            top: "20",
-            bottom: "20",
-            left: "20",
-            right: "20",
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
         },
     },
     contentPaddingTabletCssStyle: { 
@@ -213,10 +205,10 @@ const attributes = {
     contentPaddingMobile: {
         type: "object",  
         default: {
-            top: "15",
-            bottom: "15",
-            left: "15",
-            right: "15",
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
         },
     },
     contentPaddingMobileCssStyle: { 

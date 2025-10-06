@@ -85,6 +85,12 @@ export const VERTICAL_ALIGN = [
 	{ label: __(VERTICAL_POSITION_ICONS.bottom), value: "flex-end" },
 ];
 
+export const VERTICAL_ALIGN_SELF = [
+	{ label: __(VERTICAL_POSITION_ICONS.top), value: "start" }, 
+	{ label: __(VERTICAL_POSITION_ICONS.middle), value: "center" },
+	{ label: __(VERTICAL_POSITION_ICONS.bottom), value: "end" },
+];
+
 export const HORIZONTAL_ALIGN = [
 	{ label: __(HORIZONTAL_POSITION_ICONS.left), value: "left" },
 	{ label: __(HORIZONTAL_POSITION_ICONS.center), value: "center" },
