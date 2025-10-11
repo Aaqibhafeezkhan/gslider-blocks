@@ -3522,14 +3522,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         }
 
         .${blockId} .swiper-wrapper {
-            align-items: center;
             ${layoutHeightSwitcher !== 'adapt' ? `height: auto;` : ''}
+            ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
+        }
+
+        .${blockId} .swiper-slide{
+            ${layoutHeightSwitcher !== 'adapt' ? `height: auto !important;` : ''}
             ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
         }
         
         .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
-            ${layoutHeightSwitcher !== 'adapt' ? `height: auto;` : ''}
-            ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
+            ${layoutHeightSwitcher !== 'adapt' ? `height: 100% !important;` : ''}
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ''}
         }
 
@@ -3881,8 +3884,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+            .${blockId} .swiper-slide{
                 ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
+            }
+            
+            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
                 ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ''}
             }
 
@@ -4070,6 +4076,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${globalBorderRadiusMobileCssStyle ? `border-radius: ${globalBorderRadiusMobileCssStyle};` : ''}
                 ${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
             }
+
             .${blockId}.gslider-base-wrapper:hover { 
                 ${globalMobileBackgroundHoverStyles}
             }
@@ -4078,8 +4085,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
+            .${blockId} .swiper-slide{
                 ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
+            }
+            
+            .${blockId}.gslider-base-wrapper .gslider-content-wrapper {
                 ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ''}
             }
 
