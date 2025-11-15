@@ -3,7 +3,7 @@ Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,9 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.1 – November 15, 2025 = 
+- **Fixed**: Minor CSS issues
 
 = 1.1.0 – October 11, 2025 =
 - **Fixed**: Fixed-height mode now uses the tallest (max-content) slide to set a uniform slider and background-image height across all Flexi Content items, resolving the navigation “bottom jump.

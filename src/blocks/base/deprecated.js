@@ -1259,7 +1259,7 @@ const v1_0_10 = {
 	},
 };
 
-const v1_1_0 = {
+const v1_1_1 = {
 	attributes,
 	supports: {
 		html: false,
@@ -1580,4 +1580,4 @@ const v1_1_0 = {
 	},
 };
 
-export default [v1_0_7, v1_0_8, v1_0_9, v1_0_10, v1_1_0];
+export default [v1_0_7, v1_0_8, v1_0_9, v1_0_10, v1_1_1];
