@@ -2071,6 +2071,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contentPaddingDesktopCssStyle ? `padding: ${contentPaddingDesktopCssStyle};` : ''}
         }
 
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            margin: 0 auto;
+        }
+
         .${blockId}.gslider-logo-carousel-wrapper.outside {
             ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                 padding: ${navigationArrowPositionOutsidePadding.Desktop}${navigationArrowPositionOutsidePaddingUnits.Desktop} 0 0;
