@@ -7,8 +7,8 @@ module.exports = {
 		admin: path.resolve(__dirname, 'admin/scss/admin.scss'), // ✅ Corrected path
 	},
 	output: {
-		path: path.resolve(__dirname, 'assets/admin/css'),
-		filename: '[name].js', // optional dummy JS
+		path: path.resolve(__dirname, 'assets/admin'),
+		filename: 'js/[name].js', // JS files go to js folder
 	},
 	module: {
 		rules: [
@@ -24,7 +24,7 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: '[name].css', // outputs admin.css
+			filename: 'css/[name].css', // CSS files go to css folder
 		}),
 	],
 	optimization: {
