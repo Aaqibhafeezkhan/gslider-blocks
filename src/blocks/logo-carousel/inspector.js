@@ -2040,34 +2040,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Tablet'));
     const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Mobile'));   
 
-    // Calculate dynamic margin-bottom for pagination based on position
-    // If position is negative, we need to add that much space (as positive) plus extra for pagination height
-    const calculatePaginationMargin = (position, unit) => {
-        if (!position || position === '') return '';
-        const numValue = parseFloat(position);
-        if (isNaN(numValue)) return '';
-        // If negative position (like -30px), convert to positive margin (30px) plus extra space (20px) for pagination height
-        if (numValue < 0) {
-            const marginValue = Math.abs(numValue) + 20; // Add 20px extra space for pagination height
-            return `margin-bottom: ${marginValue}${unit || 'px'};`;
-        }
-        // If positive position, add minimum space
-        return 'margin-bottom: 20px;';
-    };
-
-    // Calculate padding-bottom for swiper container to accommodate pagination when positioned outside
-    const calculateSwiperPadding = (position, unit) => {
-        if (!position || position === '') return '';
-        const numValue = parseFloat(position);
-        if (isNaN(numValue)) return '';
-        // If negative position, add padding to swiper to prevent clipping
-        if (numValue < 0) {
-            const paddingValue = Math.abs(numValue) + 10; // Add padding equal to negative value plus small buffer
-            return `padding-bottom: ${paddingValue}${unit || 'px'};`;
-        }
-        return '';
-    };
-
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
 
@@ -2237,10 +2209,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${navigationArrowSize.Desktop ? `font-size: ${navigationArrowSize.Desktop}${navigationArrowSizeUnits.Desktop};` : ''}
         }
 
-        .${blockId} .swiper {
-            ${paginationType !== 'progressbar' && paginationDotsPosition?.Desktop ? calculateSwiperPadding(paginationDotsPosition.Desktop, paginationDotsPositionUnits?.Desktop) : ''}
-        }
-
         .${blockId} .swiper-pagination {
             ${paginationType === 'progressbar' ? (
                 paginationProgressbarPosition.Desktop ? `top: ${paginationProgressbarPosition.Desktop}${paginationProgressbarPositionUnits.Desktop} !important;` : '' 
@@ -2297,8 +2265,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${paginationProgressbarBGActiveColor ? `background-color: ${paginationProgressbarBGActiveColor};` : ''}
         }
 
+
         .wp-block-gslider-blocks-logo-carousel.has-pagination {
-            ${paginationType !== 'progressbar' && paginationDotsPosition?.Desktop ? calculatePaginationMargin(paginationDotsPosition.Desktop, paginationDotsPositionUnits?.Desktop) : 'margin-bottom: 20px;'}
+            margin-bottom: 30px;
         }
 
 
@@ -2403,10 +2372,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${navigationArrowSize.Tablet ? `font-size: ${navigationArrowSize.Tablet}${navigationArrowSizeUnits.Tablet};` : ''}
             }
 
-            .${blockId} .swiper {
-                ${paginationType !== 'progressbar' && paginationDotsPosition?.Tablet ? calculateSwiperPadding(paginationDotsPosition.Tablet, paginationDotsPositionUnits?.Tablet) : ''}
-            }
-
             .${blockId} .swiper-pagination {
                 ${paginationType === 'progressbar' ? (
                     paginationProgressbarPosition.Tablet ? `top: ${paginationProgressbarPosition.Tablet}${paginationProgressbarPositionUnits.Tablet} !important;` : ''
@@ -2439,10 +2404,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId} .swiper-pagination-progressbar {
                 ${paginationProgressbarHeight.Tablet ? `height: ${paginationProgressbarHeight.Tablet}${paginationProgressbarHeightUnits.Tablet};` : ''}
-            }
-
-            .wp-block-gslider-blocks-logo-carousel.has-pagination {
-                ${paginationType !== 'progressbar' && paginationDotsPosition?.Tablet ? calculatePaginationMargin(paginationDotsPosition.Tablet, paginationDotsPositionUnits?.Tablet) : 'margin-bottom: 20px;'}
             }
         }
         
@@ -2547,10 +2508,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${navigationArrowSize.Mobile ? `font-size: ${navigationArrowSize.Mobile}${navigationArrowSizeUnits.Mobile};` : ''}
             }
 
-            .${blockId} .swiper {
-                ${paginationType !== 'progressbar' && paginationDotsPosition?.Mobile ? calculateSwiperPadding(paginationDotsPosition.Mobile, paginationDotsPositionUnits?.Mobile) : ''}
-            }
-
             .${blockId} .swiper-pagination {
                 ${paginationType === 'progressbar' ? (
                     paginationProgressbarPosition.Mobile ? `top: ${paginationProgressbarPosition.Mobile}${paginationProgressbarPositionUnits.Mobile} !important;` : ''
@@ -2583,10 +2540,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId} .swiper-pagination-progressbar {
                 ${paginationProgressbarHeight.Mobile ? `height: ${paginationProgressbarHeight.Mobile}${paginationProgressbarHeightUnits.Mobile};` : ''}
-            }
-
-            .wp-block-gslider-blocks-logo-carousel.has-pagination {
-                ${paginationType !== 'progressbar' && paginationDotsPosition?.Mobile ? calculatePaginationMargin(paginationDotsPosition.Mobile, paginationDotsPositionUnits?.Mobile) : 'margin-bottom: 20px;'}
             }
         }
 
