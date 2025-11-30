@@ -147,6 +147,10 @@ export const NAVIGATION_ARROW_POSITION_TYPE = [
 	{ label: __('Inside', 'gslider-blocks'), value: 'inside' },
 	{ label: __('Outside', 'gslider-blocks'), value: 'outside' },
 ];
+export const PAGINATION_POSITION_TYPE = [
+	{ label: __('Inside', 'gslider-blocks'), value: 'inside' },
+	{ label: __('Outside', 'gslider-blocks'), value: 'outside' },
+];
 
 export const NAVIGATION_ARROW_POSITION = [
 	{ label: __('Center Center', 'gslider-blocks'), value: 'center' },

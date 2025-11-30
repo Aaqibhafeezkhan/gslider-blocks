@@ -81,12 +81,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconRightImageAlt,
 
         layoutHeightSwitcher,
+
+		// 👇 NEW – pagination position attribute (inside / outside)
+		paginationPositionType,
 	} = attributes;
 
 	// Block props for container
 	const blockProps = useBlockProps({
-        className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination?'has-pagination':''}`, 
+        className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
 	});
+
+	// Unique class for external pagination element
+	const paginationClass = `gslider-pagination-${blockId}`;
 
 	const onSelectFromPlaceholder = (selection) => {
 		const list = Array.isArray(selection) ? selection : [selection];
@@ -97,11 +103,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	};
 	
 	const onSelectGallery = (images) => {
-	const list = Array.isArray(images) ? images : [images];
-	const next = list
-		.filter((m) => m && (m.type === 'image' || (m.mime && m.mime.startsWith('image/'))))
-		.map(mapMedia);
-	setAttributes({ logos: next });
+		const list = Array.isArray(images) ? images : [images];
+		const next = list
+			.filter((m) => m && (m.type === 'image' || (m.mime && m.mime.startsWith('image/'))))
+			.map(mapMedia);
+		setAttributes({ logos: next });
 	};
 
 	// Local state management for slider items and active slide index
@@ -169,21 +175,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     
         // Navigation and pagination settings
         navigation: showNavigation?.[deviceType]
-        ? {
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-        }
-        : false,
-
-        pagination: showPagination?.[deviceType]
             ? {
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                clickable: true,
-              }
+                prevEl: prevRef.current,
+                nextEl: nextRef.current,
+            }
+            : false,
+
+		// 👇 pagination inside/outside logic
+        pagination: showPagination?.[deviceType]
+            ? paginationPositionType === 'outside'
+                ? {
+                    el: `.${paginationClass}`, // external container
+                    type: paginationType,
+                    dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+                    clickable: true,
+                  }
+                : {
+                    // inside – default Swiper behaviour
+                    type: paginationType,
+                    dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+                    clickable: true,
+                  }
             : false,
     
-
         // Handle slide change event to update selected slide index
         onSlideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
 
@@ -205,7 +219,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showPagination,
         paginationType,
         dynamicBullets,
-        setSelectedSlideIndex,
+		paginationPositionType, // depends on inside / outside
+		paginationClass,
         navigationArrowPositionType,
         navigationArrowPosition,
         navigationArrowsIconSwitcher,
@@ -237,6 +252,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		carouselPerColumnGap,
 		paginationType,
 		dynamicBullets,
+		paginationPositionType, // re-init when inside/outside toggles
         navigationArrowPositionType,
         navigationArrowPosition,
         navigationArrowsIconSwitcher,
@@ -417,6 +433,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         </div>
                     </div>
                 )}
+
+				{/* 👇 external pagination – only when outside selected */}
+				{logos?.length > 0 &&
+					showPagination?.[deviceType] &&
+					paginationPositionType === 'outside' && (
+						<div className={`gslider-pagination ${paginationClass}`} />
+				)}
 
 			</div>
 		</>

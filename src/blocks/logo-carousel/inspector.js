@@ -17,6 +17,7 @@ import {
     PAGINATION_TYPE,
     NORMAL_ACTIVE,
     NAVIGATION_ARROW_POSITION_TYPE,
+    PAGINATION_POSITION_TYPE,
     NAVIGATION_ARROW_POSITION,
     NAVIGATION_ARROW_DIRECTION,
     LAYOUT_HEIGHT_SWITCHER,
@@ -65,6 +66,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         logos,
 
         /** Start Show/Hide Elements */
+        paginationPositionType,
         showNavigation,
         showPagination,
         /** End Show/Hide Elements */
@@ -993,6 +995,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     opened={openPanels.general === "pagination"}
                     onToggle={() => togglePanel("general", "pagination")}
                 >
+                    <SwitcherControl
+                        label={__("Position Type", "gslider-blocks")}
+                        options={PAGINATION_POSITION_TYPE}
+                        value={paginationPositionType}
+                        onChange={(value) => setAttributes({ paginationPositionType: value })}
+                    />
+
                     <SelectControls
                         label={__("Pagination Type", "gslider-blocks")}
                         options={PAGINATION_TYPE}
@@ -2265,6 +2274,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${paginationProgressbarBGActiveColor ? `background-color: ${paginationProgressbarBGActiveColor};` : ''}
         }
 
+        ${paginationPositionType === 'outside' ? `   
+            .${blockId} .swiper-pagination-logo-carousel {
+                margin-bottom: -30px;
+            }
+        ` : ''}
 
         .wp-block-gslider-blocks-logo-carousel.has-pagination {
             margin-bottom: 30px;
@@ -2564,6 +2578,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         dynamicBullets,
 
         /** Start Show/Hide Elements */
+        paginationPositionType,
         showNavigation,
         showPagination,
         /** End Show/Hide Elements */
