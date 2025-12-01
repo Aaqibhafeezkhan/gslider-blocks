@@ -21,6 +21,7 @@ export default function Save({ attributes }) {
 
         logos,
 
+        paginationPositionType,
         showNavigation,
         showPagination,
         globalID,
@@ -121,7 +122,7 @@ export default function Save({ attributes }) {
         
         pagination: {
             enabled: anyPaginationEnabled,
-            el: '.swiper-pagination',
+            el: '.swiper-pagination-logo-carousel',
             type: paginationType,
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,
@@ -168,14 +169,13 @@ export default function Save({ attributes }) {
                     </div>
                 )}
 
-                {anyPaginationEnabled && (
+                { anyPaginationEnabled && paginationPositionType === 'inside' && (
                     <>
-                        <div className="gslider-pagination-wrapper">
-                            <div className="swiper-pagination"></div>
-                        </div>
+                        <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
                     </>
                 )}
             </div>
+
             {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
                 <>
                     <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
@@ -201,6 +201,12 @@ export default function Save({ attributes }) {
                         <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
                     </div>
                 </div>
+            )}
+
+            {anyPaginationEnabled && paginationPositionType === 'outside' && (
+                <>
+                    <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
+                </>
             )}
         </div>
     );

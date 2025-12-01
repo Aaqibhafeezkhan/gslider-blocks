@@ -102,6 +102,10 @@ const attributes = {
     /** End Carousel Settings */
 
     /** Start Show/Hide Elements */
+    paginationPositionType: {
+        type: "string",
+        default: "outside",
+    },
     showNavigation: {
         type: "object",
         default: {
