@@ -81,15 +81,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End Layout & Content Setting */
 
         /** Start Content Padding */
-        contentPaddingUnits,
-        contentPaddingDesktop,
-        contentPaddingDesktopCssStyle,
-        contentPaddingTablet,
-        contentPaddingTabletCssStyle,
-        contentPaddingMobile,
-        contentPaddingMobileCssStyle,
-        contentPaddingLink,
+        logoPaddingUnits,
+        logoPaddingDesktop,
+        logoPaddingDesktopCssStyle,
+        logoPaddingTablet,
+        logoPaddingTabletCssStyle,
+        logoPaddingMobile,
+        logoPaddingMobileCssStyle,
+        logoPaddingLink,
         /** End Content Padding */
+
+        /** Start Logo Background */     
+        logoNormalBackgroundType,
+        logoNormalClassicColor,
+        logoNormalGradientColor,
+        logoNormalCustomGradientSwitcher,
+        logoNormalCustomGradientInputValue,
+        logoNormalBackgroundImageUrl,
+        logoNormalBackgroundImagePosition,
+        logoNormalBackgroundImageAttachment,
+        logoNormalBackgroundImageRepeat,
+        logoNormalBackgroundImageSize,
+        logoHoverBackgroundType,
+        logoHoverClassicColor,
+        logoHoverGradientColor,
+        logoHoverCustomGradientSwitcher,
+        logoHoverCustomGradientInputValue,
+        logoHoverBackgroundImageUrl,
+        logoHoverBackgroundImagePosition,
+        logoHoverBackgroundImageAttachment,
+        logoHoverBackgroundImageRepeat,
+        logoHoverBackgroundImageSize,
+        /** End Logo Background */
+
+        /** Start Logo Border */
+        logoBorder,
+        logoBorderColorSwitcher,
+        logoBorderColor,
+        logoBorderHoverColor,
+        logoBorderUnits,
+        logoBorderDesktop,
+        logoBorderDesktopCssStyle,
+        logoBorderTablet,
+        logoBorderTabletCssStyle,
+        logoBorderMobile,
+        logoBorderMobileCssStyle,
+        logoBorderLink,
+        /** End Logo Border */
+
+        /** Start Logo Border Radius */
+        logoBorderRadiusUnits,
+        logoBorderRadiusDesktop,
+        logoBorderRadiusDesktopCssStyle,
+        logoBorderRadiusTablet,
+        logoBorderRadiusTabletCssStyle,
+        logoBorderRadiusMobile,
+        logoBorderRadiusMobileCssStyle,
+        logoBorderRadiusLink,
+        /** End Logo Border Radius */
+
+        /** Start Logo Box Shadow */
+        logoBoxShadowValuesSwitcher,
+        logoBoxShadowValues,
+        logoBoxShadowCssValue,
+        logoBoxShadowHoverValues,
+        logoBoxShadowHoverCssValue,
+        /** End Logo Box Shadow */
 
         /** Start Navigation Custom Arrows */
         navigationArrowsIconSwitcher,
@@ -522,7 +579,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         units={layoutHeightUnits}
                         resetFallbackValue={{
-                            px: "350",
+                            px: "150",
                             "%": "50",
                             vh: "50",
                             vw: "50",
@@ -545,7 +602,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     units={contentWidthUnits}
                     resetFallbackValue={{
                         px: "1200",
-                        "%": "80",
+                        "%": "100",
                         vw: "100",
                         em: "60",
                         rem:"60",
@@ -1028,7 +1085,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const styleControls = (
         <>
             <PanelBody
-                title={__("Content", "gslider-blocks")}
+                title={__("Logo", "gslider-blocks")}
                 opened={openPanels.styles === "content"}
                 onToggle={() => togglePanel("styles", "content")}
             >
@@ -1036,20 +1093,163 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     label={__("Padding", "gslider-blocks")}
                     deviceType={deviceType}
                     onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={contentPaddingUnits}
-                    onChangeUnits={(value) => setAttributes({ contentPaddingUnits: value })}
-                    desktopSpacing={contentPaddingDesktop} 
-                    onChangeDesktopSpacing={(value) => setAttributes({ contentPaddingDesktop: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ contentPaddingDesktopCssStyle: value })}
-                    tabletSpacing={contentPaddingTablet} 
-                    onChangeTabletSpacing={(value) => setAttributes({ contentPaddingTablet: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ contentPaddingTabletCssStyle: value })}
-                    mobileSpacing={contentPaddingMobile}
-                    onChangeMobileSpacing={(value) => setAttributes({ contentPaddingMobile: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ contentPaddingMobileCssStyle: value })}
-                    isLinked={contentPaddingLink}
-                    onChangeLink={(value) => setAttributes({ contentPaddingLink: value })} 
+                    units={logoPaddingUnits}
+                    onChangeUnits={(value) => setAttributes({ logoPaddingUnits: value })}
+                    desktopSpacing={logoPaddingDesktop} 
+                    onChangeDesktopSpacing={(value) => setAttributes({ logoPaddingDesktop: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ logoPaddingDesktopCssStyle: value })}
+                    tabletSpacing={logoPaddingTablet} 
+                    onChangeTabletSpacing={(value) => setAttributes({ logoPaddingTablet: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ logoPaddingTabletCssStyle: value })}
+                    mobileSpacing={logoPaddingMobile}
+                    onChangeMobileSpacing={(value) => setAttributes({ logoPaddingMobile: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ logoPaddingMobileCssStyle: value })}
+                    isLinked={logoPaddingLink}
+                    onChangeLink={(value) => setAttributes({ logoPaddingLink: value })} 
                 />
+
+                <BackgroundControl
+                    label={__("Background", "gslider-blocks")}
+                    deviceType={deviceType}
+                            
+                    normalBackgroundType={logoNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ logoNormalBackgroundType: value })}
+                    normalClassicColor={logoNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ logoNormalClassicColor: value })}
+                    normalGradientColor={logoNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ logoNormalGradientColor: value })}
+                    normalCustomGradientSwitcher={logoNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ logoNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={logoNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ logoNormalCustomGradientInputValue: value })}
+                    normalBackgroundImageUrl={logoNormalBackgroundImageUrl}
+                    setNormalBackgroundImageUrl={(value) => setAttributes({ logoNormalBackgroundImageUrl: value })}
+                    normalBackgroundImagePosition={logoNormalBackgroundImagePosition}
+                    setNormalBackgroundImagePosition={(value) => setAttributes({ logoNormalBackgroundImagePosition: value })}
+                    normalBackgroundImageAttachment={logoNormalBackgroundImageAttachment}
+                    setNormalBackgroundImageAttachment={(value) => setAttributes({ logoNormalBackgroundImageAttachment: value })}
+                    normalBackgroundImageRepeat={logoNormalBackgroundImageRepeat}
+                    setNormalBackgroundImageRepeat={(value) => setAttributes({ logoNormalBackgroundImageRepeat: value })}
+                    normalBackgroundImageSize={logoNormalBackgroundImageSize}
+                    setNormalBackgroundImageSize={(value) => setAttributes({ logoNormalBackgroundImageSize: value })}
+                    
+                    hoverBackgroundType={logoHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ logoHoverBackgroundType: value })}
+                    hoverClassicColor={logoHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ logoHoverClassicColor: value })}
+                    hoverGradientColor={logoHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ logoHoverGradientColor: value })}
+                    hoverCustomGradientSwitcher={logoHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ logoHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={logoHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ logoHoverCustomGradientInputValue: value })}
+                    hoverBackgroundImageUrl={logoHoverBackgroundImageUrl}
+                    setHoverBackgroundImageUrl={(value) => setAttributes({ logoHoverBackgroundImageUrl: value })}
+                    hoverBackgroundImagePosition={logoHoverBackgroundImagePosition}
+                    setHoverBackgroundImagePosition={(value) => setAttributes({ logoHoverBackgroundImagePosition: value })}
+                    hoverBackgroundImageAttachment={logoHoverBackgroundImageAttachment}
+                    setHoverBackgroundImageAttachment={(value) => setAttributes({ logoHoverBackgroundImageAttachment: value })}
+                    hoverBackgroundImageRepeat={logoHoverBackgroundImageRepeat}
+                    setHoverBackgroundImageRepeat={(value) => setAttributes({ logoHoverBackgroundImageRepeat: value })}
+                    hoverBackgroundImageSize={logoHoverBackgroundImageSize}
+                    setHoverBackgroundImageSize={(value) => setAttributes({ logoHoverBackgroundImageSize: value })}
+                    setAttributes={setAttributes}
+                    
+                />
+
+                <SelectControls
+                    label={__("Border Style", "gslider-blocks")}
+                    options={BORDER_STYLES}
+                    value={logoBorder}
+                    onChange={(value) => setAttributes({ logoBorder: value })}
+                />
+
+                <SwitcherControl
+                    label={__("Border Color", "gslider-blocks")}
+                    options={NORMAL_HOVER}
+                    value={logoBorderColorSwitcher}
+                    onChange={(value) => setAttributes({ logoBorderColorSwitcher: value })}
+                />
+
+                {logoBorderColorSwitcher === 'normal' && (
+                    <ColorControl
+                        label={__("Normal Color", "gslider-blocks")}
+                        color={logoBorderColor}
+                        onChangeColor={(value) => setAttributes({ logoBorderColor: value })}
+                    />
+                )}
+
+                {logoBorderColorSwitcher === 'hover' && (
+                    <ColorControl
+                        label={__("Hover Color", "gslider-blocks")}
+                        color={logoBorderHoverColor}
+                        onChangeColor={(value) => setAttributes({ logoBorderHoverColor: value })}
+                    />
+                )}
+
+                <ResponsiveSpacingControl
+                    label={__("Border", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={logoBorderUnits}
+                    onChangeUnits={(value) => setAttributes({ logoBorderUnits: value })}
+                    desktopSpacing={logoBorderDesktop}
+                    onChangeDesktopSpacing={(value) => setAttributes({ logoBorderDesktop: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ logoBorderDesktopCssStyle: value })}
+                    tabletSpacing={logoBorderTablet}
+                    onChangeTabletSpacing={(value) => setAttributes({ logoBorderTablet: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ logoBorderTabletCssStyle: value })}
+                    mobileSpacing={logoBorderMobile}
+                    onChangeMobileSpacing={(value) => setAttributes({ logoBorderMobile: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ logoBorderMobileCssStyle: value })}
+                    isLinked={logoBorderLink}
+                    onChangeLink={(value) => setAttributes({ logoBorderLink: value })}
+                />
+
+                <ResponsiveSpacingControl
+                    label={__("Border Radius", "gslider-blocks")}
+                    deviceType={deviceType}
+                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                    units={logoBorderRadiusUnits}
+                    onChangeUnits={(value) => setAttributes({ logoBorderRadiusUnits: value })}
+                    desktopSpacing={logoBorderRadiusDesktop}
+                    onChangeDesktopSpacing={(value) => setAttributes({ logoBorderRadiusDesktop: value })}
+                    desktopSpacingStyle={(value) => setAttributes({ logoBorderRadiusDesktopCssStyle: value })}
+                    tabletSpacing={logoBorderRadiusTablet}
+                    onChangeTabletSpacing={(value) => setAttributes({ logoBorderRadiusTablet: value })}
+                    tabletSpacingStyle={(value) => setAttributes({ logoBorderRadiusTabletCssStyle: value })}
+                    mobileSpacing={logoBorderRadiusMobile}
+                    onChangeMobileSpacing={(value) => setAttributes({ logoBorderRadiusMobile: value })}
+                    mobileSpacingStyle={(value) => setAttributes({ logoBorderRadiusMobileCssStyle: value })}
+                    isLinked={logoBorderRadiusLink}
+                    onChangeLink={(value) => setAttributes({ logoBorderRadiusLink: value })}
+                />
+
+                <SwitcherControl
+                    label={__("Box Shadow", "gslider-blocks")}
+                    options={NORMAL_HOVER}
+                    value={logoBoxShadowValuesSwitcher}
+                    onChange={(value) => setAttributes({ logoBoxShadowValuesSwitcher: value })}
+                />
+
+                {logoBoxShadowValuesSwitcher === 'normal' && (
+                    <BoxShadowSettingsControl
+                        label={__("Normal Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ logoBoxShadowValues: value })}
+                        initialShadowValue={logoBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ logoBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {logoBoxShadowValuesSwitcher === 'hover' && (
+                    <BoxShadowSettingsControl
+                        label={__("Hover Shadow", "gslider-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ logoBoxShadowHoverValues: value })}
+                        initialShadowValue={logoBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ logoBoxShadowHoverCssValue: value })}
+                    />
+                )}
+
             </PanelBody>
 
             {showNavigation && (
@@ -1938,7 +2138,117 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </PanelBody>
         </>
-    );      
+    );   
+    
+    
+    /**
+     * Get logo background normal styles
+     */
+    const getLogoBackgroundNormalStyles = (device) => {
+        const bgType = logoNormalBackgroundType;
+        const bgColor = logoNormalClassicColor;
+        const bgGradient = logoNormalGradientColor;
+        const customGradient = logoNormalCustomGradientInputValue;
+        const customGradientEnabled = logoNormalCustomGradientSwitcher;
+
+        const bgImageUrl = logoNormalBackgroundImageUrl?.[device];
+        const bgImagePosition = logoNormalBackgroundImagePosition?.[device];
+        const bgAttachment = logoNormalBackgroundImageAttachment?.[device];
+        const bgRepeat = logoNormalBackgroundImageRepeat?.[device];
+        const bgSize = logoNormalBackgroundImageSize?.[device];
+
+        if (bgType === 'gradient') {
+            if (customGradientEnabled && customGradient) {
+                return { background: customGradient };
+            } else if (bgGradient) {
+                return { background: bgGradient };
+            } else if (bgColor) {
+                return { background: bgColor };
+            }
+            return {};
+        }
+
+        let styles = bgColor ? { background: bgColor } : {};
+
+        if (bgType !== 'gradient' && bgImageUrl) {
+            styles = {
+                ...styles,
+                'background-image': `url(${bgImageUrl})`,
+                'background-position': bgImagePosition 
+                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+                    : "50% 50%",
+                'background-attachment': bgAttachment || undefined,
+                'background-repeat': bgRepeat || undefined,
+                'background-size': bgSize || undefined,
+            };
+        }
+
+        return styles;
+    };
+
+    /**
+     * Get logo background hover styles
+     */
+    const getLogoBackgroundHoverStyles = (device) => {
+        const bgType = logoHoverBackgroundType;
+        const bgColor = logoHoverClassicColor;
+        const bgGradient = logoHoverGradientColor;
+        const customGradient = logoHoverCustomGradientInputValue;
+        const customGradientEnabled = logoHoverCustomGradientSwitcher;
+
+        const bgImageUrl = logoHoverBackgroundImageUrl?.[device];
+        const bgImagePosition = logoHoverBackgroundImagePosition?.[device];
+        const bgAttachment = logoHoverBackgroundImageAttachment?.[device];
+        const bgRepeat = logoHoverBackgroundImageRepeat?.[device];
+        const bgSize = logoHoverBackgroundImageSize?.[device];
+
+        if (bgType === 'gradient') {
+            if (customGradientEnabled && customGradient) {
+                return { background: customGradient };
+            } else if (bgGradient) {
+                return { background: bgGradient };
+            } else if (bgColor) {
+                return { background: bgColor };
+            }
+            return {};
+        }
+
+        let styles = bgColor ? { background: bgColor } : {};
+
+        if (bgType !== 'gradient' && bgImageUrl) {
+            styles = {
+                ...styles,
+                'background-image': `url(${bgImageUrl})`,
+                'background-position': bgImagePosition 
+                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+                    : "50% 50%",
+                'background-attachment': bgAttachment || undefined,
+                'background-repeat': bgRepeat || undefined,
+                'background-size': bgSize || undefined,
+            };
+        }
+
+        return styles;
+    };
+
+    /**
+     * Convert object to string
+     */
+    const logoBackgroundStyleObjectToString = (styleObj) =>
+        Object.entries(styleObj)
+            .map(([key, value]) => `${key}: ${value};`)
+            .join(' ');
+        
+    /**
+     * Get logo background styles
+     */
+    const logoDesktopBackgroundNormalStyles = logoBackgroundStyleObjectToString(getLogoBackgroundNormalStyles('Desktop'));
+    const logoTabletBackgroundNormalStyles = logoBackgroundStyleObjectToString(getLogoBackgroundNormalStyles('Tablet'));
+    const logoMobileBackgroundNormalStyles = logoBackgroundStyleObjectToString(getLogoBackgroundNormalStyles('Mobile'));
+
+    const logoDesktopBackgroundHoverStyles = logoBackgroundStyleObjectToString(getLogoBackgroundHoverStyles('Desktop'));
+    const logoTabletBackgroundHoverStyles = logoBackgroundStyleObjectToString(getLogoBackgroundHoverStyles('Tablet'));
+    const logoMobileBackgroundHoverStyles = logoBackgroundStyleObjectToString(getLogoBackgroundHoverStyles('Mobile'));
 
     /**
      * Get global background normal styles
@@ -2064,6 +2374,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
             box-sizing: border-box;
             position: relative;
+            transition: all .3s ease-in-out;
         }
         .${blockId}.gslider-logo-carousel-wrapper:hover {
             ${globalDesktopBackgroundHoverStyles}
@@ -2077,7 +2388,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
             ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${contentWidth?.Desktop ? `max-width: ${contentWidth.Desktop}${contentWidthUnits?.Desktop};` : ''}
-            ${contentPaddingDesktopCssStyle ? `padding: ${contentPaddingDesktopCssStyle};` : ''}
+            ${logoPaddingDesktopCssStyle ? `padding: ${logoPaddingDesktopCssStyle};` : ''}
+            ${logoDesktopBackgroundNormalStyles}
+            ${logoBorder ? `border: ${logoBorder};` : ''}
+			${logoBorderDesktopCssStyle ? `border-width: ${logoBorderDesktopCssStyle};` : ''}  
+			${logoBorderRadiusDesktopCssStyle ? `border-radius: ${logoBorderRadiusDesktopCssStyle} !important;` : ''}
+            ${logoBorderColor ? `border-color: ${logoBorderColor};` : ''}
+            ${logoBoxShadowCssValue ? `box-shadow: ${logoBoxShadowCssValue} !important;` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper:hover {
+            ${logoDesktopBackgroundHoverStyles}
+            ${logoBorderHoverColor ? `border-color: ${logoBorderHoverColor};` : ''}
+            ${logoBoxShadowHoverCssValue ? `box-shadow: ${logoBoxShadowHoverCssValue} !important;` : ''}
         }
         .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper img {
             width: 100%;
@@ -2275,8 +2598,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         ${paginationPositionType === 'outside' ? `   
-            .${blockId} .swiper-pagination-logo-carousel {
-                margin-bottom: -30px;
+            .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+                bottom: -30px !important;
             }
         ` : ''}
 
@@ -2303,7 +2626,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
                 ${contentVerticalAlignment?.Tablet ? `align-self: ${contentVerticalAlignment.Tablet};` : ''}
                 ${contentWidth?.Tablet ? `max-width: ${contentWidth.Tablet}${contentWidthUnits?.Tablet};` : ''}
-                ${contentPaddingTabletCssStyle ? `padding: ${contentPaddingTabletCssStyle};` : ''}
+                ${logoPaddingTabletCssStyle ? `padding: ${logoPaddingTabletCssStyle};` : ''}
+                ${logoTabletBackgroundNormalStyles}
+			    ${logoBorderTabletCssStyle ? `border-width: ${logoBorderTabletCssStyle};` : ''}  
+                ${logoBorderRadiusTabletCssStyle ? `border-radius: ${logoBorderRadiusTabletCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
+                ${logoTabletBackgroundHoverStyles}
             }
 
             .${blockId}.gslider-logo-carousel-wrapper.outside {
@@ -2439,7 +2769,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
                 ${contentVerticalAlignment?.Mobile ? `align-self: ${contentVerticalAlignment.Mobile};` : ''}
                 ${contentWidth?.Mobile ? `max-width: ${contentWidth.Mobile}${contentWidthUnits?.Mobile};` : ''}
-                ${contentPaddingMobileCssStyle ? `padding: ${contentPaddingMobileCssStyle};` : ''}
+                ${logoPaddingMobileCssStyle ? `padding: ${logoPaddingMobileCssStyle};` : ''}
+                ${logoMobileBackgroundNormalStyles}
+                ${logoBorderMobileCssStyle ? `border-width: ${logoBorderMobileCssStyle};` : ''}  
+                ${logoBorderRadiusMobileCssStyle ? `border-radius: ${logoBorderRadiusMobileCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper:hover { 
+                ${logoMobileBackgroundHoverStyles}
             }
 
             .${blockId}.gslider-logo-carousel-wrapper.outside {
@@ -2593,15 +2930,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End Layout & Content Setting */
 
         /** Start Content Padding */
-        contentPaddingUnits,
-        contentPaddingDesktop,
-        contentPaddingDesktopCssStyle,
-        contentPaddingTablet,
-        contentPaddingTabletCssStyle,
-        contentPaddingMobile,
-        contentPaddingMobileCssStyle,
-        contentPaddingLink,
+        logoPaddingUnits,
+        logoPaddingDesktop,
+        logoPaddingDesktopCssStyle,
+        logoPaddingTablet,
+        logoPaddingTabletCssStyle,
+        logoPaddingMobile,
+        logoPaddingMobileCssStyle,
+        logoPaddingLink,
         /** End Content Padding */
+
+        /** Start Logo Background */     
+        logoNormalBackgroundType,
+        logoNormalClassicColor,
+        logoNormalGradientColor,
+        logoNormalCustomGradientSwitcher,
+        logoNormalCustomGradientInputValue,
+        logoNormalBackgroundImageUrl,
+        logoNormalBackgroundImagePosition,
+        logoNormalBackgroundImageAttachment,
+        logoNormalBackgroundImageRepeat,
+        logoNormalBackgroundImageSize,
+        logoHoverBackgroundType,
+        logoHoverClassicColor,
+        logoHoverGradientColor,
+        logoHoverCustomGradientSwitcher,
+        logoHoverCustomGradientInputValue,
+        logoHoverBackgroundImageUrl,
+        logoHoverBackgroundImagePosition,
+        logoHoverBackgroundImageAttachment,
+        logoHoverBackgroundImageRepeat,
+        logoHoverBackgroundImageSize,
+        /** End Logo Background */
+
+        /** Start Logo Border */
+        logoBorder,
+        logoBorderColorSwitcher,
+        logoBorderColor,
+        logoBorderHoverColor,
+        logoBorderUnits,
+        logoBorderDesktop,
+        logoBorderDesktopCssStyle,
+        logoBorderTablet,
+        logoBorderTabletCssStyle,
+        logoBorderMobile,
+        logoBorderMobileCssStyle,
+        logoBorderLink,
+        /** End Logo Border */
+
+        /** Start Logo Border Radius */
+        logoBorderRadiusUnits,
+        logoBorderRadiusDesktop,
+        logoBorderRadiusDesktopCssStyle,
+        logoBorderRadiusTablet,
+        logoBorderRadiusTabletCssStyle,
+        logoBorderRadiusMobile,
+        logoBorderRadiusMobileCssStyle,
+        logoBorderRadiusLink,
+        /** End Logo Border Radius */
+
+        /** Start Logo Box Shadow */
+        logoBoxShadowValuesSwitcher,
+        logoBoxShadowValues,
+        logoBoxShadowCssValue,
+        logoBoxShadowHoverValues,
+        logoBoxShadowHoverCssValue,
+        /** End Logo Box Shadow */
 
         /** Start Navigation Custom Arrows */
         navigationArrowsIconSwitcher,
