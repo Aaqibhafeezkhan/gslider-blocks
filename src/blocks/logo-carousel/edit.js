@@ -214,7 +214,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showPagination,
         paginationType,
         dynamicBullets,
-		paginationPositionType, // depends on inside / outside
+		paginationPositionType,
         navigationArrowPositionType,
         navigationArrowPosition,
         navigationArrowsIconSwitcher,
