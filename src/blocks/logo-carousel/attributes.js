@@ -132,9 +132,9 @@ const attributes = {
     layoutHeight: {
         type: "object",
         default: {
-            Desktop: "350",
-            Tablet: "350",
-            Mobile: "350",
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
         },
     },
     layoutHeightUnits: {
@@ -171,8 +171,8 @@ const attributes = {
     },
     /** End Layout & Content Setting */
 
-    /** Start Content Padding */
-    contentPaddingUnits: {
+    /** Start Logo Padding */
+    logoPaddingUnits: {
         type: "object",
         default: {  
             Desktop: "px",
@@ -180,50 +180,314 @@ const attributes = {
             Mobile: "px"
         }
     },
-    contentPaddingDesktop: {
+    logoPaddingDesktop: {
         type: "object", 
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    contentPaddingDesktopCssStyle: { 
+    logoPaddingDesktopCssStyle: { 
         type: "string",
         default: "",
     },
-    contentPaddingTablet: {
+    logoPaddingTablet: {
         type: "object",  
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    contentPaddingTabletCssStyle: { 
+    logoPaddingTabletCssStyle: { 
         type: "string",
         default: "",
     },
-    contentPaddingMobile: {
+    logoPaddingMobile: {
         type: "object",  
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
         },
     },
-    contentPaddingMobileCssStyle: { 
+    logoPaddingMobileCssStyle: { 
         type: "string",
         default: "",
     },
-    contentPaddingLink : {
+    logoPaddingLink : {
         type : "boolean",
         default: true
     },
-    /** End Content Padding */
+    /** End Logo Padding */
+
+
+    /** Start Logo Background */     
+    logoNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    logoNormalClassicColor: {
+        type: "string",
+        default: "",
+    },
+    logoNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    logoNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    logoNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    logoNormalBackgroundImageUrl: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    logoNormalBackgroundImagePosition: {
+        type: "object",
+        default: {
+            Desktop: { x: 0.5, y: 0.5 },
+            Tablet: { x: 0.5, y: 0.5 },
+            Mobile: { x: 0.5, y: 0.5 }
+        }
+    },
+    logoNormalBackgroundImageAttachment: {
+        type: "object",
+        default: {
+            Desktop: "scroll",
+            Tablet: "scroll",
+            Mobile: "scroll"
+        }
+    },
+    logoNormalBackgroundImageRepeat: {
+        type: "object",
+        default: {
+            Desktop: "no-repeat",
+            Tablet: "no-repeat",
+            Mobile: "no-repeat"
+        }
+    },
+    logoNormalBackgroundImageSize: {
+        type: "object",
+        default: {
+            Desktop: "cover",
+            Tablet: "cover",
+            Mobile: "cover"
+        }
+    },
+
+    logoHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    logoHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    logoHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    logoHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    logoHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    logoHoverBackgroundImageUrl: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },  
+    logoHoverBackgroundImagePosition: {
+        type: "object", 
+        default: {
+            Desktop: { x: 0.5, y: 0.5 },
+            Tablet: { x: 0.5, y: 0.5 },
+            Mobile: { x: 0.5, y: 0.5 }
+        }
+    },  
+    logoHoverBackgroundImageAttachment: {
+        type: "object",
+        default: {
+            Desktop: "scroll",
+            Tablet: "scroll",
+            Mobile: "scroll"
+        }
+    },    
+    logoHoverBackgroundImageRepeat: {
+        type: "object",
+        default: {
+            Desktop: "no-repeat",
+            Tablet: "no-repeat",
+            Mobile: "no-repeat"
+        }
+    },            
+    logoHoverBackgroundImageSize: {
+        type: "object",
+        default: {
+            Desktop: "cover",
+            Tablet: "cover",
+            Mobile: "cover"
+        }
+    },
+    /** End Logo Background */
+
+    /** Start Global Border */
+    logoBorder: {
+        type: "string",
+        default: "none",
+    },
+    logoBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    logoBorderColor: {
+        type: "string",
+    },
+    logoBorderHoverColor: {
+        type: "string",
+    },
+    logoBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    logoBorderDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoBorderDesktopCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoBorderTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoBorderTabletCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoBorderMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoBorderMobileCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    logoBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    logoBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoBorderRadiusDesktopCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    logoBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoBorderRadiusTabletCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    logoBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoBorderRadiusMobileCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    logoBoxShadowValuesSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    logoBoxShadowValues: {
+        type: "array",
+        default: [],
+    },
+    logoBoxShadowCssValue: {
+        type: "string",
+        default: "",
+    },
+    logoBoxShadowHoverValues: {
+        type: "array",
+        default: [],
+    },
+    logoBoxShadowHoverCssValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Logo Border */
 
     /** Start Navigation Custom Arrows */
     navigationArrowsIconSwitcher: {
