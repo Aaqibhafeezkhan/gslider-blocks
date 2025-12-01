@@ -171,13 +171,11 @@ export default function Save({ attributes }) {
 
                 { anyPaginationEnabled && paginationPositionType === 'inside' && (
                     <>
-                        <div className="gslider-pagination-wrapper">
-                            <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
-                        </div>
+                        <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
                     </>
                 )}
             </div>
-            
+
             {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
                 <>
                     <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
@@ -207,9 +205,7 @@ export default function Save({ attributes }) {
 
             {anyPaginationEnabled && paginationPositionType === 'outside' && (
                 <>
-                    <div className="gslider-pagination-wrapper">
-                        <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
-                    </div>
+                    <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
                 </>
             )}
         </div>

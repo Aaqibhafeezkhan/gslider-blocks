@@ -60,7 +60,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		dynamicBullets,
 
 		logos,
-
+		paginationPositionType,
         showNavigation,
 		showPagination,
 
@@ -82,17 +82,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         layoutHeightSwitcher,
 
-		// 👇 NEW – pagination position attribute (inside / outside)
-		paginationPositionType,
 	} = attributes;
 
 	// Block props for container
 	const blockProps = useBlockProps({
         className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
 	});
-
-	// Unique class for external pagination element
-	const paginationClass = `gslider-pagination-${blockId}`;
 
 	const onSelectFromPlaceholder = (selection) => {
 		const list = Array.isArray(selection) ? selection : [selection];
@@ -181,11 +176,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             }
             : false,
 
-		// 👇 pagination inside/outside logic
+		// pagination inside/outside logic
         pagination: showPagination?.[deviceType]
             ? paginationPositionType === 'outside'
                 ? {
-                    el: `.${paginationClass}`, // external container
+                    el: `.swiper-pagination-logo-carousel`,
                     type: paginationType,
                     dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
                     clickable: true,
@@ -220,7 +215,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         paginationType,
         dynamicBullets,
 		paginationPositionType, // depends on inside / outside
-		paginationClass,
         navigationArrowPositionType,
         navigationArrowPosition,
         navigationArrowsIconSwitcher,
@@ -252,7 +246,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		carouselPerColumnGap,
 		paginationType,
 		dynamicBullets,
-		paginationPositionType, // re-init when inside/outside toggles
+		paginationPositionType,
         navigationArrowPositionType,
         navigationArrowPosition,
         navigationArrowsIconSwitcher,
@@ -434,11 +428,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 )}
 
-				{/* 👇 external pagination – only when outside selected */}
 				{logos?.length > 0 &&
 					showPagination?.[deviceType] &&
 					paginationPositionType === 'outside' && (
-						<div className={`gslider-pagination ${paginationClass}`} />
+						<div className="swiper-pagination swiper-pagination-logo-carousel"></div>
 				)}
 
 			</div>
