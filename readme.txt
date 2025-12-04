@@ -2,8 +2,8 @@
 Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 1.1.1
+Tested up to: 6.9
+Stable tag: 1.1.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,9 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.2 – December 04, 2025 = 
+- **Added**: keyboard Navigation control
 
 = 1.1.1 – November 15, 2025 = 
 - **Fixed**: Minor CSS issues
