@@ -470,6 +470,10 @@ const attributes = {
         type: "boolean",
         default: false
     },
+    keyboardNavigation: {
+		type: 'boolean',
+		default: false
+	},
     paginationType: {
         type: "string",
         default: "bullets"

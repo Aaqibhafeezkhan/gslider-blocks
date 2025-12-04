@@ -24,6 +24,7 @@ import {
     Autoplay,
 	Manipulation,
 	Mousewheel,
+    Keyboard,
 	EffectFade,
 	EffectCube,
 	EffectCoverflow,
@@ -53,6 +54,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		carouselEffect,
 		slideEffect,
 		mousewheelControl,
+		keyboardNavigation,
 		paginationType,
 		dynamicBullets,
 
@@ -147,6 +149,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         speed: speed?.[deviceType] || 800,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
+
+        keyboard: keyboardNavigation ? { 
+            enabled: true,
+            onlyInViewport: true,
+            pageUpDown: false,
+        } : false,
     
         // Navigation and pagination settings
         navigation: showNavigation?.[deviceType]
@@ -188,6 +196,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         speed,
         allowTouchMove,
         mousewheelControl,
+        keyboardNavigation,
         showNavigation,
         showPagination,
         paginationType,
@@ -214,6 +223,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		stopOnLastSlide,
 		reverseDirection,
 		mousewheelControl,
+		keyboardNavigation,
 		showNavigation,
 		showPagination,
 		autoplay,
@@ -321,7 +331,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
-			{renderSliderToolbarControls()}
+
 			<div {...blockProps}>
 				<Swiper
 					key={swiperKey}
@@ -334,6 +344,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						Autoplay,
 						Manipulation,
 						Mousewheel,
+						Keyboard,
 						EffectFade,
 						EffectCube,
 						EffectCoverflow,

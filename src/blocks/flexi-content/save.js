@@ -18,6 +18,7 @@ export default function Save({ attributes }) {
         carouselEffect,
         slideEffect,
         mousewheelControl,
+        keyboardNavigation,
         paginationType,
         dynamicBullets,
 
@@ -125,6 +126,12 @@ export default function Save({ attributes }) {
         } : false,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
+
+        keyboard: keyboardNavigation ? { 
+            enabled: true,
+            onlyInViewport: true,
+            pageUpDown: false,
+        } : false,
         
         navigation: {
             enabled: anyNavigationEnabled,

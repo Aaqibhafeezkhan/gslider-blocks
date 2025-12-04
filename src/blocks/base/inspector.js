@@ -70,6 +70,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         slideEffect,
         carouselEffect,
         mousewheelControl,
+        keyboardNavigation,
         paginationType,
         dynamicBullets,
 
@@ -1100,6 +1101,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                     label={__("Mousewheel Navigation", "gslider-blocks")}
                     checked={mousewheelControl}
                     onChange={(value) => setAttributes({ mousewheelControl: value })}
+                />
+                <ToggleControl
+                    label={__("Keyboard Navigation", "gslider-blocks")}
+                    checked={keyboardNavigation}
+                    onChange={(value) => setAttributes({ keyboardNavigation: value })}
                 />
                 <ToggleControl
                     label={ __( 'Autoplay', 'gslider-blocks' ) }
@@ -4286,6 +4292,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
         slideEffect,
         carouselEffect,
         mousewheelControl,
+        keyboardNavigation,
         paginationType,
         dynamicBullets,
 
