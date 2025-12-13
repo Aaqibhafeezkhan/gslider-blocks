@@ -145,30 +145,6 @@ const attributes = {
             Mobile: "px",
         },
     },
-    contentWidth: {
-        type: "object",
-        default: {
-            Desktop: "100",
-            Tablet: "100",
-            Mobile: "100",
-        },
-    },
-    contentWidthUnits: {
-        type: "object",
-        default: {
-            Desktop: "%",
-            Tablet: "%",
-            Mobile: "%",
-        },
-    },
-    contentVerticalAlignment: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
     /** End Layout & Content Setting */
 
     /** Start Logo Padding */
