@@ -1059,7 +1059,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 opened={openPanels.styles === "content"}
                 onToggle={() => togglePanel("styles", "content")}
             >
-                <ResponsiveSpacingControl
+
+                <ResponsiveRangeControl
                     label={__("Max Width", "gslider-blocks")}
                     rangeValue={logoMaxWidth}
                     onChangeValue={(value) => setAttributes({ logoMaxWidth: value })}
@@ -1071,6 +1072,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         px:  { min: 0, max: 1000, step: 1 },
                     }}
                 />
+
                 <ResponsiveSpacingControl
                     label={__("Padding", "gslider-blocks")}
                     deviceType={deviceType}
@@ -2390,8 +2392,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${logoBoxShadowHoverCssValue ? `box-shadow: ${logoBoxShadowHoverCssValue} !important;` : ''}
         }
         .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper img {
+            ${logoMaxWidth.Desktop ? `max-width: ${logoMaxWidth.Desktop}${logoMaxWidthUnits.Desktop};` : ''}
             display: block;
-            max-width: 100%;
             height: auto;
             margin: 0 auto;
         }
@@ -2625,6 +2627,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${logoTabletBackgroundHoverStyles}
             }
 
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper img {
+                ${logoMaxWidth.Tablet ? `max-width: ${logoMaxWidth.Tablet}${logoMaxWidthUnits.Tablet};` : ''}
+            }
+
+
             .${blockId}.gslider-logo-carousel-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Tablet}${navigationArrowPositionOutsidePaddingUnits.Tablet} 0 0;
@@ -2767,6 +2774,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper:hover { 
                 ${logoMobileBackgroundHoverStyles}
+            }
+
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper img {
+                ${logoMaxWidth.Mobile ? `max-width: ${logoMaxWidth.Mobile}${logoMaxWidthUnits.Mobile};` : ''}
             }
 
             .${blockId}.gslider-logo-carousel-wrapper.outside {
@@ -2915,6 +2926,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         layoutHeight,
         layoutHeightUnits,
         /** End Layout & Content Setting */
+
+        /** Start Logo Max Width */
+        logoMaxWidth,
+        logoMaxWidthUnits,
+        /** End Logo Max Width */
 
         /** Start Content Padding */
         logoPaddingUnits,
