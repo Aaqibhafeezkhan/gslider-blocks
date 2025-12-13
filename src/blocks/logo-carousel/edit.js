@@ -62,6 +62,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		dynamicBullets,
 
 		logos,
+		showCaption,
 		paginationPositionType,
         showNavigation,
 		showPagination,
@@ -368,8 +369,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					>
 						{logos.map((item) => (
 							<SwiperSlide key={item.id}>
-								<div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
+								<div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
 									<img src={item.url} alt={item.alt || ''}/> 
+                                    {showCaption?.[deviceType] && item.caption ? (
+                                        <div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
+                                    ) : null}
 								</div>
 							</SwiperSlide>
 						))}

@@ -65,6 +65,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         dynamicBullets,
 
         logos,
+        showCaption,
 
         /** Start Show/Hide Elements */
         paginationPositionType,
@@ -77,7 +78,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         layoutHeightUnits,
         /** End Layout & Content Setting */
 
-        /** Start Content Padding */
+        /** Start Logo Max Width */
+        logoMaxWidth,
+        logoMaxWidthUnits,
+        /** End Logo Max Width */
+
+        /** Start Logo Padding */
         logoPaddingUnits,
         logoPaddingDesktop,
         logoPaddingDesktopCssStyle,
@@ -86,7 +92,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         logoPaddingMobile,
         logoPaddingMobileCssStyle,
         logoPaddingLink,
-        /** End Content Padding */
+        /** End Logo Padding */
 
         /** Start Logo Background */     
         logoNormalBackgroundType,
@@ -539,6 +545,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 opened={openPanels.general === "show-hide-elements"}
                 onToggle={() => togglePanel("general", "show-hide-elements")}
             >
+                <ResponsiveToggleControl
+                    label={ __( "Show Caption", "gslider-blocks" ) }
+                    toggleValue={showCaption}
+                    setToggleValue={(value) => setAttributes({ showCaption: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
                 <ResponsiveToggleControl
                     label={ __( "Show Navigation", "gslider-blocks" ) }
                     toggleValue={showNavigation}
@@ -1046,6 +1059,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 opened={openPanels.styles === "content"}
                 onToggle={() => togglePanel("styles", "content")}
             >
+                <ResponsiveSpacingControl
+                    label={__("Max Width", "gslider-blocks")}
+                    rangeValue={logoMaxWidth}
+                    onChangeValue={(value) => setAttributes({ logoMaxWidth: value })}
+                    onUnitChange={(value) => setAttributes({ logoMaxWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={logoMaxWidthUnits}
+                    resetFallbackValue={""}
+                    unitBounds={{
+                        px:  { min: 0, max: 1000, step: 1 },
+                    }}
+                />
                 <ResponsiveSpacingControl
                     label={__("Padding", "gslider-blocks")}
                     deviceType={deviceType}
@@ -2345,7 +2370,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             justify-content: center;
         }
         
-        .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper {
             ${layoutHeight.Desktop ? `height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${logoPaddingDesktopCssStyle ? `padding: ${logoPaddingDesktopCssStyle};` : ''}
             ${logoDesktopBackgroundNormalStyles}
@@ -2359,12 +2384,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             justify-content: center;
             transition: all .3s ease-in-out;
         }
-        .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper:hover {
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper:hover {
             ${logoDesktopBackgroundHoverStyles}
             ${logoBorderHoverColor ? `border-color: ${logoBorderHoverColor};` : ''}
             ${logoBoxShadowHoverCssValue ? `box-shadow: ${logoBoxShadowHoverCssValue} !important;` : ''}
         }
-        .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper img {
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper img {
             display: block;
             max-width: 100%;
             height: auto;
@@ -2585,7 +2610,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalTabletBackgroundHoverStyles}
             }
 
-            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper {
                 ${layoutHeight.Tablet ? `height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
                 ${logoPaddingTabletCssStyle ? `padding: ${logoPaddingTabletCssStyle};` : ''}
                 ${logoTabletBackgroundNormalStyles}
@@ -2596,7 +2621,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 justify-content: center;
             }
 
-            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper {
                 ${logoTabletBackgroundHoverStyles}
             }
 
@@ -2729,7 +2754,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalMobileBackgroundHoverStyles}
             }
 
-            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper {
                 ${layoutHeight.Mobile ? `height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
                 ${logoPaddingMobileCssStyle ? `padding: ${logoPaddingMobileCssStyle};` : ''}
                 ${logoMobileBackgroundNormalStyles}
@@ -2740,7 +2765,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 justify-content: center;
             }
 
-            .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper:hover { 
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper:hover { 
                 ${logoMobileBackgroundHoverStyles}
             }
 

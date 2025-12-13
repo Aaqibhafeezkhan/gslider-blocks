@@ -105,6 +105,15 @@ const attributes = {
     },
     /** End Carousel Settings */
 
+    showCaption: {
+        type: "object",
+        default: {
+            Desktop: false,
+            Tablet: false,
+            Mobile: false,
+        },
+    },
+
     /** Start Show/Hide Elements */
     paginationPositionType: {
         type: "string",
@@ -146,6 +155,25 @@ const attributes = {
         },
     },
     /** End Layout & Content Setting */
+
+    /** Start Logo Max Width */
+    logoMaxWidth: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    logoMaxWidthUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    /** End Logo Max Width */
 
     /** Start Logo Padding */
     logoPaddingUnits: {

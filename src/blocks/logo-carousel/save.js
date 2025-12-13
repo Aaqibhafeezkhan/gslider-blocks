@@ -21,6 +21,7 @@ export default function Save({ attributes }) {
         dynamicBullets,
 
         logos,
+        showCaption,
 
         paginationPositionType,
         showNavigation,
@@ -47,6 +48,13 @@ export default function Save({ attributes }) {
         className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination?'has-pagination':''}`, 
     });
 
+    const captionEnabled = {
+        Mobile:  !!showCaption?.Mobile,
+        Tablet:  !!showCaption?.Tablet,
+        Desktop: !!showCaption?.Desktop,
+    };
+    const anyCaptionEnabled = captionEnabled.Mobile || captionEnabled.Tablet || captionEnabled.Desktop;
+
     const navigationEnabled = {
         Mobile:  !!showNavigation?.Mobile,
         Tablet:  !!showNavigation?.Tablet,
@@ -58,7 +66,7 @@ export default function Save({ attributes }) {
         Mobile:  !!showPagination?.Mobile,
         Tablet:  !!showPagination?.Tablet,
         Desktop: !!showPagination?.Desktop,
-    };
+    };  
     const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
 
     // Configure Swiper settings for frontend rendering
@@ -138,8 +146,11 @@ export default function Save({ attributes }) {
                 <div className="swiper-wrapper">
                     {logos.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
-                            <div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})}>
+                            <div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})}>
                                 <img src={item.url} alt={item.alt || ''} />
+                                {anyCaptionEnabled && item.caption ? (
+                                    <div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
+                                ) : null}
                             </div>
                         </div>
                     ))}
