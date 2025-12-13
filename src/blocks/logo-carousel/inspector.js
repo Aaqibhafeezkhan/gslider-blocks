@@ -2598,12 +2598,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         ${paginationPositionType === 'outside' ? `   
-            .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+            .${blockId}.gslider-logo-carousel-wrapper .swiper-horizontal>.swiper-pagination-bullets,
+            .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
+            .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-custom,
+            .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-fraction {
                 bottom: -30px !important;
             }
         ` : ''}
 
-        .wp-block-gslider-blocks-logo-carousel.has-pagination {
+        .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
             margin-bottom: 30px;
         }
 
