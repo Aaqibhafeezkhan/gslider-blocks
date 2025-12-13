@@ -434,7 +434,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				{logos?.length > 0 &&
 					showPagination?.[deviceType] &&
 					paginationPositionType === 'outside' && (
-						<div className="swiper-pagination swiper-pagination-logo-carousel"></div>
+						<div
+							className="swiper-pagination swiper-pagination-logo-carousel"
+							aria-label="Carousel pagination"
+						></div>
 				)}
 
 			</div>

@@ -173,7 +173,10 @@ export default function Save({ attributes }) {
 
                 { anyPaginationEnabled && paginationPositionType === 'inside' && (
                     <>
-                        <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
+                        <div
+                            className="swiper-pagination swiper-pagination-logo-carousel"
+                            aria-label="Carousel pagination"
+                        ></div>
                     </>
                 )}
             </div>
@@ -207,7 +210,10 @@ export default function Save({ attributes }) {
 
             {anyPaginationEnabled && paginationPositionType === 'outside' && (
                 <>
-                    <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
+                    <div
+                        className="swiper-pagination swiper-pagination-logo-carousel"
+                        aria-label="Carousel pagination"
+                    ></div>
                 </>
             )}
         </div>
