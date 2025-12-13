@@ -60,6 +60,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         reverseDirection,
         carouselEffect,
         mousewheelControl,
+        keyboardNavigation,
         paginationType,
         dynamicBullets,
 
@@ -72,7 +73,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End Show/Hide Elements */
 
         /** Start Layout & Content Setting */   
-        layoutHeightSwitcher,
         layoutHeight,
         layoutHeightUnits,
         contentWidth,
@@ -562,36 +562,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 opened={openPanels.general === "layout-content-setting"}
                 onToggle={() => togglePanel("general", "layout-content-setting")}
             >
-
-                <SwitcherControl
-                    label={__("Layout Height Switcher", "gslider-blocks")}
-                    options={LAYOUT_HEIGHT_SWITCHER}
-                    value={layoutHeightSwitcher}
-                    onChange={(value) => setAttributes({ layoutHeightSwitcher: value })}
+                <ResponsiveRangeControl
+                    label={__("Height", "gslider-blocks")}
+                    rangeValue={layoutHeight}
+                    onChangeValue={(value) => setAttributes({ layoutHeight: value })}
+                    onUnitChange={(value) => setAttributes({ layoutHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={layoutHeightUnits}
+                    resetFallbackValue={{
+                        px: "150",
+                        "%": "50",
+                        vh: "50",
+                        vw: "50",
+                        em: "20",
+                        rem:"20",
+                    }}
                 />
-
-                {layoutHeightSwitcher === 'fixed' && (
-                    <ResponsiveRangeControl
-                        label={__("Height", "gslider-blocks")}
-                        rangeValue={layoutHeight}
-                        onChangeValue={(value) => setAttributes({ layoutHeight: value })}
-                        onUnitChange={(value) => setAttributes({ layoutHeightUnits: value })}
-                        deviceType={deviceType}
-                        units={layoutHeightUnits}
-                        resetFallbackValue={{
-                            px: "150",
-                            "%": "50",
-                            vh: "50",
-                            vw: "50",
-                            em: "20",
-                            rem:"20",
-                        }}
-                    />
-                )}
-
-                {layoutHeightSwitcher === 'adapt' && (
-                    <p>Slides adapt their height to the inside content.</p>
-                )}
 
                 <ResponsiveRangeControl
                     label={__("Max Width", "gslider-blocks")}
@@ -612,18 +598,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     }}
                 /> 
 
-                {layoutHeightSwitcher !== 'adapt' && (
-                    <ResponsiveAlignmentControl
-                        label={__("Vertical Alignment", "gslider-blocks")}
-                        options={VERTICAL_ALIGN_SELF}
-                        alignmentValue={contentVerticalAlignment}
-                        setAlignmentValue={(value) => setAttributes({ contentVerticalAlignment: value })}
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                        className="gslider-vertical-alignment"
-                    />
-                )}
-                
+                <ResponsiveAlignmentControl
+                    label={__("Vertical Alignment", "gslider-blocks")}
+                    options={VERTICAL_ALIGN_SELF}
+                    alignmentValue={contentVerticalAlignment}
+                    setAlignmentValue={(value) => setAttributes({ contentVerticalAlignment: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    className="gslider-vertical-alignment"
+                />
+            
             </PanelBody>
 
             <PanelBody 
@@ -693,6 +677,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     label={__("Mousewheel Navigation", "gslider-blocks")}
                     checked={mousewheelControl}
                     onChange={(value) => setAttributes({ mousewheelControl: value })}
+                />
+                <ToggleControl
+                    label={__("Keyboard Navigation", "gslider-blocks")}
+                    checked={keyboardNavigation}
+                    onChange={(value) => setAttributes({ keyboardNavigation: value })}
                 />
                 <ToggleControl
                     label={ __( 'Autoplay', 'gslider-blocks' ) }
@@ -2386,7 +2375,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         
         .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
-            ${layoutHeight.Desktop && layoutHeightSwitcher === 'fixed' ? `height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
+            ${layoutHeight.Desktop ? `height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${contentWidth?.Desktop ? `max-width: ${contentWidth.Desktop}${contentWidthUnits?.Desktop};` : ''}
             ${logoPaddingDesktopCssStyle ? `padding: ${logoPaddingDesktopCssStyle};` : ''}
             ${logoDesktopBackgroundNormalStyles}
@@ -2626,7 +2615,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
-                ${layoutHeight.Tablet && layoutHeightSwitcher === 'fixed' ? `height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
+                ${layoutHeight.Tablet ? `height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
                 ${contentVerticalAlignment?.Tablet ? `align-self: ${contentVerticalAlignment.Tablet};` : ''}
                 ${contentWidth?.Tablet ? `max-width: ${contentWidth.Tablet}${contentWidthUnits?.Tablet};` : ''}
                 ${logoPaddingTabletCssStyle ? `padding: ${logoPaddingTabletCssStyle};` : ''}
@@ -2769,7 +2758,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
-                ${layoutHeight.Mobile && layoutHeightSwitcher === 'fixed' ? `height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
+                ${layoutHeight.Mobile ? `height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
                 ${contentVerticalAlignment?.Mobile ? `align-self: ${contentVerticalAlignment.Mobile};` : ''}
                 ${contentWidth?.Mobile ? `max-width: ${contentWidth.Mobile}${contentWidthUnits?.Mobile};` : ''}
                 ${logoPaddingMobileCssStyle ? `padding: ${logoPaddingMobileCssStyle};` : ''}
@@ -2914,6 +2903,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         reverseDirection,
         carouselEffect,
         mousewheelControl,
+        keyboardNavigation,
         paginationType,
         dynamicBullets,
 
@@ -2924,7 +2914,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End Show/Hide Elements */
 
         /** Start Layout & Content Setting */
-        layoutHeightSwitcher,
         layoutHeight,
         layoutHeightUnits,
         contentWidth,

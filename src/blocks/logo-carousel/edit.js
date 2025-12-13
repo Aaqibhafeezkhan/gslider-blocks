@@ -20,6 +20,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import {
 	Navigation,
 	Pagination,
+	Keyboard,
     Autoplay,
 	Manipulation,
 	Mousewheel,
@@ -56,6 +57,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		reverseDirection,
 		carouselEffect,
 		mousewheelControl,
+		keyboardNavigation,
 		paginationType,
 		dynamicBullets,
 
@@ -79,8 +81,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconRight,
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
-
-        layoutHeightSwitcher,
 
 	} = attributes;
 
@@ -148,10 +148,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		   },
 	   	},
 
-        ...(layoutHeightSwitcher === 'adapt' && {
-            autoHeight: true,
-        }),
-    
         // Common settings
         loop: infiniteLoop,
         autoplay: autoplay
@@ -167,6 +163,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         speed: speed?.[deviceType] || 800,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
+
+		keyboard: keyboardNavigation ? { 
+            enabled: true,
+            onlyInViewport: true,
+            pageUpDown: false,
+        } : false,
     
         // Navigation and pagination settings
         navigation: showNavigation?.[deviceType]
@@ -210,6 +212,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         speed,
         allowTouchMove,
         mousewheelControl,
+        keyboardNavigation,
         showNavigation,
         showPagination,
         paginationType,
@@ -220,7 +223,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconSwitcher,
         navigationArrowsIconLeft,
         navigationArrowsIconRight,
-        layoutHeightSwitcher,
     ]);
 
     /**
@@ -236,6 +238,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		stopOnLastSlide,
 		reverseDirection,
 		mousewheelControl,
+		keyboardNavigation,
 		showNavigation,
 		showPagination,
 		autoplay,
@@ -252,7 +255,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconSwitcher,
         navigationArrowsIconLeft,
         navigationArrowsIconRight,
-        layoutHeightSwitcher,
 	]);
 
 
@@ -351,6 +353,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							Autoplay,
 							Manipulation,
 							Mousewheel,
+							Keyboard,
 							EffectFade,
 							EffectCube,
 							EffectCoverflow,

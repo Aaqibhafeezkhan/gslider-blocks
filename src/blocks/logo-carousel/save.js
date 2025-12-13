@@ -16,6 +16,7 @@ export default function Save({ attributes }) {
         reverseDirection,
         carouselEffect,
         mousewheelControl,
+        keyboardNavigation,
         paginationType,
         dynamicBullets,
 
@@ -40,7 +41,6 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
 
-        layoutHeightSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -99,10 +99,6 @@ export default function Save({ attributes }) {
             },
         },
 
-        ...(layoutHeightSwitcher === 'adapt' && {
-            autoHeight: true,
-        }),
-        
         // Common settings
         loop: infiniteLoop,
         autoplay: autoplay ? {
@@ -113,6 +109,12 @@ export default function Save({ attributes }) {
         } : false,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
+
+        keyboard: keyboardNavigation ? { 
+            enabled: true,
+            onlyInViewport: true,
+            pageUpDown: false,
+        } : false,
         
         navigation: {
             enabled: anyNavigationEnabled,
