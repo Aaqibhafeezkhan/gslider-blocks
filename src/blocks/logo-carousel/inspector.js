@@ -2338,6 +2338,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ''}
             ${globalBoxShadowHoverCssValue ? `box-shadow: ${globalBoxShadowHoverCssValue} !important;` : ''}
         }
+
+        .${blockId} .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         
         .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
             ${layoutHeight.Desktop ? `height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
@@ -2348,6 +2354,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${logoBorderRadiusDesktopCssStyle ? `border-radius: ${logoBorderRadiusDesktopCssStyle} !important;` : ''}
             ${logoBorderColor ? `border-color: ${logoBorderColor};` : ''}
             ${logoBoxShadowCssValue ? `box-shadow: ${logoBoxShadowCssValue} !important;` : ''}
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all .3s ease-in-out;
         }
         .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper:hover {
@@ -2356,11 +2365,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${logoBoxShadowHoverCssValue ? `box-shadow: ${logoBoxShadowHoverCssValue} !important;` : ''}
         }
         .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
             display: block;
+            max-width: 100%;
+            height: auto;
             margin: 0 auto;
         }
 
@@ -2584,6 +2591,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${logoTabletBackgroundNormalStyles}
 			    ${logoBorderTabletCssStyle ? `border-width: ${logoBorderTabletCssStyle};` : ''}  
                 ${logoBorderRadiusTabletCssStyle ? `border-radius: ${logoBorderRadiusTabletCssStyle};` : ''}
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper {
@@ -2725,6 +2735,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${logoMobileBackgroundNormalStyles}
                 ${logoBorderMobileCssStyle ? `border-width: ${logoBorderMobileCssStyle};` : ''}  
                 ${logoBorderRadiusMobileCssStyle ? `border-radius: ${logoBorderRadiusMobileCssStyle};` : ''}
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .${blockId}.gslider-logo-carousel-wrapper .gslider-content-wrapper:hover { 
