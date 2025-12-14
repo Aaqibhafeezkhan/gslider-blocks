@@ -1166,60 +1166,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChange={(value) => setAttributes({ logoLinkRel: value })}
                         placeholder="noopener noreferrer"
                     />
-
-                    <SelectControls
-                        label={__('Hover Effect', 'gslider-blocks')}
-                        options={[
-                            { label: __('Opacity', 'gslider-blocks'), value: 'opacity' },
-                            { label: __('Scale', 'gslider-blocks'), value: 'scale' },
-                            { label: __('Both', 'gslider-blocks'), value: 'both' },
-                            { label: __('None', 'gslider-blocks'), value: 'none' },
-                        ]}
-                        value={logoLinkHoverEffect}
-                        onChange={(value) => setAttributes({ logoLinkHoverEffect: value })}
-                    />
-
-                    {(logoLinkHoverEffect === 'opacity' || logoLinkHoverEffect === 'both') && (
-                        <ResponsiveRangeControl
-                            min={0}
-                            max={1}
-                            step={0.05}
-                            label={__("Hover Opacity", "gslider-blocks")}
-                            rangeValue={logoLinkHoverOpacity}
-                            onChangeValue={(value) => setAttributes({ logoLinkHoverOpacity: value })}
-                            deviceType={deviceType}
-                            resetFallbackValue={"0.8"}
-                            isRangeUnit={false}
-                        />
-                    )}
-
-                    {(logoLinkHoverEffect === 'scale' || logoLinkHoverEffect === 'both') && (
-                        <ResponsiveRangeControl
-                            min={0.8}
-                            max={1.5}
-                            step={0.05}
-                            label={__("Hover Scale", "gslider-blocks")}
-                            rangeValue={logoLinkHoverScale}
-                            onChangeValue={(value) => setAttributes({ logoLinkHoverScale: value })}
-                            deviceType={deviceType}
-                            resetFallbackValue={"1.05"}
-                            isRangeUnit={false}
-                        />
-                    )}
-
-                    <ResponsiveRangeControl
-                        min={100}
-                        max={1000}
-                        step={50}
-                        label={__("Transition Duration (ms)", "gslider-blocks")}
-                        rangeValue={logoLinkTransitionDuration}
-                        onChangeValue={(value) => setAttributes({ logoLinkTransitionDuration: value })}
-                        deviceType={deviceType}
-                        resetFallbackValue={"300"}
-                        isRangeUnit={false}
-                    />
                 </PanelBody>
             )}
+
+            <PanelBody
+                title={__("Logo Hover Effect", "gslider-blocks")}
+                opened={openPanels.general === "logo-hover-effect"}
+                onToggle={() => togglePanel("general", "logo-hover-effect")}
+            >
+                <SelectControls
+                    label={__('Hover Effect', 'gslider-blocks')}
+                    options={[
+                        { label: __('Opacity', 'gslider-blocks'), value: 'opacity' },
+                        { label: __('Scale', 'gslider-blocks'), value: 'scale' },
+                        { label: __('Both', 'gslider-blocks'), value: 'both' },
+                        { label: __('None', 'gslider-blocks'), value: 'none' },
+                    ]}
+                    value={logoLinkHoverEffect}
+                    onChange={(value) => setAttributes({ logoLinkHoverEffect: value })}
+                />
+
+                {(logoLinkHoverEffect === 'opacity' || logoLinkHoverEffect === 'both') && (
+                    <ResponsiveRangeControl
+                        min={0}
+                        max={1}
+                        step={0.05}
+                        label={__("Hover Opacity", "gslider-blocks")}
+                        rangeValue={logoLinkHoverOpacity}
+                        onChangeValue={(value) => setAttributes({ logoLinkHoverOpacity: value })}
+                        deviceType={deviceType}
+                        resetFallbackValue={"0.8"}
+                        isRangeUnit={false}
+                    />
+                )}
+
+                {(logoLinkHoverEffect === 'scale' || logoLinkHoverEffect === 'both') && (
+                    <ResponsiveRangeControl
+                        min={0.8}
+                        max={1.5}
+                        step={0.05}
+                        label={__("Hover Scale", "gslider-blocks")}
+                        rangeValue={logoLinkHoverScale}
+                        onChangeValue={(value) => setAttributes({ logoLinkHoverScale: value })}
+                        deviceType={deviceType}
+                        resetFallbackValue={"1.05"}
+                        isRangeUnit={false}
+                    />
+                )}
+
+                <ResponsiveRangeControl
+                    min={100}
+                    max={1000}
+                    step={50}
+                    label={__("Transition Duration (ms)", "gslider-blocks")}
+                    rangeValue={logoLinkTransitionDuration}
+                    onChangeValue={(value) => setAttributes({ logoLinkTransitionDuration: value })}
+                    deviceType={deviceType}
+                    resetFallbackValue={"300"}
+                    isRangeUnit={false}
+                />
+            </PanelBody>
 
         </>
     );

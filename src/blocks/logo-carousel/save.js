@@ -155,26 +155,30 @@ export default function Save({ attributes }) {
                     {logos.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
                             <div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })}>
-                                {enableLogoLinks && item.link ? (
-                                    <a
-                                        href={item.link}
-                                        target={logoLinkTarget}
-                                        rel={logoLinkRel}
-                                        className="gslider-logo-link"
-                                        data-hover-effect={logoLinkHoverEffect}
-                                        data-hover-opacity={logoLinkHoverOpacity?.Desktop || 0.8}
-                                        data-hover-scale={logoLinkHoverScale?.Desktop || 1.05}
-                                        data-transition-duration={logoLinkTransitionDuration?.Desktop || 300}
-                                        style={{
-                                            display: 'block',
-                                            transition: `all ${logoLinkTransitionDuration?.Desktop || 300}ms ease`,
-                                        }}
-                                    >
+                                <div
+                                    className="gslider-logo-item"
+                                    data-hover-effect={logoLinkHoverEffect}
+                                    data-hover-opacity={logoLinkHoverOpacity?.Desktop || 0.8}
+                                    data-hover-scale={logoLinkHoverScale?.Desktop || 1.05}
+                                    data-transition-duration={logoLinkTransitionDuration?.Desktop || 300}
+                                    style={{
+                                        display: 'block',
+                                        transition: `all ${logoLinkTransitionDuration?.Desktop || 300}ms ease`,
+                                    }}
+                                >
+                                    {enableLogoLinks && item.link ? (
+                                        <a
+                                            href={item.link}
+                                            target={logoLinkTarget}
+                                            rel={logoLinkRel}
+                                            className="gslider-logo-link"
+                                        >
+                                            <img src={item.url} alt={item.alt || ''} />
+                                        </a>
+                                    ) : (
                                         <img src={item.url} alt={item.alt || ''} />
-                                    </a>
-                                ) : (
-                                    <img src={item.url} alt={item.alt || ''} />
-                                )}
+                                    )}
+                                </div>
                                 {anyCaptionEnabled && item.caption ? (
                                     <div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
                                 ) : null}

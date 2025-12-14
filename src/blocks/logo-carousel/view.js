@@ -27,15 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
      * Initialize hover effects for logo links
      */
     const initializeLogoLinkHoverEffects = (container) => {
-        const logoLinks = container.querySelectorAll('.gslider-logo-link');
+        const logoItems = container.querySelectorAll('.gslider-logo-item');
 
-        logoLinks.forEach((link) => {
-            const hoverEffect = link.dataset.hoverEffect;
-            const hoverOpacity = parseFloat(link.dataset.hoverOpacity) || 0.8;
-            const hoverScale = parseFloat(link.dataset.hoverScale) || 1.05;
+        logoItems.forEach((item) => {
+            const hoverEffect = item.dataset.hoverEffect;
+            const hoverOpacity = parseFloat(item.dataset.hoverOpacity) || 0.8;
+            const hoverScale = parseFloat(item.dataset.hoverScale) || 1.05;
 
             if (hoverEffect && hoverEffect !== 'none') {
-                link.addEventListener('mouseenter', function () {
+                item.addEventListener('mouseenter', function () {
                     if (hoverEffect === 'opacity' || hoverEffect === 'both') {
                         this.style.opacity = hoverOpacity;
                     }
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                link.addEventListener('mouseleave', function () {
+                item.addEventListener('mouseleave', function () {
                     this.style.opacity = 1;
                     this.style.transform = 'scale(1)';
                 });

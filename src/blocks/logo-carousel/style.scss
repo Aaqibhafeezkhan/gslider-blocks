@@ -41,6 +41,17 @@
 		}
 	}
 
+	// Logo item with hover effects
+	.gslider-logo-item {
+		display: block;
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	}
+
 	// Link button in editor
 	.gslider-logo-link-button {
 		opacity: 0;

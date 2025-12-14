@@ -419,7 +419,31 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						{logos.map((item) => (
 							<SwiperSlide key={item.id}>
 								<div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
-									<img src={item.url} alt={item.alt || ''} />
+									<div
+										className="gslider-logo-item"
+										style={{
+											display: 'block',
+											transition: `all ${logoLinkTransitionDuration?.[deviceType] || 300}ms ease`,
+										}}
+										onMouseEnter={(e) => {
+											if (logoLinkHoverEffect && logoLinkHoverEffect !== 'none') {
+												if (logoLinkHoverEffect === 'opacity' || logoLinkHoverEffect === 'both') {
+													e.currentTarget.style.opacity = logoLinkHoverOpacity?.[deviceType] || 0.8;
+												}
+												if (logoLinkHoverEffect === 'scale' || logoLinkHoverEffect === 'both') {
+													e.currentTarget.style.transform = `scale(${logoLinkHoverScale?.[deviceType] || 1.05})`;
+												}
+											}
+										}}
+										onMouseLeave={(e) => {
+											if (logoLinkHoverEffect && logoLinkHoverEffect !== 'none') {
+												e.currentTarget.style.opacity = 1;
+												e.currentTarget.style.transform = 'scale(1)';
+											}
+										}}
+									>
+										<img src={item.url} alt={item.alt || ''} />
+									</div>
 									{showCaption?.[deviceType] && item.caption ? (
 										<div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
 									) : null}
