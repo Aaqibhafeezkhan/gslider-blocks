@@ -80,6 +80,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         logoLinkHoverEffect,
         logoLinkHoverOpacity,
         logoLinkHoverScale,
+        logoLinkHoverLift,
+        logoLinkHoverLiftUnits,
         logoLinkTransitionDuration,
         /** End Logo Link Settings */
 
@@ -1360,14 +1362,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             <PanelBody
                 title={__("Logo Hover Effect", "gslider-blocks")}
-                opened={openPanels.general === "logo-hover-effect"}
-                onToggle={() => togglePanel("general", "logo-hover-effect")}
+                opened={openPanels.styles === "logo-hover-effect"}
+                onToggle={() => togglePanel("styles", "logo-hover-effect")}
             >
                 <SelectControls
                     label={__('Hover Effect', 'gslider-blocks')}
                     options={[
                         { label: __('Opacity', 'gslider-blocks'), value: 'opacity' },
                         { label: __('Scale', 'gslider-blocks'), value: 'scale' },
+                        { label: __('Move Up', 'gslider-blocks'), value: 'move-up' },
                         { label: __('Both', 'gslider-blocks'), value: 'both' },
                         { label: __('None', 'gslider-blocks'), value: 'none' },
                     ]}
@@ -1401,6 +1404,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         resetFallbackValue={"1.05"}
                         isRangeUnit={false}
                     />
+                )}
+
+                {(logoLinkHoverEffect === 'move-up') && (
+                    <ResponsiveRangeControl
+                        label={__("Lift Amount", "gslider-blocks")}
+                        rangeValue={logoLinkHoverLift}
+                        onChangeValue={(value) => setAttributes({ logoLinkHoverLift: value })}
+                        onUnitChange={(value) => setAttributes({ logoLinkHoverLiftUnits: value })}
+                        deviceType={deviceType}
+                        units={logoLinkHoverLiftUnits}
+                        resetFallbackValue={{
+                            px: "10",
+                            "%": "5",
+                            em: "1",
+                            rem: "1",
+                            vw: "1",
+                            vh: "1"
+                        }}
+                        isRangeUnit={true}
+                        unitBounds={{
+                            px: { min: 0, max: 200, step: 1 },
+                            em: { min: 0, max: 10, step: 0.1 },
+                            rem: { min: 0, max: 10, step: 0.1 },
+                            '%': { min: 0, max: 100, step: 1 },
+                        }}
+                    />
+
+
+
                 )}
 
                 <ResponsiveRangeControl

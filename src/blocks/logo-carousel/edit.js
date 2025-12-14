@@ -92,6 +92,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		logoLinkHoverEffect,
 		logoLinkHoverOpacity,
 		logoLinkHoverScale,
+		logoLinkHoverLift,
+		logoLinkHoverLiftUnits,
 		logoLinkTransitionDuration,
 
 	} = attributes;
@@ -433,12 +435,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												if (logoLinkHoverEffect === 'scale' || logoLinkHoverEffect === 'both') {
 													e.currentTarget.style.transform = `scale(${logoLinkHoverScale?.[deviceType] || 1.05})`;
 												}
+												if (logoLinkHoverEffect === 'move-up') {
+													e.currentTarget.style.transform = `translateY(-${logoLinkHoverLift?.[deviceType] || 10}${logoLinkHoverLiftUnits?.[deviceType] || 'px'})`;
+												}
 											}
 										}}
 										onMouseLeave={(e) => {
 											if (logoLinkHoverEffect && logoLinkHoverEffect !== 'none') {
 												e.currentTarget.style.opacity = 1;
-												e.currentTarget.style.transform = 'scale(1)';
+												e.currentTarget.style.transform = 'scale(1) translateY(0)';
 											}
 										}}
 									>

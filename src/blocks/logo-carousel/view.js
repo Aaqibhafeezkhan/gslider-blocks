@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const hoverEffect = item.dataset.hoverEffect;
             const hoverOpacity = parseFloat(item.dataset.hoverOpacity) || 0.8;
             const hoverScale = parseFloat(item.dataset.hoverScale) || 1.05;
+            const hoverLift = parseFloat(item.dataset.hoverLift) || 10;
+            const hoverLiftUnit = item.dataset.hoverLiftUnit || 'px';
 
             if (hoverEffect && hoverEffect !== 'none') {
                 item.addEventListener('mouseenter', function () {
@@ -42,11 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (hoverEffect === 'scale' || hoverEffect === 'both') {
                         this.style.transform = `scale(${hoverScale})`;
                     }
+                    if (hoverEffect === 'move-up') {
+                        this.style.transform = `translateY(-${hoverLift}${hoverLiftUnit})`;
+                    }
                 });
 
                 item.addEventListener('mouseleave', function () {
                     this.style.opacity = 1;
-                    this.style.transform = 'scale(1)';
+                    this.style.transform = 'scale(1) translateY(0)';
                 });
             }
         });

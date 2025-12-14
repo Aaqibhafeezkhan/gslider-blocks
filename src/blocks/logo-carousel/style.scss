@@ -44,11 +44,30 @@
 	// Logo item with hover effects
 	.gslider-logo-item {
 		display: block;
+		transition: transform 0.3s ease, opacity 0.3s ease;
 
 		img {
 			display: block;
 			width: 100%;
 			height: auto;
+		}
+
+		// Hover effects
+		&[data-hover-effect="opacity"]:hover {
+			opacity: var(--hover-opacity, 0.8);
+		}
+
+		&[data-hover-effect="scale"]:hover {
+			transform: scale(var(--hover-scale, 1.05));
+		}
+
+		&[data-hover-effect="move-up"]:hover {
+			transform: translateY(calc(var(--hover-lift, 10px) * -1));
+		}
+
+		&[data-hover-effect="both"]:hover {
+			opacity: var(--hover-opacity, 0.8);
+			transform: scale(var(--hover-scale, 1.05));
 		}
 	}
 

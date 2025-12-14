@@ -170,6 +170,22 @@ const attributes = {
             Mobile: 1.05,
         },
     },
+    logoLinkHoverLift: {
+        type: "object",
+        default: {
+            Desktop: 10,
+            Tablet: 10,
+            Mobile: 10,
+        },
+    },
+    logoLinkHoverLiftUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
     logoLinkTransitionDuration: {
         type: "object",
         default: {
