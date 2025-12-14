@@ -152,7 +152,7 @@ const attributes = {
     },
     logoLinkHoverEffect: {
         type: "string",
-        default: "opacity", // opacity, scale, both, none
+        default: "none",
     },
     logoLinkHoverOpacity: {
         type: "object",
