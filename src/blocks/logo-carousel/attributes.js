@@ -91,6 +91,10 @@ const attributes = {
         type: "boolean",
         default: false
     },
+    keyboardNavigation: {
+		type: 'boolean',
+		default: false
+	},
     paginationType: {
         type: "string",
         default: "bullets"
@@ -100,6 +104,15 @@ const attributes = {
         default: false,
     },
     /** End Carousel Settings */
+
+    showCaption: {
+        type: "object",
+        default: {
+            Desktop: false,
+            Tablet: false,
+            Mobile: false,
+        },
+    },
 
     /** Start Show/Hide Elements */
     paginationPositionType: {
@@ -125,10 +138,6 @@ const attributes = {
     /** End Show/Hide Elements */
 
     /** Layout & Content Setting */
-    layoutHeightSwitcher: {
-        type: "string",
-        default: "fixed",
-    },
     layoutHeight: {
         type: "object",
         default: {
@@ -145,23 +154,10 @@ const attributes = {
             Mobile: "px",
         },
     },
-    contentWidth: {
-        type: "object",
-        default: {
-            Desktop: "100",
-            Tablet: "100",
-            Mobile: "100",
-        },
-    },
-    contentWidthUnits: {
-        type: "object",
-        default: {
-            Desktop: "%",
-            Tablet: "%",
-            Mobile: "%",
-        },
-    },
-    contentVerticalAlignment: {
+    /** End Layout & Content Setting */
+
+    /** Start Logo Max Width */
+    logoMaxWidth: {
         type: "object",
         default: {
             Desktop: "",
@@ -169,7 +165,15 @@ const attributes = {
             Mobile: "",
         },
     },
-    /** End Layout & Content Setting */
+    logoMaxWidthUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    /** End Logo Max Width */
 
     /** Start Logo Padding */
     logoPaddingUnits: {
@@ -350,7 +354,7 @@ const attributes = {
     },
     /** End Logo Background */
 
-    /** Start Global Border */
+    /** Start Logo Border */
     logoBorder: {
         type: "string",
         default: "none",
@@ -488,6 +492,343 @@ const attributes = {
         default: "",
     },
     /** End Logo Border */
+
+    /** Start Logo Caption Typography */
+    logoCaptionFontFamily: {
+        type: "string",
+        default: "",
+    },
+    logoCaptionFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    logoCaptionFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    logoCaptionFontWeight: {
+        type: "string",
+        default: "",
+    },
+    logoCaptionFontStyle: {
+        type: "string",
+        default: "",
+    },
+    logoCaptionTextTransform: {
+        type: "string",
+        default: "",
+    },
+    logoCaptionTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    logoCaptionLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    logoCaptionLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    logoCaptionLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    logoCaptionLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    logoCaptionWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },  
+    logoCaptionWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Logo Caption Typography */
+
+    /** start logo caption width  */
+    logoCaptionWidth: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    logoCaptionWidthUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    /** End logo caption width */
+
+    /** Start Logo Caption Color */
+    logoCaptionColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    logoCaptionColor: {
+        type: "string",
+        default: "#ffffff",
+    },
+    logoCaptionColorHover: {
+        type: "string",
+        default: "",
+    },
+    /** End Logo Caption Color */
+
+    /** Start Logo Caption Background */
+    logoCaptionNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    logoCaptionNormalClassicColor: {
+        type: "string",
+        default: "#00000075",
+    },
+    logoCaptionNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    logoCaptionNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    logoCaptionNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    logoCaptionHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    logoCaptionHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    logoCaptionHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    logoCaptionHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    logoCaptionHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Logo Caption Background */
+
+    /** Start Logo Caption Border */
+    logoCaptionBorder: { 
+        type: "string",
+        default: "none",
+    },
+    logoCaptionBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    logoCaptionBorderColor: {
+        type: "string",
+    },
+    logoCaptionBorderHoverColor: {
+        type: "string",
+    },
+    logoCaptionBorderUnits: {  
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    logoCaptionBorderDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoCaptionBorderDesktopCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoCaptionBorderTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoCaptionBorderTabletCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoCaptionBorderMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoCaptionBorderMobileCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoCaptionBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    logoCaptionBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    logoCaptionBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoCaptionBorderRadiusDesktopCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    logoCaptionBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoCaptionBorderRadiusTabletCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    logoCaptionBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoCaptionBorderRadiusMobileCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoCaptionBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Logo Caption Border */
+
+    /** Start Logo Caption Padding */
+    logoCaptionPaddingUnits: {
+        type: "object",
+        default: {  
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    logoCaptionPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoCaptionPaddingDesktopCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoCaptionPaddingTablet: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoCaptionPaddingTabletCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoCaptionPaddingMobile: {
+        type: "object",  
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoCaptionPaddingMobileCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    logoCaptionPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Logo Caption Padding */
 
     /** Start Navigation Custom Arrows */
     navigationArrowsIconSwitcher: {

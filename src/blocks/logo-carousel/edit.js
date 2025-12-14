@@ -20,6 +20,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import {
 	Navigation,
 	Pagination,
+	Keyboard,
     Autoplay,
 	Manipulation,
 	Mousewheel,
@@ -56,10 +57,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		reverseDirection,
 		carouselEffect,
 		mousewheelControl,
+		keyboardNavigation,
 		paginationType,
 		dynamicBullets,
 
 		logos,
+		showCaption,
 		paginationPositionType,
         showNavigation,
 		showPagination,
@@ -79,8 +82,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconRight,
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
-
-        layoutHeightSwitcher,
 
 	} = attributes;
 
@@ -148,10 +149,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		   },
 	   	},
 
-        ...(layoutHeightSwitcher === 'adapt' && {
-            autoHeight: true,
-        }),
-    
         // Common settings
         loop: infiniteLoop,
         autoplay: autoplay
@@ -167,6 +164,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         speed: speed?.[deviceType] || 800,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
+
+		keyboard: keyboardNavigation ? { 
+            enabled: true,
+            onlyInViewport: true,
+            pageUpDown: false,
+        } : false,
     
         // Navigation and pagination settings
         navigation: showNavigation?.[deviceType]
@@ -210,6 +213,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         speed,
         allowTouchMove,
         mousewheelControl,
+        keyboardNavigation,
         showNavigation,
         showPagination,
         paginationType,
@@ -220,7 +224,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconSwitcher,
         navigationArrowsIconLeft,
         navigationArrowsIconRight,
-        layoutHeightSwitcher,
     ]);
 
     /**
@@ -236,6 +239,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		stopOnLastSlide,
 		reverseDirection,
 		mousewheelControl,
+		keyboardNavigation,
 		showNavigation,
 		showPagination,
 		autoplay,
@@ -252,7 +256,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationArrowsIconSwitcher,
         navigationArrowsIconLeft,
         navigationArrowsIconRight,
-        layoutHeightSwitcher,
 	]);
 
 
@@ -351,6 +354,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							Autoplay,
 							Manipulation,
 							Mousewheel,
+							Keyboard,
 							EffectFade,
 							EffectCube,
 							EffectCoverflow,
@@ -365,8 +369,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					>
 						{logos.map((item) => (
 							<SwiperSlide key={item.id}>
-								<div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
+								<div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
 									<img src={item.url} alt={item.alt || ''}/> 
+                                    {showCaption?.[deviceType] && item.caption ? (
+                                        <div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
+                                    ) : null}
 								</div>
 							</SwiperSlide>
 						))}
@@ -431,7 +438,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				{logos?.length > 0 &&
 					showPagination?.[deviceType] &&
 					paginationPositionType === 'outside' && (
-						<div className="swiper-pagination swiper-pagination-logo-carousel"></div>
+						<div
+							className="swiper-pagination swiper-pagination-logo-carousel"
+							aria-label="Carousel pagination"
+						></div>
 				)}
 
 			</div>

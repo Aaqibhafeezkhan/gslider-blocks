@@ -214,6 +214,13 @@ export const LAYOUT_HEIGHT_SWITCHER = [
     { label: __("Adapt", "gslider-blocks"), value: "adapt" },
 ];
 
+export const OBJECT_FIT_OPTIONS = [
+  { label: __("Contain", "gslider-blocks"), value: "contain" },
+  { label: __("Cover", "gslider-blocks"), value: "cover" },
+  { label: __("Fill", "gslider-blocks"), value: "fill" },
+  { label: __("Scale-down", "gslider-blocks"), value: "scale-down" },
+];
+
 export const GOOGLE_FONTS = async () => {
     const res = await fetch(GsliderBlocksData.plugin_url + 'assets/google-fonts/google-fonts.json');
     const data = await res.json();

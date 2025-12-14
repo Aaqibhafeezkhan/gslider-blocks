@@ -1,5 +1,5 @@
 .gslider-logo-carousel-wrapper {
-	.gslider-content-wrapper {
+	.gslider-logo-carousel-content-wrapper {
 		box-sizing: border-box;
 		height: clamp(150px, 60vh, 150px);
 		overflow: hidden;
@@ -7,7 +7,21 @@
 		text-align: center;
 		z-index: 1;
 	}
-	
+
+	.gslider-logo-carousel-content-wrapper .gslider-logo-carousel-caption {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 8px 12px;
+		color: #fff;
+		font-size: 14px;
+		line-height: 1.4;
+		text-align: center;
+		box-sizing: border-box;
+		background: rgba(0, 0, 0, .5);
+		box-sizing: border-box;
+	}
 }
 
 :where(.wp-site-blocks *:focus) {

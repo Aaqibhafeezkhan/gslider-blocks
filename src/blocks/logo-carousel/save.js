@@ -1,4 +1,4 @@
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Save({ attributes }) {
@@ -16,10 +16,12 @@ export default function Save({ attributes }) {
         reverseDirection,
         carouselEffect,
         mousewheelControl,
+        keyboardNavigation,
         paginationType,
         dynamicBullets,
 
         logos,
+        showCaption,
 
         paginationPositionType,
         showNavigation,
@@ -40,12 +42,18 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
 
-        layoutHeightSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
         className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination?'has-pagination':''}`, 
     });
+
+    const captionEnabled = {
+        Mobile:  !!showCaption?.Mobile,
+        Tablet:  !!showCaption?.Tablet,
+        Desktop: !!showCaption?.Desktop,
+    };
+    const anyCaptionEnabled = captionEnabled.Mobile || captionEnabled.Tablet || captionEnabled.Desktop;
 
     const navigationEnabled = {
         Mobile:  !!showNavigation?.Mobile,
@@ -58,7 +66,7 @@ export default function Save({ attributes }) {
         Mobile:  !!showPagination?.Mobile,
         Tablet:  !!showPagination?.Tablet,
         Desktop: !!showPagination?.Desktop,
-    };
+    };  
     const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
 
     // Configure Swiper settings for frontend rendering
@@ -99,10 +107,6 @@ export default function Save({ attributes }) {
             },
         },
 
-        ...(layoutHeightSwitcher === 'adapt' && {
-            autoHeight: true,
-        }),
-        
         // Common settings
         loop: infiniteLoop,
         autoplay: autoplay ? {
@@ -113,6 +117,12 @@ export default function Save({ attributes }) {
         } : false,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
+
+        keyboard: keyboardNavigation ? { 
+            enabled: true,
+            onlyInViewport: true,
+            pageUpDown: false,
+        } : false,
         
         navigation: {
             enabled: anyNavigationEnabled,
@@ -136,8 +146,11 @@ export default function Save({ attributes }) {
                 <div className="swiper-wrapper">
                     {logos.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
-                            <div className={`gslider-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})}>
+                            <div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})}>
                                 <img src={item.url} alt={item.alt || ''} />
+                                {anyCaptionEnabled && item.caption ? (
+                                    <div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
+                                ) : null}
                             </div>
                         </div>
                     ))}
@@ -171,7 +184,10 @@ export default function Save({ attributes }) {
 
                 { anyPaginationEnabled && paginationPositionType === 'inside' && (
                     <>
-                        <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
+                        <div
+                            className="swiper-pagination swiper-pagination-logo-carousel"
+                            aria-label="Carousel pagination"
+                        ></div>
                     </>
                 )}
             </div>
@@ -205,7 +221,10 @@ export default function Save({ attributes }) {
 
             {anyPaginationEnabled && paginationPositionType === 'outside' && (
                 <>
-                    <div className="swiper-pagination swiper-pagination-logo-carousel"></div>
+                    <div
+                        className="swiper-pagination swiper-pagination-logo-carousel"
+                        aria-label="Carousel pagination"
+                    ></div>
                 </>
             )}
         </div>
