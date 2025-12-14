@@ -22,6 +22,38 @@
 		background: rgba(0, 0, 0, .5);
 		box-sizing: border-box;
 	}
+
+	// Logo link styles
+	.gslider-logo-link {
+		display: block;
+		text-decoration: none;
+		outline: none;
+
+		&:focus {
+			outline: 2px solid #2271b1;
+			outline-offset: 2px;
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	// Link button in editor
+	.gslider-logo-link-button {
+		opacity: 0;
+		transition: opacity 0.2s ease;
+
+		&.has-link {
+			opacity: 1;
+		}
+	}
+
+	.gslider-logo-carousel-content-wrapper:hover .gslider-logo-link-button {
+		opacity: 1;
+	}
 }
 
 :where(.wp-site-blocks *:focus) {

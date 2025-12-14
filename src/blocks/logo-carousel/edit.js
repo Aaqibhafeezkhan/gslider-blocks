@@ -8,7 +8,10 @@ import {
 } from '@wordpress/block-editor';
 import {
 	ToolbarGroup,
-	ToolbarButton
+	ToolbarButton,
+	Popover,
+	Button,
+	TextControl
 } from '@wordpress/components';
 import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
@@ -21,7 +24,7 @@ import {
 	Navigation,
 	Pagination,
 	Keyboard,
-    Autoplay,
+	Autoplay,
 	Manipulation,
 	Mousewheel,
 	EffectFade,
@@ -44,7 +47,7 @@ const mapMedia = (m) => ({
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
-        deviceType,
+		deviceType,
 		carouselPerColumn,
 		carouselPerColumnGap,
 		speed,
@@ -64,40 +67,48 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		logos,
 		showCaption,
 		paginationPositionType,
-        showNavigation,
+		showNavigation,
 		showPagination,
 
-        globalID,
-        globalClass,
-        navigationArrowPositionType,
-        navigationArrowPosition,
+		globalID,
+		globalClass,
+		navigationArrowPositionType,
+		navigationArrowPosition,
 
-        navigationArrowsIconSwitcher,
-        navigationArrowsIconLeftAlign,
-        navigationArrowsIconLeft,
-        navigationArrowsIconLeftImageUrl,
-        navigationArrowsIconLeftImageAlt,
+		navigationArrowsIconSwitcher,
+		navigationArrowsIconLeftAlign,
+		navigationArrowsIconLeft,
+		navigationArrowsIconLeftImageUrl,
+		navigationArrowsIconLeftImageAlt,
 
-        navigationArrowsIconRightAlign,
-        navigationArrowsIconRight,
-        navigationArrowsIconRightImageUrl,
-        navigationArrowsIconRightImageAlt,
+		navigationArrowsIconRightAlign,
+		navigationArrowsIconRight,
+		navigationArrowsIconRightImageUrl,
+		navigationArrowsIconRightImageAlt,
+
+		enableLogoLinks,
+		logoLinkTarget,
+		logoLinkRel,
+		logoLinkHoverEffect,
+		logoLinkHoverOpacity,
+		logoLinkHoverScale,
+		logoLinkTransitionDuration,
 
 	} = attributes;
 
 	// Block props for container
 	const blockProps = useBlockProps({
-        className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
+		className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
 	});
 
 	const onSelectFromPlaceholder = (selection) => {
 		const list = Array.isArray(selection) ? selection : [selection];
 		const next = list
-		  .filter((m) => m && (m.type === 'image' || (m.mime && m.mime.startsWith('image/'))))
-		  .map(mapMedia);
+			.filter((m) => m && (m.type === 'image' || (m.mime && m.mime.startsWith('image/'))))
+			.map(mapMedia);
 		setAttributes({ logos: next });
 	};
-	
+
 	const onSelectGallery = (images) => {
 		const list = Array.isArray(images) ? images : [images];
 		const next = list
@@ -108,131 +119,135 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Local state management for slider items and active slide index
 	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
-    const [swiperInstance, setSwiperInstance] = useState(null);
+	const [swiperInstance, setSwiperInstance] = useState(null);
 
 	// A key to force re-mounting of <Swiper> when critical settings change
 	const [swiperKey, setSwiperKey] = useState(0);
+
+	// State for link editing popover
+	const [editingLogoId, setEditingLogoId] = useState(null);
+	const [tempLinkUrl, setTempLinkUrl] = useState('');
 
 	// Ref for panel settings focus management
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-    // Refs for navigation buttons
-    const prevRef = useRef(null);
-    const nextRef = useRef(null);
+	// Refs for navigation buttons
+	const prevRef = useRef(null);
+	const nextRef = useRef(null);
 
-    /**
-     * Initializes and updates Swiper instance when slider configuration changes
-     * Handles different slider types, effects, and interactive options
-     */
-    const swiperSettings = useMemo(() => ({
+	/**
+	 * Initializes and updates Swiper instance when slider configuration changes
+	 * Handles different slider types, effects, and interactive options
+	 */
+	const swiperSettings = useMemo(() => ({
 
-        // Set effect based on carouselEffect
-        effect: carouselEffect,
+		// Set effect based on carouselEffect
+		effect: carouselEffect,
 
-        // Responsive breakpoints for Desktop, Tablet, and Mobile
+		// Responsive breakpoints for Desktop, Tablet, and Mobile
 		breakpoints: {
 			// Mobile (e.g., screens < 768px)
-		   0: {
-			   slidesPerView: carouselPerColumn?.[deviceType] || 1,
-			   spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
-		   },
-		   // Tablet (e.g., screens 768px - 1024px)
-		   768: {
-			   slidesPerView: carouselPerColumn?.[deviceType] || 2,
-			   spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
-		   },
-		   // Desktop (e.g., screens > 1024px)
-		   1025: {
-			   slidesPerView: carouselPerColumn?.[deviceType] || 2,
-			   spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
-		   },
-	   	},
+			0: {
+				slidesPerView: carouselPerColumn?.[deviceType] || 1,
+				spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
+			},
+			// Tablet (e.g., screens 768px - 1024px)
+			768: {
+				slidesPerView: carouselPerColumn?.[deviceType] || 2,
+				spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+			},
+			// Desktop (e.g., screens > 1024px)
+			1025: {
+				slidesPerView: carouselPerColumn?.[deviceType] || 2,
+				spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+			},
+		},
 
-        // Common settings
-        loop: infiniteLoop,
-        autoplay: autoplay
-            ? {
-                  delay: autoplayDelay?.[deviceType] || 1000,
-                  pauseOnMouseEnter: pauseOnHover,
-                  disableOnInteraction: false,
-                  stopOnLastSlide: stopOnLastSlide,
-                  reverseDirection: reverseDirection,
-              }
-            : false,
-    
-        speed: speed?.[deviceType] || 800,
-        allowTouchMove: allowTouchMove,
-        mousewheel: mousewheelControl,
+		// Common settings
+		loop: infiniteLoop,
+		autoplay: autoplay
+			? {
+				delay: autoplayDelay?.[deviceType] || 1000,
+				pauseOnMouseEnter: pauseOnHover,
+				disableOnInteraction: false,
+				stopOnLastSlide: stopOnLastSlide,
+				reverseDirection: reverseDirection,
+			}
+			: false,
 
-		keyboard: keyboardNavigation ? { 
-            enabled: true,
-            onlyInViewport: true,
-            pageUpDown: false,
-        } : false,
-    
-        // Navigation and pagination settings
-        navigation: showNavigation?.[deviceType]
-            ? {
-                prevEl: prevRef.current,
-                nextEl: nextRef.current,
-            }
-            : false,
+		speed: speed?.[deviceType] || 800,
+		allowTouchMove: allowTouchMove,
+		mousewheel: mousewheelControl,
+
+		keyboard: keyboardNavigation ? {
+			enabled: true,
+			onlyInViewport: true,
+			pageUpDown: false,
+		} : false,
+
+		// Navigation and pagination settings
+		navigation: showNavigation?.[deviceType]
+			? {
+				prevEl: prevRef.current,
+				nextEl: nextRef.current,
+			}
+			: false,
 
 		// pagination inside/outside logic
-        pagination: showPagination?.[deviceType]
-            ? paginationPositionType === 'outside'
-                ? {
-                    el: `.swiper-pagination-logo-carousel`,
-                    type: paginationType,
-                    dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                    clickable: true,
-                  }
-                : {
-                    // inside – default Swiper behaviour
-                    type: paginationType,
-                    dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                    clickable: true,
-                  }
-            : false,
-    
-        // Handle slide change event to update selected slide index
-        onSlideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
+		pagination: showPagination?.[deviceType]
+			? paginationPositionType === 'outside'
+				? {
+					el: `.swiper-pagination-logo-carousel`,
+					type: paginationType,
+					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+					clickable: true,
+				}
+				: {
+					// inside – default Swiper behaviour
+					type: paginationType,
+					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+					clickable: true,
+				}
+			: false,
 
-    }), [
-        deviceType,
-        carouselEffect,
-        carouselPerColumn,
-        carouselPerColumnGap,
-        infiniteLoop,
-        autoplay,
-        autoplayDelay,
-        pauseOnHover,
-        stopOnLastSlide,
-        reverseDirection,
-        speed,
-        allowTouchMove,
-        mousewheelControl,
-        keyboardNavigation,
-        showNavigation,
-        showPagination,
-        paginationType,
-        dynamicBullets,
+		// Handle slide change event to update selected slide index
+		onSlideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
+
+	}), [
+		deviceType,
+		carouselEffect,
+		carouselPerColumn,
+		carouselPerColumnGap,
+		infiniteLoop,
+		autoplay,
+		autoplayDelay,
+		pauseOnHover,
+		stopOnLastSlide,
+		reverseDirection,
+		speed,
+		allowTouchMove,
+		mousewheelControl,
+		keyboardNavigation,
+		showNavigation,
+		showPagination,
+		paginationType,
+		dynamicBullets,
 		paginationPositionType,
-        navigationArrowPositionType,
-        navigationArrowPosition,
-        navigationArrowsIconSwitcher,
-        navigationArrowsIconLeft,
-        navigationArrowsIconRight,
-    ]);
+		navigationArrowPositionType,
+		navigationArrowPosition,
+		navigationArrowsIconSwitcher,
+		navigationArrowsIconLeft,
+		navigationArrowsIconRight,
+	]);
 
-    /**
-     * When any of these settings change, update the key to reinitialize Swiper
-     */
+	/**
+	 * When any of these settings change, update the key to reinitialize Swiper
+	 */
 	useEffect(() => {
 		setSwiperKey(prevKey => prevKey + 1);
 	}, [
-        deviceType,
+		deviceType,
 		infiniteLoop,
 		allowTouchMove,
 		pauseOnHover,
@@ -251,77 +266,111 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		paginationType,
 		dynamicBullets,
 		paginationPositionType,
-        navigationArrowPositionType,
-        navigationArrowPosition,
-        navigationArrowsIconSwitcher,
-        navigationArrowsIconLeft,
-        navigationArrowsIconRight,
+		navigationArrowPositionType,
+		navigationArrowPosition,
+		navigationArrowsIconSwitcher,
+		navigationArrowsIconLeft,
+		navigationArrowsIconRight,
 	]);
 
 
-    /* Custom Icon */
-    useEffect(() => {
-        if (!swiperInstance || !showNavigation?.[deviceType]) return;
-    
-        const prevEl = prevRef.current;
-        const nextEl = nextRef.current;
-    
-        if (prevEl && nextEl && swiperInstance.navigation) {
-            swiperInstance.params.navigation.prevEl = prevEl;
-            swiperInstance.params.navigation.nextEl = nextEl;
-    
-            setTimeout(() => {
-                // Check again in case swiperInstance.navigation was reloaded in the meantime
-                if (swiperInstance.navigation) {
-                    swiperInstance.navigation.destroy();
-                    swiperInstance.navigation.init();
-                    swiperInstance.navigation.update();
-                }
-            }, 100);
-        }
-    }, [
-        swiperInstance,
-        showNavigation,
-        navigationArrowsIconSwitcher,
-        navigationArrowPositionType,
-        navigationArrowPosition,
-        navigationArrowsIconLeft,
-        navigationArrowsIconRight,
-        navigationArrowsIconLeftAlign,
-        navigationArrowsIconRightAlign,
-        navigationArrowsIconLeftImageUrl,
-        navigationArrowsIconRightImageUrl
-    ]);
+	/* Custom Icon */
+	useEffect(() => {
+		if (!swiperInstance || !showNavigation?.[deviceType]) return;
 
-    /**
-     * Renders toolbar controls for slide management
-     * Provides buttons for adding and duplicating logos
-     */
-    const renderSliderToolbarControls = () => {
-        return (
+		const prevEl = prevRef.current;
+		const nextEl = nextRef.current;
+
+		if (prevEl && nextEl && swiperInstance.navigation) {
+			swiperInstance.params.navigation.prevEl = prevEl;
+			swiperInstance.params.navigation.nextEl = nextEl;
+
+			setTimeout(() => {
+				// Check again in case swiperInstance.navigation was reloaded in the meantime
+				if (swiperInstance.navigation) {
+					swiperInstance.navigation.destroy();
+					swiperInstance.navigation.init();
+					swiperInstance.navigation.update();
+				}
+			}, 100);
+		}
+	}, [
+		swiperInstance,
+		showNavigation,
+		navigationArrowsIconSwitcher,
+		navigationArrowPositionType,
+		navigationArrowPosition,
+		navigationArrowsIconLeft,
+		navigationArrowsIconRight,
+		navigationArrowsIconLeftAlign,
+		navigationArrowsIconRightAlign,
+		navigationArrowsIconLeftImageUrl,
+		navigationArrowsIconRightImageUrl
+	]);
+
+	/**
+	 * Link management functions
+	 */
+	const handleEditLink = (logoId, currentLink) => {
+		setEditingLogoId(logoId);
+		setTempLinkUrl(currentLink || '');
+	};
+
+	const handleSaveLink = () => {
+		if (editingLogoId !== null) {
+			const updatedLogos = logos.map(logo =>
+				logo.id === editingLogoId
+					? { ...logo, link: tempLinkUrl }
+					: logo
+			);
+			setAttributes({ logos: updatedLogos });
+			setEditingLogoId(null);
+			setTempLinkUrl('');
+		}
+	};
+
+	const handleRemoveLink = () => {
+		if (editingLogoId !== null) {
+			const updatedLogos = logos.map(logo =>
+				logo.id === editingLogoId
+					? { ...logo, link: '' }
+					: logo
+			);
+			setAttributes({ logos: updatedLogos });
+			setEditingLogoId(null);
+			setTempLinkUrl('');
+		}
+	};
+
+	/**
+	 * Renders toolbar controls for slide management
+	 * Provides buttons for adding and duplicating logos
+	 */
+	const renderSliderToolbarControls = () => {
+		return (
 			<BlockControls>
 				<ToolbarGroup>
 					<MediaUploadCheck>
 						<MediaUpload
-						allowedTypes={['image']}
-						gallery
-						multiple
-						addToGallery
-						value={logos.map((l) => l.id)}
-						onSelect={onSelectGallery}
-						render={({ open }) => (
-							<ToolbarButton icon="edit" label={__('Edit Logos', 'logo-carousel')} onClick={open} />
-						)}
+							allowedTypes={['image']}
+							gallery
+							multiple
+							addToGallery
+							value={logos.map((l) => l.id)}
+							onSelect={onSelectGallery}
+							render={({ open }) => (
+								<ToolbarButton icon="edit" label={__('Edit Logos', 'logo-carousel')} onClick={open} />
+							)}
 						/>
 					</MediaUploadCheck>
 				</ToolbarGroup>
 			</BlockControls>
-        );
-    };
+		);
+	};
 
 	return (
 		<>
-			<Inspector 
+			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
 				clientId={clientId}
@@ -369,11 +418,76 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					>
 						{logos.map((item) => (
 							<SwiperSlide key={item.id}>
-								<div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
-									<img src={item.url} alt={item.alt || ''}/> 
-                                    {showCaption?.[deviceType] && item.caption ? (
-                                        <div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
-                                    ) : null}
+								<div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
+									<img src={item.url} alt={item.alt || ''} />
+									{showCaption?.[deviceType] && item.caption ? (
+										<div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
+									) : null}
+
+									{enableLogoLinks && (
+										<>
+											<Button
+												icon={item.link ? "admin-links" : "admin-links"}
+												className={`gslider-logo-link-button ${item.link ? 'has-link' : ''}`}
+												onClick={() => handleEditLink(item.id, item.link)}
+												label={item.link ? __('Edit Link', 'gslider-blocks') : __('Add Link', 'gslider-blocks')}
+												style={{
+													position: 'absolute',
+													top: '8px',
+													right: '8px',
+													zIndex: 10,
+													background: item.link ? '#2271b1' : '#fff',
+													color: item.link ? '#fff' : '#2271b1',
+													border: '1px solid #2271b1',
+													borderRadius: '4px',
+													padding: '4px 8px',
+													cursor: 'pointer',
+													fontSize: '16px',
+												}}
+											/>
+
+											{editingLogoId === item.id && (
+												<Popover
+													position="middle center"
+													onClose={() => setEditingLogoId(null)}
+													focusOnMount="firstElement"
+												>
+													<div style={{ padding: '16px', minWidth: '300px' }}>
+														<TextControl
+															label={__('Logo Link URL', 'gslider-blocks')}
+															value={tempLinkUrl}
+															onChange={(value) => setTempLinkUrl(value)}
+															placeholder="https://example.com"
+															help={__('Enter the URL for this logo', 'gslider-blocks')}
+														/>
+														<div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+															<Button
+																variant="primary"
+																onClick={handleSaveLink}
+															>
+																{__('Save', 'gslider-blocks')}
+															</Button>
+															{item.link && (
+																<Button
+																	variant="secondary"
+																	isDestructive
+																	onClick={handleRemoveLink}
+																>
+																	{__('Remove Link', 'gslider-blocks')}
+																</Button>
+															)}
+															<Button
+																variant="tertiary"
+																onClick={() => setEditingLogoId(null)}
+															>
+																{__('Cancel', 'gslider-blocks')}
+															</Button>
+														</div>
+													</div>
+												</Popover>
+											)}
+										</>
+									)}
 								</div>
 							</SwiperSlide>
 						))}
@@ -389,17 +503,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 						{showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
 							<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-								<div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-								<div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
+								<div className="swiper-button-prev" ref={prevRef} role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
+								<div className="swiper-button-next" ref={nextRef} role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
 							</div>
 						)}
 
 						{showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
 							<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-								<div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">
+								<div className="swiper-button-prev" ref={prevRef} role="button" tabIndex={0} aria-label="Previous slide">
 									<img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
 								</div>
-								<div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">
+								<div className="swiper-button-next" ref={nextRef} role="button" tabIndex={0} aria-label="Next slide">
 									<img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
 								</div>
 							</div>
@@ -407,33 +521,33 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 					</Swiper>
 				)}
-				
-                {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div ref={prevRef} className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                            <div ref={nextRef} className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
 
-                {showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
+				{showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
+					<>
+						<div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+							<div ref={prevRef} className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
+							<div ref={nextRef} className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
+						</div>
+					</>
+				)}
 
-                {showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
+				{showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
+					<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+						<div className="swiper-button-prev" ref={prevRef} role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
+						<div className="swiper-button-next" ref={nextRef} role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
+					</div>
+				)}
+
+				{showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+					<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+						<div className="swiper-button-prev" ref={prevRef} role="button" tabIndex={0} aria-label="Previous slide">
+							<img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
+						</div>
+						<div className="swiper-button-next" ref={nextRef} role="button" tabIndex={0} aria-label="Next slide">
+							<img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
+						</div>
+					</div>
+				)}
 
 				{logos?.length > 0 &&
 					showPagination?.[deviceType] &&
@@ -442,7 +556,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							className="swiper-pagination swiper-pagination-logo-carousel"
 							aria-label="Carousel pagination"
 						></div>
-				)}
+					)}
 
 			</div>
 		</>

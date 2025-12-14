@@ -5,7 +5,7 @@ import { PanelBody, ToggleControl, BaseControl, Button, } from '@wordpress/compo
 /**
  * Internal Dependencies
  */
-import { 
+import {
     TEXT_ALIGN,
     ARROW_ICON_ALIGN,
     VERTICAL_ALIGN,
@@ -37,14 +37,14 @@ import InspectorControl from '@Components/inspector-controls';
 import CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
-import {useDeviceType} from "@Utils/displayType";
+import { useDeviceType } from "@Utils/displayType";
 import InputControls from '@Components/input-control';
 import SelectControls from '@Components/select-controls';
 import IconPicker from '@Components/icon-picker';
 import ResponsiveToggleControl from '@Components/responsive-toggle-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockId,
         deviceType,
         blockStyle,
@@ -73,7 +73,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         showPagination,
         /** End Show/Hide Elements */
 
-        /** Start Layout & Content Setting */   
+        /** Start Logo Link Settings */
+        enableLogoLinks,
+        logoLinkTarget,
+        logoLinkRel,
+        logoLinkHoverEffect,
+        logoLinkHoverOpacity,
+        logoLinkHoverScale,
+        logoLinkTransitionDuration,
+        /** End Logo Link Settings */
+
+        /** Start Layout & Content Setting */
         layoutHeight,
         layoutHeightUnits,
         /** End Layout & Content Setting */
@@ -94,7 +104,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         logoPaddingLink,
         /** End Logo Padding */
 
-        /** Start Logo Background */     
+        /** Start Logo Background */
         logoNormalBackgroundType,
         logoNormalClassicColor,
         logoNormalGradientColor,
@@ -447,7 +457,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationProgressbarBGActiveColor,
         paginationProgressbarHeight,
         paginationProgressbarHeightUnits,
-        /** End pagination Progressbar Color */  
+        /** End pagination Progressbar Color */
 
         /** Global Settings */
 
@@ -480,7 +490,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End Global Z-Index */
 
         /** Start Global Background */
-        globalNormalBackgroundType, 
+        globalNormalBackgroundType,
         globalNormalClassicColor,
         globalNormalGradientColor,
         globalNormalCustomGradientSwitcher,
@@ -508,7 +518,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         globalBorderColorSwitcher,
         globalBorderColor,
         globalBorderHoverColor,
-        
+
         globalBorderUnits,
         globalBorderDesktop,
         globalBorderDesktopCssStyle,
@@ -517,7 +527,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         globalBorderMobile,
         globalBorderMobileCssStyle,
         globalBorderLink,
-        /** End Global Border */    
+        /** End Global Border */
 
         /** Start Global Border Radius */
         globalBorderRadiusUnits,
@@ -541,7 +551,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Start Global Custom CSS */
         globalCustomCSS,
         /** End Global Custom CSS */
-        
+
     } = attributes;
 
     /** Get Current Device Type */
@@ -607,18 +617,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     /** Navigation Custom Arrows */
     const navigationArrowsIconLeftHandler = (IconName) => {
-		setAttributes({navigationArrowsIconLeft: IconName})
+        setAttributes({ navigationArrowsIconLeft: IconName })
 
-	}
+    }
     const navigationArrowsIconRightHandler = (IconName) => {
-		setAttributes({navigationArrowsIconRight: IconName})
-	}
+        setAttributes({ navigationArrowsIconRight: IconName })
+    }
     /** End Navigation Custom Arrows */
 
     /**
-	 * Inspector General Controls
-	 */
-	const generalControls = (
+     * Inspector General Controls
+     */
+    const generalControls = (
         <>
             <PanelBody
                 title={__("Show / Hide Elements", "gslider-blocks")}
@@ -626,25 +636,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 onToggle={() => togglePanel("general", "show-hide-elements")}
             >
                 <ResponsiveToggleControl
-                    label={ __( "Show Caption", "gslider-blocks" ) }
+                    label={__("Show Caption", "gslider-blocks")}
                     toggleValue={showCaption}
                     setToggleValue={(value) => setAttributes({ showCaption: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />
                 <ResponsiveToggleControl
-                    label={ __( "Show Navigation", "gslider-blocks" ) }
+                    label={__("Show Navigation", "gslider-blocks")}
                     toggleValue={showNavigation}
                     setToggleValue={(value) => setAttributes({ showNavigation: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />
                 <ResponsiveToggleControl
-                    label={ __( "Show Pagination", "gslider-blocks" ) }
+                    label={__("Show Pagination", "gslider-blocks")}
                     toggleValue={showPagination}
                     setToggleValue={(value) => setAttributes({ showPagination: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
+                />
+                <ToggleControl
+                    label={__('Enable Logo Links', 'gslider-blocks')}
+                    help={__('Allow logos to be clickable with custom URLs', 'gslider-blocks')}
+                    checked={enableLogoLinks}
+                    onChange={(value) => setAttributes({ enableLogoLinks: value })}
                 />
             </PanelBody>
             <PanelBody
@@ -665,14 +681,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         vh: "50",
                         vw: "50",
                         em: "20",
-                        rem:"20",
+                        rem: "20",
                     }}
                 />
-            
+
             </PanelBody>
 
-            <PanelBody 
-                title={__("Carousel Settings", "gslider-blocks")} 
+            <PanelBody
+                title={__("Carousel Settings", "gslider-blocks")}
                 opened={openPanels.general === "carousel-settings"}
                 onToggle={() => togglePanel("general", "carousel-settings")}
             >
@@ -699,13 +715,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     isRangeUnit={false}
                 />
                 <ToggleControl
-                    label={ __( 'Infinite Loop', 'gslider-blocks' ) }
-                    checked={ infiniteLoop }
+                    label={__('Infinite Loop', 'gslider-blocks')}
+                    checked={infiniteLoop}
                     onChange={(value) => setAttributes({ infiniteLoop: value })}
                 />
                 <ToggleControl
-                    label={ __( 'Touch Swipe Control', 'gslider-blocks' ) }
-                    checked={ allowTouchMove }
+                    label={__('Touch Swipe Control', 'gslider-blocks')}
+                    checked={allowTouchMove}
                     onChange={(value) => setAttributes({ allowTouchMove: value })}
                 />
                 <ToggleControl
@@ -745,16 +761,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChange={(value) => setAttributes({ keyboardNavigation: value })}
                 />
                 <ToggleControl
-                    label={ __( 'Autoplay', 'gslider-blocks' ) }
-                    checked={ autoplay }
+                    label={__('Autoplay', 'gslider-blocks')}
+                    checked={autoplay}
                     onChange={(value) => setAttributes({ autoplay: value })}
                 />
-                { autoplay && (
+                {autoplay && (
                     <ResponsiveRangeControl
                         min={500}
                         max={20000}
                         label={__("Autoplay Delay (ms)", "gslider-blocks")}
-                        rangeValue={autoplayDelay} 
+                        rangeValue={autoplayDelay}
                         onChangeValue={(value) => setAttributes({ autoplayDelay: value })}
                         deviceType={deviceType}
                         step={100}
@@ -767,7 +783,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     min={100}
                     max={5000}
                     label={__("Transition Speed (ms)", "gslider-blocks")}
-                    rangeValue={speed} 
+                    rangeValue={speed}
                     onChangeValue={(value) => setAttributes({ speed: value })}
                     deviceType={deviceType}
                     step={50}
@@ -775,8 +791,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     isRangeUnit={false}
                 />
             </PanelBody>
-            <PanelBody 
-                title={__("Carousel Effect", "gslider-blocks")} 
+            <PanelBody
+                title={__("Carousel Effect", "gslider-blocks")}
                 opened={openPanels.general === "carousel-effect"}
                 onToggle={() => togglePanel("general", "carousel-effect")}
             >
@@ -789,14 +805,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </PanelBody>
 
             {showNavigation && (
-                <PanelBody 
-                    title={__("Navigation", "gslider-blocks")} 
+                <PanelBody
+                    title={__("Navigation", "gslider-blocks")}
                     opened={openPanels.general === "navigation"}
                     onToggle={() => togglePanel("general", "navigation")}
                 >
                     <ToggleControl
-                        label={ __( 'Custom Icon', 'gslider-blocks' ) }
-                        checked={ navigationArrowsIconSwitcher }
+                        label={__('Custom Icon', 'gslider-blocks')}
+                        checked={navigationArrowsIconSwitcher}
                         onChange={(value) => setAttributes({ navigationArrowsIconSwitcher: value })}
                     />
 
@@ -815,7 +831,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 )}
 
                                 {navigationArrowsIconLeftAlign === 'image' && (
-                                    <ImageControl 
+                                    <ImageControl
                                         imageUrl={navigationArrowsIconLeftImageUrl}
                                         setImageUrl={(value) => setAttributes({ navigationArrowsIconLeftImageUrl: value })}
                                         imageAlt={navigationArrowsIconLeftImageAlt}
@@ -840,7 +856,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 )}
 
                                 {navigationArrowsIconRightAlign === 'image' && (
-                                    <ImageControl 
+                                    <ImageControl
                                         imageUrl={navigationArrowsIconRightImageUrl}
                                         setImageUrl={(value) => setAttributes({ navigationArrowsIconRightImageUrl: value })}
                                         imageAlt={navigationArrowsIconRightImageAlt}
@@ -888,7 +904,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionTopOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                             <ResponsiveRangeControl
@@ -900,7 +916,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionLeftOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                         </>
@@ -916,7 +932,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionTopOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                             <ResponsiveRangeControl
@@ -928,7 +944,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionLeftOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                         </>
@@ -945,7 +961,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionTopOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                             <ResponsiveRangeControl
@@ -957,7 +973,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionRightOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                         </>
@@ -974,7 +990,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionBottomOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                             <ResponsiveRangeControl
@@ -986,7 +1002,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionLeftOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                         </>
@@ -1002,7 +1018,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionBottomOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                             <ResponsiveRangeControl
@@ -1014,7 +1030,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionLeftOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                         </>
@@ -1031,7 +1047,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionBottomOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                             <ResponsiveRangeControl
@@ -1043,7 +1059,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 units={navigationArrowPositionRightOffsetUnits}
                                 resetFallbackValue={""}
                                 unitBounds={{
-                                    px:  { min: 0, max: 1000, step: 1 },
+                                    px: { min: 0, max: 1000, step: 1 },
                                 }}
                             />
                         </>
@@ -1052,7 +1068,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     {navigationArrowPosition !== 'center' && (
                         <ResponsiveRangeControl
                             label={__("Gap", "gslider-blocks")}
-                            rangeValue={navigationArrowGap} 
+                            rangeValue={navigationArrowGap}
                             onChangeValue={(value) => setAttributes({ navigationArrowGap: value })}
                             onUnitChange={(value) => setAttributes({ navigationArrowGapUnits: value })}
                             deviceType={deviceType}
@@ -1063,10 +1079,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 vh: "2",
                                 vw: "2",
                                 em: "0.75",
-                                rem:"0.75",
+                                rem: "0.75",
                             }}
                             unitBounds={{
-                                px: { min: 0,  max: 200, step: 1 },
+                                px: { min: 0, max: 200, step: 1 },
                             }}
                         />
                     )}
@@ -1085,20 +1101,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 vh: "5",
                                 vw: "5",
                                 em: "3.75",
-                                rem:"3.75",
+                                rem: "3.75",
                             }}
                             unitBounds={{
-                                px: { min: 0,  max: 200, step: 1 },
+                                px: { min: 0, max: 200, step: 1 },
                             }}
-                        /> 
+                        />
                     )}
 
                 </PanelBody>
             )}
 
             {showPagination && (
-                <PanelBody 
-                    title={__("Pagination", "gslider-blocks")} 
+                <PanelBody
+                    title={__("Pagination", "gslider-blocks")}
                     opened={openPanels.general === "pagination"}
                     onToggle={() => togglePanel("general", "pagination")}
                 >
@@ -1125,14 +1141,93 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                 </PanelBody>
             )}
-            
+
+            {enableLogoLinks && (
+                <PanelBody
+                    title={__("Logo Link Settings", "gslider-blocks")}
+                    opened={openPanels.general === "logo-link-settings"}
+                    onToggle={() => togglePanel("general", "logo-link-settings")}
+                >
+                    <SelectControls
+                        label={__('Link Target', 'gslider-blocks')}
+                        help={__('Choose where to open the link', 'gslider-blocks')}
+                        options={[
+                            { label: __('New Tab', 'gslider-blocks'), value: '_blank' },
+                            { label: __('Same Tab', 'gslider-blocks'), value: '_self' },
+                        ]}
+                        value={logoLinkTarget}
+                        onChange={(value) => setAttributes({ logoLinkTarget: value })}
+                    />
+
+                    <InputControls
+                        label={__('Link Rel Attribute', 'gslider-blocks')}
+                        help={__('Relationship between current and linked document', 'gslider-blocks')}
+                        value={logoLinkRel}
+                        onChange={(value) => setAttributes({ logoLinkRel: value })}
+                        placeholder="noopener noreferrer"
+                    />
+
+                    <SelectControls
+                        label={__('Hover Effect', 'gslider-blocks')}
+                        options={[
+                            { label: __('Opacity', 'gslider-blocks'), value: 'opacity' },
+                            { label: __('Scale', 'gslider-blocks'), value: 'scale' },
+                            { label: __('Both', 'gslider-blocks'), value: 'both' },
+                            { label: __('None', 'gslider-blocks'), value: 'none' },
+                        ]}
+                        value={logoLinkHoverEffect}
+                        onChange={(value) => setAttributes({ logoLinkHoverEffect: value })}
+                    />
+
+                    {(logoLinkHoverEffect === 'opacity' || logoLinkHoverEffect === 'both') && (
+                        <ResponsiveRangeControl
+                            min={0}
+                            max={1}
+                            step={0.05}
+                            label={__("Hover Opacity", "gslider-blocks")}
+                            rangeValue={logoLinkHoverOpacity}
+                            onChangeValue={(value) => setAttributes({ logoLinkHoverOpacity: value })}
+                            deviceType={deviceType}
+                            resetFallbackValue={"0.8"}
+                            isRangeUnit={false}
+                        />
+                    )}
+
+                    {(logoLinkHoverEffect === 'scale' || logoLinkHoverEffect === 'both') && (
+                        <ResponsiveRangeControl
+                            min={0.8}
+                            max={1.5}
+                            step={0.05}
+                            label={__("Hover Scale", "gslider-blocks")}
+                            rangeValue={logoLinkHoverScale}
+                            onChangeValue={(value) => setAttributes({ logoLinkHoverScale: value })}
+                            deviceType={deviceType}
+                            resetFallbackValue={"1.05"}
+                            isRangeUnit={false}
+                        />
+                    )}
+
+                    <ResponsiveRangeControl
+                        min={100}
+                        max={1000}
+                        step={50}
+                        label={__("Transition Duration (ms)", "gslider-blocks")}
+                        rangeValue={logoLinkTransitionDuration}
+                        onChangeValue={(value) => setAttributes({ logoLinkTransitionDuration: value })}
+                        deviceType={deviceType}
+                        resetFallbackValue={"300"}
+                        isRangeUnit={false}
+                    />
+                </PanelBody>
+            )}
+
         </>
     );
 
     /**
-	 * Inspector Style Controls
-	 */
-	const styleControls = (
+     * Inspector Style Controls
+     */
+    const styleControls = (
         <>
             <PanelBody
                 title={__("Logo", "gslider-blocks")}
@@ -1149,7 +1244,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     units={logoMaxWidthUnits}
                     resetFallbackValue={""}
                     unitBounds={{
-                        px:  { min: 0, max: 1000, step: 1 },
+                        px: { min: 0, max: 1000, step: 1 },
                     }}
                 />
 
@@ -1159,23 +1254,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                     units={logoPaddingUnits}
                     onChangeUnits={(value) => setAttributes({ logoPaddingUnits: value })}
-                    desktopSpacing={logoPaddingDesktop} 
+                    desktopSpacing={logoPaddingDesktop}
                     onChangeDesktopSpacing={(value) => setAttributes({ logoPaddingDesktop: value })}
                     desktopSpacingStyle={(value) => setAttributes({ logoPaddingDesktopCssStyle: value })}
-                    tabletSpacing={logoPaddingTablet} 
+                    tabletSpacing={logoPaddingTablet}
                     onChangeTabletSpacing={(value) => setAttributes({ logoPaddingTablet: value })}
                     tabletSpacingStyle={(value) => setAttributes({ logoPaddingTabletCssStyle: value })}
                     mobileSpacing={logoPaddingMobile}
                     onChangeMobileSpacing={(value) => setAttributes({ logoPaddingMobile: value })}
                     mobileSpacingStyle={(value) => setAttributes({ logoPaddingMobileCssStyle: value })}
                     isLinked={logoPaddingLink}
-                    onChangeLink={(value) => setAttributes({ logoPaddingLink: value })} 
+                    onChangeLink={(value) => setAttributes({ logoPaddingLink: value })}
                 />
 
                 <BackgroundControl
                     label={__("Background", "gslider-blocks")}
                     deviceType={deviceType}
-                            
+
                     normalBackgroundType={logoNormalBackgroundType}
                     setNormalBackgroundType={(value) => setAttributes({ logoNormalBackgroundType: value })}
                     normalClassicColor={logoNormalClassicColor}
@@ -1196,12 +1291,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setNormalBackgroundImageRepeat={(value) => setAttributes({ logoNormalBackgroundImageRepeat: value })}
                     normalBackgroundImageSize={logoNormalBackgroundImageSize}
                     setNormalBackgroundImageSize={(value) => setAttributes({ logoNormalBackgroundImageSize: value })}
-                    
+
                     hoverBackgroundType={logoHoverBackgroundType}
                     setHoverBackgroundType={(value) => setAttributes({ logoHoverBackgroundType: value })}
                     hoverClassicColor={logoHoverClassicColor}
                     setHoverClassicColor={(value) => setAttributes({ logoHoverClassicColor: value })}
-                    hoverGradientColor={logoHoverGradientColor} 
+                    hoverGradientColor={logoHoverGradientColor}
                     setHoverGradientColor={(value) => setAttributes({ logoHoverGradientColor: value })}
                     hoverCustomGradientSwitcher={logoHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ logoHoverCustomGradientSwitcher: value })}
@@ -1218,7 +1313,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     hoverBackgroundImageSize={logoHoverBackgroundImageSize}
                     setHoverBackgroundImageSize={(value) => setAttributes({ logoHoverBackgroundImageSize: value })}
                     setAttributes={setAttributes}
-                    
+
                 />
 
                 <SelectControls
@@ -1316,55 +1411,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             </PanelBody>
 
-            <PanelBody 
+            <PanelBody
                 title={__("Logo Caption", "gslider-blocks")}
                 opened={openPanels.styles === "logo-caption"}
                 onToggle={() => togglePanel("styles", "logo-caption")}
             >
 
-                <ResponsiveTypographyControl 
+                <ResponsiveTypographyControl
                     fontFamily={logoCaptionFontFamily}
                     onChangeFontFamily={(value) => setAttributes({ logoCaptionFontFamily: value })}
-                    
+
                     fontSize={logoCaptionFontSize}
                     onChangeFontSize={(value) => setAttributes({ logoCaptionFontSize: value })}
-                    
+
                     fontSizeUnits={logoCaptionFontSizeUnits}
                     onChangeFontSizeUnit={(value) => setAttributes({ logoCaptionFontSizeUnits: value })}
-                    
+
                     fontWeight={logoCaptionFontWeight}
                     onChangeFontWeight={(value) => setAttributes({ logoCaptionFontWeight: value })}
-                    
+
                     fontStyle={logoCaptionFontStyle}
                     onChangeFontStyle={(value) => setAttributes({ logoCaptionFontStyle: value })}
-                    
+
                     textTransform={logoCaptionTextTransform}
                     onChangeTextTransform={(value) => setAttributes({ logoCaptionTextTransform: value })}
-                    
+
                     textDecoration={logoCaptionTextDecoration}
                     onChangeTextDecoration={(value) => setAttributes({ logoCaptionTextDecoration: value })}
-                    
+
                     lineHeight={logoCaptionLineHeight}
                     onChangeLineHeight={(value) => setAttributes({ logoCaptionLineHeight: value })}
-                    
+
                     lineHeightUnits={logoCaptionLineHeightUnits}
                     onChangeLineHeightUnit={(value) => setAttributes({ logoCaptionLineHeightUnits: value })}
 
                     letterSpacing={logoCaptionLetterSpacing}
                     onChangeLetterSpacing={(value) => setAttributes({ logoCaptionLetterSpacing: value })}
-                    
+
                     letterSpacingUnits={logoCaptionLetterSpacingUnits}
                     onChangeLetterSpacingUnit={(value) => setAttributes({ logoCaptionLetterSpacingUnits: value })}
 
-                    wordSpacing={logoCaptionWordSpacing} 
+                    wordSpacing={logoCaptionWordSpacing}
                     onChangeWordSpacing={(value) => setAttributes({ logoCaptionWordSpacing: value })}
-                    
+
                     wordSpacingUnits={logoCaptionWordSpacingUnits}
                     onChangeWordSpacingUnit={(value) => setAttributes({ logoCaptionWordSpacingUnits: value })}
-                    
+
                     deviceType={deviceType}
                 />
-                
+
                 <SwitcherControl
                     label={__("Color", "gslider-blocks")}
                     options={NORMAL_HOVER}
@@ -1381,7 +1476,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 )}
 
-                {logoCaptionColorSwitcher === 'hover' && ( 
+                {logoCaptionColorSwitcher === 'hover' && (
                     <ColorControl
                         label={__("Hover Color", "gslider-blocks")}
                         color={logoCaptionColorHover}
@@ -1393,7 +1488,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 <BackgroundControl
                     label={__("Background Color", "gslider-blocks")}
-                            
+
                     normalBackgroundType={logoCaptionNormalBackgroundType}
                     setNormalBackgroundType={(value) => setAttributes({ logoCaptionNormalBackgroundType: value })}
                     normalClassicColor={logoCaptionNormalClassicColor}
@@ -1406,11 +1501,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setNormalCustomGradientInputValue={(value) => setAttributes({ logoCaptionNormalCustomGradientInputValue: value })}
                     normalClassicDefaultColor={'#00000075'}
 
-                    hoverBackgroundType={logoCaptionHoverBackgroundType}  
+                    hoverBackgroundType={logoCaptionHoverBackgroundType}
                     setHoverBackgroundType={(value) => setAttributes({ logoCaptionHoverBackgroundType: value })}
                     hoverClassicColor={logoCaptionHoverClassicColor}
                     setHoverClassicColor={(value) => setAttributes({ logoCaptionHoverClassicColor: value })}
-                    hoverGradientColor={logoCaptionHoverGradientColor} 
+                    hoverGradientColor={logoCaptionHoverGradientColor}
                     setHoverGradientColor={(value) => setAttributes({ logoCaptionHoverGradientColor: value })}
                     hoverCustomGradientSwitcher={logoCaptionHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ logoCaptionHoverCustomGradientSwitcher: value })}
@@ -1494,24 +1589,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                     units={logoCaptionPaddingUnits}
                     onChangeUnits={(value) => setAttributes({ logoCaptionPaddingUnits: value })}
-                    desktopSpacing={logoCaptionPaddingDesktop} 
+                    desktopSpacing={logoCaptionPaddingDesktop}
                     onChangeDesktopSpacing={(value) => setAttributes({ logoCaptionPaddingDesktop: value })}
                     desktopSpacingStyle={(value) => setAttributes({ logoCaptionPaddingDesktopCssStyle: value })}
-                    tabletSpacing={logoCaptionPaddingTablet} 
+                    tabletSpacing={logoCaptionPaddingTablet}
                     onChangeTabletSpacing={(value) => setAttributes({ logoCaptionPaddingTablet: value })}
                     tabletSpacingStyle={(value) => setAttributes({ logoCaptionPaddingTabletCssStyle: value })}
                     mobileSpacing={logoCaptionPaddingMobile}
                     onChangeMobileSpacing={(value) => setAttributes({ logoCaptionPaddingMobile: value })}
                     mobileSpacingStyle={(value) => setAttributes({ logoCaptionPaddingMobileCssStyle: value })}
                     isLinked={logoCaptionPaddingLink}
-                    onChangeLink={(value) => setAttributes({ logoCaptionPaddingLink: value })} 
+                    onChangeLink={(value) => setAttributes({ logoCaptionPaddingLink: value })}
                 />
 
             </PanelBody>
 
             {showNavigation && (
-                <PanelBody 
-                    title={__("Navigation", "gslider-blocks")}  
+                <PanelBody
+                    title={__("Navigation", "gslider-blocks")}
                     opened={openPanels.styles === "navigation"}
                     onToggle={() => togglePanel("styles", "navigation")}
                 >
@@ -1528,10 +1623,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             vh: "",
                             vw: "",
                             em: "1",
-                            rem:"1",
+                            rem: "1",
                         }}
                         unitBounds={{
-                            px: { min: 0,  max: 200, step: 1 },
+                            px: { min: 0, max: 200, step: 1 },
                         }}
                     />
 
@@ -1548,10 +1643,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             vh: "",
                             vw: "",
                             em: "2.875",
-                            rem:"2.875",
+                            rem: "2.875",
                         }}
                         unitBounds={{
-                            px: { min: 0,  max: 200, step: 1 },
+                            px: { min: 0, max: 200, step: 1 },
                         }}
                     />
                     <ResponsiveRangeControl
@@ -1567,10 +1662,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             vh: "",
                             vw: "",
                             em: "2.875",
-                            rem:"2.875",
+                            rem: "2.875",
                         }}
                         unitBounds={{
-                            px: { min: 0,  max: 200, step: 1 },
+                            px: { min: 0, max: 200, step: 1 },
                         }}
                     />
 
@@ -1598,9 +1693,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     )}
 
-                    <BackgroundControl 
+                    <BackgroundControl
                         label={__("Background Color", "gslider-blocks")}
-                                
+
                         normalBackgroundType={navigationArrowNormalBackgroundType}
                         setNormalBackgroundType={(value) => setAttributes({ navigationArrowNormalBackgroundType: value })}
                         normalClassicColor={navigationArrowNormalClassicColor}
@@ -1617,7 +1712,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setHoverBackgroundType={(value) => setAttributes({ navigationArrowHoverBackgroundType: value })}
                         hoverClassicColor={navigationArrowHoverClassicColor}
                         setHoverClassicColor={(value) => setAttributes({ navigationArrowHoverClassicColor: value })}
-                        hoverGradientColor={navigationArrowHoverGradientColor} 
+                        hoverGradientColor={navigationArrowHoverGradientColor}
                         setHoverGradientColor={(value) => setAttributes({ navigationArrowHoverGradientColor: value })}
                         hoverCustomGradientSwitcher={navigationArrowHoverCustomGradientSwitcher}
                         setHoverCustomGradientSwitcher={(value) => setAttributes({ navigationArrowHoverCustomGradientSwitcher: value })}
@@ -1663,17 +1758,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                         units={navigationArrowBorderUnits}
                         onChangeUnits={(value) => setAttributes({ navigationArrowBorderUnits: value })}
-                        desktopSpacing={navigationArrowDesktopBorder} 
+                        desktopSpacing={navigationArrowDesktopBorder}
                         onChangeDesktopSpacing={(value) => setAttributes({ navigationArrowDesktopBorder: value })}
                         desktopSpacingStyle={(value) => setAttributes({ navigationArrowDesktopBorderCssStyle: value })}
-                        tabletSpacing={navigationArrowTabletBorder} 
+                        tabletSpacing={navigationArrowTabletBorder}
                         onChangeTabletSpacing={(value) => setAttributes({ navigationArrowTabletBorder: value })}
                         tabletSpacingStyle={(value) => setAttributes({ navigationArrowTabletBorderCssStyle: value })}
                         mobileSpacing={navigationArrowMobileBorder}
                         onChangeMobileSpacing={(value) => setAttributes({ navigationArrowMobileBorder: value })}
                         mobileSpacingStyle={(value) => setAttributes({ navigationArrowMobileBorderCssStyle: value })}
                         isLinked={navigationArrowBorderLink}
-                        onChangeLink={(value) => setAttributes({ navigationArrowBorderLink: value })} 
+                        onChangeLink={(value) => setAttributes({ navigationArrowBorderLink: value })}
                     />
 
                     <ResponsiveSpacingControl
@@ -1692,7 +1787,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChangeMobileSpacing={(value) => setAttributes({ navigationArrowMobileBorderRadius: value })}
                         mobileSpacingStyle={(value) => setAttributes({ navigationArrowMobileBorderRadiusCssStyle: value })}
                         isLinked={navigationArrowBorderRadiusLink}
-                        onChangeLink={(value) => setAttributes({ navigationArrowBorderRadiusLink: value })} 
+                        onChangeLink={(value) => setAttributes({ navigationArrowBorderRadiusLink: value })}
                     />
 
                     <SwitcherControl
@@ -1724,8 +1819,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             )}
 
             {showPagination && (
-                <PanelBody 
-                    title={__("Pagination", "gslider-blocks")}  
+                <PanelBody
+                    title={__("Pagination", "gslider-blocks")}
                     opened={openPanels.styles === "pagination"}
                     onToggle={() => togglePanel("styles", "pagination")}
                 >
@@ -1740,7 +1835,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             units={paginationDotsPositionUnits}
                             resetFallbackValue={""}
                             unitBounds={{
-                                px: { min: -200,  max: 200, step: 1 },
+                                px: { min: -200, max: 200, step: 1 },
                             }}
                         />
                     )}
@@ -1755,7 +1850,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             units={paginationProgressbarPositionUnits}
                             resetFallbackValue={""}
                             unitBounds={{
-                                px: { min: -200,  max: 200, step: 1 },
+                                px: { min: -200, max: 200, step: 1 },
                             }}
                         />
                     )}
@@ -1776,7 +1871,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChangeMobileSpacing={(value) => setAttributes({ paginationDotsMobileMargin: value })}
                         mobileSpacingStyle={(value) => setAttributes({ paginationDotsMobileMarginCssStyle: value })}
                         isLinked={paginationDotsMarginLink}
-                        onChangeLink={(value) => setAttributes({ paginationDotsMarginLink: value })} 
+                        onChangeLink={(value) => setAttributes({ paginationDotsMarginLink: value })}
                     />
 
                     {paginationType === 'bullets' && (
@@ -1802,10 +1897,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             vh: "",
                                             vw: "",
                                             em: "0.5",
-                                            rem:"0.5",
+                                            rem: "0.5",
                                         }}
                                         unitBounds={{
-                                            px: { min: 0,  max: 200, step: 1 },
+                                            px: { min: 0, max: 200, step: 1 },
                                         }}
                                     />
 
@@ -1822,10 +1917,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             vh: "",
                                             vw: "",
                                             em: "0.5",
-                                            rem:"0.5",
+                                            rem: "0.5",
                                         }}
                                         unitBounds={{
-                                            px: { min: 0,  max: 200, step: 1 },
+                                            px: { min: 0, max: 200, step: 1 },
                                         }}
                                     />
 
@@ -1872,17 +1967,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                         units={paginationNormalDotsBorderUnits}
                                         onChangeUnits={(value) => setAttributes({ paginationNormalDotsBorderUnits: value })}
-                                        desktopSpacing={paginationNormalDotsDesktopBorder} 
+                                        desktopSpacing={paginationNormalDotsDesktopBorder}
                                         onChangeDesktopSpacing={(value) => setAttributes({ paginationNormalDotsDesktopBorder: value })}
                                         desktopSpacingStyle={(value) => setAttributes({ paginationNormalDotsDesktopBorderCssStyle: value })}
-                                        tabletSpacing={paginationNormalDotsTabletBorder} 
+                                        tabletSpacing={paginationNormalDotsTabletBorder}
                                         onChangeTabletSpacing={(value) => setAttributes({ paginationNormalDotsTabletBorder: value })}
                                         tabletSpacingStyle={(value) => setAttributes({ paginationNormalDotsTabletBorderCssStyle: value })}
                                         mobileSpacing={paginationNormalDotsMobileBorder}
                                         onChangeMobileSpacing={(value) => setAttributes({ paginationNormalDotsMobileBorder: value })}
                                         mobileSpacingStyle={(value) => setAttributes({ paginationNormalDotsMobileBorderCssStyle: value })}
                                         isLinked={paginationNormalDotsBorderLink}
-                                        onChangeLink={(value) => setAttributes({ paginationNormalDotsBorderLink: value })} 
+                                        onChangeLink={(value) => setAttributes({ paginationNormalDotsBorderLink: value })}
                                     />
 
                                     <ResponsiveSpacingControl
@@ -1901,7 +1996,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         onChangeMobileSpacing={(value) => setAttributes({ paginationNormalDotsMobileBorderRadius: value })}
                                         mobileSpacingStyle={(value) => setAttributes({ paginationNormalDotsMobileBorderRadiusCssStyle: value })}
                                         isLinked={paginationNormalDotsBorderRadiusLink}
-                                        onChangeLink={(value) => setAttributes({ paginationNormalDotsBorderRadiusLink: value })} 
+                                        onChangeLink={(value) => setAttributes({ paginationNormalDotsBorderRadiusLink: value })}
                                     />
                                 </>
                             )}
@@ -1921,10 +2016,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             vh: "",
                                             vw: "",
                                             em: "0.5",
-                                            rem:"0.5",
+                                            rem: "0.5",
                                         }}
                                         unitBounds={{
-                                            px: { min: 0,  max: 200, step: 1 },
+                                            px: { min: 0, max: 200, step: 1 },
                                         }}
                                     />
 
@@ -1941,10 +2036,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             vh: "",
                                             vw: "",
                                             em: "0.5",
-                                            rem:"0.5",
+                                            rem: "0.5",
                                         }}
                                         unitBounds={{
-                                            px: { min: 0,  max: 200, step: 1 },
+                                            px: { min: 0, max: 200, step: 1 },
                                         }}
                                     />
 
@@ -1990,17 +2085,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
                                         units={paginationActiveDotsBorderUnits}
                                         onChangeUnits={(value) => setAttributes({ paginationActiveDotsBorderUnits: value })}
-                                        desktopSpacing={paginationActiveDotsDesktopBorder} 
+                                        desktopSpacing={paginationActiveDotsDesktopBorder}
                                         onChangeDesktopSpacing={(value) => setAttributes({ paginationActiveDotsDesktopBorder: value })}
                                         desktopSpacingStyle={(value) => setAttributes({ paginationActiveDotsDesktopBorderCssStyle: value })}
-                                        tabletSpacing={paginationActiveDotsTabletBorder} 
+                                        tabletSpacing={paginationActiveDotsTabletBorder}
                                         onChangeTabletSpacing={(value) => setAttributes({ paginationActiveDotsTabletBorder: value })}
                                         tabletSpacingStyle={(value) => setAttributes({ paginationActiveDotsTabletBorderCssStyle: value })}
                                         mobileSpacing={paginationActiveDotsMobileBorder}
                                         onChangeMobileSpacing={(value) => setAttributes({ paginationActiveDotsMobileBorder: value })}
                                         mobileSpacingStyle={(value) => setAttributes({ paginationActiveDotsMobileBorderCssStyle: value })}
                                         isLinked={paginationActiveDotsBorderLink}
-                                        onChangeLink={(value) => setAttributes({ paginationActiveDotsBorderLink: value })} 
+                                        onChangeLink={(value) => setAttributes({ paginationActiveDotsBorderLink: value })}
                                     />
 
                                     <ResponsiveSpacingControl
@@ -2019,7 +2114,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         onChangeMobileSpacing={(value) => setAttributes({ paginationActiveDotsMobileBorderRadius: value })}
                                         mobileSpacingStyle={(value) => setAttributes({ paginationActiveDotsMobileBorderRadiusCssStyle: value })}
                                         isLinked={paginationActiveDotsBorderRadiusLink}
-                                        onChangeLink={(value) => setAttributes({ paginationActiveDotsBorderRadiusLink: value })} 
+                                        onChangeLink={(value) => setAttributes({ paginationActiveDotsBorderRadiusLink: value })}
                                     />
                                 </>
                             )}
@@ -2028,49 +2123,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     {paginationType === 'fraction' && (
                         <>
-                            <ResponsiveTypographyControl 
+                            <ResponsiveTypographyControl
                                 fontFamily={paginationFractionFontFamily}
                                 onChangeFontFamily={(value) => setAttributes({ paginationFractionFontFamily: value })}
-                                
+
                                 fontSize={paginationFractionFontSize}
                                 onChangeFontSize={(value) => setAttributes({ paginationFractionFontSize: value })}
-                                
+
                                 fontSizeUnits={paginationFractionFontSizeUnits}
                                 onChangeFontSizeUnit={(value) => setAttributes({ paginationFractionFontSizeUnits: value })}
-                                
+
                                 fontWeight={paginationFractionFontWeight}
                                 onChangeFontWeight={(value) => setAttributes({ paginationFractionFontWeight: value })}
-                                
+
                                 fontStyle={paginationFractionFontStyle}
                                 onChangeFontStyle={(value) => setAttributes({ paginationFractionFontStyle: value })}
-                                
+
                                 textTransform={paginationFractionTextTransform}
                                 onChangeTextTransform={(value) => setAttributes({ paginationFractionTextTransform: value })}
-                                
+
                                 textDecoration={paginationFractionTextDecoration}
                                 onChangeTextDecoration={(value) => setAttributes({ paginationFractionTextDecoration: value })}
-                                
+
                                 lineHeight={paginationFractionLineHeight}
                                 onChangeLineHeight={(value) => setAttributes({ paginationFractionLineHeight: value })}
-                                
+
                                 lineHeightUnits={paginationFractionLineHeightUnits}
                                 onChangeLineHeightUnit={(value) => setAttributes({ paginationFractionLineHeightUnits: value })}
 
                                 letterSpacing={paginationFractionLetterSpacing}
                                 onChangeLetterSpacing={(value) => setAttributes({ paginationFractionLetterSpacing: value })}
-                                
+
                                 letterSpacingUnits={paginationFractionLetterSpacingUnits}
                                 onChangeLetterSpacingUnit={(value) => setAttributes({ paginationFractionLetterSpacingUnits: value })}
 
-                                wordSpacing={paginationFractionWordSpacing} 
+                                wordSpacing={paginationFractionWordSpacing}
                                 onChangeWordSpacing={(value) => setAttributes({ paginationFractionWordSpacing: value })}
-                                
+
                                 wordSpacingUnits={paginationFractionWordSpacingUnits}
                                 onChangeWordSpacingUnit={(value) => setAttributes({ paginationFractionWordSpacingUnits: value })}
-                                
+
                                 deviceType={deviceType}
                             />
-                            
+
                             <SwitcherControl
                                 label={__("Color", "gslider-blocks")}
                                 options={NORMAL_HOVER}
@@ -2087,7 +2182,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 />
                             )}
 
-                            {paginationFractionColorSwitcher === 'hover' && ( 
+                            {paginationFractionColorSwitcher === 'hover' && (
                                 <ColorControl
                                     label={__("Hover Color", "gslider-blocks")}
                                     color={paginationFractionColorHover}
@@ -2095,7 +2190,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     defaultColor=''
                                 />
                             )}
-                            
+
                         </>
                     )}
 
@@ -2117,7 +2212,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 />
                             )}
 
-                            {paginationProgressbarBGColorSwitcher === 'active' && ( 
+                            {paginationProgressbarBGColorSwitcher === 'active' && (
                                 <ColorControl
                                     label={__("Active Color", "gslider-blocks")}
                                     color={paginationProgressbarBGActiveColor}
@@ -2139,28 +2234,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     vh: "",
                                     vw: "",
                                     em: "0.25",
-                                    rem:"0.25",
+                                    rem: "0.25",
                                 }}
                                 unitBounds={{
-                                    px: { min: 0,  max: 200, step: 1 },
+                                    px: { min: 0, max: 200, step: 1 },
                                 }}
                             />
-                            
+
                         </>
                     )}
 
                 </PanelBody>
             )}
         </>
-    );  
+    );
 
     /**
-	 * Inspector Advanced Controls
-	 */
-	const advancedControls = (
+     * Inspector Advanced Controls
+     */
+    const advancedControls = (
         <>
-            <PanelBody 
-                title={__("Layout", "gslider-blocks")} 
+            <PanelBody
+                title={__("Layout", "gslider-blocks")}
                 opened={openPanels.advanced === "layout"}
                 onToggle={() => togglePanel("advanced", "layout")}
             >
@@ -2180,7 +2275,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChangeMobileSpacing={(value) => setAttributes({ globalMarginMobile: value })}
                     mobileSpacingStyle={(value) => setAttributes({ globalMarginMobileCssStyle: value })}
                     isLinked={globalMarginLink}
-                    onChangeLink={(value) => setAttributes({ globalMarginLink: value })} 
+                    onChangeLink={(value) => setAttributes({ globalMarginLink: value })}
                 />
 
                 <ResponsiveSpacingControl
@@ -2227,18 +2322,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChangeValue={(value) => setAttributes({ globalClass: value })}
                     helpText={__("Separate with spaces key.", "gslider-blocks")}
                 />
-                
+
             </PanelBody>
-            
-            <PanelBody 
-                title={__("Background", "gslider-blocks")} 
+
+            <PanelBody
+                title={__("Background", "gslider-blocks")}
                 opened={openPanels.advanced === "background"}
                 onToggle={() => togglePanel("advanced", "background")}
             >
                 <BackgroundControl
                     label={__("Background", "gslider-blocks")}
                     deviceType={deviceType}
-                            
+
                     normalBackgroundType={globalNormalBackgroundType}
                     setNormalBackgroundType={(value) => setAttributes({ globalNormalBackgroundType: value })}
                     normalClassicColor={globalNormalClassicColor}
@@ -2259,12 +2354,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setNormalBackgroundImageRepeat={(value) => setAttributes({ globalNormalBackgroundImageRepeat: value })}
                     normalBackgroundImageSize={globalNormalBackgroundImageSize}
                     setNormalBackgroundImageSize={(value) => setAttributes({ globalNormalBackgroundImageSize: value })}
-                    
+
                     hoverBackgroundType={globalHoverBackgroundType}
                     setHoverBackgroundType={(value) => setAttributes({ globalHoverBackgroundType: value })}
                     hoverClassicColor={globalHoverClassicColor}
                     setHoverClassicColor={(value) => setAttributes({ globalHoverClassicColor: value })}
-                    hoverGradientColor={globalHoverGradientColor} 
+                    hoverGradientColor={globalHoverGradientColor}
                     setHoverGradientColor={(value) => setAttributes({ globalHoverGradientColor: value })}
                     hoverCustomGradientSwitcher={globalHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ globalHoverCustomGradientSwitcher: value })}
@@ -2281,7 +2376,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     hoverBackgroundImageSize={globalHoverBackgroundImageSize}
                     setHoverBackgroundImageSize={(value) => setAttributes({ globalHoverBackgroundImageSize: value })}
                     setAttributes={setAttributes}
-                    
+
                 />
             </PanelBody>
 
@@ -2389,15 +2484,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 opened={openPanels.advanced === "custom-css"}
                 onToggle={() => togglePanel("advanced", "custom-css")}
             >
-                <CustomCSSEditor  
+                <CustomCSSEditor
                     value={globalCustomCSS}
                     onChangeValue={(value) => setAttributes({ globalCustomCSS: value })}
                 />
             </PanelBody>
         </>
-    );   
-    
-    
+    );
+
+
     /**
      * Get logo background normal styles
      */
@@ -2431,7 +2526,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             styles = {
                 ...styles,
                 'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition 
+                'background-position': bgImagePosition
                     ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
                     : "50% 50%",
                 'background-attachment': bgAttachment || undefined,
@@ -2476,7 +2571,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             styles = {
                 ...styles,
                 'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition 
+                'background-position': bgImagePosition
                     ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
                     : "50% 50%",
                 'background-attachment': bgAttachment || undefined,
@@ -2495,7 +2590,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         Object.entries(styleObj)
             .map(([key, value]) => `${key}: ${value};`)
             .join(' ');
-        
+
     /**
      * Get logo background styles
      */
@@ -2540,7 +2635,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             styles = {
                 ...styles,
                 'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition 
+                'background-position': bgImagePosition
                     ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
                     : "50% 50%",
                 'background-attachment': bgAttachment || undefined,
@@ -2585,7 +2680,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             styles = {
                 ...styles,
                 'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition 
+                'background-position': bgImagePosition
                     ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
                     : "50% 50%",
                 'background-attachment': bgAttachment || undefined,
@@ -2602,9 +2697,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      */
     const globalBackgroundStyleObjectToString = (styleObj) =>
         Object.entries(styleObj)
-          .map(([key, value]) => `${key}: ${value};`)
-          .join(' ');
-      
+            .map(([key, value]) => `${key}: ${value};`)
+            .join(' ');
+
     /**
      * Get global background styles
      */
@@ -2614,7 +2709,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const globalDesktopBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Desktop'));
     const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Tablet'));
-    const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Mobile'));   
+    const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles('Mobile'));
 
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
@@ -2828,10 +2923,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId} .swiper-pagination {
             ${paginationType === 'progressbar' ? (
-                paginationProgressbarPosition.Desktop ? `top: ${paginationProgressbarPosition.Desktop}${paginationProgressbarPositionUnits.Desktop} !important;` : '' 
-            ) : (
-                paginationDotsPosition.Desktop ? `bottom: ${paginationDotsPosition.Desktop}${paginationDotsPositionUnits.Desktop} !important;` : ''
-            )}
+            paginationProgressbarPosition.Desktop ? `top: ${paginationProgressbarPosition.Desktop}${paginationProgressbarPositionUnits.Desktop} !important;` : ''
+        ) : (
+            paginationDotsPosition.Desktop ? `bottom: ${paginationDotsPosition.Desktop}${paginationDotsPositionUnits.Desktop} !important;` : ''
+        )}
             ${paginationDotsDesktopMarginCssStyle ? `margin: ${paginationDotsDesktopMarginCssStyle};` : ''}
         }
 
@@ -3017,10 +3112,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId} .swiper-pagination {
                 ${paginationType === 'progressbar' ? (
-                    paginationProgressbarPosition.Tablet ? `top: ${paginationProgressbarPosition.Tablet}${paginationProgressbarPositionUnits.Tablet} !important;` : ''
-                ) : (
-                    paginationDotsPosition.Tablet ? `bottom: ${paginationDotsPosition.Tablet}${paginationDotsPositionUnits.Tablet} !important;` : ''
-                )}
+            paginationProgressbarPosition.Tablet ? `top: ${paginationProgressbarPosition.Tablet}${paginationProgressbarPositionUnits.Tablet} !important;` : ''
+        ) : (
+            paginationDotsPosition.Tablet ? `bottom: ${paginationDotsPosition.Tablet}${paginationDotsPositionUnits.Tablet} !important;` : ''
+        )}
                 ${paginationDotsTabletMarginCssStyle ? `margin: ${paginationDotsTabletMarginCssStyle};` : ''}
             }
 
@@ -3171,10 +3266,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId} .swiper-pagination {
                 ${paginationType === 'progressbar' ? (
-                    paginationProgressbarPosition.Mobile ? `top: ${paginationProgressbarPosition.Mobile}${paginationProgressbarPositionUnits.Mobile} !important;` : ''
-                ) : (
-                    paginationDotsPosition.Mobile ? `bottom: ${paginationDotsPosition.Mobile}${paginationDotsPositionUnits.Mobile} !important;` : ''
-                )}
+            paginationProgressbarPosition.Mobile ? `top: ${paginationProgressbarPosition.Mobile}${paginationProgressbarPositionUnits.Mobile} !important;` : ''
+        ) : (
+            paginationDotsPosition.Mobile ? `bottom: ${paginationDotsPosition.Mobile}${paginationDotsPositionUnits.Mobile} !important;` : ''
+        )}
                 ${paginationDotsMobileMarginCssStyle ? `margin: ${paginationDotsMobileMarginCssStyle};` : ''}
             }
 
@@ -3252,7 +3347,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         logoPaddingLink,
         /** End Content Padding */
 
-        /** Start Logo Background */     
+        /** Start Logo Background */
         logoNormalBackgroundType,
         logoNormalClassicColor,
         logoNormalGradientColor,
@@ -3396,7 +3491,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         navigationArrowsIconLeftImageUrl,
         navigationArrowsIconLeftImageAlt,
         navigationArrowsIconLeftImageID,
-        
+
         navigationArrowsIconRightAlign,
         navigationArrowsIconRight,
         navigationArrowsIconRightImageUrl,
@@ -3605,7 +3700,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationProgressbarBGActiveColor,
         paginationProgressbarHeight,
         paginationProgressbarHeightUnits,
-        /** End pagination Progressbar Color */  
+        /** End pagination Progressbar Color */
 
         /** Global Settings */
 
@@ -3638,7 +3733,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End Global Z-Index */
 
         /** Start Global Background */
-        globalNormalBackgroundType, 
+        globalNormalBackgroundType,
         globalNormalClassicColor,
         globalNormalGradientColor,
         globalNormalCustomGradientSwitcher,
@@ -3666,7 +3761,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         globalBorderColorSwitcher,
         globalBorderColor,
         globalBorderHoverColor,
-        
+
         globalBorderUnits,
         globalBorderDesktop,
         globalBorderDesktopCssStyle,
@@ -3675,7 +3770,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         globalBorderMobile,
         globalBorderMobileCssStyle,
         globalBorderLink,
-        /** End Global Border */    
+        /** End Global Border */
 
         /** Start Global Border Radius */
         globalBorderRadiusUnits,
@@ -3706,7 +3801,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     /** Set Block Style */
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+        setAttributes({ blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim() });
     }, [allBlockStyle, customCss]);
 
     /** Set Editor Style */
@@ -3715,7 +3810,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     return (
         <>
             <style>
-            	{editorStyle}
+                {editorStyle}
             </style>
             <InspectorControl
                 generalControls={generalControls}
