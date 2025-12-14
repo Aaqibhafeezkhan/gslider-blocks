@@ -161,21 +161,13 @@ export default function Save({ attributes }) {
                                         target={logoLinkTarget}
                                         rel={logoLinkRel}
                                         className="gslider-logo-link"
+                                        data-hover-effect={logoLinkHoverEffect}
+                                        data-hover-opacity={logoLinkHoverOpacity?.Desktop || 0.8}
+                                        data-hover-scale={logoLinkHoverScale?.Desktop || 1.05}
+                                        data-transition-duration={logoLinkTransitionDuration?.Desktop || 300}
                                         style={{
                                             display: 'block',
                                             transition: `all ${logoLinkTransitionDuration?.Desktop || 300}ms ease`,
-                                        }}
-                                        onMouseEnter={(e) => {
-                                            if (logoLinkHoverEffect === 'opacity' || logoLinkHoverEffect === 'both') {
-                                                e.currentTarget.style.opacity = logoLinkHoverOpacity?.Desktop || 0.8;
-                                            }
-                                            if (logoLinkHoverEffect === 'scale' || logoLinkHoverEffect === 'both') {
-                                                e.currentTarget.style.transform = `scale(${logoLinkHoverScale?.Desktop || 1.05})`;
-                                            }
-                                        }}
-                                        onMouseLeave={(e) => {
-                                            e.currentTarget.style.opacity = 1;
-                                            e.currentTarget.style.transform = 'scale(1)';
                                         }}
                                     >
                                         <img src={item.url} alt={item.alt || ''} />
