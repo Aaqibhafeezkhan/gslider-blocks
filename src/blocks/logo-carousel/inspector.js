@@ -2810,7 +2810,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             margin: 0 auto;
         }
 
-        .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-caption {
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-caption {           
+        
+            ${logoCaptionFontFamily ? `font-family: ${logoCaptionFontFamily};` : ''} 
+            ${logoCaptionFontSize.Desktop && logoCaptionFontSizeUnits.Desktop ? `font-size: ${logoCaptionFontSize.Desktop}${logoCaptionFontSizeUnits.Desktop};` : ''}
+            ${logoCaptionFontWeight ? `font-weight: ${logoCaptionFontWeight};` : ''}
+            ${logoCaptionFontStyle ? `font-style: ${logoCaptionFontStyle};` : ''}
+            ${logoCaptionTextTransform ? `text-transform: ${logoCaptionTextTransform};` : ''}
+            ${logoCaptionTextDecoration ? `text-decoration: ${logoCaptionTextDecoration};` : ''}
+            ${logoCaptionLineHeight.Desktop && logoCaptionLineHeightUnits.Desktop ? `line-height: ${logoCaptionLineHeight.Desktop}${logoCaptionLineHeightUnits.Desktop};` : ''}
+            ${logoCaptionLetterSpacing.Desktop && logoCaptionLetterSpacingUnits.Desktop ? `letter-spacing: ${logoCaptionLetterSpacing.Desktop}${logoCaptionLetterSpacingUnits.Desktop};` : ''}
+            ${logoCaptionWordSpacing.Desktop && logoCaptionWordSpacingUnits.Desktop ? `word-spacing: ${logoCaptionWordSpacing.Desktop}${logoCaptionWordSpacingUnits.Desktop};` : ''}
+
             ${logoCaptionColor ? `color: ${logoCaptionColor};` : ''}
             ${logoCaptionNormalBackgroundType === 'gradient' ? `  
                 background: ${logoCaptionNormalCustomGradientSwitcher && logoCaptionNormalCustomGradientInputValue ? logoCaptionNormalCustomGradientInputValue : logoCaptionNormalGradientColor ? logoCaptionNormalGradientColor : logoCaptionNormalClassicColor};
@@ -3069,6 +3080,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-caption {
+                ${logoCaptionFontSize.Tablet && logoCaptionFontSizeUnits.Tablet ? `font-size: ${logoCaptionFontSize.Tablet}${logoCaptionFontSizeUnits.Tablet};` : ''}
+                ${logoCaptionLineHeight.Tablet && logoCaptionLineHeightUnits.Tablet ? `line-height: ${logoCaptionLineHeight.Tablet}${logoCaptionLineHeightUnits.Tablet};` : ''}
+                ${logoCaptionLetterSpacing.Tablet && logoCaptionLetterSpacingUnits.Tablet ? `letter-spacing: ${logoCaptionLetterSpacing.Tablet}${logoCaptionLetterSpacingUnits.Tablet};` : ''}
+                ${logoCaptionWordSpacing.Tablet && logoCaptionWordSpacingUnits.Tablet ? `word-spacing: ${logoCaptionWordSpacing.Tablet}${logoCaptionWordSpacingUnits.Tablet};` : ''}
                 ${logoCaptionPaddingTabletCssStyle ? `padding: ${logoCaptionPaddingTabletCssStyle};` : ''}
                 ${logoCaptionBorderTabletCssStyle ? `border-width: ${logoCaptionBorderTabletCssStyle};` : ''}  
                 ${logoCaptionBorderRadiusTabletCssStyle ? `border-radius: ${logoCaptionBorderRadiusTabletCssStyle} !important;` : ''}
@@ -3223,6 +3238,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-caption {
+                ${logoCaptionFontSize.Mobile && logoCaptionFontSizeUnits.Mobile ? `font-size: ${logoCaptionFontSize.Mobile}${logoCaptionFontSizeUnits.Mobile};` : ''}
+                ${logoCaptionLineHeight.Mobile && logoCaptionLineHeightUnits.Mobile ? `line-height: ${logoCaptionLineHeight.Mobile}${logoCaptionLineHeightUnits.Mobile};` : ''}
+                ${logoCaptionLetterSpacing.Mobile && logoCaptionLetterSpacingUnits.Mobile ? `letter-spacing: ${logoCaptionLetterSpacing.Mobile}${logoCaptionLetterSpacingUnits.Mobile};` : ''}
+                ${logoCaptionWordSpacing.Mobile && logoCaptionWordSpacingUnits.Mobile ? `word-spacing: ${logoCaptionWordSpacing.Mobile}${logoCaptionWordSpacingUnits.Mobile};` : ''}
                 ${logoCaptionPaddingMobileCssStyle ? `padding: ${logoCaptionPaddingMobileCssStyle};` : ''}
                 ${logoCaptionBorderMobileCssStyle ? `border-width: ${logoCaptionBorderMobileCssStyle};` : ''}  
                 ${logoCaptionBorderRadiusMobileCssStyle ? `border-radius: ${logoCaptionBorderRadiusMobileCssStyle} !important;` : ''}
