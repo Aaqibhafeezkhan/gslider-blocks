@@ -1,6 +1,7 @@
 
 import { registerBlockType } from '@wordpress/blocks';
 import './style.scss';
+import './editor.scss';
 
 /**
  * Internal dependencies
@@ -11,9 +12,9 @@ import metadata from './block.json';
 import attributes from './attributes.js';
 import Icon from './icon';
 
-registerBlockType( metadata.name, {
+registerBlockType(metadata.name, {
 	attributes,
 	edit: Edit,
 	save,
 	icon: Icon,
-} );
+});

@@ -15,14 +15,15 @@ const attributes = {
         type: 'array',
         default: [],
         items: {
-          type: 'object',
-          properties: {
-            id: { type: 'number' },
-            url: { type: 'string' },
-            alt: { type: 'string' },
-            link: { type: 'string' },
-            caption: { type: 'string' }
-          }
+            type: 'object',
+            properties: {
+                id: { type: 'number' },
+                url: { type: 'string' },
+                alt: { type: 'string' },
+                link: { type: 'string' },
+                caption: { type: 'string' },
+                tooltipText: { type: 'string' }
+            }
         }
     },
 
@@ -92,9 +93,9 @@ const attributes = {
         default: false
     },
     keyboardNavigation: {
-		type: 'boolean',
-		default: false
-	},
+        type: 'boolean',
+        default: false
+    },
     paginationType: {
         type: "string",
         default: "bullets"
@@ -137,6 +138,69 @@ const attributes = {
     },
     /** End Show/Hide Elements */
 
+    /** Start Logo Link Settings */
+    enableLogoLinks: {
+        type: "boolean",
+        default: false,
+    },
+    enableTooltip: {
+        type: "boolean",
+        default: false,
+    },
+    logoLinkTarget: {
+        type: "string",
+        default: "_blank",
+    },
+    logoLinkRel: {
+        type: "string",
+        default: "noopener noreferrer",
+    },
+    logoLinkHoverEffect: {
+        type: "string",
+        default: "none",
+    },
+    logoLinkHoverOpacity: {
+        type: "object",
+        default: {
+            Desktop: 0.8,
+            Tablet: 0.8,
+            Mobile: 0.8,
+        },
+    },
+    logoLinkHoverScale: {
+        type: "object",
+        default: {
+            Desktop: 1.05,
+            Tablet: 1.05,
+            Mobile: 1.05,
+        },
+    },
+    logoLinkHoverLift: {
+        type: "object",
+        default: {
+            Desktop: 10,
+            Tablet: 10,
+            Mobile: 10,
+        },
+    },
+    logoLinkHoverLiftUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    logoLinkTransitionDuration: {
+        type: "object",
+        default: {
+            Desktop: 300,
+            Tablet: 300,
+            Mobile: 300,
+        },
+    },
+    /** End Logo Link Settings */
+
     /** Layout & Content Setting */
     layoutHeight: {
         type: "object",
@@ -178,14 +242,14 @@ const attributes = {
     /** Start Logo Padding */
     logoPaddingUnits: {
         type: "object",
-        default: {  
+        default: {
             Desktop: "px",
             Tablet: "px",
             Mobile: "px"
         }
     },
     logoPaddingDesktop: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -193,12 +257,12 @@ const attributes = {
             right: "",
         },
     },
-    logoPaddingDesktopCssStyle: { 
+    logoPaddingDesktopCssStyle: {
         type: "string",
         default: "",
     },
     logoPaddingTablet: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -206,12 +270,12 @@ const attributes = {
             right: "",
         },
     },
-    logoPaddingTabletCssStyle: { 
+    logoPaddingTabletCssStyle: {
         type: "string",
         default: "",
     },
     logoPaddingMobile: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -219,18 +283,18 @@ const attributes = {
             right: "",
         },
     },
-    logoPaddingMobileCssStyle: { 
+    logoPaddingMobileCssStyle: {
         type: "string",
         default: "",
     },
-    logoPaddingLink : {
-        type : "boolean",
+    logoPaddingLink: {
+        type: "boolean",
         default: true
     },
     /** End Logo Padding */
 
 
-    /** Start Logo Background */     
+    /** Start Logo Background */
     logoNormalBackgroundType: {
         type: "string",
         default: "classic",
@@ -319,15 +383,15 @@ const attributes = {
             Tablet: "",
             Mobile: ""
         }
-    },  
+    },
     logoHoverBackgroundImagePosition: {
-        type: "object", 
+        type: "object",
         default: {
             Desktop: { x: 0.5, y: 0.5 },
             Tablet: { x: 0.5, y: 0.5 },
             Mobile: { x: 0.5, y: 0.5 }
         }
-    },  
+    },
     logoHoverBackgroundImageAttachment: {
         type: "object",
         default: {
@@ -335,7 +399,7 @@ const attributes = {
             Tablet: "scroll",
             Mobile: "scroll"
         }
-    },    
+    },
     logoHoverBackgroundImageRepeat: {
         type: "object",
         default: {
@@ -343,7 +407,7 @@ const attributes = {
             Tablet: "no-repeat",
             Mobile: "no-repeat"
         }
-    },            
+    },
     logoHoverBackgroundImageSize: {
         type: "object",
         default: {
@@ -386,7 +450,7 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderDesktopCssStyle: { 
+    logoBorderDesktopCssStyle: {
         type: "string",
         default: "",
     },
@@ -399,7 +463,7 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderTabletCssStyle: { 
+    logoBorderTabletCssStyle: {
         type: "string",
         default: "",
     },
@@ -412,7 +476,7 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderMobileCssStyle: { 
+    logoBorderMobileCssStyle: {
         type: "string",
         default: "",
     },
@@ -437,7 +501,7 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderRadiusDesktopCssStyle: { 
+    logoBorderRadiusDesktopCssStyle: {
         type: 'string',
         default: '',
     },
@@ -450,7 +514,7 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderRadiusTabletCssStyle: { 
+    logoBorderRadiusTabletCssStyle: {
         type: 'string',
         default: '',
     },
@@ -463,7 +527,7 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderRadiusMobileCssStyle: { 
+    logoBorderRadiusMobileCssStyle: {
         type: "string",
         default: "",
     },
@@ -471,7 +535,7 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    logoBoxShadowValuesSwitcher : {
+    logoBoxShadowValuesSwitcher: {
         type: "string",
         default: "normal"
     },
@@ -569,7 +633,7 @@ const attributes = {
             Tablet: '',
             Mobile: ''
         }
-    },  
+    },
     logoCaptionWordSpacingUnits: {
         type: 'object',
         default: {
@@ -658,7 +722,7 @@ const attributes = {
     /** End Logo Caption Background */
 
     /** Start Logo Caption Border */
-    logoCaptionBorder: { 
+    logoCaptionBorder: {
         type: "string",
         default: "none",
     },
@@ -672,7 +736,7 @@ const attributes = {
     logoCaptionBorderHoverColor: {
         type: "string",
     },
-    logoCaptionBorderUnits: {  
+    logoCaptionBorderUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -689,7 +753,7 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderDesktopCssStyle: { 
+    logoCaptionBorderDesktopCssStyle: {
         type: "string",
         default: "",
     },
@@ -702,7 +766,7 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderTabletCssStyle: { 
+    logoCaptionBorderTabletCssStyle: {
         type: "string",
         default: "",
     },
@@ -715,7 +779,7 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderMobileCssStyle: { 
+    logoCaptionBorderMobileCssStyle: {
         type: "string",
         default: "",
     },
@@ -740,7 +804,7 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderRadiusDesktopCssStyle: { 
+    logoCaptionBorderRadiusDesktopCssStyle: {
         type: 'string',
         default: '',
     },
@@ -753,7 +817,7 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderRadiusTabletCssStyle: { 
+    logoCaptionBorderRadiusTabletCssStyle: {
         type: 'string',
         default: '',
     },
@@ -766,7 +830,7 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderRadiusMobileCssStyle: { 
+    logoCaptionBorderRadiusMobileCssStyle: {
         type: "string",
         default: "",
     },
@@ -779,14 +843,14 @@ const attributes = {
     /** Start Logo Caption Padding */
     logoCaptionPaddingUnits: {
         type: "object",
-        default: {  
+        default: {
             Desktop: "px",
             Tablet: "px",
             Mobile: "px"
         }
     },
     logoCaptionPaddingDesktop: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -794,12 +858,12 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionPaddingDesktopCssStyle: { 
+    logoCaptionPaddingDesktopCssStyle: {
         type: "string",
         default: "",
     },
     logoCaptionPaddingTablet: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -807,12 +871,12 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionPaddingTabletCssStyle: { 
+    logoCaptionPaddingTabletCssStyle: {
         type: "string",
         default: "",
     },
     logoCaptionPaddingMobile: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -820,12 +884,12 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionPaddingMobileCssStyle: { 
+    logoCaptionPaddingMobileCssStyle: {
         type: "string",
         default: "",
     },
-    logoCaptionPaddingLink : {
-        type : "boolean",
+    logoCaptionPaddingLink: {
+        type: "boolean",
         default: true
     },
     /** End Logo Caption Padding */
@@ -1000,7 +1064,7 @@ const attributes = {
         type: "string",
         default: "none",
     },
-    navigationArrowBorderColorSwitcher : {
+    navigationArrowBorderColorSwitcher: {
         type: "string",
         default: "normal"
     },
@@ -1029,12 +1093,12 @@ const attributes = {
             right: "",
         },
     },
-    navigationArrowDesktopBorderCssStyle: { 
+    navigationArrowDesktopBorderCssStyle: {
         type: "string",
         default: "",
     },
     navigationArrowTabletBorder: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1042,12 +1106,12 @@ const attributes = {
             right: "",
         },
     },
-    navigationArrowTabletBorderCssStyle: { 
+    navigationArrowTabletBorderCssStyle: {
         type: "string",
         default: "",
     },
     navigationArrowMobileBorder: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1055,12 +1119,12 @@ const attributes = {
             right: "",
         },
     },
-    navigationArrowMobileBorderCssStyle: { 
+    navigationArrowMobileBorderCssStyle: {
         type: "string",
         default: "",
     },
-    navigationArrowBorderLink : {
-        type : "boolean",
+    navigationArrowBorderLink: {
+        type: "boolean",
         default: true
     },
     /** End Navigation Arrow Border */
@@ -1075,7 +1139,7 @@ const attributes = {
         },
     },
     navigationArrowDesktopBorderRadius: {
-        type: "object", 
+        type: "object",
         default: {
             top: "50",
             bottom: "50",
@@ -1083,12 +1147,12 @@ const attributes = {
             right: "50",
         },
     },
-    navigationArrowDesktopBorderRadiusCssStyle: { 
+    navigationArrowDesktopBorderRadiusCssStyle: {
         type: "string",
         default: "",
     },
     navigationArrowTabletBorderRadius: {
-        type: "object",  
+        type: "object",
         default: {
             top: "50",
             bottom: "50",
@@ -1096,12 +1160,12 @@ const attributes = {
             right: "50",
         },
     },
-    navigationArrowTabletBorderRadiusCssStyle: { 
+    navigationArrowTabletBorderRadiusCssStyle: {
         type: "string",
         default: "",
     },
     navigationArrowMobileBorderRadius: {
-        type: "object",  
+        type: "object",
         default: {
             top: "50",
             bottom: "50",
@@ -1109,18 +1173,18 @@ const attributes = {
             right: "50",
         },
     },
-    navigationArrowMobileBorderRadiusCssStyle: { 
+    navigationArrowMobileBorderRadiusCssStyle: {
         type: "string",
         default: "",
     },
-    navigationArrowBorderRadiusLink : {
-        type : "boolean",
+    navigationArrowBorderRadiusLink: {
+        type: "boolean",
         default: true
     },
     /** End Navigation Arrow Border Radius */
 
     /** Start Navigation Arrow Box Shadow */
-    navigationArrowBoxShadowValuesSwitcher : {
+    navigationArrowBoxShadowValuesSwitcher: {
         type: "string",
         default: "normal"
     },
@@ -1141,7 +1205,7 @@ const attributes = {
         default: "",
     },
     /** End Navigation Arrow Box Shadow */
-    
+
     /** Start Navigation Arrow Position */
     navigationArrowPositionType: {
         type: "string",
@@ -1264,7 +1328,7 @@ const attributes = {
         },
     },
     paginationDotsDesktopMargin: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1272,12 +1336,12 @@ const attributes = {
             right: "",
         },
     },
-    paginationDotsDesktopMarginCssStyle: { 
+    paginationDotsDesktopMarginCssStyle: {
         type: "string",
         default: "",
     },
     paginationDotsTabletMargin: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1285,12 +1349,12 @@ const attributes = {
             right: "",
         },
     },
-    paginationDotsTabletMarginCssStyle: { 
+    paginationDotsTabletMarginCssStyle: {
         type: "string",
         default: "",
     },
     paginationDotsMobileMargin: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1298,12 +1362,12 @@ const attributes = {
             right: "",
         },
     },
-    paginationDotsMobileMarginCssStyle: { 
+    paginationDotsMobileMarginCssStyle: {
         type: "string",
         default: "",
     },
-    paginationDotsMarginLink : {
-        type : "boolean",
+    paginationDotsMarginLink: {
+        type: "boolean",
         default: true
     },
     /** End Pagination Dots Margin */
@@ -1391,11 +1455,11 @@ const attributes = {
     /** End Pagination Dots Style */
 
     /** Start Pagination Dots Border */
-    paginationNormalDotsBorder: { 
+    paginationNormalDotsBorder: {
         type: "string",
         default: "none",
     },
-    paginationNormalDotsBorderColorSwitcher : {
+    paginationNormalDotsBorderColorSwitcher: {
         type: "string",
         default: "normal"
     },
@@ -1406,7 +1470,7 @@ const attributes = {
     paginationNormalDotsBorderHoverColor: {
         type: "string",
     },
-    
+
     paginationNormalDotsBorderUnits: {
         type: "object",
         default: {
@@ -1416,7 +1480,7 @@ const attributes = {
         },
     },
     paginationNormalDotsDesktopBorder: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1424,25 +1488,12 @@ const attributes = {
             right: "",
         },
     },
-    paginationNormalDotsDesktopBorderCssStyle: { 
+    paginationNormalDotsDesktopBorderCssStyle: {
         type: "string",
         default: "",
     },
     paginationNormalDotsTabletBorder: {
-        type: "object",  
-        default: {  
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
-        },
-    },
-    paginationNormalDotsTabletBorderCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    paginationNormalDotsMobileBorder: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1450,12 +1501,25 @@ const attributes = {
             right: "",
         },
     },
-    paginationNormalDotsMobileBorderCssStyle: { 
+    paginationNormalDotsTabletBorderCssStyle: {
         type: "string",
         default: "",
     },
-    paginationNormalDotsBorderLink : {
-        type : "boolean",
+    paginationNormalDotsMobileBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    paginationNormalDotsMobileBorderCssStyle: {
+        type: "string",
+        default: "",
+    },
+    paginationNormalDotsBorderLink: {
+        type: "boolean",
         default: true
     },
     /** End Pagination Dots Border */
@@ -1471,14 +1535,14 @@ const attributes = {
     },
     paginationNormalDotsBorderRadiusUnits: {
         type: "object",
-        default: {  
+        default: {
             Desktop: "px",
             Tablet: "px",
             Mobile: "px"
         }
     },
     paginationNormalDotsDesktopBorderRadius: {
-        type: "object", 
+        type: "object",
         default: {
             top: "50",
             bottom: "50",
@@ -1486,12 +1550,12 @@ const attributes = {
             right: "50",
         },
     },
-    paginationNormalDotsDesktopBorderRadiusCssStyle: { 
+    paginationNormalDotsDesktopBorderRadiusCssStyle: {
         type: "string",
         default: "",
     },
     paginationNormalDotsTabletBorderRadius: {
-        type: "object",  
+        type: "object",
         default: {
             top: "50",
             bottom: "50",
@@ -1499,12 +1563,12 @@ const attributes = {
             right: "50",
         },
     },
-    paginationNormalDotsTabletBorderRadiusCssStyle: { 
+    paginationNormalDotsTabletBorderRadiusCssStyle: {
         type: "string",
         default: "",
     },
     paginationNormalDotsMobileBorderRadius: {
-        type: "object",  
+        type: "object",
         default: {
             top: "50",
             bottom: "50",
@@ -1512,12 +1576,12 @@ const attributes = {
             right: "50",
         },
     },
-    paginationNormalDotsMobileBorderRadiusCssStyle: { 
+    paginationNormalDotsMobileBorderRadiusCssStyle: {
         type: "string",
         default: "",
     },
-    paginationNormalDotsBorderRadiusLink : {
-        type : "boolean",
+    paginationNormalDotsBorderRadiusLink: {
+        type: "boolean",
         default: true
     },
     /** End Pagination Dots Border Radius */
@@ -1558,11 +1622,11 @@ const attributes = {
     /** End Active Pagination Dots Width & Height */
 
     /** Start Active Pagination Dots Border */
-    paginationActiveDotsBorder: { 
+    paginationActiveDotsBorder: {
         type: "string",
         default: "none",
     },
-    paginationActiveDotsBorderColorSwitcher : {
+    paginationActiveDotsBorderColorSwitcher: {
         type: "string",
         default: "normal"
     },
@@ -1573,7 +1637,7 @@ const attributes = {
     paginationActiveDotsBorderHoverColor: {
         type: "string",
     },
-    
+
     paginationActiveDotsBorderUnits: {
         type: "object",
         default: {
@@ -1583,7 +1647,7 @@ const attributes = {
         }
     },
     paginationActiveDotsDesktopBorder: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1591,25 +1655,12 @@ const attributes = {
             right: "",
         },
     },
-    paginationActiveDotsDesktopBorderCssStyle: { 
+    paginationActiveDotsDesktopBorderCssStyle: {
         type: "string",
         default: "",
     },
     paginationActiveDotsTabletBorder: {
-        type: "object",  
-        default: {  
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
-        },
-    },
-    paginationActiveDotsTabletBorderCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    paginationActiveDotsMobileBorder: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1617,12 +1668,25 @@ const attributes = {
             right: "",
         },
     },
-    paginationActiveDotsMobileBorderCssStyle: { 
+    paginationActiveDotsTabletBorderCssStyle: {
         type: "string",
         default: "",
     },
-    paginationActiveDotsBorderLink : {
-        type : "boolean",
+    paginationActiveDotsMobileBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    paginationActiveDotsMobileBorderCssStyle: {
+        type: "string",
+        default: "",
+    },
+    paginationActiveDotsBorderLink: {
+        type: "boolean",
         default: true
     },
     /** End Active Pagination Dots Border */
@@ -1630,14 +1694,14 @@ const attributes = {
     /** Start Active Pagination Dots Border Radius */
     paginationActiveDotsBorderRadiusUnits: {
         type: "object",
-        default: {  
+        default: {
             Desktop: "px",
             Tablet: "px",
             Mobile: "px"
         }
     },
     paginationActiveDotsDesktopBorderRadius: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1645,12 +1709,12 @@ const attributes = {
             right: "",
         },
     },
-    paginationActiveDotsDesktopBorderRadiusCssStyle: { 
+    paginationActiveDotsDesktopBorderRadiusCssStyle: {
         type: "string",
         default: "",
     },
     paginationActiveDotsTabletBorderRadius: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1658,12 +1722,12 @@ const attributes = {
             right: "",
         },
     },
-    paginationActiveDotsTabletBorderRadiusCssStyle: { 
+    paginationActiveDotsTabletBorderRadiusCssStyle: {
         type: "string",
         default: "",
     },
     paginationActiveDotsMobileBorderRadius: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1671,12 +1735,12 @@ const attributes = {
             right: "",
         },
     },
-    paginationActiveDotsMobileBorderRadiusCssStyle: { 
+    paginationActiveDotsMobileBorderRadiusCssStyle: {
         type: "string",
         default: "",
     },
-    paginationActiveDotsBorderRadiusLink : {
-        type : "boolean",
+    paginationActiveDotsBorderRadiusLink: {
+        type: "boolean",
         default: true
     },
     /** End Active Pagination Dots Border Radius */
@@ -1757,7 +1821,7 @@ const attributes = {
             Tablet: '',
             Mobile: ''
         }
-    },  
+    },
     paginationFractionWordSpacingUnits: {
         type: 'object',
         default: {
@@ -1819,14 +1883,14 @@ const attributes = {
     /** Start Global Margin */
     globalMarginUnits: {
         type: "object",
-        default: {  
+        default: {
             Desktop: "px",
             Tablet: "px",
             Mobile: "px"
         }
     },
     globalMarginDesktop: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1834,12 +1898,12 @@ const attributes = {
             right: "",
         },
     },
-    globalMarginDesktopCssStyle: { 
+    globalMarginDesktopCssStyle: {
         type: "string",
         default: "",
     },
     globalMarginTablet: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1847,12 +1911,12 @@ const attributes = {
             right: "",
         },
     },
-    globalMarginTabletCssStyle: { 
+    globalMarginTabletCssStyle: {
         type: "string",
         default: "",
     },
     globalMarginMobile: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1860,12 +1924,12 @@ const attributes = {
             right: "",
         },
     },
-    globalMarginMobileCssStyle: { 
+    globalMarginMobileCssStyle: {
         type: "string",
         default: "",
     },
-    globalMarginLink : {
-        type : "boolean",
+    globalMarginLink: {
+        type: "boolean",
         default: true
     },
     /** End Global Margin */
@@ -1873,14 +1937,14 @@ const attributes = {
     /** Start Global Padding */
     globalPaddingUnits: {
         type: "object",
-        default: {  
+        default: {
             Desktop: "px",
             Tablet: "px",
             Mobile: "px"
         }
     },
     globalPaddingDesktop: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1888,12 +1952,12 @@ const attributes = {
             right: "",
         },
     },
-    globalPaddingDesktopCssStyle: { 
+    globalPaddingDesktopCssStyle: {
         type: "string",
         default: "",
     },
     globalPaddingTablet: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1901,12 +1965,12 @@ const attributes = {
             right: "",
         },
     },
-    globalPaddingTabletCssStyle: { 
+    globalPaddingTabletCssStyle: {
         type: "string",
         default: "",
     },
     globalPaddingMobile: {
-        type: "object",  
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -1914,12 +1978,12 @@ const attributes = {
             right: "",
         },
     },
-    globalPaddingMobileCssStyle: { 
+    globalPaddingMobileCssStyle: {
         type: "string",
         default: "",
     },
-    globalPaddingLink : {
-        type : "boolean",
+    globalPaddingLink: {
+        type: "boolean",
         default: true
     },
     /** End Global Padding */
@@ -1943,7 +2007,7 @@ const attributes = {
     },
     /** End Global Z-Index */
 
-    /** Start Global Background */     
+    /** Start Global Background */
     globalNormalBackgroundType: {
         type: "string",
         default: "classic",
@@ -2032,15 +2096,15 @@ const attributes = {
             Tablet: "",
             Mobile: ""
         }
-    },  
+    },
     globalHoverBackgroundImagePosition: {
-        type: "object", 
+        type: "object",
         default: {
             Desktop: { x: 0.5, y: 0.5 },
             Tablet: { x: 0.5, y: 0.5 },
             Mobile: { x: 0.5, y: 0.5 }
         }
-    },  
+    },
     globalHoverBackgroundImageAttachment: {
         type: "object",
         default: {
@@ -2048,7 +2112,7 @@ const attributes = {
             Tablet: "scroll",
             Mobile: "scroll"
         }
-    },    
+    },
     globalHoverBackgroundImageRepeat: {
         type: "object",
         default: {
@@ -2056,7 +2120,7 @@ const attributes = {
             Tablet: "no-repeat",
             Mobile: "no-repeat"
         }
-    },            
+    },
     globalHoverBackgroundImageSize: {
         type: "object",
         default: {
@@ -2099,7 +2163,7 @@ const attributes = {
             right: "",
         },
     },
-    globalBorderDesktopCssStyle: { 
+    globalBorderDesktopCssStyle: {
         type: "string",
         default: "",
     },
@@ -2112,7 +2176,7 @@ const attributes = {
             right: "",
         },
     },
-    globalBorderTabletCssStyle: { 
+    globalBorderTabletCssStyle: {
         type: "string",
         default: "",
     },
@@ -2125,7 +2189,7 @@ const attributes = {
             right: "",
         },
     },
-    globalBorderMobileCssStyle: { 
+    globalBorderMobileCssStyle: {
         type: "string",
         default: "",
     },
@@ -2150,7 +2214,7 @@ const attributes = {
             right: "",
         },
     },
-    globalBorderRadiusDesktopCssStyle: { 
+    globalBorderRadiusDesktopCssStyle: {
         type: 'string',
         default: '',
     },
@@ -2163,7 +2227,7 @@ const attributes = {
             right: "",
         },
     },
-    globalBorderRadiusTabletCssStyle: { 
+    globalBorderRadiusTabletCssStyle: {
         type: 'string',
         default: '',
     },
@@ -2176,7 +2240,7 @@ const attributes = {
             right: "",
         },
     },
-    globalBorderRadiusMobileCssStyle: { 
+    globalBorderRadiusMobileCssStyle: {
         type: "string",
         default: "",
     },
@@ -2184,7 +2248,7 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    globalBoxShadowValuesSwitcher : {
+    globalBoxShadowValuesSwitcher: {
         type: "string",
         default: "normal"
     },

@@ -20,7 +20,94 @@
 		text-align: center;
 		box-sizing: border-box;
 		background: rgba(0, 0, 0, .5);
-		box-sizing: border-box;
+	}
+
+	// Logo link styles
+	.gslider-logo-link {
+		display: block;
+		text-decoration: none;
+		outline: none;
+
+		&:focus {
+			outline: 2px solid #2271b1;
+			outline-offset: 2px;
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	// Logo item with hover effects
+	.gslider-logo-item {
+		display: block;
+		position: relative;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		// Hover effects
+		&[data-hover-effect="opacity"]:hover {
+			opacity: var(--hover-opacity, 0.8);
+		}
+
+		&[data-hover-effect="scale"]:hover {
+			transform: scale(var(--hover-scale, 1.05));
+		}
+
+		&[data-hover-effect="move-up"]:hover {
+			transform: translateY(calc(var(--hover-lift, 10px) * -1));
+		}
+
+		&[data-hover-effect="both"]:hover {
+			opacity: var(--hover-opacity, 0.8);
+			transform: scale(var(--hover-scale, 1.05));
+		}
+	}
+
+	// Link button in editor
+	.gslider-logo-link-button {
+		opacity: 0;
+		transition: opacity 0.2s ease;
+
+		&.has-link {
+			opacity: 1;
+		}
+	}
+
+	.gslider-logo-carousel-content-wrapper:hover .gslider-logo-link-button {
+		opacity: 1;
+	}
+
+	// Custom Tooltip
+	.gslider-tooltip {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.85);
+		color: #fff;
+		padding: 8px 16px;
+		border-radius: 4px;
+		font-size: 14px;
+		line-height: 1.4;
+		white-space: nowrap;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+		z-index: 1000;
+	}
+
+	.gslider-logo-item:hover .gslider-tooltip {
+		opacity: 1;
+		visibility: visible;
 	}
 }
 

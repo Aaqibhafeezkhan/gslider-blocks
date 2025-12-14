@@ -42,31 +42,42 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
 
+        enableLogoLinks,
+        enableTooltip,
+        logoLinkTarget,
+        logoLinkRel,
+        logoLinkHoverEffect,
+        logoLinkHoverOpacity,
+        logoLinkHoverScale,
+        logoLinkHoverLift,
+        logoLinkHoverLiftUnits,
+        logoLinkTransitionDuration,
+
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination?'has-pagination':''}`, 
+        className: `gslider-logo-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
     });
 
     const captionEnabled = {
-        Mobile:  !!showCaption?.Mobile,
-        Tablet:  !!showCaption?.Tablet,
+        Mobile: !!showCaption?.Mobile,
+        Tablet: !!showCaption?.Tablet,
         Desktop: !!showCaption?.Desktop,
     };
     const anyCaptionEnabled = captionEnabled.Mobile || captionEnabled.Tablet || captionEnabled.Desktop;
 
     const navigationEnabled = {
-        Mobile:  !!showNavigation?.Mobile,
-        Tablet:  !!showNavigation?.Tablet,
+        Mobile: !!showNavigation?.Mobile,
+        Tablet: !!showNavigation?.Tablet,
         Desktop: !!showNavigation?.Desktop,
     };
     const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
 
     const paginationEnabled = {
-        Mobile:  !!showPagination?.Mobile,
-        Tablet:  !!showPagination?.Tablet,
+        Mobile: !!showPagination?.Mobile,
+        Tablet: !!showPagination?.Tablet,
         Desktop: !!showPagination?.Desktop,
-    };  
+    };
     const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
 
     // Configure Swiper settings for frontend rendering
@@ -118,18 +129,18 @@ export default function Save({ attributes }) {
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
 
-        keyboard: keyboardNavigation ? { 
+        keyboard: keyboardNavigation ? {
             enabled: true,
             onlyInViewport: true,
             pageUpDown: false,
         } : false,
-        
+
         navigation: {
             enabled: anyNavigationEnabled,
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        
+
         pagination: {
             enabled: anyPaginationEnabled,
             el: '.swiper-pagination-logo-carousel',
@@ -137,7 +148,7 @@ export default function Save({ attributes }) {
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,
         },
-        
+
     });
 
     return (
@@ -146,8 +157,43 @@ export default function Save({ attributes }) {
                 <div className="swiper-wrapper">
                     {logos.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
-                            <div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && {id: globalID})}>
-                                <img src={item.url} alt={item.alt || ''} />
+                            <div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })}>
+                                <div
+                                    className="gslider-logo-item"
+                                    data-hover-effect={logoLinkHoverEffect}
+                                    data-hover-opacity={logoLinkHoverOpacity?.Desktop || 0.8}
+                                    data-hover-scale={logoLinkHoverScale?.Desktop || 1.05}
+                                    data-hover-lift={logoLinkHoverLift?.Desktop || 10}
+                                    data-hover-lift-unit={logoLinkHoverLiftUnits?.Desktop || 'px'}
+                                    data-transition-duration={logoLinkTransitionDuration?.Desktop || 300}
+                                    style={{
+                                        display: 'block',
+                                        '--hover-opacity': logoLinkHoverOpacity?.Desktop || 0.8,
+                                        '--hover-scale': logoLinkHoverScale?.Desktop || 1.05,
+                                        '--hover-lift': `${logoLinkHoverLift?.Desktop || 10}${logoLinkHoverLiftUnits?.Desktop || 'px'}`,
+                                        '--transition-duration': `${logoLinkTransitionDuration?.Desktop || 300}ms`,
+                                        transition: `all var(--transition-duration, 300ms) ease`,
+                                    }}
+                                >
+                                    {enableLogoLinks && item.link ? (
+                                        <a
+                                            href={item.link}
+                                            target={logoLinkTarget}
+                                            rel={logoLinkRel}
+                                            className="gslider-logo-link"
+                                        >
+                                            <img src={item.url} alt={item.alt || ''} />
+                                        </a>
+                                    ) : (
+                                        <img
+                                            src={item.url}
+                                            alt={item.alt || ''}
+                                        />
+                                    )}
+                                    {enableTooltip && item.tooltipText && (
+                                        <div className="gslider-tooltip">{item.tooltipText}</div>
+                                    )}
+                                </div>
                                 {anyCaptionEnabled && item.caption ? (
                                     <div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
                                 ) : null}
@@ -182,7 +228,7 @@ export default function Save({ attributes }) {
                     </div>
                 )}
 
-                { anyPaginationEnabled && paginationPositionType === 'inside' && (
+                {anyPaginationEnabled && paginationPositionType === 'inside' && (
                     <>
                         <div
                             className="swiper-pagination swiper-pagination-logo-carousel"
@@ -201,7 +247,7 @@ export default function Save({ attributes }) {
                 </>
             )}
 
-            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
+            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
                 <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                     <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
                     <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
