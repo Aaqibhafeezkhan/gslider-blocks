@@ -75,6 +75,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Start Logo Link Settings */
         enableLogoLinks,
+        enableTooltip,
         logoLinkTarget,
         logoLinkRel,
         logoLinkHoverEffect,
@@ -663,6 +664,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     help={__('Allow logos to be clickable with custom URLs', 'gslider-blocks')}
                     checked={enableLogoLinks}
                     onChange={(value) => setAttributes({ enableLogoLinks: value })}
+                />
+                <ToggleControl
+                    label={__('Enable Tooltip', 'gslider-blocks')}
+                    help={__('Show custom tooltip text when hovering over logos', 'gslider-blocks')}
+                    checked={enableTooltip}
+                    onChange={(value) => setAttributes({ enableTooltip: value })}
                 />
             </PanelBody>
             <PanelBody

@@ -42,6 +42,7 @@ const mapMedia = (m) => ({
 	alt: m.alt || m.title || '',
 	caption: m.caption || '',
 	link: '',
+	tooltipText: '',
 });
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -87,6 +88,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		navigationArrowsIconRightImageAlt,
 
 		enableLogoLinks,
+		enableTooltip,
 		logoLinkTarget,
 		logoLinkRel,
 		logoLinkHoverEffect,
@@ -129,6 +131,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	// State for link editing popover
 	const [editingLogoId, setEditingLogoId] = useState(null);
 	const [tempLinkUrl, setTempLinkUrl] = useState('');
+	const [tempTooltipText, setTempTooltipText] = useState('');
 
 	// Ref for panel settings focus management
 	const panelRef = useRef(null);
@@ -313,21 +316,23 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	/**
 	 * Link management functions
 	 */
-	const handleEditLink = (logoId, currentLink) => {
+	const handleEditLink = (logoId, currentLink, currentTooltip) => {
 		setEditingLogoId(logoId);
 		setTempLinkUrl(currentLink || '');
+		setTempTooltipText(currentTooltip || '');
 	};
 
 	const handleSaveLink = () => {
 		if (editingLogoId !== null) {
 			const updatedLogos = logos.map(logo =>
 				logo.id === editingLogoId
-					? { ...logo, link: tempLinkUrl }
+					? { ...logo, link: tempLinkUrl, tooltipText: tempTooltipText }
 					: logo
 			);
 			setAttributes({ logos: updatedLogos });
 			setEditingLogoId(null);
 			setTempLinkUrl('');
+			setTempTooltipText('');
 		}
 	};
 
@@ -335,12 +340,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		if (editingLogoId !== null) {
 			const updatedLogos = logos.map(logo =>
 				logo.id === editingLogoId
-					? { ...logo, link: '' }
+					? { ...logo, link: '', tooltipText: '' }
 					: logo
 			);
 			setAttributes({ logos: updatedLogos });
 			setEditingLogoId(null);
 			setTempLinkUrl('');
+			setTempTooltipText('');
 		}
 	};
 
@@ -448,17 +454,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										}}
 									>
 										<img src={item.url} alt={item.alt || ''} />
+										{enableTooltip && item.tooltipText && (
+											<div className="gslider-tooltip">{item.tooltipText}</div>
+										)}
 									</div>
 									{showCaption?.[deviceType] && item.caption ? (
 										<div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
 									) : null}
 
-									{enableLogoLinks && (
+									{(enableLogoLinks || enableTooltip) && (
 										<>
 											<Button
 												icon={item.link ? "admin-links" : "admin-links"}
 												className={`gslider-logo-link-button ${item.link ? 'has-link' : ''}`}
-												onClick={() => handleEditLink(item.id, item.link)}
+												onClick={() => handleEditLink(item.id, item.link, item.
+													tooltipText)}
 												label={item.link ? __('Edit Link', 'gslider-blocks') : __('Add Link', 'gslider-blocks')}
 												style={{
 													position: 'absolute',
@@ -482,13 +492,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													focusOnMount="firstElement"
 												>
 													<div style={{ padding: '16px', minWidth: '300px' }}>
-														<TextControl
-															label={__('Logo Link URL', 'gslider-blocks')}
-															value={tempLinkUrl}
-															onChange={(value) => setTempLinkUrl(value)}
-															placeholder="https://example.com"
-															help={__('Enter the URL for this logo', 'gslider-blocks')}
-														/>
+														{enableLogoLinks && (
+															<TextControl
+																label={__('Logo Link URL', 'gslider-blocks')}
+																value={tempLinkUrl}
+																onChange={(value) => setTempLinkUrl(value)}
+																placeholder="https://example.com"
+																help={__('Enter the URL for this logo', 'gslider-blocks')}
+															/>
+														)}
+														{enableTooltip && (
+															<TextControl
+																label={__('Tooltip Text', 'gslider-blocks')}
+																value={tempTooltipText}
+																onChange={(value) => setTempTooltipText(value)}
+																placeholder="Visit our website"
+																help={__('Text shown when hovering over the logo', 'gslider-blocks')}
+															/>
+														)}
 														<div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
 															<Button
 																variant="primary"

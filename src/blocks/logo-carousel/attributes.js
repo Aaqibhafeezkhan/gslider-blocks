@@ -21,7 +21,8 @@ const attributes = {
                 url: { type: 'string' },
                 alt: { type: 'string' },
                 link: { type: 'string' },
-                caption: { type: 'string' }
+                caption: { type: 'string' },
+                tooltipText: { type: 'string' }
             }
         }
     },
@@ -139,6 +140,10 @@ const attributes = {
 
     /** Start Logo Link Settings */
     enableLogoLinks: {
+        type: "boolean",
+        default: false,
+    },
+    enableTooltip: {
         type: "boolean",
         default: false,
     },

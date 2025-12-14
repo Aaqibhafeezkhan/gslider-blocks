@@ -43,6 +43,7 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageAlt,
 
         enableLogoLinks,
+        enableTooltip,
         logoLinkTarget,
         logoLinkRel,
         logoLinkHoverEffect,
@@ -184,7 +185,13 @@ export default function Save({ attributes }) {
                                             <img src={item.url} alt={item.alt || ''} />
                                         </a>
                                     ) : (
-                                        <img src={item.url} alt={item.alt || ''} />
+                                        <img
+                                            src={item.url}
+                                            alt={item.alt || ''}
+                                        />
+                                    )}
+                                    {enableTooltip && item.tooltipText && (
+                                        <div className="gslider-tooltip">{item.tooltipText}</div>
                                     )}
                                 </div>
                                 {anyCaptionEnabled && item.caption ? (

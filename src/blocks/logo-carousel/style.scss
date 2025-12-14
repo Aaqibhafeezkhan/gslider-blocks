@@ -44,6 +44,7 @@
 	// Logo item with hover effects
 	.gslider-logo-item {
 		display: block;
+		position: relative;
 		transition: transform 0.3s ease, opacity 0.3s ease;
 
 		img {
@@ -83,6 +84,31 @@
 
 	.gslider-logo-carousel-content-wrapper:hover .gslider-logo-link-button {
 		opacity: 1;
+	}
+
+	// Custom Tooltip
+	.gslider-tooltip {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.85);
+		color: #fff;
+		padding: 8px 16px;
+		border-radius: 4px;
+		font-size: 14px;
+		line-height: 1.4;
+		white-space: nowrap;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+		z-index: 1000;
+	}
+
+	.gslider-logo-item:hover .gslider-tooltip {
+		opacity: 1;
+		visibility: visible;
 	}
 }
 
