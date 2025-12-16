@@ -3,7 +3,7 @@ Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,23 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.3 – December 16, 2025 = 
+**New Block: Logo Carousel**
+- Added fully-featured Logo Carousel block with Swiper.js integration
+- Logo Management: Add, remove, duplicate, and reorder logos with drag & drop
+- Advanced Carousel Controls: Autoplay, infinite loop, navigation arrows, pagination (bullets/fraction/progressbar)
+- Responsive Settings: Configure slides per view, spacing, and speed for Desktop, Tablet, and Mobile
+- Logo Styling: Customizable hover effects including grayscale-to-color transition, opacity, scale, and lift animations
+- Logo Links: Enable clickable logos with custom URLs, target, and rel attributes
+- Tooltips: Add custom tooltip text with full styling controls (typography, colors, positioning, spacing, borders)
+- Captions: Display logo captions with complete styling options
+- Responsive Visibility: Show/hide individual logos on specific devices
+- Vertical Alignment: Control logo positioning (top, middle, bottom) within slides
+- Performance: Built-in lazy loading support for optimized page speed
+- Navigation: Customizable arrow icons/images with flexible positioning (inside/outside)
+- Accessibility: Keyboard navigation, mousewheel control, and ARIA labels
+- Google Fonts: Full support for custom typography with Google Fonts integration
 
 = 1.1.2 – December 04, 2025 = 
 - **Added**: keyboard Navigation control
