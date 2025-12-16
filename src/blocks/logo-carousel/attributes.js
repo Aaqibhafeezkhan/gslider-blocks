@@ -222,6 +222,14 @@ const attributes = {
             Mobile: "px",
         },
     },
+    verticalAlign: {
+        type: "object",
+        default: {
+            Desktop: 'center',
+            Tablet: 'center',
+            Mobile: 'center',
+        }
+    },
     /** End Layout & Content Setting */
 
     /** Start Logo Max Width */

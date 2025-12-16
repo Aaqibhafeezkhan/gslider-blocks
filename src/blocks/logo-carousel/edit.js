@@ -432,8 +432,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
 									<div
 										className="gslider-logo-item"
+										data-hover-effect={logoLinkHoverEffect}
 										onMouseEnter={(e) => {
-											if (logoLinkHoverEffect && logoLinkHoverEffect !== 'none') {
+											if (logoLinkHoverEffect && logoLinkHoverEffect !== 'none' && logoLinkHoverEffect !== 'grayscale') {
 												if (logoLinkHoverEffect === 'opacity' || logoLinkHoverEffect === 'both') {
 													e.currentTarget.style.opacity = logoLinkHoverOpacity?.[deviceType] || 0.8;
 												}
@@ -446,7 +447,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											}
 										}}
 										onMouseLeave={(e) => {
-											if (logoLinkHoverEffect && logoLinkHoverEffect !== 'none') {
+											if (logoLinkHoverEffect && logoLinkHoverEffect !== 'none' && logoLinkHoverEffect !== 'grayscale') {
 												e.currentTarget.style.opacity = 1;
 												e.currentTarget.style.transform = 'scale(1) translateY(0)';
 											}
