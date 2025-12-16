@@ -32,31 +32,70 @@
         position: relative;
     }
 
-    // Delete button styling
-    .gslider-logo-delete-button {
+    // Logo Action Toolbar
+    .gslider-logo-action-toolbar {
         position: absolute;
         top: 8px;
-        left: 8px;
+        left: 50%;
+        transform: translateX(-50%);
         z-index: 10;
-        background: #dc3232 !important;
-        color: #fff !important;
-        border: none !important;
-        border-radius: 4px;
-        padding: 4px 8px;
+        display: flex;
+        gap: 4px;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        border-radius: 6px;
+        padding: 6px;
         opacity: 0;
         transition: opacity 0.2s ease;
-        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
-        &:hover {
-            background: #a00 !important;
-        }
+        .gslider-logo-action-btn {
+            min-width: 32px;
+            height: 32px;
+            padding: 0;
+            border: none !important;
+            border-radius: 4px;
+            background: transparent !important;
+            color: #fff !important;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-        svg {
-            fill: #fff !important;
+            svg {
+                fill: #fff !important;
+                width: 18px;
+                height: 18px;
+            }
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.15) !important;
+                transform: scale(1.05);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+
+            // Delete button - red on hover
+            &.gslider-logo-delete-btn:hover {
+                background: #dc3232 !important;
+            }
+
+            // Duplicate button - blue on hover
+            &.gslider-logo-duplicate-btn:hover {
+                background: #2271b1 !important;
+            }
+
+            // Edit button - green on hover
+            &.gslider-logo-edit-btn:hover {
+                background: #46b450 !important;
+            }
         }
     }
 
-    .swiper-slide:hover .gslider-logo-delete-button {
+    .swiper-slide:hover .gslider-logo-action-toolbar {
         opacity: 1;
     }
 }

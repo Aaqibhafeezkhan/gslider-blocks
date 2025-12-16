@@ -460,32 +460,56 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										<div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
 									) : null}
 
-									<Button
-										icon="no-alt"
-										className="gslider-logo-delete-button"
-										onClick={() => {
-											const updatedLogos = logos.filter(logo => logo.id !== item.id);
-											setAttributes({ logos: updatedLogos });
-										}}
-										label={__('Remove Logo', 'gslider-blocks')}
-									/>
 
-
-									{/* Smart button with dynamic label */}
-									{(enableLogoLinks || enableTooltip) && (
+									{/* Logo Action Toolbar */}
+									<div className="gslider-logo-action-toolbar">
 										<Button
-											icon='admin-links'
-											className={`gslider-logo-edit-button ${(item.link || item.tooltipText) ? 'has-content' : ''}`}
-											onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
-											label={
-												enableLogoLinks && enableTooltip
-													? (item.link || item.tooltipText ? __('Edit Link & Tooltip', 'gslider-blocks') : __('Add Link & Tooltip', 'gslider-blocks'))
-													: enableLogoLinks
-														? (item.link ? __('Edit Link', 'gslider-blocks') : __('Add Link', 'gslider-blocks'))
-														: (item.tooltipText ? __('Edit Tooltip', 'gslider-blocks') : __('Add Tooltip', 'gslider-blocks'))
-											}
+											icon="no-alt"
+											className="gslider-logo-action-btn gslider-logo-delete-btn"
+											onClick={() => {
+												const updatedLogos = logos.filter(logo => logo.id !== item.id);
+												setAttributes({ logos: updatedLogos });
+											}}
+											label={__('Delete', 'gslider-blocks')}
+											showTooltip={true}
 										/>
-									)}
+
+										<Button
+											icon="admin-page"
+											className="gslider-logo-action-btn gslider-logo-duplicate-btn"
+											onClick={() => {
+												const duplicatedLogo = {
+													...item,
+													id: Date.now() + Math.random()
+												};
+												const logoIndex = logos.findIndex(logo => logo.id === item.id);
+												const updatedLogos = [
+													...logos.slice(0, logoIndex + 1),
+													duplicatedLogo,
+													...logos.slice(logoIndex + 1)
+												];
+												setAttributes({ logos: updatedLogos });
+											}}
+											label={__('Duplicate', 'gslider-blocks')}
+											showTooltip={true}
+										/>
+
+										{(enableLogoLinks || enableTooltip) && (
+											<Button
+												icon='admin-links'
+												className="gslider-logo-action-btn gslider-logo-edit-btn"
+												onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
+												label={
+													enableLogoLinks && enableTooltip
+														? __('Edit Link & Tooltip', 'gslider-blocks')
+														: enableLogoLinks
+															? __('Edit Link', 'gslider-blocks')
+															: __('Edit Tooltip', 'gslider-blocks')
+												}
+												showTooltip={true}
+											/>
+										)}
+									</div>
 
 									{editingLogoId === item.id && (
 										<Popover
