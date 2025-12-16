@@ -69,7 +69,8 @@
 		}
 	}
 
-	// Link button in editor
+	// Edit button in editor (for Link and/or Tooltip)
+	.gslider-logo-edit-button,
 	.gslider-logo-link-button {
 		position: absolute;
 		top: 8px;
@@ -85,6 +86,7 @@
 		background: #fff;
 		color: #2271b1;
 
+		&.has-content,
 		&.has-link {
 			opacity: 1;
 			background: #2271b1;
@@ -96,6 +98,7 @@
 		}
 	}
 
+	.gslider-logo-carousel-content-wrapper:hover .gslider-logo-edit-button,
 	.gslider-logo-carousel-content-wrapper:hover .gslider-logo-link-button {
 		opacity: 1;
 	}

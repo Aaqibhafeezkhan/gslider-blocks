@@ -31,4 +31,32 @@
     .gslider-logo-item {
         position: relative;
     }
+
+    // Delete button styling
+    .gslider-logo-delete-button {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        z-index: 10;
+        background: #dc3232 !important;
+        color: #fff !important;
+        border: none !important;
+        border-radius: 4px;
+        padding: 4px 8px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+            background: #a00 !important;
+        }
+
+        svg {
+            fill: #fff !important;
+        }
+    }
+
+    .swiper-slide:hover .gslider-logo-delete-button {
+        opacity: 1;
+    }
 }
