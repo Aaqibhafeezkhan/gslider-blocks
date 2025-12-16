@@ -117,8 +117,8 @@
 		opacity: 1;
 	}
 
-	// Custom Tooltip
-	.gslider-tooltip {
+	// Custom Tooltip - Default Styles (Can be overridden by Inspector)
+	.gslider-logo-tooltip {
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -137,12 +137,10 @@
 		z-index: 1000;
 	}
 
-	.gslider-logo-item:hover .gslider-tooltip {
+	.gslider-logo-item:hover .gslider-logo-tooltip {
 		opacity: 1;
 		visibility: visible;
 	}
-
-
 }
 
 :where(.wp-site-blocks *:focus) {

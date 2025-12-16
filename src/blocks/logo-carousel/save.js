@@ -43,7 +43,7 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageAlt,
 
         enableLogoLinks,
-        enableTooltip,
+        showTooltip,
         logoLinkTarget,
         logoLinkRel,
         logoLinkHoverEffect,
@@ -183,8 +183,8 @@ export default function Save({ attributes }) {
                                             loading={enableLazyLoad ? "lazy" : undefined}
                                         />
                                     )}
-                                    {enableTooltip && item.tooltipText && (
-                                        <div className="gslider-tooltip">{item.tooltipText}</div>
+                                    {showTooltip && item.tooltipText && (
+                                        <div className="gslider-logo-tooltip">{item.tooltipText}</div>
                                     )}
                                 </div>
                                 {anyCaptionEnabled && item.caption ? (

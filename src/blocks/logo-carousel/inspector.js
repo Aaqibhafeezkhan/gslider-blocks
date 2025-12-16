@@ -78,7 +78,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Start Logo Link Settings */
         enableLogoLinks,
-        enableTooltip,
+        showTooltip,
         logoLinkTarget,
         logoLinkRel,
         logoLinkHoverEffect,
@@ -183,11 +183,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         logoCaptionWordSpacingUnits,
         /** End Logo Caption Typography */
 
-        /** Start Logo Caption Width */
-        logoCaptionWidth,
-        logoCaptionWidthUnits,
-        /** End Logo Caption Width */
-
         /** Start Logo Caption Color */
         logoCaptionColorSwitcher,
         logoCaptionColor,
@@ -246,6 +241,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         logoCaptionPaddingMobileCssStyle,
         logoCaptionPaddingLink,
         /** End Logo Caption Padding */
+
+        /** Start Logo Tooltip Typography */
+        logoTooltipFontFamily,
+        logoTooltipFontSize,
+        logoTooltipFontSizeUnits,
+        logoTooltipFontWeight,
+        logoTooltipFontStyle,
+        logoTooltipTextTransform,
+        logoTooltipTextDecoration,
+        logoTooltipLineHeight,
+        logoTooltipLineHeightUnits,
+        logoTooltipLetterSpacing,
+        logoTooltipLetterSpacingUnits,
+        logoTooltipWordSpacing,
+        logoTooltipWordSpacingUnits,
+        /** End Logo Tooltip Typography */
+
+        /** Start Logo Tooltip Color */
+        logoTooltipColor,
+        logoTooltipBgColor,
+        /** End Logo Tooltip Color */
+
+        /** Start Logo Tooltip Border and color */
+        logoTooltipBorder,
+        logoTooltipBorderColor,
+        /** End Logo Tooltip Border and color */
+
+        /** Start Logo Tooltip Border */
+        logoTooltipBorderUnits,
+        logoTooltipBorderDesktop,
+        logoTooltipBorderDesktopCssStyle,
+        logoTooltipBorderTablet,
+        logoTooltipBorderTabletCssStyle,
+        logoTooltipBorderMobile,
+        logoTooltipBorderMobileCssStyle,
+        logoTooltipBorderLink,
+        /** End Logo Tooltip Border */
+
+        /** Start Logo Tooltip Border Radius */
+        logoTooltipBorderRadiusUnits,
+        logoTooltipBorderRadiusDesktop,
+        logoTooltipBorderRadiusDesktopCssStyle,
+        logoTooltipBorderRadiusTablet,
+        logoTooltipBorderRadiusTabletCssStyle,
+        logoTooltipBorderRadiusMobile,
+        logoTooltipBorderRadiusMobileCssStyle,
+        logoTooltipBorderRadiusLink,
+        /** End Logo Tooltip Border Radius */
+
+        /** Start Logo Tooltip Padding */
+        logoTooltipPaddingUnits,
+        logoTooltipPaddingDesktop,
+        logoTooltipPaddingDesktopCssStyle,
+        logoTooltipPaddingTablet,
+        logoTooltipPaddingTabletCssStyle,
+        logoTooltipPaddingMobile,
+        logoTooltipPaddingMobileCssStyle,
+        logoTooltipPaddingLink,
+        /** End Logo Tooltip Padding */
+
+        /** Start Logo Tooltip Position */
+        logoTooltipTopPosition,
+        logoTooltipTopPositionUnits,
+        logoTooltipLeftPosition,
+        logoTooltipLeftPositionUnits,
+        /** End Logo Tooltip Position */
 
         /** Start Navigation Custom Arrows */
         navigationArrowsIconSwitcher,
@@ -635,7 +696,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     if (logoCaptionFontFamily !== 'Default') {
         LoadGoogleFont(logoCaptionFontFamily);
     }
+    if (logoTooltipFontFamily !== 'Default') {
+        LoadGoogleFont(logoTooltipFontFamily);
+    }
     /** End Load Google Font */
+
 
     /**
      * Inspector General Controls
@@ -677,8 +742,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <ToggleControl
                     label={__('Enable Tooltip', 'gslider-blocks')}
                     help={__('Show custom tooltip text when hovering over logos', 'gslider-blocks')}
-                    checked={enableTooltip}
-                    onChange={(value) => setAttributes({ enableTooltip: value })}
+                    checked={showTooltip}
+                    onChange={(value) => setAttributes({ showTooltip: value })}
                 />
             </PanelBody>
             <PanelBody
@@ -1489,13 +1554,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             </PanelBody>
 
-
-
             {showCaption?.[deviceType] && (
                 <PanelBody
-                    title={__("Logo Caption", "gslider-blocks")}
-                    opened={openPanels.styles === "logo-caption"}
-                    onToggle={() => togglePanel("styles", "logo-caption")}
+                    title={__("Caption", "gslider-blocks")}
+                    opened={openPanels.styles === "caption"}
+                    onToggle={() => togglePanel("styles", "caption")}
                 >
 
                     <ResponsiveTypographyControl
@@ -1682,6 +1745,177 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         isLinked={logoCaptionPaddingLink}
                         onChangeLink={(value) => setAttributes({ logoCaptionPaddingLink: value })}
                     />
+
+                </PanelBody>
+            )}
+
+
+            {showTooltip && (
+                <PanelBody
+                    title={__("Tooltip", "gslider-blocks")}
+                    opened={openPanels.styles === "tooltip"}
+                    onToggle={() => togglePanel("styles", "tooltip")}
+                >
+                    <ResponsiveTypographyControl
+                        fontFamily={logoTooltipFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ logoTooltipFontFamily: value })}
+
+                        fontSize={logoTooltipFontSize}
+                        onChangeFontSize={(value) => setAttributes({ logoTooltipFontSize: value })}
+
+                        fontSizeUnits={logoTooltipFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ logoTooltipFontSizeUnits: value })}
+
+                        fontWeight={logoTooltipFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ logoTooltipFontWeight: value })}
+
+                        fontStyle={logoTooltipFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ logoTooltipFontStyle: value })}
+
+                        textTransform={logoTooltipTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ logoTooltipTextTransform: value })}
+
+                        textDecoration={logoTooltipTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ logoTooltipTextDecoration: value })}
+
+                        lineHeight={logoTooltipLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ logoTooltipLineHeight: value })}
+
+                        lineHeightUnits={logoTooltipLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ logoTooltipLineHeightUnits: value })}
+
+                        letterSpacing={logoTooltipLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ logoTooltipLetterSpacing: value })}
+
+                        letterSpacingUnits={logoTooltipLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ logoTooltipLetterSpacingUnits: value })}
+
+                        wordSpacing={logoTooltipWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ logoTooltipWordSpacing: value })}
+
+                        wordSpacingUnits={logoTooltipWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ logoTooltipWordSpacingUnits: value })}
+
+                        deviceType={deviceType}
+                    />
+
+                    <ColorControl
+                        label={__("Text Color", "gslider-blocks")}
+                        color={logoTooltipColor}
+                        onChangeColor={(value) => setAttributes({ logoTooltipColor: value })}
+                        defaultColor=''
+                    />
+
+                    <ColorControl
+                        label={__("Background Color", "gslider-blocks")}
+                        color={logoTooltipBgColor}
+                        onChangeColor={(value) => setAttributes({ logoTooltipBgColor: value })}
+                        defaultColor=''
+                    />
+
+                    <SelectControls
+                        label={__("Border Style", "gslider-blocks")}
+                        options={BORDER_STYLES}
+                        value={logoTooltipBorder}
+                        onChange={(value) => setAttributes({ logoTooltipBorder: value })}
+                    />
+
+                    <ColorControl
+                        label={__("Border Color", "gslider-blocks")}
+                        color={logoTooltipBorderColor}
+                        onChangeColor={(value) => setAttributes({ logoTooltipBorderColor: value })}
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Border", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={logoTooltipBorderUnits}
+                        onChangeUnits={(value) => setAttributes({ logoTooltipBorderUnits: value })}
+                        desktopSpacing={logoTooltipBorderDesktop}
+                        onChangeDesktopSpacing={(value) => setAttributes({ logoTooltipBorderDesktop: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ logoTooltipBorderDesktopCssStyle: value })}
+                        tabletSpacing={logoTooltipBorderTablet}
+                        onChangeTabletSpacing={(value) => setAttributes({ logoTooltipBorderTablet: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ logoTooltipBorderTabletCssStyle: value })}
+                        mobileSpacing={logoTooltipBorderMobile}
+                        onChangeMobileSpacing={(value) => setAttributes({ logoTooltipBorderMobile: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ logoTooltipBorderMobileCssStyle: value })}
+                        isLinked={logoTooltipBorderLink}
+                        onChangeLink={(value) => setAttributes({ logoTooltipBorderLink: value })}
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Border Radius", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={logoTooltipBorderRadiusUnits}
+                        onChangeUnits={(value) => setAttributes({ logoTooltipBorderRadiusUnits: value })}
+                        desktopSpacing={logoTooltipBorderRadiusDesktop}
+                        onChangeDesktopSpacing={(value) => setAttributes({ logoTooltipBorderRadiusDesktop: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ logoTooltipBorderRadiusDesktopCssStyle: value })}
+                        tabletSpacing={logoTooltipBorderRadiusTablet}
+                        onChangeTabletSpacing={(value) => setAttributes({ logoTooltipBorderRadiusTablet: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ logoTooltipBorderRadiusTabletCssStyle: value })}
+                        mobileSpacing={logoTooltipBorderRadiusMobile}
+                        onChangeMobileSpacing={(value) => setAttributes({ logoTooltipBorderRadiusMobile: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ logoTooltipBorderRadiusMobileCssStyle: value })}
+                        isLinked={logoTooltipBorderRadiusLink}
+                        onChangeLink={(value) => setAttributes({ logoTooltipBorderRadiusLink: value })}
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={logoTooltipPaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ logoTooltipPaddingUnits: value })}
+                        desktopSpacing={logoTooltipPaddingDesktop}
+                        onChangeDesktopSpacing={(value) => setAttributes({ logoTooltipPaddingDesktop: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ logoTooltipPaddingDesktopCssStyle: value })}
+                        tabletSpacing={logoTooltipPaddingTablet}
+                        onChangeTabletSpacing={(value) => setAttributes({ logoTooltipPaddingTablet: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ logoTooltipPaddingTabletCssStyle: value })}
+                        mobileSpacing={logoTooltipPaddingMobile}
+                        onChangeMobileSpacing={(value) => setAttributes({ logoTooltipPaddingMobile: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ logoTooltipPaddingMobileCssStyle: value })}
+                        isLinked={logoTooltipPaddingLink}
+                        onChangeLink={(value) => setAttributes({ logoTooltipPaddingLink: value })}
+                    />
+
+                    <ResponsiveRangeControl
+                        label={__("Top Position", "gslider-blocks")}
+                        rangeValue={logoTooltipTopPosition}
+                        onChangeValue={(value) => setAttributes({ logoTooltipTopPosition: value })}
+                        onUnitChange={(value) => setAttributes({ logoTooltipTopPositionUnits: value })}
+                        deviceType={deviceType}
+                        units={logoTooltipTopPositionUnits}
+                        resetFallbackValue={{
+                            "%": "50",
+                        }}
+                        unitBounds={{
+                            '%': { min: 0, max: 100, step: 1 },
+                            px: { min: 0, max: 500, step: 1 },
+                        }}
+                    />
+
+
+                    <ResponsiveRangeControl
+                        label={__("Left Position", "gslider-blocks")}
+                        rangeValue={logoTooltipLeftPosition}
+                        onChangeValue={(value) => setAttributes({ logoTooltipLeftPosition: value })}
+                        onUnitChange={(value) => setAttributes({ logoTooltipLeftPositionUnits: value })}
+                        deviceType={deviceType}
+                        units={logoTooltipLeftPositionUnits}
+                        resetFallbackValue={{
+                            "%": "50",
+                        }}
+                        unitBounds={{
+                            '%': { min: 0, max: 100, step: 1 },
+                            px: { min: 0, max: 500, step: 1 },
+                        }}
+                    />
+
 
                 </PanelBody>
             )}
@@ -2893,6 +3127,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${logoCaptionBorderHoverColor ? `border-color: ${logoCaptionBorderHoverColor};` : ''}
         }
 
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-tooltip {           
+            ${logoTooltipFontFamily ? `font-family: ${logoTooltipFontFamily};` : ''} 
+            ${logoTooltipFontSize.Desktop && logoTooltipFontSizeUnits.Desktop ? `font-size: ${logoTooltipFontSize.Desktop}${logoTooltipFontSizeUnits.Desktop};` : ''}
+            ${logoTooltipFontWeight ? `font-weight: ${logoTooltipFontWeight};` : ''}
+            ${logoTooltipFontStyle ? `font-style: ${logoTooltipFontStyle};` : ''}
+            ${logoTooltipTextTransform ? `text-transform: ${logoTooltipTextTransform};` : ''}
+            ${logoTooltipTextDecoration ? `text-decoration: ${logoTooltipTextDecoration};` : ''}
+            ${logoTooltipLineHeight.Desktop && logoTooltipLineHeightUnits.Desktop ? `line-height: ${logoTooltipLineHeight.Desktop}${logoTooltipLineHeightUnits.Desktop};` : ''}
+            ${logoTooltipLetterSpacing.Desktop && logoTooltipLetterSpacingUnits.Desktop ? `letter-spacing: ${logoTooltipLetterSpacing.Desktop}${logoTooltipLetterSpacingUnits.Desktop};` : ''}
+            ${logoTooltipWordSpacing.Desktop && logoTooltipWordSpacingUnits.Desktop ? `word-spacing: ${logoTooltipWordSpacing.Desktop}${logoTooltipWordSpacingUnits.Desktop};` : ''}
+
+            ${logoTooltipColor ? `color: ${logoTooltipColor};` : ''}
+            ${logoTooltipBgColor ? `background-color: ${logoTooltipBgColor};` : ''}
+            ${logoTooltipPaddingDesktopCssStyle ? `padding: ${logoTooltipPaddingDesktopCssStyle};` : ''}
+            ${logoTooltipBorder ? `border: ${logoTooltipBorder};` : ''}
+			${logoTooltipBorderDesktopCssStyle ? `border-width: ${logoTooltipBorderDesktopCssStyle};` : ''}  
+			${logoTooltipBorderRadiusDesktopCssStyle ? `border-radius: ${logoTooltipBorderRadiusDesktopCssStyle} !important;` : ''}
+            ${logoTooltipBorderColor ? `border-color: ${logoTooltipBorderColor};` : ''}
+            ${logoTooltipTopPosition.Desktop && logoTooltipTopPositionUnits.Desktop ? `top: ${logoTooltipTopPosition.Desktop}${logoTooltipTopPositionUnits.Desktop};` : ''}
+            ${logoTooltipLeftPosition.Desktop && logoTooltipLeftPositionUnits.Desktop ? `left: ${logoTooltipLeftPosition.Desktop}${logoTooltipLeftPositionUnits.Desktop};` : ''}
+            transition: all .3s ease-in-out;
+        }
+
         .${blockId}.gslider-logo-carousel-wrapper.outside {
             ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                 padding: ${navigationArrowPositionOutsidePadding.Desktop}${navigationArrowPositionOutsidePaddingUnits.Desktop} 0 0;
@@ -3145,6 +3402,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${logoCaptionBorderRadiusTabletCssStyle ? `border-radius: ${logoCaptionBorderRadiusTabletCssStyle} !important;` : ''}
             }
 
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-tooltip {
+                ${logoTooltipFontSize.Tablet && logoTooltipFontSizeUnits.Tablet ? `font-size: ${logoTooltipFontSize.Tablet}${logoTooltipFontSizeUnits.Tablet};` : ''}
+                ${logoTooltipLineHeight.Tablet && logoTooltipLineHeightUnits.Tablet ? `line-height: ${logoTooltipLineHeight.Tablet}${logoTooltipLineHeightUnits.Tablet};` : ''}
+                ${logoTooltipLetterSpacing.Tablet && logoTooltipLetterSpacingUnits.Tablet ? `letter-spacing: ${logoTooltipLetterSpacing.Tablet}${logoTooltipLetterSpacingUnits.Tablet};` : ''}
+                ${logoTooltipWordSpacing.Tablet && logoTooltipWordSpacingUnits.Tablet ? `word-spacing: ${logoTooltipWordSpacing.Tablet}${logoTooltipWordSpacingUnits.Tablet};` : ''}
+                ${logoTooltipPaddingTabletCssStyle ? `padding: ${logoTooltipPaddingTabletCssStyle};` : ''}
+                ${logoTooltipBorderTabletCssStyle ? `border-width: ${logoTooltipBorderTabletCssStyle};` : ''}  
+                ${logoTooltipBorderRadiusTabletCssStyle ? `border-radius: ${logoTooltipBorderRadiusTabletCssStyle} !important;` : ''}
+                ${logoTooltipTopPosition.Tablet && logoTooltipTopPositionUnits.Tablet ? `top: ${logoTooltipTopPosition.Tablet}${logoTooltipTopPositionUnits.Tablet};` : ''}
+                ${logoTooltipLeftPosition.Tablet && logoTooltipLeftPositionUnits.Tablet ? `left: ${logoTooltipLeftPosition.Tablet}${logoTooltipLeftPositionUnits.Tablet};` : ''}
+            }
+
             .${blockId}.gslider-logo-carousel-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Tablet}${navigationArrowPositionOutsidePaddingUnits.Tablet} 0 0;
@@ -3312,6 +3581,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${logoCaptionBorderRadiusMobileCssStyle ? `border-radius: ${logoCaptionBorderRadiusMobileCssStyle} !important;` : ''}
             }
 
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-tooltip {
+                ${logoTooltipFontSize.Mobile && logoTooltipFontSizeUnits.Mobile ? `font-size: ${logoTooltipFontSize.Mobile}${logoTooltipFontSizeUnits.Mobile};` : ''}
+                ${logoTooltipLineHeight.Mobile && logoTooltipLineHeightUnits.Mobile ? `line-height: ${logoTooltipLineHeight.Mobile}${logoTooltipLineHeightUnits.Mobile};` : ''}
+                ${logoTooltipLetterSpacing.Mobile && logoTooltipLetterSpacingUnits.Mobile ? `letter-spacing: ${logoTooltipLetterSpacing.Mobile}${logoTooltipLetterSpacingUnits.Mobile};` : ''}
+                ${logoTooltipWordSpacing.Mobile && logoTooltipWordSpacingUnits.Mobile ? `word-spacing: ${logoTooltipWordSpacing.Mobile}${logoTooltipWordSpacingUnits.Mobile};` : ''}
+                ${logoTooltipPaddingMobileCssStyle ? `padding: ${logoTooltipPaddingMobileCssStyle};` : ''}
+                ${logoTooltipBorderMobileCssStyle ? `border-width: ${logoTooltipBorderMobileCssStyle};` : ''}  
+                ${logoTooltipBorderRadiusMobileCssStyle ? `border-radius: ${logoTooltipBorderRadiusMobileCssStyle} !important;` : ''}
+                ${logoTooltipTopPosition.Mobile && logoTooltipTopPositionUnits.Mobile ? `top: ${logoTooltipTopPosition.Mobile}${logoTooltipTopPositionUnits.Mobile};` : ''}
+                ${logoTooltipLeftPosition.Mobile && logoTooltipLeftPositionUnits.Mobile ? `left: ${logoTooltipLeftPosition.Mobile}${logoTooltipLeftPositionUnits.Mobile};` : ''}
+            }
+
             .${blockId}.gslider-logo-carousel-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Mobile}${navigationArrowPositionOutsidePaddingUnits.Mobile} 0 0;
@@ -3456,7 +3737,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Start Logo Link Settings */
         enableLogoLinks,
-        enableTooltip,
+        showTooltip,
         logoLinkTarget,
         logoLinkRel,
         logoLinkHoverEffect,
@@ -3562,11 +3843,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         logoCaptionWordSpacingUnits,
         /** End Logo Caption Typography */
 
-        /** Start Logo Caption Width */
-        logoCaptionWidth,
-        logoCaptionWidthUnits,
-        /** End Logo Caption Width */
-
         /** Start Logo Caption Color */
         logoCaptionColorSwitcher,
         logoCaptionColor,
@@ -3625,6 +3901,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         logoCaptionPaddingMobileCssStyle,
         logoCaptionPaddingLink,
         /** End Logo Caption Padding */
+
+        /** Start Logo Tooltip Typography */
+        logoTooltipFontFamily,
+        logoTooltipFontSize,
+        logoTooltipFontSizeUnits,
+        logoTooltipFontWeight,
+        logoTooltipFontStyle,
+        logoTooltipTextTransform,
+        logoTooltipTextDecoration,
+        logoTooltipLineHeight,
+        logoTooltipLineHeightUnits,
+        logoTooltipLetterSpacing,
+        logoTooltipLetterSpacingUnits,
+        logoTooltipWordSpacing,
+        logoTooltipWordSpacingUnits,
+        /** End Logo Tooltip Typography */
+
+        /** Start Logo Tooltip Color */
+        logoTooltipColor,
+        logoTooltipBgColor,
+        /** End Logo Tooltip Color */
+
+        /** Start Logo Tooltip Border and color */
+        logoTooltipBorder,
+        logoTooltipBorderColor,
+        /** End Logo Tooltip Border and color */
+
+        /** Start Logo Tooltip Border */
+        logoTooltipBorderUnits,
+        logoTooltipBorderDesktop,
+        logoTooltipBorderDesktopCssStyle,
+        logoTooltipBorderTablet,
+        logoTooltipBorderTabletCssStyle,
+        logoTooltipBorderMobile,
+        logoTooltipBorderMobileCssStyle,
+        logoTooltipBorderLink,
+        /** End Logo Tooltip Border */
+
+        /** Start Logo Tooltip Border Radius */
+        logoTooltipBorderRadiusUnits,
+        logoTooltipBorderRadiusDesktop,
+        logoTooltipBorderRadiusDesktopCssStyle,
+        logoTooltipBorderRadiusTablet,
+        logoTooltipBorderRadiusTabletCssStyle,
+        logoTooltipBorderRadiusMobile,
+        logoTooltipBorderRadiusMobileCssStyle,
+        logoTooltipBorderRadiusLink,
+        /** End Logo Tooltip Border Radius */
+
+        /** Start Logo Tooltip Padding */
+        logoTooltipPaddingUnits,
+        logoTooltipPaddingDesktop,
+        logoTooltipPaddingDesktopCssStyle,
+        logoTooltipPaddingTablet,
+        logoTooltipPaddingTabletCssStyle,
+        logoTooltipPaddingMobile,
+        logoTooltipPaddingMobileCssStyle,
+        logoTooltipPaddingLink,
+        /** End Logo Tooltip Padding */
+
+        /** Start Logo Tooltip Position */
+        logoTooltipTopPosition,
+        logoTooltipTopPositionUnits,
+        logoTooltipLeftPosition,
+        logoTooltipLeftPositionUnits,
+        /** End Logo Tooltip Position */
 
         /** Start Navigation Custom Arrows */
         navigationArrowsIconSwitcher,

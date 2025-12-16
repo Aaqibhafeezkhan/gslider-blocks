@@ -147,7 +147,7 @@ const attributes = {
         type: "boolean",
         default: false,
     },
-    enableTooltip: {
+    showTooltip: {
         type: "boolean",
         default: false,
     },
@@ -656,25 +656,6 @@ const attributes = {
     },
     /** End Logo Caption Typography */
 
-    /** start logo caption width  */
-    logoCaptionWidth: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    logoCaptionWidthUnits: {
-        type: "object",
-        default: {
-            Desktop: "%",
-            Tablet: "%",
-            Mobile: "%",
-        },
-    },
-    /** End logo caption width */
-
     /** Start Logo Caption Color */
     logoCaptionColorSwitcher: {
         type: "string",
@@ -905,6 +886,309 @@ const attributes = {
         default: true
     },
     /** End Logo Caption Padding */
+
+
+    /** Start Logo Tooltip Typography */
+    logoTooltipFontFamily: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    logoTooltipFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    logoTooltipFontWeight: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipFontStyle: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipTextTransform: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    logoTooltipLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    logoTooltipLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    logoTooltipLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    logoTooltipWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    logoTooltipWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Logo Tooltip Typography */
+
+    /** Start Logo Tooltip Color */
+    logoTooltipColor: {
+        type: "string",
+        default: "#ffffff",
+    },
+    logoTooltipBgColor: {
+        type: "string",
+        default: "#00000085",
+    },
+    /** End Logo Tooltip Color */
+
+    /** Start Logo Tooltip Border */
+    logoTooltipBorder: {
+        type: "string",
+        default: "none",
+    },
+    logoTooltipBorderColor: {
+        type: "string",
+    },
+    logoTooltipBorderHoverColor: {
+        type: "string",
+    },
+    logoTooltipBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    logoTooltipBorderDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoTooltipBorderDesktopCssStyle: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipBorderTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoTooltipBorderTabletCssStyle: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipBorderMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoTooltipBorderMobileCssStyle: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    logoTooltipBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    logoTooltipBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoTooltipBorderRadiusDesktopCssStyle: {
+        type: 'string',
+        default: '',
+    },
+    logoTooltipBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoTooltipBorderRadiusTabletCssStyle: {
+        type: 'string',
+        default: '',
+    },
+    logoTooltipBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoTooltipBorderRadiusMobileCssStyle: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Logo Tooltip Border */
+
+    /** Start Logo Tooltip Padding */
+    logoTooltipPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    logoTooltipPaddingDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoTooltipPaddingDesktopCssStyle: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipPaddingTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoTooltipPaddingTabletCssStyle: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipPaddingMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    logoTooltipPaddingMobileCssStyle: {
+        type: "string",
+        default: "",
+    },
+    logoTooltipPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Logo Tooltip Padding */
+
+    /** Start Logo Tooltip Position */
+    logoTooltipTopPosition: {
+        type: "object",
+        default: {
+            Desktop: "50",
+            Tablet: "50",
+            Mobile: "50",
+        },
+    },
+    logoTooltipTopPositionUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    logoTooltipLeftPosition: {
+        type: "object",
+        default: {
+            Desktop: "50",
+            Tablet: "50",
+            Mobile: "50",
+        },
+    },
+    logoTooltipLeftPositionUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    /** End Logo Tooltip Position */
 
     /** Start Navigation Custom Arrows */
     navigationArrowsIconSwitcher: {

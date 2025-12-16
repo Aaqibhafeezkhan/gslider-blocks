@@ -88,7 +88,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		navigationArrowsIconRightImageAlt,
 
 		enableLogoLinks,
-		enableTooltip,
+		showTooltip,
 		logoLinkTarget,
 		logoLinkRel,
 		logoLinkHoverEffect,
@@ -458,8 +458,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											alt={item.alt || `Logo ${logos.indexOf(item) + 1}`}
 											loading={enableLazyLoad ? "lazy" : undefined}
 										/>
-										{enableTooltip && item.tooltipText && (
-											<div className="gslider-tooltip">{item.tooltipText}</div>
+										{showTooltip && item.tooltipText && (
+											<div className="gslider-logo-tooltip">{item.tooltipText}</div>
 										)}
 									</div>
 									{showCaption?.[deviceType] && item.caption ? (
@@ -540,13 +540,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											showTooltip={true}
 										/>
 
-										{(enableLogoLinks || enableTooltip) && (
+										{(enableLogoLinks || showTooltip) && (
 											<Button
 												icon='admin-links'
 												className="gslider-logo-action-btn gslider-logo-edit-btn"
 												onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
 												label={
-													enableLogoLinks && enableTooltip
+													enableLogoLinks && showTooltip
 														? __('Edit Link & Tooltip', 'gslider-blocks')
 														: enableLogoLinks
 															? __('Edit Link', 'gslider-blocks')
@@ -575,7 +575,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														help={__('Enter the URL for this logo', 'gslider-blocks')}
 													/>
 												)}
-												{enableTooltip && (
+												{showTooltip && (
 													<TextControl
 														label={__('Tooltip Text', 'gslider-blocks')}
 														className="gslider-logo-tooltip-text"
