@@ -793,7 +793,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChangeValue={(value) => setAttributes({ carouselPerColumn: value })}
                     deviceType={deviceType}
                     step={1}
-                    resetFallbackValue={"4"}
+                    resetFallbackValue={"2"}
                     isRangeUnit={false}
                 />
                 <ResponsiveRangeControl

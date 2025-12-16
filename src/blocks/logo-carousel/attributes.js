@@ -31,7 +31,7 @@ const attributes = {
     carouselPerColumn: {
         type: "object",
         default: {
-            Desktop: 4,
+            Desktop: 2,
             Tablet: 2,
             Mobile: 1,
         },
