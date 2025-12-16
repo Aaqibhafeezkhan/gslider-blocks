@@ -471,22 +471,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									/>
 
 
-									{/* Separate buttons for Link and Tooltip */}
-									{enableLogoLinks && (
+									{/* Smart button with dynamic label */}
+									{(enableLogoLinks || enableTooltip) && (
 										<Button
-											icon="admin-links"
-											className={`gslider-logo-link-button ${item.link ? 'has-link' : ''}`}
+											icon='admin-links'
+											className={`gslider-logo-edit-button ${(item.link || item.tooltipText) ? 'has-content' : ''}`}
 											onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
-											label={item.link ? __('Edit Link', 'gslider-blocks') : __('Add Link', 'gslider-blocks')}
-										/>
-									)}
-
-									{enableTooltip && (
-										<Button
-											icon="info"
-											className={`gslider-logo-tooltip-button ${item.tooltipText ? 'has-tooltip' : ''}`}
-											onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
-											label={item.tooltipText ? __('Edit Tooltip', 'gslider-blocks') : __('Add Tooltip', 'gslider-blocks')}
+											label={
+												enableLogoLinks && enableTooltip
+													? (item.link || item.tooltipText ? __('Edit Link & Tooltip', 'gslider-blocks') : __('Add Link & Tooltip', 'gslider-blocks'))
+													: enableLogoLinks
+														? (item.link ? __('Edit Link', 'gslider-blocks') : __('Add Link', 'gslider-blocks'))
+														: (item.tooltipText ? __('Edit Tooltip', 'gslider-blocks') : __('Add Tooltip', 'gslider-blocks'))
+											}
 										/>
 									)}
 
