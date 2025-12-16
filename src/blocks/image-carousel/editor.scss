@@ -1,10 +1,10 @@
 // Editor-specific styles for Logo Carousel
 
-.gslider-logo-carousel-wrapper {
+.gslider-image-carousel-wrapper {
 
 
     // Custom Tooltip for Editor - Default Styles (Can be overridden by Inspector)
-    .gslider-logo-tooltip {
+    .gslider-image-tooltip {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -23,7 +23,7 @@
         z-index: 1000;
     }
 
-    .gslider-logo-item:hover .gslider-logo-tooltip {
+    .gslider-image-item:hover .gslider-image-tooltip {
         opacity: 1;
         visibility: visible;
     }
@@ -31,7 +31,7 @@
 
 
     // Ensure logo item has relative positioning
-    .gslider-logo-item {
+    .gslider-image-item {
         position: relative;
     }
 

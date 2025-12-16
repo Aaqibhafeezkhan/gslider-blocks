@@ -1,5 +1,5 @@
-.gslider-logo-carousel-wrapper {
-	.gslider-logo-carousel-content-wrapper {
+.gslider-image-carousel-wrapper {
+	.gslider-image-carousel-content-wrapper {
 		box-sizing: border-box;
 		height: clamp(150px, 60vh, 150px);
 		overflow: hidden;
@@ -10,7 +10,7 @@
 		flex-direction: column;
 	}
 
-	.gslider-logo-carousel-content-wrapper .gslider-logo-carousel-caption {
+	.gslider-image-carousel-content-wrapper .gslider-image-carousel-caption {
 		position: absolute;
 		left: 0;
 		right: 0;
@@ -43,7 +43,7 @@
 	}
 
 	// Logo item with hover effects
-	.gslider-logo-item {
+	.gslider-image-item {
 		position: relative;
 
 		img {
@@ -112,13 +112,13 @@
 		}
 	}
 
-	.gslider-logo-carousel-content-wrapper:hover .gslider-logo-edit-button,
-	.gslider-logo-carousel-content-wrapper:hover .gslider-logo-link-button {
+	.gslider-image-carousel-content-wrapper:hover .gslider-logo-edit-button,
+	.gslider-image-carousel-content-wrapper:hover .gslider-logo-link-button {
 		opacity: 1;
 	}
 
 	// Custom Tooltip - Default Styles (Can be overridden by Inspector)
-	.gslider-logo-tooltip {
+	.gslider-image-tooltip {
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -137,7 +137,7 @@
 		z-index: 1000;
 	}
 
-	.gslider-logo-item:hover .gslider-logo-tooltip {
+	.gslider-image-item:hover .gslider-image-tooltip {
 		opacity: 1;
 		visibility: visible;
 	}

@@ -41,8 +41,11 @@ const mapMedia = (m) => ({
 	url: m?.sizes?.full?.url || m.url,
 	alt: m.alt || m.title || '',
 	caption: m.caption || '',
-	link: '',
-	tooltipText: '',
+	visibleOn: {
+		Desktop: true,
+		Tablet: true,
+		Mobile: true
+	}
 });
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -87,17 +90,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		navigationArrowsIconRightImageUrl,
 		navigationArrowsIconRightImageAlt,
 
-		enableImageLinks,
-		showTooltip,
-		ImageLinkTarget,
-		ImageLinkRel,
-		ImageLinkHoverEffect,
-		ImageLinkHoverOpacity,
-		ImageLinkHoverScale,
-		ImageLinkHoverLift,
-		ImageLinkHoverLiftUnits,
-		ImageLinkTransitionDuration,
 		enableLazyLoad,
+		enableLightbox,
 
 	} = attributes;
 
@@ -129,10 +123,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	// A key to force re-mounting of <Swiper> when critical settings change
 	const [swiperKey, setSwiperKey] = useState(0);
 
-	// State for link editing popover
-	const [editingImageId, setEditingImageId] = useState(null);
-	const [tempLinkUrl, setTempLinkUrl] = useState('');
-	const [tempTooltipText, setTempTooltipText] = useState('');
+	// Removed link/tooltip editing state
 
 	// Ref for panel settings focus management
 	const panelRef = useRef(null);
@@ -314,42 +305,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		navigationArrowsIconRightImageUrl
 	]);
 
-	/**
-	 * Link management functions
-	 */
-	const handleEditLink = (ImageId, currentLink, currentTooltip) => {
-		setEditingImageId(ImageId);
-		setTempLinkUrl(currentLink || '');
-		setTempTooltipText(currentTooltip || '');
-	};
-
-	const handleSaveLink = () => {
-		if (editingImageId !== null) {
-			const updatedImages = images.map(image =>
-				image.id === editingImageId
-					? { ...image, link: tempLinkUrl, tooltipText: tempTooltipText }
-					: image
-			);
-			setAttributes({ images: updatedImages });
-			setEditingImageId(null);
-			setTempLinkUrl('');
-			setTempTooltipText('');
-		}
-	};
-
-	const handleRemoveLink = () => {
-		if (editingImageId !== null) {
-			const updatedImages = images.map(image =>
-				image.id === editingImageId
-					? { ...image, link: '', tooltipText: '' }
-					: image
-			);
-			setAttributes({ images: updatedImages });
-			setEditingImageId(null);
-			setTempLinkUrl('');
-			setTempTooltipText('');
-		}
-	};
+	// Removed link management functions
 
 	/**
 	 * Renders toolbar controls for slide management
@@ -430,37 +386,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						{images.map((item, index) => (
 							<SwiperSlide key={item.id}>
 								<div className={`gslider-image-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
-									<div
-										className="gslider-image-item"
-										data-hover-effect={ImageLinkHoverEffect}
-										onMouseEnter={(e) => {
-											if (ImageLinkHoverEffect && ImageLinkHoverEffect !== 'none' && ImageLinkHoverEffect !== 'grayscale') {
-												if (ImageLinkHoverEffect === 'opacity' || ImageLinkHoverEffect === 'both') {
-													e.currentTarget.style.opacity = ImageLinkHoverOpacity?.[deviceType] || 0.8;
-												}
-												if (ImageLinkHoverEffect === 'scale' || ImageLinkHoverEffect === 'both') {
-													e.currentTarget.style.transform = `scale(${ImageLinkHoverScale?.[deviceType] || 1.05})`;
-												}
-												if (ImageLinkHoverEffect === 'move-up') {
-													e.currentTarget.style.transform = `translateY(-${ImageLinkHoverLift?.[deviceType] || 10}${ImageLinkHoverLiftUnits?.[deviceType] || 'px'})`;
-												}
-											}
-										}}
-										onMouseLeave={(e) => {
-											if (ImageLinkHoverEffect && ImageLinkHoverEffect !== 'none' && ImageLinkHoverEffect !== 'grayscale') {
-												e.currentTarget.style.opacity = 1;
-												e.currentTarget.style.transform = 'scale(1) translateY(0)';
-											}
-										}}
-									>
+									<div className="gslider-image-item">
 										<img
 											src={item.url}
 											alt={item.alt || `image ${images.indexOf(item) + 1}`}
 											loading={enableLazyLoad ? "lazy" : undefined}
+											className={enableLightbox ? 'lightbox-enabled' : ''}
 										/>
-										{showTooltip && item.tooltipText && (
-											<div className="gslider-image-tooltip">{item.tooltipText}</div>
-										)}
 									</div>
 									{showCaption?.[deviceType] && item.caption ? (
 										<div className="gslider-image-carousel-caption" aria-live="polite">{item.caption}</div>
@@ -540,80 +472,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											showTooltip={true}
 										/>
 
-										{(enableImageLinks || showTooltip) && (
-											<Button
-												icon='admin-links'
-												className="gslider-image-action-btn gslider-image-edit-btn"
-												onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
-												label={
-													enableImageLinks && showTooltip
-														? __('Edit Link & Tooltip', 'gslider-blocks')
-														: enableImageLinks
-															? __('Edit Link', 'gslider-blocks')
-															: __('Edit Tooltip', 'gslider-blocks')
-												}
-												showTooltip={true}
-											/>
-										)}
 									</div>
-
-									{editingImageId === item.id && (
-										<Popover
-											position="middle center"
-											onClose={() => setEditingImageId(null)}
-											focusOnMount="firstElement"
-											className="gslider-image-link-popover"
-										>
-											<div className="gslider-image-link-popover-wrapper">
-												{enableImageLinks && (
-													<TextControl
-														label={__('image Link URL', 'gslider-blocks')}
-														className="gslider-image-link-url"
-														value={tempLinkUrl}
-														onChange={(value) => setTempLinkUrl(value)}
-														placeholder="https://example.com"
-														help={__('Enter the URL for this image', 'gslider-blocks')}
-													/>
-												)}
-												{showTooltip && (
-													<TextControl
-														label={__('Tooltip Text', 'gslider-blocks')}
-														className="gslider-image-tooltip-text"
-														value={tempTooltipText}
-														onChange={(value) => setTempTooltipText(value)}
-														placeholder="Visit our website"
-														help={__('Text shown when hovering over the image', 'gslider-blocks')}
-													/>
-												)}
-												<div className="gslider-image-link-popover-buttons-wrapper">
-													<Button
-														variant="primary"
-														onClick={handleSaveLink}
-														className="gslider-image-link-save-button"
-													>
-														{__('Save', 'gslider-blocks')}
-													</Button>
-													{item.link && (
-														<Button
-															variant="secondary"
-															isDestructive
-															onClick={handleRemoveLink}
-															className="gslider-image-link-remove-button"
-														>
-															{__('Remove Link', 'gslider-blocks')}
-														</Button>
-													)}
-													<Button
-														variant="tertiary"
-														onClick={() => setEditingImageId(null)}
-														className="gslider-image-link-cancel-button"
-													>
-														{__('Cancel', 'gslider-blocks')}
-													</Button>
-												</div>
-											</div>
-										</Popover>
-									)}
 								</div>
 							</SwiperSlide>
 						))}
