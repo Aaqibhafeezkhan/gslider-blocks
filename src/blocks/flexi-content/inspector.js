@@ -1054,7 +1054,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 </PanelBody>
             )}
 
-            {showPagination && (
+            {showPagination?.[deviceType] && (
                 <PanelBody 
                     title={__("Pagination", "gslider-blocks")} 
                     opened={openPanels.general === "pagination"}
@@ -1323,7 +1323,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleA
                 </PanelBody>
             )}
 
-            {showPagination && (
+            {showPagination?.[deviceType] && (
                 <PanelBody 
                     title={__("Pagination", "gslider-blocks")}  
                     opened={openPanels.styles === "pagination"}
