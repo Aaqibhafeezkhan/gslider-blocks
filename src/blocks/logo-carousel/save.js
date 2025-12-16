@@ -161,19 +161,6 @@ export default function Save({ attributes }) {
                                 <div
                                     className="gslider-logo-item"
                                     data-hover-effect={logoLinkHoverEffect}
-                                    data-hover-opacity={logoLinkHoverOpacity?.Desktop || 0.8}
-                                    data-hover-scale={logoLinkHoverScale?.Desktop || 1.05}
-                                    data-hover-lift={logoLinkHoverLift?.Desktop || 10}
-                                    data-hover-lift-unit={logoLinkHoverLiftUnits?.Desktop || 'px'}
-                                    data-transition-duration={logoLinkTransitionDuration?.Desktop || 300}
-                                    style={{
-                                        display: 'block',
-                                        '--hover-opacity': logoLinkHoverOpacity?.Desktop || 0.8,
-                                        '--hover-scale': logoLinkHoverScale?.Desktop || 1.05,
-                                        '--hover-lift': `${logoLinkHoverLift?.Desktop || 10}${logoLinkHoverLiftUnits?.Desktop || 'px'}`,
-                                        '--transition-duration': `${logoLinkTransitionDuration?.Desktop || 300}ms`,
-                                        transition: `all var(--transition-duration, 300ms) ease`,
-                                    }}
                                 >
                                     {enableLogoLinks && item.link ? (
                                         <a

@@ -429,10 +429,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
 									<div
 										className="gslider-logo-item"
-										style={{
-											display: 'block',
-											transition: `all ${logoLinkTransitionDuration?.[deviceType] || 300}ms ease`,
-										}}
 										onMouseEnter={(e) => {
 											if (logoLinkHoverEffect && logoLinkHoverEffect !== 'none') {
 												if (logoLinkHoverEffect === 'opacity' || logoLinkHoverEffect === 'both') {
@@ -470,19 +466,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												onClick={() => handleEditLink(item.id, item.link, item.
 													tooltipText)}
 												label={item.link ? __('Edit Link', 'gslider-blocks') : __('Add Link', 'gslider-blocks')}
-												style={{
-													position: 'absolute',
-													top: '8px',
-													right: '8px',
-													zIndex: 10,
-													background: item.link ? '#2271b1' : '#fff',
-													color: item.link ? '#fff' : '#2271b1',
-													border: '1px solid #2271b1',
-													borderRadius: '4px',
-													padding: '4px 8px',
-													cursor: 'pointer',
-													fontSize: '16px',
-												}}
 											/>
 
 											{editingLogoId === item.id && (
@@ -490,11 +473,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 													position="middle center"
 													onClose={() => setEditingLogoId(null)}
 													focusOnMount="firstElement"
+													className="gslider-logo-link-popover"
 												>
-													<div style={{ padding: '16px', minWidth: '300px' }}>
+													<div className="gslider-logo-link-popover-wrapper">
 														{enableLogoLinks && (
 															<TextControl
 																label={__('Logo Link URL', 'gslider-blocks')}
+																className="gslider-logo-link-url"
 																value={tempLinkUrl}
 																onChange={(value) => setTempLinkUrl(value)}
 																placeholder="https://example.com"
@@ -504,16 +489,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														{enableTooltip && (
 															<TextControl
 																label={__('Tooltip Text', 'gslider-blocks')}
+																className="gslider-logo-tooltip-text"
 																value={tempTooltipText}
 																onChange={(value) => setTempTooltipText(value)}
 																placeholder="Visit our website"
 																help={__('Text shown when hovering over the logo', 'gslider-blocks')}
 															/>
 														)}
-														<div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+														<div className="gslider-logo-link-popover-buttons-wrapper">
 															<Button
 																variant="primary"
 																onClick={handleSaveLink}
+																className="gslider-logo-link-save-button"
 															>
 																{__('Save', 'gslider-blocks')}
 															</Button>
@@ -522,6 +509,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 																	variant="secondary"
 																	isDestructive
 																	onClick={handleRemoveLink}
+																	className="gslider-logo-link-remove-button"
 																>
 																	{__('Remove Link', 'gslider-blocks')}
 																</Button>
@@ -529,6 +517,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 															<Button
 																variant="tertiary"
 																onClick={() => setEditingLogoId(null)}
+																className="gslider-logo-link-cancel-button"
 															>
 																{__('Cancel', 'gslider-blocks')}
 															</Button>

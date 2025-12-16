@@ -813,7 +813,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </PanelBody>
 
-            {showNavigation && (
+            {showNavigation?.[deviceType] && (
                 <PanelBody
                     title={__("Navigation", "gslider-blocks")}
                     opened={openPanels.general === "navigation"}
@@ -1121,7 +1121,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 </PanelBody>
             )}
 
-            {showPagination && (
+            {showPagination?.[deviceType] && (
                 <PanelBody
                     title={__("Pagination", "gslider-blocks")}
                     opened={openPanels.general === "pagination"}
@@ -1378,7 +1378,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         { label: __('Opacity', 'gslider-blocks'), value: 'opacity' },
                         { label: __('Scale', 'gslider-blocks'), value: 'scale' },
                         { label: __('Move Up', 'gslider-blocks'), value: 'move-up' },
-                        { label: __('Both', 'gslider-blocks'), value: 'both' },
+                        { label: __('Opacity & Scale', 'gslider-blocks'), value: 'both' },
                         { label: __('None', 'gslider-blocks'), value: 'none' },
                     ]}
                     value={logoLinkHoverEffect}
@@ -1455,200 +1455,202 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </PanelBody>
 
-            <PanelBody
-                title={__("Logo Caption", "gslider-blocks")}
-                opened={openPanels.styles === "logo-caption"}
-                onToggle={() => togglePanel("styles", "logo-caption")}
-            >
+            {showCaption?.[deviceType] && (
+                <PanelBody
+                    title={__("Logo Caption", "gslider-blocks")}
+                    opened={openPanels.styles === "logo-caption"}
+                    onToggle={() => togglePanel("styles", "logo-caption")}
+                >
 
-                <ResponsiveTypographyControl
-                    fontFamily={logoCaptionFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ logoCaptionFontFamily: value })}
+                    <ResponsiveTypographyControl
+                        fontFamily={logoCaptionFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ logoCaptionFontFamily: value })}
 
-                    fontSize={logoCaptionFontSize}
-                    onChangeFontSize={(value) => setAttributes({ logoCaptionFontSize: value })}
+                        fontSize={logoCaptionFontSize}
+                        onChangeFontSize={(value) => setAttributes({ logoCaptionFontSize: value })}
 
-                    fontSizeUnits={logoCaptionFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ logoCaptionFontSizeUnits: value })}
+                        fontSizeUnits={logoCaptionFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ logoCaptionFontSizeUnits: value })}
 
-                    fontWeight={logoCaptionFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ logoCaptionFontWeight: value })}
+                        fontWeight={logoCaptionFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ logoCaptionFontWeight: value })}
 
-                    fontStyle={logoCaptionFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ logoCaptionFontStyle: value })}
+                        fontStyle={logoCaptionFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ logoCaptionFontStyle: value })}
 
-                    textTransform={logoCaptionTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ logoCaptionTextTransform: value })}
+                        textTransform={logoCaptionTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ logoCaptionTextTransform: value })}
 
-                    textDecoration={logoCaptionTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ logoCaptionTextDecoration: value })}
+                        textDecoration={logoCaptionTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ logoCaptionTextDecoration: value })}
 
-                    lineHeight={logoCaptionLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ logoCaptionLineHeight: value })}
+                        lineHeight={logoCaptionLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ logoCaptionLineHeight: value })}
 
-                    lineHeightUnits={logoCaptionLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ logoCaptionLineHeightUnits: value })}
+                        lineHeightUnits={logoCaptionLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ logoCaptionLineHeightUnits: value })}
 
-                    letterSpacing={logoCaptionLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ logoCaptionLetterSpacing: value })}
+                        letterSpacing={logoCaptionLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ logoCaptionLetterSpacing: value })}
 
-                    letterSpacingUnits={logoCaptionLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ logoCaptionLetterSpacingUnits: value })}
+                        letterSpacingUnits={logoCaptionLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ logoCaptionLetterSpacingUnits: value })}
 
-                    wordSpacing={logoCaptionWordSpacing}
-                    onChangeWordSpacing={(value) => setAttributes({ logoCaptionWordSpacing: value })}
+                        wordSpacing={logoCaptionWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ logoCaptionWordSpacing: value })}
 
-                    wordSpacingUnits={logoCaptionWordSpacingUnits}
-                    onChangeWordSpacingUnit={(value) => setAttributes({ logoCaptionWordSpacingUnits: value })}
+                        wordSpacingUnits={logoCaptionWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ logoCaptionWordSpacingUnits: value })}
 
-                    deviceType={deviceType}
-                />
-
-                <SwitcherControl
-                    label={__("Color", "gslider-blocks")}
-                    options={NORMAL_HOVER}
-                    value={logoCaptionColorSwitcher}
-                    onChange={(value) => setAttributes({ logoCaptionColorSwitcher: value })}
-                />
-
-                {logoCaptionColorSwitcher === 'normal' && (
-                    <ColorControl
-                        label={__("Normal Color", "gslider-blocks")}
-                        color={logoCaptionColor}
-                        onChangeColor={(value) => setAttributes({ logoCaptionColor: value })}
-                        defaultColor=''
+                        deviceType={deviceType}
                     />
-                )}
 
-                {logoCaptionColorSwitcher === 'hover' && (
-                    <ColorControl
-                        label={__("Hover Color", "gslider-blocks")}
-                        color={logoCaptionColorHover}
-                        onChangeColor={(value) => setAttributes({ logoCaptionColorHover: value })}
-                        defaultColor=''
+                    <SwitcherControl
+                        label={__("Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={logoCaptionColorSwitcher}
+                        onChange={(value) => setAttributes({ logoCaptionColorSwitcher: value })}
                     />
-                )}
+
+                    {logoCaptionColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={logoCaptionColor}
+                            onChangeColor={(value) => setAttributes({ logoCaptionColor: value })}
+                            defaultColor=''
+                        />
+                    )}
+
+                    {logoCaptionColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={logoCaptionColorHover}
+                            onChangeColor={(value) => setAttributes({ logoCaptionColorHover: value })}
+                            defaultColor=''
+                        />
+                    )}
 
 
-                <BackgroundControl
-                    label={__("Background Color", "gslider-blocks")}
+                    <BackgroundControl
+                        label={__("Background Color", "gslider-blocks")}
 
-                    normalBackgroundType={logoCaptionNormalBackgroundType}
-                    setNormalBackgroundType={(value) => setAttributes({ logoCaptionNormalBackgroundType: value })}
-                    normalClassicColor={logoCaptionNormalClassicColor}
-                    setNormalClassicColor={(value) => setAttributes({ logoCaptionNormalClassicColor: value })}
-                    normalGradientColor={logoCaptionNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ logoCaptionNormalGradientColor: value })}
-                    normalCustomGradientSwitcher={logoCaptionNormalCustomGradientSwitcher}
-                    setNormalCustomGradientSwitcher={(value) => setAttributes({ logoCaptionNormalCustomGradientSwitcher: value })}
-                    normalCustomGradientInputValue={logoCaptionNormalCustomGradientInputValue}
-                    setNormalCustomGradientInputValue={(value) => setAttributes({ logoCaptionNormalCustomGradientInputValue: value })}
-                    normalClassicDefaultColor={'#00000075'}
+                        normalBackgroundType={logoCaptionNormalBackgroundType}
+                        setNormalBackgroundType={(value) => setAttributes({ logoCaptionNormalBackgroundType: value })}
+                        normalClassicColor={logoCaptionNormalClassicColor}
+                        setNormalClassicColor={(value) => setAttributes({ logoCaptionNormalClassicColor: value })}
+                        normalGradientColor={logoCaptionNormalGradientColor}
+                        setNormalGradientColor={(value) => setAttributes({ logoCaptionNormalGradientColor: value })}
+                        normalCustomGradientSwitcher={logoCaptionNormalCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => setAttributes({ logoCaptionNormalCustomGradientSwitcher: value })}
+                        normalCustomGradientInputValue={logoCaptionNormalCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => setAttributes({ logoCaptionNormalCustomGradientInputValue: value })}
+                        normalClassicDefaultColor={'#00000075'}
 
-                    hoverBackgroundType={logoCaptionHoverBackgroundType}
-                    setHoverBackgroundType={(value) => setAttributes({ logoCaptionHoverBackgroundType: value })}
-                    hoverClassicColor={logoCaptionHoverClassicColor}
-                    setHoverClassicColor={(value) => setAttributes({ logoCaptionHoverClassicColor: value })}
-                    hoverGradientColor={logoCaptionHoverGradientColor}
-                    setHoverGradientColor={(value) => setAttributes({ logoCaptionHoverGradientColor: value })}
-                    hoverCustomGradientSwitcher={logoCaptionHoverCustomGradientSwitcher}
-                    setHoverCustomGradientSwitcher={(value) => setAttributes({ logoCaptionHoverCustomGradientSwitcher: value })}
-                    hoverCustomGradientInputValue={logoCaptionHoverCustomGradientInputValue}
-                    setHoverCustomGradientInputValue={(value) => setAttributes({ logoCaptionHoverCustomGradientInputValue: value })}
-                    hoverClassicDefaultColor={''}
-                    isBackgroundImage={false}
-                />
-
-                <SelectControls
-                    label={__("Border Style", "gslider-blocks")}
-                    options={BORDER_STYLES}
-                    value={logoCaptionBorder}
-                    onChange={(value) => setAttributes({ logoCaptionBorder: value })}
-                />
-
-                <SwitcherControl
-                    label={__("Border Color", "gslider-blocks")}
-                    options={NORMAL_HOVER}
-                    value={logoCaptionBorderColorSwitcher}
-                    onChange={(value) => setAttributes({ logoCaptionBorderColorSwitcher: value })}
-                />
-
-                {logoCaptionBorderColorSwitcher === 'normal' && (
-                    <ColorControl
-                        label={__("Normal Color", "gslider-blocks")}
-                        color={logoCaptionBorderColor}
-                        onChangeColor={(value) => setAttributes({ logoCaptionBorderColor: value })}
+                        hoverBackgroundType={logoCaptionHoverBackgroundType}
+                        setHoverBackgroundType={(value) => setAttributes({ logoCaptionHoverBackgroundType: value })}
+                        hoverClassicColor={logoCaptionHoverClassicColor}
+                        setHoverClassicColor={(value) => setAttributes({ logoCaptionHoverClassicColor: value })}
+                        hoverGradientColor={logoCaptionHoverGradientColor}
+                        setHoverGradientColor={(value) => setAttributes({ logoCaptionHoverGradientColor: value })}
+                        hoverCustomGradientSwitcher={logoCaptionHoverCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => setAttributes({ logoCaptionHoverCustomGradientSwitcher: value })}
+                        hoverCustomGradientInputValue={logoCaptionHoverCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => setAttributes({ logoCaptionHoverCustomGradientInputValue: value })}
+                        hoverClassicDefaultColor={''}
+                        isBackgroundImage={false}
                     />
-                )}
 
-                {logoCaptionBorderColorSwitcher === 'hover' && (
-                    <ColorControl
-                        label={__("Hover Color", "gslider-blocks")}
-                        color={logoCaptionBorderHoverColor}
-                        onChangeColor={(value) => setAttributes({ logoCaptionBorderHoverColor: value })}
+                    <SelectControls
+                        label={__("Border Style", "gslider-blocks")}
+                        options={BORDER_STYLES}
+                        value={logoCaptionBorder}
+                        onChange={(value) => setAttributes({ logoCaptionBorder: value })}
                     />
-                )}
 
-                <ResponsiveSpacingControl
-                    label={__("Border", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={logoCaptionBorderUnits}
-                    onChangeUnits={(value) => setAttributes({ logoCaptionBorderUnits: value })}
-                    desktopSpacing={logoCaptionBorderDesktop}
-                    onChangeDesktopSpacing={(value) => setAttributes({ logoCaptionBorderDesktop: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ logoCaptionBorderDesktopCssStyle: value })}
-                    tabletSpacing={logoCaptionBorderTablet}
-                    onChangeTabletSpacing={(value) => setAttributes({ logoCaptionBorderTablet: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ logoCaptionBorderTabletCssStyle: value })}
-                    mobileSpacing={logoCaptionBorderMobile}
-                    onChangeMobileSpacing={(value) => setAttributes({ logoCaptionBorderMobile: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ logoCaptionBorderMobileCssStyle: value })}
-                    isLinked={logoCaptionBorderLink}
-                    onChangeLink={(value) => setAttributes({ logoCaptionBorderLink: value })}
-                />
+                    <SwitcherControl
+                        label={__("Border Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={logoCaptionBorderColorSwitcher}
+                        onChange={(value) => setAttributes({ logoCaptionBorderColorSwitcher: value })}
+                    />
 
-                <ResponsiveSpacingControl
-                    label={__("Border Radius", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={logoCaptionBorderRadiusUnits}
-                    onChangeUnits={(value) => setAttributes({ logoCaptionBorderRadiusUnits: value })}
-                    desktopSpacing={logoCaptionBorderRadiusDesktop}
-                    onChangeDesktopSpacing={(value) => setAttributes({ logoCaptionBorderRadiusDesktop: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ logoCaptionBorderRadiusDesktopCssStyle: value })}
-                    tabletSpacing={logoCaptionBorderRadiusTablet}
-                    onChangeTabletSpacing={(value) => setAttributes({ logoCaptionBorderRadiusTablet: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ logoCaptionBorderRadiusTabletCssStyle: value })}
-                    mobileSpacing={logoCaptionBorderRadiusMobile}
-                    onChangeMobileSpacing={(value) => setAttributes({ logoCaptionBorderRadiusMobile: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ logoCaptionBorderRadiusMobileCssStyle: value })}
-                    isLinked={logoCaptionBorderRadiusLink}
-                    onChangeLink={(value) => setAttributes({ logoCaptionBorderRadiusLink: value })}
-                />
+                    {logoCaptionBorderColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={logoCaptionBorderColor}
+                            onChangeColor={(value) => setAttributes({ logoCaptionBorderColor: value })}
+                        />
+                    )}
 
-                <ResponsiveSpacingControl
-                    label={__("Padding", "gslider-blocks")}
-                    deviceType={deviceType}
-                    onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                    units={logoCaptionPaddingUnits}
-                    onChangeUnits={(value) => setAttributes({ logoCaptionPaddingUnits: value })}
-                    desktopSpacing={logoCaptionPaddingDesktop}
-                    onChangeDesktopSpacing={(value) => setAttributes({ logoCaptionPaddingDesktop: value })}
-                    desktopSpacingStyle={(value) => setAttributes({ logoCaptionPaddingDesktopCssStyle: value })}
-                    tabletSpacing={logoCaptionPaddingTablet}
-                    onChangeTabletSpacing={(value) => setAttributes({ logoCaptionPaddingTablet: value })}
-                    tabletSpacingStyle={(value) => setAttributes({ logoCaptionPaddingTabletCssStyle: value })}
-                    mobileSpacing={logoCaptionPaddingMobile}
-                    onChangeMobileSpacing={(value) => setAttributes({ logoCaptionPaddingMobile: value })}
-                    mobileSpacingStyle={(value) => setAttributes({ logoCaptionPaddingMobileCssStyle: value })}
-                    isLinked={logoCaptionPaddingLink}
-                    onChangeLink={(value) => setAttributes({ logoCaptionPaddingLink: value })}
-                />
+                    {logoCaptionBorderColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={logoCaptionBorderHoverColor}
+                            onChangeColor={(value) => setAttributes({ logoCaptionBorderHoverColor: value })}
+                        />
+                    )}
 
-            </PanelBody>
+                    <ResponsiveSpacingControl
+                        label={__("Border", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={logoCaptionBorderUnits}
+                        onChangeUnits={(value) => setAttributes({ logoCaptionBorderUnits: value })}
+                        desktopSpacing={logoCaptionBorderDesktop}
+                        onChangeDesktopSpacing={(value) => setAttributes({ logoCaptionBorderDesktop: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ logoCaptionBorderDesktopCssStyle: value })}
+                        tabletSpacing={logoCaptionBorderTablet}
+                        onChangeTabletSpacing={(value) => setAttributes({ logoCaptionBorderTablet: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ logoCaptionBorderTabletCssStyle: value })}
+                        mobileSpacing={logoCaptionBorderMobile}
+                        onChangeMobileSpacing={(value) => setAttributes({ logoCaptionBorderMobile: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ logoCaptionBorderMobileCssStyle: value })}
+                        isLinked={logoCaptionBorderLink}
+                        onChangeLink={(value) => setAttributes({ logoCaptionBorderLink: value })}
+                    />
 
-            {showNavigation && (
+                    <ResponsiveSpacingControl
+                        label={__("Border Radius", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={logoCaptionBorderRadiusUnits}
+                        onChangeUnits={(value) => setAttributes({ logoCaptionBorderRadiusUnits: value })}
+                        desktopSpacing={logoCaptionBorderRadiusDesktop}
+                        onChangeDesktopSpacing={(value) => setAttributes({ logoCaptionBorderRadiusDesktop: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ logoCaptionBorderRadiusDesktopCssStyle: value })}
+                        tabletSpacing={logoCaptionBorderRadiusTablet}
+                        onChangeTabletSpacing={(value) => setAttributes({ logoCaptionBorderRadiusTablet: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ logoCaptionBorderRadiusTabletCssStyle: value })}
+                        mobileSpacing={logoCaptionBorderRadiusMobile}
+                        onChangeMobileSpacing={(value) => setAttributes({ logoCaptionBorderRadiusMobile: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ logoCaptionBorderRadiusMobileCssStyle: value })}
+                        isLinked={logoCaptionBorderRadiusLink}
+                        onChangeLink={(value) => setAttributes({ logoCaptionBorderRadiusLink: value })}
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={logoCaptionPaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ logoCaptionPaddingUnits: value })}
+                        desktopSpacing={logoCaptionPaddingDesktop}
+                        onChangeDesktopSpacing={(value) => setAttributes({ logoCaptionPaddingDesktop: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ logoCaptionPaddingDesktopCssStyle: value })}
+                        tabletSpacing={logoCaptionPaddingTablet}
+                        onChangeTabletSpacing={(value) => setAttributes({ logoCaptionPaddingTablet: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ logoCaptionPaddingTabletCssStyle: value })}
+                        mobileSpacing={logoCaptionPaddingMobile}
+                        onChangeMobileSpacing={(value) => setAttributes({ logoCaptionPaddingMobile: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ logoCaptionPaddingMobileCssStyle: value })}
+                        isLinked={logoCaptionPaddingLink}
+                        onChangeLink={(value) => setAttributes({ logoCaptionPaddingLink: value })}
+                    />
+
+                </PanelBody>
+            )}
+
+            {showNavigation?.[deviceType] && (
                 <PanelBody
                     title={__("Navigation", "gslider-blocks")}
                     opened={openPanels.styles === "navigation"}
@@ -1862,7 +1864,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 </PanelBody>
             )}
 
-            {showPagination && (
+            {showPagination?.[deviceType] && (
                 <PanelBody
                     title={__("Pagination", "gslider-blocks")}
                     opened={openPanels.styles === "pagination"}
@@ -2810,6 +2812,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             margin: 0 auto;
         }
 
+        .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-item {
+            display: block;
+            transition: all ${logoLinkTransitionDuration?.Desktop || 300}ms ease;
+            --hover-opacity: ${logoLinkHoverOpacity?.Desktop || 0.8};
+            --hover-scale: ${logoLinkHoverScale?.Desktop || 1.05};
+            --hover-lift: ${logoLinkHoverLift?.Desktop || 10}${logoLinkHoverLiftUnits?.Desktop || 'px'};
+            --transition-duration: ${logoLinkTransitionDuration?.Desktop || 300}ms;
+        }
+
         .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-caption {           
         
             ${logoCaptionFontFamily ? `font-family: ${logoCaptionFontFamily};` : ''} 
@@ -3079,6 +3090,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${logoMaxWidth.Tablet ? `max-width: ${logoMaxWidth.Tablet}${logoMaxWidthUnits.Tablet};` : ''}
             }
 
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-item {
+                display: block;
+                transition: all ${logoLinkTransitionDuration?.Tablet || 300}ms ease;
+                --hover-opacity: ${logoLinkHoverOpacity?.Tablet || 0.8};
+                --hover-scale: ${logoLinkHoverScale?.Tablet || 1.05};
+                --hover-lift: ${logoLinkHoverLift?.Tablet || 10}${logoLinkHoverLiftUnits?.Tablet || 'px'};
+                --transition-duration: ${logoLinkTransitionDuration?.Tablet || 300}ms;
+            }
+
             .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-caption {
                 ${logoCaptionFontSize.Tablet && logoCaptionFontSizeUnits.Tablet ? `font-size: ${logoCaptionFontSize.Tablet}${logoCaptionFontSizeUnits.Tablet};` : ''}
                 ${logoCaptionLineHeight.Tablet && logoCaptionLineHeightUnits.Tablet ? `line-height: ${logoCaptionLineHeight.Tablet}${logoCaptionLineHeightUnits.Tablet};` : ''}
@@ -3237,6 +3257,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${logoMaxWidth.Mobile ? `max-width: ${logoMaxWidth.Mobile}${logoMaxWidthUnits.Mobile};` : ''}
             }
 
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-item {
+                display: block;
+                transition: all ${logoLinkTransitionDuration?.Mobile || 300}ms ease;
+                --hover-opacity: ${logoLinkHoverOpacity?.Mobile || 0.8};
+                --hover-scale: ${logoLinkHoverScale?.Mobile || 1.05};
+                --hover-lift: ${logoLinkHoverLift?.Mobile || 10}${logoLinkHoverLiftUnits?.Mobile || 'px'};
+                --transition-duration: ${logoLinkTransitionDuration?.Mobile || 300}ms;
+            }
+
             .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-caption {
                 ${logoCaptionFontSize.Mobile && logoCaptionFontSizeUnits.Mobile ? `font-size: ${logoCaptionFontSize.Mobile}${logoCaptionFontSizeUnits.Mobile};` : ''}
                 ${logoCaptionLineHeight.Mobile && logoCaptionLineHeightUnits.Mobile ? `line-height: ${logoCaptionLineHeight.Mobile}${logoCaptionLineHeightUnits.Mobile};` : ''}
@@ -3388,6 +3417,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         showNavigation,
         showPagination,
         /** End Show/Hide Elements */
+
+        /** Start Logo Link Settings */
+        enableLogoLinks,
+        enableTooltip,
+        logoLinkTarget,
+        logoLinkRel,
+        logoLinkHoverEffect,
+        logoLinkHoverOpacity,
+        logoLinkHoverScale,
+        logoLinkHoverLift,
+        logoLinkHoverLiftUnits,
+        logoLinkTransitionDuration,
+        /** End Logo Link Settings */
 
         /** Start Layout & Content Setting */
         layoutHeight,
