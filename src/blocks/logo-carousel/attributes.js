@@ -56,6 +56,10 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+    enableLazyLoad: {
+        type: "boolean",
+        default: false,
+    },
     autoplayDelay: {
         type: "object",
         default: {

@@ -97,6 +97,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		logoLinkHoverLift,
 		logoLinkHoverLiftUnits,
 		logoLinkTransitionDuration,
+		enableLazyLoad,
 
 	} = attributes;
 
@@ -451,7 +452,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											}
 										}}
 									>
-										<img src={item.url} alt={item.alt || `Logo ${logos.indexOf(item) + 1}`} />
+										<img
+											src={item.url}
+											alt={item.alt || `Logo ${logos.indexOf(item) + 1}`}
+											loading={enableLazyLoad ? "lazy" : undefined}
+										/>
 										{enableTooltip && item.tooltipText && (
 											<div className="gslider-tooltip">{item.tooltipText}</div>
 										)}
