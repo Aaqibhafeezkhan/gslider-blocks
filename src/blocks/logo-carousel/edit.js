@@ -426,7 +426,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							setSwiperInstance(swiper);
 						}}
 					>
-						{logos.map((item) => (
+						{logos.map((item, index) => (
 							<SwiperSlide key={item.id}>
 								<div className={`gslider-logo-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
 									<div
@@ -463,6 +463,46 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 									{/* Logo Action Toolbar */}
 									<div className="gslider-logo-action-toolbar">
+
+										{/* Move Left Button */}
+										{index > 0 && (
+											<Button
+												icon="arrow-left-alt2"
+												className="gslider-logo-action-btn gslider-logo-move-btn"
+												onClick={() => {
+													const newLogos = [...logos];
+													const temp = newLogos[index - 1];
+													newLogos[index - 1] = newLogos[index];
+													newLogos[index] = temp;
+													setAttributes({ logos: newLogos });
+												}}
+												label={__('Move Left', 'gslider-blocks')}
+												showTooltip={true}
+											/>
+										)}
+
+										{/* Move Right Button */}
+										{index < logos.length - 1 && (
+											<Button
+												icon="arrow-right-alt2"
+												className="gslider-logo-action-btn gslider-logo-move-btn"
+												onClick={() => {
+													const newLogos = [...logos];
+													const temp = newLogos[index + 1];
+													newLogos[index + 1] = newLogos[index];
+													newLogos[index] = temp;
+													setAttributes({ logos: newLogos });
+												}}
+												label={__('Move Right', 'gslider-blocks')}
+												showTooltip={true}
+											/>
+										)}
+
+										{/* Divider */}
+										{(index > 0 || index < logos.length - 1) && (
+											<div className="gslider-toolbar-divider" />
+										)}
+
 										<Button
 											icon="no-alt"
 											className="gslider-logo-action-btn gslider-logo-delete-btn"

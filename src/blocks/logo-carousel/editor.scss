@@ -92,6 +92,17 @@
             &.gslider-logo-edit-btn:hover {
                 background: #46b450 !important;
             }
+
+            // Move button - white/grey on hover
+            &.gslider-logo-move-btn:hover {
+                background: rgba(255, 255, 255, 0.3) !important;
+            }
+        }
+
+        .gslider-toolbar-divider {
+            width: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 4px 2px;
         }
     }
 
