@@ -35,6 +35,7 @@ import BackgroundControl from '@Components/background-control';
 import ImageControl from '@Components/image-control';
 import InspectorControl from '@Components/inspector-controls';
 import CustomCSSEditor from '@Components/custom-css-editor';
+import LoadGoogleFont from '@Utils/loadGoogleFont';
 import getCustomCss from '@Utils/getCustomCss';
 import ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import { useDeviceType } from "@Utils/displayType";
@@ -627,6 +628,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ navigationArrowsIconRight: IconName })
     }
     /** End Navigation Custom Arrows */
+
+    /** Start Load Google Font */
+    if (logoCaptionFontFamily !== 'Default') {
+        LoadGoogleFont(logoCaptionFontFamily);
+    }
+    /** End Load Google Font */
 
     /**
      * Inspector General Controls
