@@ -405,6 +405,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<Swiper
 						key={swiperKey}
 						{...swiperSettings}
+						role="region"
+						aria-label="Logo Carousel"
 						modules={[
 							Navigation,
 							Pagination,
@@ -449,7 +451,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											}
 										}}
 									>
-										<img src={item.url} alt={item.alt || ''} />
+										<img src={item.url} alt={item.alt || `Logo ${logos.indexOf(item) + 1}`} />
 										{enableTooltip && item.tooltipText && (
 											<div className="gslider-tooltip">{item.tooltipText}</div>
 										)}

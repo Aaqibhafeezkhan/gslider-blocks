@@ -153,7 +153,7 @@ export default function Save({ attributes }) {
 
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
-            <div className="swiper">
+            <div className="swiper" role="region" aria-label="Logo Carousel">
                 <div className="swiper-wrapper">
                     {logos.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
@@ -169,12 +169,12 @@ export default function Save({ attributes }) {
                                             rel={logoLinkRel}
                                             className="gslider-logo-link"
                                         >
-                                            <img src={item.url} alt={item.alt || ''} />
+                                            <img src={item.url} alt={item.alt || `Logo ${logos.indexOf(item) + 1}`} />
                                         </a>
                                     ) : (
                                         <img
                                             src={item.url}
-                                            alt={item.alt || ''}
+                                            alt={item.alt || `Logo ${logos.indexOf(item) + 1}`}
                                         />
                                     )}
                                     {enableTooltip && item.tooltipText && (
