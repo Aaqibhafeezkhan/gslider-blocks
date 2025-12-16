@@ -52,6 +52,7 @@ export default function Save({ attributes }) {
         logoLinkHoverLift,
         logoLinkHoverLiftUnits,
         logoLinkTransitionDuration,
+        enableLazyLoad,
 
     } = attributes;
 
@@ -169,12 +170,17 @@ export default function Save({ attributes }) {
                                             rel={logoLinkRel}
                                             className="gslider-logo-link"
                                         >
-                                            <img src={item.url} alt={item.alt || `Logo ${logos.indexOf(item) + 1}`} />
+                                            <img
+                                                src={item.url}
+                                                alt={item.alt || `Logo ${logos.indexOf(item) + 1}`}
+                                                loading={enableLazyLoad ? "lazy" : undefined}
+                                            />
                                         </a>
                                     ) : (
                                         <img
                                             src={item.url}
                                             alt={item.alt || `Logo ${logos.indexOf(item) + 1}`}
+                                            loading={enableLazyLoad ? "lazy" : undefined}
                                         />
                                     )}
                                     {enableTooltip && item.tooltipText && (

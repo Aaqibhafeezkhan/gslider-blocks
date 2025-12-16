@@ -59,6 +59,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         pauseOnHover,
         stopOnLastSlide,
         reverseDirection,
+        enableLazyLoad,
         carouselEffect,
         mousewheelControl,
         keyboardNavigation,
@@ -1184,6 +1185,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 </PanelBody>
             )}
+
+            <PanelBody
+                title={__("Performance Settings", "gslider-blocks")}
+                opened={openPanels.general === "performance-settings"}
+                onToggle={() => togglePanel("general", "performance-settings")}
+                initialOpen={false}
+            >
+                <ToggleControl
+                    label={__("Enable Lazy Loading", "gslider-blocks")}
+                    help={__("Delay loading of images until they are in the viewport.", "gslider-blocks")}
+                    checked={enableLazyLoad}
+                    onChange={(value) => setAttributes({ enableLazyLoad: value })}
+                />
+            </PanelBody>
         </>
     );
 
