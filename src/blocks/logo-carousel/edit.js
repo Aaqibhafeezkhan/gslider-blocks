@@ -460,74 +460,92 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										<div className="gslider-logo-carousel-caption" aria-live="polite">{item.caption}</div>
 									) : null}
 
-									{(enableLogoLinks || enableTooltip) && (
-										<>
-											<Button
-												icon={item.link ? "admin-links" : "admin-links"}
-												className={`gslider-logo-link-button ${item.link ? 'has-link' : ''}`}
-												onClick={() => handleEditLink(item.id, item.link, item.
-													tooltipText)}
-												label={item.link ? __('Edit Link', 'gslider-blocks') : __('Add Link', 'gslider-blocks')}
-											/>
+									<Button
+										icon="no-alt"
+										className="gslider-logo-delete-button"
+										onClick={() => {
+											const updatedLogos = logos.filter(logo => logo.id !== item.id);
+											setAttributes({ logos: updatedLogos });
+										}}
+										label={__('Remove Logo', 'gslider-blocks')}
+									/>
 
-											{editingLogoId === item.id && (
-												<Popover
-													position="middle center"
-													onClose={() => setEditingLogoId(null)}
-													focusOnMount="firstElement"
-													className="gslider-logo-link-popover"
-												>
-													<div className="gslider-logo-link-popover-wrapper">
-														{enableLogoLinks && (
-															<TextControl
-																label={__('Logo Link URL', 'gslider-blocks')}
-																className="gslider-logo-link-url"
-																value={tempLinkUrl}
-																onChange={(value) => setTempLinkUrl(value)}
-																placeholder="https://example.com"
-																help={__('Enter the URL for this logo', 'gslider-blocks')}
-															/>
-														)}
-														{enableTooltip && (
-															<TextControl
-																label={__('Tooltip Text', 'gslider-blocks')}
-																className="gslider-logo-tooltip-text"
-																value={tempTooltipText}
-																onChange={(value) => setTempTooltipText(value)}
-																placeholder="Visit our website"
-																help={__('Text shown when hovering over the logo', 'gslider-blocks')}
-															/>
-														)}
-														<div className="gslider-logo-link-popover-buttons-wrapper">
-															<Button
-																variant="primary"
-																onClick={handleSaveLink}
-																className="gslider-logo-link-save-button"
-															>
-																{__('Save', 'gslider-blocks')}
-															</Button>
-															{item.link && (
-																<Button
-																	variant="secondary"
-																	isDestructive
-																	onClick={handleRemoveLink}
-																	className="gslider-logo-link-remove-button"
-																>
-																	{__('Remove Link', 'gslider-blocks')}
-																</Button>
-															)}
-															<Button
-																variant="tertiary"
-																onClick={() => setEditingLogoId(null)}
-																className="gslider-logo-link-cancel-button"
-															>
-																{__('Cancel', 'gslider-blocks')}
-															</Button>
-														</div>
-													</div>
-												</Popover>
-											)}
-										</>
+
+									{/* Separate buttons for Link and Tooltip */}
+									{enableLogoLinks && (
+										<Button
+											icon="admin-links"
+											className={`gslider-logo-link-button ${item.link ? 'has-link' : ''}`}
+											onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
+											label={item.link ? __('Edit Link', 'gslider-blocks') : __('Add Link', 'gslider-blocks')}
+										/>
+									)}
+
+									{enableTooltip && (
+										<Button
+											icon="info"
+											className={`gslider-logo-tooltip-button ${item.tooltipText ? 'has-tooltip' : ''}`}
+											onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
+											label={item.tooltipText ? __('Edit Tooltip', 'gslider-blocks') : __('Add Tooltip', 'gslider-blocks')}
+										/>
+									)}
+
+									{editingLogoId === item.id && (
+										<Popover
+											position="middle center"
+											onClose={() => setEditingLogoId(null)}
+											focusOnMount="firstElement"
+											className="gslider-logo-link-popover"
+										>
+											<div className="gslider-logo-link-popover-wrapper">
+												{enableLogoLinks && (
+													<TextControl
+														label={__('Logo Link URL', 'gslider-blocks')}
+														className="gslider-logo-link-url"
+														value={tempLinkUrl}
+														onChange={(value) => setTempLinkUrl(value)}
+														placeholder="https://example.com"
+														help={__('Enter the URL for this logo', 'gslider-blocks')}
+													/>
+												)}
+												{enableTooltip && (
+													<TextControl
+														label={__('Tooltip Text', 'gslider-blocks')}
+														className="gslider-logo-tooltip-text"
+														value={tempTooltipText}
+														onChange={(value) => setTempTooltipText(value)}
+														placeholder="Visit our website"
+														help={__('Text shown when hovering over the logo', 'gslider-blocks')}
+													/>
+												)}
+												<div className="gslider-logo-link-popover-buttons-wrapper">
+													<Button
+														variant="primary"
+														onClick={handleSaveLink}
+														className="gslider-logo-link-save-button"
+													>
+														{__('Save', 'gslider-blocks')}
+													</Button>
+													{item.link && (
+														<Button
+															variant="secondary"
+															isDestructive
+															onClick={handleRemoveLink}
+															className="gslider-logo-link-remove-button"
+														>
+															{__('Remove Link', 'gslider-blocks')}
+														</Button>
+													)}
+													<Button
+														variant="tertiary"
+														onClick={() => setEditingLogoId(null)}
+														className="gslider-logo-link-cancel-button"
+													>
+														{__('Cancel', 'gslider-blocks')}
+													</Button>
+												</div>
+											</div>
+										</Popover>
 									)}
 								</div>
 							</SwiperSlide>
@@ -599,7 +617,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						></div>
 					)}
 
-			</div>
+			</div >
 		</>
 	);
 }
