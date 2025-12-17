@@ -327,46 +327,6 @@ const attributes = {
         type: "string",
         default: "",
     },
-    imageNormalBackgroundImageUrl: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: ""
-        }
-    },
-    imageNormalBackgroundImagePosition: {
-        type: "object",
-        default: {
-            Desktop: { x: 0.5, y: 0.5 },
-            Tablet: { x: 0.5, y: 0.5 },
-            Mobile: { x: 0.5, y: 0.5 }
-        }
-    },
-    imageNormalBackgroundImageAttachment: {
-        type: "object",
-        default: {
-            Desktop: "scroll",
-            Tablet: "scroll",
-            Mobile: "scroll"
-        }
-    },
-    imageNormalBackgroundImageRepeat: {
-        type: "object",
-        default: {
-            Desktop: "no-repeat",
-            Tablet: "no-repeat",
-            Mobile: "no-repeat"
-        }
-    },
-    imageNormalBackgroundImageSize: {
-        type: "object",
-        default: {
-            Desktop: "cover",
-            Tablet: "cover",
-            Mobile: "cover"
-        }
-    },
 
     imageHoverBackgroundType: {
         type: "string",
@@ -387,46 +347,6 @@ const attributes = {
     imageHoverCustomGradientInputValue: {
         type: "string",
         default: "",
-    },
-    imageHoverBackgroundImageUrl: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: ""
-        }
-    },
-    imageHoverBackgroundImagePosition: {
-        type: "object",
-        default: {
-            Desktop: { x: 0.5, y: 0.5 },
-            Tablet: { x: 0.5, y: 0.5 },
-            Mobile: { x: 0.5, y: 0.5 }
-        }
-    },
-    imageHoverBackgroundImageAttachment: {
-        type: "object",
-        default: {
-            Desktop: "scroll",
-            Tablet: "scroll",
-            Mobile: "scroll"
-        }
-    },
-    imageHoverBackgroundImageRepeat: {
-        type: "object",
-        default: {
-            Desktop: "no-repeat",
-            Tablet: "no-repeat",
-            Mobile: "no-repeat"
-        }
-    },
-    imageHoverBackgroundImageSize: {
-        type: "object",
-        default: {
-            Desktop: "cover",
-            Tablet: "cover",
-            Mobile: "cover"
-        }
     },
     /** End image Background */
 

@@ -116,21 +116,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         imageNormalGradientColor,
         imageNormalCustomGradientSwitcher,
         imageNormalCustomGradientInputValue,
-        imageNormalBackgroundImageUrl,
-        imageNormalBackgroundImagePosition,
-        imageNormalBackgroundImageAttachment,
-        imageNormalBackgroundImageRepeat,
-        imageNormalBackgroundImageSize,
         imageHoverBackgroundType,
         imageHoverClassicColor,
         imageHoverGradientColor,
         imageHoverCustomGradientSwitcher,
         imageHoverCustomGradientInputValue,
-        imageHoverBackgroundImageUrl,
-        imageHoverBackgroundImagePosition,
-        imageHoverBackgroundImageAttachment,
-        imageHoverBackgroundImageRepeat,
-        imageHoverBackgroundImageSize,
         /** End image Background */
 
         /** Start image Border */
@@ -1411,7 +1401,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
 
                 <BackgroundControl
-                    label={__("Background", "gslider-blocks")}
+                    label={__("Background Color", "gslider-blocks")}
                     deviceType={deviceType}
 
                     normalBackgroundType={imageNormalBackgroundType}
@@ -1424,16 +1414,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setNormalCustomGradientSwitcher={(value) => setAttributes({ imageNormalCustomGradientSwitcher: value })}
                     normalCustomGradientInputValue={imageNormalCustomGradientInputValue}
                     setNormalCustomGradientInputValue={(value) => setAttributes({ imageNormalCustomGradientInputValue: value })}
-                    normalBackgroundImageUrl={imageNormalBackgroundImageUrl}
-                    setNormalBackgroundImageUrl={(value) => setAttributes({ imageNormalBackgroundImageUrl: value })}
-                    normalBackgroundImagePosition={imageNormalBackgroundImagePosition}
-                    setNormalBackgroundImagePosition={(value) => setAttributes({ imageNormalBackgroundImagePosition: value })}
-                    normalBackgroundImageAttachment={imageNormalBackgroundImageAttachment}
-                    setNormalBackgroundImageAttachment={(value) => setAttributes({ imageNormalBackgroundImageAttachment: value })}
-                    normalBackgroundImageRepeat={imageNormalBackgroundImageRepeat}
-                    setNormalBackgroundImageRepeat={(value) => setAttributes({ imageNormalBackgroundImageRepeat: value })}
-                    normalBackgroundImageSize={imageNormalBackgroundImageSize}
-                    setNormalBackgroundImageSize={(value) => setAttributes({ imageNormalBackgroundImageSize: value })}
 
                     hoverBackgroundType={imageHoverBackgroundType}
                     setHoverBackgroundType={(value) => setAttributes({ imageHoverBackgroundType: value })}
@@ -1445,18 +1425,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ imageHoverCustomGradientSwitcher: value })}
                     hoverCustomGradientInputValue={imageHoverCustomGradientInputValue}
                     setHoverCustomGradientInputValue={(value) => setAttributes({ imageHoverCustomGradientInputValue: value })}
-                    hoverBackgroundImageUrl={imageHoverBackgroundImageUrl}
-                    setHoverBackgroundImageUrl={(value) => setAttributes({ imageHoverBackgroundImageUrl: value })}
-                    hoverBackgroundImagePosition={imageHoverBackgroundImagePosition}
-                    setHoverBackgroundImagePosition={(value) => setAttributes({ imageHoverBackgroundImagePosition: value })}
-                    hoverBackgroundImageAttachment={imageHoverBackgroundImageAttachment}
-                    setHoverBackgroundImageAttachment={(value) => setAttributes({ imageHoverBackgroundImageAttachment: value })}
-                    hoverBackgroundImageRepeat={imageHoverBackgroundImageRepeat}
-                    setHoverBackgroundImageRepeat={(value) => setAttributes({ imageHoverBackgroundImageRepeat: value })}
-                    hoverBackgroundImageSize={imageHoverBackgroundImageSize}
-                    setHoverBackgroundImageSize={(value) => setAttributes({ imageHoverBackgroundImageSize: value })}
                     setAttributes={setAttributes}
-
+                    isBackgroundImage={false}
                 />
 
                 <SelectControls
@@ -2808,116 +2778,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 
-
-    /**
-     * Get image background normal styles
-     */
-    const getimageBackgroundNormalStyles = (device) => {
-        const bgType = imageNormalBackgroundType;
-        const bgColor = imageNormalClassicColor;
-        const bgGradient = imageNormalGradientColor;
-        const customGradient = imageNormalCustomGradientInputValue;
-        const customGradientEnabled = imageNormalCustomGradientSwitcher;
-
-        const bgImageUrl = imageNormalBackgroundImageUrl?.[device];
-        const bgImagePosition = imageNormalBackgroundImagePosition?.[device];
-        const bgAttachment = imageNormalBackgroundImageAttachment?.[device];
-        const bgRepeat = imageNormalBackgroundImageRepeat?.[device];
-        const bgSize = imageNormalBackgroundImageSize?.[device];
-
-        if (bgType === 'gradient') {
-            if (customGradientEnabled && customGradient) {
-                return { background: customGradient };
-            } else if (bgGradient) {
-                return { background: bgGradient };
-            } else if (bgColor) {
-                return { background: bgColor };
-            }
-            return {};
-        }
-
-        let styles = bgColor ? { background: bgColor } : {};
-
-        if (bgType !== 'gradient' && bgImageUrl) {
-            styles = {
-                ...styles,
-                'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition
-                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
-                    : "50% 50%",
-                'background-attachment': bgAttachment || undefined,
-                'background-repeat': bgRepeat || undefined,
-                'background-size': bgSize || undefined,
-            };
-        }
-
-        return styles;
-    };
-
-    /**
-     * Get image background hover styles
-     */
-    const getimageBackgroundHoverStyles = (device) => {
-        const bgType = imageHoverBackgroundType;
-        const bgColor = imageHoverClassicColor;
-        const bgGradient = imageHoverGradientColor;
-        const customGradient = imageHoverCustomGradientInputValue;
-        const customGradientEnabled = imageHoverCustomGradientSwitcher;
-
-        const bgImageUrl = imageHoverBackgroundImageUrl?.[device];
-        const bgImagePosition = imageHoverBackgroundImagePosition?.[device];
-        const bgAttachment = imageHoverBackgroundImageAttachment?.[device];
-        const bgRepeat = imageHoverBackgroundImageRepeat?.[device];
-        const bgSize = imageHoverBackgroundImageSize?.[device];
-
-        if (bgType === 'gradient') {
-            if (customGradientEnabled && customGradient) {
-                return { background: customGradient };
-            } else if (bgGradient) {
-                return { background: bgGradient };
-            } else if (bgColor) {
-                return { background: bgColor };
-            }
-            return {};
-        }
-
-        let styles = bgColor ? { background: bgColor } : {};
-
-        if (bgType !== 'gradient' && bgImageUrl) {
-            styles = {
-                ...styles,
-                'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition
-                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
-                    : "50% 50%",
-                'background-attachment': bgAttachment || undefined,
-                'background-repeat': bgRepeat || undefined,
-                'background-size': bgSize || undefined,
-            };
-        }
-
-        return styles;
-    };
-
-    /**
-     * Convert object to string
-     */
-    const imageBackgroundStyleObjectToString = (styleObj) =>
-        Object.entries(styleObj)
-            .map(([key, value]) => `${key}: ${value};`)
-            .join(' ');
-
-    /**
-     * Get image background styles
-     */
-    const imageDesktopBackgroundNormalStyles = imageBackgroundStyleObjectToString(getimageBackgroundNormalStyles('Desktop'));
-    const imageTabletBackgroundNormalStyles = imageBackgroundStyleObjectToString(getimageBackgroundNormalStyles('Tablet'));
-    const imageMobileBackgroundNormalStyles = imageBackgroundStyleObjectToString(getimageBackgroundNormalStyles('Mobile'));
-
-    const imageDesktopBackgroundHoverStyles = imageBackgroundStyleObjectToString(getimageBackgroundHoverStyles('Desktop'));
-    const imageTabletBackgroundHoverStyles = imageBackgroundStyleObjectToString(getimageBackgroundHoverStyles('Tablet'));
-    const imageMobileBackgroundHoverStyles = imageBackgroundStyleObjectToString(getimageBackgroundHoverStyles('Mobile'));
-
     /**
      * Get global background normal styles
      */
@@ -3059,7 +2919,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper {
             ${layoutHeight.Desktop ? `height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${imagePaddingDesktopCssStyle ? `padding: ${imagePaddingDesktopCssStyle};` : ''}
-            ${imageDesktopBackgroundNormalStyles}
             ${imageBorder ? `border: ${imageBorder};` : ''}
 			${imageBorderDesktopCssStyle ? `border-width: ${imageBorderDesktopCssStyle};` : ''}  
 			${imageBorderRadiusDesktopCssStyle ? `border-radius: ${imageBorderRadiusDesktopCssStyle} !important;` : ''}
@@ -3071,7 +2930,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
         }
         .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper:hover {
-            ${imageDesktopBackgroundHoverStyles}
             ${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
             ${imageBoxShadowHoverCssValue ? `box-shadow: ${imageBoxShadowHoverCssValue} !important;` : ''}
         }
@@ -3367,16 +3225,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper {
                 ${layoutHeight.Tablet ? `height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
                 ${imagePaddingTabletCssStyle ? `padding: ${imagePaddingTabletCssStyle};` : ''}
-                ${imageTabletBackgroundNormalStyles}
 			    ${imageBorderTabletCssStyle ? `border-width: ${imageBorderTabletCssStyle};` : ''}  
                 ${imageBorderRadiusTabletCssStyle ? `border-radius: ${imageBorderRadiusTabletCssStyle};` : ''}
                 display: flex;
                 align-items: center;
                 justify-content: ${verticalAlign.Tablet || 'center'};
-            }
-
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper {
-                ${imageTabletBackgroundHoverStyles}
             }
 
             .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper img {
@@ -3546,16 +3399,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper {
                 ${layoutHeight.Mobile ? `height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
                 ${imagePaddingMobileCssStyle ? `padding: ${imagePaddingMobileCssStyle};` : ''}
-                ${imageMobileBackgroundNormalStyles}
                 ${imageBorderMobileCssStyle ? `border-width: ${imageBorderMobileCssStyle};` : ''}  
                 ${imageBorderRadiusMobileCssStyle ? `border-radius: ${imageBorderRadiusMobileCssStyle};` : ''}
                 display: flex;
                 align-items: center;
                 justify-content: ${verticalAlign.Mobile || 'center'};
-            }
-
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper:hover { 
-                ${imageMobileBackgroundHoverStyles}
             }
 
             .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper img {
@@ -3776,21 +3624,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         imageNormalGradientColor,
         imageNormalCustomGradientSwitcher,
         imageNormalCustomGradientInputValue,
-        imageNormalBackgroundImageUrl,
-        imageNormalBackgroundImagePosition,
-        imageNormalBackgroundImageAttachment,
-        imageNormalBackgroundImageRepeat,
-        imageNormalBackgroundImageSize,
         imageHoverBackgroundType,
         imageHoverClassicColor,
         imageHoverGradientColor,
         imageHoverCustomGradientSwitcher,
         imageHoverCustomGradientInputValue,
-        imageHoverBackgroundImageUrl,
-        imageHoverBackgroundImagePosition,
-        imageHoverBackgroundImageAttachment,
-        imageHoverBackgroundImageRepeat,
-        imageHoverBackgroundImageSize,
         /** End image Background */
 
         /** Start image Border */
