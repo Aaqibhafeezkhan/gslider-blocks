@@ -42,8 +42,17 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageUrl,
         navigationArrowsIconRightImageAlt,
 
+        enableimageLinks,
+        showTooltip,
+        imageLinkTarget,
+        imageLinkRel,
+        imageLinkHoverEffect,
+        imageLinkHoverOpacity,
+        imageLinkHoverScale,
+        imageLinkHoverLift,
+        imageLinkHoverLiftUnits,
+        imageLinkTransitionDuration,
         enableLazyLoad,
-        enableLightbox,
 
     } = attributes;
 
@@ -145,18 +154,38 @@ export default function Save({ attributes }) {
 
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
-            <div className="swiper" role="region" aria-label="Image Carousel">
+            <div className="swiper" role="region" aria-label="image Carousel">
                 <div className="swiper-wrapper">
                     {images.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
                             <div className={`gslider-image-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })}>
-                                <div className="gslider-image-item">
-                                    <img
-                                        src={item.url}
-                                        alt={item.alt || `Image ${images.indexOf(item) + 1}`}
-                                        loading={enableLazyLoad ? "lazy" : undefined}
-                                        className={enableLightbox ? 'lightbox-enabled' : ''}
-                                    />
+                                <div
+                                    className="gslider-image-item"
+                                    data-hover-effect={imageLinkHoverEffect}
+                                >
+                                    {enableimageLinks && item.link ? (
+                                        <a
+                                            href={item.link}
+                                            target={imageLinkTarget}
+                                            rel={imageLinkRel}
+                                            className="gslider-image-link"
+                                        >
+                                            <img
+                                                src={item.url}
+                                                alt={item.alt || `image ${images.indexOf(item) + 1}`}
+                                                loading={enableLazyLoad ? "lazy" : undefined}
+                                            />
+                                        </a>
+                                    ) : (
+                                        <img
+                                            src={item.url}
+                                            alt={item.alt || `image ${images.indexOf(item) + 1}`}
+                                            loading={enableLazyLoad ? "lazy" : undefined}
+                                        />
+                                    )}
+                                    {showTooltip && item.tooltipText && (
+                                        <div className="gslider-image-tooltip">{item.tooltipText}</div>
+                                    )}
                                 </div>
                                 {anyCaptionEnabled && item.caption ? (
                                     <div className="gslider-image-carousel-caption" aria-live="polite">{item.caption}</div>

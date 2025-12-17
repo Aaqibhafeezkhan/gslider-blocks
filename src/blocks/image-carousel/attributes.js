@@ -20,15 +20,9 @@ const attributes = {
                 id: { type: 'number' },
                 url: { type: 'string' },
                 alt: { type: 'string' },
+                link: { type: 'string' },
                 caption: { type: 'string' },
-                visibleOn: {
-                    type: 'object',
-                    properties: {
-                        Desktop: { type: 'boolean' },
-                        Tablet: { type: 'boolean' },
-                        Mobile: { type: 'boolean' }
-                    }
-                }
+                tooltipText: { type: 'string' }
             }
         }
     },
@@ -148,93 +142,68 @@ const attributes = {
     },
     /** End Show/Hide Elements */
 
-    /** Start Image Settings */
-    enableLightbox: {
-        type: "boolean",
-        default: true,
-    },
-    aspectRatio: {
-        type: "string",
-        default: "original", // original, 16:9, 4:3, 1:1, 9:16, custom
-    },
-    customAspectRatio: {
-        type: "string",
-        default: "16 / 9",
-    },
-    imageFit: {
-        type: "string",
-        default: "cover", // cover, contain, fill, none
-    },
-    /** End Image Settings */
-
-    /** Start Image Overlay */
-    enableOverlay: {
+    /** Start image Link Settings */
+    enableimageLinks: {
         type: "boolean",
         default: false,
     },
-    overlayType: {
-        type: "string",
-        default: "gradient", // gradient, color
-    },
-    overlayColor: {
-        type: "string",
-        default: "rgba(0, 0, 0, 0.5)",
-    },
-    overlayGradient: {
-        type: "string",
-        default: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%)",
-    },
-    overlayOpacity: {
-        type: "number",
-        default: 1,
-    },
-    /** End Image Overlay */
-
-    /** Start Image Filters */
-    enableFilters: {
+    showTooltip: {
         type: "boolean",
         default: false,
     },
-    filterBrightness: {
-        type: "number",
-        default: 100,
-    },
-    filterContrast: {
-        type: "number",
-        default: 100,
-    },
-    filterSaturation: {
-        type: "number",
-        default: 100,
-    },
-    filterBlur: {
-        type: "number",
-        default: 0,
-    },
-    filterSepia: {
-        type: "number",
-        default: 0,
-    },
-    filterHue: {
-        type: "number",
-        default: 0,
-    },
-    /** End Image Filters */
-
-    /** Start Ken Burns Effect */
-    enableKenBurns: {
-        type: "boolean",
-        default: false,
-    },
-    kenBurnsDirection: {
+    imageLinkTarget: {
         type: "string",
-        default: "zoom-in", // zoom-in, zoom-out, pan-left, pan-right
+        default: "_blank",
     },
-    kenBurnsDuration: {
-        type: "number",
-        default: 10,
+    imageLinkRel: {
+        type: "string",
+        default: "noopener noreferrer",
     },
-    /** End Ken Burns Effect */
+    imageLinkHoverEffect: {
+        type: "string",
+        default: "none",
+    },
+    imageLinkHoverOpacity: {
+        type: "object",
+        default: {
+            Desktop: 0.8,
+            Tablet: 0.8,
+            Mobile: 0.8,
+        },
+    },
+    imageLinkHoverScale: {
+        type: "object",
+        default: {
+            Desktop: 1.05,
+            Tablet: 1.05,
+            Mobile: 1.05,
+        },
+    },
+    imageLinkHoverLift: {
+        type: "object",
+        default: {
+            Desktop: 10,
+            Tablet: 10,
+            Mobile: 10,
+        },
+    },
+    imageLinkHoverLiftUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    imageLinkTransitionDuration: {
+        type: "object",
+        default: {
+            Desktop: 300,
+            Tablet: 300,
+            Mobile: 300,
+        },
+    },
+    /** End image Link Settings */
 
     /** Layout & Content Setting */
     layoutHeight: {
@@ -263,8 +232,8 @@ const attributes = {
     },
     /** End Layout & Content Setting */
 
-    /** Start Logo Max Width */
-    logoMaxWidth: {
+    /** Start image Max Width */
+    imageMaxWidth: {
         type: "object",
         default: {
             Desktop: "",
@@ -272,7 +241,7 @@ const attributes = {
             Mobile: "",
         },
     },
-    logoMaxWidthUnits: {
+    imageMaxWidthUnits: {
         type: "object",
         default: {
             Desktop: "%",
@@ -280,10 +249,10 @@ const attributes = {
             Mobile: "%",
         },
     },
-    /** End Logo Max Width */
+    /** End image Max Width */
 
-    /** Start Logo Padding */
-    logoPaddingUnits: {
+    /** Start image Padding */
+    imagePaddingUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -291,7 +260,7 @@ const attributes = {
             Mobile: "px"
         }
     },
-    logoPaddingDesktop: {
+    imagePaddingDesktop: {
         type: "object",
         default: {
             top: "",
@@ -300,11 +269,11 @@ const attributes = {
             right: "",
         },
     },
-    logoPaddingDesktopCssStyle: {
+    imagePaddingDesktopCssStyle: {
         type: "string",
         default: "",
     },
-    logoPaddingTablet: {
+    imagePaddingTablet: {
         type: "object",
         default: {
             top: "",
@@ -313,11 +282,11 @@ const attributes = {
             right: "",
         },
     },
-    logoPaddingTabletCssStyle: {
+    imagePaddingTabletCssStyle: {
         type: "string",
         default: "",
     },
-    logoPaddingMobile: {
+    imagePaddingMobile: {
         type: "object",
         default: {
             top: "",
@@ -326,39 +295,39 @@ const attributes = {
             right: "",
         },
     },
-    logoPaddingMobileCssStyle: {
+    imagePaddingMobileCssStyle: {
         type: "string",
         default: "",
     },
-    logoPaddingLink: {
+    imagePaddingLink: {
         type: "boolean",
         default: true
     },
-    /** End Logo Padding */
+    /** End image Padding */
 
 
-    /** Start Logo Background */
-    logoNormalBackgroundType: {
+    /** Start image Background */
+    imageNormalBackgroundType: {
         type: "string",
         default: "classic",
     },
-    logoNormalClassicColor: {
+    imageNormalClassicColor: {
         type: "string",
         default: "",
     },
-    logoNormalGradientColor: {
+    imageNormalGradientColor: {
         type: "string",
         default: null,
     },
-    logoNormalCustomGradientSwitcher: {
+    imageNormalCustomGradientSwitcher: {
         type: "boolean",
         default: false,
     },
-    logoNormalCustomGradientInputValue: {
+    imageNormalCustomGradientInputValue: {
         type: "string",
         default: "",
     },
-    logoNormalBackgroundImageUrl: {
+    imageNormalBackgroundImageUrl: {
         type: "object",
         default: {
             Desktop: "",
@@ -366,7 +335,7 @@ const attributes = {
             Mobile: ""
         }
     },
-    logoNormalBackgroundImagePosition: {
+    imageNormalBackgroundImagePosition: {
         type: "object",
         default: {
             Desktop: { x: 0.5, y: 0.5 },
@@ -374,7 +343,7 @@ const attributes = {
             Mobile: { x: 0.5, y: 0.5 }
         }
     },
-    logoNormalBackgroundImageAttachment: {
+    imageNormalBackgroundImageAttachment: {
         type: "object",
         default: {
             Desktop: "scroll",
@@ -382,7 +351,7 @@ const attributes = {
             Mobile: "scroll"
         }
     },
-    logoNormalBackgroundImageRepeat: {
+    imageNormalBackgroundImageRepeat: {
         type: "object",
         default: {
             Desktop: "no-repeat",
@@ -390,7 +359,7 @@ const attributes = {
             Mobile: "no-repeat"
         }
     },
-    logoNormalBackgroundImageSize: {
+    imageNormalBackgroundImageSize: {
         type: "object",
         default: {
             Desktop: "cover",
@@ -399,27 +368,27 @@ const attributes = {
         }
     },
 
-    logoHoverBackgroundType: {
+    imageHoverBackgroundType: {
         type: "string",
         default: "classic",
     },
-    logoHoverClassicColor: {
+    imageHoverClassicColor: {
         type: "string",
         default: "",
     },
-    logoHoverGradientColor: {
+    imageHoverGradientColor: {
         type: "string",
         default: null,
     },
-    logoHoverCustomGradientSwitcher: {
+    imageHoverCustomGradientSwitcher: {
         type: "boolean",
         default: false,
     },
-    logoHoverCustomGradientInputValue: {
+    imageHoverCustomGradientInputValue: {
         type: "string",
         default: "",
     },
-    logoHoverBackgroundImageUrl: {
+    imageHoverBackgroundImageUrl: {
         type: "object",
         default: {
             Desktop: "",
@@ -427,7 +396,7 @@ const attributes = {
             Mobile: ""
         }
     },
-    logoHoverBackgroundImagePosition: {
+    imageHoverBackgroundImagePosition: {
         type: "object",
         default: {
             Desktop: { x: 0.5, y: 0.5 },
@@ -435,7 +404,7 @@ const attributes = {
             Mobile: { x: 0.5, y: 0.5 }
         }
     },
-    logoHoverBackgroundImageAttachment: {
+    imageHoverBackgroundImageAttachment: {
         type: "object",
         default: {
             Desktop: "scroll",
@@ -443,7 +412,7 @@ const attributes = {
             Mobile: "scroll"
         }
     },
-    logoHoverBackgroundImageRepeat: {
+    imageHoverBackgroundImageRepeat: {
         type: "object",
         default: {
             Desktop: "no-repeat",
@@ -451,7 +420,7 @@ const attributes = {
             Mobile: "no-repeat"
         }
     },
-    logoHoverBackgroundImageSize: {
+    imageHoverBackgroundImageSize: {
         type: "object",
         default: {
             Desktop: "cover",
@@ -459,24 +428,24 @@ const attributes = {
             Mobile: "cover"
         }
     },
-    /** End Logo Background */
+    /** End image Background */
 
-    /** Start Logo Border */
-    logoBorder: {
+    /** Start image Border */
+    imageBorder: {
         type: "string",
         default: "none",
     },
-    logoBorderColorSwitcher: {
+    imageBorderColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    logoBorderColor: {
+    imageBorderColor: {
         type: "string",
     },
-    logoBorderHoverColor: {
+    imageBorderHoverColor: {
         type: "string",
     },
-    logoBorderUnits: {
+    imageBorderUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -484,7 +453,7 @@ const attributes = {
             Mobile: "px"
         }
     },
-    logoBorderDesktop: {
+    imageBorderDesktop: {
         type: "object",
         default: {
             top: "",
@@ -493,11 +462,11 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderDesktopCssStyle: {
+    imageBorderDesktopCssStyle: {
         type: "string",
         default: "",
     },
-    logoBorderTablet: {
+    imageBorderTablet: {
         type: "object",
         default: {
             top: "",
@@ -506,11 +475,11 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderTabletCssStyle: {
+    imageBorderTabletCssStyle: {
         type: "string",
         default: "",
     },
-    logoBorderMobile: {
+    imageBorderMobile: {
         type: "object",
         default: {
             top: "",
@@ -519,15 +488,15 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderMobileCssStyle: {
+    imageBorderMobileCssStyle: {
         type: "string",
         default: "",
     },
-    logoBorderLink: {
+    imageBorderLink: {
         type: "boolean",
         default: true
     },
-    logoBorderRadiusUnits: {
+    imageBorderRadiusUnits: {
         type: 'object',
         default: {
             Desktop: "px",
@@ -535,7 +504,7 @@ const attributes = {
             Mobile: "px"
         }
     },
-    logoBorderRadiusDesktop: {
+    imageBorderRadiusDesktop: {
         type: "object",
         default: {
             top: "",
@@ -544,11 +513,11 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderRadiusDesktopCssStyle: {
+    imageBorderRadiusDesktopCssStyle: {
         type: 'string',
         default: '',
     },
-    logoBorderRadiusTablet: {
+    imageBorderRadiusTablet: {
         type: "object",
         default: {
             top: "",
@@ -557,11 +526,11 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderRadiusTabletCssStyle: {
+    imageBorderRadiusTabletCssStyle: {
         type: 'string',
         default: '',
     },
-    logoBorderRadiusMobile: {
+    imageBorderRadiusMobile: {
         type: "object",
         default: {
             top: "",
@@ -570,42 +539,42 @@ const attributes = {
             right: "",
         },
     },
-    logoBorderRadiusMobileCssStyle: {
+    imageBorderRadiusMobileCssStyle: {
         type: "string",
         default: "",
     },
-    logoBorderRadiusLink: {
+    imageBorderRadiusLink: {
         type: "boolean",
         default: true
     },
-    logoBoxShadowValuesSwitcher: {
+    imageBoxShadowValuesSwitcher: {
         type: "string",
         default: "normal"
     },
-    logoBoxShadowValues: {
+    imageBoxShadowValues: {
         type: "array",
         default: [],
     },
-    logoBoxShadowCssValue: {
+    imageBoxShadowCssValue: {
         type: "string",
         default: "",
     },
-    logoBoxShadowHoverValues: {
+    imageBoxShadowHoverValues: {
         type: "array",
         default: [],
     },
-    logoBoxShadowHoverCssValue: {
+    imageBoxShadowHoverCssValue: {
         type: "string",
         default: "",
     },
-    /** End Logo Border */
+    /** End image Border */
 
-    /** Start Logo Caption Typography */
-    logoCaptionFontFamily: {
+    /** Start image Caption Typography */
+    imageCaptionFontFamily: {
         type: "string",
         default: "",
     },
-    logoCaptionFontSize: {
+    imageCaptionFontSize: {
         type: 'object',
         default: {
             Desktop: '',
@@ -613,7 +582,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    logoCaptionFontSizeUnits: {
+    imageCaptionFontSizeUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -621,23 +590,23 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    logoCaptionFontWeight: {
+    imageCaptionFontWeight: {
         type: "string",
         default: "",
     },
-    logoCaptionFontStyle: {
+    imageCaptionFontStyle: {
         type: "string",
         default: "",
     },
-    logoCaptionTextTransform: {
+    imageCaptionTextTransform: {
         type: "string",
         default: "",
     },
-    logoCaptionTextDecoration: {
+    imageCaptionTextDecoration: {
         type: "string",
         default: "",
     },
-    logoCaptionLineHeight: {
+    imageCaptionLineHeight: {
         type: 'object',
         default: {
             Desktop: '',
@@ -645,7 +614,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    logoCaptionLineHeightUnits: {
+    imageCaptionLineHeightUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -653,7 +622,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    logoCaptionLetterSpacing: {
+    imageCaptionLetterSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -661,7 +630,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    logoCaptionLetterSpacingUnits: {
+    imageCaptionLetterSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -669,7 +638,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    logoCaptionWordSpacing: {
+    imageCaptionWordSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -677,7 +646,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    logoCaptionWordSpacingUnits: {
+    imageCaptionWordSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -685,82 +654,82 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    /** End Logo Caption Typography */
+    /** End image Caption Typography */
 
-    /** Start Logo Caption Color */
-    logoCaptionColorSwitcher: {
+    /** Start image Caption Color */
+    imageCaptionColorSwitcher: {
         type: "string",
         default: "normal",
     },
-    logoCaptionColor: {
+    imageCaptionColor: {
         type: "string",
         default: "#ffffff",
     },
-    logoCaptionColorHover: {
+    imageCaptionColorHover: {
         type: "string",
         default: "",
     },
-    /** End Logo Caption Color */
+    /** End image Caption Color */
 
-    /** Start Logo Caption Background */
-    logoCaptionNormalBackgroundType: {
+    /** Start image Caption Background */
+    imageCaptionNormalBackgroundType: {
         type: "string",
         default: "classic",
     },
-    logoCaptionNormalClassicColor: {
+    imageCaptionNormalClassicColor: {
         type: "string",
         default: "#00000075",
     },
-    logoCaptionNormalGradientColor: {
+    imageCaptionNormalGradientColor: {
         type: "string",
         default: null,
     },
-    logoCaptionNormalCustomGradientSwitcher: {
+    imageCaptionNormalCustomGradientSwitcher: {
         type: "boolean",
         default: false,
     },
-    logoCaptionNormalCustomGradientInputValue: {
+    imageCaptionNormalCustomGradientInputValue: {
         type: "string",
         default: "",
     },
-    logoCaptionHoverBackgroundType: {
+    imageCaptionHoverBackgroundType: {
         type: "string",
         default: "classic",
     },
-    logoCaptionHoverClassicColor: {
+    imageCaptionHoverClassicColor: {
         type: "string",
         default: "",
     },
-    logoCaptionHoverGradientColor: {
+    imageCaptionHoverGradientColor: {
         type: "string",
         default: null,
     },
-    logoCaptionHoverCustomGradientSwitcher: {
+    imageCaptionHoverCustomGradientSwitcher: {
         type: "boolean",
         default: false,
     },
-    logoCaptionHoverCustomGradientInputValue: {
+    imageCaptionHoverCustomGradientInputValue: {
         type: "string",
         default: "",
     },
-    /** End Logo Caption Background */
+    /** End image Caption Background */
 
-    /** Start Logo Caption Border */
-    logoCaptionBorder: {
+    /** Start image Caption Border */
+    imageCaptionBorder: {
         type: "string",
         default: "none",
     },
-    logoCaptionBorderColorSwitcher: {
+    imageCaptionBorderColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    logoCaptionBorderColor: {
+    imageCaptionBorderColor: {
         type: "string",
     },
-    logoCaptionBorderHoverColor: {
+    imageCaptionBorderHoverColor: {
         type: "string",
     },
-    logoCaptionBorderUnits: {
+    imageCaptionBorderUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -768,7 +737,7 @@ const attributes = {
             Mobile: "px"
         }
     },
-    logoCaptionBorderDesktop: {
+    imageCaptionBorderDesktop: {
         type: "object",
         default: {
             top: "",
@@ -777,11 +746,11 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderDesktopCssStyle: {
+    imageCaptionBorderDesktopCssStyle: {
         type: "string",
         default: "",
     },
-    logoCaptionBorderTablet: {
+    imageCaptionBorderTablet: {
         type: "object",
         default: {
             top: "",
@@ -790,11 +759,11 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderTabletCssStyle: {
+    imageCaptionBorderTabletCssStyle: {
         type: "string",
         default: "",
     },
-    logoCaptionBorderMobile: {
+    imageCaptionBorderMobile: {
         type: "object",
         default: {
             top: "",
@@ -803,15 +772,15 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderMobileCssStyle: {
+    imageCaptionBorderMobileCssStyle: {
         type: "string",
         default: "",
     },
-    logoCaptionBorderLink: {
+    imageCaptionBorderLink: {
         type: "boolean",
         default: true
     },
-    logoCaptionBorderRadiusUnits: {
+    imageCaptionBorderRadiusUnits: {
         type: 'object',
         default: {
             Desktop: "px",
@@ -819,7 +788,7 @@ const attributes = {
             Mobile: "px"
         }
     },
-    logoCaptionBorderRadiusDesktop: {
+    imageCaptionBorderRadiusDesktop: {
         type: "object",
         default: {
             top: "",
@@ -828,11 +797,11 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderRadiusDesktopCssStyle: {
+    imageCaptionBorderRadiusDesktopCssStyle: {
         type: 'string',
         default: '',
     },
-    logoCaptionBorderRadiusTablet: {
+    imageCaptionBorderRadiusTablet: {
         type: "object",
         default: {
             top: "",
@@ -841,11 +810,11 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderRadiusTabletCssStyle: {
+    imageCaptionBorderRadiusTabletCssStyle: {
         type: 'string',
         default: '',
     },
-    logoCaptionBorderRadiusMobile: {
+    imageCaptionBorderRadiusMobile: {
         type: "object",
         default: {
             top: "",
@@ -854,18 +823,18 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionBorderRadiusMobileCssStyle: {
+    imageCaptionBorderRadiusMobileCssStyle: {
         type: "string",
         default: "",
     },
-    logoCaptionBorderRadiusLink: {
+    imageCaptionBorderRadiusLink: {
         type: "boolean",
         default: true
     },
-    /** End Logo Caption Border */
+    /** End image Caption Border */
 
-    /** Start Logo Caption Padding */
-    logoCaptionPaddingUnits: {
+    /** Start image Caption Padding */
+    imageCaptionPaddingUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -873,7 +842,7 @@ const attributes = {
             Mobile: "px"
         }
     },
-    logoCaptionPaddingDesktop: {
+    imageCaptionPaddingDesktop: {
         type: "object",
         default: {
             top: "",
@@ -882,11 +851,11 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionPaddingDesktopCssStyle: {
+    imageCaptionPaddingDesktopCssStyle: {
         type: "string",
         default: "",
     },
-    logoCaptionPaddingTablet: {
+    imageCaptionPaddingTablet: {
         type: "object",
         default: {
             top: "",
@@ -895,11 +864,11 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionPaddingTabletCssStyle: {
+    imageCaptionPaddingTabletCssStyle: {
         type: "string",
         default: "",
     },
-    logoCaptionPaddingMobile: {
+    imageCaptionPaddingMobile: {
         type: "object",
         default: {
             top: "",
@@ -908,18 +877,318 @@ const attributes = {
             right: "",
         },
     },
-    logoCaptionPaddingMobileCssStyle: {
+    imageCaptionPaddingMobileCssStyle: {
         type: "string",
         default: "",
     },
-    logoCaptionPaddingLink: {
+    imageCaptionPaddingLink: {
         type: "boolean",
         default: true
     },
-    /** End Logo Caption Padding */
+    /** End image Caption Padding */
 
 
+    /** Start image Tooltip Typography */
+    imageTooltipFontFamily: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    imageTooltipFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    imageTooltipFontWeight: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipFontStyle: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipTextTransform: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    imageTooltipLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    imageTooltipLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    imageTooltipLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    imageTooltipWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    imageTooltipWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End image Tooltip Typography */
 
+    /** Start image Tooltip Color */
+    imageTooltipColor: {
+        type: "string",
+        default: "#ffffff",
+    },
+    imageTooltipBgColor: {
+        type: "string",
+        default: "#00000085",
+    },
+    /** End image Tooltip Color */
+
+    /** Start image Tooltip Border */
+    imageTooltipBorder: {
+        type: "string",
+        default: "none",
+    },
+    imageTooltipBorderColor: {
+        type: "string",
+    },
+    imageTooltipBorderHoverColor: {
+        type: "string",
+    },
+    imageTooltipBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    imageTooltipBorderDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    imageTooltipBorderDesktopCssStyle: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipBorderTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    imageTooltipBorderTabletCssStyle: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipBorderMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    imageTooltipBorderMobileCssStyle: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    imageTooltipBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    imageTooltipBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    imageTooltipBorderRadiusDesktopCssStyle: {
+        type: 'string',
+        default: '',
+    },
+    imageTooltipBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    imageTooltipBorderRadiusTabletCssStyle: {
+        type: 'string',
+        default: '',
+    },
+    imageTooltipBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    imageTooltipBorderRadiusMobileCssStyle: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End image Tooltip Border */
+
+    /** Start image Tooltip Padding */
+    imageTooltipPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    imageTooltipPaddingDesktop: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    imageTooltipPaddingDesktopCssStyle: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipPaddingTablet: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    imageTooltipPaddingTabletCssStyle: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipPaddingMobile: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    imageTooltipPaddingMobileCssStyle: {
+        type: "string",
+        default: "",
+    },
+    imageTooltipPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End image Tooltip Padding */
+
+    /** Start image Tooltip Position */
+    imageTooltipTopPosition: {
+        type: "object",
+        default: {
+            Desktop: "50",
+            Tablet: "50",
+            Mobile: "50",
+        },
+    },
+    imageTooltipTopPositionUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    imageTooltipLeftPosition: {
+        type: "object",
+        default: {
+            Desktop: "50",
+            Tablet: "50",
+            Mobile: "50",
+        },
+    },
+    imageTooltipLeftPositionUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    /** End image Tooltip Position */
 
     /** Start Navigation Custom Arrows */
     navigationArrowsIconSwitcher: {

@@ -1,4 +1,4 @@
-// Editor-specific styles for Logo Carousel
+// Editor-specific styles for image Carousel
 
 .gslider-image-carousel-wrapper {
 
@@ -30,13 +30,13 @@
 
 
 
-    // Ensure logo item has relative positioning
+    // Ensure image item has relative positioning
     .gslider-image-item {
         position: relative;
     }
 
-    // Logo Action Toolbar
-    .gslider-logo-action-toolbar {
+    // image Action Toolbar
+    .gslider-image-action-toolbar {
         position: absolute;
         top: 8px;
         left: 50%;
@@ -52,7 +52,7 @@
         transition: opacity 0.2s ease;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
-        .gslider-logo-action-btn {
+        .gslider-image-action-btn {
             min-width: 32px;
             height: 32px;
             padding: 0;
@@ -82,22 +82,22 @@
             }
 
             // Delete button - red on hover
-            &.gslider-logo-delete-btn:hover {
+            &.gslider-image-delete-btn:hover {
                 background: #dc3232 !important;
             }
 
             // Duplicate button - blue on hover
-            &.gslider-logo-duplicate-btn:hover {
+            &.gslider-image-duplicate-btn:hover {
                 background: #2271b1 !important;
             }
 
             // Edit button - green on hover
-            &.gslider-logo-edit-btn:hover {
+            &.gslider-image-edit-btn:hover {
                 background: #46b450 !important;
             }
 
             // Move button - white/grey on hover
-            &.gslider-logo-move-btn:hover {
+            &.gslider-image-move-btn:hover {
                 background: rgba(255, 255, 255, 0.3) !important;
             }
         }
@@ -109,7 +109,7 @@
         }
     }
 
-    .swiper-slide:hover .gslider-logo-action-toolbar {
+    .swiper-slide:hover .gslider-image-action-toolbar {
         opacity: 1;
     }
 }

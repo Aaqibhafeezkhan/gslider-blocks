@@ -24,8 +24,8 @@
 		background: rgba(0, 0, 0, .5);
 	}
 
-	// Logo link styles
-	.gslider-logo-link {
+	// image link styles
+	.gslider-image-link {
 		display: block;
 		text-decoration: none;
 		outline: none;
@@ -42,7 +42,7 @@
 		}
 	}
 
-	// Logo item with hover effects
+	// image item with hover effects
 	.gslider-image-item {
 		position: relative;
 
@@ -84,8 +84,8 @@
 	}
 
 	// Edit button in editor (for Link and/or Tooltip)
-	.gslider-logo-edit-button,
-	.gslider-logo-link-button {
+	.gslider-image-edit-button,
+	.gslider-image-link-button {
 		position: absolute;
 		top: 8px;
 		right: 8px;
@@ -112,8 +112,8 @@
 		}
 	}
 
-	.gslider-image-carousel-content-wrapper:hover .gslider-logo-edit-button,
-	.gslider-image-carousel-content-wrapper:hover .gslider-logo-link-button {
+	.gslider-image-carousel-content-wrapper:hover .gslider-image-edit-button,
+	.gslider-image-carousel-content-wrapper:hover .gslider-image-link-button {
 		opacity: 1;
 	}
 
@@ -149,10 +149,10 @@
 
 // Popover styles - WordPress renders popover in fallback container
 .components-popover__fallback-container {
-	.gslider-logo-link-popover {
+	.gslider-image-link-popover {
 
 		// Popover wrapper
-		.gslider-logo-link-popover-wrapper {
+		.gslider-image-link-popover-wrapper {
 			padding: 20px;
 			min-width: 320px;
 			max-width: 400px;
@@ -202,7 +202,7 @@
 		}
 
 		// Buttons wrapper
-		.gslider-logo-link-popover-buttons-wrapper {
+		.gslider-image-link-popover-buttons-wrapper {
 			display: flex;
 			gap: 10px;
 			margin-top: 20px;

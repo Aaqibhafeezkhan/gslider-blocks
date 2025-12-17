@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const initializeSliders = () => {
         // Select all slider containers
-        const sliders = document.querySelectorAll('.gslider-logo-carousel-wrapper');
+        const sliders = document.querySelectorAll('.gslider-image-carousel-wrapper');
 
         sliders.forEach((sliderContainer) => {
             try {
@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     new Swiper(sliderContainer.querySelector('.swiper'), settings);
                 }
 
-                // Initialize hover effects for logo links
-                initializeLogoLinkHoverEffects(sliderContainer);
+                // Initialize hover effects for image links
+                initializeImageLinkHoverEffects(sliderContainer);
             } catch (error) {
                 console.error('Error initializing slider:', error);
             }
@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * Initialize hover effects for logo links
+     * Initialize hover effects for image links
      */
-    const initializeLogoLinkHoverEffects = (container) => {
-        const logoItems = container.querySelectorAll('.gslider-logo-item');
+    const initializeImageLinkHoverEffects = (container) => {
+        const imageItems = container.querySelectorAll('.gslider-image-item');
 
-        logoItems.forEach((item) => {
+        imageItems.forEach((item) => {
             const hoverEffect = item.dataset.hoverEffect;
             const hoverOpacity = parseFloat(item.dataset.hoverOpacity) || 0.8;
             const hoverScale = parseFloat(item.dataset.hoverScale) || 1.05;
