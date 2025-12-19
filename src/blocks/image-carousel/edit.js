@@ -35,6 +35,13 @@ import {
 	EffectCards
 } from 'swiper/modules';
 import 'swiper/css/bundle';
+import {
+	ToolbarMoveLeftIcon,
+	ToolbarMoveRightIcon,
+	ToolbarDeleteIcon,
+	ToolbarDuplicateIcon,
+	ToolbarLinkIcon
+} from '@Utils/svgIcons';
 
 const mapMedia = (m) => ({
 	id: m.id,
@@ -473,7 +480,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										{/* Move Left Button */}
 										{index > 0 && (
 											<Button
-												icon="arrow-left-alt2"
+												icon={<ToolbarMoveLeftIcon />}
 												className="gslider-image-action-btn gslider-image-move-btn"
 												onClick={() => {
 													const newimages = [...images];
@@ -490,7 +497,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										{/* Move Right Button */}
 										{index < images.length - 1 && (
 											<Button
-												icon="arrow-right-alt2"
+												icon={<ToolbarMoveRightIcon />}
 												className="gslider-image-action-btn gslider-image-move-btn"
 												onClick={() => {
 													const newimages = [...images];
@@ -510,7 +517,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										)}
 
 										<Button
-											icon="no-alt"
+											icon={<ToolbarDeleteIcon />}
 											className="gslider-image-action-btn gslider-image-delete-btn"
 											onClick={() => {
 												const updatedimages = images.filter(image => image.id !== item.id);
@@ -521,7 +528,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										/>
 
 										<Button
-											icon="admin-page"
+											icon={<ToolbarDuplicateIcon />}
 											className="gslider-image-action-btn gslider-image-duplicate-btn"
 											onClick={() => {
 												const duplicatedimage = {
@@ -542,7 +549,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 										{(enableimageLinks || showTooltip) && (
 											<Button
-												icon='admin-links'
+												icon={<ToolbarLinkIcon />}
 												className="gslider-image-action-btn gslider-image-edit-btn"
 												onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
 												label={
