@@ -1,0 +1,257 @@
+.gslider-image-carousel-wrapper {
+	.gslider-image-carousel-content-wrapper {
+		box-sizing: border-box;
+		height: clamp(150px, 60vh, 150px);
+		overflow: hidden;
+		position: relative;
+		text-align: center;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.gslider-image-carousel-content-wrapper .gslider-image-carousel-caption {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 8px 12px;
+		color: #fff;
+		font-size: 14px;
+		line-height: 1.4;
+		text-align: center;
+		box-sizing: border-box;
+		background: rgba(0, 0, 0, .5);
+	}
+
+	// image link styles
+	.gslider-image-link {
+		display: block;
+		text-decoration: none;
+		outline: none;
+
+		&:focus {
+			outline: 2px solid #2271b1;
+			outline-offset: 2px;
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	// image item with hover effects
+	.gslider-image-item {
+		position: relative;
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		// Hover effects using CSS variables from inspector.js
+		&[data-hover-effect="opacity"]:hover {
+			opacity: var(--hover-opacity, 0.8);
+		}
+
+		&[data-hover-effect="scale"]:hover {
+			transform: scale(var(--hover-scale, 1.05));
+		}
+
+		&[data-hover-effect="move-up"]:hover {
+			transform: translateY(calc(var(--hover-lift, 10px) * -1));
+		}
+
+		&[data-hover-effect="both"]:hover {
+			opacity: var(--hover-opacity, 0.8);
+			transform: scale(var(--hover-scale, 1.05));
+		}
+
+		// Grayscale to Color
+		&[data-hover-effect="grayscale"] {
+			img {
+				filter: grayscale(100%);
+				transition: filter 0.3s ease, transform 0.3s ease;
+			}
+
+			&:hover img {
+				filter: grayscale(0%);
+			}
+		}
+	}
+
+	// Edit button in editor (for Link and/or Tooltip)
+	.gslider-image-edit-button,
+	.gslider-image-link-button {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		z-index: 10;
+		border: 1px solid #2271b1;
+		border-radius: 4px;
+		padding: 4px 8px;
+		cursor: pointer;
+		font-size: 16px;
+		opacity: 0;
+		transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+		background: #fff;
+		color: #2271b1;
+
+		&.has-content,
+		&.has-link {
+			opacity: 1;
+			background: #2271b1;
+			color: #fff;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	.gslider-image-carousel-content-wrapper:hover .gslider-image-edit-button,
+	.gslider-image-carousel-content-wrapper:hover .gslider-image-link-button {
+		opacity: 1;
+	}
+
+	// Custom Tooltip - Default Styles (Can be overridden by Inspector)
+	.gslider-image-tooltip {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.85);
+		color: #fff;
+		padding: 8px 16px;
+		border-radius: 4px;
+		font-size: 14px;
+		line-height: 1.4;
+		white-space: nowrap;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+		z-index: 1000;
+	}
+
+	.gslider-image-item:hover .gslider-image-tooltip {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+:where(.wp-site-blocks *:focus) {
+	outline-width: 0 !important;
+}
+
+// Popover styles - WordPress renders popover in fallback container
+.components-popover__fallback-container {
+	.gslider-image-link-popover {
+
+		// Popover wrapper
+		.gslider-image-link-popover-wrapper {
+			padding: 20px;
+			min-width: 320px;
+			max-width: 400px;
+
+			// Input field labels
+			.components-base-control__label {
+				font-weight: 600;
+				font-size: 13px;
+				color: #1e1e1e;
+				margin-bottom: 8px;
+				display: block;
+			}
+
+			// Input fields
+			.components-text-control__input {
+				width: 100%;
+				padding: 8px 12px;
+				border: 1px solid #949494;
+				border-radius: 4px;
+				font-size: 14px;
+				line-height: 1.4;
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+				&:focus {
+					border-color: #2271b1;
+					box-shadow: 0 0 0 1px #2271b1;
+					outline: none;
+				}
+			}
+
+			// Help text
+			.components-base-control__help {
+				font-size: 12px;
+				color: #757575;
+				margin-top: 6px;
+				line-height: 1.4;
+			}
+
+			// Spacing between fields
+			.components-base-control {
+				margin-bottom: 16px;
+
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		// Buttons wrapper
+		.gslider-image-link-popover-buttons-wrapper {
+			display: flex;
+			gap: 10px;
+			margin-top: 20px;
+			padding-top: 16px;
+			border-top: 1px solid #ddd;
+
+			// Button styling
+			.components-button {
+				flex: 1;
+				justify-content: center;
+				padding: 8px 16px;
+				font-size: 14px;
+				font-weight: 500;
+				border-radius: 4px;
+				transition: all 0.2s ease;
+
+				&.is-primary {
+					background: #2271b1;
+					color: #fff;
+					border-color: #2271b1;
+
+					&:hover:not(:disabled) {
+						background: #135e96;
+						border-color: #135e96;
+					}
+				}
+
+				&.is-secondary {
+					&.is-destructive {
+						color: #cc1818;
+						border-color: #cc1818;
+
+						&:hover:not(:disabled) {
+							background: #cc1818;
+							color: #fff;
+							border-color: #cc1818;
+						}
+					}
+				}
+
+				&.is-tertiary {
+					color: #757575;
+
+					&:hover:not(:disabled) {
+						color: #1e1e1e;
+						background: #f0f0f0;
+					}
+				}
+			}
+		}
+	}
+}
