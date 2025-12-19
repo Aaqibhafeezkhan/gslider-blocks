@@ -3,7 +3,7 @@ Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,11 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.4 – December 19, 2025 = 
+**New: SVG Icons support for toolbar actions**
+- Icons are now consistent across Logo Carousel and Image Carousel blocks
+- Improved code maintainability with single-source icon management
 
 = 1.1.3 – December 16, 2025 = 
 **New Block: Logo Carousel**

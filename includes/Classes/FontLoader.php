@@ -9,7 +9,8 @@ if (!defined('ABSPATH')) {
 
 if (!class_exists('FontLoader')) {
 
-    class FontLoader {
+    class FontLoader
+    {
 
         use SingletonTrait;
 
@@ -21,7 +22,8 @@ if (!class_exists('FontLoader')) {
         /**
          * Register the hooks
          */
-        public function register() {
+        public function register()
+        {
             add_filter('render_block', [$this, 'get_fonts_on_render_block'], 10, 2);
             add_action('wp_footer', [$this, 'fonts_loader'], 10);
         }
@@ -29,7 +31,8 @@ if (!class_exists('FontLoader')) {
         /**
          * Get the fonts on render block
          */
-        public function get_fonts_on_render_block($block_content, $block) {
+        public function get_fonts_on_render_block($block_content, $block)
+        {
             if (!is_array($block) || empty($block['attrs'])) {
                 return $block_content;
             }
@@ -45,7 +48,8 @@ if (!class_exists('FontLoader')) {
         /**
          * Get the fonts family
          */
-        public static function get_fonts_family($attributes) {
+        public static function get_fonts_family($attributes)
+        {
             if (!is_array($attributes)) {
                 return [];
             }
@@ -66,7 +70,8 @@ if (!class_exists('FontLoader')) {
         /**
          * Load the google font
          */
-        private function load_google_font($fonts) {
+        private function load_google_font($fonts)
+        {
             if (empty($fonts)) {
                 return;
             }
@@ -92,10 +97,10 @@ if (!class_exists('FontLoader')) {
             $font_url = add_query_arg($query_args, self::GOOGLE_FONTS_URL);
 
             wp_register_style(
-                'gslider-blocks-fonts', 
+                'gslider-blocks-fonts',
                 esc_url($font_url),
                 [],
-                defined('GSLIDER_VERSION') ? GSLIDER_VERSION : '1.1.'
+                defined('GSLIDER_VERSION') ? GSLIDER_VERSION : '1.1.4',
             );
 
             wp_enqueue_style('gslider-blocks-fonts');
@@ -104,7 +109,8 @@ if (!class_exists('FontLoader')) {
         /**
          * Load the fonts
          */
-        public function fonts_loader() {
+        public function fonts_loader()
+        {
             try {
                 $fonts = array_filter(self::$gfonts);
                 if (!empty($fonts)) {
