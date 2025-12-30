@@ -3,7 +3,7 @@ Contributors: noruzzaman, sanaf
 Tags: slider, block, carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,19 +12,49 @@ Enhance your site with dynamic, customizable, and multi-functional slider blocks
 
 == Description ==
 
-The **gslider Blocks** plugin allows you to easily add customizable and responsive sliders to your WordPress website. Perfect for both beginners and developers, this plugin provides a simple yet powerful slider block for the WordPress editor (Gutenberg). Customize slider content, transitions, navigation, and more, while enjoying full control over slider styling and functionality.
+The **gslider Blocks** plugin allows you to easily add customizable and responsive sliders to your WordPress website. Perfect for both beginners and developers, this plugin provides powerful slider blocks for the WordPress block editor (Gutenberg). Customize slider content, transitions, navigation, and more, while enjoying full control over slider styling and functionality.
 
-== Key Features: ==
+== Available Blocks ==
 
-- **Customizable Slider Settings:** Easily adjust your slider's behavior including autoplay, speed, loop, and transition effects.
-- **Multiple Slide Support:** Add as many slides as you need with full content customization for each slide.
-- **Navigation Controls:** Choose to display pagination dots, navigation arrows, or both for intuitive user interaction.
-- **Responsive Design:** Ensure your sliders look great on all devices with automatic adjustments for different screen sizes.
-- **Content Positioning:** Control the alignment and positioning of content within each slide for perfect presentation.
-- **Advanced Styling Options:** Tailor the slider's design to match your site's theme by adjusting colors, sizes, spacing, and more.
-- **User-Friendly Interface:** Seamlessly integrate with the WordPress block editor (Gutenberg), making slider customization intuitive without the need for coding.
-- **Performance Optimized:** Built with performance in mind to ensure smooth transitions and minimal impact on page load times.
-- **Swiper.js Integration:** Powered by the popular Swiper.js library for reliable and smooth slider functionality.
+**1. Base Slider Block**
+Create stunning hero sliders with predefined content elements. Perfect for homepage banners, promotional sliders, and featured content showcases.
+
+* Pre-built slide structure with Title, Subtitle, Description, and Button
+* Multiple transition effects (Slide, Fade, Cube, Coverflow, Flip, Cards, Creative)
+* Full background image/color support with overlay options
+* Responsive navigation arrows and pagination controls
+* Content alignment and positioning controls
+* Custom spacing and padding options
+
+**2. Flexi Content Block**
+Build completely custom slides using any Gutenberg blocks. Ultimate flexibility for creative slider designs.
+
+* Use ANY WordPress blocks inside slides (images, text, buttons, galleries, etc.)
+* Full creative control with InnerBlocks support
+* Multiple slide effects including Fade, Slide, Cube, and more
+* Responsive height options (Fixed, Auto, Minimum height)
+* Loop, autoplay, and touch/swipe support
+* Keyboard and mousewheel navigation
+
+**3. Logo Carousel Block**
+Display client logos, partner brands, or sponsor images in a beautiful, animated carousel.
+
+* Easy logo management with drag & drop reordering
+* Hover effects: Grayscale-to-color, opacity, scale, and lift animations
+* Clickable logos with custom URLs and link settings
+* Tooltips and captions with full styling options
+* Responsive slides per view configuration
+* Lazy loading for optimized performance
+
+== Key Features ==
+
+* **Multiple Transition Effects:** Slide, Fade, Cube, Coverflow, Flip, Cards, and Creative effects
+* **Fully Responsive:** Separate settings for Desktop, Tablet, and Mobile
+* **Navigation Controls:** Customizable arrows (icons or images) and pagination (bullets, fraction, progressbar)
+* **Performance Optimized:** Built with Swiper.js for smooth, hardware-accelerated animations
+* **Accessibility Ready:** Keyboard navigation, ARIA labels, and touch support
+* **Custom Styling:** Full control over colors, typography, spacing, borders, and shadows
+* **Google Fonts:** Built-in typography options with Google Fonts integration
 
 == Support ==
 
@@ -53,9 +83,19 @@ Yes, each slide can be customized independently with different content, backgrou
 
 Yes, gslider Blocks is designed to work with any WordPress theme that supports the block editor.
 
+= What is the difference between Base Slider and Flexi Content? =
+
+Base Slider has pre-built content elements (title, subtitle, description, button) for quick setup. Flexi Content allows you to use any Gutenberg blocks inside slides for complete creative freedom.
+
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.5 – December 30, 2025 = 
+**Fixed: Fade effect initial load glitch**
+- Resolved an issue where the first slide would briefly animate from right to left when using the fade effect on page load
+- Improved slider initialization to disable transitions during initial positioning
+- Fix applies to both wrapper and individual slide elements for consistent behavior
 
 = 1.1.4 – December 19, 2025 = 
 **New: SVG Icons support for toolbar actions**

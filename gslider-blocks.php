@@ -4,7 +4,7 @@
  * Description: Enhance your site with dynamic, customizable, and multi-functional slider blocks to create a more engaging and functional experience.
  * Author: 		Noruzzaman
  * Author URI: 	https://github.com/noruzzamans/
- * Version: 	1.1.4
+ * Version: 	1.1.5
  * Text Domain: gslider-blocks
  * Domain Path: /languages
  * License: 	GPLv2 or later
@@ -14,14 +14,14 @@
  */
 
 if (!defined('ABSPATH')) {
-    exit;
+	exit;
 }
 
 /**
  * Check if the autoload file exists and include it
  */
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
-    require_once __DIR__ . '/vendor/autoload.php';
+	require_once __DIR__ . '/vendor/autoload.php';
 }
 
 /**
@@ -57,9 +57,9 @@ if ( ! class_exists( 'GSliderBlocks' ) ) {
 		public function define_constants() {
 			define('GSLIDER_FILE', __FILE__);
 			define('GSLIDER_SLUG', 'gslider-blocks');
-			define('GSLIDER_VERSION', '1.1.4');
+			define('GSLIDER_VERSION', '1.1.5');
 			define('GSLIDER_DIR_PATH', plugin_dir_path(__FILE__));
-			define('GSLIDER_PLUGIN_URL', plugin_dir_url(__FILE__)); 
+			define('GSLIDER_PLUGIN_URL', plugin_dir_url(__FILE__));
 			define('GSLIDER_WP_VERSION', (float) get_bloginfo('version'));
 			define('GSLIDER_PHP_VERSION', (float) phpversion());
 		}
@@ -85,4 +85,4 @@ function GSliderBlocks() {
 /**
  * Initialize the plugin
  */
-GSliderBlocks(); 
+GSliderBlocks();

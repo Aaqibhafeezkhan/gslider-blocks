@@ -100,7 +100,7 @@ if (!class_exists('FontLoader')) {
                 'gslider-blocks-fonts',
                 esc_url($font_url),
                 [],
-                defined('GSLIDER_VERSION') ? GSLIDER_VERSION : '1.1.4',
+                defined('GSLIDER_VERSION') ? GSLIDER_VERSION : '1.1.5', 
             );
 
             wp_enqueue_style('gslider-blocks-fonts');
