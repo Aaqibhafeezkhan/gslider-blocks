@@ -10,25 +10,22 @@ if (!defined('ABSPATH')) {
 
 if (!class_exists('RegistrationBlocks')) {
 
-    class RegistrationBlocks
-    {
+    class RegistrationBlocks {
         use SingletonTrait;
 
         /**
          * Attach hooks for block registration.
          */
-        public function register()
-        {
+        public function register() {
             add_action('init', [$this, 'register_blocks']);
         }
 
         /**
          * Register all blocks dynamically from build/blocks directory.
          */
-        public function register_blocks()
-        {
+        public function register_blocks() {
             $plugin_dir = defined('GSLIDER_DIR_PATH') ? GSLIDER_DIR_PATH : plugin_dir_path(__FILE__);
-            $build_dir = trailingslashit($plugin_dir) . 'build/blocks/';
+            $build_dir  = trailingslashit($plugin_dir) . 'build/blocks/';
 
             if (!is_readable($build_dir)) {
                 error_log('GSlider Blocks: Build directory is not readable: ' . $build_dir);
@@ -54,8 +51,7 @@ if (!class_exists('RegistrationBlocks')) {
          * @param string $block
          * @throws \Exception
          */
-        private function register_single_block(string $build_dir, string $block)
-        {
+        private function register_single_block(string $build_dir, string $block) {
             $block_dir = trailingslashit($build_dir . sanitize_file_name($block));
 
             if (!is_readable($block_dir)) {
@@ -77,8 +73,7 @@ if (!class_exists('RegistrationBlocks')) {
          * @param string $build_dir
          * @return array
          */
-        private function get_available_blocks(string $build_dir)
-        {
+        private function get_available_blocks(string $build_dir) {
             if (!is_dir($build_dir)) {
                 return [];
             }
