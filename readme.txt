@@ -87,6 +87,10 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 
 Base Slider has pre-built content elements (title, subtitle, description, button) for quick setup. Flexi Content allows you to use any Gutenberg blocks inside slides for complete creative freedom.
 
+= Why do my slides show overlapping content with Creative, Cube, Cards, or Flip effects? =
+
+These are 3D transition effects where slides are stacked in layers. If your slides have transparent backgrounds, content from slides behind will show through. To fix this, add a background color or background image to each slide in your slider settings.
+
 == Screenshots ==
 
 == Changelog ==
