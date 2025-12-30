@@ -4,6 +4,10 @@ namespace GSlider\Assets;
 
 use GSlider\Traits\SingletonTrait;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class FrontendAssets {
     use SingletonTrait;
 
