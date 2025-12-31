@@ -53,13 +53,13 @@ if (!class_exists('SupportSVG')) {
             // Validate file extension
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
             if (!in_array($extension, ['svg', 'svgz'], true)) {
-                $file['error'] = __('Invalid SVG file extension.', 'gslider-blocks'); 
+                $file['error'] = __('Invalid SVG file extension.', 'gslider-blocks');
                 return $file;
             }
 
             // Read file content
             if (!$this->wpFilesystem->exists($file['tmp_name'])) {
-                $file['error'] = __('Unable to locate uploaded file.', 'gslider-blocks'); 
+                $file['error'] = __('Unable to locate uploaded file.', 'gslider-blocks');
                 return $file;
             }
 
@@ -72,7 +72,7 @@ if (!class_exists('SupportSVG')) {
             // Validate SVG structure
             libxml_use_internal_errors(true);
             $doc = new \DOMDocument();
-            if (!$doc->loadXML($content, LIBXML_NOENT | LIBXML_DTDLOAD | LIBXML_NOERROR | LIBXML_NOWARNING)) {
+            if (!$doc->loadXML($content, LIBXML_NOERROR | LIBXML_NOWARNING)) {
                 $file['error'] = __('Invalid SVG XML structure.', 'gslider-blocks');
                 libxml_clear_errors();
                 return $file;
