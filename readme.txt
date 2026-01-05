@@ -1,6 +1,6 @@
-=== Slider Block for Gutenberg Gutenslider by GSlider ===      
+=== Slider Block for Gutenberg Gutenslider by GSlider ===
 Contributors: noruzzaman, sanaf
-Tags: slider, block, carousel, slideshow, gutenberg
+Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.9
 Stable tag: 1.1.5
@@ -8,7 +8,7 @@ Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Enhance your site with dynamic, customizable, and multi-functional slider blocks to create a more engaging and functional experience. 
+Logo Carousel, Image Carousel & Testimonial Carousel blocks for Gutenberg. Create stunning carousels with 7+ effects, responsive design & full customization!
 
 == Description ==
 
