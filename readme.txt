@@ -8,7 +8,7 @@ Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Logo Carousel, Image Carousel & Testimonial Carousel blocks for Gutenberg. Create stunning carousels with 7+ effects, responsive design & full customization!
+Logo Carousel, Image Carousel & Testimonial blocks for Gutenberg. 7+ effects, responsive design & full customization!
 
 == Description ==
 
