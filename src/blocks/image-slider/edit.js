@@ -110,7 +110,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Block props for container
 	const blockProps = useBlockProps({
-		className: `gslider-image-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
+		className: `gslider-image-slider-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
 	});
 
 	const onSelectFromPlaceholder = (selection) => {
@@ -211,7 +211,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		pagination: showPagination?.[deviceType]
 			? paginationPositionType === 'outside'
 				? {
-					el: `.swiper-pagination-image-carousel`,
+					el: `.swiper-pagination-image-slider`,
 					type: paginationType,
 					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
 					clickable: true,
@@ -375,7 +375,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							value={images.map((l) => l.id)}
 							onSelect={onSelectGallery}
 							render={({ open }) => (
-								<ToolbarButton icon="edit" label={__('Edit images', 'image-carousel')} onClick={open} />
+								<ToolbarButton icon="edit" label={__('Edit images', 'gslider')} onClick={open} />
 							)}
 						/>
 					</MediaUploadCheck>
@@ -398,14 +398,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<MediaPlaceholder
 						icon={<span className="dashicons dashicons-format-gallery" />}
 						labels={{
-							title: __('Upload Clients images', 'image-carousel'),
-							instructions: __('Upload multiple images directly or from your media library', 'image-carousel'),
+							title: __('Upload Clients images', 'gslider'),
+							instructions: __('Upload multiple images directly or from your media library', 'gslider'),
 						}}
 						onSelect={onSelectFromPlaceholder}
 						accept="image/*"
 						allowedTypes={['image']}
 						multiple
-						className='gslider-image-carousel-placeholder'
+						className='gslider-image-slider-placeholder'
 					/>
 				)}
 
@@ -436,7 +436,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					>
 						{images.map((item, index) => (
 							<SwiperSlide key={item.id}>
-								<div className={`gslider-image-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
+								<div className={`gslider-image-slider-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
 									<div
 										className="gslider-image-item"
 										data-hover-effect={imageLinkHoverEffect}
@@ -470,7 +470,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										)}
 									</div>
 									{showCaption?.[deviceType] && item.caption ? (
-										<div className="gslider-image-carousel-caption" aria-live="polite">{item.caption}</div>
+										<div className="gslider-image-slider-caption" aria-live="polite">{item.caption}</div>
 									) : null}
 
 
@@ -686,8 +686,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					showPagination?.[deviceType] &&
 					paginationPositionType === 'outside' && (
 						<div
-							className="swiper-pagination swiper-pagination-image-carousel"
-							aria-label="Carousel pagination"
+							className="swiper-pagination swiper-pagination-image-slider"
+							aria-label="Slider pagination"
 						></div>
 					)}
 

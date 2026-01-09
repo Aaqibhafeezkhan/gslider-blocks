@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const initializeSliders = () => {
         // Select all slider containers
-        const sliders = document.querySelectorAll('.gslider-image-carousel-wrapper');
+        const sliders = document.querySelectorAll('.gslider-image-slider-wrapper');
 
         sliders.forEach((sliderContainer) => {
             try {

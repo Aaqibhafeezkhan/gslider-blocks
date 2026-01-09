@@ -2890,7 +2890,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Start Block Style */
     const allBlockStyle = useMemo(() => `
 
-        .${blockId}.gslider-image-carousel-wrapper {
+        .${blockId}.gslider-image-slider-wrapper {
             ${globalDesktopBackgroundNormalStyles}
             ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ''} 
             ${globalPaddingDesktopCssStyle ? `padding: ${globalPaddingDesktopCssStyle};` : ''}
@@ -2904,7 +2904,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             position: relative;
             transition: all .3s ease-in-out;
         }
-        .${blockId}.gslider-image-carousel-wrapper:hover {
+        .${blockId}.gslider-image-slider-wrapper:hover {
             ${globalDesktopBackgroundHoverStyles}
             ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ''}
             ${globalBoxShadowHoverCssValue ? `box-shadow: ${globalBoxShadowHoverCssValue} !important;` : ''}
@@ -2916,7 +2916,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             justify-content: center;
         }
         
-        .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper {
+        .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper {
             ${layoutHeight.Desktop ? `height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : 'auto'}
             ${imagePaddingDesktopCssStyle ? `padding: ${imagePaddingDesktopCssStyle};` : ''}
             ${imageBorder ? `border: ${imageBorder};` : ''}
@@ -2929,18 +2929,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             justify-content: ${verticalAlign.Desktop || 'center'};
             transition: all .3s ease-in-out;
         }
-        .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper:hover {
+        .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper:hover {
             ${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
             ${imageBoxShadowHoverCssValue ? `box-shadow: ${imageBoxShadowHoverCssValue} !important;` : ''}
         }
-        .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper img {
+        .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper img {
             ${imageMaxWidth.Desktop ? `max-width: ${imageMaxWidth.Desktop}${imageMaxWidthUnits.Desktop};` : ''}
             display: block;
             height: auto;
             margin: 0 auto;
         }
 
-        .${blockId}.gslider-image-carousel-wrapper .gslider-image-item {
+        .${blockId}.gslider-image-slider-wrapper .gslider-image-item {
             display: block;
             transition: all ${imageLinkTransitionDuration?.Desktop || 300}ms ease;
             --hover-opacity: ${imageLinkHoverOpacity?.Desktop || 0.8};
@@ -2949,7 +2949,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             --transition-duration: ${imageLinkTransitionDuration?.Desktop || 300}ms;
         }
 
-        .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-caption {           
+        .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-caption {           
         
             ${imageCaptionFontFamily ? `font-family: ${imageCaptionFontFamily};` : ''} 
             ${imageCaptionFontSize.Desktop && imageCaptionFontSizeUnits.Desktop ? `font-size: ${imageCaptionFontSize.Desktop}${imageCaptionFontSizeUnits.Desktop};` : ''}
@@ -2975,7 +2975,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
         }
 
-        .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-caption:hover {
+        .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-caption:hover {
             ${imageCaptionColorHover ? `color: ${imageCaptionColorHover};` : ''}
             ${imageCaptionHoverBackgroundType === 'gradient' ? `  
                 background: ${imageCaptionHoverCustomGradientSwitcher && imageCaptionHoverCustomGradientInputValue ? imageCaptionHoverCustomGradientInputValue : imageCaptionHoverGradientColor ? imageCaptionHoverGradientColor : imageCaptionHoverClassicColor};
@@ -2985,7 +2985,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${imageCaptionBorderHoverColor ? `border-color: ${imageCaptionBorderHoverColor};` : ''}
         }
 
-        .${blockId}.gslider-image-carousel-wrapper .gslider-image-tooltip {           
+        .${blockId}.gslider-image-slider-wrapper .gslider-image-tooltip {           
             ${imageTooltipFontFamily ? `font-family: ${imageTooltipFontFamily};` : ''} 
             ${imageTooltipFontSize.Desktop && imageTooltipFontSizeUnits.Desktop ? `font-size: ${imageTooltipFontSize.Desktop}${imageTooltipFontSizeUnits.Desktop};` : ''}
             ${imageTooltipFontWeight ? `font-weight: ${imageTooltipFontWeight};` : ''}
@@ -3008,7 +3008,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
         }
 
-        .${blockId}.gslider-image-carousel-wrapper.outside {
+        .${blockId}.gslider-image-slider-wrapper.outside {
             ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                 padding: ${navigationArrowPositionOutsidePadding.Desktop}${navigationArrowPositionOutsidePaddingUnits.Desktop} 0 0;
             ` : ''}
@@ -3195,22 +3195,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         ${paginationPositionType === 'outside' ? `   
-            .${blockId}.gslider-image-carousel-wrapper .swiper-horizontal>.swiper-pagination-bullets,
-            .${blockId}.gslider-image-carousel-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
-            .${blockId}.gslider-image-carousel-wrapper .swiper-pagination-custom,
-            .${blockId}.gslider-image-carousel-wrapper .swiper-pagination-fraction {
+            .${blockId}.gslider-image-slider-wrapper .swiper-horizontal>.swiper-pagination-bullets,
+            .${blockId}.gslider-image-slider-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
+            .${blockId}.gslider-image-slider-wrapper .swiper-pagination-custom,
+            .${blockId}.gslider-image-slider-wrapper .swiper-pagination-fraction {
                 bottom: -30px !important;
             }
         ` : ''}
 
-        .${blockId}.gslider-image-carousel-wrapper.has-pagination {
+        .${blockId}.gslider-image-slider-wrapper.has-pagination {
             margin-bottom: 30px;
         }
 
 
         @media only screen and (max-width: 1024px) {
 
-            .${blockId}.gslider-image-carousel-wrapper {
+            .${blockId}.gslider-image-slider-wrapper {
                 ${globalTabletBackgroundNormalStyles}
                 ${globalMarginTabletCssStyle ? `margin: ${globalMarginTabletCssStyle};` : ''} 
                 ${globalPaddingTabletCssStyle ? `padding: ${globalPaddingTabletCssStyle};` : ''}
@@ -3218,11 +3218,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalBorderRadiusTabletCssStyle ? `border-radius: ${globalBorderRadiusTabletCssStyle};` : ''}
                 ${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
             }
-            .${blockId}.gslider-image-carousel-wrapper:hover { 
+            .${blockId}.gslider-image-slider-wrapper:hover { 
                 ${globalTabletBackgroundHoverStyles}
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper {
                 ${layoutHeight.Tablet ? `height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : 'auto'}
                 ${imagePaddingTabletCssStyle ? `padding: ${imagePaddingTabletCssStyle};` : ''}
 			    ${imageBorderTabletCssStyle ? `border-width: ${imageBorderTabletCssStyle};` : ''}  
@@ -3232,11 +3232,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 justify-content: ${verticalAlign.Tablet || 'center'};
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper img {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper img {
                 ${imageMaxWidth.Tablet ? `max-width: ${imageMaxWidth.Tablet}${imageMaxWidthUnits.Tablet};` : ''}
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-item {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-item {
                 display: block;
                 transition: all ${imageLinkTransitionDuration?.Tablet || 300}ms ease;
                 --hover-opacity: ${imageLinkHoverOpacity?.Tablet || 0.8};
@@ -3245,7 +3245,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 --transition-duration: ${imageLinkTransitionDuration?.Tablet || 300}ms;
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-caption {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-caption {
                 ${imageCaptionFontSize.Tablet && imageCaptionFontSizeUnits.Tablet ? `font-size: ${imageCaptionFontSize.Tablet}${imageCaptionFontSizeUnits.Tablet};` : ''}
                 ${imageCaptionLineHeight.Tablet && imageCaptionLineHeightUnits.Tablet ? `line-height: ${imageCaptionLineHeight.Tablet}${imageCaptionLineHeightUnits.Tablet};` : ''}
                 ${imageCaptionLetterSpacing.Tablet && imageCaptionLetterSpacingUnits.Tablet ? `letter-spacing: ${imageCaptionLetterSpacing.Tablet}${imageCaptionLetterSpacingUnits.Tablet};` : ''}
@@ -3255,7 +3255,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${imageCaptionBorderRadiusTabletCssStyle ? `border-radius: ${imageCaptionBorderRadiusTabletCssStyle} !important;` : ''}
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-tooltip {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-tooltip {
                 ${imageTooltipFontSize.Tablet && imageTooltipFontSizeUnits.Tablet ? `font-size: ${imageTooltipFontSize.Tablet}${imageTooltipFontSizeUnits.Tablet};` : ''}
                 ${imageTooltipLineHeight.Tablet && imageTooltipLineHeightUnits.Tablet ? `line-height: ${imageTooltipLineHeight.Tablet}${imageTooltipLineHeightUnits.Tablet};` : ''}
                 ${imageTooltipLetterSpacing.Tablet && imageTooltipLetterSpacingUnits.Tablet ? `letter-spacing: ${imageTooltipLetterSpacing.Tablet}${imageTooltipLetterSpacingUnits.Tablet};` : ''}
@@ -3267,7 +3267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${imageTooltipLeftPosition.Tablet && imageTooltipLeftPositionUnits.Tablet ? `left: ${imageTooltipLeftPosition.Tablet}${imageTooltipLeftPositionUnits.Tablet};` : ''}
             }
 
-            .${blockId}.gslider-image-carousel-wrapper.outside {
+            .${blockId}.gslider-image-slider-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Tablet}${navigationArrowPositionOutsidePaddingUnits.Tablet} 0 0;
                 ` : ''}
@@ -3384,7 +3384,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
         @media only screen and (max-width: 767px) {
 
-            .${blockId}.gslider-image-carousel-wrapper {
+            .${blockId}.gslider-image-slider-wrapper {
                 ${globalMobileBackgroundNormalStyles}
                 ${globalMarginMobileCssStyle ? `margin: ${globalMarginMobileCssStyle};` : ''} 
                 ${globalPaddingMobileCssStyle ? `padding: ${globalPaddingMobileCssStyle};` : ''}
@@ -3392,11 +3392,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalBorderRadiusMobileCssStyle ? `border-radius: ${globalBorderRadiusMobileCssStyle};` : ''}
                 ${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
             }
-            .${blockId}.gslider-image-carousel-wrapper:hover { 
+            .${blockId}.gslider-image-slider-wrapper:hover { 
                 ${globalMobileBackgroundHoverStyles}
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper {
                 ${layoutHeight.Mobile ? `height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : 'auto'}
                 ${imagePaddingMobileCssStyle ? `padding: ${imagePaddingMobileCssStyle};` : ''}
                 ${imageBorderMobileCssStyle ? `border-width: ${imageBorderMobileCssStyle};` : ''}  
@@ -3406,11 +3406,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 justify-content: ${verticalAlign.Mobile || 'center'};
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-content-wrapper img {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper img {
                 ${imageMaxWidth.Mobile ? `max-width: ${imageMaxWidth.Mobile}${imageMaxWidthUnits.Mobile};` : ''}
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-item {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-item {
                 display: block;
                 transition: all ${imageLinkTransitionDuration?.Mobile || 300}ms ease;
                 --hover-opacity: ${imageLinkHoverOpacity?.Mobile || 0.8};
@@ -3419,7 +3419,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 --transition-duration: ${imageLinkTransitionDuration?.Mobile || 300}ms;
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-carousel-caption {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-caption {
                 ${imageCaptionFontSize.Mobile && imageCaptionFontSizeUnits.Mobile ? `font-size: ${imageCaptionFontSize.Mobile}${imageCaptionFontSizeUnits.Mobile};` : ''}
                 ${imageCaptionLineHeight.Mobile && imageCaptionLineHeightUnits.Mobile ? `line-height: ${imageCaptionLineHeight.Mobile}${imageCaptionLineHeightUnits.Mobile};` : ''}
                 ${imageCaptionLetterSpacing.Mobile && imageCaptionLetterSpacingUnits.Mobile ? `letter-spacing: ${imageCaptionLetterSpacing.Mobile}${imageCaptionLetterSpacingUnits.Mobile};` : ''}
@@ -3429,7 +3429,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${imageCaptionBorderRadiusMobileCssStyle ? `border-radius: ${imageCaptionBorderRadiusMobileCssStyle} !important;` : ''}
             }
 
-            .${blockId}.gslider-image-carousel-wrapper .gslider-image-tooltip {
+            .${blockId}.gslider-image-slider-wrapper .gslider-image-tooltip {
                 ${imageTooltipFontSize.Mobile && imageTooltipFontSizeUnits.Mobile ? `font-size: ${imageTooltipFontSize.Mobile}${imageTooltipFontSizeUnits.Mobile};` : ''}
                 ${imageTooltipLineHeight.Mobile && imageTooltipLineHeightUnits.Mobile ? `line-height: ${imageTooltipLineHeight.Mobile}${imageTooltipLineHeightUnits.Mobile};` : ''}
                 ${imageTooltipLetterSpacing.Mobile && imageTooltipLetterSpacingUnits.Mobile ? `letter-spacing: ${imageTooltipLetterSpacing.Mobile}${imageTooltipLetterSpacingUnits.Mobile};` : ''}
@@ -3441,7 +3441,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${imageTooltipLeftPosition.Mobile && imageTooltipLeftPositionUnits.Mobile ? `left: ${imageTooltipLeftPosition.Mobile}${imageTooltipLeftPositionUnits.Mobile};` : ''}
             }
 
-            .${blockId}.gslider-image-carousel-wrapper.outside {
+            .${blockId}.gslider-image-slider-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Mobile}${navigationArrowPositionOutsidePaddingUnits.Mobile} 0 0;
                 ` : ''}

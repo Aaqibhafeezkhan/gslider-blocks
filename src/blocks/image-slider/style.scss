@@ -1,5 +1,5 @@
-.gslider-image-carousel-wrapper {
-	.gslider-image-carousel-content-wrapper {
+.gslider-image-slider-wrapper {
+	.gslider-image-slider-content-wrapper {
 		box-sizing: border-box;
 		height: clamp(150px, 60vh, 150px);
 		overflow: hidden;
@@ -10,7 +10,7 @@
 		flex-direction: column;
 	}
 
-	.gslider-image-carousel-content-wrapper .gslider-image-carousel-caption {
+	.gslider-image-slider-content-wrapper .gslider-image-slider-caption {
 		position: absolute;
 		left: 0;
 		right: 0;
@@ -112,8 +112,8 @@
 		}
 	}
 
-	.gslider-image-carousel-content-wrapper:hover .gslider-image-edit-button,
-	.gslider-image-carousel-content-wrapper:hover .gslider-image-link-button {
+	.gslider-image-slider-content-wrapper:hover .gslider-image-edit-button,
+	.gslider-image-slider-content-wrapper:hover .gslider-image-link-button {
 		opacity: 1;
 	}
 

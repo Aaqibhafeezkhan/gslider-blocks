@@ -57,7 +57,7 @@ export default function Save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `gslider-image-carousel-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
+        className: `gslider-image-slider-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
     });
 
     const captionEnabled = {
@@ -144,7 +144,7 @@ export default function Save({ attributes }) {
 
         pagination: {
             enabled: anyPaginationEnabled,
-            el: '.swiper-pagination-image-carousel',
+            el: '.swiper-pagination-image-slider',
             type: paginationType,
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,
@@ -158,7 +158,7 @@ export default function Save({ attributes }) {
                 <div className="swiper-wrapper">
                     {images.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
-                            <div className={`gslider-image-carousel-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })}>
+                            <div className={`gslider-image-slider-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })}>
                                 <div
                                     className="gslider-image-item"
                                     data-hover-effect={imageLinkHoverEffect}
@@ -188,7 +188,7 @@ export default function Save({ attributes }) {
                                     )}
                                 </div>
                                 {anyCaptionEnabled && item.caption ? (
-                                    <div className="gslider-image-carousel-caption" aria-live="polite">{item.caption}</div>
+                                    <div className="gslider-image-slider-caption" aria-live="polite">{item.caption}</div>
                                 ) : null}
                             </div>
                         </div>
@@ -224,7 +224,7 @@ export default function Save({ attributes }) {
                 {anyPaginationEnabled && paginationPositionType === 'inside' && (
                     <>
                         <div
-                            className="swiper-pagination swiper-pagination-image-carousel"
+                            className="swiper-pagination swiper-pagination-image-slider"
                             aria-label="Carousel pagination"
                         ></div>
                     </>
@@ -261,7 +261,7 @@ export default function Save({ attributes }) {
             {anyPaginationEnabled && paginationPositionType === 'outside' && (
                 <>
                     <div
-                        className="swiper-pagination swiper-pagination-image-carousel"
+                        className="swiper-pagination swiper-pagination-image-slider"
                         aria-label="Carousel pagination"
                     ></div>
                 </>

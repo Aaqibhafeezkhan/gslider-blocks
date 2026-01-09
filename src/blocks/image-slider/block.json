@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "gslider-blocks/image-carousel",
+	"name": "gslider-blocks/image-slider",
 	"version": "1.0.0",
-	"title": "Image Carousel",
+	"title": "Image Slider",
 	"category": "gslider-blocks",
 	"description": "Scrollable carousel for client/brand images.",
 	"keywords": [
