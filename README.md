@@ -8,7 +8,7 @@
   <strong>🎠 The Ultimate Gutenberg Carousel Collection</strong><br>
   10 Powerful Carousel Blocks for WordPress Block Editor
 </p>
-
+V
 <p align="center">
   <a href="https://wordpress.org/plugins/gslider-blocks/">
     <img src="https://img.shields.io/badge/WordPress-5.0+-blue.svg?logo=wordpress" alt="WordPress">
@@ -437,6 +437,42 @@ git push origin feature/amazing-feature
 | 🐛 GitHub Issues | [Report Bug](https://github.com/noruzzamans/gslider-blocks/issues) |
 | 💬 WordPress Forum | [Support Forum](https://wordpress.org/support/plugin/gslider-blocks/) |
 | 📖 Documentation | Coming Soon |
+
+---
+
+## 🌐 Stay Connected
+
+Follow us for tutorials, updates, and design inspiration!
+
+<p align="center">
+  <a href="https://x.com/gsliderblocks">
+    <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter">
+  </a>
+  <a href="https://facebook.com/gsliderblocks">
+    <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook">
+  </a>
+  <a href="https://instagram.com/gsliderblocks">
+    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram">
+  </a>
+  <a href="https://youtube.com/@gsliderblocks">
+    <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://linkedin.com/company/gsliderblocks">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+  </a>
+  <a href="https://pinterest.com/gsliderblocks">
+    <img src="https://img.shields.io/badge/Pinterest-BD081C?style=for-the-badge&logo=pinterest&logoColor=white" alt="Pinterest">
+  </a>
+  <a href="https://reddit.com/user/gsliderblocks">
+    <img src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit">
+  </a>
+  <a href="https://threads.net/@gsliderblocks">
+    <img src="https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=threads&logoColor=white" alt="Threads">
+  </a>
+</p>
 
 ---
 
