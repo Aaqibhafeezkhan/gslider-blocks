@@ -58,7 +58,7 @@ Display client logos, partner brands, or sponsor images in a beautiful, animated
 
 == Support ==
 
-If you have any questions, please email us at **[noruzzaman19@gmail.com](mailto:noruzzaman19@gmail.com)**
+If you have any questions, please email us at **[gsliderblocks@gmail.com](mailto:gsliderblocks@gmail.com)**
 
 == Installation ==
 

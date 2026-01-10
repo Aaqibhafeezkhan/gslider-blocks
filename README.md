@@ -433,7 +433,7 @@ git push origin feature/amazing-feature
 
 | Channel | Link |
 |---------|------|
-| 📧 Email | [noruzzaman19@gmail.com](mailto:noruzzaman19@gmail.com) |
+| 📧 Email | [gsliderblocks@gmail.com](mailto:gsliderblocks@gmail.com) |
 | 🐛 GitHub Issues | [Report Bug](https://github.com/noruzzamans/gslider-blocks/issues) |
 | 💬 WordPress Forum | [Support Forum](https://wordpress.org/support/plugin/gslider-blocks/) |
 | 📖 Documentation | Coming Soon |
