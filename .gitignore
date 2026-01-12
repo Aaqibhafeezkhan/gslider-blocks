@@ -31,3 +31,4 @@ build/
 # dotenv environment variables file
 .env
 .editorconfig
+gslider-website/
