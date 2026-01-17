@@ -1,10 +1,10 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
 import { ToggleControl, BaseControl } from '@wordpress/components';
-import ResponsiveDeviceControl from "@Components/responsive-device-control"; 
+import ResponsiveDeviceControl from "@Components/responsive-device-control";
 
-const ResponsiveToggleControl = ({ 
-    label = '', 
+const ResponsiveToggleControl = ({
+    label = '',
     toggleValue,
     setToggleValue,
     deviceType,
