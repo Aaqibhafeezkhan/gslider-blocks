@@ -749,7 +749,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     deviceType={deviceType}
                     units={layoutHeightUnits}
                     resetFallbackValue={{
-                        px: "150",
+                        px: "500",
                         "%": "50",
                         vh: "50",
                         vw: "50",

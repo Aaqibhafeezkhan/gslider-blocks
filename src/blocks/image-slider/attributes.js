@@ -31,17 +31,17 @@ const attributes = {
     carouselPerColumn: {
         type: "object",
         default: {
-            Desktop: 2,
-            Tablet: 2,
+            Desktop: 1,
+            Tablet: 1,
             Mobile: 1,
         },
     },
     carouselPerColumnGap: {
         type: "object",
         default: {
-            Desktop: 10,
-            Tablet: 10,
-            Mobile: 10,
+            Desktop: 0,
+            Tablet: 0,
+            Mobile: 0,
         },
     },
     speed: {
