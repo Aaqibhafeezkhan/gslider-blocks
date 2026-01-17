@@ -414,7 +414,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						key={swiperKey}
 						{...swiperSettings}
 						role="region"
-						aria-label="image Carousel"
+						aria-label="Image Slider"
 						modules={[
 							Navigation,
 							Pagination,

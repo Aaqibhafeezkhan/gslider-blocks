@@ -8,7 +8,7 @@ Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Logo Carousel, Image Carousel & Testimonial blocks for Gutenberg. 7+ effects, responsive design & full customization!
+Logo Carousel, Image Slider & Testimonial blocks for Gutenberg. 7+ effects, responsive design & full customization!
 
 == Description ==
 
@@ -103,7 +103,7 @@ These are 3D transition effects where slides are stacked in layers. If your slid
 
 = 1.1.4 – December 19, 2025 = 
 **New: SVG Icons support for toolbar actions**
-- Icons are now consistent across Logo Carousel and Image Carousel blocks
+- Icons are now consistent across Logo Carousel and Image Slider blocks
 - Improved code maintainability with single-source icon management
 
 = 1.1.3 – December 16, 2025 = 

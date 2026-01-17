@@ -154,7 +154,7 @@ export default function Save({ attributes }) {
 
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
-            <div className="swiper" role="region" aria-label="image Carousel">
+            <div className="swiper" role="region" aria-label="Image Slider">
                 <div className="swiper-wrapper">
                     {images.map((item) => (
                         <div key={item.id} className={`swiper-slide`}>
