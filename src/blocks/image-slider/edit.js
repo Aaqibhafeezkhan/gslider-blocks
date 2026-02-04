@@ -42,6 +42,7 @@ import {
 	ToolbarDuplicateIcon,
 	ToolbarLinkIcon
 } from '@Utils/svgIcons';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 
 const mapMedia = (m) => ({
 	id: m.id,
@@ -52,7 +53,7 @@ const mapMedia = (m) => ({
 	tooltipText: '',
 });
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockId,
 		deviceType,
@@ -108,6 +109,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		enableLightbox,
 
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockId,
+		blockPrefix: 'gslider-image-slider',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	// Block props for container
 	const blockProps = useBlockProps({

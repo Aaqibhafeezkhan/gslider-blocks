@@ -620,12 +620,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ deviceType: currentDeviceType });
     }, [currentDeviceType]);
 
-    /** Set Block ID */
-    useEffect(() => {
-        if (clientId) {
-            setAttributes({ blockId: `gslider-${clientId.slice(0, 8)}` });
-        }
-    }, [clientId]);
 
     const defaultOpenPanels = {
         general: 'show-hide-elements',
