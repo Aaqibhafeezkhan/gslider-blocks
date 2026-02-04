@@ -147,6 +147,10 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+    enableLightbox: {
+        type: "boolean",
+        default: false,
+    },
     showTooltip: {
         type: "boolean",
         default: false,

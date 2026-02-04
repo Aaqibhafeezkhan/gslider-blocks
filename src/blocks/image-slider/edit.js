@@ -105,6 +105,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		imageLinkHoverLiftUnits,
 		imageLinkTransitionDuration,
 		enableLazyLoad,
+		enableLightbox,
 
 	} = attributes;
 
@@ -322,6 +323,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	]);
 
 	/**
+	 * Refresh fsLightbox when images or lightbox setting changes
+	 */
+	useEffect(() => {
+		if (enableLightbox && typeof refreshFsLightbox === 'function') {
+			refreshFsLightbox();
+		}
+	}, [images, enableLightbox]);
+
+	/**
 	 * Link management functions
 	 */
 	const handleEditLink = (imageId, currentLink, currentTooltip) => {
@@ -460,11 +470,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											}
 										}}
 									>
-										<img
-											src={item.url}
-											alt={item.alt || `image ${images.indexOf(item) + 1}`}
-											loading={enableLazyLoad ? "lazy" : undefined}
-										/>
+										{enableLightbox ? (
+											<a
+												href={item.url}
+												data-fslightbox={blockId}
+												data-caption={item.caption}
+												className="gslider-image-link"
+												onClick={(e) => e.preventDefault()}
+											>
+												<img
+													src={item.url}
+													alt={item.alt || `image ${images.indexOf(item) + 1}`}
+													loading={enableLazyLoad ? "lazy" : undefined}
+												/>
+											</a>
+										) : (
+											<img
+												src={item.url}
+												alt={item.alt || `image ${images.indexOf(item) + 1}`}
+												loading={enableLazyLoad ? "lazy" : undefined}
+											/>
+										)}
 										{showTooltip && item.tooltipText && (
 											<div className="gslider-image-tooltip">{item.tooltipText}</div>
 										)}

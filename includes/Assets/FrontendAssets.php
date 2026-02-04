@@ -31,9 +31,20 @@ class FrontendAssets {
             true
         );
 
+        wp_register_script(
+            'gslider-blocks-fslightbox-script',
+            GSLIDER_PLUGIN_URL . 'assets/js/fslightbox.min.js',
+            [],
+            GSLIDER_VERSION,
+            true
+        );
+
         if (!is_admin()) {
             wp_enqueue_style('gslider-blocks-swiper-style');
             wp_enqueue_script('gslider-blocks-swiper-script');
         }
+        wp_enqueue_script('gslider-blocks-fslightbox-script');
+
+        // Enqueue fsLightbox for both frontend and editor
     }
 }

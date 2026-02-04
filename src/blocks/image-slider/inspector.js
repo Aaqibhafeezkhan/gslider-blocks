@@ -78,6 +78,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Start image Link Settings */
         enableimageLinks,
+        enableLightbox,
         showTooltip,
         imageLinkTarget,
         imageLinkRel,
@@ -728,6 +729,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     help={__('Allow images to be clickable with custom URLs', 'gslider-blocks')}
                     checked={enableimageLinks}
                     onChange={(value) => setAttributes({ enableimageLinks: value })}
+                />
+                <ToggleControl
+                    label={__('Enable Lightbox', 'gslider-blocks')}
+                    help={__('Open images in a lightbox on click', 'gslider-blocks')}
+                    checked={enableLightbox}
+                    onChange={(value) => setAttributes({ enableLightbox: value })}
                 />
                 <ToggleControl
                     label={__('Enable Tooltip', 'gslider-blocks')}

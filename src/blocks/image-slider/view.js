@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Initialize Swiper with parsed settings
                     new Swiper(sliderContainer.querySelector('.swiper'), settings);
+
+                    // Refresh fsLightbox to detect new slides
+                    if (typeof refreshFsLightbox === 'function') {
+                        refreshFsLightbox();
+                    }
                 }
 
                 // Initialize hover effects for image links

@@ -43,6 +43,7 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageAlt,
 
         enableimageLinks,
+        enableLightbox,
         showTooltip,
         imageLinkTarget,
         imageLinkRel,
@@ -163,11 +164,11 @@ export default function Save({ attributes }) {
                                     className="gslider-image-item"
                                     data-hover-effect={imageLinkHoverEffect}
                                 >
-                                    {enableimageLinks && item.link ? (
+                                    {enableLightbox ? (
                                         <a
-                                            href={item.link}
-                                            target={imageLinkTarget}
-                                            rel={imageLinkRel}
+                                            href={item.url}
+                                            data-fslightbox={blockId}
+                                            data-caption={item.caption}
                                             className="gslider-image-link"
                                         >
                                             <img
@@ -177,11 +178,28 @@ export default function Save({ attributes }) {
                                             />
                                         </a>
                                     ) : (
-                                        <img
-                                            src={item.url}
-                                            alt={item.alt || `image ${images.indexOf(item) + 1}`}
-                                            loading={enableLazyLoad ? "lazy" : undefined}
-                                        />
+                                        <>
+                                            {enableimageLinks && item.link ? (
+                                                <a
+                                                    href={item.link}
+                                                    target={imageLinkTarget}
+                                                    rel={imageLinkRel}
+                                                    className="gslider-image-link"
+                                                >
+                                                    <img
+                                                        src={item.url}
+                                                        alt={item.alt || `image ${images.indexOf(item) + 1}`}
+                                                        loading={enableLazyLoad ? "lazy" : undefined}
+                                                    />
+                                                </a>
+                                            ) : (
+                                                <img
+                                                    src={item.url}
+                                                    alt={item.alt || `image ${images.indexOf(item) + 1}`}
+                                                    loading={enableLazyLoad ? "lazy" : undefined}
+                                                />
+                                            )}
+                                        </>
                                     )}
                                     {showTooltip && item.tooltipText && (
                                         <div className="gslider-image-tooltip">{item.tooltipText}</div>
