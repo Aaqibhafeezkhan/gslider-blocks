@@ -145,7 +145,7 @@ export default function Save({ attributes }) {
 
         pagination: {
             enabled: anyPaginationEnabled,
-            el: '.swiper-pagination-image-slider',
+            el: `.${blockId} .swiper-pagination-image-slider`,
             type: paginationType,
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,

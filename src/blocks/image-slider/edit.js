@@ -43,6 +43,7 @@ import {
 	ToolbarLinkIcon
 } from '@Utils/svgIcons';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateImageSliderStyle from './styling';
 
 const mapMedia = (m) => ({
 	id: m.id,
@@ -57,6 +58,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	const {
 		blockId,
 		deviceType,
+		blockStyle,
 		carouselPerColumn,
 		carouselPerColumnGap,
 		speed,
@@ -119,6 +121,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		attributes,
 		setAttributes,
 	});
+
+	/** Start Generate Block Style */
+    useEffect(() => {
+        if (blockId) {
+            const css = generateImageSliderStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockId]);
+    /** End Generate Block Style */
 
 	// Block props for container
 	const blockProps = useBlockProps({
@@ -223,7 +234,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		pagination: showPagination?.[deviceType]
 			? paginationPositionType === 'outside'
 				? {
-					el: `.swiper-pagination-image-slider`,
+					el: `.${blockId} .swiper-pagination-image-slider`,
 					type: paginationType,
 					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
 					clickable: true,
@@ -333,6 +344,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		navigationArrowsIconRightImageUrl
 	]);
 
+
+
 	/**
 	 * Refresh fsLightbox when images or lightbox setting changes
 	 */
@@ -410,9 +423,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
+
 			{renderSliderToolbarControls()}
+
 			<div {...blockProps}>
 
 				{!images.length && (
@@ -723,12 +737,13 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 					showPagination?.[deviceType] &&
 					paginationPositionType === 'outside' && (
 						<div
-							className="swiper-pagination swiper-pagination-image-slider"
+							className={`swiper-pagination swiper-pagination-image-slider swiper-pagination-${blockId}`}
 							aria-label="Slider pagination"
 						></div>
 					)}
 
 			</div >
+			<style>{blockStyle}</style>
 		</>
 	);
 }

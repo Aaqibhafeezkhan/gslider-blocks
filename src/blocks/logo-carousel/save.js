@@ -144,7 +144,7 @@ export default function Save({ attributes }) {
 
         pagination: {
             enabled: anyPaginationEnabled,
-            el: '.swiper-pagination-logo-carousel',
+            el: `.${blockId} .swiper-pagination-logo-carousel`,
             type: paginationType,
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,

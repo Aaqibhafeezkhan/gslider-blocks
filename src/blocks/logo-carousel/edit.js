@@ -211,7 +211,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		pagination: showPagination?.[deviceType]
 			? paginationPositionType === 'outside'
 				? {
-					el: `.swiper-pagination-logo-carousel`,
+					el: `.${blockId} .swiper-pagination-logo-carousel`,
 					type: paginationType,
 					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
 					clickable: true,
