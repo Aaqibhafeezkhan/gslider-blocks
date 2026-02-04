@@ -340,7 +340,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		if (enableLightbox && typeof refreshFsLightbox === 'function') {
 			refreshFsLightbox();
 		}
-	}, [images, enableLightbox]);
+	}, [images, enableLightbox, blockId]);
 
 	/**
 	 * Link management functions
