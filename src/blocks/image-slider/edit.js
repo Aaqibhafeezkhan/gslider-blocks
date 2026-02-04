@@ -344,8 +344,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		navigationArrowsIconRightImageUrl
 	]);
 
-
-
 	/**
 	 * Refresh fsLightbox when images or lightbox setting changes
 	 */
@@ -420,10 +418,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			{renderSliderToolbarControls()}
 
