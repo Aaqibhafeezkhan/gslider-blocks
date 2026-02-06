@@ -15,6 +15,8 @@ import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import Inspector from './inspector';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateFlexiContentStyle from './styling';
 
 // Import Swiper React components and required modules
 import { Swiper } from 'swiper/react';
@@ -36,9 +38,10 @@ import 'swiper/css/bundle';
 
 const ALLOWED_BLOCKS = ['gslider-blocks/flexi-content-item'];
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockId,
+        blockStyle,
         deviceType,
 		sliderType,
 		carouselPerColumn,
@@ -81,6 +84,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         layoutHeightSwitcher,
 	} = attributes;
+
+    /** Handle block ID generation (handles duplication and initial ID) */
+    useBlockIdGenerator({
+        clientId,
+        blockId,
+        blockPrefix: 'gslider-flexi-content',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockId) {
+            const css = generateFlexiContentStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockId]);
+    /** End Generate Block Style */
 
 	// Block props for container
 	const blockProps = useBlockProps({
@@ -326,11 +348,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector 
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
 			<div {...blockProps}>
 				<Swiper
@@ -416,6 +439,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 )}
 
 			</div>
+            <style>{blockStyle}</style>
 		</>
 	);
 }

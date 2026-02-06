@@ -1,12 +1,35 @@
+import { useEffect } from '@wordpress/element';
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import './editor.scss';
 import Inspector from './inspector';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateFlexiContentItemStyle from './styling';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 
 	const {
 		blockId,
+		blockStyle,
 	} = attributes;
+
+	/** Handle block ID generation (handles duplication and initial ID) */
+    useBlockIdGenerator({
+        clientId,
+        blockId,
+        blockPrefix: 'gslider-flexi-content-item',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockId) {
+            const css = generateFlexiContentItemStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockId]);
+    /** End Generate Block Style */
 
   const blockProps = useBlockProps({
     className: `flexi-content-item swiper-slide ${blockId}`,
@@ -14,11 +37,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
   return (
 	<>
-		<Inspector 
-			attributes={attributes}
-			setAttributes={setAttributes}
-			clientId={clientId}
-		/>
+		{isSelected && (
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+			/>
+		)}
+
 		<div {...blockProps}>
 			<div className="gslider-content-wrapper">
 				<div className="gslider-content-inner-wrapper">
@@ -31,6 +56,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				</div>
 			</div>
 		</div>
+		<style>{blockStyle}</style>
 	</>
   );
 }

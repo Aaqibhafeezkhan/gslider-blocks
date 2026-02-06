@@ -97,7 +97,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	} = attributes;
 
-	// Handle block ID generation (handles duplication and initial ID)
+	/** Handle block ID generation (handles duplication and initial ID) */
 	useBlockIdGenerator({
 		clientId,
 		blockId,
@@ -116,7 +116,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     }, [attributes, blockId]);
     /** End Generate Block Style */
 
-	// Block props for container
+	/** Block props for container */
 	const blockProps = useBlockProps({
 		className: `gslider-image-slider-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
 	});
@@ -137,23 +137,23 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		setAttributes({ images: next });
 	};
 
-	// Local state management for slider items and active slide index
+	/** Local state management for slider items and active slide index */
 	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
 
-	// Refs for vanilla JS Swiper
+	/** Refs for vanilla JS Swiper */
 	const swiperContainerRef = useRef(null);
 	const swiperInstanceRef = useRef(null);
 
-	// State for link editing popover
+	/** State for link editing popover */
 	const [editingimageId, setEditingimageId] = useState(null);
 	const [tempLinkUrl, setTempLinkUrl] = useState('');
 	const [tempTooltipText, setTempTooltipText] = useState('');
 
-	// Ref for panel settings focus management
+	/** Ref for panel settings focus management */
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-	// Refs for navigation buttons
+	/** Refs for navigation buttons */
 	const prevRef = useRef(null);
 	const nextRef = useRef(null);
 	const paginationInsideRef = useRef(null);
@@ -651,6 +651,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 						</div>
 					</div>
 				)}
+
 				{/* Pagination outside swiper container */}
 				<div
 					className={`swiper-pagination swiper-pagination-image-slider swiper-pagination-${blockId}`}

@@ -1011,7 +1011,6 @@ const generateImageSliderStyle = (attributes) => {
             margin-bottom: 30px;
         }
 
-
         @media only screen and (max-width: 1024px) {
 
             .${blockId}.gslider-image-slider-wrapper {

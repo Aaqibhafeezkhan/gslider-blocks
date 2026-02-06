@@ -27,6 +27,8 @@ import {
 	ToolbarDuplicateIcon,
 	ToolbarLinkIcon
 } from '@Utils/svgIcons';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateLogoCarouselStyle from './styling';
 
 const mapMedia = (m) => ({
 	id: m.id,
@@ -37,9 +39,10 @@ const mapMedia = (m) => ({
 	tooltipText: '',
 });
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockId,
+		blockStyle,
 		deviceType,
 		carouselPerColumn,
 		carouselPerColumnGap,
@@ -92,6 +95,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		enableLazyLoad,
 
 	} = attributes;
+
+	/** Handle block ID generation (handles duplication and initial ID) */
+	useBlockIdGenerator({
+		clientId,
+		blockId,
+		blockPrefix: 'gslider-logo-carousel',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockId) {
+			const css = generateLogoCarouselStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockId]);
+	/** End Generate Block Style */
 
 	// Block props for container
 	const blockProps = useBlockProps({
@@ -320,12 +342,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{ isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+
 			{renderSliderToolbarControls()}
+
 			<div {...blockProps}>
 
 				{!logos.length && (
@@ -606,6 +631,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				></div>
 
 			</div >
+			<style>{blockStyle}</style>
 		</>
 	);
 }

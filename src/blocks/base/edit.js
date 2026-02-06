@@ -14,13 +14,16 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateBaseSliderStyle from './styling';
 
 // Swiper is loaded globally via FrontendAssets.php (swiper-bundle.min.js)
 // We use vanilla JS Swiper in useEffect instead of swiper/react
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockId,
+        blockStyle,
         deviceType,
 		sliderItems,
 		sliderType,
@@ -47,6 +50,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showButton,
         showNavigation,
 		showPagination,
+        paginationPositionType,
         subTitleHtmlTag,
         titleHtmlTag,
         descriptionHtmlTag,
@@ -71,9 +75,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         layoutHeightSwitcher,
 	} = attributes;
 
+    /** Handle block ID generation (handles duplication and initial ID) */
+    useBlockIdGenerator({
+        clientId,
+        blockId,
+        blockPrefix: 'gslider',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    	/** Start Generate Block Style */
+    useEffect(() => {
+        if (blockId) {
+            const css = generateBaseSliderStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockId]);
+    /** End Generate Block Style */
+
 	// Block props for container
 	const blockProps = useBlockProps({
-        className: `gslider-base-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`, 
+        className: `gslider-base-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
 	});
 
 	// Local state management for slider items and active slide index
@@ -91,7 +114,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     // Refs for navigation buttons
     const prevRef = useRef(null);
     const nextRef = useRef(null);
-    const paginationRef = useRef(null);
+    const paginationInsideRef = useRef(null);
+    const paginationOutsideRef = useRef(null);
+
 
     /**
      * Vanilla JS Swiper initialization
@@ -108,6 +133,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             swiperInstanceRef.current.destroy(true, true);
             swiperInstanceRef.current = null;
         }
+
+        // Clear both pagination elements to prevent stale bullets when switching position
+		if (paginationInsideRef.current) {
+			paginationInsideRef.current.innerHTML = '';
+		}
+		if (paginationOutsideRef.current) {
+			paginationOutsideRef.current.innerHTML = '';
+		}
 
         // Build Swiper settings
         const swiperSettings = {
@@ -155,14 +188,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     nextEl: nextRef.current,
                 }
                 : false,
-            pagination: showPagination?.[deviceType]
-                ? {
-                    el: paginationRef.current,
-                    type: paginationType,
-                    dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                    clickable: true,
-                }
-                : false,
+			pagination: showPagination?.[deviceType]
+				? {
+					el: paginationPositionType === 'outside' 
+						? paginationOutsideRef.current 
+						: paginationInsideRef.current,
+					type: paginationType,
+					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+					clickable: true,
+				}
+				: false,
             ...(slideEffect === 'creative' && {
                 creativeEffect: {
                     prev: { shadow: true, translate: [0, 0, -400] },
@@ -204,6 +239,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         keyboardNavigation,
         showNavigation,
         showPagination,
+        paginationPositionType,
         paginationType,
         dynamicBullets,
         navigationArrowPositionType,
@@ -453,17 +489,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector 
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-				handleAddItem={handleAddItem}
-                handleChangeItem={handleChangeItem}
-                handleDuplicateItem={handleDuplicateItem}
-				handleDragEnd={handleDragEnd}
-                handleDeleteItem={handleDeleteItem}
-			/>
+        	{isSelected && (
+                <Inspector 
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    handleAddItem={handleAddItem}
+                    handleChangeItem={handleChangeItem}
+                    handleDuplicateItem={handleDuplicateItem}
+                    handleDragEnd={handleDragEnd}
+                    handleDeleteItem={handleDeleteItem}
+                />
+            )}
+
 			{renderSliderToolbarControls()}
+
 			<div {...blockProps}>
 				<div className="swiper" ref={swiperContainerRef}>
 					<div className="swiper-wrapper">
@@ -607,8 +646,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         </div>
                     )}
 
-					{/* Pagination inside - always render, Swiper controls visibility */}
-					<div className="swiper-pagination" ref={paginationRef}></div>
+					{/* Pagination inside swiper container */}
+					<div className="swiper-pagination" ref={paginationInsideRef}></div>
 				</div>
 
                 {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
@@ -638,7 +677,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 )}
 
+                {/* Pagination outside swiper container */}
+				<div
+					className={`swiper-pagination swiper-pagination-base-slider swiper-pagination-${blockId}`}
+					ref={paginationOutsideRef}
+					aria-label="Slider pagination"
+				></div>
+
 			</div>
+            <style>{blockStyle}</style>
 		</>
 	);
 }
