@@ -45,6 +45,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
         showNavigation,
 		showPagination,
+        paginationPositionType,
 
         globalID,
         globalClass,
@@ -88,7 +89,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	// Block props for container
 	const blockProps = useBlockProps({
-		className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
+		className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
 	});
 
 	// Local state management for swiper instance is replaced by useRef
@@ -103,6 +104,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     // Refs for navigation buttons
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+    const paginationInsideRef = useRef(null);
+    const paginationOutsideRef = useRef(null);
 
     /**
      * Vanilla JS Swiper initialization
@@ -119,6 +122,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             swiperInstanceRef.current.destroy(true, true);
             swiperInstanceRef.current = null;
         }
+
+        // Clear both pagination elements to prevent stale bullets when switching position
+		if (paginationInsideRef.current) {
+			paginationInsideRef.current.innerHTML = '';
+		}
+		if (paginationOutsideRef.current) {
+			paginationOutsideRef.current.innerHTML = '';
+		}
 
         // Build Swiper settings
         const swiperSettings = {
@@ -166,14 +177,16 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     nextEl: nextRef.current,
                 }
                 : false,
-            pagination: showPagination?.[deviceType]
-                ? {
-                    el: swiperContainerRef.current.querySelector('.swiper-pagination'),
-                    type: paginationType,
-                    dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                    clickable: true,
-                }
-                : false,
+			pagination: showPagination?.[deviceType]
+				? {
+					el: paginationPositionType === 'outside' 
+						? paginationOutsideRef.current 
+						: paginationInsideRef.current,
+					type: paginationType,
+					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+					clickable: true,
+				}
+				: false,
             ...(slideEffect === 'creative' && {
                 creativeEffect: {
                     prev: { shadow: true, translate: [0, 0, -400] },
@@ -211,6 +224,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         keyboardNavigation,
         showNavigation,
         showPagination,
+        paginationPositionType,
         paginationType,
         dynamicBullets,
         navigationArrowPositionType,
@@ -310,7 +324,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         </div>
                     )}
 
-                    <div className="swiper-pagination"></div>
+                    {/* Pagination inside swiper container */}
+                    <div className="swiper-pagination swiper-pagination-flexi-content" ref={paginationInsideRef}></div>
 				</div>
 
                 {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
@@ -339,6 +354,13 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         </div>
                     </div>
                 )}
+
+                {/* Pagination outside swiper container */}
+				<div
+					className={`swiper-pagination swiper-pagination-flexi-content swiper-pagination-${blockId}`}
+					ref={paginationOutsideRef}
+					aria-label="Slider pagination"
+				></div>
 
 			</div>
             <style>{blockStyle}</style>

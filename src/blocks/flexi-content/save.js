@@ -24,6 +24,7 @@ export default function Save({ attributes }) {
 
         showNavigation,
         showPagination,
+        paginationPositionType,
 
         globalID,
         globalClass,
@@ -47,7 +48,7 @@ export default function Save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
+        className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
     });
 
     const innerBlocksProps = useInnerBlocksProps.save({
@@ -141,7 +142,7 @@ export default function Save({ attributes }) {
         
         pagination: {
             enabled: anyPaginationEnabled,
-            el: '.swiper-pagination',
+            el: `.${blockId} .swiper-pagination-flexi-content`,
             type: paginationType,
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,
@@ -189,11 +190,12 @@ export default function Save({ attributes }) {
                     </div>
                 )}
 
-                {anyPaginationEnabled && (
+                {anyPaginationEnabled && paginationPositionType === 'inside' && (
                     <>
-                        <div className="gslider-pagination-wrapper">
-                            <div className="swiper-pagination"></div>
-                        </div>
+                        <div
+                            className="swiper-pagination swiper-pagination-flexi-content"
+                            aria-label="Carousel pagination"
+                        ></div>
                     </>
                 )}
             </div>
@@ -222,6 +224,14 @@ export default function Save({ attributes }) {
                         <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
                     </div>
                 </div>
+            )}
+            {anyPaginationEnabled && paginationPositionType === 'outside' && (
+                <>
+                    <div
+                        className={`swiper-pagination swiper-pagination-flexi-content swiper-pagination-${blockId}`}
+                        aria-label="Carousel pagination"
+                    ></div>
+                </>
             )}
         </div>
     );

@@ -1091,6 +1091,11 @@ const generateBaseSliderStyle = (attributes) => {
             ` : ''}
         }
 
+            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
+            .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
+                z-index: 100 !important;
+            }
+
         ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
             .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
@@ -1578,7 +1583,7 @@ const generateBaseSliderStyle = (attributes) => {
 
             ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
-                .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition}
+                .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
                 .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
                     gap: ${navigationArrowGap.Mobile ? `${navigationArrowGap.Mobile}${navigationArrowGapUnits.Mobile}` : '10px'};
                     ${navigationArrowPosition === 'top-left' ? `

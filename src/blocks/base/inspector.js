@@ -1260,7 +1260,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     )}
 
                     <SwitcherControl
-                        label={__("Position Type", "gslider-blocks")}
+                        label={__("Positioning", "gslider-blocks")}
                         options={NAVIGATION_ARROW_POSITION_TYPE}
                         value={navigationArrowPositionType}
                         onChange={(value) => setAttributes({ navigationArrowPositionType: value })}
@@ -1508,14 +1508,14 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     onToggle={() => togglePanel("general", "pagination")}
                 >
                     <SwitcherControl
-                        label={__("Position Type", "gslider-blocks")}
+                        label={__("Position", "gslider-blocks")}
                         options={PAGINATION_POSITION_TYPE}
                         value={paginationPositionType}
                         onChange={(value) => setAttributes({ paginationPositionType: value })}
                     />
 
                     <SelectControls
-                        label={__("Pagination Type", "gslider-blocks")}
+                        label={__("Type", "gslider-blocks")}
                         options={PAGINATION_TYPE}
                         value={paginationType}
                         onChange={(value) => setAttributes({ paginationType: value })}

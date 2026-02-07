@@ -116,6 +116,10 @@ const attributes = {
             Mobile: true,
         },
 	},
+    paginationPositionType: {
+        type: "string",
+        default: "inside",
+    },
     /** End Show/Hide Elements */
 
     /** Layout & Content Setting */

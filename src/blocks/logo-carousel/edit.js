@@ -591,7 +591,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 						)}
 
 						{/* Pagination inside swiper container */}
-						<div className="swiper-pagination" ref={paginationInsideRef}></div>
+						<div className="swiper-pagination swiper-pagination-logo-carousel" ref={paginationInsideRef}></div>
 
 					</div>
 				)}

@@ -828,6 +828,10 @@ const generateImageSliderStyle = (attributes) => {
         }
 
         ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
+            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
+            .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
+                z-index: 100 !important;
+            }
 
             .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
             .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {

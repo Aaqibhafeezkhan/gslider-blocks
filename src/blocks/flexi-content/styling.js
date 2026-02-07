@@ -36,6 +36,7 @@ const generateFlexiContentStyle = (attributes) => {
         /** Start Show/Hide Elements */
         showNavigation,
         showPagination,
+        paginationPositionType,
         /** End Show/Hide Elements */
 
         /** Start Layout & Content Setting */
@@ -543,6 +544,11 @@ const generateFlexiContentStyle = (attributes) => {
             ` : ''}
         }
 
+        .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
+        .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
+            z-index: 100 !important;
+        }
+
         ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
             .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
@@ -713,6 +719,19 @@ const generateFlexiContentStyle = (attributes) => {
 
         .${blockId} .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
             ${paginationProgressbarBGActiveColor ? `background-color: ${paginationProgressbarBGActiveColor};` : ''}
+        }
+
+        ${paginationPositionType === 'outside' ? `   
+            .${blockId}.gslider-flexi-content-wrapper .swiper-horizontal>.swiper-pagination-bullets,
+            .${blockId}.gslider-flexi-content-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
+            .${blockId}.gslider-flexi-content-wrapper .swiper-pagination-custom,
+            .${blockId}.gslider-flexi-content-wrapper .swiper-pagination-fraction {
+                bottom: -30px !important;
+            }
+        ` : ''}
+
+        .${blockId}.gslider-flexi-content-wrapper.has-pagination {
+            margin-bottom: 30px;
         }
 
 
@@ -926,7 +945,7 @@ const generateFlexiContentStyle = (attributes) => {
 
             ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
 
-                .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition}
+                .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
                 .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
                     gap: ${navigationArrowGap.Mobile ? `${navigationArrowGap.Mobile}${navigationArrowGapUnits.Mobile}` : '10px'};
                     ${navigationArrowPosition === 'top-left' ? `

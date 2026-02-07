@@ -26,6 +26,7 @@ import {
     NAVIGATION_ARROW_POSITION,
     NAVIGATION_ARROW_DIRECTION,
     LAYOUT_HEIGHT_SWITCHER,
+    PAGINATION_POSITION_TYPE,
 
 } from "@Constants";
 
@@ -74,6 +75,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         /** Start Show/Hide Elements */
         showNavigation,
         showPagination,
+        paginationPositionType,
         /** End Show/Hide Elements */
 
         /** Start Layout & Content Setting */
@@ -806,7 +808,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     )}
 
                     <SwitcherControl
-                        label={__("Position Type", "gslider-blocks")}
+                        label={__("Positioning", "gslider-blocks")}
                         options={NAVIGATION_ARROW_POSITION_TYPE}
                         value={navigationArrowPositionType}
                         onChange={(value) => setAttributes({ navigationArrowPositionType: value })}
@@ -1053,8 +1055,15 @@ const Inspector = ({ attributes, setAttributes }) => {
                     opened={openPanels.general === "pagination"}
                     onToggle={() => togglePanel("general", "pagination")}
                 >
+                    <SwitcherControl
+                        label={__("Position", "gslider-blocks")}
+                        options={PAGINATION_POSITION_TYPE}
+                        value={paginationPositionType}
+                        onChange={(value) => setAttributes({ paginationPositionType: value })}
+                    />
+
                     <SelectControls
-                        label={__("Pagination Type", "gslider-blocks")}
+                        label={__("Type", "gslider-blocks")}
                         options={PAGINATION_TYPE}
                         value={paginationType}
                         onChange={(value) => setAttributes({ paginationType: value })}
