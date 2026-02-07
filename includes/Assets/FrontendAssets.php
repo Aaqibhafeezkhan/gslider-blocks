@@ -39,12 +39,9 @@ class FrontendAssets {
             true
         );
 
-        if (!is_admin()) {
-            wp_enqueue_style('gslider-blocks-swiper-style');
-            wp_enqueue_script('gslider-blocks-swiper-script');
+        // Enqueue fsLightbox for admin editor only
+        if (is_admin()) {
+            wp_enqueue_script('gslider-blocks-fslightbox-script');
         }
-
-        // Enqueue fsLightbox for both frontend and editor
-        wp_enqueue_script('gslider-blocks-fslightbox-script');
     }
 }

@@ -31,8 +31,20 @@
 		"align": ["wide", "full"]
 	},
 	"textdomain": "gslider-blocks",
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
-	"viewScript": "file:./view.js"
+	"editorScript": [
+		"file:./index.js",
+		"gslider-blocks-swiper-script"
+	],
+	"editorStyle": [
+		"file:./index.css",
+		"gslider-blocks-swiper-style"
+	],
+	"style": [
+		"file:./style-index.css",
+		"gslider-blocks-swiper-style"
+	],
+	"viewScript": [
+		"file:./view.js",
+		"gslider-blocks-swiper-script"
+	]
 }

@@ -279,7 +279,7 @@ export default function Save({ attributes }) {
             {anyPaginationEnabled && paginationPositionType === 'outside' && (
                 <>
                     <div
-                        className="swiper-pagination swiper-pagination-image-slider"
+                        className={`swiper-pagination swiper-pagination-image-slider swiper-pagination-${blockId}`}
                         aria-label="Carousel pagination"
                     ></div>
                 </>

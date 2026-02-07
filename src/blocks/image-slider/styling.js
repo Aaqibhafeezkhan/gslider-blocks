@@ -828,6 +828,10 @@ const generateImageSliderStyle = (attributes) => {
         }
 
         ${navigationArrowPosition && navigationArrowPosition !== 'center' ? `
+            .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
+            .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
+                z-index: 100 !important;
+            }
 
             .${blockId} .gslider-navigation-default-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition},
             .${blockId} .gslider-navigation-custom-icon-wrapper.${navigationArrowPositionType}.${navigationArrowPosition} {
@@ -1010,7 +1014,6 @@ const generateImageSliderStyle = (attributes) => {
         .${blockId}.gslider-image-slider-wrapper.has-pagination {
             margin-bottom: 30px;
         }
-
 
         @media only screen and (max-width: 1024px) {
 

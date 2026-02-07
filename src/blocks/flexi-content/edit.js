@@ -11,34 +11,19 @@ import {
 	ToolbarGroup,
 	ToolbarButton
 } from '@wordpress/components';
-import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
+import { useState, useEffect, useRef } from "@wordpress/element";
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import Inspector from './inspector';
-
-// Import Swiper React components and required modules
-import { Swiper } from 'swiper/react';
-import {
-	Navigation,
-	Pagination,
-    Autoplay,
-	Manipulation,
-	Mousewheel,
-    Keyboard,
-	EffectFade,
-	EffectCube,
-	EffectCoverflow,
-	EffectFlip,
-	EffectCreative,
-	EffectCards
-} from 'swiper/modules';
-import 'swiper/css/bundle';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateFlexiContentStyle from './styling';
 
 const ALLOWED_BLOCKS = ['gslider-blocks/flexi-content-item'];
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockId,
+        blockStyle,
         deviceType,
 		sliderType,
 		carouselPerColumn,
@@ -60,6 +45,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         showNavigation,
 		showPagination,
+        paginationPositionType,
 
         globalID,
         globalClass,
@@ -82,15 +68,33 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         layoutHeightSwitcher,
 	} = attributes;
 
+    /** Handle block ID generation (handles duplication and initial ID) */
+    useBlockIdGenerator({
+        clientId,
+        blockId,
+        blockPrefix: 'gslider-flexi-content',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockId) {
+            const css = generateFlexiContentStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockId]);
+    /** End Generate Block Style */
+
 	// Block props for container
 	const blockProps = useBlockProps({
-		className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
+		className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
 	});
 
-	// Local state management for swiper instance
-    const [swiperInstance, setSwiperInstance] = useState(null);
-	const [swiperKey, setSwiperKey] = useState(0);
-	// A key to force re-mounting of <Swiper> when critical settings change
+	// Local state management for swiper instance is replaced by useRef
+	const swiperContainerRef = useRef(null);
+	const swiperInstanceRef = useRef(null);
 
 
 	// Ref for panel settings focus management
@@ -100,87 +104,108 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     // Refs for navigation buttons
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+    const paginationInsideRef = useRef(null);
+    const paginationOutsideRef = useRef(null);
 
     /**
-     * Initializes and updates Swiper instance when slider configuration changes
-     * Handles different slider types, effects, and interactive options
+     * Vanilla JS Swiper initialization
+     * Destroys and recreates Swiper when settings change for instant updates
      */
-    const swiperSettings = useMemo(() => ({
-        // Set effect based on sliderType
-        effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-    
-        // Responsive breakpoints for Desktop, Tablet, and Mobile
-        ...(sliderType === 'carousel' && {
-            breakpoints: {
-                 // Mobile (e.g., screens < 768px)
-                0: {
-                    slidesPerView: carouselPerColumn?.[deviceType] || 1,
-                    spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
-                },
-                // Tablet (e.g., screens 768px - 1024px)
-                768: {
-                    slidesPerView: carouselPerColumn?.[deviceType] || 2,
-                    spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
-                },
-                // Desktop (e.g., screens > 1024px)
-                1025: {
-                    slidesPerView: carouselPerColumn?.[deviceType] || 2,
-                    spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
-                },
-            },
-        }),
-
-        ...(layoutHeightSwitcher === 'adapt' && {
-            autoHeight: true,
-        }),
-    
-        // Common settings
-        loop: infiniteLoop,
-        autoplay: autoplay
-            ? {
-                  delay: autoplayDelay?.[deviceType] || 1000,
-                  pauseOnMouseEnter: pauseOnHover,
-                  disableOnInteraction: false,
-                  stopOnLastSlide: stopOnLastSlide,
-                  reverseDirection: reverseDirection,
-              }
-            : false,
-    
-        speed: speed?.[deviceType] || 800,
-        allowTouchMove: allowTouchMove,
-        mousewheel: mousewheelControl,
-
-        keyboard: keyboardNavigation ? { 
-            enabled: true,
-            onlyInViewport: true,
-            pageUpDown: false,
-        } : false,
-    
-        // Navigation and pagination settings
-        navigation: showNavigation?.[deviceType]
-        ? {
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
+    useEffect(() => {
+        // Check if Swiper is available globally and container exists
+        if (!window.Swiper || !swiperContainerRef.current) {
+            return;
         }
-        : false,
 
-        pagination: showPagination?.[deviceType]
-            ? {
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                clickable: true,
-              }
-            : false,
-    
-        // Creative effect settings for slideEffect
-        ...(slideEffect === 'creative' && {
-            creativeEffect: {
-                prev: { shadow: true, translate: [0, 0, -400] },
-                next: { translate: ['100%', 0, 0] },
-            },
-        }),
+        // Destroy previous instance if exists
+        if (swiperInstanceRef.current) {
+            swiperInstanceRef.current.destroy(true, true);
+            swiperInstanceRef.current = null;
+        }
 
-    }), [
+        // Clear both pagination elements to prevent stale bullets when switching position
+		if (paginationInsideRef.current) {
+			paginationInsideRef.current.innerHTML = '';
+		}
+		if (paginationOutsideRef.current) {
+			paginationOutsideRef.current.innerHTML = '';
+		}
+
+        // Build Swiper settings
+        const swiperSettings = {
+            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+            ...(sliderType === 'carousel' && {
+                breakpoints: {
+                    0: {
+                        slidesPerView: carouselPerColumn?.[deviceType] || 1,
+                        spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
+                    },
+                    768: {
+                        slidesPerView: carouselPerColumn?.[deviceType] || 2,
+                        spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+                    },
+                    1025: {
+                        slidesPerView: carouselPerColumn?.[deviceType] || 2,
+                        spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+                    },
+                },
+            }),
+            ...(layoutHeightSwitcher === 'adapt' && {
+                autoHeight: true,
+            }),
+            loop: infiniteLoop,
+            autoplay: autoplay
+                ? {
+                    delay: autoplayDelay?.[deviceType] || 1000,
+                    pauseOnMouseEnter: pauseOnHover,
+                    disableOnInteraction: false,
+                    stopOnLastSlide: stopOnLastSlide,
+                    reverseDirection: reverseDirection,
+                }
+                : false,
+            speed: speed?.[deviceType] || 800,
+            allowTouchMove: allowTouchMove,
+            mousewheel: mousewheelControl,
+            keyboard: keyboardNavigation ? {
+                enabled: true,
+                onlyInViewport: true,
+                pageUpDown: false,
+            } : false,
+            navigation: showNavigation?.[deviceType]
+                ? {
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
+                }
+                : false,
+			pagination: showPagination?.[deviceType]
+				? {
+					el: paginationPositionType === 'outside' 
+						? paginationOutsideRef.current 
+						: paginationInsideRef.current,
+					type: paginationType,
+					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+					clickable: true,
+				}
+				: false,
+            ...(slideEffect === 'creative' && {
+                creativeEffect: {
+                    prev: { shadow: true, translate: [0, 0, -400] },
+                    next: { translate: ['100%', 0, 0] },
+                },
+            }),
+        };
+
+        // Initialize new Swiper instance
+        swiperInstanceRef.current = new window.Swiper(swiperContainerRef.current, swiperSettings);
+
+        // Cleanup on unmount or before re-initialization
+        return () => {
+            if (swiperInstanceRef.current) {
+                swiperInstanceRef.current.destroy(true, true);
+                swiperInstanceRef.current = null;
+            }
+        };
+    }, [
         deviceType,
         sliderType,
         carouselEffect,
@@ -199,6 +224,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         keyboardNavigation,
         showNavigation,
         showPagination,
+        paginationPositionType,
         paginationType,
         dynamicBullets,
         navigationArrowPositionType,
@@ -209,85 +235,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         layoutHeightSwitcher,
     ]);
 
-    /**
-     * When any of these settings change, update the key to reinitialize Swiper
-     */
-	useEffect(() => {
-		setSwiperKey(prevKey => prevKey + 1);
-	}, [
-        deviceType,
-		sliderType,
-		infiniteLoop,
-		allowTouchMove,
-		pauseOnHover,
-		stopOnLastSlide,
-		reverseDirection,
-		mousewheelControl,
-		keyboardNavigation,
-		showNavigation,
-		showPagination,
-		autoplay,
-		autoplayDelay,
-		speed,
-		slideEffect,
-		carouselEffect,
-		carouselPerColumn,
-		carouselPerColumnGap,
-		paginationType,
-		dynamicBullets,
-        navigationArrowPositionType,
-        navigationArrowPosition,
-        navigationArrowsIconSwitcher,
-        navigationArrowsIconLeft,
-        navigationArrowsIconRight,
-        layoutHeightSwitcher,
-	]);
-
-
-    /* Custom Icon */
-    useEffect(() => {
-        if (!swiperInstance || !showNavigation?.[deviceType]) return;
-    
-        const prevEl = prevRef.current;
-        const nextEl = nextRef.current;
-    
-        if (prevEl && nextEl && swiperInstance.navigation) {
-            swiperInstance.params.navigation.prevEl = prevEl;
-            swiperInstance.params.navigation.nextEl = nextEl;
-    
-            setTimeout(() => {
-                // Check again in case swiperInstance.navigation was reloaded in the meantime
-                if (swiperInstance.navigation) {
-                    swiperInstance.navigation.destroy();
-                    swiperInstance.navigation.init();
-                    swiperInstance.navigation.update();
-                }
-            }, 100);
-        }
-    }, [
-        swiperInstance,
-        showNavigation,
-        navigationArrowsIconSwitcher,
-        navigationArrowPositionType,
-        navigationArrowPosition,
-        navigationArrowsIconLeft,
-        navigationArrowsIconRight,
-        navigationArrowsIconLeftAlign,
-        navigationArrowsIconRightAlign,
-        navigationArrowsIconLeftImageUrl,
-        navigationArrowsIconRightImageUrl
-    ]);
-
-    const getSliderTemplate = useMemo(() => [
+    const getSliderTemplate = [
         ['gslider-blocks/flexi-content-item'], 
         ['gslider-blocks/flexi-content-item'],
         ['gslider-blocks/flexi-content-item'],
-    ], []);
+    ];
 
     const innerBlocksProps = useInnerBlocksProps(
 		{
 			className: `swiper-wrapper gslider-swiper-wrapper`,
-			slot: 'container-start',
 		},
 		{
 			allowedBlocks: ALLOWED_BLOCKS,
@@ -326,37 +282,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector 
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
 			<div {...blockProps}>
-				<Swiper
-					key={swiperKey}
-					{...swiperSettings}
-                    className={globalClass}
+                <div 
+                    className={`swiper ${globalClass}`} 
+                    ref={swiperContainerRef}
                     {...(globalID && {id: globalID})}
-					modules={[
-						Navigation,
-						Pagination,
-						Autoplay,
-						Manipulation,
-						Mousewheel,
-						Keyboard,
-						EffectFade,
-						EffectCube,
-						EffectCoverflow,
-						EffectFlip,
-						EffectCreative,
-						EffectCards
-					]}
-
-                    onSwiper={(swiper) => {
-                        setSwiperInstance(swiper);
-                    }}
-				>
+                >
                     <div {...innerBlocksProps} />
 
                     {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
@@ -386,7 +324,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         </div>
                     )}
 
-				</Swiper>
+                    {/* Pagination inside swiper container */}
+                    <div className="swiper-pagination swiper-pagination-flexi-content" ref={paginationInsideRef}></div>
+				</div>
 
                 {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
                     <>
@@ -415,7 +355,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 )}
 
+                {/* Pagination outside swiper container */}
+				<div
+					className={`swiper-pagination swiper-pagination-flexi-content swiper-pagination-${blockId}`}
+					ref={paginationOutsideRef}
+					aria-label="Slider pagination"
+				></div>
+
 			</div>
+            <style>{blockStyle}</style>
 		</>
 	);
 }

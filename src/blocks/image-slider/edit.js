@@ -18,23 +18,8 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import Inspector from './inspector';
 
-// Import Swiper React components and required modules
-import { Swiper, SwiperSlide } from 'swiper/react';
-import {
-	Navigation,
-	Pagination,
-	Keyboard,
-	Autoplay,
-	Manipulation,
-	Mousewheel,
-	EffectFade,
-	EffectCube,
-	EffectCoverflow,
-	EffectFlip,
-	EffectCreative,
-	EffectCards
-} from 'swiper/modules';
-import 'swiper/css/bundle';
+// Swiper is loaded globally via FrontendAssets.php (swiper-bundle.min.js)
+// We use vanilla JS Swiper in useEffect instead of swiper/react
 import {
 	ToolbarMoveLeftIcon,
 	ToolbarMoveRightIcon,
@@ -112,7 +97,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	} = attributes;
 
-	// Handle block ID generation (handles duplication and initial ID)
+	/** Handle block ID generation (handles duplication and initial ID) */
 	useBlockIdGenerator({
 		clientId,
 		blockId,
@@ -131,7 +116,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     }, [attributes, blockId]);
     /** End Generate Block Style */
 
-	// Block props for container
+	/** Block props for container */
 	const blockProps = useBlockProps({
 		className: `gslider-image-slider-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
 	});
@@ -152,197 +137,149 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		setAttributes({ images: next });
 	};
 
-	// Local state management for slider items and active slide index
+	/** Local state management for slider items and active slide index */
 	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
-	const [swiperInstance, setSwiperInstance] = useState(null);
 
-	// A key to force re-mounting of <Swiper> when critical settings change
-	const [swiperKey, setSwiperKey] = useState(0);
+	/** Refs for vanilla JS Swiper */
+	const swiperContainerRef = useRef(null);
+	const swiperInstanceRef = useRef(null);
 
-	// State for link editing popover
+	/** State for link editing popover */
 	const [editingimageId, setEditingimageId] = useState(null);
 	const [tempLinkUrl, setTempLinkUrl] = useState('');
 	const [tempTooltipText, setTempTooltipText] = useState('');
 
-	// Ref for panel settings focus management
+	/** Ref for panel settings focus management */
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-	// Refs for navigation buttons
+	/** Refs for navigation buttons */
 	const prevRef = useRef(null);
 	const nextRef = useRef(null);
+	const paginationInsideRef = useRef(null);
+	const paginationOutsideRef = useRef(null);
 
 	/**
-	 * Initializes and updates Swiper instance when slider configuration changes
-	 * Handles different slider types, effects, and interactive options
-	 */
-	const swiperSettings = useMemo(() => ({
-
-		// Set effect based on carouselEffect
-		effect: carouselEffect,
-
-		// Responsive breakpoints for Desktop, Tablet, and Mobile
-		breakpoints: {
-			// Mobile (e.g., screens < 768px)
-			0: {
-				slidesPerView: carouselPerColumn?.[deviceType] || 1,
-				spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
-			},
-			// Tablet (e.g., screens 768px - 1024px)
-			768: {
-				slidesPerView: carouselPerColumn?.[deviceType] || 2,
-				spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
-			},
-			// Desktop (e.g., screens > 1024px)
-			1025: {
-				slidesPerView: carouselPerColumn?.[deviceType] || 2,
-				spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
-			},
-		},
-
-		// Common settings
-		loop: infiniteLoop,
-		autoplay: autoplay
-			? {
-				delay: autoplayDelay?.[deviceType] || 1000,
-				pauseOnMouseEnter: pauseOnHover,
-				disableOnInteraction: false,
-				stopOnLastSlide: stopOnLastSlide,
-				reverseDirection: reverseDirection,
-			}
-			: false,
-
-		speed: speed?.[deviceType] || 800,
-		allowTouchMove: allowTouchMove,
-		mousewheel: mousewheelControl,
-
-		keyboard: keyboardNavigation ? {
-			enabled: true,
-			onlyInViewport: true,
-			pageUpDown: false,
-		} : false,
-
-		// Navigation and pagination settings
-		navigation: showNavigation?.[deviceType]
-			? {
-				prevEl: prevRef.current,
-				nextEl: nextRef.current,
-			}
-			: false,
-
-		// pagination inside/outside logic
-		pagination: showPagination?.[deviceType]
-			? paginationPositionType === 'outside'
-				? {
-					el: `.${blockId} .swiper-pagination-image-slider`,
-					type: paginationType,
-					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-					clickable: true,
-				}
-				: {
-					// inside – default Swiper behaviour
-					type: paginationType,
-					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-					clickable: true,
-				}
-			: false,
-
-		// Handle slide change event to update selected slide index
-		onSlideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
-
-	}), [
-		deviceType,
-		carouselEffect,
-		carouselPerColumn,
-		carouselPerColumnGap,
-		infiniteLoop,
-		autoplay,
-		autoplayDelay,
-		pauseOnHover,
-		stopOnLastSlide,
-		reverseDirection,
-		speed,
-		allowTouchMove,
-		mousewheelControl,
-		keyboardNavigation,
-		showNavigation,
-		showPagination,
-		paginationType,
-		dynamicBullets,
-		paginationPositionType,
-		navigationArrowPositionType,
-		navigationArrowPosition,
-		navigationArrowsIconSwitcher,
-		navigationArrowsIconLeft,
-		navigationArrowsIconRight,
-	]);
-
-	/**
-	 * When any of these settings change, update the key to reinitialize Swiper
+	 * Vanilla JS Swiper initialization
+	 * Destroys and recreates Swiper when settings change for instant updates
 	 */
 	useEffect(() => {
-		setSwiperKey(prevKey => prevKey + 1);
-	}, [
-		deviceType,
-		infiniteLoop,
-		allowTouchMove,
-		pauseOnHover,
-		stopOnLastSlide,
-		reverseDirection,
-		mousewheelControl,
-		keyboardNavigation,
-		showNavigation,
-		showPagination,
-		autoplay,
-		autoplayDelay,
-		speed,
-		carouselEffect,
-		carouselPerColumn,
-		carouselPerColumnGap,
-		paginationType,
-		dynamicBullets,
-		paginationPositionType,
-		navigationArrowPositionType,
-		navigationArrowPosition,
-		navigationArrowsIconSwitcher,
-		navigationArrowsIconLeft,
-		navigationArrowsIconRight,
-	]);
-
-
-	/* Custom Icon */
-	useEffect(() => {
-		if (!swiperInstance || !showNavigation?.[deviceType]) return;
-
-		const prevEl = prevRef.current;
-		const nextEl = nextRef.current;
-
-		if (prevEl && nextEl && swiperInstance.navigation) {
-			swiperInstance.params.navigation.prevEl = prevEl;
-			swiperInstance.params.navigation.nextEl = nextEl;
-
-			setTimeout(() => {
-				// Check again in case swiperInstance.navigation was reloaded in the meantime
-				if (swiperInstance.navigation) {
-					swiperInstance.navigation.destroy();
-					swiperInstance.navigation.init();
-					swiperInstance.navigation.update();
-				}
-			}, 100);
+		// Check if Swiper is available globally and container exists
+		if (!window.Swiper || !swiperContainerRef.current || images.length === 0) {
+			return;
 		}
+
+		// Destroy previous instance if exists
+		if (swiperInstanceRef.current) {
+			swiperInstanceRef.current.destroy(true, true);
+			swiperInstanceRef.current = null;
+		}
+
+		// Clear both pagination elements to prevent stale bullets when switching position
+		if (paginationInsideRef.current) {
+			paginationInsideRef.current.innerHTML = '';
+		}
+		if (paginationOutsideRef.current) {
+			paginationOutsideRef.current.innerHTML = '';
+		}
+
+		// Build Swiper settings
+		const swiperSettings = {
+			effect: carouselEffect,
+			breakpoints: {
+				0: {
+					slidesPerView: carouselPerColumn?.[deviceType] || 1,
+					spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
+				},
+				768: {
+					slidesPerView: carouselPerColumn?.[deviceType] || 2,
+					spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+				},
+				1025: {
+					slidesPerView: carouselPerColumn?.[deviceType] || 2,
+					spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+				},
+			},
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+					delay: autoplayDelay?.[deviceType] || 1000,
+					pauseOnMouseEnter: pauseOnHover,
+					disableOnInteraction: false,
+					stopOnLastSlide: stopOnLastSlide,
+					reverseDirection: reverseDirection,
+				}
+				: false,
+			speed: speed?.[deviceType] || 800,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
+			keyboard: keyboardNavigation ? {
+				enabled: true,
+				onlyInViewport: true,
+				pageUpDown: false,
+			} : false,
+			navigation: showNavigation?.[deviceType]
+				? {
+					prevEl: prevRef.current,
+					nextEl: nextRef.current,
+				}
+				: false,
+			pagination: showPagination?.[deviceType]
+				? {
+					el: paginationPositionType === 'outside' 
+						? paginationOutsideRef.current 
+						: paginationInsideRef.current,
+					type: paginationType,
+					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+					clickable: true,
+				}
+				: false,
+			on: {
+				slideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
+			},
+		};
+
+		// Initialize new Swiper instance
+		swiperInstanceRef.current = new window.Swiper(swiperContainerRef.current, swiperSettings);
+
+		// Cleanup on unmount or before re-initialization
+		return () => {
+			if (swiperInstanceRef.current) {
+				swiperInstanceRef.current.destroy(true, true);
+				swiperInstanceRef.current = null;
+			}
+		};
 	}, [
-		swiperInstance,
+		blockId,
+		deviceType,
+		images,
+		carouselEffect,
+		carouselPerColumn,
+		carouselPerColumnGap,
+		infiniteLoop,
+		autoplay,
+		autoplayDelay,
+		pauseOnHover,
+		stopOnLastSlide,
+		reverseDirection,
+		speed,
+		allowTouchMove,
+		mousewheelControl,
+		keyboardNavigation,
 		showNavigation,
-		navigationArrowsIconSwitcher,
+		showPagination,
+		paginationType,
+		dynamicBullets,
+		paginationPositionType,
 		navigationArrowPositionType,
 		navigationArrowPosition,
+		navigationArrowsIconSwitcher,
 		navigationArrowsIconLeft,
 		navigationArrowsIconRight,
-		navigationArrowsIconLeftAlign,
-		navigationArrowsIconRightAlign,
-		navigationArrowsIconLeftImageUrl,
-		navigationArrowsIconRightImageUrl
 	]);
+
+
+	/* Custom Icon Navigation - handled by main useEffect now */
 
 	/**
 	 * Refresh fsLightbox when images or lightbox setting changes
@@ -445,237 +382,217 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 				)}
 
 				{images?.length > 0 && (
-					<Swiper
-						key={swiperKey}
-						{...swiperSettings}
-						role="region"
-						aria-label="Image Slider"
-						modules={[
-							Navigation,
-							Pagination,
-							Autoplay,
-							Manipulation,
-							Mousewheel,
-							Keyboard,
-							EffectFade,
-							EffectCube,
-							EffectCoverflow,
-							EffectFlip,
-							EffectCreative,
-							EffectCards
-						]}
-
-						onSwiper={(swiper) => {
-							setSwiperInstance(swiper);
-						}}
-					>
-						{images.map((item, index) => (
-							<SwiperSlide key={item.id}>
-								<div className={`gslider-image-slider-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
-									<div
-										className="gslider-image-item"
-										data-hover-effect={imageLinkHoverEffect}
-										onMouseEnter={(e) => {
-											if (imageLinkHoverEffect && imageLinkHoverEffect !== 'none' && imageLinkHoverEffect !== 'grayscale') {
-												if (imageLinkHoverEffect === 'opacity' || imageLinkHoverEffect === 'both') {
-													e.currentTarget.style.opacity = imageLinkHoverOpacity?.[deviceType] || 0.8;
+					<div className="swiper" ref={swiperContainerRef} role="region" aria-label="Image Slider">
+						<div className="swiper-wrapper">
+							{images.map((item, index) => (
+								<div className="swiper-slide" key={item.id}>
+									<div className={`gslider-image-slider-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
+										<div
+											className="gslider-image-item"
+											data-hover-effect={imageLinkHoverEffect}
+											onMouseEnter={(e) => {
+												if (imageLinkHoverEffect && imageLinkHoverEffect !== 'none' && imageLinkHoverEffect !== 'grayscale') {
+													if (imageLinkHoverEffect === 'opacity' || imageLinkHoverEffect === 'both') {
+														e.currentTarget.style.opacity = imageLinkHoverOpacity?.[deviceType] || 0.8;
+													}
+													if (imageLinkHoverEffect === 'scale' || imageLinkHoverEffect === 'both') {
+														e.currentTarget.style.transform = `scale(${imageLinkHoverScale?.[deviceType] || 1.05})`;
+													}
+													if (imageLinkHoverEffect === 'move-up') {
+														e.currentTarget.style.transform = `translateY(-${imageLinkHoverLift?.[deviceType] || 10}${imageLinkHoverLiftUnits?.[deviceType] || 'px'})`;
+													}
 												}
-												if (imageLinkHoverEffect === 'scale' || imageLinkHoverEffect === 'both') {
-													e.currentTarget.style.transform = `scale(${imageLinkHoverScale?.[deviceType] || 1.05})`;
+											}}
+											onMouseLeave={(e) => {
+												if (imageLinkHoverEffect && imageLinkHoverEffect !== 'none' && imageLinkHoverEffect !== 'grayscale') {
+													e.currentTarget.style.opacity = 1;
+													e.currentTarget.style.transform = 'scale(1) translateY(0)';
 												}
-												if (imageLinkHoverEffect === 'move-up') {
-													e.currentTarget.style.transform = `translateY(-${imageLinkHoverLift?.[deviceType] || 10}${imageLinkHoverLiftUnits?.[deviceType] || 'px'})`;
-												}
-											}
-										}}
-										onMouseLeave={(e) => {
-											if (imageLinkHoverEffect && imageLinkHoverEffect !== 'none' && imageLinkHoverEffect !== 'grayscale') {
-												e.currentTarget.style.opacity = 1;
-												e.currentTarget.style.transform = 'scale(1) translateY(0)';
-											}
-										}}
-									>
-										{enableLightbox ? (
-											<a
-												href={item.url}
-												data-fslightbox={blockId}
-												data-caption={item.caption}
-												className="gslider-image-link"
-												onClick={(e) => e.preventDefault()}
-											>
+											}}
+										>
+											{enableLightbox ? (
+												<a
+													href={item.url}
+													data-fslightbox={blockId}
+													data-caption={item.caption}
+													className="gslider-image-link"
+													onClick={(e) => e.preventDefault()}
+												>
+													<img
+														src={item.url}
+														alt={item.alt || `image ${images.indexOf(item) + 1}`}
+														loading={enableLazyLoad ? "lazy" : undefined}
+													/>
+												</a>
+											) : (
 												<img
 													src={item.url}
 													alt={item.alt || `image ${images.indexOf(item) + 1}`}
 													loading={enableLazyLoad ? "lazy" : undefined}
 												/>
-											</a>
-										) : (
-											<img
-												src={item.url}
-												alt={item.alt || `image ${images.indexOf(item) + 1}`}
-												loading={enableLazyLoad ? "lazy" : undefined}
-											/>
-										)}
-										{showTooltip && item.tooltipText && (
-											<div className="gslider-image-tooltip">{item.tooltipText}</div>
-										)}
-									</div>
-									{showCaption?.[deviceType] && item.caption ? (
-										<div className="gslider-image-slider-caption" aria-live="polite">{item.caption}</div>
-									) : null}
+											)}
+											{showTooltip && item.tooltipText && (
+												<div className="gslider-image-tooltip">{item.tooltipText}</div>
+											)}
+										</div>
+										{showCaption?.[deviceType] && item.caption ? (
+											<div className="gslider-image-slider-caption" aria-live="polite">{item.caption}</div>
+										) : null}
 
 
-									{/* image Action Toolbar */}
-									<div className="gslider-image-action-toolbar">
+										{/* image Action Toolbar */}
+										<div className="gslider-image-action-toolbar">
 
-										{/* Move Left Button */}
-										{index > 0 && (
+											{/* Move Left Button */}
+											{index > 0 && (
+												<Button
+													icon={<ToolbarMoveLeftIcon />}
+													className="gslider-image-action-btn gslider-image-move-btn"
+													onClick={() => {
+														const newimages = [...images];
+														const temp = newimages[index - 1];
+														newimages[index - 1] = newimages[index];
+														newimages[index] = temp;
+														setAttributes({ images: newimages });
+													}}
+													label={__('Move Left', 'gslider-blocks')}
+													showTooltip={true}
+												/>
+											)}
+
+											{/* Move Right Button */}
+											{index < images.length - 1 && (
+												<Button
+													icon={<ToolbarMoveRightIcon />}
+													className="gslider-image-action-btn gslider-image-move-btn"
+													onClick={() => {
+														const newimages = [...images];
+														const temp = newimages[index + 1];
+														newimages[index + 1] = newimages[index];
+														newimages[index] = temp;
+														setAttributes({ images: newimages });
+													}}
+													label={__('Move Right', 'gslider-blocks')}
+													showTooltip={true}
+												/>
+											)}
+
+											{/* Divider */}
+											{(index > 0 || index < images.length - 1) && (
+												<div className="gslider-toolbar-divider" />
+											)}
+
 											<Button
-												icon={<ToolbarMoveLeftIcon />}
-												className="gslider-image-action-btn gslider-image-move-btn"
+												icon={<ToolbarDeleteIcon />}
+												className="gslider-image-action-btn gslider-image-delete-btn"
 												onClick={() => {
-													const newimages = [...images];
-													const temp = newimages[index - 1];
-													newimages[index - 1] = newimages[index];
-													newimages[index] = temp;
-													setAttributes({ images: newimages });
+													const updatedimages = images.filter(image => image.id !== item.id);
+													setAttributes({ images: updatedimages });
 												}}
-												label={__('Move Left', 'gslider-blocks')}
+												label={__('Delete', 'gslider-blocks')}
 												showTooltip={true}
 											/>
-										)}
 
-										{/* Move Right Button */}
-										{index < images.length - 1 && (
 											<Button
-												icon={<ToolbarMoveRightIcon />}
-												className="gslider-image-action-btn gslider-image-move-btn"
+												icon={<ToolbarDuplicateIcon />}
+												className="gslider-image-action-btn gslider-image-duplicate-btn"
 												onClick={() => {
-													const newimages = [...images];
-													const temp = newimages[index + 1];
-													newimages[index + 1] = newimages[index];
-													newimages[index] = temp;
-													setAttributes({ images: newimages });
+													const duplicatedimage = {
+														...item,
+														id: Date.now() + Math.random()
+													};
+													const imageIndex = images.findIndex(image => image.id === item.id);
+													const updatedimages = [
+														...images.slice(0, imageIndex + 1),
+														duplicatedimage,
+														...images.slice(imageIndex + 1)
+													];
+													setAttributes({ images: updatedimages });
 												}}
-												label={__('Move Right', 'gslider-blocks')}
+												label={__('Duplicate', 'gslider-blocks')}
 												showTooltip={true}
 											/>
-										)}
 
-										{/* Divider */}
-										{(index > 0 || index < images.length - 1) && (
-											<div className="gslider-toolbar-divider" />
-										)}
+											{(enableimageLinks || showTooltip) && (
+												<Button
+													icon={<ToolbarLinkIcon />}
+													className="gslider-image-action-btn gslider-image-edit-btn"
+													onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
+													label={
+														enableimageLinks && showTooltip
+															? __('Edit Link & Tooltip', 'gslider-blocks')
+															: enableimageLinks
+																? __('Edit Link', 'gslider-blocks')
+																: __('Edit Tooltip', 'gslider-blocks')
+													}
+													showTooltip={true}
+												/>
+											)}
+										</div>
 
-										<Button
-											icon={<ToolbarDeleteIcon />}
-											className="gslider-image-action-btn gslider-image-delete-btn"
-											onClick={() => {
-												const updatedimages = images.filter(image => image.id !== item.id);
-												setAttributes({ images: updatedimages });
-											}}
-											label={__('Delete', 'gslider-blocks')}
-											showTooltip={true}
-										/>
-
-										<Button
-											icon={<ToolbarDuplicateIcon />}
-											className="gslider-image-action-btn gslider-image-duplicate-btn"
-											onClick={() => {
-												const duplicatedimage = {
-													...item,
-													id: Date.now() + Math.random()
-												};
-												const imageIndex = images.findIndex(image => image.id === item.id);
-												const updatedimages = [
-													...images.slice(0, imageIndex + 1),
-													duplicatedimage,
-													...images.slice(imageIndex + 1)
-												];
-												setAttributes({ images: updatedimages });
-											}}
-											label={__('Duplicate', 'gslider-blocks')}
-											showTooltip={true}
-										/>
-
-										{(enableimageLinks || showTooltip) && (
-											<Button
-												icon={<ToolbarLinkIcon />}
-												className="gslider-image-action-btn gslider-image-edit-btn"
-												onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
-												label={
-													enableimageLinks && showTooltip
-														? __('Edit Link & Tooltip', 'gslider-blocks')
-														: enableimageLinks
-															? __('Edit Link', 'gslider-blocks')
-															: __('Edit Tooltip', 'gslider-blocks')
-												}
-												showTooltip={true}
-											/>
-										)}
-									</div>
-
-									{editingimageId === item.id && (
-										<Popover
-											position="middle center"
-											onClose={() => setEditingimageId(null)}
-											focusOnMount="firstElement"
-											className="gslider-image-link-popover"
-										>
-											<div className="gslider-image-link-popover-wrapper">
-												{enableimageLinks && (
-													<TextControl
-														label={__('image Link URL', 'gslider-blocks')}
-														className="gslider-image-link-url"
-														value={tempLinkUrl}
-														onChange={(value) => setTempLinkUrl(value)}
-														placeholder="https://example.com"
-														help={__('Enter the URL for this image', 'gslider-blocks')}
-													/>
-												)}
-												{showTooltip && (
-													<TextControl
-														label={__('Tooltip Text', 'gslider-blocks')}
-														className="gslider-image-tooltip-text"
-														value={tempTooltipText}
-														onChange={(value) => setTempTooltipText(value)}
-														placeholder="Visit our website"
-														help={__('Text shown when hovering over the image', 'gslider-blocks')}
-													/>
-												)}
-												<div className="gslider-image-link-popover-buttons-wrapper">
-													<Button
-														variant="primary"
-														onClick={handleSaveLink}
-														className="gslider-image-link-save-button"
-													>
-														{__('Save', 'gslider-blocks')}
-													</Button>
-													{item.link && (
-														<Button
-															variant="secondary"
-															isDestructive
-															onClick={handleRemoveLink}
-															className="gslider-image-link-remove-button"
-														>
-															{__('Remove Link', 'gslider-blocks')}
-														</Button>
+										{editingimageId === item.id && (
+											<Popover
+												position="middle center"
+												onClose={() => setEditingimageId(null)}
+												focusOnMount="firstElement"
+												className="gslider-image-link-popover"
+											>
+												<div className="gslider-image-link-popover-wrapper">
+													{enableimageLinks && (
+														<TextControl
+															label={__('image Link URL', 'gslider-blocks')}
+															className="gslider-image-link-url"
+															value={tempLinkUrl}
+															onChange={(value) => setTempLinkUrl(value)}
+															placeholder="https://example.com"
+															help={__('Enter the URL for this image', 'gslider-blocks')}
+														/>
 													)}
-													<Button
-														variant="tertiary"
-														onClick={() => setEditingimageId(null)}
-														className="gslider-image-link-cancel-button"
-													>
-														{__('Cancel', 'gslider-blocks')}
-													</Button>
+													{showTooltip && (
+														<TextControl
+															label={__('Tooltip Text', 'gslider-blocks')}
+															className="gslider-image-tooltip-text"
+															value={tempTooltipText}
+															onChange={(value) => setTempTooltipText(value)}
+															placeholder="Visit our website"
+															help={__('Text shown when hovering over the image', 'gslider-blocks')}
+														/>
+													)}
+													<div className="gslider-image-link-popover-buttons-wrapper">
+														<Button
+															variant="primary"
+															onClick={handleSaveLink}
+															className="gslider-image-link-save-button"
+														>
+															{__('Save', 'gslider-blocks')}
+														</Button>
+														{item.link && (
+															<Button
+																variant="secondary"
+																isDestructive
+																onClick={handleRemoveLink}
+																className="gslider-image-link-remove-button"
+															>
+																{__('Remove Link', 'gslider-blocks')}
+															</Button>
+														)}
+														<Button
+															variant="tertiary"
+															onClick={() => setEditingimageId(null)}
+															className="gslider-image-link-cancel-button"
+														>
+															{__('Cancel', 'gslider-blocks')}
+														</Button>
+													</div>
 												</div>
-											</div>
-										</Popover>
-									)}
+											</Popover>
+										)}
+									</div>
 								</div>
-							</SwiperSlide>
-						))}
+							))}
+						</div>
 
+						{/* Navigation inside swiper container */}
 						{showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
 							<>
 								<div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
@@ -703,7 +620,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 							</div>
 						)}
 
-					</Swiper>
+						{/* Pagination inside swiper container */}
+						<div className="swiper-pagination swiper-pagination-image-slider" ref={paginationInsideRef}></div>
+					</div>
 				)}
 
 				{showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
@@ -733,14 +652,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 					</div>
 				)}
 
-				{images?.length > 0 &&
-					showPagination?.[deviceType] &&
-					paginationPositionType === 'outside' && (
-						<div
-							className={`swiper-pagination swiper-pagination-image-slider swiper-pagination-${blockId}`}
-							aria-label="Slider pagination"
-						></div>
-					)}
+				{/* Pagination outside swiper container */}
+				<div
+					className={`swiper-pagination swiper-pagination-image-slider swiper-pagination-${blockId}`}
+					ref={paginationOutsideRef}
+					aria-label="Slider pagination"
+				></div>
 
 			</div >
 			<style>{blockStyle}</style>

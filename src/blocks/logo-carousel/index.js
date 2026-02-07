@@ -8,6 +8,7 @@ import './editor.scss';
  */
 import Edit from './edit';
 import save from './save';
+import deprecated from './deprecated';
 import metadata from './block.json';
 import attributes from './attributes.js';
 import Icon from './icon';
@@ -16,5 +17,6 @@ registerBlockType(metadata.name, {
 	attributes,
 	edit: Edit,
 	save,
+	deprecated,
 	icon: Icon,
 });
