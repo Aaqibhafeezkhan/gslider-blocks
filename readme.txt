@@ -3,7 +3,7 @@ Contributors: noruzzaman, sanaf
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -45,6 +45,16 @@ Display client logos, partner brands, or sponsor images in a beautiful, animated
 * Tooltips and captions with full styling options
 * Responsive slides per view configuration
 * Lazy loading for optimized performance
+
+**4. Image Slider Block**
+A versatile carousel for displaying images, brand assets, or partner logos with advanced interactive features.
+
+* Lightbox Support: View images in a stunning full-screen overlay
+* Custom Tooltips: Add descriptive hover text with complete styling control (typography, colors, position)
+* Clickable Images: Link each image to custom internal or external URLs
+* Caption Support: Display and style image captions for better context
+* Responsive Design: Fully customizable columns and spacing for Desktop, Tablet, and Mobile
+* Advanced Transitions: Slide, Fade, Cube, and other 3D effects powered by Swiper.js
 
 == Key Features ==
 
@@ -94,6 +104,16 @@ These are 3D transition effects where slides are stacked in layers. If your slid
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.6 – February 8, 2026 = 
+**New Block: Image Slider**
+- Added Image Slider block with Swiper.js integration
+- Lightbox Support: View images in a stunning full-screen overlay
+- Custom Tooltips: Add descriptive hover text with complete styling control (typography, colors, position)
+- Clickable Images: Link each image to custom internal or external URLs
+- Caption Support: Display and style image captions for better context
+- Responsive Design: Fully customizable columns and spacing for Desktop, Tablet, and Mobile
+- Advanced Transitions: Slide, Fade, Cube, and other 3D effects powered by Swiper.js
 
 = 1.1.5 – December 30, 2025 = 
 **Fixed: Fade effect initial load glitch**
