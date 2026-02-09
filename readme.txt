@@ -105,7 +105,7 @@ These are 3D transition effects where slides are stacked in layers. If your slid
 
 == Changelog ==
 
-= 1.1.6 – February 8, 2026 = 
+= 1.1.6 – February 9, 2026 = 
 **New Block: Image Slider**
 - Added Image Slider block with Swiper.js integration
 - Lightbox Support: View images in a stunning full-screen overlay
