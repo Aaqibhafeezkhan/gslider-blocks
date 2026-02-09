@@ -20,7 +20,7 @@ V
     <img src="https://img.shields.io/badge/License-GPLv2-green.svg" alt="License">
   </a>
   <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/Version-1.1.5-orange.svg" alt="Version">
+    <img src="https://img.shields.io/badge/Version-1.1.6-orange.svg" alt="Version">
   </a>
   <a href="https://wordpress.org/plugins/gslider-blocks/">
     <img src="https://img.shields.io/badge/Active%20Installs-700+-brightgreen.svg" alt="Active Installs">
@@ -136,7 +136,7 @@ V
 | 1 | 🎯 **Base Slider** | Hero sliders with Title, Subtitle, Description & CTA Button | ✅ Done |
 | 2 | 📝 **Flexi Content** | Use ANY Gutenberg blocks inside slides | ✅ Done |
 | 3 | 🏢 **Logo Carousel** | Client/partner logos with hover effects & tooltips | ✅ Done |
-| 4 | 🖼️ **Image Slider** | Beautiful image sliders with captions & lightbox | 🔨 Building |
+| 4 | 🖼️ **Image Slider** | Beautiful image sliders with captions & lightbox | ✅ Done |
 | 5 | ⭐ **Testimonial Carousel** | Customer reviews with star ratings & avatars | 📋 Planned |
 | 6 | 👥 **Team Carousel** | Team member profiles with social links | 📋 Planned |
 | 7 | 🎥 **Video Carousel** | YouTube/Vimeo video sliders | 📋 Planned |
@@ -155,7 +155,7 @@ V
 │ • Pre-built  │ • Any blocks │ • Logos      │ • Gallery         │
 │   structure  │ • Full       │ • Hover FX   │ • Captions        │
 │ • Title      │   creative   │ • Tooltips   │ • Links           │
-│ • Subtitle   │   freedom    │ • Links      │ • Lightbox (PRO)  │
+│ • Subtitle   │   freedom    │ • Links      │ • Lightbox     │
 │ • Button     │ • InnerBlocks│ • Grayscale  │ • Lazy load       │
 └──────────────┴──────────────┴──────────────┴───────────────────┘
 ```
@@ -345,7 +345,7 @@ gantt
     dateFormat  YYYY-MM
     section Blocks
     Logo Carousel       :done,    2025-12, 2025-12
-    Image Slider        :active,  2026-01, 2026-01
+    Image Slider        :done,  2026-01, 2026-02
     Testimonial         :         2026-02, 2026-02
     Team Carousel       :         2026-03, 2026-04
     section PRO
