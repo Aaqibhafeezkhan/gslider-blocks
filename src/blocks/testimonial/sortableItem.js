@@ -101,47 +101,6 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                         onChange={(value) => handleChangeItem(item.id, "description", value)}
                                         help= "Leave blank to hide description"
                                     />
-                                    <TextControl
-                                        label={__("Primary Button", "gslider-blocks")}
-                                        value={item.primaryButtonText}
-                                        onChange={(value) => handleChangeItem(item.id, "primaryButtonText", value)}
-                                        help= "Leave blank to hide button text"
-                                    />
-                                    <UrlControl
-                                        url={item.primaryButtonLink}
-                                        onChangeUrl={(value) => handleChangeItem(item.id, "primaryButtonLink", value)}
-                                        openInNewTab={item.primaryButtonTargetLink}
-                                        onChangeOpenInNewTab={(value) => handleChangeItem(item.id, "primaryButtonTargetLink", value)}
-                                        nofollow={item.primaryButtonNofollow}
-                                        onChangeNofollow={(value) => handleChangeItem(item.id, "primaryButtonNofollow", value)}
-                                        sponsored={item.primaryButtonSponsored}
-                                        onChangeSponsored={(value) => handleChangeItem(item.id, "primaryButtonSponsored", value)}
-                                    />
-                                    <ToggleControl
-                                        label={__("Enable Secondary Button", "gslider-blocks")}
-                                        checked={item.secondaryButtonSwitcher}
-                                        onChange={(value) => handleChangeItem(item.id, "secondaryButtonSwitcher", value)}
-                                    />  
-                                    { item.secondaryButtonSwitcher && (
-                                        <>
-                                            <TextControl
-                                                label={__("Button Text", "gslider-blocks")}
-                                                value={item.secondaryButtonText}
-                                                onChange={(value) => handleChangeItem(item.id, "secondaryButtonText", value)}
-                                                help= "Leave blank to hide button text"
-                                            />
-                                            <UrlControl
-                                                url={item.secondaryButtonLink}
-                                                onChangeUrl={(value) => handleChangeItem(item.id, "secondaryButtonLink", value)}
-                                                openInNewTab={item.secondaryButtonTargetLink}
-                                                onChangeOpenInNewTab={(value) => handleChangeItem(item.id, "secondaryButtonTargetLink", value)}
-                                                nofollow={item.secondaryButtonNofollow}
-                                                onChangeNofollow={(value) => handleChangeItem(item.id, "secondaryButtonNofollow", value)}
-                                                sponsored={item.secondaryButtonSponsored}
-                                                onChangeSponsored={(value) => handleChangeItem(item.id, "secondaryButtonSponsored", value)}
-                                            />
-                                        </>
-                                    )}
                                 </div>
                             )}
                         />

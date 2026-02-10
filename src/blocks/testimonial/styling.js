@@ -38,7 +38,6 @@ const generateBaseSliderStyle = (attributes) => {
         showSubTitle,
         showTitle,
         showDescription,
-        showButton,
         showNavigation,
         showPagination,
         paginationPositionType,
@@ -182,160 +181,6 @@ const generateBaseSliderStyle = (attributes) => {
         descriptionMobilePaddingCssStyle,
         descriptionPaddingLink,
         /** End Description Typography, Color, Margin & Padding */
-
-        /** Start Primary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
-        primaryButtonFontFamily,
-        primaryButtonFontSize,
-        primaryButtonFontSizeUnits,
-        primaryButtonFontWeight,
-        primaryButtonFontStyle,
-        primaryButtonTextTransform,
-        primaryButtonTextDecoration,
-        primaryButtonLineHeight,
-        primaryButtonLineHeightUnits,
-        primaryButtonLetterSpacing,
-        primaryButtonLetterSpacingUnits,
-        primaryButtonWordSpacing,
-        primaryButtonWordSpacingUnits,
-
-        primaryButtonColorSwitcher,
-        primaryButtonColor,
-        primaryButtonColorHover,
-
-        primaryButtonNormalBackgroundType,
-        primaryButtonNormalClassicColor,
-        primaryButtonNormalGradientColor,
-        primaryButtonNormalCustomGradientSwitcher,
-        primaryButtonNormalCustomGradientInputValue,
-        primaryButtonHoverBackgroundType,
-        primaryButtonHoverClassicColor,
-        primaryButtonHoverGradientColor,
-        primaryButtonHoverCustomGradientSwitcher,
-        primaryButtonHoverCustomGradientInputValue,
-
-        primaryButtonBorder,
-        primaryButtonBorderColorSwitcher,
-        primaryButtonBorderColor,
-        primaryButtonBorderHoverColor,
-        primaryButtonBorderUnits,
-        primaryButtonDesktopBorder,
-        primaryButtonDesktopBorderCssStyle,
-        primaryButtonTabletBorder,
-        primaryButtonTabletBorderCssStyle,
-        primaryButtonMobileBorder,
-        primaryButtonMobileBorderCssStyle,
-        primaryButtonBorderLink,
-
-        primaryButtonBorderRadiusUnits,
-        primaryButtonDesktopBorderRadius,
-        primaryButtonDesktopBorderRadiusCssStyle,
-        primaryButtonTabletBorderRadius,
-        primaryButtonTabletBorderRadiusCssStyle,
-        primaryButtonMobileBorderRadius,
-        primaryButtonMobileBorderRadiusCssStyle,
-        primaryButtonBorderRadiusLink,
-
-        primaryButtonBoxShadowValuesSwitcher,
-        primaryButtonBoxShadowValues,
-        primaryButtonBoxShadowCssValue,
-        primaryButtonBoxShadowHoverValues,
-        primaryButtonBoxShadowHoverCssValue,
-
-        primaryButtonMarginUnits,
-        primaryButtonDesktopMargin,
-        primaryButtonDesktopMarginCssStyle,
-        primaryButtonTabletMargin,
-        primaryButtonTabletMarginCssStyle,
-        primaryButtonMobileMargin,
-        primaryButtonMobileMarginCssStyle,
-        primaryButtonMarginLink,
-
-        primaryButtonPaddingUnits,
-        primaryButtonDesktopPadding,
-        primaryButtonDesktopPaddingCssStyle,
-        primaryButtonTabletPadding,
-        primaryButtonTabletPaddingCssStyle,
-        primaryButtonMobilePadding,
-        primaryButtonMobilePaddingCssStyle,
-        primaryButtonPaddingLink,
-        /** End Primary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
-
-        /** Start Secondary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
-        secondaryButtonFontFamily,
-        secondaryButtonFontSize,
-        secondaryButtonFontSizeUnits,
-        secondaryButtonFontWeight,
-        secondaryButtonFontStyle,
-        secondaryButtonTextTransform,
-        secondaryButtonTextDecoration,
-        secondaryButtonLineHeight,
-        secondaryButtonLineHeightUnits,
-        secondaryButtonLetterSpacing,
-        secondaryButtonLetterSpacingUnits,
-        secondaryButtonWordSpacing,
-        secondaryButtonWordSpacingUnits,
-
-        secondaryButtonColorSwitcher,
-        secondaryButtonColor,
-        secondaryButtonColorHover,
-
-        secondaryButtonNormalBackgroundType,
-        secondaryButtonNormalClassicColor,
-        secondaryButtonNormalGradientColor,
-        secondaryButtonNormalCustomGradientSwitcher,
-        secondaryButtonNormalCustomGradientInputValue,
-        secondaryButtonHoverBackgroundType,
-        secondaryButtonHoverClassicColor,
-        secondaryButtonHoverGradientColor,
-        secondaryButtonHoverCustomGradientSwitcher,
-        secondaryButtonHoverCustomGradientInputValue,
-
-        secondaryButtonBorder,
-        secondaryButtonBorderColorSwitcher,
-        secondaryButtonBorderColor,
-        secondaryButtonBorderHoverColor,
-        secondaryButtonBorderUnits,
-        secondaryButtonDesktopBorder,
-        secondaryButtonDesktopBorderCssStyle,
-        secondaryButtonTabletBorder,
-        secondaryButtonTabletBorderCssStyle,
-        secondaryButtonMobileBorder,
-        secondaryButtonMobileBorderCssStyle,
-        secondaryButtonBorderLink,
-
-        secondaryButtonBorderRadiusUnits,
-        secondaryButtonDesktopBorderRadius,
-        secondaryButtonDesktopBorderRadiusCssStyle,
-        secondaryButtonTabletBorderRadius,
-        secondaryButtonTabletBorderRadiusCssStyle,
-        secondaryButtonMobileBorderRadius,
-        secondaryButtonMobileBorderRadiusCssStyle,
-        secondaryButtonBorderRadiusLink,
-
-        secondaryButtonBoxShadowValuesSwitcher,
-        secondaryButtonBoxShadowValues,
-        secondaryButtonBoxShadowCssValue,
-        secondaryButtonBoxShadowHoverValues,
-        secondaryButtonBoxShadowHoverCssValue,
-
-        secondaryButtonMarginUnits,
-        secondaryButtonDesktopMargin,
-        secondaryButtonDesktopMarginCssStyle,
-        secondaryButtonTabletMargin,
-        secondaryButtonTabletMarginCssStyle,
-        secondaryButtonMobileMargin,
-        secondaryButtonMobileMarginCssStyle,
-        secondaryButtonMarginLink,
-
-        secondaryButtonPaddingUnits,
-        secondaryButtonDesktopPadding,
-        secondaryButtonDesktopPaddingCssStyle,
-        secondaryButtonTabletPadding,
-        secondaryButtonTabletPaddingCssStyle,
-        secondaryButtonMobilePadding,
-        secondaryButtonMobilePaddingCssStyle,
-        secondaryButtonPaddingLink,
-        /** End Secondary Button Typography, Color, Background, Border, Border Radius, Box Shadow, Margin & Padding */
 
         /** Start Navigation Custom Arrows */
         navigationArrowsIconSwitcher,
@@ -1000,82 +845,6 @@ const generateBaseSliderStyle = (attributes) => {
             ${descriptionColorHover ? `color: ${descriptionColorHover};` : ''}
         }
 
-        .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn {
-            ${primaryButtonFontFamily ? `font-family: ${primaryButtonFontFamily};` : ''}
-            ${primaryButtonFontSize.Desktop && primaryButtonFontSizeUnits.Desktop ? `font-size: ${primaryButtonFontSize.Desktop}${primaryButtonFontSizeUnits.Desktop};` : ''}
-            ${primaryButtonFontWeight ? `font-weight: ${primaryButtonFontWeight};` : ''}
-            ${primaryButtonFontStyle ? `font-style: ${primaryButtonFontStyle};` : ''}
-            ${primaryButtonTextTransform ? `text-transform: ${primaryButtonTextTransform};` : ''}
-            ${primaryButtonTextDecoration ? `text-decoration: ${primaryButtonTextDecoration};` : ''}
-            ${primaryButtonLineHeight.Desktop && primaryButtonLineHeightUnits.Desktop ? `line-height: ${primaryButtonLineHeight.Desktop}${primaryButtonLineHeightUnits.Desktop};` : ''}
-            ${primaryButtonLetterSpacing.Desktop && primaryButtonLetterSpacingUnits.Desktop ? `letter-spacing: ${primaryButtonLetterSpacing.Desktop}${primaryButtonLetterSpacingUnits.Desktop};` : ''}
-            ${primaryButtonWordSpacing.Desktop && primaryButtonWordSpacingUnits.Desktop ? `word-spacing: ${primaryButtonWordSpacing.Desktop}${primaryButtonWordSpacingUnits.Desktop};` : ''}
-            ${primaryButtonColor ? `color: ${primaryButtonColor};` : ''}
-            ${primaryButtonNormalBackgroundType === 'gradient' ? `  
-                background: ${primaryButtonNormalCustomGradientSwitcher && primaryButtonNormalCustomGradientInputValue ? primaryButtonNormalCustomGradientInputValue : primaryButtonNormalGradientColor ? primaryButtonNormalGradientColor : primaryButtonNormalClassicColor};
-            ` : `
-                ${primaryButtonNormalClassicColor ? `background: ${primaryButtonNormalClassicColor};` : ''}
-            `}
-            ${primaryButtonBorder ? `border: ${primaryButtonBorder};` : ''}
-            ${primaryButtonBorderColor ? `border-color: ${primaryButtonBorderColor};` : ''}
-			${primaryButtonDesktopBorderCssStyle ? `border-width: ${primaryButtonDesktopBorderCssStyle};` : ''}  
-			${primaryButtonDesktopBorderRadiusCssStyle ? `border-radius: ${primaryButtonDesktopBorderRadiusCssStyle};` : ''}
-            ${primaryButtonBoxShadowCssValue ? `box-shadow: ${primaryButtonBoxShadowCssValue};` : ''}
-            ${primaryButtonDesktopMarginCssStyle ? `margin: ${primaryButtonDesktopMarginCssStyle};` : ''} 
-            ${primaryButtonDesktopPaddingCssStyle ? `padding: ${primaryButtonDesktopPaddingCssStyle};` : ''}
-            display: inline-block;
-            transition: all .3s ease-in-out;
-        }
-
-        .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn:hover {
-            ${primaryButtonColorHover ? `color: ${primaryButtonColorHover};` : ''}
-            ${primaryButtonHoverBackgroundType === 'gradient' ? `   
-                background: ${primaryButtonHoverCustomGradientSwitcher && primaryButtonHoverCustomGradientInputValue ? primaryButtonHoverCustomGradientInputValue : primaryButtonHoverGradientColor ? primaryButtonHoverGradientColor : primaryButtonHoverClassicColor};
-            ` : `
-                ${primaryButtonHoverClassicColor ? `background: ${primaryButtonHoverClassicColor};` : ''}
-            `}
-            ${primaryButtonBorderHoverColor ? `border-color: ${primaryButtonBorderHoverColor};` : ''}
-            ${primaryButtonBoxShadowHoverCssValue ? `box-shadow: ${primaryButtonBoxShadowHoverCssValue};` : ''}
-        }
-
-        .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn {
-            ${secondaryButtonFontFamily ? `font-family: ${secondaryButtonFontFamily};` : ''}
-            ${secondaryButtonFontSize.Desktop && secondaryButtonFontSizeUnits.Desktop ? `font-size: ${secondaryButtonFontSize.Desktop}${secondaryButtonFontSizeUnits.Desktop};` : ''}
-            ${secondaryButtonFontWeight ? `font-weight: ${secondaryButtonFontWeight};` : ''}
-            ${secondaryButtonFontStyle ? `font-style: ${secondaryButtonFontStyle};` : ''}
-            ${secondaryButtonTextTransform ? `text-transform: ${secondaryButtonTextTransform};` : ''}
-            ${secondaryButtonTextDecoration ? `text-decoration: ${secondaryButtonTextDecoration};` : ''}
-            ${secondaryButtonLineHeight.Desktop && secondaryButtonLineHeightUnits.Desktop ? `line-height: ${secondaryButtonLineHeight.Desktop}${secondaryButtonLineHeightUnits.Desktop};` : ''}
-            ${secondaryButtonLetterSpacing.Desktop && secondaryButtonLetterSpacingUnits.Desktop ? `letter-spacing: ${secondaryButtonLetterSpacing.Desktop}${secondaryButtonLetterSpacingUnits.Desktop};` : ''}
-            ${secondaryButtonWordSpacing.Desktop && secondaryButtonWordSpacingUnits.Desktop ? `word-spacing: ${secondaryButtonWordSpacing.Desktop}${secondaryButtonWordSpacingUnits.Desktop};` : ''}
-            ${secondaryButtonColor ? `color: ${secondaryButtonColor};` : ''}
-            ${secondaryButtonNormalBackgroundType === 'gradient' ? `  
-                background: ${secondaryButtonNormalCustomGradientSwitcher && secondaryButtonNormalCustomGradientInputValue ? secondaryButtonNormalCustomGradientInputValue : secondaryButtonNormalGradientColor ? secondaryButtonNormalGradientColor : secondaryButtonNormalClassicColor};
-            ` : `
-                ${secondaryButtonNormalClassicColor ? `background: ${secondaryButtonNormalClassicColor};` : ''}
-            `}
-            ${secondaryButtonBorder ? `border: ${secondaryButtonBorder};` : ''}
-            ${secondaryButtonBorderColor ? `border-color: ${secondaryButtonBorderColor};` : ''}
-			${secondaryButtonDesktopBorderCssStyle ? `border-width: ${secondaryButtonDesktopBorderCssStyle};` : ''}  
-			${secondaryButtonDesktopBorderRadiusCssStyle ? `border-radius: ${secondaryButtonDesktopBorderRadiusCssStyle};` : ''}
-            ${secondaryButtonBoxShadowCssValue ? `box-shadow: ${secondaryButtonBoxShadowCssValue};` : ''}
-            ${secondaryButtonDesktopMarginCssStyle ? `margin: ${secondaryButtonDesktopMarginCssStyle};` : ''} 
-            ${secondaryButtonDesktopPaddingCssStyle ? `padding: ${secondaryButtonDesktopPaddingCssStyle};` : ''}
-            display: inline-block;
-            transition: all .3s ease-in-out;
-        }
-
-        .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn:hover {
-            ${secondaryButtonColorHover ? `color: ${secondaryButtonColorHover};` : ''}
-            ${secondaryButtonHoverBackgroundType === 'gradient' ? `   
-                background: ${secondaryButtonHoverCustomGradientSwitcher && secondaryButtonHoverCustomGradientInputValue ? secondaryButtonHoverCustomGradientInputValue : secondaryButtonHoverGradientColor ? secondaryButtonHoverGradientColor : secondaryButtonHoverClassicColor};
-            ` : `
-                ${secondaryButtonHoverClassicColor ? `background: ${secondaryButtonHoverClassicColor};` : ''}
-            `}
-            ${secondaryButtonBorderHoverColor ? `border-color: ${secondaryButtonBorderHoverColor};` : ''}
-            ${secondaryButtonBoxShadowHoverCssValue ? `box-shadow: ${secondaryButtonBoxShadowHoverCssValue};` : ''}
-        }
-
         .${blockId}.gslider-base-wrapper.outside {
             ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                 padding: ${navigationArrowPositionOutsidePadding.Desktop}${navigationArrowPositionOutsidePaddingUnits.Desktop} 0 0;
@@ -1343,28 +1112,6 @@ const generateBaseSliderStyle = (attributes) => {
                 ${descriptionTabletPaddingCssStyle ? `padding: ${descriptionTabletPaddingCssStyle};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn {
-                ${primaryButtonFontSize.Tablet && primaryButtonFontSizeUnits.Tablet ? `font-size: ${primaryButtonFontSize.Tablet}${primaryButtonFontSizeUnits.Tablet};` : ''}
-                ${primaryButtonLineHeight.Tablet && primaryButtonLineHeightUnits.Tablet ? `line-height: ${primaryButtonLineHeight.Tablet}${primaryButtonLineHeightUnits.Tablet};` : ''}
-                ${primaryButtonLetterSpacing.Tablet && primaryButtonLetterSpacingUnits.Tablet ? `letter-spacing: ${primaryButtonLetterSpacing.Tablet}${primaryButtonLetterSpacingUnits.Tablet};` : ''}
-                ${primaryButtonWordSpacing.Tablet && primaryButtonWordSpacingUnits.Tablet ? `word-spacing: ${primaryButtonWordSpacing.Tablet}${primaryButtonWordSpacingUnits.Tablet};` : ''}
-                ${primaryButtonTabletBorderCssStyle ? `border-width: ${primaryButtonTabletBorderCssStyle};` : ''}  
-                ${primaryButtonTabletBorderRadiusCssStyle ? `border-radius: ${primaryButtonTabletBorderRadiusCssStyle};` : ''}
-                ${primaryButtonTabletMarginCssStyle ? `margin: ${primaryButtonTabletMarginCssStyle};` : ''} 
-                ${primaryButtonTabletPaddingCssStyle ? `padding: ${primaryButtonTabletPaddingCssStyle};` : ''}
-            }
-
-            .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn {
-                ${secondaryButtonFontSize.Tablet && secondaryButtonFontSizeUnits.Tablet ? `font-size: ${secondaryButtonFontSize.Tablet}${secondaryButtonFontSizeUnits.Tablet};` : ''}
-                ${secondaryButtonLineHeight.Tablet && secondaryButtonLineHeightUnits.Tablet ? `line-height: ${secondaryButtonLineHeight.Tablet}${secondaryButtonLineHeightUnits.Tablet};` : ''}
-                ${secondaryButtonLetterSpacing.Tablet && secondaryButtonLetterSpacingUnits.Tablet ? `letter-spacing: ${secondaryButtonLetterSpacing.Tablet}${secondaryButtonLetterSpacingUnits.Tablet};` : ''}
-                ${secondaryButtonWordSpacing.Tablet && secondaryButtonWordSpacingUnits.Tablet ? `word-spacing: ${secondaryButtonWordSpacing.Tablet}${secondaryButtonWordSpacingUnits.Tablet};` : ''}
-                ${secondaryButtonTabletBorderCssStyle ? `border-width: ${secondaryButtonTabletBorderCssStyle};` : ''}  
-                ${secondaryButtonTabletBorderRadiusCssStyle ? `border-radius: ${secondaryButtonTabletBorderRadiusCssStyle};` : ''}
-                ${secondaryButtonTabletMarginCssStyle ? `margin: ${secondaryButtonTabletMarginCssStyle};` : ''} 
-                ${secondaryButtonTabletPaddingCssStyle ? `padding: ${secondaryButtonTabletPaddingCssStyle};` : ''}
-            }
-
             .${blockId}.gslider-base-wrapper.outside {
                 ${navigationArrowPosition === 'top-left' || navigationArrowPosition === 'top-center' || navigationArrowPosition === 'top-right' ? `
                     padding: ${navigationArrowPositionOutsidePadding.Tablet}${navigationArrowPositionOutsidePaddingUnits.Tablet} 0 0;
@@ -1542,28 +1289,6 @@ const generateBaseSliderStyle = (attributes) => {
                 ${descriptionWordSpacing.Mobile && descriptionWordSpacingUnits.Mobile ? `word-spacing: ${descriptionWordSpacing.Mobile}${descriptionWordSpacingUnits.Mobile};` : ''}
                 ${descriptionMobileMarginCssStyle ? `margin: ${descriptionMobileMarginCssStyle};` : ''} 
                 ${descriptionMobilePaddingCssStyle ? `padding: ${descriptionMobilePaddingCssStyle};` : ''}
-            }
-
-            .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn {
-                ${primaryButtonFontSize.Mobile && primaryButtonFontSizeUnits.Mobile ? `font-size: ${primaryButtonFontSize.Mobile}${primaryButtonFontSizeUnits.Mobile};` : ''}
-                ${primaryButtonLineHeight.Mobile && primaryButtonLineHeightUnits.Mobile ? `line-height: ${primaryButtonLineHeight.Mobile}${primaryButtonLineHeightUnits.Mobile};` : ''}
-                ${primaryButtonLetterSpacing.Mobile && primaryButtonLetterSpacingUnits.Mobile ? `letter-spacing: ${primaryButtonLetterSpacing.Mobile}${primaryButtonLetterSpacingUnits.Mobile};` : ''}
-                ${primaryButtonWordSpacing.Mobile && primaryButtonWordSpacingUnits.Mobile ? `word-spacing: ${primaryButtonWordSpacing.Mobile}${primaryButtonWordSpacingUnits.Mobile};` : ''}
-                ${primaryButtonMobileBorderCssStyle ? `border-width: ${primaryButtonMobileBorderCssStyle};` : ''}  
-                ${primaryButtonMobileBorderRadiusCssStyle ? `border-radius: ${primaryButtonMobileBorderRadiusCssStyle};` : ''}
-                ${primaryButtonMobileMarginCssStyle ? `margin: ${primaryButtonMobileMarginCssStyle};` : ''} 
-                ${primaryButtonMobilePaddingCssStyle ? `padding: ${primaryButtonMobilePaddingCssStyle};` : ''}
-            }
-
-            .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn {
-                ${secondaryButtonFontSize.Mobile && secondaryButtonFontSizeUnits.Mobile ? `font-size: ${secondaryButtonFontSize.Mobile}${secondaryButtonFontSizeUnits.Mobile};` : ''}
-                ${secondaryButtonLineHeight.Mobile && secondaryButtonLineHeightUnits.Mobile ? `line-height: ${secondaryButtonLineHeight.Mobile}${secondaryButtonLineHeightUnits.Mobile};` : ''}
-                ${secondaryButtonLetterSpacing.Mobile && secondaryButtonLetterSpacingUnits.Mobile ? `letter-spacing: ${secondaryButtonLetterSpacing.Mobile}${secondaryButtonLetterSpacingUnits.Mobile};` : ''}
-                ${secondaryButtonWordSpacing.Mobile && secondaryButtonWordSpacingUnits.Mobile ? `word-spacing: ${secondaryButtonWordSpacing.Mobile}${secondaryButtonWordSpacingUnits.Mobile};` : ''}
-                ${secondaryButtonMobileBorderCssStyle ? `border-width: ${secondaryButtonMobileBorderCssStyle};` : ''}  
-                ${secondaryButtonMobileBorderRadiusCssStyle ? `border-radius: ${secondaryButtonMobileBorderRadiusCssStyle};` : ''}
-                ${secondaryButtonMobileMarginCssStyle ? `margin: ${secondaryButtonMobileMarginCssStyle};` : ''} 
-                ${secondaryButtonMobilePaddingCssStyle ? `padding: ${secondaryButtonMobilePaddingCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper.outside {
