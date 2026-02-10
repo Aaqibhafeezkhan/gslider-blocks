@@ -38,7 +38,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.title || __( `Social Item ${index + 1}`, "gslider-blocks" )}
+                    {item.title || __( `Testimonial Item ${index + 1}`, "gslider-blocks" )}
                 </span>
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
                     <Button icon="move" label={__("Sort", "gslider-blocks")} aria-label={__("Move item", "gslider-blocks")} />
@@ -84,22 +84,22 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             renderContent={() => (
                                 <div className="gslider-setting-contant-popup-wrapper">
                                     <TextControl
-                                        label={__("Sub Title", "gslider-blocks")}
-                                        value={item.subTitle}
-                                        onChange={(value) => handleChangeItem(item.id, "subTitle", value)}
-                                        help= "Leave blank to hide subtitle"
+                                        label={__("Author Name", "gslider-blocks")}
+                                        value={item.authorName}
+                                        onChange={(value) => handleChangeItem(item.id, "authorName", value)}
+                                        help= "Leave blank to hide author name"
+                                    />
+                                    <TextControl
+                                        label={__("Author Designation", "gslider-blocks")}
+                                        value={item.authorDesignation}
+                                        onChange={(value) => handleChangeItem(item.id, "authorDesignation", value)}
+                                        help= "Leave blank to hide designation"
                                     />
                                     <TextareaControl
-                                        label={__("Title", "gslider-blocks")}
-                                        value={item.title}
-                                        onChange={(value) => handleChangeItem(item.id, "title", value)}
-                                        help= "Leave blank to hide title"
-                                    />
-                                    <TextareaControl
-                                        label={__("Description", "gslider-blocks")}
-                                        value={item.description}
-                                        onChange={(value) => handleChangeItem(item.id, "description", value)}
-                                        help= "Leave blank to hide description"
+                                        label={__("Testimonial Text", "gslider-blocks")}
+                                        value={item.testimonialText}
+                                        onChange={(value) => handleChangeItem(item.id, "testimonialText", value)}
+                                        help= "Leave blank to hide testimonial text"
                                     />
                                 </div>
                             )}

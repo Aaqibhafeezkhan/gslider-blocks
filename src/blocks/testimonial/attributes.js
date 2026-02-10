@@ -16,9 +16,9 @@ const attributes = {
         default: [
             { 
                 id: "item-1",
-                subTitle: "Sub Title",
-                title: "Slider Item 1",
-                description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
+                authorName: "Author Name",
+                authorDesignation: "CEO, Google",
+                testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -73,9 +73,9 @@ const attributes = {
             { 
                 id: "item-2",
 
-                subTitle: "Sub Title",
-                title: "Slider Item 2",
-                description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
+                authorName: "Author Name",
+                authorDesignation: "CEO, Google",
+                testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -131,9 +131,9 @@ const attributes = {
             { 
                 id: "item-3",
 
-                subTitle: "Sub Title",
-                title: "Slider Item 3",
-                description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
+                authorName: "Author Name",
+                authorDesignation: "CEO, Google",
+                testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -193,42 +193,17 @@ const attributes = {
                     type: "string",
                     default: ""
                 },
-                subTitle: {
+                authorName: {
                     type: "string",
-                    default: "Sub Title"
+                    default: "Author Name"
                 },
-                title: {
+                authorDesignation: {
                     type: "string",
-                    default: "Slider Item"
+                    default: "CEO, Google"
                 },
-                description: {
+                testimonialText: {
                     type: "string",
                     default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum."
-                },
-
-                secondaryButtonSwitcher: {
-                    type: "boolean",
-                    default: false
-                },
-                secondaryButtonText: {
-                    type: "string",
-                    default: "Get Started"
-                },
-                secondaryButtonLink: {
-                    type: "string",
-                    default: "#"
-                },
-                secondaryButtonTargetLink: {
-                    type: "boolean",
-                    default: true
-                },
-                secondaryButtonNofollow: {
-                    type: "boolean",
-                    default: false
-                },
-                secondaryButtonSponsored: {
-                    type: "boolean",
-                    default: false
                 },
 
                 normalItemBackgroundType: {
@@ -429,15 +404,15 @@ const attributes = {
     /** End Slider Settings */
 
     /** Start Show/Hide Elements */
-    showSubTitle: {
+    showAuthorName: {
         type: "boolean",
         default: true,
     },
-    showTitle: {
+    showAuthorDesignation: {
         type: "boolean",
         default: true,
     },
-    showDescription: {
+    showTestimonialText: {
         type: "boolean",
         default: true,
     },
@@ -524,15 +499,15 @@ const attributes = {
             Mobile: "",
         },
     },
-    subTitleHtmlTag: {
+    authorNameHtmlTag: {
         type: "string",
         default: "h3",
     },
-    titleHtmlTag: {
+    authorDesignationHtmlTag: {
         type: "string",
-        default: "h2",
+        default: "p",
     },
-    descriptionHtmlTag: {
+    testimonialTextHtmlTag: {
         type: "string",
         default: "p",
     },
@@ -592,12 +567,12 @@ const attributes = {
     },
     /** End Content Padding */
 
-    /** Start Subtitle Typography */
-    subtitleFontFamily: {
+    /** Start Author Name Typography */
+    authorNameFontFamily: {
         type: "string",
         default: "",
     },
-    subtitleFontSize: {
+    authorNameFontSize: {
         type: 'object',
         default: {
             Desktop: '',
@@ -605,7 +580,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    subtitleFontSizeUnits: {
+    authorNameFontSizeUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -613,23 +588,23 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    subtitleFontWeight: {
+    authorNameFontWeight: {
         type: "string",
         default: "",
     },
-    subtitleFontStyle: {
+    authorNameFontStyle: {
         type: "string",
         default: "",
     },
-    subtitleTextTransform: {
+    authorNameTextTransform: {
         type: "string",
         default: "",
     },
-    subtitleTextDecoration: {
+    authorNameTextDecoration: {
         type: "string",
         default: "",
     },
-    subtitleLineHeight: {
+    authorNameLineHeight: {
         type: 'object',
         default: {
             Desktop: '',
@@ -637,7 +612,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    subtitleLineHeightUnits: {
+    authorNameLineHeightUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -645,7 +620,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    subtitleLetterSpacing: {
+    authorNameLetterSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -653,7 +628,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    subtitleLetterSpacingUnits: {
+    authorNameLetterSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -661,7 +636,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    subtitleWordSpacing: {
+    authorNameWordSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -669,7 +644,7 @@ const attributes = {
             Mobile: ''
         }
     },  
-    subtitleWordSpacingUnits: {
+    authorNameWordSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -677,25 +652,25 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    /** End Subtitle Typography */
+    /** End Author Name Typography */
 
-    /** Start Subtitle Color */
-    subtitleColorSwitcher: {
+    /** Start Author Name Color */
+    authorNameColorSwitcher: {
 		type: "string",
 		default: "normal",
 	},
-	subtitleColor: {
+	authorNameColor: {
 		type: "string",
 		default: "",
 	},
-	subtitleColorHover: {
+	authorNameColorHover: {
 		type: "string",
 		default: "",
 	},
-    /** End Subtitle Color */
+    /** End Author Name Color */
 
-    /** Start Subtitle Margin */
-	subtitleMarginUnits: {
+    /** Start Author Name Margin */
+	authorNameMarginUnits: {
 		type: "object",
 		default: {
 			Desktop: "px",
@@ -703,7 +678,7 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
-	subtitleDesktopMargin: {
+	authorNameDesktopMargin: {
 		type: "object", 
 		default: {
 			top: "0",
@@ -712,11 +687,11 @@ const attributes = {
 			right: "0",
 		},
 	},
-    subtitleDesktopMarginCssStyle: { 
+    authorNameDesktopMarginCssStyle: { 
         type: "string",
         default: "",
     },
-	subtitleTabletMargin: {
+	authorNameTabletMargin: {
 		type: "object",  
 		default: {
 			top: "0",
@@ -725,11 +700,11 @@ const attributes = {
 			right: "0",
 		},
 	},
-    subtitleTabletMarginCssStyle: { 
+    authorNameTabletMarginCssStyle: { 
         type: "string",
         default: "",
     },
-	subtitleMobileMargin: {
+	authorNameMobileMargin: {
 		type: "object",  
 		default: {
 			top: "0",
@@ -738,18 +713,18 @@ const attributes = {
 			right: "0",
 		},
 	},
-    subtitleMobileMarginCssStyle: { 
+    authorNameMobileMarginCssStyle: { 
         type: "string",
         default: "",
     },
-	subtitleMarginLink : {
+	authorNameMarginLink : {
 		type : "boolean",
 		default: true
 	},
-    /** End Subtitle Margin */
+    /** End Author Name Margin */
 
-    /** Start Subtitle Padding */
-	subtitlePaddingUnits: {
+    /** Start Author Name Padding */
+	authorNamePaddingUnits: {
 		type: "object",
 		default: {
 			Desktop: "px",
@@ -757,7 +732,7 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
-	subtitleDesktopPadding: {
+	authorNameDesktopPadding: {
 		type: "object", 
 		default: {
 			top: "",
@@ -766,11 +741,11 @@ const attributes = {
 			right: "",
 		},
 	},
-    subtitleDesktopPaddingCssStyle: { 
+    authorNameDesktopPaddingCssStyle: { 
         type: "string",
         default: "",
     },
-	subtitleTabletPadding: {
+	authorNameTabletPadding: {
 		type: "object",  
 		default: {
 			top: "",
@@ -779,11 +754,11 @@ const attributes = {
 			right: "",
 		},
 	},
-    subtitleTabletPaddingCssStyle: { 
+    authorNameTabletPaddingCssStyle: { 
         type: "string",
         default: "",
     },
-	subtitleMobilePadding: {
+	authorNameMobilePadding: {
 		type: "object",  
 		default: {
 			top: "",
@@ -792,122 +767,336 @@ const attributes = {
 			right: "",
 		},
 	},
-    subtitleMobilePaddingCssStyle: { 
+    authorNameMobilePaddingCssStyle: { 
         type: "string",
         default: "",
     },
-	subtitlePaddingLink : {
+	authorNamePaddingLink : {
 		type : "boolean",
 		default: true
 	},
-    /** End Subtitle Padding */
+    /** End Author Name Padding */
     
-    /** End Subtitle     */
+    /** End Author Name */
 
-    /** Start Title Typography */
-    titleFontFamily: {
-        type: "string",
-        default: "",
-    },
-    titleFontSize: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    titleFontSizeUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    titleFontWeight: {
-        type: "string",
-        default: "",
-    },
-    titleFontStyle: {
-        type: "string",
-        default: "",
-    },
-    titleTextTransform: {
-        type: "string",
-        default: "",
-    },
-    titleTextDecoration: {
-        type: "string",
-        default: "",
-    },
-    titleLineHeight: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    titleLineHeightUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    titleLetterSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    titleLetterSpacingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    titleWordSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    titleWordSpacingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    /** End Title Typography */
+    /** Start Author Designation */
 
-    /** Start Title Color */
-    titleColorSwitcher: {
+    /** Start Author Designation Typography */
+    authorDesignationFontFamily: {
+        type: "string",
+        default: "",
+    },
+    authorDesignationFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    authorDesignationFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    authorDesignationFontWeight: {
+        type: "string",
+        default: "",
+    },
+    authorDesignationFontStyle: {
+        type: "string",
+        default: "",
+    },
+    authorDesignationTextTransform: {
+        type: "string",
+        default: "",
+    },
+    authorDesignationTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    authorDesignationLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    authorDesignationLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    authorDesignationLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    authorDesignationLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    authorDesignationWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },  
+    authorDesignationWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Author Designation Typography */
+
+    /** Start Author Designation Color */
+    authorDesignationColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	authorDesignationColor: {
+		type: "string",
+		default: "",
+	},
+	authorDesignationColorHover: {
+		type: "string",
+		default: "",
+	},
+    /** End Author Designation Color */
+
+    /** Start Author Designation Margin */
+	authorDesignationMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorDesignationDesktopMargin: {
+		type: "object", 
+		default: {
+			top: "0",
+			bottom: "16",
+			left: "0",
+			right: "0",
+		},
+	},
+    authorDesignationDesktopMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	authorDesignationTabletMargin: {
+		type: "object",  
+		default: {
+			top: "0",
+			bottom: "16",
+			left: "0",
+			right: "0",
+		},
+	},
+    authorDesignationTabletMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	authorDesignationMobileMargin: {
+		type: "object",  
+		default: {
+			top: "0",
+			bottom: "16",
+			left: "0",
+			right: "0",
+		},
+	},
+    authorDesignationMobileMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	authorDesignationMarginLink : {
+		type : "boolean",
+		default: true
+	},
+    /** End Author Designation Margin */
+
+    /** Start Author Designation Padding */
+	authorDesignationPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorDesignationDesktopPadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    authorDesignationDesktopPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	authorDesignationTabletPadding: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    authorDesignationTabletPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	authorDesignationMobilePadding: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    authorDesignationMobilePaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	authorDesignationPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+    /** End Author Designation Padding */
+    
+    /** End Author Designation */
+
+    /** Start Testimonial Text Typography */
+    testimonialTextFontFamily: {
+        type: "string",
+        default: "",
+    },
+    testimonialTextFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialTextFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    testimonialTextFontWeight: {
+        type: "string",
+        default: "",
+    },
+    testimonialTextFontStyle: {
+        type: "string",
+        default: "",
+    },
+    testimonialTextTextTransform: {
+        type: "string",
+        default: "",
+    },
+    testimonialTextTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    testimonialTextLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialTextLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    testimonialTextLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialTextLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    testimonialTextWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialTextWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Testimonial Text Typography */
+
+    /** Start Testimonial Text Color */
+    testimonialTextColorSwitcher: {
         type: "string",
         default: "normal",
     },
-    titleColor: {
+    testimonialTextColor: {
         type: "string",
         default: "",
     },
-    titleColorHover: {
+    testimonialTextColorHover: {
         type: "string",
         default: "",
     },
-    /** End Title Color */
+    /** End Testimonial Text Color */
 
-    /** Start Title Margin */
-    titleMarginUnits: {
+    /** Start Testimonial Text Margin */
+    testimonialTextMarginUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -915,7 +1104,7 @@ const attributes = {
             Mobile: "px",
         },
     },
-    titleDesktopMargin: {
+    testimonialTextDesktopMargin: {
         type: "object", 
         default: {
             top: "0",
@@ -924,11 +1113,11 @@ const attributes = {
             right: "0",
         },
     },
-    titleDesktopMarginCssStyle: { 
+    testimonialTextDesktopMarginCssStyle: { 
         type: "string",
         default: "",
     },
-    titleTabletMargin: {
+    testimonialTextTabletMargin: {
         type: "object",  
         default: {
             top: "0",
@@ -937,11 +1126,11 @@ const attributes = {
             right: "0",
         },
     },
-    titleTabletMarginCssStyle: { 
+    testimonialTextTabletMarginCssStyle: { 
         type: "string",
         default: "",
     },
-    titleMobileMargin: {
+    testimonialTextMobileMargin: {
         type: "object",  
         default: {
             top: "0",
@@ -950,18 +1139,18 @@ const attributes = {
             right: "0",
         },
     },
-    titleMobileMarginCssStyle: { 
+    testimonialTextMobileMarginCssStyle: { 
         type: "string",
         default: "",
     },
-    titleMarginLink : {
+    testimonialTextMarginLink : {
         type : "boolean",
         default: true
     },
-    /** End Title Margin */
+    /** End Testimonial Text Margin */
 
-    /** Start Title Padding */
-    titlePaddingUnits: {
+    /** Start Testimonial Text Padding */
+    testimonialTextPaddingUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -969,7 +1158,7 @@ const attributes = {
             Mobile: "px",
         },
     },
-    titleDesktopPadding: {
+    testimonialTextDesktopPadding: {
         type: "object", 
         default: {
             top: "",
@@ -978,11 +1167,11 @@ const attributes = {
             right: "",
         },
     },
-    titleDesktopPaddingCssStyle: { 
+    testimonialTextDesktopPaddingCssStyle: { 
         type: "string",
         default: "",
     },
-    titleTabletPadding: {
+    testimonialTextTabletPadding: {
         type: "object",  
         default: {
             top: "",
@@ -991,11 +1180,11 @@ const attributes = {
             right: "",
         },
     },
-    titleTabletPaddingCssStyle: { 
+    testimonialTextTabletPaddingCssStyle: { 
         type: "string",
         default: "",
     },
-    titleMobilePadding: {
+    testimonialTextMobilePadding: {
         type: "object",  
         default: {
             top: "",
@@ -1004,631 +1193,17 @@ const attributes = {
             right: "",
         },
     },
-    titleMobilePaddingCssStyle: { 
+    testimonialTextMobilePaddingCssStyle: { 
         type: "string",
         default: "",
     },
-    titlePaddingLink : {
+    testimonialTextPaddingLink : {
         type : "boolean",
         default: true
     },
-    /** End Title Padding */
+    /** End Testimonial Text Padding */
     
-    /** End Title     */
-
-    /** Start Description Typography */
-    descriptionFontFamily: {
-        type: "string",
-        default: "",
-    },
-    descriptionFontSize: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    descriptionFontSizeUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    descriptionFontWeight: {
-        type: "string",
-        default: "",
-    },
-    descriptionFontStyle: {
-        type: "string",
-        default: "",
-    },
-    descriptionTextTransform: {
-        type: "string",
-        default: "",
-    },
-    descriptionTextDecoration: {
-        type: "string",
-        default: "",
-    },
-    descriptionLineHeight: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    descriptionLineHeightUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    descriptionLetterSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    descriptionLetterSpacingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    descriptionWordSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    descriptionWordSpacingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    /** End Description Typography */
-
-    /** Start Description Color */
-    descriptionColorSwitcher: {
-        type: "string",
-        default: "normal",
-    },
-    descriptionColor: {
-        type: "string",
-        default: "",
-    },
-    descriptionColorHover: {
-        type: "string",
-        default: "",
-    },
-    /** End Description Color */
-
-    /** Start Description Margin */
-    descriptionMarginUnits: {
-        type: "object",
-        default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px",
-        },
-    },
-    descriptionDesktopMargin: {
-        type: "object", 
-        default: {
-            top: "0",
-            bottom: "16",
-            left: "0",
-            right: "0",
-        },
-    },
-    descriptionDesktopMarginCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    descriptionTabletMargin: {
-        type: "object",  
-        default: {
-            top: "0",
-            bottom: "16",
-            left: "0",
-            right: "0",
-        },
-    },
-    descriptionTabletMarginCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    descriptionMobileMargin: {
-        type: "object",  
-        default: {
-            top: "0",
-            bottom: "16",
-            left: "0",
-            right: "0",
-        },
-    },
-    descriptionMobileMarginCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    descriptionMarginLink : {
-        type : "boolean",
-        default: true
-    },
-    /** End Description Margin */
-
-    /** Start Description Padding */
-    descriptionPaddingUnits: {
-        type: "object",
-        default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px",
-        },
-    },
-    descriptionDesktopPadding: {
-        type: "object", 
-        default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
-        },
-    },
-    descriptionDesktopPaddingCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    descriptionTabletPadding: {
-        type: "object",  
-        default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
-        },
-    },
-    descriptionTabletPaddingCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    descriptionMobilePadding: {
-        type: "object",  
-        default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
-        },
-    },
-    descriptionMobilePaddingCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    descriptionPaddingLink : {
-        type : "boolean",
-        default: true
-    },
-    /** End Description Padding */
-    
-    /** End Description     */
-    
-    /** End Primary Button     */
-
-    /** Start Secondary Button Typography */
-    secondaryButtonFontFamily: {
-        type: "string",
-        default: "",
-    },
-    secondaryButtonFontSize: {
-        type: 'object',
-        default: {
-            Desktop: '16',
-            Tablet: '16',
-            Mobile: '14'
-        }
-    },
-    secondaryButtonFontSizeUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    secondaryButtonFontWeight: {
-        type: "string",
-        default: "",
-    },
-    secondaryButtonFontStyle: {
-        type: "string",
-        default: "",
-    },
-    secondaryButtonTextTransform: {
-        type: "string",
-        default: "",
-    },
-    secondaryButtonTextDecoration: {
-        type: "string",
-        default: "none",
-    },
-    secondaryButtonLineHeight: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    secondaryButtonLineHeightUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    secondaryButtonLetterSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    secondaryButtonLetterSpacingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    secondaryButtonWordSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    secondaryButtonWordSpacingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    /** End Secondary Button Typography */
-
-    /** Start Secondary Button Color */
-    secondaryButtonColorSwitcher: {
-        type: "string",
-        default: "normal",
-    },
-    secondaryButtonColor: {
-        type: "string",
-        default: "",
-    },
-    secondaryButtonColorHover: {
-        type: "string",
-        default: "",
-    },
-    /** End Secondary Button Color */
-
-    /** Start Secondary Button Background */
-    secondaryButtonNormalBackgroundType: {
-        type: "string",
-        default: "classic",
-    },
-    secondaryButtonNormalClassicColor: {
-        type: "string",
-        default: "#d2d2d2c7",
-    },
-    secondaryButtonNormalGradientColor: {
-        type: "string",
-        default: null,
-    },
-    secondaryButtonNormalCustomGradientSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    secondaryButtonNormalCustomGradientInputValue: {
-        type: "string",
-        default: "",
-    },
-    secondaryButtonHoverBackgroundType: {
-        type: "string",
-        default: "classic",
-    },
-    secondaryButtonHoverClassicColor: {
-        type: "string",
-        default: "#787878b8",
-    },
-    secondaryButtonHoverGradientColor: {
-        type: "string",
-        default: null,
-    },
-    secondaryButtonHoverCustomGradientSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    secondaryButtonHoverCustomGradientInputValue: {
-        type: "string",
-        default: "",
-    },
-    /** End Secondary Button Background */
-
-    /** Start Secondary Button Border */
-    secondaryButtonBorder: {
-        type: "string",
-        default: "none",
-    },
-    secondaryButtonBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
-    },
-    secondaryButtonBorderColor: {
-        type: "string",
-        default: "",
-    },
-    secondaryButtonBorderHoverColor: {
-        type: "string",
-        default: "",
-    },
-    secondaryButtonBorderUnits: {
-        type: "object",
-        default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px",
-        },
-    },
-    secondaryButtonDesktopBorder: {
-        type: "object",
-        default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
-        },
-    },
-    secondaryButtonDesktopBorderCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonTabletBorder: {
-        type: "object",  
-        default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
-        },
-    },
-    secondaryButtonTabletBorderCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonMobileBorder: {
-        type: "object", 
-        default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
-        },
-    },
-    secondaryButtonMobileBorderCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonBorderLink : {
-        type : "boolean",
-        default: true
-    },
-    /** End Secondary Button Border */
-
-    /** Start Secondary Button Border Radius */
-    secondaryButtonBorderRadiusUnits: {
-        type: "object",
-        default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px",
-        },
-    },
-    secondaryButtonDesktopBorderRadius: {
-        type: "object", 
-        default: {
-            top: "4",
-            bottom: "4",
-            left: "4",
-            right: "4",
-        },
-    },
-    secondaryButtonDesktopBorderRadiusCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonTabletBorderRadius: {
-        type: "object",  
-        default: {
-            top: "4",
-            bottom: "4",
-            left: "4",
-            right: "4",
-        },
-    },
-    secondaryButtonTabletBorderRadiusCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonMobileBorderRadius: {
-        type: "object",  
-        default: {
-            top: "4",
-            bottom: "4",
-            left: "4",
-            right: "4",
-        },
-    },
-    secondaryButtonMobileBorderRadiusCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonBorderRadiusLink : {
-        type : "boolean",
-        default: true
-    },
-    /** End Secondary Button Border Radius */
-
-    /** Start Secondary Button Box Shadow */
-    secondaryButtonBoxShadowValuesSwitcher : {
-        type: "string",
-        default: "normal"
-    },
-    secondaryButtonBoxShadowValues: {
-        type: "array",
-        default: [],
-    },
-    secondaryButtonBoxShadowCssValue: {
-        type: "string",
-        default: "",
-    },
-    secondaryButtonBoxShadowHoverValues: {
-        type: "array",
-        default: [],
-    },
-    secondaryButtonBoxShadowHoverCssValue: {
-        type: "string",
-        default: "",
-    },
-    /** End Secondary Button Box Shadow */
-
-    /** Start Secondary Button Margin */
-    secondaryButtonMarginUnits: {
-        type: "object",
-        default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px",
-        },
-    },
-    secondaryButtonDesktopMargin: {
-        type: "object", 
-        default: {
-            top: "12",
-            bottom: "0",
-            left: "12",
-            right: "0",
-        },
-    },
-    secondaryButtonDesktopMarginCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonTabletMargin: {
-        type: "object",  
-        default: {
-            top: "12",
-            bottom: "0",
-            left: "12",
-            right: "0",
-        },
-    },
-    secondaryButtonTabletMarginCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonMobileMargin: {
-        type: "object",  
-        default: {
-            top: "12",
-            bottom: "0",
-            left: "0",
-            right: "0",
-        },
-    },
-    secondaryButtonMobileMarginCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonMarginLink : {
-        type : "boolean",
-        default: true
-    },
-    /** End Secondary Button Margin */
-
-    /** Start Secondary Button Padding */
-    secondaryButtonPaddingUnits: {
-        type: "object",
-        default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px",
-        },
-    },
-    secondaryButtonDesktopPadding: {
-        type: "object", 
-        default: {
-            top: "12",
-            bottom: "12",
-            left: "24",
-            right: "24",
-        },
-    },
-    secondaryButtonDesktopPaddingCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonTabletPadding: {
-        type: "object",  
-        default: {
-            top: "12",
-            bottom: "12",
-            left: "24",
-            right: "24",
-        },
-    },
-    secondaryButtonTabletPaddingCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonMobilePadding: {
-        type: "object",  
-        default: {
-            top: "8",
-            bottom: "8",
-            left: "16",
-            right: "16",
-        },
-    },
-    secondaryButtonMobilePaddingCssStyle: { 
-        type: "string",
-        default: "",
-    },
-    secondaryButtonPaddingLink : {
-        type : "boolean",
-        default: true
-    },
-    /** End Secondary Button Padding */
+    /** End Testimonial Text */
 
     /** Start Navigation Custom Arrows */
     navigationArrowsIconSwitcher: {

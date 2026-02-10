@@ -23,15 +23,15 @@ export default function Save({ attributes }) {
         paginationType,
         dynamicBullets,
 
-        showSubTitle,
-        showTitle,
-        showDescription,
+        showAuthorName,
+        showAuthorDesignation,
+        showTestimonialText,
         showNavigation,
         showPagination,
         paginationPositionType,
-        subTitleHtmlTag,
-        titleHtmlTag,
-        descriptionHtmlTag,
+        authorNameHtmlTag,
+        authorDesignationHtmlTag,
+        testimonialTextHtmlTag,
         globalID,
         globalClass,
         navigationArrowPositionType,
@@ -170,30 +170,30 @@ export default function Save({ attributes }) {
                                 <div className="gslider-content-inner-wrapper">
                                     <div className="gslider-list-item">
                                         <div className="gslider-list-content">
-                                            {showSubTitle && item.subTitle && (
-                                                <div className="gslider-subtitle-wrapper">
+                                            {showAuthorName && item.authorName && (
+                                                <div className="gslider-author-name-wrapper">
                                                     <RichText.Content
-                                                        tagName={subTitleHtmlTag}
-                                                        className="gslider-subtitle"
-                                                        value={item.subTitle}
+                                                        tagName={authorNameHtmlTag}
+                                                        className="gslider-author-name"
+                                                        value={item.authorName}
                                                     />
                                                 </div>
                                             )}
-                                            {showTitle && item.title && (
-                                                <div className="gslider-title-wrapper">
+                                            {showAuthorDesignation && item.authorDesignation && (
+                                                <div className="gslider-author-designation-wrapper">
                                                     <RichText.Content
-                                                        tagName={titleHtmlTag}
-                                                        className="gslider-title"
-                                                        value={item.title}
+                                                        tagName={authorDesignationHtmlTag}
+                                                        className="gslider-author-designation"
+                                                        value={item.authorDesignation}
                                                     />
                                                 </div>
                                             )}
-                                            {showDescription && item.description && (
-                                                <div className="gslider-description-wrapper">
+                                            {showTestimonialText && item.testimonialText && (
+                                                <div className="gslider-testimonial-text-wrapper">
                                                     <RichText.Content
-                                                        tagName={descriptionHtmlTag}
-                                                        className="gslider-description"
-                                                        value={item.description}
+                                                        tagName={testimonialTextHtmlTag}
+                                                        className="gslider-testimonial-text"
+                                                        value={item.testimonialText}
                                                     />
                                                 </div>
                                             )}

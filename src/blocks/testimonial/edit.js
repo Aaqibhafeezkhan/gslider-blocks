@@ -44,15 +44,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		paginationType,
 		dynamicBullets,
 
-        showSubTitle,
-        showTitle,
-        showDescription,
+        showAuthorName,
+        showAuthorDesignation,
+        showTestimonialText,
         showNavigation,
 		showPagination,
         paginationPositionType,
-        subTitleHtmlTag,
-        titleHtmlTag,
-        descriptionHtmlTag,
+        authorNameHtmlTag,
+        authorDesignationHtmlTag,
+        testimonialTextHtmlTag,
         globalID,
         globalClass,
         navigationArrowPositionType,
@@ -259,9 +259,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const handleAddItem = () => {
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
-            subTitle: 'Sub Title',
-            title: `Slider Item ${sliderItems.length + 1}`,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
+            authorName: 'Author Name',
+            authorDesignation: 'CEO, Google',
+            testimonialText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
 
             normalItemBackgroundType: 'classic',
             normalItemClassicColor: '#EDEDED',
@@ -499,35 +499,35 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 									<div className="gslider-content-inner-wrapper">
 										<div className="gslider-list-item">
 											<div className="gslider-list-content">
-												{ showSubTitle && item.subTitle && (
-                                                <div className="gslider-subtitle-wrapper">
+												{ showAuthorName && item.authorName && (
+                                                <div className="gslider-author-name-wrapper">
                                                     <RichText
-                                                        tagName={subTitleHtmlTag}
-                                                        className="gslider-subtitle"
-                                                        value={item.subTitle}
-                                                        onChange={(value) => updateItem(index, 'subTitle', value)}
-                                                        placeholder="Enter subtitle"
+                                                        tagName={authorNameHtmlTag}
+                                                        className="gslider-author-name"
+                                                        value={item.authorName}
+                                                        onChange={(value) => updateItem(index, 'authorName', value)}
+                                                        placeholder="Enter author name"
                                                     />
                                                 </div>
 												)}
-												{ showTitle && item.title && (
-                                                <div className="gslider-title-wrapper">
+												{ showAuthorDesignation && item.authorDesignation && (
+                                                <div className="gslider-author-designation-wrapper">
                                                     <RichText
-                                                        tagName={titleHtmlTag}
-                                                        className="gslider-title"
-                                                        value={item.title}
-                                                        onChange={(value) => updateItem(index, 'title', value)}
-                                                        placeholder="Enter title"
+                                                        tagName={authorDesignationHtmlTag}
+                                                        className="gslider-author-designation"
+                                                        value={item.authorDesignation}
+                                                        onChange={(value) => updateItem(index, 'authorDesignation', value)}
+                                                        placeholder="Enter author designation"
                                                     />
                                                 </div>
 												)}
-												{ showDescription && item.description && (
-                                                <div className="gslider-description-wrapper">
+												{ showTestimonialText && item.testimonialText && (
+                                                <div className="gslider-testimonial-text-wrapper">
                                                     <RichText
-                                                        tagName={descriptionHtmlTag}
-                                                        className="gslider-description"
-                                                        value={item.description}
-                                                        onChange={(value) => updateItem(index, 'description', value)}
+                                                        tagName={testimonialTextHtmlTag}
+                                                        className="gslider-testimonial-text"
+                                                        value={item.testimonialText}
+                                                        onChange={(value) => updateItem(index, 'testimonialText', value)}
                                                         placeholder="Enter description"
                                                     />
                                                 </div>

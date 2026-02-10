@@ -76,9 +76,9 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         dynamicBullets,
 
         /** Start Show/Hide Elements */
-        showSubTitle,
-        showTitle,
-        showDescription,
+        showAuthorName,
+        showAuthorDesignation,
+        showTestimonialText,
         showNavigation,
         showPagination,
         paginationPositionType,
@@ -93,9 +93,9 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         contentAlignment,
         contentVerticalAlignment,
         contentHorizontalAlignment,
-        subTitleHtmlTag,
-        titleHtmlTag,
-        descriptionHtmlTag,
+        authorNameHtmlTag,
+        authorDesignationHtmlTag,
+        testimonialTextHtmlTag,
         /** End Layout & Content Setting */
 
         /** Start Content Padding */
@@ -109,119 +109,119 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         contentPaddingLink,
         /** End Content Padding */
 
-        /** Start Subtitle Typography, Color, Margin & Padding */
-        subtitleFontFamily,
-        subtitleFontSize,
-        subtitleFontSizeUnits,
-        subtitleFontWeight,
-        subtitleFontStyle,
-        subtitleTextTransform,
-        subtitleTextDecoration,
-        subtitleLineHeight,
-        subtitleLineHeightUnits,
-        subtitleLetterSpacing,
-        subtitleLetterSpacingUnits,
-        subtitleWordSpacing,
-        subtitleWordSpacingUnits,
+        /** Start Author Name Typography, Color, Margin & Padding */
+        authorNameFontFamily,
+        authorNameFontSize,
+        authorNameFontSizeUnits,
+        authorNameFontWeight,
+        authorNameFontStyle,
+        authorNameTextTransform,
+        authorNameTextDecoration,
+        authorNameLineHeight,
+        authorNameLineHeightUnits,
+        authorNameLetterSpacing,
+        authorNameLetterSpacingUnits,
+        authorNameWordSpacing,
+        authorNameWordSpacingUnits,
 
-        subtitleColorSwitcher,
-        subtitleColor,
-        subtitleColorHover,
+        authorNameColorSwitcher,
+        authorNameColor,
+        authorNameColorHover,
 
-        subtitleMarginUnits,
-        subtitleDesktopMargin,
-        subtitleDesktopMarginCssStyle,
-        subtitleTabletMargin,
-        subtitleTabletMarginCssStyle,
-        subtitleMobileMargin,
-        subtitleMobileMarginCssStyle,
-        subtitleMarginLink,
+        authorNameMarginUnits,
+        authorNameDesktopMargin,
+        authorNameDesktopMarginCssStyle,
+        authorNameTabletMargin,
+        authorNameTabletMarginCssStyle,
+        authorNameMobileMargin,
+        authorNameMobileMarginCssStyle,
+        authorNameMarginLink,
 
-        subtitlePaddingUnits,
-        subtitleDesktopPadding,
-        subtitleDesktopPaddingCssStyle,
-        subtitleTabletPadding,
-        subtitleTabletPaddingCssStyle,
-        subtitleMobilePadding,
-        subtitleMobilePaddingCssStyle,
-        subtitlePaddingLink,
-        /** End Subtitle Typography, Color, Margin & Padding */
+        authorNamePaddingUnits,
+        authorNameDesktopPadding,
+        authorNameDesktopPaddingCssStyle,
+        authorNameTabletPadding,
+        authorNameTabletPaddingCssStyle,
+        authorNameMobilePadding,
+        authorNameMobilePaddingCssStyle,
+        authorNamePaddingLink,
+        /** End Author Name Typography, Color, Margin & Padding */
 
-        /** Start Title Typography, Color, Margin & Padding */
-        titleFontFamily,
-        titleFontSize,
-        titleFontSizeUnits,
-        titleFontWeight,
-        titleFontStyle,
-        titleTextTransform,
-        titleTextDecoration,
-        titleLineHeight,
-        titleLineHeightUnits,
-        titleLetterSpacing,
-        titleLetterSpacingUnits,
-        titleWordSpacing,
-        titleWordSpacingUnits,
+        /** Start Author Designation Typography, Color, Margin & Padding */
+        authorDesignationFontFamily,
+        authorDesignationFontSize,
+        authorDesignationFontSizeUnits,
+        authorDesignationFontWeight,
+        authorDesignationFontStyle,
+        authorDesignationTextTransform,
+        authorDesignationTextDecoration,
+        authorDesignationLineHeight,
+        authorDesignationLineHeightUnits,
+        authorDesignationLetterSpacing,
+        authorDesignationLetterSpacingUnits,
+        authorDesignationWordSpacing,
+        authorDesignationWordSpacingUnits,
 
-        titleColorSwitcher,
-        titleColor,
-        titleColorHover,
+        authorDesignationColorSwitcher,
+        authorDesignationColor,
+        authorDesignationColorHover,
 
-        titleMarginUnits,
-        titleDesktopMargin,
-        titleDesktopMarginCssStyle,
-        titleTabletMargin,
-        titleTabletMarginCssStyle,
-        titleMobileMargin,
-        titleMobileMarginCssStyle,
-        titleMarginLink,
+        authorDesignationMarginUnits,
+        authorDesignationDesktopMargin,
+        authorDesignationDesktopMarginCssStyle,
+        authorDesignationTabletMargin,
+        authorDesignationTabletMarginCssStyle,
+        authorDesignationMobileMargin,
+        authorDesignationMobileMarginCssStyle,
+        authorDesignationMarginLink,
 
-        titlePaddingUnits,
-        titleDesktopPadding,
-        titleDesktopPaddingCssStyle,
-        titleTabletPadding,
-        titleTabletPaddingCssStyle,
-        titleMobilePadding,
-        titleMobilePaddingCssStyle,
-        titlePaddingLink,
-        /** End Title Typography, Color, Margin & Padding */
+        authorDesignationPaddingUnits,
+        authorDesignationDesktopPadding,
+        authorDesignationDesktopPaddingCssStyle,
+        authorDesignationTabletPadding,
+        authorDesignationTabletPaddingCssStyle,
+        authorDesignationMobilePadding,
+        authorDesignationMobilePaddingCssStyle,
+        authorDesignationPaddingLink,
+        /** End Author Designation Typography, Color, Margin & Padding */
 
-        /** Start Description Typography, Color, Margin & Padding */
-        descriptionFontFamily,
-        descriptionFontSize,
-        descriptionFontSizeUnits,
-        descriptionFontWeight,
-        descriptionFontStyle,
-        descriptionTextTransform,
-        descriptionTextDecoration,
-        descriptionLineHeight,
-        descriptionLineHeightUnits,
-        descriptionLetterSpacing,
-        descriptionLetterSpacingUnits,
-        descriptionWordSpacing,
-        descriptionWordSpacingUnits,
+        /** Start Testimonial Text Typography, Color, Margin & Padding */
+        testimonialTextFontFamily,
+        testimonialTextFontSize,
+        testimonialTextFontSizeUnits,
+        testimonialTextFontWeight,
+        testimonialTextFontStyle,
+        testimonialTextTextTransform,
+        testimonialTextTextDecoration,
+        testimonialTextLineHeight,
+        testimonialTextLineHeightUnits,
+        testimonialTextLetterSpacing,
+        testimonialTextLetterSpacingUnits,
+        testimonialTextWordSpacing,
+        testimonialTextWordSpacingUnits,
 
-        descriptionColorSwitcher,
-        descriptionColor,
-        descriptionColorHover,
+        testimonialTextColorSwitcher,
+        testimonialTextColor,
+        testimonialTextColorHover,
 
-        descriptionMarginUnits,
-        descriptionDesktopMargin,
-        descriptionDesktopMarginCssStyle,
-        descriptionTabletMargin,
-        descriptionTabletMarginCssStyle,
-        descriptionMobileMargin,
-        descriptionMobileMarginCssStyle,
-        descriptionMarginLink,
+        testimonialTextMarginUnits,
+        testimonialTextDesktopMargin,
+        testimonialTextDesktopMarginCssStyle,
+        testimonialTextTabletMargin,
+        testimonialTextTabletMarginCssStyle,
+        testimonialTextMobileMargin,
+        testimonialTextMobileMarginCssStyle,
+        testimonialTextMarginLink,
 
-        descriptionPaddingUnits,
-        descriptionDesktopPadding,
-        descriptionDesktopPaddingCssStyle,
-        descriptionTabletPadding,
-        descriptionTabletPaddingCssStyle,
-        descriptionMobilePadding,
-        descriptionMobilePaddingCssStyle,
-        descriptionPaddingLink,
-        /** End Description Typography, Color, Margin & Padding */
+        testimonialTextPaddingUnits,
+        testimonialTextDesktopPadding,
+        testimonialTextDesktopPaddingCssStyle,
+        testimonialTextTabletPadding,
+        testimonialTextTabletPaddingCssStyle,
+        testimonialTextMobilePadding,
+        testimonialTextMobilePaddingCssStyle,
+        testimonialTextPaddingLink,
+        /** End Testimonial Text Typography, Color, Margin & Padding */
 
         /** Start Navigation Custom Arrows */
         navigationArrowsIconSwitcher,
@@ -569,17 +569,17 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
     /** set the css style if have default padding */
     useEffect(() => {
         setAttributes({
-            subtitleDesktopMarginCssStyle: spacingFormat(subtitleDesktopMargin, subtitleMarginUnits.Desktop),
-            subtitleTabletMarginCssStyle: spacingFormat(subtitleTabletMargin, subtitleMarginUnits.Tablet),
-            subtitleMobileMarginCssStyle: spacingFormat(subtitleMobileMargin, subtitleMarginUnits.Mobile),
+            authorNameDesktopMarginCssStyle: spacingFormat(authorNameDesktopMargin, authorNameMarginUnits.Desktop),
+            authorNameTabletMarginCssStyle: spacingFormat(authorNameTabletMargin, authorNameMarginUnits.Tablet),
+            authorNameMobileMarginCssStyle: spacingFormat(authorNameMobileMargin, authorNameMarginUnits.Mobile),
 
-            titleDesktopMarginCssStyle: spacingFormat(titleDesktopMargin, titleMarginUnits.Desktop),
-            titleTabletMarginCssStyle: spacingFormat(titleTabletMargin, titleMarginUnits.Tablet),
-            titleMobileMarginCssStyle: spacingFormat(titleMobileMargin, titleMarginUnits.Mobile),
+            authorDesignationDesktopMarginCssStyle: spacingFormat(authorDesignationDesktopMargin, authorDesignationMarginUnits.Desktop),
+            authorDesignationTabletMarginCssStyle: spacingFormat(authorDesignationTabletMargin, authorDesignationMarginUnits.Tablet),
+            authorDesignationMobileMarginCssStyle: spacingFormat(authorDesignationMobileMargin, authorDesignationMarginUnits.Mobile),
 
-            descriptionDesktopMarginCssStyle: spacingFormat(descriptionDesktopMargin, descriptionMarginUnits.Desktop),
-            descriptionTabletMarginCssStyle: spacingFormat(descriptionTabletMargin, descriptionMarginUnits.Tablet),
-            descriptionMobileMarginCssStyle: spacingFormat(descriptionMobileMargin, descriptionMarginUnits.Mobile),
+            testimonialTextDesktopMarginCssStyle: spacingFormat(testimonialTextDesktopMargin, testimonialTextMarginUnits.Desktop),
+            testimonialTextTabletMarginCssStyle: spacingFormat(testimonialTextTabletMargin, testimonialTextMarginUnits.Tablet),
+            testimonialTextMobileMarginCssStyle: spacingFormat(testimonialTextMobileMargin, testimonialTextMarginUnits.Mobile),
 
             navigationArrowDesktopBorderRadiusCssStyle: spacingFormat(navigationArrowDesktopBorderRadius, navigationArrowBorderRadiusUnits.Desktop),
             navigationArrowTabletBorderRadiusCssStyle: spacingFormat(navigationArrowTabletBorderRadius, navigationArrowBorderRadiusUnits.Tablet),
@@ -590,17 +590,17 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
             paginationNormalDotsMobileBorderRadiusCssStyle: spacingFormat(paginationNormalDotsMobileBorderRadius, paginationNormalDotsBorderRadiusUnits.Mobile),
         });
     }, [
-        subtitleDesktopMargin,
-        subtitleTabletMargin,
-        subtitleMobileMargin,
+        authorNameDesktopMargin,
+        authorNameTabletMargin,
+        authorNameMobileMargin,
 
-        titleDesktopMargin,
-        titleTabletMargin,
-        titleMobileMargin,
+        authorDesignationDesktopMargin,
+        authorDesignationTabletMargin,
+        authorDesignationMobileMargin,
 
-        descriptionDesktopMargin,
-        descriptionTabletMargin,
-        descriptionMobileMargin,
+        testimonialTextDesktopMargin,
+        testimonialTextTabletMargin,
+        testimonialTextMobileMargin,
 
         navigationArrowDesktopBorderRadius,
         navigationArrowTabletBorderRadius,
@@ -615,32 +615,18 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
     /** end if have default padding then set the css style */
 
     /** Load Google Font */
-    if (subtitleFontFamily !== 'Default') {
-        LoadGoogleFont(subtitleFontFamily);
+    if (authorNameFontFamily !== 'Default') {
+        LoadGoogleFont(authorNameFontFamily);
     }
 
-    if (titleFontFamily !== 'Default') {
-        LoadGoogleFont(titleFontFamily);
+    if (authorDesignationFontFamily !== 'Default') {
+        LoadGoogleFont(authorDesignationFontFamily);
     }
 
-    if (descriptionFontFamily !== 'Default') {
-        LoadGoogleFont(descriptionFontFamily);
+    if (testimonialTextFontFamily !== 'Default') {
+        LoadGoogleFont(testimonialTextFontFamily);
     }
     /** End Load Google Font */
-
-    /** Show Secondary Button Style if have secondary button enabled in slider items */
-    const [secondaryButtonSwitcher, setSecondaryButtonSwitcher] = useState([]);
-
-    useEffect(() => {
-        if (Array.isArray(sliderItems)) {
-            const updatedSwitchers = sliderItems.map(item => item.secondaryButtonSwitcher);
-            setSecondaryButtonSwitcher(updatedSwitchers);
-        }
-    }, [sliderItems]);
-
-    const showSecondarybtnStyle = secondaryButtonSwitcher.includes(true);
-
-    /** End Secondary Button Style */
 
     /** Navigation Custom Arrows */
     const navigationArrowsIconLeftHandler = (IconName) => {
@@ -663,19 +649,19 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                 onToggle={() => togglePanel("general", "show-hide-elements")}
             >
                 <ToggleControl
-                    label={__("Show Sub Title", "gslider-blocks")}
-                    checked={showSubTitle}
-                    onChange={(value) => setAttributes({ showSubTitle: value })}
+                    label={__("Show Author Name", "gslider-blocks")}
+                    checked={showAuthorName}
+                    onChange={(value) => setAttributes({ showAuthorName: value })}
                 />
                 <ToggleControl
-                    label={__("Show Title", "gslider-blocks")}
-                    checked={showTitle}
-                    onChange={(value) => setAttributes({ showTitle: value })}
+                    label={__("Show Author Designation", "gslider-blocks")}
+                    checked={showAuthorDesignation}
+                    onChange={(value) => setAttributes({ showAuthorDesignation: value })}
                 />
                 <ToggleControl
-                    label={__("Show Description", "gslider-blocks")}
-                    checked={showDescription}
-                    onChange={(value) => setAttributes({ showDescription: value })}
+                    label={__("Show Testimonial Text", "gslider-blocks")}
+                    checked={showTestimonialText}
+                    onChange={(value) => setAttributes({ showTestimonialText: value })}
                 />
                 <ResponsiveToggleControl
                     label={__("Show Navigation", "gslider-blocks")}
@@ -810,24 +796,24 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                 />
 
                 <HtmlTagControl
-                    label={__("Sub Title Tag", "gslider-blocks")}
+                    label={__("Author Name Tag", "gslider-blocks")}
                     options={HTML_TAGS}
-                    value={subTitleHtmlTag}
-                    onChange={(value) => setAttributes({ subTitleHtmlTag: value })}
+                    value={authorNameHtmlTag}
+                    onChange={(value) => setAttributes({ authorNameHtmlTag: value })}
                 />
 
                 <HtmlTagControl
-                    label={__("Title Tag", "gslider-blocks")}
+                    label={__("Author Designation Tag", "gslider-blocks")}
                     options={HTML_TAGS}
-                    value={titleHtmlTag}
-                    onChange={(value) => setAttributes({ titleHtmlTag: value })}
+                    value={authorDesignationHtmlTag}
+                    onChange={(value) => setAttributes({ authorDesignationHtmlTag: value })}
                 />
 
                 <HtmlTagControl
-                    label={__("Description Tag", "gslider-blocks")}
+                    label={__("Testimonial Text Tag", "gslider-blocks")}
                     options={HTML_TAGS}
-                    value={descriptionHtmlTag}
-                    onChange={(value) => setAttributes({ descriptionHtmlTag: value })}
+                    value={testimonialTextHtmlTag}
+                    onChange={(value) => setAttributes({ testimonialTextHtmlTag: value })}
                 />
 
             </PanelBody>
@@ -1355,75 +1341,75 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     onChangeLink={(value) => setAttributes({ contentPaddingLink: value })}
                 />
             </PanelBody>
-            {showSubTitle && (
+            {showAuthorName && (
                 <PanelBody
-                    title={__("Subtitle", "gslider-blocks")}
-                    opened={openPanels.styles === "subtitle"}
-                    onToggle={() => togglePanel("styles", "subtitle")}
+                    title={__("Author Name", "gslider-blocks")}
+                    opened={openPanels.styles === "authorName"}
+                    onToggle={() => togglePanel("styles", "authorName")}
                 >
                     <ResponsiveTypographyControl
-                        fontFamily={subtitleFontFamily}
-                        onChangeFontFamily={(value) => setAttributes({ subtitleFontFamily: value })}
+                        fontFamily={authorNameFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ authorNameFontFamily: value })}
 
-                        fontSize={subtitleFontSize}
-                        onChangeFontSize={(value) => setAttributes({ subtitleFontSize: value })}
+                        fontSize={authorNameFontSize}
+                        onChangeFontSize={(value) => setAttributes({ authorNameFontSize: value })}
 
-                        fontSizeUnits={subtitleFontSizeUnits}
-                        onChangeFontSizeUnit={(value) => setAttributes({ subtitleFontSizeUnits: value })}
+                        fontSizeUnits={authorNameFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ authorNameFontSizeUnits: value })}
 
-                        fontWeight={subtitleFontWeight}
-                        onChangeFontWeight={(value) => setAttributes({ subtitleFontWeight: value })}
+                        fontWeight={authorNameFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ authorNameFontWeight: value })}
 
-                        fontStyle={subtitleFontStyle}
-                        onChangeFontStyle={(value) => setAttributes({ subtitleFontStyle: value })}
+                        fontStyle={authorNameFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ authorNameFontStyle: value })}
 
-                        textTransform={subtitleTextTransform}
-                        onChangeTextTransform={(value) => setAttributes({ subtitleTextTransform: value })}
+                        textTransform={authorNameTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ authorNameTextTransform: value })}
 
-                        textDecoration={subtitleTextDecoration}
-                        onChangeTextDecoration={(value) => setAttributes({ subtitleTextDecoration: value })}
+                        textDecoration={authorNameTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ authorNameTextDecoration: value })}
 
-                        lineHeight={subtitleLineHeight}
-                        onChangeLineHeight={(value) => setAttributes({ subtitleLineHeight: value })}
+                        lineHeight={authorNameLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ authorNameLineHeight: value })}
 
-                        lineHeightUnits={subtitleLineHeightUnits}
-                        onChangeLineHeightUnit={(value) => setAttributes({ subtitleLineHeightUnits: value })}
+                        lineHeightUnits={authorNameLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ authorNameLineHeightUnits: value })}
 
-                        letterSpacing={subtitleLetterSpacing}
-                        onChangeLetterSpacing={(value) => setAttributes({ subtitleLetterSpacing: value })}
+                        letterSpacing={authorNameLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ authorNameLetterSpacing: value })}
 
-                        letterSpacingUnits={subtitleLetterSpacingUnits}
-                        onChangeLetterSpacingUnit={(value) => setAttributes({ subtitleLetterSpacingUnits: value })}
+                        letterSpacingUnits={authorNameLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ authorNameLetterSpacingUnits: value })}
 
-                        wordSpacing={subtitleWordSpacing}
-                        onChangeWordSpacing={(value) => setAttributes({ subtitleWordSpacing: value })}
+                        wordSpacing={authorNameWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ authorNameWordSpacing: value })}
 
-                        wordSpacingUnits={subtitleWordSpacingUnits}
-                        onChangeWordSpacingUnit={(value) => setAttributes({ subtitleWordSpacingUnits: value })}
+                        wordSpacingUnits={authorNameWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ authorNameWordSpacingUnits: value })}
 
                         deviceType={deviceType}
                     />
                     <SwitcherControl
                         label={__("Color", "gslider-blocks")}
                         options={NORMAL_HOVER}
-                        value={subtitleColorSwitcher}
-                        onChange={(value) => setAttributes({ subtitleColorSwitcher: value })}
+                        value={authorNameColorSwitcher}
+                        onChange={(value) => setAttributes({ authorNameColorSwitcher: value })}
                     />
 
-                    {subtitleColorSwitcher === 'normal' && (
+                    {authorNameColorSwitcher === 'normal' && (
                         <ColorControl
                             label={__("Normal Color", "gslider-blocks")}
-                            color={subtitleColor}
-                            onChangeColor={(value) => setAttributes({ subtitleColor: value })}
+                            color={authorNameColor}
+                            onChangeColor={(value) => setAttributes({ authorNameColor: value })}
                             defaultColor=''
                         />
                     )}
 
-                    {subtitleColorSwitcher === 'hover' && (
+                    {authorNameColorSwitcher === 'hover' && (
                         <ColorControl
                             label={__("Hover Color", "gslider-blocks")}
-                            color={subtitleColorHover}
-                            onChangeColor={(value) => setAttributes({ subtitleColorHover: value })}
+                            color={authorNameColorHover}
+                            onChangeColor={(value) => setAttributes({ authorNameColorHover: value })}
                             defaultColor=''
                         />
                     )}
@@ -1431,224 +1417,223 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         label={__("Margin", "gslider-blocks")}
                         deviceType={deviceType}
                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                        units={subtitleMarginUnits}
-                        onChangeUnits={(value) => setAttributes({ subtitleMarginUnits: value })}
-                        desktopSpacing={subtitleDesktopMargin}
-                        onChangeDesktopSpacing={(value) => setAttributes({ subtitleDesktopMargin: value })}
-                        desktopSpacingStyle={(value) => setAttributes({ subtitleDesktopMarginCssStyle: value })}
-                        tabletSpacing={subtitleTabletMargin}
-                        onChangeTabletSpacing={(value) => setAttributes({ subtitleTabletMargin: value })}
-                        tabletSpacingStyle={(value) => setAttributes({ subtitleTabletMarginCssStyle: value })}
-                        mobileSpacing={subtitleMobileMargin}
-                        onChangeMobileSpacing={(value) => setAttributes({ subtitleMobileMargin: value })}
-                        mobileSpacingStyle={(value) => setAttributes({ subtitleMobileMarginCssStyle: value })}
-                        isLinked={subtitleMarginLink}
-                        onChangeLink={(value) => setAttributes({ subtitleMarginLink: value })}
+                        units={authorNameMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ authorNameMarginUnits: value })}
+                        desktopSpacing={authorNameDesktopMargin}
+                        onChangeDesktopSpacing={(value) => setAttributes({ authorNameDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ authorNameDesktopMarginCssStyle: value })}
+                        tabletSpacing={authorNameTabletMargin}
+                        onChangeTabletSpacing={(value) => setAttributes({ authorNameTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ authorNameTabletMarginCssStyle: value })}
+                        mobileSpacing={authorNameMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ authorNameMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ authorNameMobileMarginCssStyle: value })}
+                        isLinked={authorNameMarginLink}
+                        onChangeLink={(value) => setAttributes({ authorNameMarginLink: value })}
                     />
 
                     <ResponsiveSpacingControl
                         label={__("Padding", "gslider-blocks")}
                         deviceType={deviceType}
                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                        units={subtitlePaddingUnits}
-                        onChangeUnits={(value) => setAttributes({ subtitlePaddingUnits: value })}
-                        desktopSpacing={subtitleDesktopPadding}
-                        onChangeDesktopSpacing={(value) => setAttributes({ subtitleDesktopPadding: value })}
-                        desktopSpacingStyle={(value) => setAttributes({ subtitleDesktopPaddingCssStyle: value })}
-                        tabletSpacing={subtitleTabletPadding}
-                        onChangeTabletSpacing={(value) => setAttributes({ subtitleTabletPadding: value })}
-                        tabletSpacingStyle={(value) => setAttributes({ subtitleTabletPaddingCssStyle: value })}
-                        mobileSpacing={subtitleMobilePadding}
-                        onChangeMobileSpacing={(value) => setAttributes({ subtitleMobilePadding: value })}
-                        mobileSpacingStyle={(value) => setAttributes({ subtitleMobilePaddingCssStyle: value })}
-                        isLinked={subtitlePaddingLink}
-                        onChangeLink={(value) => setAttributes({ subtitlePaddingLink: value })}
+                        units={authorNamePaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ authorNamePaddingUnits: value })}
+                        desktopSpacing={authorNameDesktopPadding}
+                        onChangeDesktopSpacing={(value) => setAttributes({ authorNameDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ authorNameDesktopPaddingCssStyle: value })}
+                        tabletSpacing={authorNameTabletPadding}
+                        onChangeTabletSpacing={(value) => setAttributes({ authorNameTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ authorNameTabletPaddingCssStyle: value })}
+                        mobileSpacing={authorNameMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ authorNameMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ authorNameMobilePaddingCssStyle: value })}
+                        isLinked={authorNamePaddingLink}
+                        onChangeLink={(value) => setAttributes({ authorNamePaddingLink: value })}
                     />
                 </PanelBody>
             )}
 
-            {showTitle && (
+            {showAuthorDesignation && (
                 <PanelBody
-                    title={__("Title", "gslider-blocks")}
-                    opened={openPanels.styles === "title"}
-                    onToggle={() => togglePanel("styles", "title")}
+                    title={__("Author Designation", "gslider-blocks")}
+                    opened={openPanels.styles === "authorDesignation"}
+                    onToggle={() => togglePanel("styles", "authorDesignation")}
                 >
                     <ResponsiveTypographyControl
-                        fontFamily={titleFontFamily}
-                        onChangeFontFamily={(value) => setAttributes({ titleFontFamily: value })}
+                        fontFamily={authorDesignationFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ authorDesignationFontFamily: value })}
 
-                        fontSize={titleFontSize}
-                        onChangeFontSize={(value) => setAttributes({ titleFontSize: value })}
+                        fontSize={authorDesignationFontSize}
+                        onChangeFontSize={(value) => setAttributes({ authorDesignationFontSize: value })}
 
-                        fontSizeUnits={titleFontSizeUnits}
-                        onChangeFontSizeUnit={(value) => setAttributes({ titleFontSizeUnits: value })}
+                        fontSizeUnits={authorDesignationFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ authorDesignationFontSizeUnits: value })}
 
-                        fontWeight={titleFontWeight}
-                        onChangeFontWeight={(value) => setAttributes({ titleFontWeight: value })}
+                        fontWeight={authorDesignationFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ authorDesignationFontWeight: value })}
 
-                        fontStyle={titleFontStyle}
-                        onChangeFontStyle={(value) => setAttributes({ titleFontStyle: value })}
+                        fontStyle={authorDesignationFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ authorDesignationFontStyle: value })}
 
-                        textTransform={titleTextTransform}
-                        onChangeTextTransform={(value) => setAttributes({ titleTextTransform: value })}
+                        textTransform={authorDesignationTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ authorDesignationTextTransform: value })}
 
-                        textDecoration={titleTextDecoration}
-                        onChangeTextDecoration={(value) => setAttributes({ titleTextDecoration: value })}
+                        textDecoration={authorDesignationTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ authorDesignationTextDecoration: value })}
 
-                        lineHeight={titleLineHeight}
-                        onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
+                        lineHeight={authorDesignationLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ authorDesignationLineHeight: value })}
 
-                        lineHeightUnits={titleLineHeightUnits}
-                        onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
+                        lineHeightUnits={authorDesignationLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ authorDesignationLineHeightUnits: value })}
 
-                        letterSpacing={titleLetterSpacing}
-                        onChangeLetterSpacing={(value) => setAttributes({ titleLetterSpacing: value })}
+                        letterSpacing={authorDesignationLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ authorDesignationLetterSpacing: value })}
 
-                        letterSpacingUnits={titleLetterSpacingUnits}
-                        onChangeLetterSpacingUnit={(value) => setAttributes({ titleLetterSpacingUnits: value })}
+                        letterSpacingUnits={authorDesignationLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ authorDesignationLetterSpacingUnits: value })}
 
-                        wordSpacing={titleWordSpacing}
-                        onChangeWordSpacing={(value) => setAttributes({ titleWordSpacing: value })}
+                        wordSpacing={authorDesignationWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ authorDesignationWordSpacing: value })}
 
-                        wordSpacingUnits={titleWordSpacingUnits}
-                        onChangeWordSpacingUnit={(value) => setAttributes({ titleWordSpacingUnits: value })}
+                        wordSpacingUnits={authorDesignationWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ authorDesignationWordSpacingUnits: value })}
 
                         deviceType={deviceType}
                     />
                     <SwitcherControl
                         label={__("Color", "gslider-blocks")}
                         options={NORMAL_HOVER}
-                        value={titleColorSwitcher}
-                        onChange={(value) => setAttributes({ titleColorSwitcher: value })}
+                        value={authorDesignationColorSwitcher}
+                        onChange={(value) => setAttributes({ authorDesignationColorSwitcher: value })}
                     />
 
-                    {titleColorSwitcher === 'normal' && (
+                    {authorDesignationColorSwitcher === 'normal' && (
                         <ColorControl
                             label={__("Normal Color", "gslider-blocks")}
-                            color={titleColor}
-                            onChangeColor={(value) => setAttributes({ titleColor: value })}
+                            color={authorDesignationColor}
+                            onChangeColor={(value) => setAttributes({ authorDesignationColor: value })}
                             defaultColor=''
                         />
                     )}
 
-                    {titleColorSwitcher === 'hover' && (
+                    {authorDesignationColorSwitcher === 'hover' && (
                         <ColorControl
                             label={__("Hover Color", "gslider-blocks")}
-                            color={titleColorHover}
-                            onChangeColor={(value) => setAttributes({ titleColorHover: value })}
+                            color={authorDesignationColorHover}
+                            onChangeColor={(value) => setAttributes({ authorDesignationColorHover: value })}
                             defaultColor=''
                         />
                     )}
-
                     <ResponsiveSpacingControl
                         label={__("Margin", "gslider-blocks")}
                         deviceType={deviceType}
                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                        units={titleMarginUnits}
-                        onChangeUnits={(value) => setAttributes({ titleMarginUnits: value })}
-                        desktopSpacing={titleDesktopMargin}
-                        onChangeDesktopSpacing={(value) => setAttributes({ titleDesktopMargin: value })}
-                        desktopSpacingStyle={(value) => setAttributes({ titleDesktopMarginCssStyle: value })}
-                        tabletSpacing={titleTabletMargin}
-                        onChangeTabletSpacing={(value) => setAttributes({ titleTabletMargin: value })}
-                        tabletSpacingStyle={(value) => setAttributes({ titleTabletMarginCssStyle: value })}
-                        mobileSpacing={titleMobileMargin}
-                        onChangeMobileSpacing={(value) => setAttributes({ titleMobileMargin: value })}
-                        mobileSpacingStyle={(value) => setAttributes({ titleMobileMarginCssStyle: value })}
-                        isLinked={titleMarginLink}
-                        onChangeLink={(value) => setAttributes({ titleMarginLink: value })}
+                        units={authorDesignationMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ authorDesignationMarginUnits: value })}
+                        desktopSpacing={authorDesignationDesktopMargin}
+                        onChangeDesktopSpacing={(value) => setAttributes({ authorDesignationDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ authorDesignationDesktopMarginCssStyle: value })}
+                        tabletSpacing={authorDesignationTabletMargin}
+                        onChangeTabletSpacing={(value) => setAttributes({ authorDesignationTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ authorDesignationTabletMarginCssStyle: value })}
+                        mobileSpacing={authorDesignationMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ authorDesignationMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ authorDesignationMobileMarginCssStyle: value })}
+                        isLinked={authorDesignationMarginLink}
+                        onChangeLink={(value) => setAttributes({ authorDesignationMarginLink: value })}
                     />
 
                     <ResponsiveSpacingControl
                         label={__("Padding", "gslider-blocks")}
                         deviceType={deviceType}
                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                        units={titlePaddingUnits}
-                        onChangeUnits={(value) => setAttributes({ titlePaddingUnits: value })}
-                        desktopSpacing={titleDesktopPadding}
-                        onChangeDesktopSpacing={(value) => setAttributes({ titleDesktopPadding: value })}
-                        desktopSpacingStyle={(value) => setAttributes({ titleDesktopPaddingCssStyle: value })}
-                        tabletSpacing={titleTabletPadding}
-                        onChangeTabletSpacing={(value) => setAttributes({ titleTabletPadding: value })}
-                        tabletSpacingStyle={(value) => setAttributes({ titleTabletPaddingCssStyle: value })}
-                        mobileSpacing={titleMobilePadding}
-                        onChangeMobileSpacing={(value) => setAttributes({ titleMobilePadding: value })}
-                        mobileSpacingStyle={(value) => setAttributes({ titleMobilePaddingCssStyle: value })}
-                        isLinked={titlePaddingLink}
-                        onChangeLink={(value) => setAttributes({ titlePaddingLink: value })}
+                        units={authorDesignationPaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ authorDesignationPaddingUnits: value })}
+                        desktopSpacing={authorDesignationDesktopPadding}
+                        onChangeDesktopSpacing={(value) => setAttributes({ authorDesignationDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ authorDesignationDesktopPaddingCssStyle: value })}
+                        tabletSpacing={authorDesignationTabletPadding}
+                        onChangeTabletSpacing={(value) => setAttributes({ authorDesignationTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ authorDesignationTabletPaddingCssStyle: value })}
+                        mobileSpacing={authorDesignationMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ authorDesignationMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ authorDesignationMobilePaddingCssStyle: value })}
+                        isLinked={authorDesignationPaddingLink}
+                        onChangeLink={(value) => setAttributes({ authorDesignationPaddingLink: value })}
                     />
                 </PanelBody>
             )}
 
-            {showDescription && (
+            {showTestimonialText && (
                 <PanelBody
-                    title={__("Description", "gslider-blocks")}
-                    opened={openPanels.styles === "description"}
-                    onToggle={() => togglePanel("styles", "description")}
+                    title={__("Testimonial Text", "gslider-blocks")}
+                    opened={openPanels.styles === "testimonial-text"}
+                    onToggle={() => togglePanel("styles", "testimonial-text")}
                 >
                     <ResponsiveTypographyControl
-                        fontFamily={descriptionFontFamily}
-                        onChangeFontFamily={(value) => setAttributes({ descriptionFontFamily: value })}
+                        fontFamily={testimonialTextFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ testimonialTextFontFamily: value })}
 
-                        fontSize={descriptionFontSize}
-                        onChangeFontSize={(value) => setAttributes({ descriptionFontSize: value })}
+                        fontSize={testimonialTextFontSize}
+                        onChangeFontSize={(value) => setAttributes({ testimonialTextFontSize: value })}
 
-                        fontSizeUnits={descriptionFontSizeUnits}
-                        onChangeFontSizeUnit={(value) => setAttributes({ descriptionFontSizeUnits: value })}
+                        fontSizeUnits={testimonialTextFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ testimonialTextFontSizeUnits: value })}
 
-                        fontWeight={descriptionFontWeight}
-                        onChangeFontWeight={(value) => setAttributes({ descriptionFontWeight: value })}
+                        fontWeight={testimonialTextFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ testimonialTextFontWeight: value })}
 
-                        fontStyle={descriptionFontStyle}
-                        onChangeFontStyle={(value) => setAttributes({ descriptionFontStyle: value })}
+                        fontStyle={testimonialTextFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ testimonialTextFontStyle: value })}
 
-                        textTransform={descriptionTextTransform}
-                        onChangeTextTransform={(value) => setAttributes({ descriptionTextTransform: value })}
+                        textTransform={testimonialTextTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ testimonialTextTextTransform: value })}
 
-                        textDecoration={descriptionTextDecoration}
-                        onChangeTextDecoration={(value) => setAttributes({ descriptionTextDecoration: value })}
+                        textDecoration={testimonialTextTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ testimonialTextTextDecoration: value })}
 
-                        lineHeight={descriptionLineHeight}
-                        onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
+                        lineHeight={testimonialTextLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ testimonialTextLineHeight: value })}
 
-                        lineHeightUnits={descriptionLineHeightUnits}
-                        onChangeLineHeightUnit={(value) => setAttributes({ descriptionLineHeightUnits: value })}
+                        lineHeightUnits={testimonialTextLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ testimonialTextLineHeightUnits: value })}
 
-                        letterSpacing={descriptionLetterSpacing}
-                        onChangeLetterSpacing={(value) => setAttributes({ descriptionLetterSpacing: value })}
+                        letterSpacing={testimonialTextLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ testimonialTextLetterSpacing: value })}
 
-                        letterSpacingUnits={descriptionLetterSpacingUnits}
-                        onChangeLetterSpacingUnit={(value) => setAttributes({ descriptionLetterSpacingUnits: value })}
+                        letterSpacingUnits={testimonialTextLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ testimonialTextLetterSpacingUnits: value })}
 
-                        wordSpacing={descriptionWordSpacing}
-                        onChangeWordSpacing={(value) => setAttributes({ descriptionWordSpacing: value })}
+                        wordSpacing={testimonialTextWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ testimonialTextWordSpacing: value })}
 
-                        wordSpacingUnits={descriptionWordSpacingUnits}
-                        onChangeWordSpacingUnit={(value) => setAttributes({ descriptionWordSpacingUnits: value })}
+                        wordSpacingUnits={testimonialTextWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ testimonialTextWordSpacingUnits: value })}
 
                         deviceType={deviceType}
                     />
                     <SwitcherControl
                         label={__("Color", "gslider-blocks")}
                         options={NORMAL_HOVER}
-                        value={descriptionColorSwitcher}
-                        onChange={(value) => setAttributes({ descriptionColorSwitcher: value })}
+                        value={testimonialTextColorSwitcher}
+                        onChange={(value) => setAttributes({ testimonialTextColorSwitcher: value })}
                     />
 
-                    {descriptionColorSwitcher === 'normal' && (
+                    {testimonialTextColorSwitcher === 'normal' && (
                         <ColorControl
                             label={__("Normal Color", "gslider-blocks")}
-                            color={descriptionColor}
-                            onChangeColor={(value) => setAttributes({ descriptionColor: value })}
+                            color={testimonialTextColor}
+                            onChangeColor={(value) => setAttributes({ testimonialTextColor: value })}
                             defaultColor=''
                         />
                     )}
 
-                    {descriptionColorSwitcher === 'hover' && (
+                    {testimonialTextColorSwitcher === 'hover' && (
                         <ColorControl
                             label={__("Hover Color", "gslider-blocks")}
-                            color={descriptionColorHover}
-                            onChangeColor={(value) => setAttributes({ descriptionColorHover: value })}
+                            color={testimonialTextColorHover}
+                            onChangeColor={(value) => setAttributes({ testimonialTextColorHover: value })}
                             defaultColor=''
                         />
                     )}
@@ -1656,37 +1641,37 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         label={__("Margin", "gslider-blocks")}
                         deviceType={deviceType}
                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                        units={descriptionMarginUnits}
-                        onChangeUnits={(value) => setAttributes({ descriptionMarginUnits: value })}
-                        desktopSpacing={descriptionDesktopMargin}
-                        onChangeDesktopSpacing={(value) => setAttributes({ descriptionDesktopMargin: value })}
-                        desktopSpacingStyle={(value) => setAttributes({ descriptionDesktopMarginCssStyle: value })}
-                        tabletSpacing={descriptionTabletMargin}
-                        onChangeTabletSpacing={(value) => setAttributes({ descriptionTabletMargin: value })}
-                        tabletSpacingStyle={(value) => setAttributes({ descriptionTabletMarginCssStyle: value })}
-                        mobileSpacing={descriptionMobileMargin}
-                        onChangeMobileSpacing={(value) => setAttributes({ descriptionMobileMargin: value })}
-                        mobileSpacingStyle={(value) => setAttributes({ descriptionMobileMarginCssStyle: value })}
-                        isLinked={descriptionMarginLink}
-                        onChangeLink={(value) => setAttributes({ descriptionMarginLink: value })}
+                        units={testimonialTextMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ testimonialTextMarginUnits: value })}
+                        desktopSpacing={testimonialTextDesktopMargin}
+                        onChangeDesktopSpacing={(value) => setAttributes({ testimonialTextDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ testimonialTextDesktopMarginCssStyle: value })}
+                        tabletSpacing={testimonialTextTabletMargin}
+                        onChangeTabletSpacing={(value) => setAttributes({ testimonialTextTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ testimonialTextTabletMarginCssStyle: value })}
+                        mobileSpacing={testimonialTextMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ testimonialTextMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ testimonialTextMobileMarginCssStyle: value })}
+                        isLinked={testimonialTextMarginLink}
+                        onChangeLink={(value) => setAttributes({ testimonialTextMarginLink: value })}
                     />
                     <ResponsiveSpacingControl
                         label={__("Padding", "gslider-blocks")}
                         deviceType={deviceType}
                         onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
-                        units={descriptionPaddingUnits}
-                        onChangeUnits={(value) => setAttributes({ descriptionPaddingUnits: value })}
-                        desktopSpacing={descriptionDesktopPadding}
-                        onChangeDesktopSpacing={(value) => setAttributes({ descriptionDesktopPadding: value })}
-                        desktopSpacingStyle={(value) => setAttributes({ descriptionDesktopPaddingCssStyle: value })}
-                        tabletSpacing={descriptionTabletPadding}
-                        onChangeTabletSpacing={(value) => setAttributes({ descriptionTabletPadding: value })}
-                        tabletSpacingStyle={(value) => setAttributes({ descriptionTabletPaddingCssStyle: value })}
-                        mobileSpacing={descriptionMobilePadding}
-                        onChangeMobileSpacing={(value) => setAttributes({ descriptionMobilePadding: value })}
-                        mobileSpacingStyle={(value) => setAttributes({ descriptionMobilePaddingCssStyle: value })}
-                        isLinked={descriptionPaddingLink}
-                        onChangeLink={(value) => setAttributes({ descriptionPaddingLink: value })}
+                        units={testimonialTextPaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ testimonialTextPaddingUnits: value })}
+                        desktopSpacing={testimonialTextDesktopPadding}
+                        onChangeDesktopSpacing={(value) => setAttributes({ testimonialTextDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ testimonialTextDesktopPaddingCssStyle: value })}
+                        tabletSpacing={testimonialTextTabletPadding}
+                        onChangeTabletSpacing={(value) => setAttributes({ testimonialTextTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ testimonialTextTabletPaddingCssStyle: value })}
+                        mobileSpacing={testimonialTextMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ testimonialTextMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ testimonialTextMobilePaddingCssStyle: value })}
+                        isLinked={testimonialTextPaddingLink}
+                        onChangeLink={(value) => setAttributes({ testimonialTextPaddingLink: value })}
                     />
                 </PanelBody>
             )}

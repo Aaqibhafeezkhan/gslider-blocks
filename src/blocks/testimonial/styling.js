@@ -35,9 +35,9 @@ const generateBaseSliderStyle = (attributes) => {
         dynamicBullets,
 
         /** Start Show/Hide Elements */
-        showSubTitle,
+        showAuthorName,
         showTitle,
-        showDescription,
+        showTestimonialText,
         showNavigation,
         showPagination,
         paginationPositionType,
@@ -52,9 +52,9 @@ const generateBaseSliderStyle = (attributes) => {
         contentAlignment,
         contentVerticalAlignment,
         contentHorizontalAlignment,
-        subTitleHtmlTag,
+        authorNameHtmlTag,
         titleHtmlTag,
-        descriptionHtmlTag,
+        testimonialTextHtmlTag,
         /** End Layout & Content Setting */
 
         /** Start Content Padding */
@@ -68,119 +68,119 @@ const generateBaseSliderStyle = (attributes) => {
         contentPaddingLink,
         /** End Content Padding */
 
-        /** Start Subtitle Typography, Color, Margin & Padding */
-        subtitleFontFamily,
-        subtitleFontSize,
-        subtitleFontSizeUnits,
-        subtitleFontWeight,
-        subtitleFontStyle,
-        subtitleTextTransform,
-        subtitleTextDecoration,
-        subtitleLineHeight,
-        subtitleLineHeightUnits,
-        subtitleLetterSpacing,
-        subtitleLetterSpacingUnits,
-        subtitleWordSpacing,
-        subtitleWordSpacingUnits,
+        /** Start Author Name Typography, Color, Margin & Padding */
+        authorNameFontFamily,
+        authorNameFontSize,
+        authorNameFontSizeUnits,
+        authorNameFontWeight,
+        authorNameFontStyle,
+        authorNameTextTransform,
+        authorNameTextDecoration,
+        authorNameLineHeight,
+        authorNameLineHeightUnits,
+        authorNameLetterSpacing,
+        authorNameLetterSpacingUnits,
+        authorNameWordSpacing,
+        authorNameWordSpacingUnits,
 
-        subtitleColorSwitcher,
-        subtitleColor,
-        subtitleColorHover,
+        authorNameColorSwitcher,
+        authorNameColor,
+        authorNameColorHover,
 
-        subtitleMarginUnits,
-        subtitleDesktopMargin,
-        subtitleDesktopMarginCssStyle,
-        subtitleTabletMargin,
-        subtitleTabletMarginCssStyle,
-        subtitleMobileMargin,
-        subtitleMobileMarginCssStyle,
-        subtitleMarginLink,
+        authorNameMarginUnits,
+        authorNameDesktopMargin,
+        authorNameDesktopMarginCssStyle,
+        authorNameTabletMargin,
+        authorNameTabletMarginCssStyle,
+        authorNameMobileMargin,
+        authorNameMobileMarginCssStyle,
+        authorNameMarginLink,
 
-        subtitlePaddingUnits,
-        subtitleDesktopPadding,
-        subtitleDesktopPaddingCssStyle,
-        subtitleTabletPadding,
-        subtitleTabletPaddingCssStyle,
-        subtitleMobilePadding,
-        subtitleMobilePaddingCssStyle,
-        subtitlePaddingLink,
-        /** End Subtitle Typography, Color, Margin & Padding */
+        authorNamePaddingUnits,
+        authorNameDesktopPadding,
+        authorNameDesktopPaddingCssStyle,
+        authorNameTabletPadding,
+        authorNameTabletPaddingCssStyle,
+        authorNameMobilePadding,
+        authorNameMobilePaddingCssStyle,
+        authorNamePaddingLink,
+        /** End Author Name Typography, Color, Margin & Padding */
 
-        /** Start Title Typography, Color, Margin & Padding */
-        titleFontFamily,
-        titleFontSize,
-        titleFontSizeUnits,
-        titleFontWeight,
-        titleFontStyle,
-        titleTextTransform,
-        titleTextDecoration,
-        titleLineHeight,
-        titleLineHeightUnits,
-        titleLetterSpacing,
-        titleLetterSpacingUnits,
-        titleWordSpacing,
-        titleWordSpacingUnits,
+        /** Start Author Designation Typography, Color, Margin & Padding */
+        authorDesignationFontFamily,
+        authorDesignationFontSize,
+        authorDesignationFontSizeUnits,
+        authorDesignationFontWeight,
+        authorDesignationFontStyle,
+        authorDesignationTextTransform,
+        authorDesignationTextDecoration,
+        authorDesignationLineHeight,
+        authorDesignationLineHeightUnits,
+        authorDesignationLetterSpacing,
+        authorDesignationLetterSpacingUnits,
+        authorDesignationWordSpacing,
+        authorDesignationWordSpacingUnits,
 
-        titleColorSwitcher,
-        titleColor,
-        titleColorHover,
+        authorDesignationColorSwitcher,
+        authorDesignationColor,
+        authorDesignationColorHover,
 
-        titleMarginUnits,
-        titleDesktopMargin,
-        titleDesktopMarginCssStyle,
-        titleTabletMargin,
-        titleTabletMarginCssStyle,
-        titleMobileMargin,
-        titleMobileMarginCssStyle,
-        titleMarginLink,
+        authorDesignationMarginUnits,
+        authorDesignationDesktopMargin,
+        authorDesignationDesktopMarginCssStyle,
+        authorDesignationTabletMargin,
+        authorDesignationTabletMarginCssStyle,
+        authorDesignationMobileMargin,
+        authorDesignationMobileMarginCssStyle,
+        authorDesignationMarginLink,
 
-        titlePaddingUnits,
-        titleDesktopPadding,
-        titleDesktopPaddingCssStyle,
-        titleTabletPadding,
-        titleTabletPaddingCssStyle,
-        titleMobilePadding,
-        titleMobilePaddingCssStyle,
-        titlePaddingLink,
-        /** End Title Typography, Color, Margin & Padding */
+        authorDesignationPaddingUnits,
+        authorDesignationDesktopPadding,
+        authorDesignationDesktopPaddingCssStyle,
+        authorDesignationTabletPadding,
+        authorDesignationTabletPaddingCssStyle,
+        authorDesignationMobilePadding,
+        authorDesignationMobilePaddingCssStyle,
+        authorDesignationPaddingLink,
+        /** End Author Designation Typography, Color, Margin & Padding */
 
-        /** Start Description Typography, Color, Margin & Padding */
-        descriptionFontFamily,
-        descriptionFontSize,
-        descriptionFontSizeUnits,
-        descriptionFontWeight,
-        descriptionFontStyle,
-        descriptionTextTransform,
-        descriptionTextDecoration,
-        descriptionLineHeight,
-        descriptionLineHeightUnits,
-        descriptionLetterSpacing,
-        descriptionLetterSpacingUnits,
-        descriptionWordSpacing,
-        descriptionWordSpacingUnits,
+        /** Start Testimonial Text Typography, Color, Margin & Padding */
+        testimonialTextFontFamily,
+        testimonialTextFontSize,
+        testimonialTextFontSizeUnits,
+        testimonialTextFontWeight,
+        testimonialTextFontStyle,
+        testimonialTextTextTransform,
+        testimonialTextTextDecoration,
+        testimonialTextLineHeight,
+        testimonialTextLineHeightUnits,
+        testimonialTextLetterSpacing,
+        testimonialTextLetterSpacingUnits,
+        testimonialTextWordSpacing,
+        testimonialTextWordSpacingUnits,
 
-        descriptionColorSwitcher,
-        descriptionColor,
-        descriptionColorHover,
+        testimonialTextColorSwitcher,
+        testimonialTextColor,
+        testimonialTextColorHover,
 
-        descriptionMarginUnits,
-        descriptionDesktopMargin,
-        descriptionDesktopMarginCssStyle,
-        descriptionTabletMargin,
-        descriptionTabletMarginCssStyle,
-        descriptionMobileMargin,
-        descriptionMobileMarginCssStyle,
-        descriptionMarginLink,
+        testimonialTextMarginUnits,
+        testimonialTextDesktopMargin,
+        testimonialTextDesktopMarginCssStyle,
+        testimonialTextTabletMargin,
+        testimonialTextTabletMarginCssStyle,
+        testimonialTextMobileMargin,
+        testimonialTextMobileMarginCssStyle,
+        testimonialTextMarginLink,
 
-        descriptionPaddingUnits,
-        descriptionDesktopPadding,
-        descriptionDesktopPaddingCssStyle,
-        descriptionTabletPadding,
-        descriptionTabletPaddingCssStyle,
-        descriptionMobilePadding,
-        descriptionMobilePaddingCssStyle,
-        descriptionPaddingLink,
-        /** End Description Typography, Color, Margin & Padding */
+        testimonialTextPaddingUnits,
+        testimonialTextDesktopPadding,
+        testimonialTextDesktopPaddingCssStyle,
+        testimonialTextTabletPadding,
+        testimonialTextTabletPaddingCssStyle,
+        testimonialTextMobilePadding,
+        testimonialTextMobilePaddingCssStyle,
+        testimonialTextPaddingLink,
+        /** End Testimonial Text Typography, Color, Margin & Padding */
 
         /** Start Navigation Custom Arrows */
         navigationArrowsIconSwitcher,
@@ -788,61 +788,61 @@ const generateBaseSliderStyle = (attributes) => {
             ${contentPaddingDesktopCssStyle ? `padding: ${contentPaddingDesktopCssStyle};` : ''}
         }
 
-        .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
-            ${subtitleFontFamily ? `font-family: ${subtitleFontFamily};` : ''}
-            ${subtitleFontSize.Desktop && subtitleFontSizeUnits.Desktop ? `font-size: ${subtitleFontSize.Desktop}${subtitleFontSizeUnits.Desktop};` : ''}
-            ${subtitleFontWeight ? `font-weight: ${subtitleFontWeight};` : ''}
-            ${subtitleFontStyle ? `font-style: ${subtitleFontStyle};` : ''}
-            ${subtitleTextTransform ? `text-transform: ${subtitleTextTransform};` : ''}
-            ${subtitleTextDecoration ? `text-decoration: ${subtitleTextDecoration};` : ''}
-            ${subtitleLineHeight.Desktop && subtitleLineHeightUnits.Desktop ? `line-height: ${subtitleLineHeight.Desktop}${subtitleLineHeightUnits.Desktop};` : ''}
-            ${subtitleLetterSpacing.Desktop && subtitleLetterSpacingUnits.Desktop ? `letter-spacing: ${subtitleLetterSpacing.Desktop}${subtitleLetterSpacingUnits.Desktop};` : ''}
-            ${subtitleWordSpacing.Desktop && subtitleWordSpacingUnits.Desktop ? `word-spacing: ${subtitleWordSpacing.Desktop}${subtitleWordSpacingUnits.Desktop};` : ''}
-            ${subtitleColor ? `color: ${subtitleColor};` : ''}
-            ${subtitleDesktopMarginCssStyle ? `margin: ${subtitleDesktopMarginCssStyle};` : ''} 
-            ${subtitleDesktopPaddingCssStyle ? `padding: ${subtitleDesktopPaddingCssStyle};` : ''}
+        .${blockId}.gslider-base-wrapper .gslider-author-name-wrapper .gslider-author-name {
+            ${authorNameFontFamily ? `font-family: ${authorNameFontFamily};` : ''}
+            ${authorNameFontSize.Desktop && authorNameFontSizeUnits.Desktop ? `font-size: ${authorNameFontSize.Desktop}${authorNameFontSizeUnits.Desktop};` : ''}
+            ${authorNameFontWeight ? `font-weight: ${authorNameFontWeight};` : ''}
+            ${authorNameFontStyle ? `font-style: ${authorNameFontStyle};` : ''}
+            ${authorNameTextTransform ? `text-transform: ${authorNameTextTransform};` : ''}
+            ${authorNameTextDecoration ? `text-decoration: ${authorNameTextDecoration};` : ''}
+            ${authorNameLineHeight.Desktop && authorNameLineHeightUnits.Desktop ? `line-height: ${authorNameLineHeight.Desktop}${authorNameLineHeightUnits.Desktop};` : ''}
+            ${authorNameLetterSpacing.Desktop && authorNameLetterSpacingUnits.Desktop ? `letter-spacing: ${authorNameLetterSpacing.Desktop}${authorNameLetterSpacingUnits.Desktop};` : ''}
+            ${authorNameWordSpacing.Desktop && authorNameWordSpacingUnits.Desktop ? `word-spacing: ${authorNameWordSpacing.Desktop}${authorNameWordSpacingUnits.Desktop};` : ''}
+            ${authorNameColor ? `color: ${authorNameColor};` : ''}
+            ${authorNameDesktopMarginCssStyle ? `margin: ${authorNameDesktopMarginCssStyle};` : ''} 
+            ${authorNameDesktopPaddingCssStyle ? `padding: ${authorNameDesktopPaddingCssStyle};` : ''}
             transition: all .3s ease-in-out;
         }
-        .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle:hover {
-            ${subtitleColorHover ? `color: ${subtitleColorHover};` : ''}
+        .${blockId}.gslider-base-wrapper .gslider-author-name-wrapper .gslider-author-name:hover {
+            ${authorNameColorHover ? `color: ${authorNameColorHover};` : ''}
         }
 
-        .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title {
-            ${titleFontFamily ? `font-family: ${titleFontFamily};` : ''}
-            ${titleFontSize.Desktop && titleFontSizeUnits.Desktop ? `font-size: ${titleFontSize.Desktop}${titleFontSizeUnits.Desktop};` : ''}
-            ${titleFontWeight ? `font-weight: ${titleFontWeight};` : ''}
-            ${titleFontStyle ? `font-style: ${titleFontStyle};` : ''}
-            ${titleTextTransform ? `text-transform: ${titleTextTransform};` : ''}
-            ${titleTextDecoration ? `text-decoration: ${titleTextDecoration};` : ''}
-            ${titleLineHeight.Desktop && titleLineHeightUnits.Desktop ? `line-height: ${titleLineHeight.Desktop}${titleLineHeightUnits.Desktop};` : ''}
-            ${titleLetterSpacing.Desktop && titleLetterSpacingUnits.Desktop ? `letter-spacing: ${titleLetterSpacing.Desktop}${titleLetterSpacingUnits.Desktop};` : ''}
-            ${titleWordSpacing.Desktop && titleWordSpacingUnits.Desktop ? `word-spacing: ${titleWordSpacing.Desktop}${titleWordSpacingUnits.Desktop};` : ''}
-            ${titleColor ? `color: ${titleColor};` : ''}
-            ${titleDesktopMarginCssStyle ? `margin: ${titleDesktopMarginCssStyle};` : ''} 
-            ${titleDesktopPaddingCssStyle ? `padding: ${titleDesktopPaddingCssStyle};` : ''}
+        .${blockId}.gslider-base-wrapper .gslider-author-designation-wrapper .gslider-author-designation {
+            ${authorDesignationFontFamily ? `font-family: ${authorDesignationFontFamily};` : ''}
+            ${authorDesignationFontSize.Desktop && authorDesignationFontSizeUnits.Desktop ? `font-size: ${authorDesignationFontSize.Desktop}${authorDesignationFontSizeUnits.Desktop};` : ''}
+            ${authorDesignationFontWeight ? `font-weight: ${authorDesignationFontWeight};` : ''}
+            ${authorDesignationFontStyle ? `font-style: ${authorDesignationFontStyle};` : ''}
+            ${authorDesignationTextTransform ? `text-transform: ${authorDesignationTextTransform};` : ''}
+            ${authorDesignationTextDecoration ? `text-decoration: ${authorDesignationTextDecoration};` : ''}
+            ${authorDesignationLineHeight.Desktop && authorDesignationLineHeightUnits.Desktop ? `line-height: ${authorDesignationLineHeight.Desktop}${authorDesignationLineHeightUnits.Desktop};` : ''}
+            ${authorDesignationLetterSpacing.Desktop && authorDesignationLetterSpacingUnits.Desktop ? `letter-spacing: ${authorDesignationLetterSpacing.Desktop}${authorDesignationLetterSpacingUnits.Desktop};` : ''}
+            ${authorDesignationWordSpacing.Desktop && authorDesignationWordSpacingUnits.Desktop ? `word-spacing: ${authorDesignationWordSpacing.Desktop}${authorDesignationWordSpacingUnits.Desktop};` : ''}
+            ${authorDesignationColor ? `color: ${authorDesignationColor};` : ''}
+            ${authorDesignationDesktopMarginCssStyle ? `margin: ${authorDesignationDesktopMarginCssStyle};` : ''} 
+            ${authorDesignationDesktopPaddingCssStyle ? `padding: ${authorDesignationDesktopPaddingCssStyle};` : ''}
             transition: all .3s ease-in-out;
         }
-        .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title:hover {
-            ${titleColorHover ? `color: ${titleColorHover};` : ''}
+        .${blockId}.gslider-base-wrapper .gslider-author-designation-wrapper .gslider-author-designation:hover {
+            ${authorDesignationColorHover ? `color: ${authorDesignationColorHover};` : ''}
         }
 
-        .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description {
-            ${descriptionFontFamily ? `font-family: ${descriptionFontFamily};` : ''}
-            ${descriptionFontSize.Desktop && descriptionFontSizeUnits.Desktop ? `font-size: ${descriptionFontSize.Desktop}${descriptionFontSizeUnits.Desktop};` : ''}
-            ${descriptionFontWeight ? `font-weight: ${descriptionFontWeight};` : ''}
-            ${descriptionFontStyle ? `font-style: ${descriptionFontStyle};` : ''}
-            ${descriptionTextTransform ? `text-transform: ${descriptionTextTransform};` : ''}
-            ${descriptionTextDecoration ? `text-decoration: ${descriptionTextDecoration};` : ''}
-            ${descriptionLineHeight.Desktop && descriptionLineHeightUnits.Desktop ? `line-height: ${descriptionLineHeight.Desktop}${descriptionLineHeightUnits.Desktop};` : ''}
-            ${descriptionLetterSpacing.Desktop && descriptionLetterSpacingUnits.Desktop ? `letter-spacing: ${descriptionLetterSpacing.Desktop}${descriptionLetterSpacingUnits.Desktop};` : ''}
-            ${descriptionWordSpacing.Desktop && descriptionWordSpacingUnits.Desktop ? `word-spacing: ${descriptionWordSpacing.Desktop}${descriptionWordSpacingUnits.Desktop};` : ''}
-            ${descriptionColor ? `color: ${descriptionColor};` : ''}
-            ${descriptionDesktopMarginCssStyle ? `margin: ${descriptionDesktopMarginCssStyle};` : ''} 
-            ${descriptionDesktopPaddingCssStyle ? `padding: ${descriptionDesktopPaddingCssStyle};` : ''}
+        .${blockId}.gslider-base-wrapper .gslider-testimonial-text-wrapper .gslider-testimonial-text {
+            ${testimonialTextFontFamily ? `font-family: ${testimonialTextFontFamily};` : ''}
+            ${testimonialTextFontSize.Desktop && testimonialTextFontSizeUnits.Desktop ? `font-size: ${testimonialTextFontSize.Desktop}${testimonialTextFontSizeUnits.Desktop};` : ''}
+            ${testimonialTextFontWeight ? `font-weight: ${testimonialTextFontWeight};` : ''}
+            ${testimonialTextFontStyle ? `font-style: ${testimonialTextFontStyle};` : ''}
+            ${testimonialTextTextTransform ? `text-transform: ${testimonialTextTextTransform};` : ''}
+            ${testimonialTextTextDecoration ? `text-decoration: ${testimonialTextTextDecoration};` : ''}
+            ${testimonialTextLineHeight.Desktop && testimonialTextLineHeightUnits.Desktop ? `line-height: ${testimonialTextLineHeight.Desktop}${testimonialTextLineHeightUnits.Desktop};` : ''}
+            ${testimonialTextLetterSpacing.Desktop && testimonialTextLetterSpacingUnits.Desktop ? `letter-spacing: ${testimonialTextLetterSpacing.Desktop}${testimonialTextLetterSpacingUnits.Desktop};` : ''}
+            ${testimonialTextWordSpacing.Desktop && testimonialTextWordSpacingUnits.Desktop ? `word-spacing: ${testimonialTextWordSpacing.Desktop}${testimonialTextWordSpacingUnits.Desktop};` : ''}
+            ${testimonialTextColor ? `color: ${testimonialTextColor};` : ''}
+            ${testimonialTextDesktopMarginCssStyle ? `margin: ${testimonialTextDesktopMarginCssStyle};` : ''} 
+            ${testimonialTextDesktopPaddingCssStyle ? `padding: ${testimonialTextDesktopPaddingCssStyle};` : ''}
             transition: all .3s ease-in-out;
         }
-        .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description:hover {
-            ${descriptionColorHover ? `color: ${descriptionColorHover};` : ''}
+        .${blockId}.gslider-base-wrapper .gslider-testimonial-text-wrapper .gslider-testimonial-text:hover {
+            ${testimonialTextColorHover ? `color: ${testimonialTextColorHover};` : ''}
         }
 
         .${blockId}.gslider-base-wrapper.outside {
@@ -1085,31 +1085,31 @@ const generateBaseSliderStyle = (attributes) => {
                 ${contentPaddingTabletCssStyle ? `padding: ${contentPaddingTabletCssStyle};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
-                ${subtitleFontSize.Tablet && subtitleFontSizeUnits.Tablet ? `font-size: ${subtitleFontSize.Tablet}${subtitleFontSizeUnits.Tablet};` : ''}
-                ${subtitleLineHeight.Tablet && subtitleLineHeightUnits.Tablet ? `line-height: ${subtitleLineHeight.Tablet}${subtitleLineHeightUnits.Tablet};` : ''}
-                ${subtitleLetterSpacing.Tablet && subtitleLetterSpacingUnits.Tablet ? `letter-spacing: ${subtitleLetterSpacing.Tablet}${subtitleLetterSpacingUnits.Tablet};` : ''}
-                ${subtitleWordSpacing.Tablet && subtitleWordSpacingUnits.Tablet ? `word-spacing: ${subtitleWordSpacing.Tablet}${subtitleWordSpacingUnits.Tablet};` : ''}
-                ${subtitleTabletMarginCssStyle ? `margin: ${subtitleTabletMarginCssStyle};` : ''} 
-                ${subtitleTabletPaddingCssStyle ? `padding: ${subtitleTabletPaddingCssStyle};` : ''}
+            .${blockId}.gslider-base-wrapper .gslider-author-name-wrapper .gslider-author-name {
+                ${authorNameFontSize.Tablet && authorNameFontSizeUnits.Tablet ? `font-size: ${authorNameFontSize.Tablet}${authorNameFontSizeUnits.Tablet};` : ''}
+                ${authorNameLineHeight.Tablet && authorNameLineHeightUnits.Tablet ? `line-height: ${authorNameLineHeight.Tablet}${authorNameLineHeightUnits.Tablet};` : ''}
+                ${authorNameLetterSpacing.Tablet && authorNameLetterSpacingUnits.Tablet ? `letter-spacing: ${authorNameLetterSpacing.Tablet}${authorNameLetterSpacingUnits.Tablet};` : ''}
+                ${authorNameWordSpacing.Tablet && authorNameWordSpacingUnits.Tablet ? `word-spacing: ${authorNameWordSpacing.Tablet}${authorNameWordSpacingUnits.Tablet};` : ''}
+                ${authorNameTabletMarginCssStyle ? `margin: ${authorNameTabletMarginCssStyle};` : ''} 
+                ${authorNameTabletPaddingCssStyle ? `padding: ${authorNameTabletPaddingCssStyle};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title {
-                ${titleFontSize.Tablet && titleFontSizeUnits.Tablet ? `font-size: ${titleFontSize.Tablet}${titleFontSizeUnits.Tablet};` : ''}
-                ${titleLineHeight.Tablet && titleLineHeightUnits.Tablet ? `line-height: ${titleLineHeight.Tablet}${titleLineHeightUnits.Tablet};` : ''}
-                ${titleLetterSpacing.Tablet && titleLetterSpacingUnits.Tablet ? `letter-spacing: ${titleLetterSpacing.Tablet}${titleLetterSpacingUnits.Tablet};` : ''}
-                ${titleWordSpacing.Tablet && titleWordSpacingUnits.Tablet ? `word-spacing: ${titleWordSpacing.Tablet}${titleWordSpacingUnits.Tablet};` : ''}
-                ${titleTabletMarginCssStyle ? `margin: ${titleTabletMarginCssStyle};` : ''} 
-                ${titleTabletPaddingCssStyle ? `padding: ${titleTabletPaddingCssStyle};` : ''}
+            .${blockId}.gslider-base-wrapper .gslider-author-designation-wrapper .gslider-author-designation {
+                ${authorDesignationFontSize.Tablet && authorDesignationFontSizeUnits.Tablet ? `font-size: ${authorDesignationFontSize.Tablet}${authorDesignationFontSizeUnits.Tablet};` : ''}
+                ${authorDesignationLineHeight.Tablet && authorDesignationLineHeightUnits.Tablet ? `line-height: ${authorDesignationLineHeight.Tablet}${authorDesignationLineHeightUnits.Tablet};` : ''}
+                ${authorDesignationLetterSpacing.Tablet && authorDesignationLetterSpacingUnits.Tablet ? `letter-spacing: ${authorDesignationLetterSpacing.Tablet}${authorDesignationLetterSpacingUnits.Tablet};` : ''}
+                ${authorDesignationWordSpacing.Tablet && authorDesignationWordSpacingUnits.Tablet ? `word-spacing: ${authorDesignationWordSpacing.Tablet}${authorDesignationWordSpacingUnits.Tablet};` : ''}
+                ${authorDesignationTabletMarginCssStyle ? `margin: ${authorDesignationTabletMarginCssStyle};` : ''} 
+                ${authorDesignationTabletPaddingCssStyle ? `padding: ${authorDesignationTabletPaddingCssStyle};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description {
-                ${descriptionFontSize.Tablet && descriptionFontSizeUnits.Tablet ? `font-size: ${descriptionFontSize.Tablet}${descriptionFontSizeUnits.Tablet};` : ''}
-                ${descriptionLineHeight.Tablet && descriptionLineHeightUnits.Tablet ? `line-height: ${descriptionLineHeight.Tablet}${descriptionLineHeightUnits.Tablet};` : ''}
-                ${descriptionLetterSpacing.Tablet && descriptionLetterSpacingUnits.Tablet ? `letter-spacing: ${descriptionLetterSpacing.Tablet}${descriptionLetterSpacingUnits.Tablet};` : ''}
-                ${descriptionWordSpacing.Tablet && descriptionWordSpacingUnits.Tablet ? `word-spacing: ${descriptionWordSpacing.Tablet}${descriptionWordSpacingUnits.Tablet};` : ''}
-                ${descriptionTabletMarginCssStyle ? `margin: ${descriptionTabletMarginCssStyle};` : ''} 
-                ${descriptionTabletPaddingCssStyle ? `padding: ${descriptionTabletPaddingCssStyle};` : ''}
+            .${blockId}.gslider-base-wrapper .gslider-testimonial-text-wrapper .gslider-testimonial-text {
+                ${testimonialTextFontSize.Tablet && testimonialTextFontSizeUnits.Tablet ? `font-size: ${testimonialTextFontSize.Tablet}${testimonialTextFontSizeUnits.Tablet};` : ''}
+                ${testimonialTextLineHeight.Tablet && testimonialTextLineHeightUnits.Tablet ? `line-height: ${testimonialTextLineHeight.Tablet}${testimonialTextLineHeightUnits.Tablet};` : ''}
+                ${testimonialTextLetterSpacing.Tablet && testimonialTextLetterSpacingUnits.Tablet ? `letter-spacing: ${testimonialTextLetterSpacing.Tablet}${testimonialTextLetterSpacingUnits.Tablet};` : ''}
+                ${testimonialTextWordSpacing.Tablet && testimonialTextWordSpacingUnits.Tablet ? `word-spacing: ${testimonialTextWordSpacing.Tablet}${testimonialTextWordSpacingUnits.Tablet};` : ''}
+                ${testimonialTextTabletMarginCssStyle ? `margin: ${testimonialTextTabletMarginCssStyle};` : ''} 
+                ${testimonialTextTabletPaddingCssStyle ? `padding: ${testimonialTextTabletPaddingCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper.outside {
@@ -1264,31 +1264,31 @@ const generateBaseSliderStyle = (attributes) => {
                 ${contentPaddingMobileCssStyle ? `padding: ${contentPaddingMobileCssStyle};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle {
-                ${subtitleFontSize.Mobile && subtitleFontSizeUnits.Mobile ? `font-size: ${subtitleFontSize.Mobile}${subtitleFontSizeUnits.Mobile};` : ''}
-                ${subtitleLineHeight.Mobile && subtitleLineHeightUnits.Mobile ? `line-height: ${subtitleLineHeight.Mobile}${subtitleLineHeightUnits.Mobile};` : ''}
-                ${subtitleLetterSpacing.Mobile && subtitleLetterSpacingUnits.Mobile ? `letter-spacing: ${subtitleLetterSpacing.Mobile}${subtitleLetterSpacingUnits.Mobile};` : ''}
-                ${subtitleWordSpacing.Mobile && subtitleWordSpacingUnits.Mobile ? `word-spacing: ${subtitleWordSpacing.Mobile}${subtitleWordSpacingUnits.Mobile};` : ''}
-                ${subtitleMobileMarginCssStyle ? `margin: ${subtitleMobileMarginCssStyle};` : ''} 
-                ${subtitleMobilePaddingCssStyle ? `padding: ${subtitleMobilePaddingCssStyle};` : ''}
+            .${blockId}.gslider-base-wrapper .gslider-author-name-wrapper .gslider-author-name {
+                ${authorNameFontSize.Mobile && authorNameFontSizeUnits.Mobile ? `font-size: ${authorNameFontSize.Mobile}${authorNameFontSizeUnits.Mobile};` : ''}
+                ${authorNameLineHeight.Mobile && authorNameLineHeightUnits.Mobile ? `line-height: ${authorNameLineHeight.Mobile}${authorNameLineHeightUnits.Mobile};` : ''}
+                ${authorNameLetterSpacing.Mobile && authorNameLetterSpacingUnits.Mobile ? `letter-spacing: ${authorNameLetterSpacing.Mobile}${authorNameLetterSpacingUnits.Mobile};` : ''}
+                ${authorNameWordSpacing.Mobile && authorNameWordSpacingUnits.Mobile ? `word-spacing: ${authorNameWordSpacing.Mobile}${authorNameWordSpacingUnits.Mobile};` : ''}
+                ${authorNameMobileMarginCssStyle ? `margin: ${authorNameMobileMarginCssStyle};` : ''} 
+                ${authorNameMobilePaddingCssStyle ? `padding: ${authorNameMobilePaddingCssStyle};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-title-wrapper .gslider-title {
-                ${titleFontSize.Mobile && titleFontSizeUnits.Mobile ? `font-size: ${titleFontSize.Mobile}${titleFontSizeUnits.Mobile};` : ''}
-                ${titleLineHeight.Mobile && titleLineHeightUnits.Mobile ? `line-height: ${titleLineHeight.Mobile}${titleLineHeightUnits.Mobile};` : ''}
-                ${titleLetterSpacing.Mobile && titleLetterSpacingUnits.Mobile ? `letter-spacing: ${titleLetterSpacing.Mobile}${titleLetterSpacingUnits.Mobile};` : ''}
-                ${titleWordSpacing.Mobile && titleWordSpacingUnits.Mobile ? `word-spacing: ${titleWordSpacing.Mobile}${titleWordSpacingUnits.Mobile};` : ''}
-                ${titleMobileMarginCssStyle ? `margin: ${titleMobileMarginCssStyle};` : ''} 
-                ${titleMobilePaddingCssStyle ? `padding: ${titleMobilePaddingCssStyle};` : ''}
+            .${blockId}.gslider-base-wrapper .gslider-author-designation-wrapper .gslider-author-designation {
+                ${authorDesignationFontSize.Mobile && authorDesignationFontSizeUnits.Mobile ? `font-size: ${authorDesignationFontSize.Mobile}${authorDesignationFontSizeUnits.Mobile};` : ''}
+                ${authorDesignationLineHeight.Mobile && authorDesignationLineHeightUnits.Mobile ? `line-height: ${authorDesignationLineHeight.Mobile}${authorDesignationLineHeightUnits.Mobile};` : ''}
+                ${authorDesignationLetterSpacing.Mobile && authorDesignationLetterSpacingUnits.Mobile ? `letter-spacing: ${authorDesignationLetterSpacing.Mobile}${authorDesignationLetterSpacingUnits.Mobile};` : ''}
+                ${authorDesignationWordSpacing.Mobile && authorDesignationWordSpacingUnits.Mobile ? `word-spacing: ${authorDesignationWordSpacing.Mobile}${authorDesignationWordSpacingUnits.Mobile};` : ''}
+                ${authorDesignationMobileMarginCssStyle ? `margin: ${authorDesignationMobileMarginCssStyle};` : ''} 
+                ${authorDesignationMobilePaddingCssStyle ? `padding: ${authorDesignationMobilePaddingCssStyle};` : ''}
             }
 
-            .${blockId}.gslider-base-wrapper .gslider-description-wrapper .gslider-description {
-                ${descriptionFontSize.Mobile && descriptionFontSizeUnits.Mobile ? `font-size: ${descriptionFontSize.Mobile}${descriptionFontSizeUnits.Mobile};` : ''}
-                ${descriptionLineHeight.Mobile && descriptionLineHeightUnits.Mobile ? `line-height: ${descriptionLineHeight.Mobile}${descriptionLineHeightUnits.Mobile};` : ''}
-                ${descriptionLetterSpacing.Mobile && descriptionLetterSpacingUnits.Mobile ? `letter-spacing: ${descriptionLetterSpacing.Mobile}${descriptionLetterSpacingUnits.Mobile};` : ''}
-                ${descriptionWordSpacing.Mobile && descriptionWordSpacingUnits.Mobile ? `word-spacing: ${descriptionWordSpacing.Mobile}${descriptionWordSpacingUnits.Mobile};` : ''}
-                ${descriptionMobileMarginCssStyle ? `margin: ${descriptionMobileMarginCssStyle};` : ''} 
-                ${descriptionMobilePaddingCssStyle ? `padding: ${descriptionMobilePaddingCssStyle};` : ''}
+            .${blockId}.gslider-base-wrapper .gslider-testimonial-text-wrapper .gslider-testimonial-text {
+                ${testimonialTextFontSize.Mobile && testimonialTextFontSizeUnits.Mobile ? `font-size: ${testimonialTextFontSize.Mobile}${testimonialTextFontSizeUnits.Mobile};` : ''}
+                ${testimonialTextLineHeight.Mobile && testimonialTextLineHeightUnits.Mobile ? `line-height: ${testimonialTextLineHeight.Mobile}${testimonialTextLineHeightUnits.Mobile};` : ''}
+                ${testimonialTextLetterSpacing.Mobile && testimonialTextLetterSpacingUnits.Mobile ? `letter-spacing: ${testimonialTextLetterSpacing.Mobile}${testimonialTextLetterSpacingUnits.Mobile};` : ''}
+                ${testimonialTextWordSpacing.Mobile && testimonialTextWordSpacingUnits.Mobile ? `word-spacing: ${testimonialTextWordSpacing.Mobile}${testimonialTextWordSpacingUnits.Mobile};` : ''}
+                ${testimonialTextMobileMarginCssStyle ? `margin: ${testimonialTextMobileMarginCssStyle};` : ''} 
+                ${testimonialTextMobilePaddingCssStyle ? `padding: ${testimonialTextMobilePaddingCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper.outside {
