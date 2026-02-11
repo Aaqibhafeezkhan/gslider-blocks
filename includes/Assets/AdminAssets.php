@@ -13,6 +13,7 @@ class AdminAssets {
 
     public function register() {
         add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
+        add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
     }
 
     public function enqueue_assets() {
@@ -41,12 +42,27 @@ class AdminAssets {
          * This is useful for making AJAX requests and other dynamic functionalities.
          */
         $localize_array = [
-            'site_url' => site_url(),
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('gslider_nonce'),
-            'plugin_url' => GSLIDER_PLUGIN_URL,
+            'site_url'   => site_url(),
+            'ajax_url'   => admin_url('admin-ajax.php'),
+            'nonce'      => wp_create_nonce('gslider_nonce'),
+            'pluginUrl'  => GSLIDER_PLUGIN_URL,
         ];
 
-        wp_localize_script('gslider-admin-script', 'GsliderBlocksData', $localize_array);
+        wp_localize_script('gslider-admin-script', 'GSliderBlocksData', $localize_array);
+    }
+
+    /**
+     * Enqueue editor assets and localize data for blocks.
+     */
+    public function enqueue_editor_assets() {
+        $localize_array = [
+            'site_url'   => site_url(),
+            'ajax_url'   => admin_url('admin-ajax.php'),
+            'nonce'      => wp_create_nonce('gslider_nonce'),
+            'pluginUrl'  => GSLIDER_PLUGIN_URL,
+        ];
+
+        // We use a global handle for localization that blocks can access
+        wp_localize_script('wp-block-editor', 'GSliderBlocksData', $localize_array);
     }
 }
