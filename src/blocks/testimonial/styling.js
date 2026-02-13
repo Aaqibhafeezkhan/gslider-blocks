@@ -144,6 +144,44 @@ const generateBaseSliderStyle = (attributes) => {
         authorDesignationPaddingLink,
         /** End Author Designation Typography, Color, Margin & Padding */
 
+        /** Start Company Name Typography, Color, Margin & Padding */
+        companyNameFontFamily,
+        companyNameFontSize,
+        companyNameFontSizeUnits,
+        companyNameFontWeight,
+        companyNameFontStyle,
+        companyNameTextTransform,
+        companyNameTextDecoration,
+        companyNameLineHeight,
+        companyNameLineHeightUnits,
+        companyNameLetterSpacing,
+        companyNameLetterSpacingUnits,
+        companyNameWordSpacing,
+        companyNameWordSpacingUnits,
+
+        companyNameColorSwitcher,
+        companyNameColor,
+        companyNameColorHover,
+
+        companyNameMarginUnits,
+        companyNameDesktopMargin,
+        companyNameDesktopMarginCssStyle,
+        companyNameTabletMargin,
+        companyNameTabletMarginCssStyle,
+        companyNameMobileMargin,
+        companyNameMobileMarginCssStyle,
+        companyNameMarginLink,
+
+        companyNamePaddingUnits,
+        companyNameDesktopPadding,
+        companyNameDesktopPaddingCssStyle,
+        companyNameTabletPadding,
+        companyNameTabletPaddingCssStyle,
+        companyNameMobilePadding,
+        companyNameMobilePaddingCssStyle,
+        companyNamePaddingLink,
+        /** End Company Name Typography, Color, Margin & Padding */
+
         /** Start Testimonial Text Typography, Color, Margin & Padding */
         testimonialTextFontFamily,
         testimonialTextFontSize,
@@ -826,6 +864,25 @@ const generateBaseSliderStyle = (attributes) => {
             ${authorDesignationColorHover ? `color: ${authorDesignationColorHover};` : ''}
         }
 
+        .${blockId}.gslider-base-wrapper .gslider-company-name-wrapper .gslider-company-name {
+            ${companyNameFontFamily ? `font-family: ${companyNameFontFamily};` : ''}
+            ${companyNameFontSize.Desktop && companyNameFontSizeUnits.Desktop ? `font-size: ${companyNameFontSize.Desktop}${companyNameFontSizeUnits.Desktop};` : ''}
+            ${companyNameFontWeight ? `font-weight: ${companyNameFontWeight};` : ''}
+            ${companyNameFontStyle ? `font-style: ${companyNameFontStyle};` : ''}
+            ${companyNameTextTransform ? `text-transform: ${companyNameTextTransform};` : ''}
+            ${companyNameTextDecoration ? `text-decoration: ${companyNameTextDecoration};` : ''}
+            ${companyNameLineHeight.Desktop && companyNameLineHeightUnits.Desktop ? `line-height: ${companyNameLineHeight.Desktop}${companyNameLineHeightUnits.Desktop};` : ''}
+            ${companyNameLetterSpacing.Desktop && companyNameLetterSpacingUnits.Desktop ? `letter-spacing: ${companyNameLetterSpacing.Desktop}${companyNameLetterSpacingUnits.Desktop};` : ''}
+            ${companyNameWordSpacing.Desktop && companyNameWordSpacingUnits.Desktop ? `word-spacing: ${companyNameWordSpacing.Desktop}${companyNameWordSpacingUnits.Desktop};` : ''}
+            ${companyNameColor ? `color: ${companyNameColor};` : ''}
+            ${companyNameDesktopMarginCssStyle ? `margin: ${companyNameDesktopMarginCssStyle};` : ''}
+            ${companyNameDesktopPaddingCssStyle ? `padding: ${companyNameDesktopPaddingCssStyle};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockId}.gslider-base-wrapper .gslider-company-name-wrapper .gslider-company-name:hover {
+            ${companyNameColorHover ? `color: ${companyNameColorHover};` : ''}
+        }
+
         .${blockId}.gslider-base-wrapper .gslider-testimonial-text-wrapper .gslider-testimonial-text {
             ${testimonialTextFontFamily ? `font-family: ${testimonialTextFontFamily};` : ''}
             ${testimonialTextFontSize.Desktop && testimonialTextFontSizeUnits.Desktop ? `font-size: ${testimonialTextFontSize.Desktop}${testimonialTextFontSizeUnits.Desktop};` : ''}
@@ -1103,6 +1160,15 @@ const generateBaseSliderStyle = (attributes) => {
                 ${authorDesignationTabletPaddingCssStyle ? `padding: ${authorDesignationTabletPaddingCssStyle};` : ''}
             }
 
+            .${blockId}.gslider-base-wrapper .gslider-company-name-wrapper .gslider-company-name {
+                ${companyNameFontSize.Tablet && companyNameFontSizeUnits.Tablet ? `font-size: ${companyNameFontSize.Tablet}${companyNameFontSizeUnits.Tablet};` : ''}
+                ${companyNameLineHeight.Tablet && companyNameLineHeightUnits.Tablet ? `line-height: ${companyNameLineHeight.Tablet}${companyNameLineHeightUnits.Tablet};` : ''}
+                ${companyNameLetterSpacing.Tablet && companyNameLetterSpacingUnits.Tablet ? `letter-spacing: ${companyNameLetterSpacing.Tablet}${companyNameLetterSpacingUnits.Tablet};` : ''}
+                ${companyNameWordSpacing.Tablet && companyNameWordSpacingUnits.Tablet ? `word-spacing: ${companyNameWordSpacing.Tablet}${companyNameWordSpacingUnits.Tablet};` : ''}
+                ${companyNameTabletMarginCssStyle ? `margin: ${companyNameTabletMarginCssStyle};` : ''}
+                ${companyNameTabletPaddingCssStyle ? `padding: ${companyNameTabletPaddingCssStyle};` : ''}
+            }
+
             .${blockId}.gslider-base-wrapper .gslider-testimonial-text-wrapper .gslider-testimonial-text {
                 ${testimonialTextFontSize.Tablet && testimonialTextFontSizeUnits.Tablet ? `font-size: ${testimonialTextFontSize.Tablet}${testimonialTextFontSizeUnits.Tablet};` : ''}
                 ${testimonialTextLineHeight.Tablet && testimonialTextLineHeightUnits.Tablet ? `line-height: ${testimonialTextLineHeight.Tablet}${testimonialTextLineHeightUnits.Tablet};` : ''}
@@ -1280,6 +1346,15 @@ const generateBaseSliderStyle = (attributes) => {
                 ${authorDesignationWordSpacing.Mobile && authorDesignationWordSpacingUnits.Mobile ? `word-spacing: ${authorDesignationWordSpacing.Mobile}${authorDesignationWordSpacingUnits.Mobile};` : ''}
                 ${authorDesignationMobileMarginCssStyle ? `margin: ${authorDesignationMobileMarginCssStyle};` : ''} 
                 ${authorDesignationMobilePaddingCssStyle ? `padding: ${authorDesignationMobilePaddingCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-base-wrapper .gslider-company-name-wrapper .gslider-company-name {
+                ${companyNameFontSize.Mobile && companyNameFontSizeUnits.Mobile ? `font-size: ${companyNameFontSize.Mobile}${companyNameFontSizeUnits.Mobile};` : ''}
+                ${companyNameLineHeight.Mobile && companyNameLineHeightUnits.Mobile ? `line-height: ${companyNameLineHeight.Mobile}${companyNameLineHeightUnits.Mobile};` : ''}
+                ${companyNameLetterSpacing.Mobile && companyNameLetterSpacingUnits.Mobile ? `letter-spacing: ${companyNameLetterSpacing.Mobile}${companyNameLetterSpacingUnits.Mobile};` : ''}
+                ${companyNameWordSpacing.Mobile && companyNameWordSpacingUnits.Mobile ? `word-spacing: ${companyNameWordSpacing.Mobile}${companyNameWordSpacingUnits.Mobile};` : ''}
+                ${companyNameMobileMarginCssStyle ? `margin: ${companyNameMobileMarginCssStyle};` : ''}
+                ${companyNameMobilePaddingCssStyle ? `padding: ${companyNameMobilePaddingCssStyle};` : ''}
             }
 
             .${blockId}.gslider-base-wrapper .gslider-testimonial-text-wrapper .gslider-testimonial-text {

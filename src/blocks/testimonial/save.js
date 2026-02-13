@@ -27,12 +27,15 @@ export default function Save({ attributes }) {
         showAuthorDesignation,
         showTestimonialText,
         showAuthorImage,
+        showCompanyName,
+        showCompanyLogo,
         showRating,
         showNavigation,
         showPagination,
         paginationPositionType,
         authorNameHtmlTag,
         authorDesignationHtmlTag,
+        companyNameHtmlTag,
         testimonialTextHtmlTag,
         globalID,
         globalClass,
@@ -199,6 +202,15 @@ export default function Save({ attributes }) {
                                                     />
                                                 </div>
                                             )}
+                                            {showCompanyName && item.companyName && (
+                                                <div className="gslider-company-name-wrapper">
+                                                    <RichText.Content
+                                                        tagName={companyNameHtmlTag}
+                                                        className="gslider-company-name"
+                                                        value={item.companyName}
+                                                    />
+                                                </div>
+                                            )}
                                             { showRating && (
                                                 <div className="gslider-rating-wrapper">
                                                     <div className="gslider-rating-inner">
@@ -215,12 +227,22 @@ export default function Save({ attributes }) {
                                                     </div>
                                                 </div>
                                             )}
+
                                             {showAuthorImage && item.authorImage?.url && (
                                                 <div className="gslider-author-image-wrapper">
                                                     <img 
                                                         src={item.authorImage.url}
                                                         alt={item.authorImage.alt || 'Author'}
                                                         className="gslider-author-image"
+                                                    />
+                                                </div>
+                                            )}
+                                            {showCompanyLogo && item.companyLogo?.url && (
+                                                <div className="gslider-company-logo-wrapper">
+                                                    <img 
+                                                        src={item.companyLogo.url}
+                                                        alt={item.companyLogo.alt || 'Company Logo'}
+                                                        className="gslider-company-logo"
                                                     />
                                                 </div>
                                             )}

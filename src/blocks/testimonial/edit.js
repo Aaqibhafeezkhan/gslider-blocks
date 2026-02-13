@@ -48,12 +48,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         showAuthorDesignation,
         showTestimonialText,
         showAuthorImage,
+        showCompanyName,
+        showCompanyLogo,
         showRating,
         showNavigation,
-		showPagination,
+        showPagination,
         paginationPositionType,
         authorNameHtmlTag,
         authorDesignationHtmlTag,
+        companyNameHtmlTag,
         testimonialTextHtmlTag,
         globalID,
         globalClass,
@@ -118,33 +121,50 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const paginationInsideRef = useRef(null);
     const paginationOutsideRef = useRef(null);
 
-    const defaultPlaceholder = window.GSliderBlocksData?.pluginUrl 
+    const authorImagePlaceholder = window.GSliderBlocksData?.pluginUrl 
+        ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
+        : '';
+
+    const companyLogoPlaceholder = window.GSliderBlocksData?.pluginUrl 
         ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
         : '';
 
     /**
-     * Fix for author image display on initial load
-     * Ensures all items have a valid image URL (placeholder) if missing
+     * Fix for image display on initial load
+     * Ensures all items have valid image URLs (placeholders) if missing
      */
     useEffect(() => {
-        if (defaultPlaceholder && sliderItemList.some(item => !item.authorImage?.url)) {
+        if (sliderItemList.some(item => !item.authorImage?.url || !item.companyLogo?.url)) {
             const updatedItems = sliderItemList.map(item => {
-                if (!item.authorImage?.url) {
-                    return {
-                        ...item,
-                        authorImage: {
-                            ...(item.authorImage || {}),
-                            url: defaultPlaceholder,
-                            alt: item.authorImage?.alt || 'Author Placeholder'
-                        }
+                let updatedItem = { ...item };
+                
+                if (authorImagePlaceholder && !item.authorImage?.url) {
+                    updatedItem.authorImage = {
+                        ...(item.authorImage || {}),
+                        url: authorImagePlaceholder,
+                        alt: item.authorImage?.alt || 'Author Placeholder'
                     };
                 }
-                return item;
+                
+                if (companyLogoPlaceholder && !item.companyLogo?.url) {
+                    updatedItem.companyLogo = {
+                        ...(item.companyLogo || {}),
+                        url: companyLogoPlaceholder,
+                        alt: item.companyLogo?.alt || 'Company Logo Placeholder'
+                    };
+                }
+                
+                return updatedItem;
             });
             setSliderItemList(updatedItems);
             setAttributes({ sliderItems: updatedItems });
         }
     }, []);
+
+    // Sync sliderItemList when sliderItems attribute changes (e.g. undo/redo)
+    useEffect(() => {
+        setSliderItemList(sliderItems);
+    }, [sliderItems]);
 
 
     /**
@@ -290,9 +310,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             authorName: 'Author Name',
             authorDesignation: 'CEO, Google',
             authorImage: {
-                url: defaultPlaceholder,
+                url: authorImagePlaceholder,
                 id: '',
                 alt: 'Author Placeholder',
+            },
+            companyName: 'Google',
+            companyLogo: {
+                url: companyLogoPlaceholder,
+                id: '',
+                alt: 'Company Logo Placeholder',
             },
             rating: 5,
             
@@ -360,7 +386,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         const currentDevice = deviceType; 
 
         setSliderItemList(prev => {
-            return prev.map(item => {
+            const updatedItems = prev.map(item => {
                 if (item.id === id) {
                     // Handle normal background image updates for the current device only
                     if (key === 'normalBackgroundImageID') {
@@ -403,8 +429,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         };
                     }
 
-                    // Special handling for authorImage to allow partial updates (merging)
-                    if (key === 'authorImage') {
+                    // Special handling for authorImage and companyLogo to allow partial updates (merging)
+                    if (key === 'authorImage' || key === 'companyLogo') {
                         // Ensure null values from ImageControl (delete) are converted to defaults
                         const normalizedValue = {};
                         if (value) {
@@ -420,8 +446,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
                         return {
                             ...item,
-                            authorImage: {
-                                ...item.authorImage,
+                            [key]: {
+                                ...item[key],
                                 ...normalizedValue
                             }
                         };
@@ -432,6 +458,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 }
                 return item;
             });
+            setAttributes({ sliderItems: updatedItems });
+            return updatedItems;
         });
     };
 
@@ -576,7 +604,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                     />
                                                 </div>
 												)}
-												{ showAuthorDesignation && item.authorDesignation && (
+                                                { showAuthorDesignation && item.authorDesignation && (
                                                 <div className="gslider-author-designation-wrapper">
                                                     <RichText
                                                         tagName={authorDesignationHtmlTag}
@@ -584,6 +612,17 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                         value={item.authorDesignation}
                                                         onChange={(value) => updateItem(index, 'authorDesignation', value)}
                                                         placeholder="Enter author designation"
+                                                    />
+                                                </div>
+												)}
+												{ showCompanyName && item.companyName && (
+                                                <div className="gslider-company-name-wrapper">
+                                                    <RichText
+                                                        tagName={companyNameHtmlTag}
+                                                        className="gslider-company-name"
+                                                        value={item.companyName}
+                                                        onChange={(value) => updateItem(index, 'companyName', value)}
+                                                        placeholder="Enter company name"
                                                     />
                                                 </div>
 												)}
@@ -603,12 +642,21 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                         </div>
                                                     </div>
                                                 )}
-												{ showAuthorImage && (item.authorImage?.url || defaultPlaceholder) && (
+												{ showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
                                                     <div className="gslider-author-image-wrapper">
 														<img 
-															src={item.authorImage?.url || defaultPlaceholder}
+															src={item.authorImage?.url || authorImagePlaceholder}
                                                             alt={item.authorImage?.alt || 'Author'}
 															className="gslider-author-image"
+														/>
+                                                    </div>
+												)}
+                                                { showCompanyLogo && (item.companyLogo?.url || companyLogoPlaceholder) && (
+                                                    <div className="gslider-company-logo-wrapper">
+														<img 
+															src={item.companyLogo?.url || companyLogoPlaceholder}
+                                                            alt={item.companyLogo?.alt || 'Company Logo'}
+															className="gslider-company-logo"
 														/>
                                                     </div>
 												)}

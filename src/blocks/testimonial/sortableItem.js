@@ -39,6 +39,11 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         defaultPlaceholder = GSliderBlocksData.pluginUrl + 'assets/images/author-placeholder.svg';
     }
 
+    let defaultCompanyLogoPlaceholder = '';
+    if (typeof GSliderBlocksData !== 'undefined') {
+        defaultCompanyLogoPlaceholder = GSliderBlocksData.pluginUrl + 'assets/images/company-logo-placeholder.svg';
+    }
+
     /**
      * Set default placeholder if missing
      */
@@ -48,6 +53,19 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                 url: defaultPlaceholder,
                 id: '',
                 alt: 'Author Placeholder'
+            });
+        }
+    }, []);
+
+    /**
+     * Set default placeholder if missing
+     */
+    useEffect(() => {
+        if (defaultCompanyLogoPlaceholder && !item.companyLogo?.url) {
+            handleChangeItem(item.id, "companyLogo", { 
+                url: defaultCompanyLogoPlaceholder,
+                id: '',
+                alt: 'Company Logo Placeholder'
             });
         }
     }, []);
@@ -127,6 +145,22 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                         setImageAlt={(value) => handleChangeItem(item.id, "authorImage", { alt: value })}
                                         imageID={item.authorImage?.id}
                                         setImageID={(value) => handleChangeItem(item.id, "authorImage", { id: value })}
+                                        isImageSize={false}
+                                    />
+                                    <TextControl
+                                        label={__("Company Name", "gslider-blocks")}
+                                        value={item.companyName}
+                                        onChange={(value) => handleChangeItem(item.id, "companyName", value)}
+                                        help= "Leave blank to hide company name"
+                                    />
+                                    <ImageControl
+                                        label={__("Company Logo", "gslider-blocks")}
+                                        imageUrl={item.companyLogo?.url}
+                                        setImageUrl={(value) => handleChangeItem(item.id, "companyLogo", { url: value })}
+                                        imageAlt={item.companyLogo?.alt}
+                                        setImageAlt={(value) => handleChangeItem(item.id, "companyLogo", { alt: value })}
+                                        imageID={item.companyLogo?.id}
+                                        setImageID={(value) => handleChangeItem(item.id, "companyLogo", { id: value })}
                                         isImageSize={false}
                                     />
                                     <RangeControl

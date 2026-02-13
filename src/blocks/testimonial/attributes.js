@@ -24,6 +24,12 @@ const attributes = {
                     id: "",
                     alt: "",
                 },
+                companyName: "Google",
+                companyLogo: {
+                    url: "",
+                    id: "",
+                    alt: "",
+                },
                 rating: 5,
 
                 normalItemBackgroundType: "classic",
@@ -83,6 +89,12 @@ const attributes = {
                 authorName: "Author Name",
                 authorDesignation: "CEO, Google",
                 authorImage: {
+                    url: "",
+                    id: "",
+                    alt: "",
+                },
+                companyName: "Google",
+                companyLogo: {
                     url: "",
                     id: "",
                     alt: "",
@@ -147,6 +159,12 @@ const attributes = {
                 authorName: "Author Name",
                 authorDesignation: "CEO, Google",
                 authorImage: {
+                    url: "",
+                    id: "",
+                    alt: "",
+                },
+                companyName: "Google",
+                companyLogo: {
                     url: "",
                     id: "",
                     alt: "",
@@ -224,6 +242,18 @@ const attributes = {
                     default: "CEO, Google"
                 },
                 authorImage: {
+                    type: "object",
+                    default: {
+                        url: "",
+                        id: "",
+                        alt: "",
+                    }
+                },
+                companyName: {
+                    type: "string",
+                    default: "Google"
+                },
+                companyLogo: {
                     type: "object",
                     default: {
                         url: "",
@@ -454,6 +484,14 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    showCompanyName: {
+        type: "boolean",
+        default: true,
+    },
+    showCompanyLogo: {
+        type: "boolean",
+        default: true,
+    },
     showNavigation: {
         type: "object",
         default: {
@@ -542,6 +580,10 @@ const attributes = {
         default: "h3",
     },
     authorDesignationHtmlTag: {
+        type: "string",
+        default: "p",
+    },
+    companyNameHtmlTag: {
         type: "string",
         default: "p",
     },
@@ -1030,6 +1072,220 @@ const attributes = {
     /** End Author Designation Padding */
     
     /** End Author Designation */
+
+    /** Start Company Name */
+
+    /** Start Company Name Typography */
+    companyNameFontFamily: {
+        type: "string",
+        default: "",
+    },
+    companyNameFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    companyNameFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    companyNameFontWeight: {
+        type: "string",
+        default: "",
+    },
+    companyNameFontStyle: {
+        type: "string",
+        default: "",
+    },
+    companyNameTextTransform: {
+        type: "string",
+        default: "",
+    },
+    companyNameTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    companyNameLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    companyNameLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    companyNameLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    companyNameLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    companyNameWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },  
+    companyNameWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Company Name Typography */
+
+    /** Start Company Name Color */
+    companyNameColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	companyNameColor: {
+		type: "string",
+		default: "",
+	},
+	companyNameColorHover: {
+		type: "string",
+		default: "",
+	},
+    /** End Company Name Color */
+
+    /** Start Company Name Margin */
+	companyNameMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	companyNameDesktopMargin: {
+		type: "object", 
+		default: {
+			top: "0",
+			bottom: "16",
+			left: "0",
+			right: "0",
+		},
+	},
+    companyNameDesktopMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	companyNameTabletMargin: {
+		type: "object",  
+		default: {
+			top: "0",
+			bottom: "16",
+			left: "0",
+			right: "0",
+		},
+	},
+    companyNameTabletMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	companyNameMobileMargin: {
+		type: "object",  
+		default: {
+			top: "0",
+			bottom: "16",
+			left: "0",
+			right: "0",
+		},
+	},
+    companyNameMobileMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	companyNameMarginLink : {
+		type : "boolean",
+		default: true
+	},
+    /** End Company Name Margin */
+
+    /** Start Company Name Padding */
+	companyNamePaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	companyNameDesktopPadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    companyNameDesktopPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	companyNameTabletPadding: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    companyNameTabletPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	companyNameMobilePadding: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    companyNameMobilePaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	companyNamePaddingLink : {
+		type : "boolean",
+		default: true
+	},
+    /** End Company Name Padding */
+    
+    /** End Company Name */
 
     /** Start Testimonial Text Typography */
     testimonialTextFontFamily: {

@@ -80,6 +80,8 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         showAuthorDesignation,
         showTestimonialText,
         showAuthorImage,
+        showCompanyName,
+        showCompanyLogo,
         showRating,
         showNavigation,
         showPagination,
@@ -97,6 +99,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         contentHorizontalAlignment,
         authorNameHtmlTag,
         authorDesignationHtmlTag,
+        companyNameHtmlTag,
         testimonialTextHtmlTag,
         /** End Layout & Content Setting */
 
@@ -186,6 +189,44 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         authorDesignationMobilePaddingCssStyle,
         authorDesignationPaddingLink,
         /** End Author Designation Typography, Color, Margin & Padding */
+
+        /** Start Company Name Typography, Color, Margin & Padding */
+        companyNameFontFamily,
+        companyNameFontSize,
+        companyNameFontSizeUnits,
+        companyNameFontWeight,
+        companyNameFontStyle,
+        companyNameTextTransform,
+        companyNameTextDecoration,
+        companyNameLineHeight,
+        companyNameLineHeightUnits,
+        companyNameLetterSpacing,
+        companyNameLetterSpacingUnits,
+        companyNameWordSpacing,
+        companyNameWordSpacingUnits,
+
+        companyNameColorSwitcher,
+        companyNameColor,
+        companyNameColorHover,
+
+        companyNameMarginUnits,
+        companyNameDesktopMargin,
+        companyNameDesktopMarginCssStyle,
+        companyNameTabletMargin,
+        companyNameTabletMarginCssStyle,
+        companyNameMobileMargin,
+        companyNameMobileMarginCssStyle,
+        companyNameMarginLink,
+
+        companyNamePaddingUnits,
+        companyNameDesktopPadding,
+        companyNameDesktopPaddingCssStyle,
+        companyNameTabletPadding,
+        companyNameTabletPaddingCssStyle,
+        companyNameMobilePadding,
+        companyNameMobilePaddingCssStyle,
+        companyNamePaddingLink,
+        /** End Company Name Typography, Color, Margin & Padding */
 
         /** Start Testimonial Text Typography, Color, Margin & Padding */
         testimonialTextFontFamily,
@@ -671,6 +712,16 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     onChange={(value) => setAttributes({ showAuthorImage: value })}
                 />
                 <ToggleControl
+                    label={__("Show Company Name", "gslider-blocks")}
+                    checked={showCompanyName}
+                    onChange={(value) => setAttributes({ showCompanyName: value })}
+                />
+                <ToggleControl
+                    label={__("Show Company Logo", "gslider-blocks")}
+                    checked={showCompanyLogo}
+                    onChange={(value) => setAttributes({ showCompanyLogo: value })}
+                />
+                <ToggleControl
                     label={__("Show Rating", "gslider-blocks")}
                     checked={showRating}
                     onChange={(value) => setAttributes({ showRating: value })}
@@ -819,6 +870,13 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     options={HTML_TAGS}
                     value={authorDesignationHtmlTag}
                     onChange={(value) => setAttributes({ authorDesignationHtmlTag: value })}
+                />
+                
+                <HtmlTagControl
+                    label={__("Company Name Tag", "gslider-blocks")}
+                    options={HTML_TAGS}
+                    value={companyNameHtmlTag}
+                    onChange={(value) => setAttributes({ companyNameHtmlTag: value })}
                 />
 
                 <HtmlTagControl
@@ -1573,6 +1631,118 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         mobileSpacingStyle={(value) => setAttributes({ authorDesignationMobilePaddingCssStyle: value })}
                         isLinked={authorDesignationPaddingLink}
                         onChangeLink={(value) => setAttributes({ authorDesignationPaddingLink: value })}
+                    />
+                </PanelBody>
+            )}
+
+            {showCompanyName && (
+                <PanelBody
+                    title={__("Company Name", "gslider-blocks")}
+                    opened={openPanels.styles === "companyName"}
+                    onToggle={() => togglePanel("styles", "companyName")}
+                >
+                    <ResponsiveTypographyControl
+                        fontFamily={companyNameFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ companyNameFontFamily: value })}
+
+                        fontSize={companyNameFontSize}
+                        onChangeFontSize={(value) => setAttributes({ companyNameFontSize: value })}
+
+                        fontSizeUnits={companyNameFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ companyNameFontSizeUnits: value })}
+
+                        fontWeight={companyNameFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ companyNameFontWeight: value })}
+
+                        fontStyle={companyNameFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ companyNameFontStyle: value })}
+
+                        textTransform={companyNameTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ companyNameTextTransform: value })}
+
+                        textDecoration={companyNameTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ companyNameTextDecoration: value })}
+
+                        lineHeight={companyNameLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ companyNameLineHeight: value })}
+
+                        lineHeightUnits={companyNameLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ companyNameLineHeightUnits: value })}
+
+                        letterSpacing={companyNameLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ companyNameLetterSpacing: value })}
+
+                        letterSpacingUnits={companyNameLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ companyNameLetterSpacingUnits: value })}
+
+                        wordSpacing={companyNameWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ companyNameWordSpacing: value })}
+
+                        wordSpacingUnits={companyNameWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ companyNameWordSpacingUnits: value })}
+
+                        deviceType={deviceType}
+                    />
+                    <SwitcherControl
+                        label={__("Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={companyNameColorSwitcher}
+                        onChange={(value) => setAttributes({ companyNameColorSwitcher: value })}
+                    />
+
+                    {companyNameColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={companyNameColor}
+                            onChangeColor={(value) => setAttributes({ companyNameColor: value })}
+                            defaultColor=''
+                        />
+                    )}
+
+                    {companyNameColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={companyNameColorHover}
+                            onChangeColor={(value) => setAttributes({ companyNameColorHover: value })}
+                            defaultColor=''
+                        />
+                    )}
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={companyNameMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ companyNameMarginUnits: value })}
+                        desktopSpacing={companyNameDesktopMargin}
+                        onChangeDesktopSpacing={(value) => setAttributes({ companyNameDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ companyNameDesktopMarginCssStyle: value })}
+                        tabletSpacing={companyNameTabletMargin}
+                        onChangeTabletSpacing={(value) => setAttributes({ companyNameTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ companyNameTabletMarginCssStyle: value })}
+                        mobileSpacing={companyNameMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ companyNameMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ companyNameMobileMarginCssStyle: value })}
+                        isLinked={companyNameMarginLink}
+                        onChangeLink={(value) => setAttributes({ companyNameMarginLink: value })}
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={companyNamePaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ companyNamePaddingUnits: value })}
+                        desktopSpacing={companyNameDesktopPadding}
+                        onChangeDesktopSpacing={(value) => setAttributes({ companyNameDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ companyNameDesktopPaddingCssStyle: value })}
+                        tabletSpacing={companyNameTabletPadding}
+                        onChangeTabletSpacing={(value) => setAttributes({ companyNameTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ companyNameTabletPaddingCssStyle: value })}
+                        mobileSpacing={companyNameMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ companyNameMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ companyNameMobilePaddingCssStyle: value })}
+                        isLinked={companyNamePaddingLink}
+                        onChangeLink={(value) => setAttributes({ companyNamePaddingLink: value })}
                     />
                 </PanelBody>
             )}
