@@ -16,9 +16,14 @@ const attributes = {
         default: [
             { 
                 id: "item-1",
+                testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
                 authorName: "Author Name",
                 authorDesignation: "CEO, Google",
-                testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
+                authorImage: {
+                    url: "",
+                    id: "",
+                    alt: "",
+                },
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -73,9 +78,14 @@ const attributes = {
             { 
                 id: "item-2",
 
+                testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
                 authorName: "Author Name",
                 authorDesignation: "CEO, Google",
-                testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
+                authorImage: {
+                    url: "",
+                    id: "",
+                    alt: "",
+                },
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -131,9 +141,14 @@ const attributes = {
             { 
                 id: "item-3",
 
+                testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
                 authorName: "Author Name",
                 authorDesignation: "CEO, Google",
-                testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
+                authorImage: {
+                    url: "",
+                    id: "",
+                    alt: "",
+                },
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -193,6 +208,10 @@ const attributes = {
                     type: "string",
                     default: ""
                 },
+                testimonialText: {
+                    type: "string",
+                    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum."
+                },
                 authorName: {
                     type: "string",
                     default: "Author Name"
@@ -201,9 +220,21 @@ const attributes = {
                     type: "string",
                     default: "CEO, Google"
                 },
-                testimonialText: {
-                    type: "string",
-                    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum."
+                authorImage: {
+                    type: "object",
+                    default: {
+                        url: "",
+                        id: "",
+                        alt: "",
+                    }
+                },
+                rating: {
+                    type: "object",
+                    default: {
+                        Desktop: 5,
+                        Tablet: 5,
+                        Mobile: 5
+                    }
                 },
 
                 normalItemBackgroundType: {
@@ -413,6 +444,14 @@ const attributes = {
         default: true,
     },
     showTestimonialText: {
+        type: "boolean",
+        default: true,
+    },
+    showAuthorImage: {
+        type: "boolean",
+        default: true,
+    },
+    showRating: {
         type: "boolean",
         default: true,
     },

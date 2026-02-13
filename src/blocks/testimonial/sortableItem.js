@@ -14,7 +14,6 @@ import {
     TextareaControl,
     ToggleControl,
     RangeControl,
-
 } from '@wordpress/components';
 
 /**
@@ -22,6 +21,7 @@ import {
  */
 import BackgroundControl from '@Components/background-control';
 import UrlControl from '@Components/url-control';
+import ImageControl from '@Components/image-control';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, deviceType, setAttributes }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
@@ -33,6 +33,24 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
     };
 
     const toggleOpen = () => setIsOpen(!isOpen);
+
+    let defaultPlaceholder = '';
+    if (typeof GSliderBlocksData !== 'undefined') {
+        defaultPlaceholder = GSliderBlocksData.pluginUrl + 'assets/images/author-placeholder.svg';
+    }
+
+    /**
+     * Set default placeholder if missing
+     */
+    useEffect(() => {
+        if (defaultPlaceholder && !item.authorImage?.url) {
+            handleChangeItem(item.id, "authorImage", { 
+                url: defaultPlaceholder,
+                id: '',
+                alt: 'Author Placeholder'
+            });
+        }
+    }, []);
 
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
@@ -83,6 +101,12 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             )}
                             renderContent={() => (
                                 <div className="gslider-setting-contant-popup-wrapper">
+                                    <TextareaControl
+                                        label={__("Testimonial Text", "gslider-blocks")}
+                                        value={item.testimonialText}
+                                        onChange={(value) => handleChangeItem(item.id, "testimonialText", value)}
+                                        help= "Leave blank to hide testimonial text"
+                                    />
                                     <TextControl
                                         label={__("Author Name", "gslider-blocks")}
                                         value={item.authorName}
@@ -95,11 +119,23 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                         onChange={(value) => handleChangeItem(item.id, "authorDesignation", value)}
                                         help= "Leave blank to hide designation"
                                     />
-                                    <TextareaControl
-                                        label={__("Testimonial Text", "gslider-blocks")}
-                                        value={item.testimonialText}
-                                        onChange={(value) => handleChangeItem(item.id, "testimonialText", value)}
-                                        help= "Leave blank to hide testimonial text"
+                                    <ImageControl
+                                        label={__("Author Image", "gslider-blocks")}
+                                        imageUrl={item.authorImage?.url}
+                                        setImageUrl={(value) => handleChangeItem(item.id, "authorImage", { url: value })}
+                                        imageAlt={item.authorImage?.alt}
+                                        setImageAlt={(value) => handleChangeItem(item.id, "authorImage", { alt: value })}
+                                        imageID={item.authorImage?.id}
+                                        setImageID={(value) => handleChangeItem(item.id, "authorImage", { id: value })}
+                                        isImageSize={false}
+                                    />
+                                    <RangeControl
+                                        label={__("Rating", "gslider-blocks")}
+                                        value={item.rating}
+                                        onChange={(value) => handleChangeItem(item.id, "rating", value)}
+                                        min={1}
+                                        max={5}
+                                        step={1}
                                     />
                                 </div>
                             )}

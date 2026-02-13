@@ -26,6 +26,8 @@ export default function Save({ attributes }) {
         showAuthorName,
         showAuthorDesignation,
         showTestimonialText,
+        showAuthorImage,
+        showRating,
         showNavigation,
         showPagination,
         paginationPositionType,
@@ -170,6 +172,15 @@ export default function Save({ attributes }) {
                                 <div className="gslider-content-inner-wrapper">
                                     <div className="gslider-list-item">
                                         <div className="gslider-list-content">
+                                            {showTestimonialText && item.testimonialText && (
+                                                <div className="gslider-testimonial-text-wrapper">
+                                                    <RichText.Content
+                                                        tagName={testimonialTextHtmlTag}
+                                                        className="gslider-testimonial-text"
+                                                        value={item.testimonialText}
+                                                    />
+                                                </div>
+                                            )}
                                             {showAuthorName && item.authorName && (
                                                 <div className="gslider-author-name-wrapper">
                                                     <RichText.Content
@@ -188,12 +199,19 @@ export default function Save({ attributes }) {
                                                     />
                                                 </div>
                                             )}
-                                            {showTestimonialText && item.testimonialText && (
-                                                <div className="gslider-testimonial-text-wrapper">
-                                                    <RichText.Content
-                                                        tagName={testimonialTextHtmlTag}
-                                                        className="gslider-testimonial-text"
-                                                        value={item.testimonialText}
+                                            { showRating && (
+                                                <div className="gslider-rating-wrapper">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <span key={i} className={`dashicons dashicons-star-${i < (item.rating || 5) ? 'filled' : 'empty'}`}></span>
+                                                    ))}
+                                                </div>
+                                            )}
+                                            {showAuthorImage && item.authorImage?.url && (
+                                                <div className="gslider-author-image-wrapper">
+                                                    <img 
+                                                        src={item.authorImage.url}
+                                                        alt={item.authorImage.alt || 'Author'}
+                                                        className="gslider-author-image"
                                                     />
                                                 </div>
                                             )}

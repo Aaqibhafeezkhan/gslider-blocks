@@ -47,6 +47,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         showAuthorName,
         showAuthorDesignation,
         showTestimonialText,
+        showAuthorImage,
+        showRating,
         showNavigation,
 		showPagination,
         paginationPositionType,
@@ -93,12 +95,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     }, [attributes, blockId]);
     /** End Generate Block Style */
 
+
 	// Block props for container
 	const blockProps = useBlockProps({
         className: `gslider-base-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
 	});
-
-	// Local state management for slider items and active slide index
+    
 	const [sliderItemList, setSliderItemList] = useState(sliderItems);
 	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
 
@@ -249,19 +251,25 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         layoutHeightSwitcher,
     ]);
 
-    /* Custom Icon Navigation - handled by main useEffect now */
-    
-
     /**
      * Creates and adds a new slide with default content and settings
      * Generates a unique ID for the new slide
      */
     const handleAddItem = () => {
+        const defaultImageUrl = window.GSliderBlocksData?.pluginUrl 
+            ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
+            : '';
+            
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
+            testimonialText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
             authorName: 'Author Name',
             authorDesignation: 'CEO, Google',
-            testimonialText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
+            authorImage: {
+                url: defaultImageUrl,
+                id: '',
+                alt: 'Author Placeholder',
+            },
 
             normalItemBackgroundType: 'classic',
             normalItemClassicColor: '#EDEDED',
@@ -312,7 +320,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             itemBackgroundOverlayCustomGradientSwitcher: false,
             itemBackgroundOverlayCustomGradientInputValue: '',
             itemBackgroundOverlayOpacity: 0.5,
-            
+            rating: 5,
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
         setSliderItemList([...sliderItemList, newItem]);
@@ -327,57 +335,80 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         // Get current device type ("Desktop", "Tablet", or "Mobile")
         const currentDevice = deviceType; 
 
-        const updatedItems = sliderItemList.map(item => {
-            if (item.id === id) {
-                // Handle normal background image updates for the current device only
-                if (key === 'normalBackgroundImageID') {
-                    // Get the full image data from WordPress media library
-                    const image = wp.media.attachment(value).toJSON();
-                    return {
-                        ...item,
-                        normalBackgroundImageID: {
-                            ...item.normalBackgroundImageID,
-                            [currentDevice]: value,
-                        },
-                        normalBackgroundImageUrl: {
-                            ...item.normalBackgroundImageUrl,
-                            [currentDevice]: image.url,
-                        },
-                        normalBackgroundImageAlt: {
-                            ...item.normalBackgroundImageAlt,
-                            [currentDevice]: image.alt || '',
-                        },
-                    };
-                }
+        setSliderItemList(prev => {
+            return prev.map(item => {
+                if (item.id === id) {
+                    // Handle normal background image updates for the current device only
+                    if (key === 'normalBackgroundImageID') {
+                        // Get the full image data from WordPress media library
+                        const image = value ? wp.media.attachment(value).toJSON() : { url: '', alt: '' };
+                        return {
+                            ...item,
+                            normalBackgroundImageID: {
+                                ...item.normalBackgroundImageID,
+                                [currentDevice]: value,
+                            },
+                            normalBackgroundImageUrl: {
+                                ...item.normalBackgroundImageUrl,
+                                [currentDevice]: image.url,
+                            },
+                            normalBackgroundImageAlt: {
+                                ...item.normalBackgroundImageAlt,
+                                [currentDevice]: image.alt || '',
+                            },
+                        };
+                    }
 
-                // Handle hover background image updates for the current device only
-                if (key === 'hoverBackgroundImageID') {
-                    const image = wp.media.attachment(value).toJSON();
-                    return {
-                        ...item,
-                        hoverBackgroundImageID: {
-                            ...item.hoverBackgroundImageID,
-                            [currentDevice]: value,
-                        },
-                        hoverBackgroundImageUrl: {
-                            ...item.hoverBackgroundImageUrl,
-                            [currentDevice]: image.url,
-                        },
-                        hoverBackgroundImageAlt: {
-                            ...item.hoverBackgroundImageAlt,
-                            [currentDevice]: image.alt || '',
-                        },
-                    };
-                }
+                    // Handle hover background image updates for the current device only
+                    if (key === 'hoverBackgroundImageID') {
+                        const image = value ? wp.media.attachment(value).toJSON() : { url: '', alt: '' };
+                        return {
+                            ...item,
+                            hoverBackgroundImageID: {
+                                ...item.hoverBackgroundImageID,
+                                [currentDevice]: value,
+                            },
+                            hoverBackgroundImageUrl: {
+                                ...item.hoverBackgroundImageUrl,
+                                [currentDevice]: image.url,
+                            },
+                            hoverBackgroundImageAlt: {
+                                ...item.hoverBackgroundImageAlt,
+                                [currentDevice]: image.alt || '',
+                            },
+                        };
+                    }
 
-                // For other properties, update as before
-                return { ...item, [key]: value };
-            }
-            return item;
+                    // Special handling for authorImage to allow partial updates (merging)
+                    if (key === 'authorImage') {
+                        // Ensure null values from ImageControl (delete) are converted to defaults
+                        const normalizedValue = {};
+                        if (value) {
+                            if (value.url === null) normalizedValue.url = '';
+                            else if (value.url !== undefined) normalizedValue.url = value.url;
+                            
+                            if (value.id === null) normalizedValue.id = '';
+                            else if (value.id !== undefined) normalizedValue.id = value.id;
+                            
+                            if (value.alt === null) normalizedValue.alt = '';
+                            else if (value.alt !== undefined) normalizedValue.alt = value.alt;
+                        }
+
+                        return {
+                            ...item,
+                            authorImage: {
+                                ...item.authorImage,
+                                ...normalizedValue
+                            }
+                        };
+                    }
+
+                    // For other properties, update as before
+                    return { ...item, [key]: value };
+                }
+                return item;
+            });
         });
-
-        setSliderItemList(updatedItems);
-        setAttributes({ sliderItems: updatedItems });
     };
 
     /**
@@ -425,17 +456,26 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	}, [sliderItemList, setAttributes]);
 
     /**
+     * Sync local state from attributes (for undo/redo support)
+     */
+    useEffect(() => {
+        if (JSON.stringify(sliderItems) !== JSON.stringify(sliderItemList)) {
+            setSliderItemList(sliderItems);
+        }
+    }, [sliderItems]);
+
+    /**
      * Updates a specific field of a slide at the given index
      * Used for RichText component changes
      */
     const updateItem = (index, field, value) => {
-        const newItems = sliderItems.map((item, i) => {
-            if (i === index) {
-                return { ...item, [field]: value };
+        setSliderItemList(prev => {
+            const next = [...prev];
+            if (next[index]) {
+                next[index] = { ...next[index], [field]: value };
             }
-            return item;
+            return next;
         });
-        setAttributes({ sliderItems: newItems });
     };
 
     /**
@@ -467,16 +507,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         );
     };
 
-    /**
-     * Prevent default behavior for link clicks in the editor
-     */
-	const handleButtonClick = (event) => {
-		event.preventDefault();
-	};
-
 	return (
 		<>
-        	{isSelected && (
                 <Inspector 
                     attributes={attributes}
                     setAttributes={setAttributes}
@@ -486,7 +518,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     handleDragEnd={handleDragEnd}
                     handleDeleteItem={handleDeleteItem}
                 />
-            )}
 
 			{renderSliderToolbarControls()}
 
@@ -499,6 +530,17 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 									<div className="gslider-content-inner-wrapper">
 										<div className="gslider-list-item">
 											<div className="gslider-list-content">
+												{ showTestimonialText && item.testimonialText && (
+                                                <div className="gslider-testimonial-text-wrapper">
+                                                    <RichText
+                                                        tagName={testimonialTextHtmlTag}
+                                                        className="gslider-testimonial-text"
+                                                        value={item.testimonialText}
+                                                        onChange={(value) => updateItem(index, 'testimonialText', value)}
+                                                        placeholder="Enter description"
+                                                    />
+                                                </div>
+												)}
 												{ showAuthorName && item.authorName && (
                                                 <div className="gslider-author-name-wrapper">
                                                     <RichText
@@ -521,16 +563,21 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                     />
                                                 </div>
 												)}
-												{ showTestimonialText && item.testimonialText && (
-                                                <div className="gslider-testimonial-text-wrapper">
-                                                    <RichText
-                                                        tagName={testimonialTextHtmlTag}
-                                                        className="gslider-testimonial-text"
-                                                        value={item.testimonialText}
-                                                        onChange={(value) => updateItem(index, 'testimonialText', value)}
-                                                        placeholder="Enter description"
-                                                    />
-                                                </div>
+                                                { showRating && (
+                                                    <div className="gslider-rating-wrapper">
+                                                        {[...Array(5)].map((_, i) => (
+                                                            <span key={i} className={`dashicons dashicons-star-${i < (item.rating || 5) ? 'filled' : 'empty'}`}></span>
+                                                        ))}
+                                                    </div>
+                                                )}
+												{ showAuthorImage && item.authorImage?.url && (
+                                                    <div className="gslider-author-image-wrapper">
+														<img 
+															src={item.authorImage?.url}
+                                                            alt={item.authorImage?.alt || 'Author'}
+															className="gslider-author-image"
+														/>
+                                                    </div>
 												)}
 											</div>
 										</div>
