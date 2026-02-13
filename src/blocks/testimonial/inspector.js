@@ -656,16 +656,6 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     onChange={(value) => setAttributes({ showTestimonialText: value })}
                 />
                 <ToggleControl
-                    label={__("Show Author Image", "gslider-blocks")}
-                    checked={showAuthorImage}
-                    onChange={(value) => setAttributes({ showAuthorImage: value })}
-                />
-                <ToggleControl
-                    label={__("Show Rating", "gslider-blocks")}
-                    checked={showRating}
-                    onChange={(value) => setAttributes({ showRating: value })}
-                />
-                <ToggleControl
                     label={__("Show Author Name", "gslider-blocks")}
                     checked={showAuthorName}
                     onChange={(value) => setAttributes({ showAuthorName: value })}
@@ -674,6 +664,16 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     label={__("Show Author Designation", "gslider-blocks")}
                     checked={showAuthorDesignation}
                     onChange={(value) => setAttributes({ showAuthorDesignation: value })}
+                />
+                <ToggleControl
+                    label={__("Show Author Image", "gslider-blocks")}
+                    checked={showAuthorImage}
+                    onChange={(value) => setAttributes({ showAuthorImage: value })}
+                />
+                <ToggleControl
+                    label={__("Show Rating", "gslider-blocks")}
+                    checked={showRating}
+                    onChange={(value) => setAttributes({ showRating: value })}
                 />
                 <ResponsiveToggleControl
                     label={__("Show Navigation", "gslider-blocks")}

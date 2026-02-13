@@ -232,12 +232,8 @@ const attributes = {
                     }
                 },
                 rating: {
-                    type: "object",
-                    default: {
-                        Desktop: 5,
-                        Tablet: 5,
-                        Mobile: 5
-                    }
+                    type: "number",
+                    default: 5
                 },
 
                 normalItemBackgroundType: {

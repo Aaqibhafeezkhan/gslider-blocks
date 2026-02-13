@@ -133,9 +133,9 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                         label={__("Rating", "gslider-blocks")}
                                         value={item.rating}
                                         onChange={(value) => handleChangeItem(item.id, "rating", value)}
-                                        min={1}
+                                        min={0}
                                         max={5}
-                                        step={1}
+                                        step={0.1}
                                     />
                                 </div>
                             )}

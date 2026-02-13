@@ -294,7 +294,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 id: '',
                 alt: 'Author Placeholder',
             },
-
+            rating: 5,
+            
             normalItemBackgroundType: 'classic',
             normalItemClassicColor: '#EDEDED',
             normalItemGradientColor: null,
@@ -344,7 +345,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             itemBackgroundOverlayCustomGradientSwitcher: false,
             itemBackgroundOverlayCustomGradientInputValue: '',
             itemBackgroundOverlayOpacity: 0.5,
-            rating: 5,
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
         setSliderItemList([...sliderItemList, newItem]);
@@ -545,12 +545,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 			{renderSliderToolbarControls()}
 
-			<div {...blockProps}>
+			<div {...blockProps} ref={panelRef}>
 				<div className="swiper" ref={swiperContainerRef}>
 					<div className="swiper-wrapper">
 						{sliderItemList.map((item, index) => (
 							<div className="swiper-slide" key={item.id}>
-								<div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
+								<div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})}>
 									<div className="gslider-content-inner-wrapper">
 										<div className="gslider-list-item">
 											<div className="gslider-list-content">
@@ -589,9 +589,18 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 												)}
                                                 { showRating && (
                                                     <div className="gslider-rating-wrapper">
-                                                        {[...Array(5)].map((_, i) => (
-                                                            <span key={i} className={`dashicons dashicons-star-${i < (item.rating || 5) ? 'filled' : 'empty'}`}></span>
-                                                        ))}
+                                                        <div className="gslider-rating-inner">
+                                                            <div className="gslider-rating-background">
+                                                                {[...Array(5)].map((_, i) => (
+                                                                    <span key={i} className="dashicons dashicons-star-filled"></span>
+                                                                ))}
+                                                            </div>
+                                                            <div className="gslider-rating-foreground" style={{ width: `${(typeof item.rating !== 'undefined' ? item.rating : 5) * 20}%` }}>
+                                                                {[...Array(5)].map((_, i) => (
+                                                                    <span key={i} className="dashicons dashicons-star-filled"></span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 )}
 												{ showAuthorImage && (item.authorImage?.url || defaultPlaceholder) && (

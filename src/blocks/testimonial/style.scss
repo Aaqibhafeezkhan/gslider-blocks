@@ -38,6 +38,31 @@
 			backface-visibility: visible !important;
 		}
 	}
+
+	.gslider-rating-wrapper {
+		margin-bottom: 15px;
+		.gslider-rating-inner {
+			position: relative;
+			display: inline-block;
+			line-height: 1;
+			font-size: 20px;
+
+			.gslider-rating-background {
+				color: #e6e6e6;
+				display: flex;
+			}
+
+			.gslider-rating-foreground {
+				position: absolute;
+				top: 0;
+				left: 0;
+				white-space: nowrap;
+				overflow: hidden;
+				color: #ffb700;
+				display: flex;
+			}
+		}
+	}
 }
 
 :where(.wp-site-blocks *:focus) {

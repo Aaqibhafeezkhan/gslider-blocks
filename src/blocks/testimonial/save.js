@@ -201,9 +201,18 @@ export default function Save({ attributes }) {
                                             )}
                                             { showRating && (
                                                 <div className="gslider-rating-wrapper">
-                                                    {[...Array(5)].map((_, i) => (
-                                                        <span key={i} className={`dashicons dashicons-star-${i < (item.rating || 5) ? 'filled' : 'empty'}`}></span>
-                                                    ))}
+                                                    <div className="gslider-rating-inner">
+                                                        <div className="gslider-rating-background">
+                                                            {[...Array(5)].map((_, i) => (
+                                                                <span key={i} className="dashicons dashicons-star-filled"></span>
+                                                            ))}
+                                                        </div>
+                                                        <div className="gslider-rating-foreground" style={{ width: `${(typeof item.rating !== 'undefined' ? item.rating : 5) * 20}%` }}>
+                                                            {[...Array(5)].map((_, i) => (
+                                                                <span key={i} className="dashicons dashicons-star-filled"></span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             )}
                                             {showAuthorImage && item.authorImage?.url && (
