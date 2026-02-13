@@ -24,6 +24,7 @@ const attributes = {
                     id: "",
                     alt: "",
                 },
+                rating: 5,
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -86,6 +87,7 @@ const attributes = {
                     id: "",
                     alt: "",
                 },
+                rating: 5,
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -149,6 +151,7 @@ const attributes = {
                     id: "",
                     alt: "",
                 },
+                rating: 5,
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",

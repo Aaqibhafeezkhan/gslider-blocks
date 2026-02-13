@@ -118,6 +118,34 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const paginationInsideRef = useRef(null);
     const paginationOutsideRef = useRef(null);
 
+    const defaultPlaceholder = window.GSliderBlocksData?.pluginUrl 
+        ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
+        : '';
+
+    /**
+     * Fix for author image display on initial load
+     * Ensures all items have a valid image URL (placeholder) if missing
+     */
+    useEffect(() => {
+        if (defaultPlaceholder && sliderItemList.some(item => !item.authorImage?.url)) {
+            const updatedItems = sliderItemList.map(item => {
+                if (!item.authorImage?.url) {
+                    return {
+                        ...item,
+                        authorImage: {
+                            ...(item.authorImage || {}),
+                            url: defaultPlaceholder,
+                            alt: item.authorImage?.alt || 'Author Placeholder'
+                        }
+                    };
+                }
+                return item;
+            });
+            setSliderItemList(updatedItems);
+            setAttributes({ sliderItems: updatedItems });
+        }
+    }, []);
+
 
     /**
      * Vanilla JS Swiper initialization
@@ -256,17 +284,13 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
      * Generates a unique ID for the new slide
      */
     const handleAddItem = () => {
-        const defaultImageUrl = window.GSliderBlocksData?.pluginUrl 
-            ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
-            : '';
-            
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
             testimonialText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
             authorName: 'Author Name',
             authorDesignation: 'CEO, Google',
             authorImage: {
-                url: defaultImageUrl,
+                url: defaultPlaceholder,
                 id: '',
                 alt: 'Author Placeholder',
             },
@@ -570,10 +594,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                         ))}
                                                     </div>
                                                 )}
-												{ showAuthorImage && item.authorImage?.url && (
+												{ showAuthorImage && (item.authorImage?.url || defaultPlaceholder) && (
                                                     <div className="gslider-author-image-wrapper">
 														<img 
-															src={item.authorImage?.url}
+															src={item.authorImage?.url || defaultPlaceholder}
                                                             alt={item.authorImage?.alt || 'Author'}
 															className="gslider-author-image"
 														/>
