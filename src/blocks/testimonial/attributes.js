@@ -486,6 +486,10 @@ const attributes = {
     /** End Show/Hide Elements */
 
     /** Layout & Content Setting */
+    contentOrder: {
+        type: "array",
+        default: ["image", "title", "text", "rating", "name", "designation"],
+    },
     layoutHeightSwitcher: {
         type: "string",
         default: "fixed",

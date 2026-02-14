@@ -55,6 +55,7 @@ export default function Save({ attributes }) {
         navigationArrowsIconRightImageID,
 
         layoutHeightSwitcher,
+        contentOrder,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -178,71 +179,76 @@ export default function Save({ attributes }) {
                                 <div className="gslider-content-inner-wrapper">
                                     <div className="gslider-list-item">
                                         <div className="gslider-list-content">
-                                            {showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
-                                                <div className="gslider-author-image-wrapper">
-                                                    <img 
-                                                        src={item.authorImage?.url || authorImagePlaceholder}
-                                                        alt={item.authorImage?.alt || 'Author'}
-                                                        className="gslider-author-image"
-                                                    />
-                                                </div>
-                                            )}
-                                            {showTestimonialTitle && item.testimonialTitle && (
-                                                <div className="gslider-testimonial-title-wrapper">
-                                                    <RichText.Content
-                                                        tagName={testimonialTitleHtmlTag}
-                                                        className="gslider-testimonial-title"
-                                                        value={item.testimonialTitle}
-                                                    />
-                                                </div>
-                                            )}
-                                            <div className="gslider-client-testimonial">
-                                                {showTestimonialText && item.testimonialText && (
-                                                    <div className="gslider-testimonial-text-wrapper">
-                                                        <RichText.Content
-                                                            tagName={testimonialTextHtmlTag}
-                                                            className="gslider-testimonial-text"
-                                                            value={item.testimonialText}
-                                                        />
-                                                    </div>
-                                                )}
-                                            </div>
-                                            { showRating && (
-                                                <div className="gslider-rating-wrapper">
-                                                    <div className="gslider-rating-inner">
-                                                        <div className="gslider-rating-background">
-                                                            {[...Array(5)].map((_, i) => (
-                                                                <span key={i} className="dashicons dashicons-star-filled"></span>
-                                                            ))}
+                                            {(() => {
+                                                const renderMap = {
+                                                    image: showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
+                                                        <div className="gslider-author-image-wrapper" key="image">
+                                                            <img 
+                                                                src={item.authorImage?.url || authorImagePlaceholder}
+                                                                alt={item.authorImage?.alt || 'Author'}
+                                                                className="gslider-author-image"
+                                                            />
                                                         </div>
-                                                        <div className="gslider-rating-foreground" style={{ width: `${(typeof item.rating !== 'undefined' ? item.rating : 5) * 20}%` }}>
-                                                            {[...Array(5)].map((_, i) => (
-                                                                <span key={i} className="dashicons dashicons-star-filled"></span>
-                                                            ))}
+                                                    ),
+                                                    title: showTestimonialTitle && item.testimonialTitle && (
+                                                        <div className="gslider-testimonial-title-wrapper" key="title">
+                                                            <RichText.Content
+                                                                tagName={testimonialTitleHtmlTag}
+                                                                className="gslider-testimonial-title"
+                                                                value={item.testimonialTitle}
+                                                            />
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            )}
-                                            {showAuthorName && item.authorName && (
-                                                <div className="gslider-author-name-wrapper">
-                                                    <RichText.Content
-                                                        tagName={authorNameHtmlTag}
-                                                        className="gslider-author-name"
-                                                        value={item.authorName}
-                                                    />
-                                                </div>
-                                            )}
-                                            <div className="gslider-author-designation-company-wrapper">
-                                                {showAuthorDesignation && item.authorDesignation && (
-                                                    <div className="gslider-author-designation-wrapper">
-                                                        <RichText.Content
-                                                            tagName={authorDesignationHtmlTag}
-                                                            className="gslider-author-designation"
-                                                            value={item.authorDesignation}
-                                                        />
-                                                    </div>
-                                                )}
-                                            </div>
+                                                    ),
+                                                    text: showTestimonialText && item.testimonialText && (
+                                                        <div className="gslider-client-testimonial" key="text">
+                                                            <div className="gslider-testimonial-text-wrapper">
+                                                                <RichText.Content
+                                                                    tagName={testimonialTextHtmlTag}
+                                                                    className="gslider-testimonial-text"
+                                                                    value={item.testimonialText}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    ),
+                                                    rating: showRating && (
+                                                        <div className="gslider-rating-wrapper" key="rating">
+                                                            <div className="gslider-rating-inner">
+                                                                <div className="gslider-rating-background">
+                                                                    {[...Array(5)].map((_, i) => (
+                                                                        <span key={i} className="dashicons dashicons-star-filled"></span>
+                                                                    ))}
+                                                                </div>
+                                                                <div className="gslider-rating-foreground" style={{ width: `${(typeof item.rating !== 'undefined' ? item.rating : 5) * 20}%` }}>
+                                                                    {[...Array(5)].map((_, i) => (
+                                                                        <span key={i} className="dashicons dashicons-star-filled"></span>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ),
+                                                    name: showAuthorName && item.authorName && (
+                                                        <div className="gslider-author-name-wrapper" key="name">
+                                                            <RichText.Content
+                                                                tagName={authorNameHtmlTag}
+                                                                className="gslider-author-name"
+                                                                value={item.authorName}
+                                                            />
+                                                        </div>
+                                                    ),
+                                                    designation: showAuthorDesignation && item.authorDesignation && (
+                                                        <div className="gslider-author-designation-company-wrapper" key="designation">
+                                                            <div className="gslider-author-designation-wrapper">
+                                                                <RichText.Content
+                                                                    tagName={authorDesignationHtmlTag}
+                                                                    className="gslider-author-designation"
+                                                                    value={item.authorDesignation}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    ),
+                                                };
+                                                return (contentOrder || ['image', 'title', 'text', 'rating', 'name', 'designation']).map(key => renderMap[key]);
+                                            })()}
                                         </div>
                                     </div>
                                 </div>

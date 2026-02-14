@@ -50,6 +50,7 @@ import HtmlTagControl from '@Components/html-tag-control';
 import SelectControls from '@Components/select-controls';
 import IconPicker from '@Components/icon-picker';
 import ResponsiveToggleControl from '@Components/responsive-toggle-control';
+import ContentOrderControl from '@Components/content-order-control';
 
 const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) => {
     const {
@@ -88,6 +89,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         /** End Show/Hide Elements */
 
         /** Start Layout & Content Setting */
+        contentOrder,
         layoutHeightSwitcher,
         layoutHeight,
         layoutHeightUnits,
@@ -881,6 +883,20 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     options={HTML_TAGS}
                     value={authorDesignationHtmlTag}
                     onChange={(value) => setAttributes({ authorDesignationHtmlTag: value })}
+                />
+
+                <ContentOrderControl
+                    label={__("Content Order", "gslider-blocks")}
+                    items={[
+                        { key: 'image', label: __('Author Image', 'gslider-blocks'), icon: 'format-image' },
+                        { key: 'title', label: __('Testimonial Title', 'gslider-blocks'), icon: 'heading' },
+                        { key: 'text', label: __('Testimonial Text', 'gslider-blocks'), icon: 'editor-paragraph' },
+                        { key: 'rating', label: __('Rating', 'gslider-blocks'), icon: 'star-filled' },
+                        { key: 'name', label: __('Author Name', 'gslider-blocks'), icon: 'admin-users' },
+                        { key: 'designation', label: __('Designation', 'gslider-blocks'), icon: 'portfolio' },
+                    ]}
+                    order={contentOrder}
+                    onChange={(newOrder) => setAttributes({ contentOrder: newOrder })}
                 />
 
             </PanelBody>
