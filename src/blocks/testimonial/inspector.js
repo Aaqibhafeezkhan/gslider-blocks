@@ -884,7 +884,12 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     value={authorDesignationHtmlTag}
                     onChange={(value) => setAttributes({ authorDesignationHtmlTag: value })}
                 />
-
+            </PanelBody>
+            <PanelBody
+                title={__("Content Order", "gslider-blocks")}
+                opened={openPanels.general === "content-order"}
+                onToggle={() => togglePanel("general", "content-order")}
+            >
                 <ContentOrderControl
                     label={__("Content Order", "gslider-blocks")}
                     items={[
@@ -898,7 +903,6 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     order={contentOrder}
                     onChange={(newOrder) => setAttributes({ contentOrder: newOrder })}
                 />
-
             </PanelBody>
             <PanelBody
                 title={__("Slider Type", "gslider-blocks")}

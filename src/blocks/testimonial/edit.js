@@ -101,7 +101,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	// Block props for container
 	const blockProps = useBlockProps({
-        className: `gslider-base-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
+        className: `gslider-testimonial-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
 	});
     
 	const [sliderItemList, setSliderItemList] = useState(sliderItems);
