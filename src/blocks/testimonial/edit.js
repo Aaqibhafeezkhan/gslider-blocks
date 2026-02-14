@@ -46,6 +46,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
         showAuthorName,
         showAuthorDesignation,
+        showTestimonialTitle,
         showTestimonialText,
         showAuthorImage,
         showCompanyName,
@@ -57,6 +58,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         authorNameHtmlTag,
         authorDesignationHtmlTag,
         companyNameHtmlTag,
+        testimonialTitleHtmlTag,
         testimonialTextHtmlTag,
         globalID,
         globalClass,
@@ -582,6 +584,17 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 									<div className="gslider-content-inner-wrapper">
 										<div className="gslider-list-item">
 											<div className="gslider-list-content">
+												{ showTestimonialTitle && item.testimonialTitle && (
+                                                <div className="gslider-testimonial-title-wrapper">
+                                                    <RichText
+                                                        tagName={testimonialTitleHtmlTag}
+                                                        className="gslider-testimonial-title"
+                                                        value={item.testimonialTitle}
+                                                        onChange={(value) => updateItem(index, 'testimonialTitle', value)}
+                                                        placeholder="Enter title"
+                                                    />
+                                                </div>
+												)}
 												{ showTestimonialText && item.testimonialText && (
                                                 <div className="gslider-testimonial-text-wrapper">
                                                     <RichText

@@ -25,6 +25,7 @@ export default function Save({ attributes }) {
 
         showAuthorName,
         showAuthorDesignation,
+        showTestimonialTitle,
         showTestimonialText,
         showAuthorImage,
         showCompanyName,
@@ -36,6 +37,7 @@ export default function Save({ attributes }) {
         authorNameHtmlTag,
         authorDesignationHtmlTag,
         companyNameHtmlTag,
+        testimonialTitleHtmlTag,
         testimonialTextHtmlTag,
         globalID,
         globalClass,
@@ -175,6 +177,15 @@ export default function Save({ attributes }) {
                                 <div className="gslider-content-inner-wrapper">
                                     <div className="gslider-list-item">
                                         <div className="gslider-list-content">
+                                            {showTestimonialTitle && item.testimonialTitle && (
+                                                <div className="gslider-testimonial-title-wrapper">
+                                                    <RichText.Content
+                                                        tagName={testimonialTitleHtmlTag}
+                                                        className="gslider-testimonial-title"
+                                                        value={item.testimonialTitle}
+                                                    />
+                                                </div>
+                                            )}
                                             {showTestimonialText && item.testimonialText && (
                                                 <div className="gslider-testimonial-text-wrapper">
                                                     <RichText.Content

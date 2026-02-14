@@ -78,6 +78,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         /** Start Show/Hide Elements */
         showAuthorName,
         showAuthorDesignation,
+        showTestimonialTitle,
         showTestimonialText,
         showAuthorImage,
         showCompanyName,
@@ -100,6 +101,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         authorNameHtmlTag,
         authorDesignationHtmlTag,
         companyNameHtmlTag,
+        testimonialTitleHtmlTag,
         testimonialTextHtmlTag,
         /** End Layout & Content Setting */
 
@@ -227,6 +229,44 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         companyNameMobilePaddingCssStyle,
         companyNamePaddingLink,
         /** End Company Name Typography, Color, Margin & Padding */
+        
+        /** Start Testimonial Title Typography, Color, Margin & Padding */
+        testimonialTitleFontFamily,
+        testimonialTitleFontSize,
+        testimonialTitleFontSizeUnits,
+        testimonialTitleFontWeight,
+        testimonialTitleFontStyle,
+        testimonialTitleTextTransform,
+        testimonialTitleTextDecoration,
+        testimonialTitleLineHeight,
+        testimonialTitleLineHeightUnits,
+        testimonialTitleLetterSpacing,
+        testimonialTitleLetterSpacingUnits,
+        testimonialTitleWordSpacing,
+        testimonialTitleWordSpacingUnits,
+
+        testimonialTitleColorSwitcher,
+        testimonialTitleColor,
+        testimonialTitleColorHover,
+
+        testimonialTitleMarginUnits,
+        testimonialTitleDesktopMargin,
+        testimonialTitleDesktopMarginCssStyle,
+        testimonialTitleTabletMargin,
+        testimonialTitleTabletMarginCssStyle,
+        testimonialTitleMobileMargin,
+        testimonialTitleMobileMarginCssStyle,
+        testimonialTitleMarginLink,
+
+        testimonialTitlePaddingUnits,
+        testimonialTitleDesktopPadding,
+        testimonialTitleDesktopPaddingCssStyle,
+        testimonialTitleTabletPadding,
+        testimonialTitleTabletPaddingCssStyle,
+        testimonialTitleMobilePadding,
+        testimonialTitleMobilePaddingCssStyle,
+        testimonialTitlePaddingLink,
+        /** End Testimonial Title Typography, Color, Margin & Padding */
 
         /** Start Testimonial Text Typography, Color, Margin & Padding */
         testimonialTextFontFamily,
@@ -669,6 +709,9 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
     if (testimonialTextFontFamily !== 'Default') {
         LoadGoogleFont(testimonialTextFontFamily);
     }
+    if (testimonialTitleFontFamily !== 'Default') {
+        LoadGoogleFont(testimonialTitleFontFamily);
+    }
     /** End Load Google Font */
 
     /** Navigation Custom Arrows */
@@ -691,6 +734,11 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                 opened={openPanels.general === "show-hide-elements"}
                 onToggle={() => togglePanel("general", "show-hide-elements")}
             >
+                <ToggleControl
+                    label={__("Show Testimonial Title", "gslider-blocks")}
+                    checked={showTestimonialTitle}
+                    onChange={(value) => setAttributes({ showTestimonialTitle: value })}
+                />
                 <ToggleControl
                     label={__("Show Testimonial Text", "gslider-blocks")}
                     checked={showTestimonialText}
@@ -856,6 +904,13 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     setAlignmentValue={(value) => setAttributes({ contentAlignment: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
+                />
+
+                <HtmlTagControl
+                    label={__("Testimonial Title Tag", "gslider-blocks")}
+                    options={HTML_TAGS}
+                    value={testimonialTitleHtmlTag}
+                    onChange={(value) => setAttributes({ testimonialTitleHtmlTag: value })}
                 />
 
                 <HtmlTagControl
@@ -1743,6 +1798,118 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         mobileSpacingStyle={(value) => setAttributes({ companyNameMobilePaddingCssStyle: value })}
                         isLinked={companyNamePaddingLink}
                         onChangeLink={(value) => setAttributes({ companyNamePaddingLink: value })}
+                    />
+                </PanelBody>
+            )}
+
+            {showTestimonialTitle && (
+                <PanelBody
+                    title={__("Testimonial Title", "gslider-blocks")}
+                    opened={openPanels.styles === "testimonialTitle"}
+                    onToggle={() => togglePanel("styles", "testimonialTitle")}
+                >
+                    <ResponsiveTypographyControl
+                        fontFamily={testimonialTitleFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ testimonialTitleFontFamily: value })}
+
+                        fontSize={testimonialTitleFontSize}
+                        onChangeFontSize={(value) => setAttributes({ testimonialTitleFontSize: value })}
+
+                        fontSizeUnits={testimonialTitleFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ testimonialTitleFontSizeUnits: value })}
+
+                        fontWeight={testimonialTitleFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ testimonialTitleFontWeight: value })}
+
+                        fontStyle={testimonialTitleFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ testimonialTitleFontStyle: value })}
+
+                        textTransform={testimonialTitleTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ testimonialTitleTextTransform: value })}
+
+                        textDecoration={testimonialTitleTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ testimonialTitleTextDecoration: value })}
+
+                        lineHeight={testimonialTitleLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ testimonialTitleLineHeight: value })}
+
+                        lineHeightUnits={testimonialTitleLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ testimonialTitleLineHeightUnits: value })}
+
+                        letterSpacing={testimonialTitleLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ testimonialTitleLetterSpacing: value })}
+
+                        letterSpacingUnits={testimonialTitleLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ testimonialTitleLetterSpacingUnits: value })}
+
+                        wordSpacing={testimonialTitleWordSpacing}
+                        onChangeWordSpacing={(value) => setAttributes({ testimonialTitleWordSpacing: value })}
+
+                        wordSpacingUnits={testimonialTitleWordSpacingUnits}
+                        onChangeWordSpacingUnit={(value) => setAttributes({ testimonialTitleWordSpacingUnits: value })}
+
+                        deviceType={deviceType}
+                    />
+                    <SwitcherControl
+                        label={__("Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={testimonialTitleColorSwitcher}
+                        onChange={(value) => setAttributes({ testimonialTitleColorSwitcher: value })}
+                    />
+
+                    {testimonialTitleColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={testimonialTitleColor}
+                            onChangeColor={(value) => setAttributes({ testimonialTitleColor: value })}
+                            defaultColor=''
+                        />
+                    )}
+
+                    {testimonialTitleColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={testimonialTitleColorHover}
+                            onChangeColor={(value) => setAttributes({ testimonialTitleColorHover: value })}
+                            defaultColor=''
+                        />
+                    )}
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={testimonialTitleMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ testimonialTitleMarginUnits: value })}
+                        desktopSpacing={testimonialTitleDesktopMargin}
+                        onChangeDesktopSpacing={(value) => setAttributes({ testimonialTitleDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ testimonialTitleDesktopMarginCssStyle: value })}
+                        tabletSpacing={testimonialTitleTabletMargin}
+                        onChangeTabletSpacing={(value) => setAttributes({ testimonialTitleTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ testimonialTitleTabletMarginCssStyle: value })}
+                        mobileSpacing={testimonialTitleMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ testimonialTitleMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ testimonialTitleMobileMarginCssStyle: value })}
+                        isLinked={testimonialTitleMarginLink}
+                        onChangeLink={(value) => setAttributes({ testimonialTitleMarginLink: value })}
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={testimonialTitlePaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ testimonialTitlePaddingUnits: value })}
+                        desktopSpacing={testimonialTitleDesktopPadding}
+                        onChangeDesktopSpacing={(value) => setAttributes({ testimonialTitleDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ testimonialTitleDesktopPaddingCssStyle: value })}
+                        tabletSpacing={testimonialTitleTabletPadding}
+                        onChangeTabletSpacing={(value) => setAttributes({ testimonialTitleTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ testimonialTitleTabletPaddingCssStyle: value })}
+                        mobileSpacing={testimonialTitleMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ testimonialTitleMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ testimonialTitleMobilePaddingCssStyle: value })}
+                        isLinked={testimonialTitlePaddingLink}
+                        onChangeLink={(value) => setAttributes({ testimonialTitlePaddingLink: value })}
                     />
                 </PanelBody>
             )}

@@ -16,6 +16,7 @@ const attributes = {
         default: [
             { 
                 id: "item-1",
+                testimonialTitle: "Testimonial Title",
                 testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
                 authorName: "Author Name",
                 authorDesignation: "CEO, Google",
@@ -84,7 +85,7 @@ const attributes = {
             },
             { 
                 id: "item-2",
-
+                testimonialTitle: "Testimonial Title",
                 testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
                 authorName: "Author Name",
                 authorDesignation: "CEO, Google",
@@ -154,7 +155,7 @@ const attributes = {
             },
             { 
                 id: "item-3",
-
+                testimonialTitle: "Testimonial Title",
                 testimonialText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.",
                 authorName: "Author Name",
                 authorDesignation: "CEO, Google",
@@ -228,6 +229,10 @@ const attributes = {
                 id: {
                     type: "string",
                     default: ""
+                },
+                testimonialTitle: {
+                    type: "string",
+                    default: "Testimonial Title"
                 },
                 testimonialText: {
                     type: "string",
@@ -472,6 +477,10 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    showTestimonialTitle: {
+        type: "boolean",
+        default: true,
+    },
     showTestimonialText: {
         type: "boolean",
         default: true,
@@ -582,6 +591,10 @@ const attributes = {
     authorDesignationHtmlTag: {
         type: "string",
         default: "p",
+    },
+    testimonialTitleHtmlTag: {
+        type: "string",
+        default: "h4",
     },
     companyNameHtmlTag: {
         type: "string",
@@ -1286,6 +1299,222 @@ const attributes = {
     /** End Company Name Padding */
     
     /** End Company Name */
+    
+    /** Start Testimonial Title */
+
+    /** Start Testimonial Title Typography */
+    testimonialTitleFontFamily: {
+        type: "string",
+        default: "",
+    },
+    testimonialTitleFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialTitleFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+            em: 'px',
+            rem: 'px',
+        }
+    },
+    testimonialTitleFontWeight: {
+        type: "string",
+        default: "",
+    },
+    testimonialTitleFontStyle: {
+        type: "string",
+        default: "",
+    },
+    testimonialTitleTextTransform: {
+        type: "string",
+        default: "",
+    },
+    testimonialTitleTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    testimonialTitleLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialTitleLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    testimonialTitleLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialTitleLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    testimonialTitleWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },  
+    testimonialTitleWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Testimonial Title Typography */
+
+    /** Start Testimonial Title Color */
+    testimonialTitleColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	testimonialTitleColor: {
+		type: "string",
+		default: "",
+	},
+	testimonialTitleColorHover: {
+		type: "string",
+		default: "",
+	},
+    /** End Testimonial Title Color */
+
+    /** Start Testimonial Title Margin */
+	testimonialTitleMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	testimonialTitleDesktopMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    testimonialTitleDesktopMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	testimonialTitleTabletMargin: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    testimonialTitleTabletMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	testimonialTitleMobileMargin: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    testimonialTitleMobileMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	testimonialTitleMarginLink : {
+		type : "boolean",
+		default: true
+	},
+    /** End Testimonial Title Margin */
+
+    /** Start Testimonial Title Padding */
+	testimonialTitlePaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	testimonialTitleDesktopPadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    testimonialTitleDesktopPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	testimonialTitleTabletPadding: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    testimonialTitleTabletPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	testimonialTitleMobilePadding: {
+		type: "object",  
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+    testimonialTitleMobilePaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+	testimonialTitlePaddingLink : {
+		type : "boolean",
+		default: true
+	},
+    /** End Testimonial Title Padding */
+    
+    /** End Testimonial Title */
 
     /** Start Testimonial Text Typography */
     testimonialTextFontFamily: {
