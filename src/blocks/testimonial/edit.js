@@ -49,15 +49,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         showTestimonialTitle,
         showTestimonialText,
         showAuthorImage,
-        showCompanyName,
-        showCompanyLogo,
         showRating,
         showNavigation,
         showPagination,
         paginationPositionType,
         authorNameHtmlTag,
         authorDesignationHtmlTag,
-        companyNameHtmlTag,
         testimonialTitleHtmlTag,
         testimonialTextHtmlTag,
         globalID,
@@ -127,16 +124,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
         : '';
 
-    const companyLogoPlaceholder = window.GSliderBlocksData?.pluginUrl 
-        ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
-        : '';
-
     /**
      * Fix for image display on initial load
      * Ensures all items have valid image URLs (placeholders) if missing
      */
     useEffect(() => {
-        if (sliderItemList.some(item => !item.authorImage?.url || !item.companyLogo?.url)) {
+        if (sliderItemList.some(item => !item.authorImage?.url)) {
             const updatedItems = sliderItemList.map(item => {
                 let updatedItem = { ...item };
                 
@@ -145,14 +138,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         ...(item.authorImage || {}),
                         url: authorImagePlaceholder,
                         alt: item.authorImage?.alt || 'Author Placeholder'
-                    };
-                }
-                
-                if (companyLogoPlaceholder && !item.companyLogo?.url) {
-                    updatedItem.companyLogo = {
-                        ...(item.companyLogo || {}),
-                        url: companyLogoPlaceholder,
-                        alt: item.companyLogo?.alt || 'Company Logo Placeholder'
                     };
                 }
                 
@@ -308,19 +293,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const handleAddItem = () => {
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
-            testimonialText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum.',
-            authorName: 'Author Name',
-            authorDesignation: 'CEO, Google',
+            testimonialTitle: 'Excellent Testimonial Plugin',
+            testimonialText: 'This is the best testimonial plugin I have ever used. Highly recommended for any WordPress site!',
+            authorName: 'Alex Hunter',
+            authorDesignation: 'Software Engineer, Google',
             authorImage: {
                 url: authorImagePlaceholder,
                 id: '',
                 alt: 'Author Placeholder',
-            },
-            companyName: 'Google',
-            companyLogo: {
-                url: companyLogoPlaceholder,
-                id: '',
-                alt: 'Company Logo Placeholder',
             },
             rating: 5,
             
@@ -431,8 +411,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         };
                     }
 
-                    // Special handling for authorImage and companyLogo to allow partial updates (merging)
-                    if (key === 'authorImage' || key === 'companyLogo') {
+                    // Special handling for authorImage to allow partial updates (merging)
+                    if (key === 'authorImage') {
                         // Ensure null values from ImageControl (delete) are converted to defaults
                         const normalizedValue = {};
                         if (value) {
@@ -584,6 +564,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 									<div className="gslider-content-inner-wrapper">
 										<div className="gslider-list-item">
 											<div className="gslider-list-content">
+												{ showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
+                                                    <div className="gslider-author-image-wrapper">
+														<img 
+															src={item.authorImage?.url || authorImagePlaceholder}
+                                                            alt={item.authorImage?.alt || 'Author'}
+															className="gslider-author-image"
+														/>
+                                                    </div>
+												)}
 												{ showTestimonialTitle && item.testimonialTitle && (
                                                 <div className="gslider-testimonial-title-wrapper">
                                                     <RichText
@@ -595,17 +584,19 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                     />
                                                 </div>
 												)}
-												{ showTestimonialText && item.testimonialText && (
-                                                <div className="gslider-testimonial-text-wrapper">
-                                                    <RichText
-                                                        tagName={testimonialTextHtmlTag}
-                                                        className="gslider-testimonial-text"
-                                                        value={item.testimonialText}
-                                                        onChange={(value) => updateItem(index, 'testimonialText', value)}
-                                                        placeholder="Enter description"
-                                                    />
+												<div className="gslider-client-testimonial">
+                                                    { showTestimonialText && item.testimonialText && (
+                                                    <div className="gslider-testimonial-text-wrapper">
+                                                        <RichText
+                                                            tagName={testimonialTextHtmlTag}
+                                                            className="gslider-testimonial-text"
+                                                            value={item.testimonialText}
+                                                            onChange={(value) => updateItem(index, 'testimonialText', value)}
+                                                            placeholder="Enter description"
+                                                        />
+                                                    </div>
+                                                    )}
                                                 </div>
-												)}
 												{ showAuthorName && item.authorName && (
                                                 <div className="gslider-author-name-wrapper">
                                                     <RichText
@@ -614,28 +605,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                         value={item.authorName}
                                                         onChange={(value) => updateItem(index, 'authorName', value)}
                                                         placeholder="Enter author name"
-                                                    />
-                                                </div>
-												)}
-                                                { showAuthorDesignation && item.authorDesignation && (
-                                                <div className="gslider-author-designation-wrapper">
-                                                    <RichText
-                                                        tagName={authorDesignationHtmlTag}
-                                                        className="gslider-author-designation"
-                                                        value={item.authorDesignation}
-                                                        onChange={(value) => updateItem(index, 'authorDesignation', value)}
-                                                        placeholder="Enter author designation"
-                                                    />
-                                                </div>
-												)}
-												{ showCompanyName && item.companyName && (
-                                                <div className="gslider-company-name-wrapper">
-                                                    <RichText
-                                                        tagName={companyNameHtmlTag}
-                                                        className="gslider-company-name"
-                                                        value={item.companyName}
-                                                        onChange={(value) => updateItem(index, 'companyName', value)}
-                                                        placeholder="Enter company name"
                                                     />
                                                 </div>
 												)}
@@ -655,24 +624,19 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                         </div>
                                                     </div>
                                                 )}
-												{ showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
-                                                    <div className="gslider-author-image-wrapper">
-														<img 
-															src={item.authorImage?.url || authorImagePlaceholder}
-                                                            alt={item.authorImage?.alt || 'Author'}
-															className="gslider-author-image"
-														/>
+                                                <div className="gslider-author-designation-company-wrapper">
+                                                    { showAuthorDesignation && item.authorDesignation && (
+                                                    <div className="gslider-author-designation-wrapper">
+                                                        <RichText
+                                                            tagName={authorDesignationHtmlTag}
+                                                            className="gslider-author-designation"
+                                                            value={item.authorDesignation}
+                                                            onChange={(value) => updateItem(index, 'authorDesignation', value)}
+                                                            placeholder="Enter author designation"
+                                                        />
                                                     </div>
-												)}
-                                                { showCompanyLogo && (item.companyLogo?.url || companyLogoPlaceholder) && (
-                                                    <div className="gslider-company-logo-wrapper">
-														<img 
-															src={item.companyLogo?.url || companyLogoPlaceholder}
-                                                            alt={item.companyLogo?.alt || 'Company Logo'}
-															className="gslider-company-logo"
-														/>
-                                                    </div>
-												)}
+                                                    )}
+                                                </div>
 											</div>
 										</div>
 									</div>

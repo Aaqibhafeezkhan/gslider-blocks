@@ -28,15 +28,12 @@ export default function Save({ attributes }) {
         showTestimonialTitle,
         showTestimonialText,
         showAuthorImage,
-        showCompanyName,
-        showCompanyLogo,
         showRating,
         showNavigation,
         showPagination,
         paginationPositionType,
         authorNameHtmlTag,
         authorDesignationHtmlTag,
-        companyNameHtmlTag,
         testimonialTitleHtmlTag,
         testimonialTextHtmlTag,
         globalID,
@@ -167,6 +164,10 @@ export default function Save({ attributes }) {
         
     });
 
+    const authorImagePlaceholder = typeof window !== 'undefined' && window.GSliderBlocksData?.pluginUrl
+        ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
+        : '';
+
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className="swiper">
@@ -177,6 +178,15 @@ export default function Save({ attributes }) {
                                 <div className="gslider-content-inner-wrapper">
                                     <div className="gslider-list-item">
                                         <div className="gslider-list-content">
+                                            {showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
+                                                <div className="gslider-author-image-wrapper">
+                                                    <img 
+                                                        src={item.authorImage?.url || authorImagePlaceholder}
+                                                        alt={item.authorImage?.alt || 'Author'}
+                                                        className="gslider-author-image"
+                                                    />
+                                                </div>
+                                            )}
                                             {showTestimonialTitle && item.testimonialTitle && (
                                                 <div className="gslider-testimonial-title-wrapper">
                                                     <RichText.Content
@@ -186,39 +196,23 @@ export default function Save({ attributes }) {
                                                     />
                                                 </div>
                                             )}
-                                            {showTestimonialText && item.testimonialText && (
-                                                <div className="gslider-testimonial-text-wrapper">
-                                                    <RichText.Content
-                                                        tagName={testimonialTextHtmlTag}
-                                                        className="gslider-testimonial-text"
-                                                        value={item.testimonialText}
-                                                    />
-                                                </div>
-                                            )}
+                                            <div className="gslider-client-testimonial">
+                                                {showTestimonialText && item.testimonialText && (
+                                                    <div className="gslider-testimonial-text-wrapper">
+                                                        <RichText.Content
+                                                            tagName={testimonialTextHtmlTag}
+                                                            className="gslider-testimonial-text"
+                                                            value={item.testimonialText}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
                                             {showAuthorName && item.authorName && (
                                                 <div className="gslider-author-name-wrapper">
                                                     <RichText.Content
                                                         tagName={authorNameHtmlTag}
                                                         className="gslider-author-name"
                                                         value={item.authorName}
-                                                    />
-                                                </div>
-                                            )}
-                                            {showAuthorDesignation && item.authorDesignation && (
-                                                <div className="gslider-author-designation-wrapper">
-                                                    <RichText.Content
-                                                        tagName={authorDesignationHtmlTag}
-                                                        className="gslider-author-designation"
-                                                        value={item.authorDesignation}
-                                                    />
-                                                </div>
-                                            )}
-                                            {showCompanyName && item.companyName && (
-                                                <div className="gslider-company-name-wrapper">
-                                                    <RichText.Content
-                                                        tagName={companyNameHtmlTag}
-                                                        className="gslider-company-name"
-                                                        value={item.companyName}
                                                     />
                                                 </div>
                                             )}
@@ -238,25 +232,17 @@ export default function Save({ attributes }) {
                                                     </div>
                                                 </div>
                                             )}
-
-                                            {showAuthorImage && item.authorImage?.url && (
-                                                <div className="gslider-author-image-wrapper">
-                                                    <img 
-                                                        src={item.authorImage.url}
-                                                        alt={item.authorImage.alt || 'Author'}
-                                                        className="gslider-author-image"
-                                                    />
-                                                </div>
-                                            )}
-                                            {showCompanyLogo && item.companyLogo?.url && (
-                                                <div className="gslider-company-logo-wrapper">
-                                                    <img 
-                                                        src={item.companyLogo.url}
-                                                        alt={item.companyLogo.alt || 'Company Logo'}
-                                                        className="gslider-company-logo"
-                                                    />
-                                                </div>
-                                            )}
+                                            <div className="gslider-author-designation-company-wrapper">
+                                                {showAuthorDesignation && item.authorDesignation && (
+                                                    <div className="gslider-author-designation-wrapper">
+                                                        <RichText.Content
+                                                            tagName={authorDesignationHtmlTag}
+                                                            className="gslider-author-designation"
+                                                            value={item.authorDesignation}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
