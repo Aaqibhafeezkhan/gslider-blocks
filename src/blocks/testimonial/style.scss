@@ -50,6 +50,10 @@
 			.gslider-rating-background {
 				color: #e6e6e6;
 				display: flex;
+
+				svg {
+					fill: currentColor;
+				}
 			}
 
 			.gslider-rating-foreground {
@@ -60,6 +64,10 @@
 				overflow: hidden;
 				color: #ffb700;
 				display: flex;
+
+				svg {
+					fill: currentColor;
+				}
 			}
 		}
 	}
