@@ -597,17 +597,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                     </div>
                                                     )}
                                                 </div>
-												{ showAuthorName && item.authorName && (
-                                                <div className="gslider-author-name-wrapper">
-                                                    <RichText
-                                                        tagName={authorNameHtmlTag}
-                                                        className="gslider-author-name"
-                                                        value={item.authorName}
-                                                        onChange={(value) => updateItem(index, 'authorName', value)}
-                                                        placeholder="Enter author name"
-                                                    />
-                                                </div>
-												)}
                                                 { showRating && (
                                                     <div className="gslider-rating-wrapper">
                                                         <div className="gslider-rating-inner">
@@ -624,6 +613,17 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                         </div>
                                                     </div>
                                                 )}
+												{ showAuthorName && item.authorName && (
+                                                <div className="gslider-author-name-wrapper">
+                                                    <RichText
+                                                        tagName={authorNameHtmlTag}
+                                                        className="gslider-author-name"
+                                                        value={item.authorName}
+                                                        onChange={(value) => updateItem(index, 'authorName', value)}
+                                                        placeholder="Enter author name"
+                                                    />
+                                                </div>
+												)}
                                                 <div className="gslider-author-designation-company-wrapper">
                                                     { showAuthorDesignation && item.authorDesignation && (
                                                     <div className="gslider-author-designation-wrapper">

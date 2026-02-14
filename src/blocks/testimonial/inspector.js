@@ -863,6 +863,13 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                 />
 
                 <HtmlTagControl
+                    label={__("Testimonial Text Tag", "gslider-blocks")}
+                    options={HTML_TAGS}
+                    value={testimonialTextHtmlTag}
+                    onChange={(value) => setAttributes({ testimonialTextHtmlTag: value })}
+                />
+
+                <HtmlTagControl
                     label={__("Author Name Tag", "gslider-blocks")}
                     options={HTML_TAGS}
                     value={authorNameHtmlTag}
@@ -874,13 +881,6 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     options={HTML_TAGS}
                     value={authorDesignationHtmlTag}
                     onChange={(value) => setAttributes({ authorDesignationHtmlTag: value })}
-                />
-
-                <HtmlTagControl
-                    label={__("Testimonial Text Tag", "gslider-blocks")}
-                    options={HTML_TAGS}
-                    value={testimonialTextHtmlTag}
-                    onChange={(value) => setAttributes({ testimonialTextHtmlTag: value })}
                 />
 
             </PanelBody>

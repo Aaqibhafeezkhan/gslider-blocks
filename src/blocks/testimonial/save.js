@@ -207,15 +207,6 @@ export default function Save({ attributes }) {
                                                     </div>
                                                 )}
                                             </div>
-                                            {showAuthorName && item.authorName && (
-                                                <div className="gslider-author-name-wrapper">
-                                                    <RichText.Content
-                                                        tagName={authorNameHtmlTag}
-                                                        className="gslider-author-name"
-                                                        value={item.authorName}
-                                                    />
-                                                </div>
-                                            )}
                                             { showRating && (
                                                 <div className="gslider-rating-wrapper">
                                                     <div className="gslider-rating-inner">
@@ -230,6 +221,15 @@ export default function Save({ attributes }) {
                                                             ))}
                                                         </div>
                                                     </div>
+                                                </div>
+                                            )}
+                                            {showAuthorName && item.authorName && (
+                                                <div className="gslider-author-name-wrapper">
+                                                    <RichText.Content
+                                                        tagName={authorNameHtmlTag}
+                                                        className="gslider-author-name"
+                                                        value={item.authorName}
+                                                    />
                                                 </div>
                                             )}
                                             <div className="gslider-author-designation-company-wrapper">

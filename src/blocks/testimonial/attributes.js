@@ -546,21 +546,21 @@ const attributes = {
             Mobile: "",
         },
     },
-    authorNameHtmlTag: {
-        type: "string",
-        default: "h3",
-    },
-    authorDesignationHtmlTag: {
-        type: "string",
-        default: "p",
-    },
     testimonialTitleHtmlTag: {
         type: "string",
-        default: "h4",
+        default: "h3",
     },
     testimonialTextHtmlTag: {
         type: "string",
         default: "p",
+    },
+    authorNameHtmlTag: {
+        type: "string",
+        default: "h4",
+    },
+    authorDesignationHtmlTag: {
+        type: "string",
+        default: "h5",
     },
     /** End Layout & Content Setting */
 
@@ -626,9 +626,9 @@ const attributes = {
     authorNameFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '18',
+            Tablet: '18',
+            Mobile: '18'
         }
     },
     authorNameFontSizeUnits: {
@@ -840,9 +840,9 @@ const attributes = {
     authorDesignationFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
         }
     },
     authorDesignationFontSizeUnits: {
@@ -1054,9 +1054,9 @@ const attributes = {
     testimonialTitleFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '24',
+            Tablet: '24',
+            Mobile: '24'
         }
     },
     testimonialTitleFontSizeUnits: {
