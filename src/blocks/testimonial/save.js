@@ -178,8 +178,6 @@ export default function Save({ attributes }) {
                         <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
                             <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})}>
                                 <div className="gslider-content-inner-wrapper">
-                                    <div className="gslider-list-item">
-                                        <div className="gslider-list-content">
                                             {(() => {
                                                 const renderMap = {
                                                     image: showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
@@ -321,8 +319,6 @@ export default function Save({ attributes }) {
                                                 };
                                                 return (contentOrder || ['image', 'title', 'text', 'rating', 'name', 'designation']).map(key => renderMap[key]);
                                             })()}
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

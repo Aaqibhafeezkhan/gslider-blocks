@@ -570,9 +570,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 						{sliderItemList.map((item, index) => (
 							<div className="swiper-slide" key={item.id}>
 								<div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
-									<div className="gslider-content-inner-wrapper">
-										<div className="gslider-list-item">
-											<div className="gslider-list-content">
+										<div className="gslider-content-inner-wrapper">
                                                 {(() => {
                                                     const renderMap = {
                                                         image: showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
@@ -723,8 +721,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                                     };
                                                     return (contentOrder || ['image', 'title', 'text', 'rating', 'name', 'designation']).map(key => renderMap[key]);
                                                 })()}
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>

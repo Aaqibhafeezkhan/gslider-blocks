@@ -927,7 +927,7 @@ const generateBaseSliderStyle = (attributes) => {
         }
 
         /** Start Author Image Style */
-        .${blockId} .gslider-author-image-wrapper img {
+        .${blockId} .gslider-author-image-wrapper .gslider-author-image {
             ${authorImageSize?.Desktop ? `width: ${authorImageSize.Desktop}${authorImageSizeUnits?.Desktop || 'px'};` : ''}
             ${authorImageSize?.Desktop ? `height: ${authorImageSize.Desktop}${authorImageSizeUnits?.Desktop || 'px'};` : ''}
             ${authorImageBorder !== 'none' ? `border-style: ${authorImageBorder};` : ''}
@@ -939,7 +939,7 @@ const generateBaseSliderStyle = (attributes) => {
             object-fit: cover;
             transition: all 0.3s ease-in-out;
         }
-        .${blockId}.gslider-testimonial-wrapper:hover .gslider-author-image-wrapper img {
+        .${blockId}.gslider-testimonial-wrapper:hover .gslider-author-image-wrapper .gslider-author-image {
             ${authorImageBorderHoverColor ? `border-color: ${authorImageBorderHoverColor};` : ''}
         }
         /** End Author Image Style */

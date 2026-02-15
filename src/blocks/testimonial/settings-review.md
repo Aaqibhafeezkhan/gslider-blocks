@@ -50,7 +50,7 @@
 | | Image Border (Style, Width, Color, Hover Color) | Select + Switcher | ✅ |
 | | Image Border Radius | Responsive Spacing | ✅ |
 | | Image Margin & Padding | Responsive Spacing | ✅ |
-| **Rating** | ❌ No global style controls (Color/Size/Gap) | — | ⚠️ Missing |
+| **Rating** | Star Color (Normal/Hover), Empty Star Color (Normal/Hover), Star Size (Responsive), Star Gap (Responsive), Rating Number (Toggle/Typography/Color/Hover), Margin/Padding (Responsive) | — | ✅ |
 | **Navigation Arrows** | Custom Icons (left/right) | IconPicker/ImageControl | ✅ |
 | | Arrow Size | Responsive Range | ✅ |
 | | Arrow Color (normal/hover) | Color Control | ✅ |
@@ -97,30 +97,14 @@
 
 ---
 
-## ⚠️ Missing Rating Style Settings (To Be Added)
+## ✅ Resolved & Implemented Rating Settings
 
-These settings need to be added to the **Styles tab** in the Inspector panel:
-
-### Priority: High
-| Setting | Component | Description |
-|---------|-----------|-------------|
-| **Star Color** | ColorControl | Color for filled stars (default: #ffb700) |
-| **Empty Star Color** | ColorControl | Color for empty/outline stars (default: #d4d4d4) |
-| **Star Size** | ResponsiveRangeControl | Size of stars in px (default: 20px, range: 10-50) |
-
-### Priority: Medium
-| Setting | Component | Description |
-|---------|-----------|-------------|
-| **Rating Margin** | ResponsiveSpacingControl | Margin around rating wrapper |
-| **Rating Padding** | ResponsiveSpacingControl | Padding inside rating wrapper |
-| **Star Gap** | RangeControl | Space between individual stars (default: 5px) |
-
-### Priority: Low
-| Setting | Component | Description |
-|---------|-----------|-------------|
-| **Show Rating Number** | ToggleControl | Show numeric value (e.g., "4.5/5") next to stars |
-| **Rating Number Typography** | ResponsiveTypographyControl | Typography for the numeric display |
-| **Rating Number Color** | ColorControl | Color for the numeric display |
+All previously missing rating settings have been successfully implemented:
+- **Colors**: Normal and Hover color controls for filled stars, empty stars, and rating numbers.
+- **Responsive**: Star Size and Star Gap are fully responsive with unit support.
+- **Spacing**: Responsive Margin and Padding for the rating wrapper.
+- **Numeric Display**: Toggle for the rating number with full Typography, Color, and Hover support.
+- **Unified Hover**: Implementation of a block-wide `.gslider-testimonial-wrapper:hover` trigger for all sub-elements.
 
 ---
 
