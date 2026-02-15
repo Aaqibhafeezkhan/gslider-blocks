@@ -511,7 +511,7 @@ const attributes = {
 	},
     paginationPositionType: {
         type: "string",
-        default: "inside",
+        default: "outside",
     },
     /** End Show/Hide Elements */
 
@@ -2347,7 +2347,7 @@ const attributes = {
     /** Start Navigation Arrow Position */
     navigationArrowPositionType: {
         type: "string",
-        default: "inside",
+        default: "outside",
     },
 
     navigationArrowPosition: {
