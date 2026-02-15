@@ -230,7 +230,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			pagination: showPagination?.[deviceType]
 				? {
 					el: paginationPositionType === 'outside' 
-						? paginationOutsideRef.current 
+						? `.swiper-pagination-${blockId}` 
 						: paginationInsideRef.current,
 					type: paginationType,
 					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
@@ -259,6 +259,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             }
         };
     }, [
+        blockId,
         deviceType,
         sliderType,
         sliderItemList,
@@ -756,7 +757,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     )}
 
 					{/* Pagination inside swiper container */}
-					<div className="swiper-pagination swiper-pagination-base-slider" ref={paginationInsideRef}></div>
+					<div className="swiper-pagination swiper-pagination-testimonial-slider" ref={paginationInsideRef}></div>
 				</div>
 
                 {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
@@ -788,7 +789,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
                 {/* Pagination outside swiper container */}
 				<div
-					className={`swiper-pagination swiper-pagination-base-slider swiper-pagination-${blockId}`}
+					className={`swiper-pagination swiper-pagination-testimonial-slider swiper-pagination-${blockId}`}
 					ref={paginationOutsideRef}
 					aria-label="Slider pagination"
 				></div>

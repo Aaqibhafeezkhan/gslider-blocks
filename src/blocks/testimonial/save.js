@@ -150,7 +150,7 @@ export default function Save({ attributes }) {
 
         pagination: {
             enabled: anyPaginationEnabled,
-            el: `.${blockId} .swiper-pagination-base-slider`,
+            el: `.${blockId} .swiper-pagination-testimonial-slider`,
             type: paginationType,
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,
@@ -354,7 +354,7 @@ export default function Save({ attributes }) {
                 {anyPaginationEnabled && paginationPositionType === 'inside' && (
                     <>
                         <div
-                            className="swiper-pagination swiper-pagination-base-slider"
+                            className="swiper-pagination swiper-pagination-testimonial-slider"
                             aria-label="Carousel pagination"
                         ></div>
                     </>
@@ -389,7 +389,7 @@ export default function Save({ attributes }) {
             {anyPaginationEnabled && paginationPositionType === 'outside' && (
                 <>
                     <div
-                        className={`swiper-pagination swiper-pagination-base-slider swiper-pagination-${blockId}`}
+                        className={`swiper-pagination swiper-pagination-testimonial-slider swiper-pagination-${blockId}`}
                         aria-label="Carousel pagination"
                     ></div>
                 </>
