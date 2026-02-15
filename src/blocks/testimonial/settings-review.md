@@ -46,8 +46,11 @@
 | **Author Designation** | Typography | Responsive Typography | ✅ |
 | | Color (normal/hover) | Color Control | ✅ |
 | | Margin & Padding | Responsive Spacing | ✅ |
-| **Author Image** | ❌ No style controls | — | ⚠️ Missing |
-| **Rating** | ❌ No style controls | — | ⚠️ Missing |
+| **Author Image** | Image Size (80px default) | Responsive Range | ✅ |
+| | Image Border (Style, Width, Color, Hover Color) | Select + Switcher | ✅ |
+| | Image Border Radius | Responsive Spacing | ✅ |
+| | Image Margin & Padding | Responsive Spacing | ✅ |
+| **Rating** | ❌ No global style controls (Color/Size/Gap) | — | ⚠️ Missing |
 | **Navigation Arrows** | Custom Icons (left/right) | IconPicker/ImageControl | ✅ |
 | | Arrow Size | Responsive Range | ✅ |
 | | Arrow Color (normal/hover) | Color Control | ✅ |
@@ -121,12 +124,13 @@ These settings need to be added to the **Styles tab** in the Inspector panel:
 
 ---
 
-## ⚠️ Missing Author Image Style Settings (To Be Added)
+## ✅ Resolved & Cleaned Up
 
-### Priority: Medium
-| Setting | Component | Description |
-|---------|-----------|-------------|
-| **Image Size** | ResponsiveRangeControl | Width/Height (default: 80px) |
-| **Image Border Radius** | ResponsiveSpacingControl | Corner rounding (default: 50%) |
-| **Image Border** | BorderControl | Border style, width, color |
-| **Image Margin** | ResponsiveSpacingControl | Spacing around image |
+### Errors Resolved
+- **Google Fonts (GSliderBlocksData)**: Corrected global variable naming and added safety checks in `constants/index.js`.
+- **Inspector TypeError**: Added safe fallbacks for responsive attributes and corrected component props.
+
+### DOM Structure Cleanup
+- Removed redundant `gslider-author-designation-company-wrapper` class.
+- Simplified `gslider-testimonial-text-wrapper` nesting.
+- Updated `styling.js` to target elements more accurately (e.g., direct `img` tag styling for author image).
