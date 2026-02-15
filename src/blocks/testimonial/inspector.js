@@ -190,6 +190,51 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         authorDesignationMobilePaddingCssStyle,
         authorDesignationPaddingLink,
         /** End Author Designation Typography, Color, Margin & Padding */
+
+        /** Start Author Image Style */
+        authorImageSize,
+        authorImageSizeUnits,
+
+        authorImageBorder,
+        authorImageBorderColorSwitcher,
+        authorImageBorderColor,
+        authorImageBorderHoverColor,
+        authorImageBorderWidthUnits,
+        authorImageDesktopBorderWidth,
+        authorImageDesktopBorderWidthCssStyle,
+        authorImageTabletBorderWidth,
+        authorImageTabletBorderWidthCssStyle,
+        authorImageMobileBorderWidth,
+        authorImageMobileBorderWidthCssStyle,
+        authorImageBorderWidthLink,
+
+        authorImageBorderRadiusUnits,
+        authorImageDesktopBorderRadius,
+        authorImageDesktopBorderRadiusCssStyle,
+        authorImageTabletBorderRadius,
+        authorImageTabletBorderRadiusCssStyle,
+        authorImageMobileBorderRadius,
+        authorImageMobileBorderRadiusCssStyle,
+        authorImageBorderRadiusLink,
+
+        authorImageMarginUnits,
+        authorImageDesktopMargin,
+        authorImageDesktopMarginCssStyle,
+        authorImageTabletMargin,
+        authorImageTabletMarginCssStyle,
+        authorImageMobileMargin,
+        authorImageMobileMarginCssStyle,
+        authorImageMarginLink,
+
+        authorImagePaddingUnits,
+        authorImageDesktopPadding,
+        authorImageDesktopPaddingCssStyle,
+        authorImageTabletPadding,
+        authorImageTabletPaddingCssStyle,
+        authorImageMobilePadding,
+        authorImageMobilePaddingCssStyle,
+        authorImagePaddingLink,
+        /** End Author Image Style */
         
         /** Start Testimonial Title Typography, Color, Margin & Padding */
         testimonialTitleFontFamily,
@@ -610,7 +655,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
             : '';
     };
 
-    /** set the css style if have default padding */
+    /** set the css style if have default padding or margin */
     useEffect(() => {
         setAttributes({
             authorNameDesktopMarginCssStyle: spacingFormat(authorNameDesktopMargin, authorNameMarginUnits.Desktop),
@@ -632,6 +677,14 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
             paginationNormalDotsDesktopBorderRadiusCssStyle: spacingFormat(paginationNormalDotsDesktopBorderRadius, paginationNormalDotsBorderRadiusUnits.Desktop),
             paginationNormalDotsTabletBorderRadiusCssStyle: spacingFormat(paginationNormalDotsTabletBorderRadius, paginationNormalDotsBorderRadiusUnits.Tablet),
             paginationNormalDotsMobileBorderRadiusCssStyle: spacingFormat(paginationNormalDotsMobileBorderRadius, paginationNormalDotsBorderRadiusUnits.Mobile),
+
+            authorImageDesktopBorderRadiusCssStyle: spacingFormat(authorImageDesktopBorderRadius, authorImageBorderRadiusUnits.Desktop),
+            authorImageTabletBorderRadiusCssStyle: spacingFormat(authorImageTabletBorderRadius, authorImageBorderRadiusUnits.Tablet),
+            authorImageMobileBorderRadiusCssStyle: spacingFormat(authorImageMobileBorderRadius, authorImageBorderRadiusUnits.Mobile),
+
+            authorImageDesktopMarginCssStyle: spacingFormat(authorImageDesktopMargin, authorImageMarginUnits.Desktop),
+            authorImageTabletMarginCssStyle: spacingFormat(authorImageTabletMargin, authorImageMarginUnits.Tablet),
+            authorImageMobileMarginCssStyle: spacingFormat(authorImageMobileMargin, authorImageMarginUnits.Mobile),
         });
     }, [
         authorNameDesktopMargin,
@@ -655,6 +708,16 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         paginationNormalDotsTabletBorderRadius,
         paginationNormalDotsMobileBorderRadius,
         paginationNormalDotsBorderRadiusUnits,
+
+        authorImageDesktopBorderRadius,
+        authorImageTabletBorderRadius,
+        authorImageMobileBorderRadius,
+        authorImageBorderRadiusUnits,
+
+        authorImageDesktopMargin,
+        authorImageTabletMargin,
+        authorImageMobileMargin,
+        authorImageMarginUnits,
     ]);
     /** end if have default padding then set the css style */
 
@@ -1428,6 +1491,146 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     onChangeLink={(value) => setAttributes({ contentPaddingLink: value })}
                 />
             </PanelBody>
+            {showAuthorImage && (
+                <PanelBody
+                    title={__("Author Image", "gslider-blocks")}
+                    opened={openPanels.styles === "authorImage"}
+                    onToggle={() => togglePanel("styles", "authorImage")}
+                >
+                    <ResponsiveRangeControl
+                        label={__("Size", "gslider-blocks")}
+                        rangeValue={authorImageSize}
+                        onChangeValue={(value) => setAttributes({ authorImageSize: value })}
+                        onUnitChange={(value) => setAttributes({ authorImageSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={authorImageSizeUnits}
+                        resetFallbackValue={{
+                            px: "80",
+                            "%": "5",
+                            vh: "5",
+                            vw: "5",
+                            em: "3.75",
+                            rem: "3.75",
+                        }}
+                        unitBounds={{
+                            px: { min: 0, max: 500, step: 1 },
+                        }}
+                    />
+
+                    <SelectControls
+                        label={__("Border Style", "gslider-blocks")}
+                        options={BORDER_STYLES}
+                        value={authorImageBorder}
+                        onChange={(value) => setAttributes({ authorImageBorder: value })}
+                    />
+
+                    {authorImageBorder !== 'none' && (
+                        <>
+                            <SwitcherControl
+                                label={__("Border Color", "gslider-blocks")}
+                                options={NORMAL_HOVER}
+                                value={authorImageBorderColorSwitcher}
+                                onChange={(value) => setAttributes({ authorImageBorderColorSwitcher: value })}
+                            />
+
+                            {authorImageBorderColorSwitcher === 'normal' && (
+                                <ColorControl
+                                    label={__("Normal Color", "gslider-blocks")}
+                                    color={authorImageBorderColor}
+                                    onChangeColor={(value) => setAttributes({ authorImageBorderColor: value })}
+                                    defaultColor=''
+                                />
+                            )}
+
+                            {authorImageBorderColorSwitcher === 'hover' && (
+                                <ColorControl
+                                    label={__("Hover Color", "gslider-blocks")}
+                                    color={authorImageBorderHoverColor}
+                                    onChangeColor={(value) => setAttributes({ authorImageBorderHoverColor: value })}
+                                    defaultColor=''
+                                />
+                            )}
+
+                            <ResponsiveSpacingControl
+                                label={__("Border Width", "gslider-blocks")}
+                                deviceType={deviceType}
+                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                units={authorImageBorderWidthUnits}
+                                onChangeUnits={(value) => setAttributes({ authorImageBorderWidthUnits: value })}
+                                desktopSpacing={authorImageDesktopBorderWidth}
+                                onChangeDesktopSpacing={(value) => setAttributes({ authorImageDesktopBorderWidth: value })}
+                                desktopSpacingStyle={(value) => setAttributes({ authorImageDesktopBorderWidthCssStyle: value })}
+                                tabletSpacing={authorImageTabletBorderWidth}
+                                onChangeTabletSpacing={(value) => setAttributes({ authorImageTabletBorderWidth: value })}
+                                tabletSpacingStyle={(value) => setAttributes({ authorImageTabletBorderWidthCssStyle: value })}
+                                mobileSpacing={authorImageMobileBorderWidth}
+                                onChangeMobileSpacing={(value) => setAttributes({ authorImageMobileBorderWidth: value })}
+                                mobileSpacingStyle={(value) => setAttributes({ authorImageMobileBorderWidthCssStyle: value })}
+                                isLinked={authorImageBorderWidthLink}
+                                onChangeLink={(value) => setAttributes({ authorImageBorderWidthLink: value })}
+                            />
+                        </>
+                    )}
+
+                    <ResponsiveSpacingControl
+                        label={__("Border Radius", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={authorImageBorderRadiusUnits}
+                        onChangeUnits={(value) => setAttributes({ authorImageBorderRadiusUnits: value })}
+                        desktopSpacing={authorImageDesktopBorderRadius}
+                        onChangeDesktopSpacing={(value) => setAttributes({ authorImageDesktopBorderRadius: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ authorImageDesktopBorderRadiusCssStyle: value })}
+                        tabletSpacing={authorImageTabletBorderRadius}
+                        onChangeTabletSpacing={(value) => setAttributes({ authorImageTabletBorderRadius: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ authorImageTabletBorderRadiusCssStyle: value })}
+                        mobileSpacing={authorImageMobileBorderRadius}
+                        onChangeMobileSpacing={(value) => setAttributes({ authorImageMobileBorderRadius: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ authorImageMobileBorderRadiusCssStyle: value })}
+                        isLinked={authorImageBorderRadiusLink}
+                        onChangeLink={(value) => setAttributes({ authorImageBorderRadiusLink: value })}
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={authorImageMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ authorImageMarginUnits: value })}
+                        desktopSpacing={authorImageDesktopMargin}
+                        onChangeDesktopSpacing={(value) => setAttributes({ authorImageDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ authorImageDesktopMarginCssStyle: value })}
+                        tabletSpacing={authorImageTabletMargin}
+                        onChangeTabletSpacing={(value) => setAttributes({ authorImageTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ authorImageTabletMarginCssStyle: value })}
+                        mobileSpacing={authorImageMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ authorImageMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ authorImageMobileMarginCssStyle: value })}
+                        isLinked={authorImageMarginLink}
+                        onChangeLink={(value) => setAttributes({ authorImageMarginLink: value })}
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={authorImagePaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ authorImagePaddingUnits: value })}
+                        desktopSpacing={authorImageDesktopPadding}
+                        onChangeDesktopSpacing={(value) => setAttributes({ authorImageDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ authorImageDesktopPaddingCssStyle: value })}
+                        tabletSpacing={authorImageTabletPadding}
+                        onChangeTabletSpacing={(value) => setAttributes({ authorImageTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ authorImageTabletPaddingCssStyle: value })}
+                        mobileSpacing={authorImageMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ authorImageMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ authorImageMobilePaddingCssStyle: value })}
+                        isLinked={authorImagePaddingLink}
+                        onChangeLink={(value) => setAttributes({ authorImagePaddingLink: value })}
+                    />
+                </PanelBody>
+            )}
+
             {showAuthorName && (
                 <PanelBody
                     title={__("Author Name", "gslider-blocks")}

@@ -200,14 +200,12 @@ export default function Save({ attributes }) {
                                                         </div>
                                                     ),
                                                     text: showTestimonialText && item.testimonialText && (
-                                                        <div className="gslider-client-testimonial" key="text">
-                                                            <div className="gslider-testimonial-text-wrapper">
-                                                                <RichText.Content
-                                                                    tagName={testimonialTextHtmlTag}
-                                                                    className="gslider-testimonial-text"
-                                                                    value={item.testimonialText}
-                                                                />
-                                                            </div>
+                                                        <div className="gslider-testimonial-text-wrapper" key="text">
+                                                            <RichText.Content
+                                                                tagName={testimonialTextHtmlTag}
+                                                                className="gslider-testimonial-text"
+                                                                value={item.testimonialText}
+                                                            />
                                                         </div>
                                                     ),
                                                     rating: showRating && (
@@ -312,14 +310,12 @@ export default function Save({ attributes }) {
                                                         </div>
                                                     ),
                                                     designation: showAuthorDesignation && item.authorDesignation && (
-                                                        <div className="gslider-author-designation-company-wrapper" key="designation">
-                                                            <div className="gslider-author-designation-wrapper">
-                                                                <RichText.Content
-                                                                    tagName={authorDesignationHtmlTag}
-                                                                    className="gslider-author-designation"
-                                                                    value={item.authorDesignation}
-                                                                />
-                                                            </div>
+                                                        <div className="gslider-author-designation-wrapper" key="designation">
+                                                            <RichText.Content
+                                                                tagName={authorDesignationHtmlTag}
+                                                                className="gslider-author-designation"
+                                                                value={item.authorDesignation}
+                                                            />
                                                         </div>
                                                     ),
                                                 };

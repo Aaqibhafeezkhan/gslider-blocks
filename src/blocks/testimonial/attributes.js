@@ -1077,7 +1077,262 @@ const attributes = {
     /** End Author Designation Padding */
     
     /** End Author Designation */
-    
+
+    /** Start Author Image Style */
+
+    /** Start Author Image Size */
+    authorImageSize: {
+        type: "object",
+        default: {
+            Desktop: "80",
+            Tablet: "70",
+            Mobile: "60",
+        },
+    },
+    authorImageSizeUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    /** End Author Image Size */
+
+    /** Start Author Image Border */
+    authorImageBorder: {
+        type: "string",
+        default: "none",
+    },
+    authorImageBorderColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    authorImageBorderColor: {
+        type: "string",
+        default: "",
+    },
+    authorImageBorderHoverColor: {
+        type: "string",
+        default: "",
+    },
+    authorImageBorderWidthUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    authorImageDesktopBorderWidth: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    authorImageDesktopBorderWidthCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImageTabletBorderWidth: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    authorImageTabletBorderWidthCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImageMobileBorderWidth: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    authorImageMobileBorderWidthCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImageBorderWidthLink: {
+        type: "boolean",
+        default: true,
+    },
+    /** End Author Image Border */
+
+    /** Start Author Image Border Radius */
+    authorImageBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
+    authorImageDesktopBorderRadius: {
+        type: "object",
+        default: {
+            top: "50",
+            bottom: "50",
+            left: "50",
+            right: "50",
+        },
+    },
+    authorImageDesktopBorderRadiusCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    authorImageTabletBorderRadius: {
+        type: "object",
+        default: {
+            top: "50",
+            bottom: "50",
+            left: "50",
+            right: "50",
+        },
+    },
+    authorImageTabletBorderRadiusCssStyle: { 
+        type: 'string',
+        default: '',
+    },
+    authorImageMobileBorderRadius: {
+        type: "object",
+        default: {
+            top: "50",
+            bottom: "50",
+            left: "50",
+            right: "50",
+        },
+    },
+    authorImageMobileBorderRadiusCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImageBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Author Image Border Radius */
+
+    /** Start Author Image Margin */
+    authorImageMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    authorImageDesktopMargin: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "15",
+            left: "0",
+            right: "0",
+        },
+    },
+    authorImageDesktopMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImageTabletMargin: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "15",
+            left: "0",
+            right: "0",
+        },
+    },
+    authorImageTabletMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImageMobileMargin: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "10",
+            left: "0",
+            right: "0",
+        },
+    },
+    authorImageMobileMarginCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImageMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Author Image Margin */
+
+    /** Start Author Image Padding */
+    authorImagePaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    authorImageDesktopPadding: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    authorImageDesktopPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImageTabletPadding: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    authorImageTabletPaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImageMobilePadding: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    authorImageMobilePaddingCssStyle: { 
+        type: "string",
+        default: "",
+    },
+    authorImagePaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Author Image Padding */
+
+    /** End Author Image Style */
+
     /** Start Testimonial Title */
 
     /** Start Testimonial Title Typography */

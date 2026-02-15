@@ -182,6 +182,31 @@ const generateBaseSliderStyle = (attributes) => {
         testimonialTitlePaddingLink,
         /** End Testimonial Title Typography, Color, Margin & Padding */
 
+        /** Start Author Image Style */
+        authorImageSize,
+        authorImageSizeUnits,
+
+        authorImageBorder,
+        authorImageBorderColor,
+        authorImageBorderHoverColor,
+
+        authorImageDesktopBorderWidthCssStyle,
+        authorImageTabletBorderWidthCssStyle,
+        authorImageMobileBorderWidthCssStyle,
+
+        authorImageDesktopBorderRadiusCssStyle,
+        authorImageTabletBorderRadiusCssStyle,
+        authorImageMobileBorderRadiusCssStyle,
+
+        authorImageDesktopMarginCssStyle,
+        authorImageTabletMarginCssStyle,
+        authorImageMobileMarginCssStyle,
+
+        authorImageDesktopPaddingCssStyle,
+        authorImageTabletPaddingCssStyle,
+        authorImageMobilePaddingCssStyle,
+        /** End Author Image Style */
+
         /** Start Testimonial Text Typography, Color, Margin & Padding */
         testimonialTextFontFamily,
         testimonialTextFontSize,
@@ -864,6 +889,24 @@ const generateBaseSliderStyle = (attributes) => {
             ${authorDesignationColorHover ? `color: ${authorDesignationColorHover};` : ''}
         }
 
+        /** Start Author Image Style */
+        .${blockId} .gslider-author-image-wrapper img {
+            ${authorImageSize?.Desktop ? `width: ${authorImageSize.Desktop}${authorImageSizeUnits?.Desktop || 'px'};` : ''}
+            ${authorImageSize?.Desktop ? `height: ${authorImageSize.Desktop}${authorImageSizeUnits?.Desktop || 'px'};` : ''}
+            ${authorImageBorder !== 'none' ? `border-style: ${authorImageBorder};` : ''}
+            ${authorImageDesktopBorderWidthCssStyle ? `border-width: ${authorImageDesktopBorderWidthCssStyle};` : ''}
+            ${authorImageBorderColor ? `border-color: ${authorImageBorderColor};` : ''}
+            ${authorImageDesktopBorderRadiusCssStyle ? `border-radius: ${authorImageDesktopBorderRadiusCssStyle};` : ''}
+            ${authorImageDesktopMarginCssStyle ? `margin: ${authorImageDesktopMarginCssStyle};` : ''}
+            ${authorImageDesktopPaddingCssStyle ? `padding: ${authorImageDesktopPaddingCssStyle};` : ''}
+            object-fit: cover;
+            transition: all 0.3s ease-in-out;
+        }
+        .${blockId} .gslider-author-image-wrapper img:hover {
+            ${authorImageBorderHoverColor ? `border-color: ${authorImageBorderHoverColor};` : ''}
+        }
+        /** End Author Image Style */
+
         .${blockId}.gslider-testimonial-wrapper .gslider-testimonial-title-wrapper .gslider-testimonial-title {
             ${testimonialTitleFontFamily ? `font-family: ${testimonialTitleFontFamily};` : ''}
             ${testimonialTitleFontSize.Desktop && testimonialTitleFontSizeUnits.Desktop ? `font-size: ${testimonialTitleFontSize.Desktop}${testimonialTitleFontSizeUnits.Desktop};` : ''}
@@ -1169,6 +1212,15 @@ const generateBaseSliderStyle = (attributes) => {
                 ${authorDesignationTabletPaddingCssStyle ? `padding: ${authorDesignationTabletPaddingCssStyle};` : ''}
             }
 
+            .${blockId} .gslider-author-image-wrapper .gslider-author-image {
+                ${authorImageSize?.Tablet ? `width: ${authorImageSize.Tablet}${authorImageSizeUnits?.Tablet || 'px'};` : ''}
+                ${authorImageSize?.Tablet ? `height: ${authorImageSize.Tablet}${authorImageSizeUnits?.Tablet || 'px'};` : ''}
+                ${authorImageTabletBorderWidthCssStyle ? `border-width: ${authorImageTabletBorderWidthCssStyle};` : ''}
+                ${authorImageTabletBorderRadiusCssStyle ? `border-radius: ${authorImageTabletBorderRadiusCssStyle};` : ''}
+                ${authorImageTabletMarginCssStyle ? `margin: ${authorImageTabletMarginCssStyle};` : ''}
+                ${authorImageTabletPaddingCssStyle ? `padding: ${authorImageTabletPaddingCssStyle};` : ''}
+            }
+
             .${blockId}.gslider-testimonial-wrapper .gslider-testimonial-text-wrapper .gslider-testimonial-text {
                 ${testimonialTextFontSize.Tablet && testimonialTextFontSizeUnits.Tablet ? `font-size: ${testimonialTextFontSize.Tablet}${testimonialTextFontSizeUnits.Tablet};` : ''}
                 ${testimonialTextLineHeight.Tablet && testimonialTextLineHeightUnits.Tablet ? `line-height: ${testimonialTextLineHeight.Tablet}${testimonialTextLineHeightUnits.Tablet};` : ''}
@@ -1355,6 +1407,15 @@ const generateBaseSliderStyle = (attributes) => {
                 ${authorDesignationWordSpacing.Mobile && authorDesignationWordSpacingUnits.Mobile ? `word-spacing: ${authorDesignationWordSpacing.Mobile}${authorDesignationWordSpacingUnits.Mobile};` : ''}
                 ${authorDesignationMobileMarginCssStyle ? `margin: ${authorDesignationMobileMarginCssStyle};` : ''} 
                 ${authorDesignationMobilePaddingCssStyle ? `padding: ${authorDesignationMobilePaddingCssStyle};` : ''}
+            }
+
+            .${blockId} .gslider-author-image-wrapper .gslider-author-image {
+                ${authorImageSize?.Mobile ? `width: ${authorImageSize.Mobile}${authorImageSizeUnits?.Mobile || 'px'};` : ''}
+                ${authorImageSize?.Mobile ? `height: ${authorImageSize.Mobile}${authorImageSizeUnits?.Mobile || 'px'};` : ''}
+                ${authorImageMobileBorderWidthCssStyle ? `border-width: ${authorImageMobileBorderWidthCssStyle};` : ''}
+                ${authorImageMobileBorderRadiusCssStyle ? `border-radius: ${authorImageMobileBorderRadiusCssStyle};` : ''}
+                ${authorImageMobileMarginCssStyle ? `margin: ${authorImageMobileMarginCssStyle};` : ''}
+                ${authorImageMobilePaddingCssStyle ? `padding: ${authorImageMobilePaddingCssStyle};` : ''}
             }
 
             .${blockId}.gslider-testimonial-wrapper .gslider-testimonial-text-wrapper .gslider-testimonial-text {
