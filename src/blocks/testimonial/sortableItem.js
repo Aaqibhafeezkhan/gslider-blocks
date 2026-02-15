@@ -22,6 +22,9 @@ import {
 import BackgroundControl from '@Components/background-control';
 import UrlControl from '@Components/url-control';
 import ImageControl from '@Components/image-control';
+import { ICON_IMAGE_ALIGN } from "@Constants";
+import IconPicker from '@Components/icon-picker';
+import SwitcherControl from '@Components/switcher-control';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, deviceType, setAttributes }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
@@ -58,7 +61,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.title || __( `Testimonial Item ${index + 1}`, "gslider-blocks" )}
+                    {item.testimonialTitle || item.title || __( `Testimonial Item ${index + 1}`, "gslider-blocks" )}
                 </span>
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
                     <Button icon="move" label={__("Sort", "gslider-blocks")} aria-label={__("Move item", "gslider-blocks")} />
@@ -137,14 +140,51 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                                         setImageID={(value) => handleChangeItem(item.id, "authorImage", { id: value })}
                                         isImageSize={false}
                                     />
-                                    <RangeControl
-                                        label={__("Rating", "gslider-blocks")}
-                                        value={item.rating}
-                                        onChange={(value) => handleChangeItem(item.id, "rating", value)}
-                                        min={0}
-                                        max={5}
-                                        step={0.1}
+
+                                    <SwitcherControl
+                                        label={__("Rating Icon Type", "gslider-blocks")}
+                                        options={ICON_IMAGE_ALIGN}
+                                        value={item.ratingIconAlign}
+                                        onChange={(value) => handleChangeItem(item.id, "ratingIconAlign", value)}
+                                        help={__( "Icon: SVG star ratings with fractional support. Image: Upload a custom SVG or image (no fractional support). None: Hide rating.", "gslider-blocks" )}
                                     />
+
+                                    {item.ratingIconAlign === 'image' && (
+                                        <ImageControl
+                                            label={__("Image", "gslider-blocks")}
+                                            imageUrl={item.ratingImage?.url}
+                                            setImageUrl={(value) => handleChangeItem(item.id, "ratingImage", { ...item.ratingImage, url: value })}
+                                            imageAlt={item.ratingImage?.alt}
+                                            setImageAlt={(value) => handleChangeItem(item.id, "ratingImage", { ...item.ratingImage, alt: value })}
+                                            imageID={item.ratingImage?.id}
+                                            setImageID={(value) => handleChangeItem(item.id, "ratingImage", { ...item.ratingImage, id: value })}
+                                            isImageSize={false}
+                                        />
+                                    )}
+
+                                    {item.ratingIconAlign === 'icon' && (
+                                        <RangeControl
+                                            label={__("Rating Number", "gslider-blocks")}
+                                            value={item.ratingNumber}
+                                            onChange={(value) => handleChangeItem(item.id, "ratingNumber", value)}
+                                            min={0}
+                                            max={5}
+                                            step={0.1}
+                                            help={__( "Supports fractional values (e.g. 4.5, 3.7)", "gslider-blocks" )}
+                                        />
+                                    )}
+
+                                    {item.ratingIconAlign === 'image' && (
+                                        <RangeControl
+                                            label={__("Rating Number", "gslider-blocks")}
+                                            value={item.ratingNumber}
+                                            onChange={(value) => handleChangeItem(item.id, "ratingNumber", value)}
+                                            min={0}
+                                            max={5}
+                                            step={1}
+                                            help={__( "Number of images or Svg to display (1-5)", "gslider-blocks" )}
+                                        />
+                                    )}
                                 </div>
                             )}
                         />

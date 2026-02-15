@@ -25,7 +25,13 @@ const attributes = {
                     id: "",
                     alt: "",
                 },
-                rating: 5,
+                ratingIconAlign: 'icon',
+                ratingNumber: 5,
+                ratingImage: {
+                    url: '',
+                    id: '',
+                    alt: '',
+                },
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -88,7 +94,13 @@ const attributes = {
                     id: "",
                     alt: "",
                 },
-                rating: 5,
+                ratingIconAlign: 'icon',
+                ratingNumber: 5,
+                ratingImage: {
+                    url: '',
+                    id: '',
+                    alt: '',
+                },
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -152,7 +164,13 @@ const attributes = {
                     id: "",
                     alt: "",
                 },
-                rating: 5,
+                ratingIconAlign: 'icon',
+                ratingNumber: 5,
+                ratingImage: {
+                    url: '',
+                    id: '',
+                    alt: '',
+                },
 
                 normalItemBackgroundType: "classic",
                 normalItemClassicColor: "#EDEDED",
@@ -236,9 +254,21 @@ const attributes = {
                         alt: "",
                     }
                 },
-                rating: {
-                    type: "number",
-                    default: 5
+                ratingIconAlign: {
+                    type: 'string',
+                    default: 'icon',
+                },
+                ratingNumber: {
+                    type: 'number',
+                    default: 5,
+                },
+                ratingImage: {
+                    type: 'object',
+                    default: {
+                        url: '',
+                        id: '',
+                        alt: '',
+                    },
                 },
 
                 normalItemBackgroundType: {

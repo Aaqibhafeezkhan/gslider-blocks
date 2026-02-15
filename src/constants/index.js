@@ -36,6 +36,12 @@ export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
 ];
 
+export const ICON_IMAGE_ALIGN = [
+	{ label: __("None", "gslider-blocks"), value: "none" },
+	{ label: __("Icon", "gslider-blocks"), value: "icon" },
+	{ label: __("Image", "gslider-blocks"), value: "image" },
+];
+
 export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
