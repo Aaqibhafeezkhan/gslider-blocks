@@ -1333,6 +1333,277 @@ const attributes = {
 
     /** End Author Image Style */
 
+    /** Start Rating Style */
+    ratingStarColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    ratingStarColor: {
+        type: "string",
+        default: "#ffb700",
+    },
+    ratingStarHoverColor: {
+        type: "string",
+        default: "",
+    },
+    ratingEmptyStarColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    ratingEmptyStarColor: {
+        type: "string",
+        default: "#d4d4d4",
+    },
+    ratingEmptyStarHoverColor: {
+        type: "string",
+        default: "",
+    },
+    ratingStarSize: {
+        type: "object",
+        default: {
+            Desktop: "20",
+            Tablet: "20",
+            Mobile: "20",
+        },
+    },
+    ratingStarSizeUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    ratingStarGap: {
+        type: "object",
+        default: {
+            Desktop: "5",
+            Tablet: "5",
+            Mobile: "5",
+        },
+    },
+    ratingStarGapUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+
+    /** Start Rating Margin */
+    ratingMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    ratingDesktopMargin: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    ratingDesktopMarginCssStyle: {
+        type: "string",
+        default: "",
+    },
+    ratingTabletMargin: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    ratingTabletMarginCssStyle: {
+        type: "string",
+        default: "",
+    },
+    ratingMobileMargin: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    ratingMobileMarginCssStyle: {
+        type: "string",
+        default: "",
+    },
+    ratingMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Rating Margin */
+
+    /** Start Rating Padding */
+    ratingPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    ratingDesktopPadding: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    ratingDesktopPaddingCssStyle: {
+        type: "string",
+        default: "",
+    },
+    ratingTabletPadding: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    ratingTabletPaddingCssStyle: {
+        type: "string",
+        default: "",
+    },
+    ratingMobilePadding: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    ratingMobilePaddingCssStyle: {
+        type: "string",
+        default: "",
+    },
+    ratingPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Rating Padding */
+
+    /** Start Rating Number Style */
+    showRatingNumber: {
+        type: "boolean",
+        default: false,
+    },
+    ratingNumberColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    ratingNumberColor: {
+        type: "string",
+        default: "",
+    },
+    ratingNumberHoverColor: {
+        type: "string",
+        default: "",
+    },
+    ratingNumberFontFamily: {
+        type: "string",
+        default: "",
+    },
+    ratingNumberFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    ratingNumberFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    ratingNumberFontWeight: {
+        type: "string",
+        default: "",
+    },
+    ratingNumberFontStyle: {
+        type: "string",
+        default: "",
+    },
+    ratingNumberTextTransform: {
+        type: "string",
+        default: "",
+    },
+    ratingNumberTextDecoration: {
+        type: "string",
+        default: "",
+    },
+    ratingNumberLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    ratingNumberLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    ratingNumberLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    ratingNumberLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    ratingNumberWordSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    ratingNumberWordSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Rating Number Style */
+
+    /** End Rating Style */
+
     /** Start Testimonial Title */
 
     /** Start Testimonial Title Typography */

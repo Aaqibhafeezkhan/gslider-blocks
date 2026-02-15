@@ -235,6 +235,55 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         authorImageMobilePaddingCssStyle,
         authorImagePaddingLink,
         /** End Author Image Style */
+
+        /** Start Rating Style */
+        ratingStarColorSwitcher,
+        ratingStarColor,
+        ratingStarHoverColor,
+        ratingEmptyStarColorSwitcher,
+        ratingEmptyStarColor,
+        ratingEmptyStarHoverColor,
+        ratingStarSize,
+        ratingStarSizeUnits,
+        ratingStarGap,
+        ratingStarGapUnits,
+
+        ratingMarginUnits,
+        ratingDesktopMargin,
+        ratingDesktopMarginCssStyle,
+        ratingTabletMargin,
+        ratingTabletMarginCssStyle,
+        ratingMobileMargin,
+        ratingMobileMarginCssStyle,
+        ratingMarginLink,
+
+        ratingPaddingUnits,
+        ratingDesktopPadding,
+        ratingDesktopPaddingCssStyle,
+        ratingTabletPadding,
+        ratingTabletPaddingCssStyle,
+        ratingMobilePadding,
+        ratingMobilePaddingCssStyle,
+        ratingPaddingLink,
+
+        showRatingNumber,
+        ratingNumberColorSwitcher,
+        ratingNumberColor,
+        ratingNumberHoverColor,
+        ratingNumberFontFamily,
+        ratingNumberFontSize,
+        ratingNumberFontSizeUnits,
+        ratingNumberFontWeight,
+        ratingNumberFontStyle,
+        ratingNumberTextTransform,
+        ratingNumberTextDecoration,
+        ratingNumberLineHeight,
+        ratingNumberLineHeightUnits,
+        ratingNumberLetterSpacing,
+        ratingNumberLetterSpacingUnits,
+        ratingNumberWordSpacing,
+        ratingNumberWordSpacingUnits,
+        /** End Rating Style */
         
         /** Start Testimonial Title Typography, Color, Margin & Padding */
         testimonialTitleFontFamily,
@@ -735,6 +784,9 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
     }
     if (testimonialTitleFontFamily !== 'Default') {
         LoadGoogleFont(testimonialTitleFontFamily);
+    }
+    if (ratingNumberFontFamily !== 'Default') {
+        LoadGoogleFont(ratingNumberFontFamily);
     }
     /** End Load Google Font */
 
@@ -2075,6 +2127,211 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         isLinked={testimonialTextPaddingLink}
                         onChangeLink={(value) => setAttributes({ testimonialTextPaddingLink: value })}
                     />
+                </PanelBody>
+            )}
+
+            {showRating && (
+                <PanelBody
+                    title={__("Rating", "gslider-blocks")}
+                    opened={openPanels.styles === "rating"}
+                    onToggle={() => togglePanel("styles", "rating")}
+                >
+                    <SwitcherControl
+                        label={__("Star Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={ratingStarColorSwitcher}
+                        onChange={(value) => setAttributes({ ratingStarColorSwitcher: value })}
+                    />
+
+                    {ratingStarColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={ratingStarColor}
+                            onChangeColor={(value) => setAttributes({ ratingStarColor: value })}
+                            defaultColor='#ffb700'
+                        />
+                    )}
+
+                    {ratingStarColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={ratingStarHoverColor}
+                            onChangeColor={(value) => setAttributes({ ratingStarHoverColor: value })}
+                            defaultColor='#ffb700'
+                        />
+                    )}
+
+                    <SwitcherControl
+                        label={__("Empty Star Color", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={ratingEmptyStarColorSwitcher}
+                        onChange={(value) => setAttributes({ ratingEmptyStarColorSwitcher: value })}
+                    />
+
+                    {ratingEmptyStarColorSwitcher === 'normal' && (
+                        <ColorControl
+                            label={__("Normal Color", "gslider-blocks")}
+                            color={ratingEmptyStarColor}
+                            onChangeColor={(value) => setAttributes({ ratingEmptyStarColor: value })}
+                            defaultColor='#d4d4d4'
+                        />
+                    )}
+
+                    {ratingEmptyStarColorSwitcher === 'hover' && (
+                        <ColorControl
+                            label={__("Hover Color", "gslider-blocks")}
+                            color={ratingEmptyStarHoverColor}
+                            onChangeColor={(value) => setAttributes({ ratingEmptyStarHoverColor: value })}
+                            defaultColor='#d4d4d4'
+                        />
+                    )}
+                    <ResponsiveRangeControl
+                        label={__("Star Size", "gslider-blocks")}
+                        rangeValue={ratingStarSize}
+                        onChangeValue={(value) => setAttributes({ ratingStarSize: value })}
+                        onUnitChange={(value) => setAttributes({ ratingStarSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={ratingStarSizeUnits}
+                        resetFallbackValue={{
+                            px: "20",
+                            "%": "5",
+                            vh: "5",
+                            vw: "5",
+                            em: "1.25",
+                            rem: "1.25",
+                        }}
+                        unitBounds={{
+                            px: { min: 0, max: 200, step: 1 },
+                        }}
+                    />
+                    <ResponsiveRangeControl
+                        label={__("Star Gap", "gslider-blocks")}
+                        rangeValue={ratingStarGap}
+                        onChangeValue={(value) => setAttributes({ ratingStarGap: value })}
+                        onUnitChange={(value) => setAttributes({ ratingStarGapUnits: value })}
+                        deviceType={deviceType}
+                        units={ratingStarGapUnits}
+                        resetFallbackValue={{
+                            px: "5",
+                        }}
+                        unitBounds={{
+                            px: { min: 0, max: 100, step: 1 },
+                        }}
+                    />
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={ratingMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ ratingMarginUnits: value })}
+                        desktopSpacing={ratingDesktopMargin}
+                        onChangeDesktopSpacing={(value) => setAttributes({ ratingDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ ratingDesktopMarginCssStyle: value })}
+                        tabletSpacing={ratingTabletMargin}
+                        onChangeTabletSpacing={(value) => setAttributes({ ratingTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ ratingTabletMarginCssStyle: value })}
+                        mobileSpacing={ratingMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ ratingMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ ratingMobileMarginCssStyle: value })}
+                        isLinked={ratingMarginLink}
+                        onChangeLink={(value) => setAttributes({ ratingMarginLink: value })}
+                    />
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={ratingPaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ ratingPaddingUnits: value })}
+                        desktopSpacing={ratingDesktopPadding}
+                        onChangeDesktopSpacing={(value) => setAttributes({ ratingDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ ratingDesktopPaddingCssStyle: value })}
+                        tabletSpacing={ratingTabletPadding}
+                        onChangeTabletSpacing={(value) => setAttributes({ ratingTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ ratingTabletPaddingCssStyle: value })}
+                        mobileSpacing={ratingMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ ratingMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ ratingMobilePaddingCssStyle: value })}
+                        isLinked={ratingPaddingLink}
+                        onChangeLink={(value) => setAttributes({ ratingPaddingLink: value })}
+                    />
+
+                    <ToggleControl
+                        label={__("Show Rating Number", "gslider-blocks")}
+                        checked={showRatingNumber}
+                        onChange={(value) => setAttributes({ showRatingNumber: value })}
+                    />
+
+                    {showRatingNumber && (
+                        <>
+                            <ResponsiveTypographyControl
+                                label={__("Rating Number Typography", "gslider-blocks")}
+                                fontFamily={ratingNumberFontFamily}
+                                onChangeFontFamily={(value) => setAttributes({ ratingNumberFontFamily: value })}
+
+                                fontSize={ratingNumberFontSize}
+                                onChangeFontSize={(value) => setAttributes({ ratingNumberFontSize: value })}
+
+                                fontSizeUnits={ratingNumberFontSizeUnits}
+                                onChangeFontSizeUnit={(value) => setAttributes({ ratingNumberFontSizeUnits: value })}
+
+                                fontWeight={ratingNumberFontWeight}
+                                onChangeFontWeight={(value) => setAttributes({ ratingNumberFontWeight: value })}
+
+                                fontStyle={ratingNumberFontStyle}
+                                onChangeFontStyle={(value) => setAttributes({ ratingNumberFontStyle: value })}
+
+                                textTransform={ratingNumberTextTransform}
+                                onChangeTextTransform={(value) => setAttributes({ ratingNumberTextTransform: value })}
+
+                                textDecoration={ratingNumberTextDecoration}
+                                onChangeTextDecoration={(value) => setAttributes({ ratingNumberTextDecoration: value })}
+
+                                lineHeight={ratingNumberLineHeight}
+                                onChangeLineHeight={(value) => setAttributes({ ratingNumberLineHeight: value })}
+
+                                lineHeightUnits={ratingNumberLineHeightUnits}
+                                onChangeLineHeightUnit={(value) => setAttributes({ ratingNumberLineHeightUnits: value })}
+
+                                letterSpacing={ratingNumberLetterSpacing}
+                                onChangeLetterSpacing={(value) => setAttributes({ ratingNumberLetterSpacing: value })}
+
+                                letterSpacingUnits={ratingNumberLetterSpacingUnits}
+                                onChangeLetterSpacingUnit={(value) => setAttributes({ ratingNumberLetterSpacingUnits: value })}
+
+                                wordSpacing={ratingNumberWordSpacing}
+                                onChangeWordSpacing={(value) => setAttributes({ ratingNumberWordSpacing: value })}
+
+                                wordSpacingUnits={ratingNumberWordSpacingUnits}
+                                onChangeWordSpacingUnit={(value) => setAttributes({ ratingNumberWordSpacingUnits: value })}
+
+                                deviceType={deviceType}
+                            />
+                            <SwitcherControl
+                                label={__("Color", "gslider-blocks")}
+                                options={NORMAL_HOVER}
+                                value={ratingNumberColorSwitcher}
+                                onChange={(value) => setAttributes({ ratingNumberColorSwitcher: value })}
+                            />
+
+                            {ratingNumberColorSwitcher === 'normal' && (
+                                <ColorControl
+                                    label={__("Normal Color", "gslider-blocks")}
+                                    color={ratingNumberColor}
+                                    onChangeColor={(value) => setAttributes({ ratingNumberColor: value })}
+                                    defaultColor=''
+                                />
+                            )}
+
+                            {ratingNumberColorSwitcher === 'hover' && (
+                                <ColorControl
+                                    label={__("Hover Color", "gslider-blocks")}
+                                    color={ratingNumberHoverColor}
+                                    onChangeColor={(value) => setAttributes({ ratingNumberHoverColor: value })}
+                                    defaultColor=''
+                                />
+                            )}
+                        </>
+                    )}
                 </PanelBody>
             )}
 
