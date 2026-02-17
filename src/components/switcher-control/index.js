@@ -7,10 +7,12 @@ const SwitcherControl = ({
     options,
     value,
     onChange,
+    help = '',
 }) => {
     return (
         <BaseControl
             label={label}
+            help={help}
         >
             <ButtonGroup className="gslider-setting-switcher-panel-btn">
                 {options.map((item, key) => (

@@ -38,7 +38,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.title || __( `Social Item ${index + 1}`, "gslider-blocks" )}
+                    {item.title || __( `Slider Item ${index + 1}`, "gslider-blocks" )}
                 </span>
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
                     <Button icon="move" label={__("Sort", "gslider-blocks")} aria-label={__("Move item", "gslider-blocks")} />

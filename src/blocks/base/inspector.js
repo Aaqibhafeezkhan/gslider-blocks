@@ -1817,7 +1817,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         onChangeTextDecoration={(value) => setAttributes({ descriptionTextDecoration: value })}
 
                         lineHeight={descriptionLineHeight}
-                        onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value })}
+                        onChangeLineHeight={(value) => setAttributes({ descriptionLineHeight: value })}
 
                         lineHeightUnits={descriptionLineHeightUnits}
                         onChangeLineHeightUnit={(value) => setAttributes({ descriptionLineHeightUnits: value })}

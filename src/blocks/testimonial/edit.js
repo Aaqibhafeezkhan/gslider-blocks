@@ -1,0 +1,801 @@
+import { __ } from '@wordpress/i18n';
+import {
+	RichText,
+	useBlockProps,
+	BlockControls,
+} from '@wordpress/block-editor';
+import {
+	Toolbar,
+	ToolbarGroup,
+	ToolbarButton,
+	Dashicon
+} from '@wordpress/components';
+import { useState, useEffect, useRef } from "@wordpress/element";
+import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
+import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
+import { arrayMove } from '@dnd-kit/sortable';
+import Inspector from './inspector';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateBaseSliderStyle from './styling';
+
+// Swiper is loaded globally via FrontendAssets.php (swiper-bundle.min.js)
+// We use vanilla JS Swiper in useEffect instead of swiper/react
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
+	const {
+		blockId,
+        blockStyle,
+        deviceType,
+		sliderItems,
+		sliderType,
+		carouselPerColumn,
+		carouselPerColumnGap,
+		speed,
+		autoplay,
+		autoplayDelay,
+		infiniteLoop,
+		allowTouchMove,
+		pauseOnHover,
+		stopOnLastSlide,
+		reverseDirection,
+		carouselEffect,
+		slideEffect,
+		mousewheelControl,
+		keyboardNavigation,
+		paginationType,
+		dynamicBullets,
+
+        showAuthorName,
+        showAuthorDesignation,
+        showTestimonialTitle,
+        showTestimonialText,
+        showAuthorImage,
+        showRating,
+        showRatingNumber,
+        showNavigation,
+        showPagination,
+        paginationPositionType,
+        authorNameHtmlTag,
+        authorDesignationHtmlTag,
+        testimonialTitleHtmlTag,
+        testimonialTextHtmlTag,
+        globalID,
+        globalClass,
+        navigationArrowPositionType,
+        navigationArrowPosition,
+
+        navigationArrowsIconSwitcher,
+        navigationArrowsIconLeftAlign,
+        navigationArrowsIconLeft,
+        navigationArrowsIconLeftImageUrl,
+        navigationArrowsIconLeftImageAlt,
+        navigationArrowsIconLeftImageID,
+
+        navigationArrowsIconRightAlign,
+        navigationArrowsIconRight,
+        navigationArrowsIconRightImageUrl,
+        navigationArrowsIconRightImageAlt,
+        navigationArrowsIconRightImageID,
+
+        layoutHeightSwitcher,
+        contentOrder,
+	} = attributes;
+
+    /** Handle block ID generation (handles duplication and initial ID) */
+    useBlockIdGenerator({
+        clientId,
+        blockId,
+        blockPrefix: 'gslider',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    	/** Start Generate Block Style */
+    useEffect(() => {
+        if (blockId) {
+            const css = generateBaseSliderStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockId]);
+    /** End Generate Block Style */
+
+
+	// Block props for container
+	const blockProps = useBlockProps({
+        className: `gslider-testimonial-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
+	});
+    
+	const [sliderItemList, setSliderItemList] = useState(sliderItems);
+	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
+
+	// Refs for vanilla JS Swiper
+	const swiperContainerRef = useRef(null);
+	const swiperInstanceRef = useRef(null);
+
+	// Ref for panel settings focus management
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
+
+    // Refs for navigation buttons
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
+    const paginationInsideRef = useRef(null);
+    const paginationOutsideRef = useRef(null);
+
+    const authorImagePlaceholder = window.GSliderBlocksData?.pluginUrl 
+        ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
+        : '';
+
+    /**
+     * Fix for image display on initial load
+     * Ensures all items have valid image URLs (placeholders) if missing
+     */
+    useEffect(() => {
+        if (sliderItemList.some(item => !item.authorImage?.url)) {
+            const updatedItems = sliderItemList.map(item => {
+                let updatedItem = { ...item };
+                
+                if (authorImagePlaceholder && !item.authorImage?.url) {
+                    updatedItem.authorImage = {
+                        ...(item.authorImage || {}),
+                        url: authorImagePlaceholder,
+                        alt: item.authorImage?.alt || 'Author Placeholder'
+                    };
+                }
+                
+                return updatedItem;
+            });
+            setSliderItemList(updatedItems);
+            setAttributes({ sliderItems: updatedItems });
+        }
+    }, []);
+
+    // Sync sliderItemList when sliderItems attribute changes (e.g. undo/redo)
+    useEffect(() => {
+        setSliderItemList(sliderItems);
+    }, [sliderItems]);
+
+
+    /**
+     * Vanilla JS Swiper initialization
+     * Destroys and recreates Swiper when settings change for instant updates
+     */
+    useEffect(() => {
+        // Check if Swiper is available globally and container exists
+        if (!window.Swiper || !swiperContainerRef.current || sliderItemList.length === 0) {
+            return;
+        }
+
+        // Destroy previous instance if exists
+        if (swiperInstanceRef.current) {
+            swiperInstanceRef.current.destroy(true, true);
+            swiperInstanceRef.current = null;
+        }
+
+        // Clear both pagination elements to prevent stale bullets when switching position
+		if (paginationInsideRef.current) {
+			paginationInsideRef.current.innerHTML = '';
+		}
+		if (paginationOutsideRef.current) {
+			paginationOutsideRef.current.innerHTML = '';
+		}
+
+        // Build Swiper settings
+        const swiperSettings = {
+            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+            ...(sliderType === 'carousel' && {
+                breakpoints: {
+                    0: {
+                        slidesPerView: carouselPerColumn?.[deviceType] || 1,
+                        spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
+                    },
+                    768: {
+                        slidesPerView: carouselPerColumn?.[deviceType] || 2,
+                        spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+                    },
+                    1025: {
+                        slidesPerView: carouselPerColumn?.[deviceType] || 2,
+                        spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+                    },
+                },
+            }),
+            ...(layoutHeightSwitcher === 'adapt' && {
+                autoHeight: true,
+            }),
+            loop: infiniteLoop,
+            autoplay: autoplay
+                ? {
+                    delay: autoplayDelay?.[deviceType] || 1000,
+                    pauseOnMouseEnter: pauseOnHover,
+                    disableOnInteraction: false,
+                    stopOnLastSlide: stopOnLastSlide,
+                    reverseDirection: reverseDirection,
+                }
+                : false,
+            speed: speed?.[deviceType] || 800,
+            allowTouchMove: allowTouchMove,
+            mousewheel: mousewheelControl,
+            keyboard: keyboardNavigation ? {
+                enabled: true,
+                onlyInViewport: true,
+                pageUpDown: false,
+            } : false,
+            navigation: showNavigation?.[deviceType]
+                ? {
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
+                }
+                : false,
+			pagination: showPagination?.[deviceType]
+				? {
+					el: paginationPositionType === 'outside' 
+						? `.swiper-pagination-${blockId}` 
+						: paginationInsideRef.current,
+					type: paginationType,
+					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+					clickable: true,
+				}
+				: false,
+            ...(slideEffect === 'creative' && {
+                creativeEffect: {
+                    prev: { shadow: true, translate: [0, 0, -400] },
+                    next: { translate: ['100%', 0, 0] },
+                },
+            }),
+            on: {
+                slideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
+            },
+        };
+
+        // Initialize new Swiper instance
+        swiperInstanceRef.current = new window.Swiper(swiperContainerRef.current, swiperSettings);
+
+        // Cleanup on unmount or before re-initialization
+        return () => {
+            if (swiperInstanceRef.current) {
+                swiperInstanceRef.current.destroy(true, true);
+                swiperInstanceRef.current = null;
+            }
+        };
+    }, [
+        blockId,
+        deviceType,
+        sliderType,
+        sliderItemList,
+        carouselEffect,
+        slideEffect,
+        carouselPerColumn,
+        carouselPerColumnGap,
+        infiniteLoop,
+        autoplay,
+        autoplayDelay,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        speed,
+        allowTouchMove,
+        mousewheelControl,
+        keyboardNavigation,
+        showNavigation,
+        showPagination,
+        paginationPositionType,
+        paginationType,
+        dynamicBullets,
+        navigationArrowPositionType,
+        navigationArrowPosition,
+        navigationArrowsIconSwitcher,
+        navigationArrowsIconLeft,
+        navigationArrowsIconRight,
+        layoutHeightSwitcher,
+    ]);
+
+    /**
+     * Creates and adds a new slide with default content and settings
+     * Generates a unique ID for the new slide
+     */
+    const handleAddItem = () => {
+        const newItem = {
+            id: `item-${sliderItems.length + 1}`,
+            testimonialTitle: 'Excellent Testimonial Plugin',
+            testimonialText: 'This is the best testimonial plugin I have ever used. Highly recommended for any WordPress site!',
+            authorName: 'Alex Hunter',
+            authorDesignation: 'Software Engineer, Google',
+            authorImage: {
+                url: authorImagePlaceholder,
+                id: '',
+                alt: 'Author Placeholder',
+            },
+            ratingIconAlign: 'icon',
+            ratingNumber: 5,
+            ratingImage: {
+                url: '',
+                id: '',
+                alt: '',
+            },
+            
+            normalItemBackgroundType: 'classic',
+            normalItemClassicColor: '#EDEDED',
+            normalItemGradientColor: null,
+            normalItemCustomGradientSwitcher: false,
+            normalItemCustomGradientInputValue: '',
+
+            normalBackgroundImageUrl: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            normalBackgroundImageAlt: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            normalBackgroundImageID: {
+                Desktop: '',
+                Tablet: '',
+                Mobile: '',
+            },
+            normalBackgroundImagePosition: {
+                Desktop: { x: 0.5, y: 0.5 },
+                Tablet: { x: 0.5, y: 0.5 },
+                Mobile: { x: 0.5, y: 0.5 },
+            },
+            normalBackgroundImageAttachment: {
+                Desktop: 'scroll',
+                Tablet: 'scroll',
+                Mobile: 'scroll',
+            },
+            normalBackgroundImageRepeat: {
+                Desktop: 'no-repeat',
+                Tablet: 'no-repeat',
+                Mobile: 'no-repeat',
+            },
+            normalBackgroundImageSize: {
+                Desktop: 'cover',
+                Tablet: 'cover',
+                Mobile: 'cover',
+            },
+
+            itemBackgroundOverlaySwitcher: false,
+            itemBackgroundOverlayType: 'classic',
+            itemBackgroundOverlayClassicColor: '#000',
+            itemBackgroundOverlayGradientColor: null,
+            itemBackgroundOverlayCustomGradientSwitcher: false,
+            itemBackgroundOverlayCustomGradientInputValue: '',
+            itemBackgroundOverlayOpacity: 0.5,
+        };
+        setAttributes({ sliderItems: [...sliderItems, newItem] });
+        setSliderItemList([...sliderItemList, newItem]);
+    };
+
+
+    /**
+     * Updates a specific property of a slide item
+     * Handles special cases for background images with WordPress media integration
+     */
+    const handleChangeItem = (id, key, value) => {
+        // Get current device type ("Desktop", "Tablet", or "Mobile")
+        const currentDevice = deviceType; 
+
+        setSliderItemList(prev => {
+            const updatedItems = prev.map(item => {
+                if (item.id === id) {
+                    // Handle normal background image updates for the current device only
+                    if (key === 'normalBackgroundImageID') {
+                        // Get the full image data from WordPress media library
+                        const image = value ? wp.media.attachment(value).toJSON() : { url: '', alt: '' };
+                        return {
+                            ...item,
+                            normalBackgroundImageID: {
+                                ...item.normalBackgroundImageID,
+                                [currentDevice]: value,
+                            },
+                            normalBackgroundImageUrl: {
+                                ...item.normalBackgroundImageUrl,
+                                [currentDevice]: image.url,
+                            },
+                            normalBackgroundImageAlt: {
+                                ...item.normalBackgroundImageAlt,
+                                [currentDevice]: image.alt || '',
+                            },
+                        };
+                    }
+
+                    // Handle hover background image updates for the current device only
+                    if (key === 'hoverBackgroundImageID') {
+                        const image = value ? wp.media.attachment(value).toJSON() : { url: '', alt: '' };
+                        return {
+                            ...item,
+                            hoverBackgroundImageID: {
+                                ...item.hoverBackgroundImageID,
+                                [currentDevice]: value,
+                            },
+                            hoverBackgroundImageUrl: {
+                                ...item.hoverBackgroundImageUrl,
+                                [currentDevice]: image.url,
+                            },
+                            hoverBackgroundImageAlt: {
+                                ...item.hoverBackgroundImageAlt,
+                                [currentDevice]: image.alt || '',
+                            },
+                        };
+                    }
+
+                    // Special handling for authorImage to allow partial updates (merging)
+                    if (key === 'authorImage') {
+                        // Ensure null values from ImageControl (delete) are converted to defaults
+                        const normalizedValue = {};
+                        if (value) {
+                            if (value.url === null) normalizedValue.url = '';
+                            else if (value.url !== undefined) normalizedValue.url = value.url;
+                            
+                            if (value.id === null) normalizedValue.id = '';
+                            else if (value.id !== undefined) normalizedValue.id = value.id;
+                            
+                            if (value.alt === null) normalizedValue.alt = '';
+                            else if (value.alt !== undefined) normalizedValue.alt = value.alt;
+                        }
+
+                        return {
+                            ...item,
+                            [key]: {
+                                ...item[key],
+                                ...normalizedValue
+                            }
+                        };
+                    }
+
+                    // For other properties, update as before
+                    return { ...item, [key]: value };
+                }
+                return item;
+            });
+            setAttributes({ sliderItems: updatedItems });
+            return updatedItems;
+        });
+    };
+
+    /**
+     * Handles duplicate slide functionality
+     */
+    const handleDuplicateItem = (id) => {
+        const itemToDuplicate = sliderItems.find(item => item.id === id);
+        if (itemToDuplicate) {
+            const newItem = { ...itemToDuplicate, id: `item-${sliderItems.length + 1}` };
+            setAttributes({ sliderItems: [...sliderItems, newItem] });
+            setSliderItemList([...sliderItemList, newItem]);
+        }
+    };
+
+    /**
+     * Handles slide reordering via drag and drop functionality
+     * Updates slide order in both state and attributes
+     */
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = sliderItems.findIndex(item => item.id === active.id);
+            const newIndex = sliderItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
+            setAttributes({ sliderItems: updatedItems });
+            setSliderItemList(updatedItems);
+        }
+    };
+
+    /**
+     * Removes a slide from the slider by its ID
+     * Updates both state and block attributes
+     */
+    const handleDeleteItem = (id) => {
+        const updatedItems = sliderItemList.filter(item => item.id !== id);
+        setAttributes({ sliderItems: updatedItems });
+        setSliderItemList(updatedItems);
+    };
+
+    /**
+     * Keep sliderItems attribute in sync with local state
+     */
+	useEffect(() => {
+		setAttributes({ sliderItems: sliderItemList });
+	}, [sliderItemList, setAttributes]);
+
+    /**
+     * Sync local state from attributes (for undo/redo support)
+     */
+    useEffect(() => {
+        if (JSON.stringify(sliderItems) !== JSON.stringify(sliderItemList)) {
+            setSliderItemList(sliderItems);
+        }
+    }, [sliderItems]);
+
+    /**
+     * Updates a specific field of a slide at the given index
+     * Used for RichText component changes
+     */
+    const updateItem = (index, field, value) => {
+        setSliderItemList(prev => {
+            const next = [...prev];
+            if (next[index]) {
+                next[index] = { ...next[index], [field]: value };
+            }
+            return next;
+        });
+    };
+
+    /**
+     * Renders toolbar controls for slide management
+     * Provides buttons for adding and duplicating slides
+     */
+    const renderSliderToolbarControls = () => {
+        return (
+            <BlockControls>
+                <ToolbarGroup>
+                    <ToolbarButton
+                        icon="plus"
+                        label={ __( 'Add New Slide', 'gslider-blocks' ) }
+                        onClick={handleAddItem}
+                    />
+                    <ToolbarButton
+                        icon="admin-page"
+                        label={ __( 'Duplicate Current Slide', 'gslider-blocks' ) } 
+                        onClick={() => {
+                            // Get the currently visible slide's ID
+                            const currentSlideId = sliderItems[selectedSlideIndex]?.id;
+                            if (currentSlideId) {
+                                handleDuplicateItem(currentSlideId);
+                            }
+                        }}
+                    />
+                </ToolbarGroup>
+            </BlockControls>
+        );
+    };
+
+	return (
+		<>
+                <Inspector 
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    handleAddItem={handleAddItem}
+                    handleChangeItem={handleChangeItem}
+                    handleDuplicateItem={handleDuplicateItem}
+                    handleDragEnd={handleDragEnd}
+                    handleDeleteItem={handleDeleteItem}
+                />
+
+			{renderSliderToolbarControls()}
+
+			<div {...blockProps}>
+				<div className="swiper" ref={swiperContainerRef}>
+					<div className="swiper-wrapper">
+						{sliderItemList.map((item, index) => (
+							<div className="swiper-slide" key={item.id}>
+								<div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
+									<div className="gslider-content-inner-wrapper">
+                                        {(() => {
+                                            const renderMap = {
+                                                image: showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
+                                                    <div className="gslider-author-image-wrapper" key="image">
+                                                        <img 
+                                                            src={item.authorImage?.url || authorImagePlaceholder}
+                                                            alt={item.authorImage?.alt || 'Author'}
+                                                            className="gslider-author-image"
+                                                        />
+                                                    </div>
+                                                ),
+                                                title: showTestimonialTitle && item.testimonialTitle && (
+                                                    <div className="gslider-testimonial-title-wrapper" key="title">
+                                                        <RichText
+                                                            tagName={testimonialTitleHtmlTag}
+                                                            className="gslider-testimonial-title"
+                                                            value={item.testimonialTitle}
+                                                            onChange={(value) => updateItem(index, 'testimonialTitle', value)}
+                                                            placeholder="Enter title"
+                                                        />
+                                                    </div>
+                                                ),
+                                                text: showTestimonialText && item.testimonialText && (
+                                                    <div className="gslider-testimonial-text-wrapper" key="text">
+                                                        <RichText
+                                                            tagName={testimonialTextHtmlTag}
+                                                            className="gslider-testimonial-text"
+                                                            value={item.testimonialText}
+                                                            onChange={(value) => updateItem(index, 'testimonialText', value)}
+                                                            placeholder="Enter description"
+                                                        />
+                                                    </div>
+                                                ),
+                                                rating: showRating && (
+                                                    <div className="gslider-rating-wrapper" key="rating">
+                                                        <div className="gslider-rating-inner">
+                                                            <div className="gslider-testimonial-rating-wrap">
+                                                                {(() => {
+                                                                    const { ratingNumber, ratingIconAlign } = item;
+                                                                    const ratingImageUrl = item.ratingImage?.url;
+                                                                    const ratingImageAlt = item.ratingImage?.alt;
+                                                                    const rating = Math.max(0, Math.min(5, parseFloat(ratingNumber || 0)));
+                                                                    
+                                                                    if (ratingIconAlign === 'none' || rating === 0) return null;
+
+                                                                    // For image mode, show images based on full star count
+                                                                    if (ratingIconAlign === 'image' && ratingImageUrl) {
+                                                                        const fullCount = Math.round(rating);
+                                                                        let icons = [];
+                                                                        for (let i = 0; i < fullCount; i++) {
+                                                                            icons.push(
+                                                                                <div key={i} className="gslider-testimonial-rating-icon">
+                                                                                    <img src={ratingImageUrl} alt={ratingImageAlt} />
+                                                                                </div>
+                                                                            );
+                                                                        }
+                                                                        return icons;
+                                                                    }
+
+                                                                    // For icon mode, render 5 SVG stars (full/partial/empty)
+                                                                    if (ratingIconAlign === 'icon') {
+                                                                        const fullStars = Math.floor(rating);
+                                                                        const fraction = rating - fullStars;
+                                                                        const emptyStars = 5 - fullStars - (fraction > 0 ? 1 : 0);
+
+                                                                        const FullStar = () => (
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-rating-star-svg">
+                                                                                <path d="M49.05,21.06a1.9,1.9,0,0,0,.46-2A1.93,1.93,0,0,0,48,17.8L33.3,15.63,26.74,1.88a1.93,1.93,0,0,0-3.48,0l-6.5,13.71L2,17.8A1.93,1.93,0,0,0,.49,19.1a1.9,1.9,0,0,0,.46,2L11.5,31.66v.86L9.1,47a1.9,1.9,0,0,0,.79,1.88,1.89,1.89,0,0,0,1.11.36,2,2,0,0,0,.92-.23l13-7.14L38.08,49a1.93,1.93,0,0,0,2.82-2l-2.39-14.2V31.69Z" transform="translate(-0.39 -0.78)"/>
+                                                                            </svg>
+                                                                        );
+
+                                                                        const EmptyStar = () => (
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-rating-star-svg">
+                                                                                <path d="M49.62,18.85a1.9,1.9,0,0,0-1.54-1.29L33.4,15.38,26.84,1.63a1.92,1.92,0,0,0-3.47,0L16.86,15.34,2.13,17.56a1.92,1.92,0,0,0-1.08,3.25L11.73,31.53,9.21,46.73A1.93,1.93,0,0,0,11.1,49a2,2,0,0,0,.92-.23L25.07,41.6l13.11,7.14a1.93,1.93,0,0,0,2.82-2L38.46,31.6l10.7-10.79A1.92,1.92,0,0,0,49.62,18.85ZM37,30.19a1.94,1.94,0,0,0-.53,1.67L39,46.9l-13-7a1.88,1.88,0,0,0-1.84,0l-13,7,2.5-15a1.94,1.94,0,0,0-.53-1.67L2.57,19.51l14.59-2.19a2,2,0,0,0,1.45-1.08L25.08,2.58,31.6,16.25a2,2,0,0,0,1.45,1.07l14.58,2.19Z" transform="translate(-0.49 -0.53)"/>
+                                                                            </svg>
+                                                                        );
+
+                                                                        let stars = [];
+
+                                                                        // Full stars
+                                                                        for (let i = 0; i < fullStars; i++) {
+                                                                            stars.push(
+                                                                                <div key={`full-${i}`} className="gslider-testimonial-rating-icon">
+                                                                                    <FullStar />
+                                                                                </div>
+                                                                            );
+                                                                        }
+
+                                                                        // Partial star
+                                                                        if (fraction > 0) {
+                                                                            stars.push(
+                                                                                <div key="partial" className="gslider-testimonial-rating-icon gslider-star-partial-wrap">
+                                                                                    <div className="gslider-star-partial-container">
+                                                                                        <EmptyStar />
+                                                                                        <div className="gslider-star-partial-fill" style={{ width: `${fraction * 100}%` }}>
+                                                                                            <FullStar />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            );
+                                                                        }
+
+                                                                        // Empty stars
+                                                                        for (let i = 0; i < emptyStars; i++) {
+                                                                            stars.push(
+                                                                                <div key={`empty-${i}`} className="gslider-testimonial-rating-icon empty">
+                                                                                    <EmptyStar />
+                                                                                </div>
+                                                                            );
+                                                                        }
+
+                                                                        return stars;
+                                                                    }
+
+                                                                    return null;
+                                                                })()}
+                                                            </div>
+                                                            {showRatingNumber && (
+                                                                <div className="gslider-rating-number">
+                                                                    ({Math.max(0, Math.min(5, parseFloat(item.ratingNumber || 0)))})
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                ),
+                                                name: showAuthorName && item.authorName && (
+                                                    <div className="gslider-author-name-wrapper" key="name">
+                                                        <RichText
+                                                            tagName={authorNameHtmlTag}
+                                                            className="gslider-author-name"
+                                                            value={item.authorName}
+                                                            onChange={(value) => updateItem(index, 'authorName', value)}
+                                                            placeholder="Enter author name"
+                                                        />
+                                                    </div>
+                                                ),
+                                                designation: showAuthorDesignation && item.authorDesignation && (
+                                                    <div className="gslider-author-designation-wrapper" key="designation">
+                                                        <RichText
+                                                            tagName={authorDesignationHtmlTag}
+                                                            className="gslider-author-designation"
+                                                            value={item.authorDesignation}
+                                                            onChange={(value) => updateItem(index, 'authorDesignation', value)}
+                                                            placeholder="Enter author designation"
+                                                        />
+                                                    </div>
+                                                ),
+                                            };
+                                            return (contentOrder || ['image', 'title', 'text', 'rating', 'name', 'designation']).map(key => renderMap[key]);
+                                        })()}
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+
+					{/* Navigation inside swiper container */}
+                    {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
+                        <>
+                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                                <div ref={prevRef} className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
+                                <div ref={nextRef} className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
+                            </div>
+                        </>
+                    )}
+
+                    {showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
+                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                            <div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
+                            <div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
+                        </div>
+                    )}
+
+                    {showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                            <div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">
+                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
+                            </div>
+                            <div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">
+                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
+                            </div>
+                        </div>
+                    )}
+
+					{/* Pagination inside swiper container */}
+					<div className="swiper-pagination swiper-pagination-testimonial-slider" ref={paginationInsideRef}></div>
+				</div>
+
+                {showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
+                    <>
+                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                            <div ref={prevRef} className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
+                            <div ref={nextRef} className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
+                        </div>
+                    </>
+                )}
+
+                {showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
+                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                        <div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
+                        <div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
+                    </div>
+                )}
+
+                {showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
+                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
+                        <div className="swiper-button-prev" ref={ prevRef } role="button" tabIndex={0} aria-label="Previous slide">
+                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
+                        </div>
+                        <div className="swiper-button-next" ref={ nextRef } role="button" tabIndex={0} aria-label="Next slide">
+                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
+                        </div>
+                    </div>
+                )}
+
+                {/* Pagination outside swiper container */}
+				<div
+					className={`swiper-pagination swiper-pagination-testimonial-slider swiper-pagination-${blockId}`}
+					ref={paginationOutsideRef}
+					aria-label="Slider pagination"
+				></div>
+
+			</div>
+            <style>{blockStyle}</style>
+		</>
+	);
+}

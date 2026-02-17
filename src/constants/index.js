@@ -36,6 +36,12 @@ export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
 ];
 
+export const ICON_IMAGE_ALIGN = [
+	{ label: __("None", "gslider-blocks"), value: "none" },
+	{ label: __("Icon", "gslider-blocks"), value: "icon" },
+	{ label: __("Image", "gslider-blocks"), value: "image" },
+];
+
 export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
@@ -222,7 +228,8 @@ export const OBJECT_FIT_OPTIONS = [
 ];
 
 export const GOOGLE_FONTS = async () => {
-    const res = await fetch(GsliderBlocksData.plugin_url + 'assets/google-fonts/google-fonts.json');
+    const pluginUrl = window.GSliderBlocksData?.pluginUrl || '';
+    const res = await fetch(pluginUrl + 'assets/google-fonts/google-fonts.json');
     const data = await res.json();
 
     return Object.keys(data).map(family => ({

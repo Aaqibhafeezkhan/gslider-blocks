@@ -1,0 +1,86 @@
+.gslider-testimonial-wrapper {
+	.gslider-content-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		.gslider-content-inner-wrapper {
+        	box-sizing: border-box;
+			margin: 0 auto;
+			padding: clamp(15px, 6vw, 30px);
+			width: 100%;
+			text-align: center;
+
+			figure {
+				margin: 0;
+			}
+		}
+	}
+	
+	.swiper {
+		position: relative !important;
+		overflow: hidden !important;
+	}
+
+	.swiper-backface-hidden {
+		.swiper-slide {
+			backface-visibility: visible !important;
+		}
+	}
+
+	.gslider-rating-wrapper {
+		margin-bottom: 15px;
+		.gslider-rating-inner {
+            .gslider-testimonial-rating-wrap {
+                display: flex;
+
+                .gslider-testimonial-rating-icon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    svg {
+                        display: block;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    &.gslider-star-partial-wrap {
+                        .gslider-star-partial-container {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            .gslider-star-empty {
+                                width: 100%;
+                                height: 100%;
+                            }
+
+                            .gslider-star-partial-fill {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                height: 100%;
+                                overflow: hidden;
+                                display: flex;
+                                align-items: center;
+                            }
+                        }
+                    }
+                }
+            }
+		}
+	}
+}
+
+:where(.wp-site-blocks *:focus) {
+	outline-width: 0 !important;
+}
