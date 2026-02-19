@@ -1,0 +1,129 @@
+@use "../variables" as *;
+
+.gslider-preset-selector-control {
+
+	.gslider-preset-selector-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 6px;
+		margin-top: 8px;
+	}
+
+	// Card wrapper — ensures position context
+	.gslider-preset-card-wrapper {
+		position: relative;
+		border-radius: 4px;
+		border: 1.5px solid #e0e0e0;
+		background: $white_color;
+		cursor: pointer;
+		transition: border-color 0.15s ease, background 0.15s ease;
+		overflow: hidden;
+
+		// The WP Button inside — reset all WP styles
+		.components-button.gslider-preset-selector-card {
+			display: flex !important;
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-start;
+			gap: 6px;
+			width: 100%;
+			padding: 8px 10px;
+			min-height: auto;
+			height: 36px;
+			border: none !important;
+			border-radius: 0;
+			background: transparent !important;
+			box-shadow: none !important;
+			outline: none !important;
+
+			// Icon
+			.dashicon,
+			.dashicons {
+				font-size: 16px;
+				width: 16px;
+				height: 16px;
+				color: #888;
+				flex-shrink: 0;
+				transition: color 0.15s ease;
+			}
+
+			// Label
+			.gslider-preset-selector-label {
+				font-size: $font_size_12;
+				font-weight: $font_weight_400;
+				color: $secondary_color;
+				line-height: 1;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+
+		// Hover
+		&:hover:not(.is-pro-locked) {
+			border-color: $primary_color;
+			background: rgba($primary_color, 0.02);
+
+			.dashicon,
+			.dashicons {
+				color: $primary_color;
+			}
+		}
+
+		// Active State
+		&.is-active {
+			border-color: $primary_color;
+			background: rgba($primary_color, 0.06);
+
+			.dashicon,
+			.dashicons {
+				color: $primary_color;
+			}
+
+			.gslider-preset-selector-label {
+				font-weight: $font_weight_600;
+				color: $primary_color;
+			}
+		}
+
+		// Pro Locked State
+		&.is-pro-locked {
+			opacity: 0.55;
+			cursor: default;
+
+			.components-button {
+				cursor: default !important;
+			}
+		}
+
+		// Pro Badge — positioned on the wrapper div, not the button
+		.gslider-preset-pro-badge {
+			position: absolute;
+			top: 3px;
+			right: 3px;
+			font-size: 7px;
+			font-weight: $font_weight_700;
+			text-transform: $text_transform_uppercase;
+			letter-spacing: 0.5px;
+			color: $white_color;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			padding: 1px 4px;
+			border-radius: 2px;
+			line-height: $line_height_3;
+			z-index: 1;
+		}
+	}
+
+	// Column variants
+	&.gslider-preset-columns-1 .gslider-preset-selector-grid {
+		grid-template-columns: 1fr;
+	}
+
+	&.gslider-preset-columns-3 .gslider-preset-selector-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	&.gslider-preset-columns-4 .gslider-preset-selector-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}

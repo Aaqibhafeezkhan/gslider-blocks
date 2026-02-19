@@ -11,6 +11,10 @@ const attributes = {
         type: "string",
         default: ""
     },
+    presetStyle: {
+        type: "string",
+        default: "preset-classic"
+    },
     sliderItems: {
         type: "array",
         default: [

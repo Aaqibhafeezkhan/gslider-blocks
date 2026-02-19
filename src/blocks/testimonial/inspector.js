@@ -51,6 +51,8 @@ import SelectControls from '@Components/select-controls';
 import IconPicker from '@Components/icon-picker';
 import ResponsiveToggleControl from '@Components/responsive-toggle-control';
 import ContentOrderControl from '@Components/content-order-control';
+import PresetSelector from '@Components/preset-selector';
+import { TESTIMONIAL_PRESETS } from '@Constants/presets/testimonial';
 
 const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) => {
     const {
@@ -58,6 +60,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         deviceType,
         sliderItems,
         blockStyle,
+        presetStyle,
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
@@ -683,7 +686,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
     }, [currentDeviceType]);
 
     const defaultOpenPanels = {
-        general: 'show-hide-elements',
+        general: 'preset-style',
         styles: 'content',
         advanced: 'layout',
     };
@@ -805,6 +808,18 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
      */
     const generalControls = (
         <>
+            <PanelBody
+                title={__("Preset Style", "gslider-blocks")}
+                opened={openPanels.general === "preset-style"}
+                onToggle={() => togglePanel("general", "preset-style")}
+            >
+                <PresetSelector
+                    label={__("Choose Style", "gslider-blocks")}
+                    presets={TESTIMONIAL_PRESETS}
+                    value={presetStyle}
+                    onChange={(value) => setAttributes({ presetStyle: value })}
+                />
+            </PanelBody>
             <PanelBody
                 title={__("Show / Hide Elements", "gslider-blocks")}
                 opened={openPanels.general === "show-hide-elements"}
