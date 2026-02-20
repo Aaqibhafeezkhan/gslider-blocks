@@ -207,6 +207,37 @@ const generateBaseSliderStyle = (attributes) => {
         authorImageMobilePaddingCssStyle,
         /** End Author Image Style */
 
+        /** Start Quote Icon Style */
+        quoteIconAlign,
+        quoteIcon,
+        quoteImageUrl,
+        quoteImageAlt,
+        quoteImageID,
+
+        quoteIconSize,
+        quoteIconSizeUnits,
+
+        quoteIconColorSwitcher,
+        quoteIconColor,
+        quoteIconHoverColor,
+
+        quoteIconMarginUnits,
+        quoteIconDesktopMarginCssStyle,
+        quoteIconTabletMarginCssStyle,
+        quoteIconMobileMarginCssStyle,
+
+        quoteIconPaddingUnits,
+        quoteIconDesktopPaddingCssStyle,
+        quoteIconTabletPaddingCssStyle,
+        quoteIconMobilePaddingCssStyle,
+
+        quoteIconPositionSwitcher,
+        quoteIconPositionTop,
+        quoteIconPositionTopUnits,
+        quoteIconPositionLeft,
+        quoteIconPositionLeftUnits,
+        /** End Quote Icon Style */
+
         /** Start Testimonial Text Typography, Color, Margin & Padding */
         testimonialTextFontFamily,
         testimonialTextFontSize,

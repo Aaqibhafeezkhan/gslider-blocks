@@ -373,6 +373,37 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         quoteImageUrl,
         quoteImageAlt,
         quoteImageID,
+
+        quoteIconSize,
+        quoteIconSizeUnits,
+
+        quoteIconColorSwitcher,
+        quoteIconColor,
+        quoteIconHoverColor,
+
+        quoteIconMarginUnits,
+        quoteIconDesktopMargin,
+        quoteIconDesktopMarginCssStyle,
+        quoteIconTabletMargin,
+        quoteIconTabletMarginCssStyle,
+        quoteIconMobileMargin,
+        quoteIconMobileMarginCssStyle,
+        quoteIconMarginLink,
+
+        quoteIconPaddingUnits,
+        quoteIconDesktopPadding,
+        quoteIconDesktopPaddingCssStyle,
+        quoteIconTabletPadding,
+        quoteIconTabletPaddingCssStyle,
+        quoteIconMobilePadding,
+        quoteIconMobilePaddingCssStyle,
+        quoteIconPaddingLink,
+
+        quoteIconPositionSwitcher,
+        quoteIconPositionTop,
+        quoteIconPositionTopUnits,
+        quoteIconPositionLeft,
+        quoteIconPositionLeftUnits,
         /** End Quote Icon */
 
         /** Start Navigation Custom Arrows */
@@ -2408,6 +2439,151 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         </>
                     )}
                 </PanelBody>
+            )}
+
+            {showQuoteIcon && (
+                <PanelBody
+                    title={__("Quote Icon", "gslider-blocks")}
+                    opened={openPanels.styles === "quote-icon"}
+                    onToggle={() => togglePanel("styles", "quote-icon")}
+                >
+                    <ResponsiveRangeControl
+                        label={__("Icon Size", "gslider-blocks")}
+                        rangeValue={quoteIconSize}
+                        onChangeValue={(value) => setAttributes({ quoteIconSize: value })}
+                        onUnitChange={(value) => setAttributes({ quoteIconSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={quoteIconSizeUnits}
+                        resetFallbackValue={{
+                            px: "60",
+                            "%": "5",
+                            vh: "",
+                            vw: "",
+                            em: "1",
+                            rem: "1",
+                        }}
+                        unitBounds={{
+                            px: { min: 0, max: 200, step: 1 },
+                        }}
+                    />
+
+                    {quoteIconAlign === 'icon' && (
+                        <>
+                            <SwitcherControl
+                                label={__("Icon Color", "gslider-blocks")}
+                                options={NORMAL_HOVER}
+                                value={quoteIconColorSwitcher}
+                                onChange={(value) => setAttributes({ quoteIconColorSwitcher: value })}
+                            />
+
+                            {quoteIconColorSwitcher === 'normal' && (
+                                <ColorControl
+                                    label={__("Normal Color", "gslider-blocks")}
+                                    color={quoteIconColor}
+                                    onChangeColor={(value) => setAttributes({ quoteIconColor: value })}
+                                    defaultColor=''
+                                />
+                            )}
+
+                            {quoteIconColorSwitcher === 'hover' && (
+                                <ColorControl
+                                    label={__("Hover Color", "gslider-blocks")}
+                                    color={quoteIconHoverColor}
+                                    onChangeColor={(value) => setAttributes({ quoteIconHoverColor: value })}
+                                />
+                            )}
+                        </>
+                    )}
+
+                    <ResponsiveSpacingControl
+                        label={__("Margin", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={quoteIconMarginUnits}
+                        onChangeUnits={(value) => setAttributes({ quoteIconMarginUnits: value })}
+                        desktopSpacing={quoteIconDesktopMargin}
+                        onChangeDesktopSpacing={(value) => setAttributes({ quoteIconDesktopMargin: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ quoteIconDesktopMarginCssStyle: value })}
+                        tabletSpacing={quoteIconTabletMargin}
+                        onChangeTabletSpacing={(value) => setAttributes({ quoteIconTabletMargin: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ quoteIconTabletMarginCssStyle: value })}
+                        mobileSpacing={quoteIconMobileMargin}
+                        onChangeMobileSpacing={(value) => setAttributes({ quoteIconMobileMargin: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ quoteIconMobileMarginCssStyle: value })}
+                        isLinked={quoteIconMarginLink}
+                        onChangeLink={(value) => setAttributes({ quoteIconMarginLink: value })}
+                    />
+
+                    <ResponsiveSpacingControl
+                        label={__("Padding", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={quoteIconPaddingUnits}
+                        onChangeUnits={(value) => setAttributes({ quoteIconPaddingUnits: value })}
+                        desktopSpacing={quoteIconDesktopPadding}
+                        onChangeDesktopSpacing={(value) => setAttributes({ quoteIconDesktopPadding: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ quoteIconDesktopPaddingCssStyle: value })}
+                        tabletSpacing={quoteIconTabletPadding}
+                        onChangeTabletSpacing={(value) => setAttributes({ quoteIconTabletPadding: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ quoteIconTabletPaddingCssStyle: value })}
+                        mobileSpacing={quoteIconMobilePadding}
+                        onChangeMobileSpacing={(value) => setAttributes({ quoteIconMobilePadding: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ quoteIconMobilePaddingCssStyle: value })}
+                        isLinked={quoteIconPaddingLink}
+                        onChangeLink={(value) => setAttributes({ quoteIconPaddingLink: value })}
+                    />
+
+                    <ToggleControl
+                        label={__("Position", "frontis-blocks")}
+                        checked={quoteIconPositionSwitcher}
+                        onChange={(value) => setAttributes({ quoteIconPositionSwitcher: value })}
+                    />
+
+                    {quoteIconPositionSwitcher && (
+                        <>
+                            <ResponsiveRangeControl
+                                label={__("Top", "gslider-blocks")}
+                                rangeValue={quoteIconPositionTop}
+                                onChangeValue={(value) => setAttributes({ quoteIconPositionTop: value })}
+                                onUnitChange={(value) => setAttributes({ quoteIconPositionTopUnits: value })}
+                                deviceType={deviceType}
+                                units={quoteIconPositionTopUnits}
+                                resetFallbackValue={{
+                                    px: "0",
+                                    "%": "0",
+                                    vh: "",
+                                    vw: "",
+                                    em: "0",
+                                    rem: "0",
+                                }}
+                                unitBounds={{
+                                    px: { min: 0, max: 200, step: 1 },
+                                }}
+                            />
+
+                            <ResponsiveRangeControl
+                                label={__("Left", "gslider-blocks")}
+                                rangeValue={quoteIconPositionLeft}
+                                onChangeValue={(value) => setAttributes({ quoteIconPositionLeft: value })}
+                                onUnitChange={(value) => setAttributes({ quoteIconPositionLeftUnits: value })}
+                                deviceType={deviceType}
+                                units={quoteIconPositionLeftUnits}
+                                resetFallbackValue={{
+                                    px: "0",
+                                    "%": "0",
+                                    vh: "",
+                                    vw: "",
+                                    em: "0",
+                                    rem: "0",
+                                }}
+                                unitBounds={{
+                                    px: { min: 0, max: 200, step: 1 },
+                                }}
+                            />
+                        </>
+                    )}
+                
+            </PanelBody>
             )}
 
             {showNavigation?.[deviceType] && (

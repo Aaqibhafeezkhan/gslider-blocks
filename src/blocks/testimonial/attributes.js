@@ -2061,6 +2061,172 @@ const attributes = {
         type: 'number',
         default: '',
     },
+    quoteIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '60',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    quoteIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    quoteIconColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    quoteIconColor: {
+        type: "string",
+        default: "",
+    },
+    quoteIconHoverColor: {
+        type: "string",
+        default: "",
+    },
+    quoteIconMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    quoteIconDesktopMargin: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconDesktopMarginCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconTabletMargin: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconTabletMarginCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconMobileMargin: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconMobileMarginCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconMarginLink: {
+        type: "boolean",
+        default: true,
+    },
+    quoteIconPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    quoteIconDesktopPadding: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconDesktopPaddingCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconTabletPadding: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconTabletPaddingCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconMobilePadding: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconMobilePaddingCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconPaddingLink: {
+        type: "boolean",
+        default: true,
+    },
+    quoteIconPositionSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    quoteIconPositionTop: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    quoteIconPositionTopUnits: {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%',
+        },
+    },
+    quoteIconPositionLeft: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    quoteIconPositionLeftUnits: {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%',
+        },
+    },
     /** End Quote Icon */
 
     /** Start Navigation Custom Arrows */
