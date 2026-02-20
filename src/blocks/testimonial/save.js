@@ -30,6 +30,11 @@ export default function Save({ attributes }) {
         showAuthorImage,
         showRating,
         showRatingNumber,
+        showQuoteIcon,
+        quoteIconAlign,
+        quoteIcon,
+        quoteImageUrl,
+        quoteImageAlt,
         showNavigation,
         showPagination,
         paginationPositionType,
@@ -178,14 +183,24 @@ export default function Save({ attributes }) {
                         <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
                             <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})}>
                                 <div className="gslider-content-inner-wrapper">
+                                    {/* Quote Icon — rendered separately, positioned via CSS */}
+                                    {showQuoteIcon && (
+                                        <div className="gslider-testimonial-quote-icon-wrapper">
+                                            {quoteIconAlign === 'icon' && renderSVG(quoteIcon)}
+                                            {quoteIconAlign === 'image' && quoteImageUrl && (
+                                                <img src={quoteImageUrl} alt={quoteImageAlt} />
+                                            )}
+                                        </div>
+                                    )}
+                                    {/* Ordered content elements */}
                                     {(() => {
                                         const renderMap = {
                                             image: showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
-                                                <div className="gslider-author-image-wrapper" key="image">
+                                                <div className="gslider-testimonial-author-image-wrapper" key="image">
                                                     <img 
                                                         src={item.authorImage?.url || authorImagePlaceholder}
                                                         alt={item.authorImage?.alt || 'Author'}
-                                                        className="gslider-author-image"
+                                                        className="gslider-testimonial-author-image"
                                                     />
                                                 </div>
                                             ),
@@ -208,8 +223,8 @@ export default function Save({ attributes }) {
                                                 </div>
                                             ),
                                             rating: showRating && (
-                                                <div className="gslider-rating-wrapper" key="rating">
-                                                    <div className="gslider-rating-inner">
+                                                <div className="gslider-testimonial-rating-wrapper" key="rating">
+                                                    <div className="gslider-testimonial-rating-inner">
                                                         <div className="gslider-testimonial-rating-wrap">
                                                             {(() => {
                                                                 const { ratingNumber, ratingIconAlign } = item;
@@ -248,7 +263,7 @@ export default function Save({ attributes }) {
                                                                     for (let i = 0; i < fullStars; i++) {
                                                                         stars.push(
                                                                             <div key={`full-${i}`} className="gslider-testimonial-rating-icon">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-rating-star-svg">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
                                                                                     <path d={fullStarPath} transform="translate(-0.39 -0.78)"/>
                                                                                 </svg>
                                                                             </div>
@@ -258,13 +273,13 @@ export default function Save({ attributes }) {
                                                                     // Partial star
                                                                     if (fraction > 0) {
                                                                         stars.push(
-                                                                            <div key="partial" className="gslider-testimonial-rating-icon gslider-star-partial-wrap">
-                                                                                <div className="gslider-star-partial-container">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-rating-star-svg">
+                                                                            <div key="partial" className="gslider-testimonial-rating-icon gslider-testimonial-star-partial-wrap">
+                                                                                <div className="gslider-testimonial-star-partial-container">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
                                                                                         <path d={emptyStarPath} transform="translate(-0.49 -0.53)"/>
                                                                                     </svg>
-                                                                                    <div className="gslider-star-partial-fill" style={{ width: `${fraction * 100}%` }}>
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-rating-star-svg">
+                                                                                    <div className="gslider-testimonial-star-partial-fill" style={{ width: `${fraction * 100}%` }}>
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
                                                                                             <path d={fullStarPath} transform="translate(-0.39 -0.78)"/>
                                                                                         </svg>
                                                                                     </div>
@@ -277,7 +292,7 @@ export default function Save({ attributes }) {
                                                                     for (let i = 0; i < emptyStars; i++) {
                                                                         stars.push(
                                                                             <div key={`empty-${i}`} className="gslider-testimonial-rating-icon empty">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-rating-star-svg">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
                                                                                     <path d={emptyStarPath} transform="translate(-0.49 -0.53)"/>
                                                                                 </svg>
                                                                             </div>
@@ -291,7 +306,7 @@ export default function Save({ attributes }) {
                                                             })()}
                                                         </div>
                                                         {showRatingNumber && (
-                                                            <div className="gslider-rating-number">
+                                                            <div className="gslider-testimonial-rating-number">
                                                                 ({Math.max(0, Math.min(5, parseFloat(item.ratingNumber || 0)))})
                                                             </div>
                                                         )}
@@ -299,19 +314,19 @@ export default function Save({ attributes }) {
                                                 </div>
                                             ),
                                             name: showAuthorName && item.authorName && (
-                                                <div className="gslider-author-name-wrapper" key="name">
+                                                <div className="gslider-testimonial-author-name-wrapper" key="name">
                                                     <RichText.Content
                                                         tagName={authorNameHtmlTag}
-                                                        className="gslider-author-name"
+                                                        className="gslider-testimonial-author-name"
                                                         value={item.authorName}
                                                     />
                                                 </div>
                                             ),
                                             designation: showAuthorDesignation && item.authorDesignation && (
-                                                <div className="gslider-author-designation-wrapper" key="designation">
+                                                <div className="gslider-testimonial-author-designation-wrapper" key="designation">
                                                     <RichText.Content
                                                         tagName={authorDesignationHtmlTag}
-                                                        className="gslider-author-designation"
+                                                        className="gslider-testimonial-author-designation"
                                                         value={item.authorDesignation}
                                                     />
                                                 </div>

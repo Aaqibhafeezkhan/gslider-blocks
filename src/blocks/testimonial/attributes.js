@@ -497,6 +497,10 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    showQuoteIcon: {
+        type: "boolean",
+        default: false,
+    },
     showNavigation: {
         type: "object",
         default: {
@@ -2036,6 +2040,29 @@ const attributes = {
     
     /** End Testimonial Text */
 
+    /** Start Quote Icon */
+    quoteIconAlign: {
+        type: 'string',
+        default: 'icon',
+    },
+    quoteIcon: {
+        type: 'string',
+        default: 'quote-left',
+    },
+    quoteImageUrl: {
+        type: 'string',
+        default: '',
+    },
+    quoteImageAlt: {
+        type: 'string',
+        default: '',
+    },
+    quoteImageID: {
+        type: 'number',
+        default: '',
+    },
+    /** End Quote Icon */
+
     /** Start Navigation Custom Arrows */
     navigationArrowsIconSwitcher: {
         type: "boolean",
@@ -3411,7 +3438,6 @@ const attributes = {
         default: "",
     },
     /** End Global Border */
-
 
     /** Start Global Custom CSS */
     globalCustomCSS: {

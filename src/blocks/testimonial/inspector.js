@@ -25,6 +25,8 @@ import {
     NAVIGATION_ARROW_DIRECTION,
     LAYOUT_HEIGHT_SWITCHER,
     PAGINATION_POSITION_TYPE,
+    ICON_IMAGE_ALIGN,
+    
 
 } from "@Constants";
 
@@ -86,6 +88,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         showTestimonialText,
         showAuthorImage,
         showRating,
+        showQuoteIcon,
         showNavigation,
         showPagination,
         paginationPositionType,
@@ -363,6 +366,14 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         testimonialTextMobilePaddingCssStyle,
         testimonialTextPaddingLink,
         /** End Testimonial Text Typography, Color, Margin & Padding */
+
+        /** Start Quote Icon */
+        quoteIconAlign,
+        quoteIcon,
+        quoteImageUrl,
+        quoteImageAlt,
+        quoteImageID,
+        /** End Quote Icon */
 
         /** Start Navigation Custom Arrows */
         navigationArrowsIconSwitcher,
@@ -793,6 +804,10 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
     }
     /** End Load Google Font */
 
+    /** Quote Icon Handler */
+    const quoteIconHandler = (IconName) => {
+        setAttributes({ quoteIcon: IconName })
+    }
     /** Navigation Custom Arrows */
     const navigationArrowsIconLeftHandler = (IconName) => {
         setAttributes({ navigationArrowsIconLeft: IconName })
@@ -820,6 +835,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     onChange={(value) => setAttributes({ presetStyle: value })}
                 />
             </PanelBody>
+
             <PanelBody
                 title={__("Show / Hide Elements", "gslider-blocks")}
                 opened={openPanels.general === "show-hide-elements"}
@@ -855,6 +871,11 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     checked={showRating}
                     onChange={(value) => setAttributes({ showRating: value })}
                 />
+                <ToggleControl
+                    label={__("Show Quote Icon", "gslider-blocks")}
+                    checked={showQuoteIcon}
+                    onChange={(value) => setAttributes({ showQuoteIcon: value })}
+                />
                 <ResponsiveToggleControl
                     label={__("Show Navigation", "gslider-blocks")}
                     toggleValue={showNavigation}
@@ -870,6 +891,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     setAttributes={setAttributes}
                 />
             </PanelBody>
+
             <PanelBody
                 title={__("Slider Items", "gslider-blocks")}
                 opened={openPanels.general === "slider-items"}
@@ -902,6 +924,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     </Button>
                 </div>
             </PanelBody>
+
             <PanelBody
                 title={__("Layout & Content Setting", "gslider-blocks")}
                 opened={openPanels.general === "layout-content-setting"}
@@ -1015,6 +1038,38 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     onChange={(value) => setAttributes({ authorDesignationHtmlTag: value })}
                 />
             </PanelBody>
+            
+            {showQuoteIcon && (
+                <PanelBody
+                    title={__("Quote Icon", "gslider-blocks")}
+                    opened={openPanels.general === "quote-icon"}
+                    onToggle={() => togglePanel("general", "quote-icon")}
+                >
+                    <SwitcherControl
+                        label={__("Icon Align", "gslider-blocks")}
+                        options={ICON_IMAGE_ALIGN} 
+                        value={quoteIconAlign}
+                        onChange={(value) => setAttributes({ quoteIconAlign: value })}
+                    />
+
+                    {quoteIconAlign === 'icon' && (
+                        <IconPicker value={quoteIcon} setIconHandler={quoteIconHandler} />
+                    )}
+
+                    {quoteIconAlign === 'image' && (
+                        <ImageControl
+                            imageUrl={quoteImageUrl}
+                            setImageUrl={(value) => setAttributes({ quoteImageUrl: value })}
+                            imageAlt={quoteImageAlt} 
+                            setImageAlt={(value) => setAttributes({ quoteImageAlt: value })}
+                            imageID={quoteImageID}
+                            setImageID={(value) => setAttributes({ quoteImageID: value })}
+                            isImageSize={false}
+                        />
+                    )}
+                </PanelBody>
+            )}
+
             <PanelBody
                 title={__("Content Order", "gslider-blocks")}
                 opened={openPanels.general === "content-order"}
@@ -1034,6 +1089,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     onChange={(newOrder) => setAttributes({ contentOrder: newOrder })}
                 />
             </PanelBody>
+
             <PanelBody
                 title={__("Slider Type", "gslider-blocks")}
                 opened={openPanels.general === "slider-type"}
@@ -1046,6 +1102,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     onChange={(value) => setAttributes({ sliderType: value })}
                 />
             </PanelBody>
+
             <PanelBody
                 title={__("Slider Settings", "gslider-blocks")}
                 opened={openPanels.general === "slider-settings"}
@@ -1128,6 +1185,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     isRangeUnit={false}
                 />
             </PanelBody>
+
             {sliderType === 'carousel' && (
                 <PanelBody
                     title={__("Carousel Settings", "gslider-blocks")}
@@ -1159,6 +1217,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     />
                 </PanelBody>
             )}
+
             {sliderType === 'carousel' && (
                 <PanelBody
                     title={__("Carousel Effect", "gslider-blocks")}
@@ -1173,6 +1232,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     />
                 </PanelBody>
             )}
+            
             {sliderType === 'slider' && (
                 <PanelBody
                     title={__("Slider Effect", "gslider-blocks")}

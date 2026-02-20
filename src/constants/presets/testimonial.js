@@ -43,54 +43,7 @@ export const TESTIMONIAL_PRESETS = [
         description: __('Compact card for multi-column carousel', 'gslider-blocks'),
     },
 
-    // ── Pro Presets ───────────────────────────────────────
-    {
-        value: 'preset-bubble',
-        label: __('Bubble Chat', 'gslider-blocks'),
-        icon: 'format-chat',
-        description: __('Speech bubble with tail', 'gslider-blocks'),
-        isPro: true,
-    },
-    {
-        value: 'preset-social',
-        label: __('Social Media', 'gslider-blocks'),
-        icon: 'share',
-        description: __('Twitter/Google review card style', 'gslider-blocks'),
-        isPro: true,
-    },
-    {
-        value: 'preset-fullbg',
-        label: __('Full Background', 'gslider-blocks'),
-        icon: 'cover-image',
-        description: __('Text overlay on background image', 'gslider-blocks'),
-        isPro: true,
-    },
-    {
-        value: 'preset-company',
-        label: __('Company', 'gslider-blocks'),
-        icon: 'building',
-        description: __('Logo and company focused B2B style', 'gslider-blocks'),
-        isPro: true,
-    },
-    {
-        value: 'preset-timeline',
-        label: __('Timeline', 'gslider-blocks'),
-        icon: 'clock',
-        description: __('Vertical timeline with date badge', 'gslider-blocks'),
-        isPro: true,
-    },
-    {
-        value: 'preset-video',
-        label: __('Video', 'gslider-blocks'),
-        icon: 'video-alt3',
-        description: __('Video testimonial with embed', 'gslider-blocks'),
-        isPro: true,
-    },
-    {
-        value: 'preset-masonry',
-        label: __('Masonry', 'gslider-blocks'),
-        icon: 'tagcloud',
-        description: __('Pinterest-style staggered grid', 'gslider-blocks'),
-        isPro: true,
-    },
+    // ── Pro Presets (Future) ─────────────────────────────
+    // See: log/testimonial-deep-research.md for full Pro preset plan
+    // Planned: bubble, social, fullbg, company, timeline, video, masonry
 ];

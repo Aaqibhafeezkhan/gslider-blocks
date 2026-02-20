@@ -29,9 +29,9 @@
 		}
 	}
 
-	.gslider-rating-wrapper {
+	.gslider-testimonial-rating-wrapper {
 		margin-bottom: 15px;
-		.gslider-rating-inner {
+		.gslider-testimonial-rating-inner {
             .gslider-testimonial-rating-wrap {
                 display: flex;
 
@@ -50,8 +50,8 @@
                         object-fit: cover;
                     }
 
-                    &.gslider-star-partial-wrap {
-                        .gslider-star-partial-container {
+                    &.gslider-testimonial-star-partial-wrap {
+                        .gslider-testimonial-star-partial-container {
                             position: relative;
                             width: 100%;
                             height: 100%;
@@ -59,12 +59,12 @@
                             align-items: center;
                             justify-content: center;
 
-                            .gslider-star-empty {
+                            .gslider-testimonial-star-empty {
                                 width: 100%;
                                 height: 100%;
                             }
 
-                            .gslider-star-partial-fill {
+                            .gslider-testimonial-star-partial-fill {
                                 position: absolute;
                                 top: 0;
                                 left: 0;

@@ -52,7 +52,7 @@
 				font-size: $font_size_12;
 				font-weight: $font_weight_400;
 				color: $secondary_color;
-				line-height: 1;
+				line-height: normal;
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -109,7 +109,7 @@
 			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 			padding: 1px 4px;
 			border-radius: 2px;
-			line-height: $line_height_3;
+			line-height: normal;
 			z-index: 1;
 		}
 	}

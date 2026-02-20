@@ -1728,7 +1728,7 @@
   font-size: 12px;
   font-weight: 400;
   color: #1e1e1e;
-  line-height: 1;
+  line-height: normal;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1772,7 +1772,7 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 1px 4px;
   border-radius: 2px;
-  line-height: 1.3;
+  line-height: normal;
   z-index: 1;
 }
 .gslider-preset-selector-control.gslider-preset-columns-1 .gslider-preset-selector-grid {
