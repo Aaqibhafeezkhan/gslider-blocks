@@ -56,7 +56,6 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         }
     }, []);
 
-
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">

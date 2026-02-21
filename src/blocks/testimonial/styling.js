@@ -1446,6 +1446,13 @@ const generateBaseSliderStyle = (attributes) => {
                 ${quoteIconOpacity.Tablet ? `opacity: ${quoteIconOpacity.Tablet};` : ''}
                 ${quoteIconRotate.Tablet ? `transform: rotate(${quoteIconRotate.Tablet}deg);` : ''}
                 ${quoteIconZIndex.Tablet ? `z-index: ${quoteIconZIndex.Tablet};` : ''}
+                ${quoteIconPositionSwitcher ? `
+                    position: absolute;
+                    ${quoteIconPositionTop.Tablet ? `top: ${quoteIconPositionTop.Tablet}${quoteIconPositionTopUnits.Tablet};` : ''}
+                    ${quoteIconPositionBottom.Tablet ? `bottom: ${quoteIconPositionBottom.Tablet}${quoteIconPositionBottomUnits.Tablet};` : ''}
+                    ${quoteIconPositionLeft.Tablet ? `left: ${quoteIconPositionLeft.Tablet}${quoteIconPositionLeftUnits.Tablet};` : ''}
+                    ${quoteIconPositionRight.Tablet ? `right: ${quoteIconPositionRight.Tablet}${quoteIconPositionRightUnits.Tablet};` : ''}
+                ` : 'position: relative;'}
             }
 
             ${quoteIconHoverRotate.Tablet ? `
@@ -1453,14 +1460,6 @@ const generateBaseSliderStyle = (attributes) => {
                     transform: rotate(${quoteIconHoverRotate.Tablet}deg);
                 }
             ` : ''}
-
-                ${quoteIconPositionSwitcher ? `
-                    ${quoteIconPositionTop.Tablet ? `top: ${quoteIconPositionTop.Tablet}${quoteIconPositionTopUnits.Tablet};` : ''}
-                    ${quoteIconPositionBottom.Tablet ? `bottom: ${quoteIconPositionBottom.Tablet}${quoteIconPositionBottomUnits.Tablet};` : ''}
-                    ${quoteIconPositionLeft.Tablet ? `left: ${quoteIconPositionLeft.Tablet}${quoteIconPositionLeftUnits.Tablet};` : ''}
-                    ${quoteIconPositionRight.Tablet ? `right: ${quoteIconPositionRight.Tablet}${quoteIconPositionRightUnits.Tablet};` : ''}
-                ` : ''}
-            }
             .${blockId} .gslider-testimonial-quote-icon-wrapper svg,
             .${blockId} .gslider-testimonial-quote-icon-wrapper img {
                 ${quoteIconSize.Tablet && quoteIconSizeUnits.Tablet ? `width: ${quoteIconSize.Tablet}${quoteIconSizeUnits.Tablet};` : ''}
@@ -1700,6 +1699,13 @@ const generateBaseSliderStyle = (attributes) => {
                 ${quoteIconOpacity.Mobile ? `opacity: ${quoteIconOpacity.Mobile};` : ''}
                 ${quoteIconRotate.Mobile ? `transform: rotate(${quoteIconRotate.Mobile}deg);` : ''}
                 ${quoteIconZIndex.Mobile ? `z-index: ${quoteIconZIndex.Mobile};` : ''}
+                ${quoteIconPositionSwitcher ? `
+                    position: absolute;
+                    ${quoteIconPositionTop.Mobile ? `top: ${quoteIconPositionTop.Mobile}${quoteIconPositionTopUnits.Mobile};` : ''}
+                    ${quoteIconPositionBottom.Mobile ? `bottom: ${quoteIconPositionBottom.Mobile}${quoteIconPositionBottomUnits.Mobile};` : ''}
+                    ${quoteIconPositionLeft.Mobile ? `left: ${quoteIconPositionLeft.Mobile}${quoteIconPositionLeftUnits.Mobile};` : ''}
+                    ${quoteIconPositionRight.Mobile ? `right: ${quoteIconPositionRight.Mobile}${quoteIconPositionRightUnits.Mobile};` : ''}
+                ` : 'position: relative;'}
             }
 
             ${quoteIconHoverRotate.Mobile ? `
@@ -1707,14 +1713,6 @@ const generateBaseSliderStyle = (attributes) => {
                     transform: rotate(${quoteIconHoverRotate.Mobile}deg);
                 }
             ` : ''}
-
-                ${quoteIconPositionSwitcher ? `
-                    ${quoteIconPositionTop.Mobile ? `top: ${quoteIconPositionTop.Mobile}${quoteIconPositionTopUnits.Mobile};` : ''}
-                    ${quoteIconPositionBottom.Mobile ? `bottom: ${quoteIconPositionBottom.Mobile}${quoteIconPositionBottomUnits.Mobile};` : ''}
-                    ${quoteIconPositionLeft.Mobile ? `left: ${quoteIconPositionLeft.Mobile}${quoteIconPositionLeftUnits.Mobile};` : ''}
-                    ${quoteIconPositionRight.Mobile ? `right: ${quoteIconPositionRight.Mobile}${quoteIconPositionRightUnits.Mobile};` : ''}
-                ` : ''}
-            }
             .${blockId} .gslider-testimonial-quote-icon-wrapper svg,
             .${blockId} .gslider-testimonial-quote-icon-wrapper img {
                 ${quoteIconSize.Mobile && quoteIconSizeUnits.Mobile ? `width: ${quoteIconSize.Mobile}${quoteIconSizeUnits.Mobile};` : ''}
