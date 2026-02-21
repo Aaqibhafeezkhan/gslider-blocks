@@ -402,8 +402,56 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         quoteIconPositionSwitcher,
         quoteIconPositionTop,
         quoteIconPositionTopUnits,
+        quoteIconPositionBottom,
+        quoteIconPositionBottomUnits,
         quoteIconPositionLeft,
         quoteIconPositionLeftUnits,
+        quoteIconPositionRight,
+        quoteIconPositionRightUnits,
+        quoteIconZIndex,
+
+        quoteIconNormalBackgroundType,
+        quoteIconNormalClassicColor,
+        quoteIconNormalGradientColor,
+        quoteIconNormalCustomGradientSwitcher,
+        quoteIconNormalCustomGradientInputValue,
+        quoteIconHoverBackgroundType,
+        quoteIconHoverClassicColor,
+        quoteIconHoverGradientColor,
+        quoteIconHoverCustomGradientSwitcher,
+        quoteIconHoverCustomGradientInputValue,
+
+        quoteIconBorder,
+        quoteIconBorderColorSwitcher,
+        quoteIconBorderColor,
+        quoteIconBorderHoverColor,
+        quoteIconBorderUnits,
+        quoteIconDesktopBorder,
+        quoteIconDesktopBorderCssStyle,
+        quoteIconTabletBorder,
+        quoteIconTabletBorderCssStyle,
+        quoteIconMobileBorder,
+        quoteIconMobileBorderCssStyle,
+        quoteIconBorderLink,
+
+        quoteIconBorderRadiusUnits,
+        quoteIconDesktopBorderRadius,
+        quoteIconDesktopBorderRadiusCssStyle,
+        quoteIconTabletBorderRadius,
+        quoteIconTabletBorderRadiusCssStyle,
+        quoteIconMobileBorderRadius,
+        quoteIconMobileBorderRadiusCssStyle,
+        quoteIconBorderRadiusLink,
+
+        quoteIconBoxShadowValuesSwitcher,
+        quoteIconBoxShadowValues,
+        quoteIconBoxShadowCssValue,
+        quoteIconBoxShadowHoverValues,
+        quoteIconBoxShadowHoverCssValue,
+        quoteIconOpacity,
+        quoteIconRotateSwitcher,
+        quoteIconRotate,
+        quoteIconHoverRotate,
         /** End Quote Icon */
 
         /** Start Navigation Custom Arrows */
@@ -2495,6 +2543,187 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         </>
                     )}
 
+                    <BackgroundControl
+                        label={__("Background Color", "gslider-blocks")}
+
+                        normalBackgroundType={quoteIconNormalBackgroundType}
+                        setNormalBackgroundType={(value) => setAttributes({ quoteIconNormalBackgroundType: value })}
+                        normalClassicColor={quoteIconNormalClassicColor}
+                        setNormalClassicColor={(value) => setAttributes({ quoteIconNormalClassicColor: value })}
+                        normalGradientColor={quoteIconNormalGradientColor}
+                        setNormalGradientColor={(value) => setAttributes({ quoteIconNormalGradientColor: value })}
+                        normalCustomGradientSwitcher={quoteIconNormalCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => setAttributes({ quoteIconNormalCustomGradientSwitcher: value })}
+                        normalCustomGradientInputValue={quoteIconNormalCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => setAttributes({ quoteIconNormalCustomGradientInputValue: value })}
+
+                        hoverBackgroundType={quoteIconHoverBackgroundType}
+                        setHoverBackgroundType={(value) => setAttributes({ quoteIconHoverBackgroundType: value })}
+                        hoverClassicColor={quoteIconHoverClassicColor}
+                        setHoverClassicColor={(value) => setAttributes({ quoteIconHoverClassicColor: value })}
+                        hoverGradientColor={quoteIconHoverGradientColor}
+                        setHoverGradientColor={(value) => setAttributes({ quoteIconHoverGradientColor: value })}
+                        hoverCustomGradientSwitcher={quoteIconHoverCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => setAttributes({ quoteIconHoverCustomGradientSwitcher: value })}
+                        hoverCustomGradientInputValue={quoteIconHoverCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => setAttributes({ quoteIconHoverCustomGradientInputValue: value })}
+                        isBackgroundImage={false}
+                    />
+
+                    <SelectControls
+                        label={__("Border Style", "gslider-blocks")}
+                        options={BORDER_STYLES}
+                        value={quoteIconBorder}
+                        onChange={(value) => setAttributes({ quoteIconBorder: value })}
+                    />
+
+                    {quoteIconBorder !== 'none' && (
+                        <>
+                            <SwitcherControl
+                                label={__("Border Color", "gslider-blocks")}
+                                options={NORMAL_HOVER}
+                                value={quoteIconBorderColorSwitcher}
+                                onChange={(value) => setAttributes({ quoteIconBorderColorSwitcher: value })}
+                            />
+
+                            {quoteIconBorderColorSwitcher === 'normal' && (
+                                <ColorControl
+                                    label={__("Normal Color", "gslider-blocks")}
+                                    color={quoteIconBorderColor}
+                                    onChangeColor={(value) => setAttributes({ quoteIconBorderColor: value })}
+                                />
+                            )}
+
+                            {quoteIconBorderColorSwitcher === 'hover' && (
+                                <ColorControl
+                                    label={__("Hover Color", "gslider-blocks")}
+                                    color={quoteIconBorderHoverColor}
+                                    onChangeColor={(value) => setAttributes({ quoteIconBorderHoverColor: value })}
+                                />
+                            )}
+
+                            <ResponsiveSpacingControl
+                                label={__("Border Width", "gslider-blocks")}
+                                deviceType={deviceType}
+                                onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                                units={quoteIconBorderUnits}
+                                onChangeUnits={(value) => setAttributes({ quoteIconBorderUnits: value })}
+                                desktopSpacing={quoteIconDesktopBorder}
+                                onChangeDesktopSpacing={(value) => setAttributes({ quoteIconDesktopBorder: value })}
+                                desktopSpacingStyle={(value) => setAttributes({ quoteIconDesktopBorderCssStyle: value })}
+                                tabletSpacing={quoteIconTabletBorder}
+                                onChangeTabletSpacing={(value) => setAttributes({ quoteIconTabletBorder: value })}
+                                tabletSpacingStyle={(value) => setAttributes({ quoteIconTabletBorderCssStyle: value })}
+                                mobileSpacing={quoteIconMobileBorder}
+                                onChangeMobileSpacing={(value) => setAttributes({ quoteIconMobileBorder: value })}
+                                mobileSpacingStyle={(value) => setAttributes({ quoteIconMobileBorderCssStyle: value })}
+                                isLinked={quoteIconBorderLink}
+                                onChangeLink={(value) => setAttributes({ quoteIconBorderLink: value })}
+                            />
+                        </>
+                    )}
+
+                    <ResponsiveSpacingControl
+                        label={__("Border Radius", "gslider-blocks")}
+                        deviceType={deviceType}
+                        onChangeDeviceType={(value) => setAttributes({ deviceType: value })}
+                        units={quoteIconBorderRadiusUnits}
+                        onChangeUnits={(value) => setAttributes({ quoteIconBorderRadiusUnits: value })}
+                        desktopSpacing={quoteIconDesktopBorderRadius}
+                        onChangeDesktopSpacing={(value) => setAttributes({ quoteIconDesktopBorderRadius: value })}
+                        desktopSpacingStyle={(value) => setAttributes({ quoteIconDesktopBorderRadiusCssStyle: value })}
+                        tabletSpacing={quoteIconTabletBorderRadius}
+                        onChangeTabletSpacing={(value) => setAttributes({ quoteIconTabletBorderRadius: value })}
+                        tabletSpacingStyle={(value) => setAttributes({ quoteIconTabletBorderRadiusCssStyle: value })}
+                        mobileSpacing={quoteIconMobileBorderRadius}
+                        onChangeMobileSpacing={(value) => setAttributes({ quoteIconMobileBorderRadius: value })}
+                        mobileSpacingStyle={(value) => setAttributes({ quoteIconMobileBorderRadiusCssStyle: value })}
+                        isLinked={quoteIconBorderRadiusLink}
+                        onChangeLink={(value) => setAttributes({ quoteIconBorderRadiusLink: value })}
+                    />
+
+                    <SwitcherControl
+                        label={__("Box Shadow", "gslider-blocks")}
+                        options={NORMAL_HOVER}
+                        value={quoteIconBoxShadowValuesSwitcher}
+                        onChange={(value) => setAttributes({ quoteIconBoxShadowValuesSwitcher: value })}
+                    />
+
+                    {quoteIconBoxShadowValuesSwitcher === 'normal' && (
+                        <BoxShadowSettingsControl
+                            label={__("Normal Shadow", "gslider-blocks")}
+                            onBoxShadowChange={(value) => setAttributes({ quoteIconBoxShadowValues: value })}
+                            initialShadowValue={quoteIconBoxShadowValues}
+                            onBoxShadowStyleChange={(value) => setAttributes({ quoteIconBoxShadowCssValue: value })}
+                        />
+                    )}
+
+                    {quoteIconBoxShadowValuesSwitcher === 'hover' && (
+                        <BoxShadowSettingsControl
+                            label={__("Hover Shadow", "gslider-blocks")}
+                            onBoxShadowChange={(value) => setAttributes({ quoteIconBoxShadowHoverValues: value })}
+                            initialShadowValue={quoteIconBoxShadowHoverValues}
+                            onBoxShadowStyleChange={(value) => setAttributes({ quoteIconBoxShadowHoverCssValue: value })}
+                        />
+                    )}
+
+                    <SwitcherControl
+                        label={__("Visual Effects", "gslider-blocks")}
+                        value={quoteIconRotateSwitcher}
+                        onChange={(value) => setAttributes({ quoteIconRotateSwitcher: value })}
+                        options={[
+                            { label: __("Normal", "gslider-blocks"), value: "normal" },
+                            { label: __("Hover", "gslider-blocks"), value: "hover" },
+                        ]}
+                    />
+
+                    {quoteIconRotateSwitcher === 'normal' ? (
+                        <>
+                            <ResponsiveRangeControl
+                                label={__("Opacity", "gslider-blocks")}
+                                rangeValue={quoteIconOpacity}
+                                onChangeValue={(value) => setAttributes({ quoteIconOpacity: value })}
+                                deviceType={deviceType}
+                                resetValue={""}
+                                unitBounds={{
+                                    px: { min: 0, max: 1, step: 0.1 },
+                                }}
+                            />
+
+                            <ResponsiveRangeControl
+                                label={__("Rotation (deg)", "gslider-blocks")}
+                                rangeValue={quoteIconRotate}
+                                onChangeValue={(value) => setAttributes({ quoteIconRotate: value })}
+                                deviceType={deviceType}
+                                resetValue={""}
+                                unitBounds={{
+                                    px: { min: 0, max: 360, step: 1 },
+                                }}
+                            />
+                        </>
+                    ) : (
+                        <ResponsiveRangeControl
+                            label={__("Hover Rotation (deg)", "gslider-blocks")}
+                            rangeValue={quoteIconHoverRotate}
+                            onChangeValue={(value) => setAttributes({ quoteIconHoverRotate: value })}
+                            deviceType={deviceType}
+                            resetValue={""}
+                            unitBounds={{
+                                px: { min: 0, max: 360, step: 1 },
+                            }}
+                        />
+                    )}
+
+                    <ResponsiveRangeControl
+                        label={__("Z-Index", "gslider-blocks")}
+                        rangeValue={quoteIconZIndex}
+                        onChangeValue={(value) => setAttributes({ quoteIconZIndex: value })}
+                        deviceType={deviceType}
+                        unitBounds={{
+                            px: { min: 0, max: 1000, step: 1 },
+                        }}
+                    />
+
                     <ResponsiveSpacingControl
                         label={__("Margin", "gslider-blocks")}
                         deviceType={deviceType}
@@ -2557,7 +2786,29 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                                     rem: "0",
                                 }}
                                 unitBounds={{
-                                    px: { min: 0, max: 200, step: 1 },
+                                    px: { min: -500, max: 1000, step: 1 },
+                                    "%": { min: -100, max: 100, step: 1 },
+                                }}
+                            />
+
+                            <ResponsiveRangeControl
+                                label={__("Bottom", "gslider-blocks")}
+                                rangeValue={quoteIconPositionBottom}
+                                onChangeValue={(value) => setAttributes({ quoteIconPositionBottom: value })}
+                                onUnitChange={(value) => setAttributes({ quoteIconPositionBottomUnits: value })}
+                                deviceType={deviceType}
+                                units={quoteIconPositionBottomUnits}
+                                resetFallbackValue={{
+                                    px: "0",
+                                    "%": "0",
+                                    vh: "",
+                                    vw: "",
+                                    em: "0",
+                                    rem: "0",
+                                }}
+                                unitBounds={{
+                                    px: { min: -500, max: 1000, step: 1 },
+                                    "%": { min: -100, max: 100, step: 1 },
                                 }}
                             />
 
@@ -2577,7 +2828,29 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                                     rem: "0",
                                 }}
                                 unitBounds={{
-                                    px: { min: 0, max: 200, step: 1 },
+                                    px: { min: -500, max: 1000, step: 1 },
+                                    "%": { min: -100, max: 100, step: 1 },
+                                }}
+                            />
+
+                            <ResponsiveRangeControl
+                                label={__("Right", "gslider-blocks")}
+                                rangeValue={quoteIconPositionRight}
+                                onChangeValue={(value) => setAttributes({ quoteIconPositionRight: value })}
+                                onUnitChange={(value) => setAttributes({ quoteIconPositionRightUnits: value })}
+                                deviceType={deviceType}
+                                units={quoteIconPositionRightUnits}
+                                resetFallbackValue={{
+                                    px: "0",
+                                    "%": "0",
+                                    vh: "",
+                                    vw: "",
+                                    em: "0",
+                                    rem: "0",
+                                }}
+                                unitBounds={{
+                                    px: { min: -500, max: 1000, step: 1 },
+                                    "%": { min: -100, max: 100, step: 1 },
                                 }}
                             />
                         </>

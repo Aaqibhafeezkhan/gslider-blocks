@@ -2045,6 +2045,7 @@ const attributes = {
         type: 'string',
         default: 'icon',
     },
+    /** Start Quote Icon Settings */
     quoteIcon: {
         type: 'string',
         default: 'quote-left',
@@ -2061,6 +2062,9 @@ const attributes = {
         type: 'number',
         default: '',
     },
+    /** End Quote Icon Settings */
+
+    /** Start Quote Icon Size */
     quoteIconSize: {
         type: 'object',
         default: {
@@ -2077,6 +2081,52 @@ const attributes = {
             Mobile: 'px',
         },
     },
+    /** End Quote Icon Size */
+
+    /** Start Quote Icon Background */
+    quoteIconNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    quoteIconNormalClassicColor: {
+        type: "string",
+        default: "",
+    },
+    quoteIconNormalGradientColor: {
+        type: "string",
+        default: "",
+    },
+    quoteIconNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    quoteIconNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    quoteIconHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    quoteIconHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    quoteIconHoverGradientColor: {
+        type: "string",
+        default: "",
+    },
+    quoteIconHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    quoteIconHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Quote Icon Background */
+
+    /** Start Quote Icon Color */
     quoteIconColorSwitcher: {
         type: "string",
         default: "normal",
@@ -2089,6 +2139,195 @@ const attributes = {
         type: "string",
         default: "",
     },
+    /** End Quote Icon Color */
+
+    /** Start Quote Icon Border */
+    quoteIconBorder: {
+        type: "string",
+        default: "none",
+    },
+    quoteIconBorderColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    quoteIconBorderColor: {
+        type: "string",
+        default: "",
+    },
+    quoteIconBorderHoverColor: {
+        type: "string",
+        default: "",
+    },
+    quoteIconBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    quoteIconDesktopBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconDesktopBorderCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconTabletBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconTabletBorderCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconMobileBorder: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconMobileBorderCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconBorderLink: {
+        type: "boolean",
+        default: true,
+    },
+    /** End Quote Icon Border */
+
+    /** Start Quote Icon Border Radius */
+    quoteIconBorderRadiusUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    quoteIconDesktopBorderRadius: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconDesktopBorderRadiusCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconTabletBorderRadius: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconTabletBorderRadiusCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconMobileBorderRadius: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    quoteIconMobileBorderRadiusCssStyle: {
+        type: "string",
+        default: "",
+    },
+    quoteIconBorderRadiusLink: {
+        type: "boolean",
+        default: true,
+    },
+    /** End Quote Icon Border Radius */
+
+    /** Start Quote Icon Box Shadow */
+    quoteIconBoxShadowValuesSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    quoteIconBoxShadowValues: {
+        type: "array",
+        default: [],
+    },
+    quoteIconBoxShadowCssValue: {
+        type: "string",
+        default: "",
+    },
+    quoteIconBoxShadowHoverValues: {
+        type: "array",
+        default: [],
+    },
+    quoteIconBoxShadowHoverCssValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Quote Icon Box Shadow */
+
+    /** Start Quote Icon Visual Effects */
+    quoteIconOpacity: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    quoteIconRotateSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    quoteIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    quoteIconHoverRotate: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    quoteIconZIndex: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    /** End Quote Icon Visual Effects */
+
+    /** Start Quote Icon Margin */
     quoteIconMarginUnits: {
         type: "object",
         default: {
@@ -2140,6 +2379,9 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    /** End Quote Icon Margin */
+
+    /** Start Quote Icon Padding */
     quoteIconPaddingUnits: {
         type: "object",
         default: {
@@ -2191,6 +2433,9 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    /** End Quote Icon Padding */
+
+    /** Start Quote Icon Positioning */
     quoteIconPositionSwitcher: {
         type: "boolean",
         default: false,
@@ -2204,6 +2449,22 @@ const attributes = {
         },
     },
     quoteIconPositionTopUnits: {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%',
+        },
+    },
+    quoteIconPositionBottom: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    quoteIconPositionBottomUnits: {
         type: 'object',
         default: {
             Desktop: '%',
@@ -2227,6 +2488,23 @@ const attributes = {
             Mobile: '%',
         },
     },
+    quoteIconPositionRight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    quoteIconPositionRightUnits: {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%',
+        },
+    },
+    /** End Quote Icon Positioning */
     /** End Quote Icon */
 
     /** Start Navigation Custom Arrows */

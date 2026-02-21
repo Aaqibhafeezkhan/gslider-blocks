@@ -184,7 +184,7 @@ export default function Save({ attributes }) {
                             <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})}>
                                 <div className="gslider-content-inner-wrapper">
                                     {/* Quote Icon — rendered separately, positioned via CSS */}
-                                    {showQuoteIcon && (
+                                    {showQuoteIcon && quoteIconAlign !== 'none' && (
                                         <div className="gslider-testimonial-quote-icon-wrapper">
                                             {quoteIconAlign === 'icon' && renderSVG(quoteIcon)}
                                             {quoteIconAlign === 'image' && quoteImageUrl && (
