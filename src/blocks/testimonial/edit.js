@@ -84,6 +84,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
         layoutHeightSwitcher,
         contentOrder,
+        presetStyle,
 	} = attributes;
 
     /** Handle block ID generation (handles duplication and initial ID) */
@@ -108,7 +109,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	// Block props for container
 	const blockProps = useBlockProps({
-        className: `gslider-testimonial-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
+        className: `gslider-testimonial-wrapper ${blockId} ${presetStyle || 'preset-classic'} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
 	});
     
 	const [sliderItemList, setSliderItemList] = useState(sliderItems);

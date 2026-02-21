@@ -62,10 +62,11 @@ export default function Save({ attributes }) {
 
         layoutHeightSwitcher,
         contentOrder,
+        presetStyle,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `gslider-testimonial-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
+        className: `gslider-testimonial-wrapper ${blockId} ${presetStyle || 'preset-classic'} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
     });
 
     const navigationEnabled = {
