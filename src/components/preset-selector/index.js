@@ -1,32 +1,80 @@
 import { __ } from '@wordpress/i18n';
+import { useState, useEffect, memo } from '@wordpress/element';
 import { BaseControl, Button, Dashicon, Tooltip } from '@wordpress/components';
+import { select } from '@wordpress/data';
 
 /**
  * PresetSelector — Reusable visual preset picker for all GSlider blocks.
  *
- * Uses CSS-only card grid with Dashicons + text labels.
- * Zero image assets — works for 50+ blocks without bloat.
+ * Follows Frontis Blocks pattern: applies attribute overrides on preset selection.
+ * Uses dashicons + text labels (no SVG images).
  *
  * Styles: admin/scss/components/_preset-selector.scss
  *
  * @param {Object}   props
- * @param {string}   props.label       - Control label
- * @param {Array}    props.presets     - Array of { value, label, icon, isPro?, description? }
- * @param {string}   props.value       - Currently selected preset value
- * @param {Function} props.onChange    - Callback when preset changes
- * @param {boolean}  props.isProActive - Whether Pro plugin is active (unlocks pro presets)
- * @param {number}   props.columns     - Number of columns in grid (default: 2)
- * @param {string}   props.help        - Optional help text
+ * @param {string}   props.label           - Control label
+ * @param {Array}    props.presets         - Array of { value, label, icon, attributes?, isPro?, description?, isDefault? }
+ * @param {string}   props.value           - Currently selected preset value
+ * @param {Function} props.onChange        - Callback when preset changes (for presetStyle attribute)
+ * @param {Function} props.setAttributes  - Block setAttributes function for attribute overrides
+ * @param {boolean}  props.isProActive     - Whether Pro plugin is active (unlocks pro presets)
+ * @param {number}   props.columns         - Number of columns in grid (default: 2)
+ * @param {string}   props.help            - Optional help text
+ * @param {string}   props.defaultPresetValue - Default preset value for reset
  */
 const PresetSelector = ({
     label = '',
     presets = [],
     value,
     onChange,
+    setAttributes,
     isProActive = false,
     columns = 2,
     help = '',
+    defaultPresetValue = null,
 }) => {
+    // Keep UI state in sync with saved attribute
+    const [selectedPreset, setSelectedPreset] = useState(value || '');
+    useEffect(() => {
+        setSelectedPreset(value || '');
+    }, [value]);
+
+    // Resolve default preset value
+    const resolveDefaultPresetValue = () => {
+        if (defaultPresetValue) return defaultPresetValue;
+        const flagged = (presets || []).find((p) => p?.isDefault && p?.value);
+        if (flagged?.value) return flagged.value;
+        const first = (presets || []).find((p) => p?.value);
+        return first?.value || '';
+    };
+
+    // Apply preset — sets class + attribute overrides (Frontis pattern)
+    const applyPreset = (selectedValue) => {
+        // 1. Set the preset class attribute
+        if (onChange) {
+            onChange(selectedValue);
+        }
+        setSelectedPreset(selectedValue);
+
+        // 2. Apply attribute overrides
+        const preset = presets?.find((p) => p?.value === selectedValue);
+        if (preset?.attributes?.length && setAttributes) {
+            preset.attributes.forEach((item) => {
+                if (item?.label) setAttributes({ [item.label]: item.value });
+            });
+        }
+    };
+
+    // Reset to default preset
+    const resetPreset = () => {
+        const defVal = resolveDefaultPresetValue();
+        if (defVal) applyPreset(defVal);
+    };
+
+    // Show reset only when current != default
+    const defaultValue = resolveDefaultPresetValue();
+    const showReset = selectedPreset && selectedPreset !== defaultValue;
+
     // Build wrapper class with column variant
     const controlClass = [
         'gslider-preset-selector-control',
@@ -39,9 +87,25 @@ const PresetSelector = ({
             help={help}
             className={controlClass}
         >
+            {showReset && (
+                <div className="gslider-preset-reset-wrap" style={{ textAlign: 'right', marginBottom: '4px' }}>
+                    <button
+                        type="button"
+                        className="gslider-preset-reset-button"
+                        aria-label={__('Reset to default preset', 'gslider-blocks')}
+                        onClick={resetPreset}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '2px' }}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044" stroke="#555E72"/>
+                        </svg>
+                    </button>
+                </div>
+            )}
+
             <div className="gslider-preset-selector-grid">
                 {presets.map((preset) => {
-                    const isActive = value === preset.value;
+                    const isActive = selectedPreset === preset.value;
                     // Only lock if preset is marked Pro AND Pro is not active
                     const isLocked = preset.isPro === true && !isProActive;
 
@@ -68,7 +132,7 @@ const PresetSelector = ({
                                     className="gslider-preset-selector-card"
                                     onClick={() => {
                                         if (!isLocked) {
-                                            onChange(preset.value);
+                                            applyPreset(preset.value);
                                         }
                                     }}
                                     aria-pressed={isActive}
@@ -92,4 +156,4 @@ const PresetSelector = ({
     );
 };
 
-export default PresetSelector;
+export default memo(PresetSelector);

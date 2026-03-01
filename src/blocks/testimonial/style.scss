@@ -8,9 +8,7 @@
 		.gslider-content-inner-wrapper {
         	box-sizing: border-box;
 			margin: 0 auto;
-			padding: clamp(15px, 6vw, 30px);
 			width: 100%;
-			text-align: center;
 
 			figure {
 				margin: 0;
@@ -30,7 +28,6 @@
 	}
 
 	.gslider-testimonial-rating-wrapper {
-		margin-bottom: 15px;
 		.gslider-testimonial-rating-inner {
             .gslider-testimonial-rating-wrap {
                 display: flex;
@@ -79,12 +76,37 @@
             }
 		}
 	}
+
+	/* New wrapper groups — base styles */
+	.gslider-testimonial-content-group {
+		width: 100%;
+	}
+
+	.gslider-author-info-group {
+		width: 100%;
+	}
+
+	.gslider-author-meta {
+		min-width: 0;
+	}
+
+	.gslider-testimonial-author-image {
+		object-fit: cover;
+	}
 }
 
 /* ─────────────────────────────────────────────────
-   PRESET STYLES
-   Each preset uses CSS to rearrange the same DOM.
-   Wrapper gets class: .preset-classic, .preset-card-quote, etc.
+   PRESET STYLES — Layout Structure Only
+   
+   All customizable values (font-size, padding, color,
+   margin, opacity, image size, etc.) come from styling.js
+   via block attributes and inspector controls.
+
+   style.scss only handles STRUCTURAL LAYOUT:
+   - flex/grid direction and alignment
+   - element ordering via CSS order
+   - positioning (absolute/relative)
+   - text-align direction
    ───────────────────────────────────────────────── */
 
 
@@ -96,72 +118,23 @@
 		align-items: center;
 		text-align: center;
 
-		.gslider-testimonial-quote-icon-wrapper {
-			margin-bottom: 16px;
-			opacity: 0.12;
-
-			svg {
-				width: 42px;
-				height: 42px;
-			}
-		}
-
-		.gslider-testimonial-author-image-wrapper {
-			margin-bottom: 18px;
-
-			.gslider-testimonial-author-image {
-				width: 80px;
-				height: 80px;
-				border-radius: 50%;
-				object-fit: cover;
-				box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-				border: 3px solid rgba(255, 255, 255, 0.9);
-			}
-		}
-
-		.gslider-testimonial-title-wrapper {
-			margin-bottom: 8px;
-
-			.gslider-testimonial-title {
-				font-weight: 600;
-				letter-spacing: -0.01em;
-			}
-		}
-
-		.gslider-testimonial-text-wrapper {
-			margin-bottom: 16px;
-			max-width: 560px;
-
-			.gslider-testimonial-text {
-				line-height: 1.75;
-				opacity: 0.85;
-			}
-		}
-
-		.gslider-testimonial-rating-wrapper {
-			margin-bottom: 14px;
-			justify-content: center;
+		.gslider-testimonial-content-group {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 
 			.gslider-testimonial-rating-wrap {
 				justify-content: center;
 			}
 		}
 
-		.gslider-testimonial-author-name-wrapper {
-			margin-bottom: 2px;
+		.gslider-author-info-group {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 
-			.gslider-testimonial-author-name {
-				font-weight: 600;
-				font-size: 0.95em;
-				letter-spacing: 0.01em;
-			}
-		}
-
-		.gslider-testimonial-author-designation-wrapper {
-			.gslider-testimonial-author-designation {
-				opacity: 0.55;
-				font-size: 0.85em;
-				letter-spacing: 0.02em;
+			.gslider-author-meta {
+				text-align: center;
 			}
 		}
 	}
@@ -174,122 +147,37 @@
 		flex-direction: column;
 		text-align: left;
 		position: relative;
-		overflow: hidden;
 
-		/* Quote icon — decorative watermark, top-left */
+		/* Quote icon — absolute watermark */
 		.gslider-testimonial-quote-icon-wrapper {
 			position: absolute;
-			top: -8px;
-			left: -8px;
-			opacity: 0.06;
+			top: 0;
+			left: 0;
 			z-index: 0;
 			pointer-events: none;
 			line-height: 0;
-
-			svg {
-				width: 100px;
-				height: 100px;
-			}
-
-			img {
-				width: 100px;
-				height: 100px;
-				object-fit: contain;
-			}
 		}
 
-		/* Content ordering */
-		.gslider-testimonial-title-wrapper {
-			order: 1;
+		.gslider-testimonial-content-group {
 			position: relative;
 			z-index: 1;
-			margin-bottom: 8px;
-
-			.gslider-testimonial-title {
-				font-weight: 600;
-				letter-spacing: -0.01em;
-			}
-		}
-
-		.gslider-testimonial-text-wrapper {
-			order: 2;
-			position: relative;
-			z-index: 1;
-			margin-bottom: 16px;
-
-			.gslider-testimonial-text {
-				line-height: 1.7;
-				opacity: 0.8;
-			}
-		}
-
-		.gslider-testimonial-rating-wrapper {
-			order: 3;
-			margin-bottom: 0;
 
 			.gslider-testimonial-rating-wrap {
 				justify-content: flex-start;
 			}
 		}
 
-		/* ── Divider ── */
-		&::after {
-			content: '';
-			display: block;
-			order: 4;
-			width: 100%;
-			height: 1px;
-			background: rgba(0, 0, 0, 0.08);
-			margin: 20px 0 18px;
-		}
-
-		/* ── Author row: flex layout ── */
-		flex-wrap: wrap;
-
-		.gslider-testimonial-author-image-wrapper {
-			order: 5;
-			flex: 0 0 auto;
-			margin-right: 14px;
-			margin-bottom: 0;
+		/* Author row — horizontal (image + meta side by side) */
+		.gslider-author-info-group {
 			display: flex;
 			align-items: center;
 
-			.gslider-testimonial-author-image {
-				width: 46px;
-				height: 46px;
-				border-radius: 50%;
-				object-fit: cover;
-				box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+			.gslider-testimonial-author-image-wrapper {
+				flex: 0 0 auto;
 			}
-		}
 
-		/* Name + designation stacked vertically beside image */
-		.gslider-testimonial-author-name-wrapper {
-			order: 6;
-			flex: 1 1 0;
-			display: flex;
-			align-items: flex-end;
-			margin-bottom: 0;
-			min-width: 0;
-
-			.gslider-testimonial-author-name {
-				margin: 0;
-				font-weight: 600;
-				font-size: 0.92em;
-				line-height: 1.2;
-			}
-		}
-
-		.gslider-testimonial-author-designation-wrapper {
-			order: 7;
-			flex: 1 1 100%;
-			margin-left: 60px; /* 46px image + 14px gap */
-
-			.gslider-testimonial-author-designation {
-				margin: 0;
-				opacity: 0.55;
-				font-size: 0.82em;
-				line-height: 1.3;
+			.gslider-author-meta {
+				flex: 1 1 0;
 			}
 		}
 	}
@@ -302,84 +190,40 @@
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-		max-width: 680px;
-		margin: 0 auto;
-		padding-top: clamp(24px, 5vw, 48px);
-		padding-bottom: clamp(24px, 5vw, 48px);
 
-		/* Hide image and title in minimal preset */
-		.gslider-testimonial-author-image-wrapper,
-		.gslider-testimonial-title-wrapper {
-			display: none;
-		}
+		.gslider-testimonial-content-group {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 
-		/* Quote icon — refined, subtle, centered top */
-		.gslider-testimonial-quote-icon-wrapper {
-			order: 0;
-			margin-bottom: 24px;
-			opacity: 0.15;
+			.gslider-testimonial-text-wrapper {
+				position: relative;
 
-			svg {
-				width: 40px;
-				height: 40px;
+				/* Divider line after text */
+				&::after {
+					content: '';
+					display: block;
+					width: 40px;
+					height: 2px;
+					background: currentColor;
+					opacity: 0.15;
+					margin: 28px auto 24px;
+					border-radius: 1px;
+				}
 			}
-		}
-
-		/* Large, elegant testimonial text */
-		.gslider-testimonial-text-wrapper {
-			order: 1;
-			margin-bottom: 0;
-			position: relative;
-
-			.gslider-testimonial-text {
-				font-size: clamp(1.15em, 2.2vw, 1.45em);
-				font-style: italic;
-				line-height: 1.8;
-				letter-spacing: -0.015em;
-				font-weight: 300;
-			}
-
-			/* Divider line after text */
-			&::after {
-				content: '';
-				display: block;
-				width: 40px;
-				height: 2px;
-				background: currentColor;
-				opacity: 0.15;
-				margin: 28px auto 24px;
-				border-radius: 1px;
-			}
-		}
-
-		.gslider-testimonial-rating-wrapper {
-			order: 2;
-			margin-bottom: 12px;
 
 			.gslider-testimonial-rating-wrap {
 				justify-content: center;
 			}
 		}
 
-		.gslider-testimonial-author-name-wrapper {
-			order: 3;
-			margin-bottom: 2px;
+		.gslider-author-info-group {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 
-			.gslider-testimonial-author-name {
-				font-weight: 600;
-				font-size: 0.95em;
-				letter-spacing: 0.03em;
-				text-transform: uppercase;
-			}
-		}
-
-		.gslider-testimonial-author-designation-wrapper {
-			order: 4;
-
-			.gslider-testimonial-author-designation {
-				opacity: 0.45;
-				font-size: 0.85em;
-				letter-spacing: 0.01em;
+			.gslider-author-meta {
+				text-align: center;
 			}
 		}
 	}
@@ -390,94 +234,34 @@
 	.gslider-content-inner-wrapper {
 		display: grid;
 		grid-template-columns: auto 1fr;
-		gap: 0 clamp(16px, 3vw, 30px);
+		grid-template-rows: auto;
 		text-align: left;
-		align-items: start;
+		align-items: center;
 
-		/* ── Image: left column, spans all rows ── */
-		.gslider-testimonial-author-image-wrapper {
+		/* Author image — left column */
+		.gslider-author-info-group {
 			grid-column: 1;
-			grid-row: 1 / -1;
+			grid-row: 1;
 			display: flex;
-			align-items: flex-start;
-			padding-top: 4px;
-
-			.gslider-testimonial-author-image {
-				width: 80px;
-				height: 80px;
-				min-width: 80px;
-				border-radius: 50%;
-				object-fit: cover;
-				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-				border: 3px solid rgba(255, 255, 255, 0.9);
-			}
+			flex-direction: column;
+			align-items: center;
 		}
 
-		/* ── Quote icon in right column ── */
-		.gslider-testimonial-quote-icon-wrapper {
+		/* Content — right column */
+		.gslider-testimonial-content-group {
 			grid-column: 2;
-			justify-self: start;
-			opacity: 0.12;
-			margin-bottom: 6px;
-			line-height: 0;
-
-			svg {
-				width: 24px;
-				height: 24px;
-			}
-		}
-
-		/* ── All content in right column ── */
-		.gslider-testimonial-title-wrapper,
-		.gslider-testimonial-text-wrapper,
-		.gslider-testimonial-rating-wrapper,
-		.gslider-testimonial-author-name-wrapper,
-		.gslider-testimonial-author-designation-wrapper {
-			grid-column: 2;
-		}
-
-		.gslider-testimonial-title-wrapper {
-			margin-bottom: 6px;
-
-			.gslider-testimonial-title {
-				font-weight: 600;
-				font-size: 1em;
-				letter-spacing: -0.01em;
-			}
-		}
-
-		.gslider-testimonial-text-wrapper {
-			margin-bottom: 12px;
-
-			.gslider-testimonial-text {
-				line-height: 1.7;
-				opacity: 0.8;
-				font-size: 0.95em;
-			}
-		}
-
-		.gslider-testimonial-rating-wrapper {
-			margin-bottom: 10px;
+			grid-row: 1;
 
 			.gslider-testimonial-rating-wrap {
 				justify-content: flex-start;
 			}
 		}
 
-		.gslider-testimonial-author-name-wrapper {
-			margin-bottom: 1px;
-
-			.gslider-testimonial-author-name {
-				font-weight: 600;
-				font-size: 0.9em;
-			}
-		}
-
-		.gslider-testimonial-author-designation-wrapper {
-			.gslider-testimonial-author-designation {
-				opacity: 0.5;
-				font-size: 0.82em;
-			}
+		/* Quote icon hidden by default in side-by-side */
+		.gslider-testimonial-quote-icon-wrapper {
+			grid-column: 2;
+			grid-row: 1;
+			justify-self: start;
 		}
 	}
 
@@ -487,25 +271,60 @@
 			grid-template-columns: 1fr;
 			text-align: center;
 
-			.gslider-testimonial-author-image-wrapper {
+			.gslider-author-info-group {
 				grid-column: 1;
 				grid-row: auto;
 				justify-self: center;
-				margin-bottom: 16px;
 			}
 
-			.gslider-testimonial-quote-icon-wrapper,
-			.gslider-testimonial-title-wrapper,
-			.gslider-testimonial-text-wrapper,
-			.gslider-testimonial-rating-wrapper,
-			.gslider-testimonial-author-name-wrapper,
-			.gslider-testimonial-author-designation-wrapper {
+			.gslider-testimonial-content-group {
 				grid-column: 1;
 			}
 
-			.gslider-testimonial-rating-wrapper {
+			.gslider-testimonial-rating-wrap {
+				justify-content: center;
+			}
+		}
+	}
+}
+
+/* ── Preset 5: Stacked Compact ─────────────────── */
+.gslider-testimonial-wrapper.preset-compact {
+	.gslider-content-wrapper {
+		align-items: stretch;
+
+		.gslider-content-inner-wrapper {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			text-align: left;
+
+			/* Content group — rating on top via column-reverse */
+			.gslider-testimonial-content-group {
+				display: flex;
+				flex-direction: column-reverse;
+				width: 100%;
+
 				.gslider-testimonial-rating-wrap {
-					justify-content: center;
+					justify-content: flex-start;
+				}
+			}
+
+			/* Author info — horizontal row */
+			.gslider-author-info-group {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				width: 100%;
+				margin-top: auto;
+
+				.gslider-testimonial-author-image-wrapper {
+					flex: 0 0 auto;
+				}
+
+				.gslider-author-meta {
+					flex: 1 1 0;
+					text-align: left;
 				}
 			}
 		}

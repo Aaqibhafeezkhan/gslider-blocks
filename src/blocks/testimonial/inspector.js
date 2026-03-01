@@ -54,7 +54,7 @@ import IconPicker from '@Components/icon-picker';
 import ResponsiveToggleControl from '@Components/responsive-toggle-control';
 import ContentOrderControl from '@Components/content-order-control';
 import PresetSelector from '@Components/preset-selector';
-import { TESTIMONIAL_PRESETS } from '@Constants/presets/testimonial';
+import { TESTIMONIAL_PRESETS } from './preset';
 
 const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) => {
     const {
@@ -912,6 +912,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     presets={TESTIMONIAL_PRESETS}
                     value={presetStyle}
                     onChange={(value) => setAttributes({ presetStyle: value })}
+                    setAttributes={setAttributes}
                 />
             </PanelBody>
 
@@ -1157,12 +1158,9 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                 <ContentOrderControl
                     label={__("Content Order", "gslider-blocks")}
                     items={[
-                        { key: 'image', label: __('Author Image', 'gslider-blocks'), icon: 'format-image' },
-                        { key: 'title', label: __('Testimonial Title', 'gslider-blocks'), icon: 'heading' },
-                        { key: 'text', label: __('Testimonial Text', 'gslider-blocks'), icon: 'editor-paragraph' },
-                        { key: 'rating', label: __('Rating', 'gslider-blocks'), icon: 'star-filled' },
-                        { key: 'name', label: __('Author Name', 'gslider-blocks'), icon: 'admin-users' },
-                        { key: 'designation', label: __('Designation', 'gslider-blocks'), icon: 'portfolio' },
+                        { key: 'quote', label: __('Quote Icon', 'gslider-blocks'), icon: 'format-quote' },
+                        { key: 'content', label: __('Content (Title, Text, Rating)', 'gslider-blocks'), icon: 'editor-paragraph' },
+                        { key: 'author', label: __('Author Info (Image, Name, Designation)', 'gslider-blocks'), icon: 'admin-users' },
                     ]}
                     order={contentOrder}
                     onChange={(newOrder) => setAttributes({ contentOrder: newOrder })}

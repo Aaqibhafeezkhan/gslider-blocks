@@ -526,7 +526,7 @@ const attributes = {
     /** Layout & Content Setting */
     contentOrder: {
         type: "array",
-        default: ["image", "title", "text", "rating", "name", "designation"],
+        default: ["quote", "content", "author"],
     },
     layoutHeightSwitcher: {
         type: "string",
@@ -774,8 +774,8 @@ const attributes = {
 	authorNameDesktopMargin: {
 		type: "object", 
 		default: {
-			top: "0",
-			bottom: "16",
+			top: "8",
+			bottom: "4",
 			left: "0",
 			right: "0",
 		},
@@ -989,7 +989,7 @@ const attributes = {
 		type: "object", 
 		default: {
 			top: "0",
-			bottom: "16",
+			bottom: "0",
 			left: "0",
 			right: "0",
 		},
@@ -1243,8 +1243,8 @@ const attributes = {
     authorImageDesktopMargin: {
         type: "object",
         default: {
-            top: "0",
-            bottom: "15",
+            top: "12",
+            bottom: "0",
             left: "0",
             right: "0",
         },
@@ -1730,10 +1730,10 @@ const attributes = {
 	testimonialTitleDesktopMargin: {
 		type: "object", 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "0",
+			bottom: "12",
+			left: "0",
+			right: "0",
 		},
 	},
     testimonialTitleDesktopMarginCssStyle: { 

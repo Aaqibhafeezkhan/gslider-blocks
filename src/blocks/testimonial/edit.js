@@ -579,165 +579,179 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                 <div className="swiper-slide" key={item.id}>
                                     <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})} ref={panelRef}>
                                         <div className="gslider-content-inner-wrapper">
-                                            {/* Quote Icon — rendered separately, positioned via CSS */}
-                                            {showQuoteIcon && quoteIconAlign !== 'none' && (
-                                                <div className="gslider-testimonial-quote-icon-wrapper">
-                                                    {quoteIconAlign === 'icon' && renderSVG(quoteIcon)}
-                                                    {quoteIconAlign === 'image' && quoteImageUrl && (
-                                                        <img src={quoteImageUrl} alt={quoteImageAlt} />
-                                                    )}
-                                                </div>
-                                            )}
-                                            {/* Ordered content elements */}
                                             {(() => {
-                                                const renderMap = {
-                                                    image: showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
-                                                        <div className="gslider-testimonial-author-image-wrapper" key="image">
-                                                            <img 
-                                                                src={item.authorImage?.url || authorImagePlaceholder}
-                                                                alt={item.authorImage?.alt || 'Author'}
-                                                                className="gslider-testimonial-author-image"
-                                                            />
+                                                // Group render map — each group is a self-contained JSX block
+                                                const renderGroupMap = {
+                                                    quote: showQuoteIcon && quoteIconAlign !== 'none' ? (
+                                                        <div key="quote" className="gslider-testimonial-quote-icon-wrapper">
+                                                            {quoteIconAlign === 'icon' && renderSVG(quoteIcon)}
+                                                            {quoteIconAlign === 'image' && quoteImageUrl && (
+                                                                <img src={quoteImageUrl} alt={quoteImageAlt} />
+                                                            )}
                                                         </div>
-                                                    ),
-                                                    title: showTestimonialTitle && item.testimonialTitle && (
-                                                        <div className="gslider-testimonial-title-wrapper" key="title">
-                                                            <RichText
-                                                                tagName={testimonialTitleHtmlTag}
-                                                                className="gslider-testimonial-title"
-                                                                value={item.testimonialTitle}
-                                                                onChange={(value) => updateItem(index, 'testimonialTitle', value)}
-                                                                placeholder="Enter title"
-                                                            />
-                                                        </div>
-                                                    ),
-                                                    text: showTestimonialText && item.testimonialText && (
-                                                        <div className="gslider-testimonial-text-wrapper" key="text">
-                                                            <RichText
-                                                                tagName={testimonialTextHtmlTag}
-                                                                className="gslider-testimonial-text"
-                                                                value={item.testimonialText}
-                                                                onChange={(value) => updateItem(index, 'testimonialText', value)}
-                                                                placeholder="Enter description"
-                                                            />
-                                                        </div>
-                                                    ),
-                                                    rating: showRating && (
-                                                        <div className="gslider-testimonial-rating-wrapper" key="rating">
-                                                            <div className="gslider-testimonial-rating-inner">
-                                                                <div className="gslider-testimonial-rating-wrap">
-                                                                    {(() => {
-                                                                        const { ratingNumber, ratingIconAlign } = item;
-                                                                        const ratingImageUrl = item.ratingImage?.url;
-                                                                        const ratingImageAlt = item.ratingImage?.alt;
-                                                                        const rating = Math.max(0, Math.min(5, parseFloat(ratingNumber || 0)));
-                                                                        
-                                                                        if (ratingIconAlign === 'none' || rating === 0) return null;
+                                                    ) : null,
 
-                                                                        // For image mode, show images based on full star count
-                                                                        if (ratingIconAlign === 'image' && ratingImageUrl) {
-                                                                            const fullCount = Math.round(rating);
-                                                                            let icons = [];
-                                                                            for (let i = 0; i < fullCount; i++) {
-                                                                                icons.push(
-                                                                                    <div key={i} className="gslider-testimonial-rating-icon">
-                                                                                        <img src={ratingImageUrl} alt={ratingImageAlt} />
-                                                                                    </div>
-                                                                                );
-                                                                            }
-                                                                            return icons;
-                                                                        }
+                                                    content: (
+                                                        <div key="content" className="gslider-testimonial-content-group">
+                                                            {showTestimonialTitle && item.testimonialTitle && (
+                                                                <div className="gslider-testimonial-title-wrapper">
+                                                                    <RichText
+                                                                        tagName={testimonialTitleHtmlTag}
+                                                                        className="gslider-testimonial-title"
+                                                                        value={item.testimonialTitle}
+                                                                        onChange={(value) => updateItem(index, 'testimonialTitle', value)}
+                                                                        placeholder="Enter title"
+                                                                    />
+                                                                </div>
+                                                            )}
+                                                            {showTestimonialText && item.testimonialText && (
+                                                                <div className="gslider-testimonial-text-wrapper">
+                                                                    <RichText
+                                                                        tagName={testimonialTextHtmlTag}
+                                                                        className="gslider-testimonial-text"
+                                                                        value={item.testimonialText}
+                                                                        onChange={(value) => updateItem(index, 'testimonialText', value)}
+                                                                        placeholder="Enter description"
+                                                                    />
+                                                                </div>
+                                                            )}
+                                                            {showRating && (
+                                                                <div className="gslider-testimonial-rating-wrapper">
+                                                                    <div className="gslider-testimonial-rating-inner">
+                                                                        <div className="gslider-testimonial-rating-wrap">
+                                                                            {(() => {
+                                                                                const { ratingNumber, ratingIconAlign } = item;
+                                                                                const ratingImageUrl = item.ratingImage?.url;
+                                                                                const ratingImageAlt = item.ratingImage?.alt;
+                                                                                const rating = Math.max(0, Math.min(5, parseFloat(ratingNumber || 0)));
+                                                                                
+                                                                                if (ratingIconAlign === 'none' || rating === 0) return null;
 
-                                                                        // For icon mode, render 5 SVG stars (full/partial/empty)
-                                                                        if (ratingIconAlign === 'icon') {
-                                                                            const fullStars = Math.floor(rating);
-                                                                            const fraction = rating - fullStars;
-                                                                            const emptyStars = 5 - fullStars - (fraction > 0 ? 1 : 0);
+                                                                                // For image mode, show images based on full star count
+                                                                                if (ratingIconAlign === 'image' && ratingImageUrl) {
+                                                                                    const fullCount = Math.round(rating);
+                                                                                    let icons = [];
+                                                                                    for (let i = 0; i < fullCount; i++) {
+                                                                                        icons.push(
+                                                                                            <div key={i} className="gslider-testimonial-rating-icon">
+                                                                                                <img src={ratingImageUrl} alt={ratingImageAlt} />
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
+                                                                                    return icons;
+                                                                                }
 
-                                                                            const FullStar = () => (
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
-                                                                                    <path d="M49.05,21.06a1.9,1.9,0,0,0,.46-2A1.93,1.93,0,0,0,48,17.8L33.3,15.63,26.74,1.88a1.93,1.93,0,0,0-3.48,0l-6.5,13.71L2,17.8A1.93,1.93,0,0,0,.49,19.1a1.9,1.9,0,0,0,.46,2L11.5,31.66v.86L9.1,47a1.9,1.9,0,0,0,.79,1.88,1.89,1.89,0,0,0,1.11.36,2,2,0,0,0,.92-.23l13-7.14L38.08,49a1.93,1.93,0,0,0,2.82-2l-2.39-14.2V31.69Z" transform="translate(-0.39 -0.78)"/>
-                                                                                </svg>
-                                                                            );
+                                                                                // For icon mode, render 5 SVG stars (full/partial/empty)
+                                                                                if (ratingIconAlign === 'icon') {
+                                                                                    const fullStars = Math.floor(rating);
+                                                                                    const fraction = rating - fullStars;
+                                                                                    const emptyStars = 5 - fullStars - (fraction > 0 ? 1 : 0);
 
-                                                                            const EmptyStar = () => (
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
-                                                                                    <path d="M49.62,18.85a1.9,1.9,0,0,0-1.54-1.29L33.4,15.38,26.84,1.63a1.92,1.92,0,0,0-3.47,0L16.86,15.34,2.13,17.56a1.92,1.92,0,0,0-1.08,3.25L11.73,31.53,9.21,46.73A1.93,1.93,0,0,0,11.1,49a2,2,0,0,0,.92-.23L25.07,41.6l13.11,7.14a1.93,1.93,0,0,0,2.82-2L38.46,31.6l10.7-10.79A1.92,1.92,0,0,0,49.62,18.85ZM37,30.19a1.94,1.94,0,0,0-.53,1.67L39,46.9l-13-7a1.88,1.88,0,0,0-1.84,0l-13,7,2.5-15a1.94,1.94,0,0,0-.53-1.67L2.57,19.51l14.59-2.19a2,2,0,0,0,1.45-1.08L25.08,2.58,31.6,16.25a2,2,0,0,0,1.45,1.07l14.58,2.19Z" transform="translate(-0.49 -0.53)"/>
-                                                                                </svg>
-                                                                            );
+                                                                                    const FullStar = () => (
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
+                                                                                            <path d="M49.05,21.06a1.9,1.9,0,0,0,.46-2A1.93,1.93,0,0,0,48,17.8L33.3,15.63,26.74,1.88a1.93,1.93,0,0,0-3.48,0l-6.5,13.71L2,17.8A1.93,1.93,0,0,0,.49,19.1a1.9,1.9,0,0,0,.46,2L11.5,31.66v.86L9.1,47a1.9,1.9,0,0,0,.79,1.88,1.89,1.89,0,0,0,1.11.36,2,2,0,0,0,.92-.23l13-7.14L38.08,49a1.93,1.93,0,0,0,2.82-2l-2.39-14.2V31.69Z" transform="translate(-0.39 -0.78)"/>
+                                                                                        </svg>
+                                                                                    );
 
-                                                                            let stars = [];
+                                                                                    const EmptyStar = () => (
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
+                                                                                            <path d="M49.62,18.85a1.9,1.9,0,0,0-1.54-1.29L33.4,15.38,26.84,1.63a1.92,1.92,0,0,0-3.47,0L16.86,15.34,2.13,17.56a1.92,1.92,0,0,0-1.08,3.25L11.73,31.53,9.21,46.73A1.93,1.93,0,0,0,11.1,49a2,2,0,0,0,.92-.23L25.07,41.6l13.11,7.14a1.93,1.93,0,0,0,2.82-2L38.46,31.6l10.7-10.79A1.92,1.92,0,0,0,49.62,18.85ZM37,30.19a1.94,1.94,0,0,0-.53,1.67L39,46.9l-13-7a1.88,1.88,0,0,0-1.84,0l-13,7,2.5-15a1.94,1.94,0,0,0-.53-1.67L2.57,19.51l14.59-2.19a2,2,0,0,0,1.45-1.08L25.08,2.58,31.6,16.25a2,2,0,0,0,1.45,1.07l14.58,2.19Z" transform="translate(-0.49 -0.53)"/>
+                                                                                        </svg>
+                                                                                    );
 
-                                                                            // Full stars
-                                                                            for (let i = 0; i < fullStars; i++) {
-                                                                                stars.push(
-                                                                                    <div key={`full-${i}`} className="gslider-testimonial-rating-icon">
-                                                                                        <FullStar />
-                                                                                    </div>
-                                                                                );
-                                                                            }
+                                                                                    let stars = [];
 
-                                                                            // Partial star
-                                                                            if (fraction > 0) {
-                                                                                stars.push(
-                                                                                    <div key="partial" className="gslider-testimonial-rating-icon gslider-testimonial-star-partial-wrap">
-                                                                                        <div className="gslider-testimonial-star-partial-container">
-                                                                                            <EmptyStar />
-                                                                                            <div className="gslider-testimonial-star-partial-fill" style={{ width: `${fraction * 100}%` }}>
+                                                                                    // Full stars
+                                                                                    for (let i = 0; i < fullStars; i++) {
+                                                                                        stars.push(
+                                                                                            <div key={`full-${i}`} className="gslider-testimonial-rating-icon">
                                                                                                 <FullStar />
                                                                                             </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                );
-                                                                            }
+                                                                                        );
+                                                                                    }
 
-                                                                            // Empty stars
-                                                                            for (let i = 0; i < emptyStars; i++) {
-                                                                                stars.push(
-                                                                                    <div key={`empty-${i}`} className="gslider-testimonial-rating-icon empty">
-                                                                                        <EmptyStar />
-                                                                                    </div>
-                                                                                );
-                                                                            }
+                                                                                    // Partial star
+                                                                                    if (fraction > 0) {
+                                                                                        stars.push(
+                                                                                            <div key="partial" className="gslider-testimonial-rating-icon gslider-testimonial-star-partial-wrap">
+                                                                                                <div className="gslider-testimonial-star-partial-container">
+                                                                                                    <EmptyStar />
+                                                                                                    <div className="gslider-testimonial-star-partial-fill" style={{ width: `${fraction * 100}%` }}>
+                                                                                                        <FullStar />
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
 
-                                                                            return stars;
-                                                                        }
+                                                                                    // Empty stars
+                                                                                    for (let i = 0; i < emptyStars; i++) {
+                                                                                        stars.push(
+                                                                                            <div key={`empty-${i}`} className="gslider-testimonial-rating-icon empty">
+                                                                                                <EmptyStar />
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
 
-                                                                        return null;
-                                                                    })()}
+                                                                                    return stars;
+                                                                                }
+
+                                                                                return null;
+                                                                            })()}
+                                                                        </div>
+                                                                        {showRatingNumber && (
+                                                                            <div className="gslider-testimonial-rating-number">
+                                                                                ({Math.max(0, Math.min(5, parseFloat(item.ratingNumber || 0)))})
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
                                                                 </div>
-                                                                {showRatingNumber && (
-                                                                    <div className="gslider-testimonial-rating-number">
-                                                                        ({Math.max(0, Math.min(5, parseFloat(item.ratingNumber || 0)))})
+                                                            )}
+                                                        </div>
+                                                    ),
+
+                                                    author: (
+                                                        <div key="author" className="gslider-author-info-group">
+                                                            {showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
+                                                                <div className="gslider-testimonial-author-image-wrapper">
+                                                                    <img 
+                                                                        src={item.authorImage?.url || authorImagePlaceholder}
+                                                                        alt={item.authorImage?.alt || 'Author'}
+                                                                        className="gslider-testimonial-author-image"
+                                                                    />
+                                                                </div>
+                                                            )}
+                                                            <div className="gslider-author-meta">
+                                                                {showAuthorName && item.authorName && (
+                                                                    <div className="gslider-testimonial-author-name-wrapper">
+                                                                        <RichText
+                                                                            tagName={authorNameHtmlTag}
+                                                                            className="gslider-testimonial-author-name"
+                                                                            value={item.authorName}
+                                                                            onChange={(value) => updateItem(index, 'authorName', value)}
+                                                                            placeholder="Enter author name"
+                                                                        />
+                                                                    </div>
+                                                                )}
+                                                                {showAuthorDesignation && item.authorDesignation && (
+                                                                    <div className="gslider-testimonial-author-designation-wrapper">
+                                                                        <RichText
+                                                                            tagName={authorDesignationHtmlTag}
+                                                                            className="gslider-testimonial-author-designation"
+                                                                            value={item.authorDesignation}
+                                                                            onChange={(value) => updateItem(index, 'authorDesignation', value)}
+                                                                            placeholder="Enter author designation"
+                                                                        />
                                                                     </div>
                                                                 )}
                                                             </div>
                                                         </div>
                                                     ),
-                                                    name: showAuthorName && item.authorName && (
-                                                        <div className="gslider-testimonial-author-name-wrapper" key="name">
-                                                            <RichText
-                                                                tagName={authorNameHtmlTag}
-                                                                className="gslider-testimonial-author-name"
-                                                                value={item.authorName}
-                                                                onChange={(value) => updateItem(index, 'authorName', value)}
-                                                                placeholder="Enter author name"
-                                                            />
-                                                        </div>
-                                                    ),
-                                                    designation: showAuthorDesignation && item.authorDesignation && (
-                                                        <div className="gslider-testimonial-author-designation-wrapper" key="designation">
-                                                            <RichText
-                                                                tagName={authorDesignationHtmlTag}
-                                                                className="gslider-testimonial-author-designation"
-                                                                value={item.authorDesignation}
-                                                                onChange={(value) => updateItem(index, 'authorDesignation', value)}
-                                                                placeholder="Enter author designation"
-                                                            />
-                                                        </div>
-                                                    ),
                                                 };
-                                                return (contentOrder || ['image', 'title', 'text', 'rating', 'name', 'designation']).map(key => renderMap[key]);
+
+                                                // Render groups in contentOrder
+                                                const orderToUse = contentOrder || ['quote', 'content', 'author'];
+                                                return orderToUse.map(groupKey => renderGroupMap[groupKey] || null);
                                             })()}
                                         </div>
                                     </div>
