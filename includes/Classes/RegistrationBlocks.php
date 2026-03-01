@@ -1,94 +1,135 @@
 <?php
+/**
+ * Block registration handler for GSlider Blocks.
+ *
+ * Dynamically discovers and registers all Gutenberg blocks
+ * found in the build/blocks directory.
+ *
+ * @package GSlider\Classes
+ * @since   1.0.0
+ */
 
 namespace GSlider\Classes;
 
 use GSlider\Traits\SingletonTrait;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if (!class_exists('RegistrationBlocks')) {
+if ( ! class_exists( 'RegistrationBlocks' ) ) {
 
+    /**
+     * Handles dynamic registration of Gutenberg blocks.
+     *
+     * Scans the build/blocks directory for valid block folders
+     * containing block.json and registers each one automatically.
+     *
+     * @since 1.0.0
+     */
     class RegistrationBlocks {
         use SingletonTrait;
 
         /**
-         * Attach hooks for block registration.
+         * Attaches hooks for block registration.
+         *
+         * @since 1.0.0
+         *
+         * @return void
          */
         public function register() {
-            add_action('init', [$this, 'register_blocks']);
+            add_action( 'init', [ $this, 'register_blocks' ] );
         }
 
         /**
-         * Register all blocks dynamically from build/blocks directory.
+         * Registers all blocks dynamically from build/blocks directory.
+         *
+         * Scans for available block folders, applies the
+         * 'gslider_registered_blocks' filter, and registers each block.
+         *
+         * @since 1.0.0
+         *
+         * @return void
          */
         public function register_blocks() {
-            $plugin_dir = defined('GSLIDER_DIR_PATH') ? GSLIDER_DIR_PATH : plugin_dir_path(__FILE__);
-            $build_dir  = trailingslashit($plugin_dir) . 'build/blocks/';
+            $plugin_dir = defined( 'GSLIDER_DIR_PATH' ) ? GSLIDER_DIR_PATH : plugin_dir_path( __FILE__ );
+            $build_dir  = trailingslashit( $plugin_dir ) . 'build/blocks/';
 
-            if (!is_readable($build_dir)) {
-                error_log('GSlider Blocks: Build directory is not readable: ' . $build_dir);
+            if ( ! is_readable( $build_dir ) ) {
+                error_log( 'GSlider Blocks: Build directory is not readable: ' . $build_dir );
                 return;
             }
 
-            // Get block folders dynamically
-            $blocks = apply_filters('gslider_registered_blocks', $this->get_available_blocks($build_dir));
+            // Get block folders dynamically.
+            $blocks = apply_filters( 'gslider_registered_blocks', $this->get_available_blocks( $build_dir ) );
 
-            foreach ($blocks as $block) {
+            foreach ( $blocks as $block ) {
                 try {
-                    $this->register_single_block($build_dir, $block);
-                } catch (\Exception $e) {
-                    error_log('GSlider Blocks: Error registering block "' . $block . '": ' . $e->getMessage());
+                    $this->register_single_block( $build_dir, $block );
+                } catch ( \Exception $e ) {
+                    error_log( 'GSlider Blocks: Error registering block "' . $block . '": ' . $e->getMessage() );
                 }
             }
         }
 
         /**
-         * Register a single block if valid.
+         * Registers a single block if valid.
          *
-         * @param string $build_dir
-         * @param string $block
-         * @throws \Exception
+         * Validates that the block directory is readable and contains
+         * a block.json file before attempting registration.
+         *
+         * @since 1.0.0
+         *
+         * @param string $build_dir Path to the build/blocks directory.
+         * @param string $block     The block folder name.
+         * @return void
+         *
+         * @throws \Exception If the block directory is not readable,
+         *                    block.json is missing, or registration fails.
          */
-        private function register_single_block(string $build_dir, string $block) {
-            $block_dir = trailingslashit($build_dir . sanitize_file_name($block));
+        private function register_single_block( string $build_dir, string $block ) {
+            $block_dir = trailingslashit( $build_dir . sanitize_file_name( $block ) );
 
-            if (!is_readable($block_dir)) {
-                throw new \Exception("Build directory not readable: " . esc_html($block_dir));
+            if ( ! is_readable( $block_dir ) ) {
+                throw new \Exception( 'Build directory not readable: ' . esc_html( $block_dir ) );
             }
 
-            if (!file_exists($block_dir . 'block.json')) {
-                throw new \Exception("block.json not found for " . esc_html($block));
+            if ( ! file_exists( $block_dir . 'block.json' ) ) {
+                throw new \Exception( 'block.json not found for ' . esc_html( $block ) );
             }
 
-            if (false === register_block_type($block_dir)) {
-                throw new \Exception("Block registration failed for " . esc_html($block));
+            if ( false === register_block_type( $block_dir ) ) {
+                throw new \Exception( 'Block registration failed for ' . esc_html( $block ) );
             }
         }
 
         /**
-         * Dynamically scan block folders inside build/blocks directory.
+         * Scans for available block folders in the build directory.
          *
-         * @param string $build_dir
-         * @return array
+         * Returns an array of folder names that contain a valid
+         * block.json file inside the build/blocks directory.
+         *
+         * @since 1.0.0
+         *
+         * @param string $build_dir Path to the build/blocks directory.
+         * @return string[] Array of block folder names.
          */
-        private function get_available_blocks(string $build_dir) {
-            if (!is_dir($build_dir)) {
+        private function get_available_blocks( string $build_dir ) {
+            if ( ! is_dir( $build_dir ) ) {
                 return [];
             }
 
             $blocks = [];
-            $dirs = scandir($build_dir);
+            $dirs   = scandir( $build_dir );
 
-            foreach ($dirs as $dir) {
-                if ($dir === '.' || $dir === '..') {
+            foreach ( $dirs as $dir ) {
+                if ( '.' === $dir || '..' === $dir ) {
                     continue;
                 }
 
-                $block_path = trailingslashit($build_dir . $dir);
+                $block_path = trailingslashit( $build_dir . $dir );
 
-                if (is_dir($block_path) && file_exists($block_path . 'block.json')) {
+                if ( is_dir( $block_path ) && file_exists( $block_path . 'block.json' ) ) {
                     $blocks[] = $dir;
                 }
             }
@@ -97,3 +138,4 @@ if (!class_exists('RegistrationBlocks')) {
         }
     }
 }
+

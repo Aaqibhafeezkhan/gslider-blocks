@@ -1,27 +1,56 @@
 <?php
+/**
+ * Utility functions for GSlider Blocks.
+ *
+ * Handles plugin tracking and analytics integration
+ * via the Appsero client.
+ *
+ * @package GSlider\Utils
+ * @since   1.0.0
+ */
 
 namespace GSlider\Utils;
+
 use GSlider\Traits\SingletonTrait;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if (!class_exists('Utils')) {
+if ( ! class_exists( 'Utils' ) ) {
 
+    /**
+     * Provides utility services for the GSlider plugin.
+     *
+     * Currently handles Appsero analytics tracking
+     * for plugin usage insights.
+     *
+     * @since 1.0.0
+     */
     class Utils {
-        
+
         use SingletonTrait;
 
         /**
-         * Register the hooks
+         * Registers utility hooks and services.
+         *
+         * @since 1.0.0
+         *
+         * @return void
          */
         public function register() {
             $this->gslider_init_tracker_gslider_blocks();
         }
 
         /**
-         * Initialize the plugin tracker
+         * Initializes the Appsero plugin tracker.
+         *
+         * Sets up the Appsero client for usage tracking
+         * and active insights collection.
+         *
+         * @since 1.0.0
+         *
+         * @return void
          */
         public function gslider_init_tracker_gslider_blocks() {
 
@@ -31,10 +60,9 @@ if (!class_exists('Utils')) {
                 GSLIDER_DIR_PATH . 'gslider-blocks.php'
             );
 
-            // Active insights
+            // Active insights.
             $client->insights()->init();
-
         }
-        
     }
 }
+
