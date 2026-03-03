@@ -8,7 +8,7 @@
   <strong>🎠 The Ultimate Gutenberg Carousel Collection</strong><br>
   10 Powerful Carousel Blocks for WordPress Block Editor
 </p>
-V
+
 <p align="center">
   <a href="https://wordpress.org/plugins/gslider-blocks/">
     <img src="https://img.shields.io/badge/WordPress-5.0+-blue.svg?logo=wordpress" alt="WordPress">
