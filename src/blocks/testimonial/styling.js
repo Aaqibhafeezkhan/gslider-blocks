@@ -1267,7 +1267,25 @@ const generateBaseSliderStyle = (attributes) => {
             ${navigationArrowBoxShadowCssValue ? `box-shadow: ${navigationArrowBoxShadowCssValue};` : ''}
             ${navigationArrowWidth.Desktop ? `width: ${navigationArrowWidth.Desktop}${navigationArrowWidthUnits.Desktop};` : ''}
             ${navigationArrowHeight.Desktop ? `height: ${navigationArrowHeight.Desktop}${navigationArrowHeightUnits.Desktop};` : ''}
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            line-height: 1;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
             transition: all .3s ease-in-out;
+        }
+        .${blockId} .swiper-button-prev:focus-visible,
+        .${blockId} .swiper-button-next:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 2px;
+        }
+        .${blockId} .swiper-button-prev.swiper-button-disabled,
+        .${blockId} .swiper-button-next.swiper-button-disabled {
+            cursor: default;
+            opacity: 0.45;
         }
         .${blockId}.gslider-testimonial-wrapper:hover .swiper-button-prev,
         .${blockId}.gslider-testimonial-wrapper:hover .swiper-button-next {

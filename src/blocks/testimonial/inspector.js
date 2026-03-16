@@ -1030,7 +1030,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         deviceType={deviceType}
                         units={layoutHeightUnits}
                         resetFallbackValue={{
-                            px: "500",
+                            px: deviceType === 'Desktop' ? "420" : deviceType === 'Tablet' ? "340" : "260",
                             "%": "50",
                             vh: "50",
                             vw: "50",
@@ -1622,12 +1622,12 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                             deviceType={deviceType}
                             units={navigationArrowPositionOutsidePaddingUnits}
                             resetFallbackValue={{
-                                px: "60",
-                                "%": "5",
-                                vh: "5",
-                                vw: "5",
-                                em: "3.75",
-                                rem: "3.75",
+                                px: deviceType === "Mobile" ? "56" : "60",
+                                "%": deviceType === "Mobile" ? "4.5" : "5",
+                                vh: deviceType === "Mobile" ? "4.5" : "5",
+                                vw: deviceType === "Mobile" ? "4.5" : "5",
+                                em: deviceType === "Mobile" ? "3.5" : "3.75",
+                                rem: deviceType === "Mobile" ? "3.5" : "3.75",
                             }}
                             unitBounds={{
                                 px: { min: 0, max: 200, step: 1 },
@@ -1714,12 +1714,12 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         deviceType={deviceType}
                         units={authorImageSizeUnits}
                         resetFallbackValue={{
-                            px: "80",
-                            "%": "5",
-                            vh: "5",
-                            vw: "5",
-                            em: "3.75",
-                            rem: "3.75",
+                            px: deviceType === "Desktop" ? "80" : deviceType === "Tablet" ? "64" : "56",
+                            "%": deviceType === "Desktop" ? "5" : deviceType === "Tablet" ? "4" : "3.5",
+                            vh: deviceType === "Desktop" ? "5" : deviceType === "Tablet" ? "4" : "3.5",
+                            vw: deviceType === "Desktop" ? "5" : deviceType === "Tablet" ? "4" : "3.5",
+                            em: deviceType === "Desktop" ? "5" : deviceType === "Tablet" ? "4" : "3.5",
+                            rem: deviceType === "Desktop" ? "5" : deviceType === "Tablet" ? "4" : "3.5",
                         }}
                         unitBounds={{
                             px: { min: 0, max: 500, step: 1 },
@@ -2877,7 +2877,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         units={navigationArrowSizeUnits}
                         resetFallbackValue={{
                             px: "16",
-                            "%": "5",
+                            "%": deviceType === "Mobile" ? "4" : "5",
                             vh: "",
                             vw: "",
                             em: "1",
@@ -2896,12 +2896,12 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         deviceType={deviceType}
                         units={navigationArrowWidthUnits}
                         resetFallbackValue={{
-                            px: "46",
-                            "%": "5",
+                            px: deviceType === "Mobile" ? "44" : "46",
+                            "%": deviceType === "Mobile" ? "4" : "5",
                             vh: "",
                             vw: "",
-                            em: "2.875",
-                            rem: "2.875",
+                            em: deviceType === "Mobile" ? "2.75" : "2.875",
+                            rem: deviceType === "Mobile" ? "2.75" : "2.875",
                         }}
                         unitBounds={{
                             px: { min: 0, max: 200, step: 1 },
@@ -2915,12 +2915,12 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         deviceType={deviceType}
                         units={navigationArrowHeightUnits}
                         resetFallbackValue={{
-                            px: "46",
-                            "%": "5",
+                            px: deviceType === "Mobile" ? "44" : "46",
+                            "%": deviceType === "Mobile" ? "4" : "5",
                             vh: "",
                             vw: "",
-                            em: "2.875",
-                            rem: "2.875",
+                            em: deviceType === "Mobile" ? "2.75" : "2.875",
+                            rem: deviceType === "Mobile" ? "2.75" : "2.875",
                         }}
                         unitBounds={{
                             px: { min: 0, max: 200, step: 1 },

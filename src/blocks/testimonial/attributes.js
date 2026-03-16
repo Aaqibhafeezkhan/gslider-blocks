@@ -537,9 +537,9 @@ const attributes = {
     layoutHeight: {
         type: "object",
         default: {
-            Desktop: "500",
-            Tablet: "400",
-            Mobile: "300",
+            Desktop: "420",
+            Tablet: "340",
+            Mobile: "260",
         },
     },
     layoutHeightUnits: {
@@ -790,7 +790,7 @@ const attributes = {
 		type: "object",  
 		default: {
 			top: "0",
-			bottom: "16",
+			bottom: "4",
 			left: "0",
 			right: "0",
 		},
@@ -803,7 +803,7 @@ const attributes = {
 		type: "object",  
 		default: {
 			top: "0",
-			bottom: "16",
+			bottom: "4",
 			left: "0",
 			right: "0",
 		},
@@ -1004,7 +1004,7 @@ const attributes = {
 		type: "object",  
 		default: {
 			top: "0",
-			bottom: "16",
+			bottom: "0",
 			left: "0",
 			right: "0",
 		},
@@ -1017,7 +1017,7 @@ const attributes = {
 		type: "object",  
 		default: {
 			top: "0",
-			bottom: "16",
+			bottom: "0",
 			left: "0",
 			right: "0",
 		},
@@ -1095,8 +1095,8 @@ const attributes = {
         type: "object",
         default: {
             Desktop: "80",
-            Tablet: "70",
-            Mobile: "60",
+            Tablet: "64",
+            Mobile: "56",
         },
     },
     authorImageSizeUnits: {
@@ -1258,8 +1258,8 @@ const attributes = {
     authorImageTabletMargin: {
         type: "object",
         default: {
-            top: "0",
-            bottom: "15",
+            top: "10",
+            bottom: "6",
             left: "0",
             right: "0",
         },
@@ -1271,8 +1271,8 @@ const attributes = {
     authorImageMobileMargin: {
         type: "object",
         default: {
-            top: "0",
-            bottom: "10",
+            top: "8",
+            bottom: "4",
             left: "0",
             right: "0",
         },
@@ -2568,7 +2568,7 @@ const attributes = {
 		default: {
 			Desktop: "16",
 			Tablet: "16",
-			Mobile: "14",
+			Mobile: "16",
 		},
 	},
 	navigationArrowSizeUnits: {
@@ -2645,7 +2645,7 @@ const attributes = {
 		default: {
 			Desktop: "46",
 			Tablet: "46",
-			Mobile: "32",
+			Mobile: "44",
 		},
 	},
 	navigationArrowWidthUnits: {
@@ -2661,7 +2661,7 @@ const attributes = {
 		default: {
 			Desktop: "46",
 			Tablet: "46",
-			Mobile: "32",
+			Mobile: "44",
 		},
 	},
 	navigationArrowHeightUnits: {
@@ -2920,7 +2920,7 @@ const attributes = {
         default: {
             Desktop: "60",
             Tablet: "60",
-            Mobile: "45",
+            Mobile: "56",
         },
     },
     navigationArrowPositionOutsidePaddingUnits: {
