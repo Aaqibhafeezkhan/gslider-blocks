@@ -916,6 +916,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     value={presetStyle}
                     onChange={(value) => setAttributes({ presetStyle: value })}
                     setAttributes={setAttributes}
+                    currentAttributes={attributes}
                 />
             </PanelBody>
 

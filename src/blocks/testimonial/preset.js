@@ -74,6 +74,16 @@ export const presetStyles = {
             Tablet: "left",
             Mobile: "left",
         },
+        quoteIconSize: {
+            Desktop: "88",
+            Tablet: "72",
+            Mobile: "40",
+        },
+        quoteIconOpacity: {
+            Desktop: "0.12",
+            Tablet: "0.12",
+            Mobile: "0.18",
+        },
         // Spacing
         contentPaddingDesktop: {
             top: "30",
@@ -245,29 +255,87 @@ export const presetStyles = {
         contentAlignment: {
             Desktop: "left",
             Tablet: "left",
-            Mobile: "left",
+            Mobile: "center",
+        },
+        contentWidth: {
+            Desktop: "92",
+            Tablet: "96",
+            Mobile: "100",
+        },
+        authorImageSize: {
+            Desktop: "92",
+            Tablet: "76",
+            Mobile: "64",
         },
         // Spacing
         contentPaddingDesktop: {
-            top: "30",
-            bottom: "30",
-            left: "30",
-            right: "30"
+            top: "40",
+            bottom: "40",
+            left: "40",
+            right: "40"
+        },
+        contentPaddingTablet: {
+            top: "32",
+            bottom: "32",
+            left: "28",
+            right: "28"
+        },
+        contentPaddingMobile: {
+            top: "24",
+            bottom: "24",
+            left: "18",
+            right: "18"
         },
         testimonialTitleDesktopMargin: {
+            top: "0",
+            bottom: "14",
+            left: "0",
+            right: "0"
+        },
+        testimonialTitleTabletMargin: {
             top: "0",
             bottom: "12",
             left: "0",
             right: "0"
         },
+        testimonialTitleMobileMargin: {
+            top: "0",
+            bottom: "10",
+            left: "0",
+            right: "0"
+        },
         testimonialTextDesktopMargin: {
             top: "0",
-            bottom: "16",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        },
+        testimonialTextTabletMargin: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        },
+        testimonialTextMobileMargin: {
+            top: "0",
+            bottom: "0",
             left: "0",
             right: "0"
         },
         authorNameDesktopMargin: {
-            top: "0",
+            top: "18",
+            bottom: "6",
+            left: "0",
+            right: "0"
+        },
+        authorNameTabletMargin: {
+            top: "14",
+            bottom: "4",
+            left: "0",
+            right: "0"
+        },
+        authorNameMobileMargin: {
+            top: "10",
             bottom: "4",
             left: "0",
             right: "0"
@@ -278,11 +346,35 @@ export const presetStyles = {
             left: "0",
             right: "0"
         },
-        authorImageDesktopMargin: {
+        authorDesignationTabletMargin: {
             top: "0",
             bottom: "0",
             left: "0",
-            right: "20"
+            right: "0"
+        },
+        authorDesignationMobileMargin: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        },
+        authorImageDesktopMargin: {
+            top: "0",
+            bottom: "18",
+            left: "0",
+            right: "0"
+        },
+        authorImageTabletMargin: {
+            top: "0",
+            bottom: "14",
+            left: "0",
+            right: "0"
+        },
+        authorImageMobileMargin: {
+            top: "0",
+            bottom: "10",
+            left: "0",
+            right: "0"
         },
     },
     "preset-compact": {
@@ -297,22 +389,91 @@ export const presetStyles = {
         contentAlignment: {
             Desktop: "left",
             Tablet: "left",
-            Mobile: "left",
+            Mobile: "center",
+        },
+        contentHorizontalAlignment: {
+            Desktop: "center",
+            Tablet: "center",
+            Mobile: "center",
+        },
+        contentWidth: {
+            Desktop: "76",
+            Tablet: "90",
+            Mobile: "100",
+        },
+        authorImageSize: {
+            Desktop: "56",
+            Tablet: "52",
+            Mobile: "48",
         },
         // Spacing
         contentPaddingDesktop: {
-            top: "20",
-            bottom: "20",
+            top: "24",
+            bottom: "24",
+            left: "24",
+            right: "24"
+        },
+        contentPaddingTablet: {
+            top: "22",
+            bottom: "22",
             left: "20",
             right: "20"
         },
+        contentPaddingMobile: {
+            top: "18",
+            bottom: "18",
+            left: "16",
+            right: "16"
+        },
+        ratingDesktopMargin: {
+            top: "0",
+            bottom: "12",
+            left: "0",
+            right: "0"
+        },
+        ratingTabletMargin: {
+            top: "0",
+            bottom: "10",
+            left: "0",
+            right: "0"
+        },
+        ratingMobileMargin: {
+            top: "0",
+            bottom: "8",
+            left: "0",
+            right: "0"
+        },
         testimonialTextDesktopMargin: {
             top: "0",
-            bottom: "16",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        },
+        testimonialTextTabletMargin: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        },
+        testimonialTextMobileMargin: {
+            top: "0",
+            bottom: "0",
             left: "0",
             right: "0"
         },
         authorNameDesktopMargin: {
+            top: "0",
+            bottom: "2",
+            left: "0",
+            right: "0"
+        },
+        authorNameTabletMargin: {
+            top: "0",
+            bottom: "2",
+            left: "0",
+            right: "0"
+        },
+        authorNameMobileMargin: {
             top: "0",
             bottom: "2",
             left: "0",
@@ -324,11 +485,35 @@ export const presetStyles = {
             left: "0",
             right: "0"
         },
+        authorDesignationTabletMargin: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        },
+        authorDesignationMobileMargin: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        },
         authorImageDesktopMargin: {
             top: "0",
             bottom: "0",
             left: "0",
             right: "12"
+        },
+        authorImageTabletMargin: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "10"
+        },
+        authorImageMobileMargin: {
+            top: "0",
+            bottom: "8",
+            left: "0",
+            right: "0"
         },
     },
 };

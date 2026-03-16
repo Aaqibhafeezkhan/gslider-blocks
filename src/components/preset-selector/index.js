@@ -28,6 +28,7 @@ const PresetSelector = ({
     value,
     onChange,
     setAttributes,
+    currentAttributes = {},
     isProActive = false,
     columns = 2,
     help = '',
@@ -38,6 +39,68 @@ const PresetSelector = ({
     useEffect(() => {
         setSelectedPreset(value || '');
     }, [value]);
+
+    const buildResponsiveCssStyleUpdates = (attributeKey, attributeValue, attributesSource = {}) => {
+        if (
+            !attributeKey ||
+            !attributeValue ||
+            typeof attributeValue !== 'object' ||
+            Array.isArray(attributeValue)
+        ) {
+            return {};
+        }
+
+        const hasBoxValues = ['top', 'right', 'bottom', 'left'].every((key) => key in attributeValue);
+        if (!hasBoxValues) {
+            return {};
+        }
+
+        const deviceMatch = attributeKey.match(/(Desktop|Tablet|Mobile)/);
+        if (!deviceMatch) {
+            return {};
+        }
+
+        const device = deviceMatch[1];
+        const unitsKey = `${attributeKey.replace(device, '')}Units`;
+        const cssStyleKey = `${attributeKey}CssStyle`;
+        const units = attributesSource?.[unitsKey]?.[device] || 'px';
+        const hasAnyValue = Object.values(attributeValue).some(
+            (item) => item !== '' && item !== undefined && item !== null
+        );
+
+        return {
+            [cssStyleKey]: hasAnyValue
+                ? `${attributeValue.top}${units} ${attributeValue.right}${units} ${attributeValue.bottom}${units} ${attributeValue.left}${units}`
+                : '',
+        };
+    };
+
+    const buildPresetAttributeUpdates = (selectedValue, attributesSource = {}) => {
+        const preset = presets?.find((p) => p?.value === selectedValue);
+        if (!preset?.attributes?.length) {
+            return {};
+        }
+
+        const rawUpdates = preset.attributes.reduce((acc, item) => {
+            if (item?.label) {
+                acc[item.label] = item.value;
+            }
+            return acc;
+        }, {});
+
+        const mergedAttributes = { ...attributesSource, ...rawUpdates };
+
+        return preset.attributes.reduce((acc, item) => {
+            if (!item?.label) {
+                return acc;
+            }
+
+            return {
+                ...acc,
+                ...buildResponsiveCssStyleUpdates(item.label, mergedAttributes[item.label], mergedAttributes),
+            };
+        }, rawUpdates);
+    };
 
     // Resolve default preset value
     const resolveDefaultPresetValue = () => {
@@ -57,13 +120,48 @@ const PresetSelector = ({
         setSelectedPreset(selectedValue);
 
         // 2. Apply attribute overrides
-        const preset = presets?.find((p) => p?.value === selectedValue);
-        if (preset?.attributes?.length && setAttributes) {
-            preset.attributes.forEach((item) => {
-                if (item?.label) setAttributes({ [item.label]: item.value });
-            });
+        if (setAttributes) {
+            const presetUpdates = buildPresetAttributeUpdates(selectedValue, currentAttributes);
+            if (Object.keys(presetUpdates).length) {
+                setAttributes(presetUpdates);
+            }
         }
     };
+
+    useEffect(() => {
+        if (!value || !setAttributes) {
+            return;
+        }
+
+        const preset = presets?.find((item) => item?.value === value);
+        if (!preset?.attributes?.length) {
+            return;
+        }
+
+        const cssStyleUpdates = preset.attributes.reduce((acc, item) => {
+            if (!item?.label || currentAttributes?.[item.label] === undefined) {
+                return acc;
+            }
+
+            const derivedStyle = buildResponsiveCssStyleUpdates(item.label, currentAttributes[item.label], currentAttributes);
+            const nextEntries = Object.entries(derivedStyle).filter(
+                ([key, cssValue]) => currentAttributes?.[key] !== cssValue
+            );
+
+            if (!nextEntries.length) {
+                return acc;
+            }
+
+            return {
+                ...acc,
+                ...Object.fromEntries(nextEntries),
+            };
+        }, {});
+
+        if (Object.keys(cssStyleUpdates).length) {
+            setAttributes(cssStyleUpdates);
+        }
+    }, [value, presets, currentAttributes, setAttributes]);
 
     // Reset to default preset
     const resetPreset = () => {
