@@ -126,26 +126,107 @@ export const presetStyles = {
             Tablet: "center",
             Mobile: "center",
         },
+        contentWidth: {
+            Desktop: "68",
+            Tablet: "80",
+            Mobile: "92",
+        },
+        quoteIconSize: {
+            Desktop: "52",
+            Tablet: "46",
+            Mobile: "40",
+        },
+        quoteIconOpacity: {
+            Desktop: "0.14",
+            Tablet: "0.14",
+            Mobile: "0.18",
+        },
+        quoteIconDesktopMargin: {
+            top: "0",
+            bottom: "12",
+            left: "0",
+            right: "0"
+        },
+        quoteIconTabletMargin: {
+            top: "0",
+            bottom: "10",
+            left: "0",
+            right: "0"
+        },
+        quoteIconMobileMargin: {
+            top: "0",
+            bottom: "8",
+            left: "0",
+            right: "0"
+        },
         // Spacing
         contentPaddingDesktop: {
-            top: "40",
-            bottom: "40",
-            left: "30",
-            right: "30"
+            top: "44",
+            bottom: "44",
+            left: "28",
+            right: "28"
+        },
+        contentPaddingTablet: {
+            top: "32",
+            bottom: "32",
+            left: "24",
+            right: "24"
+        },
+        contentPaddingMobile: {
+            top: "24",
+            bottom: "24",
+            left: "16",
+            right: "16"
         },
         testimonialTextDesktopMargin: {
             top: "0",
-            bottom: "24",
+            bottom: "20",
+            left: "0",
+            right: "0"
+        },
+        testimonialTextTabletMargin: {
+            top: "0",
+            bottom: "18",
+            left: "0",
+            right: "0"
+        },
+        testimonialTextMobileMargin: {
+            top: "0",
+            bottom: "16",
             left: "0",
             right: "0"
         },
         authorNameDesktopMargin: {
-            top: "8",
-            bottom: "4",
+            top: "6",
+            bottom: "2",
+            left: "0",
+            right: "0"
+        },
+        authorNameTabletMargin: {
+            top: "4",
+            bottom: "2",
+            left: "0",
+            right: "0"
+        },
+        authorNameMobileMargin: {
+            top: "4",
+            bottom: "2",
             left: "0",
             right: "0"
         },
         authorDesignationDesktopMargin: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        },
+        authorDesignationTabletMargin: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0"
+        },
+        authorDesignationMobileMargin: {
             top: "0",
             bottom: "0",
             left: "0",
