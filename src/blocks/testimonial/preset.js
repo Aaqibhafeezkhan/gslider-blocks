@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { DEFAULT_TESTIMONIAL_CONTENT_ORDER } from './content-order';
 
 /**
  * Testimonial Block — Preset Styles Data Object
@@ -8,6 +9,7 @@ import { __ } from '@wordpress/i18n';
  */
 export const presetStyles = {
     "preset-classic": {
+        contentOrder: [...DEFAULT_TESTIMONIAL_CONTENT_ORDER],
         showTestimonialTitle: true,
         showTestimonialText: true,
         showAuthorName: true,
@@ -59,6 +61,7 @@ export const presetStyles = {
         },
     },
     "preset-card-quote": {
+        contentOrder: [...DEFAULT_TESTIMONIAL_CONTENT_ORDER],
         showTestimonialTitle: true,
         showTestimonialText: true,
         showAuthorName: true,
@@ -110,6 +113,7 @@ export const presetStyles = {
         },
     },
     "preset-minimal": {
+        contentOrder: [...DEFAULT_TESTIMONIAL_CONTENT_ORDER],
         showTestimonialTitle: false,
         showTestimonialText: true,
         showAuthorName: true,
@@ -149,6 +153,7 @@ export const presetStyles = {
         },
     },
     "preset-side-by-side": {
+        contentOrder: [...DEFAULT_TESTIMONIAL_CONTENT_ORDER],
         showTestimonialTitle: true,
         showTestimonialText: true,
         showAuthorName: true,
@@ -200,6 +205,7 @@ export const presetStyles = {
         },
     },
     "preset-compact": {
+        contentOrder: ['quote', 'rating', 'content', 'author'],
         showTestimonialTitle: false,
         showTestimonialText: true,
         showAuthorName: true,

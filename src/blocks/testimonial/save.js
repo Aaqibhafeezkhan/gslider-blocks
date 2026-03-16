@@ -1,5 +1,6 @@
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
+import { normalizeContentOrder } from './content-order';
 
 export default function Save({ attributes }) {
     const {
@@ -65,29 +66,28 @@ export default function Save({ attributes }) {
         presetStyle,
     } = attributes;
 
+    const normalizedContentOrder = normalizeContentOrder(contentOrder);
+
     const blockProps = useBlockProps.save({
         className: `gslider-testimonial-wrapper ${blockId} ${presetStyle || 'preset-classic'} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
     });
 
     const navigationEnabled = {
-        Mobile:  !!showNavigation?.Mobile,
-        Tablet:  !!showNavigation?.Tablet,
+        Mobile: !!showNavigation?.Mobile,
+        Tablet: !!showNavigation?.Tablet,
         Desktop: !!showNavigation?.Desktop,
     };
     const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
 
     const paginationEnabled = {
-        Mobile:  !!showPagination?.Mobile,
-        Tablet:  !!showPagination?.Tablet,
+        Mobile: !!showPagination?.Mobile,
+        Tablet: !!showPagination?.Tablet,
         Desktop: !!showPagination?.Desktop,
     };
     const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
 
-    // Configure Swiper settings for frontend rendering
     const swiperSettings = JSON.stringify({
         effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-
-        // Responsive breakpoints for Desktop, Tablet, and Mobile
         breakpoints: {
             0: {
                 ...(sliderType === 'carousel' && {
@@ -95,9 +95,11 @@ export default function Save({ attributes }) {
                     spaceBetween: carouselPerColumnGap?.Mobile || 0,
                 }),
                 speed: speed?.Mobile || 800,
-                autoplay: autoplay ? {
-                    delay: autoplayDelay?.Mobile || 1000,
-                } : false,
+                autoplay: autoplay
+                    ? {
+                        delay: autoplayDelay?.Mobile || 1000,
+                    }
+                    : false,
                 navigation: { enabled: navigationEnabled.Mobile },
                 pagination: { enabled: paginationEnabled.Mobile },
             },
@@ -107,9 +109,11 @@ export default function Save({ attributes }) {
                     spaceBetween: carouselPerColumnGap?.Tablet || 20,
                 }),
                 speed: speed?.Tablet || 800,
-                autoplay: autoplay ? {
-                    delay: autoplayDelay?.Tablet || 1000,
-                } : false,
+                autoplay: autoplay
+                    ? {
+                        delay: autoplayDelay?.Tablet || 1000,
+                    }
+                    : false,
                 navigation: { enabled: navigationEnabled.Tablet },
                 pagination: { enabled: paginationEnabled.Tablet },
             },
@@ -119,9 +123,11 @@ export default function Save({ attributes }) {
                     spaceBetween: carouselPerColumnGap?.Desktop || 20,
                 }),
                 speed: speed?.Desktop || 800,
-                autoplay: autoplay ? {
-                    delay: autoplayDelay?.Desktop || 1000,
-                } : false,
+                autoplay: autoplay
+                    ? {
+                        delay: autoplayDelay?.Desktop || 1000,
+                    }
+                    : false,
                 navigation: { enabled: navigationEnabled.Desktop },
                 pagination: { enabled: paginationEnabled.Desktop },
             },
@@ -130,24 +136,26 @@ export default function Save({ attributes }) {
         ...(layoutHeightSwitcher === 'adapt' && {
             autoHeight: true,
         }),
-        
-        // Common settings
+
         loop: infiniteLoop,
-        autoplay: autoplay ? {
-            pauseOnMouseEnter: pauseOnHover,
-            disableOnInteraction: false,
-            stopOnLastSlide: stopOnLastSlide,
-            reverseDirection: reverseDirection,
-        } : false,
+        autoplay: autoplay
+            ? {
+                pauseOnMouseEnter: pauseOnHover,
+                disableOnInteraction: false,
+                stopOnLastSlide: stopOnLastSlide,
+                reverseDirection: reverseDirection,
+            }
+            : false,
         allowTouchMove: allowTouchMove,
         mousewheel: mousewheelControl,
+        keyboard: keyboardNavigation
+            ? {
+                enabled: true,
+                onlyInViewport: true,
+                pageUpDown: false,
+            }
+            : false,
 
-        keyboard: keyboardNavigation ? { 
-            enabled: true,
-            onlyInViewport: true,
-            pageUpDown: false,
-        } : false,
-        
         navigation: {
             enabled: anyNavigationEnabled,
             nextEl: '.swiper-button-next',
@@ -161,188 +169,191 @@ export default function Save({ attributes }) {
             dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
             clickable: true,
         },
-        
-        // Creative effect settings if needed
+
         ...(slideEffect === 'creative' && {
             creativeEffect: {
                 prev: { shadow: true, translate: [0, 0, -400] },
                 next: { translate: ['100%', 0, 0] },
             },
         }),
-        
     });
 
     const authorImagePlaceholder = typeof window !== 'undefined' && window.GSliderBlocksData?.pluginUrl
         ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
         : '';
 
+    const renderRatingIcons = (item) => {
+        const { ratingNumber, ratingIconAlign } = item;
+        const ratingImageUrl = item.ratingImage?.url;
+        const ratingImageAlt = item.ratingImage?.alt;
+        const rating = Math.max(0, Math.min(5, parseFloat(ratingNumber || 0)));
+
+        if (ratingIconAlign === 'none' || rating === 0) return null;
+
+        if (ratingIconAlign === 'image' && ratingImageUrl) {
+            const fullCount = Math.round(rating);
+            let icons = [];
+
+            for (let i = 0; i < fullCount; i++) {
+                icons.push(
+                    <div key={i} className="gslider-testimonial-rating-icon">
+                        <img src={ratingImageUrl} alt={ratingImageAlt} />
+                    </div>
+                );
+            }
+
+            return icons;
+        }
+
+        if (ratingIconAlign === 'icon') {
+            const fullStars = Math.floor(rating);
+            const fraction = rating - fullStars;
+            const emptyStars = 5 - fullStars - (fraction > 0 ? 1 : 0);
+            const fullStarPath = "M49.05,21.06a1.9,1.9,0,0,0,.46-2A1.93,1.93,0,0,0,48,17.8L33.3,15.63,26.74,1.88a1.93,1.93,0,0,0-3.48,0l-6.5,13.71L2,17.8A1.93,1.93,0,0,0,.49,19.1a1.9,1.9,0,0,0,.46,2L11.5,31.66v.86L9.1,47a1.9,1.9,0,0,0,.79,1.88,1.89,1.89,0,0,0,1.11.36,2,2,0,0,0,.92-.23l13-7.14L38.08,49a1.93,1.93,0,0,0,2.82-2l-2.39-14.2V31.69Z";
+            const emptyStarPath = "M49.62,18.85a1.9,1.9,0,0,0-1.54-1.29L33.4,15.38,26.84,1.63a1.92,1.92,0,0,0-3.47,0L16.86,15.34,2.13,17.56a1.92,1.92,0,0,0-1.08,3.25L11.73,31.53,9.21,46.73A1.93,1.93,0,0,0,11.1,49a2,2,0,0,0,.92-.23L25.07,41.6l13.11,7.14a1.93,1.93,0,0,0,2.82-2L38.46,31.6l10.7-10.79A1.92,1.92,0,0,0,49.62,18.85ZM37,30.19a1.94,1.94,0,0,0-.53,1.67L39,46.9l-13-7a1.88,1.88,0,0,0-1.84,0l-13,7,2.5-15a1.94,1.94,0,0,0-.53-1.67L2.57,19.51l14.59-2.19a2,2,0,0,0,1.45-1.08L25.08,2.58,31.6,16.25a2,2,0,0,0,1.45,1.07l14.58,2.19Z";
+            let stars = [];
+
+            for (let i = 0; i < fullStars; i++) {
+                stars.push(
+                    <div key={`full-${i}`} className="gslider-testimonial-rating-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
+                            <path d={fullStarPath} transform="translate(-0.39 -0.78)" />
+                        </svg>
+                    </div>
+                );
+            }
+
+            if (fraction > 0) {
+                stars.push(
+                    <div key="partial" className="gslider-testimonial-rating-icon gslider-testimonial-star-partial-wrap">
+                        <div className="gslider-testimonial-star-partial-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
+                                <path d={emptyStarPath} transform="translate(-0.49 -0.53)" />
+                            </svg>
+                            <div className="gslider-testimonial-star-partial-fill" style={{ width: `${fraction * 100}%` }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
+                                    <path d={fullStarPath} transform="translate(-0.39 -0.78)" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            for (let i = 0; i < emptyStars; i++) {
+                stars.push(
+                    <div key={`empty-${i}`} className="gslider-testimonial-rating-icon empty">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
+                            <path d={emptyStarPath} transform="translate(-0.49 -0.53)" />
+                        </svg>
+                    </div>
+                );
+            }
+
+            return stars;
+        }
+
+        return null;
+    };
+
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className="swiper">
                 <div className="swiper-wrapper">
-                    {sliderItems.map((item) => (
-                        <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
-                            <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && {id: globalID})}>
-                                <div className="gslider-content-inner-wrapper">
-                                    {/* Quote Icon — outside groups, positioned via CSS */}
-                                    {showQuoteIcon && quoteIconAlign !== 'none' && (
-                                        <div className="gslider-testimonial-quote-icon-wrapper">
-                                            {quoteIconAlign === 'icon' && renderSVG(quoteIcon)}
-                                            {quoteIconAlign === 'image' && quoteImageUrl && (
-                                                <img src={quoteImageUrl} alt={quoteImageAlt} />
-                                            )}
+                    {sliderItems.map((item) => {
+                        const renderGroupMap = {
+                            quote: showQuoteIcon && quoteIconAlign !== 'none' ? (
+                                <div key="quote" className="gslider-testimonial-quote-icon-wrapper">
+                                    {quoteIconAlign === 'icon' && renderSVG(quoteIcon)}
+                                    {quoteIconAlign === 'image' && quoteImageUrl && (
+                                        <img src={quoteImageUrl} alt={quoteImageAlt} />
+                                    )}
+                                </div>
+                            ) : null,
+
+                            content: (
+                                <div key="content" className="gslider-testimonial-content-group">
+                                    {showTestimonialTitle && item.testimonialTitle && (
+                                        <div className="gslider-testimonial-title-wrapper">
+                                            <RichText.Content
+                                                tagName={testimonialTitleHtmlTag}
+                                                className="gslider-testimonial-title"
+                                                value={item.testimonialTitle}
+                                            />
                                         </div>
                                     )}
+                                    {showTestimonialText && item.testimonialText && (
+                                        <div className="gslider-testimonial-text-wrapper">
+                                            <RichText.Content
+                                                tagName={testimonialTextHtmlTag}
+                                                className="gslider-testimonial-text"
+                                                value={item.testimonialText}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            ),
 
-                                    {/* Content Group — title, text, rating */}
-                                    <div className="gslider-testimonial-content-group">
-                                        {showTestimonialTitle && item.testimonialTitle && (
-                                            <div className="gslider-testimonial-title-wrapper">
-                                                <RichText.Content
-                                                    tagName={testimonialTitleHtmlTag}
-                                                    className="gslider-testimonial-title"
-                                                    value={item.testimonialTitle}
-                                                />
-                                            </div>
-                                        )}
-                                        {showTestimonialText && item.testimonialText && (
-                                            <div className="gslider-testimonial-text-wrapper">
-                                                <RichText.Content
-                                                    tagName={testimonialTextHtmlTag}
-                                                    className="gslider-testimonial-text"
-                                                    value={item.testimonialText}
-                                                />
-                                            </div>
-                                        )}
-                                        {showRating && (
-                                            <div className="gslider-testimonial-rating-wrapper">
-                                                <div className="gslider-testimonial-rating-inner">
-                                                    <div className="gslider-testimonial-rating-wrap">
-                                                        {(() => {
-                                                            const { ratingNumber, ratingIconAlign } = item;
-                                                            const ratingImageUrl = item.ratingImage?.url;
-                                                            const ratingImageAlt = item.ratingImage?.alt;
-                                                            const rating = Math.max(0, Math.min(5, parseFloat(ratingNumber || 0)));
-                                                            
-                                                            if (ratingIconAlign === 'none' || rating === 0) return null;
-
-                                                            // For image mode, show images based on full star count
-                                                            if (ratingIconAlign === 'image' && ratingImageUrl) {
-                                                                const fullCount = Math.round(rating);
-                                                                let icons = [];
-                                                                for (let i = 0; i < fullCount; i++) {
-                                                                    icons.push(
-                                                                        <div key={i} className="gslider-testimonial-rating-icon">
-                                                                            <img src={ratingImageUrl} alt={ratingImageAlt} />
-                                                                        </div>
-                                                                    );
-                                                                }
-                                                                return icons;
-                                                            }
-
-                                                            // For icon mode, render 5 SVG stars (full/partial/empty)
-                                                            if (ratingIconAlign === 'icon') {
-                                                                const fullStars = Math.floor(rating);
-                                                                const fraction = rating - fullStars;
-                                                                const emptyStars = 5 - fullStars - (fraction > 0 ? 1 : 0);
-
-                                                                const fullStarPath = "M49.05,21.06a1.9,1.9,0,0,0,.46-2A1.93,1.93,0,0,0,48,17.8L33.3,15.63,26.74,1.88a1.93,1.93,0,0,0-3.48,0l-6.5,13.71L2,17.8A1.93,1.93,0,0,0,.49,19.1a1.9,1.9,0,0,0,.46,2L11.5,31.66v.86L9.1,47a1.9,1.9,0,0,0,.79,1.88,1.89,1.89,0,0,0,1.11.36,2,2,0,0,0,.92-.23l13-7.14L38.08,49a1.93,1.93,0,0,0,2.82-2l-2.39-14.2V31.69Z";
-                                                                const emptyStarPath = "M49.62,18.85a1.9,1.9,0,0,0-1.54-1.29L33.4,15.38,26.84,1.63a1.92,1.92,0,0,0-3.47,0L16.86,15.34,2.13,17.56a1.92,1.92,0,0,0-1.08,3.25L11.73,31.53,9.21,46.73A1.93,1.93,0,0,0,11.1,49a2,2,0,0,0,.92-.23L25.07,41.6l13.11,7.14a1.93,1.93,0,0,0,2.82-2L38.46,31.6l10.7-10.79A1.92,1.92,0,0,0,49.62,18.85ZM37,30.19a1.94,1.94,0,0,0-.53,1.67L39,46.9l-13-7a1.88,1.88,0,0,0-1.84,0l-13,7,2.5-15a1.94,1.94,0,0,0-.53-1.67L2.57,19.51l14.59-2.19a2,2,0,0,0,1.45-1.08L25.08,2.58,31.6,16.25a2,2,0,0,0,1.45,1.07l14.58,2.19Z";
-
-                                                                let stars = [];
-
-                                                                // Full stars
-                                                                for (let i = 0; i < fullStars; i++) {
-                                                                    stars.push(
-                                                                        <div key={`full-${i}`} className="gslider-testimonial-rating-icon">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
-                                                                                <path d={fullStarPath} transform="translate(-0.39 -0.78)"/>
-                                                                            </svg>
-                                                                        </div>
-                                                                    );
-                                                                }
-
-                                                                // Partial star
-                                                                if (fraction > 0) {
-                                                                    stars.push(
-                                                                        <div key="partial" className="gslider-testimonial-rating-icon gslider-testimonial-star-partial-wrap">
-                                                                            <div className="gslider-testimonial-star-partial-container">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
-                                                                                    <path d={emptyStarPath} transform="translate(-0.49 -0.53)"/>
-                                                                                </svg>
-                                                                                <div className="gslider-testimonial-star-partial-fill" style={{ width: `${fraction * 100}%` }}>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
-                                                                                        <path d={fullStarPath} transform="translate(-0.39 -0.78)"/>
-                                                                                    </svg>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    );
-                                                                }
-
-                                                                // Empty stars
-                                                                for (let i = 0; i < emptyStars; i++) {
-                                                                    stars.push(
-                                                                        <div key={`empty-${i}`} className="gslider-testimonial-rating-icon empty">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.23 48.44" className="gslider-testimonial-rating-star-svg">
-                                                                                <path d={emptyStarPath} transform="translate(-0.49 -0.53)"/>
-                                                                            </svg>
-                                                                        </div>
-                                                                    );
-                                                                }
-
-                                                                return stars;
-                                                            }
-
-                                                            return null;
-                                                        })()}
-                                                    </div>
-                                                    {showRatingNumber && (
-                                                        <div className="gslider-testimonial-rating-number">
-                                                            ({Math.max(0, Math.min(5, parseFloat(item.ratingNumber || 0)))})
-                                                        </div>
-                                                    )}
-                                                </div>
+                            rating: showRating ? (
+                                <div key="rating" className="gslider-testimonial-rating-wrapper">
+                                    <div className="gslider-testimonial-rating-inner">
+                                        <div className="gslider-testimonial-rating-wrap">
+                                            {renderRatingIcons(item)}
+                                        </div>
+                                        {showRatingNumber && (
+                                            <div className="gslider-testimonial-rating-number">
+                                                ({Math.max(0, Math.min(5, parseFloat(item.ratingNumber || 0)))})
                                             </div>
                                         )}
                                     </div>
+                                </div>
+                            ) : null,
 
-                                    {/* Author Info Group — image + meta */}
-                                    <div className="gslider-author-info-group">
-                                        {showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
-                                            <div className="gslider-testimonial-author-image-wrapper">
-                                                <img 
-                                                    src={item.authorImage?.url || authorImagePlaceholder}
-                                                    alt={item.authorImage?.alt || 'Author'}
-                                                    className="gslider-testimonial-author-image"
+                            author: (
+                                <div key="author" className="gslider-author-info-group">
+                                    {showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && (
+                                        <div className="gslider-testimonial-author-image-wrapper">
+                                            <img
+                                                src={item.authorImage?.url || authorImagePlaceholder}
+                                                alt={item.authorImage?.alt || 'Author'}
+                                                className="gslider-testimonial-author-image"
+                                            />
+                                        </div>
+                                    )}
+                                    <div className="gslider-author-meta">
+                                        {showAuthorName && item.authorName && (
+                                            <div className="gslider-testimonial-author-name-wrapper">
+                                                <RichText.Content
+                                                    tagName={authorNameHtmlTag}
+                                                    className="gslider-testimonial-author-name"
+                                                    value={item.authorName}
                                                 />
                                             </div>
                                         )}
-                                        <div className="gslider-author-meta">
-                                            {showAuthorName && item.authorName && (
-                                                <div className="gslider-testimonial-author-name-wrapper">
-                                                    <RichText.Content
-                                                        tagName={authorNameHtmlTag}
-                                                        className="gslider-testimonial-author-name"
-                                                        value={item.authorName}
-                                                    />
-                                                </div>
-                                            )}
-                                            {showAuthorDesignation && item.authorDesignation && (
-                                                <div className="gslider-testimonial-author-designation-wrapper">
-                                                    <RichText.Content
-                                                        tagName={authorDesignationHtmlTag}
-                                                        className="gslider-testimonial-author-designation"
-                                                        value={item.authorDesignation}
-                                                    />
-                                                </div>
-                                            )}
-                                        </div>
+                                        {showAuthorDesignation && item.authorDesignation && (
+                                            <div className="gslider-testimonial-author-designation-wrapper">
+                                                <RichText.Content
+                                                    tagName={authorDesignationHtmlTag}
+                                                    className="gslider-testimonial-author-designation"
+                                                    value={item.authorDesignation}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ),
+                        };
+
+                        return (
+                            <div key={item.id} className={`swiper-slide ${sliderType === 'slider' ? 'slide-mode' : ''}`}>
+                                <div className={`gslider-content-wrapper ${item.id} ${globalClass}`} {...(globalID && { id: globalID })}>
+                                    <div className="gslider-content-inner-wrapper">
+                                        {normalizedContentOrder.map((groupKey) => renderGroupMap[groupKey] || null)}
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
                 {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
                     <>
@@ -389,7 +400,7 @@ export default function Save({ attributes }) {
                 </>
             )}
 
-            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
+            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
                 <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
                     <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
                     <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>

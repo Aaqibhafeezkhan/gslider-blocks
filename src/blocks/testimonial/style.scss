@@ -6,7 +6,7 @@
 		justify-content: center;
 
 		.gslider-content-inner-wrapper {
-        	box-sizing: border-box;
+			box-sizing: border-box;
 			margin: 0 auto;
 			width: 100%;
 
@@ -15,7 +15,7 @@
 			}
 		}
 	}
-	
+
 	.swiper {
 		position: relative !important;
 		overflow: hidden !important;
@@ -29,59 +29,56 @@
 
 	.gslider-testimonial-rating-wrapper {
 		.gslider-testimonial-rating-inner {
-            .gslider-testimonial-rating-wrap {
-                display: flex;
+			.gslider-testimonial-rating-wrap {
+				display: flex;
 
-                .gslider-testimonial-rating-icon {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+				.gslider-testimonial-rating-icon {
+					display: flex;
+					align-items: center;
+					justify-content: center;
 
-                    svg {
-                        display: block;
-                    }
+					svg {
+						display: block;
+					}
 
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+					}
 
-                    &.gslider-testimonial-star-partial-wrap {
-                        .gslider-testimonial-star-partial-container {
-                            position: relative;
-                            width: 100%;
-                            height: 100%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
+					&.gslider-testimonial-star-partial-wrap {
+						.gslider-testimonial-star-partial-container {
+							position: relative;
+							width: 100%;
+							height: 100%;
+							display: flex;
+							align-items: center;
+							justify-content: center;
 
-                            .gslider-testimonial-star-empty {
-                                width: 100%;
-                                height: 100%;
-                            }
+							.gslider-testimonial-star-empty {
+								width: 100%;
+								height: 100%;
+							}
 
-                            .gslider-testimonial-star-partial-fill {
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                height: 100%;
-                                overflow: hidden;
-                                display: flex;
-                                align-items: center;
-                            }
-                        }
-                    }
-                }
-            }
+							.gslider-testimonial-star-partial-fill {
+								position: absolute;
+								top: 0;
+								left: 0;
+								height: 100%;
+								overflow: hidden;
+								display: flex;
+								align-items: center;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 
-	/* New wrapper groups — base styles */
-	.gslider-testimonial-content-group {
-		width: 100%;
-	}
-
+	.gslider-testimonial-content-group,
+	.gslider-testimonial-rating-wrapper,
 	.gslider-author-info-group {
 		width: 100%;
 	}
@@ -95,22 +92,6 @@
 	}
 }
 
-/* ─────────────────────────────────────────────────
-   PRESET STYLES — Layout Structure Only
-   
-   All customizable values (font-size, padding, color,
-   margin, opacity, image size, etc.) come from styling.js
-   via block attributes and inspector controls.
-
-   style.scss only handles STRUCTURAL LAYOUT:
-   - flex/grid direction and alignment
-   - element ordering via CSS order
-   - positioning (absolute/relative)
-   - text-align direction
-   ───────────────────────────────────────────────── */
-
-
-/* ── Preset 1: Classic Centered (Default) ──────── */
 .gslider-testimonial-wrapper.preset-classic {
 	.gslider-content-inner-wrapper {
 		display: flex;
@@ -122,10 +103,6 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-
-			.gslider-testimonial-rating-wrap {
-				justify-content: center;
-			}
 		}
 
 		.gslider-author-info-group {
@@ -140,7 +117,6 @@
 	}
 }
 
-/* ── Preset 2: Card with Quote ─────────────────── */
 .gslider-testimonial-wrapper.preset-card-quote {
 	.gslider-content-inner-wrapper {
 		display: flex;
@@ -148,7 +124,6 @@
 		text-align: left;
 		position: relative;
 
-		/* Quote icon — absolute watermark */
 		.gslider-testimonial-quote-icon-wrapper {
 			position: absolute;
 			top: 0;
@@ -158,16 +133,12 @@
 			line-height: 0;
 		}
 
-		.gslider-testimonial-content-group {
+		.gslider-testimonial-content-group,
+		.gslider-testimonial-rating-wrapper {
 			position: relative;
 			z-index: 1;
-
-			.gslider-testimonial-rating-wrap {
-				justify-content: flex-start;
-			}
 		}
 
-		/* Author row — horizontal (image + meta side by side) */
 		.gslider-author-info-group {
 			display: flex;
 			align-items: center;
@@ -183,7 +154,6 @@
 	}
 }
 
-/* ── Preset 3: Minimal Text ────────────────────── */
 .gslider-testimonial-wrapper.preset-minimal {
 	.gslider-content-inner-wrapper {
 		display: flex;
@@ -199,7 +169,6 @@
 			.gslider-testimonial-text-wrapper {
 				position: relative;
 
-				/* Divider line after text */
 				&::after {
 					content: '';
 					display: block;
@@ -210,10 +179,6 @@
 					margin: 28px auto 24px;
 					border-radius: 1px;
 				}
-			}
-
-			.gslider-testimonial-rating-wrap {
-				justify-content: center;
 			}
 		}
 
@@ -229,35 +194,34 @@
 	}
 }
 
-/* ── Preset 4: Side by Side ────────────────────── */
 .gslider-testimonial-wrapper.preset-side-by-side {
 	.gslider-content-inner-wrapper {
 		display: grid;
 		grid-template-columns: auto 1fr;
-		grid-template-rows: auto;
+		grid-template-areas:
+			"author content"
+			"author rating";
 		text-align: left;
 		align-items: center;
+		column-gap: 24px;
+		row-gap: 12px;
 
-		/* Author image — left column */
 		.gslider-author-info-group {
-			grid-column: 1;
-			grid-row: 1;
+			grid-area: author;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 		}
 
-		/* Content — right column */
 		.gslider-testimonial-content-group {
-			grid-column: 2;
-			grid-row: 1;
-
-			.gslider-testimonial-rating-wrap {
-				justify-content: flex-start;
-			}
+			grid-area: content;
+			min-width: 0;
 		}
 
-		/* Quote icon hidden by default in side-by-side */
+		.gslider-testimonial-rating-wrapper {
+			grid-area: rating;
+		}
+
 		.gslider-testimonial-quote-icon-wrapper {
 			grid-column: 2;
 			grid-row: 1;
@@ -265,30 +229,22 @@
 		}
 	}
 
-	/* Responsive: Stack on small screens */
 	@media (max-width: 480px) {
 		.gslider-content-inner-wrapper {
 			grid-template-columns: 1fr;
+			grid-template-areas:
+				"author"
+				"content"
+				"rating";
 			text-align: center;
 
 			.gslider-author-info-group {
-				grid-column: 1;
-				grid-row: auto;
 				justify-self: center;
-			}
-
-			.gslider-testimonial-content-group {
-				grid-column: 1;
-			}
-
-			.gslider-testimonial-rating-wrap {
-				justify-content: center;
 			}
 		}
 	}
 }
 
-/* ── Preset 5: Stacked Compact ─────────────────── */
 .gslider-testimonial-wrapper.preset-compact {
 	.gslider-content-wrapper {
 		align-items: stretch;
@@ -299,18 +255,6 @@
 			align-items: flex-start;
 			text-align: left;
 
-			/* Content group — rating on top via column-reverse */
-			.gslider-testimonial-content-group {
-				display: flex;
-				flex-direction: column-reverse;
-				width: 100%;
-
-				.gslider-testimonial-rating-wrap {
-					justify-content: flex-start;
-				}
-			}
-
-			/* Author info — horizontal row */
 			.gslider-author-info-group {
 				display: flex;
 				flex-direction: row;

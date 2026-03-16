@@ -1,3 +1,5 @@
+import { DEFAULT_TESTIMONIAL_CONTENT_ORDER } from './content-order';
+
 const attributes = {
     blockId: {
         type: "string",
@@ -526,7 +528,7 @@ const attributes = {
     /** Layout & Content Setting */
     contentOrder: {
         type: "array",
-        default: ["quote", "content", "author"],
+        default: [...DEFAULT_TESTIMONIAL_CONTENT_ORDER],
     },
     layoutHeightSwitcher: {
         type: "string",

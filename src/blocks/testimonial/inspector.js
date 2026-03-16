@@ -55,6 +55,7 @@ import ResponsiveToggleControl from '@Components/responsive-toggle-control';
 import ContentOrderControl from '@Components/content-order-control';
 import PresetSelector from '@Components/preset-selector';
 import { TESTIMONIAL_PRESETS } from './preset';
+import { normalizeContentOrder } from './content-order';
 
 const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem, handleDuplicateItem, handleDragEnd, handleDeleteItem }) => {
     const {
@@ -767,6 +768,8 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
 
     } = attributes;
 
+    const normalizedContentOrder = normalizeContentOrder(contentOrder);
+
     /** Get Current Device Type */
     const currentDeviceType = useDeviceType();
 
@@ -1156,13 +1159,15 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                 onToggle={() => togglePanel("general", "content-order")}
             >
                 <ContentOrderControl
-                    label={__("Content Order", "gslider-blocks")}
+                    label={__("Sections", "gslider-blocks")}
+                    help={__("Drag to reorder sections", "gslider-blocks")}
                     items={[
-                        { key: 'quote', label: __('Quote Icon', 'gslider-blocks'), icon: 'format-quote' },
-                        { key: 'content', label: __('Content (Title, Text, Rating)', 'gslider-blocks'), icon: 'editor-paragraph' },
-                        { key: 'author', label: __('Author Info (Image, Name, Designation)', 'gslider-blocks'), icon: 'admin-users' },
+                        { key: 'quote', label: __('Quote', 'gslider-blocks'), icon: 'format-quote' },
+                        { key: 'content', label: __('Content', 'gslider-blocks'), icon: 'editor-paragraph' },
+                        { key: 'rating', label: __('Rating', 'gslider-blocks'), icon: 'star-filled' },
+                        { key: 'author', label: __('Author', 'gslider-blocks'), icon: 'admin-users' },
                     ]}
-                    order={contentOrder}
+                    order={normalizedContentOrder}
                     onChange={(newOrder) => setAttributes({ contentOrder: newOrder })}
                 />
             </PanelBody>
