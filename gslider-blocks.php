@@ -107,8 +107,6 @@ if ( ! class_exists( 'GSliderBlocks' ) ) {
 	}
 }
 
-GSliderBlocks::getInstance();
-
 /**
  * Returns the singleton instance of the GSliderBlocks plugin.
  *
@@ -128,5 +126,5 @@ function GSliderBlocks() {
  *
  * @since 1.0.0
  */
-GSliderBlocks();
+GSliderBlocks::getInstance();
 
