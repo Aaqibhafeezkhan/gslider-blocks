@@ -8,7 +8,6 @@ import {
 	Toolbar,
 	ToolbarGroup,
 	ToolbarButton,
-	Dashicon
 } from '@wordpress/components';
 import { useState, useEffect, useRef } from "@wordpress/element";
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";

@@ -1125,13 +1125,13 @@ const generateBaseSliderStyle = (attributes) => {
             display: flex;
             align-items: center;
             justify-content: ${contentAlignment.Desktop === 'left' ? 'flex-start' : contentAlignment.Desktop === 'right' ? 'flex-end' : 'center'};
-            gap: ${ratingNumberGap.Desktop ? `${ratingNumberGap.Desktop}${ratingNumberGapUnits.Desktop}` : '10px'};
+            gap: ${ratingNumberGap.Desktop}${ratingNumberGapUnits.Desktop};
         }
         .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-wrap {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: ${ratingStarGap.Desktop ? `${ratingStarGap.Desktop}px` : '5px'};
+            gap: ${ratingStarGap.Desktop}px;
         }
         .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-icon svg {
             ${ratingStarSize.Desktop ? `width: ${ratingStarSize.Desktop}${ratingStarSizeUnits.Desktop};` : ''}
