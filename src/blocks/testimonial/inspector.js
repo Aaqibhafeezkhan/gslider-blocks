@@ -44,7 +44,6 @@ import ResponsiveBackgroundImageControl from '@Components/responsive-background-
 import ImageControl from '@Components/image-control';
 import InspectorControl from '@Components/inspector-controls';
 import CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import { useDeviceType } from "@Utils/displayType";
 import InputControls from '@Components/input-control';

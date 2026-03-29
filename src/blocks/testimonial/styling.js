@@ -955,11 +955,21 @@ const generateBaseSliderStyle = (attributes) => {
         .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
             ${contentWidth?.Desktop ? `max-width: ${contentWidth.Desktop}${contentWidthUnits?.Desktop};` : ''}
             ${contentAlignment?.Desktop ? `text-align: ${contentAlignment.Desktop};` : ''}
+            ${contentHorizontalAlignment?.Desktop ? `align-items: ${contentHorizontalAlignment.Desktop === 'left' ? 'flex-start' : contentHorizontalAlignment.Desktop === 'right' ? 'flex-end' : 'center'};` : ''}
 
             ${contentHorizontalAlignment?.Desktop === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
             ${contentHorizontalAlignment?.Desktop === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
             ${contentHorizontalAlignment?.Desktop === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
             ${contentPaddingDesktopCssStyle ? `padding: ${contentPaddingDesktopCssStyle};` : ''}
+        }
+
+        .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper .gslider-testimonial-content-group,
+        .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper .gslider-author-info-group {
+            ${contentHorizontalAlignment?.Desktop ? `align-items: ${contentHorizontalAlignment.Desktop === 'left' ? 'flex-start' : contentHorizontalAlignment.Desktop === 'right' ? 'flex-end' : 'center'};` : ''}
+        }
+
+        .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper .gslider-author-info-group .gslider-author-meta {
+            ${contentAlignment?.Desktop ? `text-align: ${contentAlignment.Desktop};` : ''}
         }
 
         .${blockId}.gslider-testimonial-wrapper .gslider-testimonial-author-name-wrapper .gslider-testimonial-author-name {
@@ -1124,7 +1134,7 @@ const generateBaseSliderStyle = (attributes) => {
         .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-inner {
             display: flex;
             align-items: center;
-            justify-content: ${contentAlignment.Desktop === 'left' ? 'flex-start' : contentAlignment.Desktop === 'right' ? 'flex-end' : 'center'};
+            justify-content: ${contentHorizontalAlignment.Desktop === 'left' ? 'flex-start' : contentHorizontalAlignment.Desktop === 'right' ? 'flex-end' : 'center'};
             gap: ${ratingNumberGap.Desktop}${ratingNumberGapUnits.Desktop};
         }
         .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-wrap {
@@ -1427,11 +1437,21 @@ const generateBaseSliderStyle = (attributes) => {
             .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
                 ${contentWidth?.Tablet ? `max-width: ${contentWidth.Tablet}${contentWidthUnits?.Tablet};` : ''}
                 ${contentAlignment?.Tablet ? `text-align: ${contentAlignment.Tablet};` : ''}
+                ${contentHorizontalAlignment?.Tablet ? `align-items: ${contentHorizontalAlignment.Tablet === 'left' ? 'flex-start' : contentHorizontalAlignment.Tablet === 'right' ? 'flex-end' : 'center'};` : ''}
 
                 ${contentHorizontalAlignment?.Tablet === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
                 ${contentHorizontalAlignment?.Tablet === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
                 ${contentHorizontalAlignment?.Tablet === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
                 ${contentPaddingTabletCssStyle ? `padding: ${contentPaddingTabletCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper .gslider-testimonial-content-group,
+            .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper .gslider-author-info-group {
+                ${contentHorizontalAlignment?.Tablet ? `align-items: ${contentHorizontalAlignment.Tablet === 'left' ? 'flex-start' : contentHorizontalAlignment.Tablet === 'right' ? 'flex-end' : 'center'};` : ''}
+            }
+
+            .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper .gslider-author-info-group .gslider-author-meta {
+                ${contentAlignment?.Tablet ? `text-align: ${contentAlignment.Tablet};` : ''}
             }
 
             .${blockId}.gslider-testimonial-wrapper .gslider-testimonial-author-name-wrapper .gslider-testimonial-author-name {
@@ -1515,7 +1535,7 @@ const generateBaseSliderStyle = (attributes) => {
                 ${ratingTabletPaddingCssStyle ? `padding: ${ratingTabletPaddingCssStyle};` : ''}
             }
             .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-inner {
-                justify-content: ${contentAlignment.Tablet === 'left' ? 'flex-start' : contentAlignment.Tablet === 'right' ? 'flex-end' : 'center'};
+                justify-content: ${contentHorizontalAlignment.Tablet === 'left' ? 'flex-start' : contentHorizontalAlignment.Tablet === 'right' ? 'flex-end' : 'center'};
                 gap: ${ratingNumberGap.Tablet ? `${ratingNumberGap.Tablet}${ratingNumberGapUnits.Tablet}` : '10px'};
             }
             .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-inner .gslider-testimonial-rating-wrap {
@@ -1694,11 +1714,21 @@ const generateBaseSliderStyle = (attributes) => {
             .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper {
                 ${contentWidth?.Mobile ? `max-width: ${contentWidth.Mobile}${contentWidthUnits?.Mobile};` : ''}
                 ${contentAlignment?.Mobile ? `text-align: ${contentAlignment.Mobile};` : ''}
+                ${contentHorizontalAlignment?.Mobile ? `align-items: ${contentHorizontalAlignment.Mobile === 'left' ? 'flex-start' : contentHorizontalAlignment.Mobile === 'right' ? 'flex-end' : 'center'};` : ''}
 
                 ${contentHorizontalAlignment?.Mobile === 'left' ? `margin-right: auto; margin-left: 0;` : ''}
                 ${contentHorizontalAlignment?.Mobile === 'center' ? `margin-left: auto; margin-right: auto;` : ''}
                 ${contentHorizontalAlignment?.Mobile === 'right' ? `margin-left: auto; margin-right: 0;` : ''}
                 ${contentPaddingMobileCssStyle ? `padding: ${contentPaddingMobileCssStyle};` : ''}
+            }
+
+            .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper .gslider-testimonial-content-group,
+            .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper .gslider-author-info-group {
+                ${contentHorizontalAlignment?.Mobile ? `align-items: ${contentHorizontalAlignment.Mobile === 'left' ? 'flex-start' : contentHorizontalAlignment.Mobile === 'right' ? 'flex-end' : 'center'};` : ''}
+            }
+
+            .${blockId}.gslider-testimonial-wrapper .gslider-content-wrapper .gslider-content-inner-wrapper .gslider-author-info-group .gslider-author-meta {
+                ${contentAlignment?.Mobile ? `text-align: ${contentAlignment.Mobile};` : ''}
             }
 
             .${blockId}.gslider-testimonial-wrapper .gslider-testimonial-author-name-wrapper .gslider-testimonial-author-name {
@@ -1782,7 +1812,7 @@ const generateBaseSliderStyle = (attributes) => {
                 ${ratingMobilePaddingCssStyle ? `padding: ${ratingMobilePaddingCssStyle};` : ''}
             }
             .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-inner {
-                justify-content: ${contentAlignment.Mobile === 'left' ? 'flex-start' : contentAlignment.Mobile === 'right' ? 'flex-end' : 'center'};
+                justify-content: ${contentHorizontalAlignment.Mobile === 'left' ? 'flex-start' : contentHorizontalAlignment.Mobile === 'right' ? 'flex-end' : 'center'};
                 gap: ${ratingNumberGap.Mobile ? `${ratingNumberGap.Mobile}${ratingNumberGapUnits.Mobile}` : '10px'};
             }
             .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-wrap {

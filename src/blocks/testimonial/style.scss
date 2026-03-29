@@ -92,26 +92,22 @@
 	}
 }
 
-.gslider-testimonial-wrapper.preset-classic {
+.gslider-testimonial-wrapper {
 	.gslider-content-inner-wrapper {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		text-align: center;
 
 		.gslider-testimonial-content-group {
 			display: flex;
 			flex-direction: column;
-			align-items: center;
 		}
 
 		.gslider-author-info-group {
 			display: flex;
 			flex-direction: column;
-			align-items: center;
 
 			.gslider-author-meta {
-				text-align: center;
+				min-width: 0;
 			}
 		}
 	}

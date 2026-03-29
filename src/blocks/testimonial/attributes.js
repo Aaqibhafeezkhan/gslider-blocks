@@ -573,9 +573,9 @@ const attributes = {
     contentAlignment: {
         type: "object",
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: "center",
+            Tablet: "center",
+            Mobile: "center",
         },
     },
     contentVerticalAlignment: {
@@ -589,9 +589,9 @@ const attributes = {
     contentHorizontalAlignment: {
         type: "object",
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: "center",
+            Tablet: "center",
+            Mobile: "center",
         },
     },
     testimonialTitleHtmlTag: {
