@@ -64,6 +64,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         sliderItems,
         blockStyle,
         presetStyle,
+        authorPlaceholderUrl,
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
@@ -254,6 +255,8 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         ratingStarSizeUnits,
         ratingStarGap,
         ratingStarGapUnits,
+        ratingNumberGap,
+        ratingNumberGapUnits,
 
         ratingMarginUnits,
         ratingDesktopMargin,
@@ -572,6 +575,11 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         paginationProgressbarPosition,
         paginationProgressbarPositionUnits,
         /** End Dots Position */
+
+        /** Start Pagination Outside Offset */
+        paginationOutsideOffset,
+        paginationOutsideOffsetUnits,
+        /** End Pagination Outside Offset */
 
         /** Start Dots Style */
         paginationDotsSwitcher,
@@ -995,6 +1003,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                                         handleDuplicateItem={handleDuplicateItem}
                                         index={index}
                                         deviceType={deviceType}
+                                        authorPlaceholderUrl={authorPlaceholderUrl}
                                         setAttributes={setAttributes}
                                     />
                                 ))}
@@ -1161,7 +1170,6 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
             >
                 <ContentOrderControl
                     label={__("Sections", "gslider-blocks")}
-                    help={__("Drag to reorder sections", "gslider-blocks")}
                     items={[
                         { key: 'quote', label: __('Quote', 'gslider-blocks'), icon: 'format-quote' },
                         { key: 'content', label: __('Content', 'gslider-blocks'), icon: 'editor-paragraph' },
@@ -1170,6 +1178,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     ]}
                     order={normalizedContentOrder}
                     onChange={(newOrder) => setAttributes({ contentOrder: newOrder })}
+                    help={__("Drag to reorder sections", "gslider-blocks")}
                 />
             </PanelBody>
 
@@ -2421,8 +2430,22 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
 
                     {showRatingNumber && (
                         <>
+                            <ResponsiveRangeControl
+                                label={__("Gap", "gslider-blocks")}
+                                rangeValue={ratingNumberGap}
+                                onChangeValue={(value) => setAttributes({ ratingNumberGap: value })}
+                                onUnitChange={(value) => setAttributes({ ratingNumberGapUnits: value })}
+                                deviceType={deviceType}
+                                units={ratingNumberGapUnits}
+                                resetFallbackValue={{
+                                    px: "10",
+                                }}
+                                unitBounds={{
+                                    px: { min: 0, max: 100, step: 1 },
+                                }}
+                            />
                             <ResponsiveTypographyControl
-                                label={__("Rating Number Typography", "gslider-blocks")}
+                                label={__("Typography", "gslider-blocks")}
                                 fontFamily={ratingNumberFontFamily}
                                 onChangeFontFamily={(value) => setAttributes({ ratingNumberFontFamily: value })}
 
@@ -3108,6 +3131,23 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                             deviceType={deviceType}
                             units={paginationProgressbarPositionUnits}
                             resetFallbackValue={""}
+                            unitBounds={{
+                                px: { min: 0, max: 200, step: 1 },
+                            }}
+                        />
+                    )}
+
+                    {paginationPositionType === 'outside' && (
+                        <ResponsiveRangeControl
+                            label={__("Outside Offset", "gslider-blocks")}
+                            rangeValue={paginationOutsideOffset}
+                            onChangeValue={(value) => setAttributes({ paginationOutsideOffset: value })}
+                            onUnitChange={(value) => setAttributes({ paginationOutsideOffsetUnits: value })}
+                            deviceType={deviceType}
+                            units={paginationOutsideOffsetUnits}
+                            resetFallbackValue={{
+                                px: "30",
+                            }}
                             unitBounds={{
                                 px: { min: 0, max: 200, step: 1 },
                             }}

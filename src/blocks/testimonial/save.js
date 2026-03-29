@@ -5,6 +5,7 @@ import { normalizeContentOrder } from './content-order';
 export default function Save({ attributes }) {
     const {
         blockId,
+        authorPlaceholderUrl,
         sliderItems,
         sliderType,
         carouselPerColumn,
@@ -69,7 +70,7 @@ export default function Save({ attributes }) {
     const normalizedContentOrder = normalizeContentOrder(contentOrder);
 
     const blockProps = useBlockProps.save({
-        className: `gslider-testimonial-wrapper ${blockId} ${presetStyle || 'preset-classic'} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
+        className: `gslider-testimonial-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
     });
 
     const navigationEnabled = {
@@ -178,9 +179,7 @@ export default function Save({ attributes }) {
         }),
     });
 
-    const authorImagePlaceholder = typeof window !== 'undefined' && window.GSliderBlocksData?.pluginUrl
-        ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
-        : '';
+    const authorImagePlaceholder = authorPlaceholderUrl;
 
     const renderRatingIcons = (item) => {
         const { ratingNumber, ratingIconAlign } = item;

@@ -86,6 +86,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         layoutHeightSwitcher,
         contentOrder,
         presetStyle,
+        authorPlaceholderUrl,
 	} = attributes;
 
     const normalizedContentOrder = normalizeContentOrder(contentOrder);
@@ -112,7 +113,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	// Block props for container
 	const blockProps = useBlockProps({
-        className: `gslider-testimonial-wrapper ${blockId} ${presetStyle || 'preset-classic'} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
+        className: `gslider-testimonial-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`, 
 	});
     
 	const [sliderItemList, setSliderItemList] = useState(sliderItems);
@@ -132,23 +133,31 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const paginationInsideRef = useRef(null);
     const paginationOutsideRef = useRef(null);
 
-    const authorImagePlaceholder = window.GSliderBlocksData?.pluginUrl 
-        ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
-        : '';
+    const authorImagePlaceholder = authorPlaceholderUrl;
 
     /**
      * Fix for image display on initial load
      * Ensures all items have valid image URLs (placeholders) if missing
      */
     useEffect(() => {
+        const calculatedPlaceholder = window.GSliderBlocksData?.pluginUrl 
+            ? `${window.GSliderBlocksData.pluginUrl}assets/images/author-placeholder.svg`
+            : '';
+
+        if (calculatedPlaceholder && !authorPlaceholderUrl) {
+            setAttributes({ authorPlaceholderUrl: calculatedPlaceholder });
+        }
+
+        const placeholderToUse = authorPlaceholderUrl || calculatedPlaceholder;
+
         if (sliderItemList.some(item => !item.authorImage?.url)) {
             const updatedItems = sliderItemList.map(item => {
                 let updatedItem = { ...item };
                 
-                if (authorImagePlaceholder && !item.authorImage?.url) {
+                if (placeholderToUse && !item.authorImage?.url) {
                     updatedItem.authorImage = {
                         ...(item.authorImage || {}),
-                        url: authorImagePlaceholder,
+                        url: placeholderToUse,
                         alt: item.authorImage?.alt || 'Author Placeholder'
                     };
                 }
@@ -159,12 +168,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             setAttributes({ sliderItems: updatedItems });
         }
     }, []);
-
-    // Sync sliderItemList when sliderItems attribute changes (e.g. undo/redo)
-    useEffect(() => {
-        setSliderItemList(sliderItems);
-    }, [sliderItems]);
-
 
     /**
      * Vanilla JS Swiper initialization
@@ -305,7 +308,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
      */
     const handleAddItem = () => {
         const newItem = {
-            id: `item-${sliderItems.length + 1}`,
+            id: `item-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
             testimonialTitle: 'Excellent Testimonial Plugin',
             testimonialText: 'This is the best testimonial plugin I have ever used. Highly recommended for any WordPress site!',
             authorName: 'Alex Hunter',
@@ -470,7 +473,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const handleDuplicateItem = (id) => {
         const itemToDuplicate = sliderItems.find(item => item.id === id);
         if (itemToDuplicate) {
-            const newItem = { ...itemToDuplicate, id: `item-${sliderItems.length + 1}` };
+            const newItem = { 
+                ...itemToDuplicate, 
+                id: `item-${Date.now()}-${Math.random().toString(36).substr(2, 5)}` 
+            };
             setAttributes({ sliderItems: [...sliderItems, newItem] });
             setSliderItemList([...sliderItemList, newItem]);
         }
@@ -502,13 +508,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     };
 
     /**
-     * Keep sliderItems attribute in sync with local state
-     */
-	useEffect(() => {
-		setAttributes({ sliderItems: sliderItemList });
-	}, [sliderItemList, setAttributes]);
-
-    /**
      * Sync local state from attributes (for undo/redo support)
      */
     useEffect(() => {
@@ -527,6 +526,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             if (next[index]) {
                 next[index] = { ...next[index], [field]: value };
             }
+            setAttributes({ sliderItems: next });
             return next;
         });
     };

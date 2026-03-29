@@ -76,7 +76,6 @@ const ContentOrderControl = ({
 
     return (
         <BaseControl label={label} className="gslider-content-order-control">
-            {help && <p className="components-base-control__help">{help}</p>}
             <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                 <SortableContext items={currentOrder}>
                     <ul className="gslider-content-order-list">
@@ -95,6 +94,7 @@ const ContentOrderControl = ({
                     </ul>
                 </SortableContext>
             </DndContext>
+            {help && <p className="components-base-control__help">{help}</p>}
         </BaseControl>
     );
 };

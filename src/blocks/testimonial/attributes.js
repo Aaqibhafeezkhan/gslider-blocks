@@ -17,6 +17,10 @@ const attributes = {
         type: "string",
         default: "preset-classic"
     },
+    authorPlaceholderUrl: {
+        type: "string",
+        default: ""
+    },
     sliderItems: {
         type: "array",
         default: [
@@ -1393,6 +1397,22 @@ const attributes = {
         },
     },
     ratingStarGapUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    ratingNumberGap: {
+        type: "object",
+        default: {
+            Desktop: "10",
+            Tablet: "10",
+            Mobile: "10",
+        },
+    },
+    ratingNumberGapUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -3021,6 +3041,25 @@ const attributes = {
 		},
 	},
     /** End Pagination Dots Position */
+
+    /** Start Pagination Outside Offset */
+    paginationOutsideOffset: {
+        type: "object",
+        default: {
+            Desktop: "30",
+            Tablet: "30",
+            Mobile: "30",
+        },
+    },
+    paginationOutsideOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    /** End Pagination Outside Offset */
 
     /** Start Pagination Dots Style */
     paginationDotsSwitcher: {

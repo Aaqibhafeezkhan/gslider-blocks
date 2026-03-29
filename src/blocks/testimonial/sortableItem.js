@@ -26,7 +26,7 @@ import { ICON_IMAGE_ALIGN } from "@Constants";
 import IconPicker from '@Components/icon-picker';
 import SwitcherControl from '@Components/switcher-control';
 
-export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, deviceType, setAttributes }) {
+export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, deviceType, authorPlaceholderUrl, setAttributes }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
 
@@ -37,10 +37,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
     const toggleOpen = () => setIsOpen(!isOpen);
 
-    let defaultPlaceholder = '';
-    if (typeof GSliderBlocksData !== 'undefined') {
-        defaultPlaceholder = GSliderBlocksData.pluginUrl + 'assets/images/author-placeholder.svg';
-    }
+    const defaultPlaceholder = authorPlaceholderUrl;
 
 
     /**
@@ -54,7 +51,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                 alt: 'Author Placeholder'
             });
         }
-    }, []);
+    }, [defaultPlaceholder]);
 
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
