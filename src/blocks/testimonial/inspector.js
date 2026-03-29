@@ -786,7 +786,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
     }, [currentDeviceType]);
 
     const defaultOpenPanels = {
-        general: 'preset-style',
+        general: 'show-hide-elements',
         styles: 'content',
         advanced: 'layout',
     };
@@ -912,7 +912,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
      */
     const generalControls = (
         <>
-            <PanelBody
+            {/* <PanelBody
                 title={__("Preset Style", "gslider-blocks")}
                 opened={openPanels.general === "preset-style"}
                 onToggle={() => togglePanel("general", "preset-style")}
@@ -925,7 +925,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                     setAttributes={setAttributes}
                     currentAttributes={attributes}
                 />
-            </PanelBody>
+            </PanelBody> */}
 
             <PanelBody
                 title={__("Show / Hide Elements", "gslider-blocks")}
