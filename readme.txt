@@ -2,8 +2,8 @@
 Contributors: noruzzaman, sanaf
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 1.1.6
+Tested up to: 7.0
+Stable tag: 1.1.7
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -56,6 +56,18 @@ A versatile carousel for displaying images, brand assets, or partner logos with 
 * Responsive Design: Fully customizable columns and spacing for Desktop, Tablet, and Mobile
 * Advanced Transitions: Slide, Fade, Cube, and other 3D effects powered by Swiper.js
 
+**5. Testimonial Block**
+Showcase customer testimonials, reviews, and feedback in a beautiful, interactive slider or carousel layout with star ratings.
+
+* Author Info: Display author name, designation, and customizable avatar image
+* Star Ratings: SVG-based star ratings with fractional support (e.g. 4.5 stars) or custom rating images
+* Quote Icon: Choose between SVG icon or custom uploaded image for quote decoration
+* Flexible Content Ordering: Drag to reorder content sections (quote, content, rating, author)
+* RichText Editing: Edit title, testimonial text, author name, and designation directly in the editor
+* Per-slide Background: Individual background color, gradient, and image with overlay and opacity controls
+* Responsive Design: Fully customizable columns and spacing for Desktop, Tablet, and Mobile
+* Advanced Transitions: Slide, Fade, Cube, and other 3D effects powered by Swiper.js
+
 == Key Features ==
 
 * **Multiple Transition Effects:** Slide, Fade, Cube, Coverflow, Flip, Cards, and Creative effects
@@ -104,6 +116,19 @@ These are 3D transition effects where slides are stacked in layers. If your slid
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.7 – May 10, 2026 =
+**New Block: Testimonial**
+- Added Testimonial Slider block with Swiper.js integration
+- Author Info: Display author name, designation, and customizable avatar image
+- Star Rating: SVG-based star ratings with fractional support (e.g. 4.5 stars)
+- Custom Rating Images: Upload custom SVG or image for rating icons
+- Quote Icon: Choose between SVG icon or custom image for quote decoration
+- Flexible Content Ordering: Drag to reorder content sections (quote, content, rating, author)
+- RichText Editing: Edit title, testimonial text, author name, and designation directly in the editor
+- Per-slide Background: Individual background color, gradient, and image with overlay and opacity controls
+- Responsive Design: Fully customizable columns and spacing for Desktop, Tablet, and Mobile
+- Advanced Transitions: Slide, Fade, Cube, and other 3D effects powered by Swiper.js
 
 = 1.1.6 – February 9, 2026 = 
 **New Block: Image Slider**

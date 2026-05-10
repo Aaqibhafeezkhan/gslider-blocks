@@ -388,82 +388,80 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         // Get current device type ("Desktop", "Tablet", or "Mobile")
         const currentDevice = deviceType; 
 
-        setSliderItemList(prev => {
-            const updatedItems = prev.map(item => {
-                if (item.id === id) {
-                    // Handle normal background image updates for the current device only
-                    if (key === 'normalBackgroundImageID') {
-                        // Get the full image data from WordPress media library
-                        const image = value ? wp.media.attachment(value).toJSON() : { url: '', alt: '' };
-                        return {
-                            ...item,
-                            normalBackgroundImageID: {
-                                ...item.normalBackgroundImageID,
-                                [currentDevice]: value,
-                            },
-                            normalBackgroundImageUrl: {
-                                ...item.normalBackgroundImageUrl,
-                                [currentDevice]: image.url,
-                            },
-                            normalBackgroundImageAlt: {
-                                ...item.normalBackgroundImageAlt,
-                                [currentDevice]: image.alt || '',
-                            },
-                        };
-                    }
-
-                    // Handle hover background image updates for the current device only
-                    if (key === 'hoverBackgroundImageID') {
-                        const image = value ? wp.media.attachment(value).toJSON() : { url: '', alt: '' };
-                        return {
-                            ...item,
-                            hoverBackgroundImageID: {
-                                ...item.hoverBackgroundImageID,
-                                [currentDevice]: value,
-                            },
-                            hoverBackgroundImageUrl: {
-                                ...item.hoverBackgroundImageUrl,
-                                [currentDevice]: image.url,
-                            },
-                            hoverBackgroundImageAlt: {
-                                ...item.hoverBackgroundImageAlt,
-                                [currentDevice]: image.alt || '',
-                            },
-                        };
-                    }
-
-                    // Special handling for authorImage to allow partial updates (merging)
-                    if (key === 'authorImage') {
-                        // Ensure null values from ImageControl (delete) are converted to defaults
-                        const normalizedValue = {};
-                        if (value) {
-                            if (value.url === null) normalizedValue.url = '';
-                            else if (value.url !== undefined) normalizedValue.url = value.url;
-                            
-                            if (value.id === null) normalizedValue.id = '';
-                            else if (value.id !== undefined) normalizedValue.id = value.id;
-                            
-                            if (value.alt === null) normalizedValue.alt = '';
-                            else if (value.alt !== undefined) normalizedValue.alt = value.alt;
-                        }
-
-                        return {
-                            ...item,
-                            [key]: {
-                                ...item[key],
-                                ...normalizedValue
-                            }
-                        };
-                    }
-
-                    // For other properties, update as before
-                    return { ...item, [key]: value };
+        const updatedItems = sliderItemList.map(item => {
+            if (item.id === id) {
+                // Handle normal background image updates for the current device only
+                if (key === 'normalBackgroundImageID') {
+                    // Get the full image data from WordPress media library
+                    const image = value ? wp.media.attachment(value).toJSON() : { url: '', alt: '' };
+                    return {
+                        ...item,
+                        normalBackgroundImageID: {
+                            ...item.normalBackgroundImageID,
+                            [currentDevice]: value,
+                        },
+                        normalBackgroundImageUrl: {
+                            ...item.normalBackgroundImageUrl,
+                            [currentDevice]: image.url,
+                        },
+                        normalBackgroundImageAlt: {
+                            ...item.normalBackgroundImageAlt,
+                            [currentDevice]: image.alt || '',
+                        },
+                    };
                 }
-                return item;
-            });
-            setAttributes({ sliderItems: updatedItems });
-            return updatedItems;
+
+                // Handle hover background image updates for the current device only
+                if (key === 'hoverBackgroundImageID') {
+                    const image = value ? wp.media.attachment(value).toJSON() : { url: '', alt: '' };
+                    return {
+                        ...item,
+                        hoverBackgroundImageID: {
+                            ...item.hoverBackgroundImageID,
+                            [currentDevice]: value,
+                        },
+                        hoverBackgroundImageUrl: {
+                            ...item.hoverBackgroundImageUrl,
+                            [currentDevice]: image.url,
+                        },
+                        hoverBackgroundImageAlt: {
+                            ...item.hoverBackgroundImageAlt,
+                            [currentDevice]: image.alt || '',
+                        },
+                    };
+                }
+
+                // Special handling for authorImage to allow partial updates (merging)
+                if (key === 'authorImage') {
+                    // Ensure null values from ImageControl (delete) are converted to defaults
+                    const normalizedValue = {};
+                    if (value) {
+                        if (value.url === null) normalizedValue.url = '';
+                        else if (value.url !== undefined) normalizedValue.url = value.url;
+                        
+                        if (value.id === null) normalizedValue.id = '';
+                        else if (value.id !== undefined) normalizedValue.id = value.id;
+                        
+                        if (value.alt === null) normalizedValue.alt = '';
+                        else if (value.alt !== undefined) normalizedValue.alt = value.alt;
+                    }
+
+                    return {
+                        ...item,
+                        [key]: {
+                            ...item[key],
+                            ...normalizedValue
+                        }
+                    };
+                }
+
+                // For other properties, update as before
+                return { ...item, [key]: value };
+            }
+            return item;
         });
+
+        setSliderItemList(updatedItems);
     };
 
     /**
@@ -507,27 +505,24 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     };
 
     /**
-     * Sync local state from attributes (for undo/redo support)
+     * Keep sliderItems attribute in sync with local state
      */
     useEffect(() => {
-        if (JSON.stringify(sliderItems) !== JSON.stringify(sliderItemList)) {
-            setSliderItemList(sliderItems);
-        }
-    }, [sliderItems]);
+        setAttributes({ sliderItems: sliderItemList });
+    }, [sliderItemList, setAttributes]);
 
     /**
      * Updates a specific field of a slide at the given index
      * Used for RichText component changes
      */
     const updateItem = (index, field, value) => {
-        setSliderItemList(prev => {
-            const next = [...prev];
-            if (next[index]) {
-                next[index] = { ...next[index], [field]: value };
+        const newItems = sliderItems.map((item, i) => {
+            if (i === index) {
+                return { ...item, [field]: value };
             }
-            setAttributes({ sliderItems: next });
-            return next;
+            return item;
         });
+        setAttributes({ sliderItems: newItems });
     };
 
     /**
