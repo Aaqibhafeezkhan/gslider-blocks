@@ -26,7 +26,12 @@ build/
 
 # Output of `wp-scripts plugin-zip`
 *.zip
-*.DS_Store
+# macOS system files
+.DS_Store
+**/.DS_Store
+._*
+.Spotlight-V100
+.Trashes
 
 # dotenv environment variables file
 .env

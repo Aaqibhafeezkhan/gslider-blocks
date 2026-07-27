@@ -31,14 +31,19 @@ const zip = async () => {
 
             if (stats.isDirectory()) {
                 archive.directory(fullPath, item, (entry) => {
-                    // Exclude macOS system files
-                    if (entry.name.includes('.DS_Store')) {
+                    const basename = path.basename(entry.name);
+
+                    // Exclude ALL hidden files and directories (dot-files)
+                    // WordPress.org Plugin Check does not allow hidden files.
+                    if (basename.startsWith('.')) {
                         return false;
                     }
+
                     // Exclude empty/dummy admin JS files generated as side-effect of compiling SCSS
                     if (entry.name.includes('admin/js') || (entry.name.includes('admin') && entry.name.endsWith('.js'))) {
                         return false;
                     }
+
                     return entry;
                 });
             } else {
