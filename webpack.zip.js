@@ -30,7 +30,17 @@ const zip = async () => {
             const stats = fs.statSync(fullPath);
 
             if (stats.isDirectory()) {
-                archive.directory(fullPath, item); // Add full directory
+                archive.directory(fullPath, item, (entry) => {
+                    // Exclude macOS system files
+                    if (entry.name.includes('.DS_Store')) {
+                        return false;
+                    }
+                    // Exclude empty/dummy admin JS files generated as side-effect of compiling SCSS
+                    if (entry.name.includes('admin/js') || (entry.name.includes('admin') && entry.name.endsWith('.js'))) {
+                        return false;
+                    }
+                    return entry;
+                });
             } else {
                 archive.file(fullPath, { name: item }); // Add individual file
             }

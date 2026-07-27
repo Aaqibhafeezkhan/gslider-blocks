@@ -137,7 +137,7 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
                 return $block_content;
             }
 
-            if ( str_contains( $block['blockName'], 'gslider-blocks/' ) && isset( $block['attrs']['blockStyle'] ) ) {
+            if ( false !== strpos( $block['blockName'], 'gslider-blocks/' ) && isset( $block['attrs']['blockStyle'] ) ) {
                 $block_id = isset( $block['attrs']['blockId'] ) ?
                     sanitize_key( $block['attrs']['blockId'] ) :
                     'gslider-blocks-' . md5( serialize( $block['attrs'] ) );

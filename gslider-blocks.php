@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Slider Block for Gutenberg Gutenslider by GSlider
+ * Plugin Name: GSlider Blocks - Slider, Carousel and Testimonial Blocks
  * Description: Enhance your site with dynamic, customizable, and multi-functional slider blocks to create a more engaging and functional experience.
  * Author: 		Noruzzaman
  * Author URI: 	https://github.com/noruzzamans/

@@ -58,31 +58,7 @@ class AdminAssets {
             GSLIDER_VERSION
         );
 
-        wp_register_script(
-            'gslider-admin-script',
-            GSLIDER_PLUGIN_URL . 'assets/admin/js/admin.js',
-            [],
-            GSLIDER_VERSION,
-            true
-        );
-
         wp_enqueue_style( 'gslider-admin-style' );
-        wp_enqueue_script( 'gslider-admin-script' );
-
-        /**
-         * Localize script for admin.
-         *
-         * Passes data to the admin script such as site URL,
-         * AJAX URL, nonce, and plugin URL.
-         */
-        $localize_array = [
-            'site_url'   => site_url(),
-            'ajax_url'   => admin_url( 'admin-ajax.php' ),
-            'nonce'      => wp_create_nonce( 'gslider_nonce' ),
-            'pluginUrl'  => GSLIDER_PLUGIN_URL,
-        ];
-
-        wp_localize_script( 'gslider-admin-script', 'GSliderBlocksData', $localize_array );
     }
 
     /**

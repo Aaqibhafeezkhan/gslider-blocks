@@ -1,5 +1,5 @@
-=== Slider Block for Gutenberg Gutenslider by GSlider ===
-Contributors: noruzzaman, sanaf
+=== GSlider Blocks - Slider, Carousel and Testimonial Blocks ===
+Contributors: noruzzaman
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 7.0
