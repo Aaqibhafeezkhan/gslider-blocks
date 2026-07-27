@@ -187,7 +187,10 @@ if ( ! class_exists( 'FontLoader' ) ) {
                     $this->load_google_font( $fonts );
                 }
             } catch ( \Exception $e ) {
-                error_log( 'Font loading error: ' . $e->getMessage() );
+                if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+                    error_log( 'GSlider Blocks: Font loading error: ' . $e->getMessage() );
+                }
             } finally {
                 self::$gfonts = [];
             }

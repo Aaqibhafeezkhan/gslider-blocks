@@ -56,7 +56,10 @@ if ( ! class_exists( 'RegistrationBlocks' ) ) {
             $build_dir  = trailingslashit( $plugin_dir ) . 'build/blocks/';
 
             if ( ! is_readable( $build_dir ) ) {
-                error_log( 'GSlider Blocks: Build directory is not readable: ' . $build_dir );
+                if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+                    error_log( 'GSlider Blocks: Build directory is not readable: ' . $build_dir );
+                }
                 return;
             }
 
@@ -67,7 +70,10 @@ if ( ! class_exists( 'RegistrationBlocks' ) ) {
                 try {
                     $this->register_single_block( $build_dir, $block );
                 } catch ( \Exception $e ) {
-                    error_log( 'GSlider Blocks: Error registering block "' . $block . '": ' . $e->getMessage() );
+                    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+                        error_log( 'GSlider Blocks: Error registering block "' . $block . '": ' . $e->getMessage() );
+                    }
                 }
             }
         }
