@@ -3,7 +3,7 @@ Contributors: noruzzaman
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.1.7
+Stable tag: 1.1.8
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -117,8 +117,15 @@ These are 3D transition effects where slides are stacked in layers. If your slid
 
 == Changelog ==
 
+= 1.1.8 – July 27, 2026 =
+* Security: Hardened SVG upload validation — added XXE injection protection and case-insensitive XSS attribute scanning
+* Fix: Restored PHP 7.x compatibility (replaced PHP 8.0+ str_contains() with strpos())
+* Fix: Wrapped all error_log() calls in WP_DEBUG checks per Plugin Check requirements
+* Fix: Removed load_plugin_textdomain() — auto-loaded by WordPress.org since WP 4.6
+* Fix: Removed redundant admin.js script (empty webpack side-effect)
+* Chore: Removed .DS_Store hidden files from repository and zip package
+
 = 1.1.7 – May 10, 2026 =
-**New Block: Testimonial**
 - Added Testimonial Slider block with Swiper.js integration
 - Author Info: Display author name, designation, and customizable avatar image
 - Star Rating: SVG-based star ratings with fractional support (e.g. 4.5 stars)
