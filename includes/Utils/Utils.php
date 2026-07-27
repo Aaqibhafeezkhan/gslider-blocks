@@ -56,7 +56,7 @@ if ( ! class_exists( 'Utils' ) ) {
 
             $client = new \Appsero\Client(
                 '3b9e5a5d-b238-4acf-b1e2-3c1faee503bb',
-                'GSlider Blocks - Slider, Carousel and Testimonial Blocks',
+                'GSlider Blocks',
                 GSLIDER_DIR_PATH . 'gslider-blocks.php'
             );
 

@@ -1,4 +1,4 @@
-=== GSlider Blocks - Slider, Carousel and Testimonial Blocks ===
+=== GSlider Blocks ===
 Contributors: noruzzaman
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 5.0
