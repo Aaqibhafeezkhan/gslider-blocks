@@ -9,6 +9,7 @@ const zip = async () => {
         'includes',
         'languages',
         'vendor',
+        'composer.json',
         'gslider-blocks.php',
         'readme.txt'
     ];
