@@ -115,7 +115,10 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
 
             if ( ! file_exists( $this->css_dir ) ) {
                 if ( ! wp_mkdir_p( $this->css_dir ) ) {
-                    error_log( 'Failed to create CSS directory at: ' . $this->css_dir );
+                    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+                        error_log( 'GSlider Blocks: Failed to create CSS directory at: ' . $this->css_dir );
+                    }
                 }
             }
         }
@@ -137,7 +140,7 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
                 return $block_content;
             }
 
-            if ( str_contains( $block['blockName'], 'gslider-blocks/' ) && isset( $block['attrs']['blockStyle'] ) ) {
+            if ( false !== strpos( $block['blockName'], 'gslider-blocks/' ) && isset( $block['attrs']['blockStyle'] ) ) {
                 $block_id = isset( $block['attrs']['blockId'] ) ?
                     sanitize_key( $block['attrs']['blockId'] ) :
                     'gslider-blocks-' . md5( serialize( $block['attrs'] ) );
@@ -189,7 +192,10 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
 
             if ( ! is_dir( $this->css_dir ) ) {
                 if ( ! wp_mkdir_p( $this->css_dir ) ) {
-                    error_log( 'Failed to create CSS directory: ' . $this->css_dir );
+                    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+                        error_log( 'GSlider Blocks: Failed to create CSS directory: ' . $this->css_dir );
+                    }
                     return;
                 }
             }
@@ -202,7 +208,10 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
             }
 
             if ( ! $wp_filesystem->put_contents( $css_file, $css_content, self::FILE_PERMISSIONS ) ) {
-                error_log( 'Failed to write CSS file: ' . $css_file );
+                if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+                    error_log( 'GSlider Blocks: Failed to write CSS file: ' . $css_file );
+                }
             }
 
             self::$styles = [];

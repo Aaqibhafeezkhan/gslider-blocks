@@ -9,6 +9,7 @@ const zip = async () => {
         'includes',
         'languages',
         'vendor',
+        'composer.json',
         'gslider-blocks.php',
         'readme.txt'
     ];
@@ -30,7 +31,22 @@ const zip = async () => {
             const stats = fs.statSync(fullPath);
 
             if (stats.isDirectory()) {
-                archive.directory(fullPath, item); // Add full directory
+                archive.directory(fullPath, item, (entry) => {
+                    const basename = path.basename(entry.name);
+
+                    // Exclude ALL hidden files and directories (dot-files)
+                    // WordPress.org Plugin Check does not allow hidden files.
+                    if (basename.startsWith('.')) {
+                        return false;
+                    }
+
+                    // Exclude empty/dummy admin JS files generated as side-effect of compiling SCSS
+                    if (entry.name.includes('admin/js') || (entry.name.includes('admin') && entry.name.endsWith('.js'))) {
+                        return false;
+                    }
+
+                    return entry;
+                });
             } else {
                 archive.file(fullPath, { name: item }); // Add individual file
             }

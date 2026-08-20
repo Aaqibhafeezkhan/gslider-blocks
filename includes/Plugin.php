@@ -31,8 +31,7 @@ if ( ! class_exists( 'Plugin' ) ) {
 	 * Main plugin class for GSlider Blocks.
 	 *
 	 * Acts as the central bootstrap, initializing all plugin
-	 * components on the plugins_loaded hook and loading
-	 * the text domain for translations.
+	 * components on the plugins_loaded hook.
 	 *
 	 * @since 1.0.0
 	 */
@@ -43,14 +42,14 @@ if ( ! class_exists( 'Plugin' ) ) {
 		/**
 		 * Sets up core plugin hooks.
 		 *
-		 * Registers the plugins_loaded and init actions
-		 * for component initialization and text domain loading.
+		 * Registers the plugins_loaded action for component initialization.
+		 * Translation loading is handled automatically by WordPress for
+		 * plugins hosted on WordPress.org (since WordPress 4.6).
 		 *
 		 * @since 1.0.0
 		 */
 		public function __construct() {
 			add_action( 'plugins_loaded', [ $this, 'plugins_loaded' ] );
-			add_action( 'init', [ $this, 'gslider_load_textdomain' ] );
 		}
 
 		/**
@@ -79,16 +78,6 @@ if ( ! class_exists( 'Plugin' ) ) {
 			}
 		}
 
-		/**
-		 * Loads the plugin text domain for translations.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @return void
-		 */
-		public function gslider_load_textdomain() {
-			load_plugin_textdomain( 'gslider-blocks', false, basename( GSLIDER_DIR_PATH ) . '/languages' );
-		}
 	}
 
 }
