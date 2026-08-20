@@ -2,7 +2,7 @@
 Contributors: noruzzaman
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 5.0
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 1.1.8
 Requires PHP: 7.0
 License: GPLv2 or later
@@ -117,12 +117,16 @@ These are 3D transition effects where slides are stacked in layers. If your slid
 
 == Changelog ==
 
-= 1.1.8 – Augest 19, 2026 =
-* Security: Hardened SVG upload validation — added XXE injection protection and case-insensitive XSS attribute scanning
-* Fix: Restored PHP 7.x compatibility (replaced PHP 8.0+ str_contains() with strpos())
-* Fix: Wrapped all error_log() calls in WP_DEBUG checks per Plugin Check requirements
-* Fix: Removed load_plugin_textdomain() — auto-loaded by WordPress.org since WP 4.6
-* Fix: Removed redundant admin.js script (empty webpack side-effect)
+= 1.1.8 – August 20, 2026 =
+* Compliance: Updated and refactored codebase to fully adhere to all WordPress.org Plugin Directory Guidelines and Security Standards.
+* Security: Hardened SVG upload validation with robust XXE injection protection and case-insensitive XSS attribute scanning.
+* Security: Enhanced input sanitization, data validation, and output escaping across all blocks and controls.
+* Optimization: Optimized code structure and resolved all errors/warnings per WordPress Plugin Check (PCP) requirements.
+* Fix: Restored PHP 7.x compatibility (replaced PHP 8.0+ `str_contains()` with `strpos()`).
+* Fix: Wrapped all `error_log()` calls in `WP_DEBUG` checks per WordPress development standards.
+* Fix: Removed deprecated `load_plugin_textdomain()` call (auto-loaded by WordPress.org since WP 4.6).
+* Optimization: Cleaned up redundant admin assets and optimized script loading for better performance.
+
 
 = 1.1.7 – May 10, 2026 =
 - Added Testimonial Slider block with Swiper.js integration
