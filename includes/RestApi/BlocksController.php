@@ -162,8 +162,7 @@ if ( ! class_exists( 'BlocksController' ) ) {
 				);
 			}
 
-			$raw_blocks     = parse_blocks( $post->post_content );
-			$gslider_blocks = $this->extract_gslider_blocks( $raw_blocks );
+			$gslider_blocks = BlockParser::parse_post_blocks( $post );
 
 			$data = [
 				'post_id'       => $post_id,
@@ -173,44 +172,6 @@ if ( ! class_exists( 'BlocksController' ) ) {
 			];
 
 			return rest_ensure_response( $data );
-		}
-
-		/**
-		 * Recursively extracts GSlider blocks from a parsed block tree.
-		 *
-		 * Discovers top-level blocks and nested blocks (e.g. inside columns/groups).
-		 *
-		 * @since 1.1.9
-		 *
-		 * @param array $blocks Parsed blocks tree from parse_blocks().
-		 * @return array Array of extracted GSlider blocks.
-		 */
-		private function extract_gslider_blocks( array $blocks ): array {
-			$found = [];
-
-			foreach ( $blocks as $block ) {
-				if ( empty( $block['blockName'] ) ) {
-					continue;
-				}
-
-				if ( 0 === strpos( $block['blockName'], 'gslider-blocks/' ) ) {
-					$attrs   = isset( $block['attrs'] ) && is_array( $block['attrs'] ) ? $block['attrs'] : [];
-					$found[] = [
-						'blockId'   => isset( $attrs['blockId'] ) ? sanitize_key( $attrs['blockId'] ) : '',
-						'blockName' => sanitize_text_field( $block['blockName'] ),
-						'attrs'     => $attrs,
-					];
-				}
-
-				if ( ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
-					$inner_found = $this->extract_gslider_blocks( $block['innerBlocks'] );
-					if ( ! empty( $inner_found ) ) {
-						$found = array_merge( $found, $inner_found );
-					}
-				}
-			}
-
-			return $found;
 		}
 
 		/**
@@ -251,9 +212,12 @@ if ( ! class_exists( 'BlocksController' ) ) {
 						'items'       => [
 							'type'       => 'object',
 							'properties' => [
-								'blockId'   => [ 'type' => 'string' ],
-								'blockName' => [ 'type' => 'string' ],
-								'attrs'     => [ 'type' => 'object' ],
+								'blockId'     => [ 'type' => 'string' ],
+								'blockName'   => [ 'type' => 'string' ],
+								'sliderType'  => [ 'type' => 'string' ],
+								'totalSlides' => [ 'type' => 'integer' ],
+								'slides'      => [ 'type' => 'array' ],
+								'attrs'       => [ 'type' => 'object' ],
 							],
 						],
 						'readonly'    => true,
