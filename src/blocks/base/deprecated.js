@@ -1,6 +1,7 @@
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import attributes from './attributes';
+import saveGapOr20 from './save-gap-or';
 
 const v1_0_7 = {
 	attributes,
@@ -81,7 +82,7 @@ const v1_0_7 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -91,7 +92,7 @@ const v1_0_7 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -392,7 +393,7 @@ const v1_0_8 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -404,7 +405,7 @@ const v1_0_8 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -713,7 +714,7 @@ const v1_0_9 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -725,7 +726,7 @@ const v1_0_9 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -1034,7 +1035,7 @@ const v1_0_10 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -1046,7 +1047,7 @@ const v1_0_10 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -1355,7 +1356,7 @@ const v1_1_1 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -1367,7 +1368,7 @@ const v1_1_1 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -1677,7 +1678,7 @@ const v1_1_2 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -1689,7 +1690,7 @@ const v1_1_2 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -2005,7 +2006,7 @@ const v1_1_5 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -2017,7 +2018,7 @@ const v1_1_5 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -2236,4 +2237,17 @@ const v1_1_5 = {
 	},
 };
 
-export default [v1_0_7, v1_0_8, v1_0_9, v1_0_10, v1_1_1, v1_1_2, v1_1_5];
+
+const vGapOr20 = {
+	apiVersion: 3,
+	attributes,
+	supports: {
+		html: false,
+		anchor: false,
+		customClassName: false,
+		align: [ 'wide', 'full' ],
+	},
+	save: saveGapOr20,
+};
+
+export default [ vGapOr20, v1_0_7, v1_0_8, v1_0_9, v1_0_10, v1_1_1, v1_1_2, v1_1_5 ];

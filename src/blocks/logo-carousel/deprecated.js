@@ -1,5 +1,6 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import attributes from './attributes';
+import saveGapOr20 from './save-gap-or';
 
 const v1_1_5 = {
     attributes,
@@ -89,7 +90,7 @@ const v1_1_5 = {
                 },
                 768: {
                     slidesPerView: carouselPerColumn?.Tablet || 2,
-                    spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+                    spaceBetween: carouselPerColumnGap?.Tablet || 20,
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? { delay: autoplayDelay?.Tablet || 1000 } : false,
                     navigation: { enabled: navigationEnabled.Tablet },
@@ -97,7 +98,7 @@ const v1_1_5 = {
                 },
                 1025: {
                     slidesPerView: carouselPerColumn?.Desktop || 2,
-                    spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+                    spaceBetween: carouselPerColumnGap?.Desktop || 20,
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? { delay: autoplayDelay?.Desktop || 1000 } : false,
                     navigation: { enabled: navigationEnabled.Desktop },
@@ -178,4 +179,17 @@ const v1_1_5 = {
     }
 };
 
-export default [v1_1_5];
+
+const vGapOr20 = {
+	apiVersion: 3,
+	attributes,
+	supports: {
+		html: false,
+		anchor: false,
+		customClassName: false,
+		align: [ 'wide', 'full' ],
+	},
+	save: saveGapOr20,
+};
+
+export default [ vGapOr20, v1_1_5 ];
