@@ -32,13 +32,15 @@ if ( ! class_exists( 'BlockParser' ) ) {
 		 *
 		 * @since 1.1.9
 		 *
-		 * @param int|string $post_or_id Post ID or raw post content string.
+		 * @param int|string|\WP_Post $post_or_id Post ID, WP_Post instance, or raw post content string.
 		 * @return array Array of normalized GSlider block structures.
 		 */
 		public static function parse_post_blocks( $post_or_id ): array {
 			$content = '';
 
-			if ( is_numeric( $post_or_id ) ) {
+			if ( $post_or_id instanceof \WP_Post ) {
+				$content = $post_or_id->post_content;
+			} elseif ( is_numeric( $post_or_id ) ) {
 				$post = get_post( (int) $post_or_id );
 				if ( ! $post ) {
 					return [];
