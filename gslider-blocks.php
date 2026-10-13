@@ -69,7 +69,7 @@ if ( ! class_exists( 'GSliderBlocks' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function __construct() {
+		private function __construct() {
 			$this->define_constants();
 			$this->includes();
 		}
