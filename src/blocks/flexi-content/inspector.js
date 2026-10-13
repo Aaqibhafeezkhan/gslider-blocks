@@ -696,7 +696,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                         onChangeValue={(value) => setAttributes({ carouselPerColumn: value })}
                         deviceType={deviceType}
                         step={1}
-                        resetFallbackValue={"2"}
+                        resetFallbackValue={deviceType === 'Mobile' ? '1' : '2'}
                         isRangeUnit={false}
                     />
                     <ResponsiveRangeControl
