@@ -39,24 +39,19 @@ async function extractBlockAttributes(slug) {
 }
 
 async function runDriftCheck() {
-  const registryPath = path.resolve(__dirname, '../src/core/generated-registry.json');
-  if (!fs.existsSync(registryPath)) {
-    console.error('FAIL: generated-registry.json does not exist. Run "npm run generate-schemas" first.');
-    process.exit(1);
-  }
-
-  const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+  const schemasDir = path.resolve(__dirname, '../src/core/schemas');
   let hasDrift = false;
 
   for (const slug of BLOCK_SLUGS) {
-    const liveAttrs = await extractBlockAttributes(slug);
-    const cachedBlock = registry[slug];
-
-    if (!cachedBlock) {
-      console.error(`FAIL: Block "${slug}" missing from generated-registry.json`);
+    const schemaFile = path.resolve(schemasDir, `${slug}.json`);
+    if (!fs.existsSync(schemaFile)) {
+      console.error(`FAIL: Schema file missing: schemas/${slug}.json. Run "npm run generate-schemas" first.`);
       hasDrift = true;
       continue;
     }
+
+    const cachedBlock = JSON.parse(fs.readFileSync(schemaFile, 'utf8'));
+    const liveAttrs = await extractBlockAttributes(slug);
 
     const liveKeys = Object.keys(liveAttrs);
     const cachedKeys = Object.keys(cachedBlock.attributes || {});
@@ -71,7 +66,7 @@ async function runDriftCheck() {
 
     for (const key of liveKeys) {
       if (!(key in cachedBlock.attributes)) {
-        console.error(`FAIL: Attribute "${key}" in "${slug}" missing from registry.`);
+        console.error(`FAIL: Attribute "${key}" in "${slug}" missing from schema file.`);
         hasDrift = true;
       }
     }
@@ -82,7 +77,7 @@ async function runDriftCheck() {
     process.exit(1);
   }
 
-  console.log('✅ PASS: Zero schema drift. All 5 blocks and their attributes match source code 1:1.');
+  console.log('✅ PASS: Zero schema drift. All 5 individual block schemas match source code 1:1.');
 }
 
 runDriftCheck().catch((err) => {

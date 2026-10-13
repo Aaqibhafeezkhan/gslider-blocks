@@ -29,58 +29,56 @@ export interface BlockDetail extends BlockSummary {
   >;
 }
 
-function loadRegistry(): Record<string, BlockDetail> {
-  const url = new URL('./generated-registry.json', import.meta.url);
+export const SUPPORTED_BLOCK_SLUGS = [
+  'image-slider',
+  'testimonial',
+  'logo-carousel',
+  'flexi-content',
+  'base',
+] as const;
+
+export type SupportedBlockSlug = (typeof SUPPORTED_BLOCK_SLUGS)[number];
+
+function loadBlockSchema(slug: string): BlockDetail {
+  const url = new URL(`./schemas/${slug}.json`, import.meta.url);
+  if (!fs.existsSync(url)) {
+    const validSlugs = SUPPORTED_BLOCK_SLUGS.join(', ');
+    throw new Error(`Unknown block slug: "${slug}". Valid block slugs are: ${validSlugs}`);
+  }
   return JSON.parse(fs.readFileSync(url, 'utf8'));
 }
-
-export const BLOCKS_REGISTRY: Record<string, BlockDetail> = loadRegistry();
 
 /**
  * Returns a summary list of all registered GSlider blocks.
  */
 export function listBlocks(): BlockSummary[] {
-  return Object.values(BLOCKS_REGISTRY).map(
-    ({
-      slug,
-      name,
-      title,
-      description,
-      category,
-      slideField,
-      totalAttributes,
-      presets,
-      allowedEffects,
-    }) => ({
-      slug,
-      name,
-      title,
-      description,
-      category,
-      slideField,
-      totalAttributes,
-      presets,
-      allowedEffects,
-    })
-  );
+  return SUPPORTED_BLOCK_SLUGS.map((slug) => {
+    const block = loadBlockSchema(slug);
+    return {
+      slug: block.slug,
+      name: block.name,
+      title: block.title,
+      description: block.description,
+      category: block.category,
+      slideField: block.slideField,
+      totalAttributes: block.totalAttributes,
+      presets: block.presets,
+      allowedEffects: block.allowedEffects,
+    };
+  });
 }
 
 /**
  * Returns the comprehensive schema, real defaults, and full attribute dictionary
- * for a given block slug directly from GSlider source definitions.
+ * for a specific block slug loaded directly from its dedicated schema file.
  */
 export function getBlockSchema(slug: string): BlockDetail {
-  const block = BLOCKS_REGISTRY[slug];
-  if (!block) {
-    const validSlugs = Object.keys(BLOCKS_REGISTRY).join(', ');
-    throw new Error(`Unknown block slug: "${slug}". Valid block slugs are: ${validSlugs}`);
-  }
-  return block;
+  return loadBlockSchema(slug);
 }
 
 /**
  * Checks whether a given slug is a valid GSlider block.
  */
 export function isValidBlockSlug(slug: string): boolean {
-  return slug in BLOCKS_REGISTRY;
+  return (SUPPORTED_BLOCK_SLUGS as readonly string[]).includes(slug);
 }

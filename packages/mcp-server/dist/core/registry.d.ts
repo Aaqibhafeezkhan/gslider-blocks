@@ -22,14 +22,15 @@ export interface BlockDetail extends BlockSummary {
         properties?: Record<string, unknown>;
     }>;
 }
-export declare const BLOCKS_REGISTRY: Record<string, BlockDetail>;
+export declare const SUPPORTED_BLOCK_SLUGS: readonly ["image-slider", "testimonial", "logo-carousel", "flexi-content", "base"];
+export type SupportedBlockSlug = (typeof SUPPORTED_BLOCK_SLUGS)[number];
 /**
  * Returns a summary list of all registered GSlider blocks.
  */
 export declare function listBlocks(): BlockSummary[];
 /**
  * Returns the comprehensive schema, real defaults, and full attribute dictionary
- * for a given block slug directly from GSlider source definitions.
+ * for a specific block slug loaded directly from its dedicated schema file.
  */
 export declare function getBlockSchema(slug: string): BlockDetail;
 /**

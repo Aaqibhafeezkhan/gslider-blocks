@@ -15,7 +15,7 @@
   "scripts": {
     "generate-schemas": "node scripts/extract-schemas.js",
     "test": "node scripts/test-drift.js",
-    "build": "node scripts/extract-schemas.js && tsc && cp src/core/generated-registry.json dist/core/",
+    "build": "node scripts/extract-schemas.js && tsc && mkdir -p dist/core/schemas && cp src/core/schemas/*.json dist/core/schemas/",
     "watch": "tsc --watch",
     "start": "node dist/index.js",
     "prepare": "npm run build"

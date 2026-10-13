@@ -1,11 +1,9 @@
 import { z } from 'zod';
-import { getBlockSchema, BLOCKS_REGISTRY } from '../core/registry.js';
-
-const validSlugs = Object.keys(BLOCKS_REGISTRY) as [string, ...string[]];
+import { getBlockSchema, SUPPORTED_BLOCK_SLUGS } from '../core/registry.js';
 
 export const getBlockSchemaInputZod = z.object({
   blockSlug: z
-    .enum(validSlugs)
+    .enum(SUPPORTED_BLOCK_SLUGS)
     .describe('Slug of the GSlider block to inspect (e.g. image-slider, testimonial, logo-carousel, flexi-content, base)'),
 });
 
@@ -18,7 +16,7 @@ export const getBlockSchemaToolDefinition = {
     properties: {
       blockSlug: {
         type: 'string',
-        enum: validSlugs,
+        enum: SUPPORTED_BLOCK_SLUGS,
         description: 'Slug of the GSlider block (e.g. image-slider, testimonial, logo-carousel, flexi-content, base)',
       },
     },
@@ -41,7 +39,7 @@ export async function handleGetBlockSchema(args: unknown) {
       content: [
         {
           type: 'text',
-          text: `Invalid arguments for get_block_schema: ${errorMsg}. Valid slugs are: ${validSlugs.join(', ')}`,
+          text: `Invalid arguments for get_block_schema: ${errorMsg}. Valid slugs are: ${SUPPORTED_BLOCK_SLUGS.join(', ')}`,
         },
       ],
     };

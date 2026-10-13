@@ -108,7 +108,6 @@ async function extractConstants() {
 
 async function generate() {
   const constants = await extractConstants();
-  const registry = {};
 
   const slideFields = {
     'image-slider': 'images',
@@ -117,6 +116,12 @@ async function generate() {
     'base': 'sliderItems',
     'flexi-content': 'innerBlocks'
   };
+
+  const srcSchemasDir = path.resolve(__dirname, '../src/core/schemas');
+  const distSchemasDir = path.resolve(__dirname, '../dist/core/schemas');
+
+  fs.mkdirSync(srcSchemasDir, { recursive: true });
+  fs.mkdirSync(distSchemasDir, { recursive: true });
 
   for (const slug of BLOCK_SLUGS) {
     const rawAttrs = await extractBlockAttributes(slug);
@@ -132,12 +137,11 @@ async function generate() {
       allowedEffects.sliderType = constants.sliderTypes;
     }
 
-    // Determine slide item schema
     const slideField = slideFields[slug];
     const slideAttr = rawAttrs[slideField];
     const slideItemSchema = slideAttr?.items || slideAttr?.default?.[0] || {};
 
-    registry[slug] = {
+    const blockData = {
       slug,
       name: blockJson.name || `gslider-blocks/${slug}`,
       title: blockJson.title || slug,
@@ -150,11 +154,15 @@ async function generate() {
       slideItemSchema,
       attributes: rawAttrs
     };
-  }
 
-  const outPath = path.resolve(__dirname, '../src/core/generated-registry.json');
-  fs.writeFileSync(outPath, JSON.stringify(registry, null, 2), 'utf8');
-  console.log(`✅ Successfully extracted ${BLOCK_SLUGS.length} blocks into ${outPath}`);
+    const outSrcFile = path.resolve(srcSchemasDir, `${slug}.json`);
+    const outDistFile = path.resolve(distSchemasDir, `${slug}.json`);
+
+    fs.writeFileSync(outSrcFile, JSON.stringify(blockData, null, 2), 'utf8');
+    fs.writeFileSync(outDistFile, JSON.stringify(blockData, null, 2), 'utf8');
+
+    console.log(`✅ Extracted block: ${slug} (${blockData.totalAttributes} attributes) -> schemas/${slug}.json`);
+  }
 }
 
 generate().catch((err) => {
