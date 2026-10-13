@@ -66,9 +66,22 @@ On macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
 | Tool | Description | Status |
 | :--- | :--- | :--- |
 | `gslider_ping` | Health-check tool verifying server connection and version. | ✅ Available |
-| `list_gslider_blocks` | Lists all 6 registered slider blocks and supported attributes. | 🔜 Issue #32 |
-| `get_block_schema` | Returns JSON schema and attribute defaults for a specific block. | 🔜 Issue #32 |
+| `list_gslider_blocks` | Lists all registered slider blocks and supported features. | ✅ Available |
+| `get_block_schema` | Returns JSON schema, attribute defaults, and slide structure for a block. | ✅ Available |
 | `generate_slider_block` | Generates valid Gutenberg block markup with automated CSS styling. | 🔜 Issue #33 |
+
+---
+
+## 📚 Available Resources (Design Templates)
+
+AI assistants can inspect and load pre-built slider design presets via MCP URI resources:
+
+| Resource URI | Description | Target Block |
+| :--- | :--- | :--- |
+| `gslider://templates/hero-slider` | Full-width high-impact hero slider with fade transitions. | `image-slider` |
+| `gslider://templates/product-carousel` | Responsive 3-column e-commerce card carousel. | `image-slider` |
+| `gslider://templates/testimonial-cards` | 2-column client review cards with 5-star ratings. | `testimonial` |
+| `gslider://templates/brand-logos` | Smooth continuous brand logo ticker. | `logo-carousel` |
 
 ---
 

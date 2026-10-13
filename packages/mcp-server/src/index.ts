@@ -4,7 +4,22 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
+  ListResourcesRequestSchema,
+  ReadResourceRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
+
+import {
+  listBlocksToolDefinition,
+  handleListBlocks,
+} from './tools/list-blocks.js';
+import {
+  getBlockSchemaToolDefinition,
+  handleGetBlockSchema,
+} from './tools/get-schema.js';
+import {
+  listTemplates,
+  getTemplateByUri,
+} from './resources/templates.js';
 
 const SERVER_NAME = 'gslider-mcp-server';
 const SERVER_VERSION = '1.0.0';
@@ -24,10 +39,12 @@ async function main(): Promise<void> {
     {
       capabilities: {
         tools: {},
+        resources: {},
       },
     }
   );
 
+  // 1. Tool Listing
   server.setRequestHandler(ListToolsRequestSchema, async () => {
     return {
       tools: [
@@ -39,12 +56,17 @@ async function main(): Promise<void> {
             properties: {},
           },
         },
+        listBlocksToolDefinition,
+        getBlockSchemaToolDefinition,
       ],
     };
   });
 
+  // 2. Tool Execution
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
-    if (request.params.name === 'gslider_ping') {
+    const { name, arguments: args } = request.params;
+
+    if (name === 'gslider_ping') {
       return {
         content: [
           {
@@ -64,7 +86,48 @@ async function main(): Promise<void> {
       };
     }
 
-    throw new Error(`Unknown tool: ${request.params.name}`);
+    if (name === 'list_gslider_blocks') {
+      return await handleListBlocks();
+    }
+
+    if (name === 'get_block_schema') {
+      return await handleGetBlockSchema(args);
+    }
+
+    throw new Error(`Unknown tool: ${name}`);
+  });
+
+  // 3. Resource Listing
+  server.setRequestHandler(ListResourcesRequestSchema, async () => {
+    const templates = listTemplates();
+    return {
+      resources: templates.map((tpl) => ({
+        uri: tpl.uri,
+        name: tpl.name,
+        description: tpl.description,
+        mimeType: tpl.mimeType,
+      })),
+    };
+  });
+
+  // 4. Resource Reading
+  server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+    const { uri } = request.params;
+    const template = getTemplateByUri(uri);
+
+    if (!template) {
+      throw new Error(`Resource not found for URI: ${uri}`);
+    }
+
+    return {
+      contents: [
+        {
+          uri: template.uri,
+          mimeType: template.mimeType,
+          text: JSON.stringify(template.data, null, 2),
+        },
+      ],
+    };
   });
 
   const transport = new StdioServerTransport();
