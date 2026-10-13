@@ -48,7 +48,7 @@ if ( ! class_exists( 'Plugin' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function __construct() {
+		private function __construct() {
 			add_action( 'plugins_loaded', [ $this, 'plugins_loaded' ] );
 		}
 
