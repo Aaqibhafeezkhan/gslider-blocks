@@ -81,3 +81,6 @@ When developing or modifying code in this repository, reference the dedicated wo
 8. **Protected Component Directory & Strict Design System**:
    - `src/components/` is strictly locked: **NO ONE EXCEPT `@noruzzamans` IS ALLOWED TO EDIT OR ADD FILES TO `src/components/`**. Any external PR or AI modifying `src/components/` will be rejected to protect 2,000+ live sites.
    - Blocks MUST exclusively use the 23 approved `@Components/*` controls. Raw `@wordpress/components` input controls are forbidden.
+9. **Codebase-First & Surgical Diffs**:
+   - Always inspect existing traits, interfaces, and classes before making changes to prevent duplicating patterns already provided (e.g. `SingletonTrait`).
+   - PR diffs must remain atomic and surgical: change only the exact lines requested by the issue with zero unprompted methods or speculative boilerplate.
