@@ -90,6 +90,9 @@ GSlider Blocks welcomes modern AI tooling (Cursor, Claude, Copilot, Antigravity)
    npm run lint:css
    npm run build
    ```
+6. **Codebase-First Rule (Zero Redundancy):** Always inspect related traits, interfaces, and classes before writing code. Never guess architecture or recreate methods already provided by base classes/traits.
+7. **Surgical Minimal Diffs:** PRs must only change lines strictly necessary for the assigned issue. Never inject unprompted methods, speculative boilerplate, or unrelated reformatting.
+8. **Git Cleanliness:** Never stage untracked files (`vendor/`, dev dependencies, logs, caches). Keep PR diffs 100% atomic and focused.
 
 ---
 

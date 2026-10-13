@@ -50,24 +50,28 @@ graph TD
 
 ---
 
-## 🧬 Singleton Pattern
+## 🧬 Singleton Pattern & Registrable Services
 
-Every service class uses `GSlider\Traits\SingletonTrait` to ensure a single shared instance:
+Every core service class implements `GSlider\Interfaces\Registrable` and uses `GSlider\Traits\SingletonTrait`:
 
 ```php
 <?php
 namespace GSlider\Classes;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class MyNewService {
+class MyNewService implements Registrable {
     use SingletonTrait;
 
-    public function register() {
+    // Optional: Only declare if custom init is needed, and MUST be private!
+    // private function __construct() { ... }
+
+    public function register(): void {
         add_action( 'init', [ $this, 'on_init' ] );
     }
 
@@ -76,6 +80,11 @@ class MyNewService {
     }
 }
 ```
+
+### 🔒 Singleton Encapsulation & Codebase-First Rules
+1. **Never Duplicate Trait Methods**: `SingletonTrait` already provides `$instance`, `getInstance()`, `__clone()`, and `__wakeup()`. Never redeclare them in service classes.
+2. **Strict Private Constructors**: If any singleton class declares `__construct()`, it MUST be `private function __construct()`. Never leave a constructor `public`.
+3. **Inspect First**: Always view existing traits, interfaces, and base classes before editing code to prevent redundant code.
 
 ---
 
