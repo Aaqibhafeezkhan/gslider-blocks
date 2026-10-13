@@ -15,7 +15,9 @@
 		"packages-update": "wp-scripts packages-update",
 		"zip": "node webpack.zip.js",
 		"admin": "webpack --config webpack.config.admin.js --watch --mode=development",
-		"admin:build": "webpack --config webpack.config.admin.js --mode=production"
+		"admin:build": "webpack --config webpack.config.admin.js --mode=production",
+		"mcp:build": "npm --prefix packages/mcp-server run build",
+		"mcp:start": "npm --prefix packages/mcp-server run start"
 	},
 	"devDependencies": {
 		"@monaco-editor/react": "^4.6.0",

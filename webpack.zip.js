@@ -45,6 +45,11 @@ const zip = async () => {
                         return false;
                     }
 
+                    // Exclude monorepo packages (e.g. packages/mcp-server) from release archive
+                    if (entry.name.startsWith('packages') || entry.name.includes('/packages/')) {
+                        return false;
+                    }
+
                     return entry;
                 });
             } else {
