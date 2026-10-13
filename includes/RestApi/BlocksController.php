@@ -129,6 +129,7 @@ if ( ! class_exists( 'BlocksController' ) ) {
 		 * Handler for the gslider_blocks REST field.
 		 *
 		 * Extracts and normalizes GSlider blocks for the given post or page.
+		 * Password-protected posts return an empty list until the password is supplied.
 		 *
 		 * @since 1.1.9
 		 *
@@ -139,6 +140,11 @@ if ( ! class_exists( 'BlocksController' ) ) {
 			$post_id = (int) ( $post_response['id'] ?? 0 );
 
 			if ( ! $post_id ) {
+				return [];
+			}
+
+			$post = get_post( $post_id );
+			if ( ! $post instanceof WP_Post || post_password_required( $post ) ) {
 				return [];
 			}
 
@@ -178,8 +184,10 @@ if ( ! class_exists( 'BlocksController' ) ) {
 		/**
 		 * Checks whether the current user has permission to read blocks for the post.
 		 *
-		 * Published posts are publicly accessible. Non-published posts require
-		 * standard read_post capability for the post type.
+		 * A published post of a public type is readable without a login once
+		 * post_password_required() is false. Password-protected posts are
+		 * denied until then. Non-public types, drafts, private posts, and
+		 * pending posts require the post type read capability.
 		 *
 		 * @since 1.1.9
 		 *
@@ -198,22 +206,38 @@ if ( ! class_exists( 'BlocksController' ) ) {
 				);
 			}
 
-			// Published posts are publicly readable.
-			if ( 'publish' === $post->post_status ) {
+			if ( post_password_required( $post ) ) {
+				return $this->cannot_read_post_error();
+			}
+
+			$post_type = get_post_type_object( $post->post_type );
+
+			// Published posts of public types stay readable without a login.
+			if ( 'publish' === $post->post_status && $post_type && $post_type->public ) {
 				return true;
 			}
 
-			// Non-published posts (draft, private, pending) require permission.
-			$post_type = get_post_type_object( $post->post_type );
+			// Drafts, private posts, and non-public types use the type's read cap.
 			if ( ! $post_type || ! current_user_can( $post_type->cap->read_post, $post_id ) ) {
-				return new WP_Error(
-					'rest_cannot_read_post',
-					__( 'Sorry, you are not allowed to view blocks for this post.', 'gslider-blocks' ),
-					[ 'status' => rest_authorization_required_code() ]
-				);
+				return $this->cannot_read_post_error();
 			}
 
 			return true;
+		}
+
+		/**
+		 * Returns the error used when block content must stay hidden.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @return WP_Error Authorization error. Never a 404 for a real post.
+		 */
+		private function cannot_read_post_error(): WP_Error {
+			return new WP_Error(
+				'rest_cannot_read_post',
+				__( 'Sorry, you are not allowed to view blocks for this post.', 'gslider-blocks' ),
+				[ 'status' => rest_authorization_required_code() ]
+			);
 		}
 
 		/**
