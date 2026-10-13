@@ -133,14 +133,147 @@ if ( ! class_exists( 'BlockParser' ) ) {
 					break;
 			}
 
-			return [
-				'blockId'     => $block_id,
-				'blockName'   => $block_name,
-				'sliderType'  => $block_slug,
-				'totalSlides' => count( $slides ),
-				'slides'      => $slides,
-				'attrs'       => $attrs,
+			$swiper_config = self::extract_swiper_config( $attrs );
+			$css           = self::extract_block_styles( $attrs );
+
+			$data = [
+				'blockId'      => $block_id,
+				'blockName'    => $block_name,
+				'sliderType'   => $block_slug,
+				'totalSlides'  => count( $slides ),
+				'swiperConfig' => $swiper_config,
+				'css'          => $css,
+				'slides'       => $slides,
+				'attrs'        => $attrs,
 			];
+
+			/**
+			 * Filters the normalized block payload for a GSlider block.
+			 *
+			 * @since 1.1.9
+			 *
+			 * @param array $data  Normalized block payload.
+			 * @param array $block Raw Gutenberg block structure.
+			 */
+			return apply_filters( 'gslider_normalized_block_data', $data, $block );
+		}
+
+		/**
+		 * Extracts and normalizes Swiper.js configuration from block attributes.
+		 *
+		 * Generates clean responsive breakpoints and control settings
+		 * ready to be passed directly to Swiper / Swiper React in Next.js.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @param array $attrs Block attributes.
+		 * @return array Swiper.js configuration object.
+		 */
+		public static function extract_swiper_config( array $attrs ): array {
+			$slider_type     = $attrs['sliderType'] ?? 'carousel';
+			$carousel_effect = $attrs['carouselEffect'] ?? 'slide';
+			$slide_effect    = $attrs['slideEffect'] ?? 'slide';
+			$effect          = 'carousel' === $slider_type ? $carousel_effect : $slide_effect;
+
+			$per_column      = is_array( $attrs['carouselPerColumn'] ?? null ) ? $attrs['carouselPerColumn'] : [];
+			$gap             = is_array( $attrs['carouselPerColumnGap'] ?? null ) ? $attrs['carouselPerColumnGap'] : [];
+			$speed           = is_array( $attrs['speed'] ?? null ) ? $attrs['speed'] : [];
+			$autoplay        = ! empty( $attrs['autoplay'] );
+			$autoplay_delay  = is_array( $attrs['autoplayDelay'] ?? null ) ? $attrs['autoplayDelay'] : [];
+
+			$show_nav        = is_array( $attrs['showNavigation'] ?? null ) ? $attrs['showNavigation'] : [];
+			$show_pagi       = is_array( $attrs['showPagination'] ?? null ) ? $attrs['showPagination'] : [];
+
+			$nav_mobile      = ! empty( $show_nav['Mobile'] );
+			$nav_tablet      = ! empty( $show_nav['Tablet'] );
+			$nav_desktop     = ! empty( $show_nav['Desktop'] );
+			$any_nav         = $nav_mobile || $nav_tablet || $nav_desktop;
+
+			$pagi_mobile     = ! empty( $show_pagi['Mobile'] );
+			$pagi_tablet     = ! empty( $show_pagi['Tablet'] );
+			$pagi_desktop    = ! empty( $show_pagi['Desktop'] );
+			$any_pagi        = $pagi_mobile || $pagi_tablet || $pagi_desktop;
+
+			$pagination_type = $attrs['paginationType'] ?? 'bullets';
+			$dynamic_bullets = 'bullets' === $pagination_type && ! empty( $attrs['dynamicBullets'] );
+
+			$breakpoints = [
+				0    => [
+					'slidesPerView' => (float) ( $per_column['Mobile'] ?? 1 ),
+					'spaceBetween'  => (int) ( $gap['Mobile'] ?? 0 ),
+					'speed'         => (int) ( $speed['Mobile'] ?? 800 ),
+					'autoplay'      => $autoplay ? [ 'delay' => (int) ( $autoplay_delay['Mobile'] ?? 1000 ) ] : false,
+					'navigation'    => [ 'enabled' => $nav_mobile ],
+					'pagination'    => [ 'enabled' => $pagi_mobile ],
+				],
+				768  => [
+					'slidesPerView' => (float) ( $per_column['Tablet'] ?? 2 ),
+					'spaceBetween'  => (int) ( $gap['Tablet'] ?? 20 ),
+					'speed'         => (int) ( $speed['Tablet'] ?? 800 ),
+					'autoplay'      => $autoplay ? [ 'delay' => (int) ( $autoplay_delay['Tablet'] ?? 1000 ) ] : false,
+					'navigation'    => [ 'enabled' => $nav_tablet ],
+					'pagination'    => [ 'enabled' => $pagi_tablet ],
+				],
+				1025 => [
+					'slidesPerView' => (float) ( $per_column['Desktop'] ?? 2 ),
+					'spaceBetween'  => (int) ( $gap['Desktop'] ?? 20 ),
+					'speed'         => (int) ( $speed['Desktop'] ?? 800 ),
+					'autoplay'      => $autoplay ? [ 'delay' => (int) ( $autoplay_delay['Desktop'] ?? 1000 ) ] : false,
+					'navigation'    => [ 'enabled' => $nav_desktop ],
+					'pagination'    => [ 'enabled' => $pagi_desktop ],
+				],
+			];
+
+			$config = [
+				'effect'         => $effect,
+				'loop'           => ! empty( $attrs['infiniteLoop'] ),
+				'allowTouchMove' => ! isset( $attrs['allowTouchMove'] ) || ! empty( $attrs['allowTouchMove'] ),
+				'mousewheel'     => ! empty( $attrs['mousewheelControl'] ),
+				'keyboard'       => ! empty( $attrs['keyboardNavigation'] ) ? [ 'enabled' => true, 'onlyInViewport' => true ] : false,
+				'breakpoints'    => $breakpoints,
+				'navigation'     => [
+					'enabled' => $any_nav,
+				],
+				'pagination'     => [
+					'enabled'        => $any_pagi,
+					'type'           => $pagination_type,
+					'dynamicBullets' => $dynamic_bullets,
+					'clickable'      => true,
+				],
+			];
+
+			if ( $autoplay ) {
+				$config['autoplay'] = [
+					'pauseOnMouseEnter'    => ! empty( $attrs['pauseOnHover'] ),
+					'disableOnInteraction' => false,
+					'stopOnLastSlide'      => ! empty( $attrs['stopOnLastSlide'] ),
+					'reverseDirection'     => ! empty( $attrs['reverseDirection'] ),
+				];
+			} else {
+				$config['autoplay'] = false;
+			}
+
+			if ( isset( $attrs['layoutHeightSwitcher'] ) && 'adapt' === $attrs['layoutHeightSwitcher'] ) {
+				$config['autoHeight'] = true;
+			}
+
+			return $config;
+		}
+
+		/**
+		 * Extracts the pre-generated blockStyle CSS string from attributes.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @param array $attrs Block attributes.
+		 * @return string CSS stylesheet string.
+		 */
+		public static function extract_block_styles( array $attrs ): string {
+			if ( ! empty( $attrs['blockStyle'] ) && is_string( $attrs['blockStyle'] ) ) {
+				return trim( $attrs['blockStyle'] );
+			}
+
+			return '';
 		}
 
 		/**
