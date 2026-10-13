@@ -126,6 +126,10 @@ if ( ! class_exists( 'BlockParser' ) ) {
 					$slides = self::normalize_testimonial( $attrs );
 					break;
 
+				case 'gslider-blocks/base':
+					$slides = self::normalize_base( $attrs );
+					break;
+
 				case 'gslider-blocks/flexi-content':
 					$slides = self::normalize_flexi_content( $inner_blocks );
 					break;
@@ -377,6 +381,63 @@ if ( ! class_exists( 'BlockParser' ) ) {
 			}
 
 			return $slides;
+		}
+
+		/**
+		 * Normalizes Base block slides from sliderItems.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @param array $attrs Block attributes.
+		 * @return array Normalized array of slides.
+		 */
+		public static function normalize_base( array $attrs ): array {
+			$items  = isset( $attrs['sliderItems'] ) && is_array( $attrs['sliderItems'] ) ? $attrs['sliderItems'] : [];
+			$slides = [];
+
+			foreach ( $items as $index => $item ) {
+				if ( ! is_array( $item ) ) {
+					continue;
+				}
+
+				$slides[] = [
+					'id'                        => $item['id'] ?? ( $index + 1 ),
+					'subTitle'                  => wp_kses_post( (string) ( $item['subTitle'] ?? '' ) ),
+					'title'                     => wp_kses_post( (string) ( $item['title'] ?? '' ) ),
+					'description'               => wp_kses_post( (string) ( $item['description'] ?? '' ) ),
+					'primaryButtonText'         => wp_kses_post( (string) ( $item['primaryButtonText'] ?? '' ) ),
+					'primaryButtonLink'         => esc_url_raw( (string) ( $item['primaryButtonLink'] ?? '' ) ),
+					'primaryButtonTargetLink'   => self::base_flag( $item, 'primaryButtonTargetLink', true ),
+					'primaryButtonNofollow'     => self::base_flag( $item, 'primaryButtonNofollow', false ),
+					'primaryButtonSponsored'    => self::base_flag( $item, 'primaryButtonSponsored', false ),
+					'secondaryButtonSwitcher'   => self::base_flag( $item, 'secondaryButtonSwitcher', false ),
+					'secondaryButtonText'       => wp_kses_post( (string) ( $item['secondaryButtonText'] ?? '' ) ),
+					'secondaryButtonLink'       => esc_url_raw( (string) ( $item['secondaryButtonLink'] ?? '' ) ),
+					'secondaryButtonTargetLink' => self::base_flag( $item, 'secondaryButtonTargetLink', true ),
+					'secondaryButtonNofollow'   => self::base_flag( $item, 'secondaryButtonNofollow', false ),
+					'secondaryButtonSponsored'  => self::base_flag( $item, 'secondaryButtonSponsored', false ),
+				];
+			}
+
+			return $slides;
+		}
+
+		/**
+		 * Reads a base-slide button flag without turning it into a string.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @param array  $item    Slide item.
+		 * @param string $key     Attribute key.
+		 * @param bool   $default Value used when the editor omitted the key.
+		 * @return bool Boolean flag.
+		 */
+		private static function base_flag( array $item, string $key, bool $default ): bool {
+			if ( ! array_key_exists( $key, $item ) ) {
+				return $default;
+			}
+
+			return (bool) $item[ $key ];
 		}
 
 		/**
