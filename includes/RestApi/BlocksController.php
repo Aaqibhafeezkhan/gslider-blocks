@@ -120,7 +120,7 @@ if ( ! class_exists( 'BlocksController' ) ) {
 				'gslider_blocks',
 				[
 					'get_callback' => [ $this, 'get_gslider_blocks_field' ],
-					'schema'       => [ $this, 'get_gslider_blocks_schema' ],
+					'schema'       => $this->get_gslider_blocks_schema(),
 				]
 			);
 		}
