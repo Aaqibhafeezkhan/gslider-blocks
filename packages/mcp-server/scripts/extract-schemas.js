@@ -106,6 +106,36 @@ async function extractConstants() {
   };
 }
 
+async function resolveSlideSchema(slug, rawAttrs, slideFields) {
+  if (slug !== 'flexi-content') {
+    const slideField = slideFields[slug];
+    const slideAttr = rawAttrs[slideField];
+    return {
+      slideField,
+      slideItemSchema: slideAttr?.items || slideAttr?.default?.[0] || {},
+    };
+  }
+
+  const child = await extractBlockJson('flexi-content-item');
+  const name = child.name;
+  const parent = Array.isArray(child.parent) ? child.parent : [];
+  if (name !== 'gslider-blocks/flexi-content-item' || !parent.includes('gslider-blocks/flexi-content')) {
+    throw new Error(
+      'flexi-content slides must be the child block gslider-blocks/flexi-content-item'
+    );
+  }
+
+  return {
+    slideField: name,
+    slideItemSchema: {
+      type: 'childBlock',
+      name,
+      parent,
+      content: 'nested blocks',
+    },
+  };
+}
+
 async function generate() {
   const constants = await extractConstants();
 
@@ -114,7 +144,6 @@ async function generate() {
     'logo-carousel': 'logos',
     'testimonial': 'sliderItems',
     'base': 'sliderItems',
-    'flexi-content': 'innerBlocks'
   };
 
   const srcSchemasDir = path.resolve(__dirname, '../src/core/schemas');
@@ -137,9 +166,7 @@ async function generate() {
       allowedEffects.sliderType = constants.sliderTypes;
     }
 
-    const slideField = slideFields[slug];
-    const slideAttr = rawAttrs[slideField];
-    const slideItemSchema = slideAttr?.items || slideAttr?.default?.[0] || {};
+    const { slideField, slideItemSchema } = await resolveSlideSchema(slug, rawAttrs, slideFields);
 
     const blockData = {
       slug,

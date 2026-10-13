@@ -38,6 +38,37 @@ async function extractBlockAttributes(slug) {
   return mod.exports.default || mod.exports;
 }
 
+export function isEmptySlideItemSchema(schema) {
+  if (schema == null) return true;
+  if (typeof schema === 'string') return schema.trim() === '';
+  if (Array.isArray(schema)) return schema.length === 0;
+  if (typeof schema === 'object') return Object.keys(schema).length === 0;
+  return false;
+}
+
+export function slideSchemaProblems(slug, block) {
+  const problems = [];
+  if (block?.slideField === 'innerBlocks') {
+    problems.push(`"${slug}" slideField is "innerBlocks"`);
+  }
+  if (isEmptySlideItemSchema(block?.slideItemSchema)) {
+    problems.push(`"${slug}" slideItemSchema is empty`);
+  }
+  if (slug === 'flexi-content') {
+    const described = JSON.stringify(block?.slideItemSchema ?? null);
+    if (!described.includes('gslider-blocks/flexi-content-item')) {
+      problems.push(`"${slug}" slideItemSchema does not name gslider-blocks/flexi-content-item`);
+    }
+    if (!described.includes('nested blocks')) {
+      problems.push(`"${slug}" slideItemSchema does not say its content is nested blocks`);
+    }
+    if (Object.prototype.hasOwnProperty.call(block?.attributes || {}, 'innerBlocks')) {
+      problems.push(`"${slug}" attributes include "innerBlocks"`);
+    }
+  }
+  return problems;
+}
+
 async function runDriftCheck() {
   const schemasDir = path.resolve(__dirname, '../src/core/schemas');
   let hasDrift = false;
@@ -51,6 +82,11 @@ async function runDriftCheck() {
     }
 
     const cachedBlock = JSON.parse(fs.readFileSync(schemaFile, 'utf8'));
+    for (const problem of slideSchemaProblems(slug, cachedBlock)) {
+      console.error(`FAIL: ${problem}.`);
+      hasDrift = true;
+    }
+
     const liveAttrs = await extractBlockAttributes(slug);
 
     const liveKeys = Object.keys(liveAttrs);

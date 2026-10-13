@@ -4,7 +4,7 @@
   "title": "Flexi Content",
   "description": "Display any content seamlessly in slide or carousel modes.",
   "category": "gslider-blocks",
-  "slideField": "innerBlocks",
+  "slideField": "gslider-blocks/flexi-content-item",
   "presets": [],
   "allowedEffects": {
     "carouselEffect": [
@@ -24,7 +24,14 @@
     ]
   },
   "totalAttributes": 259,
-  "slideItemSchema": {},
+  "slideItemSchema": {
+    "type": "childBlock",
+    "name": "gslider-blocks/flexi-content-item",
+    "parent": [
+      "gslider-blocks/flexi-content"
+    ],
+    "content": "nested blocks"
+  },
   "attributes": {
     "blockId": {
       "type": "string",
