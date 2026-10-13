@@ -1,5 +1,4 @@
 import { useBlockProps, InnerBlocks, useInnerBlocksProps } from '@wordpress/block-editor'; 
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import attributes from './attributes';
 
