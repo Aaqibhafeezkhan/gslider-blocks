@@ -28,6 +28,15 @@ if ( ! class_exists( 'BlockParser' ) ) {
 	class BlockParser {
 
 		/**
+		 * Reusable block IDs currently being expanded, to avoid a ref cycle.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @var array<int, bool>
+		 */
+		private static $reusable_refs = [];
+
+		/**
 		 * Parses all GSlider blocks from a post's content.
 		 *
 		 * @since 1.1.9
@@ -54,7 +63,8 @@ if ( ! class_exists( 'BlockParser' ) ) {
 				return [];
 			}
 
-			$raw_blocks = parse_blocks( $content );
+			self::$reusable_refs = [];
+			$raw_blocks          = parse_blocks( $content );
 			return self::extract_and_normalize_blocks( $raw_blocks );
 		}
 
@@ -76,6 +86,14 @@ if ( ! class_exists( 'BlockParser' ) ) {
 					continue;
 				}
 
+				if ( 'core/block' === $block['blockName'] ) {
+					$reusable_sliders = self::sliders_from_reusable_block( $block );
+					if ( ! empty( $reusable_sliders ) ) {
+						$sliders = array_merge( $sliders, $reusable_sliders );
+					}
+					continue;
+				}
+
 				// Only process top-level GSlider parent blocks (flexi-content-item is handled as a child slide).
 				if ( 0 === strpos( $block['blockName'], 'gslider-blocks/' ) && 'gslider-blocks/flexi-content-item' !== $block['blockName'] ) {
 					$sliders[] = self::normalize_block( $block );
@@ -93,6 +111,35 @@ if ( ! class_exists( 'BlockParser' ) ) {
 				}
 			}
 
+			return $sliders;
+		}
+
+		/**
+		 * Loads sliders stored inside a core/block reusable reference.
+		 *
+		 * The ref's own inner blocks are empty. The slider markup lives on
+		 * the wp_block post.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @param array $block Parsed core/block.
+		 * @return array Normalized sliders from the referenced content.
+		 */
+		private static function sliders_from_reusable_block( array $block ): array {
+			$ref = isset( $block['attrs']['ref'] ) ? (int) $block['attrs']['ref'] : 0;
+			if ( $ref < 1 || ! empty( self::$reusable_refs[ $ref ] ) || ! function_exists( 'get_post' ) ) {
+				return [];
+			}
+
+			self::$reusable_refs[ $ref ] = true;
+			$reusable                     = get_post( $ref );
+			$sliders                      = [];
+
+			if ( $reusable instanceof \WP_Post && 'wp_block' === $reusable->post_type && is_string( $reusable->post_content ) && '' !== $reusable->post_content ) {
+				$sliders = self::extract_and_normalize_blocks( parse_blocks( $reusable->post_content ) );
+			}
+
+			unset( self::$reusable_refs[ $ref ] );
 			return $sliders;
 		}
 
