@@ -11,6 +11,7 @@
 
 namespace GSlider\Classes;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +28,7 @@ if ( ! class_exists( 'RegistrationCategory' ) ) {
      *
      * @since 1.0.0
      */
-    class RegistrationCategory {
+    class RegistrationCategory implements Registrable {
 
         use SingletonTrait;
 
@@ -47,7 +48,7 @@ if ( ! class_exists( 'RegistrationCategory' ) ) {
          *
          * @return void
          */
-        public function register() {
+        public function register(): void {
             add_filter( 'block_categories_all', [ $this, 'register_category' ], 99999999, 2 );
         }
 

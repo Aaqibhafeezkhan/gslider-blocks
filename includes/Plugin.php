@@ -11,6 +11,7 @@
 
 namespace GSlider;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 use GSlider\Classes\StyleGenerator;
 use GSlider\Assets\FrontendAssets;
@@ -40,6 +41,23 @@ if ( ! class_exists( 'Plugin' ) ) {
 		use SingletonTrait;
 
 		/**
+		 * Core service classes implementing Registrable.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @var array<class-string<Registrable>>
+		 */
+		private $services = [
+			StyleGenerator::class,
+			FrontendAssets::class,
+			AdminAssets::class,
+			RegistrationBlocks::class,
+			RegistrationCategory::class,
+			FontLoader::class,
+			Utils::class,
+		];
+
+		/**
 		 * Sets up core plugin hooks.
 		 *
 		 * Registers the plugins_loaded action for component initialization.
@@ -64,13 +82,9 @@ if ( ! class_exists( 'Plugin' ) ) {
 		 * @return void
 		 */
 		public function plugins_loaded() {
-			StyleGenerator::getInstance()->register();
-			FrontendAssets::getInstance()->register();
-			AdminAssets::getInstance()->register();
-			RegistrationBlocks::getInstance()->register();
-			RegistrationCategory::getInstance()->register();
-			FontLoader::getInstance()->register();
-			Utils::getInstance()->register();
+			foreach ( $this->services as $service_class ) {
+				$service_class::getInstance()->register();
+			}
 
 			// SVG Support (admin only).
 			if ( is_admin() ) {
