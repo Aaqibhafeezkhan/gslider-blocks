@@ -58,7 +58,7 @@ if ( ! class_exists( 'BlocksController' ) ) {
 		protected $rest_base = 'blocks';
 
 		/**
-		 * Registers WordPress hooks for REST API routes.
+		 * Registers WordPress hooks for REST API routes and fields.
 		 *
 		 * @since 1.1.9
 		 *
@@ -66,6 +66,7 @@ if ( ! class_exists( 'BlocksController' ) ) {
 		 */
 		public function register(): void {
 			add_action( 'rest_api_init', [ $this, 'register_routes' ] );
+			add_action( 'rest_api_init', [ $this, 'register_rest_fields' ] );
 		}
 
 		/**
@@ -99,6 +100,79 @@ if ( ! class_exists( 'BlocksController' ) ) {
 					],
 				]
 			);
+		}
+
+		/**
+		 * Registers the gslider_blocks REST field on WordPress core post and page endpoints.
+		 *
+		 * Enables decoupled and headless consumers (e.g. Next.js, Astro) to retrieve
+		 * parsed slider data directly in the standard /wp/v2/posts and /wp/v2/pages responses.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @return void
+		 */
+		public function register_rest_fields(): void {
+			$post_types = apply_filters( 'gslider_rest_field_post_types', [ 'post', 'page' ] );
+
+			register_rest_field(
+				$post_types,
+				'gslider_blocks',
+				[
+					'get_callback' => [ $this, 'get_gslider_blocks_field' ],
+					'schema'       => [ $this, 'get_gslider_blocks_schema' ],
+				]
+			);
+		}
+
+		/**
+		 * Handler for the gslider_blocks REST field.
+		 *
+		 * Extracts and normalizes GSlider blocks for the given post or page.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @param array $post_response Core REST response data for the post.
+		 * @return array Array of normalized GSlider blocks, or empty array if none found.
+		 */
+		public function get_gslider_blocks_field( array $post_response ): array {
+			$post_id = (int) ( $post_response['id'] ?? 0 );
+
+			if ( ! $post_id ) {
+				return [];
+			}
+
+			$blocks = BlockParser::parse_post_blocks( $post_id );
+
+			return is_array( $blocks ) ? $blocks : [];
+		}
+
+		/**
+		 * Retrieves the JSON schema definition for the gslider_blocks field and collection.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @return array JSON schema definition.
+		 */
+		public function get_gslider_blocks_schema(): array {
+			return [
+				'description' => __( 'List of parsed GSlider blocks.', 'gslider-blocks' ),
+				'type'        => 'array',
+				'items'       => [
+					'type'       => 'object',
+					'properties' => [
+						'blockId'      => [ 'type' => 'string' ],
+						'blockName'    => [ 'type' => 'string' ],
+						'sliderType'   => [ 'type' => 'string' ],
+						'totalSlides'  => [ 'type' => 'integer' ],
+						'swiperConfig' => [ 'type' => 'object' ],
+						'css'          => [ 'type' => 'string' ],
+						'slides'       => [ 'type' => 'array' ],
+						'attrs'        => [ 'type' => 'object' ],
+					],
+				],
+				'readonly'    => true,
+			];
 		}
 
 		/**
@@ -206,24 +280,7 @@ if ( ! class_exists( 'BlocksController' ) ) {
 						'type'        => 'integer',
 						'readonly'    => true,
 					],
-					'blocks'        => [
-						'description' => __( 'List of parsed GSlider blocks.', 'gslider-blocks' ),
-						'type'        => 'array',
-						'items'       => [
-							'type'       => 'object',
-							'properties' => [
-								'blockId'      => [ 'type' => 'string' ],
-								'blockName'    => [ 'type' => 'string' ],
-								'sliderType'   => [ 'type' => 'string' ],
-								'totalSlides'  => [ 'type' => 'integer' ],
-								'swiperConfig' => [ 'type' => 'object' ],
-								'css'          => [ 'type' => 'string' ],
-								'slides'       => [ 'type' => 'array' ],
-								'attrs'        => [ 'type' => 'object' ],
-							],
-						],
-						'readonly'    => true,
-					],
+					'blocks'        => $this->get_gslider_blocks_schema(),
 				],
 			];
 
