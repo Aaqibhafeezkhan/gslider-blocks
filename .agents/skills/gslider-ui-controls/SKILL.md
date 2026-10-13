@@ -11,15 +11,22 @@ This skill documents the complete library of **23 reusable React Gutenberg UI co
 
 ---
 
-> [!CAUTION]
-> ### 🛑 STRICT OPEN SOURCE PR REJECTION POLICY
-> **GSlider Blocks maintains a strict, unified Design System.**
-> 1. **ZERO Raw Gutenberg Controls:** Pull Requests introducing raw `@wordpress/components` controls (such as `<RangeControl>`, `<ColorPicker>`, `<FontSizePicker>`, `<ToggleControl>`, `<TextControl>`) directly into Inspector panels **WILL BE REJECTED**.
-> 2. **Mandatory GSlider Components:** Contributors and developers MUST use the corresponding components from `@Components/...` listed below.
-> 3. **Design Consistency:** All inspector panels across all blocks must feel visually consistent, responsive-ready, and cohesive. If a required control does not exist, propose or create a new reusable component in `src/components/` first before using it in blocks.
+> ## 🔒 PROTECTED CORE DIRECTORY: `src/components/` (Maintainer-Only)
+> **The 23 UI controls in `src/components/` form the foundational Design System of GSlider Blocks.**
+> All Gutenberg blocks depend directly on these components. Any uncontrolled edit will break settings across 2,000+ live websites.
+>
+> 1. **Modification Lock:** **NO ONE EXCEPT `@noruzzamans` IS PERMITTED TO EDIT OR ADD CODE TO `src/components/`.**
+> 2. **Automatic Rejection:** Any PR or AI-generated contribution that modifies files in `src/components/` without explicit, prior written approval from `@noruzzamans` **WILL BE AUTOMATICALLY REJECTED**.
+> 3. **Usage Only:** Contributors and AI agents must **USE** these components via `@Components/...`, but must **NEVER ALTER** their internal code.
 
 ---
 
+> [!IMPORTANT]
+> ### 🛑 STRICT DESIGN SYSTEM ENFORCEMENT
+> 1. **ZERO Raw Controls:** Pull Requests introducing raw `@wordpress/components` controls (such as `<RangeControl>`, `<ColorPicker>`, `<FontSizePicker>`, `<ToggleControl>`, `<TextControl>`) directly into Inspector panels **WILL BE REJECTED**.
+> 2. **Mandatory GSlider Components:** Contributors and AI agents MUST use the corresponding components from `@Components/...` cataloged below.
+
+---
 ## 🗂️ The 23 Approved UI Components Catalog
 
 All components are imported using the `@Components/<component-name>` webpack alias.

@@ -37,3 +37,6 @@ build/
 .env
 .editorconfig
 
+# Testing & Cache
+.phpunit.result.cache
+

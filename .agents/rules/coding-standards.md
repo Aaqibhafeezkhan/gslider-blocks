@@ -32,6 +32,7 @@ All code written in the **GSlider Blocks** repository must adhere to the followi
    - Use `@wordpress/block-editor` components (`useBlockProps`, `RichText`, `InspectorControls`).
    - Use `@wordpress/components` ONLY for structural containers (`PanelBody`). NEVER use raw input controls (`RangeControl`, `ColorPicker`, `FontSizePicker`, `ToggleControl`, etc.).
    - **MANDATORY**: All Inspector controls MUST use the 23 approved GSlider Design System components from `@Components/...`. PRs using raw input controls will be rejected.
+   - **LOCKED CORE**: `src/components/` is maintained exclusively by `@noruzzamans`. External PRs modifying `src/components/` will be rejected to protect 2,000+ live sites.
    - Use `@wordpress/i18n` for translations (`__('Label', 'gslider-blocks')`).
 2. **No jQuery Dependency**:
    - Never use jQuery for block interactions or animations.
