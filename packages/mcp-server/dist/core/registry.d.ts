@@ -1,16 +1,3 @@
-/**
- * GSlider Blocks Schema Registry
- *
- * Single Source of Truth (SSoT) defining the metadata, slide structures,
- * Swiper controls, and attribute schemas for all GSlider blocks.
- *
- * Prevents AI hallucinations by providing strict types and allowed options.
- */
-export interface ResponsiveValue<T> {
-    Desktop: T;
-    Tablet: T;
-    Mobile: T;
-}
 export interface BlockSummary {
     slug: string;
     name: string;
@@ -18,22 +5,22 @@ export interface BlockSummary {
     description: string;
     category: string;
     slideField: string;
-    supportedFeatures: string[];
+    totalAttributes: number;
+    presets: string[];
+    allowedEffects: {
+        carouselEffect: string[];
+        slideEffect?: string[];
+        sliderType?: string[];
+    };
 }
 export interface BlockDetail extends BlockSummary {
-    supportedEffects: string[];
-    presets?: string[];
     slideItemSchema: Record<string, unknown>;
-    defaultSwiperConfig: {
-        columns: ResponsiveValue<number>;
-        gap: ResponsiveValue<number>;
-        speed: ResponsiveValue<number>;
-        autoplay: boolean;
-        autoplayDelay: ResponsiveValue<number>;
-        infiniteLoop: boolean;
-        effect: string;
-    };
-    sampleSlide: Record<string, unknown>;
+    attributes: Record<string, {
+        type: string;
+        default?: unknown;
+        items?: Record<string, unknown>;
+        properties?: Record<string, unknown>;
+    }>;
 }
 export declare const BLOCKS_REGISTRY: Record<string, BlockDetail>;
 /**
@@ -41,7 +28,8 @@ export declare const BLOCKS_REGISTRY: Record<string, BlockDetail>;
  */
 export declare function listBlocks(): BlockSummary[];
 /**
- * Returns the comprehensive schema and default settings for a given block slug.
+ * Returns the comprehensive schema, real defaults, and full attribute dictionary
+ * for a given block slug directly from GSlider source definitions.
  */
 export declare function getBlockSchema(slug: string): BlockDetail;
 /**

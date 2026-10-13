@@ -9,6 +9,8 @@ export const listBlocksToolDefinition = {
 };
 /**
  * Handles the list_gslider_blocks MCP tool request.
+ *
+ * Returns raw blocks array directly without wrapper noise.
  */
 export async function handleListBlocks() {
     const blocks = listBlocks();
@@ -16,11 +18,7 @@ export async function handleListBlocks() {
         content: [
             {
                 type: 'text',
-                text: JSON.stringify({
-                    status: 'success',
-                    totalBlocks: blocks.length,
-                    blocks,
-                }, null, 2),
+                text: JSON.stringify(blocks, null, 2),
             },
         ],
     };

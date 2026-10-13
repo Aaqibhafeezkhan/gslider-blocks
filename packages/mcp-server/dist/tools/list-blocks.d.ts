@@ -8,6 +8,8 @@ export declare const listBlocksToolDefinition: {
 };
 /**
  * Handles the list_gslider_blocks MCP tool request.
+ *
+ * Returns raw blocks array directly without wrapper noise.
  */
 export declare function handleListBlocks(): Promise<{
     content: {

@@ -1,8 +1,8 @@
 /**
  * Curated GSlider Design Templates & Presets
  *
- * Exposes production-ready slider configurations as read-only MCP resources
- * so AI agents can inspect and reuse proven layout patterns.
+ * Exposes production-ready slider configurations matching real GSlider
+ * block attributes and responsive `{ Desktop, Tablet, Mobile }` shapes.
  */
 
 export interface SliderTemplate {
@@ -18,12 +18,12 @@ export const SLIDER_TEMPLATES: SliderTemplate[] = [
   {
     uri: 'gslider://templates/hero-slider',
     name: 'Full-Width Hero Slider',
-    description: 'High-impact full-width slider with fade transitions, auto-play, navigation arrows, and bullet pagination.',
+    description: 'High-impact full-width slider with responsive layout, auto-play, navigation arrows, and bullet pagination.',
     mimeType: 'application/json',
     blockSlug: 'image-slider',
     data: {
       blockType: 'image-slider',
-      slides: [
+      images: [
         {
           id: 1,
           url: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=1600&auto=format&fit=crop&q=80',
@@ -39,74 +39,73 @@ export const SLIDER_TEMPLATES: SliderTemplate[] = [
           link: '#explore',
         },
       ],
-      layout: {
-        columns: { Desktop: 1, Tablet: 1, Mobile: 1 },
-        gap: { Desktop: 0, Tablet: 0, Mobile: 0 },
-        speed: 900,
-        autoplay: true,
-        autoplayDelay: 4500,
-        effect: 'fade',
-        navigation: true,
-        pagination: true,
-        infiniteLoop: true,
-      },
+      carouselPerColumn: { Desktop: 1, Tablet: 1, Mobile: 1 },
+      carouselPerColumnGap: { Desktop: 0, Tablet: 0, Mobile: 0 },
+      carouselEffect: 'slide',
+      speed: { Desktop: 800, Tablet: 800, Mobile: 800 },
+      autoplay: true,
+      autoplayDelay: { Desktop: 4000, Tablet: 4000, Mobile: 4000 },
+      infiniteLoop: true,
+      showNavigation: { Desktop: true, Tablet: true, Mobile: true },
+      showPagination: { Desktop: true, Tablet: true, Mobile: true },
+      paginationType: 'bullets',
     },
   },
 
   {
     uri: 'gslider://templates/product-carousel',
     name: 'E-commerce Product Showcase Carousel',
-    description: 'Responsive 3-column card carousel with smooth sliding and hover pause.',
+    description: 'Responsive 3-column card carousel with space between items and navigation controls.',
     mimeType: 'application/json',
     blockSlug: 'image-slider',
     data: {
       blockType: 'image-slider',
-      slides: [
+      images: [
         {
           id: 11,
           url: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80',
           alt: 'Wireless Headphones',
-          caption: 'Studio Headphones - $299',
+          caption: 'Studio Headphones',
           link: '#shop',
         },
         {
           id: 12,
           url: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80',
           alt: 'Minimalist Watch',
-          caption: 'Chronograph Classic - $189',
+          caption: 'Chronograph Classic',
           link: '#shop',
         },
         {
           id: 13,
           url: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&auto=format&fit=crop&q=80',
           alt: 'Smart Watch',
-          caption: 'Smart Band Series - $149',
+          caption: 'Smart Band Series',
           link: '#shop',
         },
       ],
-      layout: {
-        columns: { Desktop: 3, Tablet: 2, Mobile: 1 },
-        gap: { Desktop: 24, Tablet: 16, Mobile: 12 },
-        speed: 700,
-        autoplay: false,
-        effect: 'slide',
-        navigation: true,
-        pagination: true,
-        infiniteLoop: true,
-      },
+      carouselPerColumn: { Desktop: 3, Tablet: 2, Mobile: 1 },
+      carouselPerColumnGap: { Desktop: 20, Tablet: 15, Mobile: 10 },
+      carouselEffect: 'slide',
+      speed: { Desktop: 700, Tablet: 700, Mobile: 700 },
+      autoplay: false,
+      autoplayDelay: { Desktop: 1000, Tablet: 1000, Mobile: 1000 },
+      infiniteLoop: true,
+      showNavigation: { Desktop: true, Tablet: true, Mobile: true },
+      showPagination: { Desktop: true, Tablet: true, Mobile: false },
+      paginationType: 'bullets',
     },
   },
 
   {
     uri: 'gslider://templates/testimonial-cards',
     name: 'Social Proof Testimonial Cards',
-    description: 'Two-column client review cards with 5-star ratings, reviewer designations, and avatar photos.',
+    description: 'Two-column client review cards using preset-classic with 5-star ratings and reviewer details.',
     mimeType: 'application/json',
     blockSlug: 'testimonial',
     data: {
       blockType: 'testimonial',
-      presetStyle: 'preset-card',
-      slides: [
+      presetStyle: 'preset-classic',
+      sliderItems: [
         {
           id: 'item-1',
           testimonialTitle: 'Game changer for our agency',
@@ -132,45 +131,43 @@ export const SLIDER_TEMPLATES: SliderTemplate[] = [
           ratingNumber: 5,
         },
       ],
-      layout: {
-        columns: { Desktop: 2, Tablet: 2, Mobile: 1 },
-        gap: { Desktop: 24, Tablet: 16, Mobile: 12 },
-        speed: 800,
-        autoplay: false,
-        effect: 'slide',
-        navigation: true,
-        pagination: true,
-        infiniteLoop: true,
-      },
+      sliderType: 'carousel',
+      carouselPerColumn: { Desktop: 2, Tablet: 2, Mobile: 1 },
+      carouselPerColumnGap: { Desktop: 20, Tablet: 20, Mobile: 0 },
+      carouselEffect: 'slide',
+      speed: { Desktop: 800, Tablet: 800, Mobile: 800 },
+      autoplay: false,
+      autoplayDelay: { Desktop: 1000, Tablet: 1000, Mobile: 1000 },
+      infiniteLoop: true,
+      showNavigation: { Desktop: true, Tablet: true, Mobile: true },
+      showPagination: { Desktop: true, Tablet: true, Mobile: true },
+      paginationType: 'bullets',
     },
   },
 
   {
     uri: 'gslider://templates/brand-logos',
-    name: 'Continuous Brand Logo Ticker',
-    description: 'Seamless continuous scrolling logo carousel for trusted brands and client showcases.',
+    name: 'Partner Brand Logo Carousel',
+    description: 'Smooth scrolling logo carousel for trusted brands and client showcases.',
     mimeType: 'application/json',
     blockSlug: 'logo-carousel',
     data: {
       blockType: 'logo-carousel',
-      slides: [
-        { id: 101, url: 'https://dummyimage.com/200x80/222/fff.png&text=Google', alt: 'Google' },
-        { id: 102, url: 'https://dummyimage.com/200x80/222/fff.png&text=Stripe', alt: 'Stripe' },
-        { id: 103, url: 'https://dummyimage.com/200x80/222/fff.png&text=Vercel', alt: 'Vercel' },
-        { id: 104, url: 'https://dummyimage.com/200x80/222/fff.png&text=Automattic', alt: 'Automattic' },
-        { id: 105, url: 'https://dummyimage.com/200x80/222/fff.png&text=GitHub', alt: 'GitHub' },
+      logos: [
+        { id: 101, url: 'https://dummyimage.com/200x80/222/fff.png&text=Google', alt: 'Google', link: '#' },
+        { id: 102, url: 'https://dummyimage.com/200x80/222/fff.png&text=Stripe', alt: 'Stripe', link: '#' },
+        { id: 103, url: 'https://dummyimage.com/200x80/222/fff.png&text=Vercel', alt: 'Vercel', link: '#' },
+        { id: 104, url: 'https://dummyimage.com/200x80/222/fff.png&text=Automattic', alt: 'Automattic', link: '#' },
       ],
-      layout: {
-        columns: { Desktop: 5, Tablet: 3, Mobile: 2 },
-        gap: { Desktop: 32, Tablet: 20, Mobile: 16 },
-        speed: 600,
-        autoplay: true,
-        autoplayDelay: 2000,
-        effect: 'slide',
-        navigation: false,
-        pagination: false,
-        infiniteLoop: true,
-      },
+      carouselPerColumn: { Desktop: 2, Tablet: 2, Mobile: 1 },
+      carouselPerColumnGap: { Desktop: 10, Tablet: 10, Mobile: 10 },
+      carouselEffect: 'slide',
+      speed: { Desktop: 800, Tablet: 800, Mobile: 800 },
+      autoplay: false,
+      autoplayDelay: { Desktop: 1000, Tablet: 1000, Mobile: 1000 },
+      infiniteLoop: true,
+      showNavigation: { Desktop: true, Tablet: true, Mobile: true },
+      showPagination: { Desktop: false, Tablet: false, Mobile: false },
     },
   },
 ];

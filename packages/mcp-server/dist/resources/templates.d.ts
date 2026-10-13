@@ -1,8 +1,8 @@
 /**
  * Curated GSlider Design Templates & Presets
  *
- * Exposes production-ready slider configurations as read-only MCP resources
- * so AI agents can inspect and reuse proven layout patterns.
+ * Exposes production-ready slider configurations matching real GSlider
+ * block attributes and responsive `{ Desktop, Tablet, Mobile }` shapes.
  */
 export interface SliderTemplate {
     uri: string;

@@ -8,7 +8,7 @@ export const getBlockSchemaInputZod = z.object({
 });
 export const getBlockSchemaToolDefinition = {
     name: 'get_block_schema',
-    description: 'Retrieves the complete attribute schema, slide structure, default Swiper configuration, and allowed options for a specific GSlider block.',
+    description: 'Retrieves the complete attribute schema, real defaults, slide structure, and allowed options for a specific GSlider block.',
     inputSchema: {
         type: 'object',
         properties: {
@@ -23,26 +23,46 @@ export const getBlockSchemaToolDefinition = {
 };
 /**
  * Handles the get_block_schema MCP tool request.
+ *
+ * Returns raw schema payload directly without wrapper noise.
+ * Returns { isError: true } on validation or lookup errors so callers receive clear diagnostics.
  */
 export async function handleGetBlockSchema(args) {
     const parsed = getBlockSchemaInputZod.safeParse(args);
     if (!parsed.success) {
         const errorMsg = parsed.error.errors.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ');
-        throw new Error(`Invalid arguments for get_block_schema: ${errorMsg}`);
+        return {
+            isError: true,
+            content: [
+                {
+                    type: 'text',
+                    text: `Invalid arguments for get_block_schema: ${errorMsg}. Valid slugs are: ${validSlugs.join(', ')}`,
+                },
+            ],
+        };
     }
     const { blockSlug } = parsed.data;
-    const schema = getBlockSchema(blockSlug);
-    return {
-        content: [
-            {
-                type: 'text',
-                text: JSON.stringify({
-                    status: 'success',
-                    blockSlug,
-                    schema,
-                }, null, 2),
-            },
-        ],
-    };
+    try {
+        const schema = getBlockSchema(blockSlug);
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: JSON.stringify(schema, null, 2),
+                },
+            ],
+        };
+    }
+    catch (error) {
+        return {
+            isError: true,
+            content: [
+                {
+                    type: 'text',
+                    text: error instanceof Error ? error.message : String(error),
+                },
+            ],
+        };
+    }
 }
 //# sourceMappingURL=get-schema.js.map
