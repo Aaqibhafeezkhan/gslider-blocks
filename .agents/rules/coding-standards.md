@@ -30,7 +30,8 @@ All code written in the **GSlider Blocks** repository must adhere to the followi
 1. **WordPress Gutenberg API Standards**:
    - Use React 18+ hooks (`useState`, `useEffect`, `useRef`, `useCallback`, `useMemo`) from `@wordpress/element`.
    - Use `@wordpress/block-editor` components (`useBlockProps`, `RichText`, `InspectorControls`).
-   - Use `@wordpress/components` for core UI elements (`PanelBody`, `RangeControl`, `SelectControl`, `ToggleControl`).
+   - Use `@wordpress/components` ONLY for structural containers (`PanelBody`). NEVER use raw input controls (`RangeControl`, `ColorPicker`, `FontSizePicker`, `ToggleControl`, etc.).
+   - **MANDATORY**: All Inspector controls MUST use the 23 approved GSlider Design System components from `@Components/...`. PRs using raw input controls will be rejected.
    - Use `@wordpress/i18n` for translations (`__('Label', 'gslider-blocks')`).
 2. **No jQuery Dependency**:
    - Never use jQuery for block interactions or animations.
