@@ -11,6 +11,7 @@
 
 namespace GSlider\Classes;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +28,7 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
      *
      * @since 1.0.0
      */
-    class StyleGenerator {
+    class StyleGenerator implements Registrable {
 
         use SingletonTrait;
 
@@ -92,7 +93,7 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
          *
          * @return void
          */
-        public function register() {
+        public function register(): void {
             add_filter( 'render_block', [ $this, 'collect_dynamic_styles' ], 10, 2 );
             add_action( 'wp_footer', [ $this, 'generate_css_file' ], 10 );
             add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_dynamic_styles' ] );

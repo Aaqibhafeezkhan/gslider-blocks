@@ -11,6 +11,7 @@
 
 namespace GSlider\Classes;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +28,7 @@ if ( ! class_exists( 'FontLoader' ) ) {
      *
      * @since 1.0.0
      */
-    class FontLoader {
+    class FontLoader implements Registrable {
 
         use SingletonTrait;
 
@@ -65,7 +66,7 @@ if ( ! class_exists( 'FontLoader' ) ) {
          *
          * @return void
          */
-        public function register() {
+        public function register(): void {
             add_filter( 'render_block', [ $this, 'get_fonts_on_render_block' ], 10, 2 );
             add_action( 'wp_footer', [ $this, 'fonts_loader' ], 10 );
         }

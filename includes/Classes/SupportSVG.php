@@ -11,6 +11,7 @@
 
 namespace GSlider\Classes;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,7 +29,7 @@ if ( ! class_exists( 'SupportSVG' ) ) {
      *
      * @since 1.0.0
      */
-    class SupportSVG {
+    class SupportSVG implements Registrable {
 
         use SingletonTrait;
 
@@ -50,7 +51,7 @@ if ( ! class_exists( 'SupportSVG' ) ) {
          *
          * @return void
          */
-        public function register() {
+        public function register(): void {
             add_filter( 'upload_mimes', [ $this, 'allowSvgMimeType' ] );
             add_filter( 'wp_handle_upload_prefilter', [ $this, 'validateSvgUpload' ] );
             add_filter( 'wp_prepare_attachment_for_js', [ $this, 'fixSvgThumbnail' ] );

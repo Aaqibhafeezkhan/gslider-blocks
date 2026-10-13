@@ -11,6 +11,7 @@
 
 namespace GSlider\Classes;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +28,7 @@ if ( ! class_exists( 'RegistrationBlocks' ) ) {
      *
      * @since 1.0.0
      */
-    class RegistrationBlocks {
+    class RegistrationBlocks implements Registrable {
         use SingletonTrait;
 
         /**
@@ -37,7 +38,7 @@ if ( ! class_exists( 'RegistrationBlocks' ) ) {
          *
          * @return void
          */
-        public function register() {
+        public function register(): void {
             add_action( 'init', [ $this, 'register_blocks' ] );
         }
 

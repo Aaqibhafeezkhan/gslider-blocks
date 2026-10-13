@@ -11,6 +11,7 @@
 
 namespace GSlider\Assets;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class FrontendAssets {
+class FrontendAssets implements Registrable {
     use SingletonTrait;
 
     /**
@@ -35,7 +36,7 @@ class FrontendAssets {
      *
      * @return void
      */
-    public function register() {
+    public function register(): void {
         add_action( 'enqueue_block_assets', [ $this, 'enqueue_assets' ] );
     }
 

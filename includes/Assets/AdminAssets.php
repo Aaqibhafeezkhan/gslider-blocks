@@ -11,6 +11,7 @@
 
 namespace GSlider\Assets;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class AdminAssets {
+class AdminAssets implements Registrable {
     use SingletonTrait;
 
     /**
@@ -35,7 +36,7 @@ class AdminAssets {
      *
      * @return void
      */
-    public function register() {
+    public function register(): void {
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
         add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
     }
