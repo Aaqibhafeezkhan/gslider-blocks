@@ -107,7 +107,7 @@ export default function Save({ attributes }) {
             768: {
                 ...(sliderType === 'carousel' && {
                     slidesPerView: carouselPerColumn?.Tablet || 2,
-                    spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                    spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
                 }),
                 speed: speed?.Tablet || 800,
                 autoplay: autoplay
@@ -121,7 +121,7 @@ export default function Save({ attributes }) {
             1025: {
                 ...(sliderType === 'carousel' && {
                     slidesPerView: carouselPerColumn?.Desktop || 2,
-                    spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                    spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
                 }),
                 speed: speed?.Desktop || 800,
                 autoplay: autoplay

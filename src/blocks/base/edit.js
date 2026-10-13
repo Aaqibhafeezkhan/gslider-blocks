@@ -153,11 +153,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     },
                     768: {
                         slidesPerView: carouselPerColumn?.[deviceType] || 2,
-                        spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+                        spaceBetween: carouselPerColumnGap?.[deviceType] ?? 20,
                     },
                     1025: {
                         slidesPerView: carouselPerColumn?.[deviceType] || 2,
-                        spaceBetween: carouselPerColumnGap?.[deviceType] || 20,
+                        spaceBetween: carouselPerColumnGap?.[deviceType] ?? 20,
                     },
                 },
             }),
