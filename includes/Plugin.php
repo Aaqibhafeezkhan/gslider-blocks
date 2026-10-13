@@ -21,6 +21,7 @@ use GSlider\Classes\RegistrationCategory;
 use GSlider\Classes\FontLoader;
 use GSlider\Classes\SupportSVG;
 use GSlider\Utils\Utils;
+use GSlider\RestApi\BlocksController;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -55,6 +56,7 @@ if ( ! class_exists( 'Plugin' ) ) {
 			RegistrationCategory::class,
 			FontLoader::class,
 			Utils::class,
+			BlocksController::class,
 		];
 
 		/**
