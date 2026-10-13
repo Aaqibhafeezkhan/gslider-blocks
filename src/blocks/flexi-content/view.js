@@ -48,6 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         };
                     }
 
+                    if (settings.navigation && typeof settings.navigation === 'object') {
+                        const nextEl = sliderContainer.querySelector('.swiper-button-next');
+                        const prevEl = sliderContainer.querySelector('.swiper-button-prev');
+                        if (nextEl) {
+                            settings.navigation.nextEl = nextEl;
+                        }
+                        if (prevEl) {
+                            settings.navigation.prevEl = prevEl;
+                        }
+                    }
+
                     // Initialize Swiper with parsed settings
                     new Swiper(sliderContainer.querySelector('.swiper'), settings);
                 }
