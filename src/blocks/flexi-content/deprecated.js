@@ -78,7 +78,7 @@ const v1_0_7 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -88,7 +88,7 @@ const v1_0_7 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -302,7 +302,7 @@ const v1_0_8 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -314,7 +314,7 @@ const v1_0_8 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -528,7 +528,7 @@ const v1_0_9 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -540,7 +540,7 @@ const v1_0_9 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -754,7 +754,7 @@ const v1_0_10 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -766,7 +766,7 @@ const v1_0_10 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -980,7 +980,7 @@ const v1_1_1 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -992,7 +992,7 @@ const v1_1_1 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -1207,7 +1207,7 @@ const v1_1_2 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -1219,7 +1219,7 @@ const v1_1_2 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
@@ -1440,7 +1440,7 @@ const v1_1_5 = {
                 768: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
+                        spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
                     }),
                     speed: speed?.Tablet || 800,
                     autoplay: autoplay ? {
@@ -1452,7 +1452,7 @@ const v1_1_5 = {
                 1025: {
                     ...(sliderType === 'carousel' && {
                         slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                        spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
                     }),
                     speed: speed?.Desktop || 800,
                     autoplay: autoplay ? {
