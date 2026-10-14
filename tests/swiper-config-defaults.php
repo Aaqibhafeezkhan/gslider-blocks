@@ -92,6 +92,17 @@ $logo = config_for( 'gslider-blocks/logo-carousel', [] );
 assert_true( 1.0 === $logo['breakpoints'][0]['slidesPerView'] && 2.0 === $logo['breakpoints'][768]['slidesPerView'] && 2.0 === $logo['breakpoints'][1025]['slidesPerView'], 'omitted logo columns are 2/2/1' );
 assert_true( 10 === $logo['breakpoints'][0]['spaceBetween'] && 10 === $logo['breakpoints'][768]['spaceBetween'] && 10 === $logo['breakpoints'][1025]['spaceBetween'], 'omitted logo gap is 10/10/10' );
 
+foreach ( [ 'base', 'testimonial', 'flexi-content', 'image-slider', 'logo-carousel' ] as $slug ) {
+	$name     = 'gslider-blocks/' . $slug;
+	$defaults = BlockParser::attribute_defaults( $name );
+	assert_true( ! empty( $defaults['carouselPerColumn'] ) && ! empty( $defaults['speed'] ), "{$name} generated defaults include the Swiper attributes" );
+	assert_true( config_for( $name, [] ) === config_for( $name, $defaults ), "{$name} omitted Swiper attrs use the generated defaults" );
+}
+
+$adapt = config_for( 'gslider-blocks/testimonial', [ 'layoutHeightSwitcher' => 'adapt' ] );
+assert_true( true === $adapt['autoHeight'], 'layoutHeightSwitcher adapt sets autoHeight' );
+assert_true( ! isset( config_for( 'gslider-blocks/testimonial', [] )['autoHeight'] ), 'omitted layoutHeightSwitcher uses fixed height' );
+
 $fade = config_for( 'gslider-blocks/base', [ 'slideEffect' => 'fade' ] );
 assert_true( 'fade' === $fade['effect'], 'omitted sliderType with slideEffect fade reports fade' );
 assert_true( ! isset( $fade['creativeEffect'] ), 'fade does not add creativeEffect' );
