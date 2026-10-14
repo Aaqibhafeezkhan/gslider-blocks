@@ -1,0 +1,67 @@
+name: CI & Quality Assurance
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  block-build-and-mcp:
+    name: Block Build & MCP Drift Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (v20)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Plugin Dependencies
+        run: npm ci
+
+      - name: Verify Webpack Block Build
+        run: npm run build
+
+      - name: Install MCP Server Dependencies
+        run: npm --prefix packages/mcp-server ci
+
+      - name: Run MCP Schema Drift Test
+        run: npm --prefix packages/mcp-server test
+
+      - name: Verify Distribution Zip Archive
+        run: npm run zip
+
+  php-compatibility:
+    name: PHP Tests (PHP ${{ matrix.php-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['7.4', '8.0', '8.1', '8.2', '8.3']
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: dom, json, libxml, mbstring
+          coverage: none
+
+      - name: Run Test Suites
+        run: |
+          for test in tests/*.php; do
+            echo "Running $test on PHP ${{ matrix.php-version }}..."
+            php "$test"
+          done
