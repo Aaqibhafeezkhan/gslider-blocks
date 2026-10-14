@@ -352,6 +352,9 @@ Contributions from both human engineers and AI assistants are welcome! Please re
 - 📜 **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)**: Contributor Covenant v2.1.
 - 🛡️ **[SECURITY.md](SECURITY.md)**: Vulnerability disclosure policy and security protections.
 
+> [!IMPORTANT]
+> **Issue-First Policy:** GSlider Blocks strictly requires all pull requests to resolve an approved [GitHub Issue](https://github.com/noruzzamans/gslider-blocks/issues) using `Closes #<issue_number>`. Unsolicited PRs submitted without an issue will be closed.
+
 > [!CAUTION]
 > **Component Lock Policy:** `src/components/` contains 23 core UI controls and is strictly locked to `@noruzzamans`. PRs modifying `src/components/` without maintainer authorization will be automatically rejected.
 

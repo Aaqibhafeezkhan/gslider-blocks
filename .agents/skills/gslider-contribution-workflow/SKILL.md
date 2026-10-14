@@ -51,15 +51,25 @@ All PR titles must strictly follow the **Conventional Commits** specification:
 
 ---
 
-## 📝 2. Pull Request Description Standard
+## 🎯 2. Issue-First Policy (Zero Orphan PRs)
 
 > [!IMPORTANT]
-> **Mandatory Issue Linking (`Closes #<issue_number>`):**
-> Every PR description **MUST** start with `Closes #<issue_number>` on the very first line. This ensures GitHub automatically links the PR to the issue and closes it upon merge. Never omit this line.
+> **No Pull Request without an approved issue:**
+> GSlider Blocks strictly enforces an **Issue-First Policy**. Every pull request **MUST** link to an open, approved GitHub Issue. Unsolicited or "orphan" PRs submitted without an existing issue will be rejected and closed.
+>
+> **Workflow:**
+> 1. Open an Issue first (or be assigned to an existing issue).
+> 2. Agree on the technical approach.
+> 3. Open the PR linking to that issue using `Closes #<issue_number>`.
+
+---
+
+## 📝 3. Pull Request Description Standard
 
 Every PR must strictly follow `.github/PULL_REQUEST_TEMPLATE.md`:
 
 ```markdown
+### 🔗 Related Issue
 Closes #<issue_number>
 
 ### Changes proposed in this Pull Request:
@@ -80,7 +90,7 @@ Closes #<issue_number>
 
 ---
 
-## 🤖 3. Use of AI Policy (AI-Assisted Contributions)
+## 🤖 4. Use of AI Policy (AI-Assisted Contributions)
 
 GSlider Blocks welcomes modern AI tooling (Cursor, Claude, Copilot, Antigravity) to accelerate development, subject to non-negotiable enterprise quality standards:
 

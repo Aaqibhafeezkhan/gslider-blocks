@@ -115,8 +115,23 @@ All commits and pull requests must follow [Conventional Commits](https://www.con
   - `fix(swiper): prevent layout jump before slide initialization`
   - `docs(contributing): update AI policy and component lock`
 
+---
+
+## 🎯 Issue-First Policy (No Orphan PRs)
+
 > [!IMPORTANT]
-> **Mandatory PR Description Rule:** Every pull request description **MUST** start with `Closes #<issue_number>` (e.g. `Closes #35`). This ensures GitHub automatically links and closes resolved issues upon merge.
+> **No Pull Request will be accepted without an approved issue.**  
+> GSlider Blocks strictly enforces an **Issue-First Policy**. Unsolicited or "orphan" pull requests submitted without a corresponding, open GitHub issue will be closed automatically.
+>
+> **The 3-Step Contribution Flow:**
+> 1. **Open an Issue First:** Report the bug or propose your feature via [GitHub Issues](https://github.com/noruzzamans/gslider-blocks/issues) before writing code.
+> 2. **Discuss & Get Triage:** Discuss the implementation approach with the maintainer and get assigned.
+> 3. **Submit PR with Issue Link:** Reference the approved issue in your PR description:
+>    ```markdown
+>    ### 🔗 Related Issue
+>    Closes #<issue_number>
+>    ```
+>    This ensures GitHub automatically links and closes the resolved issue upon merge.
 
 ---
 

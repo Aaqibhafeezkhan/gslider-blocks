@@ -172,7 +172,7 @@ Before opening a pull request, every contributor (human or AI) must verify:
 | **6** | **Security** | Are all PHP inputs sanitized (`sanitize_text_field`) and outputs escaped (`esc_html__`)? |
 | **7** | **Memory Cleanup** | Does your Swiper `useEffect` return `swiper.destroy(true, true)`? |
 | **8** | **Code Standards** | Did you run `npm run lint:js`, `npm run lint:css`, and `npm run build`? |
-| **9** | **PR Description** | Does the PR title follow Conventional Commits and start with `Closes #<issue_number>`? |
+| **9** | **Issue-First PR** | Does the PR link to an approved issue with `Closes #<issue_number>` (Zero Orphan PRs)? |
 
 ---
 
