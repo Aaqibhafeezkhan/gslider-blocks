@@ -11,11 +11,13 @@
 
 namespace GSlider\RestApi;
 
+use GSlider\Utils\CssSanitizer;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'BlockParser' ) ) {
+if ( ! class_exists( BlockParser::class, false ) ) {
 
 	/**
 	 * Parses and normalizes GSlider Gutenberg blocks.
@@ -198,6 +200,10 @@ if ( ! class_exists( 'BlockParser' ) ) {
 
 			$swiper_config = self::extract_swiper_config( $attrs, $block_name );
 			$css           = self::extract_block_styles( $attrs );
+
+			if ( array_key_exists( 'blockStyle', $attrs ) ) {
+				$attrs['blockStyle'] = $css;
+			}
 
 			$data = [
 				'blockId'      => $block_id,
@@ -579,11 +585,11 @@ if ( ! class_exists( 'BlockParser' ) ) {
 		 * @since 1.1.9
 		 *
 		 * @param array $attrs Block attributes.
-		 * @return string CSS stylesheet string.
+		 * @return string Sanitized CSS stylesheet string.
 		 */
 		public static function extract_block_styles( array $attrs ): string {
 			if ( ! empty( $attrs['blockStyle'] ) && is_string( $attrs['blockStyle'] ) ) {
-				return trim( $attrs['blockStyle'] );
+				return CssSanitizer::sanitize( $attrs['blockStyle'] );
 			}
 
 			return '';

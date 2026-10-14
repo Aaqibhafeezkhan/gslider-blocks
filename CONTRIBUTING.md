@@ -21,7 +21,7 @@ Before submitting code, please review our core architectural documents:
 > **NO ONE EXCEPT `@noruzzamans` IS PERMITTED TO EDIT OR ADD FILES TO `src/components/`.**
 > All blocks depend on these 23 foundational components. Any arbitrary edit can break live websites.
 > - **Use only:** You are encouraged to **use** these components via `@Components/...` in blocks.
-> - **Never alter:** PRs modifying `src/components/` without explicit maintainer pre-approval will be **automatically rejected**.
+> - **Never alter:** PRs modifying `src/components/` without explicit maintainer pre-approval will **not be merged**. CI labels them `needs: changes` and posts a warning comment.
 
 ---
 
@@ -125,7 +125,7 @@ All commits and pull requests must follow [Conventional Commits](https://www.con
 
 > [!IMPORTANT]
 > **No Pull Request will be accepted without an approved issue.**  
-> GSlider Blocks strictly enforces an **Issue-First Policy**. Unsolicited or "orphan" pull requests submitted without a corresponding, open GitHub issue will be closed automatically.
+> GSlider Blocks strictly enforces an **Issue-First Policy**. Unsolicited or "orphan" pull requests submitted without a corresponding, open GitHub issue will be closed by the maintainer.
 >
 > **The 3-Step Contribution Flow:**
 > 1. **Open an Issue First:** Report the bug or propose your feature via [GitHub Issues](https://github.com/noruzzamans/gslider-blocks/issues) before writing code.
@@ -153,14 +153,14 @@ We welcome AI-assisted contributions from leading AI coding tools (such as Curso
 
 ## 🛡️ Pull Request Quality Checklist
 
-Before submitting a PR, ensure all checks pass:
+Before submitting a PR, run these checks. The codebase does not pass ESLint or Stylelint yet, so lint only the files you changed and do not add new errors to them:
 
 ```bash
-# 1. Lint JavaScript
-npm run lint:js
+# 1. Lint the JavaScript files you changed
+npx wp-scripts lint-js src/blocks/<block>/<file>.js
 
-# 2. Lint CSS/SCSS
-npm run lint:css
+# 2. Lint the SCSS files you changed
+npx wp-scripts lint-style src/blocks/<block>/<file>.scss
 
 # 3. Production Build
 npm run build

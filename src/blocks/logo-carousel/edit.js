@@ -331,7 +331,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 							value={logos.map((l) => l.id)}
 							onSelect={onSelectGallery}
 							render={({ open }) => (
-								<ToolbarButton icon="edit" label={__('Edit Logos', 'logo-carousel')} onClick={open} />
+								<ToolbarButton icon="edit" label={__('Edit Logos', 'gslider-blocks')} onClick={open} />
 							)}
 						/>
 					</MediaUploadCheck>
@@ -357,8 +357,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 					<MediaPlaceholder
 						icon={<span className="dashicons dashicons-format-gallery" />}
 						labels={{
-							title: __('Upload Clients Logos', 'logo-carousel'),
-							instructions: __('Upload multiple logos directly or from your media library', 'logo-carousel'),
+							title: __('Upload Clients Logos', 'gslider-blocks'),
+							instructions: __('Upload multiple logos directly or from your media library', 'gslider-blocks'),
 						}}
 						onSelect={onSelectFromPlaceholder}
 						accept="image/*"

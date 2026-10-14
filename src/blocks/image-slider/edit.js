@@ -344,7 +344,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 							value={images.map((l) => l.id)}
 							onSelect={onSelectGallery}
 							render={({ open }) => (
-								<ToolbarButton icon="edit" label={__('Edit images', 'gslider')} onClick={open} />
+								<ToolbarButton icon="edit" label={__('Edit images', 'gslider-blocks')} onClick={open} />
 							)}
 						/>
 					</MediaUploadCheck>
@@ -370,8 +370,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 					<MediaPlaceholder
 						icon={<span className="dashicons dashicons-format-gallery" />}
 						labels={{
-							title: __('Upload Clients images', 'gslider'),
-							instructions: __('Upload multiple images directly or from your media library', 'gslider'),
+							title: __('Upload Clients images', 'gslider-blocks'),
+							instructions: __('Upload multiple images directly or from your media library', 'gslider-blocks'),
 						}}
 						onSelect={onSelectFromPlaceholder}
 						accept="image/*"

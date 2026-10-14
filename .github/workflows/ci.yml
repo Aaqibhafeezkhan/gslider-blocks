@@ -32,11 +32,23 @@ jobs:
       - name: Verify Webpack Block Build
         run: npm run build
 
+      # --ignore-scripts keeps `prepare` (the build) from regenerating the
+      # committed schemas before the drift test compares them.
       - name: Install MCP Server Dependencies
-        run: npm --prefix packages/mcp-server ci
+        run: npm --prefix packages/mcp-server ci --ignore-scripts
 
       - name: Run MCP Schema Drift Test
         run: npm --prefix packages/mcp-server test
+
+      - name: Build MCP Server
+        run: npm --prefix packages/mcp-server run build
+
+      - name: Verify Committed MCP Schemas Match a Fresh Extract
+        run: |
+          if ! git diff --exit-code -- packages/mcp-server/src/core/schemas packages/mcp-server/dist/core/schemas; then
+            echo "::error::Committed MCP schemas are out of date. Run \"npm run mcp:build\" and commit packages/mcp-server/src/core/schemas and dist/core/schemas."
+            exit 1
+          fi
 
       - name: Verify Distribution Zip Archive
         run: npm run zip

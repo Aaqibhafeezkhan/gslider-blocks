@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'Utils' ) ) {
+if ( ! class_exists( Utils::class, false ) ) {
 
     /**
      * Provides utility services for the GSlider plugin.
