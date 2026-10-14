@@ -13,6 +13,7 @@ namespace GSlider\Classes;
 
 use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
+use GSlider\Utils\CssSanitizer;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -145,10 +146,8 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
                 $block_id = isset( $block['attrs']['blockId'] ) ?
                     sanitize_key( $block['attrs']['blockId'] ) :
                     'gslider-blocks-' . md5( serialize( $block['attrs'] ) );
-                $raw_style = is_string( $block['attrs']['blockStyle'] ) ? $block['attrs']['blockStyle'] : '';
-                $clean_style = wp_strip_all_tags( $raw_style );
-                $clean_style = preg_replace( '/(<\/?(?:script|style)[^>]*>|javascript:|expression\(|behavior:)/i', '', $clean_style );
-                if ( ! empty( $clean_style ) ) {
+                $clean_style = CssSanitizer::sanitize( $block['attrs']['blockStyle'] );
+                if ( '' !== $clean_style ) {
                     self::$styles[ $block_id ] = $clean_style;
                 }
             }
