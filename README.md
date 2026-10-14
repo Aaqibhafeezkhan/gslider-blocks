@@ -6,482 +6,475 @@
 
 <p align="center">
   <strong>🎠 The Ultimate Gutenberg Carousel Collection</strong><br>
-  10 Powerful Carousel Blocks for WordPress Block Editor
+  High-Performance, React & Swiper.js Powered Slider Blocks for Modern WordPress & Headless Stacks
 </p>
 
 <p align="center">
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/WordPress-5.0+-blue.svg?logo=wordpress" alt="WordPress">
+  <a href="https://github.com/noruzzamans/gslider-blocks/actions/workflows/ci.yml">
+    <img src="https://github.com/noruzzamans/gslider-blocks/actions/workflows/ci.yml/badge.svg" alt="CI Build Status">
+  </a>
+  <a href="https://github.com/noruzzamans/gslider-blocks/releases">
+    <img src="https://img.shields.io/badge/Version-1.1.9-orange.svg" alt="Version">
+  </a>
+  <a href="https://wordpress.org/">
+    <img src="https://img.shields.io/badge/WordPress-6.3+-blue.svg?logo=wordpress" alt="WordPress 6.3+">
   </a>
   <a href="https://php.net/">
-    <img src="https://img.shields.io/badge/PHP-7.0+-purple.svg?logo=php" alt="PHP">
+    <img src="https://img.shields.io/badge/PHP-7.4--8.5-purple.svg?logo=php" alt="PHP 7.4-8.5">
   </a>
   <a href="http://www.gnu.org/licenses/gpl-2.0.html">
-    <img src="https://img.shields.io/badge/License-GPLv2-green.svg" alt="License">
+    <img src="https://img.shields.io/badge/License-GPLv2+-green.svg" alt="License">
   </a>
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/Version-1.1.6-orange.svg" alt="Version">
+  <a href="https://swiperjs.com/">
+    <img src="https://img.shields.io/badge/Engine-Swiper%2011-red.svg" alt="Swiper 11">
   </a>
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/Active%20Installs-700+-brightgreen.svg" alt="Active Installs">
-  </a>
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/Rating-⭐⭐⭐⭐⭐-yellow.svg" alt="Rating">
+  <a href="#-ai-assistant-integration-model-context-protocol---mcp">
+    <img src="https://img.shields.io/badge/MCP-Ready-9cf.svg?logo=anthropic" alt="MCP Compatible">
   </a>
 </p>
 
 <p align="center">
-  <a href="#-features">Features</a> •
+  <a href="#-about--value-proposition">About</a> •
+  <a href="#-system-architecture">Architecture</a> •
   <a href="#-available-blocks">Blocks</a> •
-  <a href="#-installation">Installation</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-development">Development</a> •
-  <a href="#-roadmap">Roadmap</a>
+  <a href="#-ai-assistant-integration-model-context-protocol---mcp">MCP AI Guide</a> •
+  <a href="#-headless-wordpress--nextjs-showcase">Headless</a> •
+  <a href="#-local-environment-setup">Setup</a> •
+  <a href="#-contributing--governance">Contributing</a>
 </p>
 
 ---
 
-## 📖 About
+## 📖 About & Value Proposition
 
-**GSlider Blocks** brings beautiful, feature-rich carousel blocks to WordPress Gutenberg. Create stunning logo carousels, testimonials, image sliders, and more - all with an intuitive block editor interface. No coding required!
+**GSlider Blocks** is an enterprise-grade Gutenberg carousel library designed for production WordPress websites. Built with modern React, PSR-4 PHP architecture, and Swiper 11, it delivers fluid hardware-accelerated animations, zero block invalidations, and native Headless/AI support without any jQuery dependencies.
 
 ### Why GSlider Blocks?
 
-| Feature | GSlider Blocks | Other Plugins |
-|---------|:-------------:|:-------------:|
-| Gutenberg Native | ✅ | ❌ Most use shortcodes |
-| 10 Block Types | ✅ | ❌ Usually 1-2 |
-| No jQuery | ✅ | ❌ Heavy dependencies |
-| 7+ Effects | ✅ | ⚠️ Limited |
-| 100% Free | ✅ | ⚠️ Freemium |
+| Feature | GSlider Blocks | Typical Slider Plugins |
+| :--- | :---: | :---: |
+| **Gutenberg Native** | ✅ Direct block canvas editing | ❌ Shortcodes or detached builders |
+| **Performance & Weight** | ✅ Hardware-accelerated Swiper 11, Zero jQuery | ❌ Heavy jQuery, bloated CSS bundles |
+| **Dynamic CSS Pipeline** | ✅ Server-rendered scoped CSS, 0 inline styles | ❌ Polluted inline `style=""` attributes |
+| **Responsive Architecture** | ✅ Dedicated 3-device controls (Desktop, Tablet, Mobile) | ⚠️ Generic breakpoint guessing |
+| **Local AI Integration** | ✅ Model Context Protocol (MCP) server ($0 cloud cost) | ❌ No AI schema support |
+| **Headless Ready** | ✅ Dedicated REST API JSON endpoints & serialized blocks | ❌ Shortcode regex parsing needed |
+| **Code Stability** | ✅ Backwards-compatible `deprecated.js` migrations | ❌ "Block invalidation" white screens on updates |
 
 ---
 
-## ✨ Features
+## 🏗️ System Architecture
 
-<table>
-<tr>
-<td width="50%">
+GSlider Blocks follows a strict 5-tier architecture connecting the Gutenberg Editor, Dynamic Style Engine, Frontend Runtime, Local AI Engine, and Headless APIs:
 
-### 🎨 Design & Effects
-- **7+ Carousel Effects**
-  - Slide, Fade, Cube
-  - Coverflow, Flip, Cards
-  - Creative
-- **Hover Animations**
-  - Grayscale-to-color
-  - Opacity, Scale, Lift
-- **Custom Navigation**
-  - Icon picker
-  - Custom images
-- **Multiple Pagination**
-  - Bullets, Fraction
-  - Progressbar, Dynamic
+```mermaid
+flowchart TD
+    subgraph Editor["🎨 1. Gutenberg React Block Editor"]
+        EditJS["edit.js (Canvas & Controls)"]
+        Inspector["inspector.js (Sidebar Controls)"]
+        Components["@Components/* (23 Locked Controls)"]
+        BlockId["useBlockIdGenerator ('gslider-xxxxxxxx')"]
+        Styling["styling.js (Dynamic CSS Compiler)"]
+        
+        Inspector --> Components
+        Components --> EditJS
+        BlockId --> EditJS
+        EditJS --> Styling
+    end
 
-</td>
-<td width="50%">
+    subgraph Storage["💾 2. WordPress Database (post_content)"]
+        SaveJS["save.js (Clean Semantic HTML)"]
+        BlockStyleAttr["attribute: blockStyle (Scoped CSS String)"]
+        Deprecations["deprecated.js (v1_0_0+ Schema Migrations)"]
+        
+        EditJS --> SaveJS
+        Styling --> BlockStyleAttr
+        SaveJS --> Deprecations
+    end
 
-### ⚡ Performance
-- **Swiper.js Powered**
-  - Hardware-accelerated
-  - 60 FPS animations
-- **Lazy Loading**
-  - Optimized images
-  - Faster page speed
-- **Lightweight**
-  - No jQuery
-  - Minimal footprint
-- **Clean Code**
-  - Modern ES6+
-  - React components
+    subgraph Backend["⚙️ 3. PHP Engine (PSR-4 Singleton)"]
+        Plugin["Plugin.php (Bootstrap)"]
+        RegBlocks["RegistrationBlocks.php"]
+        StyleGen["StyleGenerator.php (CSS Ingestion)"]
+        SVGGuard["SupportSVG.php (LIBXML_NONET + SMIL Ban)"]
+        
+        Plugin --> RegBlocks
+        Plugin --> StyleGen
+        Plugin --> SVGGuard
+        BlockStyleAttr --> StyleGen
+    end
 
-</td>
-</tr>
-<tr>
-<td width="50%">
+    subgraph Frontend["🚀 4. Client Runtime (Browser)"]
+        ViewJS["view.js (DOM Initializer)"]
+        SwiperEngine["Swiper.js v11 (Touch, Effects, a11y)"]
+        ScopedCSS["gslider-blocks-dynamic-styles-{pageId}.min.css (Cached Page CSS)"]
+        
+        SaveJS --> ViewJS
+        StyleGen --> ScopedCSS
+        ViewJS --> SwiperEngine
+    end
 
-### 📱 Responsive
-- **Device-Specific Settings**
-  - Desktop, Tablet, Mobile
-- **Touch/Swipe Support**
-  - Mobile-friendly
-- **Responsive Visibility**
-  - Show/hide per device
-- **Breakpoint Controls**
-  - Custom breakpoints
+    subgraph HeadlessAI["🤖 5. Headless & AI Ecosystem"]
+        MCPServer["packages/mcp-server (Stdio Protocol)"]
+        AIAssistants["Cursor / Claude Desktop / Antigravity"]
+        HeadlessNext["Headless Next.js 14/15 (REST API)"]
+        
+        AIAssistants <--> MCPServer
+        MCPServer --> EditJS
+        SaveJS --> HeadlessNext
+    end
+```
 
-</td>
-<td width="50%">
-
-### ♿ Accessibility
-- **Keyboard Navigation**
-  - Arrow keys, Tab
-- **ARIA Labels**
-  - Screen reader ready
-- **Focus Management**
-  - Proper focus states
-- **Pause on Hover**
-  - User control
-
-</td>
-</tr>
-</table>
+> [!NOTE]
+> For deep-dive architectural rules, review our comprehensive **[ARCHITECTURE.md](ARCHITECTURE.md)** guide.
 
 ---
 
 ## 📦 Available Blocks
 
 | # | Block | Description | Status |
-|:-:|-------|-------------|:------:|
-| 1 | 🎯 **Base Slider** | Hero sliders with Title, Subtitle, Description & CTA Button | ✅ Done |
-| 2 | 📝 **Flexi Content** | Use ANY Gutenberg blocks inside slides | ✅ Done |
-| 3 | 🏢 **Logo Carousel** | Client/partner logos with hover effects & tooltips | ✅ Done |
-| 4 | 🖼️ **Image Slider** | Beautiful image sliders with captions & lightbox | ✅ Done |
-| 5 | ⭐ **Testimonial Carousel** | Customer reviews with star ratings & avatars | 📋 Planned |
-| 6 | 👥 **Team Carousel** | Team member profiles with social links | 📋 Planned |
-| 7 | 🎥 **Video Carousel** | YouTube/Vimeo video sliders | 📋 Planned |
-| 8 | 📊 **Stats Carousel** | Animated counters & achievements | 📋 Planned |
-| 9 | 🏆 **Awards Carousel** | Certifications & awards display | 📋 Planned |
-| 10 | 📰 **Post Carousel** | Dynamic blog posts slider | 📋 Planned |
+| :-: | :--- | :--- | :-: |
+| 1 | 🎯 **Base Slider** | High-impact hero sliders with Title, Subtitle, Description & CTA buttons | ✅ Production |
+| 2 | 📝 **Flexi Content** | Full creative freedom: nest ANY Gutenberg block inside responsive slides | ✅ Production |
+| 3 | 🏢 **Logo Carousel** | Partner/client showcases with grayscale-to-color hover and ticker mode | ✅ Production |
+| 4 | 🖼️ **Image Slider** | Gallery sliders with lightbox, captions, and responsive thumbnails | ✅ Production |
+| 5 | ⭐ **Testimonial Carousel** | Customer reviews with star ratings, avatars, and verified badges | ✅ Production |
+| 6 | 👥 **Team Carousel** | Member profiles with bio, social links, and modal bio triggers | 📋 Roadmap |
+| 7 | 🎥 **Video Carousel** | Self-hosted, YouTube, and Vimeo responsive video carousels | 📋 Roadmap |
+| 8 | 📊 **Stats Carousel** | Animated milestone counters and metric sliders | 📋 Roadmap |
+| 9 | 🏆 **Awards Carousel** | Certification badges and industry recognition carousels | 📋 Roadmap |
+| 10 | 📰 **Post Carousel** | Dynamic WordPress posts & custom post type query slider | 📋 Roadmap |
 
-### Block Features Comparison
+---
 
+## 🤖 AI Assistant Integration (Model Context Protocol - MCP)
+
+GSlider Blocks ships with an official local **Model Context Protocol (MCP)** server located in `packages/mcp-server`. It empowers AI assistants and agentic IDEs (Cursor, Claude Desktop, Windsurf, Antigravity, etc.) to inspect, scaffold, and generate WordPress slider blocks directly from natural language or Figma designs with **$0 cloud cost**.
+
+### 🧠 Model-Agnostic Architecture (OpenAI, Claude, Gemini)
+
+The GSlider MCP Server operates over standard input/output (`stdio`) and is completely **model-agnostic**. You can connect it to any leading foundation model:
+- **OpenAI Ecosystem:** GPT-4o, o1, o3-mini, ChatGPT, and OpenAI-compatible developer agents.
+- **Anthropic Ecosystem:** Claude 3.7 Sonnet, Claude 3.5 Haiku, Claude Desktop.
+- **Google Ecosystem:** Gemini 2.0 Pro, Gemini 2.0 Flash via agentic environments.
+- **Open Weights:** DeepSeek-R1, Llama 3.3 via Ollama or local inference runtimes.
+
+---
+
+### 1-Click Client Configurations
+
+#### 1. Claude Desktop (`claude_desktop_config.json`)
+- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`  
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        GSlider Blocks                           │
-├──────────────┬──────────────┬──────────────┬───────────────────┤
-│  Base Slider │ Flexi Content│Logo Carousel │  Image Slider     │
-├──────────────┼──────────────┼──────────────┼───────────────────┤
-│ • Pre-built  │ • Any blocks │ • Logos      │ • Gallery         │
-│   structure  │ • Full       │ • Hover FX   │ • Captions        │
-│ • Title      │   creative   │ • Tooltips   │ • Links           │
-│ • Subtitle   │   freedom    │ • Links      │ • Lightbox     │
-│ • Button     │ • InnerBlocks│ • Grayscale  │ • Lazy load       │
-└──────────────┴──────────────┴──────────────┴───────────────────┘
+
+#### 2. OpenAI Models & ChatGPT (GPT-4o, o1, o3-mini)
+
+Connect the GSlider MCP server to any OpenAI model via standard Function Calling / Agent SDK:
+
+```javascript
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import OpenAI from "openai";
+
+const transport = new StdioClientTransport({
+  command: "node",
+  args: ["./packages/mcp-server/dist/index.js"]
+});
+const mcp = new Client({ name: "openai-gslider-agent", version: "1.0.0" }, { capabilities: {} });
+await mcp.connect(transport);
+
+// Dynamically expose GSlider MCP tools to OpenAI GPT-4o
+const { tools } = await mcp.listTools();
+const openai = new OpenAI();
+const completion = await openai.chat.completions.create({
+  model: "gpt-4o",
+  messages: [{ role: "user", content: "Inspect available GSlider block schemas" }],
+  tools: tools.map(t => ({
+    type: "function",
+    function: { name: t.name, description: t.description, parameters: t.inputSchema }
+  }))
+});
+```
+
+#### 3. Cursor IDE (`.cursor/mcp.json`)
+*Compatible with Claude 3.7, OpenAI GPT-4o, and Gemini models inside Cursor:*
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "./packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+#### 4. Antigravity IDE (Google DeepMind Agentic Workflow)
+Configure in your workspace `.antigravity/mcp.json` or global Antigravity MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+#### 5. GitHub Copilot & VS Code (Cline / Roo Code)
+In VS Code, add to `cline_mcp_settings.json` or Roo Code MCP Settings:
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+#### 6. Windsurf IDE (`~/.codeium/windsurf/mcp_config.json`)
+*Compatible with Windsurf Cascade and Codeium agentic workflows:*
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+### Available MCP Tools
+
+| Tool | Purpose | Status |
+| :--- | :--- | :---: |
+| `gslider_ping` | Verifies MCP daemon connection and plugin version | ✅ Available |
+| `list_gslider_blocks` | Returns all registered blocks and supported visual controls | ✅ Available |
+| `get_block_schema` | Returns exact attribute schemas and slide data structures | ✅ Available |
+| `generate_slider_block` | Generates validated Gutenberg markup with automated CSS | 🔜 In Progress |
+
+---
+
+## 🌐 Headless WordPress & Next.js Showcase
+
+GSlider Blocks provides dedicated machine-readable REST API endpoints for decoupled and headless architectures. Retrieve structured slider data via the dedicated endpoint `GET /wp-json/gslider/v1/blocks/<post_id>` or via the `gslider_blocks` field on standard `/wp/v2/pages/<id>` and `/wp/v2/posts/<id>`.
+
+### Consuming GSlider in Next.js 14/15 (App Router)
+
+```tsx
+// app/components/GSliderRenderer.tsx
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+interface GSliderImageItem {
+  id: number;
+  url: string;
+  alt?: string;
+  caption?: string;
+  link?: string;
+}
+
+interface GSliderBlockProps {
+  block: {
+    blockName: string;
+    attrs: {
+      blockId: string;
+      images?: GSliderImageItem[];
+      carouselPerColumn?: { Desktop?: number; Tablet?: number; Mobile?: number };
+      carouselPerColumnGap?: { Desktop?: number; Tablet?: number; Mobile?: number };
+      autoplay?: boolean;
+      autoplayDelay?: { Desktop?: number; Tablet?: number; Mobile?: number };
+      showNavigation?: { Desktop?: boolean; Tablet?: boolean; Mobile?: boolean };
+      showPagination?: { Desktop?: boolean; Tablet?: boolean; Mobile?: boolean };
+      infiniteLoop?: boolean;
+    };
+  };
+}
+
+export default function GSliderRenderer({ block }: GSliderBlockProps) {
+  if (block.blockName !== 'gslider-blocks/image-slider') return null;
+
+  const { attrs } = block;
+
+  return (
+    <div className={`gslider-wrapper ${attrs.blockId}`}>
+      <Swiper
+        modules={[Autoplay, Navigation, Pagination]}
+        slidesPerView={attrs.carouselPerColumn?.Mobile || 1}
+        spaceBetween={attrs.carouselPerColumnGap?.Mobile ?? 0}
+        loop={attrs.infiniteLoop ?? true}
+        breakpoints={{
+          768: {
+            slidesPerView: attrs.carouselPerColumn?.Tablet || 2,
+            spaceBetween: attrs.carouselPerColumnGap?.Tablet ?? 20,
+          },
+          1025: {
+            slidesPerView: attrs.carouselPerColumn?.Desktop || 3,
+            spaceBetween: attrs.carouselPerColumnGap?.Desktop ?? 20,
+          },
+        }}
+        autoplay={
+          attrs.autoplay
+            ? { delay: attrs.autoplayDelay?.Desktop || 3000 }
+            : false
+        }
+        navigation={Boolean(attrs.showNavigation?.Desktop)}
+        pagination={attrs.showPagination?.Desktop ? { clickable: true } : false}
+      >
+        {attrs.images?.map((item) => (
+          <SwiperSlide key={item.id}>
+            <img src={item.url} alt={item.alt || ''} className="w-full rounded-lg" />
+            {item.caption && <p className="text-sm text-gray-600 mt-2">{item.caption}</p>}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+}
 ```
 
 ---
 
-## 📥 Installation
+## 💻 Local Environment Setup
 
-### From WordPress Admin (Recommended)
+We support both GUI-based workflows (LocalWP) and zero-config containerized workflows (Docker via `@wordpress/env`):
 
-```bash
-1. Go to Plugins → Add New
-2. Search "GSlider Blocks"
-3. Click Install Now → Activate
-4. Done! 🎉
-```
+### Prerequisites
 
-### Manual Installation
-
-```bash
-# Download from WordPress.org
-wget https://downloads.wordpress.org/plugin/gslider-blocks.zip
-
-# Unzip to plugins directory
-unzip gslider-blocks.zip -d /wp-content/plugins/
-
-# Activate via WP Admin or WP-CLI
-wp plugin activate gslider-blocks
-```
+| Requirement | Minimum Version | Recommended |
+| :--- | :--- | :--- |
+| **Node.js** | `>= 18.0.0` | `20.x LTS` |
+| **npm** | `>= 9.0.0` | `10.x` |
+| **PHP** | `>= 7.4.0` | `8.2 / 8.3` |
+| **WordPress** | `>= 6.3.0` (required for `apiVersion: 3`) | `6.7+` |
 
 ---
 
-## 🎯 Quick Start
+### Option A: LocalWP (Recommended GUI Workflow)
 
-### 1️⃣ Base Slider (Hero Section)
-
-```
-┌────────────────────────────────────────┐
-│  Add Block → Search "Base Slider"      │
-│                ↓                        │
-│  Add slides → Title, Description        │
-│                ↓                        │
-│  Set background image/color            │
-│                ↓                        │
-│  Configure autoplay & navigation       │
-│                ↓                        │
-│  Publish! ✅                            │
-└────────────────────────────────────────┘
-```
-
-### 2️⃣ Logo Carousel (Client Showcase)
-
-```
-┌────────────────────────────────────────┐
-│  Add Block → Search "Logo Carousel"    │
-│                ↓                        │
-│  Upload multiple client logos          │
-│                ↓                        │
-│  Set grayscale-to-color hover effect   │
-│                ↓                        │
-│  Add links & tooltips (optional)       │
-│                ↓                        │
-│  Publish! ✅                            │
-└────────────────────────────────────────┘
-```
-
-### 3️⃣ Flexi Content (Custom Slides)
-
-```
-┌────────────────────────────────────────┐
-│  Add Block → Search "Flexi Content"    │
-│                ↓                        │
-│  Add any blocks inside each slide      │
-│  (Images, Text, Buttons, Galleries)    │
-│                ↓                        │
-│  Mix and match freely                  │
-│                ↓                        │
-│  Publish! ✅                            │
-└────────────────────────────────────────┘
-```
+1. Open [Local](https://localwp.com/) and create a new WordPress site.
+2. Clone this repository directly into the site's plugin directory:
+   ```bash
+   cd ~/Local\ Sites/<site-name>/app/public/wp-content/plugins/
+   git clone https://github.com/noruzzamans/gslider-blocks.git
+   cd gslider-blocks
+   ```
+3. Install dependencies and compile initial block assets (`build/` is gitignored):
+   ```bash
+   npm install
+   npm run build  # Required: compiles block bundles into build/
+   npm run start  # Starts development watch mode
+   ```
+4. Activate **GSlider Blocks** from WP Admin → Plugins.
 
 ---
 
-## 🛠️ Development
+### Option B: Docker via `@wordpress/env` (Zero-Config CLI)
 
-### Requirements
-
-| Requirement | Version |
-|-------------|---------|
-| Node.js | ≥ 16.x |
-| npm | ≥ 8.x |
-| WordPress | ≥ 5.0 |
-| PHP | ≥ 7.0 |
-
-### Setup
+If you have Docker Desktop installed, spin up a complete WordPress instance with GSlider Blocks pre-mounted in one command:
 
 ```bash
-# Clone repository
+# 1. Clone repository
 git clone https://github.com/noruzzamans/gslider-blocks.git
 cd gslider-blocks
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Start development (watch mode)
-npm run start
-
-# Production build
+# 3. Build block assets into build/ (Required before starting)
 npm run build
 
-# Create release ZIP
-npm run zip:package
+# 4. Start WordPress in Docker (Port 8888)
+npx @wordpress/env start
 ```
 
-### Project Structure
-
-```
-gslider-blocks/
-│
-├── 📁 src/                    # Source files
-│   ├── 📁 blocks/             # Individual blocks
-│   │   ├── 📁 base/           # Base Slider
-│   │   ├── 📁 flexi-content/  # Flexi Content
-│   │   ├── 📁 logo-carousel/  # Logo Carousel
-│   │   └── 📁 image-slider/   # Image Slider
-│   ├── 📁 components/         # Shared React components
-│   │   ├── color-control/
-│   │   ├── icon-picker/
-│   │   ├── responsive-range-control/
-│   │   └── typography-control/
-│   ├── 📁 constants/          # Constants & configs
-│   └── 📁 utils/              # Utility functions
-│
-├── 📁 build/                  # Compiled assets
-├── 📁 includes/               # PHP includes
-├── 📁 admin/                  # Admin UI
-├── 📁 languages/              # Translations
-├── 📁 log/                    # Strategy & planning
-│
-├── 📄 gslider-blocks.php      # Main plugin file
-├── 📄 readme.txt              # WordPress.org readme
-├── 📄 package.json            # npm config
-└── 📄 webpack.config.js       # Build config
-```
+- **Frontend:** [http://localhost:8888](http://localhost:8888)
+- **WP Admin:** [http://localhost:8888/wp-admin](http://localhost:8888/wp-admin) (`Username: admin`, `Password: password`)
+- **Stop Environment:** `npx @wordpress/env stop`
 
 ---
 
-## 🎨 Customization Options
+## ⚡ Essential NPM Scripts
 
-### General Settings
-
-| Category | Options |
-|----------|---------|
-| **Layout** | Slides per view (1-12), Gap, Height |
-| **Animation** | Effect type, Speed, Direction |
-| **Autoplay** | Enable/disable, Delay, Pause on hover |
-| **Loop** | Infinite scroll, Stop at last |
-
-### Navigation & Pagination
-
-| Category | Options |
-|----------|---------|
-| **Arrows** | Show/hide, Icon picker, Custom image |
-| **Position** | Inside/outside, 9 positions |
-| **Pagination** | Bullets, Fraction, Progressbar |
-| **Dots Style** | Size, Color, Active color |
-
-### Styling
-
-| Category | Options |
-|----------|---------|
-| **Background** | Color, Gradient, Image |
-| **Border** | Width, Style, Radius, Shadow |
-| **Typography** | Google Fonts, Size, Weight, Spacing |
-| **Spacing** | Margin, Padding (responsive) |
-| **Custom CSS** | Per-block custom styles |
+| Command | Purpose |
+| :--- | :--- |
+| `npm run start` | Starts watch mode for Gutenberg blocks development (`wp-scripts start`) |
+| `npm run build` | Compiles production assets into `build/` |
+| `npm run lint:js` | Runs ESLint across all JavaScript files |
+| `npm run lint:css` | Runs Stylelint across all SCSS/CSS stylesheets |
+| `npm run admin` | Starts watch mode for admin styles |
+| `npm run admin:build` | Compiles admin stylesheets for production |
+| `npm run mcp:build` | Builds the TypeScript MCP server in `packages/mcp-server` |
+| `npm run zip` | Generates a clean, production-ready WordPress.org distributable zip |
 
 ---
 
-## 📋 Roadmap
+## 🛡️ Testing & Code Quality Matrix
 
-### 2026 Development Plan
-
-```mermaid
-gantt
-    title GSlider Blocks 2026 Roadmap
-    dateFormat  YYYY-MM
-    section Blocks
-    Logo Carousel       :done,    2025-12, 2025-12
-    Image Slider        :done,  2026-01, 2026-02
-    Testimonial         :         2026-02, 2026-02
-    Team Carousel       :         2026-03, 2026-04
-    section PRO
-    PRO Development     :         2026-02, 2026-03
-    PRO Launch          :milestone, 2026-04, 0d
-    section Growth
-    10K Installs        :milestone, 2026-12, 0d
-```
-
-### Quarterly Goals
-
-| Quarter | Blocks | Installs Target | Milestones |
-|---------|--------|-----------------|------------|
-| **Q1** | Image, Testimonial | 1,500 | Documentation |
-| **Q2** | Team, Video, Stats | 3,000 | **PRO Launch** 🚀 |
-| **Q3** | Awards, Post | 6,000 | WooCommerce Integration |
-| **Q4** | Before/After | 10,000+ | Lifetime Deals |
+Every pull request runs automated GitHub Actions CI:
+- **Build Verification:** Compiles full Gutenberg and admin bundles.
+- **PHP Matrix Testing:** Automated tests pass on **7 PHP versions**: `PHP 7.4`, `8.0`, `8.1`, `8.2`, `8.3`, `8.4`, and `8.5`.
+- **MCP Drift Verification:** Confirms `packages/mcp-server` builds cleanly without TypeScript discrepancies.
+- **Component Lock Guard:** Automatically checks PR diffs to ensure `src/components/` remains protected.
 
 ---
 
-## 💰 Free vs PRO
+## 🤝 Contributing & Governance
 
-| Feature | Free | PRO |
-|---------|:----:|:---:|
-| 10 Carousel Blocks | ✅ | ✅ |
-| 7+ Carousel Effects | ✅ | ✅ |
-| Responsive Controls | ✅ | ✅ |
-| Custom Navigation Icons | ✅ | ✅ |
-| Touch/Swipe Support | ✅ | ✅ |
-| Keyboard Navigation | ✅ | ✅ |
-| **Lightbox Integration** | ❌ | ✅ |
-| **Pre-built Templates (20+)** | ❌ | ✅ |
-| **Dynamic Content (ACF/CPT)** | ❌ | ✅ |
-| **WooCommerce Integration** | ❌ | ✅ |
-| **Advanced Hover Effects** | ❌ | ✅ |
-| **Categories & Filtering** | ❌ | ✅ |
-| **White Label** | ❌ | ✅ |
-| **Priority Support** | ❌ | ✅ |
+Contributions from both human engineers and AI assistants are welcome! Please read our contributing documentation before starting:
 
-### PRO Pricing (Coming Q2 2026)
+- 📖 **[CONTRIBUTING.md](CONTRIBUTING.md)**: Forking, branching, PR title conventions, and AI contribution policy.
+- 🏗️ **[ARCHITECTURE.md](ARCHITECTURE.md)**: Engineering principles, patterns, and pre-flight developer checklist.
+- 📜 **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)**: Contributor Covenant v2.1.
+- 🛡️ **[SECURITY.md](SECURITY.md)**: Vulnerability disclosure policy and security protections.
 
-| Plan | Price | Sites |
-|------|-------|-------|
-| **PRO** | $49/year | 1 site |
-| **Agency** | $149/year | Unlimited |
-| **Lifetime** | $299 | Forever |
+> [!IMPORTANT]
+> **Issue-First Policy:** GSlider Blocks strictly requires all pull requests to resolve an approved [GitHub Issue](https://github.com/noruzzamans/gslider-blocks/issues) using `Closes #<issue_number>`. Unsolicited PRs submitted without an issue will be closed.
 
----
-
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help:
-
-### Ways to Contribute
-
-- 🐛 **Report Bugs** - Open an issue
-- 💡 **Suggest Features** - Open a discussion
-- 🔧 **Submit PRs** - Fix bugs or add features
-- 📖 **Improve Docs** - Help with documentation
-- ⭐ **Star the Repo** - Show your support!
-
-### Development Workflow
-
-```bash
-# 1. Fork the repository
-# 2. Create feature branch
-git checkout -b feature/amazing-feature
-
-# 3. Make changes
-npm run start  # Development mode
-
-# 4. Test your changes
-npm run build
-
-# 5. Commit with conventional commits
-git commit -m "feat: add amazing feature"
-
-# 6. Push and create PR
-git push origin feature/amazing-feature
-```
-
----
-
-## 📞 Support
-
-| Channel | Link |
-|---------|------|
-| 📧 Email | [gsliderblocks@gmail.com](mailto:gsliderblocks@gmail.com) |
-| 🐛 GitHub Issues | [Report Bug](https://github.com/noruzzamans/gslider-blocks/issues) |
-| 💬 WordPress Forum | [Support Forum](https://wordpress.org/support/plugin/gslider-blocks/) |
-| 📖 Documentation | Coming Soon |
-
----
-
-## 🌐 Stay Connected
-
-Follow us for tutorials, updates, and design inspiration!
-
-<p align="center">
-  <a href="https://x.com/gsliderblocks">
-    <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter">
-  </a>
-  <a href="https://facebook.com/gsliderblocks">
-    <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook">
-  </a>
-  <a href="https://instagram.com/gsliderblocks">
-    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram">
-  </a>
-  <a href="https://youtube.com/@gsliderblocks">
-    <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://linkedin.com/company/gsliderblocks">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
-  </a>
-  <a href="https://pinterest.com/gsliderblocks">
-    <img src="https://img.shields.io/badge/Pinterest-BD081C?style=for-the-badge&logo=pinterest&logoColor=white" alt="Pinterest">
-  </a>
-  <a href="https://reddit.com/user/gsliderblocks">
-    <img src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit">
-  </a>
-  <a href="https://threads.net/@gsliderblocks">
-    <img src="https://img.shields.io/badge/Threads-000000?style=for-the-badge&logo=threads&logoColor=white" alt="Threads">
-  </a>
-</p>
+> [!CAUTION]
+> **Component Lock Policy:** `src/components/` contains 23 core UI controls and is strictly locked to `@noruzzamans`. PRs modifying `src/components/` without maintainer authorization will be automatically rejected.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **GPLv2 or later**.
+GSlider Blocks is open-source software licensed under the **GNU General Public License v2.0 or later (GPL-2.0-or-later)**.
 
 ```
-GSlider Blocks - WordPress Plugin
+GSlider Blocks - Gutenberg Carousel Collection for WordPress
 Copyright (C) 2025-2026 Noruzzaman
 
 This program is free software; you can redistribute it and/or modify
@@ -492,15 +485,15 @@ the Free Software Foundation; either version 2 of the License, or
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Maintainer & Credits
 
 <p align="center">
-  <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="100" height="100" style="border-radius: 50%;">
+  <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="90" height="90" style="border-radius: 50%;">
 </p>
 
 <p align="center">
   <strong>Noruzzaman</strong><br>
-  WordPress Developer | Open Source Contributor
+  WordPress Core & Gutenberg Engineer | Open Source Maintainer
 </p>
 
 <p align="center">
@@ -510,32 +503,22 @@ the Free Software Foundation; either version 2 of the License, or
   <a href="https://linkedin.com/in/noruzzaman">
     <img src="https://img.shields.io/badge/LinkedIn-noruzzaman-0A66C2?logo=linkedin" alt="LinkedIn">
   </a>
+  <a href="https://profiles.wordpress.org/noruzzaman/">
+    <img src="https://img.shields.io/badge/WordPress.org-@noruzzaman-21759B?logo=wordpress" alt="WordPress Profile">
+  </a>
   <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/WordPress-GSlider%20Blocks-21759B?logo=wordpress" alt="WordPress">
+    <img src="https://img.shields.io/badge/Plugin-GSlider%20Blocks-0073AA?logo=wordpress" alt="WordPress Plugin">
   </a>
 </p>
 
----
-
-## 🙏 Credits
-
-- [Swiper.js](https://swiperjs.com/) - Modern touch slider library
-- [WordPress](https://wordpress.org/) - The world's best CMS
-- [React](https://reactjs.org/) - UI component library
-- [Google Fonts](https://fonts.google.com/) - Typography
+### Special Credits
+- [Swiper.js](https://swiperjs.com/) — The modern mobile touch slider library.
+- [WordPress Gutenberg](https://github.com/WordPress/gutenberg) — Block editor framework.
+- [React](https://reactjs.org/) — Declarative UI component engine.
+- [Appsero](https://appsero.com/) — Telemetry and analytics.
 
 ---
 
 <p align="center">
-  <strong>⭐ If you find GSlider Blocks useful, please give it a star on GitHub!</strong>
-</p>
-
-<p align="center">
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/Download-WordPress.org-blue?style=for-the-badge&logo=wordpress" alt="Download">
-  </a>
-</p>
-
-<p align="center">
-  Made with ❤️ for the WordPress Community
+  Made with ❤️ for the global WordPress Community
 </p>

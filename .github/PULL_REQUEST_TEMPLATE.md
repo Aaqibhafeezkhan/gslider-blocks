@@ -1,16 +1,21 @@
+### 🔗 Related Issue
 Closes #
+<!-- NOTE: GSlider Blocks enforces an Issue-First Policy. Every PR MUST link to an approved issue. Orphan PRs without an issue will be closed. -->
 
-### Changes proposed in this Pull Request:
-<!-- Describe the problem and the proposed changes in detail -->
+### 📝 Summary of Changes
+<!-- Describe the problem solved and the specific changes proposed in this Pull Request -->
 
-### Testing instructions:
-<!-- Provide clear, step-by-step instructions for testing and validating this change -->
+### 🧪 Testing Instructions
+<!-- Provide clear, step-by-step instructions to verify and validate this change in the WordPress editor -->
 1. Open the WordPress Block Editor (Gutenberg).
-2. Insert the affected GSlider block or perform the action.
-3. Verify behavior matches expectations.
+2. Insert or inspect the affected GSlider block.
+3. Verify behavior matches expectations across Desktop, Tablet, and Mobile.
 
-### 🛡️ GSlider Quality & Safety Checklist:
+### 🛡️ Pre-Flight Quality & Safety Checklist
+- [ ] **Issue Linked:** PR references an approved GitHub Issue via `Closes #<issue_number>`.
+- [ ] **Protected Directory:** Did NOT modify `src/components/` (maintained exclusively by `@noruzzamans`).
 - [ ] **Strict Design System:** Uses ONLY approved `@Components/*` controls (Zero raw `@wordpress/components` input controls).
-- [ ] **Zero Regressions:** Verified existing blocks (`image-slider`, `testimonial`, `logo-carousel`, `flexi-content`) load with 0 block invalidation errors.
-- [ ] **PHP Standards:** Complies with WordPress PHP Coding Standards (sanitization, escaping, nonces).
-- [ ] **2,000+ Sites Protection:** No breaking changes to existing database attributes, post meta, or public APIs.
+- [ ] **Zero Block Invalidation:** Verified existing blocks load with 0 block invalidation errors.
+- [ ] **Deprecation Migrations:** If `save.js` markup changed, registered a migration in `deprecated.js`.
+- [ ] **Security Standards:** Complies with WordPress PHP Coding Standards (sanitization, escaping, nonces).
+- [ ] **Build & Lints Pass:** Ran `npm run lint:js`, `npm run lint:css`, and `npm run build` locally.
