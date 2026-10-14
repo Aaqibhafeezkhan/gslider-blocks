@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'RegistrationBlocks' ) ) {
+if ( ! class_exists( RegistrationBlocks::class, false ) ) {
 
     /**
      * Handles dynamic registration of Gutenberg blocks.

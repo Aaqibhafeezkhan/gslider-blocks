@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'SupportSVG' ) ) {
+if ( ! class_exists( SupportSVG::class, false ) ) {
 
     /**
      * Handles SVG file upload support and security.

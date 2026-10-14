@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Plugin' ) ) {
+if ( ! class_exists( Plugin::class, false ) ) {
 
 	/**
 	 * Main plugin class for GSlider Blocks.

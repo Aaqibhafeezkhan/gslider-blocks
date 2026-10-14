@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'StyleGenerator' ) ) {
+if ( ! class_exists( StyleGenerator::class, false ) ) {
 
     /**
      * Generates and manages dynamic CSS files for GSlider blocks.

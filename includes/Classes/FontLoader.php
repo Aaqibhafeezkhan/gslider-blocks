@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'FontLoader' ) ) {
+if ( ! class_exists( FontLoader::class, false ) ) {
 
     /**
      * Loads Google Fonts used by GSlider blocks.
