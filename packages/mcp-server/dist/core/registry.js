@@ -6,6 +6,18 @@ export const SUPPORTED_BLOCK_SLUGS = [
     'flexi-content',
     'base',
 ];
+/**
+ * The `blockPrefix` each block's `edit.js` passes to `useBlockIdGenerator`.
+ * A block id is the prefix plus 8 characters, for example `gslider-1a2b3c4d`.
+ * Shared by the templates and the block generator so the two never diverge.
+ */
+export const BLOCK_ID_PREFIX = {
+    base: 'gslider',
+    testimonial: 'gslider',
+    'image-slider': 'gslider-image-slider',
+    'logo-carousel': 'gslider-logo-carousel',
+    'flexi-content': 'gslider-flexi-content',
+};
 function loadBlockSchema(slug) {
     const url = new URL(`./schemas/${slug}.json`, import.meta.url);
     if (!fs.existsSync(url)) {

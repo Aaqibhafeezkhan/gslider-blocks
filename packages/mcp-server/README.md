@@ -140,10 +140,15 @@ All tools follow a uniform `gslider_<verb>_<noun>` namespace pattern for clean s
 | `gslider_ping` | Health-check tool verifying server connection. Returns the MCP server's own version (`1.0.0`), not the plugin version. | ✅ Available |
 | `gslider_list_blocks` | Lists all registered slider blocks and supported features. | ✅ Available |
 | `gslider_get_block_schema` | Returns JSON schema, attribute defaults, and slide structure for a block. | ✅ Available |
-| `gslider_generate_block` | Generates valid Gutenberg block markup with automated CSS styling. | 🔜 Issue #33 |
+| `gslider_generate_block` | Generates paste-ready block markup for base, testimonial, image-slider, and logo-carousel, using each block's own save and styling. | ✅ Available |
+| `gslider_validate_block` | Checks markup or attributes: unknown keys, types, effects, blockId, and validateBlock. | ✅ Available |
 
 > [!NOTE]
 > For backwards compatibility, legacy aliases (`list_gslider_blocks`, `get_block_schema`) remain supported as fallback handlers.
+
+`gslider_generate_block` takes `blockSlug`, at least one slide, an optional `layout` (columns, gap, speed, autoplay, effect, navigation, pagination), and optional raw `attributes` that win over `layout`. It returns the block comment, the generated `blockId`, and the stored attributes. Default attributes are left out of the comment. Custom arrow icons and the quote icon are rejected, because those need the editor's icon set.
+
+`gslider_validate_block` takes either `markup` or `blockSlug` plus `attributes`. `blockStyle` that the editor would rewrite is reported as a warning. Flexi Content is not accepted by either tool.
 
 ---
 

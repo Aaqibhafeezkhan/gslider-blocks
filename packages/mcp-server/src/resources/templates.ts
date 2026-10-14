@@ -11,7 +11,7 @@
  * and saved in the block editor.
  */
 
-import { getBlockSchema } from '../core/registry.js';
+import { BLOCK_ID_PREFIX, getBlockSchema } from '../core/registry.js';
 
 export interface SliderTemplate {
   uri: string;
@@ -46,7 +46,7 @@ export const SLIDER_TEMPLATES: SliderTemplate[] = [
     mimeType: 'application/json',
     blockSlug: 'image-slider',
     blockName: 'gslider-blocks/image-slider',
-    blockIdPrefix: 'gslider-image-slider',
+    blockIdPrefix: BLOCK_ID_PREFIX['image-slider'],
     data: {
       blockId: '',
       blockStyle: '',
@@ -86,7 +86,7 @@ export const SLIDER_TEMPLATES: SliderTemplate[] = [
     mimeType: 'application/json',
     blockSlug: 'image-slider',
     blockName: 'gslider-blocks/image-slider',
-    blockIdPrefix: 'gslider-image-slider',
+    blockIdPrefix: BLOCK_ID_PREFIX['image-slider'],
     data: {
       blockId: '',
       blockStyle: '',
@@ -133,7 +133,7 @@ export const SLIDER_TEMPLATES: SliderTemplate[] = [
     mimeType: 'application/json',
     blockSlug: 'testimonial',
     blockName: 'gslider-blocks/testimonial',
-    blockIdPrefix: 'gslider',
+    blockIdPrefix: BLOCK_ID_PREFIX.testimonial,
     data: {
       blockId: '',
       blockStyle: '',
@@ -186,7 +186,7 @@ export const SLIDER_TEMPLATES: SliderTemplate[] = [
     mimeType: 'application/json',
     blockSlug: 'logo-carousel',
     blockName: 'gslider-blocks/logo-carousel',
-    blockIdPrefix: 'gslider-logo-carousel',
+    blockIdPrefix: BLOCK_ID_PREFIX['logo-carousel'],
     data: {
       blockId: '',
       blockStyle: '',
@@ -215,7 +215,7 @@ export const SLIDER_TEMPLATES: SliderTemplate[] = [
     mimeType: 'application/json',
     blockSlug: 'base',
     blockName: 'gslider-blocks/base',
-    blockIdPrefix: 'gslider',
+    blockIdPrefix: BLOCK_ID_PREFIX.base,
     data: {
       blockId: '',
       blockStyle: '',

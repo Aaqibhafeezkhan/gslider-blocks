@@ -17,6 +17,14 @@ import {
   handleGetBlockSchema,
 } from './tools/get-schema.js';
 import {
+  generateBlockToolDefinition,
+  handleGenerateBlock,
+} from './tools/generate-block.js';
+import {
+  validateBlockToolDefinition,
+  handleValidateBlock,
+} from './tools/validate-block.js';
+import {
   listTemplates,
   getTemplateByUri,
 } from './resources/templates.js';
@@ -58,6 +66,8 @@ async function main(): Promise<void> {
         },
         listBlocksToolDefinition,
         getBlockSchemaToolDefinition,
+        generateBlockToolDefinition,
+        validateBlockToolDefinition,
       ],
     };
   });
@@ -92,6 +102,14 @@ async function main(): Promise<void> {
 
     if (name === 'gslider_get_block_schema' || name === 'get_block_schema') {
       return await handleGetBlockSchema(args);
+    }
+
+    if (name === 'gslider_generate_block') {
+      return await handleGenerateBlock(args);
+    }
+
+    if (name === 'gslider_validate_block') {
+      return await handleValidateBlock(args);
     }
 
     throw new Error(`Unknown tool: ${name}`);
