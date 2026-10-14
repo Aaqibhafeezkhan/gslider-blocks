@@ -1,6 +1,7 @@
 import esbuild from 'esbuild';
 import path from 'path';
 import fs from 'fs';
+import { isDeepStrictEqual } from 'util';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -69,6 +70,35 @@ export function slideSchemaProblems(slug, block) {
   return problems;
 }
 
+export function attributeDriftProblems(slug, liveAttrs, cachedAttrs) {
+  const problems = [];
+  // Round-trip through JSON so live definitions compare like the written schema.
+  const live = JSON.parse(JSON.stringify(liveAttrs || {}));
+  const cached = cachedAttrs || {};
+
+  for (const key of Object.keys(live)) {
+    if (!Object.prototype.hasOwnProperty.call(cached, key)) {
+      problems.push(`Attribute "${key}" in "${slug}" is missing from the schema file.`);
+      continue;
+    }
+    for (const field of new Set([...Object.keys(live[key] || {}), ...Object.keys(cached[key] || {})])) {
+      if (!isDeepStrictEqual(live[key]?.[field], cached[key]?.[field])) {
+        problems.push(
+          `Attribute "${key}" in "${slug}" has a different "${field}". Live: ${JSON.stringify(live[key]?.[field])}, schema: ${JSON.stringify(cached[key]?.[field])}.`
+        );
+      }
+    }
+  }
+
+  for (const key of Object.keys(cached)) {
+    if (!Object.prototype.hasOwnProperty.call(live, key)) {
+      problems.push(`Attribute "${key}" in "${slug}" is in the schema file but not in attributes.js.`);
+    }
+  }
+
+  return problems;
+}
+
 async function runDriftCheck() {
   const schemasDir = path.resolve(__dirname, '../src/core/schemas');
   let hasDrift = false;
@@ -89,22 +119,9 @@ async function runDriftCheck() {
 
     const liveAttrs = await extractBlockAttributes(slug);
 
-    const liveKeys = Object.keys(liveAttrs);
-    const cachedKeys = Object.keys(cachedBlock.attributes || {});
-
-    if (liveKeys.length !== cachedKeys.length) {
-      console.error(
-        `FAIL: Drift detected in "${slug}". Live attributes count: ${liveKeys.length}, Cached: ${cachedKeys.length}`
-      );
+    for (const problem of attributeDriftProblems(slug, liveAttrs, cachedBlock.attributes)) {
+      console.error(`FAIL: ${problem}`);
       hasDrift = true;
-      continue;
-    }
-
-    for (const key of liveKeys) {
-      if (!(key in cachedBlock.attributes)) {
-        console.error(`FAIL: Attribute "${key}" in "${slug}" missing from schema file.`);
-        hasDrift = true;
-      }
     }
   }
 
