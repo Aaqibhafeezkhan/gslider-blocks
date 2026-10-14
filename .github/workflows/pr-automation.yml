@@ -18,6 +18,9 @@ jobs:
     name: Path-Based Labeler
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Apply Path Labels
         uses: actions/labeler@v5
         with:
