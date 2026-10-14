@@ -25,27 +25,11 @@ npm install
 npm run build
 ```
 
-### 2. Configure in your AI Assistant
+### 2. Configure in your AI Assistant or IDE
 
-#### Claude Desktop (`claude_desktop_config.json`)
-
-On macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "gslider": {
-      "command": "node",
-      "args": [
-        "/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
-      ]
-    }
-  }
-}
-```
+The server is **model-agnostic** and works seamlessly with **OpenAI (GPT-4o, o1, o3-mini)**, **Anthropic (Claude 3.7/3.5)**, **Google Gemini**, and local models across top agentic clients:
 
 #### Cursor (`.cursor/mcp.json`)
-
 ```json
 {
   "mcpServers": {
@@ -53,6 +37,50 @@ On macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
       "command": "node",
       "args": [
         "./packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+#### Claude Desktop (`claude_desktop_config.json`)
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+#### Windsurf IDE (`~/.codeium/windsurf/mcp_config.json`)
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+#### VS Code (Cline / Roo Code / Copilot Agent)
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
       ]
     }
   }
