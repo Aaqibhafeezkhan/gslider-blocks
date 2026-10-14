@@ -1,0 +1,71 @@
+# .github/labeler.yml
+# Configuration for actions/labeler@v5 in GSlider Blocks
+
+focus: php-backend:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'includes/**/*.php'
+          - 'gslider-blocks.php'
+          - 'uninstall.php'
+
+focus: blocks:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/blocks/**/*'
+          - 'build/blocks/**/*'
+
+focus: design-system:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/components/**/*'
+
+focus: swiper-engine:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/blocks/*/view.js'
+          - 'src/blocks/*/edit.js'
+          - 'assets/vendors/swiper/**/*'
+
+focus: headless:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'includes/RestApi/**/*'
+          - 'includes/Classes/BlockParser.php'
+          - 'tests/block-parser-base.php'
+          - 'tests/blocks-controller-permissions.php'
+          - 'tests/blocks-field-schema.php'
+          - 'tests/swiper-config-defaults.php'
+
+focus: mcp:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'packages/mcp-server/**/*'
+
+focus: ci-cd:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/**/*'
+          - 'webpack*.js'
+          - 'package*.json'
+          - 'composer*.json'
+
+focus: accessibility:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*a11y*'
+          - '**/*aria*'
+
+focus: i18n:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'languages/**/*'
+          - '**/*.pot'
+          - '**/*.po'
+
+type: documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+          - 'docs/**/*'
+          - '.agents/**/*'
+          - 'readme.txt'
