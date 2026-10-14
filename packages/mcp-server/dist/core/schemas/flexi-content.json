@@ -32,6 +32,158 @@
     ],
     "content": "nested blocks"
   },
+  "allowedValues": {
+    "carouselEffect": [
+      "slide",
+      "coverflow"
+    ],
+    "contentAlignment": [
+      "left",
+      "center",
+      "right"
+    ],
+    "contentHorizontalAlignment": [
+      "left",
+      "center",
+      "right"
+    ],
+    "contentVerticalAlignment": [
+      "flex-start",
+      "center",
+      "flex-end"
+    ],
+    "globalBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "globalBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "globalBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "layoutHeightSwitcher": [
+      "fixed",
+      "adapt"
+    ],
+    "navigationArrowBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "navigationArrowBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowDirection": [
+      "row",
+      "column",
+      "row-reverse",
+      "column-reverse"
+    ],
+    "navigationArrowPosition": [
+      "center",
+      "top-left",
+      "top-center",
+      "top-right",
+      "bottom-left",
+      "bottom-center",
+      "bottom-right"
+    ],
+    "navigationArrowPositionType": [
+      "inside",
+      "outside"
+    ],
+    "navigationArrowsIconLeftAlign": [
+      "icon",
+      "image"
+    ],
+    "navigationArrowsIconRightAlign": [
+      "icon",
+      "image"
+    ],
+    "paginationActiveDotsBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "paginationActiveDotsBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationDotsSwitcher": [
+      "normal",
+      "active"
+    ],
+    "paginationFractionColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationNormalDotsBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "paginationNormalDotsBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationPositionType": [
+      "inside",
+      "outside"
+    ],
+    "paginationProgressbarBGColorSwitcher": [
+      "normal",
+      "active"
+    ],
+    "paginationType": [
+      "bullets",
+      "fraction",
+      "progressbar"
+    ],
+    "slideEffect": [
+      "slide",
+      "fade",
+      "coverflow",
+      "flip",
+      "creative"
+    ],
+    "sliderType": [
+      "slider",
+      "carousel"
+    ]
+  },
   "attributes": {
     "blockId": {
       "type": "string",

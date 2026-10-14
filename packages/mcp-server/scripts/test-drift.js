@@ -99,6 +99,44 @@ export function attributeDriftProblems(slug, liveAttrs, cachedAttrs) {
   return problems;
 }
 
+export function allowedValuesProblems(slug, block) {
+  const problems = [];
+  const allowed = block?.allowedValues;
+  if (allowed == null || typeof allowed !== 'object' || Array.isArray(allowed)) {
+    return [`"${slug}" allowedValues is missing`];
+  }
+
+  const isAllowed = (values, value) => value === '' || values.includes(value);
+  for (const [key, values] of Object.entries(allowed)) {
+    const attr = block.attributes?.[key];
+    if (!attr) {
+      problems.push(`"${slug}" allowedValues names "${key}", which is not an attribute`);
+      continue;
+    }
+    if (!Array.isArray(values) || values.length === 0 || !values.every((v) => typeof v === 'string')) {
+      problems.push(`"${slug}" allowedValues "${key}" is not a non-empty list of strings`);
+      continue;
+    }
+    const defaults =
+      attr.type === 'object' && attr.default && typeof attr.default === 'object'
+        ? Object.values(attr.default)
+        : [attr.default];
+    for (const value of defaults) {
+      if (value !== undefined && !isAllowed(values, value)) {
+        problems.push(`"${slug}" default ${JSON.stringify(value)} of "${key}" is not in allowedValues ${JSON.stringify(values)}`);
+      }
+    }
+  }
+
+  for (const [field, values] of Object.entries(block.allowedEffects || {})) {
+    if (allowed[field] && !isDeepStrictEqual(allowed[field], values)) {
+      problems.push(`"${slug}" allowedEffects.${field} does not match allowedValues.${field}`);
+    }
+  }
+
+  return problems;
+}
+
 async function runDriftCheck() {
   const schemasDir = path.resolve(__dirname, '../src/core/schemas');
   let hasDrift = false;
@@ -113,6 +151,11 @@ async function runDriftCheck() {
 
     const cachedBlock = JSON.parse(fs.readFileSync(schemaFile, 'utf8'));
     for (const problem of slideSchemaProblems(slug, cachedBlock)) {
+      console.error(`FAIL: ${problem}.`);
+      hasDrift = true;
+    }
+
+    for (const problem of allowedValuesProblems(slug, cachedBlock)) {
       console.error(`FAIL: ${problem}.`);
       hasDrift = true;
     }

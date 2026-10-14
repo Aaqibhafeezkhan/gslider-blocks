@@ -202,6 +202,244 @@
       }
     }
   },
+  "allowedValues": {
+    "carouselEffect": [
+      "slide",
+      "coverflow"
+    ],
+    "contentAlignment": [
+      "left",
+      "center",
+      "right"
+    ],
+    "contentHorizontalAlignment": [
+      "left",
+      "center",
+      "right"
+    ],
+    "contentVerticalAlignment": [
+      "flex-start",
+      "center",
+      "flex-end"
+    ],
+    "descriptionColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "descriptionHtmlTag": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "span"
+    ],
+    "globalBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "globalBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "globalBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "layoutHeightSwitcher": [
+      "fixed",
+      "adapt"
+    ],
+    "navigationArrowBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "navigationArrowBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowDirection": [
+      "row",
+      "column",
+      "row-reverse",
+      "column-reverse"
+    ],
+    "navigationArrowPosition": [
+      "center",
+      "top-left",
+      "top-center",
+      "top-right",
+      "bottom-left",
+      "bottom-center",
+      "bottom-right"
+    ],
+    "navigationArrowPositionType": [
+      "inside",
+      "outside"
+    ],
+    "navigationArrowsIconLeftAlign": [
+      "icon",
+      "image"
+    ],
+    "navigationArrowsIconRightAlign": [
+      "icon",
+      "image"
+    ],
+    "paginationActiveDotsBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "paginationActiveDotsBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationDotsSwitcher": [
+      "normal",
+      "active"
+    ],
+    "paginationFractionColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationNormalDotsBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "paginationNormalDotsBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationPositionType": [
+      "inside",
+      "outside"
+    ],
+    "paginationProgressbarBGColorSwitcher": [
+      "normal",
+      "active"
+    ],
+    "paginationType": [
+      "bullets",
+      "fraction",
+      "progressbar"
+    ],
+    "primaryButtonBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "primaryButtonBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "primaryButtonBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "primaryButtonColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "secondaryButtonBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "secondaryButtonBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "secondaryButtonBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "secondaryButtonColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "slideEffect": [
+      "slide",
+      "fade",
+      "coverflow",
+      "flip",
+      "creative"
+    ],
+    "sliderType": [
+      "slider",
+      "carousel"
+    ],
+    "subTitleHtmlTag": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "span"
+    ],
+    "subtitleColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "titleColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "titleHtmlTag": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "span"
+    ]
+  },
   "attributes": {
     "blockId": {
       "type": "string",
