@@ -47,4 +47,4 @@ GSlider Blocks follows strict WordPress Core Security Guidelines:
 - **Input Sanitization & Output Escaping:** Every attribute rendered to the frontend is strictly escaped (`esc_html__`, `esc_attr__`, `esc_url`, `wp_kses_post`).
 - **SVG Upload Hardening:** SVG uploads undergo multi-layer validation including XML entity expansion defense (`LIBXML_NONET`), MIME-type verification, and removal of dangerous SMIL animation tags (`<animate>`, `<set>`) to prevent Stored Cross-Site Scripting (XSS).
 - **Style Sanitization:** Dynamic CSS generated from block attributes is sanitized to prohibit arbitrary CSS expressions, `javascript:` URIs, and external stylesheet inclusions.
-- **Zero Third-Party Ad-Trackers:** The codebase is free of external tracking scripts, CDNs, or unannounced outbound calls.
+- **Third-Party Service Disclosures:** The codebase contains zero hidden ad-trackers or covert analytics. Telemetry is handled strictly via the official Appsero Client SDK with explicit, opt-in merchant consent adhering to WordPress.org guidelines. Web font requests via Google Fonts are loaded over secure HTTPS with local caching support.

@@ -42,7 +42,7 @@ In professional software engineering, system design is divided into four distinc
 - **In GSlider Blocks:**
   1. When an editor modifies visual attributes (margin, typography, colors), React executes `styling.js`.
   2. `styling.js` compiles clean CSS string rules (Desktop, Tablet, Mobile) and updates the block's `blockStyle` attribute.
-  3. On frontend rendering, PHP (`StyleGenerator.php`) parses `blockStyle` and enqueues it cleanly into a single inline stylesheet (`gslider-blocks-style`) or cached CSS payload.
+  3. On frontend rendering, PHP (`StyleGenerator.php`) parses `blockStyle`, compiles all active block styles into a per-page minified CSS file (`wp-content/uploads/gslider-blocks/css/gslider-blocks-dynamic-styles-{$page_id}.min.css`), and enqueues it cleanly via `wp_enqueue_style()` with `filemtime` cache busting.
 - **Rule:** *Markup belongs in `save.js`; dynamic styling belongs in `styling.js` and `StyleGenerator.php`.*
 
 ### 4. Scoping & Collision Isolation Principle (`useBlockIdGenerator`)
@@ -154,7 +154,7 @@ class StyleGenerator {
 
 ### 14. Headless WordPress & REST API Serialization Pattern
 - **Problem:** Decoupled modern frontend frameworks (Next.js 14/15, Astro, Remix) consume WordPress via REST API or WPGraphQL and cannot execute server-side PHP hooks.
-- **Solution:** GSlider blocks output standards-compliant semantic HTML and expose their complete attribute payloads via the core WordPress REST API (`/wp/v2/pages/<id>?context=edit`). Headless consumers parse blocks via `@wordpress/block-serialization-default-parser` and render them using modern Swiper React.
+- **Solution:** GSlider blocks provide dedicated REST endpoints via `BlocksController.php` (`GET /wp-json/gslider/v1/blocks/<id>`) and expose a `gslider_blocks` field on standard `/wp/v2/pages` and `/wp/v2/posts`. Decoupled frontend frameworks (Next.js, Astro) consume structured slider data directly and render with Swiper React.
 
 ---
 

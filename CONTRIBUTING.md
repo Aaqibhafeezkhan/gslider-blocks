@@ -38,7 +38,8 @@ Choose the environment setup that matches your local workflow:
    git clone https://github.com/noruzzamans/gslider-blocks.git
    cd gslider-blocks
    npm install
-   npm run start
+   npm run build  # Required: compiles block assets into build/
+   npm run start  # Watch mode
    ```
 4. Activate **GSlider Blocks** in WordPress Admin → Plugins.
 
@@ -51,6 +52,9 @@ cd gslider-blocks
 
 # Install dependencies
 npm install
+
+# Compile block assets into build/ (build/ is gitignored, required before start)
+npm run build
 
 # Start local WordPress environment (runs on port 8888)
 npx @wordpress/env start

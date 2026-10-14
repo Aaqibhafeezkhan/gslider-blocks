@@ -13,26 +13,23 @@
   <a href="https://github.com/noruzzamans/gslider-blocks/actions/workflows/ci.yml">
     <img src="https://github.com/noruzzamans/gslider-blocks/actions/workflows/ci.yml/badge.svg" alt="CI Build Status">
   </a>
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/Active%20Installs-2,000+-brightgreen.svg?logo=wordpress" alt="Active Installs">
-  </a>
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
+  <a href="https://github.com/noruzzamans/gslider-blocks/releases">
     <img src="https://img.shields.io/badge/Version-1.1.9-orange.svg" alt="Version">
   </a>
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/WordPress-5.9+-blue.svg?logo=wordpress" alt="WordPress">
+  <a href="https://wordpress.org/">
+    <img src="https://img.shields.io/badge/WordPress-6.3+-blue.svg?logo=wordpress" alt="WordPress 6.3+">
   </a>
   <a href="https://php.net/">
-    <img src="https://img.shields.io/badge/PHP-7.4--8.5-purple.svg?logo=php" alt="PHP">
+    <img src="https://img.shields.io/badge/PHP-7.4--8.5-purple.svg?logo=php" alt="PHP 7.4-8.5">
   </a>
   <a href="http://www.gnu.org/licenses/gpl-2.0.html">
     <img src="https://img.shields.io/badge/License-GPLv2+-green.svg" alt="License">
   </a>
+  <a href="https://swiperjs.com/">
+    <img src="https://img.shields.io/badge/Engine-Swiper%2011-red.svg" alt="Swiper 11">
+  </a>
   <a href="#-ai-assistant-integration-model-context-protocol---mcp">
     <img src="https://img.shields.io/badge/MCP-Ready-9cf.svg?logo=anthropic" alt="MCP Compatible">
-  </a>
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/Rating-⭐⭐⭐⭐⭐-yellow.svg" alt="Rating">
   </a>
 </p>
 
@@ -110,7 +107,7 @@ flowchart TD
     subgraph Frontend["🚀 4. Client Runtime (Browser)"]
         ViewJS["view.js (DOM Initializer)"]
         SwiperEngine["Swiper.js v11 (Touch, Effects, a11y)"]
-        ScopedCSS["<style id='gslider-blocks-style'>"]
+        ScopedCSS["gslider-blocks-dynamic-styles-{pageId}.min.css (Cached Page CSS)"]
         
         SaveJS --> ViewJS
         StyleGen --> ScopedCSS
@@ -289,7 +286,7 @@ In VS Code, add to `cline_mcp_settings.json` or Roo Code MCP Settings:
 
 ## 🌐 Headless WordPress & Next.js Showcase
 
-GSlider Blocks outputs clean, standards-compliant semantic HTML and exposes complete block attribute trees through the core WordPress REST API (`/wp/v2/pages/<id>?context=edit`). 
+GSlider Blocks provides dedicated machine-readable REST API endpoints for decoupled and headless architectures. Retrieve structured slider data via the dedicated endpoint `GET /wp-json/gslider/v1/blocks/<post_id>` or via the `gslider_blocks` field on standard `/wp/v2/pages/<id>` and `/wp/v2/posts/<id>`.
 
 ### Consuming GSlider in Next.js 14/15 (App Router)
 
@@ -318,7 +315,7 @@ interface GSliderBlockProps {
 }
 
 export default function GSliderRenderer({ block }: GSliderBlockProps) {
-  if (block.blockName !== 'gslider/image-slider') return null;
+  if (block.blockName !== 'gslider-blocks/image-slider') return null;
 
   const { attrs } = block;
 
@@ -361,7 +358,7 @@ We support both GUI-based workflows (LocalWP) and zero-config containerized work
 | **Node.js** | `>= 18.0.0` | `20.x LTS` |
 | **npm** | `>= 9.0.0` | `10.x` |
 | **PHP** | `>= 7.4.0` | `8.2 / 8.3` |
-| **WordPress** | `>= 5.9.0` | `6.7+` |
+| **WordPress** | `>= 6.3.0` (required for `apiVersion: 3`) | `6.7+` |
 
 ---
 
@@ -374,10 +371,11 @@ We support both GUI-based workflows (LocalWP) and zero-config containerized work
    git clone https://github.com/noruzzamans/gslider-blocks.git
    cd gslider-blocks
    ```
-3. Install dependencies and start development watch mode:
+3. Install dependencies and compile initial block assets (`build/` is gitignored):
    ```bash
    npm install
-   npm run start
+   npm run build  # Required: compiles block bundles into build/
+   npm run start  # Starts development watch mode
    ```
 4. Activate **GSlider Blocks** from WP Admin → Plugins.
 
@@ -395,7 +393,10 @@ cd gslider-blocks
 # 2. Install dependencies
 npm install
 
-# 3. Start WordPress in Docker (Port 8888)
+# 3. Build block assets into build/ (Required before starting)
+npm run build
+
+# 4. Start WordPress in Docker (Port 8888)
 npx @wordpress/env start
 ```
 

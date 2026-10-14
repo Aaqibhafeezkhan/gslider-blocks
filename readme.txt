@@ -1,7 +1,7 @@
 === GSlider Blocks ===
 Contributors: noruzzaman
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
-Requires at least: 5.0
+Requires at least: 6.3
 Tested up to: 7.1
 Stable tag: 1.1.9
 Requires PHP: 7.4
