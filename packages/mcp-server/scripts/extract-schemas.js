@@ -1,6 +1,7 @@
 import esbuild from 'esbuild';
 import path from 'path';
 import fs from 'fs';
+import { isDeepStrictEqual } from 'util';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -77,7 +78,7 @@ async function extractPresets(slug) {
   return Object.keys(mod.exports.presetStyles || {});
 }
 
-async function extractConstants() {
+async function loadConstants() {
   const constantsPath = path.resolve(rootDir, 'src/constants/index.js');
   const result = await esbuild.build({
     entryPoints: [constantsPath],
@@ -97,13 +98,138 @@ async function extractConstants() {
     Dashicon: () => null
   }));
 
-  const c = mod.exports;
-  return {
-    sliderEffects: (c.SLIDER_EFFECT_OPTIONS || []).map((o) => o.value),
-    carouselEffects: (c.CAROUSEL_EFFECT_OPTIONS || []).map((o) => o.value),
-    sliderTypes: (c.SLIDER_TYPE || []).map((o) => o.value),
-    paginationTypes: (c.PAGINATION_TYPE || []).map((o) => o.value),
-  };
+  return mod.exports;
+}
+
+function optionValues(options) {
+  return Array.isArray(options) ? options.map((o) => o?.value) : [];
+}
+
+// Skips a string, template literal, or comment starting at i; returns the index after it, or -1.
+function skipNonCode(source, i) {
+  const ch = source[i];
+  if (ch === '"' || ch === "'" || ch === '`') {
+    for (let j = i + 1; j < source.length; j++) {
+      if (source[j] === '\\') {
+        j++;
+      } else if (source[j] === ch) {
+        return j + 1;
+      }
+    }
+    return source.length;
+  }
+  if (ch === '/' && source[i + 1] === '/') {
+    const end = source.indexOf('\n', i);
+    return end === -1 ? source.length : end;
+  }
+  if (ch === '/' && source[i + 1] === '*') {
+    const end = source.indexOf('*/', i + 2);
+    return end === -1 ? source.length : end + 2;
+  }
+  return -1;
+}
+
+// Returns the index just past the `}` that closes the `{` at openIndex.
+function findClosingBrace(source, openIndex) {
+  let depth = 0;
+  for (let i = openIndex; i < source.length; ) {
+    const skipped = skipNonCode(source, i);
+    if (skipped !== -1) {
+      i = skipped;
+      continue;
+    }
+    if (source[i] === '{') depth++;
+    if (source[i] === '}' && --depth === 0) return i + 1;
+    i++;
+  }
+  return source.length;
+}
+
+// Returns the index just past the `>` or `/>` that ends the JSX opening tag at start.
+function findTagEnd(source, start) {
+  for (let i = start + 1; i < source.length; ) {
+    const ch = source[i];
+    if (ch === '{') {
+      i = findClosingBrace(source, i);
+    } else if (ch === '"' || ch === "'") {
+      i = skipNonCode(source, i);
+    } else if (ch === '>') {
+      return i + 1;
+    } else {
+      i++;
+    }
+  }
+  return source.length;
+}
+
+// Finds the JSX opening tag that contains index, skipping nested elements in earlier props.
+function findEnclosingTag(source, index) {
+  const starts = [];
+  const re = /<[A-Z][\w.]*\b/g;
+  let m;
+  while ((m = re.exec(source)) && m.index < index) starts.push(m.index);
+  for (let k = starts.length - 1; k >= 0; k--) {
+    const end = findTagEnd(source, starts[k]);
+    if (end > index) return source.slice(starts[k], end);
+  }
+  return null;
+}
+
+function resolveOptions(expression, constants) {
+  const expr = expression.trim();
+  if (/^[A-Z][A-Z0-9_]*$/.test(expr)) {
+    return Array.isArray(constants[expr]) ? optionValues(constants[expr]) : null;
+  }
+  if (expr.startsWith('[') && expr.endsWith(']')) {
+    const values = [...expr.matchAll(/\bvalue:\s*(['"])(.*?)\1/g)].map((v) => v[2]);
+    return values.length ? values : null;
+  }
+  return null;
+}
+
+/**
+ * Reads every `options={...}` control in the block's inspector.js and maps the
+ * attribute it writes through setAttributes to the option values it offers.
+ */
+function extractAllowedValues(slug, rawAttrs, constants) {
+  const inspectorPath = path.resolve(rootDir, 'src/blocks', slug, 'inspector.js');
+  if (!fs.existsSync(inspectorPath)) return {};
+  const source = fs.readFileSync(inspectorPath, 'utf8');
+
+  const allowed = {};
+  const unresolved = [];
+  const re = /\boptions=\{/g;
+  let m;
+  while ((m = re.exec(source))) {
+    const line = source.slice(0, m.index).split('\n').length;
+    const openIndex = m.index + m[0].length - 1;
+    const values = resolveOptions(source.slice(openIndex + 1, findClosingBrace(source, openIndex) - 1), constants);
+    const tag = findEnclosingTag(source, m.index);
+    const keys = new Set(
+      [...(tag || '').matchAll(/setAttributes\(\s*\{\s*(\w+)\s*:/g)]
+        .map((k) => k[1])
+        .filter((k) => Object.prototype.hasOwnProperty.call(rawAttrs, k))
+    );
+
+    if (!values || keys.size !== 1) {
+      unresolved.push(`inspector.js:${line}`);
+      continue;
+    }
+
+    const [key] = keys;
+    if (allowed[key] && !isDeepStrictEqual(allowed[key], values)) {
+      throw new Error(
+        `"${slug}" attribute "${key}" has different option lists in inspector.js: ${JSON.stringify(allowed[key])} and ${JSON.stringify(values)} (line ${line})`
+      );
+    }
+    allowed[key] = values;
+  }
+
+  if (unresolved.length) {
+    console.warn(`⚠️  ${slug}: skipped option controls with no single attribute: ${unresolved.join(', ')}`);
+  }
+
+  return Object.fromEntries(Object.keys(allowed).sort().map((k) => [k, allowed[k]]));
 }
 
 async function resolveSlideSchema(slug, rawAttrs, slideFields) {
@@ -137,7 +263,12 @@ async function resolveSlideSchema(slug, rawAttrs, slideFields) {
 }
 
 async function generate() {
-  const constants = await extractConstants();
+  const constantsModule = await loadConstants();
+  const constants = {
+    sliderEffects: optionValues(constantsModule.SLIDER_EFFECT_OPTIONS),
+    carouselEffects: optionValues(constantsModule.CAROUSEL_EFFECT_OPTIONS),
+    sliderTypes: optionValues(constantsModule.SLIDER_TYPE),
+  };
 
   const slideFields = {
     'image-slider': 'images',
@@ -179,6 +310,7 @@ async function generate() {
       allowedEffects,
       totalAttributes: Object.keys(rawAttrs).length,
       slideItemSchema,
+      allowedValues: extractAllowedValues(slug, rawAttrs, constantsModule),
       attributes: rawAttrs
     };
 

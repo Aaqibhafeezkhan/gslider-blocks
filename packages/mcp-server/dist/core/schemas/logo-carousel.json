@@ -36,6 +36,191 @@
       }
     }
   },
+  "allowedValues": {
+    "carouselEffect": [
+      "slide",
+      "coverflow"
+    ],
+    "globalBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "globalBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "globalBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "logoBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "logoBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "logoBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "logoCaptionBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "logoCaptionBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "logoCaptionColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "logoLinkHoverEffect": [
+      "none",
+      "opacity",
+      "scale",
+      "move-up",
+      "grayscale",
+      "both"
+    ],
+    "logoLinkTarget": [
+      "_blank",
+      "_self"
+    ],
+    "logoTooltipBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "navigationArrowBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "navigationArrowBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowDirection": [
+      "row",
+      "column",
+      "row-reverse",
+      "column-reverse"
+    ],
+    "navigationArrowPosition": [
+      "center",
+      "top-left",
+      "top-center",
+      "top-right",
+      "bottom-left",
+      "bottom-center",
+      "bottom-right"
+    ],
+    "navigationArrowPositionType": [
+      "inside",
+      "outside"
+    ],
+    "navigationArrowsIconLeftAlign": [
+      "icon",
+      "image"
+    ],
+    "navigationArrowsIconRightAlign": [
+      "icon",
+      "image"
+    ],
+    "paginationActiveDotsBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "paginationActiveDotsBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationDotsSwitcher": [
+      "normal",
+      "active"
+    ],
+    "paginationFractionColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationNormalDotsBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "paginationNormalDotsBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationPositionType": [
+      "inside",
+      "outside"
+    ],
+    "paginationProgressbarBGColorSwitcher": [
+      "normal",
+      "active"
+    ],
+    "paginationType": [
+      "bullets",
+      "fraction",
+      "progressbar"
+    ],
+    "verticalAlign": [
+      "flex-start",
+      "center",
+      "flex-end"
+    ]
+  },
   "attributes": {
     "blockId": {
       "type": "string",

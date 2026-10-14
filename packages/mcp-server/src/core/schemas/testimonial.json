@@ -188,6 +188,271 @@
       }
     }
   },
+  "allowedValues": {
+    "authorDesignationColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "authorDesignationHtmlTag": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "span"
+    ],
+    "authorImageBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "authorImageBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "authorNameColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "authorNameHtmlTag": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "span"
+    ],
+    "carouselEffect": [
+      "slide",
+      "coverflow"
+    ],
+    "contentAlignment": [
+      "left",
+      "center",
+      "right"
+    ],
+    "contentHorizontalAlignment": [
+      "left",
+      "center",
+      "right"
+    ],
+    "contentVerticalAlignment": [
+      "flex-start",
+      "center",
+      "flex-end"
+    ],
+    "globalBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "globalBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "globalBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "layoutHeightSwitcher": [
+      "fixed",
+      "adapt"
+    ],
+    "navigationArrowBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "navigationArrowBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "navigationArrowDirection": [
+      "row",
+      "column",
+      "row-reverse",
+      "column-reverse"
+    ],
+    "navigationArrowPosition": [
+      "center",
+      "top-left",
+      "top-center",
+      "top-right",
+      "bottom-left",
+      "bottom-center",
+      "bottom-right"
+    ],
+    "navigationArrowPositionType": [
+      "inside",
+      "outside"
+    ],
+    "navigationArrowsIconLeftAlign": [
+      "icon",
+      "image"
+    ],
+    "navigationArrowsIconRightAlign": [
+      "icon",
+      "image"
+    ],
+    "paginationActiveDotsBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "paginationActiveDotsBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationDotsSwitcher": [
+      "normal",
+      "active"
+    ],
+    "paginationFractionColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationNormalDotsBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "paginationNormalDotsBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "paginationPositionType": [
+      "inside",
+      "outside"
+    ],
+    "paginationProgressbarBGColorSwitcher": [
+      "normal",
+      "active"
+    ],
+    "paginationType": [
+      "bullets",
+      "fraction",
+      "progressbar"
+    ],
+    "quoteIconAlign": [
+      "none",
+      "icon",
+      "image"
+    ],
+    "quoteIconBorder": [
+      "none",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "outset",
+      "ridge"
+    ],
+    "quoteIconBorderColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "quoteIconBoxShadowValuesSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "quoteIconColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "quoteIconRotateSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "ratingEmptyStarColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "ratingNumberColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "ratingStarColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "slideEffect": [
+      "slide",
+      "fade",
+      "coverflow",
+      "flip",
+      "creative"
+    ],
+    "sliderType": [
+      "slider",
+      "carousel"
+    ],
+    "testimonialTextColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "testimonialTextHtmlTag": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "span"
+    ],
+    "testimonialTitleColorSwitcher": [
+      "normal",
+      "hover"
+    ],
+    "testimonialTitleHtmlTag": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "span"
+    ]
+  },
   "attributes": {
     "blockId": {
       "type": "string",
