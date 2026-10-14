@@ -1,7 +1,7 @@
 import { listBlocks } from '../core/registry.js';
 
 export const listBlocksToolDefinition = {
-  name: 'list_gslider_blocks',
+  name: 'gslider_list_blocks',
   description:
     'Lists all available GSlider Gutenberg blocks with their slugs, titles, categories, and supported features.',
   inputSchema: {

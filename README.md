@@ -278,9 +278,9 @@ In VS Code, add to `cline_mcp_settings.json` or Roo Code MCP Settings:
 | Tool | Purpose | Status |
 | :--- | :--- | :---: |
 | `gslider_ping` | Verifies MCP daemon connection and plugin version | ✅ Available |
-| `list_gslider_blocks` | Returns all registered blocks and supported visual controls | ✅ Available |
-| `get_block_schema` | Returns exact attribute schemas and slide data structures | ✅ Available |
-| `generate_slider_block` | Generates validated Gutenberg markup with automated CSS | 🔜 In Progress |
+| `gslider_list_blocks` | Returns all registered blocks and supported visual controls | ✅ Available |
+| `gslider_get_block_schema` | Returns exact attribute schemas and slide data structures | ✅ Available |
+| `gslider_generate_block` | Generates validated Gutenberg markup with automated CSS | 🔜 In Progress |
 
 ---
 

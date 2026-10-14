@@ -133,12 +133,17 @@ In `cline_mcp_settings.json`:
 
 ## 🛠️ Available Tools
 
+All tools follow a uniform `gslider_<verb>_<noun>` namespace pattern for clean separation and zero collisions in multi-server environments:
+
 | Tool | Description | Status |
 | :--- | :--- | :--- |
 | `gslider_ping` | Health-check tool verifying server connection and version. | ✅ Available |
-| `list_gslider_blocks` | Lists all registered slider blocks and supported features. | ✅ Available |
-| `get_block_schema` | Returns JSON schema, attribute defaults, and slide structure for a block. | ✅ Available |
-| `generate_slider_block` | Generates valid Gutenberg block markup with automated CSS styling. | 🔜 Issue #33 |
+| `gslider_list_blocks` | Lists all registered slider blocks and supported features. | ✅ Available |
+| `gslider_get_block_schema` | Returns JSON schema, attribute defaults, and slide structure for a block. | ✅ Available |
+| `gslider_generate_block` | Generates valid Gutenberg block markup with automated CSS styling. | 🔜 Issue #33 |
+
+> [!NOTE]
+> For backwards compatibility, legacy aliases (`list_gslider_blocks`, `get_block_schema`) remain supported as fallback handlers.
 
 ---
 

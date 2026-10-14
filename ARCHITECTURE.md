@@ -149,7 +149,7 @@ class StyleGenerator {
 - **Problem:** AI coding assistants and agentic IDEs (Cursor, Claude Desktop, Windsurf, Antigravity, etc.) cannot introspect WordPress block schemas without expensive cloud APIs or manual copy-pasting.
 - **Solution:** `packages/mcp-server` implements a lightweight TypeScript server communicating via local `stdio`:
   - **$0 Cloud Cost:** Runs entirely locally on Node.js without third-party API subscriptions.
-  - **Tools Exposed:** `gslider_ping`, `list_gslider_blocks`, `get_block_schema`.
+  - **Tools Exposed:** `gslider_ping`, `gslider_list_blocks`, `gslider_get_block_schema`.
   - **Resources Exposed:** Design presets (`gslider://templates/hero-slider`, `brand-logos`).
 
 ### 14. Headless WordPress & REST API Serialization Pattern
