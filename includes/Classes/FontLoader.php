@@ -33,13 +33,22 @@ if ( ! class_exists( 'FontLoader' ) ) {
         use SingletonTrait;
 
         /**
-         * Comma-separated list of all font weight variants to load.
+         * Weight requested when a block does not store a numeric weight.
          *
-         * @since 1.0.0
+         * @since 1.1.9
          *
          * @var string
          */
-        const FONT_WEIGHTS = '100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
+        const DEFAULT_FONT_WEIGHT = '400';
+
+        /**
+         * Font family values that mean "no Google font selected".
+         *
+         * @since 1.1.9
+         *
+         * @var string[]
+         */
+        const IGNORED_FONT_FAMILIES = [ 'default', 'inherit' ];
 
         /**
          * Base URL for the Google Fonts CSS API.
@@ -51,11 +60,11 @@ if ( ! class_exists( 'FontLoader' ) ) {
         const GOOGLE_FONTS_URL = '//fonts.googleapis.com/css';
 
         /**
-         * Collection of Google Font families to load.
+         * Google Font variants to load, keyed by family then variant.
          *
          * @since 1.0.0
          *
-         * @var string[]
+         * @var array<string, array<string, bool>>
          */
         private static $gfonts = [];
 
@@ -72,10 +81,10 @@ if ( ! class_exists( 'FontLoader' ) ) {
         }
 
         /**
-         * Collects font families from rendered block attributes.
+         * Collects font variants from rendered GSlider block attributes.
          *
-         * Extracts font family attributes from each block during
-         * rendering and adds them to the fonts collection.
+         * Only `gslider-blocks/*` blocks are inspected, so other plugins'
+         * `*FontFamily` attributes never trigger a Google Fonts request.
          *
          * @since 1.0.0
          *
@@ -88,52 +97,83 @@ if ( ! class_exists( 'FontLoader' ) ) {
                 return $block_content;
             }
 
-            $fonts = self::get_fonts_family( $block['attrs'] );
-            if ( ! empty( $fonts ) ) {
-                self::$gfonts = array_unique( array_merge( self::$gfonts, $fonts ) );
+            if ( empty( $block['blockName'] ) || 0 !== strpos( $block['blockName'], 'gslider-blocks/' ) ) {
+                return $block_content;
+            }
+
+            foreach ( self::get_fonts_family( $block['attrs'] ) as $family => $variants ) {
+                if ( ! isset( self::$gfonts[ $family ] ) ) {
+                    self::$gfonts[ $family ] = [];
+                }
+                self::$gfonts[ $family ] += $variants;
             }
 
             return $block_content;
         }
 
         /**
-         * Extracts font family names from block attributes.
+         * Extracts Google Font families and their used variants from block attributes.
          *
-         * Searches for attribute keys matching the pattern
-         * `*FontFamily` and returns their sanitized values.
+         * For each `<prefix>FontFamily` attribute, the matching
+         * `<prefix>FontWeight` and `<prefix>FontStyle` attributes decide
+         * the variant, e.g. `400`, `700` or `600italic`.
          *
          * @since 1.0.0
          *
          * @param array $attributes Block attributes to search.
-         * @return string[] Array of font family names keyed by family name.
+         * @return array<string, array<string, bool>> Variants keyed by family name.
          */
         public static function get_fonts_family( $attributes ) {
             if ( ! is_array( $attributes ) ) {
                 return [];
             }
 
-            $keys              = preg_grep( '/^(\w+)FontFamily$/i', array_keys( $attributes ) );
-            $googleFontFamily = [];
+            $fonts = [];
 
-            foreach ( $keys as $key ) {
-                if ( isset( $attributes[ $key ] ) && is_string( $attributes[ $key ] ) ) {
-                    $fontFamily                    = sanitize_text_field( $attributes[ $key ] );
-                    $googleFontFamily[ $fontFamily ] = $fontFamily;
+            foreach ( array_keys( $attributes ) as $key ) {
+                if ( ! is_string( $key ) || ! preg_match( '/^(\w+)FontFamily$/', $key, $matches ) ) {
+                    continue;
                 }
+
+                if ( ! is_string( $attributes[ $key ] ) ) {
+                    continue;
+                }
+
+                $family = trim( sanitize_text_field( $attributes[ $key ] ) );
+
+                // Google family names only contain letters, digits and spaces.
+                if ( '' === $family
+                    || in_array( strtolower( $family ), self::IGNORED_FONT_FAMILIES, true )
+                    || ! preg_match( '/^[A-Za-z0-9 ]+$/', $family )
+                ) {
+                    continue;
+                }
+
+                $prefix = $matches[1];
+                $weight = isset( $attributes[ $prefix . 'FontWeight' ] ) ? (string) $attributes[ $prefix . 'FontWeight' ] : '';
+                $style  = isset( $attributes[ $prefix . 'FontStyle' ] ) ? (string) $attributes[ $prefix . 'FontStyle' ] : '';
+
+                if ( ! preg_match( '/^[1-9]00$/', $weight ) ) {
+                    $weight = self::DEFAULT_FONT_WEIGHT;
+                }
+
+                $variant = in_array( $style, [ 'italic', 'oblique' ], true ) ? $weight . 'italic' : $weight;
+
+                $fonts[ $family ][ $variant ] = true;
             }
 
-            return $googleFontFamily;
+            return $fonts;
         }
 
         /**
          * Registers and enqueues a Google Fonts stylesheet.
          *
-         * Builds the Google Fonts URL from the collected font families
-         * with all weight variants and enqueues it as a stylesheet.
+         * Builds one Google Fonts URL that requests only the
+         * variants collected for each family.
          *
          * @since 1.0.0
          *
-         * @param string[] $fonts Array of font family names to load.
+         * @param array<string, array<string, bool>> $fonts Variants keyed by family name.
          * @return void
          */
         private function load_google_font( $fonts ) {
@@ -141,12 +181,17 @@ if ( ! class_exists( 'FontLoader' ) ) {
                 return;
             }
 
+            ksort( $fonts );
+
             $gfonts = '';
-            foreach ( $fonts as $font ) {
+            foreach ( $fonts as $family => $variants ) {
+                $variants = array_keys( $variants );
+                sort( $variants, SORT_STRING );
+
                 $gfonts .= sprintf(
                     '%s:%s|',
-                    str_replace( ' ', '+', trim( $font ) ),
-                    self::FONT_WEIGHTS
+                    str_replace( ' ', '+', $family ),
+                    implode( ',', $variants )
                 );
             }
 
