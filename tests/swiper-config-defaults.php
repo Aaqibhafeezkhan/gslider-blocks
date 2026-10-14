@@ -28,6 +28,11 @@ function apply_filters( $hook, $value, ...$extra ) {
 	return $value;
 }
 
+function wp_strip_all_tags( $text ) {
+	return trim( strip_tags( preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', (string) $text ) ) );
+}
+
+require dirname( __DIR__ ) . '/includes/Utils/CssSanitizer.php';
 require dirname( __DIR__ ) . '/includes/RestApi/BlockParser.php';
 
 use GSlider\RestApi\BlockParser;

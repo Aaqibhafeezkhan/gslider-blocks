@@ -32,6 +32,10 @@ function render_block( $block ) {
 	return '<p>flexi</p>';
 }
 
+function wp_strip_all_tags( $text ) {
+	return trim( strip_tags( preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', (string) $text ) ) );
+}
+
 set_error_handler(
 	static function ( $severity, $message, $file, $line ) {
 		fwrite( STDERR, "FAIL: PHP warning {$message} in {$file}:{$line}\n" );
@@ -39,9 +43,11 @@ set_error_handler(
 	}
 );
 
+require dirname( __DIR__ ) . '/includes/Utils/CssSanitizer.php';
 require dirname( __DIR__ ) . '/includes/RestApi/BlockParser.php';
 
 use GSlider\RestApi\BlockParser;
+use GSlider\Utils\CssSanitizer;
 
 function assert_true( $condition, $message ) {
 	if ( ! $condition ) {
@@ -176,5 +182,38 @@ $flexi = BlockParser::normalize_block(
 	]
 );
 assert_true( 'gslider-blocks/flexi-content-item' === $flexi['slides'][0]['blockName'] && 1 === $flexi['totalSlides'], 'flexi slides stay child blocks' );
+
+$valid_css = ".gslider-base-1 .swiper{padding:10px 20px !important;background-image:url(https://example.com/a.jpg);background:linear-gradient(90deg, rgba(0,0,0,.5) 0%, #fff 100%);}\n@media (max-width: 767px){.gslider-base-1 .slide{background:url(\"https://example.com/b.png\") center/cover no-repeat;}}";
+assert_true( $valid_css === CssSanitizer::sanitize( $valid_css ), 'valid generated CSS passes through unchanged' );
+
+$payloads = [
+	'.a{color:red}@import url(https://evil.example/a.css);',
+	'@IMPORT "https://evil.example/a.css";.a{color:red}',
+	'@im@import x;port url(https://evil.example/a.css);.a{color:red}',
+	'.a{background:url(javajavascript:script:alert(1));color:red}',
+	'@\69mport url(https://evil.example/a.css);.a{color:red}',
+	'.a{width:expression(alert(1));color:red}',
+	'.a{background:url(JaVaScRiPt :alert(1));color:red}',
+	'.a{-moz-binding:url(https://evil.example/x.xml#x);color:red}',
+	'.a{behavior:url(x.htc);color:red}',
+	'.a{background:url( "data:text/html;base64,PHNjcmlwdD4=");color:red}',
+	'.a{color:red}</style><script>alert(1)</script>',
+	'.a{color:red}</STYLE ',
+];
+foreach ( $payloads as $payload ) {
+	$clean = strtolower( CssSanitizer::sanitize( $payload ) );
+	$bad   = preg_match( '/<|@import|@\\\\|expression\s*\(|javascript\s*:|-moz-binding|behavior\s*:|url\s*\(\s*[\'"]?\s*data:/', $clean );
+	assert_true( ! $bad && false !== strpos( $clean, 'color:red' ), 'sanitizer neutralizes ' . $payload );
+}
+assert_true( '' === CssSanitizer::sanitize( [ 'x' ] ) && '' === CssSanitizer::sanitize( null ), 'sanitizer rejects non-strings' );
+
+$styled = normalize(
+	[
+		'blockId'    => 'gslider-base',
+		'blockStyle' => '.x{color:red}@import url(https://evil.example/a.css);</style><script>alert(1)</script>',
+	],
+	'gslider-blocks/base'
+);
+assert_true( '.x{color:red}' === $styled['css'] && $styled['css'] === $styled['attrs']['blockStyle'], 'REST css and attrs.blockStyle are sanitized' );
 
 fwrite( STDOUT, "Base block slide checks passed.\n" );
