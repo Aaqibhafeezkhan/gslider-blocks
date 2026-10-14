@@ -1,6 +1,6 @@
 # @gslider/mcp-server
 
-> Official Model Context Protocol (MCP) server for **GSlider Blocks** — empowering AI assistants (Claude, Cursor, Antigravity) to inspect, scaffold, and generate WordPress slider blocks directly from natural language or Figma designs with **$0 cloud cost**.
+> Official Model Context Protocol (MCP) server for **GSlider Blocks** — empowering AI assistants (Claude, OpenAI, Cursor, Antigravity, Copilot, Windsurf, etc.) to inspect, scaffold, and generate WordPress slider blocks directly from natural language or Figma designs with **$0 cloud cost**.
 
 ---
 
@@ -54,7 +54,7 @@ import OpenAI from "openai";
 
 const transport = new StdioClientTransport({
   command: "node",
-  args: ["./packages/mcp-server/dist/index.js"]
+  args: ["/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"]
 });
 const mcp = new Client({ name: "openai-gslider", version: "1.0.0" }, { capabilities: {} });
 await mcp.connect(transport);
@@ -78,7 +78,7 @@ const completion = await openai.chat.completions.create({
     "gslider": {
       "command": "node",
       "args": [
-        "./packages/mcp-server/dist/index.js"
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
       ]
     }
   }
@@ -148,7 +148,7 @@ AI assistants can inspect and load pre-built slider design presets via MCP URI r
 
 | Resource URI | Description | Target Block |
 | :--- | :--- | :--- |
-| `gslider://templates/hero-slider` | Full-width high-impact hero slider with fade transitions. | `image-slider` |
+| `gslider://templates/hero-slider` | Full-width high-impact hero slider with smooth slide transitions. | `image-slider` |
 | `gslider://templates/product-carousel` | Responsive 3-column e-commerce card carousel. | `image-slider` |
 | `gslider://templates/testimonial-cards` | 2-column client review cards with 5-star ratings. | `testimonial` |
 | `gslider://templates/brand-logos` | Smooth continuous brand logo ticker. | `logo-carousel` |
