@@ -99,7 +99,7 @@ if ( ! class_exists( 'SupportSVG' ) ) {
             }
 
             // Validate file extension.
-            $extension = pathinfo( $file['name'], PATHINFO_EXTENSION );
+            $extension = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
             if ( ! in_array( $extension, [ 'svg', 'svgz' ], true ) ) {
                 $file['error'] = __( 'Invalid SVG file extension.', 'gslider-blocks' );
                 return $file;
@@ -183,14 +183,33 @@ if ( ! class_exists( 'SupportSVG' ) ) {
          * @return void
          */
         public function enableSvgSupport() {
-            add_filter( 'wp_check_filetype_and_ext', function ( $data, $file, $filename, $mimes ) {
-                $filetype = wp_check_filetype( $filename, $mimes );
-                return [
-                    'ext'             => $filetype['ext'],
-                    'type'            => $filetype['type'],
-                    'proper_filename' => $data['proper_filename'],
-                ];
-            }, 10, 4 );
+            add_filter( 'wp_check_filetype_and_ext', [ $this, 'filterFiletypeAndExt' ], 10, 4 );
+        }
+
+        /**
+         * Keeps WordPress's content sniff for every file except SVG and SVGZ.
+         *
+         * @since 1.0.0
+         *
+         * @param array         $data     File type data from WordPress.
+         * @param string        $file     Full path to the file.
+         * @param string        $filename Sanitized filename.
+         * @param string[]|null $mimes    Allowed MIME types.
+         * @return array File type data.
+         */
+        public function filterFiletypeAndExt( $data, $file, $filename, $mimes ) {
+            unset( $file );
+            $extension = strtolower( pathinfo( (string) $filename, PATHINFO_EXTENSION ) );
+            if ( ! in_array( $extension, [ 'svg', 'svgz' ], true ) ) {
+                return $data;
+            }
+
+            $filetype = wp_check_filetype( $filename, $mimes );
+            return [
+                'ext'             => $filetype['ext'],
+                'type'            => $filetype['type'],
+                'proper_filename' => $data['proper_filename'],
+            ];
         }
 
         /**
@@ -217,6 +236,10 @@ if ( ! class_exists( 'SupportSVG' ) ) {
                 'head',
                 'use',
                 'image',
+                'set',
+                'animate',
+                'animatetransform',
+                'animatemotion',
             ];
 
             // Loop through all elements and check their tag names.
