@@ -465,8 +465,11 @@ the Free Software Foundation; either version 2 of the License, or
   <a href="https://linkedin.com/in/noruzzaman">
     <img src="https://img.shields.io/badge/LinkedIn-noruzzaman-0A66C2?logo=linkedin" alt="LinkedIn">
   </a>
+  <a href="https://profiles.wordpress.org/noruzzaman/">
+    <img src="https://img.shields.io/badge/WordPress.org-@noruzzaman-21759B?logo=wordpress" alt="WordPress Profile">
+  </a>
   <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/WordPress-GSlider%20Blocks-21759B?logo=wordpress" alt="WordPress">
+    <img src="https://img.shields.io/badge/Plugin-GSlider%20Blocks-0073AA?logo=wordpress" alt="WordPress Plugin">
   </a>
 </p>
 
