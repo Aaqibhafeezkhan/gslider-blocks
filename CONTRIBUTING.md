@@ -137,7 +137,7 @@ All commits and pull requests must follow [Conventional Commits](https://www.con
 
 ## 🤖 Use of AI Policy
 
-We welcome AI-assisted contributions (using Cursor, Claude, GitHub Copilot, Antigravity) with the following mandatory guardrails:
+We welcome AI-assisted contributions from leading AI coding tools (such as Cursor, Claude, GitHub Copilot, OpenAI Codex/ChatGPT, Gemini, Windsurf, Antigravity, etc.) with the following mandatory guardrails:
 
 1. **Human Ownership:** You are 100% responsible for all code submitted. Blind copy-pasting of AI output without testing is prohibited.
 2. **Zero Block Invalidation:** Never alter `save.js` markup or attribute defaults of existing blocks without backward-compatible migrations in `deprecated.js`.

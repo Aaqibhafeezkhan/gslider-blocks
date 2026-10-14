@@ -92,7 +92,7 @@ Closes #<issue_number>
 
 ## 🤖 4. Use of AI Policy (AI-Assisted Contributions)
 
-GSlider Blocks welcomes modern AI tooling (Cursor, Claude, Copilot, Antigravity) to accelerate development, subject to non-negotiable enterprise quality standards:
+GSlider Blocks welcomes contributions assisted by modern AI tooling (Cursor, Claude, GitHub Copilot, OpenAI Codex/ChatGPT, Gemini, Windsurf, Antigravity, etc.) to accelerate development, subject to non-negotiable enterprise quality standards:
 
 1. **Human Ownership:** AI is an accelerator, but the committer takes 100% responsibility for the code. Blind copy-pasting of AI output without manual verification is strictly forbidden.
 2. **Zero Hallucinations:** Every function, filter, hook, and npm/composer package must exist and be legitimate. Never introduce imaginary dependencies.

@@ -152,7 +152,7 @@ flowchart TD
 
 ## 🤖 AI Assistant Integration (Model Context Protocol - MCP)
 
-GSlider Blocks ships with an official local **Model Context Protocol (MCP)** server located in `packages/mcp-server`. It empowers AI assistants (Cursor, Claude Desktop, Antigravity) to inspect, scaffold, and generate WordPress slider blocks directly from natural language or Figma designs with **$0 cloud cost**.
+GSlider Blocks ships with an official local **Model Context Protocol (MCP)** server located in `packages/mcp-server`. It empowers AI assistants and agentic IDEs (Cursor, Claude Desktop, Windsurf, Antigravity, etc.) to inspect, scaffold, and generate WordPress slider blocks directly from natural language or Figma designs with **$0 cloud cost**.
 
 ### 1-Click Setup in Cursor (`.cursor/mcp.json`)
 
