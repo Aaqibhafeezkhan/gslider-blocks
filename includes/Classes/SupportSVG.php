@@ -83,7 +83,9 @@ if ( ! class_exists( 'SupportSVG' ) ) {
         /**
          * Validates and sanitizes an uploaded SVG file.
          *
-         * Checks file extension, reads content, validates XML
+         * Runs for every .svg/.svgz file name regardless of the
+         * client-sent MIME type, and rejects image/svg+xml sent with
+         * any other extension. Reads content, validates XML
          * structure, checks for prohibited elements/attributes,
          * and sanitizes the SVG before saving.
          *
@@ -94,13 +96,17 @@ if ( ! class_exists( 'SupportSVG' ) ) {
          * @return array The file data array, possibly with 'error' set.
          */
         public function validateSvgUpload( array $file ): array {
-            if ( 'image/svg+xml' !== $file['type'] ) {
+            $name            = isset( $file['name'] ) ? (string) $file['name'] : '';
+            $clientType      = isset( $file['type'] ) ? (string) $file['type'] : '';
+            $extension       = strtolower( pathinfo( $name, PATHINFO_EXTENSION ) );
+            $hasSvgExtension = in_array( $extension, [ 'svg', 'svgz' ], true );
+
+            // The client type is untrusted; filterFiletypeAndExt() saves any .svg/.svgz as SVG.
+            if ( ! $hasSvgExtension && 'image/svg+xml' !== $clientType ) {
                 return $file;
             }
 
-            // Validate file extension.
-            $extension = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
-            if ( ! in_array( $extension, [ 'svg', 'svgz' ], true ) ) {
+            if ( ! $hasSvgExtension ) {
                 $file['error'] = __( 'Invalid SVG file extension.', 'gslider-blocks' );
                 return $file;
             }
