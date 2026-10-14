@@ -3,7 +3,24 @@
  *
  * Exposes production-ready slider configurations matching real GSlider
  * block attributes and responsive `{ Desktop, Tablet, Mobile }` shapes.
+ *
+ * Every key in `data` is a real attribute of `gslider-blocks/<blockSlug>`.
+ * `blockId` and `blockStyle` are left empty: the editor sets `blockId` to
+ * `<blockIdPrefix>-` plus 8 characters and writes `blockStyle` from the
+ * block's `styling.js`, so a template only renders fully after it is opened
+ * and saved in the block editor.
  */
+import { getBlockSchema } from '../core/registry.js';
+/**
+ * Fills each slide with the block's first default slide item, so templates
+ * carry the same per-slide fields the editor writes.
+ */
+function withDefaultSlideFields(slug, slides) {
+    const schema = getBlockSchema(slug);
+    const defaults = schema.attributes[schema.slideField]?.default;
+    const base = Array.isArray(defaults) && defaults.length > 0 ? defaults[0] : {};
+    return slides.map((slide) => ({ ...structuredClone(base), ...slide }));
+}
 export const SLIDER_TEMPLATES = [
     {
         uri: 'gslider://templates/hero-slider',
@@ -11,8 +28,11 @@ export const SLIDER_TEMPLATES = [
         description: 'High-impact full-width slider with responsive layout, auto-play, navigation arrows, and bullet pagination.',
         mimeType: 'application/json',
         blockSlug: 'image-slider',
+        blockName: 'gslider-blocks/image-slider',
+        blockIdPrefix: 'gslider-image-slider',
         data: {
-            blockType: 'image-slider',
+            blockId: '',
+            blockStyle: '',
             images: [
                 {
                     id: 1,
@@ -47,8 +67,11 @@ export const SLIDER_TEMPLATES = [
         description: 'Responsive 3-column card carousel with space between items and navigation controls.',
         mimeType: 'application/json',
         blockSlug: 'image-slider',
+        blockName: 'gslider-blocks/image-slider',
+        blockIdPrefix: 'gslider-image-slider',
         data: {
-            blockType: 'image-slider',
+            blockId: '',
+            blockStyle: '',
             images: [
                 {
                     id: 11,
@@ -87,13 +110,15 @@ export const SLIDER_TEMPLATES = [
     {
         uri: 'gslider://templates/testimonial-cards',
         name: 'Social Proof Testimonial Cards',
-        description: 'Two-column client review cards using preset-classic with 5-star ratings and reviewer details.',
+        description: 'Two-column client review cards with 5-star ratings and reviewer details.',
         mimeType: 'application/json',
         blockSlug: 'testimonial',
+        blockName: 'gslider-blocks/testimonial',
+        blockIdPrefix: 'gslider',
         data: {
-            blockType: 'testimonial',
-            presetStyle: 'preset-classic',
-            sliderItems: [
+            blockId: '',
+            blockStyle: '',
+            sliderItems: withDefaultSlideFields('testimonial', [
                 {
                     id: 'item-1',
                     testimonialTitle: 'Game changer for our agency',
@@ -102,6 +127,7 @@ export const SLIDER_TEMPLATES = [
                     authorDesignation: 'CTO, Vertex Media',
                     authorImage: {
                         url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
+                        id: '',
                         alt: 'Marcus Vance',
                     },
                     ratingNumber: 5,
@@ -114,11 +140,12 @@ export const SLIDER_TEMPLATES = [
                     authorDesignation: 'Lead Frontend Architect',
                     authorImage: {
                         url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
+                        id: '',
                         alt: 'Elena Rostova',
                     },
                     ratingNumber: 5,
                 },
-            ],
+            ]),
             sliderType: 'carousel',
             carouselPerColumn: { Desktop: 2, Tablet: 2, Mobile: 1 },
             carouselPerColumnGap: { Desktop: 20, Tablet: 20, Mobile: 0 },
@@ -135,11 +162,14 @@ export const SLIDER_TEMPLATES = [
     {
         uri: 'gslider://templates/brand-logos',
         name: 'Partner Brand Logo Carousel',
-        description: 'Smooth scrolling logo carousel for trusted brands and client showcases.',
+        description: 'Two-column logo carousel for trusted brands and client showcases, with autoplay off.',
         mimeType: 'application/json',
         blockSlug: 'logo-carousel',
+        blockName: 'gslider-blocks/logo-carousel',
+        blockIdPrefix: 'gslider-logo-carousel',
         data: {
-            blockType: 'logo-carousel',
+            blockId: '',
+            blockStyle: '',
             logos: [
                 { id: 101, url: 'https://dummyimage.com/200x80/222/fff.png&text=Google', alt: 'Google', link: '#' },
                 { id: 102, url: 'https://dummyimage.com/200x80/222/fff.png&text=Stripe', alt: 'Stripe', link: '#' },
@@ -155,6 +185,46 @@ export const SLIDER_TEMPLATES = [
             infiniteLoop: true,
             showNavigation: { Desktop: true, Tablet: true, Mobile: true },
             showPagination: { Desktop: false, Tablet: false, Mobile: false },
+        },
+    },
+    {
+        uri: 'gslider://templates/content-hero',
+        name: 'Content Hero Slider',
+        description: 'Single-column content slider with titles, descriptions, and call-to-action buttons, using a fade transition and autoplay.',
+        mimeType: 'application/json',
+        blockSlug: 'base',
+        blockName: 'gslider-blocks/base',
+        blockIdPrefix: 'gslider',
+        data: {
+            blockId: '',
+            blockStyle: '',
+            sliderItems: withDefaultSlideFields('base', [
+                {
+                    id: 'item-1',
+                    subTitle: 'New Release',
+                    title: 'Launch Faster With GSlider',
+                    description: 'Build responsive sliders in the block editor without writing code.',
+                    primaryButtonText: 'Get Started',
+                    primaryButtonLink: '#get-started',
+                },
+                {
+                    id: 'item-2',
+                    subTitle: 'Headless Ready',
+                    title: 'Ship To Any Frontend',
+                    description: 'Read pre-parsed Swiper settings and styles from the REST API.',
+                    primaryButtonText: 'Read The Docs',
+                    primaryButtonLink: '#docs',
+                },
+            ]),
+            sliderType: 'slider',
+            slideEffect: 'fade',
+            speed: { Desktop: 800, Tablet: 800, Mobile: 800 },
+            autoplay: true,
+            autoplayDelay: { Desktop: 5000, Tablet: 5000, Mobile: 5000 },
+            infiniteLoop: true,
+            showNavigation: { Desktop: true, Tablet: true, Mobile: false },
+            showPagination: { Desktop: true, Tablet: true, Mobile: true },
+            paginationType: 'bullets',
         },
     },
 ];
