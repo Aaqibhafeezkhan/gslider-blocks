@@ -166,23 +166,7 @@ The GSlider MCP Server operates over standard input/output (`stdio`) and is comp
 
 ### 1-Click Client Configurations
 
-#### 1. Cursor IDE (`.cursor/mcp.json`)
-*Compatible with OpenAI GPT-4o, Claude 3.7, and Gemini inside Cursor:*
-
-```json
-{
-  "mcpServers": {
-    "gslider": {
-      "command": "node",
-      "args": [
-        "./packages/mcp-server/dist/index.js"
-      ]
-    }
-  }
-}
-```
-
-#### 2. Claude Desktop (`claude_desktop_config.json`)
+#### 1. Claude Desktop (`claude_desktop_config.json`)
 - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`  
 - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 
@@ -199,41 +183,9 @@ The GSlider MCP Server operates over standard input/output (`stdio`) and is comp
 }
 ```
 
-#### 3. Windsurf IDE (`~/.codeium/windsurf/mcp_config.json`)
-*Compatible with Windsurf Cascade and OpenAI models:*
+#### 2. OpenAI Models & ChatGPT (GPT-4o, o1, o3-mini)
 
-```json
-{
-  "mcpServers": {
-    "gslider": {
-      "command": "node",
-      "args": [
-        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
-      ]
-    }
-  }
-}
-```
-
-#### 4. VS Code (Cline / Roo Code / Copilot Agent)
-*Compatible with OpenAI API keys (GPT-4o, o3-mini), Anthropic, and local models:*
-
-```json
-{
-  "mcpServers": {
-    "gslider": {
-      "command": "node",
-      "args": [
-        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
-      ]
-    }
-  }
-}
-```
-
-#### 5. OpenAI SDK / Custom Agent Integration (Node.js)
-
-Connect the GSlider MCP server directly to OpenAI's Function Calling API:
+Connect the GSlider MCP server to any OpenAI model via standard Function Calling / Agent SDK:
 
 ```javascript
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
@@ -247,7 +199,7 @@ const transport = new StdioClientTransport({
 const mcp = new Client({ name: "openai-gslider-agent", version: "1.0.0" }, { capabilities: {} });
 await mcp.connect(transport);
 
-// Map MCP tools into OpenAI Function Calling format
+// Dynamically expose GSlider MCP tools to OpenAI GPT-4o
 const { tools } = await mcp.listTools();
 const openai = new OpenAI();
 const completion = await openai.chat.completions.create({
@@ -258,6 +210,70 @@ const completion = await openai.chat.completions.create({
     function: { name: t.name, description: t.description, parameters: t.inputSchema }
   }))
 });
+```
+
+#### 3. Cursor IDE (`.cursor/mcp.json`)
+*Compatible with Claude 3.7, OpenAI GPT-4o, and Gemini models inside Cursor:*
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "./packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+#### 4. Antigravity IDE (Google DeepMind Agentic Workflow)
+Configure in your workspace `.antigravity/mcp.json` or global Antigravity MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+#### 5. GitHub Copilot & VS Code (Cline / Roo Code)
+In VS Code, add to `cline_mcp_settings.json` or Roo Code MCP Settings:
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
+```
+
+#### 6. Windsurf IDE (`~/.codeium/windsurf/mcp_config.json`)
+*Compatible with Windsurf Cascade and Codeium agentic workflows:*
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
 ```
 
 ### Available MCP Tools
