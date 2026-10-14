@@ -37,13 +37,13 @@ if ( ! class_exists( 'BlockParser' ) ) {
 		private static $reusable_refs = [];
 
 		/**
-		 * Attribute defaults keyed by block name, loaded once from block-defaults.json.
+		 * Attribute defaults keyed by block name, filled as each block's file is loaded.
 		 *
 		 * @since 1.1.9
 		 *
-		 * @var array<string, array>|null
+		 * @var array<string, array>
 		 */
-		private static $attribute_defaults = null;
+		private static $attribute_defaults = [];
 
 		/**
 		 * Parses all GSlider blocks from a post's content.
@@ -238,22 +238,23 @@ if ( ! class_exists( 'BlockParser' ) ) {
 		}
 
 		/**
-		 * Default attribute values for a GSlider block, from block-defaults.json.
+		 * Default attribute values for a GSlider block.
 		 *
-		 * The file is generated from each block's attributes.js by
-		 * `npm run defaults:generate`.
+		 * Read from includes/RestApi/defaults/<slug>.php, which
+		 * `npm run defaults:generate` writes from that block's attributes.js.
+		 * Each file is loaded at most once per request.
 		 *
 		 * @since 1.1.9
 		 *
-		 * @param string $block_name Block name.
+		 * @param string $block_name Block name, such as gslider-blocks/base.
 		 * @return array Default attribute values. Empty for an unknown block.
 		 */
 		public static function attribute_defaults( string $block_name ): array {
-			if ( null === self::$attribute_defaults ) {
-				self::$attribute_defaults = self::load_attribute_defaults();
+			if ( ! array_key_exists( $block_name, self::$attribute_defaults ) ) {
+				self::$attribute_defaults[ $block_name ] = self::load_attribute_defaults( $block_name );
 			}
 
-			$defaults = self::$attribute_defaults[ $block_name ] ?? [];
+			$defaults = self::$attribute_defaults[ $block_name ];
 
 			/**
 			 * Filters the default attributes used to fill a GSlider block's REST attrs.
@@ -269,23 +270,35 @@ if ( ! class_exists( 'BlockParser' ) ) {
 		}
 
 		/**
-		 * Reads block-defaults.json. A missing or invalid file yields no defaults.
+		 * Loads one block's generated defaults file.
+		 *
+		 * A block outside the gslider-blocks namespace, or a missing or invalid
+		 * file, yields no defaults, so the raw attributes are used unchanged.
 		 *
 		 * @since 1.1.9
 		 *
-		 * @return array Defaults keyed by block name.
+		 * @param string $block_name Block name.
+		 * @return array Default attribute values.
 		 */
-		private static function load_attribute_defaults(): array {
-			$file = __DIR__ . '/block-defaults.json';
+		private static function load_attribute_defaults( string $block_name ): array {
+			$prefix = 'gslider-blocks/';
+			if ( 0 !== strpos( $block_name, $prefix ) ) {
+				return [];
+			}
+
+			$slug = substr( $block_name, strlen( $prefix ) );
+			if ( ! preg_match( '/^[a-z0-9-]+$/', $slug ) ) {
+				return [];
+			}
+
+			$file = __DIR__ . '/defaults/' . $slug . '.php';
 			if ( ! is_readable( $file ) ) {
 				return [];
 			}
 
-			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local plugin file.
-			$json = file_get_contents( $file );
-			$data = is_string( $json ) ? json_decode( $json, true ) : null;
+			$defaults = include $file;
 
-			return is_array( $data ) ? $data : [];
+			return is_array( $defaults ) ? $defaults : [];
 		}
 
 		/**
