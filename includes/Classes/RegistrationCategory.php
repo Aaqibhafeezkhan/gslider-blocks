@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'RegistrationCategory' ) ) {
+if ( ! class_exists( RegistrationCategory::class, false ) ) {
 
     /**
      * Registers the GSlider Blocks custom block category.

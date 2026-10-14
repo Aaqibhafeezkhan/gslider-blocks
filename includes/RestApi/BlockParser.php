@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'BlockParser' ) ) {
+if ( ! class_exists( BlockParser::class, false ) ) {
 
 	/**
 	 * Parses and normalizes GSlider Gutenberg blocks.

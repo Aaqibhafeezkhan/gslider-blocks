@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'BlocksController' ) ) {
+if ( ! class_exists( BlocksController::class, false ) ) {
 
 	/**
 	 * Controller for the /wp-json/gslider/v1/blocks endpoint.
