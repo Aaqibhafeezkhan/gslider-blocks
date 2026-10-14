@@ -88,7 +88,7 @@ flowchart TD
     subgraph Storage["💾 2. WordPress Database (post_content)"]
         SaveJS["save.js (Clean Semantic HTML)"]
         BlockStyleAttr["attribute: blockStyle (Scoped CSS String)"]
-        Deprecations["deprecated.js (v1_1_7+ Schema Migrations)"]
+        Deprecations["deprecated.js (v1_0_0+ Schema Migrations)"]
         
         EditJS --> SaveJS
         Styling --> BlockStyleAttr

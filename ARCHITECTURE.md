@@ -113,7 +113,7 @@ useEffect(() => {
 - **Problem:** Adding a new wrapper `<div>` or altering attribute structures in `save.js` invalidates existing blocks in the database.
 - **Solution:** Every modification to `save.js` is paired with an immutable entry in `deprecated.js`:
 ```javascript
-export const v1_1_7 = {
+export const v1_0_0 = {
     attributes: previousAttributesSchema,
     save: PreviousSaveComponent,
     migrate(attributes) {
@@ -125,7 +125,7 @@ export const v1_1_7 = {
     },
 };
 
-export default [v1_1_7];
+export default [v1_0_0];
 ```
 
 ### 12. PSR-4 Singleton Service Pattern (PHP Backend)
