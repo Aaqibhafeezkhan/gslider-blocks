@@ -86,11 +86,11 @@ async function main(): Promise<void> {
       };
     }
 
-    if (name === 'list_gslider_blocks') {
+    if (name === 'gslider_list_blocks' || name === 'list_gslider_blocks') {
       return await handleListBlocks();
     }
 
-    if (name === 'get_block_schema') {
+    if (name === 'gslider_get_block_schema' || name === 'get_block_schema') {
       return await handleGetBlockSchema(args);
     }
 

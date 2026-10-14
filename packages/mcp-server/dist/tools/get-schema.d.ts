@@ -22,7 +22,7 @@ export declare const getBlockSchemaToolDefinition: {
     };
 };
 /**
- * Handles the get_block_schema MCP tool request.
+ * Handles the gslider_get_block_schema MCP tool request.
  *
  * Returns raw schema payload directly without wrapper noise.
  * Returns { isError: true } on validation or lookup errors so callers receive clear diagnostics.

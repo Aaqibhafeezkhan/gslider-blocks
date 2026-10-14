@@ -6,7 +6,7 @@ export const getBlockSchemaInputZod = z.object({
         .describe('Slug of the GSlider block to inspect (e.g. image-slider, testimonial, logo-carousel, flexi-content, base)'),
 });
 export const getBlockSchemaToolDefinition = {
-    name: 'get_block_schema',
+    name: 'gslider_get_block_schema',
     description: 'Retrieves the complete attribute schema, real defaults, slide structure, and allowed options for a specific GSlider block.',
     inputSchema: {
         type: 'object',
@@ -21,7 +21,7 @@ export const getBlockSchemaToolDefinition = {
     },
 };
 /**
- * Handles the get_block_schema MCP tool request.
+ * Handles the gslider_get_block_schema MCP tool request.
  *
  * Returns raw schema payload directly without wrapper noise.
  * Returns { isError: true } on validation or lookup errors so callers receive clear diagnostics.
@@ -35,7 +35,7 @@ export async function handleGetBlockSchema(args) {
             content: [
                 {
                     type: 'text',
-                    text: `Invalid arguments for get_block_schema: ${errorMsg}. Valid slugs are: ${SUPPORTED_BLOCK_SLUGS.join(', ')}`,
+                    text: `Invalid arguments for gslider_get_block_schema: ${errorMsg}. Valid slugs are: ${SUPPORTED_BLOCK_SLUGS.join(', ')}`,
                 },
             ],
         };
