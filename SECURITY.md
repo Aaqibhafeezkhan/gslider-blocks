@@ -13,7 +13,7 @@ We release security updates and patches for the current major/minor release cycl
 
 ## Reporting a Vulnerability
 
-The GSlider Blocks team takes the security of our plugin, users, and the 2,000+ active WordPress sites running our code seriously.
+The GSlider Blocks team takes the security of our plugin, users, and all WordPress sites running our code seriously.
 
 If you believe you have discovered a security vulnerability in GSlider Blocks, please report it to us responsibly. **Do NOT report security vulnerabilities via public GitHub issues, discussions, or pull requests.**
 
@@ -45,6 +45,6 @@ To help us triage and resolve the issue quickly, please include:
 
 GSlider Blocks follows strict WordPress Core Security Guidelines:
 - **Input Sanitization & Output Escaping:** Every attribute rendered to the frontend is strictly escaped (`esc_html__`, `esc_attr__`, `esc_url`, `wp_kses_post`).
-- **SVG Upload Hardening:** SVG uploads undergo multi-layer validation including XML entity expansion defense (`LIBXML_NONET`), MIME-type verification, and removal of dangerous SMIL animation tags (`<animate>`, `<set>`) to prevent Stored Cross-Site Scripting (XSS).
+- **SVG Upload Hardening:** SVG uploads undergo multi-layer validation including XML entity expansion defense (`LIBXML_NONET`), MIME-type verification, and strict rejection of files containing dangerous elements (`<script>`, `<foreignobject>`, `<image>`, or SMIL animation tags like `<animate>`, `<set>`, `<animatetransform>`) to eliminate Stored Cross-Site Scripting (XSS) vectors.
 - **Style Sanitization:** Dynamic CSS generated from block attributes is sanitized to prohibit arbitrary CSS expressions, `javascript:` URIs, and external stylesheet inclusions.
-- **Third-Party Service Disclosures:** The codebase contains zero hidden ad-trackers or covert analytics. Telemetry is handled strictly via the official Appsero Client SDK with explicit, opt-in merchant consent adhering to WordPress.org guidelines. Web font requests via Google Fonts are loaded over secure HTTPS with local caching support.
+- **Third-Party Service Disclosures:** The codebase contains zero hidden ad-trackers or covert analytics. Telemetry is handled strictly via the official Appsero Client SDK with explicit, opt-in merchant consent adhering to WordPress.org guidelines. Web font requests via Google Fonts (`//fonts.googleapis.com/css`) are enqueued directly over secure HTTPS with dynamic deduplication.

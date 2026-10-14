@@ -47,7 +47,7 @@
 
 ## 📖 About & Value Proposition
 
-**GSlider Blocks** is an enterprise-grade Gutenberg carousel library powering sliders on **2,000+ active WordPress websites**. Built with modern React, PSR-4 PHP architecture, and Swiper 11, it delivers fluid hardware-accelerated animations, zero block invalidations, and native Headless/AI support without any jQuery dependencies.
+**GSlider Blocks** is an enterprise-grade Gutenberg carousel library designed for production WordPress websites. Built with modern React, PSR-4 PHP architecture, and Swiper 11, it delivers fluid hardware-accelerated animations, zero block invalidations, and native Headless/AI support without any jQuery dependencies.
 
 ### Why GSlider Blocks?
 
@@ -58,7 +58,7 @@
 | **Dynamic CSS Pipeline** | ✅ Server-rendered scoped CSS, 0 inline styles | ❌ Polluted inline `style=""` attributes |
 | **Responsive Architecture** | ✅ Dedicated 3-device controls (Desktop, Tablet, Mobile) | ⚠️ Generic breakpoint guessing |
 | **Local AI Integration** | ✅ Model Context Protocol (MCP) server ($0 cloud cost) | ❌ No AI schema support |
-| **Headless Ready** | ✅ Semantic REST API / WPGraphQL JSON serialization | ❌ Shortcode regex parsing needed |
+| **Headless Ready** | ✅ Dedicated REST API JSON endpoints & serialized blocks | ❌ Shortcode regex parsing needed |
 | **Code Stability** | ✅ Backwards-compatible `deprecated.js` migrations | ❌ "Block invalidation" white screens on updates |
 
 ---
@@ -117,7 +117,7 @@ flowchart TD
     subgraph HeadlessAI["🤖 5. Headless & AI Ecosystem"]
         MCPServer["packages/mcp-server (Stdio Protocol)"]
         AIAssistants["Cursor / Claude Desktop / Antigravity"]
-        HeadlessNext["Headless Next.js 14/15 (REST / WPGraphQL)"]
+        HeadlessNext["Headless Next.js 14/15 (REST API)"]
         
         AIAssistants <--> MCPServer
         MCPServer --> EditJS
@@ -299,17 +299,27 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+interface GSliderImageItem {
+  id: number;
+  url: string;
+  alt?: string;
+  caption?: string;
+  link?: string;
+}
+
 interface GSliderBlockProps {
   block: {
     blockName: string;
     attrs: {
       blockId: string;
-      slidesPerView?: { Desktop?: number; Tablet?: number; Mobile?: number };
+      images?: GSliderImageItem[];
+      carouselPerColumn?: { Desktop?: number; Tablet?: number; Mobile?: number };
+      carouselPerColumnGap?: { Desktop?: number; Tablet?: number; Mobile?: number };
       autoplay?: boolean;
-      autoplayDelay?: number;
-      showNavigation?: { Desktop?: boolean };
-      showPagination?: { Desktop?: boolean };
-      slides?: Array<{ id: string; title: string; image: string }>;
+      autoplayDelay?: { Desktop?: number; Tablet?: number; Mobile?: number };
+      showNavigation?: { Desktop?: boolean; Tablet?: boolean; Mobile?: boolean };
+      showPagination?: { Desktop?: boolean; Tablet?: boolean; Mobile?: boolean };
+      infiniteLoop?: boolean;
     };
   };
 }
@@ -323,20 +333,31 @@ export default function GSliderRenderer({ block }: GSliderBlockProps) {
     <div className={`gslider-wrapper ${attrs.blockId}`}>
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
-        spaceBetween={20}
-        slidesPerView={attrs.slidesPerView?.Mobile || 1}
+        slidesPerView={attrs.carouselPerColumn?.Mobile || 1}
+        spaceBetween={attrs.carouselPerColumnGap?.Mobile ?? 0}
+        loop={attrs.infiniteLoop ?? true}
         breakpoints={{
-          768: { slidesPerView: attrs.slidesPerView?.Tablet || 2 },
-          1024: { slidesPerView: attrs.slidesPerView?.Desktop || 3 },
+          768: {
+            slidesPerView: attrs.carouselPerColumn?.Tablet || 2,
+            spaceBetween: attrs.carouselPerColumnGap?.Tablet ?? 20,
+          },
+          1025: {
+            slidesPerView: attrs.carouselPerColumn?.Desktop || 3,
+            spaceBetween: attrs.carouselPerColumnGap?.Desktop ?? 20,
+          },
         }}
-        autoplay={attrs.autoplay ? { delay: attrs.autoplayDelay || 3000 } : false}
+        autoplay={
+          attrs.autoplay
+            ? { delay: attrs.autoplayDelay?.Desktop || 3000 }
+            : false
+        }
         navigation={Boolean(attrs.showNavigation?.Desktop)}
         pagination={attrs.showPagination?.Desktop ? { clickable: true } : false}
       >
-        {attrs.slides?.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <img src={slide.image} alt={slide.title} className="w-full rounded-lg" />
-            <h3 className="text-lg font-bold mt-2">{slide.title}</h3>
+        {attrs.images?.map((item) => (
+          <SwiperSlide key={item.id}>
+            <img src={item.url} alt={item.alt || ''} className="w-full rounded-lg" />
+            {item.caption && <p className="text-sm text-gray-600 mt-2">{item.caption}</p>}
           </SwiperSlide>
         ))}
       </Swiper>

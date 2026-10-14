@@ -1,6 +1,6 @@
 # Contributing to GSlider Blocks
 
-Thank you for your interest in contributing to **GSlider Blocks**! This project powers carousels and sliders on **2,000+ active WordPress websites**. 
+Thank you for your interest in contributing to **GSlider Blocks**! This project provides modern carousels and sliders for WordPress. 
 
 To maintain stability, security, and world-class code quality, all contributors (human and AI) must adhere strictly to these guidelines.
 

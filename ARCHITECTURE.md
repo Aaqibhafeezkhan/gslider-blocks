@@ -9,7 +9,7 @@ A comprehensive architectural specification explaining the core software enginee
 In professional software engineering, system design is divided into four distinct layers:
 1. **Core Principles (The "Why"):** Foundational philosophies governing block development, backwards compatibility, and WordPress stability (e.g., Zero Block Invalidation, Scoped Collision Isolation, Responsive-First).
 2. **Design Patterns (The "How"):** Proven structural blueprints solving concrete technical challenges in React and PHP (e.g., Dynamic CSS Pipeline, Swiper Lifecycle Cleanup, Deprecation Migrations, MCP Stdio Bridge).
-3. **Engineering Checklists (The "What to Verify"):** Step-by-step verification rules executed prior to pushing code to safeguard 2,000+ production sites.
+3. **Engineering Checklists (The "What to Verify"):** Step-by-step verification rules executed prior to pushing code to safeguard production WordPress installations.
 4. **Code Smells (The "What to Avoid"):** Surface symptoms indicating architectural debt, DOM memory leaks, or WordPress.org compliance risks.
 
 ---
@@ -153,7 +153,7 @@ class StyleGenerator {
   - **Resources Exposed:** Design presets (`gslider://templates/hero-slider`, `brand-logos`).
 
 ### 14. Headless WordPress & REST API Serialization Pattern
-- **Problem:** Decoupled modern frontend frameworks (Next.js 14/15, Astro, Remix) consume WordPress via REST API or WPGraphQL and cannot execute server-side PHP hooks.
+- **Problem:** Decoupled modern frontend frameworks (Next.js 14/15, Astro, Remix) consume WordPress via REST API and cannot execute server-side PHP hooks.
 - **Solution:** GSlider blocks provide dedicated REST endpoints via `BlocksController.php` (`GET /wp-json/gslider/v1/blocks/<id>`) and expose a `gslider_blocks` field on standard `/wp/v2/pages` and `/wp/v2/posts`. Decoupled frontend frameworks (Next.js, Astro) consume structured slider data directly and render with Swiper React.
 
 ---
