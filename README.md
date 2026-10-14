@@ -141,7 +141,7 @@ flowchart TD
 | 2 | 📝 **Flexi Content** | Full creative freedom: nest ANY Gutenberg block inside responsive slides | ✅ Production |
 | 3 | 🏢 **Logo Carousel** | Partner/client showcases with grayscale-to-color hover and ticker mode | ✅ Production |
 | 4 | 🖼️ **Image Slider** | Gallery sliders with lightbox, captions, and responsive thumbnails | ✅ Production |
-| 5 | ⭐ **Testimonial Carousel** | Customer reviews with star ratings, avatars, and verified badges | 🚀 Active Dev |
+| 5 | ⭐ **Testimonial Carousel** | Customer reviews with star ratings, avatars, and verified badges | ✅ Production |
 | 6 | 👥 **Team Carousel** | Member profiles with bio, social links, and modal bio triggers | 📋 Roadmap |
 | 7 | 🎥 **Video Carousel** | Self-hosted, YouTube, and Vimeo responsive video carousels | 📋 Roadmap |
 | 8 | 📊 **Stats Carousel** | Animated milestone counters and metric sliders | 📋 Roadmap |
