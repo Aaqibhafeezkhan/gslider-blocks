@@ -69,17 +69,31 @@ npx @wordpress/env stop
 
 ## 🌿 Branching & Development Workflow
 
-1. **Fork & Branch:** Create a dedicated branch off `main`:
+1. **Sync with Upstream:** Always ensure your local `main` is up to date:
    ```bash
-   git checkout -b fix/issue-55-pagination-spacing
-   # or
-   git checkout -b feat/testimonial-carousel-layout
+   git checkout main
+   git pull origin main
    ```
-2. **Watch Mode:** Run development bundler:
+
+2. **Structured Branch Naming:** Create a branch following the `<type>/<issue-number>-<kebab-case-description>` convention:
+   ```bash
+   # Bug Fixes (link issue number if applicable)
+   git checkout -b fix/55-swiper-pagination-overlap
+
+   # New Features & Enhancements
+   git checkout -b feat/testimonial-carousel-rating-stars
+
+   # Documentation & Specifications
+   git checkout -b docs/35-architecture-readme-overhaul
+
+   # Performance & Refactoring
+   git checkout -b refactor/dynamic-css-caching-pipeline
+   ```
+3. **Watch Mode:** Run development bundler:
    ```bash
    npm run start
    ```
-3. **Admin Styles (if modifying SCSS):**
+4. **Admin Styles (if modifying SCSS):**
    ```bash
    npm run admin:build
    ```
