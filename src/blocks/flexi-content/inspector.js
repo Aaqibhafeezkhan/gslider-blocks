@@ -40,8 +40,7 @@ import BoxShadowSettingsControl from '@Components/box-shadow-control';
 import BackgroundControl from '@Components/background-control';
 import ImageControl from '@Components/image-control';
 import InspectorControl from '@Components/inspector-controls';
-import CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
+
 import ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import {useDeviceType} from "@Utils/displayType";
 import InputControls from '@Components/input-control';
@@ -1986,16 +1985,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 )}
             </PanelBody>
 
-            <PanelBody
-                title={__("Custom CSS", "gslider-blocks")}
-                opened={openPanels.advanced === "custom-css"}
-                onToggle={() => togglePanel("advanced", "custom-css")}
-            >
-                <CustomCSSEditor  
-                    value={globalCustomCSS}
-                    onChangeValue={(value) => setAttributes({ globalCustomCSS: value })}
-                />
-            </PanelBody>
+
         </>
     );
 

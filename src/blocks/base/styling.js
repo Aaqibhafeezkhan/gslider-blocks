@@ -3,7 +3,7 @@
  * Returns Dynamic Generated CSS
  */
 
-import getCustomCss from '@Utils/getCustomCss';
+
 
 /**
  * Generate block styles from attributes
@@ -1683,10 +1683,7 @@ const generateBaseSliderStyle = (attributes) => {
     `;
     /** End All Block Style */
 
-    // Custom CSS
-    const customCss = getCustomCss(globalCustomCSS, `.${blockId}`);
-
-    return `${baseSliderCSS} ${sliderItemColorStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+    return `${baseSliderCSS} ${sliderItemColorStyle}`.replace(/\s+/g, ' ').trim();
 }
 
 export default generateBaseSliderStyle;

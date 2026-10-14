@@ -8,8 +8,11 @@ const zip = async () => {
         'build',
         'includes',
         'languages',
+        'src',
         'vendor',
         'composer.json',
+        'package.json',
+        'webpack.config.js',
         'gslider-blocks.php',
         'readme.txt'
     ];
@@ -34,9 +37,9 @@ const zip = async () => {
                 archive.directory(fullPath, item, (entry) => {
                     const basename = path.basename(entry.name);
 
-                    // Exclude ALL hidden files and directories (dot-files)
+                    // Exclude ALL hidden files and directories (dot-files and dot-directories anywhere in path)
                     // WordPress.org Plugin Check does not allow hidden files.
-                    if (basename.startsWith('.')) {
+                    if (entry.name.split('/').some(part => part.startsWith('.'))) {
                         return false;
                     }
 
