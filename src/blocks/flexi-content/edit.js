@@ -89,7 +89,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	// Block props for container
 	const blockProps = useBlockProps({
-		className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
+		className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? 'has-pagination' : ''}`,
 	});
 
 	// Local state management for swiper instance is replaced by useRef

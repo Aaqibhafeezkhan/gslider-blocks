@@ -70,7 +70,7 @@ export default function Save({ attributes }) {
     const normalizedContentOrder = normalizeContentOrder(contentOrder);
 
     const blockProps = useBlockProps.save({
-        className: `gslider-testimonial-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
+        className: `gslider-testimonial-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? 'has-pagination' : ''}`,
     });
 
     const navigationEnabled = {

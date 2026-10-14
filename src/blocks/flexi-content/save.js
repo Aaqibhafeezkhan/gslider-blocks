@@ -48,7 +48,7 @@ export default function Save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
+        className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? 'has-pagination' : ''}`,
     });
 
     const innerBlocksProps = useInnerBlocksProps.save({

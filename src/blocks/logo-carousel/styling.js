@@ -1127,9 +1127,11 @@ const generateLogoCarouselStyle = (attributes) => {
             }
         ` : ''}
 
+${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? `
         .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
             margin-bottom: 30px;
         }
+        ` : ''}
 
 
         @media only screen and (max-width: 1024px) {

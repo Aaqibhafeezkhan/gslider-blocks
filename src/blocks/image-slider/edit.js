@@ -118,7 +118,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	/** Block props for container */
 	const blockProps = useBlockProps({
-		className: `gslider-image-slider-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
+		className: `gslider-image-slider-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? 'has-pagination' : ''}`,
 	});
 
 	const onSelectFromPlaceholder = (selection) => {

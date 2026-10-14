@@ -730,9 +730,11 @@ const generateFlexiContentStyle = (attributes) => {
             }
         ` : ''}
 
+${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? `
         .${blockId}.gslider-flexi-content-wrapper.has-pagination {
             margin-bottom: 30px;
         }
+        ` : ''}
 
 
         @media only screen and (max-width: 1024px) {
