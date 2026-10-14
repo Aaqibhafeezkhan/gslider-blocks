@@ -288,6 +288,8 @@ In VS Code, add to `cline_mcp_settings.json` or Roo Code MCP Settings:
 
 GSlider Blocks provides dedicated machine-readable REST API endpoints for decoupled and headless architectures. Retrieve structured slider data via the dedicated endpoint `GET /wp-json/gslider/v1/blocks/<post_id>` or via the `gslider_blocks` field on standard `/wp/v2/pages/<id>` and `/wp/v2/posts/<id>`.
 
+Each block's `attrs` holds every attribute: values the editor stored, plus the `attributes.js` default for any attribute Gutenberg left out of the block comment. An untouched Base or Testimonial block therefore returns its default slides. The defaults ship in `includes/RestApi/block-defaults.json`, which `npm run build` regenerates from the MCP schemas, and the `gslider_block_attribute_defaults` filter can change them.
+
 ### Consuming GSlider in Next.js 14/15 (App Router)
 
 ```tsx

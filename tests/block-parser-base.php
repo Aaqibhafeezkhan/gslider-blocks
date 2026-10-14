@@ -113,8 +113,53 @@ assert_true( 2 === $two['totalSlides'] && 2 === count( $two['slides'] ), 'two sl
 assert_true( 'Slider Item 2' === $two['slides'][1]['title'], 'the second slide title is copied' );
 assert_true( true === $two['slides'][0]['primaryButtonTargetLink'] && false === $two['slides'][0]['secondaryButtonSwitcher'], 'omitted button flags use the editor defaults as booleans' );
 
-$empty = normalize( [ 'blockId' => 'gslider-empty' ], 'gslider-blocks/base' );
-assert_true( [] === $empty['slides'] && 0 === $empty['totalSlides'], 'missing sliderItems returns an empty slide list' );
+$untouched = normalize( [ 'blockId' => 'gslider-empty' ], 'gslider-blocks/base' );
+assert_true( 3 === $untouched['totalSlides'] && 3 === count( $untouched['slides'] ), 'missing sliderItems returns the three default slides' );
+assert_true( 'Slider Item 1' === $untouched['slides'][0]['title'] && 'item-3' === $untouched['slides'][2]['id'], 'default base slides keep their default content' );
+assert_true( 'gslider-empty' === $untouched['blockId'] && 'gslider-empty' === $untouched['attrs']['blockId'], 'stored blockId wins over its default' );
+
+$empty = normalize( [ 'sliderItems' => [] ], 'gslider-blocks/base' );
+assert_true( [] === $empty['slides'] && 0 === $empty['totalSlides'], 'a stored empty sliderItems stays empty' );
+
+$untouched_testimonial = normalize( [], 'gslider-blocks/testimonial' );
+assert_true( 3 === $untouched_testimonial['totalSlides'], 'an untouched testimonial returns the three default slides' );
+assert_true( 'Alex Hunter' === $untouched_testimonial['slides'][0]['authorName'], 'default testimonial slides keep their default content' );
+
+$schemas_dir = dirname( __DIR__ ) . '/packages/mcp-server/src/core/schemas';
+foreach ( [ 'base', 'testimonial', 'image-slider', 'logo-carousel', 'flexi-content' ] as $slug ) {
+	$schema   = json_decode( file_get_contents( "{$schemas_dir}/{$slug}.json" ), true );
+	$expected = [];
+	foreach ( $schema['attributes'] as $name => $definition ) {
+		if ( array_key_exists( 'default', $definition ) ) {
+			$expected[ $name ] = $definition['default'];
+		}
+	}
+	$defaults = BlockParser::attribute_defaults( "gslider-blocks/{$slug}" );
+	assert_true( $expected === $defaults, "{$slug} defaults match the MCP schema (run npm run defaults:generate if not)" );
+
+	$filled = normalize( [], "gslider-blocks/{$slug}" );
+	assert_true( $expected === $filled['attrs'], "an untouched {$slug} block returns every default in attrs" );
+}
+
+$base_defaults = BlockParser::attribute_defaults( 'gslider-blocks/base' );
+assert_true( true === $base_defaults['showTitle'] || false === $base_defaults['showTitle'], 'base defaults include showTitle' );
+
+$stored = normalize(
+	[
+		'infiniteLoop'      => false,
+		'carouselPerColumn' => [ 'Desktop' => 4 ],
+		'showTitle'         => false,
+		'blockStyle'        => '',
+	],
+	'gslider-blocks/base'
+);
+assert_true( false === $stored['attrs']['infiniteLoop'] && false === $stored['attrs']['showTitle'], 'stored false values are not replaced by defaults' );
+assert_true( [ 'Desktop' => 4 ] === $stored['attrs']['carouselPerColumn'], 'a stored object replaces the default object, as in Gutenberg' );
+assert_true( false === $stored['swiperConfig']['loop'], 'swiperConfig still honors stored values' );
+
+$untouched_image = normalize( [], 'gslider-blocks/image-slider' );
+assert_true( 0 === $untouched_image['totalSlides'] && [] === $untouched_image['attrs']['images'], 'an untouched image slider has no default images' );
+assert_true( [] === BlockParser::attribute_defaults( 'gslider-blocks/unknown' ), 'an unknown block has no defaults' );
 
 $image = normalize(
 	[

@@ -6,8 +6,9 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build",
-		"build:production": "wp-scripts build --mode=production",
+		"build": "wp-scripts build && npm run defaults:generate",
+		"defaults:generate": "node scripts/generate-block-defaults.js",
+		"build:production": "wp-scripts build --mode=production && npm run defaults:generate",
 		"start": "wp-scripts start",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",

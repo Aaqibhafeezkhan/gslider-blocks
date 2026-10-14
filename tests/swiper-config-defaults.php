@@ -62,7 +62,7 @@ $omitted = BlockParser::normalize_block(
 	]
 );
 $base = $omitted['swiperConfig'];
-assert_true( ! array_key_exists( 'sliderType', $omitted['attrs'] ), 'omitted defaults stay out of the raw attrs bag' );
+assert_true( 'slider' === $omitted['attrs']['sliderType'], 'omitted defaults are filled into attrs' );
 assert_true( true === $base['loop'], 'omitted base infiniteLoop becomes loop true' );
 assert_true( 'slide' === $base['effect'], 'omitted base sliderType uses slideEffect' );
 assert_true( false === $base['autoplay'], 'omitted autoplay stays off' );
