@@ -305,9 +305,11 @@ Each response holds `{ post_id, post_title, total_sliders, blocks }`. Every entr
 | `swiperConfig` | Swiper options built by `BlockParser`, with block defaults filled in: `effect`, `loop`, `autoplay`, `keyboard`, `mousewheel`, `navigation.enabled`, `pagination`, and per-breakpoint (`0`, `768`, `1025`) `slidesPerView`, `spaceBetween`, `speed`, and `autoplay.delay`. It has no `navigation.nextEl`/`prevEl` or `pagination.el`; your renderer supplies those. |
 | `slides` | Sanitized slide data. Image and logo slides are `{ id, url, alt, caption, link, tooltipText }`. |
 | `css` | The block's generated CSS, scoped to the WordPress markup (`.gslider-xxxxxxxx.gslider-image-slider-wrapper …`). It only matches if you reproduce the `save.js` wrapper classes. |
-| `attrs` | The raw block comment. Gutenberg leaves out every attribute that is still at its default, so do not read layout settings from here. Use `swiperConfig` and `slides`. |
+| `attrs` | Every block attribute: the values stored in the block comment, plus the `attributes.js` default for each attribute Gutenberg left out because it was still at its default. Stored values always win. |
 
 On collection requests such as `/wp/v2/posts?per_page=100`, the `gslider_blocks` field parses every post. Use `_fields=` to skip it when you do not need it.
+
+An untouched Base or Testimonial block returns its 3 default slides. The defaults ship as one generated file per block in `includes/RestApi/defaults/`, which `npm run build` regenerates from the MCP schemas. The `gslider_block_attribute_defaults` filter can change them.
 
 ### Consuming GSlider in Next.js 14/15 (App Router)
 
@@ -381,7 +383,7 @@ export default async function Page() {
 ```
 
 > [!NOTE]
-> - `slides[].link` is always returned. The WordPress frontend only links an image when the block's `enableimageLinks` setting is on, and that setting is only present in `attrs` after it has been changed from its default.
+> - `slides[].link` is always returned. The WordPress frontend only links an image when the block's `enableimageLinks` setting is on. Check `attrs.enableimageLinks` before rendering the link.
 > - Treat `css` as content written by post authors. Do not inject it into a `<style>` tag unless you trust everyone who can edit the post.
 
 ---

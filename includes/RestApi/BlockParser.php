@@ -39,6 +39,15 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 		private static $reusable_refs = [];
 
 		/**
+		 * Attribute defaults keyed by block name, filled as each block's file is loaded.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @var array<string, array>
+		 */
+		private static $attribute_defaults = [];
+
+		/**
 		 * Parses all GSlider blocks from a post's content.
 		 *
 		 * @since 1.1.9
@@ -156,6 +165,7 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 		public static function normalize_block( array $block ): array {
 			$block_name   = sanitize_text_field( $block['blockName'] ?? '' );
 			$attrs        = isset( $block['attrs'] ) && is_array( $block['attrs'] ) ? $block['attrs'] : [];
+			$attrs        = self::with_attribute_defaults( $block_name, $attrs );
 			$inner_blocks = isset( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ? $block['innerBlocks'] : [];
 			$block_slug   = str_replace( 'gslider-blocks/', '', $block_name );
 
@@ -215,6 +225,86 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 			 * @param array $block Raw Gutenberg block structure.
 			 */
 			return apply_filters( 'gslider_normalized_block_data', $data, $block );
+		}
+
+		/**
+		 * Fills attributes Gutenberg omitted from the block comment with their defaults.
+		 *
+		 * Stored values win, including 0, false, '' and []. The merge is top-level
+		 * only, like Gutenberg: a stored object replaces the whole default object.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @param string $block_name Block name, such as gslider-blocks/base.
+		 * @param array  $attrs      Attributes from the block comment.
+		 * @return array Attributes with every omitted default filled in.
+		 */
+		public static function with_attribute_defaults( string $block_name, array $attrs ): array {
+			return $attrs + self::attribute_defaults( $block_name );
+		}
+
+		/**
+		 * Default attribute values for a GSlider block.
+		 *
+		 * Read from includes/RestApi/defaults/<slug>.php, which
+		 * `npm run defaults:generate` writes from that block's attributes.js.
+		 * Each file is loaded at most once per request.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @param string $block_name Block name, such as gslider-blocks/base.
+		 * @return array Default attribute values. Empty for an unknown block.
+		 */
+		public static function attribute_defaults( string $block_name ): array {
+			if ( ! array_key_exists( $block_name, self::$attribute_defaults ) ) {
+				self::$attribute_defaults[ $block_name ] = self::load_attribute_defaults( $block_name );
+			}
+
+			$defaults = self::$attribute_defaults[ $block_name ];
+
+			/**
+			 * Filters the default attributes used to fill a GSlider block's REST attrs.
+			 *
+			 * @since 1.1.9
+			 *
+			 * @param array  $defaults   Default attribute values.
+			 * @param string $block_name Block name.
+			 */
+			$filtered = apply_filters( 'gslider_block_attribute_defaults', $defaults, $block_name );
+
+			return is_array( $filtered ) ? $filtered : $defaults;
+		}
+
+		/**
+		 * Loads one block's generated defaults file.
+		 *
+		 * A block outside the gslider-blocks namespace, or a missing or invalid
+		 * file, yields no defaults, so the raw attributes are used unchanged.
+		 *
+		 * @since 1.1.9
+		 *
+		 * @param string $block_name Block name.
+		 * @return array Default attribute values.
+		 */
+		private static function load_attribute_defaults( string $block_name ): array {
+			$prefix = 'gslider-blocks/';
+			if ( 0 !== strpos( $block_name, $prefix ) ) {
+				return [];
+			}
+
+			$slug = substr( $block_name, strlen( $prefix ) );
+			if ( ! preg_match( '/^[a-z0-9-]+$/', $slug ) ) {
+				return [];
+			}
+
+			$file = __DIR__ . '/defaults/' . $slug . '.php';
+			if ( ! is_readable( $file ) ) {
+				return [];
+			}
+
+			$defaults = include $file;
+
+			return is_array( $defaults ) ? $defaults : [];
 		}
 
 		/**
