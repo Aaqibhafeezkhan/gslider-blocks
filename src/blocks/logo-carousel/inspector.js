@@ -796,7 +796,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     onChangeValue={(value) => setAttributes({ carouselPerColumnGap: value })}
                     deviceType={deviceType}
                     step={1}
-                    resetFallbackValue={""}
+                    resetFallbackValue={'10'}
                     isRangeUnit={false}
                 />
                 <ToggleControl

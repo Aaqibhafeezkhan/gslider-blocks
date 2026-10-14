@@ -1303,7 +1303,7 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
                         onChangeValue={(value) => setAttributes({ carouselPerColumnGap: value })}
                         deviceType={deviceType}
                         step={1}
-                        resetFallbackValue={""}
+                        resetFallbackValue={deviceType === 'Mobile' ? '0' : '20'}
                         isRangeUnit={false}
                     />
                 </PanelBody>
