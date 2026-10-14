@@ -30,6 +30,36 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 	class BlockParser {
 
 		/**
+		 * Attributes extract_swiper_config() reads, filled from attribute_defaults().
+		 *
+		 * @since 1.1.9
+		 *
+		 * @var string[]
+		 */
+		private const SWIPER_ATTRIBUTES = [
+			'sliderType',
+			'slideEffect',
+			'carouselEffect',
+			'carouselPerColumn',
+			'carouselPerColumnGap',
+			'speed',
+			'autoplay',
+			'autoplayDelay',
+			'showNavigation',
+			'showPagination',
+			'paginationType',
+			'dynamicBullets',
+			'infiniteLoop',
+			'allowTouchMove',
+			'mousewheelControl',
+			'keyboardNavigation',
+			'pauseOnHover',
+			'stopOnLastSlide',
+			'reverseDirection',
+			'layoutHeightSwitcher',
+		];
+
+		/**
 		 * Reusable block IDs currently being expanded, to avoid a ref cycle.
 		 *
 		 * @since 1.1.9
@@ -453,7 +483,9 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 		/**
 		 * Fills omitted Swiper attributes with that block's attributes.js defaults.
 		 *
-		 * A stored value, including numeric 0 and boolean false, is left as stored.
+		 * Only the attributes in SWIPER_ATTRIBUTES are filled. A stored value,
+		 * including numeric 0 and boolean false, is left as stored. A stored
+		 * per-device map that lacks a device gets that device's default.
 		 *
 		 * @since 1.1.9
 		 *
@@ -462,7 +494,12 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 		 * @return array Attributes with missing Swiper defaults filled in.
 		 */
 		private static function merge_swiper_defaults( string $block_name, array $attrs ): array {
-			foreach ( self::swiper_attribute_defaults( $block_name ) as $key => $default ) {
+			$defaults = array_intersect_key(
+				self::attribute_defaults( $block_name ),
+				array_flip( self::SWIPER_ATTRIBUTES )
+			);
+
+			foreach ( $defaults as $key => $default ) {
 				if ( ! array_key_exists( $key, $attrs ) ) {
 					$attrs[ $key ] = $default;
 					continue;
@@ -478,105 +515,6 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 			}
 
 			return $attrs;
-		}
-
-		/**
-		 * Swiper-related defaults copied from each block's attributes.js.
-		 *
-		 * @since 1.1.9
-		 *
-		 * @param string $block_name Block name.
-		 * @return array Default attribute values. Empty for an unknown block.
-		 */
-		private static function swiper_attribute_defaults( string $block_name ): array {
-			$devices_true = [
-				'Desktop' => true,
-				'Tablet'  => true,
-				'Mobile'  => true,
-			];
-			$shared       = [
-				'infiniteLoop'       => true,
-				'autoplay'           => false,
-				'allowTouchMove'     => true,
-				'showNavigation'     => $devices_true,
-				'showPagination'     => $devices_true,
-				'carouselEffect'     => 'slide',
-				'speed'              => [
-					'Desktop' => 800,
-					'Tablet'  => 800,
-					'Mobile'  => 800,
-				],
-				'autoplayDelay'      => [
-					'Desktop' => 1000,
-					'Tablet'  => 1000,
-					'Mobile'  => 1000,
-				],
-				'paginationType'     => 'bullets',
-				'dynamicBullets'     => false,
-				'mousewheelControl'  => false,
-				'keyboardNavigation' => false,
-				'pauseOnHover'       => false,
-				'stopOnLastSlide'    => false,
-				'reverseDirection'   => false,
-			];
-
-			if ( in_array( $block_name, [ 'gslider-blocks/base', 'gslider-blocks/testimonial', 'gslider-blocks/flexi-content' ], true ) ) {
-				return array_merge(
-					$shared,
-					[
-						'sliderType'           => 'slider',
-						'slideEffect'          => 'slide',
-						'carouselPerColumn'    => [
-							'Desktop' => 2,
-							'Tablet'  => 2,
-							'Mobile'  => 1,
-						],
-						'carouselPerColumnGap' => [
-							'Desktop' => 20,
-							'Tablet'  => 20,
-							'Mobile'  => 0,
-						],
-					]
-				);
-			}
-
-			if ( 'gslider-blocks/image-slider' === $block_name ) {
-				return array_merge(
-					$shared,
-					[
-						'carouselPerColumn'    => [
-							'Desktop' => 1,
-							'Tablet'  => 1,
-							'Mobile'  => 1,
-						],
-						'carouselPerColumnGap' => [
-							'Desktop' => 0,
-							'Tablet'  => 0,
-							'Mobile'  => 0,
-						],
-					]
-				);
-			}
-
-			if ( 'gslider-blocks/logo-carousel' === $block_name ) {
-				return array_merge(
-					$shared,
-					[
-						'carouselPerColumn'    => [
-							'Desktop' => 2,
-							'Tablet'  => 2,
-							'Mobile'  => 1,
-						],
-						'carouselPerColumnGap' => [
-							'Desktop' => 10,
-							'Tablet'  => 10,
-							'Mobile'  => 10,
-						],
-					]
-				);
-			}
-
-			return [];
 		}
 
 		/**
