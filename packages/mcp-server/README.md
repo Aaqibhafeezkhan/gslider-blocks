@@ -157,6 +157,18 @@ AI assistants can inspect and load pre-built slider design presets via MCP URI r
 | `gslider://templates/product-carousel` | Responsive 3-column e-commerce card carousel. | `image-slider` |
 | `gslider://templates/testimonial-cards` | 2-column client review cards with 5-star ratings. | `testimonial` |
 | `gslider://templates/brand-logos` | Partner logo carousel with autoplay off. | `logo-carousel` |
+| `gslider://templates/content-hero` | Content slider with titles, buttons, fade transition, and autoplay. | `base` |
+
+Reading a template returns the attribute object for `gslider-blocks/<target block>`. Every key is a real block attribute, and attributes not listed keep their defaults. Testimonial and content slides include every default slide field.
+
+Two attributes are left empty and must be set before the block renders correctly:
+
+| Attribute | Value |
+| :--- | :--- |
+| `blockId` | A unique class name: the block prefix plus 8 characters. The prefix is `gslider-image-slider`, `gslider-logo-carousel`, or `gslider` (testimonial and base). Example: `gslider-image-slider-1a2b3c4d`. |
+| `blockStyle` | The block's generated CSS. The block editor writes it from the block's `styling.js` when the block is opened and saved. |
+
+There is no Flexi Content template yet. Its slides are child `gslider-blocks/flexi-content-item` blocks, not attribute data.
 
 ---
 
