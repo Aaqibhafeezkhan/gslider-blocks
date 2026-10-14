@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Logo Carousel, Image Slider & Testimonial blocks for Gutenberg. 7+ effects, responsive design & full customization!
+Logo Carousel, Image Slider & Testimonial blocks for Gutenberg. 5 transition effects, responsive design & full customization!
 
 == Description ==
 
@@ -20,7 +20,7 @@ The **gslider Blocks** plugin allows you to easily add customizable and responsi
 Create stunning hero sliders with predefined content elements. Perfect for homepage banners, promotional sliders, and featured content showcases.
 
 * Pre-built slide structure with Title, Subtitle, Description, and Button
-* Multiple transition effects (Slide, Fade, Cube, Coverflow, Flip, Cards, Creative)
+* Transition effects: Slide, Fade, Coverflow, Flip, and Creative in slider mode; Slide and Coverflow in carousel mode
 * Full background image/color support with overlay options
 * Responsive navigation arrows and pagination controls
 * Content alignment and positioning controls
@@ -31,7 +31,7 @@ Build completely custom slides using any Gutenberg blocks. Ultimate flexibility 
 
 * Use ANY WordPress blocks inside slides (images, text, buttons, galleries, etc.)
 * Full creative control with InnerBlocks support
-* Multiple slide effects including Fade, Slide, Cube, and more
+* Slide effects: Slide, Fade, Coverflow, Flip, and Creative in slider mode; Slide and Coverflow in carousel mode
 * Responsive height options (Fixed, Auto, Minimum height)
 * Loop, autoplay, and touch/swipe support
 * Keyboard and mousewheel navigation
@@ -54,7 +54,7 @@ A versatile carousel for displaying images, brand assets, or partner logos with 
 * Clickable Images: Link each image to custom internal or external URLs
 * Caption Support: Display and style image captions for better context
 * Responsive Design: Fully customizable columns and spacing for Desktop, Tablet, and Mobile
-* Advanced Transitions: Slide, Fade, Cube, and other 3D effects powered by Swiper.js
+* Transitions: Slide and Coverflow effects powered by Swiper.js
 
 **5. Testimonial Block**
 Showcase customer testimonials, reviews, and feedback in a beautiful, interactive slider or carousel layout with star ratings.
@@ -66,11 +66,11 @@ Showcase customer testimonials, reviews, and feedback in a beautiful, interactiv
 * RichText Editing: Edit title, testimonial text, author name, and designation directly in the editor
 * Per-slide Background: Individual background color, gradient, and image with overlay and opacity controls
 * Responsive Design: Fully customizable columns and spacing for Desktop, Tablet, and Mobile
-* Advanced Transitions: Slide, Fade, Cube, and other 3D effects powered by Swiper.js
+* Transitions: Slide, Fade, Coverflow, Flip, and Creative in slider mode; Slide and Coverflow in carousel mode
 
 == Key Features ==
 
-* **Multiple Transition Effects:** Slide, Fade, Cube, Coverflow, Flip, Cards, and Creative effects
+* **Multiple Transition Effects:** Slide, Fade, Coverflow, Flip, and Creative (Base Slider, Flexi Content, and Testimonial in slider mode); Slide and Coverflow in carousel mode and for Image Slider and Logo Carousel
 * **Fully Responsive:** Separate settings for Desktop, Tablet, and Mobile
 * **Navigation Controls:** Customizable arrows (icons or images) and pagination (bullets, fraction, progressbar)
 * **Performance Optimized:** Built with Swiper.js for smooth, hardware-accelerated animations
@@ -109,7 +109,7 @@ Yes, gslider Blocks is designed to work with any WordPress theme that supports t
 
 Base Slider has pre-built content elements (title, subtitle, description, button) for quick setup. Flexi Content allows you to use any Gutenberg blocks inside slides for complete creative freedom.
 
-= Why do my slides show overlapping content with Creative, Cube, Cards, or Flip effects? =
+= Why do my slides show overlapping content with Creative, Coverflow, or Flip effects? =
 
 These are 3D transition effects where slides are stacked in layers. If your slides have transparent backgrounds, content from slides behind will show through. To fix this, add a background color or background image to each slide in your slider settings.
 
@@ -189,7 +189,7 @@ This plugin may connect to or load resources from external third-party services 
 - RichText Editing: Edit title, testimonial text, author name, and designation directly in the editor
 - Per-slide Background: Individual background color, gradient, and image with overlay and opacity controls
 - Responsive Design: Fully customizable columns and spacing for Desktop, Tablet, and Mobile
-- Advanced Transitions: Slide, Fade, Cube, and other 3D effects powered by Swiper.js
+- Transitions: Slide, Fade, Coverflow, Flip, and Creative in slider mode; Slide and Coverflow in carousel mode
 
 = 1.1.6 – February 9, 2026 = 
 **New Block: Image Slider**
@@ -199,7 +199,7 @@ This plugin may connect to or load resources from external third-party services 
 - Clickable Images: Link each image to custom internal or external URLs
 - Caption Support: Display and style image captions for better context
 - Responsive Design: Fully customizable columns and spacing for Desktop, Tablet, and Mobile
-- Advanced Transitions: Slide, Fade, Cube, and other 3D effects powered by Swiper.js
+- Transitions: Slide and Coverflow effects powered by Swiper.js
 
 = 1.1.5 – December 30, 2025 = 
 **Fixed: Fade effect initial load glitch**

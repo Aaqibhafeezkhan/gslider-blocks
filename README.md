@@ -55,7 +55,7 @@
 | :--- | :---: | :---: |
 | **Gutenberg Native** | ✅ Direct block canvas editing | ❌ Shortcodes or detached builders |
 | **Performance & Weight** | ✅ Hardware-accelerated Swiper 11, Zero jQuery | ❌ Heavy jQuery, bloated CSS bundles |
-| **Dynamic CSS Pipeline** | ✅ Server-rendered scoped CSS, 0 inline styles | ❌ Polluted inline `style=""` attributes |
+| **Dynamic CSS Pipeline** | ✅ Block-scoped CSS served from a per-page stylesheet instead of `style=""` attributes | ❌ Polluted inline `style=""` attributes |
 | **Responsive Architecture** | ✅ Dedicated 3-device controls (Desktop, Tablet, Mobile) | ⚠️ Generic breakpoint guessing |
 | **Local AI Integration** | ✅ Model Context Protocol (MCP) server ($0 cloud cost) | ❌ No AI schema support |
 | **Headless Ready** | ✅ Dedicated REST API JSON endpoints & serialized blocks | ❌ Shortcode regex parsing needed |
@@ -96,12 +96,19 @@ flowchart TD
         Plugin["Plugin.php (Bootstrap)"]
         RegBlocks["RegistrationBlocks.php"]
         StyleGen["StyleGenerator.php (CSS Ingestion)"]
+        FontLoader["FontLoader.php (Google Fonts)"]
         SVGGuard["SupportSVG.php (LIBXML_NONET + SMIL Ban)"]
+        RestCtrl["BlocksController.php (REST Routes)"]
+        Parser["BlockParser.php (Block Normalizer)"]
         
         Plugin --> RegBlocks
         Plugin --> StyleGen
+        Plugin --> FontLoader
         Plugin --> SVGGuard
+        Plugin --> RestCtrl
+        RestCtrl --> Parser
         BlockStyleAttr --> StyleGen
+        SaveJS --> Parser
     end
 
     subgraph Frontend["🚀 4. Client Runtime (Browser)"]
@@ -115,13 +122,14 @@ flowchart TD
     end
 
     subgraph HeadlessAI["🤖 5. Headless & AI Ecosystem"]
+        AttributesJS["src/blocks/*/attributes.js (Schema Source)"]
         MCPServer["packages/mcp-server (Stdio Protocol)"]
         AIAssistants["Cursor / Claude Desktop / Antigravity"]
         HeadlessNext["Headless Next.js 14/15 (REST API)"]
         
+        AttributesJS -->|"extract-schemas.js at build time"| MCPServer
         AIAssistants <--> MCPServer
-        MCPServer --> EditJS
-        SaveJS --> HeadlessNext
+        Parser --> HeadlessNext
     end
 ```
 
@@ -136,9 +144,9 @@ flowchart TD
 | :-: | :--- | :--- | :-: |
 | 1 | 🎯 **Base Slider** | High-impact hero sliders with Title, Subtitle, Description & CTA buttons | ✅ Production |
 | 2 | 📝 **Flexi Content** | Full creative freedom: nest ANY Gutenberg block inside responsive slides | ✅ Production |
-| 3 | 🏢 **Logo Carousel** | Partner/client showcases with grayscale-to-color hover and ticker mode | ✅ Production |
-| 4 | 🖼️ **Image Slider** | Gallery sliders with lightbox, captions, and responsive thumbnails | ✅ Production |
-| 5 | ⭐ **Testimonial Carousel** | Customer reviews with star ratings, avatars, and verified badges | ✅ Production |
+| 3 | 🏢 **Logo Carousel** | Partner/client showcases with hover effects (grayscale-to-color, opacity, scale, move up), links, tooltips, and captions | ✅ Production |
+| 4 | 🖼️ **Image Slider** | Image carousels with lightbox, captions, tooltips, and per-image links | ✅ Production |
+| 5 | ⭐ **Testimonial Carousel** | Customer reviews with fractional star ratings, author avatars, and quote icons | ✅ Production |
 | 6 | 👥 **Team Carousel** | Member profiles with bio, social links, and modal bio triggers | 📋 Roadmap |
 | 7 | 🎥 **Video Carousel** | Self-hosted, YouTube, and Vimeo responsive video carousels | 📋 Roadmap |
 | 8 | 📊 **Stats Carousel** | Animated milestone counters and metric sliders | 📋 Roadmap |
@@ -149,7 +157,7 @@ flowchart TD
 
 ## 🤖 AI Assistant Integration (Model Context Protocol - MCP)
 
-GSlider Blocks ships with an official local **Model Context Protocol (MCP)** server located in `packages/mcp-server`. It empowers AI assistants and agentic IDEs (Cursor, Claude Desktop, Windsurf, Antigravity, etc.) to inspect, scaffold, and generate WordPress slider blocks directly from natural language or Figma designs with **$0 cloud cost**.
+GSlider Blocks ships with an official local **Model Context Protocol (MCP)** server located in `packages/mcp-server`. It lets AI assistants and agentic IDEs (Cursor, Claude Desktop, Windsurf, Antigravity, etc.) list the GSlider blocks, read each block's attribute schema and defaults, and load starter templates, locally with **$0 cloud cost**. Generating block markup is planned ([#33](https://github.com/noruzzamans/gslider-blocks/issues/33)) and not available yet.
 
 ### 🧠 Model-Agnostic Architecture (OpenAI, Claude, Gemini)
 
@@ -277,7 +285,7 @@ In VS Code, add to `cline_mcp_settings.json` or Roo Code MCP Settings:
 
 | Tool | Purpose | Status |
 | :--- | :--- | :---: |
-| `gslider_ping` | Verifies MCP daemon connection and plugin version | ✅ Available |
+| `gslider_ping` | Verifies the MCP server connection and returns the MCP server's own version (not the plugin version) | ✅ Available |
 | `gslider_list_blocks` | Returns all registered blocks and supported visual controls | ✅ Available |
 | `gslider_get_block_schema` | Returns exact attribute schemas and slide data structures | ✅ Available |
 | `gslider_generate_block` | Generates validated Gutenberg markup with automated CSS | 🔜 In Progress |
@@ -288,83 +296,93 @@ In VS Code, add to `cline_mcp_settings.json` or Roo Code MCP Settings:
 
 GSlider Blocks provides dedicated machine-readable REST API endpoints for decoupled and headless architectures. Retrieve structured slider data via the dedicated endpoint `GET /wp-json/gslider/v1/blocks/<post_id>` or via the `gslider_blocks` field on standard `/wp/v2/pages/<id>` and `/wp/v2/posts/<id>`.
 
+Each response holds `{ post_id, post_title, total_sliders, blocks }`. Every entry in `blocks` has this shape:
+
+| Field | Contents |
+| :--- | :--- |
+| `blockId` | The block's scoped class, for example `gslider-1a2b3c4d`. |
+| `blockName` | For example `gslider-blocks/image-slider`. |
+| `swiperConfig` | Swiper options built by `BlockParser`, with block defaults filled in: `effect`, `loop`, `autoplay`, `keyboard`, `mousewheel`, `navigation.enabled`, `pagination`, and per-breakpoint (`0`, `768`, `1025`) `slidesPerView`, `spaceBetween`, `speed`, and `autoplay.delay`. It has no `navigation.nextEl`/`prevEl` or `pagination.el`; your renderer supplies those. |
+| `slides` | Sanitized slide data. Image and logo slides are `{ id, url, alt, caption, link, tooltipText }`. |
+| `css` | The block's generated CSS, scoped to the WordPress markup (`.gslider-xxxxxxxx.gslider-image-slider-wrapper …`). It only matches if you reproduce the `save.js` wrapper classes. |
+| `attrs` | The raw block comment. Gutenberg leaves out every attribute that is still at its default, so do not read layout settings from here. Use `swiperConfig` and `slides`. |
+
+On collection requests such as `/wp/v2/posts?per_page=100`, the `gslider_blocks` field parses every post. Use `_fields=` to skip it when you do not need it.
+
 ### Consuming GSlider in Next.js 14/15 (App Router)
 
 ```tsx
-// app/components/GSliderRenderer.tsx
-import React from 'react';
+// app/components/GSliderImageSlider.tsx
+'use client';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, EffectCoverflow, Keyboard, Mousewheel, Navigation, Pagination } from 'swiper/modules';
+import type { SwiperOptions } from 'swiper/types';
 import 'swiper/css';
+import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-interface GSliderImageItem {
+interface GSliderImageSlide {
   id: number;
   url: string;
-  alt?: string;
-  caption?: string;
-  link?: string;
+  alt: string;
+  caption: string;
+  link: string;
+  tooltipText: string;
 }
 
-interface GSliderBlockProps {
-  block: {
-    blockName: string;
-    attrs: {
-      blockId: string;
-      images?: GSliderImageItem[];
-      carouselPerColumn?: { Desktop?: number; Tablet?: number; Mobile?: number };
-      carouselPerColumnGap?: { Desktop?: number; Tablet?: number; Mobile?: number };
-      autoplay?: boolean;
-      autoplayDelay?: { Desktop?: number; Tablet?: number; Mobile?: number };
-      showNavigation?: { Desktop?: boolean; Tablet?: boolean; Mobile?: boolean };
-      showPagination?: { Desktop?: boolean; Tablet?: boolean; Mobile?: boolean };
-      infiniteLoop?: boolean;
-    };
-  };
+export interface GSliderBlock {
+  blockId: string;
+  blockName: string;
+  sliderType: string;
+  totalSlides: number;
+  swiperConfig: SwiperOptions;
+  css: string;
+  slides: unknown[];
+  attrs: Record<string, unknown>;
 }
 
-export default function GSliderRenderer({ block }: GSliderBlockProps) {
+export default function GSliderImageSlider({ block }: { block: GSliderBlock }) {
   if (block.blockName !== 'gslider-blocks/image-slider') return null;
 
-  const { attrs } = block;
+  const slides = block.slides as GSliderImageSlide[];
 
+  // Swiper React renders its own arrows and bullets when navigation/pagination
+  // are set without elements, so swiperConfig can be spread as-is.
   return (
-    <div className={`gslider-wrapper ${attrs.blockId}`}>
-      <Swiper
-        modules={[Autoplay, Navigation, Pagination]}
-        slidesPerView={attrs.carouselPerColumn?.Mobile || 1}
-        spaceBetween={attrs.carouselPerColumnGap?.Mobile ?? 0}
-        loop={attrs.infiniteLoop ?? true}
-        breakpoints={{
-          768: {
-            slidesPerView: attrs.carouselPerColumn?.Tablet || 2,
-            spaceBetween: attrs.carouselPerColumnGap?.Tablet ?? 20,
-          },
-          1025: {
-            slidesPerView: attrs.carouselPerColumn?.Desktop || 3,
-            spaceBetween: attrs.carouselPerColumnGap?.Desktop ?? 20,
-          },
-        }}
-        autoplay={
-          attrs.autoplay
-            ? { delay: attrs.autoplayDelay?.Desktop || 3000 }
-            : false
-        }
-        navigation={Boolean(attrs.showNavigation?.Desktop)}
-        pagination={attrs.showPagination?.Desktop ? { clickable: true } : false}
-      >
-        {attrs.images?.map((item) => (
-          <SwiperSlide key={item.id}>
-            <img src={item.url} alt={item.alt || ''} className="w-full rounded-lg" />
-            {item.caption && <p className="text-sm text-gray-600 mt-2">{item.caption}</p>}
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+    <Swiper
+      modules={[Autoplay, EffectCoverflow, Keyboard, Mousewheel, Navigation, Pagination]}
+      {...block.swiperConfig}
+    >
+      {slides.map((slide) => (
+        <SwiperSlide key={slide.id}>
+          <img src={slide.url} alt={slide.alt} loading="lazy" />
+          {slide.caption && <p>{slide.caption}</p>}
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }
 ```
+
+```tsx
+// app/[slug]/page.tsx (server component)
+import GSliderImageSlider, { type GSliderBlock } from '../components/GSliderImageSlider';
+
+export default async function Page() {
+  const res = await fetch(`${process.env.WP_URL}/wp-json/gslider/v1/blocks/42`, {
+    next: { revalidate: 60 },
+  });
+  const { blocks } = (await res.json()) as { blocks: GSliderBlock[] };
+
+  return blocks.map((block) => <GSliderImageSlider key={block.blockId} block={block} />);
+}
+```
+
+> [!NOTE]
+> - `slides[].link` is always returned. The WordPress frontend only links an image when the block's `enableimageLinks` setting is on, and that setting is only present in `attrs` after it has been changed from its default.
+> - Treat `css` as content written by post authors. Do not inject it into a `<style>` tag unless you trust everyone who can edit the post.
 
 ---
 
@@ -444,11 +462,15 @@ npx @wordpress/env start
 
 ## 🛡️ Testing & Code Quality Matrix
 
-Every pull request runs automated GitHub Actions CI:
-- **Build Verification:** Compiles full Gutenberg and admin bundles.
-- **PHP Matrix Testing:** Automated tests pass on **7 PHP versions**: `PHP 7.4`, `8.0`, `8.1`, `8.2`, `8.3`, `8.4`, and `8.5`.
-- **MCP Drift Verification:** Confirms `packages/mcp-server` builds cleanly without TypeScript discrepancies.
-- **Component Lock Guard:** Automatically checks PR diffs to ensure `src/components/` remains protected.
+Every pull request runs automated GitHub Actions CI (`.github/workflows/ci.yml`):
+- **Block Build:** Runs `npm run build` for the Gutenberg block bundles. The admin stylesheet (`npm run admin:build`) is not built in CI.
+- **MCP Server Tests:** Installs and builds `packages/mcp-server`, then runs its test suite (`npm test`).
+- **Distribution Zip:** Runs `npm run zip`.
+- **PHP Matrix Testing:** Runs the stub-based scripts in `tests/` on **7 PHP versions**: `PHP 7.4`, `8.0`, `8.1`, `8.2`, `8.3`, `8.4`, and `8.5`.
+
+ESLint and Stylelint are not part of CI yet. `npm run lint:js` and `npm run lint:css` currently report many existing errors, so run them on the files you change.
+
+`.github/workflows/pr-automation.yml` adds type and size labels. When a PR from anyone other than `@noruzzamans` touches `src/components/`, it adds the `needs: changes` label and posts a warning comment.
 
 ---
 
@@ -462,10 +484,10 @@ Contributions from both human engineers and AI assistants are welcome! Please re
 - 🛡️ **[SECURITY.md](SECURITY.md)**: Vulnerability disclosure policy and security protections.
 
 > [!IMPORTANT]
-> **Issue-First Policy:** GSlider Blocks strictly requires all pull requests to resolve an approved [GitHub Issue](https://github.com/noruzzamans/gslider-blocks/issues) using `Closes #<issue_number>`. Unsolicited PRs submitted without an issue will be closed.
+> **Issue-First Policy:** GSlider Blocks strictly requires all pull requests to resolve an approved [GitHub Issue](https://github.com/noruzzamans/gslider-blocks/issues) using `Closes #<issue_number>`. The maintainer closes unsolicited PRs submitted without an issue.
 
 > [!CAUTION]
-> **Component Lock Policy:** `src/components/` contains 23 core UI controls and is strictly locked to `@noruzzamans`. PRs modifying `src/components/` without maintainer authorization will be automatically rejected.
+> **Component Lock Policy:** `src/components/` contains 23 core UI controls and is strictly locked to `@noruzzamans`. PRs modifying `src/components/` without maintainer authorization are flagged by CI with a warning comment and will not be merged.
 
 ---
 

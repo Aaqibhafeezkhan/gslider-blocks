@@ -70,15 +70,15 @@ In professional software engineering, system design is divided into four distinc
 - **In GSlider Blocks:**
   - **Input Sanitization:** Every PHP request input is sanitized using `sanitize_text_field()`, `sanitize_key()`, and `wp_unslash()`.
   - **Output Escaping:** Every dynamic string printed to HTML is escaped using `esc_html__()`, `esc_attr__()`, `esc_url()`, or `wp_kses_post()`.
-  - **SVG Upload Protection:** SVG uploads are hardened with `LIBXML_NONET` to prevent XXE entity expansion, verified by MIME sniffing, and strictly rejected if containing prohibited elements (`<script>`, `<foreignobject>`) or SMIL animation tags (`<animate>`, `<set>`) to eliminate Stored XSS vectors.
+  - **SVG Upload Protection:** `SupportSVG.php` parses uploaded SVGs with `LIBXML_NONET` to prevent XXE entity expansion, and rejects files that contain prohibited elements (`<script>`, `<foreignObject>`, `<use>`, `<image>`, `<iframe>`, and others), SMIL animation tags (`<animate>`, `<set>`, `<animateTransform>`, `<animateMotion>`), `on*` event attributes, or `javascript:`, `data:`, and `vbscript:` URLs.
 
 ### 8. Accessibility (a11y) & Semantic HTML First
 - **Concept:** Sliders must be fully operable by assistive technology and keyboard-only users (WCAG 2.1 AA).
 - **In GSlider Blocks:**
-  - Swiper containers declare `role="region"` and `aria-roledescription="carousel"`.
-  - Navigation buttons have descriptive `aria-label` tags (`"Previous slide"`, `"Next slide"`).
-  - Autoplay pauses on hover or keyboard focus, preventing cognitive disorientation.
-  - Tab navigation respects natural focus order across active slides.
+  - The Image Slider and Logo Carousel `.swiper` containers declare `role="region"` with an `aria-label`. Base, Testimonial, and Flexi Content do not have a region role yet.
+  - Navigation buttons have descriptive `aria-label` tags (`"Previous slide"`, `"Next slide"`), and pagination containers are labelled.
+  - Autoplay is off by default. When it is on, it pauses on hover only if the block's **Pause on Hover** setting (`pauseOnHover`, default off) is enabled. Autoplay does not pause on keyboard focus, and `prefers-reduced-motion` is not handled yet.
+  - Keyboard arrow navigation is available through the **Keyboard Navigation** setting (`keyboardNavigation`, default off).
 
 ### 9. YAGNI & Chesterton's Fence in WordPress
 - **Concept:** *"You Aren't Gonna Need It"* vs. *"Never tear down a fence until you understand why it was built."*
@@ -92,22 +92,32 @@ In professional software engineering, system design is divided into four distinc
 
 ### 10. Swiper.js React Lifecycle & Memory Leak Cleanup Pattern
 - **Problem:** Swiper attaches direct DOM mutation listeners, touch handlers, and resize observers. In the Gutenberg editor, blocks unmount, re-render, and duplicate frequently.
-- **Solution:** Swiper instances in `edit.js` and `view.js` must be instantiated via element references (`useRef`) and strictly disposed within the effect cleanup return:
+- **Solution:** In `edit.js`, the Swiper instance is kept in a ref. Any previous instance is destroyed before a new one is created, and the effect cleanup destroys it again on unmount or re-run:
 ```javascript
-useEffect(() => {
-    if (!sliderRef.current) return;
+const swiperContainerRef = useRef(null);
+const swiperInstanceRef = useRef(null);
 
-    const swiper = new Swiper(sliderRef.current, {
+useEffect(() => {
+    if (!swiperContainerRef.current || !window.Swiper) return;
+
+    if (swiperInstanceRef.current) {
+        swiperInstanceRef.current.destroy(true, true);
+        swiperInstanceRef.current = null;
+    }
+
+    swiperInstanceRef.current = new window.Swiper(swiperContainerRef.current, {
         /* configuration */
     });
 
     return () => {
-        if (swiper && typeof swiper.destroy === 'function') {
-            swiper.destroy(true, true);
+        if (swiperInstanceRef.current) {
+            swiperInstanceRef.current.destroy(true, true);
+            swiperInstanceRef.current = null;
         }
     };
 }, [/* reactive block attributes */]);
 ```
+- **Frontend:** `view.js` is plain JavaScript, not React. On `DOMContentLoaded` it reads each block's `data-swiper-settings` and creates one Swiper instance per slider. The page owns that instance for its lifetime, so `view.js` never destroys it.
 
 ### 11. Deprecation & Migration Pattern (`deprecated.js`)
 - **Problem:** Adding a new wrapper `<div>` or altering attribute structures in `save.js` invalidates existing blocks in the database.
@@ -130,17 +140,20 @@ export default [v1_0_0];
 
 ### 12. PSR-4 Singleton Service Pattern (PHP Backend)
 - **Problem:** WordPress procedural hooks (`add_action`, `add_filter`) scattered across loose files create namespace pollution and multiple instances.
-- **Solution:** GSlider uses PSR-4 autoloading (`GSlider\` -> `includes/`) and a reusable `SingletonTrait`:
+- **Solution:** GSlider uses PSR-4 autoloading (`GSlider\` -> `includes/`), a reusable `SingletonTrait`, and the `Registrable` interface. `Plugin.php` loops over its service list and calls `getInstance()->register()` on each one:
 ```php
 namespace GSlider\Classes;
 
+use GSlider\Interfaces\Registrable;
 use GSlider\Traits\SingletonTrait;
 
-class StyleGenerator {
+class StyleGenerator implements Registrable {
     use SingletonTrait;
 
-    public function init(): void {
-        add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
+    public function register(): void {
+        add_filter( 'render_block', [ $this, 'collect_dynamic_styles' ], 10, 2 );
+        add_action( 'wp_footer', [ $this, 'generate_css_file' ], 10 );
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_dynamic_styles' ] );
     }
 }
 ```
@@ -170,8 +183,8 @@ Before opening a pull request, every contributor (human or AI) must verify:
 | **4** | **Deprecations** | If `save.js` or attributes changed, did you register a version in `deprecated.js`? |
 | **5** | **CSS Scoping** | Are dynamic styles generated in `styling.js` and properly scoped to `.${blockId}`? |
 | **6** | **Security** | Are all PHP inputs sanitized (`sanitize_text_field`) and outputs escaped (`esc_html__`)? |
-| **7** | **Memory Cleanup** | Does your Swiper `useEffect` return `swiper.destroy(true, true)`? |
-| **8** | **Code Standards** | Did you run `npm run lint:js`, `npm run lint:css`, and `npm run build`? |
+| **7** | **Memory Cleanup** | Does your `edit.js` Swiper `useEffect` destroy the previous instance and return `destroy(true, true)` in its cleanup? |
+| **8** | **Code Standards** | Did you lint the files you changed (the full `lint:js` / `lint:css` runs still report existing errors) and run `npm run build`? |
 | **9** | **Issue-First PR** | Does the PR link to an approved issue with `Closes #<issue_number>` (Zero Orphan PRs)? |
 
 ---
