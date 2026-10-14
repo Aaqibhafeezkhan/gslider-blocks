@@ -70,7 +70,7 @@ In professional software engineering, system design is divided into four distinc
 - **In GSlider Blocks:**
   - **Input Sanitization:** Every PHP request input is sanitized using `sanitize_text_field()`, `sanitize_key()`, and `wp_unslash()`.
   - **Output Escaping:** Every dynamic string printed to HTML is escaped using `esc_html__()`, `esc_attr__()`, `esc_url()`, or `wp_kses_post()`.
-  - **SVG Upload Protection:** SVG uploads are hardened with `LIBXML_NONET` to prevent XXE entity expansion, verified by MIME sniffing, and purged of SMIL tags (`<animate>`, `<set>`) to eliminate Stored XSS vectors.
+  - **SVG Upload Protection:** SVG uploads are hardened with `LIBXML_NONET` to prevent XXE entity expansion, verified by MIME sniffing, and strictly rejected if containing prohibited elements (`<script>`, `<foreignobject>`) or SMIL animation tags (`<animate>`, `<set>`) to eliminate Stored XSS vectors.
 
 ### 8. Accessibility (a11y) & Semantic HTML First
 - **Concept:** Sliders must be fully operable by assistive technology and keyboard-only users (WCAG 2.1 AA).
