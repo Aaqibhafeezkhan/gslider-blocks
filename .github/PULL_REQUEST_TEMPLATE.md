@@ -18,4 +18,4 @@ Closes #
 - [ ] **Zero Block Invalidation:** Verified existing blocks load with 0 block invalidation errors.
 - [ ] **Deprecation Migrations:** If `save.js` markup changed, registered a migration in `deprecated.js`.
 - [ ] **Security Standards:** Complies with WordPress PHP Coding Standards (sanitization, escaping, nonces).
-- [ ] **Build & Lints Pass:** Ran `npm run lint:js`, `npm run lint:css`, and `npm run build` locally.
+- [ ] **Build & Lints Pass:** Ran `npm run build` locally, and linted the files I changed with `npx wp-scripts lint-js` / `npx wp-scripts lint-style` without adding new errors.
