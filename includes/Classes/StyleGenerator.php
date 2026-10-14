@@ -39,7 +39,7 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
          *
          * @var string
          */
-        private const CSS_SUBDIR = '/gslider-blocks/css';
+        const CSS_SUBDIR = '/gslider-blocks/css';
 
         /**
          * File permissions for generated CSS files.
@@ -48,7 +48,7 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
          *
          * @var int
          */
-        private const FILE_PERMISSIONS = 0644;
+        const FILE_PERMISSIONS = 0644;
 
         /**
          * Collected block styles keyed by block ID.
@@ -141,11 +141,16 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
                 return $block_content;
             }
 
-            if ( false !== strpos( $block['blockName'], 'gslider-blocks/' ) && isset( $block['attrs']['blockStyle'] ) ) {
+            if ( false !== strpos( $block['blockName'], 'gslider-blocks/' ) && ! empty( $block['attrs']['blockStyle'] ) ) {
                 $block_id = isset( $block['attrs']['blockId'] ) ?
                     sanitize_key( $block['attrs']['blockId'] ) :
                     'gslider-blocks-' . md5( serialize( $block['attrs'] ) );
-                self::$styles[ $block_id ] = $block['attrs']['blockStyle'];
+                $raw_style = is_string( $block['attrs']['blockStyle'] ) ? $block['attrs']['blockStyle'] : '';
+                $clean_style = wp_strip_all_tags( $raw_style );
+                $clean_style = preg_replace( '/(<\/?(?:script|style)[^>]*>|javascript:|expression\(|behavior:)/i', '', $clean_style );
+                if ( ! empty( $clean_style ) ) {
+                    self::$styles[ $block_id ] = $clean_style;
+                }
             }
 
             return $block_content;
@@ -265,6 +270,7 @@ if ( ! class_exists( 'StyleGenerator' ) ) {
                 return '';
             }
 
+            $css = wp_strip_all_tags( $css );
             $css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
             $css = preg_replace( '/\s*([:,;{}])\s*/', '$1', $css );
             $css = preg_replace( '/;}/', '}', $css );

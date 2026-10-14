@@ -3,7 +3,7 @@
  * Returns Dynamic Generated CSS
  */
 
-import getCustomCss from '@Utils/getCustomCss';
+
 
 /**
  * Generate block styles from attributes
@@ -1366,10 +1366,7 @@ ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) 
     `;
     /** End All Block Style */
 
-    // Custom CSS
-    const customCss = getCustomCss(globalCustomCSS, `.${blockId}`);
-
-    return `${imageSliderCSS} ${customCss}`.replace(/\s+/g, ' ').trim();
+    return `${imageSliderCSS}`.replace(/\s+/g, ' ').trim();
 }
 
 export default generateImageSliderStyle;

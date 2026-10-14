@@ -7,22 +7,22 @@ namespace Composer\Autoload;
 class ComposerStaticInit1515cd7e8136c5df6671f4636329d50f
 {
     public static $prefixLengthsPsr4 = array (
-        'G' => 
+        'G' =>
         array (
             'GSlider\\' => 8,
         ),
-        'A' => 
+        'A' =>
         array (
             'Appsero\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'GSlider\\' => 
+        'GSlider\\' =>
         array (
             0 => __DIR__ . '/../..' . '/includes',
         ),
-        'Appsero\\' => 
+        'Appsero\\' =>
         array (
             0 => __DIR__ . '/..' . '/appsero/client/src',
         ),

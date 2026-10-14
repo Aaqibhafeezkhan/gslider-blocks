@@ -1,0 +1,7 @@
+build/
+vendor/
+assets/
+node_modules/
+packages/
+coverage/
+*.min.js

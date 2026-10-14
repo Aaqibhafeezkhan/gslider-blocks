@@ -1,0 +1,134 @@
+name: Pull Request Automation & Labeler
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  path-based-labeler:
+    name: Path-Based Labeler
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply Path Labels
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
+          sync-labels: false
+
+  smart-automation:
+    name: Metadata, Size & Policy Automation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Intelligent PR Triage
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            const author = pr.user.login;
+            const title = pr.title;
+            const action = context.payload.action;
+            const labelsToAdd = new Set();
+            const labelsToRemove = new Set();
+
+            // 1. External community contributor detection
+            if (author !== 'noruzzamans') {
+              labelsToAdd.add('type: community contribution');
+            }
+
+            // 2. PR Conventional Commits title parser
+            if (/^fix(\(.*\))?:/i.test(title)) labelsToAdd.add('type: bug');
+            if (/^feat(\(.*\))?:/i.test(title)) labelsToAdd.add('type: enhancement');
+            if (/^refactor(\(.*\))?:/i.test(title)) labelsToAdd.add('type: architecture');
+            if (/^perf(\(.*\))?:/i.test(title)) labelsToAdd.add('type: performance');
+            if (/^sec(urity)?(\(.*\))?:/i.test(title)) labelsToAdd.add('type: security');
+            if (/^docs(\(.*\))?:/i.test(title)) labelsToAdd.add('type: documentation');
+            if (/^(ci|test|chore)(\(.*\))?:/i.test(title)) labelsToAdd.add('focus: ci-cd');
+
+            // 3. Initial review status on PR open
+            if (action === 'opened' || action === 'reopened') {
+              labelsToAdd.add('needs: review');
+            }
+
+            // 4. PR Size Labeling (lines added + deleted)
+            const totalChanges = (pr.additions || 0) + (pr.deletions || 0);
+            let targetSizeLabel = 'size: S';
+            if (totalChanges < 10) targetSizeLabel = 'size: XS';
+            else if (totalChanges < 50) targetSizeLabel = 'size: S';
+            else if (totalChanges < 250) targetSizeLabel = 'size: M';
+            else if (totalChanges < 1000) targetSizeLabel = 'size: L';
+            else targetSizeLabel = 'size: XL';
+
+            const allSizeLabels = ['size: XS', 'size: S', 'size: M', 'size: L', 'size: XL'];
+            const currentLabels = pr.labels.map(l => l.name);
+
+            for (const s of allSizeLabels) {
+              if (s !== targetSizeLabel && currentLabels.includes(s)) {
+                labelsToRemove.add(s);
+              }
+            }
+            labelsToAdd.add(targetSizeLabel);
+
+            // 5. Protected Directory Guard for src/components/
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number,
+              per_page: 100
+            });
+
+            const touchedProtectedDir = files.some(f => f.filename.startsWith('src/components/'));
+            if (touchedProtectedDir && author !== 'noruzzamans') {
+              labelsToAdd.add('needs: changes');
+              
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number
+              });
+              
+              const alreadyWarned = comments.some(c => c.body && c.body.includes('PROTECTED CORE DIRECTORY: `src/components/`'));
+              if (!alreadyWarned) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  body: `> [!CAUTION]\n> ### 🔒 PROTECTED CORE DIRECTORY: \`src/components/\`\n>\n> Hello @${author}! Thank you for your contribution.\n> Please note that **\`src/components/\` is maintained exclusively by @noruzzamans** to protect 2,000+ live sites.\n> External pull requests that modify files in this directory cannot be accepted without prior maintainer authorization.\n>\n> Please revert your changes to \`src/components/\` to proceed with code review.`
+                });
+              }
+            }
+
+            // Apply label additions
+            const finalAdditions = Array.from(labelsToAdd).filter(l => !currentLabels.includes(l));
+            if (finalAdditions.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                labels: finalAdditions
+              });
+            }
+
+            // Apply label removals
+            for (const label of labelsToRemove) {
+              try {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  name: label
+                });
+              } catch (err) {
+                // Ignore if already removed
+              }
+            }

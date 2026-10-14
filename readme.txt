@@ -3,8 +3,8 @@ Contributors: noruzzaman
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.1.8
-Requires PHP: 7.0
+Stable tag: 1.1.9
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,9 +113,60 @@ Base Slider has pre-built content elements (title, subtitle, description, button
 
 These are 3D transition effects where slides are stacked in layers. If your slides have transparent backgrounds, content from slides behind will show through. To fix this, add a background color or background image to each slide in your slider settings.
 
+== Source Code & Build Instructions ==
+
+The uncompiled human-readable source code for all Gutenberg blocks, React components, and scripts is bundled directly within this plugin in the `src/` directory.
+
+To build and compile the production assets from source:
+1. Install dependencies: `npm install` and `composer install`
+2. Compile production assets: `npm run build`
+
+== Third-Party Libraries ==
+
+This plugin bundles and uses the following open-source third-party libraries:
+* **Swiper.js** (v11.x)
+  - Source: https://swiperjs.com/
+  - Repository: https://github.com/nolimits4web/swiper
+  - License: MIT License (https://github.com/nolimits4web/swiper/blob/master/LICENSE)
+* **fslightbox** (v3.x)
+  - Source: https://fslightbox.com/
+  - License: Free / Commercial
+* **Appsero Client** (v2.0.7)
+  - Source: https://github.com/Appsero/client
+  - License: MIT License (https://github.com/Appsero/client/blob/master/LICENSE)
+
+== External Services ==
+
+This plugin may connect to or load resources from external third-party services in the following scenarios:
+
+1. **Google Fonts API**
+   - **Service URL:** `https://fonts.googleapis.com`
+   - **Purpose:** Dynamically loads Google Web Fonts selected by the user in the block typography settings to render custom slider fonts.
+   - **Data Sent:** Only standard HTTP request headers (font family, weight variants, user agent) are sent by the browser. No personal identifiable user information is sent or stored.
+   - **Terms & Privacy:**
+     - Terms of Service: https://developers.google.com/fonts/terms
+     - Privacy Policy: https://policies.google.com/privacy
+
+2. **Appsero Telemetry & Diagnostics (Opt-in)**
+   - **Service URL:** `https://api.appsero.com`
+   - **Purpose:** Used for plugin diagnostics, crash analytics, and feature usage to help improve the plugin.
+   - **Consent:** Telemetry is strictly opt-in and requires explicit user consent upon activation. Users can decline or deactivate tracking at any time.
+   - **Terms & Privacy:**
+     - Privacy Policy: https://appsero.com/privacy-policy/
+     - Terms of Service: https://appsero.com/terms-of-service/
+
 == Screenshots ==
 
 == Changelog ==
+
+= 1.1.9 – October 14, 2026 =
+* Security: Removed custom CSS input editor and arbitrary code insertion across all blocks to strictly comply with WordPress.org security guidelines.
+* Security: Sanitized dynamic CSS output via `wp_strip_all_tags()` and strict protocol/tag filtering in StyleGenerator.
+* Compatibility: Removed deprecated `libxml_disable_entity_loader()` calls in SVG validator in favor of secure `LIBXML_NONET` flag.
+* Compatibility: Fixed PHP parse issues on earlier PHP versions by removing private class constants, void return types, and trailing function-call commas.
+* Compatibility: Updated minimum declared PHP version to PHP 7.4.
+* Library Update: Upgraded `appsero/client` from v2.0.4 to v2.0.7.
+* Documentation: Added dedicated sections for source repository, build instructions, third-party libraries, and external services disclosure.
 
 = 1.1.8 – August 20, 2026 =
 * Compliance: Updated and refactored codebase to fully adhere to all WordPress.org Plugin Directory Guidelines and Security Standards.

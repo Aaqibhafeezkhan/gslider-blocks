@@ -99,7 +99,7 @@ if ( ! class_exists( 'SupportSVG' ) ) {
             }
 
             // Validate file extension.
-            $extension = pathinfo( $file['name'], PATHINFO_EXTENSION );
+            $extension = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
             if ( ! in_array( $extension, [ 'svg', 'svgz' ], true ) ) {
                 $file['error'] = __( 'Invalid SVG file extension.', 'gslider-blocks' );
                 return $file;
@@ -121,17 +121,8 @@ if ( ! class_exists( 'SupportSVG' ) ) {
             libxml_use_internal_errors( true );
             $doc = new \DOMDocument();
 
-            // Disable entity loader for PHP < 8.0 to prevent XXE.
-            $disableEntityLoader = PHP_VERSION_ID < 80000 && function_exists( 'libxml_disable_entity_loader' );
-            if ( $disableEntityLoader ) {
-                $oldEntityLoader = libxml_disable_entity_loader( true );
-            }
-
-            $loadResult = $doc->loadXML( $content, LIBXML_NOERROR | LIBXML_NOWARNING );
-
-            if ( $disableEntityLoader ) {
-                libxml_disable_entity_loader( $oldEntityLoader );
-            }
+            // Prevent XXE by disabling external entities via LIBXML_NONET.
+            $loadResult = $doc->loadXML( $content, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING );
 
             if ( ! $loadResult ) {
                 $file['error'] = __( 'Invalid SVG XML structure.', 'gslider-blocks' );
@@ -191,15 +182,34 @@ if ( ! class_exists( 'SupportSVG' ) ) {
          *
          * @return void
          */
-        public function enableSvgSupport(): void {
-            add_filter( 'wp_check_filetype_and_ext', function ( $data, $file, $filename, $mimes ) {
-                $filetype = wp_check_filetype( $filename, $mimes );
-                return [
-                    'ext'             => $filetype['ext'],
-                    'type'            => $filetype['type'],
-                    'proper_filename' => $data['proper_filename'],
-                ];
-            }, 10, 4 );
+        public function enableSvgSupport() {
+            add_filter( 'wp_check_filetype_and_ext', [ $this, 'filterFiletypeAndExt' ], 10, 4 );
+        }
+
+        /**
+         * Keeps WordPress's content sniff for every file except SVG and SVGZ.
+         *
+         * @since 1.0.0
+         *
+         * @param array         $data     File type data from WordPress.
+         * @param string        $file     Full path to the file.
+         * @param string        $filename Sanitized filename.
+         * @param string[]|null $mimes    Allowed MIME types.
+         * @return array File type data.
+         */
+        public function filterFiletypeAndExt( $data, $file, $filename, $mimes ) {
+            unset( $file );
+            $extension = strtolower( pathinfo( (string) $filename, PATHINFO_EXTENSION ) );
+            if ( ! in_array( $extension, [ 'svg', 'svgz' ], true ) ) {
+                return $data;
+            }
+
+            $filetype = wp_check_filetype( $filename, $mimes );
+            return [
+                'ext'             => $filetype['ext'],
+                'type'            => $filetype['type'],
+                'proper_filename' => $data['proper_filename'],
+            ];
         }
 
         /**
@@ -226,6 +236,10 @@ if ( ! class_exists( 'SupportSVG' ) ) {
                 'head',
                 'use',
                 'image',
+                'set',
+                'animate',
+                'animatetransform',
+                'animatemotion',
             ];
 
             // Loop through all elements and check their tag names.
@@ -285,21 +299,12 @@ if ( ! class_exists( 'SupportSVG' ) ) {
          * @param string $content The raw SVG XML content.
          * @return string The sanitized SVG XML content.
          */
-        private function sanitizeSvgContent( string $content ): string {
+        private function sanitizeSvgContent( $content ) {
             libxml_use_internal_errors( true );
             $doc = new \DOMDocument();
 
-            // Disable entity loader for PHP < 8.0 to prevent XXE.
-            $disableEntityLoader = PHP_VERSION_ID < 80000 && function_exists( 'libxml_disable_entity_loader' );
-            if ( $disableEntityLoader ) {
-                $oldEntityLoader = libxml_disable_entity_loader( true );
-            }
-
-            $loadResult = $doc->loadXML( $content );
-
-            if ( $disableEntityLoader ) {
-                libxml_disable_entity_loader( $oldEntityLoader );
-            }
+            // Prevent XXE by disabling external entities via LIBXML_NONET.
+            $loadResult = $doc->loadXML( $content, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING );
 
             if ( ! $loadResult ) {
                 libxml_clear_errors();

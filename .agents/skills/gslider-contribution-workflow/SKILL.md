@@ -53,6 +53,10 @@ All PR titles must strictly follow the **Conventional Commits** specification:
 
 ## 📝 2. Pull Request Description Standard
 
+> [!IMPORTANT]
+> **Mandatory Issue Linking (`Closes #<issue_number>`):**
+> Every PR description **MUST** start with `Closes #<issue_number>` on the very first line. This ensures GitHub automatically links the PR to the issue and closes it upon merge. Never omit this line.
+
 Every PR must strictly follow `.github/PULL_REQUEST_TEMPLATE.md`:
 
 ```markdown
