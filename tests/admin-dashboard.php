@@ -395,4 +395,36 @@ if ( strpos( $dashboard_css_content, 'prefers-reduced-motion' ) === false ) {
 }
 echo "OK: Compiled dashboard stylesheet verified (scoped selector, layout classes, reduced-motion)\n";
 
+// Test 16: Compiled dashboard header component and styles verification.
+$required_header_classes = [
+	'.gslider-dashboard-header',
+	'.gslider-dashboard-brand',
+	'.gslider-dashboard-logo',
+	'.gslider-dashboard-title',
+	'.gslider-dashboard-version-pill',
+	'.gslider-dashboard-actions',
+	'.gslider-dashboard-btn',
+];
+foreach ( $required_header_classes as $class_name ) {
+	if ( strpos( $dashboard_css_content, $class_name ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.css missing header class '$class_name'\n" );
+		exit( 1 );
+	}
+}
+$dashboard_js_file = dirname( __DIR__ ) . '/assets/admin/js/dashboard.js';
+if ( ! file_exists( $dashboard_js_file ) ) {
+	fwrite( STDERR, "FAIL: Compiled assets/admin/js/dashboard.js not found\n" );
+	exit( 1 );
+}
+$dashboard_js_content = file_get_contents( $dashboard_js_file );
+if ( strpos( $dashboard_js_content, 'https://github.com/noruzzamans/gslider-blocks#readme' ) === false ) {
+	fwrite( STDERR, "FAIL: dashboard.js missing documentation URL\n" );
+	exit( 1 );
+}
+if ( strpos( $dashboard_js_content, 'https://wordpress.org/support/plugin/gslider-blocks/' ) === false ) {
+	fwrite( STDERR, "FAIL: dashboard.js missing support forum URL\n" );
+	exit( 1 );
+}
+echo "OK: Header component styles and resource URLs verified in compiled assets\n";
+
 echo "All Admin Dashboard tests passed successfully!\n";

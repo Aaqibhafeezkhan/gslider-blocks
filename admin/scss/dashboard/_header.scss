@@ -1,0 +1,107 @@
+// ==========================================================================
+// GSlider Blocks - Dashboard Header Component Styles
+// ==========================================================================
+
+@use "variables" as *;
+
+body.toplevel_page_gslider-blocks {
+	.gslider-admin-wrap {
+		.gslider-dashboard-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding-bottom: 24px;
+			margin-bottom: 28px;
+			border-bottom: 1px solid $color-border;
+			gap: 16px;
+
+			@media (max-width: 640px) {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 16px;
+			}
+		}
+
+		.gslider-dashboard-brand {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.gslider-dashboard-logo {
+			display: block;
+			width: 32px;
+			height: 32px;
+			flex-shrink: 0;
+		}
+
+		.gslider-dashboard-title {
+			margin: 0;
+			font-size: 20px;
+			font-weight: 700;
+			color: $color-text-primary;
+			line-height: 1.2;
+			letter-spacing: -0.01em;
+		}
+
+		.gslider-dashboard-version-pill {
+			display: inline-flex;
+			align-items: center;
+			font-size: 11px;
+			font-weight: 600;
+			line-height: 1;
+			padding: 4px 8px;
+			border-radius: $radius-full;
+			background-color: $color-brand-subtle;
+			color: $color-brand-primary;
+			border: 1px solid rgba(0, 124, 186, 0.18);
+			font-family: $font-family-mono;
+		}
+
+		.gslider-dashboard-actions {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.gslider-dashboard-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 7px 14px;
+			font-size: 13px;
+			font-weight: 500;
+			color: $color-text-secondary;
+			background-color: $color-surface;
+			border: 1px solid $color-border;
+			border-radius: $radius-md;
+			text-decoration: none;
+			box-shadow: $shadow-subtle;
+			transition: border-color $transition-fast, color $transition-fast, background-color $transition-fast, box-shadow $transition-fast;
+
+			svg {
+				flex-shrink: 0;
+				color: $color-text-muted;
+				transition: color $transition-fast, transform $transition-fast;
+			}
+
+			&:hover {
+				color: $color-brand-primary;
+				border-color: $color-brand-primary;
+				background-color: $color-brand-subtle;
+				box-shadow: $shadow-xs;
+
+				svg {
+					color: $color-brand-primary;
+					transform: translate(1px, -1px);
+				}
+			}
+
+			&:focus-visible {
+				outline: 2px solid $color-brand-primary;
+				outline-offset: 2px;
+			}
+		}
+	}
+}
