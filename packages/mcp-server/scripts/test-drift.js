@@ -13,6 +13,7 @@ const BLOCK_SLUGS = [
   'testimonial',
   'logo-carousel',
   'flexi-content',
+  'flexi-content-item',
   'base'
 ];
 
@@ -49,6 +50,16 @@ export function isEmptySlideItemSchema(schema) {
 
 export function slideSchemaProblems(slug, block) {
   const problems = [];
+  if (slug === 'flexi-content-item') {
+    const schema = block?.slideItemSchema;
+    if (schema?.type !== 'childBlock' || schema?.name !== 'gslider-blocks/flexi-content-item') {
+      problems.push(`"${slug}" must be described as the flexi-content child block`);
+    }
+    if (block?.slideField) {
+      problems.push(`"${slug}" is a child block and has no slide field`);
+    }
+    return problems;
+  }
   if (block?.slideField === 'innerBlocks') {
     problems.push(`"${slug}" slideField is "innerBlocks"`);
   }
@@ -173,7 +184,7 @@ async function runDriftCheck() {
     process.exit(1);
   }
 
-  console.log('✅ PASS: Zero schema drift. All 5 individual block schemas match source code 1:1.');
+  console.log(`✅ PASS: Zero schema drift. All ${BLOCK_SLUGS.length} individual block schemas match source code 1:1.`);
 }
 
 runDriftCheck().catch((err) => {

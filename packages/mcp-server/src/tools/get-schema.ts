@@ -4,7 +4,7 @@ import { getBlockSchema, SUPPORTED_BLOCK_SLUGS } from '../core/registry.js';
 export const getBlockSchemaInputZod = z.object({
   blockSlug: z
     .enum(SUPPORTED_BLOCK_SLUGS)
-    .describe('Slug of the GSlider block to inspect (e.g. image-slider, testimonial, logo-carousel, flexi-content, base)'),
+    .describe('Slug of the GSlider block to inspect (e.g. image-slider, testimonial, logo-carousel, flexi-content, flexi-content-item, base)'),
 });
 
 export const getBlockSchemaToolDefinition = {
@@ -17,7 +17,7 @@ export const getBlockSchemaToolDefinition = {
       blockSlug: {
         type: 'string',
         enum: SUPPORTED_BLOCK_SLUGS,
-        description: 'Slug of the GSlider block (e.g. image-slider, testimonial, logo-carousel, flexi-content, base)',
+        description: 'Slug of the GSlider block (e.g. image-slider, testimonial, logo-carousel, flexi-content, flexi-content-item, base)',
       },
     },
     required: ['blockSlug'],

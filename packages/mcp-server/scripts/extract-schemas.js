@@ -13,6 +13,7 @@ const BLOCK_SLUGS = [
   'testimonial',
   'logo-carousel',
   'flexi-content',
+  'flexi-content-item',
   'base'
 ];
 
@@ -233,6 +234,17 @@ function extractAllowedValues(slug, rawAttrs, constants) {
 }
 
 async function resolveSlideSchema(slug, rawAttrs, slideFields) {
+  if (slug === 'flexi-content-item') {
+    return {
+      slideField: '',
+      slideItemSchema: {
+        type: 'childBlock',
+        name: 'gslider-blocks/flexi-content-item',
+        parent: ['gslider-blocks/flexi-content'],
+      },
+    };
+  }
+
   if (slug !== 'flexi-content') {
     const slideField = slideFields[slug];
     const slideAttr = rawAttrs[slideField];
@@ -289,10 +301,11 @@ async function generate() {
     const presets = await extractPresets(slug);
 
     const hasSliderType = slug in rawAttrs && 'sliderType' in rawAttrs;
-    const allowedEffects = {
-      carouselEffect: constants.carouselEffects,
-    };
-    if (hasSliderType || slug === 'base' || slug === 'testimonial' || slug === 'flexi-content') {
+    const allowedEffects = {};
+    if (slug !== 'flexi-content-item') {
+      allowedEffects.carouselEffect = constants.carouselEffects;
+    }
+    if (slug !== 'flexi-content-item' && (hasSliderType || slug === 'base' || slug === 'testimonial' || slug === 'flexi-content')) {
       allowedEffects.slideEffect = constants.sliderEffects;
       allowedEffects.sliderType = constants.sliderTypes;
     }

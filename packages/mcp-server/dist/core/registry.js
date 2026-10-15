@@ -4,6 +4,7 @@ export const SUPPORTED_BLOCK_SLUGS = [
     'testimonial',
     'logo-carousel',
     'flexi-content',
+    'flexi-content-item',
     'base',
 ];
 /**
@@ -17,6 +18,7 @@ export const BLOCK_ID_PREFIX = {
     'image-slider': 'gslider-image-slider',
     'logo-carousel': 'gslider-logo-carousel',
     'flexi-content': 'gslider-flexi-content',
+    'flexi-content-item': 'gslider-flexi-content-item',
 };
 function loadBlockSchema(slug) {
     const url = new URL(`./schemas/${slug}.json`, import.meta.url);
