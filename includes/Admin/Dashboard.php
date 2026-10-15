@@ -70,6 +70,74 @@ if ( ! class_exists( Dashboard::class, false ) ) {
 		 */
 		public function register(): void {
 			add_action( 'admin_menu', [ $this, 'register_admin_menu' ] );
+			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_dashboard_assets' ] );
+		}
+
+		/**
+		 * Enqueues scripts and styles for the admin dashboard.
+		 *
+		 * Isolates loading strictly to the GSlider Blocks admin dashboard page
+		 * and localizes runtime data for the React Single Page Application.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param string $hook_suffix The current admin screen hook suffix.
+		 * @return void
+		 */
+		public function enqueue_dashboard_assets( string $hook_suffix ): void {
+			if ( 'toplevel_page_' . self::MENU_SLUG !== $hook_suffix ) {
+				return;
+			}
+
+			if ( ! current_user_can( self::CAPABILITY ) ) {
+				return;
+			}
+
+			$plugin_url = defined( 'GSLIDER_PLUGIN_URL' ) ? GSLIDER_PLUGIN_URL : plugins_url( '/', dirname( __DIR__, 2 ) . '/gslider-blocks.php' );
+			$plugin_dir = defined( 'GSLIDER_DIR_PATH' ) ? GSLIDER_DIR_PATH : dirname( __DIR__, 2 ) . '/';
+			$version    = defined( 'GSLIDER_VERSION' ) ? GSLIDER_VERSION : '1.2.0';
+
+			$asset_file = $plugin_dir . 'assets/admin/js/dashboard.asset.php';
+			$asset      = file_exists( $asset_file )
+				? require $asset_file
+				: [
+					'dependencies' => [ 'wp-element', 'wp-components', 'wp-i18n', 'wp-api-fetch' ],
+					'version'      => $version,
+				];
+
+			// Enqueue WordPress core component styles.
+			wp_enqueue_style( 'wp-components' );
+
+			// Enqueue dashboard compiled stylesheet.
+			wp_enqueue_style(
+				'gslider-dashboard-style',
+				$plugin_url . 'assets/admin/css/dashboard.css',
+				[ 'wp-components' ],
+				$version
+			);
+
+			// Enqueue dashboard React SPA bundle.
+			wp_enqueue_script(
+				'gslider-dashboard-script',
+				$plugin_url . 'assets/admin/js/dashboard.js',
+				$asset['dependencies'] ?? [ 'wp-element', 'wp-components', 'wp-i18n', 'wp-api-fetch' ],
+				$asset['version'] ?? $version,
+				true
+			);
+
+			// Localize runtime configuration data.
+			$localized_data = [
+				'siteUrl'   => site_url(),
+				'adminUrl'  => admin_url(),
+				'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
+				'restUrl'   => rest_url( 'gslider/v1/' ),
+				'nonce'     => wp_create_nonce( 'wp_rest' ),
+				'version'   => $version,
+				'pluginUrl' => $plugin_url,
+				'assetsUrl' => $plugin_url . 'assets/',
+			];
+
+			wp_localize_script( 'gslider-dashboard-script', 'GSliderDashboardData', $localized_data );
 		}
 
 		/**

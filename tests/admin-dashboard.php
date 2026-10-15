@@ -63,6 +63,62 @@ function is_admin() {
 	return true;
 }
 
+$enqueued_styles   = [];
+$enqueued_scripts  = [];
+$localized_scripts = [];
+
+function wp_enqueue_style( $handle, $src = '', $deps = [], $ver = false, $media = 'all' ) {
+	global $enqueued_styles;
+	$enqueued_styles[ $handle ] = [
+		'src'   => $src,
+		'deps'  => $deps,
+		'ver'   => $ver,
+		'media' => $media,
+	];
+}
+
+function wp_enqueue_script( $handle, $src = '', $deps = [], $ver = false, $in_footer = false ) {
+	global $enqueued_scripts;
+	$enqueued_scripts[ $handle ] = [
+		'src'       => $src,
+		'deps'      => $deps,
+		'ver'       => $ver,
+		'in_footer' => $in_footer,
+	];
+}
+
+function wp_localize_script( $handle, $object_name, $l10n ) {
+	global $localized_scripts;
+	$localized_scripts[ $handle ][ $object_name ] = $l10n;
+	return true;
+}
+
+function site_url( $path = '' ) {
+	return 'http://example.org' . ( $path ? '/' . ltrim( $path, '/' ) : '' );
+}
+
+function admin_url( $path = '' ) {
+	return 'http://example.org/wp-admin/' . ltrim( $path, '/' );
+}
+
+function rest_url( $path = '' ) {
+	return 'http://example.org/wp-json/' . ltrim( $path, '/' );
+}
+
+function wp_create_nonce( $action = -1 ) {
+	return 'mock_nonce_' . $action;
+}
+
+if ( ! defined( 'GSLIDER_PLUGIN_URL' ) ) {
+	define( 'GSLIDER_PLUGIN_URL', 'http://example.org/wp-content/plugins/gslider-blocks/' );
+}
+if ( ! defined( 'GSLIDER_DIR_PATH' ) ) {
+	define( 'GSLIDER_DIR_PATH', dirname( __DIR__ ) . '/' );
+}
+if ( ! defined( 'GSLIDER_VERSION' ) ) {
+	define( 'GSLIDER_VERSION', '1.1.9' );
+}
+
 require_once dirname( __DIR__ ) . '/vendor/autoload.php';
 
 use GSlider\Admin\Dashboard;
@@ -190,5 +246,132 @@ if ( ! in_array( Dashboard::class, $services, true ) ) {
 	exit( 1 );
 }
 echo "OK: Plugin services array contains Dashboard::class\n";
+
+// Test 10: Hook registration for admin_enqueue_scripts.
+$has_enqueue_hook = false;
+foreach ( $wp_actions['admin_enqueue_scripts'] ?? [] as $hook_entry ) {
+	if ( is_array( $hook_entry['callback'] ) && $hook_entry['callback'][0] === $dashboard && $hook_entry['callback'][1] === 'enqueue_dashboard_assets' ) {
+		$has_enqueue_hook = true;
+		break;
+	}
+}
+if ( ! $has_enqueue_hook ) {
+	fwrite( STDERR, "FAIL: Dashboard register() did not hook into admin_enqueue_scripts\n" );
+	exit( 1 );
+}
+echo "OK: Dashboard hooks into admin_enqueue_scripts\n";
+
+// Test 11: Screen hook suffix isolation.
+$enqueued_styles   = [];
+$enqueued_scripts  = [];
+$localized_scripts = [];
+$current_caps['manage_options'] = true;
+
+$dashboard->enqueue_dashboard_assets( 'edit.php' );
+$dashboard->enqueue_dashboard_assets( 'settings_page_general' );
+
+if ( ! empty( $enqueued_styles ) || ! empty( $enqueued_scripts ) || ! empty( $localized_scripts ) ) {
+	fwrite( STDERR, "FAIL: Assets were enqueued on non-dashboard screen hook\n" );
+	exit( 1 );
+}
+echo "OK: Non-matching screen hooks do not enqueue any assets\n";
+
+// Test 12: Capability check prevents asset enqueue for unauthorized users.
+$current_caps = [];
+$dashboard->enqueue_dashboard_assets( 'toplevel_page_gslider-blocks' );
+
+if ( ! empty( $enqueued_styles ) || ! empty( $enqueued_scripts ) || ! empty( $localized_scripts ) ) {
+	fwrite( STDERR, "FAIL: Assets were enqueued for unauthorized user\n" );
+	exit( 1 );
+}
+echo "OK: Unauthorized users cannot trigger asset enqueueing on dashboard hook\n";
+
+// Test 13: Asset enqueueing on matching hook suffix for authorized user.
+$current_caps['manage_options'] = true;
+$dashboard->enqueue_dashboard_assets( 'toplevel_page_gslider-blocks' );
+
+if ( ! isset( $enqueued_styles['wp-components'] ) ) {
+	fwrite( STDERR, "FAIL: wp-components style not enqueued\n" );
+	exit( 1 );
+}
+if ( ! isset( $enqueued_styles['gslider-dashboard-style'] ) ) {
+	fwrite( STDERR, "FAIL: gslider-dashboard-style not enqueued\n" );
+	exit( 1 );
+}
+$style = $enqueued_styles['gslider-dashboard-style'];
+if ( $style['src'] !== 'http://example.org/wp-content/plugins/gslider-blocks/assets/admin/css/dashboard.css' ) {
+	fwrite( STDERR, "FAIL: gslider-dashboard-style src mismatch\n" );
+	exit( 1 );
+}
+if ( $style['deps'] !== [ 'wp-components' ] ) {
+	fwrite( STDERR, "FAIL: gslider-dashboard-style dependencies mismatch\n" );
+	exit( 1 );
+}
+if ( $style['ver'] !== '1.1.9' ) {
+	fwrite( STDERR, "FAIL: gslider-dashboard-style version mismatch\n" );
+	exit( 1 );
+}
+
+if ( ! isset( $enqueued_scripts['gslider-dashboard-script'] ) ) {
+	fwrite( STDERR, "FAIL: gslider-dashboard-script not enqueued\n" );
+	exit( 1 );
+}
+$script = $enqueued_scripts['gslider-dashboard-script'];
+if ( $script['src'] !== 'http://example.org/wp-content/plugins/gslider-blocks/assets/admin/js/dashboard.js' ) {
+	fwrite( STDERR, "FAIL: gslider-dashboard-script src mismatch\n" );
+	exit( 1 );
+}
+if ( empty( $script['in_footer'] ) ) {
+	fwrite( STDERR, "FAIL: gslider-dashboard-script not enqueued in footer\n" );
+	exit( 1 );
+}
+echo "OK: Dashboard style and script enqueued with correct attributes and dependencies\n";
+
+// Test 14: Data localization on gslider-dashboard-script.
+if ( ! isset( $localized_scripts['gslider-dashboard-script']['GSliderDashboardData'] ) ) {
+	fwrite( STDERR, "FAIL: GSliderDashboardData not localized on gslider-dashboard-script\n" );
+	exit( 1 );
+}
+$l10n = $localized_scripts['gslider-dashboard-script']['GSliderDashboardData'];
+$expected_keys = [ 'siteUrl', 'adminUrl', 'ajaxUrl', 'restUrl', 'nonce', 'version', 'pluginUrl', 'assetsUrl' ];
+foreach ( $expected_keys as $key ) {
+	if ( ! array_key_exists( $key, $l10n ) ) {
+		fwrite( STDERR, "FAIL: GSliderDashboardData missing key '$key'\n" );
+		exit( 1 );
+	}
+}
+if ( $l10n['siteUrl'] !== 'http://example.org' ) {
+	fwrite( STDERR, "FAIL: Unexpected siteUrl {$l10n['siteUrl']}\n" );
+	exit( 1 );
+}
+if ( $l10n['adminUrl'] !== 'http://example.org/wp-admin/' ) {
+	fwrite( STDERR, "FAIL: Unexpected adminUrl {$l10n['adminUrl']}\n" );
+	exit( 1 );
+}
+if ( $l10n['ajaxUrl'] !== 'http://example.org/wp-admin/admin-ajax.php' ) {
+	fwrite( STDERR, "FAIL: Unexpected ajaxUrl {$l10n['ajaxUrl']}\n" );
+	exit( 1 );
+}
+if ( $l10n['restUrl'] !== 'http://example.org/wp-json/gslider/v1/' ) {
+	fwrite( STDERR, "FAIL: Unexpected restUrl {$l10n['restUrl']}\n" );
+	exit( 1 );
+}
+if ( $l10n['nonce'] !== 'mock_nonce_wp_rest' ) {
+	fwrite( STDERR, "FAIL: Unexpected nonce {$l10n['nonce']}\n" );
+	exit( 1 );
+}
+if ( $l10n['version'] !== '1.1.9' ) {
+	fwrite( STDERR, "FAIL: Unexpected version {$l10n['version']}\n" );
+	exit( 1 );
+}
+if ( $l10n['pluginUrl'] !== 'http://example.org/wp-content/plugins/gslider-blocks/' ) {
+	fwrite( STDERR, "FAIL: Unexpected pluginUrl {$l10n['pluginUrl']}\n" );
+	exit( 1 );
+}
+if ( $l10n['assetsUrl'] !== 'http://example.org/wp-content/plugins/gslider-blocks/assets/' ) {
+	fwrite( STDERR, "FAIL: Unexpected assetsUrl {$l10n['assetsUrl']}\n" );
+	exit( 1 );
+}
+echo "OK: GSliderDashboardData localized correctly with all 8 runtime configuration keys\n";
 
 echo "All Admin Dashboard tests passed successfully!\n";
