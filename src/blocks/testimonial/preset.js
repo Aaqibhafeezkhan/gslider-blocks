@@ -69,7 +69,7 @@ export const presetStyles = {
  * Used with the PresetSelector component in inspector.js
  */
 export const TESTIMONIAL_PRESETS = [
-    // ── Free Presets ──────────────────────────────────────
+    // ── Presets ───────────────────────────────────────────
     {
         value: 'preset-classic',
         label: __('Classic', 'gslider-blocks'),
@@ -79,7 +79,5 @@ export const TESTIMONIAL_PRESETS = [
         attributes: Object.entries(presetStyles['preset-classic']).map(([label, value]) => ({ label, value })),
     },
 
-    // ── Pro Presets (Future) ─────────────────────────────
-    // See: log/testimonial-deep-research.md for full Pro preset plan
-    // Planned: bubble, social, fullbg, company, timeline, video, masonry
+    // Planned later: bubble, social, fullbg, company, timeline, video, masonry
 ];
