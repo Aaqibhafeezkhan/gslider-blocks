@@ -66,10 +66,10 @@ const TABS = [
  * @param {Object}   props                   Component properties.
  * @param {string}   props.activeTab         Current active tab identifier.
  * @param {Function} props.setActiveTab      Function to update the active tab.
- * @param {number}   [props.activeBlocksCount=5] Total count of active blocks for badge.
+ * @param {number|null} [props.activeBlocksCount=null] Total count of active blocks for badge.
  * @return {JSX.Element} Navigation tablist.
  */
-const Navigation = ({ activeTab, setActiveTab, activeBlocksCount = 5 }) => {
+const Navigation = ({ activeTab, setActiveTab, activeBlocksCount = null }) => {
 	const tabRefs = useRef({});
 
 	/**
@@ -114,7 +114,7 @@ const Navigation = ({ activeTab, setActiveTab, activeBlocksCount = 5 }) => {
 			<div className="gslider-dashboard-tabs" role="tablist" aria-orientation="horizontal">
 				{TABS.map((tab, index) => {
 					const isActive = activeTab === tab.id;
-					const badgeCount = tab.hasBadge ? activeBlocksCount : null;
+					const badgeCount = tab.hasBadge && typeof activeBlocksCount === 'number' ? activeBlocksCount : null;
 
 					return (
 						<button

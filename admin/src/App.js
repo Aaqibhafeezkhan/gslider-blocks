@@ -9,8 +9,10 @@
 
 import { useState, useEffect, useCallback } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import apiFetch from '@wordpress/api-fetch';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
+import OverviewTab from './tabs/OverviewTab';
 
 /**
  * Valid tab identifiers.
@@ -38,6 +40,9 @@ const getTabFromHash = () => {
  */
 const App = () => {
 	const [activeTab, setActiveTabState] = useState(getTabFromHash);
+	const [dashboardData, setDashboardData] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
+	const [hasError, setHasError] = useState(false);
 
 	/**
 	 * Sets the active tab and synchronizes the browser URL hash.
@@ -50,6 +55,34 @@ const App = () => {
 			}
 		}
 	}, []);
+
+	/**
+	 * Fetches dashboard metrics from the REST API endpoint.
+	 */
+	const fetchDashboardData = useCallback(async () => {
+		setIsLoading(true);
+		setHasError(false);
+
+		try {
+			const data = await apiFetch({ path: '/gslider/v1/dashboard' });
+			if (data && data.status === 'success') {
+				setDashboardData(data);
+			} else {
+				setHasError(true);
+			}
+		} catch (err) {
+			setHasError(true);
+		} finally {
+			setIsLoading(false);
+		}
+	}, []);
+
+	/**
+	 * Fetch initial dashboard metrics on mount.
+	 */
+	useEffect(() => {
+		fetchDashboardData();
+	}, [fetchDashboardData]);
 
 	/**
 	 * Listens to hashchange events to support browser back/forward and bookmarking.
@@ -66,10 +99,19 @@ const App = () => {
 		};
 	}, []);
 
+	const activeBlocksCount =
+		dashboardData?.blocks && Array.isArray(dashboardData.blocks)
+			? dashboardData.blocks.filter((b) => b.enabled).length
+			: null;
+
 	return (
 		<div className="gslider-dashboard-wrap">
 			<Header />
-			<Navigation activeTab={activeTab} setActiveTab={setActiveTab} activeBlocksCount={5} />
+			<Navigation
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				activeBlocksCount={activeBlocksCount}
+			/>
 			<main className="gslider-dashboard-main">
 				<div
 					role="tabpanel"
@@ -79,15 +121,13 @@ const App = () => {
 					tabIndex={0}
 				>
 					{activeTab === 'overview' && (
-						<div className="gslider-dashboard-card">
-							<h2>{__('Welcome to GSlider Studio', 'gslider-blocks')}</h2>
-							<p>
-								{__(
-									'High-performance, modern responsive slider and carousel blocks engineered for Gutenberg and Full Site Editing.',
-									'gslider-blocks'
-								)}
-							</p>
-						</div>
+						<OverviewTab
+							setActiveTab={setActiveTab}
+							dashboardData={dashboardData}
+							isLoading={isLoading}
+							hasError={hasError}
+							onRetry={fetchDashboardData}
+						/>
 					)}
 
 					{activeTab === 'blocks' && (
@@ -107,7 +147,7 @@ const App = () => {
 							<h2>{__('Global Preferences & Settings', 'gslider-blocks')}</h2>
 							<p>
 								{__(
-									'Configure asset loading optimization, Swiper defaults, and global styling behaviors.',
+									'Configure asset loading optimization and global styling behaviors.',
 									'gslider-blocks'
 								)}
 							</p>

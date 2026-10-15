@@ -461,4 +461,49 @@ if ( strpos( $dashboard_js_content, 'hashchange' ) === false ) {
 }
 echo "OK: Navigation tabs component styles and URL hash sync logic verified in compiled assets\n";
 
+// Test 18: Compiled Overview tab, metric cards, and quickstart guide verification.
+$required_card_classes = [
+	'.gslider-dashboard-hero',
+	'.gslider-dashboard-hero-title',
+	'.gslider-dashboard-btn-primary',
+	'.gslider-dashboard-metrics-grid',
+	'.gslider-dashboard-metric-card',
+	'.gslider-dashboard-metric-value',
+	'.gslider-dashboard-quickstart',
+	'.gslider-dashboard-steps-grid',
+	'.gslider-dashboard-step-item',
+	'.gslider-dashboard-skeleton',
+];
+foreach ( $required_card_classes as $class_name ) {
+	if ( strpos( $dashboard_css_content, $class_name ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.css missing card class '$class_name'\n" );
+		exit( 1 );
+	}
+}
+
+$required_overview_strings = [
+	'/gslider/v1/dashboard',
+	'post-new.php?post_type=page',
+	'Sliders',
+	'On published posts and pages',
+	'Active Core Blocks',
+	'Modern Architecture',
+	'Create Your First Slider in 3 Simple Steps',
+	'Pure Swiper.js + React runtime',
+];
+foreach ( $required_overview_strings as $str ) {
+	if ( strpos( $dashboard_js_content, $str ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.js missing overview string '$str'\n" );
+		exit( 1 );
+	}
+}
+
+$asset_php_file = dirname( __DIR__ ) . '/assets/admin/js/dashboard.asset.php';
+$asset_data     = require $asset_php_file;
+if ( ! in_array( 'wp-api-fetch', $asset_data['dependencies'], true ) ) {
+	fwrite( STDERR, "FAIL: dashboard.asset.php missing 'wp-api-fetch' dependency\n" );
+	exit( 1 );
+}
+echo "OK: Overview tab hero, live metric cards, quickstart guide, and REST API integration verified\n";
+
 echo "All Admin Dashboard tests passed successfully!\n";
