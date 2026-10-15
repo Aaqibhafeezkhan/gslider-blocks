@@ -43,8 +43,12 @@ const zip = async () => {
                         return false;
                     }
 
-                    // Exclude empty/dummy admin JS files generated as side-effect of compiling SCSS
-                    if (entry.name.includes('admin/js') || (entry.name.includes('admin') && entry.name.endsWith('.js'))) {
+                    // Exclude empty/dummy admin JS and asset side-effect files from SCSS compilation
+                    const dummyAdminFiles = [
+                        'block-controls.js',
+                        'block-controls.asset.php',
+                    ];
+                    if (dummyAdminFiles.includes(basename)) {
                         return false;
                     }
 

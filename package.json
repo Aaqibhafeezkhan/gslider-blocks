@@ -23,7 +23,10 @@
 	},
 	"devDependencies": {
 		"@monaco-editor/react": "^4.6.0",
+		"@wordpress/babel-preset-default": "^8.26.0",
+		"@wordpress/dependency-extraction-webpack-plugin": "^6.26.0",
 		"@wordpress/scripts": "^30.17.0",
+		"babel-loader": "^9.2.1",
 		"css-loader": "^7.1.2",
 		"mini-css-extract-plugin": "^2.9.2",
 		"sass": "^1.88.0",

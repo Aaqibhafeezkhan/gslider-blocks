@@ -59,13 +59,6 @@ class AdminAssets implements Registrable {
             GSLIDER_VERSION
         );
 
-        wp_register_style(
-            'gslider-admin-style',
-            GSLIDER_PLUGIN_URL . 'assets/admin/css/admin.css',
-            [],
-            GSLIDER_VERSION
-        );
-
         wp_enqueue_style( 'gslider-block-controls' );
     }
 
