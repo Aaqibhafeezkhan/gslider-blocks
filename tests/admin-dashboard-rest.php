@@ -218,6 +218,21 @@ if ( ! function_exists( 'get_bloginfo' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wp_upload_dir' ) ) {
+	function wp_upload_dir() {
+		return [
+			'basedir' => '/tmp/wp-test-uploads',
+			'baseurl' => 'https://example.com/wp-content/uploads',
+		];
+	}
+}
+
+if ( ! function_exists( 'wp_mkdir_p' ) ) {
+	function wp_mkdir_p( $dir ) {
+		return true;
+	}
+}
+
 // Load Composer Autoloader.
 require_once dirname( __DIR__ ) . '/vendor/autoload.php';
 

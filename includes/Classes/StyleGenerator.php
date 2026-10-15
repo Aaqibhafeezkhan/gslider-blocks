@@ -211,7 +211,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
             $css_content = "/* GSlider Blocks Dynamic Styles - Page ID: $page_id - Generated on " .
                 current_time( 'mysql' ) . " */\n" . $this->minify_css( $css_content );
 
-            if ( ! function_exists( 'WP_Filesystem' ) ) {
+            if ( ! function_exists( 'WP_Filesystem' ) && file_exists( ABSPATH . 'wp-admin/includes/file.php' ) ) {
                 require_once ABSPATH . 'wp-admin/includes/file.php';
             }
 
@@ -441,6 +441,108 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          */
         public static function get_collected_styles(): array {
             return self::$styles;
+        }
+
+        /**
+         * Purges all generated dynamic CSS files from the uploads directory.
+         *
+         * Deletes only files matching 'gslider-blocks-dynamic-styles-*.min.css'
+         * using WP_Filesystem. Leaves all other files and directories intact.
+         *
+         * @since 1.2.0
+         *
+         * @return int Number of CSS cache files deleted.
+         */
+        public function clear_dynamic_css_cache(): int {
+            if ( ! function_exists( 'WP_Filesystem' ) && file_exists( ABSPATH . 'wp-admin/includes/file.php' ) ) {
+                require_once ABSPATH . 'wp-admin/includes/file.php';
+            }
+
+            global $wp_filesystem;
+            if ( empty( $wp_filesystem ) ) {
+                WP_Filesystem();
+            }
+
+            if ( ! is_dir( $this->css_dir ) ) {
+                self::reset_styles();
+                return 0;
+            }
+
+            $deleted_count = 0;
+            $files         = scandir( $this->css_dir );
+
+            if ( is_array( $files ) ) {
+                foreach ( $files as $file ) {
+                    if ( '.' === $file || '..' === $file ) {
+                        continue;
+                    }
+
+                    // Delete only generated dynamic CSS stylesheets.
+                    if ( preg_match( '/^gslider-blocks-dynamic-styles-.*\.min\.css$/', $file ) ) {
+                        $full_path = $this->css_dir . '/' . $file;
+                        if ( is_file( $full_path ) ) {
+                            if ( $wp_filesystem && method_exists( $wp_filesystem, 'delete' ) ) {
+                                $wp_filesystem->delete( $full_path );
+                            } else {
+                                @unlink( $full_path );
+                            }
+                            $deleted_count++;
+                        }
+                    }
+                }
+            }
+
+            self::reset_styles();
+            clearstatcache();
+
+            return $deleted_count;
+        }
+
+        /**
+         * Retrieves statistics about currently cached dynamic CSS files.
+         *
+         * @since 1.2.0
+         *
+         * @return array{files_count: int, total_size_bytes: int, total_size_formatted: string}
+         */
+        public function get_cache_stats(): array {
+            $stats = [
+                'files_count'          => 0,
+                'total_size_bytes'     => 0,
+                'total_size_formatted' => '0 KB',
+            ];
+
+            if ( ! is_dir( $this->css_dir ) ) {
+                return $stats;
+            }
+
+            $files = scandir( $this->css_dir );
+            if ( ! is_array( $files ) ) {
+                return $stats;
+            }
+
+            foreach ( $files as $file ) {
+                if ( '.' === $file || '..' === $file ) {
+                    continue;
+                }
+
+                if ( preg_match( '/^gslider-blocks-dynamic-styles-.*\.min\.css$/', $file ) ) {
+                    $full_path = $this->css_dir . '/' . $file;
+                    if ( is_file( $full_path ) ) {
+                        $stats['files_count']++;
+                        $size = (int) filesize( $full_path );
+                        $stats['total_size_bytes'] += $size;
+                    }
+                }
+            }
+
+            if ( $stats['total_size_bytes'] > 1048576 ) {
+                $stats['total_size_formatted'] = round( $stats['total_size_bytes'] / 1048576, 2 ) . ' MB';
+            } elseif ( $stats['total_size_bytes'] > 0 ) {
+                $stats['total_size_formatted'] = round( $stats['total_size_bytes'] / 1024, 1 ) . ' KB';
+            }
+
+            return $stats;
         }
 
         /**

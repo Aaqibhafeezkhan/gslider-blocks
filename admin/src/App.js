@@ -8,13 +8,13 @@
  */
 
 import { useState, useEffect, useCallback } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import OverviewTab from './tabs/OverviewTab';
 import BlocksTab from './tabs/BlocksTab';
 import SettingsTab from './tabs/SettingsTab';
+import ToolsTab from './tabs/ToolsTab';
 
 /**
  * Valid tab identifiers.
@@ -147,20 +147,10 @@ const App = () => {
 					) }
 
 					{ activeTab === 'tools' && (
-						<div className="gslider-dashboard-card">
-							<h2>
-								{ __(
-									'System Information & Diagnostics',
-									'gslider-blocks'
-								) }
-							</h2>
-							<p>
-								{ __(
-									'Inspect system environment, active WordPress REST endpoints, and debug telemetry.',
-									'gslider-blocks'
-								) }
-							</p>
-						</div>
+						<ToolsTab
+							dashboardData={ dashboardData }
+							setDashboardData={ setDashboardData }
+						/>
 					) }
 				</div>
 			</main>

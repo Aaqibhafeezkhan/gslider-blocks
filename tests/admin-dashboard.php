@@ -583,4 +583,41 @@ foreach ( $required_settings_strings as $str ) {
 }
 echo "OK: Settings tab, GDPR font privacy, CSS delivery preferences, and security shield verified\n";
 
+// Test 21: Compiled Tools tab, Dynamic CSS cache purger, and System Report verification.
+$required_tools_classes = [
+	'.gslider-dashboard-tools-container',
+	'.gslider-dashboard-tools-title',
+	'.gslider-tools-card',
+	'.gslider-tools-badge',
+	'.gslider-tools-stats-grid',
+	'.gslider-tools-stat-card',
+	'.gslider-tools-action-btn',
+	'.gslider-tools-system-grid',
+	'.gslider-tools-report-container',
+	'.gslider-tools-report-pre',
+];
+foreach ( $required_tools_classes as $class_name ) {
+	if ( strpos( $dashboard_css_content, $class_name ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.css missing tools class '$class_name'\n" );
+		exit( 1 );
+	}
+}
+
+$required_tools_strings = [
+	'/gslider/v1/dashboard/clear-cache',
+	'/gslider/v1/dashboard/system-report',
+	'Dynamic CSS Cache Purger',
+	'Purge Dynamic CSS Cache',
+	'System Status & Diagnostic Report',
+	'Copy System Report',
+	'Diagnostics Report Preview',
+];
+foreach ( $required_tools_strings as $str ) {
+	if ( strpos( $dashboard_js_content, $str ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.js missing tools string '$str'\n" );
+		exit( 1 );
+	}
+}
+echo "OK: Tools tab, dynamic CSS cache purger, and system diagnostic report exporter verified\n";
+
 echo "All Admin Dashboard tests passed successfully!\n";
