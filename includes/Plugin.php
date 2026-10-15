@@ -23,6 +23,7 @@ use GSlider\Classes\SupportSVG;
 use GSlider\Utils\Utils;
 use GSlider\RestApi\BlocksController;
 use GSlider\Admin\Dashboard;
+use GSlider\Admin\DashboardController;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -59,6 +60,7 @@ if ( ! class_exists( Plugin::class, false ) ) {
 			Utils::class,
 			BlocksController::class,
 			Dashboard::class,
+			DashboardController::class,
 		];
 
 		/**
