@@ -1,8 +1,8 @@
 import { z } from 'zod';
-export declare const GENERATABLE_SLUGS: readonly ["base", "testimonial", "image-slider", "logo-carousel"];
+export declare const GENERATABLE_SLUGS: readonly ["base", "testimonial", "image-slider", "logo-carousel", "flexi-content"];
 export type GeneratableSlug = (typeof GENERATABLE_SLUGS)[number];
 export declare const generateBlockInputZod: z.ZodObject<{
-    blockSlug: z.ZodEnum<["base", "testimonial", "image-slider", "logo-carousel"]>;
+    blockSlug: z.ZodEnum<["base", "testimonial", "image-slider", "logo-carousel", "flexi-content"]>;
     slides: z.ZodArray<z.ZodObject<{
         subTitle: z.ZodOptional<z.ZodString>;
         title: z.ZodOptional<z.ZodString>;
@@ -25,6 +25,25 @@ export declare const generateBlockInputZod: z.ZodObject<{
         link: z.ZodOptional<z.ZodString>;
         caption: z.ZodOptional<z.ZodString>;
         tooltipText: z.ZodOptional<z.ZodString>;
+        blocks: z.ZodOptional<z.ZodArray<z.ZodObject<{
+            type: z.ZodEnum<["paragraph", "heading", "image", "button"]>;
+            text: z.ZodOptional<z.ZodString>;
+            level: z.ZodOptional<z.ZodNumber>;
+            url: z.ZodOptional<z.ZodString>;
+            alt: z.ZodOptional<z.ZodString>;
+        }, "strict", z.ZodTypeAny, {
+            type: "paragraph" | "heading" | "image" | "button";
+            text?: string | undefined;
+            url?: string | undefined;
+            alt?: string | undefined;
+            level?: number | undefined;
+        }, {
+            type: "paragraph" | "heading" | "image" | "button";
+            text?: string | undefined;
+            url?: string | undefined;
+            alt?: string | undefined;
+            level?: number | undefined;
+        }>, "many">>;
     }, "strict", z.ZodTypeAny, {
         link?: string | undefined;
         title?: string | undefined;
@@ -47,6 +66,13 @@ export declare const generateBlockInputZod: z.ZodObject<{
         alt?: string | undefined;
         caption?: string | undefined;
         tooltipText?: string | undefined;
+        blocks?: {
+            type: "paragraph" | "heading" | "image" | "button";
+            text?: string | undefined;
+            url?: string | undefined;
+            alt?: string | undefined;
+            level?: number | undefined;
+        }[] | undefined;
     }, {
         link?: string | undefined;
         title?: string | undefined;
@@ -69,6 +95,13 @@ export declare const generateBlockInputZod: z.ZodObject<{
         alt?: string | undefined;
         caption?: string | undefined;
         tooltipText?: string | undefined;
+        blocks?: {
+            type: "paragraph" | "heading" | "image" | "button";
+            text?: string | undefined;
+            url?: string | undefined;
+            alt?: string | undefined;
+            level?: number | undefined;
+        }[] | undefined;
     }>, "many">;
     layout: z.ZodOptional<z.ZodObject<{
         mode: z.ZodOptional<z.ZodEnum<["slider", "carousel"]>>;
@@ -192,7 +225,7 @@ export declare const generateBlockInputZod: z.ZodObject<{
     }>>;
     attributes: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
 }, "strict", z.ZodTypeAny, {
-    blockSlug: "image-slider" | "testimonial" | "logo-carousel" | "base";
+    blockSlug: "image-slider" | "testimonial" | "logo-carousel" | "flexi-content" | "base";
     slides: {
         link?: string | undefined;
         title?: string | undefined;
@@ -215,6 +248,13 @@ export declare const generateBlockInputZod: z.ZodObject<{
         alt?: string | undefined;
         caption?: string | undefined;
         tooltipText?: string | undefined;
+        blocks?: {
+            type: "paragraph" | "heading" | "image" | "button";
+            text?: string | undefined;
+            url?: string | undefined;
+            alt?: string | undefined;
+            level?: number | undefined;
+        }[] | undefined;
     }[];
     attributes?: Record<string, unknown> | undefined;
     layout?: {
@@ -248,7 +288,7 @@ export declare const generateBlockInputZod: z.ZodObject<{
         paginationType?: string | undefined;
     } | undefined;
 }, {
-    blockSlug: "image-slider" | "testimonial" | "logo-carousel" | "base";
+    blockSlug: "image-slider" | "testimonial" | "logo-carousel" | "flexi-content" | "base";
     slides: {
         link?: string | undefined;
         title?: string | undefined;
@@ -271,6 +311,13 @@ export declare const generateBlockInputZod: z.ZodObject<{
         alt?: string | undefined;
         caption?: string | undefined;
         tooltipText?: string | undefined;
+        blocks?: {
+            type: "paragraph" | "heading" | "image" | "button";
+            text?: string | undefined;
+            url?: string | undefined;
+            alt?: string | undefined;
+            level?: number | undefined;
+        }[] | undefined;
     }[];
     attributes?: Record<string, unknown> | undefined;
     layout?: {
@@ -314,7 +361,7 @@ export declare const generateBlockToolDefinition: {
         properties: {
             blockSlug: {
                 type: string;
-                enum: readonly ["base", "testimonial", "image-slider", "logo-carousel"];
+                enum: readonly ["base", "testimonial", "image-slider", "logo-carousel", "flexi-content"];
                 description: string;
             };
             slides: {

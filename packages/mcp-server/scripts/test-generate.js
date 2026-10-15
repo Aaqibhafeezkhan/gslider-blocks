@@ -157,12 +157,49 @@ console.log('ok validate wrong type');
 
 await rejects(
   { blockSlug: 'flexi-content', slides: [{ title: 'One' }] },
-  "received 'flexi-content'"
+  'title'
 );
 await rejects(
   { blockSlug: 'flexi-content-item', slides: [{ title: 'One' }] },
   "received 'flexi-content-item'"
 );
+await rejects(
+  { blockSlug: 'flexi-content', slides: [{ blocks: [{ type: 'paragraph', text: 'Hi' }] }], layout: { effect: 'cube' } },
+  'cube'
+);
+
+const flexi = await generate({
+  blockSlug: 'flexi-content',
+  slides: [
+    { blocks: [{ type: 'paragraph', text: 'First slide' }] },
+    { blocks: [{ type: 'heading', text: 'Second', level: 2 }, { type: 'button', text: 'Go', url: 'https://example.com' }] },
+  ],
+  layout: { mode: 'carousel', effect: 'coverflow', columns: 2 },
+});
+if (!flexi.markup.includes('<!-- wp:gslider-blocks/flexi-content ')) {
+  fail('flexi comment name');
+}
+const itemMatches = flexi.markup.match(/<!-- wp:gslider-blocks\/flexi-content-item /g) || [];
+if (itemMatches.length !== 2) {
+  fail(`flexi expected 2 items, found ${itemMatches.length}`);
+}
+if (!flexi.markup.includes('wp:paragraph') || !flexi.markup.includes('wp:heading') || !flexi.markup.includes('wp:buttons')) {
+  fail('flexi inner core blocks are missing');
+}
+if (!/^gslider-flexi-content-[a-f0-9]{8}$/.test(flexi.blockId)) {
+  fail(`flexi blockId ${flexi.blockId}`);
+}
+const itemIds = [...flexi.markup.matchAll(/"blockId":"(gslider-flexi-content-item-[a-f0-9]{8})"/g)].map((match) => match[1]);
+if (itemIds.length !== 2 || new Set(itemIds).size !== 2) {
+  fail(`flexi item ids ${itemIds.join(', ')}`);
+}
+if (effectIn(flexi.markup) !== 'coverflow') {
+  fail(`flexi effect ${effectIn(flexi.markup)}`);
+}
+if (!flexi.validation.isValid) {
+  fail('flexi validation');
+}
+console.log('ok flexi-content');
 
 if (failed) {
   process.exit(1);

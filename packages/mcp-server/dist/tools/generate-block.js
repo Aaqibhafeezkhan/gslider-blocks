@@ -1,9 +1,9 @@
 import { randomBytes } from 'crypto';
 import { z } from 'zod';
 import { BLOCK_ID_PREFIX } from '../core/registry.js';
-import { attributeDefaults, prepareBlock, validationOf } from '../core/block-runtime.js';
+import { attributeDefaults, loadBundledBlock, prepareBlock, registerCoreBlocksOnce, validationOf } from '../core/block-runtime.js';
 import { commentAttributes } from '../core/markup.js';
-export const GENERATABLE_SLUGS = ['base', 'testimonial', 'image-slider', 'logo-carousel'];
+export const GENERATABLE_SLUGS = ['base', 'testimonial', 'image-slider', 'logo-carousel', 'flexi-content'];
 const SLIDE_FIELDS = {
     base: [
         'subTitle',
@@ -27,6 +27,7 @@ const SLIDE_FIELDS = {
     ],
     'image-slider': ['url', 'alt', 'link', 'caption', 'tooltipText'],
     'logo-carousel': ['url', 'alt', 'link', 'caption', 'tooltipText'],
+    'flexi-content': ['blocks'],
 };
 const RESERVED_ATTRIBUTES = ['blockId', 'blockStyle', 'deviceType'];
 const deviceNumber = z.union([
@@ -60,6 +61,18 @@ const slideSchema = z
     link: z.string().optional(),
     caption: z.string().optional(),
     tooltipText: z.string().optional(),
+    blocks: z
+        .array(z
+        .object({
+        type: z.enum(['paragraph', 'heading', 'image', 'button']),
+        text: z.string().optional(),
+        level: z.number().int().min(1).max(6).optional(),
+        url: z.string().optional(),
+        alt: z.string().optional(),
+    })
+        .strict())
+        .min(1)
+        .optional(),
 })
     .strict();
 export const generateBlockInputZod = z
@@ -90,14 +103,14 @@ export class GeneratorInputError extends Error {
 }
 export const generateBlockToolDefinition = {
     name: 'gslider_generate_block',
-    description: 'Generates paste-ready Gutenberg markup for a GSlider block. The markup is produced by the block\'s own save function and checked with validateBlock before it is returned. Flexi Content is not supported.',
+    description: 'Generates paste-ready Gutenberg markup for a GSlider block. The markup is produced by the block\'s own save function and checked with validateBlock before it is returned. Flexi Content slides are child flexi-content-item blocks.',
     inputSchema: {
         type: 'object',
         properties: {
             blockSlug: {
                 type: 'string',
                 enum: GENERATABLE_SLUGS,
-                description: 'Block to generate: base, testimonial, image-slider, or logo-carousel.',
+                description: 'Block to generate: base, testimonial, image-slider, logo-carousel, or flexi-content.',
             },
             slides: {
                 type: 'array',
@@ -200,6 +213,38 @@ function buildSlide(slug, slide, index, fallback) {
     }
     return item;
 }
+function coreBlock(blocksApi, inner) {
+    if (inner.type === 'paragraph') {
+        if (!inner.text) {
+            throw new GeneratorInputError('A paragraph needs text.');
+        }
+        return blocksApi.createBlock('core/paragraph', { content: inner.text });
+    }
+    if (inner.type === 'heading') {
+        if (!inner.text) {
+            throw new GeneratorInputError('A heading needs text.');
+        }
+        return blocksApi.createBlock('core/heading', { content: inner.text, level: inner.level ?? 2 });
+    }
+    if (inner.type === 'image') {
+        if (!inner.url) {
+            throw new GeneratorInputError('An image needs a url. The generator does not upload media.');
+        }
+        return blocksApi.createBlock('core/image', { url: inner.url, alt: inner.alt ?? '' });
+    }
+    if (!inner.text) {
+        throw new GeneratorInputError('A button needs text.');
+    }
+    return blocksApi.createBlock('core/buttons', {}, [
+        blocksApi.createBlock('core/button', { text: inner.text, url: inner.url ?? '' }),
+    ]);
+}
+function validationIssues(blocksApi, block) {
+    const current = block;
+    const result = validationOf(blocksApi.validateBlock(current));
+    const nested = (current.innerBlocks ?? []).flatMap((child) => validationIssues(blocksApi, child));
+    return result.isValid ? nested : [...result.issues, ...nested];
+}
 function generate(input) {
     const slug = input.blockSlug;
     const { blocks, bundled, schema } = prepareBlock(slug);
@@ -226,18 +271,44 @@ function generate(input) {
             throw new GeneratorInputError(`Attribute "${key}" must be one of: ${allowed.join(', ')}.`);
         }
     }
-    const fallbackItems = defaults[schema.slideField];
-    const fallbackItem = Array.isArray(fallbackItems) && fallbackItems.length > 0
-        ? fallbackItems[0]
-        : null;
-    if (!carouselOnly && !fallbackItem) {
-        throw new GeneratorInputError(`${slug} has no default slide item to build from.`);
+    const isFlexi = slug === 'flexi-content';
+    let flexiItems = [];
+    let slides = [];
+    if (isFlexi) {
+        registerCoreBlocksOnce();
+        prepareBlock('flexi-content-item');
+        const itemBundled = loadBundledBlock('flexi-content-item');
+        const itemDefaults = attributeDefaults(itemBundled.attributes);
+        flexiItems = input.slides.map((slide) => {
+            const foreign = Object.keys(slide).filter((key) => key !== 'blocks');
+            if (foreign.length > 0) {
+                throw new GeneratorInputError(`Slide field "${foreign[0]}" is not valid for flexi-content. Each slide needs a blocks array.`);
+            }
+            if (!slide.blocks || slide.blocks.length === 0) {
+                throw new GeneratorInputError('Each flexi slide needs at least one block.');
+            }
+            const itemId = `${BLOCK_ID_PREFIX['flexi-content-item']}-${randomBytes(4).toString('hex')}`;
+            const itemChanged = { blockId: itemId };
+            const itemStyle = itemBundled.styling({ ...itemDefaults, ...itemChanged });
+            return blocks.createBlock('gslider-blocks/flexi-content-item', { ...itemChanged, blockStyle: itemStyle }, slide.blocks.map((inner) => coreBlock(blocks, inner)));
+        });
     }
-    const slides = input.slides.map((slide, index) => buildSlide(slug, slide, index, fallbackItem));
+    else {
+        const fallbackItems = defaults[schema.slideField];
+        const fallbackItem = Array.isArray(fallbackItems) && fallbackItems.length > 0
+            ? fallbackItems[0]
+            : null;
+        if (!carouselOnly && !fallbackItem) {
+            throw new GeneratorInputError(`${slug} has no default slide item to build from.`);
+        }
+        slides = input.slides.map((slide, index) => buildSlide(slug, slide, index, fallbackItem));
+    }
     const changed = {
         blockId: `${BLOCK_ID_PREFIX[slug]}-${randomBytes(4).toString('hex')}`,
-        [schema.slideField]: slides,
     };
+    if (!isFlexi) {
+        changed[schema.slideField] = slides;
+    }
     if (layout.mode)
         changed.sliderType = layout.mode;
     if (layout.columns !== undefined) {
@@ -286,12 +357,12 @@ function generate(input) {
         throw new GeneratorInputError('Custom arrow icons and the quote icon need the editor icon set, which the generator does not load. Leave navigationArrowsIconSwitcher and showQuoteIcon off.');
     }
     changed.blockStyle = bundled.styling({ ...defaults, ...changed });
-    const block = blocks.createBlock(schema.name, changed);
+    const block = blocks.createBlock(schema.name, changed, isFlexi ? flexiItems : undefined);
     const markup = blocks.serialize([block]);
     const parsed = blocks.parse(markup)[0];
-    const validation = validationOf(blocks.validateBlock(parsed));
-    if (!validation.isValid) {
-        throw new GeneratorInputError(`Generated markup failed block validation: ${JSON.stringify(validation.issues)}`);
+    const issues = validationIssues(blocks, parsed);
+    if (issues.length > 0) {
+        throw new GeneratorInputError(`Generated markup failed block validation: ${JSON.stringify(issues)}`);
     }
     return {
         blockName: schema.name,
