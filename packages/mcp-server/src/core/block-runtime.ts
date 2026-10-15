@@ -15,9 +15,13 @@ export interface BundledBlock {
 
 interface BlocksApi {
   registerBlockType: (name: string, settings: Record<string, unknown>) => unknown;
-  createBlock: (name: string, attributes: Record<string, unknown>) => unknown;
+  createBlock: (
+    name: string,
+    attributes: Record<string, unknown>,
+    innerBlocks?: unknown[]
+  ) => { innerBlocks?: unknown[] };
   serialize: (blocks: unknown[]) => string;
-  parse: (markup: string) => Array<{ name: string; attributes: Record<string, unknown> }>;
+  parse: (markup: string) => Array<{ name: string; attributes: Record<string, unknown>; innerBlocks?: unknown[] }>;
   validateBlock: (block: unknown) => unknown;
 }
 
@@ -112,6 +116,33 @@ export function attributeDefaults(
 
 let blocksApi: BlocksApi | null = null;
 const registered = new Set<string>();
+let coreBlocksReady = false;
+
+/**
+ * Registers the core blocks a Flexi slide may contain, using the save
+ * functions bundled from @wordpress/block-library. Only those saves are
+ * loaded, so the server does not start the whole block library.
+ */
+export function registerCoreBlocksOnce(): void {
+  if (coreBlocksReady) {
+    return;
+  }
+  ensureDom();
+  const saves = require('./core-saves.cjs') as Record<string, unknown>;
+  const blocks = wordpressBlocks();
+  for (const name of ['paragraph', 'heading', 'image', 'button', 'buttons']) {
+    const meta = saves[`${name}Meta`] as { name: string };
+    if (!registered.has(meta.name)) {
+      blocks.registerBlockType(meta.name, {
+        ...(saves[`${name}Meta`] as Record<string, unknown>),
+        save: saves[name],
+        edit: () => null,
+      });
+      registered.add(meta.name);
+    }
+  }
+  coreBlocksReady = true;
+}
 
 export function wordpressBlocks(): BlocksApi {
   ensureDom();

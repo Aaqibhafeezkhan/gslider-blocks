@@ -82,6 +82,32 @@ export function attributeDefaults(attributes) {
 }
 let blocksApi = null;
 const registered = new Set();
+let coreBlocksReady = false;
+/**
+ * Registers the core blocks a Flexi slide may contain, using the save
+ * functions bundled from @wordpress/block-library. Only those saves are
+ * loaded, so the server does not start the whole block library.
+ */
+export function registerCoreBlocksOnce() {
+    if (coreBlocksReady) {
+        return;
+    }
+    ensureDom();
+    const saves = require('./core-saves.cjs');
+    const blocks = wordpressBlocks();
+    for (const name of ['paragraph', 'heading', 'image', 'button', 'buttons']) {
+        const meta = saves[`${name}Meta`];
+        if (!registered.has(meta.name)) {
+            blocks.registerBlockType(meta.name, {
+                ...saves[`${name}Meta`],
+                save: saves[name],
+                edit: () => null,
+            });
+            registered.add(meta.name);
+        }
+    }
+    coreBlocksReady = true;
+}
 export function wordpressBlocks() {
     ensureDom();
     if (!blocksApi) {

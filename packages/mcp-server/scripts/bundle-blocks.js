@@ -16,7 +16,14 @@ const packageDir = path.resolve(__dirname, '..');
 const rootDir = path.resolve(packageDir, '../..');
 
 // Flexi Content is out of scope for the generator, so it is not bundled.
-export const BLOCK_SLUGS = ['base', 'testimonial', 'image-slider', 'logo-carousel'];
+export const BLOCK_SLUGS = [
+  'base',
+  'testimonial',
+  'image-slider',
+  'logo-carousel',
+  'flexi-content',
+  'flexi-content-item',
+];
 
 const aliases = {
   '@Components': path.join(rootDir, 'src/components'),

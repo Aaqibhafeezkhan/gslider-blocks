@@ -15,7 +15,7 @@
   "scripts": {
     "generate-schemas": "node scripts/extract-schemas.js",
     "test": "node scripts/test-drift.js",
-    "build": "node scripts/bundle-blocks.js && node scripts/extract-schemas.js && tsc && mkdir -p dist/core/schemas && cp src/core/schemas/*.json dist/core/schemas/",
+    "build": "node scripts/bundle-core-saves.js && node scripts/bundle-blocks.js && node scripts/extract-schemas.js && tsc && mkdir -p dist/core/schemas && cp src/core/schemas/*.json dist/core/schemas/",
     "watch": "tsc --watch",
     "start": "node dist/index.js",
     "prepare": "npm run build",
@@ -33,6 +33,7 @@
   "devDependencies": {
     "@types/node": "^22.13.8",
     "esbuild": "^0.28.2",
+    "@wordpress/block-library": "10.5.0",
     "typescript": "^5.7.3"
   }
 }

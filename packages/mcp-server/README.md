@@ -148,7 +148,9 @@ All tools follow a uniform `gslider_<verb>_<noun>` namespace pattern for clean s
 
 `gslider_generate_block` takes `blockSlug`, at least one slide, an optional `layout` (columns, gap, speed, autoplay, effect, navigation, pagination), and optional raw `attributes` that win over `layout`. It returns the block comment, the generated `blockId`, and the stored attributes. Default attributes are left out of the comment. Custom arrow icons and the quote icon are rejected, because those need the editor's icon set.
 
-`gslider_validate_block` takes either `markup` or `blockSlug` plus `attributes`. `blockStyle` that the editor would rewrite is reported as a warning. Flexi Content is not accepted by either tool.
+`gslider_validate_block` takes either `markup` or `blockSlug` plus `attributes`. `blockStyle` that the editor would rewrite is reported as a warning.
+
+`gslider_generate_block` also accepts `flexi-content`. Each slide is a `blocks` array of `paragraph`, `heading`, `image`, or `button`. Those become `gslider-blocks/flexi-content-item` child blocks. A lone `flexi-content-item` is rejected.
 
 `gslider_get_block_schema` accepts `flexi-content-item`. That block has no slide array. The flexi-content schema still describes its slides as child blocks.
 
