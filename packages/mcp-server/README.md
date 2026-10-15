@@ -1,6 +1,6 @@
 # @gslider/mcp-server
 
-> Official Model Context Protocol (MCP) server for **GSlider Blocks** — lets AI assistants (Claude, OpenAI, Cursor, Antigravity, Copilot, Windsurf, etc.) list the GSlider blocks, read each block's attribute schema and defaults, and load starter templates, locally with **$0 cloud cost**. Generating block markup is planned in [#33](https://github.com/noruzzamans/gslider-blocks/issues/33) and not available yet.
+> Official Model Context Protocol (MCP) server for **GSlider Blocks** — lets AI assistants (Claude, OpenAI, Cursor, Antigravity, Copilot, Windsurf, etc.) list the GSlider blocks, read each block's attribute schema and defaults, and load starter templates, locally with **$0 cloud cost**. `gslider_generate_block` can write base, testimonial, image-slider, and logo-carousel markup. `gslider_get_block_schema` also describes the `flexi-content-item` child block.
 
 ---
 
@@ -149,6 +149,8 @@ All tools follow a uniform `gslider_<verb>_<noun>` namespace pattern for clean s
 `gslider_generate_block` takes `blockSlug`, at least one slide, an optional `layout` (columns, gap, speed, autoplay, effect, navigation, pagination), and optional raw `attributes` that win over `layout`. It returns the block comment, the generated `blockId`, and the stored attributes. Default attributes are left out of the comment. Custom arrow icons and the quote icon are rejected, because those need the editor's icon set.
 
 `gslider_validate_block` takes either `markup` or `blockSlug` plus `attributes`. `blockStyle` that the editor would rewrite is reported as a warning. Flexi Content is not accepted by either tool.
+
+`gslider_get_block_schema` accepts `flexi-content-item`. That block has no slide array. The flexi-content schema still describes its slides as child blocks.
 
 ---
 

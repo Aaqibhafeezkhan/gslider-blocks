@@ -10,7 +10,7 @@ export interface BlockSummary {
   totalAttributes: number;
   presets: string[];
   allowedEffects: {
-    carouselEffect: string[];
+    carouselEffect?: string[];
     slideEffect?: string[];
     sliderType?: string[];
   };
@@ -35,6 +35,7 @@ export const SUPPORTED_BLOCK_SLUGS = [
   'testimonial',
   'logo-carousel',
   'flexi-content',
+  'flexi-content-item',
   'base',
 ] as const;
 
@@ -51,6 +52,7 @@ export const BLOCK_ID_PREFIX: Record<SupportedBlockSlug, string> = {
   'image-slider': 'gslider-image-slider',
   'logo-carousel': 'gslider-logo-carousel',
   'flexi-content': 'gslider-flexi-content',
+  'flexi-content-item': 'gslider-flexi-content-item',
 };
 
 function loadBlockSchema(slug: string): BlockDetail {

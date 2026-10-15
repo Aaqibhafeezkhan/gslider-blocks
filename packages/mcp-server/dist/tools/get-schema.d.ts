@@ -1,10 +1,10 @@
 import { z } from 'zod';
 export declare const getBlockSchemaInputZod: z.ZodObject<{
-    blockSlug: z.ZodEnum<["image-slider", "testimonial", "logo-carousel", "flexi-content", "base"]>;
+    blockSlug: z.ZodEnum<["image-slider", "testimonial", "logo-carousel", "flexi-content", "flexi-content-item", "base"]>;
 }, "strip", z.ZodTypeAny, {
-    blockSlug: "image-slider" | "testimonial" | "logo-carousel" | "flexi-content" | "base";
+    blockSlug: "image-slider" | "testimonial" | "logo-carousel" | "flexi-content" | "flexi-content-item" | "base";
 }, {
-    blockSlug: "image-slider" | "testimonial" | "logo-carousel" | "flexi-content" | "base";
+    blockSlug: "image-slider" | "testimonial" | "logo-carousel" | "flexi-content" | "flexi-content-item" | "base";
 }>;
 export declare const getBlockSchemaToolDefinition: {
     name: string;
@@ -14,7 +14,7 @@ export declare const getBlockSchemaToolDefinition: {
         properties: {
             blockSlug: {
                 type: string;
-                enum: readonly ["image-slider", "testimonial", "logo-carousel", "flexi-content", "base"];
+                enum: readonly ["image-slider", "testimonial", "logo-carousel", "flexi-content", "flexi-content-item", "base"];
                 description: string;
             };
         };

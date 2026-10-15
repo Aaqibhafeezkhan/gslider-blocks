@@ -155,6 +155,15 @@ if (!badType.content[0].text.includes('autoplay')) {
 }
 console.log('ok validate wrong type');
 
+await rejects(
+  { blockSlug: 'flexi-content', slides: [{ title: 'One' }] },
+  "received 'flexi-content'"
+);
+await rejects(
+  { blockSlug: 'flexi-content-item', slides: [{ title: 'One' }] },
+  "received 'flexi-content-item'"
+);
+
 if (failed) {
   process.exit(1);
 }
