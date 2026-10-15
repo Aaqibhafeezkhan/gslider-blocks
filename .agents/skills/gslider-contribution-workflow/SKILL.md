@@ -51,16 +51,23 @@ All PR titles must strictly follow the **Conventional Commits** specification:
 
 ---
 
-## 🎯 2. Issue-First Policy (Zero Orphan PRs)
+## 🎯 2. Issue-First Policy (Zero Orphan PRs & Automated Labeling)
 
 > [!IMPORTANT]
 > **No Pull Request without an approved issue:**
 > GSlider Blocks strictly enforces an **Issue-First Policy**. Every pull request **MUST** link to an open, approved GitHub Issue. Unsolicited or "orphan" PRs submitted without an existing issue will be rejected and closed.
 >
 > **Workflow:**
-> 1. Open an Issue first (or be assigned to an existing issue).
+> 1. Open an Issue first (or be assigned to an existing issue). Always supply `--label "type: <type>,focus: <scope>"` during `gh issue create`.
+>    Example:
+>    ```bash
+>    gh issue create --title "feat(headless): add REST API block parser" --body "..." --label "type: enhancement,focus: headless"
+>    ```
 > 2. Agree on the technical approach.
 > 3. Open the PR linking to that issue using `Closes #<issue_number>`.
+>
+> **Automated Issue Labeler:**
+> GitHub Actions automatically runs `.github/workflows/issue-automation.yml` on every opened/edited issue, parsing Conventional Commits prefixes and scopes to guarantee consistent labels across all issues.
 
 ---
 
