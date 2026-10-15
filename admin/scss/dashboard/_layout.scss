@@ -35,10 +35,10 @@ body.toplevel_page_gslider-blocks {
 		.gslider-dashboard-card {
 			background: $color-surface;
 			border: 1px solid $color-border;
-			border-radius: $radius-lg;
+			border-radius: 14px;
 			padding: 32px;
-			box-shadow: $shadow-card;
-			transition: border-color $transition-normal, box-shadow $transition-normal;
+			box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
+			transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
 
 			&:hover {
 				border-color: $color-border-strong;
@@ -46,7 +46,7 @@ body.toplevel_page_gslider-blocks {
 
 			@media (max-width: 600px) {
 				padding: 20px;
-				border-radius: $radius-md;
+				border-radius: 10px;
 			}
 
 			h1 {

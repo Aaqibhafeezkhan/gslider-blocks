@@ -51,7 +51,7 @@ body.toplevel_page_gslider-blocks {
 			font-weight: 600;
 			line-height: 1;
 			padding: 4px 8px;
-			border-radius: $radius-full;
+			border-radius: 9999px;
 			background-color: $color-brand-subtle;
 			color: $color-brand-primary;
 			border: 1px solid rgba(0, 124, 186, 0.18);
@@ -75,22 +75,22 @@ body.toplevel_page_gslider-blocks {
 			color: $color-text-secondary;
 			background-color: $color-surface;
 			border: 1px solid $color-border;
-			border-radius: $radius-md;
+			border-radius: 10px;
 			text-decoration: none;
-			box-shadow: $shadow-subtle;
-			transition: border-color $transition-fast, color $transition-fast, background-color $transition-fast, box-shadow $transition-fast;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+			transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
 
 			svg {
 				flex-shrink: 0;
 				color: $color-text-muted;
-				transition: color $transition-fast, transform $transition-fast;
+				transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
 			}
 
 			&:hover {
 				color: $color-brand-primary;
 				border-color: $color-brand-primary;
 				background-color: $color-brand-subtle;
-				box-shadow: $shadow-xs;
+				box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
 
 				svg {
 					color: $color-brand-primary;

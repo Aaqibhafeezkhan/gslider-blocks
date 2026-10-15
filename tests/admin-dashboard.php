@@ -427,4 +427,38 @@ if ( strpos( $dashboard_js_content, 'https://wordpress.org/support/plugin/gslide
 }
 echo "OK: Header component styles and resource URLs verified in compiled assets\n";
 
+// Test 17: Compiled dashboard tabs navigation styles and state logic verification.
+$dashboard_css_content = file_get_contents( $dashboard_css_file );
+$dashboard_js_content  = file_get_contents( $dashboard_js_file );
+
+$required_nav_classes = [
+	'.gslider-dashboard-nav',
+	'.gslider-dashboard-tabs',
+	'.gslider-dashboard-tab',
+	'.gslider-dashboard-tab-icon',
+	'.gslider-dashboard-tab-label',
+	'.gslider-dashboard-tab-badge',
+	'.is-active',
+];
+foreach ( $required_nav_classes as $class_name ) {
+	if ( strpos( $dashboard_css_content, $class_name ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.css missing navigation class '$class_name'\n" );
+		exit( 1 );
+	}
+}
+
+$required_tabs = [ 'overview', 'blocks', 'settings', 'tools' ];
+foreach ( $required_tabs as $tab_id ) {
+	if ( strpos( $dashboard_js_content, $tab_id ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.js missing tab identifier '$tab_id'\n" );
+		exit( 1 );
+	}
+}
+
+if ( strpos( $dashboard_js_content, 'hashchange' ) === false ) {
+	fwrite( STDERR, "FAIL: dashboard.js missing hashchange event listener\n" );
+	exit( 1 );
+}
+echo "OK: Navigation tabs component styles and URL hash sync logic verified in compiled assets\n";
+
 echo "All Admin Dashboard tests passed successfully!\n";

@@ -144,9 +144,6 @@ $color-text-muted: #64748b;     // Slate 500 (WCAG AA Compliant on #ffffff)
 $color-brand-primary: #007cba;  // WordPress Core Blue
 $color-brand-hover: #006ba1;
 $color-brand-subtle: #f0f7fb;
-
-// Elevation & Shadows
-$shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
 ```
 
 ### Usage in Dashboard SCSS Modules:
