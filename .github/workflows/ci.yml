@@ -43,10 +43,13 @@ jobs:
       - name: Build MCP Server
         run: npm --prefix packages/mcp-server run build
 
+      - name: Run MCP Block Generation Test
+        run: npm --prefix packages/mcp-server run test:generate
+
       - name: Verify Committed MCP Schemas Match a Fresh Extract
         run: |
-          if ! git diff --exit-code -- packages/mcp-server/src/core/schemas packages/mcp-server/dist/core/schemas; then
-            echo "::error::Committed MCP schemas are out of date. Run \"npm run mcp:build\" and commit packages/mcp-server/src/core/schemas and dist/core/schemas."
+          if ! git diff --exit-code -- packages/mcp-server/src/core/schemas packages/mcp-server/dist/core/schemas packages/mcp-server/dist/blocks; then
+            echo "::error::Committed MCP schemas or block bundles are out of date. Run \"npm run mcp:build\" and commit packages/mcp-server/src/core/schemas, dist/core/schemas, and dist/blocks."
             exit 1
           fi
 

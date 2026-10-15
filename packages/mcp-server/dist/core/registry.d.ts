@@ -15,6 +15,7 @@ export interface BlockSummary {
 }
 export interface BlockDetail extends BlockSummary {
     slideItemSchema: Record<string, unknown>;
+    allowedValues?: Record<string, string[]>;
     attributes: Record<string, {
         type: string;
         default?: unknown;
@@ -24,6 +25,12 @@ export interface BlockDetail extends BlockSummary {
 }
 export declare const SUPPORTED_BLOCK_SLUGS: readonly ["image-slider", "testimonial", "logo-carousel", "flexi-content", "base"];
 export type SupportedBlockSlug = (typeof SUPPORTED_BLOCK_SLUGS)[number];
+/**
+ * The `blockPrefix` each block's `edit.js` passes to `useBlockIdGenerator`.
+ * A block id is the prefix plus 8 characters, for example `gslider-1a2b3c4d`.
+ * Shared by the templates and the block generator so the two never diverge.
+ */
+export declare const BLOCK_ID_PREFIX: Record<SupportedBlockSlug, string>;
 /**
  * Returns a summary list of all registered GSlider blocks.
  */

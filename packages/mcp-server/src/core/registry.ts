@@ -18,6 +18,7 @@ export interface BlockSummary {
 
 export interface BlockDetail extends BlockSummary {
   slideItemSchema: Record<string, unknown>;
+  allowedValues?: Record<string, string[]>;
   attributes: Record<
     string,
     {
@@ -38,6 +39,19 @@ export const SUPPORTED_BLOCK_SLUGS = [
 ] as const;
 
 export type SupportedBlockSlug = (typeof SUPPORTED_BLOCK_SLUGS)[number];
+
+/**
+ * The `blockPrefix` each block's `edit.js` passes to `useBlockIdGenerator`.
+ * A block id is the prefix plus 8 characters, for example `gslider-1a2b3c4d`.
+ * Shared by the templates and the block generator so the two never diverge.
+ */
+export const BLOCK_ID_PREFIX: Record<SupportedBlockSlug, string> = {
+  base: 'gslider',
+  testimonial: 'gslider',
+  'image-slider': 'gslider-image-slider',
+  'logo-carousel': 'gslider-logo-carousel',
+  'flexi-content': 'gslider-flexi-content',
+};
 
 function loadBlockSchema(slug: string): BlockDetail {
   const url = new URL(`./schemas/${slug}.json`, import.meta.url);

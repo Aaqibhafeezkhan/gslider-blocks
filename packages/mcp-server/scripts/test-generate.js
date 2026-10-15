@@ -1,0 +1,161 @@
+import { isDeepStrictEqual } from 'util';
+import { handleGenerateBlock } from '../dist/tools/generate-block.js';
+import { handleValidateBlock } from '../dist/tools/validate-block.js';
+import { attributeDefaults, loadBundledBlock } from '../dist/core/block-runtime.js';
+import { BLOCK_ID_PREFIX } from '../dist/core/registry.js';
+
+const slugs = ['base', 'testimonial', 'image-slider', 'logo-carousel'];
+const blockIds = [];
+let failed = false;
+
+function fail(message) {
+  failed = true;
+  throw new Error(message);
+}
+
+function slideFor(slug) {
+  if (slug === 'base') return { title: 'Hello', description: 'World' };
+  if (slug === 'testimonial') return { testimonialText: 'Great', authorName: 'Ada', rating: 5 };
+  return { url: 'https://example.com/slide.jpg', alt: 'Slide' };
+}
+
+function effectIn(markup) {
+  const match = markup.match(/data-swiper-settings="([^"]*)"/);
+  if (!match) fail('markup has no data-swiper-settings attribute');
+  const decoded = match[1].replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+  return JSON.parse(decoded).effect;
+}
+
+async function generate(input) {
+  const result = await handleGenerateBlock(input);
+  const text = result.content[0].text;
+  if (result.isError) throw new Error(text);
+  return JSON.parse(text);
+}
+
+async function check(slug, extra, expectedEffect, label) {
+  const result = await generate({ blockSlug: slug, slides: [slideFor(slug)], ...extra });
+  if (!result.markup.startsWith(`<!-- wp:gslider-blocks/${slug} `)) {
+    fail(`${slug} ${label}: comment is not wp:gslider-blocks/${slug}`);
+  }
+  if (!result.markup.includes('data-swiper-settings')) {
+    fail(`${slug} ${label}: markup has no data-swiper-settings`);
+  }
+  const effect = effectIn(result.markup);
+  if (effect !== expectedEffect) {
+    fail(`${slug} ${label}: effect is ${effect}, expected ${expectedEffect}`);
+  }
+  const prefix = BLOCK_ID_PREFIX[slug];
+  if (!new RegExp(`^${prefix}-[a-f0-9]{8}$`).test(result.blockId)) {
+    fail(`${slug} ${label}: blockId ${result.blockId} does not use ${prefix}`);
+  }
+  blockIds.push(result.blockId);
+  if (!result.validation.isValid || result.validation.issues.length !== 0) {
+    fail(`${slug} ${label}: validation failed`);
+  }
+  const bundled = loadBundledBlock(slug);
+  const defaults = attributeDefaults(bundled.attributes);
+  for (const [key, value] of Object.entries(result.attributes)) {
+    if (isDeepStrictEqual(value, defaults[key])) {
+      fail(`${slug} ${label}: comment keeps default attribute ${key}`);
+    }
+  }
+  const recomputed = bundled.styling({ ...defaults, ...result.attributes });
+  if (result.attributes.blockStyle !== recomputed) {
+    fail(`${slug} ${label}: blockStyle does not match styling()`);
+  }
+  console.log(`ok ${slug} ${label}`);
+}
+
+async function rejects(input, needle) {
+  const result = await handleGenerateBlock(input);
+  const text = result.content[0].text;
+  if (!result.isError || !text.includes(needle)) {
+    fail(`expected a rejection containing "${needle}", got: ${text}`);
+  }
+  console.log(`ok reject ${needle}`);
+}
+
+for (const slug of slugs) {
+  const carouselOnly = slug === 'image-slider' || slug === 'logo-carousel';
+  await check(slug, {}, 'slide', 'defaults');
+  await check(
+    slug,
+    {
+      layout: {
+        columns: 3,
+        autoplay: true,
+        effect: 'coverflow',
+        loop: false,
+        ...(carouselOnly ? {} : { mode: 'carousel' }),
+      },
+    },
+    'coverflow',
+    'layout'
+  );
+}
+
+for (const slug of ['base', 'testimonial']) {
+  await check(slug, { layout: { mode: 'slider', effect: 'fade' } }, 'fade', 'fade');
+  await check(slug, { layout: { mode: 'carousel', effect: 'coverflow' } }, 'coverflow', 'coverflow');
+}
+
+if (new Set(blockIds).size !== blockIds.length) {
+  fail('generated block ids are not unique');
+}
+
+for (const slug of slugs) {
+  await rejects({ blockSlug: slug, slides: [slideFor(slug)], layout: { effect: 'cube' } }, 'cube');
+}
+await rejects(
+  { blockSlug: 'image-slider', slides: [slideFor('image-slider')], layout: { effect: 'fade' } },
+  'fade'
+);
+await rejects(
+  { blockSlug: 'logo-carousel', slides: [{ url: 'https://example.com/slide.jpg', rating: 4 }] },
+  'rating'
+);
+await rejects(
+  { blockSlug: 'base', slides: [slideFor('base')], attributes: { notARealAttribute: true } },
+  'notARealAttribute'
+);
+
+const sample = await generate({ blockSlug: 'image-slider', slides: [slideFor('image-slider')] });
+const valid = await handleValidateBlock({ markup: sample.markup });
+const validReport = JSON.parse(valid.content[0].text);
+if (valid.isError || !validReport.isValid || validReport.warnings.length !== 0) {
+  fail(`generated markup did not validate cleanly: ${valid.content[0].text}`);
+}
+console.log('ok validate generated markup');
+
+const badEffect = await handleValidateBlock({
+  blockSlug: 'image-slider',
+  attributes: { blockId: 'gslider-image-slider-abcd1234', carouselEffect: 'cube' },
+});
+if (!badEffect.content[0].text.includes('cube')) {
+  fail(`validate did not report the cube effect: ${badEffect.content[0].text}`);
+}
+console.log('ok validate cube');
+
+const badKey = await handleValidateBlock({
+  blockSlug: 'base',
+  attributes: { blockId: 'gslider-abcd1234', notARealAttribute: true },
+});
+if (!badKey.content[0].text.includes('notARealAttribute')) {
+  fail(`validate did not report the unknown key: ${badKey.content[0].text}`);
+}
+console.log('ok validate unknown key');
+
+const badType = await handleValidateBlock({
+  blockSlug: 'base',
+  attributes: { blockId: 'gslider-abcd1234', autoplay: 'yes' },
+});
+if (!badType.content[0].text.includes('autoplay')) {
+  fail(`validate did not report the wrong type: ${badType.content[0].text}`);
+}
+console.log('ok validate wrong type');
+
+if (failed) {
+  process.exit(1);
+}
+console.log('generate tests passed');
