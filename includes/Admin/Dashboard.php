@@ -71,6 +71,7 @@ if ( ! class_exists( Dashboard::class, false ) ) {
 		public function register(): void {
 			add_action( 'admin_menu', [ $this, 'register_admin_menu' ] );
 			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_dashboard_assets' ] );
+			add_filter( 'allowed_block_types_all', [ $this, 'filter_allowed_block_types' ], 10, 2 );
 		}
 
 		/**
@@ -177,6 +178,60 @@ if ( ! class_exists( Dashboard::class, false ) ) {
 				. '</svg>';
 
 			return 'data:image/svg+xml;base64,' . base64_encode( $svg );
+		}
+
+		/**
+		 * Filters the allowed block types in the Gutenberg block editor.
+		 *
+		 * Safely hides disabled GSlider blocks from the Gutenberg inserter without
+		 * unregistering them, ensuring existing published content renders without
+		 * block invalidation errors. Preserves all core WordPress blocks.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param bool|string[] $allowed_block_types Array of block type slugs, or boolean to enable/disable all.
+		 * @param mixed         $block_editor_context The current block editor context.
+		 * @return bool|string[] Filtered list of allowed block types.
+		 */
+		public function filter_allowed_block_types( $allowed_block_types, $block_editor_context = null ) {
+			$disabled_blocks = get_option( 'gslider_disabled_blocks', [] );
+			if ( empty( $disabled_blocks ) || ! is_array( $disabled_blocks ) ) {
+				return $allowed_block_types;
+			}
+
+			// Ensure full block names in disabled list.
+			$disabled_names = [];
+			foreach ( $disabled_blocks as $block ) {
+				if ( ! is_string( $block ) || '' === $block ) {
+					continue;
+				}
+				$name = ( 0 === strpos( $block, 'gslider-blocks/' ) ) ? $block : 'gslider-blocks/' . $block;
+				$disabled_names[] = $name;
+				// If flexi-content is disabled, also disable child item.
+				if ( 'gslider-blocks/flexi-content' === $name ) {
+					$disabled_names[] = 'gslider-blocks/flexi-content-item';
+				}
+			}
+			$disabled_names = array_unique( $disabled_names );
+
+			// When all blocks are allowed (default WordPress behavior: $allowed_block_types === true).
+			if ( true === $allowed_block_types ) {
+				if ( class_exists( '\WP_Block_Type_Registry' ) ) {
+					$registry = \WP_Block_Type_Registry::get_instance();
+					if ( is_object( $registry ) && method_exists( $registry, 'get_all_registered' ) ) {
+						$registered_blocks = array_keys( $registry->get_all_registered() );
+						return array_values( array_diff( $registered_blocks, $disabled_names ) );
+					}
+				}
+				return $allowed_block_types;
+			}
+
+			// When $allowed_block_types is an explicit array of allowed block names.
+			if ( is_array( $allowed_block_types ) ) {
+				return array_values( array_diff( $allowed_block_types, $disabled_names ) );
+			}
+
+			return $allowed_block_types;
 		}
 
 		/**

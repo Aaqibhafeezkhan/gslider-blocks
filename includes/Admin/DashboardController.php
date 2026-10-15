@@ -97,6 +97,31 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 					],
 				]
 			);
+
+			register_rest_route(
+				$this->namespace,
+				'/' . $this->rest_base . '/toggle-block',
+				[
+					[
+						'methods'             => WP_REST_Server::CREATABLE,
+						'callback'            => [ $this, 'toggle_block' ],
+						'permission_callback' => [ $this, 'get_item_permissions_check' ],
+						'args'                => [
+							'slug'    => [
+								'description'       => __( 'Block slug or full name.', 'gslider-blocks' ),
+								'type'              => 'string',
+								'required'          => true,
+								'sanitize_callback' => 'sanitize_text_field',
+							],
+							'enabled' => [
+								'description' => __( 'Whether the block is enabled.', 'gslider-blocks' ),
+								'type'        => 'boolean',
+								'required'    => true,
+							],
+						],
+					],
+				]
+			);
 		}
 
 		/**
@@ -146,6 +171,82 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 			];
 
 			return rest_ensure_response( $data );
+		}
+
+		/**
+		 * Toggles the enabled status of a specific slider block.
+		 *
+		 * Updates the 'gslider_disabled_blocks' option by adding or removing
+		 * the block's full name. Automatically ties 'flexi-content-item' to
+		 * 'flexi-content' to prevent broken slider dependencies.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param WP_REST_Request $request Full data about the request.
+		 * @return WP_REST_Response Response object with updated block status.
+		 */
+		public function toggle_block( $request ) {
+			$raw_slug = (string) $request->get_param( 'slug' );
+			$enabled  = (bool) $request->get_param( 'enabled' );
+
+			$disabled_blocks = get_option( 'gslider_disabled_blocks', [] );
+			if ( ! is_array( $disabled_blocks ) ) {
+				$disabled_blocks = [];
+			}
+
+			if ( 'all' === $raw_slug ) {
+				if ( $enabled ) {
+					$disabled_blocks = [];
+				} else {
+					$disabled_blocks = [
+						'gslider-blocks/base',
+						'gslider-blocks/flexi-content',
+						'gslider-blocks/flexi-content-item',
+						'gslider-blocks/image-slider',
+						'gslider-blocks/logo-carousel',
+						'gslider-blocks/testimonial',
+					];
+				}
+				update_option( 'gslider_disabled_blocks', $disabled_blocks );
+
+				return rest_ensure_response( [
+					'status'          => 'success',
+					'slug'            => 'all',
+					'enabled'         => $enabled,
+					'blocks'          => $this->get_blocks_status(),
+					'disabled_blocks' => $disabled_blocks,
+				] );
+			}
+
+			$short_slug = str_replace( 'gslider-blocks/', '', $raw_slug );
+			$full_slug  = 'gslider-blocks/' . $short_slug;
+
+			if ( $enabled ) {
+				$to_remove = [ $short_slug, $full_slug ];
+				if ( 'flexi-content' === $short_slug ) {
+					$to_remove[] = 'flexi-content-item';
+					$to_remove[] = 'gslider-blocks/flexi-content-item';
+				}
+				$disabled_blocks = array_diff( $disabled_blocks, $to_remove );
+			} else {
+				if ( ! in_array( $full_slug, $disabled_blocks, true ) ) {
+					$disabled_blocks[] = $full_slug;
+				}
+				if ( 'flexi-content' === $short_slug && ! in_array( 'gslider-blocks/flexi-content-item', $disabled_blocks, true ) ) {
+					$disabled_blocks[] = 'gslider-blocks/flexi-content-item';
+				}
+			}
+
+			$disabled_blocks = array_values( array_unique( $disabled_blocks ) );
+			update_option( 'gslider_disabled_blocks', $disabled_blocks );
+
+			return rest_ensure_response( [
+				'status'          => 'success',
+				'slug'            => $full_slug,
+				'enabled'         => $enabled,
+				'blocks'          => $this->get_blocks_status(),
+				'disabled_blocks' => $disabled_blocks,
+			] );
 		}
 
 		/**

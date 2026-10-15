@@ -1,0 +1,62 @@
+// --------------------------------------------------------------------------
+// Toggle Switch Styles (iOS / Modern Minimalist)
+// --------------------------------------------------------------------------
+@use 'variables' as *;
+
+.gslider-toggle-switch {
+	appearance: none;
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	outline: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	border-radius: 9999px;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+
+	&:focus-visible .gslider-toggle-track {
+		box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px $color-brand-primary;
+	}
+
+	&:disabled {
+		opacity: 0.45;
+		cursor: not-allowed;
+	}
+}
+
+.gslider-toggle-track {
+	position: relative;
+	display: block;
+	width: 44px;
+	height: 24px;
+	border-radius: 9999px;
+	background-color: #cbd5e1;
+	transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gslider-toggle-switch.is-checked .gslider-toggle-track {
+	background-color: $color-brand-primary;
+}
+
+.gslider-toggle-thumb {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	display: block;
+	width: 20px;
+	height: 20px;
+	border-radius: 9999px;
+	background-color: #ffffff;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18), 0 1px 2px rgba(0, 0, 0, 0.08);
+	transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+	transform: translateX(0);
+}
+
+.gslider-toggle-switch.is-checked .gslider-toggle-thumb {
+	transform: translateX(20px);
+}

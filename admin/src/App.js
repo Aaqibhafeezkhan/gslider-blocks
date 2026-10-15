@@ -13,6 +13,7 @@ import apiFetch from '@wordpress/api-fetch';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import OverviewTab from './tabs/OverviewTab';
+import BlocksTab from './tabs/BlocksTab';
 
 /**
  * Valid tab identifiers.
@@ -131,15 +132,10 @@ const App = () => {
 					)}
 
 					{activeTab === 'blocks' && (
-						<div className="gslider-dashboard-card">
-							<h2>{__('GSlider Core Blocks', 'gslider-blocks')}</h2>
-							<p>
-								{__(
-									'Manage and configure the 5 core slider blocks: Base Slider, Testimonial Slider, Image Slider, Logo Carousel, and Flexi Content Slider.',
-									'gslider-blocks'
-								)}
-							</p>
-						</div>
+						<BlocksTab
+							dashboardData={dashboardData}
+							setDashboardData={setDashboardData}
+						/>
 					)}
 
 					{activeTab === 'settings' && (

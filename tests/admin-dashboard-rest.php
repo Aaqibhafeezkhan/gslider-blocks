@@ -45,7 +45,8 @@ if ( ! class_exists( 'WP_REST_Controller' ) ) {
 
 if ( ! class_exists( 'WP_REST_Server' ) ) {
 	class WP_REST_Server {
-		const READABLE = 'GET';
+		const READABLE  = 'GET';
+		const CREATABLE = 'POST';
 	}
 }
 

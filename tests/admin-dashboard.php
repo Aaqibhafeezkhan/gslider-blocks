@@ -506,4 +506,44 @@ if ( ! in_array( 'wp-api-fetch', $asset_data['dependencies'], true ) ) {
 }
 echo "OK: Overview tab hero, live metric cards, quickstart guide, and REST API integration verified\n";
 
+// Test 19: Compiled Blocks Manager tab, iOS toggle switches, and REST sync verification.
+$required_block_classes = [
+	'.gslider-toggle-switch',
+	'.gslider-toggle-track',
+	'.gslider-toggle-thumb',
+	'.gslider-dashboard-blocks-header',
+	'.gslider-dashboard-blocks-title',
+	'.gslider-dashboard-blocks-badge',
+	'.gslider-dashboard-blocks-grid',
+	'.gslider-dashboard-block-card',
+	'.gslider-dashboard-block-icon',
+	'.gslider-dashboard-block-status-tag',
+	'.gslider-dashboard-toast',
+];
+foreach ( $required_block_classes as $class_name ) {
+	if ( strpos( $dashboard_css_content, $class_name ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.css missing block manager class '$class_name'\n" );
+		exit( 1 );
+	}
+}
+
+$required_block_strings = [
+	'/gslider/v1/dashboard/toggle-block',
+	'Core Slider Blocks',
+	'Base Slider',
+	'Flexi Content Slider',
+	'Image Slider',
+	'Logo Carousel',
+	'Testimonial Slider',
+	'Active',
+	'Disabled',
+];
+foreach ( $required_block_strings as $str ) {
+	if ( strpos( $dashboard_js_content, $str ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.js missing block manager string '$str'\n" );
+		exit( 1 );
+	}
+}
+echo "OK: Blocks Manager tab, iOS toggle switches, and REST endpoint integration verified\n";
+
 echo "All Admin Dashboard tests passed successfully!\n";
