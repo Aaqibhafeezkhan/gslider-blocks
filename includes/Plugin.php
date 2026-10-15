@@ -22,6 +22,7 @@ use GSlider\Classes\FontLoader;
 use GSlider\Classes\SupportSVG;
 use GSlider\Utils\Utils;
 use GSlider\RestApi\BlocksController;
+use GSlider\Admin\Dashboard;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -57,6 +58,7 @@ if ( ! class_exists( Plugin::class, false ) ) {
 			FontLoader::class,
 			Utils::class,
 			BlocksController::class,
+			Dashboard::class,
 		];
 
 		/**
