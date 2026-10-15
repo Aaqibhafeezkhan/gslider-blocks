@@ -374,4 +374,25 @@ if ( $l10n['assetsUrl'] !== 'http://example.org/wp-content/plugins/gslider-block
 }
 echo "OK: GSliderDashboardData localized correctly with all 8 runtime configuration keys\n";
 
+// Test 15: Compiled dashboard stylesheet exists and contains scoped layout rules.
+$dashboard_css_file = dirname( __DIR__ ) . '/assets/admin/css/dashboard.css';
+if ( ! file_exists( $dashboard_css_file ) ) {
+	fwrite( STDERR, "FAIL: Compiled assets/admin/css/dashboard.css not found\n" );
+	exit( 1 );
+}
+$dashboard_css_content = file_get_contents( $dashboard_css_file );
+if ( strpos( $dashboard_css_content, 'body.toplevel_page_gslider-blocks' ) === false ) {
+	fwrite( STDERR, "FAIL: dashboard.css missing scoped body.toplevel_page_gslider-blocks rule\n" );
+	exit( 1 );
+}
+if ( strpos( $dashboard_css_content, '.gslider-dashboard-wrap' ) === false ) {
+	fwrite( STDERR, "FAIL: dashboard.css missing .gslider-dashboard-wrap class\n" );
+	exit( 1 );
+}
+if ( strpos( $dashboard_css_content, 'prefers-reduced-motion' ) === false ) {
+	fwrite( STDERR, "FAIL: dashboard.css missing prefers-reduced-motion accessibility media query\n" );
+	exit( 1 );
+}
+echo "OK: Compiled dashboard stylesheet verified (scoped selector, layout classes, reduced-motion)\n";
+
 echo "All Admin Dashboard tests passed successfully!\n";

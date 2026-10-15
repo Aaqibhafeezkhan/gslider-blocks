@@ -139,9 +139,11 @@ $color-canvas: #f8fafc;
 $color-surface: #ffffff;
 $color-border: #e2e8f0;
 $color-text-primary: #0f172a;   // Slate 900
-$color-text-secondary: #475569; // Slate 600
+$color-text-secondary: #334155; // Slate 700
 $color-text-muted: #64748b;     // Slate 500 (WCAG AA Compliant on #ffffff)
-$color-brand-primary: #2563eb;  // Accent Blue
+$color-brand-primary: #007cba;  // WordPress Core Blue
+$color-brand-hover: #006ba1;
+$color-brand-subtle: #f0f7fb;
 
 // Elevation & Shadows
 $shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.05);

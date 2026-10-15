@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 const InitialDashboard = () => {
 	return (
-		<div className="gslider-dashboard-container">
+		<div className="gslider-dashboard-wrap">
 			<div className="gslider-dashboard-card">
 				<h1>{__('GSlider Studio Ready', 'gslider-blocks')}</h1>
 				<p>
