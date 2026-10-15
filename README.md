@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="log/logo.png" alt="GSlider Blocks Logo" width="128" height="128">
-</p>
-
 <h1 align="center">GSlider Blocks</h1>
 
 <p align="center">
