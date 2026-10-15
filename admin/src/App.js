@@ -3,7 +3,7 @@
  *
  * Manages tab navigation state with bidirectional browser URL hash synchronization.
  *
- * @package GSlider
+ * @package
  * @since   1.2.0
  */
 
@@ -14,11 +14,12 @@ import Header from './components/Header';
 import Navigation from './components/Navigation';
 import OverviewTab from './tabs/OverviewTab';
 import BlocksTab from './tabs/BlocksTab';
+import SettingsTab from './tabs/SettingsTab';
 
 /**
  * Valid tab identifiers.
  */
-const VALID_TABS = ['overview', 'blocks', 'settings', 'tools'];
+const VALID_TABS = [ 'overview', 'blocks', 'settings', 'tools' ];
 const DEFAULT_TAB = 'overview';
 
 /**
@@ -27,11 +28,11 @@ const DEFAULT_TAB = 'overview';
  * @return {string} Valid tab id.
  */
 const getTabFromHash = () => {
-	if (typeof window === 'undefined') {
+	if ( typeof window === 'undefined' ) {
 		return DEFAULT_TAB;
 	}
-	const hash = window.location.hash.replace('#', '').toLowerCase();
-	return VALID_TABS.includes(hash) ? hash : DEFAULT_TAB;
+	const hash = window.location.hash.replace( '#', '' ).toLowerCase();
+	return VALID_TABS.includes( hash ) ? hash : DEFAULT_TAB;
 };
 
 /**
@@ -40,127 +41,127 @@ const getTabFromHash = () => {
  * @return {JSX.Element} The root dashboard element.
  */
 const App = () => {
-	const [activeTab, setActiveTabState] = useState(getTabFromHash);
-	const [dashboardData, setDashboardData] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const [hasError, setHasError] = useState(false);
+	const [ activeTab, setActiveTabState ] = useState( getTabFromHash );
+	const [ dashboardData, setDashboardData ] = useState( null );
+	const [ isLoading, setIsLoading ] = useState( true );
+	const [ hasError, setHasError ] = useState( false );
 
 	/**
 	 * Sets the active tab and synchronizes the browser URL hash.
 	 */
-	const setActiveTab = useCallback((tabId) => {
-		if (VALID_TABS.includes(tabId)) {
-			setActiveTabState(tabId);
-			if (window.location.hash !== `#${tabId}`) {
+	const setActiveTab = useCallback( ( tabId ) => {
+		if ( VALID_TABS.includes( tabId ) ) {
+			setActiveTabState( tabId );
+			if ( window.location.hash !== `#${ tabId }` ) {
 				window.location.hash = tabId;
 			}
 		}
-	}, []);
+	}, [] );
 
 	/**
 	 * Fetches dashboard metrics from the REST API endpoint.
 	 */
-	const fetchDashboardData = useCallback(async () => {
-		setIsLoading(true);
-		setHasError(false);
+	const fetchDashboardData = useCallback( async () => {
+		setIsLoading( true );
+		setHasError( false );
 
 		try {
-			const data = await apiFetch({ path: '/gslider/v1/dashboard' });
-			if (data && data.status === 'success') {
-				setDashboardData(data);
+			const data = await apiFetch( { path: '/gslider/v1/dashboard' } );
+			if ( data && data.status === 'success' ) {
+				setDashboardData( data );
 			} else {
-				setHasError(true);
+				setHasError( true );
 			}
-		} catch (err) {
-			setHasError(true);
+		} catch ( err ) {
+			setHasError( true );
 		} finally {
-			setIsLoading(false);
+			setIsLoading( false );
 		}
-	}, []);
+	}, [] );
 
 	/**
 	 * Fetch initial dashboard metrics on mount.
 	 */
-	useEffect(() => {
+	useEffect( () => {
 		fetchDashboardData();
-	}, [fetchDashboardData]);
+	}, [ fetchDashboardData ] );
 
 	/**
 	 * Listens to hashchange events to support browser back/forward and bookmarking.
 	 */
-	useEffect(() => {
+	useEffect( () => {
 		const handleHashChange = () => {
 			const newTab = getTabFromHash();
-			setActiveTabState(newTab);
+			setActiveTabState( newTab );
 		};
 
-		window.addEventListener('hashchange', handleHashChange);
+		window.addEventListener( 'hashchange', handleHashChange );
 		return () => {
-			window.removeEventListener('hashchange', handleHashChange);
+			window.removeEventListener( 'hashchange', handleHashChange );
 		};
-	}, []);
+	}, [] );
 
 	const activeBlocksCount =
-		dashboardData?.blocks && Array.isArray(dashboardData.blocks)
-			? dashboardData.blocks.filter((b) => b.enabled).length
+		dashboardData?.blocks && Array.isArray( dashboardData.blocks )
+			? dashboardData.blocks.filter( ( b ) => b.enabled ).length
 			: null;
 
 	return (
 		<div className="gslider-dashboard-wrap">
 			<Header />
 			<Navigation
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
-				activeBlocksCount={activeBlocksCount}
+				activeTab={ activeTab }
+				setActiveTab={ setActiveTab }
+				activeBlocksCount={ activeBlocksCount }
 			/>
 			<main className="gslider-dashboard-main">
 				<div
 					role="tabpanel"
-					id={`gslider-tabpanel-${activeTab}`}
-					aria-labelledby={`gslider-tab-${activeTab}`}
+					id={ `gslider-tabpanel-${ activeTab }` }
+					aria-labelledby={ `gslider-tab-${ activeTab }` }
 					className="gslider-dashboard-tabpanel"
-					tabIndex={0}
+					tabIndex={ 0 }
 				>
-					{activeTab === 'overview' && (
+					{ activeTab === 'overview' && (
 						<OverviewTab
-							setActiveTab={setActiveTab}
-							dashboardData={dashboardData}
-							isLoading={isLoading}
-							hasError={hasError}
-							onRetry={fetchDashboardData}
+							setActiveTab={ setActiveTab }
+							dashboardData={ dashboardData }
+							isLoading={ isLoading }
+							hasError={ hasError }
+							onRetry={ fetchDashboardData }
 						/>
-					)}
+					) }
 
-					{activeTab === 'blocks' && (
+					{ activeTab === 'blocks' && (
 						<BlocksTab
-							dashboardData={dashboardData}
-							setDashboardData={setDashboardData}
+							dashboardData={ dashboardData }
+							setDashboardData={ setDashboardData }
 						/>
-					)}
+					) }
 
-					{activeTab === 'settings' && (
+					{ activeTab === 'settings' && (
+						<SettingsTab
+							dashboardData={ dashboardData }
+							setDashboardData={ setDashboardData }
+						/>
+					) }
+
+					{ activeTab === 'tools' && (
 						<div className="gslider-dashboard-card">
-							<h2>{__('Global Preferences & Settings', 'gslider-blocks')}</h2>
-							<p>
-								{__(
-									'Configure asset loading optimization and global styling behaviors.',
+							<h2>
+								{ __(
+									'System Information & Diagnostics',
 									'gslider-blocks'
-								)}
-							</p>
-						</div>
-					)}
-
-					{activeTab === 'tools' && (
-						<div className="gslider-dashboard-card">
-							<h2>{__('System Information & Diagnostics', 'gslider-blocks')}</h2>
+								) }
+							</h2>
 							<p>
-								{__(
+								{ __(
 									'Inspect system environment, active WordPress REST endpoints, and debug telemetry.',
 									'gslider-blocks'
-								)}
+								) }
 							</p>
 						</div>
-					)}
+					) }
 				</div>
 			</main>
 		</div>

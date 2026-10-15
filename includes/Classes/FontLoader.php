@@ -93,6 +93,10 @@ if ( ! class_exists( FontLoader::class, false ) ) {
          * @return string The unmodified block content.
          */
         public function get_fonts_on_render_block( $block_content, $block ) {
+            if ( self::is_privacy_mode_enabled() ) {
+                return $block_content;
+            }
+
             if ( ! is_array( $block ) || empty( $block['attrs'] ) ) {
                 return $block_content;
             }
@@ -166,6 +170,41 @@ if ( ! class_exists( FontLoader::class, false ) ) {
         }
 
         /**
+         * Checks whether Google Fonts privacy mode (GDPR compliance) is enabled.
+         *
+         * When enabled, external requests to fonts.googleapis.com are suppressed
+         * and the frontend falls back to native system font stacks.
+         *
+         * @since 1.2.0
+         *
+         * @return bool True if privacy mode is enabled, false otherwise.
+         */
+        public static function is_privacy_mode_enabled(): bool {
+            $settings   = get_option( 'gslider_settings', [] );
+            $is_enabled = is_array( $settings ) && ! empty( $settings['google_fonts_privacy'] );
+
+            /**
+             * Filters whether Google Fonts privacy mode is active.
+             *
+             * @since 1.2.0
+             *
+             * @param bool $is_enabled Whether privacy mode is enabled.
+             */
+            return (bool) apply_filters( 'gslider_google_fonts_privacy_enabled', $is_enabled );
+        }
+
+        /**
+         * Clears collected fonts in memory (primarily for testing).
+         *
+         * @since 1.2.0
+         *
+         * @return void
+         */
+        public static function reset_collected_fonts(): void {
+            self::$gfonts = [];
+        }
+
+        /**
          * Registers and enqueues a Google Fonts stylesheet.
          *
          * Builds one Google Fonts URL that requests only the
@@ -177,7 +216,7 @@ if ( ! class_exists( FontLoader::class, false ) ) {
          * @return void
          */
         private function load_google_font( $fonts ) {
-            if ( empty( $fonts ) ) {
+            if ( self::is_privacy_mode_enabled() || empty( $fonts ) ) {
                 return;
             }
 
@@ -227,6 +266,11 @@ if ( ! class_exists( FontLoader::class, false ) ) {
          * @return void
          */
         public function fonts_loader() {
+            if ( self::is_privacy_mode_enabled() ) {
+                self::$gfonts = [];
+                return;
+            }
+
             try {
                 $fonts = array_filter( self::$gfonts );
                 if ( ! empty( $fonts ) ) {

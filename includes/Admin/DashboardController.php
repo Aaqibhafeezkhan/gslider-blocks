@@ -122,6 +122,34 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 					],
 				]
 			);
+
+			register_rest_route(
+				$this->namespace,
+				'/' . $this->rest_base . '/settings',
+				[
+					[
+						'methods'             => WP_REST_Server::CREATABLE,
+						'callback'            => [ $this, 'save_settings' ],
+						'permission_callback' => [ $this, 'save_settings_permissions_check' ],
+						'args'                => [
+							'google_fonts_privacy' => [
+								'description' => __( 'Whether Google Fonts privacy mode is enabled.', 'gslider-blocks' ),
+								'type'        => 'boolean',
+								'required'    => false,
+								'default'     => false,
+							],
+							'css_delivery'         => [
+								'description'       => __( 'Dynamic CSS delivery method (file or inline).', 'gslider-blocks' ),
+								'type'              => 'string',
+								'enum'              => [ 'file', 'inline' ],
+								'required'          => false,
+								'default'           => 'file',
+								'sanitize_callback' => 'sanitize_key',
+							],
+						],
+					],
+				]
+			);
 		}
 
 		/**
@@ -152,6 +180,32 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 		}
 
 		/**
+		 * Checks whether the current user has permission to update dashboard settings.
+		 *
+		 * Requires the 'manage_options' capability.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param WP_REST_Request $request Full data about the request.
+		 * @return true|WP_Error True if user has manage_options capability, WP_Error otherwise.
+		 */
+		public function save_settings_permissions_check( $request ) {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				$status_code = function_exists( 'rest_authorization_required_code' )
+					? rest_authorization_required_code()
+					: 401;
+
+				return new WP_Error(
+					'rest_forbidden',
+					__( 'Sorry, you are not allowed to manage GSlider settings.', 'gslider-blocks' ),
+					[ 'status' => $status_code ]
+				);
+			}
+
+			return true;
+		}
+
+		/**
 		 * Retrieves dashboard data including system metrics and block status.
 		 *
 		 * @since 1.2.0
@@ -167,6 +221,7 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 				'version'       => $version,
 				'sliders_count' => $this->get_sliders_count(),
 				'blocks'        => $this->get_blocks_status(),
+				'settings'      => $this->get_settings(),
 				'system'        => $this->get_system_metrics(),
 			];
 
@@ -418,6 +473,78 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 		}
 
 		/**
+		 * Retrieves the global plugin settings with backward-compatible defaults.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @return array{google_fonts_privacy: bool, css_delivery: string}
+		 */
+		public function get_settings(): array {
+			$settings = get_option( 'gslider_settings', [] );
+			if ( ! is_array( $settings ) ) {
+				$settings = [];
+			}
+
+			$css_delivery = isset( $settings['css_delivery'] ) && in_array( $settings['css_delivery'], [ 'file', 'inline' ], true )
+				? (string) $settings['css_delivery']
+				: 'file';
+
+			$defaults = [
+				'google_fonts_privacy' => ! empty( $settings['google_fonts_privacy'] ),
+				'css_delivery'         => $css_delivery,
+			];
+
+			/**
+			 * Filters the global GSlider settings array.
+			 *
+			 * @since 1.2.0
+			 *
+			 * @param array $defaults Default settings values.
+			 */
+			return apply_filters( 'gslider_dashboard_settings', $defaults );
+		}
+
+		/**
+		 * Updates global plugin preferences from REST request.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param WP_REST_Request $request Full data about the request.
+		 * @return WP_REST_Response Response object containing updated settings.
+		 */
+		public function save_settings( $request ) {
+			$existing = get_option( 'gslider_settings', [] );
+			if ( ! is_array( $existing ) ) {
+				$existing = [];
+			}
+
+			$google_fonts_privacy = $request->has_param( 'google_fonts_privacy' )
+				? (bool) $request->get_param( 'google_fonts_privacy' )
+				: ( ! empty( $existing['google_fonts_privacy'] ) );
+
+			$css_delivery = $request->has_param( 'css_delivery' )
+				? sanitize_key( (string) $request->get_param( 'css_delivery' ) )
+				: ( isset( $existing['css_delivery'] ) ? (string) $existing['css_delivery'] : 'file' );
+
+			if ( ! in_array( $css_delivery, [ 'file', 'inline' ], true ) ) {
+				$css_delivery = 'file';
+			}
+
+			$updated = [
+				'google_fonts_privacy' => $google_fonts_privacy,
+				'css_delivery'         => $css_delivery,
+			];
+
+			update_option( 'gslider_settings', $updated );
+
+			return rest_ensure_response( [
+				'status'   => 'success',
+				'message'  => __( 'Settings saved successfully.', 'gslider-blocks' ),
+				'settings' => $this->get_settings(),
+			] );
+		}
+
+		/**
 		 * Retrieves the item schema for the dashboard endpoint.
 		 *
 		 * @since 1.2.0
@@ -468,6 +595,22 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 									'type'     => 'boolean',
 									'readonly' => true,
 								],
+							],
+						],
+						'readonly'    => true,
+					],
+					'settings'      => [
+						'description' => __( 'Global plugin settings and delivery preferences.', 'gslider-blocks' ),
+						'type'        => 'object',
+						'properties'  => [
+							'google_fonts_privacy' => [
+								'type'     => 'boolean',
+								'readonly' => true,
+							],
+							'css_delivery'         => [
+								'type'     => 'string',
+								'enum'     => [ 'file', 'inline' ],
+								'readonly' => true,
 							],
 						],
 						'readonly'    => true,

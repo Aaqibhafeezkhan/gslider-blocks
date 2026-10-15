@@ -546,4 +546,41 @@ foreach ( $required_block_strings as $str ) {
 }
 echo "OK: Blocks Manager tab, iOS toggle switches, and REST endpoint integration verified\n";
 
+// Test 20: Compiled Settings tab, GDPR font privacy, CSS delivery, and SVG security shield verification.
+$required_settings_classes = [
+	'.gslider-dashboard-settings-container',
+	'.gslider-dashboard-settings-title',
+	'.gslider-settings-card',
+	'.gslider-settings-badge',
+	'.gslider-settings-status-box',
+	'.gslider-settings-radio-grid',
+	'.gslider-settings-radio-card',
+	'.gslider-settings-save-btn',
+	'.gslider-settings-toast',
+];
+foreach ( $required_settings_classes as $class_name ) {
+	if ( strpos( $dashboard_css_content, $class_name ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.css missing settings class '$class_name'\n" );
+		exit( 1 );
+	}
+}
+
+$required_settings_strings = [
+	'/gslider/v1/dashboard/settings',
+	'Google Fonts Privacy Mode (GDPR)',
+	'Dynamic CSS Delivery Method',
+	'Generated External Stylesheet',
+	'Direct Inline <style> in <head>',
+	'SVG Upload Security Shield',
+	'Active & Enforced',
+	'Save Settings',
+];
+foreach ( $required_settings_strings as $str ) {
+	if ( strpos( $dashboard_js_content, $str ) === false ) {
+		fwrite( STDERR, "FAIL: dashboard.js missing settings string '$str'\n" );
+		exit( 1 );
+	}
+}
+echo "OK: Settings tab, GDPR font privacy, CSS delivery preferences, and security shield verified\n";
+
 echo "All Admin Dashboard tests passed successfully!\n";

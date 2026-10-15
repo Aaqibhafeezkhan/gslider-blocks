@@ -1,0 +1,455 @@
+// ==========================================================================
+// GSlider Blocks - Dashboard Settings Tab Styles
+// ==========================================================================
+// Styling for GDPR Font Privacy, CSS Delivery Selection,
+// Informative Security Shield, and Action Save Notifications.
+// ==========================================================================
+
+@use "variables" as *;
+
+.gslider-dashboard-settings-container {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	max-width: 1000px;
+}
+
+// --------------------------------------------------------------------------
+// 1. Settings Header Card
+// --------------------------------------------------------------------------
+.gslider-dashboard-settings-header-card {
+	padding: 24px 28px;
+}
+
+.gslider-dashboard-settings-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.gslider-dashboard-settings-header-left {
+	flex: 1;
+}
+
+.gslider-dashboard-settings-title {
+	font-family: $font-family-sans;
+	font-size: 18px;
+	font-weight: 700;
+	color: $color-text-primary;
+	margin: 0 0 6px;
+	letter-spacing: -0.01em;
+}
+
+.gslider-dashboard-settings-desc {
+	font-family: $font-family-sans;
+	font-size: 14px;
+	color: $color-text-muted;
+	margin: 0;
+	line-height: 1.5;
+	max-width: 680px;
+}
+
+// --------------------------------------------------------------------------
+// 2. Settings Section Cards
+// --------------------------------------------------------------------------
+.gslider-settings-card {
+	background-color: $color-surface;
+	border: 1px solid $color-border;
+	border-radius: 12px;
+	padding: 28px;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+	transition: border-color 150ms ease, box-shadow 150ms ease;
+
+	@media (max-width: 640px) {
+		padding: 20px;
+	}
+}
+
+.gslider-settings-card-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 24px;
+	margin-bottom: 20px;
+
+	@media (max-width: 640px) {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 16px;
+	}
+}
+
+.gslider-settings-card-info {
+	flex: 1;
+}
+
+.gslider-settings-card-title-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 8px;
+	flex-wrap: wrap;
+}
+
+.gslider-settings-card-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	background-color: $color-brand-subtle;
+	color: $color-brand-primary;
+	flex-shrink: 0;
+
+	&.is-security {
+		background-color: $color-success-bg;
+		color: $color-success;
+	}
+}
+
+.gslider-settings-card-title {
+	font-family: $font-family-sans;
+	font-size: 16px;
+	font-weight: 600;
+	color: $color-text-primary;
+	margin: 0;
+	letter-spacing: -0.01em;
+}
+
+.gslider-settings-card-desc {
+	font-family: $font-family-sans;
+	font-size: 13.5px;
+	color: $color-text-secondary;
+	line-height: 1.55;
+	margin: 0;
+	max-width: 720px;
+}
+
+// --------------------------------------------------------------------------
+// 3. Badges
+// --------------------------------------------------------------------------
+.gslider-settings-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-family: $font-family-sans;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 3px 9px;
+	border-radius: 9999px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+
+	&.is-gdpr {
+		background-color: #f1f5f9;
+		color: #475569;
+		border: 1px solid #cbd5e1;
+	}
+
+	&.is-recommended {
+		background-color: $color-brand-subtle;
+		color: $color-brand-primary;
+	}
+
+	&.is-active-security {
+		background-color: $color-success-bg;
+		color: #065f46;
+		border: 1px solid #a7f3d0;
+	}
+}
+
+// --------------------------------------------------------------------------
+// 4. Status Callout Boxes
+// --------------------------------------------------------------------------
+.gslider-settings-status-box {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 14px 16px;
+	border-radius: 8px;
+	font-family: $font-family-sans;
+	font-size: 13px;
+	line-height: 1.5;
+	margin-top: 16px;
+
+	&.is-active {
+		background-color: $color-success-bg;
+		border: 1px solid #a7f3d0;
+		color: #065f46;
+	}
+
+	&.is-idle {
+		background-color: #f8fafc;
+		border: 1px solid $color-border;
+		color: $color-text-secondary;
+	}
+
+	&.is-security-note {
+		background-color: #f8fafc;
+		border: 1px solid #e2e8f0;
+		color: $color-text-secondary;
+	}
+
+	.gslider-settings-status-icon {
+		flex-shrink: 0;
+		margin-top: 1px;
+	}
+
+	strong {
+		color: inherit;
+		font-weight: 600;
+	}
+}
+
+// --------------------------------------------------------------------------
+// 5. CSS Delivery Radio Cards Grid
+// --------------------------------------------------------------------------
+.gslider-settings-radio-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 16px;
+	margin-top: 16px;
+
+	@media (max-width: 640px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.gslider-settings-radio-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	gap: 10px;
+}
+
+.gslider-settings-radio-title-group {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.gslider-settings-radio-circle {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	border: 2px solid #cbd5e1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	transition: border-color 150ms ease;
+
+	&::after {
+		content: "";
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background-color: $color-brand-primary;
+		opacity: 0;
+		transform: scale(0.5);
+		transition: transform 150ms ease, opacity 150ms ease;
+	}
+}
+
+.gslider-settings-radio-title {
+	font-family: $font-family-sans;
+	font-size: 14.5px;
+	font-weight: 600;
+	color: $color-text-primary;
+	margin: 0;
+	transition: color 150ms ease;
+}
+
+.gslider-settings-radio-desc {
+	font-family: $font-family-sans;
+	font-size: 13px;
+	color: $color-text-secondary;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.gslider-settings-radio-code {
+	font-family: $font-family-mono;
+	font-size: 11.5px;
+	background-color: rgba(15, 23, 42, 0.05);
+	padding: 2px 6px;
+	border-radius: 4px;
+	color: $color-text-primary;
+}
+
+.gslider-settings-radio-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background-color: $color-surface;
+	border: 1.5px solid $color-border;
+	border-radius: 10px;
+	padding: 20px;
+	cursor: pointer;
+	text-align: left;
+	transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+	outline: none;
+
+	&:focus-visible {
+		box-shadow: 0 0 0 2px #fff, 0 0 0 4px $color-brand-primary;
+	}
+
+	&:hover:not(:disabled) {
+		border-color: #cbd5e1;
+		background-color: #f8fafc;
+	}
+
+	&.is-selected {
+		border-color: $color-brand-primary;
+		background-color: $color-brand-subtle;
+
+		.gslider-settings-radio-circle {
+			border-color: $color-brand-primary;
+
+			&::after {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+
+		.gslider-settings-radio-title {
+			color: $color-brand-primary;
+		}
+	}
+}
+
+// --------------------------------------------------------------------------
+// 6. Footer Actions & Sticky Bar
+// --------------------------------------------------------------------------
+.gslider-settings-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 20px 28px;
+	background-color: $color-surface;
+	border: 1px solid $color-border;
+	border-radius: 12px;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+
+	@media (max-width: 640px) {
+		flex-direction: column;
+		align-items: stretch;
+		padding: 16px;
+	}
+}
+
+.gslider-settings-footer-info {
+	font-family: $font-family-sans;
+	font-size: 13px;
+	color: $color-text-muted;
+}
+
+.gslider-settings-save-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 10px 24px;
+	font-family: $font-family-sans;
+	font-size: 14px;
+	font-weight: 600;
+	color: $color-text-inverse;
+	background-color: $color-brand-primary;
+	border: 1px solid $color-brand-primary;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 150ms ease, box-shadow 150ms ease, transform 100ms ease;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+	&:focus-visible {
+		outline: 2px solid $color-brand-primary;
+		outline-offset: 2px;
+	}
+
+	&:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	&:hover:not(:disabled) {
+		background-color: $color-brand-hover;
+		border-color: $color-brand-hover;
+	}
+}
+
+// --------------------------------------------------------------------------
+// 7. Toast Notification Banner
+// --------------------------------------------------------------------------
+.gslider-settings-toast {
+	position: fixed;
+	bottom: 28px;
+	right: 28px;
+	z-index: 99999;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 20px;
+	border-radius: 10px;
+	background-color: #0f172a;
+	color: #fff;
+	font-family: $font-family-sans;
+	font-size: 13.5px;
+	font-weight: 500;
+	box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3), 0 8px 10px -6px rgba(15, 23, 42, 0.2);
+	animation: gslider-toast-slide-up 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+	&.is-error {
+		background-color: $color-danger;
+	}
+
+	.gslider-settings-toast-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		color: $color-success;
+
+		&.is-error {
+			color: #fff;
+		}
+	}
+
+	.gslider-settings-toast-close {
+		background: none;
+		border: none;
+		color: #94a3b8;
+		padding: 2px;
+		margin-left: 8px;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 4px;
+		transition: color 150ms ease;
+
+		&:hover {
+			color: #fff;
+		}
+	}
+}
+
+@keyframes gslider-toast-slide-up {
+
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
