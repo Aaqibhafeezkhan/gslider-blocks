@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
 	mode: 'development',
 	entry: {
-		admin: path.resolve(__dirname, 'admin/scss/admin.scss'), // ✅ Corrected path
+		admin: path.resolve(__dirname, 'admin/scss/admin.scss'),
+		'block-controls': path.resolve(__dirname, 'admin/scss/block-controls.scss'),
 	},
 	output: {
 		path: path.resolve(__dirname, 'assets/admin'),
