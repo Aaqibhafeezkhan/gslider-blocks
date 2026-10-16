@@ -14,6 +14,7 @@ docs/
 ├── explanations/                      # Deep architectural concepts & system design
 │   └── architecture.md                # Plugin architecture, style engine & Swiper lifecycle
 ├── how-to-guides/                     # Practical step-by-step guides for technical tasks
+│   ├── custom-block-patterns.md       # Custom Block Patterns registration & best practices
 │   ├── headless-rest-api.md           # Decoupled Headless REST API & Next.js integration
 │   └── mcp-server-ai-workflows.md     # Local MCP Server & Cursor/Claude integration
 ├── reference-guides/                  # Exhaustive API specifications & schema references
@@ -44,8 +45,8 @@ Actionable recipes and step-by-step technical guides for solving specific real-w
   How to fetch, deserialize, and render GSlider Blocks in decoupled React/Next.js (App Router), Astro, and Remix frontends with pre-parsed `swiperConfig` and zero-runtime CSS parsing.
 - 🤖 **[Model Context Protocol (MCP) Server & AI Assistant Workflows](how-to-guides/mcp-server-ai-workflows.md)**
   Local stdio MCP server setup, TypeScript build, Cursor/Claude/Antigravity integration, registered tools, and design templates.
-- 🎨 *(Upcoming)* **Custom Block Patterns**
-  Building and registering production block pattern collections with local vector SVGs.
+- 🎨 **[Custom Block Patterns Guide](how-to-guides/custom-block-patterns.md)**
+  Building, customizing, and registering production block pattern collections with local vector SVGs, proper escaping, and zero block invalidations.
 
 ---
 
