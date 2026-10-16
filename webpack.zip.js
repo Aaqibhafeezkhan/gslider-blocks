@@ -3,17 +3,14 @@ const path = require('path');
 const archiver = require('archiver');
 
 const zip = async () => {
+    // Strictly whitelist production runtime files and directories
     const filesAndFolders = [
         'assets',
         'build',
         'includes',
         'languages',
         'patterns',
-        'src',
         'vendor',
-        'composer.json',
-        'package.json',
-        'webpack.config.js',
         'gslider-blocks.php',
         'readme.txt'
     ];
@@ -37,10 +34,12 @@ const zip = async () => {
             if (stats.isDirectory()) {
                 archive.directory(fullPath, item, (entry) => {
                     const basename = path.basename(entry.name);
+                    // Normalize Windows path separators to POSIX forward slashes
+                    const relativePath = entry.name.replace(/\\/g, '/');
 
                     // Exclude ALL hidden files and directories (dot-files and dot-directories anywhere in path)
                     // WordPress.org Plugin Check does not allow hidden files.
-                    if (entry.name.split('/').some(part => part.startsWith('.'))) {
+                    if (relativePath.split('/').some(part => part.startsWith('.'))) {
                         return false;
                     }
 
@@ -54,8 +53,30 @@ const zip = async () => {
                     }
 
                     // Exclude monorepo packages (e.g. packages/mcp-server) from release archive
-                    if (entry.name.startsWith('packages') || entry.name.includes('/packages/')) {
+                    if (relativePath.startsWith('packages') || relativePath.includes('/packages/')) {
                         return false;
+                    }
+
+                    // Exclude developer/testing packages leftover in vendor (both with and without vendor prefix)
+                    if (item === 'vendor' && (
+                        relativePath.startsWith('phpunit') ||
+                        relativePath.startsWith('vendor/phpunit') ||
+                        relativePath.startsWith('sebastian') ||
+                        relativePath.startsWith('vendor/sebastian')
+                    )) {
+                        return false;
+                    }
+
+                    // Exclude development configs and documentation inside vendor dependencies
+                    if (item === 'vendor') {
+                        if (
+                            basename === 'composer.json' ||
+                            basename === 'composer.lock' ||
+                            basename.endsWith('.md') ||
+                            basename.startsWith('phpcs.xml')
+                        ) {
+                            return false;
+                        }
                     }
 
                     return entry;
