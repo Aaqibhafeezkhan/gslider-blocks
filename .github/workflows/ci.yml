@@ -32,6 +32,14 @@ jobs:
       - name: Verify Webpack Block Build
         run: npm run build
 
+      - name: Code Quality Advisory (JS & CSS Lint)
+        continue-on-error: true
+        run: |
+          echo "Checking JavaScript syntax and standards (Advisory)..."
+          npm run lint:js || true
+          echo "Checking SCSS syntax and standards (Advisory)..."
+          npm run lint:css || true
+
       # --ignore-scripts keeps `prepare` (the build) from regenerating the
       # committed schemas before the drift test compares them.
       - name: Install MCP Server Dependencies
