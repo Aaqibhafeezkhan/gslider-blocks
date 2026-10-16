@@ -4,8 +4,7 @@
  * Displays executive metrics with skeleton loading states,
  * custom SVG icons, subtitles, and optional action buttons.
  *
- * @package GSlider
- * @since   1.2.0
+ * @since 1.2.0
  */
 
 const MetricCard = ( {
@@ -37,24 +36,46 @@ const MetricCard = ( {
 		<div className="gslider-dashboard-card gslider-dashboard-metric-card">
 			<div className="gslider-dashboard-metric-header">
 				<div className="gslider-dashboard-metric-header-left">
-					{ icon && <div className="gslider-dashboard-metric-icon">{ icon }</div> }
-					<h3 className="gslider-dashboard-metric-title">{ title }</h3>
+					{ icon && (
+						<div className="gslider-dashboard-metric-icon">
+							{ icon }
+						</div>
+					) }
+					<h3 className="gslider-dashboard-metric-title">
+						{ title }
+					</h3>
 				</div>
-				{ badge && <span className="gslider-dashboard-metric-badge">{ badge }</span> }
+				{ badge && (
+					<span className="gslider-dashboard-metric-badge">
+						{ badge }
+					</span>
+				) }
 			</div>
 
 			<div className="gslider-dashboard-metric-body">
 				{ value !== undefined && value !== null && (
-					<div className="gslider-dashboard-metric-value">{ value }</div>
+					<div className="gslider-dashboard-metric-value">
+						{ value }
+					</div>
 				) }
 
 				{ emptyMessage ? (
-					<p className="gslider-dashboard-metric-empty">{ emptyMessage }</p>
+					<p className="gslider-dashboard-metric-empty">
+						{ emptyMessage }
+					</p>
 				) : (
-					subtitle && <p className="gslider-dashboard-metric-subtitle">{ subtitle }</p>
+					subtitle && (
+						<p className="gslider-dashboard-metric-subtitle">
+							{ subtitle }
+						</p>
+					)
 				) }
 
-				{ action && <div className="gslider-dashboard-metric-action">{ action }</div> }
+				{ action && (
+					<div className="gslider-dashboard-metric-action">
+						{ action }
+					</div>
+				) }
 			</div>
 		</div>
 	);

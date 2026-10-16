@@ -17,13 +17,40 @@ def run_cmd(args):
     result = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     return result.stdout.strip()
 
-def get_pr_diff():
-    # Diff against target base branch (main, develop, etc.)
+def get_pr_diff(pr_number=None):
+    # Strategy 1: Fetch directly using GitHub CLI for the specific PR number
+    # Works seamlessly for both automated pull_request events and manual workflow_dispatch
+    if pr_number:
+        try:
+            diff = run_cmd(["gh", "pr", "diff", str(pr_number)])
+            if diff:
+                filtered_lines = []
+                skip_file = False
+                excluded_exts = ('.md', '.txt', '.zip', '.lock', 'package-lock.json', 'composer.lock')
+                excluded_dirs = ('build/', 'vendor/', 'node_modules/', 'assets/')
+
+                for line in diff.splitlines(keepends=True):
+                    if line.startswith('diff --git'):
+                        parts = line.strip().split()
+                        raw_path = parts[-1] if len(parts) >= 4 else ""
+                        filepath = raw_path[2:] if raw_path.startswith('b/') else raw_path
+                        if any(filepath.startswith(d) or f"/{d}" in filepath for d in excluded_dirs) or filepath.endswith(excluded_exts):
+                            skip_file = True
+                        else:
+                            skip_file = False
+                    if not skip_file:
+                        filtered_lines.append(line)
+
+                return "".join(filtered_lines).strip()
+        except Exception as err:
+            print(f"gh pr diff notice: {err}. Falling back to git diff...")
+
+    # Strategy 2: Fallback to local git diff against base branch
     base_branch = os.environ.get("GITHUB_BASE_REF", "main")
     args = [
         "git", "diff", f"origin/{base_branch}...HEAD", "--", ".",
-        ":!build", ":!vendor", ":!node_modules", ":!assets",
-        ":!package-lock.json", ":!composer.lock", ":!*.zip", ":!*.md", ":!*.txt"
+        ":!package-lock.json", ":!composer.lock", ":!*.md", ":!*.txt", ":!*.zip",
+        ":!build/", ":!vendor/", ":!node_modules/", ":!assets/"
     ]
     return run_cmd(args)
 
@@ -40,7 +67,7 @@ def main():
         sys.exit(0)
 
     print(f"Fetching code diff for PR #{pr_number}...")
-    diff = get_pr_diff()
+    diff = get_pr_diff(pr_number)
     
     if not diff:
         print("No relevant code changes found to review.")
@@ -53,25 +80,25 @@ def main():
 
     client = genai.Client(api_key=api_key)
 
-    prompt = f"""You are a Principal WordPress Core & React/Gutenberg Senior Code Reviewer.
-Carefully analyze the following Pull Request git diff for the WordPress plugin 'gslider-blocks'.
+    prompt = f"""You are an elite, concise Senior Code Reviewer for the WordPress Gutenberg plugin 'gslider-blocks'.
+Review the following Pull Request git diff.
 
-### Key Review Focus Areas:
-1. **WordPress Security & Standards**:
-   - Proper input sanitization (`sanitize_text_field`, `sanitize_key`, `wp_strip_all_tags`).
-   - Output escaping (`esc_html__`, `esc_attr__`, `esc_url`, `wp_kses_post`).
-   - Strict adherence to WordPress.org guidelines: NO arbitrary user-defined custom CSS inputs or script injection.
-   - PHP 7.4+ compatibility.
-2. **React & Gutenberg Block Lifecycle**:
-   - Attribute schema consistency in `attributes.js`.
-   - `useEffect` hooks: ensure Swiper.js instances are cleaned up with `swiper.destroy(true, true)` on unmount/re-init.
-   - Responsive attribute handling (Desktop, Tablet, Mobile).
-   - No direct DOM mutations outside Swiper refs.
-3. **Performance & Clean Code**:
-   - Redundant re-renders, memory leaks, and unbounded REST queries.
-
-Provide structured, actionable feedback with exact file names, line references, and code suggestions where appropriate.
-If the code is clean and follows all standards, give a brief positive summary approving the changes.
+### STRICT TONE & FORMAT RULES:
+1. **Zero Fluff & Zero Boilerplate**: Do NOT include conversational introductions, polite greetings, or lengthy narrative essays. Go directly to the review findings.
+2. **Concise Status**:
+   - If defects or improvements are found: `### Status: ⚠️ Action Required`
+   - If clean and meets all standards: `### Status: ✅ Approved`
+3. **Action-Oriented Defect List**:
+   - List each defect as a concise bullet specifying the exact file path and line number/context.
+   - Focus strictly on real defects: WordPress security (sanitization, escaping), Gutenberg/React lifecycle (Swiper destruction on unmount), and logical bugs.
+4. **1-Click GitHub Code Suggestions**:
+   - Whenever proposing code changes, format them using GitHub Markdown suggestion blocks:
+     ```suggestion
+     exact_replacement_code
+     ```
+     so the author can review and accept them with one click.
+5. **If Approved (Clean Code)**:
+   - Provide a 2 to 3 bullet-point summary explaining why it passes, with zero filler text.
 
 ---
 ### Pull Request Diff:

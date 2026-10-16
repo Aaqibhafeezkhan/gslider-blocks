@@ -4,14 +4,24 @@
  * Provides global preference management for GDPR Google Fonts privacy,
  * dynamic CSS delivery methods, and displays SVG upload security status.
  *
- * @package
- * @since   1.2.0
+ * @since 1.2.0
  */
 
 import { useState, useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import ToggleSwitch from '../components/ToggleSwitch';
+import {
+	SpinnerIcon,
+	CheckIcon,
+	GlobeIcon,
+	InfoCircleIcon,
+	CodeIcon,
+	ShieldCheckIcon,
+	LockIcon,
+	CrossCircleIcon,
+	CloseIcon,
+} from '../icons';
 
 /**
  * SettingsTab Component.
@@ -149,69 +159,14 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 						>
 							{ isSaving ? (
 								<>
-									<svg
-										width="16"
-										height="16"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="2.5"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										className="gslider-spin"
-										aria-hidden="true"
-									>
-										<line x1="12" y1="2" x2="12" y2="6" />
-										<line x1="12" y1="18" x2="12" y2="22" />
-										<line
-											x1="4.93"
-											y1="4.93"
-											x2="7.76"
-											y2="7.76"
-										/>
-										<line
-											x1="16.24"
-											y1="16.24"
-											x2="19.07"
-											y2="19.07"
-										/>
-										<line x1="2" y1="12" x2="6" y2="12" />
-										<line x1="18" y1="12" x2="22" y2="12" />
-										<line
-											x1="4.93"
-											y1="19.07"
-											x2="7.76"
-											y2="16.24"
-										/>
-										<line
-											x1="16.24"
-											y1="7.76"
-											x2="19.07"
-											y2="4.93"
-										/>
-									</svg>
+									<SpinnerIcon />
 									<span>
 										{ __( 'Saving…', 'gslider-blocks' ) }
 									</span>
 								</>
 							) : (
 								<>
-									<svg
-										width="16"
-										height="16"
-										viewBox="0 0 20 20"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-										aria-hidden="true"
-									>
-										<path
-											d="M16.6667 5L7.50001 14.1667L3.33334 10"
-											stroke="currentColor"
-											strokeWidth="2"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										/>
-									</svg>
+									<CheckIcon />
 									<span>
 										{ __(
 											'Save Settings',
@@ -231,21 +186,7 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 					<div className="gslider-settings-card-info">
 						<div className="gslider-settings-card-title-row">
 							<span className="gslider-settings-card-icon">
-								<svg
-									width="18"
-									height="18"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									aria-hidden="true"
-								>
-									<circle cx="12" cy="12" r="10" />
-									<line x1="2" y1="12" x2="22" y2="12" />
-									<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-								</svg>
+								<GlobeIcon />
 							</span>
 							<h3 className="gslider-settings-card-title">
 								{ __(
@@ -259,14 +200,14 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 						</div>
 						<p className="gslider-settings-card-desc">
 							{ __(
-								'Disable external font requests to Google Fonts servers (//fonts.googleapis.com) and fall back to native system font stacks (-apple-system, Segoe UI, Roboto). This eliminates third-party IP sharing and complies with strict European GDPR rulings without requiring cookie banner consent.',
+								'When enabled, prevents all external HTTP requests to Google Fonts servers (fonts.googleapis.com). Blocks will safely fall back to native system font stacks (Inter, -apple-system, Segoe UI, Roboto) to ensure 100% GDPR, DSGVO, and LGPD compliance without external tracking.',
 								'gslider-blocks'
 							) }
 						</p>
 					</div>
-					<div className="gslider-settings-card-control">
+					<div className="gslider-settings-card-action">
 						<ToggleSwitch
-							id="gslider-setting-gdpr-privacy"
+							id="gslider-google-fonts-privacy-toggle"
 							checked={ googleFontsPrivacy }
 							onChange={ ( val ) => setGoogleFontsPrivacy( val ) }
 							ariaLabel={ __(
@@ -284,35 +225,9 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 				>
 					<span className="gslider-settings-status-icon">
 						{ googleFontsPrivacy ? (
-							<svg
-								width="16"
-								height="16"
-								viewBox="0 0 20 20"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								aria-hidden="true"
-							>
-								<path d="M16.6667 5L7.50001 14.1667L3.33334 10" />
-							</svg>
+							<CheckIcon />
 						) : (
-							<svg
-								width="16"
-								height="16"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								aria-hidden="true"
-							>
-								<circle cx="12" cy="12" r="10" />
-								<line x1="12" y1="8" x2="12" y2="12" />
-								<line x1="12" y1="16" x2="12.01" y2="16" />
-							</svg>
+							<InfoCircleIcon />
 						) }
 					</span>
 					<span>
@@ -355,20 +270,7 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 					<div className="gslider-settings-card-info">
 						<div className="gslider-settings-card-title-row">
 							<span className="gslider-settings-card-icon">
-								<svg
-									width="18"
-									height="18"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									aria-hidden="true"
-								>
-									<polyline points="16 18 22 12 16 6" />
-									<polyline points="8 6 2 12 8 18" />
-								</svg>
+								<CodeIcon />
 							</span>
 							<h3 className="gslider-settings-card-title">
 								{ __(
@@ -489,20 +391,7 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 					<div className="gslider-settings-card-info">
 						<div className="gslider-settings-card-title-row">
 							<span className="gslider-settings-card-icon is-security">
-								<svg
-									width="18"
-									height="18"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									aria-hidden="true"
-								>
-									<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-									<path d="M9 12l2 2 4-4" />
-								</svg>
+								<ShieldCheckIcon />
 							</span>
 							<h3 className="gslider-settings-card-title">
 								{ __(
@@ -511,19 +400,11 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 								) }
 							</h3>
 							<span className="gslider-settings-badge is-active-security">
-								<svg
+								<CheckIcon
 									width="10"
 									height="10"
-									viewBox="0 0 20 20"
-									fill="none"
-									stroke="currentColor"
 									strokeWidth="2.5"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									aria-hidden="true"
-								>
-									<path d="M16.6667 5L7.50001 14.1667L3.33334 10" />
-								</svg>
+								/>
 								{ __( 'Active & Enforced', 'gslider-blocks' ) }
 							</span>
 						</div>
@@ -538,27 +419,7 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 
 				<div className="gslider-settings-status-box is-security-note">
 					<span className="gslider-settings-status-icon">
-						<svg
-							width="16"
-							height="16"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							aria-hidden="true"
-						>
-							<rect
-								x="3"
-								y="11"
-								width="18"
-								height="11"
-								rx="2"
-								ry="2"
-							/>
-							<path d="M7 11V7a5 5 0 0 1 10 0v4" />
-						</svg>
+						<LockIcon />
 					</span>
 					<span>
 						<strong>
@@ -596,62 +457,12 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 				>
 					{ isSaving ? (
 						<>
-							<svg
-								width="16"
-								height="16"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2.5"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								className="gslider-spin"
-								aria-hidden="true"
-							>
-								<line x1="12" y1="2" x2="12" y2="6" />
-								<line x1="12" y1="18" x2="12" y2="22" />
-								<line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
-								<line
-									x1="16.24"
-									y1="16.24"
-									x2="19.07"
-									y2="19.07"
-								/>
-								<line x1="2" y1="12" x2="6" y2="12" />
-								<line x1="18" y1="12" x2="22" y2="12" />
-								<line
-									x1="4.93"
-									y1="19.07"
-									x2="7.76"
-									y2="16.24"
-								/>
-								<line
-									x1="16.24"
-									y1="7.76"
-									x2="19.07"
-									y2="4.93"
-								/>
-							</svg>
+							<SpinnerIcon />
 							<span>{ __( 'Saving…', 'gslider-blocks' ) }</span>
 						</>
 					) : (
 						<>
-							<svg
-								width="16"
-								height="16"
-								viewBox="0 0 20 20"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-								aria-hidden="true"
-							>
-								<path
-									d="M16.6667 5L7.50001 14.1667L3.33334 10"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</svg>
+							<CheckIcon />
 							<span>
 								{ __( 'Save Settings', 'gslider-blocks' ) }
 							</span>
@@ -675,35 +486,9 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 						}` }
 					>
 						{ toast.type === 'error' ? (
-							<svg
-								width="18"
-								height="18"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								aria-hidden="true"
-							>
-								<circle cx="12" cy="12" r="10" />
-								<line x1="15" y1="9" x2="9" y2="15" />
-								<line x1="9" y1="9" x2="15" y2="15" />
-							</svg>
+							<CrossCircleIcon />
 						) : (
-							<svg
-								width="18"
-								height="18"
-								viewBox="0 0 20 20"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								aria-hidden="true"
-							>
-								<path d="M16.6667 5L7.50001 14.1667L3.33334 10" />
-							</svg>
+							<CheckIcon width="18" height="18" />
 						) }
 					</span>
 					<span>{ toast.message }</span>
@@ -716,20 +501,7 @@ const SettingsTab = ( { dashboardData, setDashboardData } ) => {
 							'gslider-blocks'
 						) }
 					>
-						<svg
-							width="14"
-							height="14"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							aria-hidden="true"
-						>
-							<line x1="18" y1="6" x2="6" y2="18" />
-							<line x1="6" y1="6" x2="18" y2="18" />
-						</svg>
+						<CloseIcon />
 					</button>
 				</div>
 			) }

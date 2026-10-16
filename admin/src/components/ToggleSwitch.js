@@ -3,19 +3,18 @@
  *
  * Implements ARIA switch semantics with keyboard navigation support (Space / Enter).
  *
- * @package GSlider
- * @since   1.2.0
+ * @since 1.2.0
  */
 
 /**
  * ToggleSwitch Component.
  *
- * @param {Object}   props               Component properties.
- * @param {string}   [props.id]          Unique element id.
- * @param {boolean}  props.checked       Current switch status (true = on, false = off).
- * @param {Function} props.onChange      Callback triggered when toggled.
- * @param {boolean}  [props.disabled]    Whether the switch is disabled.
- * @param {string}   [props.ariaLabel]   Accessible label describing the toggle action.
+ * @param {Object}   props             Component properties.
+ * @param {string}   [props.id]        Unique element id.
+ * @param {boolean}  props.checked     Current switch status (true = on, false = off).
+ * @param {Function} props.onChange    Callback triggered when toggled.
+ * @param {boolean}  [props.disabled]  Whether the switch is disabled.
+ * @param {string}   [props.ariaLabel] Accessible label describing the toggle action.
  * @return {JSX.Element} The rendered switch button.
  */
 const ToggleSwitch = ( {
@@ -46,7 +45,9 @@ const ToggleSwitch = ( {
 			aria-checked={ checked }
 			aria-label={ ariaLabel }
 			disabled={ disabled }
-			className={ `gslider-toggle-switch ${ checked ? 'is-checked' : '' }` }
+			className={ `gslider-toggle-switch ${
+				checked ? 'is-checked' : ''
+			}` }
 			onClick={ handleClick }
 			onKeyDown={ handleKeyDown }
 		>

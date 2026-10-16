@@ -4,19 +4,25 @@
  * Renders the hero banner, real-time metric cards, and a 3-step
  * Gutenberg Quick Start guide.
  *
- * @package GSlider
- * @since   1.2.0
+ * @since 1.2.0
  */
 
 import { __, sprintf } from '@wordpress/i18n';
 import MetricCard from '../components/MetricCard';
+import {
+	PlusIcon,
+	SlidersMetricIcon,
+	BlocksMetricIcon,
+	LightningIcon,
+	ChevronRightIcon,
+} from '../icons';
 
 /**
  * OverviewTab Component.
  *
- * @param {Object}   props                  Component props.
- * @param {Function} props.setActiveTab     Callback to switch active tabs.
- * @param {Object}   [props.dashboardData]  REST API dashboard data.
+ * @param {Object}   props                   Component props.
+ * @param {Function} props.setActiveTab      Callback to switch active tabs.
+ * @param {Object}   [props.dashboardData]   REST API dashboard data.
  * @param {boolean}  [props.isLoading=false] Whether data is loading.
  * @param {boolean}  [props.hasError=false]  Whether data fetch resulted in an error.
  * @return {JSX.Element} The rendered overview tab view.
@@ -27,7 +33,8 @@ const OverviewTab = ( {
 	isLoading = false,
 	hasError = false,
 } ) => {
-	const adminUrl = window.GSliderDashboardData?.adminUrl || 'post-new.php?post_type=page';
+	const adminUrl =
+		window.GSliderDashboardData?.adminUrl || 'post-new.php?post_type=page';
 	const createPageUrl = adminUrl.endsWith( '/' )
 		? `${ adminUrl }post-new.php?post_type=page`
 		: `${ adminUrl }/post-new.php?post_type=page`;
@@ -35,20 +42,57 @@ const OverviewTab = ( {
 	const slidersCount = dashboardData?.sliders_count;
 	const blocksList = dashboardData?.blocks || [];
 	const totalBlocks = blocksList.length || 5;
-	const activeBlocksCount = blocksList.length > 0
-		? blocksList.filter( ( b ) => b.enabled ).length
-		: 5;
+	const activeBlocksCount =
+		blocksList.length > 0
+			? blocksList.filter( ( b ) => b.enabled ).length
+			: 5;
+
+	let sliderMetricValue = null;
+	if ( hasError ) {
+		sliderMetricValue = '—';
+	} else if ( typeof slidersCount === 'number' && slidersCount > 0 ) {
+		sliderMetricValue = slidersCount;
+	}
+
+	let sliderEmptyMessage = null;
+	if ( hasError ) {
+		sliderEmptyMessage = __(
+			'Unable to load live metrics. Refresh page to try again.',
+			'gslider-blocks'
+		);
+	} else if ( slidersCount === 0 ) {
+		sliderEmptyMessage = __(
+			'No sliders created yet. Insert your first GSlider block in any page or post to see live metrics here.',
+			'gslider-blocks'
+		);
+	}
+
+	let activeBlocksDisplay = '—';
+	if ( ! hasError ) {
+		activeBlocksDisplay = sprintf(
+			/* translators: 1: number of active blocks, 2: total number of blocks */
+			__( '%1$d of %2$d Active', 'gslider-blocks' ),
+			activeBlocksCount,
+			totalBlocks
+		);
+	}
 
 	return (
 		<div className="gslider-dashboard-overview">
 			{ /* Section 1: Hero Banner */ }
-			<section className="gslider-dashboard-hero" aria-label={ __( 'Dashboard Overview Hero', 'gslider-blocks' ) }>
+			<section
+				className="gslider-dashboard-hero"
+				aria-label={ __( 'Dashboard Overview Hero', 'gslider-blocks' ) }
+			>
 				<div className="gslider-dashboard-hero-content">
 					<span className="gslider-dashboard-hero-badge">
 						{ __( 'Gutenberg Studio', 'gslider-blocks' ) }
 					</span>
 					<h2 className="gslider-dashboard-hero-title">
-						{ __( 'Welcome to GSlider Blocks Studio', 'gslider-blocks' ) }
+						{ __(
+							'Welcome to GSlider Blocks Studio',
+							'gslider-blocks'
+						) }
 					</h2>
 					<p className="gslider-dashboard-hero-subtitle">
 						{ __(
@@ -62,23 +106,13 @@ const OverviewTab = ( {
 						href={ createPageUrl }
 						className="gslider-dashboard-btn gslider-dashboard-btn-primary"
 					>
-						<svg
-							width="16"
-							height="16"
-							viewBox="0 0 20 20"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-							aria-hidden="true"
-						>
-							<path
-								d="M10 4V16M4 10H16"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</svg>
-						<span>{ __( 'Create New Page with Slider', 'gslider-blocks' ) }</span>
+						<PlusIcon />
+						<span>
+							{ __(
+								'Create New Page with Slider',
+								'gslider-blocks'
+							) }
+						</span>
 					</a>
 				</div>
 			</section>
@@ -91,50 +125,35 @@ const OverviewTab = ( {
 				{ /* Card 1: Sliders */ }
 				<MetricCard
 					title={ __( 'Sliders', 'gslider-blocks' ) }
-					value={
+					value={ sliderMetricValue }
+					subtitle={
 						hasError
-							? '—'
-							: typeof slidersCount === 'number' && slidersCount > 0
-							? slidersCount
-							: null
+							? null
+							: __(
+									'On published posts and pages',
+									'gslider-blocks'
+							  )
 					}
-					subtitle={ hasError ? null : __( 'On published posts and pages', 'gslider-blocks' ) }
 					isLoading={ isLoading }
-					emptyMessage={
-						hasError
-							? __(
-								'Unable to load live metrics. Refresh page to try again.',
-								'gslider-blocks'
-							)
-							: slidersCount === 0
-							? __(
-								'No sliders created yet. Insert your first GSlider block in any page or post to see live metrics here.',
-								'gslider-blocks'
-							)
-							: null
-					}
-					icon={
-						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<rect x="2.5" y="3.5" width="15" height="13" rx="2" stroke="currentColor" strokeWidth="1.5" />
-							<path d="M6 8.5L8.5 11L11.5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-							<circle cx="14" cy="7" r="1" fill="currentColor" />
-						</svg>
-					}
+					emptyMessage={ sliderEmptyMessage }
+					icon={ <SlidersMetricIcon /> }
 					badge={ __( 'Live Metric', 'gslider-blocks' ) }
 				/>
 
 				{ /* Card 2: Active Core Blocks */ }
 				<MetricCard
 					title={ __( 'Active Core Blocks', 'gslider-blocks' ) }
-					value={
-						hasError
-							? '—'
-							: sprintf( __( '%1$d of %2$d Active', 'gslider-blocks' ), activeBlocksCount, totalBlocks )
-					}
+					value={ activeBlocksDisplay }
 					subtitle={
 						hasError
-							? __( 'Unable to load block status', 'gslider-blocks' )
-							: __( 'Core Gutenberg slider modules', 'gslider-blocks' )
+							? __(
+									'Unable to load block status',
+									'gslider-blocks'
+							  )
+							: __(
+									'Core Gutenberg slider modules',
+									'gslider-blocks'
+							  )
 					}
 					isLoading={ isLoading }
 					action={
@@ -143,34 +162,30 @@ const OverviewTab = ( {
 							className="gslider-dashboard-card-link"
 							onClick={ () => setActiveTab( 'blocks' ) }
 						>
-							<span>{ __( 'Manage Blocks', 'gslider-blocks' ) }</span>
-							<svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-							</svg>
+							<span>
+								{ __( 'Manage Blocks', 'gslider-blocks' ) }
+							</span>
+							<ChevronRightIcon />
 						</button>
 					}
-					icon={
-						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
-							<rect x="11" y="3" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
-							<rect x="3" y="11" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
-							<rect x="11" y="11" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
-						</svg>
+					icon={ <BlocksMetricIcon /> }
+					badge={
+						hasError
+							? null
+							: __( '5 Core Modules', 'gslider-blocks' )
 					}
-					badge={ hasError ? null : __( '5 Core Modules', 'gslider-blocks' ) }
 				/>
 
 				{ /* Card 3: Modern Architecture Highlight */ }
 				<MetricCard
 					title={ __( 'Modern Architecture', 'gslider-blocks' ) }
 					value={ __( 'Zero jQuery', 'gslider-blocks' ) }
-					subtitle={ __( 'Pure Swiper.js + React runtime, 0 jQuery dependencies', 'gslider-blocks' ) }
+					subtitle={ __(
+						'Pure Swiper.js + React runtime, 0 jQuery dependencies',
+						'gslider-blocks'
+					) }
 					isLoading={ isLoading }
-					icon={
-						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M11 2L4 11H10L9 18L16 9H10L11 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-						</svg>
-					}
+					icon={ <LightningIcon /> }
 					badge={ __( 'Pure React + Swiper', 'gslider-blocks' ) }
 				/>
 			</section>
@@ -178,14 +193,20 @@ const OverviewTab = ( {
 			{ /* Section 3: 3-Step Gutenberg Quick Start Guide */ }
 			<section
 				className="gslider-dashboard-card gslider-dashboard-quickstart"
-				aria-label={ __( 'Gutenberg Quick Start Guide', 'gslider-blocks' ) }
+				aria-label={ __(
+					'Gutenberg Quick Start Guide',
+					'gslider-blocks'
+				) }
 			>
 				<div className="gslider-dashboard-quickstart-header">
 					<span className="gslider-dashboard-quickstart-badge">
 						{ __( 'Quick Start', 'gslider-blocks' ) }
 					</span>
 					<h3 className="gslider-dashboard-quickstart-title">
-						{ __( 'Create Your First Slider in 3 Simple Steps', 'gslider-blocks' ) }
+						{ __(
+							'Create Your First Slider in 3 Simple Steps',
+							'gslider-blocks'
+						) }
 					</h3>
 					<p className="gslider-dashboard-quickstart-subtitle">
 						{ __(
@@ -204,7 +225,10 @@ const OverviewTab = ( {
 								{ __( 'Open Block Editor', 'gslider-blocks' ) }
 							</h4>
 							<p className="gslider-dashboard-step-desc">
-								{ __( 'Open any Page or Post in the WordPress Block Editor.', 'gslider-blocks' ) }
+								{ __(
+									'Open any Page or Post in the WordPress Block Editor.',
+									'gslider-blocks'
+								) }
 							</p>
 						</div>
 					</div>
@@ -214,7 +238,10 @@ const OverviewTab = ( {
 						<div className="gslider-dashboard-step-number">2</div>
 						<div className="gslider-dashboard-step-content">
 							<h4 className="gslider-dashboard-step-title">
-								{ __( 'Insert a GSlider Block', 'gslider-blocks' ) }
+								{ __(
+									'Insert a GSlider Block',
+									'gslider-blocks'
+								) }
 							</h4>
 							<p className="gslider-dashboard-step-desc">
 								{ __(
@@ -230,10 +257,16 @@ const OverviewTab = ( {
 						<div className="gslider-dashboard-step-number">3</div>
 						<div className="gslider-dashboard-step-content">
 							<h4 className="gslider-dashboard-step-title">
-								{ __( 'Customize & Publish', 'gslider-blocks' ) }
+								{ __(
+									'Customize & Publish',
+									'gslider-blocks'
+								) }
 							</h4>
 							<p className="gslider-dashboard-step-desc">
-								{ __( 'Customize slide items and publish.', 'gslider-blocks' ) }
+								{ __(
+									'Customize slide items and publish.',
+									'gslider-blocks'
+								) }
 							</p>
 						</div>
 					</div>

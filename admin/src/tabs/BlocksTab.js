@@ -4,14 +4,23 @@
  * Provides live enable/disable toggles for all 5 core slider blocks,
  * updating the WordPress Gutenberg inserter filter via REST API.
  *
- * @package GSlider
- * @since   1.2.0
+ * @since 1.2.0
  */
 
 import { useState, useEffect, useRef } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import ToggleSwitch from '../components/ToggleSwitch';
+import {
+	BaseSliderIcon,
+	FlexiSliderIcon,
+	ImageSliderIcon,
+	LogoCarouselIcon,
+	TestimonialSliderIcon,
+	ActiveStatusDotIcon,
+	ToastSuccessIcon,
+	ToastErrorIcon,
+} from '../icons';
 
 /**
  * Metadata for all 5 top-level GSlider blocks in alphabetical order.
@@ -19,84 +28,56 @@ import ToggleSwitch from '../components/ToggleSwitch';
 const BLOCKS_METADATA = [
 	{
 		slug: 'base',
-		name: __('Base Slider', 'gslider-blocks'),
+		name: __( 'Base Slider', 'gslider-blocks' ),
 		description: __(
 			'Flexible, full-featured carousel block with customizable slides, buttons, and animations.',
 			'gslider-blocks'
 		),
-		icon: (
-			<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-				<rect x="2.5" y="3.5" width="15" height="13" rx="2" stroke="currentColor" strokeWidth="1.5" />
-				<path d="M7 10L9 12L13 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-			</svg>
-		),
+		icon: <BaseSliderIcon />,
 	},
 	{
 		slug: 'flexi-content',
-		name: __('Flexi Content Slider', 'gslider-blocks'),
+		name: __( 'Flexi Content Slider', 'gslider-blocks' ),
 		description: __(
 			'Multi-slide layout container supporting nested Gutenberg blocks per slide.',
 			'gslider-blocks'
 		),
-		icon: (
-			<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-				<rect x="2.5" y="3.5" width="15" height="13" rx="2" stroke="currentColor" strokeWidth="1.5" />
-				<path d="M6 7.5H14M6 10.5H11M6 13.5H9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-			</svg>
-		),
+		icon: <FlexiSliderIcon />,
 	},
 	{
 		slug: 'image-slider',
-		name: __('Image Slider', 'gslider-blocks'),
+		name: __( 'Image Slider', 'gslider-blocks' ),
 		description: __(
 			'High-performance image gallery carousel with lightbox and thumbnail navigation.',
 			'gslider-blocks'
 		),
-		icon: (
-			<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-				<rect x="2.5" y="3.5" width="15" height="13" rx="2" stroke="currentColor" strokeWidth="1.5" />
-				<circle cx="6.5" cy="7.5" r="1.25" fill="currentColor" />
-				<path d="M4 14.5L8.5 9.5L12 13.5L14 11.5L16.5 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-			</svg>
-		),
+		icon: <ImageSliderIcon />,
 	},
 	{
 		slug: 'logo-carousel',
-		name: __('Logo Carousel', 'gslider-blocks'),
+		name: __( 'Logo Carousel', 'gslider-blocks' ),
 		description: __(
 			'Continuous client and sponsor logo showcase with grayscale and hover effects.',
 			'gslider-blocks'
 		),
-		icon: (
-			<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-				<rect x="2.5" y="4.5" width="4.5" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-				<rect x="9" y="4.5" width="4.5" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-				<rect x="15.5" y="4.5" width="2" height="11" rx="1" stroke="currentColor" strokeWidth="1.5" />
-			</svg>
-		),
+		icon: <LogoCarouselIcon />,
 	},
 	{
 		slug: 'testimonial',
-		name: __('Testimonial Slider', 'gslider-blocks'),
+		name: __( 'Testimonial Slider', 'gslider-blocks' ),
 		description: __(
 			'Customer reviews and ratings carousel with star ratings and avatar styling.',
 			'gslider-blocks'
 		),
-		icon: (
-			<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-				<path d="M4 6.5C4 5.11929 5.11929 4 6.5 4H8.5V9H5.5C4.67157 9 4 8.32843 4 7.5V6.5Z" stroke="currentColor" strokeWidth="1.5" />
-				<path d="M11.5 6.5C11.5 5.11929 12.6193 4 14 4H16V9H13C12.1716 9 11.5 8.32843 11.5 7.5V6.5Z" stroke="currentColor" strokeWidth="1.5" />
-				<path d="M4.5 12H15.5M4.5 15H11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-			</svg>
-		),
+		icon: <TestimonialSliderIcon />,
 	},
 ];
 
 /**
  * BlocksTab Component.
  *
- * @param {Object}   props                  Component props.
- * @param {Object}   [props.dashboardData]  Current dashboard metrics.
+ * @param {Object}   props                    Component props.
+ * @param {Object}   [props.dashboardData]    Current dashboard metrics.
  * @param {Function} [props.setDashboardData] Parent dashboard state setter.
  * @return {JSX.Element} Rendered blocks management view.
  */
@@ -119,11 +100,19 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 	const toastTimeoutRef = useRef( null );
 
 	useEffect( () => {
-		if ( dashboardData?.blocks && Object.values( isToggling ).every( ( v ) => ! v ) && ! isBulkUpdating ) {
+		if (
+			dashboardData?.blocks &&
+			Object.values( isToggling ).every( ( v ) => ! v ) &&
+			! isBulkUpdating
+		) {
 			setBlocks( ( currentBlocks ) =>
 				currentBlocks.map( ( block ) => {
-					const found = dashboardData.blocks.find( ( b ) => b.slug === block.slug );
-					return found ? { ...block, enabled: Boolean( found.enabled ) } : block;
+					const found = dashboardData.blocks.find(
+						( b ) => b.slug === block.slug
+					);
+					return found
+						? { ...block, enabled: Boolean( found.enabled ) }
+						: block;
 				} )
 			);
 		}
@@ -164,13 +153,13 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 			setDashboardData( ( prev ) =>
 				prev
 					? {
-						...prev,
-						blocks: updatedBlocks.map( ( b ) => ( {
-							slug: b.slug,
-							name: b.name,
-							enabled: b.enabled,
-						} ) ),
-					}
+							...prev,
+							blocks: updatedBlocks.map( ( b ) => ( {
+								slug: b.slug,
+								name: b.name,
+								enabled: b.enabled,
+							} ) ),
+					  }
 					: prev
 			);
 		}
@@ -186,17 +175,36 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 			} );
 
 			if ( response && response.status === 'success' ) {
-				const blockMeta = BLOCKS_METADATA.find( ( b ) => b.slug === slug );
+				const blockMeta = BLOCKS_METADATA.find(
+					( b ) => b.slug === slug
+				);
 				const blockName = blockMeta ? blockMeta.name : slug;
 
 				showToast(
 					'success',
 					nextEnabled
-						? sprintf( __( '%s enabled successfully', 'gslider-blocks' ), blockName )
-						: sprintf( __( '%s disabled successfully', 'gslider-blocks' ), blockName )
+						? sprintf(
+								/* translators: %s: Block name */
+								__(
+									'%s enabled successfully',
+									'gslider-blocks'
+								),
+								blockName
+						  )
+						: sprintf(
+								/* translators: %s: Block name */
+								__(
+									'%s disabled successfully',
+									'gslider-blocks'
+								),
+								blockName
+						  )
 				);
 
-				if ( response.blocks && typeof setDashboardData === 'function' ) {
+				if (
+					response.blocks &&
+					typeof setDashboardData === 'function'
+				) {
 					setDashboardData( ( prev ) =>
 						prev ? { ...prev, blocks: response.blocks } : prev
 					);
@@ -210,19 +218,22 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 				setDashboardData( ( prev ) =>
 					prev
 						? {
-							...prev,
-							blocks: prevBlocks.map( ( b ) => ( {
-								slug: b.slug,
-								name: b.name,
-								enabled: b.enabled,
-							} ) ),
-						}
+								...prev,
+								blocks: prevBlocks.map( ( b ) => ( {
+									slug: b.slug,
+									name: b.name,
+									enabled: b.enabled,
+								} ) ),
+						  }
 						: prev
 				);
 			}
 			showToast(
 				'error',
-				__( 'Failed to update block status. Please try again.', 'gslider-blocks' )
+				__(
+					'Failed to update block status. Please try again.',
+					'gslider-blocks'
+				)
 			);
 		} finally {
 			setIsToggling( ( prev ) => ( { ...prev, [ slug ]: false } ) );
@@ -235,7 +246,10 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 		}
 
 		const prevBlocks = [ ...blocks ];
-		const updatedBlocks = blocks.map( ( b ) => ( { ...b, enabled: nextEnabled } ) );
+		const updatedBlocks = blocks.map( ( b ) => ( {
+			...b,
+			enabled: nextEnabled,
+		} ) );
 
 		setBlocks( updatedBlocks );
 		setIsBulkUpdating( true );
@@ -244,13 +258,13 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 			setDashboardData( ( prev ) =>
 				prev
 					? {
-						...prev,
-						blocks: updatedBlocks.map( ( b ) => ( {
-							slug: b.slug,
-							name: b.name,
-							enabled: b.enabled,
-						} ) ),
-					}
+							...prev,
+							blocks: updatedBlocks.map( ( b ) => ( {
+								slug: b.slug,
+								name: b.name,
+								enabled: b.enabled,
+							} ) ),
+					  }
 					: prev
 			);
 		}
@@ -269,11 +283,20 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 				showToast(
 					'success',
 					nextEnabled
-						? __( 'All slider blocks activated successfully', 'gslider-blocks' )
-						: __( 'All slider blocks deactivated successfully', 'gslider-blocks' )
+						? __(
+								'All slider blocks activated successfully',
+								'gslider-blocks'
+						  )
+						: __(
+								'All slider blocks deactivated successfully',
+								'gslider-blocks'
+						  )
 				);
 
-				if ( response.blocks && typeof setDashboardData === 'function' ) {
+				if (
+					response.blocks &&
+					typeof setDashboardData === 'function'
+				) {
 					setDashboardData( ( prev ) =>
 						prev ? { ...prev, blocks: response.blocks } : prev
 					);
@@ -287,19 +310,22 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 				setDashboardData( ( prev ) =>
 					prev
 						? {
-							...prev,
-							blocks: prevBlocks.map( ( b ) => ( {
-								slug: b.slug,
-								name: b.name,
-								enabled: b.enabled,
-							} ) ),
-						}
+								...prev,
+								blocks: prevBlocks.map( ( b ) => ( {
+									slug: b.slug,
+									name: b.name,
+									enabled: b.enabled,
+								} ) ),
+						  }
 						: prev
 				);
 			}
 			showToast(
 				'error',
-				__( 'Failed to update all blocks. Please try again.', 'gslider-blocks' )
+				__(
+					'Failed to update all blocks. Please try again.',
+					'gslider-blocks'
+				)
 			);
 		} finally {
 			setIsBulkUpdating( false );
@@ -330,7 +356,9 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 							<button
 								type="button"
 								className="gslider-dashboard-btn-sm"
-								disabled={ activeCount === totalCount || isBulkUpdating }
+								disabled={
+									activeCount === totalCount || isBulkUpdating
+								}
 								onClick={ () => handleToggleAll( true ) }
 							>
 								{ __( 'Activate All', 'gslider-blocks' ) }
@@ -345,13 +373,14 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 							</button>
 						</div>
 						<span className="gslider-dashboard-blocks-badge">
-							<svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-								<circle cx="8" cy="8" r="6" fill="currentColor" fillOpacity="0.2" />
-								<circle cx="8" cy="8" r="3" fill="currentColor" />
-							</svg>
+							<ActiveStatusDotIcon />
 							<span>
 								{ sprintf(
-									__( '%1$d of %2$d Active', 'gslider-blocks' ),
+									/* translators: 1: number of active blocks, 2: total number of blocks */
+									__(
+										'%1$d of %2$d Active',
+										'gslider-blocks'
+									),
 									activeCount,
 									totalCount
 								) }
@@ -373,17 +402,26 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 					>
 						<div className="gslider-dashboard-block-card-top">
 							<div className="gslider-dashboard-block-identity">
-								<div className="gslider-dashboard-block-icon">{ block.icon }</div>
+								<div className="gslider-dashboard-block-icon">
+									{ block.icon }
+								</div>
 								<div className="gslider-dashboard-block-meta">
-									<h3 className="gslider-dashboard-block-name">{ block.name }</h3>
+									<h3 className="gslider-dashboard-block-name">
+										{ block.name }
+									</h3>
 									<span
 										className={ `gslider-dashboard-block-status-tag ${
-											block.enabled ? 'is-enabled' : 'is-disabled'
+											block.enabled
+												? 'is-enabled'
+												: 'is-disabled'
 										}` }
 									>
 										{ block.enabled
 											? __( 'Active', 'gslider-blocks' )
-											: __( 'Disabled', 'gslider-blocks' ) }
+											: __(
+													'Disabled',
+													'gslider-blocks'
+											  ) }
 									</span>
 								</div>
 							</div>
@@ -391,11 +429,19 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 								<ToggleSwitch
 									id={ `gslider-toggle-${ block.slug }` }
 									checked={ block.enabled }
-									disabled={ Boolean( isToggling[ block.slug ] || isBulkUpdating ) }
-									onChange={ ( nextVal ) => handleToggle( block.slug, nextVal ) }
+									disabled={ Boolean(
+										isToggling[ block.slug ] ||
+											isBulkUpdating
+									) }
+									onChange={ ( nextVal ) =>
+										handleToggle( block.slug, nextVal )
+									}
 									ariaLabel={ sprintf(
 										/* translators: %s: Block name */
-										__( 'Toggle %s status', 'gslider-blocks' ),
+										__(
+											'Toggle %s status',
+											'gslider-blocks'
+										),
 										block.name
 									) }
 								/>
@@ -403,7 +449,9 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 						</div>
 
 						<div className="gslider-dashboard-block-card-body">
-							<p className="gslider-dashboard-block-description">{ block.description }</p>
+							<p className="gslider-dashboard-block-description">
+								{ block.description }
+							</p>
 						</div>
 					</div>
 				) ) }
@@ -412,20 +460,16 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 			{ /* Transient Toast Notification */ }
 			{ toast && (
 				<div
-					className={ `gslider-dashboard-toast ${ toast.type === 'error' ? 'is-error' : 'is-success' }` }
+					className={ `gslider-dashboard-toast ${
+						toast.type === 'error' ? 'is-error' : 'is-success'
+					}` }
 					role="status"
 					aria-live="polite"
 				>
 					{ toast.type === 'success' ? (
-						<svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<circle cx="10" cy="10" r="8" fill="#10b981" />
-							<path d="M6.5 10L9 12.5L13.5 8" stroke="#ffffff" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-						</svg>
+						<ToastSuccessIcon />
 					) : (
-						<svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<circle cx="10" cy="10" r="8" fill="#ef4444" />
-							<path d="M10 6V11M10 14H10.01" stroke="#ffffff" strokeWidth="1.75" strokeLinecap="round" />
-						</svg>
+						<ToastErrorIcon />
 					) }
 					<span>{ toast.message }</span>
 				</div>
