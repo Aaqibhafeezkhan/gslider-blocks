@@ -20,7 +20,9 @@ docs/
 │   ├── rest-api-schemas.md            # REST API endpoints & JSON response schemas
 │   ├── block-attributes.md            # Standardized spacing, typography & color schemas
 │   └── php-hooks.md                   # WordPress actions & filters reference
-└── getting-started/                   # (Upcoming) Setup, onboarding & quickstart guides
+└── getting-started/                   # Onboarding & environment setup guides
+    ├── quick-start.md                 # Plugin activation & first slider setup
+    └── local-development.md           # Prerequisites, npm scripts & test suite
 ```
 
 ---
@@ -59,8 +61,13 @@ Exhaustive technical references for APIs, schemas, and extension points.
 
 ---
 
-### 4. 🚀 [Getting Started](getting-started/) *(Upcoming)*
+### 4. 🚀 Getting Started
 Quick onboarding guides for new developers and agencies looking to get up to speed with GSlider Blocks.
+
+- ⚡ **[Quick Start Guide](getting-started/quick-start.md)**
+  Installing the plugin, adding your first slider via block inserter or slash commands, using starter patterns, and configuring transitions.
+- 💻 **[Local Development Environment Setup](getting-started/local-development.md)**
+  Prerequisites (Node.js, PHP, Composer), development workflows (`npm run start`, `npm run build`), running standalone PHP unit tests, and release zip packaging.
 
 ---
 
