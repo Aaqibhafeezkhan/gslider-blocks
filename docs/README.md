@@ -10,13 +10,17 @@ Following the standard [WordPress Gutenberg Documentation Architecture](https://
 
 ```text
 docs/
-├── README.md                      # Developer Handbook Index & Overview
-├── explanations/                  # Deep architectural concepts & system design
-│   └── architecture.md            # Plugin architecture, style engine & Swiper lifecycle
-├── how-to-guides/                 # Practical step-by-step guides for technical tasks
-│   └── headless-rest-api.md       # Decoupled Headless REST API & Next.js integration
-├── getting-started/               # (Upcoming) Setup, onboarding & quickstart guides
-└── reference-guides/              # (Upcoming) Block attributes, REST schemas & filter hooks
+├── README.md                          # Developer Handbook Index & Overview
+├── explanations/                      # Deep architectural concepts & system design
+│   └── architecture.md                # Plugin architecture, style engine & Swiper lifecycle
+├── how-to-guides/                     # Practical step-by-step guides for technical tasks
+│   ├── headless-rest-api.md           # Decoupled Headless REST API & Next.js integration
+│   └── mcp-server-ai-workflows.md     # Local MCP Server & Cursor/Claude integration
+├── reference-guides/                  # Exhaustive API specifications & schema references
+│   ├── rest-api-schemas.md            # REST API endpoints & JSON response schemas
+│   ├── block-attributes.md            # Standardized spacing, typography & color schemas
+│   └── php-hooks.md                   # WordPress actions & filters reference
+└── getting-started/                   # (Upcoming) Setup, onboarding & quickstart guides
 ```
 
 ---
@@ -43,12 +47,15 @@ Actionable recipes and step-by-step technical guides for solving specific real-w
 
 ---
 
-### 3. 📖 [Reference Guides](reference-guides/) *(Upcoming)*
+### 3. 📖 Reference Guides
 Exhaustive technical references for APIs, schemas, and extension points.
 
-- **REST API Endpoints Reference**: Complete OpenAPI/JSON schema definitions for `/wp-json/gslider/v1/blocks/{id}`.
-- **Block Attribute Schemas**: Reference tables for responsive spacing, typography, and color attribute schemas across all 5 blocks.
-- **PHP Actions & Filters**: Customization hooks for dynamic CSS output, script enqueues, and REST serialization.
+- 🔌 **[REST API Schemas & Endpoints Reference](reference-guides/rest-api-schemas.md)**
+  Complete OpenAPI/JSON schema definitions, parameter types, authentication checks, and `swiperConfig` specifications for `/wp-json/gslider/v1/blocks/{id}` and `gslider_blocks`.
+- 📐 **[Block Attributes & Schema Conventions](reference-guides/block-attributes.md)**
+  Standardized 8-key spacing pattern, 13-key typography pattern, 3-key color pattern, responsive object rules, and block-specific slide structures across all 5 blocks.
+- 🪝 **[PHP Actions & Filters Reference](reference-guides/php-hooks.md)**
+  Customization hooks for dynamic CSS delivery, custom post type REST exposure, Google Fonts privacy, and block pattern loaders.
 
 ---
 
