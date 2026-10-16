@@ -36,8 +36,8 @@ Actionable recipes and step-by-step technical guides for solving specific real-w
 
 - 🚀 **[Headless WordPress & Decoupled REST API Guide](how-to-guides/headless-rest-api.md)**
   How to fetch, deserialize, and render GSlider Blocks in decoupled React/Next.js (App Router), Astro, and Remix frontends with pre-parsed `swiperConfig` and zero-runtime CSS parsing.
-- 🤖 *(Upcoming)* **Model Context Protocol (MCP) Workflows**
-  Local stdio MCP server integration for Cursor and Claude AI assistant tool introspection.
+- 🤖 **[Model Context Protocol (MCP) Server & AI Assistant Workflows](how-to-guides/mcp-server-ai-workflows.md)**
+  Local stdio MCP server setup, TypeScript build, Cursor/Claude/Antigravity integration, registered tools, and design templates.
 - 🎨 *(Upcoming)* **Custom Block Patterns**
   Building and registering production block pattern collections with local vector SVGs.
 

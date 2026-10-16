@@ -12,22 +12,40 @@ By running locally on the developer's computer:
 - **Zero Cloud Cost**: No external servers, hosted proxies, or subscription APIs required.
 - **Privacy & Security**: All schemas and generated block content stay local to the project.
 - **Full Automation**: Direct tool-calling integration for coding assistants.
+- **Admin Dashboard Decoupled**: Exclusively a local workstation tool. Zero footprint or clutter in the merchant-facing WordPress Admin Dashboard (which remains focused on Overview, Blocks, Settings, and Tools).
+- **Production Clean**: Completely excluded from distributable WordPress release `.zip` archives.
+
+> For comprehensive walkthroughs and prompting guides, see our **[Developer Handbook: MCP Server & AI Workflows Guide](../../docs/how-to-guides/mcp-server-ai-workflows.md)**.
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Developer Setup & Quick Start
 
-### 1. Build the MCP Server
+### Step 1: Clone Repository & Install Dependencies
 
 ```bash
-cd packages/mcp-server
+git clone https://github.com/noruzzamans/gslider-blocks.git
+cd gslider-blocks
 npm install
-npm run build
+cd packages/mcp-server && npm install && cd ../..
 ```
 
-### 2. Configure in your AI Assistant or IDE
+### Step 2: Build the MCP Server Locally
 
-The server is **model-agnostic** and connects seamlessly to any LLM and agentic runtime:
+From the repository root:
+```bash
+npm run mcp:build
+```
+*(Compiles TypeScript source into `packages/mcp-server/dist/index.js` and packages JSON schemas)*.
+
+To verify zero schema drift:
+```bash
+npm run mcp:test
+```
+
+### Step 3: Configure in your AI Assistant or IDE
+
+Replace `/absolute/path/to/gslider-blocks` with the absolute path to your cloned repository:
 
 #### 1. Claude Desktop (`claude_desktop_config.json`)
 - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
