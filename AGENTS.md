@@ -19,7 +19,8 @@ gslider-blocks/
 ├── includes/                  # PHP Backend Services (PSR-4, Singleton Pattern)
 │   ├── Plugin.php             # Core bootstrap on `plugins_loaded`
 │   ├── Assets/                # Asset managers (FrontendAssets, AdminAssets)
-│   ├── Classes/               # Service classes (RegistrationBlocks, StyleGenerator, FontLoader, SupportSVG)
+│   ├── Classes/               # Service classes (RegistrationBlocks, StyleGenerator, FontLoader, SupportSVG, RegistrationPatterns)
+│   ├── RestApi/               # Headless REST API services & compiled attribute defaults
 │   ├── Traits/                # Reusable traits (SingletonTrait)
 │   └── Utils/                 # Utility services (Telemetry/Appsero)
 ├── src/                       # Gutenberg React Frontend Source
@@ -28,9 +29,14 @@ gslider-blocks/
 │   ├── constants/             # Global options, bounds, alignment definitions, font lists
 │   ├── store/                 # Redux store for deviceType and editor state
 │   └── utils/                 # Helpers (useBlockIdGenerator, getCustomCss, loadGoogleFont, etc.)
+├── patterns/                  # Modular Gutenberg Block Pattern templates
+├── packages/                  # Monorepo packages
+│   └── mcp-server/            # Local Model Context Protocol stdio server for AI tools & template resources
 ├── admin/                     # Admin SCSS stylesheets
-├── assets/                    # Compiled assets, vendor libraries (Swiper, fsLightbox, Google Fonts)
-└── build/                     # Compiled Gutenberg blocks output directory
+├── assets/                    # Compiled assets, vector SVGs, vendor libraries (Swiper, fsLightbox)
+├── build/                     # Compiled Gutenberg blocks output directory
+├── tests/                     # Zero-dependency PHP CLI test harness (PHP 7.4-8.5 matrix)
+└── scripts/                   # Developer automation and build codegen utilities
 ```
 
 ---
@@ -61,6 +67,9 @@ When developing or modifying code in this repository, reference the dedicated wo
 - `npm run lint:js` : Lint JavaScript code
 - `npm run lint:css` : Lint CSS/SCSS code
 - `npm run zip` : Generate distributable plugin zip archive
+- `npm run mcp:build` : Build local MCP TypeScript server and schemas
+- `npm run mcp:test` : Run MCP schema drift test
+- `npm run defaults:generate` : Regenerate REST PHP defaults from block schemas
 
 ---
 
@@ -87,4 +96,26 @@ When developing or modifying code in this repository, reference the dedicated wo
 10. **Admin Dashboard Centralized Design Tokens**:
     - Never hardcode font families or color palette directly in admin dashboard SCSS.
     - All dashboard design tokens MUST be imported from `admin/scss/dashboard/_variables.scss` (`@use 'variables' as *;`) keeping each module (`block-controls` and `dashboard`) clean and self-contained with its own scoped variables.
+11. **Directory Architecture & Subsystem Conventions**:
+    - `patterns/`: Houses curated, lightweight Gutenberg Block Pattern templates (`patterns/*.php`).
+      - **Lifecycle Rule**: Bundled starter patterns register unconditionally on the WordPress `init` hook across all contexts (Admin, REST, Frontend/FSE).
+      - **Remote Library Rule**: The future remote pattern library (500+ patterns) must NEVER download, fetch, or register on `init`. Remote patterns must be fetched on-demand strictly via REST API requests and cached with transients.
+      - **Localization Rule**: All bundled pattern metadata must have an explicit entry in `RegistrationPatterns::get_pattern_translations()` with literal strings for `title`, `description`, and `keywords` for `make-pot` compatibility.
+      - **Asset Rule**: Bundled patterns must never hotlink external third-party images (GDPR compliance); use local, lightweight vector SVGs in `assets/images/patterns/`.
+      - **Escaping Rule**: Use `esc_url_raw()` inside Gutenberg block delimiter JSON comments (`<!-- wp:... -->`) and `esc_url()` inside HTML tag attributes (`<img src="...">`).
+    - `packages/mcp-server/`: Local Model Context Protocol (MCP) server for AI tool introspection.
+      - Communicates over local `stdio` (zero cloud cost).
+      - Exposes tools (`gslider_ping`, `gslider_list_blocks`, `gslider_get_block_schema`) and template resources (`gslider://templates/*`).
+      - Compiled output in `packages/mcp-server/dist/` is intentionally tracked in git for zero-build external AI execution.
+      - Always run `npm test` inside `packages/mcp-server` to verify zero schema drift when updating block attributes.
+    - `includes/RestApi/`: Decoupled Headless REST API serialization layer.
+      - `BlocksController.php`: Registers `/wp-json/gslider/v1/blocks/<id>` and exposes the `gslider_blocks` field on core post/page endpoints.
+      - `BlockParser.php`: Normalizes stored Gutenberg block attributes against defaults so decoupled frontend consumers receive complete Swiper configurations.
+      - `includes/RestApi/defaults/`: Generated PHP defaults compiled from block schemas via `npm run defaults:generate`.
+    - `tests/`: Zero-dependency PHP CLI test harness.
+      - Fast standalone unit tests executable via `for f in tests/*.php; do php "$f"; done`.
+      - Tested on GitHub Actions across a PHP 7.4 through 8.5 matrix on every PR.
+    - `scripts/`: Internal developer automation utilities.
+      - `scripts/generate-block-defaults.js`: Reads block schemas and compiles PHP attribute defaults for headless REST parsing.
+
 
