@@ -44,12 +44,27 @@ jobs:
             const labelsToAdd = new Set();
             const labelsToRemove = new Set();
 
-            // 1. External community contributor detection
+            // 1. Auto-assign PR author on open
+            if ((action === 'opened' || action === 'reopened') && (!pr.assignees || pr.assignees.length === 0)) {
+              try {
+                await github.rest.issues.addAssignees({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  assignees: [author]
+                });
+                console.log(`Auto-assigned author @${author} to PR #${pr.number}`);
+              } catch (err) {
+                console.log(`Failed to auto-assign PR author @${author}: ${err.message}`);
+              }
+            }
+
+            // 2. External community contributor detection
             if (author !== 'noruzzamans') {
               labelsToAdd.add('type: community contribution');
             }
 
-            // 2. PR Conventional Commits title parser
+            // 3. PR Conventional Commits title parser
             if (/^fix(\(.*\))?:/i.test(title)) labelsToAdd.add('type: bug');
             if (/^feat(\(.*\))?:/i.test(title)) labelsToAdd.add('type: enhancement');
             if (/^refactor(\(.*\))?:/i.test(title)) labelsToAdd.add('type: architecture');
@@ -58,12 +73,12 @@ jobs:
             if (/^docs(\(.*\))?:/i.test(title)) labelsToAdd.add('type: documentation');
             if (/^(ci|test|chore)(\(.*\))?:/i.test(title)) labelsToAdd.add('focus: ci-cd');
 
-            // 3. Initial review status on PR open
+            // 4. Initial review status on PR open
             if (action === 'opened' || action === 'reopened') {
               labelsToAdd.add('needs: review');
             }
 
-            // 4. PR Size Labeling (lines added + deleted)
+            // 5. PR Size Labeling (lines added + deleted)
             const totalChanges = (pr.additions || 0) + (pr.deletions || 0);
             let targetSizeLabel = 'size: S';
             if (totalChanges < 10) targetSizeLabel = 'size: XS';
@@ -82,7 +97,7 @@ jobs:
             }
             labelsToAdd.add(targetSizeLabel);
 
-            // 5. Protected Directory Guard for src/components/
+            // 6. Protected Directory Guard for src/components/
             const { data: files } = await github.rest.pulls.listFiles({
               owner: context.repo.owner,
               repo: context.repo.repo,

@@ -23,8 +23,36 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue = context.payload.issue;
+            const author = issue.user.login;
+            const action = context.payload.action;
             const title = issue.title;
             const labelsToAdd = new Set();
+
+            // 0. Auto-assign issue author (or repo maintainer) on open
+            if (action === 'opened' && (!issue.assignees || issue.assignees.length === 0)) {
+              try {
+                await github.rest.issues.addAssignees({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  assignees: [author]
+                });
+                console.log(`Auto-assigned author @${author} to issue #${issue.number}`);
+              } catch (err) {
+                // If external contributor cannot be assigned directly, fallback to maintainer
+                try {
+                  await github.rest.issues.addAssignees({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    assignees: ['noruzzamans']
+                  });
+                  console.log(`Assigned maintainer @noruzzamans to issue #${issue.number}`);
+                } catch (fallbackErr) {
+                  console.log(`Failed to assign fallback maintainer: ${fallbackErr.message}`);
+                }
+              }
+            }
 
             // 1. Conventional Commits prefix parser
             if (/^fix(\(.*\))?:/i.test(title)) labelsToAdd.add('type: bug');
