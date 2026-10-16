@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="heroGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14532d"/>
+      <stop offset="50%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+    <linearGradient id="glow3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#heroGrad3)"/>
+  <circle cx="1100" cy="400" r="380" fill="url(#glow3)" opacity="0.3" filter="blur(65px)"/>
+  <circle cx="500" cy="650" r="260" fill="#059669" opacity="0.25" filter="blur(55px)"/>
+  <g transform="translate(800, 450)" text-anchor="middle">
+    <rect x="-120" y="-120" width="240" height="240" rx="40" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2"/>
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#ffffff" stroke-width="12" stroke-opacity="0.8"/>
+    <circle cx="0" cy="0" r="14" fill="#34d399"/>
+  </g>
+</svg>

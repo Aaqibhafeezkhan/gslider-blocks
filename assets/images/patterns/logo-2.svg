@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80">
+  <g fill="#1e293b">
+    <!-- Pulse Mark -->
+    <path d="M22,40 L30,40 L35,26 L42,54 L47,34 L52,44 L55,40 L62,40" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="74" y="45" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" letter-spacing="1">PULSE</text>
+  </g>
+</svg>

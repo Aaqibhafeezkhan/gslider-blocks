@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="heroGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4c0519"/>
+      <stop offset="50%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#9f1239"/>
+    </linearGradient>
+    <linearGradient id="glow4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#fb7185" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#heroGrad4)"/>
+  <circle cx="1250" cy="350" r="360" fill="url(#glow4)" opacity="0.3" filter="blur(65px)"/>
+  <circle cx="450" cy="650" r="280" fill="#e11d48" opacity="0.25" filter="blur(55px)"/>
+  <g transform="translate(800, 450)" text-anchor="middle">
+    <rect x="-120" y="-120" width="240" height="240" rx="40" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2"/>
+    <path d="M-35,-15 L0,-50 L35,-15 L20,35 L-20,35 Z" fill="#ffffff" fill-opacity="0.75"/>
+    <circle cx="0" cy="0" r="12" fill="#fb7185"/>
+  </g>
+</svg>

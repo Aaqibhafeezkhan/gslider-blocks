@@ -18,6 +18,7 @@ use GSlider\Assets\FrontendAssets;
 use GSlider\Assets\AdminAssets;
 use GSlider\Classes\RegistrationBlocks;
 use GSlider\Classes\RegistrationCategory;
+use GSlider\Classes\RegistrationPatterns;
 use GSlider\Classes\FontLoader;
 use GSlider\Classes\SupportSVG;
 use GSlider\Utils\Utils;
@@ -56,6 +57,7 @@ if ( ! class_exists( Plugin::class, false ) ) {
 			AdminAssets::class,
 			RegistrationBlocks::class,
 			RegistrationCategory::class,
+			RegistrationPatterns::class,
 			FontLoader::class,
 			Utils::class,
 			BlocksController::class,

@@ -8,6 +8,7 @@ const zip = async () => {
         'build',
         'includes',
         'languages',
+        'patterns',
         'src',
         'vendor',
         'composer.json',

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="prodBg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="800" rx="32" fill="url(#prodBg5)"/>
+  <circle cx="400" cy="380" r="180" fill="#ec4899" fill-opacity="0.1"/>
+  <!-- Sunglasses Icon -->
+  <path d="M250,350 Q310,340 370,350 L380,360 Q400,350 420,360 L430,350 Q490,340 550,350" fill="none" stroke="#1e293b" stroke-width="14" stroke-linecap="round"/>
+  <path d="M260,370 C260,440 350,440 360,370 Z" fill="#ec4899" fill-opacity="0.8"/>
+  <path d="M440,370 C450,440 540,440 540,370 Z" fill="#ec4899" fill-opacity="0.8"/>
+  <text x="400" y="620" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="600" fill="#1e293b" text-anchor="middle">Polarized Sunglasses</text>
+  <text x="400" y="660" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="500" fill="#64748b" text-anchor="middle">$89.00</text>
+</svg>
