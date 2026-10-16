@@ -130,7 +130,7 @@ flowchart TD
 ```
 
 > [!NOTE]
-> For deep-dive architectural rules, review our comprehensive **[ARCHITECTURE.md](ARCHITECTURE.md)** guide.
+> For deep-dive architectural rules, review our comprehensive **[Architecture Guide](docs/explanations/architecture.md)**.
 
 ---
 
@@ -477,7 +477,8 @@ ESLint and Stylelint are not part of CI yet. `npm run lint:js` and `npm run lint
 Contributions from both human engineers and AI assistants are welcome! Please read our contributing documentation before starting:
 
 - 📖 **[CONTRIBUTING.md](CONTRIBUTING.md)**: Forking, branching, PR title conventions, and AI contribution policy.
-- 🏗️ **[ARCHITECTURE.md](ARCHITECTURE.md)**: Engineering principles, patterns, and pre-flight developer checklist.
+- 📚 **[Developer Handbook](docs/README.md)**: Central developer documentation map and technical guides.
+- 🏗️ **[Architecture Guide](docs/explanations/architecture.md)**: Engineering principles, patterns, and pre-flight developer checklist.
 - 📜 **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)**: Contributor Covenant v2.1.
 - 🛡️ **[SECURITY.md](SECURITY.md)**: Vulnerability disclosure policy and security protections.
 

@@ -9,7 +9,8 @@ To maintain stability, security, and world-class code quality, all contributors 
 ## 🧭 Foundational Standards & Architecture
 
 Before submitting code, please review our core architectural documents:
-- 🏗️ **[ARCHITECTURE.md](ARCHITECTURE.md)** — Architectural principles, patterns, and checklists.
+- 📚 **[Developer Handbook](docs/README.md)** — Documentation index and how-to guides.
+- 🏗️ **[Architecture Guide](docs/explanations/architecture.md)** — Architectural principles, patterns, and checklists.
 - 📜 **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** — Contributor Covenant v2.1.
 - 🛡️ **[SECURITY.md](SECURITY.md)** — Security disclosure process and built-in protections.
 
