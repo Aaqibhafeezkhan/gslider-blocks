@@ -2548,7 +2548,7 @@ var getDataFromLocalStorage = () => {
 };
 var fetchFromJson = async () => {
   try {
-    const response = await fetch("https://raw.githubusercontent.com/noruzzamans/plugins-demo-content/master/icons.json");
+    const response = await fetch("/wp-content/plugins/gslider-blocks/assets/icon-library/font-awesome.json");
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

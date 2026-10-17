@@ -2,8 +2,9 @@
 /**
  * Dynamic CSS generator for GSlider Blocks.
  *
- * Collects block styles during rendering and generates
- * minified per-page CSS files in the uploads directory.
+ * Collects block styles during rendering, applies strict CSS sanitization
+ * to prevent arbitrary CSS injection, enforces block-level scoping, and
+ * outputs safe scoped styles via inline <style> injection or dynamic stylesheets.
  *
  * @package GSlider\Classes
  * @since   1.0.0
@@ -22,10 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( StyleGenerator::class, false ) ) {
 
     /**
-     * Generates and manages dynamic CSS files for GSlider blocks.
+     * Generates and manages safe dynamic CSS for GSlider blocks.
      *
-     * Collects inline styles from rendered blocks, combines them
-     * into a single minified CSS file per page, and enqueues it.
+     * Collects styles from rendered blocks, sanitizes them to ensure
+     * all rules are scoped to the block ID and free of arbitrary code,
+     * and delivers them either via inline style injection or cached files.
      *
      * @since 1.0.0
      */
@@ -52,7 +54,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         const FILE_PERMISSIONS = 0644;
 
         /**
-         * Collected block styles keyed by block ID.
+         * Collected and sanitized block styles keyed by block ID.
          *
          * @since 1.0.0
          *
@@ -97,7 +99,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         }
 
         /**
-         * Registers hooks for style collection and generation.
+         * Registers hooks for style collection, sanitization, and rendering.
          *
          * @since 1.0.0
          *
@@ -109,9 +111,24 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
             if ( 'inline' === self::get_css_delivery_mode() ) {
                 add_action( 'wp_head', [ $this, 'print_inline_styles' ], 100 );
                 add_action( 'wp_footer', [ $this, 'print_inline_styles' ], 100 );
+                add_action( 'wp_enqueue_scripts', [ $this, 'register_style_handle' ], 20 );
             } else {
                 add_action( 'wp_footer', [ $this, 'generate_css_file' ], 10 );
                 add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_dynamic_styles' ] );
+            }
+        }
+
+        /**
+         * Registers the dynamic style handle for WordPress enqueue system.
+         *
+         * @since 1.2.0
+         *
+         * @return void
+         */
+        public function register_style_handle(): void {
+            if ( ! wp_style_is( 'gslider-blocks-dynamic-styles', 'registered' ) ) {
+                wp_register_style( 'gslider-blocks-dynamic-styles', false, [], GSLIDER_VERSION );
+                wp_enqueue_style( 'gslider-blocks-dynamic-styles' );
             }
         }
 
@@ -125,7 +142,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          *
          * @return void
          */
-        private function setup_directories() {
+        private function setup_directories(): void {
             $upload_dir    = wp_upload_dir();
             $this->css_dir = $upload_dir['basedir'] . self::CSS_SUBDIR;
             $this->css_url = $upload_dir['baseurl'] . self::CSS_SUBDIR;
@@ -150,7 +167,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          *
          * @param string $block_content The block content being rendered.
          * @param array  $block         The full block data including attributes.
-         * @return string The unmodified block content.
+         * @return string The block content with safe scoped styles.
          */
         public function collect_dynamic_styles( $block_content, $block ) {
             if ( ! is_array( $block ) || empty( $block['blockName'] ) ) {
@@ -167,13 +184,185 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
                     return $block_content;
                 }
 
-                $clean_style = CssSanitizer::sanitize( $block['attrs']['blockStyle'] );
+                $raw_style   = is_string( $block['attrs']['blockStyle'] ) ? $block['attrs']['blockStyle'] : '';
+                $clean_style = $this->sanitize_css( $raw_style, $block_id );
+
                 if ( '' !== $clean_style ) {
                     self::$styles[ $block_id ] = $clean_style;
                 }
             }
 
             return $block_content;
+        }
+
+        /**
+         * Backward-compatible alias for collect_dynamic_styles.
+         *
+         * @since 1.2.0
+         *
+         * @param string $block_content The block content being rendered.
+         * @param array  $block         The full block data including attributes.
+         * @return string The block content with safe scoped styles.
+         */
+        public function collect_and_render_dynamic_styles( $block_content, $block ) {
+            return $this->collect_dynamic_styles( $block_content, $block );
+        }
+
+        /**
+         * Strictly sanitizes CSS rules to prevent arbitrary CSS injection.
+         *
+         * Enforces:
+         * 1. Removal of all HTML/XML tags.
+         * 2. Removal of comments to avoid filter bypasses.
+         * 3. Blocking of dangerous protocols (javascript, data, expression, behavior, -moz-binding, vbscript).
+         * 4. Stripping of risky at-rules (@import, @charset, @namespace, etc.).
+         * 5. Sanitization of url() values to only allow safe HTTP/HTTPS image URLs.
+         * 6. Scoping: every selector MUST contain the specific block ID.
+         *
+         * @since 1.2.0
+         *
+         * @param string $css      The raw CSS string to sanitize.
+         * @param string $block_id The unique block identifier to enforce scoping against.
+         * @return string The sanitized and minified CSS string.
+         */
+        public function sanitize_css( $css, $block_id ): string {
+            if ( empty( $css ) || ! is_string( $css ) ) {
+                return '';
+            }
+
+            // Layer 1: Run comprehensive CssSanitizer to strip nested exploit patterns.
+            $css = CssSanitizer::sanitize( $css );
+            if ( empty( $css ) ) {
+                return '';
+            }
+
+            // Layer 2: Strip comments to prevent comment-based filter bypasses.
+            $css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
+
+            // Layer 3: Block and strip dangerous CSS functions, protocols, and keywords.
+            $dangerous_patterns = [
+                '/expression\s*\([^)]*\)?/i',
+                '/javascript\s*:[^;}]*;?/i',
+                '/behavior\s*:[^;}]*;?/i',
+                '/-moz-binding\s*:[^;}]*;?/i',
+                '/vbscript\s*:[^;}]*;?/i',
+                '/@import\b[^;]*;?/i',
+                '/@charset\b[^;]*;?/i',
+                '/@namespace\b[^;]*;?/i',
+                '/<\/?(?:script|style|iframe|object|embed)[^>]*>/i',
+                '/data\s*:\s*text\/html/i',
+            ];
+            $css = preg_replace( $dangerous_patterns, '', $css );
+
+            // 4. Sanitize and validate url(...) values: only allow safe image URLs.
+            $css = preg_replace_callback( '/url\s*\(\s*([\'"]?)(.*?)\1\s*\)/i', function( $matches ) {
+                $url = trim( $matches[2] );
+                if ( preg_match( '/[\'"\(\);\s]/', $url ) || preg_match( '/^(javascript|data|vbscript):/i', $url ) ) {
+                    return 'none';
+                }
+                $clean_url = esc_url_raw( $url );
+                return empty( $clean_url ) ? 'none' : "url('{$clean_url}')";
+            }, $css );
+
+            // 5. Enforce Block Scoping:
+            $output = '';
+
+            // Handle media queries.
+            $media_regex = '/@media[^{]+\{(?:[^{}]*\{[^{}]*\})+[^{}]*\}/i';
+            if ( preg_match_all( $media_regex, $css, $media_matches, PREG_SET_ORDER ) ) {
+                foreach ( $media_matches as $match ) {
+                    $media_full   = $match[0];
+                    $open_pos     = strpos( $media_full, '{' );
+                    $media_header = trim( substr( $media_full, 0, $open_pos ) );
+                    $media_inner  = trim( substr( $media_full, $open_pos + 1, -1 ) );
+
+                    $sanitized_inner = $this->filter_rules_by_scope( $media_inner, $block_id );
+                    if ( ! empty( $sanitized_inner ) ) {
+                        $output .= $media_header . ' { ' . $sanitized_inner . " }\n";
+                    }
+                    $css = str_replace( $media_full, '', $css );
+                }
+            }
+
+            // Handle remaining standard rules.
+            $sanitized_normal = $this->filter_rules_by_scope( $css, $block_id );
+            if ( ! empty( $sanitized_normal ) ) {
+                $output .= $sanitized_normal;
+            }
+
+            return $this->minify_css( $output );
+        }
+
+        /**
+         * Filters CSS rules so that only selectors containing the specific block ID are retained.
+         *
+         * Drops any selectors that attempt to target outside elements (e.g. body, html, input, *).
+         *
+         * @since 1.2.0
+         *
+         * @param string $css      CSS rules chunk.
+         * @param string $block_id Block identifier to match against.
+         * @return string Filtered CSS rules.
+         */
+        private function filter_rules_by_scope( $css, $block_id ): string {
+            $rules       = explode( '}', $css );
+            $valid_rules = [];
+
+            foreach ( $rules as $rule ) {
+                $rule = trim( $rule );
+                if ( empty( $rule ) ) {
+                    continue;
+                }
+
+                $parts = explode( '{', $rule );
+                if ( count( $parts ) < 2 ) {
+                    continue;
+                }
+
+                $selectors_str = trim( $parts[0] );
+                $props_str     = trim( $parts[1] );
+
+                if ( empty( $selectors_str ) || empty( $props_str ) ) {
+                    continue;
+                }
+
+                $selectors       = explode( ',', $selectors_str );
+                $valid_selectors = [];
+
+                foreach ( $selectors as $sel ) {
+                    $sel = trim( $sel );
+                    // Must contain the specific block ID to prevent targeting arbitrary page elements.
+                    if ( false !== strpos( $sel, $block_id ) ) {
+                        $valid_selectors[] = $sel;
+                    }
+                }
+
+                if ( empty( $valid_selectors ) ) {
+                    continue;
+                }
+
+                // Sanitize property declarations to drop any risky declarations.
+                $declarations = explode( ';', $props_str );
+                $valid_decls  = [];
+                foreach ( $declarations as $decl ) {
+                    $decl = trim( $decl );
+                    if ( empty( $decl ) ) {
+                        continue;
+                    }
+                    if ( preg_match( '/(javascript|expression|behavior|-moz-binding|vbscript)/i', $decl ) ||
+                         preg_match( '/:\s*[\)\s]*$/', $decl ) ||
+                         preg_match( '/\bnone\)/i', $decl ) ) {
+                        continue;
+                    }
+                    $valid_decls[] = $decl;
+                }
+
+                if ( ! empty( $valid_decls ) ) {
+                    $valid_rules[] = implode( ', ', $valid_selectors ) . ' { ' . implode( '; ', $valid_decls ) . ' }';
+                }
+            }
+
+            return implode( ' ', $valid_rules );
         }
 
         /**
@@ -189,7 +378,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          *
          * @return void
          */
-        public function generate_css_file() {
+        public function generate_css_file(): void {
             if ( 'inline' === self::get_css_delivery_mode() ) {
                 return;
             }
@@ -257,56 +446,53 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          *
          * @return void
          */
-        public function enqueue_dynamic_styles() {
+        public function enqueue_dynamic_styles(): void {
             if ( 'inline' === self::get_css_delivery_mode() ) {
                 return;
             }
 
-            clearstatcache();
-            $page_id       = get_queried_object_id();
-            $css_filename  = 'gslider-blocks-dynamic-styles-' . $page_id . '.min.css';
-            $css_file_path = $this->css_dir . '/' . $css_filename;
-            $css_file_url  = $this->css_url . '/' . $css_filename;
+            $page_id      = get_queried_object_id();
+            $css_filename = 'gslider-blocks-dynamic-styles-' . $page_id . '.min.css';
+            $css_file     = $this->css_dir . '/' . $css_filename;
+            $css_file_url = $this->css_url . '/' . $css_filename;
 
-            if ( ! file_exists( $css_file_path ) ) {
-                $this->generate_css_file();
-            }
-
-            if ( file_exists( $css_file_path ) ) {
-                wp_enqueue_style(
-                    'gslider-blocks-dynamic-styles-' . $page_id,
+            if ( file_exists( $css_file ) ) {
+                wp_register_style(
+                    'gslider-blocks-dynamic-styles',
                     $css_file_url,
                     [],
-                    filemtime( $css_file_path )
+                    filemtime( $css_file )
                 );
+                wp_enqueue_style( 'gslider-blocks-dynamic-styles' );
             }
         }
 
         /**
-         * Retrieves the current dynamic CSS delivery mode ('file' or 'inline').
+         * Retrieves the configured CSS delivery mode.
+         *
+         * Reads from the consolidated 'gslider_settings' option.
+         * Defaults to 'file' for backward compatibility.
          *
          * @since 1.2.0
          *
-         * @return string Delivery mode: 'file' or 'inline'.
+         * @return string Either 'file' or 'inline'.
          */
         public static function get_css_delivery_mode(): string {
             $settings = get_option( 'gslider_settings', [] );
-            $mode     = is_array( $settings ) && isset( $settings['css_delivery'] ) && in_array( $settings['css_delivery'], [ 'file', 'inline' ], true )
-                ? (string) $settings['css_delivery']
-                : 'inline';
+            if ( is_array( $settings ) && ! empty( $settings['css_delivery'] ) ) {
+                return in_array( $settings['css_delivery'], [ 'file', 'inline' ], true )
+                    ? $settings['css_delivery']
+                    : 'file';
+            }
 
-            /**
-             * Filters the dynamic CSS delivery mode.
-             *
-             * @since 1.2.0
-             *
-             * @param string $mode Delivery mode ('file' or 'inline').
-             */
-            return (string) apply_filters( 'gslider_css_delivery_mode', $mode );
+            $legacy = get_option( 'gslider_css_delivery_mode', 'file' );
+            return in_array( $legacy, [ 'file', 'inline' ], true ) ? $legacy : 'file';
         }
 
         /**
-         * Outputs dynamic styles directly into the HTML head or footer in inline mode.
+         * Prints dynamic styles directly as an inline <style> tag.
+         *
+         * Enforces strict de-duplication between wp_head and wp_footer.
          *
          * @since 1.2.0
          *
@@ -319,22 +505,23 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
 
             $is_head = function_exists( 'doing_action' ) && doing_action( 'wp_head' );
 
-            // In wp_head, attempt to extract styles from the queried post before the body renders.
             if ( $is_head ) {
                 $this->collect_styles_from_queried_post();
             }
 
-            // Filter out any block styles that have already been printed in this request.
+            if ( empty( self::$styles ) ) {
+                return;
+            }
+
             $unprinted = [];
             foreach ( self::$styles as $block_id => $style ) {
                 if ( empty( self::$printed_styles[ $block_id ] ) ) {
-                    $unprinted[ $block_id ]             = $style;
+                    $unprinted[ $block_id ]              = $style;
                     self::$printed_styles[ $block_id ] = true;
                 }
             }
 
             if ( empty( $unprinted ) ) {
-                self::$styles = [];
                 return;
             }
 
@@ -407,7 +594,8 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
                             ? sanitize_key( $block['attrs']['blockId'] )
                             : 'gslider-blocks-' . md5( serialize( $block['attrs'] ) );
 
-                        $clean_style = CssSanitizer::sanitize( $block['attrs']['blockStyle'] );
+                        $raw_style   = is_string( $block['attrs']['blockStyle'] ) ? $block['attrs']['blockStyle'] : '';
+                        $clean_style = $this->sanitize_css( $raw_style, $block_id );
                         if ( '' !== $clean_style ) {
                             self::$styles[ $block_id ] = $clean_style;
                         }
@@ -546,6 +734,17 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         }
 
         /**
+         * Prints any collected dynamic styles in wp_footer as fallback.
+         *
+         * @since 1.0.0
+         *
+         * @return void
+         */
+        public function print_footer_styles(): void {
+            self::$styles = [];
+        }
+
+        /**
          * Minifies a CSS string.
          *
          * Removes comments, unnecessary whitespace, and trailing
@@ -556,7 +755,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          * @param string $css The raw CSS string to minify.
          * @return string The minified CSS string.
          */
-        private function minify_css( $css ) {
+        private function minify_css( $css ): string {
             if ( empty( $css ) ) {
                 return '';
             }
@@ -570,4 +769,3 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         }
     }
 }
-

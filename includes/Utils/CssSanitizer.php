@@ -67,22 +67,6 @@ if ( ! class_exists( CssSanitizer::class, false ) ) {
                     return '';
                 }
                 if ( $clean === $css ) {
-                    // Enforce selector scoping: drop any rules directly targeting global tags
-                    if ( preg_match_all( '/([^{}]+)\{([^{}]+)\}/s', $css, $matches, PREG_SET_ORDER ) ) {
-                        $scoped = '';
-                        foreach ( $matches as $match ) {
-                            $selector     = trim( $match[1] );
-                            $declarations = trim( $match[2] );
-
-                            if ( preg_match( '/^(body|html|:root|\*|head|input|script)\b/i', $selector ) ) {
-                                continue;
-                            }
-
-                            $scoped .= $selector . ' { ' . $declarations . " }\n";
-                        }
-                        return trim( $scoped );
-                    }
-
                     return trim( $css );
                 }
                 $css = $clean;
