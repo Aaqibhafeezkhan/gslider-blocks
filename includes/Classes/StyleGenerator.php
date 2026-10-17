@@ -106,16 +106,11 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          * @return void
          */
         public function register(): void {
-            add_filter( 'render_block', [ $this, 'collect_dynamic_styles' ], 10, 2 );
-
-            if ( 'inline' === self::get_css_delivery_mode() ) {
-                add_action( 'wp_head', [ $this, 'print_inline_styles' ], 100 );
-                add_action( 'wp_footer', [ $this, 'print_inline_styles' ], 100 );
-                add_action( 'wp_enqueue_scripts', [ $this, 'register_style_handle' ], 20 );
-            } else {
-                add_action( 'wp_footer', [ $this, 'generate_css_file' ], 10 );
-                add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_dynamic_styles' ] );
-            }
+            add_filter( 'render_block', [ $this, 'collect_and_render_dynamic_styles' ], 10, 2 );
+            add_action( 'wp_head', [ $this, 'print_inline_styles' ], 100 );
+            add_action( 'wp_footer', [ $this, 'print_footer_styles' ], 20 );
+            add_action( 'wp_footer', [ $this, 'print_inline_styles' ], 100 );
+            add_action( 'wp_enqueue_scripts', [ $this, 'register_style_handle' ], 20 );
         }
 
         /**
@@ -133,10 +128,10 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         }
 
         /**
-         * Sets up the CSS output directory paths.
+         * Sets up the CSS output directory paths in memory.
          *
-         * Creates the CSS directory inside wp-content/uploads
-         * if it does not already exist.
+         * Preserves directory path reference for purging legacy cache files
+         * without creating directories or writing to disk.
          *
          * @since 1.0.0
          *
@@ -146,15 +141,6 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
             $upload_dir    = wp_upload_dir();
             $this->css_dir = $upload_dir['basedir'] . self::CSS_SUBDIR;
             $this->css_url = $upload_dir['baseurl'] . self::CSS_SUBDIR;
-
-            if ( ! file_exists( $this->css_dir ) ) {
-                if ( ! wp_mkdir_p( $this->css_dir ) ) {
-                    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-                        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-                        error_log( 'GSlider Blocks: Failed to create CSS directory at: ' . $this->css_dir );
-                    }
-                }
-            }
         }
 
         /**
@@ -170,6 +156,23 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          * @return string The block content with safe scoped styles.
          */
         public function collect_dynamic_styles( $block_content, $block ) {
+            return $this->collect_and_render_dynamic_styles( $block_content, $block );
+        }
+
+        /**
+         * Collects, sanitizes, and renders dynamic styles for GSlider blocks.
+         *
+         * Extracts the blockStyle attribute from each GSlider block,
+         * strictly validates that all CSS rules are scoped to the block ID,
+         * strips dangerous properties/protocols, and injects safe scoped CSS.
+         *
+         * @since 1.2.0
+         *
+         * @param string $block_content The block content being rendered.
+         * @param array  $block         The full block data including attributes.
+         * @return string The block content with safe scoped styles.
+         */
+        public function collect_and_render_dynamic_styles( $block_content, $block ) {
             if ( ! is_array( $block ) || empty( $block['blockName'] ) ) {
                 return $block_content;
             }
@@ -179,33 +182,30 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
                     sanitize_key( $block['attrs']['blockId'] ) :
                     'gslider-blocks-' . md5( serialize( $block['attrs'] ) );
 
-                // In inline mode, skip re-collecting if this block was already output in wp_head.
-                if ( 'inline' === self::get_css_delivery_mode() && ! empty( self::$printed_styles[ $block_id ] ) ) {
-                    return $block_content;
-                }
-
                 $raw_style   = is_string( $block['attrs']['blockStyle'] ) ? $block['attrs']['blockStyle'] : '';
                 $clean_style = $this->sanitize_css( $raw_style, $block_id );
 
                 if ( '' !== $clean_style ) {
                     self::$styles[ $block_id ] = $clean_style;
+
+                    if ( function_exists( 'wp_style_is' ) && wp_style_is( 'gslider-blocks-dynamic-styles', 'registered' ) ) {
+                        wp_add_inline_style( 'gslider-blocks-dynamic-styles', $clean_style );
+                    }
+
+                    // Avoid duplicate style tags if already printed in wp_head.
+                    if ( ! empty( self::$printed_styles[ $block_id ] ) ) {
+                        return $block_content;
+                    }
+
+                    self::$printed_styles[ $block_id ] = true;
+
+                    // Render inline style tag directly scoped to this block for zero-FOUC and full compatibility.
+                    $style_tag = '<style id="gslider-style-' . esc_attr( $block_id ) . '">' . $clean_style . '</style>';
+                    return $style_tag . $block_content;
                 }
             }
 
             return $block_content;
-        }
-
-        /**
-         * Backward-compatible alias for collect_dynamic_styles.
-         *
-         * @since 1.2.0
-         *
-         * @param string $block_content The block content being rendered.
-         * @param array  $block         The full block data including attributes.
-         * @return string The block content with safe scoped styles.
-         */
-        public function collect_and_render_dynamic_styles( $block_content, $block ) {
-            return $this->collect_dynamic_styles( $block_content, $block );
         }
 
         /**
@@ -379,92 +379,20 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          * @return void
          */
         public function generate_css_file(): void {
-            if ( 'inline' === self::get_css_delivery_mode() ) {
-                return;
-            }
-
-            if ( empty( self::$styles ) ) {
-                return;
-            }
-
-            clearstatcache();
-            $page_id      = get_queried_object_id();
-            $css_filename = 'gslider-blocks-dynamic-styles-' . $page_id . '.min.css';
-            $css_file     = $this->css_dir . '/' . $css_filename;
-
-            $css_content = '';
-            foreach ( self::$styles as $block_id => $style ) {
-                $css_content .= $style;
-            }
-
-            $css_content = "/* GSlider Blocks Dynamic Styles - Page ID: $page_id - Generated on " .
-                current_time( 'mysql' ) . " */\n" . $this->minify_css( $css_content );
-
-            if ( ! function_exists( 'WP_Filesystem' ) && file_exists( ABSPATH . 'wp-admin/includes/file.php' ) ) {
-                require_once ABSPATH . 'wp-admin/includes/file.php';
-            }
-
-            global $wp_filesystem;
-            if ( empty( $wp_filesystem ) ) {
-                WP_Filesystem();
-            }
-
-            if ( ! is_dir( $this->css_dir ) ) {
-                if ( ! wp_mkdir_p( $this->css_dir ) ) {
-                    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-                        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-                        error_log( 'GSlider Blocks: Failed to create CSS directory: ' . $this->css_dir );
-                    }
-                    return;
-                }
-            }
-
-            if ( file_exists( $css_file ) ) {
-                $existing_content = $wp_filesystem->get_contents( $css_file );
-                if ( $existing_content === $css_content ) {
-                    return;
-                }
-            }
-
-            if ( ! $wp_filesystem->put_contents( $css_file, $css_content, self::FILE_PERMISSIONS ) ) {
-                if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-                    error_log( 'GSlider Blocks: Failed to write CSS file: ' . $css_file );
-                }
-            }
-
+            // Disabled: Writing dynamic CSS files to wp-content/uploads/ was strictly prohibited by WordPress.org Plugin Review.
+            // All dynamic styles are securely scoped and rendered inline.
             self::$styles = [];
         }
 
         /**
          * Enqueues the generated dynamic CSS file.
          *
-         * Loads the per-page CSS file if it exists, using the file
-         * modification time for cache busting.
-         *
          * @since 1.0.0
          *
          * @return void
          */
         public function enqueue_dynamic_styles(): void {
-            if ( 'inline' === self::get_css_delivery_mode() ) {
-                return;
-            }
-
-            $page_id      = get_queried_object_id();
-            $css_filename = 'gslider-blocks-dynamic-styles-' . $page_id . '.min.css';
-            $css_file     = $this->css_dir . '/' . $css_filename;
-            $css_file_url = $this->css_url . '/' . $css_filename;
-
-            if ( file_exists( $css_file ) ) {
-                wp_register_style(
-                    'gslider-blocks-dynamic-styles',
-                    $css_file_url,
-                    [],
-                    filemtime( $css_file )
-                );
-                wp_enqueue_style( 'gslider-blocks-dynamic-styles' );
-            }
+            // Disabled: Stylesheets from wp-content/uploads/ are disabled. Styles are output inline.
         }
 
         /**
