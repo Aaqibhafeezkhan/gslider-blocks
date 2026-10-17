@@ -73,7 +73,7 @@ function fileHeader( slug, blockName ) {
  * How it is made: scripts/generate-block-defaults.js reads
  * packages/mcp-server/src/core/schemas/${ slug }.json, which is extracted from
  * attributes.js, and writes each attribute's \`default\`. Attributes without a
- * default are left out. tests/block-parser-base.php fails if this file and the
+ * default are left out. tests/BlockParserTest.php fails if this file and the
  * schema disagree.
  *
  * @package GSlider\\RestApi
