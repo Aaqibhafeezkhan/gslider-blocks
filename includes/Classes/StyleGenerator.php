@@ -293,7 +293,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
             $settings = get_option( 'gslider_settings', [] );
             $mode     = is_array( $settings ) && isset( $settings['css_delivery'] ) && in_array( $settings['css_delivery'], [ 'file', 'inline' ], true )
                 ? (string) $settings['css_delivery']
-                : 'file';
+                : 'inline';
 
             /**
              * Filters the dynamic CSS delivery mode.

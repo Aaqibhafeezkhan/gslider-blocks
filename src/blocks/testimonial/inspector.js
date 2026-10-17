@@ -768,11 +768,6 @@ const Inspector = ({ attributes, setAttributes, handleAddItem, handleChangeItem,
         globalBoxShadowHoverValues,
         globalBoxShadowHoverCssValue,
         /** End Global Box Shadow */
-
-        /** Start Global Custom CSS */
-        globalCustomCSS,
-        /** End Global Custom CSS */
-
     } = attributes;
 
     const normalizedContentOrder = normalizeContentOrder(contentOrder);

@@ -643,11 +643,6 @@ const generateBaseSliderStyle = (attributes) => {
         globalBoxShadowHoverValues,
         globalBoxShadowHoverCssValue,
         /** End Global Box Shadow */
-
-        /** Start Global Custom CSS */
-        globalCustomCSS,
-        /** End Global Custom CSS */
-
     } = attributes;
 
     /** Start Slider Item Color Style */

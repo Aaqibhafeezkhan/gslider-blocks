@@ -5,7 +5,7 @@ import { DEFAULT_TESTIMONIAL_CONTENT_ORDER } from './content-order';
  * Testimonial Block — Preset Styles Data Object
  *
  * Each preset defines attribute overrides that get applied via setAttributes()
- * when the preset is selected. Pattern follows Frontis Blocks approach.
+ * when the preset is selected.
  */
 export const presetStyles = {
     "preset-classic": {

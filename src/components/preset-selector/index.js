@@ -6,7 +6,7 @@ import { select } from '@wordpress/data';
 /**
  * PresetSelector — Reusable visual preset picker for all GSlider blocks.
  *
- * Follows Frontis Blocks pattern: applies attribute overrides on preset selection.
+ * Applies attribute overrides on preset selection.
  * Uses dashicons + text labels (no SVG images).
  *
  * Styles: admin/scss/components/_preset-selector.scss
@@ -111,7 +111,7 @@ const PresetSelector = ({
         return first?.value || '';
     };
 
-    // Apply preset — sets class + attribute overrides (Frontis pattern)
+    // Apply preset — sets class + attribute overrides
     const applyPreset = (selectedValue) => {
         // 1. Set the preset class attribute
         if (onChange) {

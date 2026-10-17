@@ -20,7 +20,7 @@ export const useDeviceType = () => {
  * @param {boolean} updateInCustomizer - Whether to update the device type in the customizer preview.
  */
 export const setDeviceType = ( device, updateInCustomizer = true ) => {
-	const setPreviewDeviceType = dispatch( 'core/edit-site' )?.__experimentalSetPreviewDeviceType || dispatch( 'core/edit-post' )?.__experimentalSetPreviewDeviceType || dispatch( frontisStore )?.setDeviceType;
+	const setPreviewDeviceType = dispatch( 'core/edit-site' )?.__experimentalSetPreviewDeviceType || dispatch( 'core/edit-post' )?.__experimentalSetPreviewDeviceType || dispatch( storeName )?.setDeviceType;
 
 	// Verify setPreviewDeviceType is available and setPreviewDeviceType should be function.
 	if( ! setPreviewDeviceType || typeof setPreviewDeviceType !== 'function' ){

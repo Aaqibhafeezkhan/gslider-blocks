@@ -612,11 +612,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         globalBoxShadowHoverValues,
         globalBoxShadowHoverCssValue,
         /** End Global Box Shadow */
-
-        /** Start Global Custom CSS */
-        globalCustomCSS,
-        /** End Global Custom CSS */
-
     } = attributes;
 
     /** Get Current Device Type */

@@ -1,4 +1,17 @@
+import { __ } from '@wordpress/i18n';
 import parseSVG from './parseIcon';
+
+const getIconsUrl = () => {
+	if (typeof window !== 'undefined' && window.GSliderBlocksData) {
+		if (window.GSliderBlocksData.iconsUrl) {
+			return window.GSliderBlocksData.iconsUrl;
+		}
+		if (window.GSliderBlocksData.pluginUrl) {
+			return window.GSliderBlocksData.pluginUrl + 'assets/icon-library/font-awesome.json';
+		}
+	}
+	return '/wp-content/plugins/gslider-blocks/assets/icon-library/font-awesome.json';
+};
 
 // Function to check if data exists in localStorage
 const getDataFromLocalStorage = () => {
@@ -9,7 +22,8 @@ const getDataFromLocalStorage = () => {
 
 const fetchFromJson = async () => {
 	try {
-		const response = await fetch('https://raw.githubusercontent.com/noruzzamans/plugins-demo-content/master/icons.json');
+		const iconsUrl = getIconsUrl();
+		const response = await fetch(iconsUrl);
 		if (!response.ok) {
 			throw new Error('Network response was not ok');
 		}

@@ -3,7 +3,7 @@ Contributors: noruzzaman
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 1.1.9
+Stable tag: 1.2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -131,9 +131,12 @@ This plugin bundles and uses the following open-source third-party libraries:
 * **fslightbox** (v3.x)
   - Source: https://fslightbox.com/
   - License: Free / Commercial
+* **Font Awesome Free SVG Icons** (v6.x)
+  - Source: https://fontawesome.com/
+  - License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
 * **Appsero Client** (v2.0.7)
   - Source: https://github.com/Appsero/client
-  - License: MIT License (https://github.com/Appsero/client/blob/master/LICENSE)
+  - License: MIT License (https://github.com/Appsero/client/blob/develop/composer.json)
 
 == External Services ==
 
@@ -152,12 +155,18 @@ This plugin may connect to or load resources from external third-party services 
    - **Purpose:** Used for plugin diagnostics, crash analytics, and feature usage to help improve the plugin.
    - **Consent:** Telemetry is strictly opt-in and requires explicit user consent upon activation. Users can decline or deactivate tracking at any time.
    - **Terms & Privacy:**
-     - Privacy Policy: https://appsero.com/privacy-policy/
-     - Terms of Service: https://appsero.com/terms-of-service/
+     - Terms & Privacy Policy: https://appsero.com/privacy-policy/
 
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2.0 – October 17, 2026 =
+* Security: Eliminated dynamic CSS file generation in wp-content/uploads/ in favor of safe, block-scoped inline styles rendered via wp_add_inline_style().
+* Security: Implemented strict CSS sanitization and selector scoping to prevent arbitrary CSS injection, rejecting disallowed selectors and dangerous CSS rules.
+* Security: Fully cleaned up legacy custom CSS attributes and removed unused code editor dependencies across all blocks.
+* Security: Bundled Font Awesome icon library locally within the plugin, completely removing runtime remote asset fetching from external repositories.
+* Documentation: Fixed 404 broken URLs in readme.txt for Appsero license and privacy policy links to valid endpoints.
 
 = 1.1.9 – October 14, 2026 =
 * Security: Removed custom CSS input editor and arbitrary code insertion across all blocks to strictly comply with WordPress.org security guidelines.

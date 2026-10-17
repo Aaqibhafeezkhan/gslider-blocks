@@ -2490,14 +2490,6 @@ const attributes = {
     },
     /** End Global Border */
 
-
-    /** Start Global Custom CSS */
-    globalCustomCSS: {
-        type: "string",
-        default: "",
-    },
-    /** End Global Custom CSS */
-
 };
 
 export default attributes;
