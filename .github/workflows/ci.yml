@@ -84,7 +84,7 @@ jobs:
 
       - name: Run Test Suites
         run: |
-          for test in tests/*.php; do
+          for test in $(find tests -name '*.php' ! -name 'bootstrap.php' ! -path '*/stubs/*' | sort); do
             echo "Running $test on PHP ${{ matrix.php-version }}..."
-            php "$test"
+            php "$test" || exit 1
           done

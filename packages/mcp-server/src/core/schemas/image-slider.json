@@ -12,7 +12,7 @@
       "coverflow"
     ]
   },
-  "totalAttributes": 403,
+  "totalAttributes": 402,
   "slideItemSchema": {
     "type": "object",
     "properties": {
@@ -2593,10 +2593,6 @@
       "default": []
     },
     "globalBoxShadowHoverCssValue": {
-      "type": "string",
-      "default": ""
-    },
-    "globalCustomCSS": {
       "type": "string",
       "default": ""
     }

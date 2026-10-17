@@ -25,7 +25,7 @@
       "carousel"
     ]
   },
-  "totalAttributes": 562,
+  "totalAttributes": 561,
   "slideItemSchema": {
     "type": "object",
     "properties": {
@@ -4189,10 +4189,6 @@
       "default": []
     },
     "globalBoxShadowHoverCssValue": {
-      "type": "string",
-      "default": ""
-    },
-    "globalCustomCSS": {
       "type": "string",
       "default": ""
     }

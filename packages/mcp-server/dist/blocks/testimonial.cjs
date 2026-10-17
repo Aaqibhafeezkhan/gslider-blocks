@@ -32,7 +32,7 @@ var block_default = {
   $schema: "https://schemas.wp.org/trunk/block.json",
   apiVersion: 3,
   name: "gslider-blocks/testimonial",
-  version: "1.1.6",
+  version: "1.2.0",
   title: "Testimonial",
   category: "gslider-blocks",
   description: "Display customer testimonials in slider, carousel, or grid layout with star ratings.",
@@ -3912,19 +3912,16 @@ var attributes = {
   globalBoxShadowHoverCssValue: {
     type: "string",
     default: ""
-  },
-  /** End Global Border */
-  /** Start Global Custom CSS */
-  globalCustomCSS: {
-    type: "string",
-    default: ""
   }
-  /** End Global Custom CSS */
+  /** End Global Border */
 };
 var attributes_default = attributes;
 
 // ../../src/blocks/testimonial/save.js
 var import_block_editor = require("@wordpress/block-editor");
+
+// ../../src/components/icon-picker/components/icon-picker/controls/renderIcon.js
+var import_i18n = require("@wordpress/i18n");
 
 // ../../src/components/icon-picker/components/icon-picker/controls/parseIcon.js
 function parseSVG(svg) {
@@ -3939,6 +3936,17 @@ var parseIcon_default = parseSVG;
 
 // ../../src/components/icon-picker/components/icon-picker/controls/renderIcon.js
 var import_jsx_runtime = require("react/jsx-runtime");
+var getIconsUrl = () => {
+  if (typeof window !== "undefined" && window.GSliderBlocksData) {
+    if (window.GSliderBlocksData.iconsUrl) {
+      return window.GSliderBlocksData.iconsUrl;
+    }
+    if (window.GSliderBlocksData.pluginUrl) {
+      return window.GSliderBlocksData.pluginUrl + "assets/icon-library/font-awesome.json";
+    }
+  }
+  return "/wp-content/plugins/gslider-blocks/assets/icon-library/font-awesome.json";
+};
 var getDataFromLocalStorage = () => {
   let data = localStorage.getItem("iconData");
   data = data ? JSON.parse(data) : null;
@@ -3946,7 +3954,8 @@ var getDataFromLocalStorage = () => {
 };
 var fetchFromJson = async () => {
   try {
-    const response = await fetch("/wp-content/plugins/gslider-blocks/assets/icon-library/font-awesome.json");
+    const iconsUrl = getIconsUrl();
+    const response = await fetch(iconsUrl);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -3954,7 +3963,7 @@ var fetchFromJson = async () => {
     localStorage.setItem("iconData", JSON.stringify(data));
     return data;
   } catch (error) {
-    console.error(__("Error fetching icon data:", "gslider-blocks"), error);
+    console.error((0, import_i18n.__)("Error fetching icon data:", "gslider-blocks"), error);
     return null;
   }
 };
@@ -4909,11 +4918,8 @@ var generateBaseSliderStyle = (attributes2) => {
     globalBoxShadowValues,
     globalBoxShadowCssValue,
     globalBoxShadowHoverValues,
-    globalBoxShadowHoverCssValue,
+    globalBoxShadowHoverCssValue
     /** End Global Box Shadow */
-    /** Start Global Custom CSS */
-    globalCustomCSS
-    /** End Global Custom CSS */
   } = attributes2;
   let sliderItemColorStyle = "";
   sliderItems.forEach((item) => {

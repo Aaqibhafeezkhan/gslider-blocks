@@ -19,7 +19,9 @@
 		"admin:build": "webpack --config webpack.config.admin.js --mode=production",
 		"mcp:build": "npm --prefix packages/mcp-server run build",
 		"mcp:start": "npm --prefix packages/mcp-server run start",
-		"mcp:test": "npm --prefix packages/mcp-server run test"
+		"mcp:test": "npm --prefix packages/mcp-server run test",
+		"test": "npm run test:php",
+		"test:php": "composer test"
 	},
 	"devDependencies": {
 		"@wordpress/babel-preset-default": "^8.26.0",

@@ -11,100 +11,18 @@
  * 6. File-based directory architecture exists and contains bundled patterns.
  * 7. Every bundled pattern file has complete entries in get_pattern_translations().
  *
- * @package GSlider\Tests
+ * @package GSlider\Tests\Classes
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', dirname( __DIR__ ) . '/' );
-}
-
-global $wp_actions, $wp_filters, $wp_block_patterns, $wp_pattern_categories;
-$wp_actions            = [];
-$wp_filters            = [];
-$wp_block_patterns     = [];
-$wp_pattern_categories = [];
-
-if ( ! function_exists( 'add_action' ) ) {
-	function add_action( $hook, $callback, $priority = 10, $accepted_args = 1 ) {
-		global $wp_actions;
-		$wp_actions[ $hook ][] = [
-			'callback'      => $callback,
-			'priority'      => $priority,
-			'accepted_args' => $accepted_args,
-		];
-	}
-}
-
-if ( ! function_exists( 'apply_filters' ) ) {
-	function apply_filters( $tag, $value ) {
-		return $value;
-	}
-}
-
-if ( ! function_exists( 'trailingslashit' ) ) {
-	function trailingslashit( $string ) {
-		return rtrim( $string, '/\\' ) . '/';
-	}
-}
-
-if ( ! function_exists( 'register_block_pattern_category' ) ) {
-	function register_block_pattern_category( $category_name, $category_properties ) {
-		global $wp_pattern_categories;
-		$wp_pattern_categories[ $category_name ] = $category_properties;
-		return true;
-	}
-}
-
-if ( ! function_exists( 'register_block_pattern' ) ) {
-	function register_block_pattern( $pattern_name, $pattern_properties ) {
-		global $wp_block_patterns;
-		$wp_block_patterns[ $pattern_name ] = $pattern_properties;
-		return true;
-	}
-}
-
-if ( ! function_exists( '__' ) ) {
-	function __( $text, $domain = 'default' ) {
-		return $text;
-	}
-}
-
-if ( ! function_exists( 'esc_html__' ) ) {
-	function esc_html__( $text, $domain = 'default' ) {
-		return $text;
-	}
-}
+require_once dirname( __DIR__ ) . '/bootstrap.php';
 
 global $is_admin_mock;
 $is_admin_mock = false;
-
-if ( ! function_exists( 'is_admin' ) ) {
-	function is_admin() {
-		global $is_admin_mock;
-		return (bool) $is_admin_mock;
-	}
-}
-
-if ( ! function_exists( 'esc_url_raw' ) ) {
-	function esc_url_raw( $url ) {
-		return $url;
-	}
-}
-
-if ( ! function_exists( 'esc_url' ) ) {
-	function esc_url( $url ) {
-		return $url;
-	}
-}
 
 if ( ! function_exists( 'plugins_url' ) ) {
 	function plugins_url( $path = '', $plugin = '' ) {
 		return 'https://example.com/wp-content/plugins/gslider-blocks/' . ltrim( $path, '/' );
 	}
-}
-
-if ( ! defined( 'GSLIDER_PLUGIN_URL' ) ) {
-	define( 'GSLIDER_PLUGIN_URL', 'https://example.com/wp-content/plugins/gslider-blocks/' );
 }
 
 // Require Core Classes Under Test
@@ -118,22 +36,22 @@ use GSlider\Interfaces\Registrable;
 use GSlider\Plugin;
 
 /**
- * Test class for RegistrationPatterns.
+ * Test class for GSlider\Classes\RegistrationPatterns.
  */
 class RegistrationPatternsTest {
 
 	/**
-	 * Runs all unit test assertions for RegistrationPatterns.
+	 * Run all test methods in class.
 	 *
 	 * @return void
 	 */
 	public function run_all_tests(): void {
 		echo "=== GSlider Blocks Patterns Registration Tests ===\n\n";
 
-		$this->test_singleton_and_interface();
-		$this->test_plugin_services_registration();
-		$this->test_init_hook_registration();
-		$this->test_pattern_and_category_registration();
+		$this->test_implements_registrable_and_singleton();
+		$this->test_plugin_services_contains_class();
+		$this->test_register_hooks_into_init();
+		$this->test_register_patterns_registers_category_and_patterns();
 		$this->test_curated_starter_patterns();
 		$this->test_directory_architecture_and_translations();
 
@@ -141,11 +59,11 @@ class RegistrationPatternsTest {
 	}
 
 	/**
-	 * Test 1: Class Interface and Singleton Implementation.
+	 * Test 1 & 2: Verify RegistrationPatterns implements Registrable and follows Singleton pattern.
 	 *
 	 * @return void
 	 */
-	public function test_singleton_and_interface(): void {
+	public function test_implements_registrable_and_singleton(): void {
 		$patterns = RegistrationPatterns::getInstance();
 		if ( ! ( $patterns instanceof Registrable ) ) {
 			fwrite( STDERR, "FAIL: RegistrationPatterns does not implement Registrable interface\n" );
@@ -153,81 +71,93 @@ class RegistrationPatternsTest {
 		}
 		echo "OK: RegistrationPatterns implements Registrable interface\n";
 
-		if ( $patterns !== RegistrationPatterns::getInstance() ) {
-			fwrite( STDERR, "FAIL: RegistrationPatterns does not follow Singleton pattern\n" );
+		$patterns_again = RegistrationPatterns::getInstance();
+		if ( $patterns !== $patterns_again ) {
+			fwrite( STDERR, "FAIL: RegistrationPatterns getInstance() returned different instances\n" );
 			exit( 1 );
 		}
 		echo "OK: RegistrationPatterns follows Singleton pattern\n";
 	}
 
 	/**
-	 * Test 2: Plugin services array contains RegistrationPatterns::class.
+	 * Test 3: Verify Plugin services array includes RegistrationPatterns::class.
 	 *
 	 * @return void
 	 */
-	public function test_plugin_services_registration(): void {
-		$ref           = new ReflectionClass( Plugin::class );
-		$services_prop = $ref->getProperty( 'services' );
+	public function test_plugin_services_contains_class(): void {
+		$plugin_reflection = new ReflectionClass( Plugin::class );
+		$services_property = $plugin_reflection->getProperty( 'services' );
 		if ( PHP_VERSION_ID < 80100 ) {
-			$services_prop->setAccessible( true );
+			$services_property->setAccessible( true );
 		}
-		$services = $services_prop->getValue( Plugin::getInstance() );
+
+		$plugin_instance = Plugin::getInstance();
+		$services        = $services_property->getValue( $plugin_instance );
+
 		if ( ! in_array( RegistrationPatterns::class, $services, true ) ) {
-			fwrite( STDERR, "FAIL: Plugin::services does not contain RegistrationPatterns::class\n" );
+			fwrite( STDERR, "FAIL: RegistrationPatterns::class is not registered in Plugin::\$services\n" );
 			exit( 1 );
 		}
 		echo "OK: Plugin services array contains RegistrationPatterns::class\n";
 	}
 
 	/**
-	 * Test 3: Hook into WordPress 'init'.
+	 * Test 4: Verify register() hooks into WordPress 'init'.
 	 *
 	 * @return void
 	 */
-	public function test_init_hook_registration(): void {
+	public function test_register_hooks_into_init(): void {
 		global $wp_actions;
-		$patterns   = RegistrationPatterns::getInstance();
+		$patterns = RegistrationPatterns::getInstance();
 		$patterns->register();
-		$init_hooks = $wp_actions['init'] ?? [];
-		$hook_found = false;
 
-		foreach ( $init_hooks as $hook ) {
-			if ( isset( $hook['callback'][0], $hook['callback'][1] ) &&
-				$hook['callback'][0] === $patterns &&
-				'register_patterns' === $hook['callback'][1] ) {
-				$hook_found = true;
+		$has_init_hook = false;
+		foreach ( $wp_actions['init'] ?? [] as $hook_entry ) {
+			if (
+				is_array( $hook_entry['callback'] ) &&
+				$hook_entry['callback'][0] === $patterns &&
+				$hook_entry['callback'][1] === 'register_patterns'
+			) {
+				$has_init_hook = true;
 				break;
 			}
 		}
 
-		if ( ! $hook_found ) {
-			fwrite( STDERR, "FAIL: RegistrationPatterns did not hook register_patterns into 'init'\n" );
+		if ( ! $has_init_hook ) {
+			fwrite( STDERR, "FAIL: RegistrationPatterns::register() did not hook register_patterns into 'init'\n" );
 			exit( 1 );
 		}
 		echo "OK: RegistrationPatterns hooks register_patterns into WordPress 'init'\n";
 	}
 
 	/**
-	 * Test 4: Pattern & Category Registration on 'init' for Any Request Type.
+	 * Test 5: Verify patterns and category registration.
 	 *
 	 * @return void
 	 */
-	public function test_pattern_and_category_registration(): void {
-		global $wp_pattern_categories, $wp_block_patterns, $is_admin_mock;
-		$is_admin_mock = false;
-		$patterns      = RegistrationPatterns::getInstance();
+	public function test_register_patterns_registers_category_and_patterns(): void {
+		global $wp_block_patterns, $wp_pattern_categories, $is_admin_mock;
+		$patterns = RegistrationPatterns::getInstance();
+
+		$wp_block_patterns     = [];
+		$wp_pattern_categories = [];
+		$is_admin_mock         = false;
+
 		$patterns->register_patterns();
 
 		if ( ! isset( $wp_pattern_categories['gslider-blocks'] ) ) {
-			fwrite( STDERR, "FAIL: Block pattern category 'gslider-blocks' not registered on init hook\n" );
+			fwrite( STDERR, "FAIL: Pattern category 'gslider-blocks' was not registered\n" );
 			exit( 1 );
 		}
-		if ( 'GSlider Blocks' !== $wp_pattern_categories['gslider-blocks']['label'] ) {
-			fwrite( STDERR, "FAIL: Block pattern category label mismatch\n" );
+
+		$category_props = $wp_pattern_categories['gslider-blocks'];
+		if ( empty( $category_props['label'] ) || $category_props['label'] !== 'GSlider Blocks' ) {
+			fwrite( STDERR, "FAIL: Pattern category 'gslider-blocks' label mismatch\n" );
 			exit( 1 );
 		}
-		if ( empty( $wp_block_patterns ) ) {
-			fwrite( STDERR, "FAIL: Patterns were not registered on init hook\n" );
+
+		if ( count( $wp_block_patterns ) < 5 ) {
+			fwrite( STDERR, "FAIL: Expected at least 5 registered patterns, found " . count( $wp_block_patterns ) . "\n" );
 			exit( 1 );
 		}
 		echo "OK: Patterns and categories are registered on 'init' for any request type\n";

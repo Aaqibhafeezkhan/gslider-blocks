@@ -23,7 +23,7 @@
       "carousel"
     ]
   },
-  "totalAttributes": 259,
+  "totalAttributes": 258,
   "slideItemSchema": {
     "type": "childBlock",
     "name": "gslider-blocks/flexi-content-item",
@@ -1715,10 +1715,6 @@
       "default": []
     },
     "globalBoxShadowHoverCssValue": {
-      "type": "string",
-      "default": ""
-    },
-    "globalCustomCSS": {
       "type": "string",
       "default": ""
     }

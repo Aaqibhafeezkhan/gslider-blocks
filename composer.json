@@ -9,6 +9,9 @@
             "GSlider\\": "includes/"
         }
     },
+    "scripts": {
+        "test": "for test in $(find tests -name '*.php' ! -name 'bootstrap.php' ! -path '*/stubs/*' | sort); do php \"$test\" || exit 1; done"
+    },
     "require": {
         "appsero/client": "^2.0.7"
     }

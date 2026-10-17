@@ -9,12 +9,10 @@
  * 4. Image, Logo, Testimonial, and Flexi-Content slide structures are parsed with appropriate fields.
  * 5. blockStyle CSS is strictly sanitized to prevent arbitrary code injection for REST consumers.
  *
- * @package GSlider\Tests
+ * @package GSlider\Tests\RestApi
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', dirname( __DIR__ ) . '/' );
-}
+require_once dirname( __DIR__ ) . '/bootstrap.php';
 
 if ( ! function_exists( 'sanitize_text_field' ) ) {
 	function sanitize_text_field( $text ) {
@@ -29,21 +27,9 @@ if ( ! function_exists( 'sanitize_key' ) ) {
 	}
 }
 
-if ( ! function_exists( 'esc_url_raw' ) ) {
-	function esc_url_raw( $url ) {
-		return (string) $url;
-	}
-}
-
 if ( ! function_exists( 'wp_kses_post' ) ) {
 	function wp_kses_post( $text ) {
 		return (string) $text;
-	}
-}
-
-if ( ! function_exists( 'apply_filters' ) ) {
-	function apply_filters( $hook, $value, ...$extra ) {
-		return $value;
 	}
 }
 
@@ -199,7 +185,7 @@ class BlockParserTest {
 	 * @return void
 	 */
 	public function test_attribute_defaults_matching_schemas(): void {
-		$schemas_dir = dirname( __DIR__ ) . '/packages/mcp-server/src/core/schemas';
+		$schemas_dir = GSLIDER_DIR_PATH . 'packages/mcp-server/src/core/schemas';
 		foreach ( [ 'base', 'testimonial', 'image-slider', 'logo-carousel', 'flexi-content' ] as $slug ) {
 			$schema_file = "{$schemas_dir}/{$slug}.json";
 			if ( ! file_exists( $schema_file ) ) {
