@@ -469,83 +469,54 @@ assert( ! isset( $wp_styles['gslider-blocks-fonts'] ), 'Google Fonts stylesheet 
 echo "OK: Test 8 - FontLoader suppresses Google Fonts requests when privacy mode is enabled\n";
 
 // --------------------------------------------------------------------------
-// Test 9: StyleGenerator delivery mode switching and inline style printing
+// Test 9: StyleGenerator collects and renders dynamic inline styles on render_block
 // --------------------------------------------------------------------------
 $style_gen = StyleGenerator::getInstance();
-
-// When delivery is file:
-update_option( 'gslider_settings', [ 'css_delivery' => 'file' ] );
-assert( StyleGenerator::get_css_delivery_mode() === 'file', 'Delivery mode must be file' );
-
-// In file mode, print_inline_styles does nothing
-ob_start();
-$style_gen->print_inline_styles();
-$printed = ob_get_clean();
-assert( empty( $printed ), 'print_inline_styles must output nothing in file mode' );
-
-// When delivery is inline:
-update_option( 'gslider_settings', [ 'css_delivery' => 'inline' ] );
-assert( StyleGenerator::get_css_delivery_mode() === 'inline', 'Delivery mode must be inline' );
-
-// Test print_inline_styles in wp_head
-global $wp_post_content, $wp_current_action;
-$wp_post_content = '<!-- wp:gslider-blocks/image-slider {"blockId":"slider-abc123","blockStyle":".slider-abc123 { border-radius: 8px; }"} -->';
-$wp_current_action = 'wp_head';
-
 StyleGenerator::reset_styles();
-ob_start();
-$style_gen->print_inline_styles();
-$output = ob_get_clean();
 
-assert( false !== strpos( $output, '<style id="gslider-blocks-dynamic-styles-inline">' ), 'Inline style tag must be printed' );
-assert( false !== strpos( $output, '.slider-abc123' ), 'Sanitized block style must be inside inline style tag' );
-assert( false !== strpos( $output, '</style>' ), 'Closing style tag must be present' );
-echo "OK: Test 9 - StyleGenerator outputs sanitized inline <style> tag in wp_head when inline mode is active\n";
-
-// --------------------------------------------------------------------------
-// Test 10: In inline mode, generate_css_file and enqueue_dynamic_styles do not write or enqueue files
-// --------------------------------------------------------------------------
-global $wp_styles;
-$wp_styles = [];
-$style_gen->generate_css_file();
-$style_gen->enqueue_dynamic_styles();
-assert( empty( $wp_styles ), 'No stylesheet handles should be enqueued in inline mode' );
-echo "OK: Test 10 - StyleGenerator skips file generation and enqueuing in inline mode\n";
-
-// --------------------------------------------------------------------------
-// Test 11: StyleGenerator deduplicates inline styles and never prints duplicate tags in footer
-// --------------------------------------------------------------------------
-StyleGenerator::reset_styles();
-update_option( 'gslider_settings', [ 'css_delivery' => 'inline' ] );
-
-// 1. In wp_head, styles for slider-abc123 are extracted and printed
-$wp_post_content = '<!-- wp:gslider-blocks/image-slider {"blockId":"slider-abc123","blockStyle":".slider-abc123 { border-radius: 8px; }"} -->';
-$wp_current_action = 'wp_head';
-
-ob_start();
-$style_gen->print_inline_styles();
-$head_output = ob_get_clean();
-assert( false !== strpos( $head_output, '.slider-abc123' ), 'Head output contains slider-abc123' );
-
-// 2. During body render, render_block attempts to collect the same block's style
-$wp_current_action = '';
-$block_rendered = [
+$block_data = [
 	'blockName' => 'gslider-blocks/image-slider',
 	'attrs'     => [
 		'blockId'    => 'slider-abc123',
 		'blockStyle' => '.slider-abc123 { border-radius: 8px; }',
 	],
 ];
-$style_gen->collect_dynamic_styles( '<div>slider</div>', $block_rendered );
 
-// 3. In wp_footer, print_inline_styles runs again. It must NOT print a duplicate tag!
-$wp_current_action = 'wp_footer';
-ob_start();
-$style_gen->print_inline_styles();
-$footer_output = ob_get_clean();
+$rendered_output = $style_gen->collect_and_render_dynamic_styles( '<div>slider content</div>', $block_data );
 
-assert( empty( $footer_output ), 'Footer output must be completely empty since styles were already printed in head' );
-echo "OK: Test 11 - StyleGenerator successfully deduplicates inline styles between wp_head and wp_footer\n";
+assert( false !== strpos( $rendered_output, '<style id="gslider-style-slider-abc123">' ), 'Inline style tag must be printed directly' );
+assert( false !== strpos( $rendered_output, '.slider-abc123{border-radius:8px}' ), 'Sanitized block style must be inside inline style tag' );
+assert( false !== strpos( $rendered_output, '<div>slider content</div>' ), 'Original block content must be appended' );
+echo "OK: Test 9 - StyleGenerator outputs sanitized inline <style> tag directly with block content\n";
+
+// --------------------------------------------------------------------------
+// Test 10: StyleGenerator strictly sanitizes CSS and neutralizes malicious injections
+// --------------------------------------------------------------------------
+$malicious_block = [
+	'blockName' => 'gslider-blocks/image-slider',
+	'attrs'     => [
+		'blockId'    => 'slider-sec456',
+		'blockStyle' => '.slider-sec456 { color: red; } </style><script>alert(1)</script> body { background: black; }',
+	],
+];
+
+$safe_output = $style_gen->collect_and_render_dynamic_styles( '<div>safe</div>', $malicious_block );
+assert( false === strpos( $safe_output, '<script>' ), 'Malicious <script> tag must be stripped' );
+assert( false === strpos( $safe_output, 'body' ), 'Unscoped external body selector must be stripped' );
+assert( false !== strpos( $safe_output, '.slider-sec456{color:red}' ), 'Legitimate scoped style must be retained' );
+echo "OK: Test 10 - StyleGenerator strictly strips malicious scripts and unscoped selectors\n";
+
+// --------------------------------------------------------------------------
+// Test 11: StyleGenerator resets and retrieves in-memory styles
+// --------------------------------------------------------------------------
+$collected = StyleGenerator::get_collected_styles();
+assert( isset( $collected['slider-abc123'] ), 'slider-abc123 must be present in collected styles' );
+assert( isset( $collected['slider-sec456'] ), 'slider-sec456 must be present in collected styles' );
+
+StyleGenerator::reset_styles();
+$cleared = StyleGenerator::get_collected_styles();
+assert( empty( $cleared ), 'Collected styles must be empty after reset_styles()' );
+echo "OK: Test 11 - StyleGenerator successfully resets and manages in-memory styles\n";
 
 // Reset options back to clean state
 delete_option( 'gslider_settings' );

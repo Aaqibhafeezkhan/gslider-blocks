@@ -362,80 +362,22 @@ if ( true !== $check_admin ) {
 }
 echo "OK: Permissions check enforces 'manage_options' on clear-cache and system-report endpoints\n";
 
-// Test 3: StyleGenerator::clear_dynamic_css_cache() Surgical File Purging
-$test_upload_dir = sys_get_temp_dir() . '/gslider-test-purge-' . uniqid();
-$test_css_dir    = $test_upload_dir . '/gslider-blocks/css';
-mkdir( $test_css_dir, 0777, true );
-
-// Create matching generated dynamic CSS files
-file_put_contents( $test_css_dir . '/gslider-blocks-dynamic-styles-1.min.css', '.gslider-test-1{color:red;}' );
-file_put_contents( $test_css_dir . '/gslider-blocks-dynamic-styles-42.min.css', '.gslider-test-42{color:blue;}' );
-file_put_contents( $test_css_dir . '/gslider-blocks-dynamic-styles-global.min.css', '.gslider-test-global{color:green;}' );
-
-// Create non-matching files that MUST NOT be touched
-file_put_contents( $test_css_dir . '/custom-theme-styles.css', '/* preserve this */' );
-file_put_contents( $test_css_dir . '/other-plugin-asset.min.css', '/* preserve this */' );
-mkdir( $test_css_dir . '/subfolder' );
-file_put_contents( $test_css_dir . '/subfolder/nested.css', '/* preserve nested */' );
-
+// Test 3: StyleGenerator::clear_dynamic_css_cache() In-Memory Purging
 $style_gen = StyleGenerator::getInstance();
-// Use reflection to point css_dir to test directory
-$ref = new ReflectionClass( $style_gen );
-$css_dir_prop = $ref->getProperty( 'css_dir' );
-if ( PHP_VERSION_ID < 80100 ) {
-	$css_dir_prop->setAccessible( true );
-}
-$css_dir_prop->setValue( $style_gen, $test_css_dir );
-
 $deleted_files_count = $style_gen->clear_dynamic_css_cache();
-if ( 3 !== $deleted_files_count ) {
-	fwrite( STDERR, "FAIL: clear_dynamic_css_cache() expected to delete 3 files, got $deleted_files_count\n" );
+if ( 0 !== $deleted_files_count ) {
+	fwrite( STDERR, "FAIL: clear_dynamic_css_cache() expected to return 0, got $deleted_files_count\n" );
 	exit( 1 );
 }
+echo "OK: clear_dynamic_css_cache() clears in-memory styles and returns 0 deleted files\n";
 
-// Verify dynamic files were deleted
-if ( file_exists( $test_css_dir . '/gslider-blocks-dynamic-styles-1.min.css' ) ||
-     file_exists( $test_css_dir . '/gslider-blocks-dynamic-styles-42.min.css' ) ||
-     file_exists( $test_css_dir . '/gslider-blocks-dynamic-styles-global.min.css' ) ) {
-	fwrite( STDERR, "FAIL: Dynamic CSS files were not deleted by clear_dynamic_css_cache()\n" );
+// Test 4: StyleGenerator::get_cache_stats() reports zero disk usage in inline mode
+$stats = $style_gen->get_cache_stats();
+if ( 0 !== $stats['files_count'] || 0 !== $stats['total_size_bytes'] || '0 KB' !== $stats['total_size_formatted'] ) {
+	fwrite( STDERR, "FAIL: get_cache_stats() returned incorrect values\n" );
 	exit( 1 );
 }
-
-// Verify non-matching files were safely PRESERVED
-if ( ! file_exists( $test_css_dir . '/custom-theme-styles.css' ) ||
-     ! file_exists( $test_css_dir . '/other-plugin-asset.min.css' ) ||
-     ! is_dir( $test_css_dir . '/subfolder' ) ||
-     ! file_exists( $test_css_dir . '/subfolder/nested.css' ) ) {
-	fwrite( STDERR, "FAIL: Non-matching files or subfolders were improperly deleted by cache purger\n" );
-	exit( 1 );
-}
-echo "OK: clear_dynamic_css_cache() deleted 3 matching files and preserved non-matching files/directories\n";
-
-// Test 4: StyleGenerator::get_cache_stats()
-$empty_stats = $style_gen->get_cache_stats();
-if ( 0 !== $empty_stats['files_count'] || 0 !== $empty_stats['total_size_bytes'] || '0 KB' !== $empty_stats['total_size_formatted'] ) {
-	fwrite( STDERR, "FAIL: get_cache_stats() on empty cache returned incorrect values\n" );
-	exit( 1 );
-}
-
-// Add a test file and verify stats calculation
-file_put_contents( $test_css_dir . '/gslider-blocks-dynamic-styles-99.min.css', str_repeat( 'a', 2048 ) );
-$populated_stats = $style_gen->get_cache_stats();
-if ( 1 !== $populated_stats['files_count'] || 2048 !== $populated_stats['total_size_bytes'] || '2 KB' !== $populated_stats['total_size_formatted'] ) {
-	fwrite( STDERR, "FAIL: get_cache_stats() returned incorrect file count or size calculations\n" );
-	exit( 1 );
-}
-
-// Clean up test file
-$style_gen->clear_dynamic_css_cache();
-unlink( $test_css_dir . '/custom-theme-styles.css' );
-unlink( $test_css_dir . '/other-plugin-asset.min.css' );
-unlink( $test_css_dir . '/subfolder/nested.css' );
-rmdir( $test_css_dir . '/subfolder' );
-rmdir( $test_css_dir );
-rmdir( $test_upload_dir . '/gslider-blocks' );
-rmdir( $test_upload_dir );
-echo "OK: get_cache_stats() accurately calculates file counts and human-readable byte sizes\n";
+echo "OK: get_cache_stats() accurately reports 0 files and 0 KB in inline mode\n";
 
 // Test 5: DashboardController::clear_cache() REST Endpoint Response
 $clear_response = $controller->clear_cache( new WP_REST_Request() );
