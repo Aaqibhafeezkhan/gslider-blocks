@@ -300,7 +300,7 @@ class DashboardTest {
 			fwrite( STDERR, "FAIL: gslider-dashboard-style dependencies mismatch\n" );
 			exit( 1 );
 		}
-		if ( $style['ver'] !== '1.1.9' ) {
+		if ( $style['ver'] !== GSLIDER_VERSION ) {
 			fwrite( STDERR, "FAIL: gslider-dashboard-style version mismatch\n" );
 			exit( 1 );
 		}
@@ -352,7 +352,7 @@ class DashboardTest {
 			fwrite( STDERR, "FAIL: Unexpected nonce {$l10n['nonce']}\n" );
 			exit( 1 );
 		}
-		if ( $l10n['version'] !== '1.1.9' ) {
+		if ( $l10n['version'] !== GSLIDER_VERSION ) {
 			fwrite( STDERR, "FAIL: Unexpected version {$l10n['version']}\n" );
 			exit( 1 );
 		}

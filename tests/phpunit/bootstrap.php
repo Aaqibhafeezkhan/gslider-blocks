@@ -21,11 +21,15 @@ if ( ! defined( 'GSLIDER_DIR_PATH' ) ) {
 }
 
 if ( ! defined( 'GSLIDER_VERSION' ) ) {
-	define( 'GSLIDER_VERSION', '1.1.9' );
+	define( 'GSLIDER_VERSION', '1.2.0' );
+}
+
+if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
+	define( 'HOUR_IN_SECONDS', 3600 );
 }
 
 // Global state registries.
-global $wp_actions, $wp_filters, $wp_menu_pages, $current_caps, $enqueued_styles, $enqueued_scripts, $localized_scripts, $wp_block_patterns, $wp_pattern_categories;
+global $wp_actions, $wp_filters, $wp_menu_pages, $current_caps, $enqueued_styles, $enqueued_scripts, $localized_scripts, $wp_block_patterns, $wp_pattern_categories, $wp_rest_routes, $wp_transients, $wp_options, $wpdb;
 $wp_actions            = [];
 $wp_filters            = [];
 $wp_menu_pages         = [];
@@ -35,6 +39,9 @@ $enqueued_scripts      = [];
 $localized_scripts     = [];
 $wp_block_patterns     = [];
 $wp_pattern_categories = [];
+$wp_rest_routes        = [];
+$wp_transients         = [];
+$wp_options            = [];
 
 if ( ! function_exists( 'add_action' ) ) {
 	function add_action( $hook, $callback, $priority = 10, $accepted_args = 1 ) {
@@ -234,6 +241,198 @@ if ( ! function_exists( 'wp_kses_post' ) ) {
 if ( ! function_exists( 'render_block' ) ) {
 	function render_block( $block ) {
 		return '<p>flexi</p>';
+	}
+}
+
+if ( ! class_exists( 'WP_REST_Controller' ) ) {
+	class WP_REST_Controller {
+		protected $namespace;
+		protected $rest_base;
+		protected $schema;
+		public function add_additional_fields_schema( $schema ) {
+			return $schema;
+		}
+	}
+}
+
+if ( ! class_exists( 'WP_REST_Server' ) ) {
+	class WP_REST_Server {
+		const READABLE  = 'GET';
+		const CREATABLE = 'POST';
+	}
+}
+
+if ( ! class_exists( 'WP_REST_Request' ) ) {
+	class WP_REST_Request {
+		public $params = [];
+		public function __construct( array $params = [] ) {
+			$this->params = $params;
+		}
+		public function get_param( $key ) {
+			return $this->params[ $key ] ?? null;
+		}
+	}
+}
+
+if ( ! class_exists( 'WP_REST_Response' ) ) {
+	class WP_REST_Response {
+		public $data;
+		public $status;
+		public function __construct( $data = null, $status = 200 ) {
+			$this->data   = $data;
+			$this->status = $status;
+		}
+		public function get_data() {
+			return $this->data;
+		}
+		public function get_status() {
+			return $this->status;
+		}
+	}
+}
+
+if ( ! class_exists( 'WP_Error' ) ) {
+	class WP_Error {
+		public $code;
+		public $message;
+		public $data;
+		public function __construct( $code = '', $message = '', $data = [] ) {
+			$this->code    = $code;
+			$this->message = $message;
+			$this->data    = $data;
+		}
+		public function get_error_code() {
+			return $this->code;
+		}
+		public function get_error_message() {
+			return $this->message;
+		}
+		public function get_error_data() {
+			return $this->data;
+		}
+	}
+}
+
+if ( ! class_exists( 'MockWPDB' ) ) {
+	class MockWPDB {
+		public $posts      = 'wp_posts';
+		public $last_query = '';
+		public $return_col = [];
+
+		public function get_col( $query ) {
+			$this->last_query = $query;
+			return $this->return_col;
+		}
+
+		public function get_var( $query ) {
+			$this->last_query = $query;
+			return count( $this->return_col );
+		}
+	}
+}
+
+if ( ! isset( $wpdb ) || ! ( $wpdb instanceof MockWPDB ) ) {
+	$wpdb = new MockWPDB();
+}
+
+if ( ! function_exists( 'register_rest_route' ) ) {
+	function register_rest_route( $namespace, $route, $args = [] ) {
+		global $wp_rest_routes;
+		$wp_rest_routes[ $namespace ][ $route ] = $args;
+	}
+}
+
+if ( ! function_exists( 'rest_authorization_required_code' ) ) {
+	function rest_authorization_required_code() {
+		return 401;
+	}
+}
+
+if ( ! function_exists( 'rest_ensure_response' ) ) {
+	function rest_ensure_response( $response ) {
+		if ( $response instanceof WP_REST_Response ) {
+			return $response;
+		}
+		return new WP_REST_Response( $response );
+	}
+}
+
+if ( ! function_exists( 'get_transient' ) ) {
+	function get_transient( $transient ) {
+		global $wp_transients;
+		return isset( $wp_transients[ $transient ] ) ? $wp_transients[ $transient ] : false;
+	}
+}
+
+if ( ! function_exists( 'set_transient' ) ) {
+	function set_transient( $transient, $value, $expiration = 0 ) {
+		global $wp_transients;
+		$wp_transients[ $transient ] = $value;
+		return true;
+	}
+}
+
+if ( ! function_exists( 'delete_transient' ) ) {
+	function delete_transient( $transient ) {
+		global $wp_transients;
+		unset( $wp_transients[ $transient ] );
+		return true;
+	}
+}
+
+if ( ! function_exists( 'get_option' ) ) {
+	function get_option( $option, $default = false ) {
+		global $wp_options;
+		return isset( $wp_options[ $option ] ) ? $wp_options[ $option ] : $default;
+	}
+}
+
+if ( ! function_exists( 'update_option' ) ) {
+	function update_option( $option, $value, $autoload = null ) {
+		global $wp_options;
+		$wp_options[ $option ] = $value;
+		return true;
+	}
+}
+
+if ( ! function_exists( 'delete_option' ) ) {
+	function delete_option( $option ) {
+		global $wp_options;
+		unset( $wp_options[ $option ] );
+		return true;
+	}
+}
+
+if ( ! function_exists( 'get_bloginfo' ) ) {
+	function get_bloginfo( $show = '' ) {
+		return '6.7.1';
+	}
+}
+
+if ( ! function_exists( 'wp_upload_dir' ) ) {
+	function wp_upload_dir() {
+		return [
+			'basedir' => '/tmp/wp-test-uploads',
+			'baseurl' => 'https://example.com/wp-content/uploads',
+		];
+	}
+}
+
+if ( ! function_exists( 'wp_mkdir_p' ) ) {
+	function wp_mkdir_p( $dir ) {
+		return true;
+	}
+}
+
+if ( ! function_exists( 'sanitize_text_field' ) ) {
+	function sanitize_text_field( $str ) {
+		return is_string( $str ) ? trim( strip_tags( $str ) ) : '';
+	}
+}
+
+if ( ! function_exists( 'sanitize_key' ) ) {
+	function sanitize_key( $key ) {
+		return is_string( $key ) ? strtolower( preg_replace( '/[^a-z0-9_\-]/i', '', $key ) ) : '';
 	}
 }
 
