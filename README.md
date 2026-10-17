@@ -10,7 +10,13 @@
     <img src="https://github.com/noruzzamans/gslider-blocks/actions/workflows/ci.yml/badge.svg" alt="CI Build Status">
   </a>
   <a href="https://github.com/noruzzamans/gslider-blocks/releases">
-    <img src="https://img.shields.io/badge/Version-1.1.9-orange.svg" alt="Version">
+    <img src="https://img.shields.io/badge/Version-1.2.0-orange.svg" alt="Version">
+  </a>
+  <a href="https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">
+    <img src="https://img.shields.io/github/issues/noruzzamans/gslider-blocks/good%20first%20issue?color=7057ff&label=Good%20First%20Issues" alt="Good First Issues">
+  </a>
+  <a href="https://github.com/noruzzamans/gslider-blocks/pulls">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
   </a>
   <a href="https://wordpress.org/">
     <img src="https://img.shields.io/badge/WordPress-6.3+-blue.svg?logo=wordpress" alt="WordPress 6.3+">
@@ -476,6 +482,12 @@ ESLint and Stylelint are not part of CI yet. `npm run lint:js` and `npm run lint
 
 Contributions from both human engineers and AI assistants are welcome! Please read our contributing documentation before starting:
 
+### 🌟 First-Time Contributors Welcome!
+Looking to make your first open-source contribution or build your WordPress / React portfolio? We have curated step-by-step beginner-friendly tasks with ready-to-run commands:
+👉 **[Browse Good First Issues](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)**
+
+Every contributor with a merged PR is automatically inducted into our [Contributors](#-contributors) hall of fame and mentioned in our official release notes!
+
 - 📖 **[CONTRIBUTING.md](CONTRIBUTING.md)**: Forking, branching, PR title conventions, and AI contribution policy.
 - 📚 **[Developer Handbook](docs/README.md)**: Central developer documentation map and technical guides.
 - 🏗️ **[Architecture Guide](docs/explanations/architecture.md)**: Engineering principles, patterns, and pre-flight developer checklist.
@@ -503,6 +515,28 @@ it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 ```
+
+---
+
+## 👥 Contributors
+
+Thank you to all the amazing people who contribute to GSlider Blocks!
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/noruzzamans"><img src="https://avatars.githubusercontent.com/u/46926901?v=4" width="100px;" alt="Noruzzaman"/><br /><sub><b>Noruzzaman</b></sub></a><br /><a href="#creator" title="Creator & Maintainer">👑</a> <a href="#code" title="Code">💻</a> <a href="#doc" title="Documentation">📖</a> <a href="#design" title="Design">🎨</a> <a href="#review" title="Reviewed Pull Requests">👀</a></td>
+    </tr>
+  </tbody>
+</table>
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING.md) to get started.
 
 ---
 
