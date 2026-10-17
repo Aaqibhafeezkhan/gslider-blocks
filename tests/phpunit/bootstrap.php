@@ -29,7 +29,7 @@ if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
 }
 
 // Global state registries.
-global $wp_actions, $wp_filters, $wp_menu_pages, $current_caps, $enqueued_styles, $enqueued_scripts, $localized_scripts, $wp_block_patterns, $wp_pattern_categories, $wp_rest_routes, $wp_transients, $wp_options, $wpdb, $wp_styles, $wp_post_content, $wp_current_action;
+global $wp_actions, $wp_filters, $wp_menu_pages, $current_caps, $enqueued_styles, $enqueued_scripts, $localized_scripts, $wp_block_patterns, $wp_pattern_categories, $wp_rest_routes, $wp_transients, $wp_options, $wpdb, $wp_styles, $wp_post_content, $wp_current_action, $wp_mock_posts, $password_clear, $can_read, $registered_rest_fields;
 $wp_actions            = [];
 $wp_filters            = [];
 $wp_menu_pages         = [];
@@ -45,6 +45,10 @@ $wp_options            = [];
 $wp_styles             = [];
 $wp_post_content       = '';
 $wp_current_action     = '';
+$wp_mock_posts         = [];
+$password_clear        = [];
+$can_read              = [];
+$registered_rest_fields = [];
 
 if ( ! function_exists( 'add_action' ) ) {
 	function add_action( $hook, $callback, $priority = 10, $accepted_args = 1 ) {
@@ -69,7 +73,13 @@ if ( ! function_exists( 'add_filter' ) ) {
 }
 
 if ( ! function_exists( 'apply_filters' ) ) {
-	function apply_filters( $tag, $value ) {
+	function apply_filters( $tag, $value, ...$args ) {
+		global $wp_filters;
+		if ( ! empty( $wp_filters[ $tag ] ) ) {
+			foreach ( $wp_filters[ $tag ] as $filter ) {
+				$value = call_user_func( $filter['callback'], $value, ...$args );
+			}
+		}
 		return $value;
 	}
 }
@@ -154,8 +164,12 @@ if ( ! function_exists( 'wp_create_nonce' ) ) {
 }
 
 if ( ! function_exists( 'current_user_can' ) ) {
-	function current_user_can( $capability ) {
-		global $current_caps;
+	function current_user_can( $capability, ...$args ) {
+		global $current_caps, $can_read;
+		if ( 'read_post' === $capability && ! empty( $args ) ) {
+			$post_id = (int) $args[0];
+			return ! empty( $can_read[ $post_id ] ) || ! empty( $current_caps['read_post'] );
+		}
 		return ! empty( $current_caps[ $capability ] );
 	}
 }
@@ -472,13 +486,71 @@ if ( ! function_exists( 'get_queried_object_id' ) ) {
 	}
 }
 
+if ( ! class_exists( 'WP_Post' ) ) {
+	class WP_Post {
+		public $ID;
+		public $post_status;
+		public $post_password;
+		public $post_type;
+		public $post_title;
+		public $post_content;
+	}
+}
+
 if ( ! function_exists( 'get_post' ) ) {
 	function get_post( $id ) {
-		global $wp_post_content;
-		$post               = new stdClass();
-		$post->ID           = $id;
+		global $wp_post_content, $wp_mock_posts;
+		$post_id = (int) ( $id instanceof WP_Post ? $id->ID : $id );
+		if ( isset( $wp_mock_posts[ $post_id ] ) ) {
+			return $wp_mock_posts[ $post_id ];
+		}
+		if ( 99 === $post_id ) {
+			return null;
+		}
+		$post               = new WP_Post();
+		$post->ID           = $post_id;
+		$post->post_status  = 'publish';
+		$post->post_type    = 'post';
+		$post->post_title   = 'Post ' . $post_id;
 		$post->post_content = $wp_post_content;
 		return $post;
+	}
+}
+
+if ( ! function_exists( 'post_password_required' ) ) {
+	function post_password_required( $post ) {
+		global $password_clear;
+		$post = get_post( $post );
+		if ( ! $post instanceof WP_Post || empty( $post->post_password ) ) {
+			return false;
+		}
+		return empty( $password_clear[ (int) $post->ID ] );
+	}
+}
+
+if ( ! function_exists( 'get_post_type_object' ) ) {
+	function get_post_type_object( $type ) {
+		$obj         = new stdClass();
+		$obj->public = ( 'internal_note' !== $type );
+		$obj->cap    = (object) [ 'read_post' => 'read_post' ];
+		return $obj;
+	}
+}
+
+if ( ! function_exists( 'get_the_title' ) ) {
+	function get_the_title( $post ) {
+		return $post instanceof WP_Post ? $post->post_title : '';
+	}
+}
+
+if ( ! function_exists( 'register_rest_field' ) ) {
+	function register_rest_field( $object_type, $attribute, $args ) {
+		global $registered_rest_fields;
+		$registered_rest_fields[] = [
+			'object_type' => $object_type,
+			'attribute'   => $attribute,
+			'args'        => $args,
+		];
 	}
 }
 
