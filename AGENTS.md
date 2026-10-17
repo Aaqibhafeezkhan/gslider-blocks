@@ -53,6 +53,7 @@ When developing or modifying code in this repository, reference the dedicated wo
 | **[`gslider-ui-controls`](.agents/skills/gslider-ui-controls/SKILL.md)** | Guide to using the 23+ custom React UI controls in `src/components/` (Responsive range/typography/spacing, color pickers, icon picker, etc.). |
 | **[`gslider-php-backend`](.agents/skills/gslider-php-backend/SKILL.md)** | Backend architecture, PSR-4 autoloading, WordPress hooks, Singleton pattern, security/sanitization, and dynamic block registration. |
 | **[`gslider-qa-and-release`](.agents/skills/gslider-qa-and-release/SKILL.md)** | Quality Assurance, testing, linting, version synchronization, production builds, and distributable zip packaging. |
+| **[`gslider-testing-standards`](.agents/skills/gslider-testing-standards/SKILL.md)** | Modern enterprise PHP testing standards, 1-to-1 class-to-test mapping (matching Google Site Kit, WooCommerce, and 10up), and test execution. |
 
 ---
 
