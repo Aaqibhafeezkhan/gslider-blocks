@@ -45,15 +45,6 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         const CSS_SUBDIR = '/gslider-blocks/css';
 
         /**
-         * File permissions for generated CSS files.
-         *
-         * @since 1.0.0
-         *
-         * @var int
-         */
-        const FILE_PERMISSIONS = 0644;
-
-        /**
          * Collected and sanitized block styles keyed by block ID.
          *
          * @since 1.0.0
@@ -72,22 +63,13 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         private static $printed_styles = [];
 
         /**
-         * Absolute path to the CSS output directory.
+         * Absolute path to the legacy CSS output directory for cache purging.
          *
          * @since 1.0.0
          *
          * @var string
          */
         private $css_dir;
-
-        /**
-         * URL to the CSS output directory.
-         *
-         * @since 1.0.0
-         *
-         * @var string
-         */
-        private $css_url;
 
         /**
          * Initializes the style generator and sets up directories.
@@ -140,7 +122,6 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         private function setup_directories(): void {
             $upload_dir    = wp_upload_dir();
             $this->css_dir = $upload_dir['basedir'] . self::CSS_SUBDIR;
-            $this->css_url = $upload_dir['baseurl'] . self::CSS_SUBDIR;
         }
 
         /**
@@ -366,33 +347,30 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         }
 
         /**
-         * Generates a minified CSS file from collected styles.
+         * Legacy stub for dynamic CSS file generation.
          *
-         * Combines all collected block styles into a single CSS file
-         * per page using WP_Filesystem. Skips writing if content
-         * has not changed.
+         * Dynamic stylesheet generation to wp-content/uploads/ has been disabled
+         * in compliance with WordPress.org security guidelines. All dynamic
+         * styles are securely scoped and rendered inline.
          *
          * @since 1.0.0
-         *
-         * @global WP_Filesystem_Base $wp_filesystem WordPress filesystem abstraction.
          *
          * @return void
          */
         public function generate_css_file(): void {
-            // Disabled: Writing dynamic CSS files to wp-content/uploads/ was strictly prohibited by WordPress.org Plugin Review.
-            // All dynamic styles are securely scoped and rendered inline.
             self::$styles = [];
         }
 
         /**
-         * Enqueues the generated dynamic CSS file.
+         * Legacy stub for enqueuing dynamic stylesheets.
+         *
+         * Enqueueing from wp-content/uploads/ has been disabled.
          *
          * @since 1.0.0
          *
          * @return void
          */
         public function enqueue_dynamic_styles(): void {
-            // Disabled: Stylesheets from wp-content/uploads/ are disabled. Styles are output inline.
         }
 
         /**
