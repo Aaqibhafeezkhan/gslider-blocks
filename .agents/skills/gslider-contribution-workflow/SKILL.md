@@ -73,27 +73,33 @@ All PR titles must strictly follow the **Conventional Commits** specification:
 
 ## 📝 3. Pull Request Description Standard
 
-Every PR must strictly follow `.github/PULL_REQUEST_TEMPLATE.md`:
+Every PR must strictly provide an in-depth, technical description following `.github/PULL_REQUEST_TEMPLATE.md`:
 
 ```markdown
 ### 🔗 Related Issue
 Closes #<issue_number>
 
-### Changes proposed in this Pull Request:
-- Concise, bulleted list of specific changes made.
+### 📋 Overview & Technical Architecture
+<!-- Concise technical context, design rationale, and architecture overview. -->
 
-### Testing instructions:
-1. Open the WordPress Block Editor (Gutenberg).
-2. Insert the affected block.
-3. Verify behavior matches expectations.
+### 🔍 Changes Implemented (In-Details)
+<!-- In-depth, file-by-file or component-by-component breakdown:
+- Exact components/services touched or created.
+- Story variants, state harnesses, mock props, or API schemas.
+- Responsive breakpoint configurations, fallback handling, and edge cases.
+- NO generic checklists, NO safety checklists, NO marketing fluff.
+-->
 
-### 🛡️ GSlider Quality & Safety Checklist:
-- [x] **Protected Directory:** Did NOT modify `src/components/` (maintained exclusively by @noruzzamans).
-- [x] **Strict Design System:** Uses ONLY approved `@Components/*` controls.
-- [x] **Zero Regressions:** Existing blocks load with 0 block invalidation errors.
-- [x] **PHP Standards:** Sanitization, escaping, and nonces are 100% compliant.
-- [x] **2,000+ Sites Protection:** Zero breaking changes to database schemas or attributes.
+### 🧪 Verification & Testing Instructions
+<!-- Exact step-by-step CLI commands and browser instructions:
+1. Exact CLI commands to run (e.g. npm run test:php, npm run storybook:build).
+2. Step-by-step UI actions in Gutenberg editor or Storybook sidebar.
+3. Expected results and observable state transitions across Desktop, Tablet, and Mobile.
+-->
 ```
+
+> [!IMPORTANT]
+> **Zero Checklist Policy:** Never include generic checklists (such as `🛡️ Quality & Safety Checklist`) or boilerplate self-attestations in PR descriptions. Focus 100% on concrete, senior-level technical details and verification steps.
 
 ---
 
