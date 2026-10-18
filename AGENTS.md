@@ -118,5 +118,9 @@ When developing or modifying code in this repository, reference the dedicated wo
       - Tested on GitHub Actions across a PHP 7.4 through 8.5 matrix on every PR.
     - `scripts/`: Internal developer automation utilities.
       - `scripts/generate-block-defaults.js`: Reads block schemas and compiles PHP attribute defaults for headless REST parsing.
+12. **Branch Preservation Rule (Zero Branch Deletion)**:
+    - Feature, bugfix, and chore branches MUST NEVER be deleted after PR merge (neither locally nor remotely).
+    - NEVER run `git branch -d`, `git branch -D`, `git push origin --delete`, or use `--delete-branch` flags in `gh pr merge`.
+    - All merged branches must be permanently preserved to maintain historical integrity and traceability.
 
 

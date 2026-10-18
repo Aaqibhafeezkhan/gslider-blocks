@@ -117,7 +117,21 @@ GSlider Blocks welcomes contributions assisted by modern AI tooling (Cursor, Cla
 
 ---
 
-## 👥 4. Assignees and Code Review Flow
+## 👥 5. Assignees and Code Review Flow
 
 1. **Assignees:** When working on an issue, assign yourself to signal active development and avoid duplicate work.
 2. **Reviewers:** Code ownership is universal (`* @noruzzamans`). All PRs require at least **1 approving review** from `@noruzzamans` before merging into `main`.
+
+---
+
+## 🌿 6. Branch Preservation Rule (Zero Branch Deletion)
+
+> [!IMPORTANT]
+> **Never Delete Merged Branches:**
+> - Contributors and AI agents must **NEVER** delete local or remote branches after a Pull Request is merged.
+> - Preserving all branches maintains the full commit provenance, historical traceability, and allows easy reference or rollback.
+> - **Forbidden actions/flags:**
+>   - `git branch -d <branch>` or `git branch -D <branch>`
+>   - `git push origin --delete <branch>`
+>   - `gh pr merge --delete-branch`
+> - Always leave the feature branch intact after switching back to `main`.
