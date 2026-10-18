@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@Controls/*": ["blocks-config/gslider-controls/*"],
+      "@Attributes/*": ["blocks-config/blocks-attributes/*"],
+      "@Components/*": ["src/components/*"],
+      "@Utils/*": ["src/utils/*"],
+      "@Constants/*": ["src/constants/*"],
+      "@Store/*": ["src/store/*"],
+      "@Blocks/*": ["src/blocks/*"]
+    }
+  },
+  "include": ["src/**/*", "storybook/**/*", "blocks-config/**/*"]
+}

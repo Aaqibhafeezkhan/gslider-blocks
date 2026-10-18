@@ -32,14 +32,6 @@ jobs:
       - name: Verify Webpack Block Build
         run: npm run build
 
-      - name: Code Quality Advisory (JS & CSS Lint)
-        continue-on-error: true
-        run: |
-          echo "Checking JavaScript syntax and standards (Advisory)..."
-          npm run lint:js || true
-          echo "Checking SCSS syntax and standards (Advisory)..."
-          npm run lint:css || true
-
       # --ignore-scripts keeps `prepare` (the build) from regenerating the
       # committed schemas before the drift test compares them.
       - name: Install MCP Server Dependencies
@@ -63,6 +55,44 @@ jobs:
 
       - name: Verify Distribution Zip Archive
         run: npm run zip
+
+  code-quality:
+    name: Code Quality Advisory (JS & CSS Lint)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (v20)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Plugin Dependencies
+        run: npm ci
+
+      - name: Cache Linter Results
+        uses: actions/cache@v4
+        with:
+          path: |
+            .eslintcache
+            .stylelintcache
+          key: linter-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            linter-${{ runner.os }}-
+
+      - name: JavaScript Standards Advisory
+        continue-on-error: true
+        run: |
+          echo "Checking JavaScript syntax and standards (Advisory)..."
+          npm run lint:js -- --cache || true
+
+      - name: SCSS Standards Advisory
+        continue-on-error: true
+        run: |
+          echo "Checking SCSS syntax and standards (Advisory)..."
+          npm run lint:css -- --cache || true
 
   php-compatibility:
     name: PHP Tests (PHP ${{ matrix.php-version }})

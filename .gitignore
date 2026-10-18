@@ -20,6 +20,7 @@ build/
 
 # Optional eslint cache
 .eslintcache
+.stylelintcache
 
 # Output of `npm pack`
 *.tgz
@@ -39,4 +40,7 @@ build/
 
 # Testing & Cache
 .phpunit.result.cache
+
+# Storybook build output
+storybook-static/
 
