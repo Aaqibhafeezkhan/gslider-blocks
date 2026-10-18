@@ -2,7 +2,7 @@
 
 <p align="center">
   <strong>🎠 The Ultimate Gutenberg Carousel Collection</strong><br>
-  High-Performance, React & Swiper.js Powered Slider Blocks for Modern WordPress & Headless Stacks
+  High-Performance, React & Swiper.js Powered Slider Blocks for Modern WordPress, Headless Stacks & Native MCP AI Workflows
 </p>
 
 <p align="center">
