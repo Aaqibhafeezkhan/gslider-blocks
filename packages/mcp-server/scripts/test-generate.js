@@ -161,7 +161,7 @@ await rejects(
 );
 await rejects(
   { blockSlug: 'flexi-content-item', slides: [{ title: 'One' }] },
-  "received 'flexi-content-item'"
+  'blockSlug'
 );
 await rejects(
   { blockSlug: 'flexi-content', slides: [{ blocks: [{ type: 'paragraph', text: 'Hi' }] }], layout: { effect: 'cube' } },

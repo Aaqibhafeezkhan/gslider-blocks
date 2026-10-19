@@ -4,6 +4,9 @@
 	"description": "gslider Blocks",
 	"author": "Noruzzaman",
 	"license": "GPL-2.0-or-later",
+	"engines": {
+		"node": ">=22.11.0"
+	},
 	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build && npm run defaults:generate",

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Model Context Protocol (MCP) server for GSlider Blocks - AI-assisted slider generation and design",
   "license": "GPL-2.0-or-later",
+  "engines": {
+    "node": ">=22.11.0"
+  },
   "author": "Noruzzaman",
   "type": "module",
   "main": "dist/index.js",

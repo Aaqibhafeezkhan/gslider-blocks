@@ -8,7 +8,7 @@ const validateInputZod = z
   .object({
     markup: z.string().optional(),
     blockSlug: z.enum(GENERATABLE_SLUGS).optional(),
-    attributes: z.record(z.unknown()).optional(),
+    attributes: z.record(z.string(), z.unknown()).optional(),
   })
   .strict();
 
@@ -153,7 +153,7 @@ function validate(input: z.infer<typeof validateInputZod>): Report {
 export async function handleValidateBlock(args: unknown) {
   const parsed = validateInputZod.safeParse(args);
   if (!parsed.success) {
-    const message = parsed.error.errors.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join(', ');
+    const message = parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join(', ');
     return {
       isError: true,
       content: [{ type: 'text' as const, text: `Invalid arguments for gslider_validate_block: ${message}` }],

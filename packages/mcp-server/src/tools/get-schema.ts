@@ -33,7 +33,7 @@ export const getBlockSchemaToolDefinition = {
 export async function handleGetBlockSchema(args: unknown) {
   const parsed = getBlockSchemaInputZod.safeParse(args);
   if (!parsed.success) {
-    const errorMsg = parsed.error.errors.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ');
+    const errorMsg = parsed.error.issues.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ');
     return {
       isError: true,
       content: [

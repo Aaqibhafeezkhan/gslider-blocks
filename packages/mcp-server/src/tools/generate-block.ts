@@ -106,7 +106,7 @@ export const generateBlockInputZod = z
       })
       .strict()
       .optional(),
-    attributes: z.record(z.unknown()).optional(),
+    attributes: z.record(z.string(), z.unknown()).optional(),
   })
   .strict();
 
@@ -415,7 +415,7 @@ function generate(input: GenerateInput) {
 export async function handleGenerateBlock(args: unknown) {
   const parsed = generateBlockInputZod.safeParse(args);
   if (!parsed.success) {
-    const message = parsed.error.errors.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join(', ');
+    const message = parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join(', ');
     return toolError(`Invalid arguments for gslider_generate_block: ${message}`);
   }
   try {
