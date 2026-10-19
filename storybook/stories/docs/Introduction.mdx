@@ -2,19 +2,69 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="GSlider/Introduction" />
 
-# 🎠 GSlider Blocks Design System
+# 🎠 GSlider Blocks Design System & Component Library
 
-Welcome to the official **GSlider Blocks Component Library & Storybook**, modeled directly after the [WordPress Gutenberg Storybook](https://wordpress.github.io/gutenberg).
+Welcome to the official **GSlider Blocks Design System & Storybook**, modeled directly after the [WordPress Gutenberg Storybook](https://wordpress.github.io/gutenberg).
 
----
-
-## 🏛️ Architecture & Principles
-- **Gutenberg Inspector Aligned**: Every control is built specifically for the WordPress Block Inspector sidebar (280px–300px width).
-- **Responsive-First Architecture**: Dedicated 3-device controls (Desktop, Tablet, Mobile) with synchronized state.
-- **Pure React & Zero jQuery**: Lightweight modern React components.
-- **Model-Agnostic & MCP-Ready**: Synchronized with our Model Context Protocol (MCP) server schemas.
+GSlider Blocks is an enterprise-grade WordPress Gutenberg carousel and slider block suite built with modern React, pure Swiper.js, and a robust decoupled PHP backend architecture.
 
 ---
 
-## 🧭 Navigation
-Explore the 23 design system controls organized by category in the sidebar.
+## 🎯 Mission Statement
+
+Our mission is to provide WordPress creators, agencies, and enterprise site builders with a high-performance, accessible, and intuitive slider design toolkit that produces **zero client-side bloat**, enforces **GDPR-compliant local assets**, and delivers **100% lean inline styles**.
+
+---
+
+## 🏛️ Comprehensive Component Registry (23 Core Components)
+
+The GSlider Block Editor design system consists of **23 battle-tested, isolated UI controls** built strictly for the WordPress Block Inspector sidebar (280px–300px width).
+
+| Component Name | Import Path | Category | Primary Purpose & Usage |
+| :--- | :--- | :--- | :--- |
+| **`InspectorControl`** | `@Components/inspector-controls` | Composition | Tabbed Inspector shell unifying General, Style, and Advanced tabs. |
+| **`SwitcherControl`** | `@Components/switcher-control` | Primitives | Multi-option segmented button group (e.g. Normal/Hover, Auto/Fixed). |
+| **`InputControls`** | `@Components/input-control` | Primitives | Accessible text and number inputs for Z-index, anchors, and CSS classes. |
+| **`SelectControls`** | `@Components/select-controls` | Primitives | Standardized dropdown selector for font weights and transition modes. |
+| **`UnitControl`** | `@Components/unit-control` | Primitives | Unit selector dropdown supporting `px`, `%`, `em`, `rem`, `vw`, and `vh`. |
+| **`HtmlTagControl`** | `@Components/html-tag-control` | Primitives | Semantic heading selector (H1–H6, P, Span, Div) with active state pills. |
+| **`IconPicker`** | `@Components/icon-picker` | Primitives | Virtualized SVG icon library supporting FontAwesome brands and solid icons. |
+| **`UrlControl`** | `@Components/url-control` | Primitives | URL destination field with popover settings for target, nofollow, and sponsored. |
+| **`ResponsiveDeviceControl`** | `@Components/responsive-device-control` | Responsive | 3-breakpoint device switcher bar (Desktop, Tablet, Mobile) with synced state. |
+| **`ResponsiveRangeControl`** | `@Components/responsive-range-control` | Responsive | Slider range input with numerical bounds and per-device synchronized values. |
+| **`ResponsiveSpacingControl`** | `@Components/responsive-spacing-control` | Responsive | 4-sided dimension controller (Top, Right, Bottom, Left) with linked toggle. |
+| **`ResponsiveToggleControl`** | `@Components/responsive-toggle-control` | Responsive | Device-aware boolean switch toggling features independently per screen size. |
+| **`ResponsiveAlignmentControl`** | `@Components/responsive-alignment-control` | Responsive | Visual alignment button group (Left, Center, Right, Justify) with responsive modes. |
+| **`ResponsiveTypographyControl`** | `@Components/responsive-typography-control` | Responsive | Complete typography controller with Google Fonts loader, size, and spacing. |
+| **`ColorControl`** | `@Components/color-control` | Color & Style | Theme-aware color picker with popover, hex inputs, and reset buttons. |
+| **`GradientColorControl`** | `@Components/gradient-color-control` | Color & Style | Linear/radial gradient designer with color stops, angle rotation, and custom CSS. |
+| **`BackgroundControl`** | `@Components/background-control` | Color & Style | Multi-layer background manager supporting solid colors, gradients, and images. |
+| **`ResponsiveBackgroundImageControl`** | `@Components/responsive-background-image-control` | Color & Style | Device-aware background backdrop with focal point picker and size settings. |
+| **`BoxShadowSettingsControl`** | `@Components/box-shadow-control` | Color & Style | Elevation designer for X, Y, Blur, Spread, and color with live CSS calculation. |
+| **`ImageControl`** | `@Components/image-control` | Media | WordPress media library uploader with preview, replace, and remove actions. |
+| **`PresetSelector`** | `@Components/preset-selector` | Layout | Visual layout card picker with Dashicons, Pro badges, and one-click reset. |
+| **`ContentOrderControl`** | `@Components/content-order-control` | Layout | Accessible `@dnd-kit` drag-and-drop slide content reordering interface. |
+| **`FullInspectorPanel`** | `storybook/stories/compositions/` | Composition | Benchmark composition uniting all 22 controls in an authentic Gutenberg canvas. |
+
+---
+
+## 🔒 Protected Core Policy
+
+> **CRITICAL ARCHITECTURAL RULE:**  
+> The `src/components/` directory is **strictly locked** to protect 2,000+ active production websites. No external PR or AI assistant is permitted to modify or create files in `src/components/` without explicit authorization from `@noruzzamans`. All new stories and experimental compositions belong exclusively inside `storybook/stories/`.
+
+---
+
+## 🚀 Getting Started with Storybook
+
+To run the local component explorer in development mode:
+
+```bash
+npm run storybook
+```
+
+To compile the production static distribution for deployment on GitHub Pages:
+
+```bash
+npm run storybook:build
+```
