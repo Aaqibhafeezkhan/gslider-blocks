@@ -18,6 +18,7 @@ const config = {
 	docs: {
 		autodocs: 'tag',
 	},
+	staticDirs: [{ from: '../assets', to: 'assets' }],
 	webpackFinal: async (config) => {
 		// 1. Resolve GSlider path aliases matching webpack.config.js
 		config.resolve.alias = {
