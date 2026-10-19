@@ -29,6 +29,10 @@ updates:
           - "patch"
       dev-dependencies:
         dependency-type: "development"
+        exclude-patterns:
+          - "@wordpress/*"
+          - "@storybook/*"
+          - "storybook"
         update-types:
           - "minor"
           - "patch"
