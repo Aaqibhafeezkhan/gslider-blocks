@@ -12,7 +12,7 @@ Logo Carousel, Image Slider & Testimonial blocks for Gutenberg. 5 transition eff
 
 == Description ==
 
-The **gslider Blocks** plugin allows you to easily add customizable and responsive sliders to your WordPress website. Perfect for both beginners and developers, this plugin provides powerful slider blocks for the WordPress block editor (Gutenberg). Customize slider content, transitions, navigation, and more, while enjoying full control over slider styling and functionality.
+The **GSlider Blocks** plugin allows you to easily add customizable and responsive sliders to your WordPress website. Perfect for both beginners and developers, this plugin provides powerful slider blocks for the WordPress block editor (Gutenberg). Customize slider content, transitions, navigation, and more, while enjoying full control over slider styling and functionality.
 
 == Available Blocks ==
 
@@ -84,11 +84,11 @@ If you have any questions, please email us at **[gsliderblocks@gmail.com](mailto
 
 == Installation ==
 
-There are no prerequisites for installing **gslider Blocks**. You can follow the steps below to complete the installation.
+There are no prerequisites for installing **GSlider Blocks**. You can follow the steps below to complete the installation.
 
 = Automatic Installation =
 1.  Go to `Plugins > Add New` screen from your WordPress website dashboard.
-2.  Search for `gslider Blocks`.
+2.  Search for `GSlider Blocks`.
 3.  Install and activate the plugin, that's it!
 
 == Frequently Asked Questions ==
@@ -101,9 +101,9 @@ Yes, it's completely free.
 
 Yes, each slide can be customized independently with different content, backgrounds, and styling options.
 
-= Does gslider work with any WordPress theme? =
+= Does GSlider Blocks work with any WordPress theme? =
 
-Yes, gslider Blocks is designed to work with any WordPress theme that supports the block editor.
+Yes, GSlider Blocks is designed to work with any WordPress theme that supports the block editor.
 
 = What is the difference between Base Slider and Flexi Content? =
 
@@ -112,6 +112,11 @@ Base Slider has pre-built content elements (title, subtitle, description, button
 = Why do my slides show overlapping content with Creative, Coverflow, or Flip effects? =
 
 These are 3D transition effects where slides are stacked in layers. If your slides have transparent backgrounds, content from slides behind will show through. To fix this, add a background color or background image to each slide in your slider settings.
+
+= Where can I explore the design system and UI components? =
+
+You can inspect all 23 isolated Gutenberg block controls, responsive breakpoints, and design tokens in our interactive Storybook explorer:
+https://noruzzamans.github.io/gslider-blocks/
 
 == Source Code & Build Instructions ==
 
@@ -161,7 +166,12 @@ This plugin may connect to or load resources from external third-party services 
 
 == Changelog ==
 
-= 1.2.0 – October 17, 2026 =
+= 1.2.0 – October 19, 2026 =
+* Storybook Design System: Integrated 23 isolated Gutenberg UI controls with live interactive explorer (https://noruzzamans.github.io/gslider-blocks/).
+* Accessibility: Integrated @storybook/addon-a11y with automated WCAG 2.1 AA accessibility auditing across all inspector controls.
+* Architecture: Native Gutenberg block patterns, PSR-4 singleton architecture, and decoupled headless REST API serialization (/wp-json/gslider/v1/blocks/<id>).
+* Admin Dashboard: Streamlined modern admin dashboard with live metrics, quickstart guide, and block toggles.
+* MCP AI Integration: Built-in local Model Context Protocol server for AI coding assistants.
 * Security: Eliminated dynamic CSS file generation in wp-content/uploads/ in favor of safe, block-scoped inline styles rendered via wp_add_inline_style().
 * Security: Implemented strict CSS sanitization and selector scoping to prevent arbitrary CSS injection, rejecting disallowed selectors and dangerous CSS rules.
 * Security: Fully cleaned up legacy custom CSS attributes and removed unused code editor dependencies across all blocks.

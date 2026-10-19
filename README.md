@@ -30,6 +30,9 @@
   <a href="https://swiperjs.com/">
     <img src="https://img.shields.io/badge/Engine-Swiper%2011-red.svg" alt="Swiper 11">
   </a>
+  <a href="https://noruzzamans.github.io/gslider-blocks/">
+    <img src="https://img.shields.io/badge/Storybook-Live%20Explorer-ff4785.svg?logo=storybook" alt="Storybook Design System">
+  </a>
   <a href="#-ai-assistant-integration-model-context-protocol---mcp">
     <img src="https://img.shields.io/badge/MCP-Ready-9cf.svg?logo=anthropic" alt="MCP Compatible">
   </a>
@@ -38,6 +41,7 @@
 <p align="center">
   <a href="#-about--value-proposition">About</a> •
   <a href="#-system-architecture">Architecture</a> •
+  <a href="#-design-system--component-storybook">Storybook</a> •
   <a href="#-available-blocks">Blocks</a> •
   <a href="#-ai-assistant-integration-model-context-protocol---mcp">MCP AI Guide</a> •
   <a href="#-headless-wordpress--nextjs-showcase">Headless</a> •
@@ -137,6 +141,20 @@ flowchart TD
 
 > [!NOTE]
 > For deep-dive architectural rules, review our comprehensive **[Architecture Guide](docs/explanations/architecture.md)**.
+
+---
+
+## 🎨 Design System & Component Storybook
+
+GSlider Blocks features an enterprise **23-component design system** modeled directly after the official [WordPress Gutenberg Storybook](https://wordpress.github.io/gutenberg). Every UI control is completely isolated, WCAG 2.1 AA accessible, responsive-aware (Desktop, Tablet, Mobile), and built strictly for the Gutenberg Inspector sidebar (280px–300px width).
+
+👉 **[Launch Interactive Storybook Explorer](https://noruzzamans.github.io/gslider-blocks/)**
+
+### 🧩 What's inside the Storybook:
+* **23 Isolated Controls**: Responsive range, spacing, typography, colors, gradients, background images, elevation/shadows, layout preset selector, accessible drag-and-drop slide content reordering (`@dnd-kit`), and more.
+* **Full Inspector Benchmark Composition**: Live simulation of the entire Gutenberg block settings sidebar mounting General, Style, and Advanced tabs in an authentic editor harness.
+* **Automated Accessibility Testing (`@storybook/addon-a11y`)**: Live Axe-core accessibility auditing on every component state.
+* **Architecture Guidelines & MDX Documentation**: Standardized 8-key spacing, 13-key typography, and 3-key color schemas.
 
 ---
 
