@@ -1,0 +1,571 @@
+import { useState } from 'react';
+import IconPicker from '@Components/icon-picker';
+import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
+
+// Pre-seed common icons in localStorage so renderSVG can immediately display icons without waiting for async fetch
+const COMMON_FALLBACK_ICONS = {
+	'angle-left': {
+		svg: {
+			solid: {
+				width: 384,
+				height: 512,
+				path: 'M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z',
+			},
+		},
+		label: 'angle-left',
+		custom_categories: [ 'arrows' ],
+	},
+	'angle-right': {
+		svg: {
+			solid: {
+				width: 384,
+				height: 512,
+				path: 'M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z',
+			},
+		},
+		label: 'angle-right',
+		custom_categories: [ 'arrows' ],
+	},
+	'arrow-left': {
+		svg: {
+			solid: {
+				width: 448,
+				height: 512,
+				path: 'M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z',
+			},
+		},
+		label: 'arrow-left',
+		custom_categories: [ 'arrows' ],
+	},
+	'arrow-right': {
+		svg: {
+			solid: {
+				width: 448,
+				height: 512,
+				path: 'M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.8 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z',
+			},
+		},
+		label: 'arrow-right',
+		custom_categories: [ 'arrows' ],
+	},
+	'chevron-left': {
+		svg: {
+			solid: {
+				width: 384,
+				height: 512,
+				path: 'M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z',
+			},
+		},
+		label: 'chevron-left',
+		custom_categories: [ 'arrows' ],
+	},
+	'chevron-right': {
+		svg: {
+			solid: {
+				width: 384,
+				height: 512,
+				path: 'M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z',
+			},
+		},
+		label: 'chevron-right',
+		custom_categories: [ 'arrows' ],
+	},
+	star: {
+		svg: {
+			solid: {
+				width: 576,
+				height: 512,
+				path: 'M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z',
+			},
+		},
+		label: 'star',
+		custom_categories: [ 'design' ],
+	},
+	'quote-left': {
+		svg: {
+			solid: {
+				width: 448,
+				height: 512,
+				path: 'M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V216z',
+			},
+		},
+		label: 'quote-left',
+		custom_categories: [ 'communication' ],
+	},
+	'quote-right': {
+		svg: {
+			solid: {
+				width: 448,
+				height: 512,
+				path: 'M448 296c0 66.3-53.7 120-120 120h-8c-17.7 0-32-14.3-32-32s14.3-32 32-32h8c30.9 0 56-25.1 56-56v-8h-64c-35.3 0-64-28.7-64-64v-64c0-35.3 28.7-64 64-64h64c35.3 0 64 28.7 64 64v104zm-256 0c0 66.3-53.7 120-120 120h-8c-17.7 0-32-14.3-32-32s14.3-32 32-32h8c30.9 0 56-25.1 56-56v-8h-64c-35.3 0-64-28.7-64-64v-64c0-35.3 28.7-64 64-64h64c35.3 0 64 28.7 64 64v104z',
+			},
+		},
+		label: 'quote-right',
+		custom_categories: [ 'communication' ],
+	},
+};
+
+// Configure static iconsUrl for Storybook dev and GitHub Pages environments
+if ( typeof window !== 'undefined' ) {
+	window.GSliderBlocksData = window.GSliderBlocksData || {};
+	if ( ! window.GSliderBlocksData.iconsUrl ) {
+		const basePath = window.location.pathname.replace( /\/[^/]*$/, '/' );
+		window.GSliderBlocksData.iconsUrl = `${ basePath }assets/icon-library/font-awesome.json`;
+	}
+
+	try {
+		const existing = localStorage.getItem( 'iconData' );
+		if ( ! existing ) {
+			localStorage.setItem(
+				'iconData',
+				JSON.stringify( COMMON_FALLBACK_ICONS )
+			);
+		}
+	} catch ( _ ) {
+		// LocalStorage access restricted in certain sandbox contexts
+	}
+}
+
+export default {
+	title: 'GSlider Controls/Primitives/IconPicker',
+	component: IconPicker,
+	tags: [ 'autodocs' ],
+	parameters: {
+		docs: {
+			description: {
+				component:
+					'IconPicker provides an interactive SVG icon library selector featuring a virtualized 8-column icon grid, live keyword search filtering, category tabs, and real-time icon preview for slider navigation arrows and buttons.',
+			},
+		},
+	},
+	argTypes: {
+		value: {
+			control: 'text',
+			description:
+				'Current icon slug identifier (e.g. "angle-right", "arrow-left", "star")',
+		},
+		setIconHandler: {
+			action: 'iconSelected',
+			description:
+				'Callback fired when an icon is selected from the library modal',
+		},
+	},
+};
+
+export const Default = {
+	render: ( args ) => {
+		const [ icon, setIcon ] = useState( args.value || 'angle-right' );
+
+		const handleIconChange = ( newIcon ) => {
+			setIcon( newIcon );
+			args.setIconHandler?.( newIcon );
+		};
+
+		return (
+			<div>
+				<div
+					style={ {
+						fontSize: '12px',
+						fontWeight: 600,
+						color: '#50575e',
+						marginBottom: '8px',
+					} }
+				>
+					Navigation Arrow Icon
+				</div>
+
+				<IconPicker
+					value={ icon }
+					setIconHandler={ handleIconChange }
+				/>
+
+				<div
+					style={ {
+						marginTop: '24px',
+						padding: '20px',
+						borderRadius: '8px',
+						background: '#f8fafc',
+						border: '1px solid #e2e8f0',
+					} }
+				>
+					<div
+						style={ {
+							fontSize: '11px',
+							fontWeight: 600,
+							textTransform: 'uppercase',
+							letterSpacing: '0.05em',
+							color: '#64748b',
+							marginBottom: '14px',
+						} }
+					>
+						Selected Icon Preview
+					</div>
+					<div
+						style={ {
+							display: 'flex',
+							alignItems: 'center',
+							gap: '16px',
+							padding: '16px',
+							background: '#ffffff',
+							borderRadius: '6px',
+							border: '1px solid #e2e8f0',
+						} }
+					>
+						<div
+							style={ {
+								width: '48px',
+								height: '48px',
+								borderRadius: '8px',
+								background: '#eff6ff',
+								color: '#2563eb',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+							} }
+						>
+							<div
+								style={ {
+									width: '24px',
+									height: '24px',
+									fill: 'currentColor',
+								} }
+							>
+								{ icon ? renderSVG( icon ) : 'None' }
+							</div>
+						</div>
+						<div>
+							<div
+								style={ {
+									fontSize: '13px',
+									fontWeight: 600,
+									color: '#0f172a',
+									fontFamily: 'monospace',
+								} }
+							>
+								{ icon || 'No Icon Selected' }
+							</div>
+							<div
+								style={ {
+									fontSize: '11px',
+									color: '#64748b',
+									marginTop: '2px',
+								} }
+							>
+								Click "Change icon" above to open the library
+								modal
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	},
+	args: {
+		value: 'angle-right',
+	},
+};
+
+export const NavigationArrows = {
+	render: ( args ) => {
+		const [ leftIcon, setLeftIcon ] = useState(
+			args.leftIcon || 'angle-left'
+		);
+		const [ rightIcon, setRightIcon ] = useState(
+			args.rightIcon || 'angle-right'
+		);
+
+		return (
+			<div>
+				<div style={ { marginBottom: '16px' } }>
+					<div
+						style={ {
+							fontSize: '12px',
+							fontWeight: 600,
+							color: '#50575e',
+							marginBottom: '8px',
+						} }
+					>
+						Previous Arrow (Left)
+					</div>
+					<IconPicker
+						value={ leftIcon }
+						setIconHandler={ setLeftIcon }
+					/>
+				</div>
+
+				<div style={ { marginBottom: '16px' } }>
+					<div
+						style={ {
+							fontSize: '12px',
+							fontWeight: 600,
+							color: '#50575e',
+							marginBottom: '8px',
+						} }
+					>
+						Next Arrow (Right)
+					</div>
+					<IconPicker
+						value={ rightIcon }
+						setIconHandler={ setRightIcon }
+					/>
+				</div>
+
+				<div
+					style={ {
+						marginTop: '24px',
+						padding: '24px',
+						borderRadius: '8px',
+						background: '#f8fafc',
+						border: '1px solid #e2e8f0',
+					} }
+				>
+					<div
+						style={ {
+							fontSize: '11px',
+							fontWeight: 600,
+							textTransform: 'uppercase',
+							letterSpacing: '0.05em',
+							color: '#64748b',
+							marginBottom: '16px',
+						} }
+					>
+						Live Slider Navigation Preview
+					</div>
+					<div
+						style={ {
+							position: 'relative',
+							height: '110px',
+							borderRadius: '8px',
+							background:
+								'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'space-between',
+							padding: '0 20px',
+						} }
+					>
+						<button
+							type="button"
+							style={ {
+								width: '40px',
+								height: '40px',
+								borderRadius: '50%',
+								background: 'rgba(255, 255, 255, 0.2)',
+								border: 'none',
+								color: '#ffffff',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+								cursor: 'pointer',
+								backdropFilter: 'blur(4px)',
+								transition: 'background 0.2s ease',
+							} }
+						>
+							<div
+								style={ {
+									width: '18px',
+									height: '18px',
+									fill: 'currentColor',
+								} }
+							>
+								{ renderSVG( leftIcon ) }
+							</div>
+						</button>
+
+						<div
+							style={ {
+								color: '#94a3b8',
+								fontSize: '13px',
+								fontWeight: 500,
+							} }
+						>
+							Slide 1 of 5
+						</div>
+
+						<button
+							type="button"
+							style={ {
+								width: '40px',
+								height: '40px',
+								borderRadius: '50%',
+								background: 'rgba(255, 255, 255, 0.2)',
+								border: 'none',
+								color: '#ffffff',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+								cursor: 'pointer',
+								backdropFilter: 'blur(4px)',
+								transition: 'background 0.2s ease',
+							} }
+						>
+							<div
+								style={ {
+									width: '18px',
+									height: '18px',
+									fill: 'currentColor',
+								} }
+							>
+								{ renderSVG( rightIcon ) }
+							</div>
+						</button>
+					</div>
+				</div>
+			</div>
+		);
+	},
+	args: {
+		leftIcon: 'angle-left',
+		rightIcon: 'angle-right',
+	},
+};
+
+export const WithCustomStyling = {
+	render: ( args ) => {
+		const [ icon, setIcon ] = useState( args.value || 'star' );
+		const [ size, setSize ] = useState( 32 );
+		const [ color, setColor ] = useState( '#f59e0b' );
+
+		return (
+			<div>
+				<div
+					style={ {
+						fontSize: '12px',
+						fontWeight: 600,
+						color: '#50575e',
+						marginBottom: '8px',
+					} }
+				>
+					Accent Feature Icon
+				</div>
+
+				<IconPicker value={ icon } setIconHandler={ setIcon } />
+
+				<div style={ { marginTop: '16px' } }>
+					<label
+						style={ {
+							display: 'block',
+							fontSize: '12px',
+							fontWeight: 600,
+							color: '#50575e',
+							marginBottom: '6px',
+						} }
+					>
+						Icon Size: { size }px
+					</label>
+					<input
+						type="range"
+						min="16"
+						max="64"
+						value={ size }
+						onChange={ ( e ) =>
+							setSize( Number( e.target.value ) )
+						}
+						style={ { width: '100%' } }
+					/>
+				</div>
+
+				<div style={ { marginTop: '12px' } }>
+					<label
+						style={ {
+							display: 'block',
+							fontSize: '12px',
+							fontWeight: 600,
+							color: '#50575e',
+							marginBottom: '6px',
+						} }
+					>
+						Icon Color
+					</label>
+					<div style={ { display: 'flex', gap: '8px' } }>
+						{ [
+							'#f59e0b',
+							'#2563eb',
+							'#10b981',
+							'#ef4444',
+							'#8b5cf6',
+						].map( ( c ) => (
+							<button
+								key={ c }
+								type="button"
+								onClick={ () => setColor( c ) }
+								style={ {
+									width: '28px',
+									height: '28px',
+									borderRadius: '50%',
+									backgroundColor: c,
+									border:
+										color === c
+											? '2px solid #0f172a'
+											: '2px solid transparent',
+									cursor: 'pointer',
+								} }
+							/>
+						) ) }
+					</div>
+				</div>
+
+				<div
+					style={ {
+						marginTop: '24px',
+						padding: '24px',
+						borderRadius: '8px',
+						background: '#f8fafc',
+						border: '1px solid #e2e8f0',
+					} }
+				>
+					<div
+						style={ {
+							fontSize: '11px',
+							fontWeight: 600,
+							textTransform: 'uppercase',
+							letterSpacing: '0.05em',
+							color: '#64748b',
+							marginBottom: '16px',
+						} }
+					>
+						Styled Icon Badge
+					</div>
+					<div
+						style={ {
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+							padding: '30px',
+							background: '#ffffff',
+							borderRadius: '8px',
+							border: '1px solid #e2e8f0',
+						} }
+					>
+						<div
+							style={ {
+								width: `${ size * 2 }px`,
+								height: `${ size * 2 }px`,
+								borderRadius: '50%',
+								background: `${ color }15`,
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+								transition: 'all 0.2s ease',
+							} }
+						>
+							<div
+								style={ {
+									width: `${ size }px`,
+									height: `${ size }px`,
+									fill: color,
+									transition: 'all 0.2s ease',
+								} }
+							>
+								{ icon ? renderSVG( icon ) : null }
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	},
+	args: {
+		value: 'star',
+	},
+};
