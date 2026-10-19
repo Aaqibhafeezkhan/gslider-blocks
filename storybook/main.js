@@ -24,15 +24,25 @@ const config = {
 		path.resolve( __dirname, './static' ),
 	],
 	webpackFinal: async ( webpackConfig ) => {
+		const pkgDir = ( name ) =>
+			path.dirname( require.resolve( `${ name }/package.json` ) );
+
 		// 1. Resolve GSlider path aliases matching webpack.config.js & Storybook mocks
 		webpackConfig.resolve.alias = {
 			...webpackConfig.resolve.alias,
+			react: pkgDir( 'react' ),
+			'react-dom': pkgDir( 'react-dom' ),
 			'@wordpress/block-editor$': path.resolve(
 				__dirname,
 				'./mocks/block-editor.js'
 			),
-			'__real_wordpress_block_editor$': require.resolve(
-				'@wordpress/block-editor'
+			'__real_wordpress_block_editor$': path.join(
+				pkgDir( '@wordpress/block-editor' ),
+				'build-module/index.mjs'
+			),
+			'@wordpress/components$': path.join(
+				pkgDir( '@wordpress/components' ),
+				'build-module/index.mjs'
 			),
 			'@Components': path.resolve( __dirname, '../src/components/' ),
 			'@Utils': path.resolve( __dirname, '../src/utils/' ),
