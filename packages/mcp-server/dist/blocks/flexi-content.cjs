@@ -36,6 +36,15 @@ var block_default = {
   title: "Flexi Content",
   category: "gslider-blocks",
   description: "Display any content seamlessly in slide or carousel modes.",
+  keywords: [
+    "flexi",
+    "content slider",
+    "custom slider",
+    "innerblocks",
+    "carousel",
+    "slideshow",
+    "slider"
+  ],
   example: {
     attributes: {
       preview: true

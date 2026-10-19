@@ -36,6 +36,17 @@ var block_default = {
   title: "Testimonial",
   category: "gslider-blocks",
   description: "Display customer testimonials in slider, carousel, or grid layout with star ratings.",
+  keywords: [
+    "testimonial",
+    "review",
+    "quote",
+    "rating",
+    "stars",
+    "feedback",
+    "customer review",
+    "slider",
+    "carousel"
+  ],
   example: {
     attributes: {
       preview: true

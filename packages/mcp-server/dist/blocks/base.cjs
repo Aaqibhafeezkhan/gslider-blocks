@@ -36,6 +36,14 @@ var block_default = {
   title: "Base",
   category: "gslider-blocks",
   description: "Display fixed content in a sliding or carousel layout.",
+  keywords: [
+    "slider",
+    "carousel",
+    "hero",
+    "hero slider",
+    "banner",
+    "slideshow"
+  ],
   example: {
     attributes: {
       preview: true
