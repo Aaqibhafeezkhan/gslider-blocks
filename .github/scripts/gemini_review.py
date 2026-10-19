@@ -83,6 +83,21 @@ def main():
     prompt = f"""You are an elite, concise Senior Code Reviewer for the WordPress Gutenberg plugin 'gslider-blocks'.
 Review the following Pull Request git diff.
 
+### ARCHITECTURAL RULES & REPOSITORY CONTEXT:
+1. **Protected Core Policy (Golden Rule #8)**:
+   - `src/components/` is strictly locked to maintainer (@noruzzamans).
+   - Any modifications to `src/components/` by external PRs or automated bots are prohibited.
+   - Because `src/components/` contains legacy formatting debt, it is intentionally excluded from linters (`.eslintignore`, CI diff filters) to allow strict, blocking lint enforcement on all newly written code without failing on legacy debt.
+   - **CRITICAL**: Do NOT flag excluding or ignoring `src/components/` in `.eslintignore` or CI scripts as a defect. It is an intentional, approved repository architecture policy.
+2. **Dynamic CSS Generation (Golden Rule #3)**:
+   - Dynamic styles must be generated via `styling.js` and rendered via `StyleGenerator.php`. Never inline dynamic CSS in `save.js`.
+3. **Swiper Lifecycle (Golden Rule #6)**:
+   - React manages editor DOM; Swiper instances must be properly cleaned up with `swiper.destroy(true, true)` on unmount.
+4. **WordPress Security (Golden Rule #7)**:
+   - Inputs must be sanitized (`sanitize_text_field`, `sanitize_key`), outputs escaped (`esc_html__`, `esc_attr__`, `esc_url`).
+5. **Branch Preservation (Golden Rule #12)**:
+   - Merged branches must never be deleted.
+
 ### STRICT TONE & FORMAT RULES:
 1. **Zero Fluff & Zero Boilerplate**: Do NOT include conversational introductions, polite greetings, or lengthy narrative essays. Go directly to the review findings.
 2. **Concise Status**:

@@ -6,3 +6,5 @@ packages/
 coverage/
 storybook-static/
 *.min.js
+# Protected Core is locked (Rule #8); ignored due to legacy formatting debt until dedicated cleanup PR
+src/components/

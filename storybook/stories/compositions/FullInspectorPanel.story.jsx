@@ -137,9 +137,9 @@ const ALIGN_OPTIONS = [
 	{ label: HORIZONTAL_POSITION_ICONS.right, value: 'right' },
 ];
 
-function FullInspectorSandbox( props ) {
-	const [ , updateArgs ] = useArgs();
-
+// Plain React component: must NOT call Storybook preview hooks directly.
+// See: https://storybook.js.org/docs/8/writing-stories/args#setting-args-from-within-a-story
+function FullInspectorSandbox( { updateArgs = () => {}, ...props } ) {
 	// Synced args
 	const deviceType = props.deviceType || 'Desktop';
 	const setDeviceType = ( val ) => updateArgs( { deviceType: val } );
@@ -599,7 +599,9 @@ export const Default = {
 		htmlAnchor: 'hero-slider',
 	},
 	render: function Render( args ) {
-		return <FullInspectorSandbox { ...args } />;
+		// Storybook preview hooks are only valid here (story function) or in decorators.
+		const [ , updateArgs ] = useArgs();
+		return <FullInspectorSandbox { ...args } updateArgs={ updateArgs } />;
 	},
 	play: async ( { canvasElement } ) => {
 		const canvas = within( canvasElement );
