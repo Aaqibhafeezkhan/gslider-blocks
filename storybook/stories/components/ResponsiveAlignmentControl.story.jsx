@@ -55,7 +55,7 @@ const TEXT_ALIGN_OPTIONS = [
 ];
 
 export default {
-	title: 'GSlider Controls/Responsive/ResponsiveAlignmentControl',
+	title: 'Components/Responsive/ResponsiveAlignmentControl',
 	component: ResponsiveAlignmentControl,
 	tags: ['autodocs'],
 	parameters: {

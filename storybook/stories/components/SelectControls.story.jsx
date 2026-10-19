@@ -3,7 +3,7 @@ import SelectControls from '@Components/select-controls';
 import { SLIDER_EFFECT_OPTIONS, BORDER_STYLES } from '@Constants';
 
 export default {
-	title: 'GSlider Controls/Primitives/SelectControls',
+	title: 'Components/Primitives/SelectControls',
 	component: SelectControls,
 	tags: ['autodocs'],
 	parameters: {

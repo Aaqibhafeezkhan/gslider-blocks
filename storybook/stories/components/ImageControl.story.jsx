@@ -1,40 +1,8 @@
 import { useState } from 'react';
 import ImageControl from '@Components/image-control';
 
-// Ensure wp.media mock is available in Storybook outside the WordPress admin
-if ( typeof window !== 'undefined' && ! window.wp?.media ) {
-	window.wp = window.wp || {};
-	window.wp.media = () => {
-		let selectCallback = null;
-		const instance = {
-			state: () => ( {
-				get: () => ( {
-					first: () => ( {
-						toJSON: () => ( {
-							id: 42,
-							url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop',
-							alt: 'Tropical Beach with Turquoise Water',
-						} ),
-					} ),
-				} ),
-			} ),
-			on: ( event, cb ) => {
-				if ( event === 'select' ) {
-					selectCallback = cb;
-				}
-			},
-			open: () => {
-				if ( selectCallback ) {
-					selectCallback();
-				}
-			},
-		};
-		return instance;
-	};
-}
-
 export default {
-	title: 'GSlider Controls/Media/ImageControl',
+	title: 'Components/Media/ImageControl',
 	component: ImageControl,
 	tags: [ 'autodocs' ],
 	parameters: {

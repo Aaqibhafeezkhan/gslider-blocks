@@ -3,7 +3,7 @@ import { useState } from 'react';
 import UrlControl from '@Components/url-control';
 
 export default {
-	title: 'GSlider Controls/Primitives/UrlControl',
+	title: 'Components/Primitives/UrlControl',
 	component: UrlControl,
 	tags: [ 'autodocs' ],
 	parameters: {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ResponsiveToggleControl from '@Components/responsive-toggle-control';
 
 export default {
-	title: 'GSlider Controls/Responsive/ResponsiveToggleControl',
+	title: 'Components/Responsive/ResponsiveToggleControl',
 	component: ResponsiveToggleControl,
 	tags: ['autodocs'],
 	parameters: {

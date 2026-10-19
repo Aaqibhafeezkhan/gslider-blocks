@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ResponsiveSpacingControl from '@Components/responsive-spacing-control';
 
 export default {
-	title: 'GSlider Controls/Responsive/ResponsiveSpacingControl',
+	title: 'Components/Responsive/ResponsiveSpacingControl',
 	component: ResponsiveSpacingControl,
 	tags: ['autodocs'],
 	parameters: {

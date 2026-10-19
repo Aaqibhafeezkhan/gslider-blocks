@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta title="GSlider/Introduction" />
+<Meta title="Introduction" />
 
 # 🎠 GSlider Blocks Design System & Component Library
 
@@ -16,35 +16,162 @@ Our mission is to provide WordPress creators, agencies, and enterprise site buil
 
 ---
 
-## 🏛️ Comprehensive Component Registry (23 Core Components)
+## 🏛️ Comprehensive Component Registry (22 Core Controls + 1 Composition)
 
-The GSlider Block Editor design system consists of **23 battle-tested, isolated UI controls** built strictly for the WordPress Block Inspector sidebar (280px–300px width).
+The GSlider Block Editor design system consists of **22 battle-tested UI controls** in `src/components/` built strictly for the WordPress Block Inspector sidebar (280px–300px width), showcased across **20 isolated component stories and 1 full inspector composition** in Storybook.
 
-| Component Name | Import Path | Category | Primary Purpose & Usage |
-| :--- | :--- | :--- | :--- |
-| **`InspectorControl`** | `@Components/inspector-controls` | Composition | Tabbed Inspector shell unifying General, Style, and Advanced tabs. |
-| **`SwitcherControl`** | `@Components/switcher-control` | Primitives | Multi-option segmented button group (e.g. Normal/Hover, Auto/Fixed). |
-| **`InputControls`** | `@Components/input-control` | Primitives | Accessible text and number inputs for Z-index, anchors, and CSS classes. |
-| **`SelectControls`** | `@Components/select-controls` | Primitives | Standardized dropdown selector for font weights and transition modes. |
-| **`UnitControl`** | `@Components/unit-control` | Primitives | Unit selector dropdown supporting `px`, `%`, `em`, `rem`, `vw`, and `vh`. |
-| **`HtmlTagControl`** | `@Components/html-tag-control` | Primitives | Semantic heading selector (H1–H6, P, Span, Div) with active state pills. |
-| **`IconPicker`** | `@Components/icon-picker` | Primitives | Virtualized SVG icon library supporting FontAwesome brands and solid icons. |
-| **`UrlControl`** | `@Components/url-control` | Primitives | URL destination field with popover settings for target, nofollow, and sponsored. |
-| **`ResponsiveDeviceControl`** | `@Components/responsive-device-control` | Responsive | 3-breakpoint device switcher bar (Desktop, Tablet, Mobile) with synced state. |
-| **`ResponsiveRangeControl`** | `@Components/responsive-range-control` | Responsive | Slider range input with numerical bounds and per-device synchronized values. |
-| **`ResponsiveSpacingControl`** | `@Components/responsive-spacing-control` | Responsive | 4-sided dimension controller (Top, Right, Bottom, Left) with linked toggle. |
-| **`ResponsiveToggleControl`** | `@Components/responsive-toggle-control` | Responsive | Device-aware boolean switch toggling features independently per screen size. |
-| **`ResponsiveAlignmentControl`** | `@Components/responsive-alignment-control` | Responsive | Visual alignment button group (Left, Center, Right, Justify) with responsive modes. |
-| **`ResponsiveTypographyControl`** | `@Components/responsive-typography-control` | Responsive | Complete typography controller with Google Fonts loader, size, and spacing. |
-| **`ColorControl`** | `@Components/color-control` | Color & Style | Theme-aware color picker with popover, hex inputs, and reset buttons. |
-| **`GradientColorControl`** | `@Components/gradient-color-control` | Color & Style | Linear/radial gradient designer with color stops, angle rotation, and custom CSS. |
-| **`BackgroundControl`** | `@Components/background-control` | Color & Style | Multi-layer background manager supporting solid colors, gradients, and images. |
-| **`ResponsiveBackgroundImageControl`** | `@Components/responsive-background-image-control` | Color & Style | Device-aware background backdrop with focal point picker and size settings. |
-| **`BoxShadowSettingsControl`** | `@Components/box-shadow-control` | Color & Style | Elevation designer for X, Y, Blur, Spread, and color with live CSS calculation. |
-| **`ImageControl`** | `@Components/image-control` | Media | WordPress media library uploader with preview, replace, and remove actions. |
-| **`PresetSelector`** | `@Components/preset-selector` | Layout | Visual layout card picker with Dashicons, Pro badges, and one-click reset. |
-| **`ContentOrderControl`** | `@Components/content-order-control` | Layout | Accessible `@dnd-kit` drag-and-drop slide content reordering interface. |
-| **`FullInspectorPanel`** | `storybook/stories/compositions/` | Composition | Benchmark composition uniting all 22 controls in an authentic Gutenberg canvas. |
+<div style={{ overflowX: 'auto', margin: '24px 0' }}>
+<table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px', lineHeight: '1.6' }}>
+  <thead>
+    <tr style={{ borderBottom: '2px solid #e0e0e0', backgroundColor: '#f8fafc' }}>
+      <th style={{ padding: '12px 16px', fontWeight: 600, color: '#1e293b' }}>Component Name</th>
+      <th style={{ padding: '12px 16px', fontWeight: 600, color: '#1e293b' }}>Import Path</th>
+      <th style={{ padding: '12px 16px', fontWeight: 600, color: '#1e293b' }}>Category</th>
+      <th style={{ padding: '12px 16px', fontWeight: 600, color: '#1e293b' }}>Primary Purpose &amp; Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>InspectorControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/inspector-controls</code></td>
+      <td style={{ padding: '10px 16px' }}>Composition</td>
+      <td style={{ padding: '10px 16px' }}>Tabbed Inspector shell unifying General, Style, and Advanced tabs.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>SwitcherControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/switcher-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Primitives</td>
+      <td style={{ padding: '10px 16px' }}>Multi-option segmented button group (e.g. Normal/Hover, Auto/Fixed).</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>InputControls</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/input-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Primitives</td>
+      <td style={{ padding: '10px 16px' }}>Accessible text and number inputs for Z-index, anchors, and CSS classes.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>SelectControls</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/select-controls</code></td>
+      <td style={{ padding: '10px 16px' }}>Primitives</td>
+      <td style={{ padding: '10px 16px' }}>Standardized dropdown selector for font weights and transition modes.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>UnitControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/unit-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Primitives</td>
+      <td style={{ padding: '10px 16px' }}>Unit selector dropdown supporting <code>px</code>, <code>%</code>, <code>em</code>, <code>rem</code>, <code>vw</code>, and <code>vh</code>.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>HtmlTagControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/html-tag-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Primitives</td>
+      <td style={{ padding: '10px 16px' }}>Semantic heading selector (H1–H6, P, Span, Div) with active state pills.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>IconPicker</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/icon-picker</code></td>
+      <td style={{ padding: '10px 16px' }}>Primitives</td>
+      <td style={{ padding: '10px 16px' }}>Virtualized SVG icon library supporting FontAwesome brands and solid icons.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>UrlControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/url-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Primitives</td>
+      <td style={{ padding: '10px 16px' }}>URL destination field with popover settings for target, nofollow, and sponsored.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ResponsiveDeviceControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/responsive-device-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Responsive</td>
+      <td style={{ padding: '10px 16px' }}>3-breakpoint device switcher bar (Desktop, Tablet, Mobile) with synced state.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ResponsiveRangeControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/responsive-range-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Responsive</td>
+      <td style={{ padding: '10px 16px' }}>Slider range input with numerical bounds and per-device synchronized values.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ResponsiveSpacingControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/responsive-spacing-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Responsive</td>
+      <td style={{ padding: '10px 16px' }}>4-sided dimension controller (Top, Right, Bottom, Left) with linked toggle.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ResponsiveToggleControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/responsive-toggle-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Responsive</td>
+      <td style={{ padding: '10px 16px' }}>Device-aware boolean switch toggling features independently per screen size.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ResponsiveAlignmentControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/responsive-alignment-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Responsive</td>
+      <td style={{ padding: '10px 16px' }}>Visual alignment button group (Left, Center, Right, Justify) with responsive modes.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ResponsiveTypographyControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/responsive-typography-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Responsive</td>
+      <td style={{ padding: '10px 16px' }}>Complete typography controller with Google Fonts loader, size, and spacing.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ColorControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/color-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Color &amp; Style</td>
+      <td style={{ padding: '10px 16px' }}>Theme-aware color picker with popover, hex inputs, and reset buttons.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>GradientColorControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/gradient-color-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Color &amp; Style</td>
+      <td style={{ padding: '10px 16px' }}>Linear/radial gradient designer with color stops, angle rotation, and custom CSS.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>BackgroundControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/background-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Color &amp; Style</td>
+      <td style={{ padding: '10px 16px' }}>Multi-layer background manager supporting solid colors, gradients, and images.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ResponsiveBackgroundImageControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/responsive-background-image-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Color &amp; Style</td>
+      <td style={{ padding: '10px 16px' }}>Device-aware background backdrop with focal point picker and size settings.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>BoxShadowSettingsControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/box-shadow-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Color &amp; Style</td>
+      <td style={{ padding: '10px 16px' }}>Elevation designer for X, Y, Blur, Spread, and color with live CSS calculation.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ImageControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/image-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Media</td>
+      <td style={{ padding: '10px 16px' }}>WordPress media library uploader with preview, replace, and remove actions.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>PresetSelector</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/preset-selector</code></td>
+      <td style={{ padding: '10px 16px' }}>Layout</td>
+      <td style={{ padding: '10px 16px' }}>Visual layout card picker with Dashicons, Pro badges, and one-click reset.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #f1f5f9', backgroundColor: '#fafbfc' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>ContentOrderControl</code></td>
+      <td style={{ padding: '10px 16px' }}><code>@Components/content-order-control</code></td>
+      <td style={{ padding: '10px 16px' }}>Layout</td>
+      <td style={{ padding: '10px 16px' }}>Accessible <code>@dnd-kit</code> drag-and-drop slide content reordering interface.</td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #cbd5e1', backgroundColor: '#f1f5f9' }}>
+      <td style={{ padding: '10px 16px', fontWeight: 600 }}><code>FullInspectorPanel</code></td>
+      <td style={{ padding: '10px 16px' }}><code>storybook/stories/compositions/</code></td>
+      <td style={{ padding: '10px 16px' }}>Composition</td>
+      <td style={{ padding: '10px 16px' }}>Benchmark composition uniting all 22 controls in an authentic Gutenberg canvas.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ---
 

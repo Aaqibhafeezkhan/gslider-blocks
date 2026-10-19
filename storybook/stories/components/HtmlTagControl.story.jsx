@@ -3,7 +3,7 @@ import HtmlTagControl from '@Components/html-tag-control';
 import { HTML_TAGS } from '@Constants';
 
 export default {
-	title: 'GSlider Controls/Primitives/HtmlTagControl',
+	title: 'Components/Primitives/HtmlTagControl',
 	component: HtmlTagControl,
 	tags: ['autodocs'],
 	parameters: {

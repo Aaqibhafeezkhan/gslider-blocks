@@ -1,77 +1,8 @@
 import { useState } from 'react';
 import ResponsiveTypographyControl from '@Components/responsive-typography-control';
 
-// Ensure Google Fonts mock fallback is available if assets are not served
-if ( typeof window !== 'undefined' && ! window.__gslider_fetch_mocked ) {
-	window.__gslider_fetch_mocked = true;
-	const originalFetch = window.fetch.bind( window );
-	window.fetch = async ( ...args ) => {
-		const url =
-			typeof args[ 0 ] === 'string'
-				? args[ 0 ]
-				: args[ 0 ]?.url || String( args[ 0 ] );
-		if ( url.includes( 'google-fonts.json' ) ) {
-			try {
-				const response = await originalFetch( ...args );
-				if ( response.ok ) return response;
-			} catch ( _ ) {}
-			return new Response(
-				JSON.stringify( {
-					Default: [ 'inherit' ],
-					Roboto: [ '100', '300', '400', '500', '700', '900' ],
-					'Open Sans': [ '300', '400', '600', '700', '800' ],
-					Poppins: [
-						'100',
-						'200',
-						'300',
-						'400',
-						'500',
-						'600',
-						'700',
-						'800',
-						'900',
-					],
-					Montserrat: [
-						'100',
-						'200',
-						'300',
-						'400',
-						'500',
-						'600',
-						'700',
-						'800',
-						'900',
-					],
-					Inter: [
-						'100',
-						'200',
-						'300',
-						'400',
-						'500',
-						'600',
-						'700',
-						'800',
-						'900',
-					],
-					Lato: [ '100', '300', '400', '700', '900' ],
-					Playfair_Display: [
-						'400',
-						'500',
-						'600',
-						'700',
-						'800',
-						'900',
-					],
-				} ),
-				{ headers: { 'Content-Type': 'application/json' } }
-			);
-		}
-		return originalFetch( ...args );
-	};
-}
-
 export default {
-	title: 'GSlider Controls/Responsive/ResponsiveTypographyControl',
+	title: 'Components/Responsive/ResponsiveTypographyControl',
 	component: ResponsiveTypographyControl,
 	tags: [ 'autodocs' ],
 	parameters: {

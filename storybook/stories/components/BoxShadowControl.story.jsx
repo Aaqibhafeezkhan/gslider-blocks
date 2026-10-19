@@ -4,7 +4,7 @@ import SwitcherControl from '@Components/switcher-control';
 import { NORMAL_HOVER } from '@Constants/index';
 
 export default {
-	title: 'GSlider Controls/Effects/BoxShadowControl',
+	title: 'Components/Effects/BoxShadowControl',
 	component: BoxShadowSettingsControl,
 	tags: [ 'autodocs' ],
 	parameters: {

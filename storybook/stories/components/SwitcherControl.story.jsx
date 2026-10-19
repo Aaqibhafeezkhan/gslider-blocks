@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SwitcherControl from '@Components/switcher-control';
 
 export default {
-	title: 'GSlider Controls/Primitives/SwitcherControl',
+	title: 'Components/Primitives/SwitcherControl',
 	component: SwitcherControl,
 	tags: ['autodocs'],
 	parameters: {

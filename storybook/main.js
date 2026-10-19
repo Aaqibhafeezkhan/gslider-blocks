@@ -19,24 +19,26 @@ const config = {
 	docs: {
 		autodocs: 'tag',
 	},
-	staticDirs: [ { from: '../assets', to: 'assets' } ],
+	staticDirs: [
+		{ from: '../assets', to: 'assets' },
+		path.resolve( __dirname, './static' ),
+	],
 	webpackFinal: async ( webpackConfig ) => {
-		// 1. Resolve GSlider path aliases matching webpack.config.js
+		// 1. Resolve GSlider path aliases matching webpack.config.js & Storybook mocks
 		webpackConfig.resolve.alias = {
 			...webpackConfig.resolve.alias,
-			'@Controls': path.resolve(
+			'@wordpress/block-editor$': path.resolve(
 				__dirname,
-				'../blocks-config/gslider-controls/'
+				'./mocks/block-editor.js'
+			),
+			'__real_wordpress_block_editor$': require.resolve(
+				'@wordpress/block-editor'
 			),
 			'@Components': path.resolve( __dirname, '../src/components/' ),
 			'@Utils': path.resolve( __dirname, '../src/utils/' ),
 			'@Constants': path.resolve( __dirname, '../src/constants/' ),
 			'@Blocks': path.resolve( __dirname, '../src/blocks/' ),
 			'@Store': path.resolve( __dirname, '../src/store/' ),
-			'@Attributes': path.resolve(
-				__dirname,
-				'../blocks-config/blocks-attributes/'
-			),
 		};
 
 		// 2. Add rule for SCSS stylesheets

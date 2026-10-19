@@ -1,82 +1,8 @@
 import { useState } from 'react';
-import { createReduxStore, register, select } from '@wordpress/data';
 import BackgroundControl from '@Components/background-control';
 
-// Register core/editor store mock in Storybook so ColorControl inside BackgroundControl does not error
-if ( typeof window !== 'undefined' && ! window.__gslider_editor_store_mocked ) {
-	window.__gslider_editor_store_mocked = true;
-	try {
-		if ( ! select( 'core/editor' ) ) {
-			const editorStore = createReduxStore( 'core/editor', {
-				reducer: ( state = {} ) => state,
-				selectors: {
-					getEditorSettings: () => ( {
-						colors: [
-							{
-								name: 'Theme Primary',
-								slug: 'theme-primary',
-								color: '#2563eb',
-							},
-							{
-								name: 'Theme Secondary',
-								slug: 'theme-secondary',
-								color: '#10b981',
-							},
-							{
-								name: 'Theme Dark',
-								slug: 'theme-dark',
-								color: '#1e293b',
-							},
-							{
-								name: 'Theme Light',
-								slug: 'theme-light',
-								color: '#f1f5f9',
-							},
-						],
-					} ),
-				},
-			} );
-			register( editorStore );
-		}
-	} catch ( _ ) {
-		// Store already registered
-	}
-}
-
-// Ensure wp.media is mocked for background image selection in Storybook
-if ( typeof window !== 'undefined' && ! window.wp?.media ) {
-	window.wp = window.wp || {};
-	window.wp.media = () => {
-		let selectCallback = null;
-		const instance = {
-			state: () => ( {
-				get: () => ( {
-					first: () => ( {
-						toJSON: () => ( {
-							id: 101,
-							url: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&auto=format&fit=crop',
-							alt: 'Sample Gradient Texture',
-						} ),
-					} ),
-				} ),
-			} ),
-			on: ( event, cb ) => {
-				if ( event === 'select' ) {
-					selectCallback = cb;
-				}
-			},
-			open: () => {
-				if ( selectCallback ) {
-					selectCallback();
-				}
-			},
-		};
-		return instance;
-	};
-}
-
 export default {
-	title: 'GSlider Controls/Effects/BackgroundControl',
+	title: 'Components/Effects/BackgroundControl',
 	component: BackgroundControl,
 	tags: [ 'autodocs' ],
 	parameters: {

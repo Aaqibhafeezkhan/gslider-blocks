@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ContentOrderControl from '@Components/content-order-control';
 
 export default {
-	title: 'GSlider Controls/Layout/ContentOrderControl',
+	title: 'Components/Layout/ContentOrderControl',
 	component: ContentOrderControl,
 	tags: [ 'autodocs' ],
 	parameters: {

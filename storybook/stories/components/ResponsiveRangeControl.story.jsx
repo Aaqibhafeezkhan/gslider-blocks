@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ResponsiveRangeControl from '@Components/responsive-range-control';
 
 export default {
-	title: 'GSlider Controls/Responsive/ResponsiveRangeControl',
+	title: 'Components/Responsive/ResponsiveRangeControl',
 	component: ResponsiveRangeControl,
 	tags: ['autodocs'],
 	parameters: {

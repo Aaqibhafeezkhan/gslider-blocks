@@ -2,7 +2,7 @@ import { useState } from 'react';
 import InputControl from '@Components/input-control';
 
 export default {
-	title: 'GSlider Controls/Primitives/InputControl',
+	title: 'Components/Primitives/InputControl',
 	component: InputControl,
 	tags: ['autodocs'],
 	parameters: {

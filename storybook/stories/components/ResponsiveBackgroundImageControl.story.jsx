@@ -1,40 +1,8 @@
 import { useState } from 'react';
 import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 
-// Ensure wp.media mock is available in Storybook outside the WordPress admin
-if ( typeof window !== 'undefined' && ! window.wp?.media ) {
-	window.wp = window.wp || {};
-	window.wp.media = () => {
-		let selectCallback = null;
-		const instance = {
-			state: () => ( {
-				get: () => ( {
-					first: () => ( {
-						toJSON: () => ( {
-							id: 77,
-							url: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&auto=format&fit=crop',
-							alt: 'Vibrant Mesh Gradient Texture',
-						} ),
-					} ),
-				} ),
-			} ),
-			on: ( event, cb ) => {
-				if ( event === 'select' ) {
-					selectCallback = cb;
-				}
-			},
-			open: () => {
-				if ( selectCallback ) {
-					selectCallback();
-				}
-			},
-		};
-		return instance;
-	};
-}
-
 export default {
-	title: 'GSlider Controls/Media/ResponsiveBackgroundImageControl',
+	title: 'Components/Media/ResponsiveBackgroundImageControl',
 	component: ResponsiveBackgroundImageControl,
 	tags: [ 'autodocs' ],
 	parameters: {

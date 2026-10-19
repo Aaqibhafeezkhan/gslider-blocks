@@ -2,7 +2,7 @@ import { useState } from 'react';
 import UnitControl from '@Components/unit-control';
 
 export default {
-	title: 'GSlider Controls/Primitives/UnitControl',
+	title: 'Components/Primitives/UnitControl',
 	component: UnitControl,
 	tags: ['autodocs'],
 	parameters: {

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PresetSelector from '@Components/preset-selector';
 
 export default {
-	title: 'GSlider Controls/Layout/PresetSelector',
+	title: 'Components/Layout/PresetSelector',
 	component: PresetSelector,
 	tags: [ 'autodocs' ],
 	parameters: {

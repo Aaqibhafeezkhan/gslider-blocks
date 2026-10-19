@@ -2,7 +2,7 @@ import { useState } from 'react';
 import GradientColorControl from '@Components/gradient-color-control';
 
 export default {
-	title: 'GSlider Controls/Color/GradientColorControl',
+	title: 'Components/Color/GradientColorControl',
 	component: GradientColorControl,
 	tags: [ 'autodocs' ],
 	parameters: {
