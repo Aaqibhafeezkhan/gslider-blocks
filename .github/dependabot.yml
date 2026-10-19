@@ -1,0 +1,89 @@
+version: 2
+updates:
+  # 1. Root npm dependencies (Gutenberg blocks & Storybook)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "Asia/Dhaka"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels:
+      - "focus: ci-cd"
+    groups:
+      wordpress:
+        patterns:
+          - "@wordpress/*"
+        update-types:
+          - "minor"
+          - "patch"
+      storybook:
+        patterns:
+          - "@storybook/*"
+          - "storybook"
+        update-types:
+          - "minor"
+          - "patch"
+      dev-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "@wordpress/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@storybook/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "storybook"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  # 2. Local MCP Server package dependencies
+  - package-ecosystem: "npm"
+    directory: "/packages/mcp-server"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "Asia/Dhaka"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(deps-mcp)"
+    labels:
+      - "focus: mcp"
+    groups:
+      wordpress:
+        patterns:
+          - "@wordpress/*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@wordpress/*"
+        update-types: ["version-update:semver-major"]
+
+  # 3. GitHub Actions CI workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "Asia/Dhaka"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci(actions)"
+    labels:
+      - "focus: ci-cd"
+    groups:
+      actions:
+        patterns:
+          - "*"
