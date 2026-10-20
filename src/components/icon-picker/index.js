@@ -191,6 +191,7 @@ export default function IconPicker(props) {
 								setInsertIcon( currentIcon );
 							}
 						} }
+						onDoubleClick={ () => { setIconHandler( currentIcon ); setInsertIcon( currentIcon ); setIconPickerModal( false ); } }
 					>
 						{ renderSVG( currentIcon ) }
 						<Tooltip text={ actualTitle }>
@@ -260,12 +261,15 @@ export default function IconPicker(props) {
 							<div className={'gslider_icon_picker_wrapper_inner'}>
 								<div className={'gslider_icon_picker_wrapper_header'}>
 									<h2>{__('Icon Library', 'gslider-blocks')}</h2>
-									<div className={'gslider_icon_picker_wrapper_search'}>
-										<span>
-											<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512"><path
-												d="M448 449L301.2 300.2c20-27.9 31.9-62.2 31.9-99.2 0-93.1-74.7-168.9-166.5-168.9C74.7 32 0 107.8 0 200.9s74.7 168.9 166.5 168.9c39.8 0 76.3-14.2 105-37.9l146 148.1 30.5-31zM166.5 330.8c-70.6 0-128.1-58.3-128.1-129.9S95.9 71 166.5 71s128.1 58.3 128.1 129.9-57.4 129.9-128.1 129.9z"></path></svg>
-										</span>
-										<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'gslider-blocks')}/>
+									<div className={'gslider_icon_picker_wrapper_search_wrap'}>
+										<div className={'gslider_icon_picker_wrapper_search'}>
+											<span>
+												<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512"><path
+													d="M448 449L301.2 300.2c20-27.9 31.9-62.2 31.9-99.2 0-93.1-74.7-168.9-166.5-168.9C74.7 32 0 107.8 0 200.9s74.7 168.9 166.5 168.9c39.8 0 76.3-14.2 105-37.9l146 148.1 30.5-31zM166.5 330.8c-70.6 0-128.1-58.3-128.1-129.9S95.9 71 166.5 71s128.1 58.3 128.1 129.9-57.4 129.9-128.1 129.9z"></path></svg>
+											</span>
+											<input onChange={(e) => searchFilter(e)} type={'text'} placeholder={__('Search', 'gslider-blocks')}/>
+										</div>
+										<p className={'gslider_icon_picker_hint'}>{__('Double-click an icon to insert it', 'gslider-blocks')}</p>
 									</div>
 								</div>
 								<div className={'gslider_icon_picker_wrapper_body'}>
