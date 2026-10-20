@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { useState, useEffect } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -57,7 +57,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.testimonialTitle || item.title || __( `Testimonial Item ${index + 1}`, "gslider-blocks" )}
+                    {item.testimonialTitle || item.title || /* translators: %d: testimonial item number */ sprintf( __( 'Testimonial Item %d', 'gslider-blocks' ), index + 1 )}
                 </span>
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
                     <Button icon="move" label={__("Sort", "gslider-blocks")} aria-label={__("Move item", "gslider-blocks")} />
