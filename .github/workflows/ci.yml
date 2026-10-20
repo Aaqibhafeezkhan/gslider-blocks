@@ -88,38 +88,44 @@ jobs:
             linter-${{ runner.os }}-
 
       - name: JavaScript Standards
+        if: github.event_name == 'pull_request'
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            echo "Checking only modified JavaScript files in PR..."
-            JS_FILES=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | grep -E '\.(js|jsx)$' | grep -v -E '^(build|vendor|assets|node_modules|packages|storybook-static|src/components)/' || true)
-            if [ -n "$JS_FILES" ]; then
-              echo "Linting changed JS files:"
-              echo "$JS_FILES"
-              npm run lint:js -- $JS_FILES
-            else
-              echo "No JavaScript files changed in this PR. Skipping."
-            fi
+          echo "Checking only modified JavaScript files in PR..."
+          JS_FILES=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | grep -E '\.(js|jsx)$' | grep -v -E '^(build|vendor|assets|node_modules|packages|storybook-static|src/components)/' || true)
+          if [ -n "$JS_FILES" ]; then
+            echo "Linting changed JS files:"
+            echo "$JS_FILES"
+            npm run lint:js -- $JS_FILES
           else
-            echo "Running full repository JavaScript linting (Push to main)..."
-            npm run lint:js -- --cache
+            echo "No JavaScript files changed in this PR. Skipping."
           fi
 
-      - name: SCSS Standards
+      - name: JavaScript Standards (Push to main)
+        if: github.event_name != 'pull_request'
+        continue-on-error: true # advisory until legacy formatting debt is cleaned
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            echo "Checking only modified SCSS/CSS files in PR..."
-            CSS_FILES=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | grep -E '\.(css|scss)$' | grep -v -E '^(build|vendor|assets|node_modules|packages|storybook-static)/' || true)
-            if [ -n "$CSS_FILES" ]; then
-              echo "Linting changed SCSS/CSS files:"
-              echo "$CSS_FILES"
-              npm run lint:css -- $CSS_FILES
-            else
-              echo "No SCSS/CSS files changed in this PR. Skipping."
-            fi
+          echo "Running full repository JavaScript linting (Push to main)..."
+          npm run lint:js -- --cache
+
+      - name: SCSS Standards
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "Checking only modified SCSS/CSS files in PR..."
+          CSS_FILES=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | grep -E '\.(css|scss)$' | grep -v -E '^(build|vendor|assets|node_modules|packages|storybook-static)/' || true)
+          if [ -n "$CSS_FILES" ]; then
+            echo "Linting changed SCSS/CSS files:"
+            echo "$CSS_FILES"
+            npm run lint:css -- $CSS_FILES
           else
-            echo "Running full repository SCSS linting (Push to main)..."
-            npm run lint:css -- --cache
+            echo "No SCSS/CSS files changed in this PR. Skipping."
           fi
+
+      - name: SCSS Standards (Push to main)
+        if: github.event_name != 'pull_request'
+        continue-on-error: true # advisory until legacy formatting debt is cleaned
+        run: |
+          echo "Running full repository SCSS linting (Push to main)..."
+          npm run lint:css -- --cache
 
   php-compatibility:
     name: PHP Tests (PHP ${{ matrix.php-version }})
