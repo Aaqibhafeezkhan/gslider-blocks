@@ -1919,13 +1919,9 @@ function Save({ attributes: attributes2 }) {
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide" }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide" })
       ] }) }),
-      anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && (navigationArrowsIconLeftAlign === "icon" || navigationArrowsIconRightAlign === "icon") && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: renderIcon_default(navigationArrowsIconLeft) }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: renderIcon_default(navigationArrowsIconRight) })
-      ] }),
-      anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && (navigationArrowsIconLeftAlign === "image" || navigationArrowsIconRightAlign === "image") && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconLeftImageUrl, alt: navigationArrowsIconLeftImageAlt }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconRightImageUrl, alt: navigationArrowsIconRightImageAlt }) })
+      anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: navigationArrowsIconLeftAlign === "image" && navigationArrowsIconLeftImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconLeftImageUrl, alt: navigationArrowsIconLeftImageAlt }) : renderIcon_default(navigationArrowsIconLeft) }),
+        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: navigationArrowsIconRightAlign === "image" && navigationArrowsIconRightImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconRightImageUrl, alt: navigationArrowsIconRightImageAlt }) : renderIcon_default(navigationArrowsIconRight) })
       ] }),
       anyPaginationEnabled && paginationPositionType === "inside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         "div",
@@ -1939,13 +1935,9 @@ function Save({ attributes: attributes2 }) {
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide" })
     ] }) }),
-    anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && (navigationArrowsIconLeftAlign === "icon" || navigationArrowsIconRightAlign === "icon") && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: renderIcon_default(navigationArrowsIconLeft) }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: renderIcon_default(navigationArrowsIconRight) })
-    ] }),
-    anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && (navigationArrowsIconLeftAlign === "image" || navigationArrowsIconRightAlign === "image") && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconLeftImageUrl, alt: navigationArrowsIconLeftImageAlt }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconRightImageUrl, alt: navigationArrowsIconRightImageAlt }) })
+    anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: navigationArrowsIconLeftAlign === "image" && navigationArrowsIconLeftImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconLeftImageUrl, alt: navigationArrowsIconLeftImageAlt }) : renderIcon_default(navigationArrowsIconLeft) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: navigationArrowsIconRightAlign === "image" && navigationArrowsIconRightImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconRightImageUrl, alt: navigationArrowsIconRightImageAlt }) : renderIcon_default(navigationArrowsIconRight) })
     ] }),
     anyPaginationEnabled && paginationPositionType === "outside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
       "div",
@@ -4458,7 +4450,195 @@ var v1_1_7 = {
     ] });
   }
 };
-var deprecated_default = [v1_1_7, v1_1_6, v1_0_7, v1_0_8, v1_0_9, v1_0_10, v1_1_1, v1_1_2, v1_1_5];
+var v1_2_0 = {
+  attributes: attributes_default,
+  supports: {
+    html: false,
+    className: false
+  },
+  save({ attributes: attributes2 }) {
+    const {
+      blockId,
+      sliderType,
+      carouselPerColumn,
+      carouselPerColumnGap,
+      speed,
+      autoplay,
+      autoplayDelay,
+      infiniteLoop,
+      allowTouchMove,
+      pauseOnHover,
+      stopOnLastSlide,
+      reverseDirection,
+      carouselEffect,
+      slideEffect,
+      mousewheelControl,
+      keyboardNavigation,
+      paginationType,
+      dynamicBullets,
+      showNavigation,
+      showPagination,
+      paginationPositionType,
+      globalID,
+      globalClass,
+      navigationArrowPositionType,
+      navigationArrowPosition,
+      navigationArrowsIconSwitcher,
+      navigationArrowsIconLeftAlign,
+      navigationArrowsIconLeft,
+      navigationArrowsIconLeftImageUrl,
+      navigationArrowsIconLeftImageAlt,
+      navigationArrowsIconLeftImageID,
+      navigationArrowsIconRightAlign,
+      navigationArrowsIconRight,
+      navigationArrowsIconRightImageUrl,
+      navigationArrowsIconRightImageAlt,
+      navigationArrowsIconRightImageID,
+      layoutHeightSwitcher
+    } = attributes2;
+    const blockProps = import_block_editor2.useBlockProps.save({
+      className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile ? "has-pagination" : ""}`
+    });
+    const innerBlocksProps = import_block_editor2.useInnerBlocksProps.save({
+      className: "swiper-wrapper gslider-swiper-wrapper"
+    });
+    const navigationEnabled = {
+      Mobile: !!showNavigation?.Mobile,
+      Tablet: !!showNavigation?.Tablet,
+      Desktop: !!showNavigation?.Desktop
+    };
+    const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
+    const paginationEnabled = {
+      Mobile: !!showPagination?.Mobile,
+      Tablet: !!showPagination?.Tablet,
+      Desktop: !!showPagination?.Desktop
+    };
+    const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
+    const swiperSettings = JSON.stringify({
+      effect: sliderType === "carousel" ? carouselEffect : slideEffect,
+      // Responsive breakpoints for Desktop, Tablet, and Mobile
+      breakpoints: {
+        0: {
+          ...sliderType === "carousel" && {
+            slidesPerView: carouselPerColumn?.Mobile || 1,
+            spaceBetween: carouselPerColumnGap?.Mobile || 0
+          },
+          speed: speed?.Mobile || 800,
+          autoplay: autoplay ? {
+            delay: autoplayDelay?.Mobile || 1e3
+          } : false,
+          navigation: { enabled: navigationEnabled.Mobile },
+          pagination: { enabled: paginationEnabled.Mobile }
+        },
+        768: {
+          ...sliderType === "carousel" && {
+            slidesPerView: carouselPerColumn?.Tablet || 2,
+            spaceBetween: carouselPerColumnGap?.Tablet ?? 20
+          },
+          speed: speed?.Tablet || 800,
+          autoplay: autoplay ? {
+            delay: autoplayDelay?.Tablet || 1e3
+          } : false,
+          navigation: { enabled: navigationEnabled.Tablet },
+          pagination: { enabled: paginationEnabled.Tablet }
+        },
+        1025: {
+          ...sliderType === "carousel" && {
+            slidesPerView: carouselPerColumn?.Desktop || 2,
+            spaceBetween: carouselPerColumnGap?.Desktop ?? 20
+          },
+          speed: speed?.Desktop || 800,
+          autoplay: autoplay ? {
+            delay: autoplayDelay?.Desktop || 1e3
+          } : false,
+          navigation: { enabled: navigationEnabled.Desktop },
+          pagination: { enabled: paginationEnabled.Desktop }
+        }
+      },
+      ...layoutHeightSwitcher === "adapt" && {
+        autoHeight: true
+      },
+      // Common settings
+      loop: infiniteLoop,
+      autoplay: autoplay ? {
+        pauseOnMouseEnter: pauseOnHover,
+        disableOnInteraction: false,
+        stopOnLastSlide,
+        reverseDirection
+      } : false,
+      allowTouchMove,
+      mousewheel: mousewheelControl,
+      keyboard: keyboardNavigation ? {
+        enabled: true,
+        onlyInViewport: true,
+        pageUpDown: false
+      } : false,
+      navigation: {
+        enabled: anyNavigationEnabled,
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      pagination: {
+        enabled: anyPaginationEnabled,
+        el: `.${blockId} .swiper-pagination-flexi-content`,
+        type: paginationType,
+        dynamicBullets: paginationType === "bullets" ? dynamicBullets : false,
+        clickable: true
+      },
+      // Creative effect settings if needed
+      ...slideEffect === "creative" && {
+        creativeEffect: {
+          prev: { shadow: true, translate: [0, 0, -400] },
+          next: { translate: ["100%", 0, 0] }
+        }
+      }
+    });
+    return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { ...blockProps, "data-swiper-settings": swiperSettings, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: `swiper ${globalClass}`, ...globalID && { id: globalID }, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { ...innerBlocksProps }),
+        anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_jsx_runtime3.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: `gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide" })
+        ] }) }),
+        anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && (navigationArrowsIconLeftAlign === "icon" || navigationArrowsIconRightAlign === "icon") && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: renderIcon_default(navigationArrowsIconLeft) }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: renderIcon_default(navigationArrowsIconRight) })
+        ] }),
+        anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && (navigationArrowsIconLeftAlign === "image" || navigationArrowsIconRightAlign === "image") && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("img", { src: navigationArrowsIconLeftImageUrl, alt: navigationArrowsIconLeftImageAlt }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("img", { src: navigationArrowsIconRightImageUrl, alt: navigationArrowsIconRightImageAlt }) })
+        ] }),
+        anyPaginationEnabled && paginationPositionType === "inside" && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_jsx_runtime3.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+          "div",
+          {
+            className: "swiper-pagination swiper-pagination-flexi-content",
+            "aria-label": "Carousel pagination"
+          }
+        ) })
+      ] }),
+      anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_jsx_runtime3.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: `gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide" }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide" })
+      ] }) }),
+      anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && (navigationArrowsIconLeftAlign === "icon" || navigationArrowsIconRightAlign === "icon") && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: renderIcon_default(navigationArrowsIconLeft) }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: renderIcon_default(navigationArrowsIconRight) })
+      ] }),
+      anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && (navigationArrowsIconLeftAlign === "image" || navigationArrowsIconRightAlign === "image") && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-prev", role: "button", tabIndex: 0, "aria-label": "Previous slide", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("img", { src: navigationArrowsIconLeftImageUrl, alt: navigationArrowsIconLeftImageAlt }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "swiper-button-next", role: "button", tabIndex: 0, "aria-label": "Next slide", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("img", { src: navigationArrowsIconRightImageUrl, alt: navigationArrowsIconRightImageAlt }) })
+      ] }),
+      anyPaginationEnabled && paginationPositionType === "outside" && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_jsx_runtime3.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+        "div",
+        {
+          className: `swiper-pagination swiper-pagination-flexi-content swiper-pagination-${blockId}`,
+          "aria-label": "Carousel pagination"
+        }
+      ) })
+    ] });
+  }
+};
+var deprecated_default = [v1_2_0, v1_1_7, v1_1_6, v1_0_7, v1_0_8, v1_0_9, v1_0_10, v1_1_1, v1_1_2, v1_1_5];
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   attributes,
