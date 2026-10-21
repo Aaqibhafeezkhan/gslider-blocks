@@ -1,16 +1,13 @@
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useMemo, memo, useCallback } from '@wordpress/element';
-import { PanelBody, ToggleControl, BaseControl, Button, } from '@wordpress/components';
+import { useState, useEffect, memo, useCallback } from '@wordpress/element';
+import { PanelBody, ToggleControl, BaseControl } from '@wordpress/components';
 
 /**
  * Internal Dependencies
  */
 import {
-    TEXT_ALIGN,
     ARROW_ICON_ALIGN,
     VERTICAL_ALIGN,
-    VERTICAL_ALIGN_SELF,
-    HORIZONTAL_ALIGN,
     NORMAL_HOVER,
     BORDER_STYLES,
     CAROUSEL_EFFECT_OPTIONS,
@@ -20,8 +17,6 @@ import {
     PAGINATION_POSITION_TYPE,
     NAVIGATION_ARROW_POSITION,
     NAVIGATION_ARROW_DIRECTION,
-    LAYOUT_HEIGHT_SWITCHER,
-
 } from "@Constants";
 
 import './editor.scss';
@@ -1317,7 +1312,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 >
                     <SelectControls
                         label={__('Link Target', 'gslider-blocks')}
-                        help={__('Choose where to open the link', 'gslider-blocks')}
                         options={[
                             { label: __('New Tab', 'gslider-blocks'), value: '_blank' },
                             { label: __('Same Tab', 'gslider-blocks'), value: '_self' },
@@ -1328,10 +1322,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
                     <InputControls
                         label={__('Link Rel Attribute', 'gslider-blocks')}
-                        help={__('Relationship between current and linked document', 'gslider-blocks')}
+                        helpText={__('Relationship between current and linked document', 'gslider-blocks')}
                         value={logoLinkRel}
-                        onChange={(value) => setAttributes({ logoLinkRel: value })}
-                        placeholder="noopener noreferrer"
+                        onChangeValue={(value) => setAttributes({ logoLinkRel: value })}
                     />
                 </PanelBody>
             )}
