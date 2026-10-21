@@ -555,6 +555,8 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
+<sub>👑 Creator · 💻 Code · 📖 Docs · 🎨 Design · 👀 Review · ⚠️ Tests</sub>
+
 Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING.md) to get started.
 
 ---
