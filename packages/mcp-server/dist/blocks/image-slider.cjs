@@ -3724,6 +3724,14 @@ var generateImageSliderStyle = (attributes2) => {
             ${paginationActiveDotsHeight.Desktop ? `height: ${paginationActiveDotsHeight.Desktop}${paginationActiveDotsHeightUnits.Desktop};` : ""}
         }
 
+        .${blockId} .swiper-pagination-bullet:hover {
+            ${paginationNormalDotsBorderHoverColor ? `border-color: ${paginationNormalDotsBorderHoverColor};` : ""}
+        }
+
+        .${blockId} .swiper-pagination-bullet-active:hover {
+            ${paginationActiveDotsBorderHoverColor ? `border-color: ${paginationActiveDotsBorderHoverColor};` : ""}
+        }
+
         .${blockId} .swiper-pagination-fraction { 
             ${paginationFractionFontFamily ? `font-family: ${paginationFractionFontFamily};` : ""}
             ${paginationFractionFontSize.Desktop && paginationFractionFontSizeUnits.Desktop ? `font-size: ${paginationFractionFontSize.Desktop}${paginationFractionFontSizeUnits.Desktop};` : ""}
