@@ -54,6 +54,18 @@ def get_pr_diff(pr_number=None):
     ]
     return run_cmd(args)
 
+def get_styleguide():
+    styleguide_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), ".gemini", "styleguide.md")
+    if not os.path.exists(styleguide_path):
+        styleguide_path = os.path.join(os.getcwd(), ".gemini", "styleguide.md")
+    try:
+        if os.path.exists(styleguide_path):
+            with open(styleguide_path, "r", encoding="utf-8") as f:
+                return f.read().strip()
+    except Exception as err:
+        print(f"::warning::Failed to load .gemini/styleguide.md: {err}")
+    return ""
+
 def main():
     api_key = os.environ.get("GEMINI_API_KEY")
     pr_number = os.environ.get("PR_NUMBER")
@@ -80,6 +92,14 @@ def main():
 
     client = genai.Client(api_key=api_key)
 
+    styleguide = get_styleguide()
+    styleguide_section = ""
+    if styleguide:
+        styleguide_section = f"""### REPOSITORY STYLE GUIDE (authoritative):
+{styleguide}
+
+"""
+
     prompt = f"""You are an elite, concise Senior Code Reviewer for the WordPress Gutenberg plugin 'gslider-blocks'.
 Review the following Pull Request git diff.
 
@@ -100,22 +120,26 @@ Review the following Pull Request git diff.
 
 ### STRICT TONE & FORMAT RULES:
 1. **Zero Fluff & Zero Boilerplate**: Do NOT include conversational introductions, polite greetings, or lengthy narrative essays. Go directly to the review findings.
-2. **Concise Status**:
+2. **Review Scope & Evidence**:
+   - Only report issues you can tie to a changed line with a concrete failure reason; no style-only nitpicks covered by lint; no speculative findings.
+3. **Status Reporting**:
    - If defects or improvements are found: `### Status: ⚠️ Action Required`
-   - If clean and meets all standards: `### Status: ✅ Approved`
-3. **Action-Oriented Defect List**:
-   - List each defect as a concise bullet specifying the exact file path and line number/context.
+   - If clean and meets all standards: `### Status: 🟢 No blocking issues found in diff (CI not checked)`
+   - You cannot see CI results; never claim the PR is approved or ready to merge.
+4. **Action-Oriented Defect List**:
+   - List each defect as a concise bullet: `[SEVERITY] path:line` followed by the problem, concrete impact, and suggested fix.
    - Focus strictly on real defects: WordPress security (sanitization, escaping), Gutenberg/React lifecycle (Swiper destruction on unmount), and logical bugs.
-4. **1-Click GitHub Code Suggestions**:
-   - Whenever proposing code changes, format them using GitHub Markdown suggestion blocks:
+   - Severity: CRITICAL (data loss, broken saved blocks, security), HIGH (broken features, missing deprecations or MCP rebuilds), MEDIUM (edge case bugs, accessibility, i18n). Do NOT report LOW.
+5. **1-Click GitHub Code Suggestions**:
+   - Whenever proposing small code fixes, format them using GitHub Markdown suggestion blocks:
      ```suggestion
      exact_replacement_code
      ```
      so the author can review and accept them with one click.
-5. **If Approved (Clean Code)**:
-   - Provide a 2 to 3 bullet-point summary explaining why it passes, with zero filler text.
+6. **If Clean (No Blocking Issues)**:
+   - Provide a 2 to 3 bullet-point summary explaining what the PR does, followed by: "No blocking issues found in the diff; merge readiness depends on CI checks and maintainer review."
 
----
+{styleguide_section}---
 ### Pull Request Diff:
 ```diff
 {diff}
