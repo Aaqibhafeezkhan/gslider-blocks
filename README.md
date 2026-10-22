@@ -546,9 +546,9 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="140"><a href="https://github.com/noruzzamans"><img src="https://avatars.githubusercontent.com/u/46926901?v=4" width="100px;" alt="Noruzzaman"/></a><br /><sub><b>Noruzzaman</b></sub></td>
-      <td align="center" valign="top" width="140"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="devmuhib009"/></a><br /><sub><b>devmuhib009</b></sub></td>
-      <td align="center" valign="top" width="140"><a href="https://github.com/dbdefault"><img src="https://avatars.githubusercontent.com/u/246079841?v=4" width="100px;" alt="dbdefault"/></a><br /><sub><b>dbdefault</b></sub></td>
+      <td align="center" valign="top"><a href="https://github.com/noruzzamans"><img src="https://avatars.githubusercontent.com/u/46926901?v=4" width="100px;" alt="Noruzzaman"/></a><br /><sub><b>Noruzzaman</b></sub></td>
+      <td align="center" valign="top"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="devmuhib009"/></a><br /><sub><b>devmuhib009</b></sub></td>
+      <td align="center" valign="top"><a href="https://github.com/dbdefault"><img src="https://avatars.githubusercontent.com/u/246079841?v=4" width="100px;" alt="dbdefault"/></a><br /><sub><b>dbdefault</b></sub></td>
     </tr>
   </tbody>
 </table>
