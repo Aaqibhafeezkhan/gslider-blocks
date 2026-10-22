@@ -77,8 +77,14 @@ const BackgroundControl = ( {
 
 	const renderNormalControls = () => (
 		<>
-			<BaseControl label={ __( 'Background Type', 'gslider-blocks' ) }>
-				<ButtonGroup className="gslider-setting-switcher-panel-btn">
+			<BaseControl>
+				<BaseControl.VisualLabel>
+					{ __( 'Background Type', 'gslider-blocks' ) }
+				</BaseControl.VisualLabel>
+				<ButtonGroup
+					aria-label={ __( 'Background Type', 'gslider-blocks' ) }
+					className="gslider-setting-switcher-panel-btn"
+				>
 					{ BACKGROUND_TYPES.map( ( item ) => (
 						<Button
 							key={ item.value }
@@ -183,8 +189,14 @@ const BackgroundControl = ( {
 
 	const renderHoverControls = () => (
 		<>
-			<BaseControl label={ __( 'Background Type', 'gslider-blocks' ) }>
-				<ButtonGroup className="gslider-setting-switcher-panel-btn">
+			<BaseControl>
+				<BaseControl.VisualLabel>
+					{ __( 'Background Type', 'gslider-blocks' ) }
+				</BaseControl.VisualLabel>
+				<ButtonGroup
+					aria-label={ __( 'Background Type', 'gslider-blocks' ) }
+					className="gslider-setting-switcher-panel-btn"
+				>
 					{ BACKGROUND_TYPES.map( ( item ) => (
 						<Button
 							key={ item.value }
@@ -283,7 +295,10 @@ const BackgroundControl = ( {
 
 	return (
 		<>
-			<BaseControl label={ label }>
+			<BaseControl>
+				{ label && (
+					<BaseControl.VisualLabel>{ label }</BaseControl.VisualLabel>
+				) }
 				{ isHover ? (
 					<TabPanel
 						className="gslider-bg-tab-panel"
