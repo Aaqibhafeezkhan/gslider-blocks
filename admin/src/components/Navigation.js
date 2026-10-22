@@ -8,10 +8,7 @@
 
 import { useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import {
-	OverviewTabIcon,
-	BlocksTabIcon,
-} from '../icons';
+import { OverviewTabIcon, BlocksTabIcon } from '../icons';
 
 /**
  * Tab items definition with modular icon components.
