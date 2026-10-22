@@ -14,6 +14,78 @@ In professional software engineering, system design is divided into four distinc
 
 ---
 
+## 🏗️ 5-Tier System Architecture Overview
+
+GSlider Blocks follows a strict 5-tier architecture connecting the Gutenberg Editor, Dynamic Style Engine, Frontend Runtime, Local AI Engine, and Headless APIs:
+
+```mermaid
+flowchart TD
+    subgraph Editor["🎨 1. Gutenberg React Block Editor"]
+        EditJS["edit.js (Canvas & Controls)"]
+        Inspector["inspector.js (Sidebar Controls)"]
+        Components["@Components/* (23 Locked Controls)"]
+        BlockId["useBlockIdGenerator ('gslider-xxxxxxxx')"]
+        Styling["styling.js (Dynamic CSS Compiler)"]
+        
+        Inspector --> Components
+        Components --> EditJS
+        BlockId --> EditJS
+        EditJS --> Styling
+    end
+
+    subgraph Storage["💾 2. WordPress Database (post_content)"]
+        SaveJS["save.js (Clean Semantic HTML)"]
+        BlockStyleAttr["attribute: blockStyle (Scoped CSS String)"]
+        Deprecations["deprecated.js (v1_0_0+ Schema Migrations)"]
+        
+        EditJS --> SaveJS
+        Styling --> BlockStyleAttr
+        SaveJS --> Deprecations
+    end
+
+    subgraph Backend["⚙️ 3. PHP Engine (PSR-4 Singleton)"]
+        Plugin["Plugin.php (Bootstrap)"]
+        RegBlocks["RegistrationBlocks.php"]
+        StyleGen["StyleGenerator.php (CSS Ingestion)"]
+        FontLoader["FontLoader.php (Google Fonts)"]
+        SVGGuard["SupportSVG.php (LIBXML_NONET + SMIL Ban)"]
+        RestCtrl["BlocksController.php (REST Routes)"]
+        Parser["BlockParser.php (Block Normalizer)"]
+        
+        Plugin --> RegBlocks
+        Plugin --> StyleGen
+        Plugin --> FontLoader
+        Plugin --> SVGGuard
+        Plugin --> RestCtrl
+        RestCtrl --> Parser
+        BlockStyleAttr --> StyleGen
+        SaveJS --> Parser
+    end
+
+    subgraph Frontend["🚀 4. Client Runtime (Browser)"]
+        ViewJS["view.js (DOM Initializer)"]
+        SwiperEngine["Swiper.js v11 (Touch, Effects, a11y)"]
+        ScopedCSS["gslider-blocks-dynamic-styles-{pageId}.min.css (Cached Page CSS)"]
+        
+        SaveJS --> ViewJS
+        StyleGen --> ScopedCSS
+        ViewJS --> SwiperEngine
+    end
+
+    subgraph HeadlessAI["🤖 5. Headless & AI Ecosystem"]
+        AttributesJS["src/blocks/*/attributes.js (Schema Source)"]
+        MCPServer["packages/mcp-server (Stdio Protocol)"]
+        AIAssistants["Cursor / Claude Desktop / Antigravity"]
+        HeadlessNext["Headless Next.js 14/15 (REST API)"]
+        
+        AttributesJS -->|"extract-schemas.js at build time"| MCPServer
+        AIAssistants <--> MCPServer
+        Parser --> HeadlessNext
+    end
+```
+
+---
+
 # Part I: Core Software Engineering Principles
 
 ### 1. Zero Block Invalidation Principle (The Gutenberg Sacred Law)
