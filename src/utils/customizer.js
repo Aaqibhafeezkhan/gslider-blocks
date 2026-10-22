@@ -9,4 +9,4 @@ export const isCustomizerPage = () => {
 	}
 
 	return true;
-}
+};

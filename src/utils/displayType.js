@@ -1,13 +1,15 @@
 import { useSelect, dispatch } from '@wordpress/data';
-import {STORE_NAME as storeName} from "@Constants/index";
-import {isCustomizerPage} from "@Utils/customizer";
+import { STORE_NAME as storeName } from '@Constants/index';
+import { isCustomizerPage } from '@Utils/customizer';
 
 export const useDeviceType = () => {
 	const deviceType = useSelect( ( select ) => {
-		const getDeviceFromStore = select( 'core/edit-site' )?.__experimentalGetPreviewDeviceType() ||
-			select( 'core/edit-post' )?.__experimentalGetPreviewDeviceType() || select( storeName )?.getDeviceType();
+		const getDeviceFromStore =
+			select( 'core/edit-site' )?.__experimentalGetPreviewDeviceType() ||
+			select( 'core/edit-post' )?.__experimentalGetPreviewDeviceType() ||
+			select( storeName )?.getDeviceType();
 
-		return getDeviceFromStore || 'Desktop'
+		return getDeviceFromStore || 'Desktop';
 	}, [] );
 
 	return deviceType || '';
@@ -16,14 +18,20 @@ export const useDeviceType = () => {
 /**
  * Sets the preview device type for the Gutenberg editor.
  *
- * @param {string} device - The value representing the device type.
+ * @param {string}  device             - The value representing the device type.
  * @param {boolean} updateInCustomizer - Whether to update the device type in the customizer preview.
  */
 export const setDeviceType = ( device, updateInCustomizer = true ) => {
-	const setPreviewDeviceType = dispatch( 'core/edit-site' )?.__experimentalSetPreviewDeviceType || dispatch( 'core/edit-post' )?.__experimentalSetPreviewDeviceType || dispatch( storeName )?.setDeviceType;
+	const setPreviewDeviceType =
+		dispatch( 'core/edit-site' )?.__experimentalSetPreviewDeviceType ||
+		dispatch( 'core/edit-post' )?.__experimentalSetPreviewDeviceType ||
+		dispatch( storeName )?.setDeviceType;
 
 	// Verify setPreviewDeviceType is available and setPreviewDeviceType should be function.
-	if( ! setPreviewDeviceType || typeof setPreviewDeviceType !== 'function' ){
+	if (
+		! setPreviewDeviceType ||
+		typeof setPreviewDeviceType !== 'function'
+	) {
 		return;
 	}
 
@@ -61,7 +69,7 @@ export const setCustomizerPreview = ( deviceType ) => {
 	}
 
 	wp.customize.previewedDevice.set( deviceTypeLower );
-}
+};
 
 /**
  * This function is used to set deviceType in customizer get previewedDevice if it is customizer page and set deviceType gutenberg store.
@@ -82,9 +90,10 @@ export const setDeviceOnCustomizerAction = () => {
 				return;
 			}
 
-			const deviceTypeFirstLetterUpper = device.charAt( 0 ).toUpperCase() + device.slice( 1 );
+			const deviceTypeFirstLetterUpper =
+				device.charAt( 0 ).toUpperCase() + device.slice( 1 );
 
 			setDeviceType( deviceTypeFirstLetterUpper, false );
 		} );
 	} );
-}
+};
