@@ -1,7 +1,17 @@
 // --------------------------------------------------------------------------
 // Toggle Switch Styles (iOS / Modern Minimalist)
 // --------------------------------------------------------------------------
-@use 'variables' as *;
+@use "variables" as *;
+
+.gslider-toggle-track {
+	position: relative;
+	display: block;
+	width: 44px;
+	height: 24px;
+	border-radius: 9999px;
+	background-color: #cbd5e1;
+	transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 .gslider-toggle-switch {
 	appearance: none;
@@ -20,23 +30,13 @@
 	-webkit-tap-highlight-color: transparent;
 
 	&:focus-visible .gslider-toggle-track {
-		box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px $color-brand-primary;
+		box-shadow: 0 0 0 2px #fff, 0 0 0 4px $color-brand-primary;
 	}
 
 	&:disabled {
 		opacity: 0.45;
 		cursor: not-allowed;
 	}
-}
-
-.gslider-toggle-track {
-	position: relative;
-	display: block;
-	width: 44px;
-	height: 24px;
-	border-radius: 9999px;
-	background-color: #cbd5e1;
-	transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .gslider-toggle-switch.is-checked .gslider-toggle-track {
@@ -51,7 +51,7 @@
 	width: 20px;
 	height: 20px;
 	border-radius: 9999px;
-	background-color: #ffffff;
+	background-color: #fff;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18), 0 1px 2px rgba(0, 0, 0, 0.08);
 	transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
 	transform: translateX(0);

@@ -21,6 +21,7 @@
 			font-size: 15px;
 			line-height: 20px;
 		}
+
 		&:hover {
 			color: $secondary_color !important;
 			background: $white_color !important;
@@ -157,18 +158,18 @@
 	.react-select__menu-list {
 		scrollbar-width: thin;
 		scrollbar-color: $border_color transparent;
-	
+
 		&::-webkit-scrollbar {
-		  width: 6px;
+			width: 6px;
 		}
-	
+
 		&::-webkit-scrollbar-thumb {
-		  background: $border_color;
-		  border-radius: 4px;
+			background: $border_color;
+			border-radius: 4px;
 		}
-	
+
 		&::-webkit-scrollbar-track {
-		  background: $background_color;
+			background: $background_color;
 		}
 	}
 
@@ -182,7 +183,7 @@
 		}
 	}
 }
-  
+
 
 .gslider-setting-fontsize-wrapper,
 .gslider-setting-letterspacing-wrapper,

@@ -1,17 +1,19 @@
+/* stylelint-disable no-descending-specificity */
 @use "variables" as *;
 
 .gslider-inspector-control {
 
 	.gslider-repeat-item-wrapper {
+
 		.dnd-items-wrapper {
 			list-style: none;
 			padding: 0;
 			margin: 0;
-	
+
 			li.sortable-item {
 				margin-bottom: 8px;
 				margin-top: 8px;
-	
+
 				.sortable-header {
 					display: flex;
 					justify-content: space-between;
@@ -21,7 +23,7 @@
 					border-radius: 4px;
 					padding: 0 0 0 10px;
 					height: 38px;
-	
+
 					.sortable-title {
 						flex: 12;
 						cursor: pointer;
@@ -35,13 +37,14 @@
 						line-height: $line_height_3;
 						text-transform: $text_transform_capitalize;
 					}
-	
+
 					.sortable-sort {
+
 						button {
-	
+
 							&.components-button {
 								color: $label_color;
-	
+
 								&:focus {
 									box-shadow: none;
 									outline: none;
@@ -49,13 +52,14 @@
 							}
 						}
 					}
-	
+
 					.sortable-duplicate {
+
 						button {
-	
+
 							&.components-button {
 								color: $label_color;
-	
+
 								&:focus {
 									box-shadow: none;
 									outline: none;
@@ -63,14 +67,14 @@
 							}
 						}
 					}
-	
+
 					.sortable-delete {
-	
+
 						button {
-	
+
 							&.components-button {
 								color: $danger_color;
-	
+
 								&:focus {
 									box-shadow: none;
 									outline: none;
@@ -78,22 +82,27 @@
 							}
 						}
 					}
+
 					.dashicon {
-						&:before {
+
+						&::before {
 							font-size: 16px;
 						}
 					}
 				}
-	
+
 				.sortable-item-content {
 					padding: 0 !important;
 					margin: 24px 0;
+
 					.components-base-control {
+
 						.components-base-control__field {
 							display: flex;
 							align-items: center;
 							justify-content: space-between;
 							flex-direction: row;
+
 							.components-base-control__label {
 								margin-bottom: 0 !important;
 								padding-left: 10px !important;
@@ -103,7 +112,9 @@
 				}
 			}
 		}
+
 		button {
+
 			&.gslider-add-item-btn {
 				background: $primary_color !important;
 				color: $white_color !important;
@@ -122,11 +133,15 @@
 			padding: 16px;
 			min-width: 350px;
 			margin-right: 30px;
+
 			.gslider-setting-contant-popup-wrapper {
+
 				.components-base-control {
 					margin-bottom: 24px;
+
 					.components-base-control__field {
 						gap: 0 !important;
+
 						.components-base-control__label {
 							display: block;
 							color: $label_color !important;
@@ -135,21 +150,26 @@
 							line-height: $line_height_3 !important;
 							margin-bottom: 8px !important;
 							min-height: auto;
-							text-transform: $text_transform_capitalize !important; 
+							text-transform: $text_transform_capitalize !important;
 						}
+
 						.components-text-control__input,
 						.components-textarea-control__input {
 							// border: 1px solid $border_color;
 							border-radius: 4px;
 							box-shadow: none;
 						}
-						
+
 						.gslider-url-control-inner-wrapper {
+
 							.components-base-control {
 								margin-bottom: 0 !important;
 							}
+
 							.gslider-url-control-dropdown-wrapper {
+
 								.components-button {
+
 									&.gslider-setting-icon-btn {
 										display: flex;
 										align-items: center;
@@ -161,16 +181,17 @@
 										border-radius: 4px;
 										color: $secondary_color;
 										background: $white_color;
+
 										&:hover {
 											border-color: #949494 !important;
 										}
-								
+
 										&:focus {
 											border-color: #007cba !important;
 											outline: none;
 											box-shadow: none;
 										}
-								
+
 										.gslider-setting-panel-icon {
 											font-size: 15px;
 											line-height: 20px;
@@ -180,35 +201,44 @@
 							}
 						}
 					}
+
 					&.components-toggle-control {
 						margin-bottom: 8px !important;
+
 						.components-toggle-control__label {
 							display: block;
 							color: $label_color !important;
 							font-size: $font_size_13 !important;
-							font-weight: $font_weight_400 !important; 
+							font-weight: $font_weight_400 !important;
 							line-height: $line_height_3 !important;
 							min-height: auto;
 							text-transform: $text_transform_capitalize !important;
 							margin: 0 !important;
 						}
 					}
+
 					.components-base-control__help {
 						color: $label_color !important;
 						font-size: 11px !important;
 					}
 				}
 			}
+
 			.gslider-setting-background-color-popup-wrapper {
+
 				.components-base-control {
+
 					.components-base-control__field {
 						display: flex;
 						flex-direction: column;
 						gap: 0;
 						margin-bottom: 0 !important;
+
 						.components-base-control {
 							margin-bottom: 24px !important;
+
 							.components-base-control__field {
+
 								.components-base-control__label {
 									display: block;
 									color: $label_color !important;
@@ -217,12 +247,14 @@
 									line-height: $line_height_3 !important;
 									margin-bottom: 8px;
 									min-height: auto;
-									text-transform: $text_transform_capitalize !important; 
+									text-transform: $text_transform_capitalize !important;
 								}
 							}
 						}
 					}
+
 					&.gslider-setting-color-switcher-wrapper {
+
 						.components-base-control__field {
 							position: relative;
 							display: flex;
@@ -230,22 +262,29 @@
 							justify-content: space-between;
 							flex-direction: row;
 							margin-bottom: 0 !important;
+
 							.components-base-control__label {
 								margin-bottom: 0 !important;
 							}
 						}
 					}
-					&.gslider-image-control-wrapper{
-						.gslider-setting-device-label-wrapper{
+
+					&.gslider-image-control-wrapper {
+
+						.gslider-setting-device-label-wrapper {
 							margin-bottom: 8px !important;
+
 							.gslider-setting-label-text {
 								font-weight: $font_weight_400 !important;
 							}
 						}
 					}
+
 					&.components-range-control {
 						margin-bottom: 0 !important;
+
 						.components-base-control__field {
+
 							.components-base-control__label {
 								display: block;
 								color: $label_color !important;
@@ -253,14 +292,19 @@
 								font-weight: $font_weight_400 !important;
 								line-height: $line_height_3 !important;
 								min-height: auto;
-								text-transform: $text_transform_capitalize !important; 
+								text-transform: $text_transform_capitalize !important;
 							}
 						}
+
 						.components-range-control__root {
+
 							.components-base-control {
+
 								.components-base-control__field {
 									margin-bottom: 0 !important;
+
 									.components-input-control__container {
+
 										input {
 											color: $label_color;
 											font-weight: $font_weight_400;
@@ -269,10 +313,12 @@
 											height: 30px !important;
 											min-height: 30px;
 										}
+
 										.components-input-control__backdrop {
 											border-color: #949494 !important;
 											border-radius: 4px !important;
 											box-shadow: unset !important;
+
 											&:hover {
 												border-color: #949494 !important;
 											}

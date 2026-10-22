@@ -2,12 +2,14 @@
 // GSlider Blocks - React Admin Dashboard Shell Layout
 // ==========================================================================
 // Scoped layout shell, responsive grid, card patterns, and utilities
-// strictly isolated under body.toplevel_page_gslider-blocks .gslider-admin-wrap.
+// strictly isolated under body.toplevel_page_gslider-blocks
+// .gslider-admin-wrap.
 // ==========================================================================
 
 @use "variables" as *;
 
 body.toplevel_page_gslider-blocks {
+
 	.gslider-admin-wrap {
 		background-color: $color-canvas;
 		min-height: calc(100vh - 32px);
@@ -111,6 +113,7 @@ body.toplevel_page_gslider-blocks {
 
 // Accessibility: Respect reduced motion preference
 @media (prefers-reduced-motion: reduce) {
+
 	body.toplevel_page_gslider-blocks .gslider-admin-wrap * {
 		animation-duration: 0.01ms !important;
 		animation-iteration-count: 1 !important;

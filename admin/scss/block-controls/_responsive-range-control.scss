@@ -4,7 +4,9 @@
 .paneChild {
 
 	.components-range-control {
+
 		.components-range-control__root {
+
 			.components-range-control__wrapper {
 
 				span[aria-hidden="true"] {
@@ -12,14 +14,15 @@
 					background-color: $primary_color !important;
 				}
 			}
+
 			.components-range-control__thumb-wrapper {
 				top: 0 !important;
 				height: 8px !important;
 				margin-top: 10px !important;
 				width: 8px !important;
-		
+
 				span {
-		
+
 					&::before {
 						height: 12px !important;
 						left: -2px !important;

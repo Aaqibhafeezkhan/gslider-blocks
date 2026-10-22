@@ -5,6 +5,7 @@
 @use "variables" as *;
 
 body.toplevel_page_gslider-blocks {
+
 	.gslider-admin-wrap {
 		// ----------------------------------------------------------------------
 		// 1. Hero Banner
@@ -282,9 +283,11 @@ body.toplevel_page_gslider-blocks {
 		}
 
 		@keyframes gslider-skeleton-shimmer {
+
 			0% {
 				background-position: 200% 0;
 			}
+
 			100% {
 				background-position: -200% 0;
 			}

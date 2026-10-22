@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 @use "variables" as *;
 
 /** Start Admin Panel scss **/
@@ -24,6 +25,7 @@
 
 	.components-base-control {
 		margin-bottom: 24px;
+
 		.components-base-control__field {
 			margin-bottom: 0 !important;
 
@@ -37,14 +39,14 @@
 				min-height: auto;
 				text-transform: $text_transform_capitalize !important;
 			}
-	
+
 			.components-text-control__input,
 			.components-textarea-control__input {
 				// border: 1px solid #949494;
 				border-radius: 4px;
 				box-shadow: none;
 			}
-	
+
 			label {
 				display: block;
 				font-size: $font_size_13 !important;
@@ -54,11 +56,14 @@
 				min-height: auto;
 				text-transform: $text_transform_capitalize !important;
 			}
+
 			.components-base-control__help {
 				color: $label_color !important;
 				font-size: 11px !important;
 			}
+
 			.components-input-control__container {
+
 				input {
 					color: $label_color;
 					font-weight: $font_weight_400;
@@ -67,40 +72,50 @@
 					height: 30px !important;
 					min-height: 30px;
 				}
+
 				.components-input-control__backdrop {
 					border-color: $border_color !important;
 					border-radius: 4px !important;
 					box-shadow: unset !important;
 				}
 			}
+
 			.gslider-image-control-setting-item {
+
 				.gslider-setting-device-label-wrapper {
 					margin-bottom: 0 !important;
 				}
+
 				.components-base-control {
 					margin-bottom: 0 !important;
 				}
 			}
 		}
+
 		&.gslider-setting-typography,
 		&.gslider-setting-color-switcher-wrapper {
+
 			.components-base-control__field {
 				position: relative;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 				flex-direction: row;
+
 				.components-base-control__label {
 					margin-bottom: 0 !important;
 				}
 			}
 		}
+
 		&.gslider-alignment-control,
-		&.gslider-image-control-wrapper{
-			.gslider-setting-device-label-wrapper{
+		&.gslider-image-control-wrapper {
+
+			.gslider-setting-device-label-wrapper {
 				margin-bottom: 8px !important;
 			}
 		}
+
 		.components-select-control__input {
 			font-size: $font_size_12 !important;
 			font-weight: $font_weight_400 !important;
@@ -123,28 +138,35 @@
 			outline: none;
 			box-shadow: none;
 		}
-		
+
 	}
 
-	.gslider-select-control{
+	.gslider-select-control {
+
 		.components-base-control__field {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+
 			.components-base-control__label {
 				margin: 0 !important;
 			}
+
 			.components-base-control {
 				margin: 0 !important;
 				width: 50%;
+
 				.gslider-select-control-options {
 					width: 100%;
 				}
 			}
 		}
 	}
+
 	.gslider-responsive-toggle-control-wrapper {
+
 		&.components-base-control {
+
 			.components-base-control__field {
 				display: flex;
 				align-items: center;
@@ -152,6 +174,7 @@
 				justify-content: flex-start;
 				width: 100%;
 			}
+
 			.gslider-responsive-toggle-control {
 				margin-bottom: 0 !important;
 			}
@@ -160,50 +183,49 @@
 }
 
 
-
 /* For WebKit browsers like Chrome, Edge, Safari */
 .components-popover__content::-webkit-scrollbar {
 	width: 8px;
 }
-  
+
 .components-popover__content::-webkit-scrollbar-track {
-background: transparent;
+	background: transparent;
 }
 
 .components-popover__content::-webkit-scrollbar-thumb {
-background-color: $background_color;
-border-radius: 4px;
-border: 2px solid transparent;
-background-clip: content-box;
+	background-color: $background_color;
+	border-radius: 4px;
+	border: 2px solid transparent;
+	background-clip: content-box;
 }
 
 .components-popover__content::-webkit-scrollbar-thumb:hover {
-background-color: $background_color;
+	background-color: $background_color;
 }
 
 /* Target the textarea using its class or a more specific selector if needed */
 .components-textarea-control__input::-webkit-scrollbar {
 	width: 6px;
-  }
-  
-  .components-textarea-control__input::-webkit-scrollbar-track {
+}
+
+.components-textarea-control__input::-webkit-scrollbar-track {
 	background: $background_color;
 	border-radius: 4px;
-  }
-  
-  .components-textarea-control__input::-webkit-scrollbar-thumb {
+}
+
+.components-textarea-control__input::-webkit-scrollbar-thumb {
 	background-color: $background_color;
 	border-radius: 4px;
 	border: 1px solid transparent;
 	background-clip: content-box;
-  }
-  
-  .components-textarea-control__input::-webkit-scrollbar-thumb:hover {
+}
+
+.components-textarea-control__input::-webkit-scrollbar-thumb:hover {
 	background-color: $background_color;
-  }
-  
-  /* Optional Firefox support */
-  .components-textarea-control__input {
+}
+
+/* Optional Firefox support */
+.components-textarea-control__input {
 	scrollbar-width: thin;
 	scrollbar-color: $background_color;
-  }
+}
