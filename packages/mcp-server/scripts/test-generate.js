@@ -108,8 +108,8 @@ for (const slug of ['image-slider', 'logo-carousel']) {
   });
   const field = slug === 'image-slider' ? 'images' : 'logos';
   const items = generated.attributes[field];
-  if (!Array.isArray(items) || items.length !== 2 || items.some((item) => item.id !== 0)) {
-    fail(`${slug} generated slides must use id 0 when media is supplied by URL`);
+  if (!Array.isArray(items) || items.length !== 2 || items.some((item) => !(item.id < 0)) || new Set(items.map((item) => item.id)).size !== items.length) {
+    fail(`${slug} generated slides must use unique negative non-attachment ids`);
   }
 }
 console.log('ok generated image and logo slides have no attachment ids');
@@ -118,11 +118,11 @@ for (const template of listTemplates()) {
   const field = template.blockSlug === 'image-slider' ? 'images' : template.blockSlug === 'logo-carousel' ? 'logos' : null;
   if (!field) continue;
   const items = template.data[field];
-  if (!Array.isArray(items) || items.some((item) => item.id !== 0)) {
+  if (!Array.isArray(items) || items.some((item) => !(item.id < 0)) || new Set(items.map((item) => item.id)).size !== items.length) {
     fail(`${template.uri} must not invent media attachment ids`);
   }
 }
-console.log('ok image and logo templates have no attachment ids');
+console.log('ok image and logo templates have unique negative non-attachment ids');
 
 if (new Set(blockIds).size !== blockIds.length) {
   fail('generated block ids are not unique');
