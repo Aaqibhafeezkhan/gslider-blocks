@@ -133,9 +133,9 @@ This plugin bundles and uses the following open-source third-party libraries:
   - Source: https://swiperjs.com/
   - Repository: https://github.com/nolimits4web/swiper
   - License: MIT License (https://github.com/nolimits4web/swiper/blob/master/LICENSE)
-* **fslightbox** (v3.x)
-  - Source: https://fslightbox.com/
-  - License: Free / Commercial
+* **fslightbox** (v3.7.4, free/basic version)
+  - Source: https://fslightbox.com/ (npm: https://www.npmjs.com/package/fslightbox)
+  - License: MIT License (https://github.com/banthagroup/fslightbox/blob/master/LICENSE)
 * **Font Awesome Free SVG Icons** (v6.x)
   - Source: https://fontawesome.com/
   - License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
