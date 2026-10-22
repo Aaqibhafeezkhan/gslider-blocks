@@ -546,17 +546,15 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="140"><a href="https://github.com/noruzzamans"><img src="https://avatars.githubusercontent.com/u/46926901?v=4" width="100px;" alt="Noruzzaman"/><br /><sub><b>Noruzzaman</b></sub></a><br /><a href="#creator" title="Creator & Maintainer">👑</a> <a href="#code" title="Code">💻</a> <a href="#doc" title="Documentation">📖</a> <a href="#design" title="Design">🎨</a> <a href="#review" title="Reviewed Pull Requests">👀</a></td>
-      <td align="center" valign="top" width="140"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="devmuhib009"/><br /><sub><b>devmuhib009</b></sub></a><br /><a href="https://github.com/noruzzamans/gslider-blocks/commits?author=devmuhib009" title="Tests">⚠️</a></td>
-      <td align="center" valign="top" width="140"><a href="https://github.com/dbdefault"><img src="https://avatars.githubusercontent.com/u/246079841?v=4" width="100px;" alt="dbdefault"/><br /><sub><b>dbdefault</b></sub></a><br /><a href="https://github.com/noruzzamans/gslider-blocks/commits?author=dbdefault" title="Code">💻</a></td>
+      <td align="center" valign="top" width="140"><a href="https://github.com/noruzzamans"><img src="https://avatars.githubusercontent.com/u/46926901?v=4" width="100px;" alt="Noruzzaman"/><br /><sub><b>Noruzzaman</b></sub></a></td>
+      <td align="center" valign="top" width="140"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="devmuhib009"/><br /><sub><b>devmuhib009</b></sub></a></td>
+      <td align="center" valign="top" width="140"><a href="https://github.com/dbdefault"><img src="https://avatars.githubusercontent.com/u/246079841?v=4" width="100px;" alt="dbdefault"/><br /><sub><b>dbdefault</b></sub></a></td>
     </tr>
   </tbody>
 </table>
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-<sub>👑 Creator · 💻 Code · 📖 Docs · 🎨 Design · 👀 Review · ⚠️ Tests</sub>
 
 Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING.md) to get started.
 
