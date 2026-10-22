@@ -2565,7 +2565,10 @@ var fetchFromJson = async () => {
     localStorage.setItem("iconData", JSON.stringify(data));
     return data;
   } catch (error) {
-    console.error((0, import_i18n.__)("Error fetching icon data:", "gslider-blocks"), error);
+    console.error(
+      (0, import_i18n.__)("Error fetching icon data:", "gslider-blocks"),
+      error
+    );
     return null;
   }
 };
@@ -2614,26 +2617,66 @@ function renderSVG(svg, setAttributes = false, extraProps = {}) {
   let align = null;
   if (fontAwesome.hasOwnProperty("custom_icons") && fontAwesome.custom_icons) {
     return generateSvg(fontAwesome);
-  } else {
-    switch (svg) {
-      case "align-center":
-        align = { fillRule: "evenodd", clipRule: "evenodd", d: "M4 2H14V0H4V2ZM0 7H18V5H0V7ZM4 12H14V10H4V12Z" };
-        break;
-      case "align-left":
-        align = { fillRule: "evenodd", clipRule: "evenodd", d: "M10 2H0V0H10V2ZM18 7H0V5H18V7ZM10 12H0V10H10V12Z" };
-        break;
-      case "align-right":
-        align = { fillRule: "evenodd", clipRule: "evenodd", d: "M8 2H18V0H8V2ZM0 7H18V5H0V7ZM8 12H18V10H8V12Z" };
-        break;
-      case "align-justify":
-        align = { d: "M0 0H18V2H0V0ZM0 5.00001H18V7.00001H0V5.00001ZM0 10H18V12H0V10Z" };
-        break;
-    }
-    if (align) {
-      return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", { width: "18", height: "12", viewBox: "0 0 18 12", xmlns: "http://www.w3.org/2000/svg", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { ...align }) });
-    }
-    return !setAttributes || "not_set" === setAttributes ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", { xmlns: "https://www.w3.org/2000/svg", viewBox, ...extraProps, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: path }) }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", { width: "20", height: "20", xmlns: "https://www.w3.org/2000/svg", viewBox, ...extraProps, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: path }) });
   }
+  switch (svg) {
+    case "align-center":
+      align = {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        d: "M4 2H14V0H4V2ZM0 7H18V5H0V7ZM4 12H14V10H4V12Z"
+      };
+      break;
+    case "align-left":
+      align = {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        d: "M10 2H0V0H10V2ZM18 7H0V5H18V7ZM10 12H0V10H10V12Z"
+      };
+      break;
+    case "align-right":
+      align = {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        d: "M8 2H18V0H8V2ZM0 7H18V5H0V7ZM8 12H18V10H8V12Z"
+      };
+      break;
+    case "align-justify":
+      align = {
+        d: "M0 0H18V2H0V0ZM0 5.00001H18V7.00001H0V5.00001ZM0 10H18V12H0V10Z"
+      };
+      break;
+  }
+  if (align) {
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+      "svg",
+      {
+        width: "18",
+        height: "12",
+        viewBox: "0 0 18 12",
+        xmlns: "http://www.w3.org/2000/svg",
+        children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { ...align })
+      }
+    );
+  }
+  return !setAttributes || "not_set" === setAttributes ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+    "svg",
+    {
+      xmlns: "https://www.w3.org/2000/svg",
+      viewBox,
+      ...extraProps,
+      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: path })
+    }
+  ) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+    "svg",
+    {
+      width: "20",
+      height: "20",
+      xmlns: "https://www.w3.org/2000/svg",
+      viewBox,
+      ...extraProps,
+      children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: path })
+    }
+  );
 }
 var renderIcon_default = renderSVG;
 
