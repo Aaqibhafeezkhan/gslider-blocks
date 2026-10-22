@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { 
+import {
 	BaseControl,
 	Button,
 	SelectControl,
@@ -8,362 +8,388 @@ import {
 } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 import {
-    FONT_WEIGHT,
-    FONT_STYLE,
-    TEXT_TRANSFORM,
-    TEXT_DECORATION,
-    GOOGLE_FONTS,
+	FONT_WEIGHT,
+	FONT_STYLE,
+	TEXT_TRANSFORM,
+	TEXT_DECORATION,
+	GOOGLE_FONTS,
 } from '@Constants';
-import Select2 from "react-select";
+import Select2 from 'react-select';
 import SelectControls from '@Components/select-controls';
 import ResponsiveRangeControl from '@Components/responsive-range-control';
 
-const ResponsiveTypographyControl = ({
-    fontFamily,
+const ResponsiveTypographyControl = ( {
+	fontFamily,
 	onChangeFontFamily,
 	fontSize,
 	onChangeFontSize,
 	fontSizeUnits,
 	onChangeFontSizeUnit,
-    fontWeight,
-    onChangeFontWeight,
-    fontStyle,
-    onChangeFontStyle,
-    textTransform,
-    onChangeTextTransform,
-    textDecoration,
-    onChangeTextDecoration,
-    lineHeight,
+	fontWeight,
+	onChangeFontWeight,
+	fontStyle,
+	onChangeFontStyle,
+	textTransform,
+	onChangeTextTransform,
+	textDecoration,
+	onChangeTextDecoration,
+	lineHeight,
 	onChangeLineHeight,
 	lineHeightUnits,
 	onChangeLineHeightUnit,
-    letterSpacing,
+	letterSpacing,
 	onChangeLetterSpacing,
 	letterSpacingUnits,
 	onChangeLetterSpacingUnit,
-    wordSpacing,
+	wordSpacing,
 	onChangeWordSpacing,
 	wordSpacingUnits,
 	onChangeWordSpacingUnit,
-    deviceType,
-}) => {
-    
-    const [fontOptions, setFontOptions] = useState([]);
-    const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(null);
-    const [availableFontWeights, setAvailableFontWeights] = useState([]);
+	deviceType,
+} ) => {
+	const [ fontOptions, setFontOptions ] = useState( [] );
+	const [ selectedFontFamilyOption, setSelectedFontFamilyOption ] =
+		useState( null );
+	const [ availableFontWeights, setAvailableFontWeights ] = useState( [] );
 
-    useEffect(() => {
-        GOOGLE_FONTS().then((fetchedFonts) => {
-            setFontOptions(fetchedFonts);
-    
-            const current = fetchedFonts.find(f => f.value === fontFamily);
-    
-            if (current) {
-                setSelectedFontFamilyOption(current);
-                setAvailableFontWeights(current.weights || []);
-            } else {
-                setSelectedFontFamilyOption({ label: 'Default', value: 'Default' });
-                setAvailableFontWeights([]);
-            }
-        });
-    }, []);
+	useEffect( () => {
+		GOOGLE_FONTS().then( ( fetchedFonts ) => {
+			setFontOptions( fetchedFonts );
 
-    const handleFontFamilyChange = (selectedOption) => {
-        setSelectedFontFamilyOption(selectedOption);
-    
-        const newFontFamily = selectedOption?.value || 'Default';
-        onChangeFontFamily(newFontFamily);
+			const current = fetchedFonts.find(
+				( f ) => f.value === fontFamily
+			);
 
-        setAvailableFontWeights(selectedOption?.weights || []);
-    };
+			if ( current ) {
+				setSelectedFontFamilyOption( current );
+				setAvailableFontWeights( current.weights || [] );
+			} else {
+				setSelectedFontFamilyOption( {
+					label: 'Default',
+					value: 'Default',
+				} );
+				setAvailableFontWeights( [] );
+			}
+		} );
+	}, [] );
 
-	const handleFontSizeChange = (newFontSize) => {
-		onChangeFontSize(newFontSize);
+	const handleFontFamilyChange = ( selectedOption ) => {
+		setSelectedFontFamilyOption( selectedOption );
+
+		const newFontFamily = selectedOption?.value || 'Default';
+		onChangeFontFamily( newFontFamily );
+
+		setAvailableFontWeights( selectedOption?.weights || [] );
 	};
 
-	const handleFontSizeUnitChange = (newFontSizeUnit) => {
-		onChangeFontSizeUnit(newFontSizeUnit);
+	const handleFontSizeChange = ( newFontSize ) => {
+		onChangeFontSize( newFontSize );
 	};
 
-	const handleFontWeightChange = (newFontWeight) => {
-		onChangeFontWeight(newFontWeight);
+	const handleFontSizeUnitChange = ( newFontSizeUnit ) => {
+		onChangeFontSizeUnit( newFontSizeUnit );
 	};
 
-    const handleFontStyleChange = (newFontStyle) => {
-		onChangeFontStyle(newFontStyle);
+	const handleFontWeightChange = ( newFontWeight ) => {
+		onChangeFontWeight( newFontWeight );
 	};
 
-    const handleTextTransformChange = (newTextTransform) => {
-		onChangeTextTransform(newTextTransform);
+	const handleFontStyleChange = ( newFontStyle ) => {
+		onChangeFontStyle( newFontStyle );
 	};
 
-    const handleTextDecorationChange = (newTextDecoration) => {
-		onChangeTextDecoration(newTextDecoration);
+	const handleTextTransformChange = ( newTextTransform ) => {
+		onChangeTextTransform( newTextTransform );
 	};
-    
-    const handleLineHeightChange = (newLineHeight) => {
-        onChangeLineHeight(newLineHeight);
-    };
 
-    const handleLineHeightUnitChange = (newLineHeightUnit) => {
-        onChangeLineHeightUnit(newLineHeightUnit);
-    };
+	const handleTextDecorationChange = ( newTextDecoration ) => {
+		onChangeTextDecoration( newTextDecoration );
+	};
 
-    const handleLetterSpacingChange = (newLetterSpacing) => {
-        onChangeLetterSpacing(newLetterSpacing);
-    };
+	const handleLineHeightChange = ( newLineHeight ) => {
+		onChangeLineHeight( newLineHeight );
+	};
 
-    const handleLetterSpacingUnitChange = (newLetterSpacingUnit) => {
-        onChangeLetterSpacingUnit(newLetterSpacingUnit);
-    };
+	const handleLineHeightUnitChange = ( newLineHeightUnit ) => {
+		onChangeLineHeightUnit( newLineHeightUnit );
+	};
 
-    const handleWordSpacingChange = (newWordSpacing) => {
-        onChangeWordSpacing(newWordSpacing);
-    };
+	const handleLetterSpacingChange = ( newLetterSpacing ) => {
+		onChangeLetterSpacing( newLetterSpacing );
+	};
 
-    const handleWordSpacingUnitChange = (newWordSpacingUnit) => {
-        onChangeWordSpacingUnit(newWordSpacingUnit);
-    };
+	const handleLetterSpacingUnitChange = ( newLetterSpacingUnit ) => {
+		onChangeLetterSpacingUnit( newLetterSpacingUnit );
+	};
 
-    const gsliderSelect2ControlStyles = {
-        control: (base, state) => ({
-          ...base,
-          backgroundColor: '#fff',
-          borderColor: '#f0f0f0',
-          borderWidth: '1px',
-          boxShadow: 'none',
-          borderRadius: '4px',
-          minHeight: '32px', // total height match
-          height: '32px',
-          outline: 'none',
-          '&:hover': {
-            borderColor: '#f0f0f0',
-          },
-        }),
-      
-        valueContainer: (base) => ({
-          ...base,
-          padding: '0 8px',
-          height: '32px',
-          display: 'flex',
-          alignItems: 'center',
-        }),
-      
-        indicatorsContainer: (base) => ({
-          ...base,
-          height: '32px',
-        }),
+	const handleWordSpacingChange = ( newWordSpacing ) => {
+		onChangeWordSpacing( newWordSpacing );
+	};
 
+	const handleWordSpacingUnitChange = ( newWordSpacingUnit ) => {
+		onChangeWordSpacingUnit( newWordSpacingUnit );
+	};
 
-        dropdownIndicator: (base, state) => ({
-            ...base,
-            color: '#1e1e1e',
-            transition: 'all 0.2s ease',
-            '&:hover': {
-                color: '#007cba',
-            },
-            
-            svg: {
-              width: 16,
-              height: 16,
-              fill: 'currentColor',
-            },
-        }),
-      
-        input: (base) => ({
-          ...base,
-          color: '#1e1e1e',
-          fontSize: '12px',
-          padding: 0,
-          margin: 0,
-          height: '32px',
-          lineHeight: 1,
-          outline: 'none',
-          boxShadow: 'none',
-          '&:focus': {
-            outline: 'none',
-            boxShadow: 'none',
-          },
-        }),
-      
-        singleValue: (base) => ({
-          ...base,
-          color: '#1e1e1e',
-          lineHeight: 1,
-        }),
-      
-        menu: (base) => ({
-          ...base,
-          backgroundColor: '#fff',
-          border: '1px solid #f0f0f0',
-          borderRadius: '4px',
-          boxShadow: 'none',
-          marginTop: '2px',
-          zIndex: 999,
-        }),
-      
-        menuList: (base) => ({
-          ...base,
-          paddingTop: 0,
-          paddingBottom: 0,
-          borderRadius: '4px',
-          border: 'none',
-          maxHeight: '200px',
-          overflowY: 'auto',
-          scrollbarWidth: 'thin',
-        }),
-      
-        option: (base, state) => ({
-          ...base,
-          backgroundColor: state.isSelected
-            ? '#f0f0f0'
-            : state.isFocused
-            ? '#f0f0f0'
-            : '#fff',
-          color: state.isFocused ? '#007cba' : '#1e1e1e',
-          fontSize: '12px',
-          fontWeight: 400,
-          textTransform: 'capitalize',
-          lineHeight: 1.3,
-          padding: '6px 12px',
-          cursor: 'pointer',
-          outline: 'none',
-        }),
-      
-        placeholder: (base) => ({
-          ...base,
-          color: '#1e1e1e',
-          fontSize: '12px',
-        }),
-      };
+	const gsliderSelect2ControlStyles = {
+		control: ( base, state ) => ( {
+			...base,
+			backgroundColor: '#fff',
+			borderColor: '#f0f0f0',
+			borderWidth: '1px',
+			boxShadow: 'none',
+			borderRadius: '4px',
+			minHeight: '32px', // total height match
+			height: '32px',
+			outline: 'none',
+			'&:hover': {
+				borderColor: '#f0f0f0',
+			},
+		} ),
 
-    return (
-        <BaseControl
-            label={__("Typography", "gslider-blocks")}
-            className="gslider-setting-typography"
-        >
-            <Dropdown
-                className="gslider-setting-icon-dropdown"
-                contentClassName="gslider-setting-icon-dropdown-content"
-                popoverProps={{ placement: 'bottom-start' }}
-                renderToggle={({ isOpen, onToggle }) => (
-                    <Button
-                        variant="primary"
-                        onClick={onToggle}
-                        aria-expanded={isOpen}
-                        className="gslider-setting-icon-btn"
-                    >
-                        <Dashicon icon="edit" className="gslider-setting-panel-icon" />
-                    </Button>
-                )}
-                renderContent={() => (
-                    <div className="gslider-setting-typography-popup">
-                        <div className="gslider-setting-typography-popup-inner">
+		valueContainer: ( base ) => ( {
+			...base,
+			padding: '0 8px',
+			height: '32px',
+			display: 'flex',
+			alignItems: 'center',
+		} ),
 
-                            <BaseControl
-                                label={__("Family", "gslider-blocks")}
-                                className="gslider-setting-typography-family"
-                            >
-                                <Select2 
-                                    options={fontOptions} 
-                                    value={selectedFontFamilyOption}
-                                    onChange={handleFontFamilyChange}
-                                    className="gslider-select2-control"
-                                    classNamePrefix="react-select"
-                                    styles={gsliderSelect2ControlStyles}
-                                    placeholder={__("Select Font Family", "gslider-blocks")}
-                                />
-                            </BaseControl>
-                            <ResponsiveRangeControl
-                                label={__("Size", "gslider-blocks")}
-                                rangeValue={fontSize}
-                                onChangeValue={handleFontSizeChange}
-                                onUnitChange={handleFontSizeUnitChange}
-                                deviceType={deviceType}
-                                units={fontSizeUnits}
-                                resetFallbackValue={""}
-                                unitBounds={{
-                                    px: { min: 0,  max: 200, step: 1 },
-                                }}
-                            />
+		indicatorsContainer: ( base ) => ( {
+			...base,
+			height: '32px',
+		} ),
 
-                            <SelectControls
-                                label={__("Weight", "gslider-blocks")}
-                                options={[
-                                    { label: __("Default", "gslider-blocks"), value: 'inherit' },
-                                    ...(availableFontWeights.length > 0
-                                        ? availableFontWeights.map(weight => ({ label: weight, value: weight }))
-                                        : FONT_WEIGHT.filter(item => item.value !== 'inherit'))
-                                ]}
-                                value={fontWeight}
-                                onChange={handleFontWeightChange}
-                            />
+		dropdownIndicator: ( base, state ) => ( {
+			...base,
+			color: '#1e1e1e',
+			transition: 'all 0.2s ease',
+			'&:hover': {
+				color: '#007cba',
+			},
 
-                            <SelectControls
-                                label={__("Transform", "gslider-blocks")}
-                                options={TEXT_TRANSFORM}
-                                value={textTransform}
-                                onChange={handleTextTransformChange}
-                            />
-                            <SelectControls
-                                label={__("Style", "gslider-blocks")}
-                                options={FONT_STYLE}
-                                value={fontStyle}
-                                onChange={handleFontStyleChange}
-                            />
-                            <SelectControls
-                                label={__("Decoration", "gslider-blocks")}
-                                options={TEXT_DECORATION}
-                                value={textDecoration}
-                                onChange={handleTextDecorationChange}
-                            />
-                            <ResponsiveRangeControl
-                                label={__("Line Height", "gslider-blocks")}
-                                rangeValue={lineHeight}
-                                onChangeValue={handleLineHeightChange}
-                                onUnitChange={handleLineHeightUnitChange}
-                                deviceType={deviceType}
-                                units={lineHeightUnits}
-                                resetFallbackValue={""}
-                                unitBounds={{
-                                    px: { min: 0,  max: 200, step: 1 },
-                                }}
-                            />
-                            <ResponsiveRangeControl
-                                label={__("Letter Spacing", "gslider-blocks")}
-                                rangeValue={letterSpacing}
-                                onChangeValue={handleLetterSpacingChange}
-                                onUnitChange={handleLetterSpacingUnitChange}
-                                deviceType={deviceType}
-                                units={letterSpacingUnits}
-                                resetFallbackValue={""}
-                                unitBounds={{
-                                    px: { min: -20,  max: 20, step: 0.1 },
-                                    '%': { min: -20, max: 20,  step: 0.1 },
-                                    vh: { min: -20,  max: 20,  step: 0.1 },
-                                    vw: { min: -20,  max: 20,  step: 0.1 },
-                                    em: { min: -20,  max: 20,  step: 0.1 },
-                                    rem:{ min: -20,  max: 20,  step: 0.1 },
-                                }}
-                            />
-                            <ResponsiveRangeControl
-                                label={__("Word Spacing", "gslider-blocks")}
-                                rangeValue={wordSpacing}
-                                onChangeValue={handleWordSpacingChange}
-                                onUnitChange={handleWordSpacingUnitChange}
-                                deviceType={deviceType}
-                                units={wordSpacingUnits}
-                                resetFallbackValue={""}
-                                unitBounds={{
-                                    px: { min: 0,  max: 200, step: 1 },
-                                }}
-                            />
-                        </div>
-                    </div>
-                )}
-            />
-        </BaseControl>
-    );
+			svg: {
+				width: 16,
+				height: 16,
+				fill: 'currentColor',
+			},
+		} ),
+
+		input: ( base ) => ( {
+			...base,
+			color: '#1e1e1e',
+			fontSize: '12px',
+			padding: 0,
+			margin: 0,
+			height: '32px',
+			lineHeight: 1,
+			outline: 'none',
+			boxShadow: 'none',
+			'&:focus': {
+				outline: 'none',
+				boxShadow: 'none',
+			},
+		} ),
+
+		singleValue: ( base ) => ( {
+			...base,
+			color: '#1e1e1e',
+			lineHeight: 1,
+		} ),
+
+		menu: ( base ) => ( {
+			...base,
+			backgroundColor: '#fff',
+			border: '1px solid #f0f0f0',
+			borderRadius: '4px',
+			boxShadow: 'none',
+			marginTop: '2px',
+			zIndex: 999,
+		} ),
+
+		menuList: ( base ) => ( {
+			...base,
+			paddingTop: 0,
+			paddingBottom: 0,
+			borderRadius: '4px',
+			border: 'none',
+			maxHeight: '200px',
+			overflowY: 'auto',
+			scrollbarWidth: 'thin',
+		} ),
+
+		option: ( base, state ) => ( {
+			...base,
+			backgroundColor: state.isSelected
+				? '#f0f0f0'
+				: state.isFocused
+				? '#f0f0f0'
+				: '#fff',
+			color: state.isFocused ? '#007cba' : '#1e1e1e',
+			fontSize: '12px',
+			fontWeight: 400,
+			textTransform: 'capitalize',
+			lineHeight: 1.3,
+			padding: '6px 12px',
+			cursor: 'pointer',
+			outline: 'none',
+		} ),
+
+		placeholder: ( base ) => ( {
+			...base,
+			color: '#1e1e1e',
+			fontSize: '12px',
+		} ),
+	};
+
+	return (
+		<BaseControl
+			label={ __( 'Typography', 'gslider-blocks' ) }
+			className="gslider-setting-typography"
+		>
+			<Dropdown
+				className="gslider-setting-icon-dropdown"
+				contentClassName="gslider-setting-icon-dropdown-content"
+				popoverProps={ { placement: 'bottom-start' } }
+				renderToggle={ ( { isOpen, onToggle } ) => (
+					<Button
+						variant="primary"
+						onClick={ onToggle }
+						aria-expanded={ isOpen }
+						className="gslider-setting-icon-btn"
+					>
+						<Dashicon
+							icon="edit"
+							className="gslider-setting-panel-icon"
+						/>
+					</Button>
+				) }
+				renderContent={ () => (
+					<div className="gslider-setting-typography-popup">
+						<div className="gslider-setting-typography-popup-inner">
+							<BaseControl
+								label={ __( 'Family', 'gslider-blocks' ) }
+								className="gslider-setting-typography-family"
+							>
+								<Select2
+									options={ fontOptions }
+									value={ selectedFontFamilyOption }
+									onChange={ handleFontFamilyChange }
+									className="gslider-select2-control"
+									classNamePrefix="react-select"
+									styles={ gsliderSelect2ControlStyles }
+									placeholder={ __(
+										'Select Font Family',
+										'gslider-blocks'
+									) }
+								/>
+							</BaseControl>
+							<ResponsiveRangeControl
+								label={ __( 'Size', 'gslider-blocks' ) }
+								rangeValue={ fontSize }
+								onChangeValue={ handleFontSizeChange }
+								onUnitChange={ handleFontSizeUnitChange }
+								deviceType={ deviceType }
+								units={ fontSizeUnits }
+								resetFallbackValue={ '' }
+								unitBounds={ {
+									px: { min: 0, max: 200, step: 1 },
+								} }
+							/>
+
+							<SelectControls
+								label={ __( 'Weight', 'gslider-blocks' ) }
+								options={ [
+									{
+										label: __(
+											'Default',
+											'gslider-blocks'
+										),
+										value: 'inherit',
+									},
+									...( availableFontWeights.length > 0
+										? availableFontWeights.map(
+												( weight ) => ( {
+													label: weight,
+													value: weight,
+												} )
+										  )
+										: FONT_WEIGHT.filter(
+												( item ) =>
+													item.value !== 'inherit'
+										  ) ),
+								] }
+								value={ fontWeight }
+								onChange={ handleFontWeightChange }
+							/>
+
+							<SelectControls
+								label={ __( 'Transform', 'gslider-blocks' ) }
+								options={ TEXT_TRANSFORM }
+								value={ textTransform }
+								onChange={ handleTextTransformChange }
+							/>
+							<SelectControls
+								label={ __( 'Style', 'gslider-blocks' ) }
+								options={ FONT_STYLE }
+								value={ fontStyle }
+								onChange={ handleFontStyleChange }
+							/>
+							<SelectControls
+								label={ __( 'Decoration', 'gslider-blocks' ) }
+								options={ TEXT_DECORATION }
+								value={ textDecoration }
+								onChange={ handleTextDecorationChange }
+							/>
+							<ResponsiveRangeControl
+								label={ __( 'Line Height', 'gslider-blocks' ) }
+								rangeValue={ lineHeight }
+								onChangeValue={ handleLineHeightChange }
+								onUnitChange={ handleLineHeightUnitChange }
+								deviceType={ deviceType }
+								units={ lineHeightUnits }
+								resetFallbackValue={ '' }
+								unitBounds={ {
+									px: { min: 0, max: 200, step: 1 },
+								} }
+							/>
+							<ResponsiveRangeControl
+								label={ __(
+									'Letter Spacing',
+									'gslider-blocks'
+								) }
+								rangeValue={ letterSpacing }
+								onChangeValue={ handleLetterSpacingChange }
+								onUnitChange={ handleLetterSpacingUnitChange }
+								deviceType={ deviceType }
+								units={ letterSpacingUnits }
+								resetFallbackValue={ '' }
+								unitBounds={ {
+									px: { min: -20, max: 20, step: 0.1 },
+									'%': { min: -20, max: 20, step: 0.1 },
+									vh: { min: -20, max: 20, step: 0.1 },
+									vw: { min: -20, max: 20, step: 0.1 },
+									em: { min: -20, max: 20, step: 0.1 },
+									rem: { min: -20, max: 20, step: 0.1 },
+								} }
+							/>
+							<ResponsiveRangeControl
+								label={ __( 'Word Spacing', 'gslider-blocks' ) }
+								rangeValue={ wordSpacing }
+								onChangeValue={ handleWordSpacingChange }
+								onUnitChange={ handleWordSpacingUnitChange }
+								deviceType={ deviceType }
+								units={ wordSpacingUnits }
+								resetFallbackValue={ '' }
+								unitBounds={ {
+									px: { min: 0, max: 200, step: 1 },
+								} }
+							/>
+						</div>
+					</div>
+				) }
+			/>
+		</BaseControl>
+	);
 };
 
 export default ResponsiveTypographyControl;
