@@ -39,8 +39,18 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Aaqibhafeezkhan",
+      "name": "Aaqibhafeez Khan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/292322256?v=4",
+      "profile": "https://github.com/Aaqibhafeezkhan",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "linkToUsage": true
+  "linkToUsage": false
 }
