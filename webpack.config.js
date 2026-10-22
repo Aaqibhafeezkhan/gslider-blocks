@@ -6,13 +6,19 @@ module.exports = {
 	resolve: {
 		alias: {
 			...defaultConfig.resolve.alias,
-            '@Controls': path.resolve(__dirname, 'blocks-config/gslider-controls/'),
-            '@Components': path.resolve(__dirname, 'src/components/'),
-            '@Utils': path.resolve(__dirname, 'src/utils/'),
-            '@Constants': path.resolve(__dirname, 'src/constants/'),
-            '@Blocks': path.resolve(__dirname, 'src/blocks/'),
-            '@Store': path.resolve(__dirname, 'src/store/'),
-            '@Attributes': path.resolve(__dirname, 'blocks-config/blocks-attributes/'),
+			'@Controls': path.resolve(
+				__dirname,
+				'blocks-config/gslider-controls/'
+			),
+			'@Components': path.resolve( __dirname, 'src/components/' ),
+			'@Utils': path.resolve( __dirname, 'src/utils/' ),
+			'@Constants': path.resolve( __dirname, 'src/constants/' ),
+			'@Blocks': path.resolve( __dirname, 'src/blocks/' ),
+			'@Store': path.resolve( __dirname, 'src/store/' ),
+			'@Attributes': path.resolve(
+				__dirname,
+				'blocks-config/blocks-attributes/'
+			),
 		},
 	},
 };
