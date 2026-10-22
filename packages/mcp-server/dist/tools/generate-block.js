@@ -162,7 +162,7 @@ function buildSlide(slug, slide, index, fallback) {
             throw new GeneratorInputError(`Each ${slug} slide needs a url. The generator does not upload media.`);
         }
         return {
-            id: 0,
+            id: -(index + 1),
             url: slide.url,
             alt: slide.alt ?? '',
             link: slide.link ?? '',
