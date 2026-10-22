@@ -188,6 +188,8 @@ AI assistants can inspect and load pre-built slider design presets via MCP URI r
 
 Reading a template returns the attribute object for `gslider-blocks/<target block>`. Every key is a real block attribute, and attributes not listed keep their defaults. Testimonial and content slides include every default slide field.
 
+Image and logo templates use external image URLs and set each slide's `id` to `0`, meaning no WordPress media-library attachment is associated with that URL. The URL is the source of truth; do not treat these values as attachment IDs.
+
 Two attributes are left empty and must be set before the block renders correctly:
 
 | Attribute | Value |

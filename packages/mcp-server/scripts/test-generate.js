@@ -3,6 +3,7 @@ import { handleGenerateBlock } from '../dist/tools/generate-block.js';
 import { handleValidateBlock } from '../dist/tools/validate-block.js';
 import { attributeDefaults, loadBundledBlock } from '../dist/core/block-runtime.js';
 import { BLOCK_ID_PREFIX } from '../dist/core/registry.js';
+import { listTemplates } from '../dist/resources/templates.js';
 
 const slugs = ['base', 'testimonial', 'image-slider', 'logo-carousel'];
 const blockIds = [];
@@ -99,6 +100,29 @@ for (const slug of ['base', 'testimonial']) {
   await check(slug, { layout: { mode: 'slider', effect: 'fade' } }, 'fade', 'fade');
   await check(slug, { layout: { mode: 'carousel', effect: 'coverflow' } }, 'coverflow', 'coverflow');
 }
+
+for (const slug of ['image-slider', 'logo-carousel']) {
+  const generated = await generate({
+    blockSlug: slug,
+    slides: [slideFor(slug), { ...slideFor(slug), alt: 'Second slide' }],
+  });
+  const field = slug === 'image-slider' ? 'images' : 'logos';
+  const items = generated.attributes[field];
+  if (!Array.isArray(items) || items.length !== 2 || items.some((item) => item.id !== 0)) {
+    fail(`${slug} generated slides must use id 0 when media is supplied by URL`);
+  }
+}
+console.log('ok generated image and logo slides have no attachment ids');
+
+for (const template of listTemplates()) {
+  const field = template.blockSlug === 'image-slider' ? 'images' : template.blockSlug === 'logo-carousel' ? 'logos' : null;
+  if (!field) continue;
+  const items = template.data[field];
+  if (!Array.isArray(items) || items.some((item) => item.id !== 0)) {
+    fail(`${template.uri} must not invent media attachment ids`);
+  }
+}
+console.log('ok image and logo templates have no attachment ids');
 
 if (new Set(blockIds).size !== blockIds.length) {
   fail('generated block ids are not unique');

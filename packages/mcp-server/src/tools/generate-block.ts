@@ -179,7 +179,7 @@ function buildSlide(slug: GeneratableSlug, slide: SlideInput, index: number, fal
       throw new GeneratorInputError(`Each ${slug} slide needs a url. The generator does not upload media.`);
     }
     return {
-      id: index + 1,
+      id: 0,
       url: slide.url,
       alt: slide.alt ?? '',
       link: slide.link ?? '',
