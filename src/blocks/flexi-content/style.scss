@@ -1,4 +1,5 @@
 .gslider-flexi-content-wrapper {
+
 	.gslider-content-wrapper {
 		display: flex;
 		flex-direction: column;
@@ -6,23 +7,24 @@
 		justify-content: center;
 
 		.gslider-content-inner-wrapper {
-        	box-sizing: border-box;
+			box-sizing: border-box;
 			margin: 0 auto;
 			width: 100%;
 			text-align: center;
-			
+
 			figure {
 				margin: 0;
 			}
 		}
 	}
-	
+
 	.swiper {
 		position: relative !important;
 		overflow: hidden !important;
 	}
-	
+
 	.swiper-backface-hidden {
+
 		.swiper-slide {
 			backface-visibility: visible !important;
 		}

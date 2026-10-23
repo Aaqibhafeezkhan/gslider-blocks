@@ -3,113 +3,113 @@
 .gslider-logo-carousel-wrapper {
 
 
-    // Custom Tooltip for Editor - Default Styles (Can be overridden by Inspector)
-    .gslider-logo-tooltip {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.85);
-        color: #fff;
-        padding: 8px 16px;
-        border-radius: 4px;
-        font-size: 14px;
-        line-height: 1.4;
-        white-space: nowrap;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        z-index: 1000;
-    }
+	// Custom Tooltip for Editor - Default Styles
+	// (Can be overridden by Inspector)
+	.gslider-logo-tooltip {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.85);
+		color: #fff;
+		padding: 8px 16px;
+		border-radius: 4px;
+		font-size: 14px;
+		line-height: 1.4;
+		white-space: nowrap;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+		z-index: 1000;
+	}
 
-    .gslider-logo-item:hover .gslider-logo-tooltip {
-        opacity: 1;
-        visibility: visible;
-    }
+	.gslider-logo-item:hover .gslider-logo-tooltip {
+		opacity: 1;
+		visibility: visible;
+	}
 
 
+	// Ensure logo item has relative positioning
+	.gslider-logo-item {
+		position: relative;
+	}
 
-    // Ensure logo item has relative positioning
-    .gslider-logo-item {
-        position: relative;
-    }
+	// Logo Action Toolbar
+	.gslider-logo-action-toolbar {
+		position: absolute;
+		top: 8px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 10;
+		display: flex;
+		gap: 4px;
+		background: rgba(0, 0, 0, 0.8);
+		backdrop-filter: blur(8px);
+		border-radius: 6px;
+		padding: 6px;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
-    // Logo Action Toolbar
-    .gslider-logo-action-toolbar {
-        position: absolute;
-        top: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 10;
-        display: flex;
-        gap: 4px;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(8px);
-        border-radius: 6px;
-        padding: 6px;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+		.gslider-logo-action-btn {
+			min-width: 32px;
+			height: 32px;
+			padding: 0;
+			border: none !important;
+			border-radius: 4px;
+			background: transparent !important;
+			color: #fff !important;
+			cursor: pointer;
+			transition: background 0.2s ease, transform 0.1s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 
-        .gslider-logo-action-btn {
-            min-width: 32px;
-            height: 32px;
-            padding: 0;
-            border: none !important;
-            border-radius: 4px;
-            background: transparent !important;
-            color: #fff !important;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+			svg {
+				fill: #fff !important;
+				width: 18px;
+				height: 18px;
+			}
 
-            svg {
-                fill: #fff !important;
-                width: 18px;
-                height: 18px;
-            }
+			&:hover {
+				background: rgba(255, 255, 255, 0.15) !important;
+				transform: scale(1.05);
+			}
 
-            &:hover {
-                background: rgba(255, 255, 255, 0.15) !important;
-                transform: scale(1.05);
-            }
+			&:active {
+				transform: scale(0.95);
+			}
 
-            &:active {
-                transform: scale(0.95);
-            }
+			// Delete button - red on hover
+			&.gslider-logo-delete-btn:hover {
+				background: #dc3232 !important;
+			}
 
-            // Delete button - red on hover
-            &.gslider-logo-delete-btn:hover {
-                background: #dc3232 !important;
-            }
+			// Duplicate button - blue on hover
+			&.gslider-logo-duplicate-btn:hover {
+				background: #2271b1 !important;
+			}
 
-            // Duplicate button - blue on hover
-            &.gslider-logo-duplicate-btn:hover {
-                background: #2271b1 !important;
-            }
+			// Edit button - green on hover
+			&.gslider-logo-edit-btn:hover {
+				background: #46b450 !important;
+			}
 
-            // Edit button - green on hover
-            &.gslider-logo-edit-btn:hover {
-                background: #46b450 !important;
-            }
+			// Move button - white/grey on hover
+			&.gslider-logo-move-btn:hover {
+				background: rgba(255, 255, 255, 0.3) !important;
+			}
+		}
 
-            // Move button - white/grey on hover
-            &.gslider-logo-move-btn:hover {
-                background: rgba(255, 255, 255, 0.3) !important;
-            }
-        }
+		.gslider-toolbar-divider {
+			width: 1px;
+			background: rgba(255, 255, 255, 0.2);
+			margin: 4px 2px;
+		}
+	}
 
-        .gslider-toolbar-divider {
-            width: 1px;
-            background: rgba(255, 255, 255, 0.2);
-            margin: 4px 2px;
-        }
-    }
-
-    .swiper-slide:hover .gslider-logo-action-toolbar {
-        opacity: 1;
-    }
+	.swiper-slide:hover .gslider-logo-action-toolbar {
+		opacity: 1;
+	}
 }

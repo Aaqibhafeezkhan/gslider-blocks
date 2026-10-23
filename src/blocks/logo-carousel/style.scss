@@ -1,4 +1,5 @@
 .gslider-logo-carousel-wrapper {
+
 	.gslider-logo-carousel-content-wrapper {
 		box-sizing: border-box;
 		height: clamp(150px, 60vh, 150px);
@@ -21,7 +22,7 @@
 		line-height: 1.4;
 		text-align: center;
 		box-sizing: border-box;
-		background: rgba(0, 0, 0, .5);
+		background: rgba(0, 0, 0, 0.5);
 	}
 
 	// Logo link styles
@@ -72,6 +73,7 @@
 
 		// Grayscale to Color
 		&[data-hover-effect="grayscale"] {
+
 			img {
 				filter: grayscale(100%);
 				transition: filter 0.3s ease, transform 0.3s ease;
@@ -149,6 +151,7 @@
 
 // Popover styles - WordPress renders popover in fallback container
 .components-popover__fallback-container {
+
 	.gslider-logo-link-popover {
 
 		// Popover wrapper
@@ -231,6 +234,7 @@
 				}
 
 				&.is-secondary {
+
 					&.is-destructive {
 						color: #cc1818;
 						border-color: #cc1818;
