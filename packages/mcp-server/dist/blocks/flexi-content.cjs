@@ -54,7 +54,6 @@ var block_default = {
   supports: {
     html: false,
     anchor: false,
-    customClassName: false,
     align: ["wide", "full"]
   },
   textdomain: "gslider-blocks",

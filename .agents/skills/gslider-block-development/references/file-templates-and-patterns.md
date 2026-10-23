@@ -48,7 +48,6 @@ Every block in **GSlider Blocks** is constructed from exactly 12 standard files.
   "supports": {
     "html": false,
     "anchor": false,
-    "customClassName": false,
     "align": [
       "wide",
       "full"
