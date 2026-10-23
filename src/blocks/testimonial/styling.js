@@ -1403,13 +1403,13 @@ const generateBaseSliderStyle = (attributes) => {
             .${blockId}.gslider-testimonial-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
             .${blockId}.gslider-testimonial-wrapper .swiper-pagination-custom,
             .${blockId}.gslider-testimonial-wrapper .swiper-pagination-fraction {
-                bottom: -${paginationOutsideOffset.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits.Desktop}` : '30px'} !important;
+                bottom: -${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px'} !important;
             }
         ` : ''}
 
-${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? `
+        ${(paginationPositionType === 'outside' && showPagination?.Desktop) ? `
         .${blockId}.gslider-testimonial-wrapper.has-pagination {
-            margin-bottom: ${paginationOutsideOffset.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits.Desktop}` : '30px'};
+            margin-bottom: ${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px'};
         }
         ` : ''}
 
@@ -1680,15 +1680,21 @@ ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) 
                 .${blockId}.gslider-testimonial-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
                 .${blockId}.gslider-testimonial-wrapper .swiper-pagination-custom,
                 .${blockId}.gslider-testimonial-wrapper .swiper-pagination-fraction {
-                    bottom: -${paginationOutsideOffset.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits.Tablet}` : '30px'} !important;
+                    bottom: -${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || 'px'}` : (paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px')} !important;
                 }
             ` : ''}
 
-${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? `
-            .${blockId}.gslider-testimonial-wrapper.has-pagination {
-                margin-bottom: ${paginationOutsideOffset.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits.Tablet}` : '30px'};
-            }
-        ` : ''}
+            ${(paginationPositionType === 'outside') ? `
+                ${showPagination?.Tablet ? `
+                    .${blockId}.gslider-testimonial-wrapper.has-pagination {
+                        margin-bottom: ${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || 'px'}` : (paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px')};
+                    }
+                ` : (showPagination?.Desktop ? `
+                    .${blockId}.gslider-testimonial-wrapper.has-pagination {
+                        margin-bottom: 0;
+                    }
+                ` : '')}
+            ` : ''}
         }
         
         @media only screen and (max-width: 767px) {
@@ -1959,15 +1965,21 @@ ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) 
                 .${blockId}.gslider-testimonial-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
                 .${blockId}.gslider-testimonial-wrapper .swiper-pagination-custom,
                 .${blockId}.gslider-testimonial-wrapper .swiper-pagination-fraction {
-                    bottom: -${paginationOutsideOffset.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits.Mobile}` : '30px'} !important;
+                    bottom: -${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || 'px'}` : (paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || 'px'}` : (paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px'))} !important;
                 }
             ` : ''}
 
-${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? `
-            .${blockId}.gslider-testimonial-wrapper.has-pagination {
-                margin-bottom: ${paginationOutsideOffset.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits.Mobile}` : '30px'};
-            }
-        ` : ''}
+            ${(paginationPositionType === 'outside') ? `
+                ${showPagination?.Mobile ? `
+                    .${blockId}.gslider-testimonial-wrapper.has-pagination {
+                        margin-bottom: ${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || 'px'}` : (paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || 'px'}` : (paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px'))};
+                    }
+                ` : ((showPagination?.Desktop || showPagination?.Tablet) ? `
+                    .${blockId}.gslider-testimonial-wrapper.has-pagination {
+                        margin-bottom: 0;
+                    }
+                ` : '')}
+            ` : ''}
         }
     `;
     /** End All Block Style */

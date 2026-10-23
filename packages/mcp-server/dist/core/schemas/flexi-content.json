@@ -23,7 +23,7 @@
       "carousel"
     ]
   },
-  "totalAttributes": 258,
+  "totalAttributes": 260,
   "slideItemSchema": {
     "type": "childBlock",
     "name": "gslider-blocks/flexi-content-item",
@@ -883,6 +883,22 @@
         "Desktop": "%",
         "Tablet": "%",
         "Mobile": "%"
+      }
+    },
+    "paginationOutsideOffset": {
+      "type": "object",
+      "default": {
+        "Desktop": "30",
+        "Tablet": "30",
+        "Mobile": "30"
+      }
+    },
+    "paginationOutsideOffsetUnits": {
+      "type": "object",
+      "default": {
+        "Desktop": "px",
+        "Tablet": "px",
+        "Mobile": "px"
       }
     },
     "paginationDotsSwitcher": {

@@ -1703,6 +1703,25 @@ const attributes = {
     },
     /** End Pagination Dots Position */
 
+    /** Start Pagination Outside Offset */
+    paginationOutsideOffset: {
+        type: "object",
+        default: {
+            Desktop: "30",
+            Tablet: "30",
+            Mobile: "30",
+        },
+    },
+    paginationOutsideOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    /** End Pagination Outside Offset */
+
     /** Start Pagination Dots Style */
     paginationDotsSwitcher: {
         type: "string",

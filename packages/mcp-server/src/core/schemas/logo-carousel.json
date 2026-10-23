@@ -12,7 +12,7 @@
       "coverflow"
     ]
   },
-  "totalAttributes": 411,
+  "totalAttributes": 413,
   "slideItemSchema": {
     "type": "object",
     "properties": {
@@ -1855,6 +1855,22 @@
         "Desktop": "%",
         "Tablet": "%",
         "Mobile": "%"
+      }
+    },
+    "paginationOutsideOffset": {
+      "type": "object",
+      "default": {
+        "Desktop": "30",
+        "Tablet": "30",
+        "Mobile": "30"
+      }
+    },
+    "paginationOutsideOffsetUnits": {
+      "type": "object",
+      "default": {
+        "Desktop": "px",
+        "Tablet": "px",
+        "Mobile": "px"
       }
     },
     "paginationDotsSwitcher": {

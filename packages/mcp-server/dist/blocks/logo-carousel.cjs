@@ -1743,6 +1743,24 @@ var attributes = {
     }
   },
   /** End Pagination Dots Position */
+  /** Start Pagination Outside Offset */
+  paginationOutsideOffset: {
+    type: "object",
+    default: {
+      Desktop: "30",
+      Tablet: "30",
+      Mobile: "30"
+    }
+  },
+  paginationOutsideOffsetUnits: {
+    type: "object",
+    default: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    }
+  },
+  /** End Pagination Outside Offset */
   /** Start Pagination Dots Style */
   paginationDotsSwitcher: {
     type: "string",
@@ -3301,6 +3319,10 @@ var generateLogoCarouselStyle = (attributes2) => {
     paginationProgressbarPosition,
     paginationProgressbarPositionUnits,
     /** End Dots Position */
+    /** Start Pagination Outside Offset */
+    paginationOutsideOffset,
+    paginationOutsideOffsetUnits,
+    /** End Pagination Outside Offset */
     /** Start Dots Style */
     paginationDotsSwitcher,
     paginationNormalDotsBgColor,
@@ -3943,13 +3965,13 @@ var generateLogoCarouselStyle = (attributes2) => {
             .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
             .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-custom,
             .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-fraction {
-                bottom: -30px !important;
+                bottom: -${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
             }
         ` : ""}
 
-${showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile ? `
+        ${paginationPositionType === "outside" && showPagination?.Desktop ? `
         .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
-            margin-bottom: 30px;
+            margin-bottom: ${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
         }
         ` : ""}
 
@@ -4127,6 +4149,27 @@ ${showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile ? 
             .${blockId} .swiper-pagination-progressbar {
                 ${paginationProgressbarHeight.Tablet ? `height: ${paginationProgressbarHeight.Tablet}${paginationProgressbarHeightUnits.Tablet};` : ""}
             }
+
+            ${paginationPositionType === "outside" ? `   
+                .${blockId}.gslider-logo-carousel-wrapper .swiper-horizontal>.swiper-pagination-bullets,
+                .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
+                .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-custom,
+                .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-fraction {
+                    bottom: -${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
+                }
+            ` : ""}
+
+            ${paginationPositionType === "outside" ? `
+                ${showPagination?.Tablet ? `
+                    .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
+                        margin-bottom: ${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
+                    }
+                ` : showPagination?.Desktop ? `
+                    .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
+                        margin-bottom: 0;
+                    }
+                ` : ""}
+            ` : ""}
         }
         
         @media only screen and (max-width: 767px) {
@@ -4302,6 +4345,27 @@ ${showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile ? 
             .${blockId} .swiper-pagination-progressbar {
                 ${paginationProgressbarHeight.Mobile ? `height: ${paginationProgressbarHeight.Mobile}${paginationProgressbarHeightUnits.Mobile};` : ""}
             }
+
+            ${paginationPositionType === "outside" ? `   
+                .${blockId}.gslider-logo-carousel-wrapper .swiper-horizontal>.swiper-pagination-bullets,
+                .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
+                .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-custom,
+                .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-fraction {
+                    bottom: -${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
+                }
+            ` : ""}
+
+            ${paginationPositionType === "outside" ? `
+                ${showPagination?.Mobile ? `
+                    .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
+                        margin-bottom: ${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
+                    }
+                ` : showPagination?.Desktop || showPagination?.Tablet ? `
+                    .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
+                        margin-bottom: 0;
+                    }
+                ` : ""}
+            ` : ""}
         }
     `;
   return `${logoCarouselCSS}`.replace(/\s+/g, " ").trim();

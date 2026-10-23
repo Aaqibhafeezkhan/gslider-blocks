@@ -363,6 +363,16 @@ return [
 		'Tablet' => '%',
 		'Mobile' => '%',
 	],
+	'paginationOutsideOffset' => [
+		'Desktop' => '30',
+		'Tablet' => '30',
+		'Mobile' => '30',
+	],
+	'paginationOutsideOffsetUnits' => [
+		'Desktop' => 'px',
+		'Tablet' => 'px',
+		'Mobile' => 'px',
+	],
 	'paginationDotsSwitcher' => 'normal',
 	'paginationNormalDotsBgColor' => '#333333',
 	'paginationActiveDotsBgColor' => '',

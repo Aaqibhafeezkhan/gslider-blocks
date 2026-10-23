@@ -383,6 +383,11 @@ const generateImageSliderStyle = (attributes) => {
         paginationProgressbarPositionUnits,
         /** End Dots Position */
 
+        /** Start Pagination Outside Offset */
+        paginationOutsideOffset,
+        paginationOutsideOffsetUnits,
+        /** End Pagination Outside Offset */
+
         /** Start Dots Style */
         paginationDotsSwitcher,
         paginationNormalDotsBgColor,
@@ -1010,13 +1015,13 @@ const generateImageSliderStyle = (attributes) => {
             .${blockId}.gslider-image-slider-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
             .${blockId}.gslider-image-slider-wrapper .swiper-pagination-custom,
             .${blockId}.gslider-image-slider-wrapper .swiper-pagination-fraction {
-                bottom: -30px !important;
+                bottom: -${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px'} !important;
             }
         ` : ''}
 
-${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? `
+        ${(paginationPositionType === 'outside' && showPagination?.Desktop) ? `
         .${blockId}.gslider-image-slider-wrapper.has-pagination {
-            margin-bottom: 30px;
+            margin-bottom: ${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px'};
         }
         ` : ''}
 
@@ -1192,6 +1197,27 @@ ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) 
             .${blockId} .swiper-pagination-progressbar {
                 ${paginationProgressbarHeight.Tablet ? `height: ${paginationProgressbarHeight.Tablet}${paginationProgressbarHeightUnits.Tablet};` : ''}
             }
+
+            ${paginationPositionType === 'outside' ? `   
+                .${blockId}.gslider-image-slider-wrapper .swiper-horizontal>.swiper-pagination-bullets,
+                .${blockId}.gslider-image-slider-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
+                .${blockId}.gslider-image-slider-wrapper .swiper-pagination-custom,
+                .${blockId}.gslider-image-slider-wrapper .swiper-pagination-fraction {
+                    bottom: -${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || 'px'}` : (paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px')} !important;
+                }
+            ` : ''}
+
+            ${(paginationPositionType === 'outside') ? `
+                ${showPagination?.Tablet ? `
+                    .${blockId}.gslider-image-slider-wrapper.has-pagination {
+                        margin-bottom: ${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || 'px'}` : (paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px')};
+                    }
+                ` : (showPagination?.Desktop ? `
+                    .${blockId}.gslider-image-slider-wrapper.has-pagination {
+                        margin-bottom: 0;
+                    }
+                ` : '')}
+            ` : ''}
         }
         
         @media only screen and (max-width: 767px) {
@@ -1365,6 +1391,27 @@ ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) 
             .${blockId} .swiper-pagination-progressbar {
                 ${paginationProgressbarHeight.Mobile ? `height: ${paginationProgressbarHeight.Mobile}${paginationProgressbarHeightUnits.Mobile};` : ''}
             }
+
+            ${paginationPositionType === 'outside' ? `   
+                .${blockId}.gslider-image-slider-wrapper .swiper-horizontal>.swiper-pagination-bullets,
+                .${blockId}.gslider-image-slider-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
+                .${blockId}.gslider-image-slider-wrapper .swiper-pagination-custom,
+                .${blockId}.gslider-image-slider-wrapper .swiper-pagination-fraction {
+                    bottom: -${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || 'px'}` : (paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || 'px'}` : (paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px'))} !important;
+                }
+            ` : ''}
+
+            ${(paginationPositionType === 'outside') ? `
+                ${showPagination?.Mobile ? `
+                    .${blockId}.gslider-image-slider-wrapper.has-pagination {
+                        margin-bottom: ${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || 'px'}` : (paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || 'px'}` : (paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || 'px'}` : '30px'))};
+                    }
+                ` : ((showPagination?.Desktop || showPagination?.Tablet) ? `
+                    .${blockId}.gslider-image-slider-wrapper.has-pagination {
+                        margin-bottom: 0;
+                    }
+                ` : '')}
+            ` : ''}
         }
     `;
     /** End All Block Style */
