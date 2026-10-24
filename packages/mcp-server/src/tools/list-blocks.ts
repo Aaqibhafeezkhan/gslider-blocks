@@ -1,13 +1,13 @@
 import { listBlocks } from '../core/registry.js';
 
 export const listBlocksToolDefinition = {
-  name: 'gslider_list_blocks',
-  description:
-    'Lists all available GSlider Gutenberg blocks with their slugs, titles, categories, and supported features.',
-  inputSchema: {
-    type: 'object',
-    properties: {},
-  },
+	name: 'gslider_list_blocks',
+	description:
+		'Lists all available GSlider Gutenberg blocks with their slugs, titles, categories, and supported features.',
+	inputSchema: {
+		type: 'object',
+		properties: {},
+	},
 };
 
 /**
@@ -16,13 +16,13 @@ export const listBlocksToolDefinition = {
  * Returns raw blocks array directly without wrapper noise.
  */
 export async function handleListBlocks() {
-  const blocks = listBlocks();
-  return {
-    content: [
-      {
-        type: 'text',
-        text: JSON.stringify(blocks, null, 2),
-      },
-    ],
-  };
+	const blocks = listBlocks();
+	return {
+		content: [
+			{
+				type: 'text',
+				text: JSON.stringify( blocks, null, 2 ),
+			},
+		],
+	};
 }

@@ -44,6 +44,7 @@ export declare function registerCoreBlocksOnce(): void;
 export declare function wordpressBlocks(): BlocksApi;
 /**
  * Registers the block with its real attributes, save, and deprecated, once.
+ * @param slug
  */
 export declare function prepareBlock(slug: string): {
     blocks: BlocksApi;

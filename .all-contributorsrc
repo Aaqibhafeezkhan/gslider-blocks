@@ -7,6 +7,7 @@
     "README.md"
   ],
   "imageSize": 100,
+  "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"<%= contributor.name %>\"/><br /><sub><b><%= contributor.name %></b></sub></a>",
   "commit": false,
   "contributors": [
     {
@@ -49,8 +50,18 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "blank-0007",
+      "name": "blank-0007",
+      "avatar_url": "https://avatars.githubusercontent.com/u/285468035?v=4",
+      "profile": "https://github.com/blank-0007",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "linkToUsage": false
+  "linkToUsage": false,
+  "commitConvention": "angular"
 }

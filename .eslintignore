@@ -2,9 +2,11 @@ build/
 vendor/
 assets/
 node_modules/
-packages/
 coverage/
+storybook/
 storybook-static/
 *.min.js
-# Protected Core is locked (Rule #8); ignored due to legacy formatting debt until dedicated cleanup PR
+packages/*/dist/
+# Protected Core is locked (Rule #8); ignored due to semantic code lint debt (a11y, unused vars, BaseControl IDs)
 src/components/
+

@@ -1,43 +1,57 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const initializeSliders = () => {
-        // Select all slider containers
-        const sliders = document.querySelectorAll('.gslider-testimonial-wrapper');
-        
-        sliders.forEach((sliderContainer) => {
-            try {
-                // Get the Swiper settings from the data attribute
-                const swiperSettings = sliderContainer.dataset.swiperSettings;
-                
-                if (swiperSettings) {
-                    const settings = JSON.parse(swiperSettings);
-                    
-                    if (settings.navigation && typeof settings.navigation === 'object') {
-                        const nextEl = sliderContainer.querySelector('.swiper-button-next');
-                        const prevEl = sliderContainer.querySelector('.swiper-button-prev');
-                        if (nextEl) {
-                            settings.navigation.nextEl = nextEl;
-                        }
-                        if (prevEl) {
-                            settings.navigation.prevEl = prevEl;
-                        }
-                    }
+/* global Swiper */
+/* eslint-disable no-console, jsdoc/require-param */
+document.addEventListener( 'DOMContentLoaded', () => {
+	const initializeSliders = () => {
+		// Select all slider containers
+		const sliders = document.querySelectorAll(
+			'.gslider-testimonial-wrapper'
+		);
 
-                    // Initialize Swiper with parsed settings
-                    new Swiper(sliderContainer.querySelector('.swiper'), settings);
-                }
-            } catch (error) {
-                console.error('Error initializing slider:', error);
-            }
-        });
-    };
+		sliders.forEach( ( sliderContainer ) => {
+			try {
+				// Get the Swiper settings from the data attribute
+				const swiperSettings = sliderContainer.dataset.swiperSettings;
 
-    // Initialize sliders on page load
-    initializeSliders();
+				if ( swiperSettings ) {
+					const settings = JSON.parse( swiperSettings );
 
-    // Re-initialize sliders when new blocks are added (useful for dynamic content)
-    if (window.wp && window.wp.hooks) {
-        window.wp.hooks.addAction('blocks.blockRendered', 'gslider', () => {
-            initializeSliders();
-        });
-    }
-});
+					if (
+						settings.navigation &&
+						typeof settings.navigation === 'object'
+					) {
+						const nextEl = sliderContainer.querySelector(
+							'.swiper-button-next'
+						);
+						const prevEl = sliderContainer.querySelector(
+							'.swiper-button-prev'
+						);
+						if ( nextEl ) {
+							settings.navigation.nextEl = nextEl;
+						}
+						if ( prevEl ) {
+							settings.navigation.prevEl = prevEl;
+						}
+					}
+
+					// Initialize Swiper with parsed settings
+					new Swiper(
+						sliderContainer.querySelector( '.swiper' ),
+						settings
+					);
+				}
+			} catch ( error ) {
+				console.error( 'Error initializing slider:', error );
+			}
+		} );
+	};
+
+	// Initialize sliders on page load
+	initializeSliders();
+
+	// Re-initialize sliders when new blocks are added (useful for dynamic content)
+	if ( window.wp && window.wp.hooks ) {
+		window.wp.hooks.addAction( 'blocks.blockRendered', 'gslider', () => {
+			initializeSliders();
+		} );
+	}
+} );

@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/check-tag-names */
 import { createRequire } from 'module';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -74,7 +75,9 @@ export function loadBundledBlock(slug) {
 export function attributeDefaults(attributes) {
     const defaults = {};
     for (const [key, definition] of Object.entries(attributes)) {
-        if (definition && typeof definition === 'object' && 'default' in definition) {
+        if (definition &&
+            typeof definition === 'object' &&
+            'default' in definition) {
             defaults[key] = definition.default;
         }
     }
@@ -95,7 +98,13 @@ export function registerCoreBlocksOnce() {
     ensureDom();
     const saves = require('./core-saves.cjs');
     const blocks = wordpressBlocks();
-    for (const name of ['paragraph', 'heading', 'image', 'button', 'buttons']) {
+    for (const name of [
+        'paragraph',
+        'heading',
+        'image',
+        'button',
+        'buttons',
+    ]) {
         const meta = saves[`${name}Meta`];
         if (!registered.has(meta.name)) {
             blocks.registerBlockType(meta.name, {
@@ -117,6 +126,7 @@ export function wordpressBlocks() {
 }
 /**
  * Registers the block with its real attributes, save, and deprecated, once.
+ * @param slug
  */
 export function prepareBlock(slug) {
     const bundled = loadBundledBlock(slug);
@@ -136,7 +146,10 @@ export function prepareBlock(slug) {
 }
 export function validationOf(raw) {
     if (Array.isArray(raw)) {
-        return { isValid: Boolean(raw[0]), issues: Array.isArray(raw[1]) ? raw[1] : [] };
+        return {
+            isValid: Boolean(raw[0]),
+            issues: Array.isArray(raw[1]) ? raw[1] : [],
+        };
     }
     if (raw && typeof raw === 'object') {
         const record = raw;

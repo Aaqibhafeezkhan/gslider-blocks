@@ -38,10 +38,12 @@ export declare function listBlocks(): BlockSummary[];
 /**
  * Returns the comprehensive schema, real defaults, and full attribute dictionary
  * for a specific block slug loaded directly from its dedicated schema file.
+ * @param slug
  */
 export declare function getBlockSchema(slug: string): BlockDetail;
 /**
  * Checks whether a given slug is a valid GSlider block.
+ * @param slug
  */
 export declare function isValidBlockSlug(slug: string): boolean;
 //# sourceMappingURL=registry.d.ts.map

@@ -12,6 +12,12 @@
   <a href="https://github.com/noruzzamans/gslider-blocks/releases">
     <img src="https://img.shields.io/badge/Version-1.2.0-orange.svg" alt="Version">
   </a>
+  <a href="https://github.com/noruzzamans/gslider-blocks/stargazers">
+    <img src="https://img.shields.io/github/stars/noruzzamans/gslider-blocks?color=ffb800&label=Stars&logo=github" alt="GitHub Stars">
+  </a>
+  <a href="https://github.com/noruzzamans/gslider-blocks/network/members">
+    <img src="https://img.shields.io/github/forks/noruzzamans/gslider-blocks?color=blue&label=Forks&logo=github" alt="GitHub Forks">
+  </a>
   <a href="https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">
     <img src="https://img.shields.io/github/issues/noruzzamans/gslider-blocks/good%20first%20issue?color=7057ff&label=Good%20First%20Issues" alt="Good First Issues">
   </a>
@@ -46,7 +52,8 @@
   <a href="#-ai-assistant-integration-model-context-protocol---mcp">MCP AI Guide</a> •
   <a href="#-headless-wordpress--nextjs-showcase">Headless</a> •
   <a href="#-local-environment-setup">Setup</a> •
-  <a href="#-contributing--governance">Contributing</a>
+  <a href="#-contributing--governance">Contributing</a> •
+  <a href="#-support-the-project">Support ⭐</a>
 </p>
 
 ---
@@ -461,6 +468,23 @@ the Free Software Foundation; either version 2 of the License, or
 
 ---
 
+## ⭐ Support the Project
+
+If you find **GSlider Blocks** valuable or use it in your projects, please consider giving it a star on GitHub! It takes just a second and helps the project gain visibility across the WordPress & open-source community, attract more contributors, and motivates ongoing active development.
+
+<p align="center">
+  <a href="https://github.com/noruzzamans/gslider-blocks">
+    <img src="https://img.shields.io/badge/⭐_Star_on_GitHub-gslider--blocks-yellow?style=for-the-badge&logo=github" alt="Star on GitHub">
+  </a>
+</p>
+
+- **Star this repository** to bookmark it for future use.
+- **Share it** with fellow WordPress developers, agencies, and friends.
+- **Contribute** code, docs, or ideas to our open [Good First Issues](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) or [Help Wanted issues](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
+
+---
+
+<a id="contributors"></a>
 ## 👥 Contributors
 
 Thank you to all the amazing people who contribute to GSlider Blocks!
@@ -471,15 +495,18 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top"><a href="https://github.com/noruzzamans"><img src="https://avatars.githubusercontent.com/u/46926901?v=4" width="100px;" alt="Noruzzaman"/></a><br /><sub><b>Noruzzaman</b></sub></td>
-      <td align="center" valign="top"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="devmuhib009"/></a><br /><sub><b>devmuhib009</b></sub></td>
-      <td align="center" valign="top"><a href="https://github.com/dbdefault"><img src="https://avatars.githubusercontent.com/u/246079841?v=4" width="100px;" alt="dbdefault"/></a><br /><sub><b>dbdefault</b></sub></td>
-      <td align="center" valign="top"><a href="https://github.com/Aaqibhafeezkhan"><img src="https://avatars.githubusercontent.com/u/292322256?v=4" width="100px;" alt="Aaqibhafeezkhan"/></a><br /><sub><b>Aaqibhafeez Khan</b></sub></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/noruzzamans"><img src="https://avatars.githubusercontent.com/u/46926901?v=4" width="100px;" alt="Noruzzaman"/><br /><sub><b>Noruzzaman</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="devmuhib009"/><br /><sub><b>devmuhib009</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dbdefault"><img src="https://avatars.githubusercontent.com/u/246079841?v=4" width="100px;" alt="dbdefault"/><br /><sub><b>dbdefault</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Aaqibhafeezkhan"><img src="https://avatars.githubusercontent.com/u/292322256?v=4" width="100px;" alt="Aaqibhafeez Khan"/><br /><sub><b>Aaqibhafeez Khan</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/blank-0007"><img src="https://avatars.githubusercontent.com/u/285468035?v=4" width="100px;" alt="blank-0007"/><br /><sub><b>blank-0007</b></sub></a></td>
     </tr>
   </tbody>
 </table>
+
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING.md) to get started.
@@ -498,17 +525,20 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
 </p>
 
 <p align="center">
-  <a href="https://github.com/noruzzamans">
-    <img src="https://img.shields.io/badge/GitHub-@noruzzamans-181717?logo=github" alt="GitHub">
+  <a href="https://github.com/noruzzamans" title="GitHub">
+    <img src="https://img.shields.io/badge/--181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
-  <a href="https://linkedin.com/in/noruzzaman">
-    <img src="https://img.shields.io/badge/LinkedIn-noruzzaman-0A66C2?logo=linkedin" alt="LinkedIn">
+  <a href="https://linkedin.com/in/noruzzaman" title="LinkedIn">
+    <img src="https://img.shields.io/badge/--0A66C2?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xOSAwaC0xNGMtMi43NjIgMC01IDIuMjM4LTUgNXYxNGMwIDIuNzYyIDIuMjM4IDUgNSA1aDE0YzIuNzYyIDAgNS0yLjIzOCA1LTV2LTE0YzAtMi43NjItMi4yMzgtNS01LTV6bS0xMSAxOWgtM3YtMTBoM3YxMHptLTEuNS0xMS4yNjhjLS45NjYgMC0xLjc1LS43OS0xLjc1LTEuNzY0cy43ODQtMS43NjQgMS43NS0xLjc2NCAxLjc1Ljc5IDEuNzUgMS43NjQtLjc4MyAxLjc2NC0xLjc1IDEuNzY0em0xMy41IDExLjI2OGgtM3YtNS42MDRjMC0zLjM2OC00LTMuMTEzLTQtMHY1LjYwNGgtM3YtMTBoM3YxLjMwOWMxLjM5Ni0yLjU4NiA3LTIuNzc3IDcgMi40NzZ2Ni4yMTV6Ii8+PC9zdmc+" alt="LinkedIn">
   </a>
-  <a href="https://profiles.wordpress.org/noruzzaman/">
-    <img src="https://img.shields.io/badge/WordPress.org-@noruzzaman-21759B?logo=wordpress" alt="WordPress Profile">
+  <a href="https://x.com/Noruzzamanwp" title="X (Twitter)">
+    <img src="https://img.shields.io/badge/--000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)">
   </a>
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/Plugin-GSlider%20Blocks-0073AA?logo=wordpress" alt="WordPress Plugin">
+  <a href="https://profiles.wordpress.org/noruzzaman/" title="WordPress.org Profile">
+    <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
+  </a>
+  <a href="https://wordpress.org/plugins/gslider-blocks/" title="GSlider Blocks on WordPress.org">
+    <img src="https://ps.w.org/gslider-blocks/assets/icon-256x256.png" height="28" alt="GSlider Blocks" style="border-radius: 4px; vertical-align: middle;">
   </a>
 </p>
 

@@ -2,14 +2,14 @@ name: Pull Request Automation & Labeler
 
 on:
   pull_request_target:
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, synchronize, reopened, edited, closed]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
   issues: write
 
@@ -35,12 +35,93 @@ jobs:
       - name: Run Intelligent PR Triage
         uses: actions/github-script@v9
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const pr = context.payload.pull_request;
             const author = pr.user.login;
             const title = pr.title;
             const action = context.payload.action;
+
+            // Handle PR closed event
+            if (action === 'closed') {
+              if (pr.merged && author !== 'noruzzamans') {
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number
+                });
+
+                const alreadyCommented = comments.some(c => c.body && c.body.includes(`@${author}`) && c.body.includes(`merged into \`main\``));
+                if (!alreadyCommented) {
+                  // Live check: has the contributor already starred this repository?
+                  let hasStarred = false;
+                  try {
+                    const stargazers = await github.paginate(github.rest.activity.listStargazersForRepo, {
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      per_page: 100
+                    });
+                    hasStarred = stargazers.some(s => s && s.login && s.login.toLowerCase() === author.toLowerCase());
+                  } catch (err) {
+                    console.log(`Could not check repository stargazers: ${err.message}`);
+                  }
+
+                  if (!hasStarred) {
+                    try {
+                      const starred = await github.rest.activity.listReposStarredByUser({
+                        username: author,
+                        per_page: 100
+                      });
+                      hasStarred = starred.data.some(r => r && r.full_name && r.full_name.toLowerCase() === `${context.repo.owner}/${context.repo.repo}`.toLowerCase());
+                    } catch (err) {
+                      // Fallback / ignore
+                    }
+                  }
+
+                  // 2. Check if this is their first contribution or if they were already an existing contributor
+                  let isFirstContribution = true;
+                  try {
+                    const { data: fileData } = await github.rest.repos.getContent({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      path: '.all-contributorsrc',
+                      ref: 'main'
+                    });
+                    const rawContent = Buffer.from(fileData.content, 'base64').toString('utf8');
+                    const allContribs = JSON.parse(rawContent);
+                    if (allContribs.contributors && allContribs.contributors.some(c => c.login && c.login.toLowerCase() === author.toLowerCase())) {
+                      isFirstContribution = false;
+                    }
+                  } catch (err) {
+                    console.log(`Could not check .all-contributorsrc: ${err.message}`);
+                  }
+
+                  const contributorsCreditText = isFirstContribution 
+                    ? " You have also been added to our [Contributors List](https://github.com/noruzzamans/gslider-blocks#contributors)!" 
+                    : "";
+
+                  if (!hasStarred) {
+                    // Contributor has NOT starred yet: thank on merge and invite star
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: pr.number,
+                      body: `Thank you for your ${isFirstContribution ? 'contribution' : 'continued contribution'}, @${author}! Your changes are now merged into \`main\`.${contributorsCreditText}\n\nIf you find GSlider Blocks valuable, a [star on GitHub](https://github.com/noruzzamans/gslider-blocks) helps us reach more developers. We also have open [good first issue](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [help wanted](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issues if you would like to take on another challenge!\n\nBy the way, if you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X](https://x.com/Noruzzamanwp), feel free to tag me — I would be glad to repost and celebrate your achievement!`
+                    });
+                  } else {
+                    // Contributor ALREADY starred: thank on merge with warm gratitude, zero star nagging
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: pr.number,
+                      body: `Thank you for your fantastic contribution, @${author}! Your changes are now merged into \`main\`.${contributorsCreditText}\n\nYour continued support means a lot to our community. Whenever you are ready for your next challenge, feel free to explore our open [good first issue](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [help wanted](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issues!\n\nAlso, if you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X](https://x.com/Noruzzamanwp), feel free to tag me — I would love to repost and celebrate your achievement!`
+                    });
+                  }
+                }
+              }
+              return;
+            }
+
             const labelsToAdd = new Set();
             const labelsToRemove = new Set();
 
@@ -150,3 +231,41 @@ jobs:
                 // Ignore if already removed
               }
             }
+
+  auto-contributor:
+    name: Auto Add All-Contributor
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.user.login != 'noruzzamans' && github.event.pull_request.user.login != 'app/dependabot'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Add Contributor to All-Contributors
+        env:
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          echo "Processing contributor @${AUTHOR}..."
+          npx --yes all-contributors-cli add "${AUTHOR}" code
+          npx --yes all-contributors-cli generate
+
+      - name: Commit and Push if Changed
+        env:
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -n $(git status --porcelain README.md .all-contributorsrc) ]]; then
+            git add README.md .all-contributorsrc
+            git commit -m "docs(contributors): add @${AUTHOR} to all-contributors [skip ci]"
+            git push origin main
+          else
+            echo "No changes in contributors list (already present)."
+          fi
