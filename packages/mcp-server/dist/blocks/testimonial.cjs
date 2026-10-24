@@ -4247,11 +4247,16 @@ function Save({ attributes: attributes2 }) {
     const { ratingNumber, ratingIconAlign } = item;
     const ratingImageUrl = item.ratingImage?.url;
     const ratingImageAlt = item.ratingImage?.alt;
-    const rating = Math.max(0, Math.min(5, parseFloat(ratingNumber || 0)));
-    if (ratingIconAlign === "none" || rating === 0) return null;
+    const rating = Math.max(
+      0,
+      Math.min(5, parseFloat(ratingNumber || 0))
+    );
+    if (ratingIconAlign === "none" || rating === 0) {
+      return null;
+    }
     if (ratingIconAlign === "image" && ratingImageUrl) {
       const fullCount = Math.round(rating);
-      let icons = [];
+      const icons = [];
       for (let i = 0; i < fullCount; i++) {
         icons.push(
           /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-rating-icon", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: ratingImageUrl, alt: ratingImageAlt }) }, i)
@@ -4265,23 +4270,107 @@ function Save({ attributes: attributes2 }) {
       const emptyStars = 5 - fullStars - (fraction > 0 ? 1 : 0);
       const fullStarPath = "M49.05,21.06a1.9,1.9,0,0,0,.46-2A1.93,1.93,0,0,0,48,17.8L33.3,15.63,26.74,1.88a1.93,1.93,0,0,0-3.48,0l-6.5,13.71L2,17.8A1.93,1.93,0,0,0,.49,19.1a1.9,1.9,0,0,0,.46,2L11.5,31.66v.86L9.1,47a1.9,1.9,0,0,0,.79,1.88,1.89,1.89,0,0,0,1.11.36,2,2,0,0,0,.92-.23l13-7.14L38.08,49a1.93,1.93,0,0,0,2.82-2l-2.39-14.2V31.69Z";
       const emptyStarPath = "M49.62,18.85a1.9,1.9,0,0,0-1.54-1.29L33.4,15.38,26.84,1.63a1.92,1.92,0,0,0-3.47,0L16.86,15.34,2.13,17.56a1.92,1.92,0,0,0-1.08,3.25L11.73,31.53,9.21,46.73A1.93,1.93,0,0,0,11.1,49a2,2,0,0,0,.92-.23L25.07,41.6l13.11,7.14a1.93,1.93,0,0,0,2.82-2L38.46,31.6l10.7-10.79A1.92,1.92,0,0,0,49.62,18.85ZM37,30.19a1.94,1.94,0,0,0-.53,1.67L39,46.9l-13-7a1.88,1.88,0,0,0-1.84,0l-13,7,2.5-15a1.94,1.94,0,0,0-.53-1.67L2.57,19.51l14.59-2.19a2,2,0,0,0,1.45-1.08L25.08,2.58,31.6,16.25a2,2,0,0,0,1.45,1.07l14.58,2.19Z";
-      let stars = [];
+      const stars = [];
       for (let i = 0; i < fullStars; i++) {
         stars.push(
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-rating-icon", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 49.23 48.44", className: "gslider-testimonial-rating-star-svg", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("path", { d: fullStarPath, transform: "translate(-0.39 -0.78)" }) }) }, `full-${i}`)
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "div",
+            {
+              className: "gslider-testimonial-rating-icon",
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                "svg",
+                {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  viewBox: "0 0 49.23 48.44",
+                  className: "gslider-testimonial-rating-star-svg",
+                  children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                    "path",
+                    {
+                      d: fullStarPath,
+                      transform: "translate(-0.39 -0.78)"
+                    }
+                  )
+                }
+              )
+            },
+            `full-${i}`
+          )
         );
       }
       if (fraction > 0) {
         stars.push(
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-rating-icon gslider-testimonial-star-partial-wrap", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-testimonial-star-partial-container", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 49.23 48.44", className: "gslider-testimonial-rating-star-svg", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("path", { d: emptyStarPath, transform: "translate(-0.49 -0.53)" }) }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-star-partial-fill", style: { width: `${fraction * 100}%` }, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 49.23 48.44", className: "gslider-testimonial-rating-star-svg", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("path", { d: fullStarPath, transform: "translate(-0.39 -0.78)" }) }) })
-          ] }) }, "partial")
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "div",
+            {
+              className: "gslider-testimonial-rating-icon gslider-testimonial-star-partial-wrap",
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-testimonial-star-partial-container", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                  "svg",
+                  {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 49.23 48.44",
+                    className: "gslider-testimonial-rating-star-svg",
+                    children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                      "path",
+                      {
+                        d: emptyStarPath,
+                        transform: "translate(-0.49 -0.53)"
+                      }
+                    )
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                  "div",
+                  {
+                    className: "gslider-testimonial-star-partial-fill",
+                    style: { width: `${fraction * 100}%` },
+                    children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                      "svg",
+                      {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        viewBox: "0 0 49.23 48.44",
+                        className: "gslider-testimonial-rating-star-svg",
+                        children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                          "path",
+                          {
+                            d: fullStarPath,
+                            transform: "translate(-0.39 -0.78)"
+                          }
+                        )
+                      }
+                    )
+                  }
+                )
+              ] })
+            },
+            "partial"
+          )
         );
       }
       for (let i = 0; i < emptyStars; i++) {
         stars.push(
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-rating-icon empty", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 49.23 48.44", className: "gslider-testimonial-rating-star-svg", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("path", { d: emptyStarPath, transform: "translate(-0.49 -0.53)" }) }) }, `empty-${i}`)
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "div",
+            {
+              className: "gslider-testimonial-rating-icon empty",
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                "svg",
+                {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  viewBox: "0 0 49.23 48.44",
+                  className: "gslider-testimonial-rating-star-svg",
+                  children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                    "path",
+                    {
+                      d: emptyStarPath,
+                      transform: "translate(-0.49 -0.53)"
+                    }
+                  )
+                }
+              )
+            },
+            `empty-${i}`
+          )
         );
       }
       return stars;
@@ -4292,75 +4381,193 @@ function Save({ attributes: attributes2 }) {
     /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "swiper", children: [
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "swiper-wrapper", children: sliderItems.map((item) => {
         const renderGroupMap = {
-          quote: showQuoteIcon && quoteIconAlign !== "none" ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-testimonial-quote-icon-wrapper", children: [
-            quoteIconAlign === "icon" && renderIcon_default(quoteIcon),
-            quoteIconAlign === "image" && quoteImageUrl && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: quoteImageUrl, alt: quoteImageAlt })
-          ] }, "quote") : null,
-          content: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-testimonial-content-group", children: [
-            showTestimonialTitle && item.testimonialTitle && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-title-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-              import_block_editor.RichText.Content,
-              {
-                tagName: testimonialTitleHtmlTag,
-                className: "gslider-testimonial-title",
-                value: item.testimonialTitle
-              }
-            ) }),
-            showTestimonialText && item.testimonialText && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-text-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-              import_block_editor.RichText.Content,
-              {
-                tagName: testimonialTextHtmlTag,
-                className: "gslider-testimonial-text",
-                value: item.testimonialText
-              }
-            ) })
-          ] }, "content"),
-          rating: showRating ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-rating-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-testimonial-rating-inner", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-rating-wrap", children: renderRatingIcons(item) }),
-            showRatingNumber && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-testimonial-rating-number", children: [
-              "(",
-              Math.max(0, Math.min(5, parseFloat(item.ratingNumber || 0))),
-              ")"
-            ] })
-          ] }) }, "rating") : null,
-          author: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-author-info-group", children: [
-            showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-author-image-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-              "img",
-              {
-                src: item.authorImage?.url || authorImagePlaceholder,
-                alt: item.authorImage?.alt || "Author",
-                className: "gslider-testimonial-author-image"
-              }
-            ) }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-author-meta", children: [
-              showAuthorName && item.authorName && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-author-name-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                import_block_editor.RichText.Content,
-                {
-                  tagName: authorNameHtmlTag,
-                  className: "gslider-testimonial-author-name",
-                  value: item.authorName
-                }
-              ) }),
-              showAuthorDesignation && item.authorDesignation && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-author-designation-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                import_block_editor.RichText.Content,
-                {
-                  tagName: authorDesignationHtmlTag,
-                  className: "gslider-testimonial-author-designation",
-                  value: item.authorDesignation
-                }
-              ) })
-            ] })
-          ] }, "author")
+          quote: showQuoteIcon && quoteIconAlign !== "none" ? /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+            "div",
+            {
+              className: "gslider-testimonial-quote-icon-wrapper",
+              children: [
+                quoteIconAlign === "icon" && renderIcon_default(quoteIcon),
+                quoteIconAlign === "image" && quoteImageUrl && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                  "img",
+                  {
+                    src: quoteImageUrl,
+                    alt: quoteImageAlt
+                  }
+                )
+              ]
+            },
+            "quote"
+          ) : null,
+          content: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+            "div",
+            {
+              className: "gslider-testimonial-content-group",
+              children: [
+                showTestimonialTitle && item.testimonialTitle && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-title-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                  import_block_editor.RichText.Content,
+                  {
+                    tagName: testimonialTitleHtmlTag,
+                    className: "gslider-testimonial-title",
+                    value: item.testimonialTitle
+                  }
+                ) }),
+                showTestimonialText && item.testimonialText && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-text-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                  import_block_editor.RichText.Content,
+                  {
+                    tagName: testimonialTextHtmlTag,
+                    className: "gslider-testimonial-text",
+                    value: item.testimonialText
+                  }
+                ) })
+              ]
+            },
+            "content"
+          ),
+          rating: showRating ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "div",
+            {
+              className: "gslider-testimonial-rating-wrapper",
+              children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-testimonial-rating-inner", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-rating-wrap", children: renderRatingIcons(item) }),
+                showRatingNumber && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-testimonial-rating-number", children: [
+                  "(",
+                  Math.max(
+                    0,
+                    Math.min(
+                      5,
+                      parseFloat(
+                        item.ratingNumber || 0
+                      )
+                    )
+                  ),
+                  ")"
+                ] })
+              ] })
+            },
+            "rating"
+          ) : null,
+          author: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+            "div",
+            {
+              className: "gslider-author-info-group",
+              children: [
+                showAuthorImage && (item.authorImage?.url || authorImagePlaceholder) && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-author-image-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                  "img",
+                  {
+                    src: item.authorImage?.url || authorImagePlaceholder,
+                    alt: item.authorImage?.alt || "Author",
+                    className: "gslider-testimonial-author-image"
+                  }
+                ) }),
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "gslider-author-meta", children: [
+                  showAuthorName && item.authorName && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-author-name-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                    import_block_editor.RichText.Content,
+                    {
+                      tagName: authorNameHtmlTag,
+                      className: "gslider-testimonial-author-name",
+                      value: item.authorName
+                    }
+                  ) }),
+                  showAuthorDesignation && item.authorDesignation && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-testimonial-author-designation-wrapper", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                    import_block_editor.RichText.Content,
+                    {
+                      tagName: authorDesignationHtmlTag,
+                      className: "gslider-testimonial-author-designation",
+                      value: item.authorDesignation
+                    }
+                  ) })
+                ] })
+              ]
+            },
+            "author"
+          )
         };
-        return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: `swiper-slide ${sliderType === "slider" ? "slide-mode" : ""}`, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: `gslider-content-wrapper ${item.id} ${globalClass}`, ...globalID && { id: globalID }, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-content-inner-wrapper", children: normalizedContentOrder.map((groupKey) => renderGroupMap[groupKey] || null) }) }) }, item.id);
+        return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          "div",
+          {
+            className: `swiper-slide ${sliderType === "slider" ? "slide-mode" : ""}`,
+            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              "div",
+              {
+                className: `gslider-content-wrapper ${item.id} ${globalClass}`,
+                ...globalID && { id: globalID },
+                children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "gslider-content-inner-wrapper", children: normalizedContentOrder.map(
+                  (groupKey) => renderGroupMap[groupKey] || null
+                ) })
+              }
+            )
+          },
+          item.id
+        );
       }) }),
-      anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: "swiper-button-prev", "aria-label": "Previous slide" }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: "swiper-button-next", "aria-label": "Next slide" })
-      ] }) }),
-      anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: "swiper-button-prev", "aria-label": "Previous slide", children: navigationArrowsIconLeftAlign === "image" && navigationArrowsIconLeftImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconLeftImageUrl, alt: "", "aria-hidden": "true" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { "aria-hidden": "true", children: renderIcon_default(navigationArrowsIconLeft) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: "swiper-button-next", "aria-label": "Next slide", children: navigationArrowsIconRightAlign === "image" && navigationArrowsIconRightImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconRightImageUrl, alt: "", "aria-hidden": "true" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { "aria-hidden": "true", children: renderIcon_default(navigationArrowsIconRight) }) })
-      ] }),
+      anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+        "div",
+        {
+          className: `gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`,
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              "button",
+              {
+                type: "button",
+                className: "swiper-button-prev",
+                "aria-label": "Previous slide"
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              "button",
+              {
+                type: "button",
+                className: "swiper-button-next",
+                "aria-label": "Next slide"
+              }
+            )
+          ]
+        }
+      ) }),
+      anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "inside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+        "div",
+        {
+          className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`,
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              "button",
+              {
+                type: "button",
+                className: "swiper-button-prev",
+                "aria-label": "Previous slide",
+                children: navigationArrowsIconLeftAlign === "image" && navigationArrowsIconLeftImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                  "img",
+                  {
+                    src: navigationArrowsIconLeftImageUrl,
+                    alt: "",
+                    "aria-hidden": "true"
+                  }
+                ) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { "aria-hidden": "true", children: renderIcon_default(
+                  navigationArrowsIconLeft
+                ) })
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+              "button",
+              {
+                type: "button",
+                className: "swiper-button-next",
+                "aria-label": "Next slide",
+                children: navigationArrowsIconRightAlign === "image" && navigationArrowsIconRightImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                  "img",
+                  {
+                    src: navigationArrowsIconRightImageUrl,
+                    alt: "",
+                    "aria-hidden": "true"
+                  }
+                ) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { "aria-hidden": "true", children: renderIcon_default(
+                  navigationArrowsIconRight
+                ) })
+              }
+            )
+          ]
+        }
+      ),
       anyPaginationEnabled && paginationPositionType === "inside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
         "div",
         {
@@ -4369,14 +4576,70 @@ function Save({ attributes: attributes2 }) {
         }
       ) })
     ] }),
-    anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: "swiper-button-prev", "aria-label": "Previous slide" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: "swiper-button-next", "aria-label": "Next slide" })
-    ] }) }),
-    anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: "swiper-button-prev", "aria-label": "Previous slide", children: navigationArrowsIconLeftAlign === "image" && navigationArrowsIconLeftImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconLeftImageUrl, alt: "", "aria-hidden": "true" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { "aria-hidden": "true", children: renderIcon_default(navigationArrowsIconLeft) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { type: "button", className: "swiper-button-next", "aria-label": "Next slide", children: navigationArrowsIconRightAlign === "image" && navigationArrowsIconRightImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("img", { src: navigationArrowsIconRightImageUrl, alt: "", "aria-hidden": "true" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { "aria-hidden": "true", children: renderIcon_default(navigationArrowsIconRight) }) })
-    ] }),
+    anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      "div",
+      {
+        className: `gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "button",
+            {
+              type: "button",
+              className: "swiper-button-prev",
+              "aria-label": "Previous slide"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "button",
+            {
+              type: "button",
+              className: "swiper-button-next",
+              "aria-label": "Next slide"
+            }
+          )
+        ]
+      }
+    ) }),
+    anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === "outside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      "div",
+      {
+        className: `gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "button",
+            {
+              type: "button",
+              className: "swiper-button-prev",
+              "aria-label": "Previous slide",
+              children: navigationArrowsIconLeftAlign === "image" && navigationArrowsIconLeftImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                "img",
+                {
+                  src: navigationArrowsIconLeftImageUrl,
+                  alt: "",
+                  "aria-hidden": "true"
+                }
+              ) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { "aria-hidden": "true", children: renderIcon_default(navigationArrowsIconLeft) })
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "button",
+            {
+              type: "button",
+              className: "swiper-button-next",
+              "aria-label": "Next slide",
+              children: navigationArrowsIconRightAlign === "image" && navigationArrowsIconRightImageUrl ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                "img",
+                {
+                  src: navigationArrowsIconRightImageUrl,
+                  alt: "",
+                  "aria-hidden": "true"
+                }
+              ) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { "aria-hidden": "true", children: renderIcon_default(navigationArrowsIconRight) })
+            }
+          )
+        ]
+      }
+    ),
     anyPaginationEnabled && paginationPositionType === "outside" && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_jsx_runtime2.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
       "div",
       {
