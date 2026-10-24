@@ -4149,16 +4149,11 @@ function Save({ attributes: attributes2 }) {
     navigationArrowsIconLeftAlign,
     navigationArrowsIconLeft,
     navigationArrowsIconLeftImageUrl,
-    navigationArrowsIconLeftImageAlt,
-    navigationArrowsIconLeftImageID,
     navigationArrowsIconRightAlign,
     navigationArrowsIconRight,
     navigationArrowsIconRightImageUrl,
-    navigationArrowsIconRightImageAlt,
-    navigationArrowsIconRightImageID,
     layoutHeightSwitcher,
-    contentOrder,
-    presetStyle
+    contentOrder
   } = attributes2;
   const normalizedContentOrder = normalizeContentOrder(contentOrder);
   const blockProps = import_block_editor.useBlockProps.save({

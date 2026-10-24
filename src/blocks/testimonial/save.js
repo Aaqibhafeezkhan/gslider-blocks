@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars, object-shorthand */
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
 import { normalizeContentOrder } from './content-order';
@@ -54,18 +53,13 @@ export default function Save( { attributes } ) {
 		navigationArrowsIconLeftAlign,
 		navigationArrowsIconLeft,
 		navigationArrowsIconLeftImageUrl,
-		navigationArrowsIconLeftImageAlt,
-		navigationArrowsIconLeftImageID,
 
 		navigationArrowsIconRightAlign,
 		navigationArrowsIconRight,
 		navigationArrowsIconRightImageUrl,
-		navigationArrowsIconRightImageAlt,
-		navigationArrowsIconRightImageID,
 
 		layoutHeightSwitcher,
 		contentOrder,
-		presetStyle,
 	} = attributes;
 
 	const normalizedContentOrder = normalizeContentOrder( contentOrder );
@@ -156,11 +150,11 @@ export default function Save( { attributes } ) {
 			? {
 					pauseOnMouseEnter: pauseOnHover,
 					disableOnInteraction: false,
-					stopOnLastSlide: stopOnLastSlide,
-					reverseDirection: reverseDirection,
+					stopOnLastSlide,
+					reverseDirection,
 			  }
 			: false,
-		allowTouchMove: allowTouchMove,
+		allowTouchMove,
 		mousewheel: mousewheelControl,
 		keyboard: keyboardNavigation
 			? {
