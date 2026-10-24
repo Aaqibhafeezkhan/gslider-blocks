@@ -1,7 +1,7 @@
 import { isDeepStrictEqual } from 'util';
 import { handleGenerateBlock } from '../dist/tools/generate-block.js';
 import { handleValidateBlock } from '../dist/tools/validate-block.js';
-import { attributeDefaults, loadBundledBlock } from '../dist/core/block-runtime.js';
+import { attributeDefaults, loadBundledBlock, prepareBlock } from '../dist/core/block-runtime.js';
 import { BLOCK_ID_PREFIX } from '../dist/core/registry.js';
 import { listTemplates } from '../dist/resources/templates.js';
 
@@ -151,6 +151,43 @@ if (valid.isError || !validReport.isValid || validReport.warnings.length !== 0) 
   fail(`generated markup did not validate cleanly: ${valid.content[0].text}`);
 }
 console.log('ok validate generated markup');
+
+const testimonial = loadBundledBlock('testimonial');
+const testimonialDefaults = attributeDefaults(testimonial.attributes);
+const titleUnits = { Desktop: 'px', Tablet: 'px', Mobile: 'px' };
+if (!isDeepStrictEqual(testimonialDefaults.testimonialTitleFontSizeUnits, titleUnits)) {
+  fail('testimonial title font-size units must default to exactly the three devices');
+}
+console.log('ok testimonial title font-size device defaults');
+
+const legacyUnits = { ...titleUnits, em: 'px', rem: 'px' };
+if (testimonial.styling({ ...testimonialDefaults, testimonialTitleFontSizeUnits: legacyUnits }) !==
+    testimonial.styling(testimonialDefaults)) {
+  fail('legacy stray title font-size keys change testimonial CSS');
+}
+const { blocks } = prepareBlock('testimonial');
+for (const [label, units] of [
+  ['legacy stray keys', legacyUnits],
+  ['em/rem device values', { Desktop: 'em', Tablet: 'rem', Mobile: 'px' }],
+]) {
+  const attributes = {
+    ...testimonialDefaults,
+    blockId: `${BLOCK_ID_PREFIX.testimonial}-abcd1234`,
+    testimonialTitleFontSizeUnits: units,
+  };
+  attributes.blockStyle = testimonial.styling(attributes);
+  const markup = blocks.serialize([blocks.createBlock('gslider-blocks/testimonial', attributes)]);
+  const parsed = blocks.parse(markup)[0];
+  if (!isDeepStrictEqual(parsed.attributes.testimonialTitleFontSizeUnits, units)) {
+    fail(`testimonial ${label}: saved units were not preserved`);
+  }
+  const report = await handleValidateBlock({ markup });
+  const validation = JSON.parse(report.content[0].text);
+  if (report.isError || !validation.isValid || validation.warnings.length !== 0) {
+    fail(`testimonial ${label}: saved markup did not validate cleanly: ${report.content[0].text}`);
+  }
+  console.log(`ok testimonial ${label} saved markup`);
+}
 
 const badEffect = await handleValidateBlock({
   blockSlug: 'image-slider',

@@ -1713,9 +1713,7 @@ var attributes = {
     default: {
       Desktop: "px",
       Tablet: "px",
-      Mobile: "px",
-      em: "px",
-      rem: "px"
+      Mobile: "px"
     }
   },
   testimonialTitleFontWeight: {

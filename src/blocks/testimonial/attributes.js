@@ -1658,8 +1658,6 @@ const attributes = {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px',
-			em: 'px',
-			rem: 'px',
 		},
 	},
 	testimonialTitleFontWeight: {
