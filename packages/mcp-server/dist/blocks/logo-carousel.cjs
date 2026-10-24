@@ -3563,12 +3563,24 @@ var generateLogoCarouselStyle = (attributes2) => {
     return styles;
   };
   const logoBackgroundStyleObjectToString = (styleObj) => Object.entries(styleObj).map(([key, value]) => `${key}: ${value};`).join(" ");
-  const logoDesktopBackgroundNormalStyles = logoBackgroundStyleObjectToString(getLogoBackgroundNormalStyles("Desktop"));
-  const logoTabletBackgroundNormalStyles = logoBackgroundStyleObjectToString(getLogoBackgroundNormalStyles("Tablet"));
-  const logoMobileBackgroundNormalStyles = logoBackgroundStyleObjectToString(getLogoBackgroundNormalStyles("Mobile"));
-  const logoDesktopBackgroundHoverStyles = logoBackgroundStyleObjectToString(getLogoBackgroundHoverStyles("Desktop"));
-  const logoTabletBackgroundHoverStyles = logoBackgroundStyleObjectToString(getLogoBackgroundHoverStyles("Tablet"));
-  const logoMobileBackgroundHoverStyles = logoBackgroundStyleObjectToString(getLogoBackgroundHoverStyles("Mobile"));
+  const logoDesktopBackgroundNormalStyles = logoBackgroundStyleObjectToString(
+    getLogoBackgroundNormalStyles("Desktop")
+  );
+  const logoTabletBackgroundNormalStyles = logoBackgroundStyleObjectToString(
+    getLogoBackgroundNormalStyles("Tablet")
+  );
+  const logoMobileBackgroundNormalStyles = logoBackgroundStyleObjectToString(
+    getLogoBackgroundNormalStyles("Mobile")
+  );
+  const logoDesktopBackgroundHoverStyles = logoBackgroundStyleObjectToString(
+    getLogoBackgroundHoverStyles("Desktop")
+  );
+  const logoTabletBackgroundHoverStyles = logoBackgroundStyleObjectToString(
+    getLogoBackgroundHoverStyles("Tablet")
+  );
+  const logoMobileBackgroundHoverStyles = logoBackgroundStyleObjectToString(
+    getLogoBackgroundHoverStyles("Mobile")
+  );
   const getGlobalBackgroundNormalStyles = (device) => {
     const bgType = globalNormalBackgroundType;
     const bgColor = globalNormalClassicColor;
@@ -3638,12 +3650,24 @@ var generateLogoCarouselStyle = (attributes2) => {
     return styles;
   };
   const globalBackgroundStyleObjectToString = (styleObj) => Object.entries(styleObj).map(([key, value]) => `${key}: ${value};`).join(" ");
-  const globalDesktopBackgroundNormalStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundNormalStyles("Desktop"));
-  const globalTabletBackgroundNormalStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundNormalStyles("Tablet"));
-  const globalMobileBackgroundNormalStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundNormalStyles("Mobile"));
-  const globalDesktopBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles("Desktop"));
-  const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles("Tablet"));
-  const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles("Mobile"));
+  const globalDesktopBackgroundNormalStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundNormalStyles("Desktop")
+  );
+  const globalTabletBackgroundNormalStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundNormalStyles("Tablet")
+  );
+  const globalMobileBackgroundNormalStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundNormalStyles("Mobile")
+  );
+  const globalDesktopBackgroundHoverStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundHoverStyles("Desktop")
+  );
+  const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundHoverStyles("Tablet")
+  );
+  const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundHoverStyles("Mobile")
+  );
   const logoCarouselCSS = `
         .${blockId}.gslider-logo-carousel-wrapper {
             ${globalDesktopBackgroundNormalStyles}
