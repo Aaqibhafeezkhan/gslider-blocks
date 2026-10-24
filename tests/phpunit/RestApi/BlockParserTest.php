@@ -239,6 +239,16 @@ class BlockParserTest {
 		$this->assert_true( 3 === $untouched_testimonial['totalSlides'], 'an untouched testimonial returns the three default slides' );
 		$this->assert_true( 'Alex Hunter' === $untouched_testimonial['slides'][0]['authorName'], 'default testimonial slides keep their default content' );
 
+		$title_units = [ 'Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px' ];
+		$this->assert_true( $title_units === $untouched_testimonial['attrs']['testimonialTitleFontSizeUnits'], 'untouched testimonial title font-size units contain only the three devices' );
+
+		$stored_units       = [ 'Desktop' => 'em', 'Tablet' => 'rem', 'Mobile' => 'px', 'em' => 'px', 'rem' => 'px' ];
+		$stored_testimonial = $this->normalize(
+			[ 'testimonialTitleFontSizeUnits' => $stored_units ],
+			'gslider-blocks/testimonial'
+		);
+		$this->assert_true( $stored_units === $stored_testimonial['attrs']['testimonialTitleFontSizeUnits'], 'stored testimonial units and legacy stray keys remain unchanged' );
+
 		$untouched_image = $this->normalize( [], 'gslider-blocks/image-slider' );
 		$this->assert_true( 0 === $untouched_image['totalSlides'] && [] === $untouched_image['attrs']['images'], 'an untouched image slider has no default images' );
 		$this->assert_true( [] === BlockParser::attribute_defaults( 'gslider-blocks/unknown' ), 'an unknown block has no defaults' );
