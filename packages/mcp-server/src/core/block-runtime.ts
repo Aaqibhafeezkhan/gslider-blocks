@@ -1,28 +1,36 @@
+/* eslint-disable jsdoc/check-tag-names */
 import { createRequire } from 'module';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { getBlockSchema, type BlockDetail } from './registry.js';
 
-const require = createRequire(import.meta.url);
+const require = createRequire( import.meta.url );
 
 export interface BundledBlock {
-  meta: { name: string; title?: string; [key: string]: unknown };
-  attributes: Record<string, { type?: string; default?: unknown }>;
-  save: (props: { attributes: Record<string, unknown> }) => unknown;
-  styling: (attributes: Record<string, unknown>) => string;
-  deprecated: unknown[];
+	meta: { name: string; title?: string; [ key: string ]: unknown };
+	attributes: Record< string, { type?: string; default?: unknown } >;
+	save: ( props: { attributes: Record< string, unknown > } ) => unknown;
+	styling: ( attributes: Record< string, unknown > ) => string;
+	deprecated: unknown[];
 }
 
 interface BlocksApi {
-  registerBlockType: (name: string, settings: Record<string, unknown>) => unknown;
-  createBlock: (
-    name: string,
-    attributes: Record<string, unknown>,
-    innerBlocks?: unknown[]
-  ) => { innerBlocks?: unknown[] };
-  serialize: (blocks: unknown[]) => string;
-  parse: (markup: string) => Array<{ name: string; attributes: Record<string, unknown>; innerBlocks?: unknown[] }>;
-  validateBlock: (block: unknown) => unknown;
+	registerBlockType: (
+		name: string,
+		settings: Record< string, unknown >
+	) => unknown;
+	createBlock: (
+		name: string,
+		attributes: Record< string, unknown >,
+		innerBlocks?: unknown[]
+	) => { innerBlocks?: unknown[] };
+	serialize: ( blocks: unknown[] ) => string;
+	parse: ( markup: string ) => Array< {
+		name: string;
+		attributes: Record< string, unknown >;
+		innerBlocks?: unknown[];
+	} >;
+	validateBlock: ( block: unknown ) => unknown;
 }
 
 let domReady = false;
@@ -32,90 +40,103 @@ let domReady = false;
  * bundles require it, so the window has to exist before the first require.
  */
 export function ensureDom(): void {
-  if (domReady) {
-    return;
-  }
-  const { JSDOM, VirtualConsole } = require('jsdom') as {
-    JSDOM: new (html: string, options: unknown) => { window: Record<string, unknown> };
-    VirtualConsole: new () => { on: (event: string, listener: () => void) => void };
-  };
-  const virtualConsole = new VirtualConsole();
-  virtualConsole.on('jsdomError', () => {});
-  const dom = new JSDOM('<!doctype html><html><body></body></html>', {
-    url: 'http://localhost/',
-    virtualConsole,
-  });
-  const target = globalThis as Record<string, unknown>;
-  for (const key of [
-    'window',
-    'document',
-    'navigator',
-    'Node',
-    'HTMLElement',
-    'Element',
-    'DOMParser',
-    'MutationObserver',
-    'getComputedStyle',
-    'CustomEvent',
-    'Event',
-  ]) {
-    if (!(key in globalThis)) {
-      target[key] = key === 'window' ? dom.window : dom.window[key];
-    }
-  }
-  target.requestAnimationFrame = (callback: () => void) => setTimeout(callback, 0);
-  const matchMedia = () => ({
-    matches: false,
-    addListener() {},
-    removeListener() {},
-    addEventListener() {},
-    removeEventListener() {},
-  });
-  target.matchMedia = matchMedia;
-  dom.window.matchMedia = matchMedia;
-  const store = new Map<string, string>();
-  target.localStorage = {
-    getItem: (key: string) => store.get(key) ?? null,
-    setItem: (key: string, value: string) => store.set(key, String(value)),
-    removeItem: (key: string) => store.delete(key),
-  };
-  target.__ = (text: unknown) => text;
-  domReady = true;
+	if ( domReady ) {
+		return;
+	}
+	const { JSDOM, VirtualConsole } = require( 'jsdom' ) as {
+		JSDOM: new (
+			html: string,
+			options: unknown
+		) => { window: Record< string, unknown > };
+		VirtualConsole: new () => {
+			on: ( event: string, listener: () => void ) => void;
+		};
+	};
+	const virtualConsole = new VirtualConsole();
+	virtualConsole.on( 'jsdomError', () => {} );
+	const dom = new JSDOM( '<!doctype html><html><body></body></html>', {
+		url: 'http://localhost/',
+		virtualConsole,
+	} );
+	const target = globalThis as Record< string, unknown >;
+	for ( const key of [
+		'window',
+		'document',
+		'navigator',
+		'Node',
+		'HTMLElement',
+		'Element',
+		'DOMParser',
+		'MutationObserver',
+		'getComputedStyle',
+		'CustomEvent',
+		'Event',
+	] ) {
+		if ( ! ( key in globalThis ) ) {
+			target[ key ] = key === 'window' ? dom.window : dom.window[ key ];
+		}
+	}
+	target.requestAnimationFrame = ( callback: () => void ) =>
+		setTimeout( callback, 0 );
+	const matchMedia = () => ( {
+		matches: false,
+		addListener() {},
+		removeListener() {},
+		addEventListener() {},
+		removeEventListener() {},
+	} );
+	target.matchMedia = matchMedia;
+	dom.window.matchMedia = matchMedia;
+	const store = new Map< string, string >();
+	target.localStorage = {
+		getItem: ( key: string ) => store.get( key ) ?? null,
+		setItem: ( key: string, value: string ) =>
+			store.set( key, String( value ) ),
+		removeItem: ( key: string ) => store.delete( key ),
+	};
+	target.__ = ( text: unknown ) => text;
+	domReady = true;
 }
 
-const loaded = new Map<string, BundledBlock>();
+const loaded = new Map< string, BundledBlock >();
 
-export function loadBundledBlock(slug: string): BundledBlock {
-  const cached = loaded.get(slug);
-  if (cached) {
-    return cached;
-  }
-  ensureDom();
-  const file = fileURLToPath(new URL(`../blocks/${slug}.cjs`, import.meta.url));
-  if (!fs.existsSync(file)) {
-    throw new Error(
-      `Block bundle missing for "${slug}". Run "npm run build" in packages/mcp-server.`
-    );
-  }
-  const mod = require(file) as BundledBlock;
-  loaded.set(slug, mod);
-  return mod;
+export function loadBundledBlock( slug: string ): BundledBlock {
+	const cached = loaded.get( slug );
+	if ( cached ) {
+		return cached;
+	}
+	ensureDom();
+	const file = fileURLToPath(
+		new URL( `../blocks/${ slug }.cjs`, import.meta.url )
+	);
+	if ( ! fs.existsSync( file ) ) {
+		throw new Error(
+			`Block bundle missing for "${ slug }". Run "npm run build" in packages/mcp-server.`
+		);
+	}
+	const mod = require( file ) as BundledBlock;
+	loaded.set( slug, mod );
+	return mod;
 }
 
 export function attributeDefaults(
-  attributes: BundledBlock['attributes']
-): Record<string, unknown> {
-  const defaults: Record<string, unknown> = {};
-  for (const [key, definition] of Object.entries(attributes)) {
-    if (definition && typeof definition === 'object' && 'default' in definition) {
-      defaults[key] = definition.default;
-    }
-  }
-  return defaults;
+	attributes: BundledBlock[ 'attributes' ]
+): Record< string, unknown > {
+	const defaults: Record< string, unknown > = {};
+	for ( const [ key, definition ] of Object.entries( attributes ) ) {
+		if (
+			definition &&
+			typeof definition === 'object' &&
+			'default' in definition
+		) {
+			defaults[ key ] = definition.default;
+		}
+	}
+	return defaults;
 }
 
 let blocksApi: BlocksApi | null = null;
-const registered = new Set<string>();
+const registered = new Set< string >();
 let coreBlocksReady = false;
 
 /**
@@ -124,68 +145,85 @@ let coreBlocksReady = false;
  * loaded, so the server does not start the whole block library.
  */
 export function registerCoreBlocksOnce(): void {
-  if (coreBlocksReady) {
-    return;
-  }
-  ensureDom();
-  const saves = require('./core-saves.cjs') as Record<string, unknown>;
-  const blocks = wordpressBlocks();
-  for (const name of ['paragraph', 'heading', 'image', 'button', 'buttons']) {
-    const meta = saves[`${name}Meta`] as { name: string };
-    if (!registered.has(meta.name)) {
-      blocks.registerBlockType(meta.name, {
-        ...(saves[`${name}Meta`] as Record<string, unknown>),
-        save: saves[name],
-        edit: () => null,
-      });
-      registered.add(meta.name);
-    }
-  }
-  coreBlocksReady = true;
+	if ( coreBlocksReady ) {
+		return;
+	}
+	ensureDom();
+	const saves = require( './core-saves.cjs' ) as Record< string, unknown >;
+	const blocks = wordpressBlocks();
+	for ( const name of [
+		'paragraph',
+		'heading',
+		'image',
+		'button',
+		'buttons',
+	] ) {
+		const meta = saves[ `${ name }Meta` ] as { name: string };
+		if ( ! registered.has( meta.name ) ) {
+			blocks.registerBlockType( meta.name, {
+				...( saves[ `${ name }Meta` ] as Record< string, unknown > ),
+				save: saves[ name ],
+				edit: () => null,
+			} );
+			registered.add( meta.name );
+		}
+	}
+	coreBlocksReady = true;
 }
 
 export function wordpressBlocks(): BlocksApi {
-  ensureDom();
-  if (!blocksApi) {
-    blocksApi = require('@wordpress/blocks') as BlocksApi;
-  }
-  return blocksApi;
+	ensureDom();
+	if ( ! blocksApi ) {
+		blocksApi = require( '@wordpress/blocks' ) as BlocksApi;
+	}
+	return blocksApi;
 }
 
 /**
  * Registers the block with its real attributes, save, and deprecated, once.
+ * @param slug
  */
-export function prepareBlock(slug: string): {
-  blocks: BlocksApi;
-  bundled: BundledBlock;
-  schema: BlockDetail;
+export function prepareBlock( slug: string ): {
+	blocks: BlocksApi;
+	bundled: BundledBlock;
+	schema: BlockDetail;
 } {
-  const bundled = loadBundledBlock(slug);
-  const schema = getBlockSchema(slug);
-  const blocks = wordpressBlocks();
-  if (!registered.has(schema.name)) {
-    blocks.registerBlockType(schema.name, {
-      ...bundled.meta,
-      attributes: bundled.attributes,
-      save: bundled.save,
-      deprecated: bundled.deprecated ?? [],
-      edit: () => null,
-    });
-    registered.add(schema.name);
-  }
-  return { blocks, bundled, schema };
+	const bundled = loadBundledBlock( slug );
+	const schema = getBlockSchema( slug );
+	const blocks = wordpressBlocks();
+	if ( ! registered.has( schema.name ) ) {
+		blocks.registerBlockType( schema.name, {
+			...bundled.meta,
+			attributes: bundled.attributes,
+			save: bundled.save,
+			deprecated: bundled.deprecated ?? [],
+			edit: () => null,
+		} );
+		registered.add( schema.name );
+	}
+	return { blocks, bundled, schema };
 }
 
-export function validationOf(raw: unknown): { isValid: boolean; issues: unknown[] } {
-  if (Array.isArray(raw)) {
-    return { isValid: Boolean(raw[0]), issues: Array.isArray(raw[1]) ? raw[1] : [] };
-  }
-  if (raw && typeof raw === 'object') {
-    const record = raw as { isValid?: boolean; validationIssues?: unknown[]; issues?: unknown[] };
-    return {
-      isValid: Boolean(record.isValid),
-      issues: record.validationIssues ?? record.issues ?? [],
-    };
-  }
-  return { isValid: false, issues: [raw] };
+export function validationOf( raw: unknown ): {
+	isValid: boolean;
+	issues: unknown[];
+} {
+	if ( Array.isArray( raw ) ) {
+		return {
+			isValid: Boolean( raw[ 0 ] ),
+			issues: Array.isArray( raw[ 1 ] ) ? raw[ 1 ] : [],
+		};
+	}
+	if ( raw && typeof raw === 'object' ) {
+		const record = raw as {
+			isValid?: boolean;
+			validationIssues?: unknown[];
+			issues?: unknown[];
+		};
+		return {
+			isValid: Boolean( record.isValid ),
+			issues: record.validationIssues ?? record.issues ?? [],
+		};
+	}
+	return { isValid: false, issues: [ raw ] };
 }
