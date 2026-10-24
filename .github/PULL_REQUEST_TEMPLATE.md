@@ -22,6 +22,6 @@ Closes #
 
 ---
 
-### ⭐ Support GSlider Blocks
-- [ ] I have starred the [noruzzamans/gslider-blocks](https://github.com/noruzzamans/gslider-blocks) repository ⭐ *(optional, but deeply appreciated!)*
+### Support GSlider Blocks
+- [ ] I have starred the [noruzzamans/gslider-blocks](https://github.com/noruzzamans/gslider-blocks) repository (optional, but appreciated!)
 
