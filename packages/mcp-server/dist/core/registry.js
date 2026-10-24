@@ -50,12 +50,14 @@ export function listBlocks() {
 /**
  * Returns the comprehensive schema, real defaults, and full attribute dictionary
  * for a specific block slug loaded directly from its dedicated schema file.
+ * @param slug
  */
 export function getBlockSchema(slug) {
     return loadBlockSchema(slug);
 }
 /**
  * Checks whether a given slug is a valid GSlider block.
+ * @param slug
  */
 export function isValidBlockSlug(slug) {
     return SUPPORTED_BLOCK_SLUGS.includes(slug);
