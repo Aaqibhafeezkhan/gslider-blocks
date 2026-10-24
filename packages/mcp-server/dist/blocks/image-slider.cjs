@@ -3499,12 +3499,24 @@ var generateImageSliderStyle = (attributes2) => {
     return styles;
   };
   const globalBackgroundStyleObjectToString = (styleObj) => Object.entries(styleObj).map(([key, value]) => `${key}: ${value};`).join(" ");
-  const globalDesktopBackgroundNormalStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundNormalStyles("Desktop"));
-  const globalTabletBackgroundNormalStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundNormalStyles("Tablet"));
-  const globalMobileBackgroundNormalStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundNormalStyles("Mobile"));
-  const globalDesktopBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles("Desktop"));
-  const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles("Tablet"));
-  const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(getGlobalBackgroundHoverStyles("Mobile"));
+  const globalDesktopBackgroundNormalStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundNormalStyles("Desktop")
+  );
+  const globalTabletBackgroundNormalStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundNormalStyles("Tablet")
+  );
+  const globalMobileBackgroundNormalStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundNormalStyles("Mobile")
+  );
+  const globalDesktopBackgroundHoverStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundHoverStyles("Desktop")
+  );
+  const globalTabletBackgroundHoverStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundHoverStyles("Tablet")
+  );
+  const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(
+    getGlobalBackgroundHoverStyles("Mobile")
+  );
   const imageSliderCSS = `
         .${blockId}.gslider-image-slider-wrapper {
             ${globalDesktopBackgroundNormalStyles}
