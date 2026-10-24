@@ -2741,11 +2741,6 @@ function Save({ attributes: attributes2 }) {
     imageLinkTarget,
     imageLinkRel,
     imageLinkHoverEffect,
-    imageLinkHoverOpacity,
-    imageLinkHoverScale,
-    imageLinkHoverLift,
-    imageLinkHoverLiftUnits,
-    imageLinkTransitionDuration,
     enableLazyLoad
   } = attributes2;
   const blockProps = import_block_editor.useBlockProps.save({
