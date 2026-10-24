@@ -1867,12 +1867,10 @@ function Save({ attributes: attributes2 }) {
     navigationArrowsIconLeft,
     navigationArrowsIconLeftImageUrl,
     navigationArrowsIconLeftImageAlt,
-    navigationArrowsIconLeftImageID,
     navigationArrowsIconRightAlign,
     navigationArrowsIconRight,
     navigationArrowsIconRightImageUrl,
     navigationArrowsIconRightImageAlt,
-    navigationArrowsIconRightImageID,
     layoutHeightSwitcher
   } = attributes2;
   const blockProps = import_block_editor.useBlockProps.save({

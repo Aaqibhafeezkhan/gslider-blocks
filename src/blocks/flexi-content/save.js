@@ -1,9 +1,4 @@
-/* eslint-disable no-unused-vars */
-import {
-	useBlockProps,
-	InnerBlocks,
-	useInnerBlocksProps,
-} from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
 
 export default function Save( { attributes } ) {
@@ -41,13 +36,11 @@ export default function Save( { attributes } ) {
 		navigationArrowsIconLeft,
 		navigationArrowsIconLeftImageUrl,
 		navigationArrowsIconLeftImageAlt,
-		navigationArrowsIconLeftImageID,
 
 		navigationArrowsIconRightAlign,
 		navigationArrowsIconRight,
 		navigationArrowsIconRightImageUrl,
 		navigationArrowsIconRightImageAlt,
-		navigationArrowsIconRightImageID,
 
 		layoutHeightSwitcher,
 	} = attributes;
