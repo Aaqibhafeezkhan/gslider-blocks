@@ -1,9 +1,15 @@
 import { randomBytes } from 'crypto';
 import { z } from 'zod';
 import { BLOCK_ID_PREFIX } from '../core/registry.js';
-import { attributeDefaults, loadBundledBlock, prepareBlock, registerCoreBlocksOnce, validationOf } from '../core/block-runtime.js';
+import { attributeDefaults, loadBundledBlock, prepareBlock, registerCoreBlocksOnce, validationOf, } from '../core/block-runtime.js';
 import { commentAttributes } from '../core/markup.js';
-export const GENERATABLE_SLUGS = ['base', 'testimonial', 'image-slider', 'logo-carousel', 'flexi-content'];
+export const GENERATABLE_SLUGS = [
+    'base',
+    'testimonial',
+    'image-slider',
+    'logo-carousel',
+    'flexi-content',
+];
 const SLIDE_FIELDS = {
     base: [
         'subTitle',
@@ -32,11 +38,23 @@ const SLIDE_FIELDS = {
 const RESERVED_ATTRIBUTES = ['blockId', 'blockStyle', 'deviceType'];
 const deviceNumber = z.union([
     z.number(),
-    z.object({ Desktop: z.number().optional(), Tablet: z.number().optional(), Mobile: z.number().optional() }).strict(),
+    z
+        .object({
+        Desktop: z.number().optional(),
+        Tablet: z.number().optional(),
+        Mobile: z.number().optional(),
+    })
+        .strict(),
 ]);
 const deviceBoolean = z.union([
     z.boolean(),
-    z.object({ Desktop: z.boolean().optional(), Tablet: z.boolean().optional(), Mobile: z.boolean().optional() }).strict(),
+    z
+        .object({
+        Desktop: z.boolean().optional(),
+        Tablet: z.boolean().optional(),
+        Mobile: z.boolean().optional(),
+    })
+        .strict(),
 ]);
 const slideSchema = z
     .object({
@@ -64,7 +82,12 @@ const slideSchema = z
     blocks: z
         .array(z
         .object({
-        type: z.enum(['paragraph', 'heading', 'image', 'button']),
+        type: z.enum([
+            'paragraph',
+            'heading',
+            'image',
+            'button',
+        ]),
         text: z.string().optional(),
         level: z.number().int().min(1).max(6).optional(),
         url: z.string().optional(),
@@ -103,7 +126,7 @@ export class GeneratorInputError extends Error {
 }
 export const generateBlockToolDefinition = {
     name: 'gslider_generate_block',
-    description: 'Generates paste-ready Gutenberg markup for a GSlider block. The markup is produced by the block\'s own save function and checked with validateBlock before it is returned. Flexi Content slides are child flexi-content-item blocks.',
+    description: "Generates paste-ready Gutenberg markup for a GSlider block. The markup is produced by the block's own save function and checked with validateBlock before it is returned. Flexi Content slides are child flexi-content-item blocks.",
     inputSchema: {
         type: 'object',
         properties: {
@@ -140,16 +163,23 @@ function deviceObject(value, fallback) {
     return { Desktop: value, Tablet: value, Mobile: value };
 }
 function typeMatches(type, value) {
-    if (type === 'array')
+    if (type === 'array') {
         return Array.isArray(value);
-    if (type === 'object')
-        return value !== null && typeof value === 'object' && !Array.isArray(value);
-    if (type === 'boolean')
+    }
+    if (type === 'object') {
+        return (value !== null &&
+            typeof value === 'object' &&
+            !Array.isArray(value));
+    }
+    if (type === 'boolean') {
         return typeof value === 'boolean';
-    if (type === 'string')
+    }
+    if (type === 'string') {
         return typeof value === 'string';
-    if (type === 'number')
+    }
+    if (type === 'number') {
         return typeof value === 'number' && Number.isFinite(value);
+    }
     return true;
 }
 function buildSlide(slug, slide, index, fallback) {
@@ -170,11 +200,14 @@ function buildSlide(slug, slide, index, fallback) {
             tooltipText: slide.tooltipText ?? '',
         };
     }
-    const item = fallback ? structuredClone(fallback) : {};
+    const item = fallback
+        ? structuredClone(fallback)
+        : {};
     item.id = `item-${index + 1}`;
     const copy = (from, to) => {
-        if (slide[from] !== undefined)
+        if (slide[from] !== undefined) {
             item[to] = slide[from];
+        }
     };
     if (slug === 'base') {
         copy('subTitle', 'subTitle');
@@ -182,7 +215,8 @@ function buildSlide(slug, slide, index, fallback) {
         copy('description', 'description');
         copy('buttonText', 'primaryButtonText');
         copy('buttonUrl', 'primaryButtonLink');
-        if (slide.secondaryButtonText !== undefined || slide.secondaryButtonUrl !== undefined) {
+        if (slide.secondaryButtonText !== undefined ||
+            slide.secondaryButtonUrl !== undefined) {
             item.secondaryButtonSwitcher = true;
             copy('secondaryButtonText', 'secondaryButtonText');
             copy('secondaryButtonUrl', 'secondaryButtonLink');
@@ -193,7 +227,10 @@ function buildSlide(slug, slide, index, fallback) {
         }
         if (slide.backgroundImageUrl !== undefined) {
             const current = (item.normalBackgroundImageUrl ?? {});
-            item.normalBackgroundImageUrl = { ...current, Desktop: slide.backgroundImageUrl };
+            item.normalBackgroundImageUrl = {
+                ...current,
+                Desktop: slide.backgroundImageUrl,
+            };
         }
     }
     else {
@@ -202,7 +239,8 @@ function buildSlide(slug, slide, index, fallback) {
         copy('authorName', 'authorName');
         copy('authorDesignation', 'authorDesignation');
         copy('rating', 'ratingNumber');
-        if (slide.authorImageUrl !== undefined || slide.authorImageAlt !== undefined) {
+        if (slide.authorImageUrl !== undefined ||
+            slide.authorImageAlt !== undefined) {
             const current = (item.authorImage ?? {});
             item.authorImage = {
                 url: slide.authorImageUrl ?? current.url ?? '',
@@ -218,25 +256,36 @@ function coreBlock(blocksApi, inner) {
         if (!inner.text) {
             throw new GeneratorInputError('A paragraph needs text.');
         }
-        return blocksApi.createBlock('core/paragraph', { content: inner.text });
+        return blocksApi.createBlock('core/paragraph', {
+            content: inner.text,
+        });
     }
     if (inner.type === 'heading') {
         if (!inner.text) {
             throw new GeneratorInputError('A heading needs text.');
         }
-        return blocksApi.createBlock('core/heading', { content: inner.text, level: inner.level ?? 2 });
+        return blocksApi.createBlock('core/heading', {
+            content: inner.text,
+            level: inner.level ?? 2,
+        });
     }
     if (inner.type === 'image') {
         if (!inner.url) {
             throw new GeneratorInputError('An image needs a url. The generator does not upload media.');
         }
-        return blocksApi.createBlock('core/image', { url: inner.url, alt: inner.alt ?? '' });
+        return blocksApi.createBlock('core/image', {
+            url: inner.url,
+            alt: inner.alt ?? '',
+        });
     }
     if (!inner.text) {
         throw new GeneratorInputError('A button needs text.');
     }
     return blocksApi.createBlock('core/buttons', {}, [
-        blocksApi.createBlock('core/button', { text: inner.text, url: inner.url ?? '' }),
+        blocksApi.createBlock('core/button', {
+            text: inner.text,
+            url: inner.url ?? '',
+        }),
     ]);
 }
 function validationIssues(blocksApi, block) {
@@ -267,7 +316,9 @@ function generate(input) {
             throw new GeneratorInputError(`Attribute "${key}" must be a ${definition.type}.`);
         }
         const allowed = schema.allowedValues?.[key];
-        if (Array.isArray(allowed) && typeof overrides[key] === 'string' && !allowed.includes(overrides[key])) {
+        if (Array.isArray(allowed) &&
+            typeof overrides[key] === 'string' &&
+            !allowed.includes(overrides[key])) {
             throw new GeneratorInputError(`Attribute "${key}" must be one of: ${allowed.join(', ')}.`);
         }
     }
@@ -289,7 +340,10 @@ function generate(input) {
             }
             const itemId = `${BLOCK_ID_PREFIX['flexi-content-item']}-${randomBytes(4).toString('hex')}`;
             const itemChanged = { blockId: itemId };
-            const itemStyle = itemBundled.styling({ ...itemDefaults, ...itemChanged });
+            const itemStyle = itemBundled.styling({
+                ...itemDefaults,
+                ...itemChanged,
+            });
             return blocks.createBlock('gslider-blocks/flexi-content-item', { ...itemChanged, blockStyle: itemStyle }, slide.blocks.map((inner) => coreBlock(blocks, inner)));
         });
     }
@@ -309,25 +363,30 @@ function generate(input) {
     if (!isFlexi) {
         changed[schema.slideField] = slides;
     }
-    if (layout.mode)
+    if (layout.mode) {
         changed.sliderType = layout.mode;
+    }
     if (layout.columns !== undefined) {
         changed.carouselPerColumn = deviceObject(layout.columns, defaults.carouselPerColumn);
     }
     if (layout.gap !== undefined) {
         changed.carouselPerColumnGap = deviceObject(layout.gap, defaults.carouselPerColumnGap);
     }
-    if (layout.speed !== undefined)
+    if (layout.speed !== undefined) {
         changed.speed = deviceObject(layout.speed, defaults.speed);
-    if (layout.autoplay !== undefined)
+    }
+    if (layout.autoplay !== undefined) {
         changed.autoplay = layout.autoplay;
+    }
     if (layout.autoplayDelay !== undefined) {
         changed.autoplayDelay = deviceObject(layout.autoplayDelay, defaults.autoplayDelay);
     }
-    if (layout.loop !== undefined)
+    if (layout.loop !== undefined) {
         changed.infiniteLoop = layout.loop;
-    if (layout.pauseOnHover !== undefined)
+    }
+    if (layout.pauseOnHover !== undefined) {
         changed.pauseOnHover = layout.pauseOnHover;
+    }
     if (layout.navigation !== undefined) {
         changed.showNavigation = deviceObject(layout.navigation, defaults.showNavigation);
     }
@@ -336,14 +395,19 @@ function generate(input) {
     }
     if (layout.paginationType !== undefined) {
         const allowed = schema.allowedValues?.paginationType ?? [];
-        if (allowed.length > 0 && !allowed.includes(layout.paginationType)) {
+        if (allowed.length > 0 &&
+            !allowed.includes(layout.paginationType)) {
             throw new GeneratorInputError(`paginationType must be one of: ${allowed.join(', ')}.`);
         }
         changed.paginationType = layout.paginationType;
     }
-    const sliderType = (typeof overrides.sliderType === 'string' ? overrides.sliderType : undefined)
-        ?? (typeof changed.sliderType === 'string' ? changed.sliderType : undefined)
-        ?? (carouselOnly ? 'carousel' : 'slider');
+    const sliderType = (typeof overrides.sliderType === 'string'
+        ? overrides.sliderType
+        : undefined) ??
+        (typeof changed.sliderType === 'string'
+            ? changed.sliderType
+            : undefined) ??
+        (carouselOnly ? 'carousel' : 'slider');
     if (layout.effect !== undefined) {
         const effectKey = sliderType === 'carousel' ? 'carouselEffect' : 'slideEffect';
         const allowed = schema.allowedEffects[effectKey] ?? [];
@@ -353,7 +417,8 @@ function generate(input) {
         changed[effectKey] = layout.effect;
     }
     Object.assign(changed, overrides);
-    if (changed.navigationArrowsIconSwitcher === true || changed.showQuoteIcon === true) {
+    if (changed.navigationArrowsIconSwitcher === true ||
+        changed.showQuoteIcon === true) {
         throw new GeneratorInputError('Custom arrow icons and the quote icon need the editor icon set, which the generator does not load. Leave navigationArrowsIconSwitcher and showQuoteIcon off.');
     }
     changed.blockStyle = bundled.styling({ ...defaults, ...changed });
@@ -375,11 +440,20 @@ function generate(input) {
 export async function handleGenerateBlock(args) {
     const parsed = generateBlockInputZod.safeParse(args);
     if (!parsed.success) {
-        const message = parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join(', ');
+        const message = parsed.error.issues
+            .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
+            .join(', ');
         return toolError(`Invalid arguments for gslider_generate_block: ${message}`);
     }
     try {
-        return { content: [{ type: 'text', text: JSON.stringify(generate(parsed.data), null, 2) }] };
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: JSON.stringify(generate(parsed.data), null, 2),
+                },
+            ],
+        };
     }
     catch (error) {
         const message = error instanceof Error ? error.message : String(error);
