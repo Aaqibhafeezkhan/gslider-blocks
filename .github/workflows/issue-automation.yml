@@ -2,10 +2,10 @@ name: Issue Automation & Labeler
 
 on:
   issues:
-    types: [opened, edited]
+    types: [opened, edited, labeled]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.issue.number }}
+  group: ${{ github.workflow }}-${{ github.event.issue.number }}-${{ github.event.label.name || github.event.action }}
   cancel-in-progress: true
 
 permissions:
@@ -27,31 +27,91 @@ jobs:
             const action = context.payload.action;
             const title = issue.title;
             const labelsToAdd = new Set();
+            const OPEN_FOR_CONTRIBUTORS = ['help wanted', 'good first issue'];
+            const issueLabels = (issue.labels || []).map(l => l.name);
 
-            // 0. Auto-assign issue author (or repo maintainer) on open
-            if (action === 'opened' && (!issue.assignees || issue.assignees.length === 0)) {
+            // 0. Auto-assign issue author (or repo maintainer) on open, skipping contributor-open issues
+            if (
+              action === 'opened' &&
+              (!issue.assignees || issue.assignees.length === 0) &&
+              !issueLabels.some(l => OPEN_FOR_CONTRIBUTORS.includes(l))
+            ) {
+              // Short delay before re-fetching to catch labels applied right after issue creation
+              await new Promise(resolve => setTimeout(resolve, 3000));
+
+              let freshLabels = issueLabels;
+              let freshAssignees = issue.assignees || [];
               try {
-                await github.rest.issues.addAssignees({
+                const { data: freshIssue } = await github.rest.issues.get({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  issue_number: issue.number,
-                  assignees: [author]
+                  issue_number: issue.number
                 });
-                console.log(`Auto-assigned author @${author} to issue #${issue.number}`);
-              } catch (err) {
-                // If external contributor cannot be assigned directly, fallback to maintainer
+                freshLabels = (freshIssue.labels || []).map(l => l.name);
+                freshAssignees = freshIssue.assignees || [];
+              } catch (fetchErr) {
+                console.log(`Failed to re-fetch issue #${issue.number}: ${fetchErr.message}`);
+              }
+
+              if (
+                freshAssignees.length === 0 &&
+                !freshLabels.some(l => OPEN_FOR_CONTRIBUTORS.includes(l))
+              ) {
                 try {
                   await github.rest.issues.addAssignees({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     issue_number: issue.number,
-                    assignees: ['noruzzamans']
+                    assignees: [author]
                   });
-                  console.log(`Assigned maintainer @noruzzamans to issue #${issue.number}`);
-                } catch (fallbackErr) {
-                  console.log(`Failed to assign fallback maintainer: ${fallbackErr.message}`);
+                  console.log(`Auto-assigned author @${author} to issue #${issue.number}`);
+                } catch (err) {
+                  // If external contributor cannot be assigned directly, fallback to maintainer
+                  try {
+                    await github.rest.issues.addAssignees({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: issue.number,
+                      assignees: ['noruzzamans']
+                    });
+                    console.log(`Assigned maintainer @noruzzamans to issue #${issue.number}`);
+                  } catch (fallbackErr) {
+                    console.log(`Failed to assign fallback maintainer: ${fallbackErr.message}`);
+                  }
+                }
+              } else {
+                console.log(`Skipped auto-assign for issue #${issue.number} due to contributor label or existing assignee.`);
+              }
+            }
+
+            // 0b. Remove automation-set assignee when a contributor label is added
+            if (action === 'labeled') {
+              const addedLabel = context.payload.label ? context.payload.label.name : '';
+              if (OPEN_FOR_CONTRIBUTORS.includes(addedLabel)) {
+                try {
+                  const { data: freshIssue } = await github.rest.issues.get({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number
+                  });
+                  const assigneesToRemove = (freshIssue.assignees || [])
+                    .map(a => a.login)
+                    .filter(login => login === author || login === 'noruzzamans');
+
+                  if (assigneesToRemove.length > 0) {
+                    await github.rest.issues.removeAssignees({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: issue.number,
+                      assignees: assigneesToRemove
+                    });
+                    console.log(`Removed automation assignee(s) (${assigneesToRemove.join(', ')}) from issue #${issue.number}`);
+                  }
+                } catch (removeErr) {
+                  console.log(`Failed to remove assignee from issue #${issue.number}: ${removeErr.message}`);
                 }
               }
+              return;
             }
 
             // 1. Conventional Commits prefix parser
