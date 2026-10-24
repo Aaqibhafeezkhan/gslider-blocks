@@ -480,7 +480,7 @@ If you find **GSlider Blocks** valuable or use it in your projects, please consi
 
 - **Star this repository** to bookmark it for future use.
 - **Share it** with fellow WordPress developers, agencies, and friends.
-- **Contribute** code, docs, or ideas to our open [Good First Issues](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+- **Contribute** code, docs, or ideas to our open [Good First Issues](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) or [Help Wanted issues](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
 
 ---
 
@@ -525,20 +525,20 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
 </p>
 
 <p align="center">
-  <a href="https://github.com/noruzzamans">
-    <img src="https://img.shields.io/badge/GitHub-@noruzzamans-181717?logo=github" alt="GitHub">
+  <a href="https://github.com/noruzzamans" title="GitHub">
+    <img src="https://img.shields.io/badge/--181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
-  <a href="https://linkedin.com/in/noruzzaman">
-    <img src="https://img.shields.io/badge/LinkedIn-noruzzaman-0A66C2?logo=linkedin" alt="LinkedIn">
+  <a href="https://linkedin.com/in/noruzzaman" title="LinkedIn">
+    <img src="https://img.shields.io/badge/--0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
-  <a href="https://x.com/Noruzzamanwp">
-    <img src="https://img.shields.io/badge/X-@Noruzzamanwp-000000?logo=x" alt="X (Twitter)">
+  <a href="https://x.com/Noruzzamanwp" title="X (Twitter)">
+    <img src="https://img.shields.io/badge/--000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)">
   </a>
-  <a href="https://profiles.wordpress.org/noruzzaman/">
-    <img src="https://img.shields.io/badge/WordPress.org-@noruzzaman-21759B?logo=wordpress" alt="WordPress Profile">
+  <a href="https://profiles.wordpress.org/noruzzaman/" title="WordPress.org Profile">
+    <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
   </a>
-  <a href="https://wordpress.org/plugins/gslider-blocks/">
-    <img src="https://img.shields.io/badge/Plugin-GSlider%20Blocks-0073AA?logo=wordpress" alt="WordPress Plugin">
+  <a href="https://wordpress.org/plugins/gslider-blocks/" title="GSlider Blocks on WordPress.org">
+    <img src="https://img.shields.io/badge/--0073AA?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Plugin">
   </a>
 </p>
 
