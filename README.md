@@ -527,6 +527,9 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
   <a href="https://linkedin.com/in/noruzzaman">
     <img src="https://img.shields.io/badge/LinkedIn-noruzzaman-0A66C2?logo=linkedin" alt="LinkedIn">
   </a>
+  <a href="https://x.com/Noruzzamanwp">
+    <img src="https://img.shields.io/badge/X-@Noruzzamanwp-000000?logo=x" alt="X (Twitter)">
+  </a>
   <a href="https://profiles.wordpress.org/noruzzaman/">
     <img src="https://img.shields.io/badge/WordPress.org-@noruzzaman-21759B?logo=wordpress" alt="WordPress Profile">
   </a>

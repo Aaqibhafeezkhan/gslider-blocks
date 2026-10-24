@@ -51,7 +51,7 @@ jobs:
                   issue_number: pr.number
                 });
 
-                const alreadyCommented = comments.some(c => c.body && c.body.includes(`Congratulations @${author}`));
+                const alreadyCommented = comments.some(c => c.body && c.body.includes(`@${author}`) && c.body.includes(`merged into \`main\``));
                 if (!alreadyCommented) {
                   // Live check: has the contributor already starred this repository?
                   let hasStarred = false;
@@ -84,7 +84,7 @@ jobs:
                       owner: context.repo.owner,
                       repo: context.repo.repo,
                       issue_number: pr.number,
-                      body: `🎉 **Congratulations @${author}!** Your pull request has been merged into \`main\`.\n\nThank you for contributing to **GSlider Blocks**! If you haven't already, please consider leaving a ⭐ [star on GitHub](https://github.com/noruzzamans/gslider-blocks) to support the project — it helps our community grow and motivates future development.`
+                      body: `🎉 **Thank you for your contribution, @${author}!** Your changes are now merged into \`main\`.\n\nIf you find **GSlider Blocks** valuable, a ⭐ [star on GitHub](https://github.com/noruzzamans/gslider-blocks) helps us reach more developers and grow the project.\n\nYou are welcome to pick up another task from our [Good First Issues](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) or explore [Help Wanted tasks](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22). If you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X (@Noruzzamanwp)](https://x.com/Noruzzamanwp), feel free to tag me — I'd be happy to repost and celebrate your achievement! 🚀`
                     });
                   } else {
                     // Contributor ALREADY starred: celebrate merge with warm gratitude, zero star nagging
@@ -92,7 +92,7 @@ jobs:
                       owner: context.repo.owner,
                       repo: context.repo.repo,
                       issue_number: pr.number,
-                      body: `🎉 **Congratulations @${author}!** Your pull request has been merged into \`main\`.\n\nThank you for your fantastic contribution to **GSlider Blocks**! Your continued support means the world to our community. 🚀`
+                      body: `🎉 **Thank you for your fantastic contribution, @${author}!** Your changes are now merged into \`main\`.\n\nYour continued support means a lot to our community! Feel free to explore our [Good First Issues](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) or [Help Wanted tasks](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) whenever you're ready for the next challenge. If you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X (@Noruzzamanwp)](https://x.com/Noruzzamanwp), feel free to tag me — I'd love to repost and celebrate your achievement! 🚀`
                     });
                   }
                 }
