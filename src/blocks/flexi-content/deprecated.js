@@ -1,5 +1,10 @@
-import { useBlockProps, InnerBlocks, useInnerBlocksProps } from '@wordpress/block-editor'; 
-import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
+/* eslint-disable no-unused-vars, camelcase, no-shadow, object-shorthand */
+import {
+	useBlockProps,
+	InnerBlocks,
+	useInnerBlocksProps,
+} from '@wordpress/block-editor';
+import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
 import attributes from './attributes';
 
 const v1_0_7 = {
@@ -8,204 +13,286 @@ const v1_0_7 = {
 		html: false,
 		className: false,
 	},
-	save({ attributes }) {
+	save( { attributes } ) {
 		const {
-            blockId,
-            deviceType,
-            sliderType,
-            carouselPerColumn,
-            carouselPerColumnGap,
-            speed,
-            autoplay,
-            autoplayDelay,
-            infiniteLoop,
-            allowTouchMove,
-            pauseOnHover,
-            stopOnLastSlide,
-            reverseDirection,
-            carouselEffect,
-            slideEffect,
-            mousewheelControl,
-            paginationType,
-            dynamicBullets,
-    
-            showNavigation,
-            showPagination,
-    
-            globalID,
-            globalClass,
-            navigationArrowPositionType,
-            navigationArrowPosition,
-    
-            navigationArrowsIconSwitcher,
-            navigationArrowsIconLeftAlign,
-            navigationArrowsIconLeft,
-            navigationArrowsIconLeftImageUrl,
-            navigationArrowsIconLeftImageAlt,
-            navigationArrowsIconLeftImageID,
-    
-            navigationArrowsIconRightAlign,
-            navigationArrowsIconRight,
-            navigationArrowsIconRightImageUrl,
-            navigationArrowsIconRightImageAlt,
-            navigationArrowsIconRightImageID,
+			blockId,
+			deviceType,
+			sliderType,
+			carouselPerColumn,
+			carouselPerColumnGap,
+			speed,
+			autoplay,
+			autoplayDelay,
+			infiniteLoop,
+			allowTouchMove,
+			pauseOnHover,
+			stopOnLastSlide,
+			reverseDirection,
+			carouselEffect,
+			slideEffect,
+			mousewheelControl,
+			paginationType,
+			dynamicBullets,
+
+			showNavigation,
+			showPagination,
+
+			globalID,
+			globalClass,
+			navigationArrowPositionType,
+			navigationArrowPosition,
+
+			navigationArrowsIconSwitcher,
+			navigationArrowsIconLeftAlign,
+			navigationArrowsIconLeft,
+			navigationArrowsIconLeftImageUrl,
+			navigationArrowsIconLeftImageAlt,
+			navigationArrowsIconLeftImageID,
+
+			navigationArrowsIconRightAlign,
+			navigationArrowsIconRight,
+			navigationArrowsIconRightImageUrl,
+			navigationArrowsIconRightImageAlt,
+			navigationArrowsIconRightImageID,
 		} = attributes;
 
-        const blockProps = useBlockProps.save({
-            className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
-        });
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition }`,
+		} );
 
-        const innerBlocksProps = useInnerBlocksProps.save({
-            className: 'swiper-wrapper gslider-swiper-wrapper',
-        });
+		const innerBlocksProps = useInnerBlocksProps.save( {
+			className: 'swiper-wrapper gslider-swiper-wrapper',
+		} );
 
-        // Configure Swiper settings for frontend rendering
-        const swiperSettings = JSON.stringify({
-            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+		// Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify( {
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-            // Responsive breakpoints for Desktop, Tablet, and Mobile
-            breakpoints: {
-                0: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Mobile || 1,
-                        spaceBetween: carouselPerColumnGap?.Mobile || 0,
-                    }),
-                    speed: speed?.Mobile || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Mobile || 1000,
-                    } : false,
-                },
-                768: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
-                    }),
-                    speed: speed?.Tablet || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Tablet || 1000,
-                    } : false,
-                },
-                1025: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
-                    }),
-                    speed: speed?.Desktop || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Desktop || 1000,
-                    } : false,
-                },
-            },
-            
-            // Common settings
-            loop: infiniteLoop,
-            autoplay: autoplay ? {
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-                stopOnLastSlide: stopOnLastSlide,
-                reverseDirection: reverseDirection,
-            } : false,
-            allowTouchMove: allowTouchMove,
-            mousewheel: mousewheelControl,
-            
-            navigation: showNavigation ? {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            } : false,
-            
-            pagination: showPagination ? {
-                el: '.swiper-pagination',
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                clickable: true,
-            } : false,
-            
-            // Creative effect settings if needed
-            ...(slideEffect === 'creative' && {
-                creativeEffect: {
-                    prev: { shadow: true, translate: [0, 0, -400] },
-                    next: { translate: ['100%', 0, 0] },
-                },
-            }),
-            
-            // Creative effect settings if needed
-            ...(slideEffect === 'creative' && {
-                creativeEffect: {
-                    prev: { shadow: true, translate: [0, 0, -400] },
-                    next: { translate: ['100%', 0, 0] },
-                },
-            }),
-            
-        });
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			breakpoints: {
+				0: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Mobile || 1,
+						spaceBetween: carouselPerColumnGap?.Mobile || 0,
+					} ),
+					speed: speed?.Mobile || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
+				},
+				768: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Tablet || 2,
+						spaceBetween: carouselPerColumnGap?.Tablet || 20,
+					} ),
+					speed: speed?.Tablet || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+				},
+				1025: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Desktop || 2,
+						spaceBetween: carouselPerColumnGap?.Desktop || 20,
+					} ),
+					speed: speed?.Desktop || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
+				},
+			},
 
-        return (
-            <div {...blockProps} data-swiper-settings={swiperSettings}>
-                <div className="swiper">
-                    <div {...innerBlocksProps} />
+			// Common settings
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
 
-                    {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                        <>
-                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                                <div className="swiper-button-prev" aria-label="Previous slide"></div>
-                                <div className="swiper-button-next" aria-label="Next slide"></div>
-                            </div>
-                        </>
-                    )}
+			navigation: showNavigation
+				? {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+				  }
+				: false,
 
-                    {navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
-                            <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
-                        </div>
-                    )}
+			pagination: showPagination
+				? {
+						el: '.swiper-pagination',
+						type: paginationType,
+						dynamicBullets:
+							paginationType === 'bullets'
+								? dynamicBullets
+								: false,
+						clickable: true,
+				  }
+				: false,
 
-                    {navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev">
-                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                            </div>
-                            <div className="swiper-button-next">
-                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                            </div>
-                        </div>
-                    )}
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
 
-                    {showPagination && (
-                        <>
-                            <div className="gslider-pagination-wrapper">
-                                <div className="swiper-pagination"></div>
-                            </div>
-                        </>
-                    )}
-                </div>
-                {showNavigation && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" aria-label="Previous slide"></div>
-                            <div className="swiper-button-next" aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
+		} );
 
-                {navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
+		return (
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div className="swiper">
+					<div { ...innerBlocksProps } />
 
-                {navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
-            </div>
-        );
+					{ showNavigation &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
+
+					{ navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div className="swiper-button-prev">
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div className="swiper-button-next">
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
+							</div>
+						) }
+
+					{ navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div className="swiper-button-prev">
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div className="swiper-button-next">
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
+							</div>
+						) }
+
+					{ showPagination && (
+						<>
+							<div className="gslider-pagination-wrapper">
+								<div className="swiper-pagination"></div>
+							</div>
+						</>
+					) }
+				</div>
+				{ showNavigation &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div className="swiper-button-prev">
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div className="swiper-button-next">
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div className="swiper-button-prev">
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div className="swiper-button-next">
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+			</div>
+		);
 	},
 };
 
@@ -215,223 +302,312 @@ const v1_0_8 = {
 		html: false,
 		className: false,
 	},
-	save({ attributes }) {
+	save( { attributes } ) {
 		const {
-            blockId,
-            sliderType,
-            carouselPerColumn,
-            carouselPerColumnGap,
-            speed,
-            autoplay,
-            autoplayDelay,
-            infiniteLoop,
-            allowTouchMove,
-            pauseOnHover,
-            stopOnLastSlide,
-            reverseDirection,
-            carouselEffect,
-            slideEffect,
-            mousewheelControl,
-            paginationType,
-            dynamicBullets,
-    
-            showNavigation,
-            showPagination,
-    
-            globalID,
-            globalClass,
-            navigationArrowPositionType,
-            navigationArrowPosition,
-    
-            navigationArrowsIconSwitcher,
-            navigationArrowsIconLeftAlign,
-            navigationArrowsIconLeft,
-            navigationArrowsIconLeftImageUrl,
-            navigationArrowsIconLeftImageAlt,
-            navigationArrowsIconLeftImageID,
-    
-            navigationArrowsIconRightAlign,
-            navigationArrowsIconRight,
-            navigationArrowsIconRightImageUrl,
-            navigationArrowsIconRightImageAlt,
-            navigationArrowsIconRightImageID,
-    
-            layoutHeightSwitcher,
+			blockId,
+			sliderType,
+			carouselPerColumn,
+			carouselPerColumnGap,
+			speed,
+			autoplay,
+			autoplayDelay,
+			infiniteLoop,
+			allowTouchMove,
+			pauseOnHover,
+			stopOnLastSlide,
+			reverseDirection,
+			carouselEffect,
+			slideEffect,
+			mousewheelControl,
+			paginationType,
+			dynamicBullets,
+
+			showNavigation,
+			showPagination,
+
+			globalID,
+			globalClass,
+			navigationArrowPositionType,
+			navigationArrowPosition,
+
+			navigationArrowsIconSwitcher,
+			navigationArrowsIconLeftAlign,
+			navigationArrowsIconLeft,
+			navigationArrowsIconLeftImageUrl,
+			navigationArrowsIconLeftImageAlt,
+			navigationArrowsIconLeftImageID,
+
+			navigationArrowsIconRightAlign,
+			navigationArrowsIconRight,
+			navigationArrowsIconRightImageUrl,
+			navigationArrowsIconRightImageAlt,
+			navigationArrowsIconRightImageID,
+
+			layoutHeightSwitcher,
 		} = attributes;
 
-        const blockProps = useBlockProps.save({
-            className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
-        });
-    
-        const innerBlocksProps = useInnerBlocksProps.save({
-            className: 'swiper-wrapper gslider-swiper-wrapper',
-        });
-    
-        const navigationEnabled = {
-            Mobile:  !!showNavigation?.Mobile,
-            Tablet:  !!showNavigation?.Tablet,
-            Desktop: !!showNavigation?.Desktop,
-        };
-        const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
-    
-        const paginationEnabled = {
-            Mobile:  !!showPagination?.Mobile,
-            Tablet:  !!showPagination?.Tablet,
-            Desktop: !!showPagination?.Desktop,
-        };
-        const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
-    
-        // Configure Swiper settings for frontend rendering
-        const swiperSettings = JSON.stringify({
-            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-    
-            // Responsive breakpoints for Desktop, Tablet, and Mobile
-            breakpoints: {
-                0: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Mobile || 1,
-                        spaceBetween: carouselPerColumnGap?.Mobile || 0,
-                    }),
-                    speed: speed?.Mobile || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Mobile || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Mobile },
-                    pagination: { enabled: paginationEnabled.Mobile },
-                },
-                768: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
-                    }),
-                    speed: speed?.Tablet || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Tablet || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Tablet }, 
-                    pagination: { enabled: paginationEnabled.Tablet },
-                },
-                1025: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
-                    }),
-                    speed: speed?.Desktop || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Desktop || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Desktop },
-                    pagination: { enabled: paginationEnabled.Desktop },
-                },
-            },
-    
-            ...(layoutHeightSwitcher === 'auto' && {
-                autoHeight: true,
-            }),
-    
-            // Common settings
-            loop: infiniteLoop,
-            autoplay: autoplay ? {
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-                stopOnLastSlide: stopOnLastSlide,
-                reverseDirection: reverseDirection,
-            } : false,
-            allowTouchMove: allowTouchMove,
-            mousewheel: mousewheelControl,
-            
-            navigation: {
-                enabled: anyNavigationEnabled,
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            
-            pagination: {
-                enabled: anyPaginationEnabled,
-                el: '.swiper-pagination',
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                clickable: true,
-            },
-            
-            // Creative effect settings if needed
-            ...(slideEffect === 'creative' && {
-                creativeEffect: {
-                    prev: { shadow: true, translate: [0, 0, -400] },
-                    next: { translate: ['100%', 0, 0] },
-                },
-            }),
-            
-        });
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition }`,
+		} );
 
-        return (
-            <div {...blockProps} data-swiper-settings={swiperSettings}>
-                <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
-                    <div {...innerBlocksProps} />
+		const innerBlocksProps = useInnerBlocksProps.save( {
+			className: 'swiper-wrapper gslider-swiper-wrapper',
+		} );
 
-                    {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                        <>
-                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                                <div className="swiper-button-prev" aria-label="Previous slide"></div>
-                                <div className="swiper-button-next" aria-label="Next slide"></div>
-                            </div>
-                        </>
-                    )}
+		const navigationEnabled = {
+			Mobile: !! showNavigation?.Mobile,
+			Tablet: !! showNavigation?.Tablet,
+			Desktop: !! showNavigation?.Desktop,
+		};
+		const anyNavigationEnabled =
+			navigationEnabled.Mobile ||
+			navigationEnabled.Tablet ||
+			navigationEnabled.Desktop;
 
-                    { anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
-                            <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
-                        </div>
-                    )}
+		const paginationEnabled = {
+			Mobile: !! showPagination?.Mobile,
+			Tablet: !! showPagination?.Tablet,
+			Desktop: !! showPagination?.Desktop,
+		};
+		const anyPaginationEnabled =
+			paginationEnabled.Mobile ||
+			paginationEnabled.Tablet ||
+			paginationEnabled.Desktop;
 
-                    {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev">
-                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                            </div>
-                            <div className="swiper-button-next">
-                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                            </div>
-                        </div>
-                    )}
+		// Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify( {
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-                    {anyPaginationEnabled && (
-                        <>
-                            <div className="gslider-pagination-wrapper">
-                                <div className="swiper-pagination"></div>
-                            </div>
-                        </>
-                    )}
-                </div>
-                { anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" aria-label="Previous slide"></div>
-                            <div className="swiper-button-next" aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			breakpoints: {
+				0: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Mobile || 1,
+						spaceBetween: carouselPerColumnGap?.Mobile || 0,
+					} ),
+					speed: speed?.Mobile || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Mobile },
+					pagination: { enabled: paginationEnabled.Mobile },
+				},
+				768: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Tablet || 2,
+						spaceBetween: carouselPerColumnGap?.Tablet || 20,
+					} ),
+					speed: speed?.Tablet || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Tablet },
+					pagination: { enabled: paginationEnabled.Tablet },
+				},
+				1025: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Desktop || 2,
+						spaceBetween: carouselPerColumnGap?.Desktop || 20,
+					} ),
+					speed: speed?.Desktop || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Desktop },
+					pagination: { enabled: paginationEnabled.Desktop },
+				},
+			},
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
+			...( layoutHeightSwitcher === 'auto' && {
+				autoHeight: true,
+			} ),
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
-            </div>
-        );
+			// Common settings
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
+
+			navigation: {
+				enabled: anyNavigationEnabled,
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+
+			pagination: {
+				enabled: anyPaginationEnabled,
+				el: '.swiper-pagination',
+				type: paginationType,
+				dynamicBullets:
+					paginationType === 'bullets' ? dynamicBullets : false,
+				clickable: true,
+			},
+
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
+		} );
+
+		return (
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div
+					className={ `swiper ${ globalClass }` }
+					{ ...( globalID && { id: globalID } ) }
+				>
+					<div { ...innerBlocksProps } />
+
+					{ anyNavigationEnabled &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div className="swiper-button-prev">
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div className="swiper-button-next">
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
+							</div>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div className="swiper-button-prev">
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div className="swiper-button-next">
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
+							</div>
+						) }
+
+					{ anyPaginationEnabled && (
+						<>
+							<div className="gslider-pagination-wrapper">
+								<div className="swiper-pagination"></div>
+							</div>
+						</>
+					) }
+				</div>
+				{ anyNavigationEnabled &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div className="swiper-button-prev">
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div className="swiper-button-next">
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div className="swiper-button-prev">
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div className="swiper-button-next">
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+			</div>
+		);
 	},
 };
 
@@ -441,223 +617,312 @@ const v1_0_9 = {
 		html: false,
 		className: false,
 	},
-	save({ attributes }) {
+	save( { attributes } ) {
 		const {
-            blockId,
-            sliderType,
-            carouselPerColumn,
-            carouselPerColumnGap,
-            speed,
-            autoplay,
-            autoplayDelay,
-            infiniteLoop,
-            allowTouchMove,
-            pauseOnHover,
-            stopOnLastSlide,
-            reverseDirection,
-            carouselEffect,
-            slideEffect,
-            mousewheelControl,
-            paginationType,
-            dynamicBullets,
-    
-            showNavigation,
-            showPagination,
-    
-            globalID,
-            globalClass,
-            navigationArrowPositionType,
-            navigationArrowPosition,
-    
-            navigationArrowsIconSwitcher,
-            navigationArrowsIconLeftAlign,
-            navigationArrowsIconLeft,
-            navigationArrowsIconLeftImageUrl,
-            navigationArrowsIconLeftImageAlt,
-            navigationArrowsIconLeftImageID,
-    
-            navigationArrowsIconRightAlign,
-            navigationArrowsIconRight,
-            navigationArrowsIconRightImageUrl,
-            navigationArrowsIconRightImageAlt,
-            navigationArrowsIconRightImageID,
-    
-            layoutHeightSwitcher,
+			blockId,
+			sliderType,
+			carouselPerColumn,
+			carouselPerColumnGap,
+			speed,
+			autoplay,
+			autoplayDelay,
+			infiniteLoop,
+			allowTouchMove,
+			pauseOnHover,
+			stopOnLastSlide,
+			reverseDirection,
+			carouselEffect,
+			slideEffect,
+			mousewheelControl,
+			paginationType,
+			dynamicBullets,
+
+			showNavigation,
+			showPagination,
+
+			globalID,
+			globalClass,
+			navigationArrowPositionType,
+			navigationArrowPosition,
+
+			navigationArrowsIconSwitcher,
+			navigationArrowsIconLeftAlign,
+			navigationArrowsIconLeft,
+			navigationArrowsIconLeftImageUrl,
+			navigationArrowsIconLeftImageAlt,
+			navigationArrowsIconLeftImageID,
+
+			navigationArrowsIconRightAlign,
+			navigationArrowsIconRight,
+			navigationArrowsIconRightImageUrl,
+			navigationArrowsIconRightImageAlt,
+			navigationArrowsIconRightImageID,
+
+			layoutHeightSwitcher,
 		} = attributes;
 
-        const blockProps = useBlockProps.save({
-            className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
-        });
-    
-        const innerBlocksProps = useInnerBlocksProps.save({
-            className: 'swiper-wrapper gslider-swiper-wrapper',
-        });
-    
-        const navigationEnabled = {
-            Mobile:  !!showNavigation?.Mobile,
-            Tablet:  !!showNavigation?.Tablet,
-            Desktop: !!showNavigation?.Desktop,
-        };
-        const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
-    
-        const paginationEnabled = {
-            Mobile:  !!showPagination?.Mobile,
-            Tablet:  !!showPagination?.Tablet,
-            Desktop: !!showPagination?.Desktop,
-        };
-        const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
-    
-        // Configure Swiper settings for frontend rendering
-        const swiperSettings = JSON.stringify({
-            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-    
-            // Responsive breakpoints for Desktop, Tablet, and Mobile
-            breakpoints: {
-                0: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Mobile || 1,
-                        spaceBetween: carouselPerColumnGap?.Mobile || 0,
-                    }),
-                    speed: speed?.Mobile || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Mobile || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Mobile },
-                    pagination: { enabled: paginationEnabled.Mobile },
-                },
-                768: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
-                    }),
-                    speed: speed?.Tablet || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Tablet || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Tablet }, 
-                    pagination: { enabled: paginationEnabled.Tablet },
-                },
-                1025: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
-                    }),
-                    speed: speed?.Desktop || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Desktop || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Desktop },
-                    pagination: { enabled: paginationEnabled.Desktop },
-                },
-            },
-    
-            ...(layoutHeightSwitcher === 'auto' && {
-                autoHeight: true,
-            }),
-    
-            // Common settings
-            loop: infiniteLoop,
-            autoplay: autoplay ? {
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-                stopOnLastSlide: stopOnLastSlide,
-                reverseDirection: reverseDirection,
-            } : false,
-            allowTouchMove: allowTouchMove,
-            mousewheel: mousewheelControl,
-            
-            navigation: {
-                enabled: anyNavigationEnabled,
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            
-            pagination: {
-                enabled: anyPaginationEnabled,
-                el: '.swiper-pagination',
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                clickable: true,
-            },
-            
-            // Creative effect settings if needed
-            ...(slideEffect === 'creative' && {
-                creativeEffect: {
-                    prev: { shadow: true, translate: [0, 0, -400] },
-                    next: { translate: ['100%', 0, 0] },
-                },
-            }),
-            
-        });
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition }`,
+		} );
 
-        return (
-            <div {...blockProps} data-swiper-settings={swiperSettings}>
-                <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
-                    <div {...innerBlocksProps} />
+		const innerBlocksProps = useInnerBlocksProps.save( {
+			className: 'swiper-wrapper gslider-swiper-wrapper',
+		} );
 
-                    {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                        <>
-                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                                <div className="swiper-button-prev" aria-label="Previous slide"></div>
-                                <div className="swiper-button-next" aria-label="Next slide"></div>
-                            </div>
-                        </>
-                    )}
+		const navigationEnabled = {
+			Mobile: !! showNavigation?.Mobile,
+			Tablet: !! showNavigation?.Tablet,
+			Desktop: !! showNavigation?.Desktop,
+		};
+		const anyNavigationEnabled =
+			navigationEnabled.Mobile ||
+			navigationEnabled.Tablet ||
+			navigationEnabled.Desktop;
 
-                    { anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
-                            <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
-                        </div>
-                    )}
+		const paginationEnabled = {
+			Mobile: !! showPagination?.Mobile,
+			Tablet: !! showPagination?.Tablet,
+			Desktop: !! showPagination?.Desktop,
+		};
+		const anyPaginationEnabled =
+			paginationEnabled.Mobile ||
+			paginationEnabled.Tablet ||
+			paginationEnabled.Desktop;
 
-                    {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev">
-                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                            </div>
-                            <div className="swiper-button-next">
-                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                            </div>
-                        </div>
-                    )}
+		// Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify( {
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-                    {anyPaginationEnabled && (
-                        <>
-                            <div className="gslider-pagination-wrapper">
-                                <div className="swiper-pagination"></div>
-                            </div>
-                        </>
-                    )}
-                </div>
-                { anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" aria-label="Previous slide"></div>
-                            <div className="swiper-button-next" aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			breakpoints: {
+				0: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Mobile || 1,
+						spaceBetween: carouselPerColumnGap?.Mobile || 0,
+					} ),
+					speed: speed?.Mobile || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Mobile },
+					pagination: { enabled: paginationEnabled.Mobile },
+				},
+				768: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Tablet || 2,
+						spaceBetween: carouselPerColumnGap?.Tablet || 20,
+					} ),
+					speed: speed?.Tablet || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Tablet },
+					pagination: { enabled: paginationEnabled.Tablet },
+				},
+				1025: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Desktop || 2,
+						spaceBetween: carouselPerColumnGap?.Desktop || 20,
+					} ),
+					speed: speed?.Desktop || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Desktop },
+					pagination: { enabled: paginationEnabled.Desktop },
+				},
+			},
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
+			...( layoutHeightSwitcher === 'auto' && {
+				autoHeight: true,
+			} ),
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
-            </div>
-        );
+			// Common settings
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
+
+			navigation: {
+				enabled: anyNavigationEnabled,
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+
+			pagination: {
+				enabled: anyPaginationEnabled,
+				el: '.swiper-pagination',
+				type: paginationType,
+				dynamicBullets:
+					paginationType === 'bullets' ? dynamicBullets : false,
+				clickable: true,
+			},
+
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
+		} );
+
+		return (
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div
+					className={ `swiper ${ globalClass }` }
+					{ ...( globalID && { id: globalID } ) }
+				>
+					<div { ...innerBlocksProps } />
+
+					{ anyNavigationEnabled &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div className="swiper-button-prev">
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div className="swiper-button-next">
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
+							</div>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div className="swiper-button-prev">
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div className="swiper-button-next">
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
+							</div>
+						) }
+
+					{ anyPaginationEnabled && (
+						<>
+							<div className="gslider-pagination-wrapper">
+								<div className="swiper-pagination"></div>
+							</div>
+						</>
+					) }
+				</div>
+				{ anyNavigationEnabled &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div className="swiper-button-prev">
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div className="swiper-button-next">
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div className="swiper-button-prev">
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div className="swiper-button-next">
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+			</div>
+		);
 	},
 };
 
@@ -667,223 +932,360 @@ const v1_0_10 = {
 		html: false,
 		className: false,
 	},
-	save({ attributes }) {
+	save( { attributes } ) {
 		const {
-            blockId,
-            sliderType,
-            carouselPerColumn,
-            carouselPerColumnGap,
-            speed,
-            autoplay,
-            autoplayDelay,
-            infiniteLoop,
-            allowTouchMove,
-            pauseOnHover,
-            stopOnLastSlide,
-            reverseDirection,
-            carouselEffect,
-            slideEffect,
-            mousewheelControl,
-            paginationType,
-            dynamicBullets,
-    
-            showNavigation,
-            showPagination,
-    
-            globalID,
-            globalClass,
-            navigationArrowPositionType,
-            navigationArrowPosition,
-    
-            navigationArrowsIconSwitcher,
-            navigationArrowsIconLeftAlign,
-            navigationArrowsIconLeft,
-            navigationArrowsIconLeftImageUrl,
-            navigationArrowsIconLeftImageAlt,
-            navigationArrowsIconLeftImageID,
-    
-            navigationArrowsIconRightAlign,
-            navigationArrowsIconRight,
-            navigationArrowsIconRightImageUrl,
-            navigationArrowsIconRightImageAlt,
-            navigationArrowsIconRightImageID,
-    
-            layoutHeightSwitcher,
+			blockId,
+			sliderType,
+			carouselPerColumn,
+			carouselPerColumnGap,
+			speed,
+			autoplay,
+			autoplayDelay,
+			infiniteLoop,
+			allowTouchMove,
+			pauseOnHover,
+			stopOnLastSlide,
+			reverseDirection,
+			carouselEffect,
+			slideEffect,
+			mousewheelControl,
+			paginationType,
+			dynamicBullets,
+
+			showNavigation,
+			showPagination,
+
+			globalID,
+			globalClass,
+			navigationArrowPositionType,
+			navigationArrowPosition,
+
+			navigationArrowsIconSwitcher,
+			navigationArrowsIconLeftAlign,
+			navigationArrowsIconLeft,
+			navigationArrowsIconLeftImageUrl,
+			navigationArrowsIconLeftImageAlt,
+			navigationArrowsIconLeftImageID,
+
+			navigationArrowsIconRightAlign,
+			navigationArrowsIconRight,
+			navigationArrowsIconRightImageUrl,
+			navigationArrowsIconRightImageAlt,
+			navigationArrowsIconRightImageID,
+
+			layoutHeightSwitcher,
 		} = attributes;
 
-        const blockProps = useBlockProps.save({
-            className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
-        });
-    
-        const innerBlocksProps = useInnerBlocksProps.save({
-            className: 'swiper-wrapper gslider-swiper-wrapper',
-        });
-    
-        const navigationEnabled = {
-            Mobile:  !!showNavigation?.Mobile,
-            Tablet:  !!showNavigation?.Tablet,
-            Desktop: !!showNavigation?.Desktop,
-        };
-        const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
-    
-        const paginationEnabled = {
-            Mobile:  !!showPagination?.Mobile,
-            Tablet:  !!showPagination?.Tablet,
-            Desktop: !!showPagination?.Desktop,
-        };
-        const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
-    
-        // Configure Swiper settings for frontend rendering
-        const swiperSettings = JSON.stringify({
-            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-    
-            // Responsive breakpoints for Desktop, Tablet, and Mobile
-            breakpoints: {
-                0: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Mobile || 1,
-                        spaceBetween: carouselPerColumnGap?.Mobile || 0,
-                    }),
-                    speed: speed?.Mobile || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Mobile || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Mobile },
-                    pagination: { enabled: paginationEnabled.Mobile },
-                },
-                768: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
-                    }),
-                    speed: speed?.Tablet || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Tablet || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Tablet }, 
-                    pagination: { enabled: paginationEnabled.Tablet },
-                },
-                1025: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
-                    }),
-                    speed: speed?.Desktop || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Desktop || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Desktop },
-                    pagination: { enabled: paginationEnabled.Desktop },
-                },
-            },
-    
-            ...(layoutHeightSwitcher === 'adapt' && {
-                autoHeight: true,
-            }),
-    
-            // Common settings
-            loop: infiniteLoop,
-            autoplay: autoplay ? {
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-                stopOnLastSlide: stopOnLastSlide,
-                reverseDirection: reverseDirection,
-            } : false,
-            allowTouchMove: allowTouchMove,
-            mousewheel: mousewheelControl,
-            
-            navigation: {
-                enabled: anyNavigationEnabled,
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            
-            pagination: {
-                enabled: anyPaginationEnabled,
-                el: '.swiper-pagination',
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                clickable: true,
-            },
-            
-            // Creative effect settings if needed
-            ...(slideEffect === 'creative' && {
-                creativeEffect: {
-                    prev: { shadow: true, translate: [0, 0, -400] },
-                    next: { translate: ['100%', 0, 0] },
-                },
-            }),
-            
-        });
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition }`,
+		} );
 
-        return (
-            <div {...blockProps} data-swiper-settings={swiperSettings}>
-                <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
-                    <div {...innerBlocksProps} />
+		const innerBlocksProps = useInnerBlocksProps.save( {
+			className: 'swiper-wrapper gslider-swiper-wrapper',
+		} );
 
-                    {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                        <>
-                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                                <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                                <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                            </div>
-                        </>
-                    )}
+		const navigationEnabled = {
+			Mobile: !! showNavigation?.Mobile,
+			Tablet: !! showNavigation?.Tablet,
+			Desktop: !! showNavigation?.Desktop,
+		};
+		const anyNavigationEnabled =
+			navigationEnabled.Mobile ||
+			navigationEnabled.Tablet ||
+			navigationEnabled.Desktop;
 
-                    { anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                        </div>
-                    )}
+		const paginationEnabled = {
+			Mobile: !! showPagination?.Mobile,
+			Tablet: !! showPagination?.Tablet,
+			Desktop: !! showPagination?.Desktop,
+		};
+		const anyPaginationEnabled =
+			paginationEnabled.Mobile ||
+			paginationEnabled.Tablet ||
+			paginationEnabled.Desktop;
 
-                    {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                            </div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                            </div>
-                        </div>
-                    )}
+		// Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify( {
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-                    {anyPaginationEnabled && (
-                        <>
-                            <div className="gslider-pagination-wrapper">
-                                <div className="swiper-pagination"></div>
-                            </div>
-                        </>
-                    )}
-                </div>
-                { anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			breakpoints: {
+				0: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Mobile || 1,
+						spaceBetween: carouselPerColumnGap?.Mobile || 0,
+					} ),
+					speed: speed?.Mobile || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Mobile },
+					pagination: { enabled: paginationEnabled.Mobile },
+				},
+				768: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Tablet || 2,
+						spaceBetween: carouselPerColumnGap?.Tablet || 20,
+					} ),
+					speed: speed?.Tablet || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Tablet },
+					pagination: { enabled: paginationEnabled.Tablet },
+				},
+				1025: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Desktop || 2,
+						spaceBetween: carouselPerColumnGap?.Desktop || 20,
+					} ),
+					speed: speed?.Desktop || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Desktop },
+					pagination: { enabled: paginationEnabled.Desktop },
+				},
+			},
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
+			...( layoutHeightSwitcher === 'adapt' && {
+				autoHeight: true,
+			} ),
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
-            </div>
-        );
+			// Common settings
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
+
+			navigation: {
+				enabled: anyNavigationEnabled,
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+
+			pagination: {
+				enabled: anyPaginationEnabled,
+				el: '.swiper-pagination',
+				type: paginationType,
+				dynamicBullets:
+					paginationType === 'bullets' ? dynamicBullets : false,
+				clickable: true,
+			},
+
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
+		} );
+
+		return (
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div
+					className={ `swiper ${ globalClass }` }
+					{ ...( globalID && { id: globalID } ) }
+				>
+					<div { ...innerBlocksProps } />
+
+					{ anyNavigationEnabled &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
+							</div>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
+							</div>
+						) }
+
+					{ anyPaginationEnabled && (
+						<>
+							<div className="gslider-pagination-wrapper">
+								<div className="swiper-pagination"></div>
+							</div>
+						</>
+					) }
+				</div>
+				{ anyNavigationEnabled &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+			</div>
+		);
 	},
 };
 
@@ -893,223 +1295,360 @@ const v1_1_1 = {
 		html: false,
 		className: false,
 	},
-	save({ attributes }) {
+	save( { attributes } ) {
 		const {
-            blockId,
-            sliderType,
-            carouselPerColumn,
-            carouselPerColumnGap,
-            speed,
-            autoplay,
-            autoplayDelay,
-            infiniteLoop,
-            allowTouchMove,
-            pauseOnHover,
-            stopOnLastSlide,
-            reverseDirection,
-            carouselEffect,
-            slideEffect,
-            mousewheelControl,
-            paginationType,
-            dynamicBullets,
-    
-            showNavigation,
-            showPagination,
-    
-            globalID,
-            globalClass,
-            navigationArrowPositionType,
-            navigationArrowPosition,
-    
-            navigationArrowsIconSwitcher,
-            navigationArrowsIconLeftAlign,
-            navigationArrowsIconLeft,
-            navigationArrowsIconLeftImageUrl,
-            navigationArrowsIconLeftImageAlt,
-            navigationArrowsIconLeftImageID,
-    
-            navigationArrowsIconRightAlign,
-            navigationArrowsIconRight,
-            navigationArrowsIconRightImageUrl,
-            navigationArrowsIconRightImageAlt,
-            navigationArrowsIconRightImageID,
-    
-            layoutHeightSwitcher,
+			blockId,
+			sliderType,
+			carouselPerColumn,
+			carouselPerColumnGap,
+			speed,
+			autoplay,
+			autoplayDelay,
+			infiniteLoop,
+			allowTouchMove,
+			pauseOnHover,
+			stopOnLastSlide,
+			reverseDirection,
+			carouselEffect,
+			slideEffect,
+			mousewheelControl,
+			paginationType,
+			dynamicBullets,
+
+			showNavigation,
+			showPagination,
+
+			globalID,
+			globalClass,
+			navigationArrowPositionType,
+			navigationArrowPosition,
+
+			navigationArrowsIconSwitcher,
+			navigationArrowsIconLeftAlign,
+			navigationArrowsIconLeft,
+			navigationArrowsIconLeftImageUrl,
+			navigationArrowsIconLeftImageAlt,
+			navigationArrowsIconLeftImageID,
+
+			navigationArrowsIconRightAlign,
+			navigationArrowsIconRight,
+			navigationArrowsIconRightImageUrl,
+			navigationArrowsIconRightImageAlt,
+			navigationArrowsIconRightImageID,
+
+			layoutHeightSwitcher,
 		} = attributes;
 
-        const blockProps = useBlockProps.save({
-            className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
-        });
-    
-        const innerBlocksProps = useInnerBlocksProps.save({
-            className: 'swiper-wrapper gslider-swiper-wrapper',
-        });
-    
-        const navigationEnabled = {
-            Mobile:  !!showNavigation?.Mobile,
-            Tablet:  !!showNavigation?.Tablet,
-            Desktop: !!showNavigation?.Desktop,
-        };
-        const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
-    
-        const paginationEnabled = {
-            Mobile:  !!showPagination?.Mobile,
-            Tablet:  !!showPagination?.Tablet,
-            Desktop: !!showPagination?.Desktop,
-        };
-        const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
-    
-        // Configure Swiper settings for frontend rendering
-        const swiperSettings = JSON.stringify({
-            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-    
-            // Responsive breakpoints for Desktop, Tablet, and Mobile
-            breakpoints: {
-                0: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Mobile || 1,
-                        spaceBetween: carouselPerColumnGap?.Mobile || 0,
-                    }),
-                    speed: speed?.Mobile || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Mobile || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Mobile },
-                    pagination: { enabled: paginationEnabled.Mobile },
-                },
-                768: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
-                    }),
-                    speed: speed?.Tablet || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Tablet || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Tablet }, 
-                    pagination: { enabled: paginationEnabled.Tablet },
-                },
-                1025: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
-                    }),
-                    speed: speed?.Desktop || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Desktop || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Desktop },
-                    pagination: { enabled: paginationEnabled.Desktop },
-                },
-            },
-    
-            ...(layoutHeightSwitcher === 'adapt' && {
-                autoHeight: true,
-            }),
-    
-            // Common settings
-            loop: infiniteLoop,
-            autoplay: autoplay ? {
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-                stopOnLastSlide: stopOnLastSlide,
-                reverseDirection: reverseDirection,
-            } : false,
-            allowTouchMove: allowTouchMove,
-            mousewheel: mousewheelControl,
-            
-            navigation: {
-                enabled: anyNavigationEnabled,
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            
-            pagination: {
-                enabled: anyPaginationEnabled,
-                el: '.swiper-pagination',
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                clickable: true,
-            },
-            
-            // Creative effect settings if needed
-            ...(slideEffect === 'creative' && {
-                creativeEffect: {
-                    prev: { shadow: true, translate: [0, 0, -400] },
-                    next: { translate: ['100%', 0, 0] },
-                },
-            }),
-            
-        });
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition }`,
+		} );
 
-        return (
-            <div {...blockProps} data-swiper-settings={swiperSettings}>
-                <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
-                    <div {...innerBlocksProps} />
+		const innerBlocksProps = useInnerBlocksProps.save( {
+			className: 'swiper-wrapper gslider-swiper-wrapper',
+		} );
 
-                    {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                        <>
-                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                                <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                                <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                            </div>
-                        </>
-                    )}
+		const navigationEnabled = {
+			Mobile: !! showNavigation?.Mobile,
+			Tablet: !! showNavigation?.Tablet,
+			Desktop: !! showNavigation?.Desktop,
+		};
+		const anyNavigationEnabled =
+			navigationEnabled.Mobile ||
+			navigationEnabled.Tablet ||
+			navigationEnabled.Desktop;
 
-                    { anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                        </div>
-                    )}
+		const paginationEnabled = {
+			Mobile: !! showPagination?.Mobile,
+			Tablet: !! showPagination?.Tablet,
+			Desktop: !! showPagination?.Desktop,
+		};
+		const anyPaginationEnabled =
+			paginationEnabled.Mobile ||
+			paginationEnabled.Tablet ||
+			paginationEnabled.Desktop;
 
-                    {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                            </div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                            </div>
-                        </div>
-                    )}
+		// Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify( {
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-                    {anyPaginationEnabled && (
-                        <>
-                            <div className="gslider-pagination-wrapper">
-                                <div className="swiper-pagination"></div>
-                            </div>
-                        </>
-                    )}
-                </div>
-                { anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			breakpoints: {
+				0: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Mobile || 1,
+						spaceBetween: carouselPerColumnGap?.Mobile || 0,
+					} ),
+					speed: speed?.Mobile || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Mobile },
+					pagination: { enabled: paginationEnabled.Mobile },
+				},
+				768: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Tablet || 2,
+						spaceBetween: carouselPerColumnGap?.Tablet || 20,
+					} ),
+					speed: speed?.Tablet || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Tablet },
+					pagination: { enabled: paginationEnabled.Tablet },
+				},
+				1025: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Desktop || 2,
+						spaceBetween: carouselPerColumnGap?.Desktop || 20,
+					} ),
+					speed: speed?.Desktop || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Desktop },
+					pagination: { enabled: paginationEnabled.Desktop },
+				},
+			},
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
+			...( layoutHeightSwitcher === 'adapt' && {
+				autoHeight: true,
+			} ),
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
-            </div>
-        );
+			// Common settings
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
+
+			navigation: {
+				enabled: anyNavigationEnabled,
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+
+			pagination: {
+				enabled: anyPaginationEnabled,
+				el: '.swiper-pagination',
+				type: paginationType,
+				dynamicBullets:
+					paginationType === 'bullets' ? dynamicBullets : false,
+				clickable: true,
+			},
+
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
+		} );
+
+		return (
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div
+					className={ `swiper ${ globalClass }` }
+					{ ...( globalID && { id: globalID } ) }
+				>
+					<div { ...innerBlocksProps } />
+
+					{ anyNavigationEnabled &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
+							</div>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
+							</div>
+						) }
+
+					{ anyPaginationEnabled && (
+						<>
+							<div className="gslider-pagination-wrapper">
+								<div className="swiper-pagination"></div>
+							</div>
+						</>
+					) }
+				</div>
+				{ anyNavigationEnabled &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+			</div>
+		);
 	},
 };
 
@@ -1119,230 +1658,369 @@ const v1_1_2 = {
 		html: false,
 		className: false,
 	},
-	save({ attributes }) {
+	save( { attributes } ) {
 		const {
-            blockId,
-            sliderType,
-            carouselPerColumn,
-            carouselPerColumnGap,
-            speed,
-            autoplay,
-            autoplayDelay,
-            infiniteLoop,
-            allowTouchMove,
-            pauseOnHover,
-            stopOnLastSlide,
-            reverseDirection,
-            carouselEffect,
-            slideEffect,
-            mousewheelControl,
-            keyboardNavigation,
-            paginationType,
-            dynamicBullets,
-    
-            showNavigation,
-            showPagination,
-    
-            globalID,
-            globalClass,
-            navigationArrowPositionType,
-            navigationArrowPosition,
-    
-            navigationArrowsIconSwitcher,
-            navigationArrowsIconLeftAlign,
-            navigationArrowsIconLeft,
-            navigationArrowsIconLeftImageUrl,
-            navigationArrowsIconLeftImageAlt,
-            navigationArrowsIconLeftImageID,
-    
-            navigationArrowsIconRightAlign,
-            navigationArrowsIconRight,
-            navigationArrowsIconRightImageUrl,
-            navigationArrowsIconRightImageAlt,
-            navigationArrowsIconRightImageID,
-    
-            layoutHeightSwitcher,
+			blockId,
+			sliderType,
+			carouselPerColumn,
+			carouselPerColumnGap,
+			speed,
+			autoplay,
+			autoplayDelay,
+			infiniteLoop,
+			allowTouchMove,
+			pauseOnHover,
+			stopOnLastSlide,
+			reverseDirection,
+			carouselEffect,
+			slideEffect,
+			mousewheelControl,
+			keyboardNavigation,
+			paginationType,
+			dynamicBullets,
+
+			showNavigation,
+			showPagination,
+
+			globalID,
+			globalClass,
+			navigationArrowPositionType,
+			navigationArrowPosition,
+
+			navigationArrowsIconSwitcher,
+			navigationArrowsIconLeftAlign,
+			navigationArrowsIconLeft,
+			navigationArrowsIconLeftImageUrl,
+			navigationArrowsIconLeftImageAlt,
+			navigationArrowsIconLeftImageID,
+
+			navigationArrowsIconRightAlign,
+			navigationArrowsIconRight,
+			navigationArrowsIconRightImageUrl,
+			navigationArrowsIconRightImageAlt,
+			navigationArrowsIconRightImageID,
+
+			layoutHeightSwitcher,
 		} = attributes;
 
-        const blockProps = useBlockProps.save({
-            className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
-        });
-    
-        const innerBlocksProps = useInnerBlocksProps.save({
-            className: 'swiper-wrapper gslider-swiper-wrapper',
-        });
-    
-        const navigationEnabled = {
-            Mobile:  !!showNavigation?.Mobile,
-            Tablet:  !!showNavigation?.Tablet,
-            Desktop: !!showNavigation?.Desktop,
-        };
-        const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
-    
-        const paginationEnabled = {
-            Mobile:  !!showPagination?.Mobile,
-            Tablet:  !!showPagination?.Tablet,
-            Desktop: !!showPagination?.Desktop,
-        };
-        const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
-    
-        // Configure Swiper settings for frontend rendering
-        const swiperSettings = JSON.stringify({
-            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-    
-            // Responsive breakpoints for Desktop, Tablet, and Mobile
-            breakpoints: {
-                0: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Mobile || 1,
-                        spaceBetween: carouselPerColumnGap?.Mobile || 0,
-                    }),
-                    speed: speed?.Mobile || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Mobile || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Mobile },
-                    pagination: { enabled: paginationEnabled.Mobile },
-                },
-                768: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
-                    }),
-                    speed: speed?.Tablet || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Tablet || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Tablet }, 
-                    pagination: { enabled: paginationEnabled.Tablet },
-                },
-                1025: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
-                    }),
-                    speed: speed?.Desktop || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Desktop || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Desktop },
-                    pagination: { enabled: paginationEnabled.Desktop },
-                },
-            },
-    
-            ...(layoutHeightSwitcher === 'adapt' && {
-                autoHeight: true,
-            }),
-    
-            // Common settings
-            loop: infiniteLoop,
-            autoplay: autoplay ? {
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-                stopOnLastSlide: stopOnLastSlide,
-                reverseDirection: reverseDirection,
-            } : false,
-            allowTouchMove: allowTouchMove,
-            mousewheel: mousewheelControl,
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition }`,
+		} );
 
-            keyboard: keyboardNavigation ? { 
-                enabled: true,
-                onlyInViewport: true,
-                pageUpDown: false,
-            } : false,
-            
-            navigation: {
-                enabled: anyNavigationEnabled,
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            
-            pagination: {
-                enabled: anyPaginationEnabled,
-                el: '.swiper-pagination',
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                clickable: true,
-            },
-            
-            // Creative effect settings if needed
-            ...(slideEffect === 'creative' && {
-                creativeEffect: {
-                    prev: { shadow: true, translate: [0, 0, -400] },
-                    next: { translate: ['100%', 0, 0] },
-                },
-            }),
-            
-        });
+		const innerBlocksProps = useInnerBlocksProps.save( {
+			className: 'swiper-wrapper gslider-swiper-wrapper',
+		} );
 
-        return (
-            <div {...blockProps} data-swiper-settings={swiperSettings}>
-                <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
-                    <div {...innerBlocksProps} />
+		const navigationEnabled = {
+			Mobile: !! showNavigation?.Mobile,
+			Tablet: !! showNavigation?.Tablet,
+			Desktop: !! showNavigation?.Desktop,
+		};
+		const anyNavigationEnabled =
+			navigationEnabled.Mobile ||
+			navigationEnabled.Tablet ||
+			navigationEnabled.Desktop;
 
-                    {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                        <>
-                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                                <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                                <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                            </div>
-                        </>
-                    )}
+		const paginationEnabled = {
+			Mobile: !! showPagination?.Mobile,
+			Tablet: !! showPagination?.Tablet,
+			Desktop: !! showPagination?.Desktop,
+		};
+		const anyPaginationEnabled =
+			paginationEnabled.Mobile ||
+			paginationEnabled.Tablet ||
+			paginationEnabled.Desktop;
 
-                    { anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                        </div>
-                    )}
+		// Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify( {
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-                    {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                            </div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                            </div>
-                        </div>
-                    )}
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			breakpoints: {
+				0: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Mobile || 1,
+						spaceBetween: carouselPerColumnGap?.Mobile || 0,
+					} ),
+					speed: speed?.Mobile || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Mobile },
+					pagination: { enabled: paginationEnabled.Mobile },
+				},
+				768: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Tablet || 2,
+						spaceBetween: carouselPerColumnGap?.Tablet || 20,
+					} ),
+					speed: speed?.Tablet || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Tablet },
+					pagination: { enabled: paginationEnabled.Tablet },
+				},
+				1025: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Desktop || 2,
+						spaceBetween: carouselPerColumnGap?.Desktop || 20,
+					} ),
+					speed: speed?.Desktop || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Desktop },
+					pagination: { enabled: paginationEnabled.Desktop },
+				},
+			},
 
-                    {anyPaginationEnabled && (
-                        <>
-                            <div className="gslider-pagination-wrapper">
-                                <div className="swiper-pagination"></div>
-                            </div>
-                        </>
-                    )}
-                </div>
-                { anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
+			...( layoutHeightSwitcher === 'adapt' && {
+				autoHeight: true,
+			} ),
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
+			// Common settings
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
-            </div>
-        );
+			keyboard: keyboardNavigation
+				? {
+						enabled: true,
+						onlyInViewport: true,
+						pageUpDown: false,
+				  }
+				: false,
+
+			navigation: {
+				enabled: anyNavigationEnabled,
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+
+			pagination: {
+				enabled: anyPaginationEnabled,
+				el: '.swiper-pagination',
+				type: paginationType,
+				dynamicBullets:
+					paginationType === 'bullets' ? dynamicBullets : false,
+				clickable: true,
+			},
+
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
+		} );
+
+		return (
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div
+					className={ `swiper ${ globalClass }` }
+					{ ...( globalID && { id: globalID } ) }
+				>
+					<div { ...innerBlocksProps } />
+
+					{ anyNavigationEnabled &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
+							</div>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
+							</div>
+						) }
+
+					{ anyPaginationEnabled && (
+						<>
+							<div className="gslider-pagination-wrapper">
+								<div className="swiper-pagination"></div>
+							</div>
+						</>
+					) }
+				</div>
+				{ anyNavigationEnabled &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+			</div>
+		);
 	},
 };
 
@@ -1352,230 +2030,369 @@ const v1_1_5 = {
 		html: false,
 		className: false,
 	},
-	save({ attributes }) {
+	save( { attributes } ) {
 		const {
-            blockId,
-            sliderType,
-            carouselPerColumn,
-            carouselPerColumnGap,
-            speed,
-            autoplay,
-            autoplayDelay,
-            infiniteLoop,
-            allowTouchMove,
-            pauseOnHover,
-            stopOnLastSlide,
-            reverseDirection,
-            carouselEffect,
-            slideEffect,
-            mousewheelControl,
-            keyboardNavigation,
-            paginationType,
-            dynamicBullets,
+			blockId,
+			sliderType,
+			carouselPerColumn,
+			carouselPerColumnGap,
+			speed,
+			autoplay,
+			autoplayDelay,
+			infiniteLoop,
+			allowTouchMove,
+			pauseOnHover,
+			stopOnLastSlide,
+			reverseDirection,
+			carouselEffect,
+			slideEffect,
+			mousewheelControl,
+			keyboardNavigation,
+			paginationType,
+			dynamicBullets,
 
-            showNavigation,
-            showPagination,
+			showNavigation,
+			showPagination,
 
-            globalID,
-            globalClass,
-            navigationArrowPositionType,
-            navigationArrowPosition,
+			globalID,
+			globalClass,
+			navigationArrowPositionType,
+			navigationArrowPosition,
 
-            navigationArrowsIconSwitcher,
-            navigationArrowsIconLeftAlign,
-            navigationArrowsIconLeft,
-            navigationArrowsIconLeftImageUrl,
-            navigationArrowsIconLeftImageAlt,
-            navigationArrowsIconLeftImageID,
+			navigationArrowsIconSwitcher,
+			navigationArrowsIconLeftAlign,
+			navigationArrowsIconLeft,
+			navigationArrowsIconLeftImageUrl,
+			navigationArrowsIconLeftImageAlt,
+			navigationArrowsIconLeftImageID,
 
-            navigationArrowsIconRightAlign,
-            navigationArrowsIconRight,
-            navigationArrowsIconRightImageUrl,
-            navigationArrowsIconRightImageAlt,
-            navigationArrowsIconRightImageID,
+			navigationArrowsIconRightAlign,
+			navigationArrowsIconRight,
+			navigationArrowsIconRightImageUrl,
+			navigationArrowsIconRightImageAlt,
+			navigationArrowsIconRightImageID,
 
-            layoutHeightSwitcher,
+			layoutHeightSwitcher,
 		} = attributes;
 
-        const blockProps = useBlockProps.save({
-            className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition}`,
-        });
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition }`,
+		} );
 
-        const innerBlocksProps = useInnerBlocksProps.save({
-            className: 'swiper-wrapper gslider-swiper-wrapper',
-        });
+		const innerBlocksProps = useInnerBlocksProps.save( {
+			className: 'swiper-wrapper gslider-swiper-wrapper',
+		} );
 
-        const navigationEnabled = {
-            Mobile:  !!showNavigation?.Mobile,
-            Tablet:  !!showNavigation?.Tablet,
-            Desktop: !!showNavigation?.Desktop,
-        };
-        const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
+		const navigationEnabled = {
+			Mobile: !! showNavigation?.Mobile,
+			Tablet: !! showNavigation?.Tablet,
+			Desktop: !! showNavigation?.Desktop,
+		};
+		const anyNavigationEnabled =
+			navigationEnabled.Mobile ||
+			navigationEnabled.Tablet ||
+			navigationEnabled.Desktop;
 
-        const paginationEnabled = {
-            Mobile:  !!showPagination?.Mobile,
-            Tablet:  !!showPagination?.Tablet,
-            Desktop: !!showPagination?.Desktop,
-        };
-        const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
+		const paginationEnabled = {
+			Mobile: !! showPagination?.Mobile,
+			Tablet: !! showPagination?.Tablet,
+			Desktop: !! showPagination?.Desktop,
+		};
+		const anyPaginationEnabled =
+			paginationEnabled.Mobile ||
+			paginationEnabled.Tablet ||
+			paginationEnabled.Desktop;
 
-        // Configure Swiper settings for frontend rendering
-        const swiperSettings = JSON.stringify({
-            effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+		// Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify( {
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-            // Responsive breakpoints for Desktop, Tablet, and Mobile
-            breakpoints: {
-                0: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Mobile || 1,
-                        spaceBetween: carouselPerColumnGap?.Mobile || 0,
-                    }),
-                    speed: speed?.Mobile || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Mobile || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Mobile },
-                    pagination: { enabled: paginationEnabled.Mobile },
-                },
-                768: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Tablet || 2,
-                        spaceBetween: carouselPerColumnGap?.Tablet || 20,
-                    }),
-                    speed: speed?.Tablet || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Tablet || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Tablet }, 
-                    pagination: { enabled: paginationEnabled.Tablet },
-                },
-                1025: {
-                    ...(sliderType === 'carousel' && {
-                        slidesPerView: carouselPerColumn?.Desktop || 2,
-                        spaceBetween: carouselPerColumnGap?.Desktop || 20,
-                    }),
-                    speed: speed?.Desktop || 800,
-                    autoplay: autoplay ? {
-                        delay: autoplayDelay?.Desktop || 1000,
-                    } : false,
-                    navigation: { enabled: navigationEnabled.Desktop },
-                    pagination: { enabled: paginationEnabled.Desktop },
-                },
-            },
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			breakpoints: {
+				0: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Mobile || 1,
+						spaceBetween: carouselPerColumnGap?.Mobile || 0,
+					} ),
+					speed: speed?.Mobile || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Mobile },
+					pagination: { enabled: paginationEnabled.Mobile },
+				},
+				768: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Tablet || 2,
+						spaceBetween: carouselPerColumnGap?.Tablet || 20,
+					} ),
+					speed: speed?.Tablet || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Tablet },
+					pagination: { enabled: paginationEnabled.Tablet },
+				},
+				1025: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Desktop || 2,
+						spaceBetween: carouselPerColumnGap?.Desktop || 20,
+					} ),
+					speed: speed?.Desktop || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Desktop },
+					pagination: { enabled: paginationEnabled.Desktop },
+				},
+			},
 
-            ...(layoutHeightSwitcher === 'adapt' && {
-                autoHeight: true,
-            }),
+			...( layoutHeightSwitcher === 'adapt' && {
+				autoHeight: true,
+			} ),
 
-            // Common settings
-            loop: infiniteLoop,
-            autoplay: autoplay ? {
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-                stopOnLastSlide: stopOnLastSlide,
-                reverseDirection: reverseDirection,
-            } : false,
-            allowTouchMove: allowTouchMove,
-            mousewheel: mousewheelControl,
+			// Common settings
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
 
-            keyboard: keyboardNavigation ? { 
-                enabled: true,
-                onlyInViewport: true,
-                pageUpDown: false,
-            } : false,
-            
-            navigation: {
-                enabled: anyNavigationEnabled,
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            
-            pagination: {
-                enabled: anyPaginationEnabled,
-                el: '.swiper-pagination',
-                type: paginationType,
-                dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-                clickable: true,
-            },
-            
-            // Creative effect settings if needed
-            ...(slideEffect === 'creative' && {
-                creativeEffect: {
-                    prev: { shadow: true, translate: [0, 0, -400] },
-                    next: { translate: ['100%', 0, 0] },
-                },
-            }),
-            
-        });
+			keyboard: keyboardNavigation
+				? {
+						enabled: true,
+						onlyInViewport: true,
+						pageUpDown: false,
+				  }
+				: false,
 
-        return (
-            <div {...blockProps} data-swiper-settings={swiperSettings}>
-                <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
-                    <div {...innerBlocksProps} />
+			navigation: {
+				enabled: anyNavigationEnabled,
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
 
-                    {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                        <>
-                            <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                                <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                                <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                            </div>
-                        </>
-                    )}
+			pagination: {
+				enabled: anyPaginationEnabled,
+				el: '.swiper-pagination',
+				type: paginationType,
+				dynamicBullets:
+					paginationType === 'bullets' ? dynamicBullets : false,
+				clickable: true,
+			},
 
-                    { anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                        </div>
-                    )}
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
+		} );
 
-                    {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                        <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                                <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                            </div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                                <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                            </div>
-                        </div>
-                    )}
+		return (
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div
+					className={ `swiper ${ globalClass }` }
+					{ ...( globalID && { id: globalID } ) }
+				>
+					<div { ...innerBlocksProps } />
 
-                    {anyPaginationEnabled && (
-                        <>
-                            <div className="gslider-pagination-wrapper">
-                                <div className="swiper-pagination"></div>
-                            </div>
-                        </>
-                    )}
-                </div>
-                { anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
+					{ anyNavigationEnabled &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
+							</div>
+						) }
 
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
-            </div>
-        );
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
+							</div>
+						) }
+
+					{ anyPaginationEnabled && (
+						<>
+							<div className="gslider-pagination-wrapper">
+								<div className="swiper-pagination"></div>
+							</div>
+						</>
+					) }
+				</div>
+				{ anyNavigationEnabled &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+			</div>
+		);
 	},
 };
 
@@ -1585,493 +2402,7 @@ const v1_1_6 = {
 		html: false,
 		className: false,
 	},
-	save({ attributes }) {
-    const {
-        blockId,
-        sliderType,
-        carouselPerColumn,
-        carouselPerColumnGap,
-        speed,
-        autoplay,
-        autoplayDelay,
-        infiniteLoop,
-        allowTouchMove,
-        pauseOnHover,
-        stopOnLastSlide,
-        reverseDirection,
-        carouselEffect,
-        slideEffect,
-        mousewheelControl,
-        keyboardNavigation,
-        paginationType,
-        dynamicBullets,
-
-        showNavigation,
-        showPagination,
-        paginationPositionType,
-
-        globalID,
-        globalClass,
-        navigationArrowPositionType,
-        navigationArrowPosition,
-
-        navigationArrowsIconSwitcher,
-        navigationArrowsIconLeftAlign,
-        navigationArrowsIconLeft,
-        navigationArrowsIconLeftImageUrl,
-        navigationArrowsIconLeftImageAlt,
-        navigationArrowsIconLeftImageID,
-
-        navigationArrowsIconRightAlign,
-        navigationArrowsIconRight,
-        navigationArrowsIconRightImageUrl,
-        navigationArrowsIconRightImageAlt,
-        navigationArrowsIconRightImageID,
-
-        layoutHeightSwitcher,
-    } = attributes;
-
-    const blockProps = useBlockProps.save({
-        className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
-    });
-
-    const innerBlocksProps = useInnerBlocksProps.save({
-        className: 'swiper-wrapper gslider-swiper-wrapper',
-    });
-
-    const navigationEnabled = {
-        Mobile:  !!showNavigation?.Mobile,
-        Tablet:  !!showNavigation?.Tablet,
-        Desktop: !!showNavigation?.Desktop,
-    };
-    const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
-
-    const paginationEnabled = {
-        Mobile:  !!showPagination?.Mobile,
-        Tablet:  !!showPagination?.Tablet,
-        Desktop: !!showPagination?.Desktop,
-    };
-    const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
-
-    // Configure Swiper settings for frontend rendering
-    const swiperSettings = JSON.stringify({
-        effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-
-        // Responsive breakpoints for Desktop, Tablet, and Mobile
-        breakpoints: {
-            0: {
-                ...(sliderType === 'carousel' && {
-                    slidesPerView: carouselPerColumn?.Mobile || 1,
-                    spaceBetween: carouselPerColumnGap?.Mobile || 0,
-                }),
-                speed: speed?.Mobile || 800,
-                autoplay: autoplay ? {
-                    delay: autoplayDelay?.Mobile || 1000,
-                } : false,
-                navigation: { enabled: navigationEnabled.Mobile },
-                pagination: { enabled: paginationEnabled.Mobile },
-            },
-            768: {
-                ...(sliderType === 'carousel' && {
-                    slidesPerView: carouselPerColumn?.Tablet || 2,
-                    spaceBetween: carouselPerColumnGap?.Tablet || 20,
-                }),
-                speed: speed?.Tablet || 800,
-                autoplay: autoplay ? {
-                    delay: autoplayDelay?.Tablet || 1000,
-                } : false,
-                navigation: { enabled: navigationEnabled.Tablet }, 
-                pagination: { enabled: paginationEnabled.Tablet },
-            },
-            1025: {
-                ...(sliderType === 'carousel' && {
-                    slidesPerView: carouselPerColumn?.Desktop || 2,
-                    spaceBetween: carouselPerColumnGap?.Desktop || 20,
-                }),
-                speed: speed?.Desktop || 800,
-                autoplay: autoplay ? {
-                    delay: autoplayDelay?.Desktop || 1000,
-                } : false,
-                navigation: { enabled: navigationEnabled.Desktop },
-                pagination: { enabled: paginationEnabled.Desktop },
-            },
-        },
-
-        ...(layoutHeightSwitcher === 'adapt' && {
-            autoHeight: true,
-        }),
-
-        // Common settings
-        loop: infiniteLoop,
-        autoplay: autoplay ? {
-            pauseOnMouseEnter: pauseOnHover,
-            disableOnInteraction: false,
-            stopOnLastSlide: stopOnLastSlide,
-            reverseDirection: reverseDirection,
-        } : false,
-        allowTouchMove: allowTouchMove,
-        mousewheel: mousewheelControl,
-
-        keyboard: keyboardNavigation ? { 
-            enabled: true,
-            onlyInViewport: true,
-            pageUpDown: false,
-        } : false,
-        
-        navigation: {
-            enabled: anyNavigationEnabled,
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        
-        pagination: {
-            enabled: anyPaginationEnabled,
-            el: `.${blockId} .swiper-pagination-flexi-content`,
-            type: paginationType,
-            dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-            clickable: true,
-        },
-        
-        // Creative effect settings if needed
-        ...(slideEffect === 'creative' && {
-            creativeEffect: {
-                prev: { shadow: true, translate: [0, 0, -400] },
-                next: { translate: ['100%', 0, 0] },
-            },
-        }),
-        
-    });
-
-    return (
-        <div {...blockProps} data-swiper-settings={swiperSettings}>
-            <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
-                <div {...innerBlocksProps} />
-
-                {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
-
-                { anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
-
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
-
-                {anyPaginationEnabled && paginationPositionType === 'inside' && (
-                    <>
-                        <div
-                            className="swiper-pagination swiper-pagination-flexi-content"
-                            aria-label="Carousel pagination"
-                        ></div>
-                    </>
-                )}
-            </div>
-            { anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                <>
-                    <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                    </div>
-                </>
-            )}
-
-            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                    <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                    <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                </div>
-            )}
-
-            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                    <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                        <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                    </div>
-                    <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                        <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                    </div>
-                </div>
-            )}
-            {anyPaginationEnabled && paginationPositionType === 'outside' && (
-                <>
-                    <div
-                        className={`swiper-pagination swiper-pagination-flexi-content swiper-pagination-${blockId}`}
-                        aria-label="Carousel pagination"
-                    ></div>
-                </>
-            )}
-        </div>
-    );
-},
-};
-
-const v1_1_7 = {
-	attributes,
-	supports: {
-		html: false,
-		className: false,
-	},
-	save({ attributes }) {
-    const {
-        blockId,
-        sliderType,
-        carouselPerColumn,
-        carouselPerColumnGap,
-        speed,
-        autoplay,
-        autoplayDelay,
-        infiniteLoop,
-        allowTouchMove,
-        pauseOnHover,
-        stopOnLastSlide,
-        reverseDirection,
-        carouselEffect,
-        slideEffect,
-        mousewheelControl,
-        keyboardNavigation,
-        paginationType,
-        dynamicBullets,
-
-        showNavigation,
-        showPagination,
-        paginationPositionType,
-
-        globalID,
-        globalClass,
-        navigationArrowPositionType,
-        navigationArrowPosition,
-
-        navigationArrowsIconSwitcher,
-        navigationArrowsIconLeftAlign,
-        navigationArrowsIconLeft,
-        navigationArrowsIconLeftImageUrl,
-        navigationArrowsIconLeftImageAlt,
-        navigationArrowsIconLeftImageID,
-
-        navigationArrowsIconRightAlign,
-        navigationArrowsIconRight,
-        navigationArrowsIconRightImageUrl,
-        navigationArrowsIconRightImageAlt,
-        navigationArrowsIconRightImageID,
-
-        layoutHeightSwitcher,
-    } = attributes;
-
-    const blockProps = useBlockProps.save({
-        className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${showPagination ? 'has-pagination' : ''}`,
-    });
-
-    const innerBlocksProps = useInnerBlocksProps.save({
-        className: 'swiper-wrapper gslider-swiper-wrapper',
-    });
-
-    const navigationEnabled = {
-        Mobile:  !!showNavigation?.Mobile,
-        Tablet:  !!showNavigation?.Tablet,
-        Desktop: !!showNavigation?.Desktop,
-    };
-    const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
-
-    const paginationEnabled = {
-        Mobile:  !!showPagination?.Mobile,
-        Tablet:  !!showPagination?.Tablet,
-        Desktop: !!showPagination?.Desktop,
-    };
-    const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
-
-    // Configure Swiper settings for frontend rendering
-    const swiperSettings = JSON.stringify({
-        effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-
-        // Responsive breakpoints for Desktop, Tablet, and Mobile
-        breakpoints: {
-            0: {
-                ...(sliderType === 'carousel' && {
-                    slidesPerView: carouselPerColumn?.Mobile || 1,
-                    spaceBetween: carouselPerColumnGap?.Mobile || 0,
-                }),
-                speed: speed?.Mobile || 800,
-                autoplay: autoplay ? {
-                    delay: autoplayDelay?.Mobile || 1000,
-                } : false,
-                navigation: { enabled: navigationEnabled.Mobile },
-                pagination: { enabled: paginationEnabled.Mobile },
-            },
-            768: {
-                ...(sliderType === 'carousel' && {
-                    slidesPerView: carouselPerColumn?.Tablet || 2,
-                    spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
-                }),
-                speed: speed?.Tablet || 800,
-                autoplay: autoplay ? {
-                    delay: autoplayDelay?.Tablet || 1000,
-                } : false,
-                navigation: { enabled: navigationEnabled.Tablet }, 
-                pagination: { enabled: paginationEnabled.Tablet },
-            },
-            1025: {
-                ...(sliderType === 'carousel' && {
-                    slidesPerView: carouselPerColumn?.Desktop || 2,
-                    spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
-                }),
-                speed: speed?.Desktop || 800,
-                autoplay: autoplay ? {
-                    delay: autoplayDelay?.Desktop || 1000,
-                } : false,
-                navigation: { enabled: navigationEnabled.Desktop },
-                pagination: { enabled: paginationEnabled.Desktop },
-            },
-        },
-
-        ...(layoutHeightSwitcher === 'adapt' && {
-            autoHeight: true,
-        }),
-
-        // Common settings
-        loop: infiniteLoop,
-        autoplay: autoplay ? {
-            pauseOnMouseEnter: pauseOnHover,
-            disableOnInteraction: false,
-            stopOnLastSlide: stopOnLastSlide,
-            reverseDirection: reverseDirection,
-        } : false,
-        allowTouchMove: allowTouchMove,
-        mousewheel: mousewheelControl,
-
-        keyboard: keyboardNavigation ? { 
-            enabled: true,
-            onlyInViewport: true,
-            pageUpDown: false,
-        } : false,
-        
-        navigation: {
-            enabled: anyNavigationEnabled,
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        
-        pagination: {
-            enabled: anyPaginationEnabled,
-            el: `.${blockId} .swiper-pagination-flexi-content`,
-            type: paginationType,
-            dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-            clickable: true,
-        },
-        
-        // Creative effect settings if needed
-        ...(slideEffect === 'creative' && {
-            creativeEffect: {
-                prev: { shadow: true, translate: [0, 0, -400] },
-                next: { translate: ['100%', 0, 0] },
-            },
-        }),
-        
-    });
-
-    return (
-        <div {...blockProps} data-swiper-settings={swiperSettings}>
-            <div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
-                <div {...innerBlocksProps} />
-
-                {anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-                    <>
-                        <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                            <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                            <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                        </div>
-                    </>
-                )}
-
-                { anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                    </div>
-                )}
-
-                {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                    <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                            <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                        </div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                            <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                        </div>
-                    </div>
-                )}
-
-                {anyPaginationEnabled && paginationPositionType === 'inside' && (
-                    <>
-                        <div
-                            className="swiper-pagination swiper-pagination-flexi-content"
-                            aria-label="Carousel pagination"
-                        ></div>
-                    </>
-                )}
-            </div>
-            { anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-                <>
-                    <div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                        <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-                        <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-                    </div>
-                </>
-            )}
-
-            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-                <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                    <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-                    <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-                </div>
-            )}
-
-            {anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-                <div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-                    <div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-                        <img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-                    </div>
-                    <div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-                        <img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-                    </div>
-                </div>
-            )}
-            {anyPaginationEnabled && paginationPositionType === 'outside' && (
-                <>
-                    <div
-                        className={`swiper-pagination swiper-pagination-flexi-content swiper-pagination-${blockId}`}
-                        aria-label="Carousel pagination"
-                    ></div>
-                </>
-            )}
-        </div>
-    );
-},
-};
-
-const v1_2_0 = {
-	attributes,
-	supports: {
-		html: false,
-		className: false,
-	},
-	save({ attributes }) {
+	save( { attributes } ) {
 		const {
 			blockId,
 			sliderType,
@@ -2117,195 +2448,1125 @@ const v1_2_0 = {
 			layoutHeightSwitcher,
 		} = attributes;
 
-		const blockProps = useBlockProps.save({
-			className: `gslider-flexi-content-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? 'has-pagination' : ''}`,
-		});
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
+				showPagination ? 'has-pagination' : ''
+			}`,
+		} );
 
-		const innerBlocksProps = useInnerBlocksProps.save({
+		const innerBlocksProps = useInnerBlocksProps.save( {
 			className: 'swiper-wrapper gslider-swiper-wrapper',
-		});
+		} );
 
 		const navigationEnabled = {
-			Mobile:  !!showNavigation?.Mobile,
-			Tablet:  !!showNavigation?.Tablet,
-			Desktop: !!showNavigation?.Desktop,
+			Mobile: !! showNavigation?.Mobile,
+			Tablet: !! showNavigation?.Tablet,
+			Desktop: !! showNavigation?.Desktop,
 		};
-		const anyNavigationEnabled = navigationEnabled.Mobile || navigationEnabled.Tablet || navigationEnabled.Desktop;
+		const anyNavigationEnabled =
+			navigationEnabled.Mobile ||
+			navigationEnabled.Tablet ||
+			navigationEnabled.Desktop;
 
 		const paginationEnabled = {
-			Mobile:  !!showPagination?.Mobile,
-			Tablet:  !!showPagination?.Tablet,
-			Desktop: !!showPagination?.Desktop,
+			Mobile: !! showPagination?.Mobile,
+			Tablet: !! showPagination?.Tablet,
+			Desktop: !! showPagination?.Desktop,
 		};
-		const anyPaginationEnabled = paginationEnabled.Mobile || paginationEnabled.Tablet || paginationEnabled.Desktop;
+		const anyPaginationEnabled =
+			paginationEnabled.Mobile ||
+			paginationEnabled.Tablet ||
+			paginationEnabled.Desktop;
 
 		// Configure Swiper settings for frontend rendering
-		const swiperSettings = JSON.stringify({
+		const swiperSettings = JSON.stringify( {
 			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
 			// Responsive breakpoints for Desktop, Tablet, and Mobile
 			breakpoints: {
 				0: {
-					...(sliderType === 'carousel' && {
+					...( sliderType === 'carousel' && {
 						slidesPerView: carouselPerColumn?.Mobile || 1,
 						spaceBetween: carouselPerColumnGap?.Mobile || 0,
-					}),
+					} ),
 					speed: speed?.Mobile || 800,
-					autoplay: autoplay ? {
-						delay: autoplayDelay?.Mobile || 1000,
-					} : false,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
 					navigation: { enabled: navigationEnabled.Mobile },
 					pagination: { enabled: paginationEnabled.Mobile },
 				},
 				768: {
-					...(sliderType === 'carousel' && {
+					...( sliderType === 'carousel' && {
 						slidesPerView: carouselPerColumn?.Tablet || 2,
-						spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
-					}),
+						spaceBetween: carouselPerColumnGap?.Tablet || 20,
+					} ),
 					speed: speed?.Tablet || 800,
-					autoplay: autoplay ? {
-						delay: autoplayDelay?.Tablet || 1000,
-					} : false,
-					navigation: { enabled: navigationEnabled.Tablet }, 
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Tablet },
 					pagination: { enabled: paginationEnabled.Tablet },
 				},
 				1025: {
-					...(sliderType === 'carousel' && {
+					...( sliderType === 'carousel' && {
 						slidesPerView: carouselPerColumn?.Desktop || 2,
-						spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
-					}),
+						spaceBetween: carouselPerColumnGap?.Desktop || 20,
+					} ),
 					speed: speed?.Desktop || 800,
-					autoplay: autoplay ? {
-						delay: autoplayDelay?.Desktop || 1000,
-					} : false,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
 					navigation: { enabled: navigationEnabled.Desktop },
 					pagination: { enabled: paginationEnabled.Desktop },
 				},
 			},
 
-			...(layoutHeightSwitcher === 'adapt' && {
+			...( layoutHeightSwitcher === 'adapt' && {
 				autoHeight: true,
-			}),
+			} ),
 
 			// Common settings
 			loop: infiniteLoop,
-			autoplay: autoplay ? {
-				pauseOnMouseEnter: pauseOnHover,
-				disableOnInteraction: false,
-				stopOnLastSlide: stopOnLastSlide,
-				reverseDirection: reverseDirection,
-			} : false,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
 			allowTouchMove: allowTouchMove,
 			mousewheel: mousewheelControl,
 
-			keyboard: keyboardNavigation ? { 
-				enabled: true,
-				onlyInViewport: true,
-				pageUpDown: false,
-			} : false,
-			
+			keyboard: keyboardNavigation
+				? {
+						enabled: true,
+						onlyInViewport: true,
+						pageUpDown: false,
+				  }
+				: false,
+
 			navigation: {
 				enabled: anyNavigationEnabled,
 				nextEl: '.swiper-button-next',
 				prevEl: '.swiper-button-prev',
 			},
-			
+
 			pagination: {
 				enabled: anyPaginationEnabled,
-				el: `.${blockId} .swiper-pagination-flexi-content`,
+				el: `.${ blockId } .swiper-pagination-flexi-content`,
 				type: paginationType,
-				dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
+				dynamicBullets:
+					paginationType === 'bullets' ? dynamicBullets : false,
 				clickable: true,
 			},
-			
+
 			// Creative effect settings if needed
-			...(slideEffect === 'creative' && {
+			...( slideEffect === 'creative' && {
 				creativeEffect: {
-					prev: { shadow: true, translate: [0, 0, -400] },
-					next: { translate: ['100%', 0, 0] },
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
 				},
-			}),
-			
-		});
+			} ),
+		} );
 
 		return (
-			<div {...blockProps} data-swiper-settings={swiperSettings}>
-				<div className={`swiper ${globalClass}`} {...(globalID && {id: globalID})}>
-					<div {...innerBlocksProps} />
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div
+					className={ `swiper ${ globalClass }` }
+					{ ...( globalID && { id: globalID } ) }
+				>
+					<div { ...innerBlocksProps } />
 
-					{anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-						<>
-							<div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-								<div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-								<div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
+					{ anyNavigationEnabled &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
 							</div>
-						</>
-					)}
+						) }
 
-					{ anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && (
-						<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-							<div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-							<div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-						</div>
-					)}
-
-					{anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-						<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-							<div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-								<img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
 							</div>
-							<div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-								<img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-							</div>
-						</div>
-					)}
+						) }
 
-					{anyPaginationEnabled && paginationPositionType === 'inside' && (
+					{ anyPaginationEnabled &&
+						paginationPositionType === 'inside' && (
+							<>
+								<div
+									className="swiper-pagination swiper-pagination-flexi-content"
+									aria-label="Carousel pagination"
+								></div>
+							</>
+						) }
+				</div>
+				{ anyNavigationEnabled &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
 						<>
 							<div
-								className="swiper-pagination swiper-pagination-flexi-content"
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+				{ anyPaginationEnabled &&
+					paginationPositionType === 'outside' && (
+						<>
+							<div
+								className={ `swiper-pagination swiper-pagination-flexi-content swiper-pagination-${ blockId }` }
 								aria-label="Carousel pagination"
 							></div>
 						</>
-					)}
-				</div>
-				{ anyNavigationEnabled && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-					<>
-						<div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-							<div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-							<div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-						</div>
-					</>
-				)}
-
-				{anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'icon' || navigationArrowsIconRightAlign === 'icon') && ( 
-					<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-						<div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">{renderSVG(navigationArrowsIconLeft)}</div>
-						<div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">{renderSVG(navigationArrowsIconRight)}</div>
-					</div>
-				)}
-
-				{anyNavigationEnabled && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (navigationArrowsIconLeftAlign === 'image' || navigationArrowsIconRightAlign === 'image') && (navigationArrowsIconLeftImageUrl || navigationArrowsIconRightImageUrl) && (
-					<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-						<div className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide">
-							<img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-						</div>
-						<div className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide">
-							<img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-						</div>
-					</div>
-				)}
-				{anyPaginationEnabled && paginationPositionType === 'outside' && (
-					<>
-						<div
-							className={`swiper-pagination swiper-pagination-flexi-content swiper-pagination-${blockId}`}
-							aria-label="Carousel pagination"
-						></div>
-					</>
-				)}
+					) }
 			</div>
 		);
 	},
 };
 
-export default [ v1_2_0, v1_1_7,  v1_1_6, v1_0_7, v1_0_8, v1_0_9, v1_0_10, v1_1_1, v1_1_2, v1_1_5];
+const v1_1_7 = {
+	attributes,
+	supports: {
+		html: false,
+		className: false,
+	},
+	save( { attributes } ) {
+		const {
+			blockId,
+			sliderType,
+			carouselPerColumn,
+			carouselPerColumnGap,
+			speed,
+			autoplay,
+			autoplayDelay,
+			infiniteLoop,
+			allowTouchMove,
+			pauseOnHover,
+			stopOnLastSlide,
+			reverseDirection,
+			carouselEffect,
+			slideEffect,
+			mousewheelControl,
+			keyboardNavigation,
+			paginationType,
+			dynamicBullets,
+
+			showNavigation,
+			showPagination,
+			paginationPositionType,
+
+			globalID,
+			globalClass,
+			navigationArrowPositionType,
+			navigationArrowPosition,
+
+			navigationArrowsIconSwitcher,
+			navigationArrowsIconLeftAlign,
+			navigationArrowsIconLeft,
+			navigationArrowsIconLeftImageUrl,
+			navigationArrowsIconLeftImageAlt,
+			navigationArrowsIconLeftImageID,
+
+			navigationArrowsIconRightAlign,
+			navigationArrowsIconRight,
+			navigationArrowsIconRightImageUrl,
+			navigationArrowsIconRightImageAlt,
+			navigationArrowsIconRightImageID,
+
+			layoutHeightSwitcher,
+		} = attributes;
+
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
+				showPagination ? 'has-pagination' : ''
+			}`,
+		} );
+
+		const innerBlocksProps = useInnerBlocksProps.save( {
+			className: 'swiper-wrapper gslider-swiper-wrapper',
+		} );
+
+		const navigationEnabled = {
+			Mobile: !! showNavigation?.Mobile,
+			Tablet: !! showNavigation?.Tablet,
+			Desktop: !! showNavigation?.Desktop,
+		};
+		const anyNavigationEnabled =
+			navigationEnabled.Mobile ||
+			navigationEnabled.Tablet ||
+			navigationEnabled.Desktop;
+
+		const paginationEnabled = {
+			Mobile: !! showPagination?.Mobile,
+			Tablet: !! showPagination?.Tablet,
+			Desktop: !! showPagination?.Desktop,
+		};
+		const anyPaginationEnabled =
+			paginationEnabled.Mobile ||
+			paginationEnabled.Tablet ||
+			paginationEnabled.Desktop;
+
+		// Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify( {
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			breakpoints: {
+				0: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Mobile || 1,
+						spaceBetween: carouselPerColumnGap?.Mobile || 0,
+					} ),
+					speed: speed?.Mobile || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Mobile },
+					pagination: { enabled: paginationEnabled.Mobile },
+				},
+				768: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Tablet || 2,
+						spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+					} ),
+					speed: speed?.Tablet || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Tablet },
+					pagination: { enabled: paginationEnabled.Tablet },
+				},
+				1025: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Desktop || 2,
+						spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+					} ),
+					speed: speed?.Desktop || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Desktop },
+					pagination: { enabled: paginationEnabled.Desktop },
+				},
+			},
+
+			...( layoutHeightSwitcher === 'adapt' && {
+				autoHeight: true,
+			} ),
+
+			// Common settings
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
+
+			keyboard: keyboardNavigation
+				? {
+						enabled: true,
+						onlyInViewport: true,
+						pageUpDown: false,
+				  }
+				: false,
+
+			navigation: {
+				enabled: anyNavigationEnabled,
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+
+			pagination: {
+				enabled: anyPaginationEnabled,
+				el: `.${ blockId } .swiper-pagination-flexi-content`,
+				type: paginationType,
+				dynamicBullets:
+					paginationType === 'bullets' ? dynamicBullets : false,
+				clickable: true,
+			},
+
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
+		} );
+
+		return (
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div
+					className={ `swiper ${ globalClass }` }
+					{ ...( globalID && { id: globalID } ) }
+				>
+					<div { ...innerBlocksProps } />
+
+					{ anyNavigationEnabled &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
+							</div>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
+							</div>
+						) }
+
+					{ anyPaginationEnabled &&
+						paginationPositionType === 'inside' && (
+							<>
+								<div
+									className="swiper-pagination swiper-pagination-flexi-content"
+									aria-label="Carousel pagination"
+								></div>
+							</>
+						) }
+				</div>
+				{ anyNavigationEnabled &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+				{ anyPaginationEnabled &&
+					paginationPositionType === 'outside' && (
+						<>
+							<div
+								className={ `swiper-pagination swiper-pagination-flexi-content swiper-pagination-${ blockId }` }
+								aria-label="Carousel pagination"
+							></div>
+						</>
+					) }
+			</div>
+		);
+	},
+};
+
+const v1_2_0 = {
+	attributes,
+	supports: {
+		html: false,
+		className: false,
+	},
+	save( { attributes } ) {
+		const {
+			blockId,
+			sliderType,
+			carouselPerColumn,
+			carouselPerColumnGap,
+			speed,
+			autoplay,
+			autoplayDelay,
+			infiniteLoop,
+			allowTouchMove,
+			pauseOnHover,
+			stopOnLastSlide,
+			reverseDirection,
+			carouselEffect,
+			slideEffect,
+			mousewheelControl,
+			keyboardNavigation,
+			paginationType,
+			dynamicBullets,
+
+			showNavigation,
+			showPagination,
+			paginationPositionType,
+
+			globalID,
+			globalClass,
+			navigationArrowPositionType,
+			navigationArrowPosition,
+
+			navigationArrowsIconSwitcher,
+			navigationArrowsIconLeftAlign,
+			navigationArrowsIconLeft,
+			navigationArrowsIconLeftImageUrl,
+			navigationArrowsIconLeftImageAlt,
+			navigationArrowsIconLeftImageID,
+
+			navigationArrowsIconRightAlign,
+			navigationArrowsIconRight,
+			navigationArrowsIconRightImageUrl,
+			navigationArrowsIconRightImageAlt,
+			navigationArrowsIconRightImageID,
+
+			layoutHeightSwitcher,
+		} = attributes;
+
+		const blockProps = useBlockProps.save( {
+			className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
+				showPagination?.Desktop ||
+				showPagination?.Tablet ||
+				showPagination?.Mobile
+					? 'has-pagination'
+					: ''
+			}`,
+		} );
+
+		const innerBlocksProps = useInnerBlocksProps.save( {
+			className: 'swiper-wrapper gslider-swiper-wrapper',
+		} );
+
+		const navigationEnabled = {
+			Mobile: !! showNavigation?.Mobile,
+			Tablet: !! showNavigation?.Tablet,
+			Desktop: !! showNavigation?.Desktop,
+		};
+		const anyNavigationEnabled =
+			navigationEnabled.Mobile ||
+			navigationEnabled.Tablet ||
+			navigationEnabled.Desktop;
+
+		const paginationEnabled = {
+			Mobile: !! showPagination?.Mobile,
+			Tablet: !! showPagination?.Tablet,
+			Desktop: !! showPagination?.Desktop,
+		};
+		const anyPaginationEnabled =
+			paginationEnabled.Mobile ||
+			paginationEnabled.Tablet ||
+			paginationEnabled.Desktop;
+
+		// Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify( {
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			breakpoints: {
+				0: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Mobile || 1,
+						spaceBetween: carouselPerColumnGap?.Mobile || 0,
+					} ),
+					speed: speed?.Mobile || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Mobile || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Mobile },
+					pagination: { enabled: paginationEnabled.Mobile },
+				},
+				768: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Tablet || 2,
+						spaceBetween: carouselPerColumnGap?.Tablet ?? 20,
+					} ),
+					speed: speed?.Tablet || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Tablet || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Tablet },
+					pagination: { enabled: paginationEnabled.Tablet },
+				},
+				1025: {
+					...( sliderType === 'carousel' && {
+						slidesPerView: carouselPerColumn?.Desktop || 2,
+						spaceBetween: carouselPerColumnGap?.Desktop ?? 20,
+					} ),
+					speed: speed?.Desktop || 800,
+					autoplay: autoplay
+						? {
+								delay: autoplayDelay?.Desktop || 1000,
+						  }
+						: false,
+					navigation: { enabled: navigationEnabled.Desktop },
+					pagination: { enabled: paginationEnabled.Desktop },
+				},
+			},
+
+			...( layoutHeightSwitcher === 'adapt' && {
+				autoHeight: true,
+			} ),
+
+			// Common settings
+			loop: infiniteLoop,
+			autoplay: autoplay
+				? {
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
+				: false,
+			allowTouchMove: allowTouchMove,
+			mousewheel: mousewheelControl,
+
+			keyboard: keyboardNavigation
+				? {
+						enabled: true,
+						onlyInViewport: true,
+						pageUpDown: false,
+				  }
+				: false,
+
+			navigation: {
+				enabled: anyNavigationEnabled,
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+
+			pagination: {
+				enabled: anyPaginationEnabled,
+				el: `.${ blockId } .swiper-pagination-flexi-content`,
+				type: paginationType,
+				dynamicBullets:
+					paginationType === 'bullets' ? dynamicBullets : false,
+				clickable: true,
+			},
+
+			// Creative effect settings if needed
+			...( slideEffect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [ 0, 0, -400 ] },
+					next: { translate: [ '100%', 0, 0 ] },
+				},
+			} ),
+		} );
+
+		return (
+			<div { ...blockProps } data-swiper-settings={ swiperSettings }>
+				<div
+					className={ `swiper ${ globalClass }` }
+					{ ...( globalID && { id: globalID } ) }
+				>
+					<div { ...innerBlocksProps } />
+
+					{ anyNavigationEnabled &&
+						! navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' && (
+							<>
+								<div
+									className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Previous slide"
+									></div>
+									<div
+										className="swiper-button-next"
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Next slide"
+									></div>
+								</div>
+							</>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'icon' ||
+							navigationArrowsIconRightAlign === 'icon' ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									{ renderSVG( navigationArrowsIconLeft ) }
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									{ renderSVG( navigationArrowsIconRight ) }
+								</div>
+							</div>
+						) }
+
+					{ anyNavigationEnabled &&
+						navigationArrowsIconSwitcher &&
+						navigationArrowPositionType === 'inside' &&
+						( navigationArrowsIconLeftAlign === 'image' ||
+							navigationArrowsIconRightAlign === 'image' ) &&
+						( navigationArrowsIconLeftImageUrl ||
+							navigationArrowsIconRightImageUrl ) && (
+							<div
+								className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								>
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								</div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								>
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								</div>
+							</div>
+						) }
+
+					{ anyPaginationEnabled &&
+						paginationPositionType === 'inside' && (
+							<>
+								<div
+									className="swiper-pagination swiper-pagination-flexi-content"
+									aria-label="Carousel pagination"
+								></div>
+							</>
+						) }
+				</div>
+				{ anyNavigationEnabled &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								></div>
+								<div
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								></div>
+							</div>
+						</>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'icon' ||
+						navigationArrowsIconRightAlign === 'icon' ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								{ renderSVG( navigationArrowsIconLeft ) }
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								{ renderSVG( navigationArrowsIconRight ) }
+							</div>
+						</div>
+					) }
+
+				{ anyNavigationEnabled &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' &&
+					( navigationArrowsIconLeftAlign === 'image' ||
+						navigationArrowsIconRightAlign === 'image' ) &&
+					( navigationArrowsIconLeftImageUrl ||
+						navigationArrowsIconRightImageUrl ) && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								<img
+									src={ navigationArrowsIconLeftImageUrl }
+									alt={ navigationArrowsIconLeftImageAlt }
+								/>
+							</div>
+							<div
+								className="swiper-button-next"
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								<img
+									src={ navigationArrowsIconRightImageUrl }
+									alt={ navigationArrowsIconRightImageAlt }
+								/>
+							</div>
+						</div>
+					) }
+				{ anyPaginationEnabled &&
+					paginationPositionType === 'outside' && (
+						<>
+							<div
+								className={ `swiper-pagination swiper-pagination-flexi-content swiper-pagination-${ blockId }` }
+								aria-label="Carousel pagination"
+							></div>
+						</>
+					) }
+			</div>
+		);
+	},
+};
+
+export default [
+	v1_2_0,
+	v1_1_7,
+	v1_1_6,
+	v1_0_7,
+	v1_0_8,
+	v1_0_9,
+	v1_0_10,
+	v1_1_1,
+	v1_1_2,
+	v1_1_5,
+];
