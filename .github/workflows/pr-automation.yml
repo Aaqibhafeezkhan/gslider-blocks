@@ -2,7 +2,7 @@ name: Pull Request Automation & Labeler
 
 on:
   pull_request_target:
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, synchronize, reopened, edited, closed]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
@@ -35,12 +35,35 @@ jobs:
       - name: Run Intelligent PR Triage
         uses: actions/github-script@v9
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const pr = context.payload.pull_request;
             const author = pr.user.login;
             const title = pr.title;
             const action = context.payload.action;
+
+            // Handle PR closed event
+            if (action === 'closed') {
+              if (pr.merged && author !== 'noruzzamans') {
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number
+                });
+
+                const alreadyThanked = comments.some(c => c.body && c.body.includes('Thank you for contributing to **GSlider Blocks**'));
+                if (!alreadyThanked) {
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: pr.number,
+                    body: `🎉 **Congratulations @${author}!** Your pull request has been merged into \`main\`.\n\nThank you for contributing to **GSlider Blocks**! If you haven't already, please consider leaving a ⭐ [star on GitHub](https://github.com/noruzzamans/gslider-blocks) to support the project — it helps our community grow and motivates future development.`
+                  });
+                }
+              }
+              return;
+            }
+
             const labelsToAdd = new Set();
             const labelsToRemove = new Set();
 
