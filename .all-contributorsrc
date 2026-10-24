@@ -49,8 +49,18 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "blank-0007",
+      "name": "blank-0007",
+      "avatar_url": "https://avatars.githubusercontent.com/u/285468035?v=4",
+      "profile": "https://github.com/blank-0007",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "linkToUsage": false
+  "linkToUsage": false,
+  "commitConvention": "angular"
 }
