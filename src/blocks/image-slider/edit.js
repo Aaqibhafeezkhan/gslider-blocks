@@ -1,3 +1,5 @@
+/* global refreshFsLightbox */
+/* eslint-disable no-unused-vars, react-hooks/exhaustive-deps, no-shadow, object-shorthand, jsdoc/require-param, no-nested-ternary */
 import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
@@ -11,10 +13,10 @@ import {
 	ToolbarButton,
 	Popover,
 	Button,
-	TextControl
+	TextControl,
 } from '@wordpress/components';
-import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
-import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
+import { useState, useEffect, useRef, useMemo } from '@wordpress/element';
+import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import Inspector from './inspector';
 
@@ -25,21 +27,26 @@ import {
 	ToolbarMoveRightIcon,
 	ToolbarDeleteIcon,
 	ToolbarDuplicateIcon,
-	ToolbarLinkIcon
+	ToolbarLinkIcon,
 } from '@Utils/svgIcons';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateImageSliderStyle from './styling';
 
-const mapMedia = (m) => ({
+const mapMedia = ( m ) => ( {
 	id: m.id,
 	url: m?.sizes?.full?.url || m.url,
 	alt: m.alt || m.title || '',
 	caption: m.caption || '',
 	link: '',
 	tooltipText: '',
-});
+} );
 
-export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
+export default function Edit( {
+	attributes,
+	setAttributes,
+	clientId,
+	isSelected,
+} ) {
 	const {
 		blockId,
 		deviceType,
@@ -94,92 +101,111 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		imageLinkTransitionDuration,
 		enableLazyLoad,
 		enableLightbox,
-
 	} = attributes;
 
 	/** Handle block ID generation (handles duplication and initial ID) */
-	useBlockIdGenerator({
+	useBlockIdGenerator( {
 		clientId,
 		blockId,
 		blockPrefix: 'gslider-image-slider',
 		isSelected,
 		attributes,
 		setAttributes,
-	});
+	} );
 
 	/** Start Generate Block Style */
-    useEffect(() => {
-        if (blockId) {
-            const css = generateImageSliderStyle(attributes);
-            setAttributes({ blockStyle: css });
-        }
-    }, [attributes, blockId]);
-    /** End Generate Block Style */
+	useEffect( () => {
+		if ( blockId ) {
+			const css = generateImageSliderStyle( attributes );
+			setAttributes( { blockStyle: css } );
+		}
+	}, [ attributes, blockId ] );
+	/** End Generate Block Style */
 
 	/** Block props for container */
-	const blockProps = useBlockProps({
-		className: `gslider-image-slider-wrapper ${blockId} ${navigationArrowPositionType} ${navigationArrowPosition} ${(showPagination?.Desktop || showPagination?.Tablet || showPagination?.Mobile) ? 'has-pagination' : ''}`,
-	});
+	const blockProps = useBlockProps( {
+		className: `gslider-image-slider-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
+			showPagination?.Desktop ||
+			showPagination?.Tablet ||
+			showPagination?.Mobile
+				? 'has-pagination'
+				: ''
+		}`,
+	} );
 
-	const onSelectFromPlaceholder = (selection) => {
-		const list = Array.isArray(selection) ? selection : [selection];
+	const onSelectFromPlaceholder = ( selection ) => {
+		const list = Array.isArray( selection ) ? selection : [ selection ];
 		const next = list
-			.filter((m) => m && (m.type === 'image' || (m.mime && m.mime.startsWith('image/'))))
-			.map(mapMedia);
-		setAttributes({ images: next });
+			.filter(
+				( m ) =>
+					m &&
+					( m.type === 'image' ||
+						( m.mime && m.mime.startsWith( 'image/' ) ) )
+			)
+			.map( mapMedia );
+		setAttributes( { images: next } );
 	};
 
-	const onSelectGallery = (images) => {
-		const list = Array.isArray(images) ? images : [images];
+	const onSelectGallery = ( images ) => {
+		const list = Array.isArray( images ) ? images : [ images ];
 		const next = list
-			.filter((m) => m && (m.type === 'image' || (m.mime && m.mime.startsWith('image/'))))
-			.map(mapMedia);
-		setAttributes({ images: next });
+			.filter(
+				( m ) =>
+					m &&
+					( m.type === 'image' ||
+						( m.mime && m.mime.startsWith( 'image/' ) ) )
+			)
+			.map( mapMedia );
+		setAttributes( { images: next } );
 	};
 
 	/** Local state management for slider items and active slide index */
-	const [selectedSlideIndex, setSelectedSlideIndex] = useState(0);
+	const [ selectedSlideIndex, setSelectedSlideIndex ] = useState( 0 );
 
 	/** Refs for vanilla JS Swiper */
-	const swiperContainerRef = useRef(null);
-	const swiperInstanceRef = useRef(null);
+	const swiperContainerRef = useRef( null );
+	const swiperInstanceRef = useRef( null );
 
 	/** State for link editing popover */
-	const [editingimageId, setEditingimageId] = useState(null);
-	const [tempLinkUrl, setTempLinkUrl] = useState('');
-	const [tempTooltipText, setTempTooltipText] = useState('');
+	const [ editingimageId, setEditingimageId ] = useState( null );
+	const [ tempLinkUrl, setTempLinkUrl ] = useState( '' );
+	const [ tempTooltipText, setTempTooltipText ] = useState( '' );
 
 	/** Ref for panel settings focus management */
-	const panelRef = useRef(null);
-	SwitchToBlockSettings(panelRef);
+	const panelRef = useRef( null );
+	SwitchToBlockSettings( panelRef );
 
 	/** Refs for navigation buttons */
-	const prevRef = useRef(null);
-	const nextRef = useRef(null);
-	const paginationInsideRef = useRef(null);
-	const paginationOutsideRef = useRef(null);
+	const prevRef = useRef( null );
+	const nextRef = useRef( null );
+	const paginationInsideRef = useRef( null );
+	const paginationOutsideRef = useRef( null );
 
 	/**
 	 * Vanilla JS Swiper initialization
 	 * Destroys and recreates Swiper when settings change for instant updates
 	 */
-	useEffect(() => {
+	useEffect( () => {
 		// Check if Swiper is available globally and container exists
-		if (!window.Swiper || !swiperContainerRef.current || images.length === 0) {
+		if (
+			! window.Swiper ||
+			! swiperContainerRef.current ||
+			images.length === 0
+		) {
 			return;
 		}
 
 		// Destroy previous instance if exists
-		if (swiperInstanceRef.current) {
-			swiperInstanceRef.current.destroy(true, true);
+		if ( swiperInstanceRef.current ) {
+			swiperInstanceRef.current.destroy( true, true );
 			swiperInstanceRef.current = null;
 		}
 
 		// Clear both pagination elements to prevent stale bullets when switching position
-		if (paginationInsideRef.current) {
+		if ( paginationInsideRef.current ) {
 			paginationInsideRef.current.innerHTML = '';
 		}
-		if (paginationOutsideRef.current) {
+		if ( paginationOutsideRef.current ) {
 			paginationOutsideRef.current.innerHTML = '';
 		}
 
@@ -188,64 +214,74 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			effect: carouselEffect,
 			breakpoints: {
 				0: {
-					slidesPerView: carouselPerColumn?.[deviceType] || 1,
-					spaceBetween: carouselPerColumnGap?.[deviceType] || 0,
+					slidesPerView: carouselPerColumn?.[ deviceType ] || 1,
+					spaceBetween: carouselPerColumnGap?.[ deviceType ] || 0,
 				},
 				768: {
-					slidesPerView: carouselPerColumn?.[deviceType] || 2,
-					spaceBetween: carouselPerColumnGap?.[deviceType] ?? 20,
+					slidesPerView: carouselPerColumn?.[ deviceType ] || 2,
+					spaceBetween: carouselPerColumnGap?.[ deviceType ] ?? 20,
 				},
 				1025: {
-					slidesPerView: carouselPerColumn?.[deviceType] || 2,
-					spaceBetween: carouselPerColumnGap?.[deviceType] ?? 20,
+					slidesPerView: carouselPerColumn?.[ deviceType ] || 2,
+					spaceBetween: carouselPerColumnGap?.[ deviceType ] ?? 20,
 				},
 			},
 			loop: infiniteLoop,
 			autoplay: autoplay
 				? {
-					delay: autoplayDelay?.[deviceType] || 1000,
-					pauseOnMouseEnter: pauseOnHover,
-					disableOnInteraction: false,
-					stopOnLastSlide: stopOnLastSlide,
-					reverseDirection: reverseDirection,
-				}
+						delay: autoplayDelay?.[ deviceType ] || 1000,
+						pauseOnMouseEnter: pauseOnHover,
+						disableOnInteraction: false,
+						stopOnLastSlide: stopOnLastSlide,
+						reverseDirection: reverseDirection,
+				  }
 				: false,
-			speed: speed?.[deviceType] || 800,
+			speed: speed?.[ deviceType ] || 800,
 			allowTouchMove: allowTouchMove,
 			mousewheel: mousewheelControl,
-			keyboard: keyboardNavigation ? {
-				enabled: true,
-				onlyInViewport: true,
-				pageUpDown: false,
-			} : false,
-			navigation: showNavigation?.[deviceType]
+			keyboard: keyboardNavigation
 				? {
-					prevEl: prevRef.current,
-					nextEl: nextRef.current,
-				}
+						enabled: true,
+						onlyInViewport: true,
+						pageUpDown: false,
+				  }
 				: false,
-			pagination: showPagination?.[deviceType]
+			navigation: showNavigation?.[ deviceType ]
 				? {
-					el: paginationPositionType === 'outside' 
-						? paginationOutsideRef.current 
-						: paginationInsideRef.current,
-					type: paginationType,
-					dynamicBullets: paginationType === 'bullets' ? dynamicBullets : false,
-					clickable: true,
-				}
+						prevEl: prevRef.current,
+						nextEl: nextRef.current,
+				  }
+				: false,
+			pagination: showPagination?.[ deviceType ]
+				? {
+						el:
+							paginationPositionType === 'outside'
+								? paginationOutsideRef.current
+								: paginationInsideRef.current,
+						type: paginationType,
+						dynamicBullets:
+							paginationType === 'bullets'
+								? dynamicBullets
+								: false,
+						clickable: true,
+				  }
 				: false,
 			on: {
-				slideChange: (swiper) => setSelectedSlideIndex(swiper.activeIndex),
+				slideChange: ( swiper ) =>
+					setSelectedSlideIndex( swiper.activeIndex ),
 			},
 		};
 
 		// Initialize new Swiper instance
-		swiperInstanceRef.current = new window.Swiper(swiperContainerRef.current, swiperSettings);
+		swiperInstanceRef.current = new window.Swiper(
+			swiperContainerRef.current,
+			swiperSettings
+		);
 
 		// Cleanup on unmount or before re-initialization
 		return () => {
-			if (swiperInstanceRef.current) {
-				swiperInstanceRef.current.destroy(true, true);
+			if ( swiperInstanceRef.current ) {
+				swiperInstanceRef.current.destroy( true, true );
 				swiperInstanceRef.current = null;
 			}
 		};
@@ -276,54 +312,57 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		navigationArrowsIconSwitcher,
 		navigationArrowsIconLeft,
 		navigationArrowsIconRight,
-	]);
-
+	] );
 
 	/* Custom Icon Navigation - handled by main useEffect now */
 
 	/**
 	 * Refresh fsLightbox when images or lightbox setting changes
 	 */
-	useEffect(() => {
-		if (enableLightbox && typeof refreshFsLightbox === 'function') {
+	useEffect( () => {
+		if ( enableLightbox && typeof refreshFsLightbox === 'function' ) {
 			refreshFsLightbox();
 		}
-	}, [images, enableLightbox, blockId]);
+	}, [ images, enableLightbox, blockId ] );
 
 	/**
 	 * Link management functions
 	 */
-	const handleEditLink = (imageId, currentLink, currentTooltip) => {
-		setEditingimageId(imageId);
-		setTempLinkUrl(currentLink || '');
-		setTempTooltipText(currentTooltip || '');
+	const handleEditLink = ( imageId, currentLink, currentTooltip ) => {
+		setEditingimageId( imageId );
+		setTempLinkUrl( currentLink || '' );
+		setTempTooltipText( currentTooltip || '' );
 	};
 
 	const handleSaveLink = () => {
-		if (editingimageId !== null) {
-			const updatedimages = images.map(image =>
+		if ( editingimageId !== null ) {
+			const updatedimages = images.map( ( image ) =>
 				image.id === editingimageId
-					? { ...image, link: tempLinkUrl, tooltipText: tempTooltipText }
+					? {
+							...image,
+							link: tempLinkUrl,
+							tooltipText: tempTooltipText,
+					  }
 					: image
 			);
-			setAttributes({ images: updatedimages });
-			setEditingimageId(null);
-			setTempLinkUrl('');
-			setTempTooltipText('');
+			setAttributes( { images: updatedimages } );
+			setEditingimageId( null );
+			setTempLinkUrl( '' );
+			setTempTooltipText( '' );
 		}
 	};
 
 	const handleRemoveLink = () => {
-		if (editingimageId !== null) {
-			const updatedimages = images.map(image =>
+		if ( editingimageId !== null ) {
+			const updatedimages = images.map( ( image ) =>
 				image.id === editingimageId
 					? { ...image, link: '', tooltipText: '' }
 					: image
 			);
-			setAttributes({ images: updatedimages });
-			setEditingimageId(null);
-			setTempLinkUrl('');
-			setTempTooltipText('');
+			setAttributes( { images: updatedimages } );
+			setEditingimageId( null );
+			setTempLinkUrl( '' );
+			setTempTooltipText( '' );
 		}
 	};
 
@@ -337,15 +376,22 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 				<ToolbarGroup>
 					<MediaUploadCheck>
 						<MediaUpload
-							allowedTypes={['image']}
+							allowedTypes={ [ 'image' ] }
 							gallery
 							multiple
 							addToGallery
-							value={images.map((l) => l.id)}
-							onSelect={onSelectGallery}
-							render={({ open }) => (
-								<ToolbarButton icon="edit" label={__('Edit images', 'gslider-blocks')} onClick={open} />
-							)}
+							value={ images.map( ( l ) => l.id ) }
+							onSelect={ onSelectGallery }
+							render={ ( { open } ) => (
+								<ToolbarButton
+									icon="edit"
+									label={ __(
+										'Edit images',
+										'gslider-blocks'
+									) }
+									onClick={ open }
+								/>
+							) }
 						/>
 					</MediaUploadCheck>
 				</ToolbarGroup>
@@ -355,314 +401,628 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	return (
 		<>
-			{isSelected && (
+			{ isSelected && (
 				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
+					attributes={ attributes }
+					setAttributes={ setAttributes }
 				/>
-			)}
+			) }
 
-			{renderSliderToolbarControls()}
+			{ renderSliderToolbarControls() }
 
-			<div {...blockProps}>
-
-				{!images.length && (
+			<div { ...blockProps }>
+				{ ! images.length && (
 					<MediaPlaceholder
-						icon={<span className="dashicons dashicons-format-gallery" />}
-						labels={{
-							title: __('Upload Clients images', 'gslider-blocks'),
-							instructions: __('Upload multiple images directly or from your media library', 'gslider-blocks'),
-						}}
-						onSelect={onSelectFromPlaceholder}
+						icon={
+							<span className="dashicons dashicons-format-gallery" />
+						}
+						labels={ {
+							title: __(
+								'Upload Clients images',
+								'gslider-blocks'
+							),
+							instructions: __(
+								'Upload multiple images directly or from your media library',
+								'gslider-blocks'
+							),
+						} }
+						onSelect={ onSelectFromPlaceholder }
 						accept="image/*"
-						allowedTypes={['image']}
+						allowedTypes={ [ 'image' ] }
 						multiple
-						className='gslider-image-slider-placeholder'
+						className="gslider-image-slider-placeholder"
 					/>
-				)}
+				) }
 
-				{images?.length > 0 && (
-					<div className="swiper" ref={swiperContainerRef} role="region" aria-label="Image Slider">
+				{ images?.length > 0 && (
+					<div
+						className="swiper"
+						ref={ swiperContainerRef }
+						role="region"
+						aria-label="Image Slider"
+					>
 						<div className="swiper-wrapper">
-							{images.map((item, index) => (
-								<div className="swiper-slide" key={item.id}>
-									<div className={`gslider-image-slider-content-wrapper ${globalClass}`} {...(globalID && { id: globalID })} ref={panelRef}>
+							{ images.map( ( item, index ) => (
+								<div className="swiper-slide" key={ item.id }>
+									<div
+										className={ `gslider-image-slider-content-wrapper ${ globalClass }` }
+										{ ...( globalID && { id: globalID } ) }
+										ref={ panelRef }
+									>
 										<div
 											className="gslider-image-item"
-											data-hover-effect={imageLinkHoverEffect}
-											onMouseEnter={(e) => {
-												if (imageLinkHoverEffect && imageLinkHoverEffect !== 'none' && imageLinkHoverEffect !== 'grayscale') {
-													if (imageLinkHoverEffect === 'opacity' || imageLinkHoverEffect === 'both') {
-														e.currentTarget.style.opacity = imageLinkHoverOpacity?.[deviceType] || 0.8;
+											data-hover-effect={
+												imageLinkHoverEffect
+											}
+											onMouseEnter={ ( e ) => {
+												if (
+													imageLinkHoverEffect &&
+													imageLinkHoverEffect !==
+														'none' &&
+													imageLinkHoverEffect !==
+														'grayscale'
+												) {
+													if (
+														imageLinkHoverEffect ===
+															'opacity' ||
+														imageLinkHoverEffect ===
+															'both'
+													) {
+														e.currentTarget.style.opacity =
+															imageLinkHoverOpacity?.[
+																deviceType
+															] || 0.8;
 													}
-													if (imageLinkHoverEffect === 'scale' || imageLinkHoverEffect === 'both') {
-														e.currentTarget.style.transform = `scale(${imageLinkHoverScale?.[deviceType] || 1.05})`;
+													if (
+														imageLinkHoverEffect ===
+															'scale' ||
+														imageLinkHoverEffect ===
+															'both'
+													) {
+														e.currentTarget.style.transform = `scale(${
+															imageLinkHoverScale?.[
+																deviceType
+															] || 1.05
+														})`;
 													}
-													if (imageLinkHoverEffect === 'move-up') {
-														e.currentTarget.style.transform = `translateY(-${imageLinkHoverLift?.[deviceType] || 10}${imageLinkHoverLiftUnits?.[deviceType] || 'px'})`;
+													if (
+														imageLinkHoverEffect ===
+														'move-up'
+													) {
+														e.currentTarget.style.transform = `translateY(-${
+															imageLinkHoverLift?.[
+																deviceType
+															] || 10
+														}${
+															imageLinkHoverLiftUnits?.[
+																deviceType
+															] || 'px'
+														})`;
 													}
 												}
-											}}
-											onMouseLeave={(e) => {
-												if (imageLinkHoverEffect && imageLinkHoverEffect !== 'none' && imageLinkHoverEffect !== 'grayscale') {
+											} }
+											onMouseLeave={ ( e ) => {
+												if (
+													imageLinkHoverEffect &&
+													imageLinkHoverEffect !==
+														'none' &&
+													imageLinkHoverEffect !==
+														'grayscale'
+												) {
 													e.currentTarget.style.opacity = 1;
-													e.currentTarget.style.transform = 'scale(1) translateY(0)';
+													e.currentTarget.style.transform =
+														'scale(1) translateY(0)';
 												}
-											}}
+											} }
 										>
-											{enableLightbox ? (
+											{ enableLightbox ? (
 												<a
-													href={item.url}
-													data-fslightbox={blockId}
-													data-caption={item.caption}
+													href={ item.url }
+													data-fslightbox={ blockId }
+													data-caption={
+														item.caption
+													}
 													className="gslider-image-link"
-													onClick={(e) => e.preventDefault()}
+													onClick={ ( e ) =>
+														e.preventDefault()
+													}
 												>
 													<img
-														src={item.url}
-														alt={item.alt || `image ${images.indexOf(item) + 1}`}
-														loading={enableLazyLoad ? "lazy" : undefined}
+														src={ item.url }
+														alt={
+															item.alt ||
+															`image ${
+																images.indexOf(
+																	item
+																) + 1
+															}`
+														}
+														loading={
+															enableLazyLoad
+																? 'lazy'
+																: undefined
+														}
 													/>
 												</a>
 											) : (
 												<img
-													src={item.url}
-													alt={item.alt || `image ${images.indexOf(item) + 1}`}
-													loading={enableLazyLoad ? "lazy" : undefined}
+													src={ item.url }
+													alt={
+														item.alt ||
+														`image ${
+															images.indexOf(
+																item
+															) + 1
+														}`
+													}
+													loading={
+														enableLazyLoad
+															? 'lazy'
+															: undefined
+													}
 												/>
-											)}
-											{showTooltip && item.tooltipText && (
-												<div className="gslider-image-tooltip">{item.tooltipText}</div>
-											)}
+											) }
+											{ showTooltip &&
+												item.tooltipText && (
+													<div className="gslider-image-tooltip">
+														{ item.tooltipText }
+													</div>
+												) }
 										</div>
-										{showCaption?.[deviceType] && item.caption ? (
-											<div className="gslider-image-slider-caption" aria-live="polite">{item.caption}</div>
-										) : null}
+										{ showCaption?.[ deviceType ] &&
+										item.caption ? (
+											<div
+												className="gslider-image-slider-caption"
+												aria-live="polite"
+											>
+												{ item.caption }
+											</div>
+										) : null }
 
-
-										{/* image Action Toolbar */}
+										{ /* image Action Toolbar */ }
 										<div className="gslider-image-action-toolbar">
-
-											{/* Move Left Button */}
-											{index > 0 && (
+											{ /* Move Left Button */ }
+											{ index > 0 && (
 												<Button
-													icon={<ToolbarMoveLeftIcon />}
+													icon={
+														<ToolbarMoveLeftIcon />
+													}
 													className="gslider-image-action-btn gslider-image-move-btn"
-													onClick={() => {
-														const newimages = [...images];
-														const temp = newimages[index - 1];
-														newimages[index - 1] = newimages[index];
-														newimages[index] = temp;
-														setAttributes({ images: newimages });
-													}}
-													label={__('Move Left', 'gslider-blocks')}
-													showTooltip={true}
+													onClick={ () => {
+														const newimages = [
+															...images,
+														];
+														const temp =
+															newimages[
+																index - 1
+															];
+														newimages[ index - 1 ] =
+															newimages[ index ];
+														newimages[ index ] =
+															temp;
+														setAttributes( {
+															images: newimages,
+														} );
+													} }
+													label={ __(
+														'Move Left',
+														'gslider-blocks'
+													) }
+													showTooltip={ true }
 												/>
-											)}
+											) }
 
-											{/* Move Right Button */}
-											{index < images.length - 1 && (
+											{ /* Move Right Button */ }
+											{ index < images.length - 1 && (
 												<Button
-													icon={<ToolbarMoveRightIcon />}
+													icon={
+														<ToolbarMoveRightIcon />
+													}
 													className="gslider-image-action-btn gslider-image-move-btn"
-													onClick={() => {
-														const newimages = [...images];
-														const temp = newimages[index + 1];
-														newimages[index + 1] = newimages[index];
-														newimages[index] = temp;
-														setAttributes({ images: newimages });
-													}}
-													label={__('Move Right', 'gslider-blocks')}
-													showTooltip={true}
+													onClick={ () => {
+														const newimages = [
+															...images,
+														];
+														const temp =
+															newimages[
+																index + 1
+															];
+														newimages[ index + 1 ] =
+															newimages[ index ];
+														newimages[ index ] =
+															temp;
+														setAttributes( {
+															images: newimages,
+														} );
+													} }
+													label={ __(
+														'Move Right',
+														'gslider-blocks'
+													) }
+													showTooltip={ true }
 												/>
-											)}
+											) }
 
-											{/* Divider */}
-											{(index > 0 || index < images.length - 1) && (
+											{ /* Divider */ }
+											{ ( index > 0 ||
+												index < images.length - 1 ) && (
 												<div className="gslider-toolbar-divider" />
-											)}
+											) }
 
 											<Button
-												icon={<ToolbarDeleteIcon />}
+												icon={ <ToolbarDeleteIcon /> }
 												className="gslider-image-action-btn gslider-image-delete-btn"
-												onClick={() => {
-													const updatedimages = images.filter(image => image.id !== item.id);
-													setAttributes({ images: updatedimages });
-												}}
-												label={__('Delete', 'gslider-blocks')}
-												showTooltip={true}
+												onClick={ () => {
+													const updatedimages =
+														images.filter(
+															( image ) =>
+																image.id !==
+																item.id
+														);
+													setAttributes( {
+														images: updatedimages,
+													} );
+												} }
+												label={ __(
+													'Delete',
+													'gslider-blocks'
+												) }
+												showTooltip={ true }
 											/>
 
 											<Button
-												icon={<ToolbarDuplicateIcon />}
+												icon={
+													<ToolbarDuplicateIcon />
+												}
 												className="gslider-image-action-btn gslider-image-duplicate-btn"
-												onClick={() => {
+												onClick={ () => {
 													const duplicatedimage = {
 														...item,
-														id: Date.now() + Math.random()
+														id:
+															Date.now() +
+															Math.random(),
 													};
-													const imageIndex = images.findIndex(image => image.id === item.id);
+													const imageIndex =
+														images.findIndex(
+															( image ) =>
+																image.id ===
+																item.id
+														);
 													const updatedimages = [
-														...images.slice(0, imageIndex + 1),
+														...images.slice(
+															0,
+															imageIndex + 1
+														),
 														duplicatedimage,
-														...images.slice(imageIndex + 1)
+														...images.slice(
+															imageIndex + 1
+														),
 													];
-													setAttributes({ images: updatedimages });
-												}}
-												label={__('Duplicate', 'gslider-blocks')}
-												showTooltip={true}
+													setAttributes( {
+														images: updatedimages,
+													} );
+												} }
+												label={ __(
+													'Duplicate',
+													'gslider-blocks'
+												) }
+												showTooltip={ true }
 											/>
 
-											{(enableimageLinks || showTooltip) && (
+											{ ( enableimageLinks ||
+												showTooltip ) && (
 												<Button
-													icon={<ToolbarLinkIcon />}
+													icon={ <ToolbarLinkIcon /> }
 													className="gslider-image-action-btn gslider-image-edit-btn"
-													onClick={() => handleEditLink(item.id, item.link, item.tooltipText)}
-													label={
-														enableimageLinks && showTooltip
-															? __('Edit Link & Tooltip', 'gslider-blocks')
-															: enableimageLinks
-																? __('Edit Link', 'gslider-blocks')
-																: __('Edit Tooltip', 'gslider-blocks')
+													onClick={ () =>
+														handleEditLink(
+															item.id,
+															item.link,
+															item.tooltipText
+														)
 													}
-													showTooltip={true}
+													label={
+														enableimageLinks &&
+														showTooltip
+															? __(
+																	'Edit Link & Tooltip',
+																	'gslider-blocks'
+															  )
+															: enableimageLinks
+															? __(
+																	'Edit Link',
+																	'gslider-blocks'
+															  )
+															: __(
+																	'Edit Tooltip',
+																	'gslider-blocks'
+															  )
+													}
+													showTooltip={ true }
 												/>
-											)}
+											) }
 										</div>
 
-										{editingimageId === item.id && (
+										{ editingimageId === item.id && (
 											<Popover
 												position="middle center"
-												onClose={() => setEditingimageId(null)}
+												onClose={ () =>
+													setEditingimageId( null )
+												}
 												focusOnMount="firstElement"
 												className="gslider-image-link-popover"
 											>
 												<div className="gslider-image-link-popover-wrapper">
-													{enableimageLinks && (
+													{ enableimageLinks && (
 														<TextControl
-															label={__('image Link URL', 'gslider-blocks')}
+															label={ __(
+																'image Link URL',
+																'gslider-blocks'
+															) }
 															className="gslider-image-link-url"
-															value={tempLinkUrl}
-															onChange={(value) => setTempLinkUrl(value)}
+															value={
+																tempLinkUrl
+															}
+															onChange={ (
+																value
+															) =>
+																setTempLinkUrl(
+																	value
+																)
+															}
 															placeholder="https://example.com"
-															help={__('Enter the URL for this image', 'gslider-blocks')}
+															help={ __(
+																'Enter the URL for this image',
+																'gslider-blocks'
+															) }
 														/>
-													)}
-													{showTooltip && (
+													) }
+													{ showTooltip && (
 														<TextControl
-															label={__('Tooltip Text', 'gslider-blocks')}
+															label={ __(
+																'Tooltip Text',
+																'gslider-blocks'
+															) }
 															className="gslider-image-tooltip-text"
-															value={tempTooltipText}
-															onChange={(value) => setTempTooltipText(value)}
+															value={
+																tempTooltipText
+															}
+															onChange={ (
+																value
+															) =>
+																setTempTooltipText(
+																	value
+																)
+															}
 															placeholder="Visit our website"
-															help={__('Text shown when hovering over the image', 'gslider-blocks')}
+															help={ __(
+																'Text shown when hovering over the image',
+																'gslider-blocks'
+															) }
 														/>
-													)}
+													) }
 													<div className="gslider-image-link-popover-buttons-wrapper">
 														<Button
 															variant="primary"
-															onClick={handleSaveLink}
+															onClick={
+																handleSaveLink
+															}
 															className="gslider-image-link-save-button"
 														>
-															{__('Save', 'gslider-blocks')}
+															{ __(
+																'Save',
+																'gslider-blocks'
+															) }
 														</Button>
-														{item.link && (
+														{ item.link && (
 															<Button
 																variant="secondary"
 																isDestructive
-																onClick={handleRemoveLink}
+																onClick={
+																	handleRemoveLink
+																}
 																className="gslider-image-link-remove-button"
 															>
-																{__('Remove Link', 'gslider-blocks')}
+																{ __(
+																	'Remove Link',
+																	'gslider-blocks'
+																) }
 															</Button>
-														)}
+														) }
 														<Button
 															variant="tertiary"
-															onClick={() => setEditingimageId(null)}
+															onClick={ () =>
+																setEditingimageId(
+																	null
+																)
+															}
 															className="gslider-image-link-cancel-button"
 														>
-															{__('Cancel', 'gslider-blocks')}
+															{ __(
+																'Cancel',
+																'gslider-blocks'
+															) }
 														</Button>
 													</div>
 												</div>
 											</Popover>
-										)}
+										) }
 									</div>
 								</div>
-							))}
+							) ) }
 						</div>
 
-						{/* Navigation inside swiper container */}
-						{showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-							<>
-								<div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-									<div ref={prevRef} className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-									<div ref={nextRef} className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
-								</div>
-							</>
-						)}
+						{ /* Navigation inside swiper container */ }
+						{ showNavigation?.[ deviceType ] &&
+							! navigationArrowsIconSwitcher &&
+							navigationArrowPositionType === 'inside' && (
+								<>
+									<div
+										className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+									>
+										<div
+											ref={ prevRef }
+											className="swiper-button-prev"
+											role="button"
+											tabIndex={ 0 }
+											aria-label="Previous slide"
+										></div>
+										<div
+											ref={ nextRef }
+											className="swiper-button-next"
+											role="button"
+											tabIndex={ 0 }
+											aria-label="Next slide"
+										></div>
+									</div>
+								</>
+							) }
 
-						{showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'inside' && (
-							<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-								<div className="swiper-button-prev" ref={prevRef} role="button" tabIndex={0} aria-label="Previous slide">
-									{navigationArrowsIconLeftAlign === 'image' && navigationArrowsIconLeftImageUrl ? (
-										<img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-									) : (
-										renderSVG(navigationArrowsIconLeft)
-									)}
+						{ showNavigation?.[ deviceType ] &&
+							navigationArrowsIconSwitcher &&
+							navigationArrowPositionType === 'inside' && (
+								<div
+									className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+								>
+									<div
+										className="swiper-button-prev"
+										ref={ prevRef }
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Previous slide"
+									>
+										{ navigationArrowsIconLeftAlign ===
+											'image' &&
+										navigationArrowsIconLeftImageUrl ? (
+											<img
+												src={
+													navigationArrowsIconLeftImageUrl
+												}
+												alt={
+													navigationArrowsIconLeftImageAlt
+												}
+											/>
+										) : (
+											renderSVG(
+												navigationArrowsIconLeft
+											)
+										) }
+									</div>
+									<div
+										className="swiper-button-next"
+										ref={ nextRef }
+										role="button"
+										tabIndex={ 0 }
+										aria-label="Next slide"
+									>
+										{ navigationArrowsIconRightAlign ===
+											'image' &&
+										navigationArrowsIconRightImageUrl ? (
+											<img
+												src={
+													navigationArrowsIconRightImageUrl
+												}
+												alt={
+													navigationArrowsIconRightImageAlt
+												}
+											/>
+										) : (
+											renderSVG(
+												navigationArrowsIconRight
+											)
+										) }
+									</div>
 								</div>
-								<div className="swiper-button-next" ref={nextRef} role="button" tabIndex={0} aria-label="Next slide">
-									{navigationArrowsIconRightAlign === 'image' && navigationArrowsIconRightImageUrl ? (
-										<img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-									) : (
-										renderSVG(navigationArrowsIconRight)
-									)}
-								</div>
+							) }
+
+						{ /* Pagination inside swiper container */ }
+						<div
+							className="swiper-pagination swiper-pagination-image-slider"
+							ref={ paginationInsideRef }
+						></div>
+					</div>
+				) }
+
+				{ showNavigation?.[ deviceType ] &&
+					! navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<>
+							<div
+								className={ `gslider-navigation-default-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+							>
+								<div
+									ref={ prevRef }
+									className="swiper-button-prev"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Previous slide"
+								></div>
+								<div
+									ref={ nextRef }
+									className="swiper-button-next"
+									role="button"
+									tabIndex={ 0 }
+									aria-label="Next slide"
+								></div>
 							</div>
-						)}
+						</>
+					) }
 
-						{/* Pagination inside swiper container */}
-						<div className="swiper-pagination swiper-pagination-image-slider" ref={paginationInsideRef}></div>
-					</div>
-				)}
-
-				{showNavigation?.[deviceType] && !navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-					<>
-						<div className={`gslider-navigation-default-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-							<div ref={prevRef} className="swiper-button-prev" role="button" tabIndex={0} aria-label="Previous slide"></div>
-							<div ref={nextRef} className="swiper-button-next" role="button" tabIndex={0} aria-label="Next slide"></div>
+				{ showNavigation?.[ deviceType ] &&
+					navigationArrowsIconSwitcher &&
+					navigationArrowPositionType === 'outside' && (
+						<div
+							className={ `gslider-navigation-custom-icon-wrapper ${ navigationArrowPositionType } ${ navigationArrowPosition }` }
+						>
+							<div
+								className="swiper-button-prev"
+								ref={ prevRef }
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Previous slide"
+							>
+								{ navigationArrowsIconLeftAlign === 'image' &&
+								navigationArrowsIconLeftImageUrl ? (
+									<img
+										src={ navigationArrowsIconLeftImageUrl }
+										alt={ navigationArrowsIconLeftImageAlt }
+									/>
+								) : (
+									renderSVG( navigationArrowsIconLeft )
+								) }
+							</div>
+							<div
+								className="swiper-button-next"
+								ref={ nextRef }
+								role="button"
+								tabIndex={ 0 }
+								aria-label="Next slide"
+							>
+								{ navigationArrowsIconRightAlign === 'image' &&
+								navigationArrowsIconRightImageUrl ? (
+									<img
+										src={
+											navigationArrowsIconRightImageUrl
+										}
+										alt={
+											navigationArrowsIconRightImageAlt
+										}
+									/>
+								) : (
+									renderSVG( navigationArrowsIconRight )
+								) }
+							</div>
 						</div>
-					</>
-				)}
+					) }
 
-				{showNavigation?.[deviceType] && navigationArrowsIconSwitcher && navigationArrowPositionType === 'outside' && (
-					<div className={`gslider-navigation-custom-icon-wrapper ${navigationArrowPositionType} ${navigationArrowPosition}`}>
-						<div className="swiper-button-prev" ref={prevRef} role="button" tabIndex={0} aria-label="Previous slide">
-							{navigationArrowsIconLeftAlign === 'image' && navigationArrowsIconLeftImageUrl ? (
-								<img src={navigationArrowsIconLeftImageUrl} alt={navigationArrowsIconLeftImageAlt} />
-							) : (
-								renderSVG(navigationArrowsIconLeft)
-							)}
-						</div>
-						<div className="swiper-button-next" ref={nextRef} role="button" tabIndex={0} aria-label="Next slide">
-							{navigationArrowsIconRightAlign === 'image' && navigationArrowsIconRightImageUrl ? (
-								<img src={navigationArrowsIconRightImageUrl} alt={navigationArrowsIconRightImageAlt} />
-							) : (
-								renderSVG(navigationArrowsIconRight)
-							)}
-						</div>
-					</div>
-				)}
-
-				{/* Pagination outside swiper container */}
+				{ /* Pagination outside swiper container */ }
 				<div
-					className={`swiper-pagination swiper-pagination-image-slider swiper-pagination-${blockId}`}
-					ref={paginationOutsideRef}
+					className={ `swiper-pagination swiper-pagination-image-slider swiper-pagination-${ blockId }` }
+					ref={ paginationOutsideRef }
 					aria-label="Slider pagination"
 				></div>
-
-			</div >
-			<style>{blockStyle}</style>
+			</div>
+			<style>{ blockStyle }</style>
 		</>
 	);
 }
