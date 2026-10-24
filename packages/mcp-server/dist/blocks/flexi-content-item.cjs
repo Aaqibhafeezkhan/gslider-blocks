@@ -203,9 +203,7 @@ var attributes_default = attributes;
 var import_block_editor = require("@wordpress/block-editor");
 var import_jsx_runtime = require("react/jsx-runtime");
 function Save({ attributes: attributes2 }) {
-  const {
-    blockId
-  } = attributes2;
+  const { blockId } = attributes2;
   const blockProps = import_block_editor.useBlockProps.save({
     className: `flexi-content-item swiper-slide ${blockId}`
   });
