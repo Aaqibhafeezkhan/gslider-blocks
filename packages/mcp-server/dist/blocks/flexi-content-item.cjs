@@ -308,12 +308,24 @@ var generateFlexiContentItemStyle = (attributes2) => {
     return styles;
   };
   const sliderItemBackgroundStyleObjectToString = (styleObj) => Object.entries(styleObj).map(([key, value]) => `${key}: ${value};`).join(" ");
-  const sliderItemDesktopBackgroundNormalStyles = sliderItemBackgroundStyleObjectToString(getSliderItemBackgroundNormalStyles("Desktop"));
-  const sliderItemTabletBackgroundNormalStyles = sliderItemBackgroundStyleObjectToString(getSliderItemBackgroundNormalStyles("Tablet"));
-  const sliderItemMobileBackgroundNormalStyles = sliderItemBackgroundStyleObjectToString(getSliderItemBackgroundNormalStyles("Mobile"));
-  const sliderItemDesktopBackgroundHoverStyles = sliderItemBackgroundStyleObjectToString(getSliderItemBackgroundHoverStyles("Desktop"));
-  const sliderItemTabletBackgroundHoverStyles = sliderItemBackgroundStyleObjectToString(getSliderItemBackgroundHoverStyles("Tablet"));
-  const sliderItemMobileBackgroundHoverStyles = sliderItemBackgroundStyleObjectToString(getSliderItemBackgroundHoverStyles("Mobile"));
+  const sliderItemDesktopBackgroundNormalStyles = sliderItemBackgroundStyleObjectToString(
+    getSliderItemBackgroundNormalStyles("Desktop")
+  );
+  const sliderItemTabletBackgroundNormalStyles = sliderItemBackgroundStyleObjectToString(
+    getSliderItemBackgroundNormalStyles("Tablet")
+  );
+  const sliderItemMobileBackgroundNormalStyles = sliderItemBackgroundStyleObjectToString(
+    getSliderItemBackgroundNormalStyles("Mobile")
+  );
+  const sliderItemDesktopBackgroundHoverStyles = sliderItemBackgroundStyleObjectToString(
+    getSliderItemBackgroundHoverStyles("Desktop")
+  );
+  const sliderItemTabletBackgroundHoverStyles = sliderItemBackgroundStyleObjectToString(
+    getSliderItemBackgroundHoverStyles("Tablet")
+  );
+  const sliderItemMobileBackgroundHoverStyles = sliderItemBackgroundStyleObjectToString(
+    getSliderItemBackgroundHoverStyles("Mobile")
+  );
   const flexiContentItemCSS = `
         .${blockId}.flexi-content-item {
             ${sliderItemDesktopBackgroundNormalStyles}
