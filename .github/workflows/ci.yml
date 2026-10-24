@@ -91,7 +91,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "Checking only modified JavaScript files in PR..."
-          JS_FILES=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | grep -E '\.(js|jsx)$' | grep -v -E '^(build|vendor|assets|node_modules|packages|storybook-static|src/components)/' || true)
+          JS_FILES=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" | grep -E '\.(js|jsx)$' | grep -v -E '^(build|vendor|assets|node_modules|coverage|storybook|storybook-static|src/components|packages/[^/]+/dist)/' || true)
           if [ -n "$JS_FILES" ]; then
             echo "Linting changed JS files:"
             echo "$JS_FILES"
@@ -102,7 +102,6 @@ jobs:
 
       - name: JavaScript Standards (Push to main)
         if: github.event_name != 'pull_request'
-        continue-on-error: true # advisory until legacy formatting debt is cleaned
         run: |
           echo "Running full repository JavaScript linting (Push to main)..."
           npm run lint:js -- --cache
@@ -122,7 +121,6 @@ jobs:
 
       - name: SCSS Standards (Push to main)
         if: github.event_name != 'pull_request'
-        continue-on-error: true # advisory until legacy formatting debt is cleaned
         run: |
           echo "Running full repository SCSS linting (Push to main)..."
           npm run lint:css -- --cache
