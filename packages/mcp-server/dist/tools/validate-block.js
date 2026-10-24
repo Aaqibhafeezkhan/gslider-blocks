@@ -1,6 +1,7 @@
+/* eslint-disable no-nested-ternary */
 import { z } from 'zod';
 import { BLOCK_ID_PREFIX } from '../core/registry.js';
-import { attributeDefaults, prepareBlock, validationOf } from '../core/block-runtime.js';
+import { attributeDefaults, prepareBlock, validationOf, } from '../core/block-runtime.js';
 import { blockNameFromMarkup, commentAttributes } from '../core/markup.js';
 import { GENERATABLE_SLUGS } from './generate-block.js';
 const validateInputZod = z
@@ -33,16 +34,23 @@ export const validateBlockToolDefinition = {
     },
 };
 function typeMatches(type, value) {
-    if (type === 'array')
+    if (type === 'array') {
         return Array.isArray(value);
-    if (type === 'object')
-        return value !== null && typeof value === 'object' && !Array.isArray(value);
-    if (type === 'boolean')
+    }
+    if (type === 'object') {
+        return (value !== null &&
+            typeof value === 'object' &&
+            !Array.isArray(value));
+    }
+    if (type === 'boolean') {
         return typeof value === 'boolean';
-    if (type === 'string')
+    }
+    if (type === 'string') {
         return typeof value === 'string';
-    if (type === 'number')
+    }
+    if (type === 'number') {
         return typeof value === 'number' && Number.isFinite(value);
+    }
     return true;
 }
 function checkAttributes(slug, raw) {
@@ -59,14 +67,17 @@ function checkAttributes(slug, raw) {
             errors.push(`Attribute "${key}" must be a ${definition.type}.`);
         }
         const allowed = schema.allowedValues?.[key];
-        if (Array.isArray(allowed) && typeof value === 'string' && !allowed.includes(value)) {
+        if (Array.isArray(allowed) &&
+            typeof value === 'string' &&
+            !allowed.includes(value)) {
             errors.push(`Attribute "${key}" must be one of: ${allowed.join(', ')}.`);
         }
     }
     for (const effectKey of ['slideEffect', 'carouselEffect']) {
         const value = raw[effectKey];
-        if (typeof value !== 'string')
+        if (typeof value !== 'string') {
             continue;
+        }
         const allowed = schema.allowedEffects[effectKey] ?? [];
         if (!allowed.includes(value)) {
             errors.push(`Effect "${value}" is not allowed for ${schema.name} (${effectKey}). Allowed: ${allowed.join(', ')}.`);
@@ -78,19 +89,24 @@ function checkAttributes(slug, raw) {
             ? 'carousel'
             : 'slider';
     const activeKey = sliderType === 'carousel' ? 'carouselEffect' : 'slideEffect';
-    if (raw[activeKey] !== undefined && typeof raw[activeKey] !== 'string') {
+    if (raw[activeKey] !== undefined &&
+        typeof raw[activeKey] !== 'string') {
         errors.push(`${activeKey} must be a string.`);
     }
     const prefix = BLOCK_ID_PREFIX[slug];
     const blockId = raw.blockId;
-    if (typeof blockId !== 'string' || !new RegExp(`^${prefix}-[a-z0-9]{8}$`).test(blockId)) {
+    if (typeof blockId !== 'string' ||
+        !new RegExp(`^${prefix}-[a-z0-9]{8}$`).test(blockId)) {
         errors.push(`blockId must be ${prefix}- followed by 8 characters.`);
     }
     return errors;
 }
 function styleWarning(slug, raw) {
     const { bundled } = prepareBlock(slug);
-    const recomputed = bundled.styling({ ...attributeDefaults(bundled.attributes), ...raw });
+    const recomputed = bundled.styling({
+        ...attributeDefaults(bundled.attributes),
+        ...raw,
+    });
     if (raw.blockStyle !== recomputed) {
         return 'blockStyle differs from what the editor would write, so opening the block rewrites it.';
     }
@@ -102,7 +118,9 @@ function validate(input) {
     }
     if (input.markup) {
         const name = blockNameFromMarkup(input.markup);
-        const slug = name?.startsWith('gslider-blocks/') ? name.slice('gslider-blocks/'.length) : '';
+        const slug = name?.startsWith('gslider-blocks/')
+            ? name.slice('gslider-blocks/'.length)
+            : '';
         if (!GENERATABLE_SLUGS.includes(slug)) {
             throw new Error(`markup must be one of: ${GENERATABLE_SLUGS.map((item) => `gslider-blocks/${item}`).join(', ')}.`);
         }
@@ -114,7 +132,9 @@ function validate(input) {
         }
         const errors = checkAttributes(blockSlug, raw);
         const parsed = blocks.parse(input.markup)[0];
-        const validation = parsed ? validationOf(blocks.validateBlock(parsed)) : { isValid: false, issues: ['nothing parsed'] };
+        const validation = parsed
+            ? validationOf(blocks.validateBlock(parsed))
+            : { isValid: false, issues: ['nothing parsed'] };
         if (!validation.isValid) {
             errors.push('Block markup does not match the block save output.');
         }
@@ -131,27 +151,46 @@ function validate(input) {
     }
     const errors = checkAttributes(input.blockSlug, input.attributes);
     const warning = styleWarning(input.blockSlug, input.attributes);
-    return { isValid: errors.length === 0, errors, warnings: warning ? [warning] : [] };
+    return {
+        isValid: errors.length === 0,
+        errors,
+        warnings: warning ? [warning] : [],
+    };
 }
 export async function handleValidateBlock(args) {
     const parsed = validateInputZod.safeParse(args);
     if (!parsed.success) {
-        const message = parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join(', ');
+        const message = parsed.error.issues
+            .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
+            .join(', ');
         return {
             isError: true,
-            content: [{ type: 'text', text: `Invalid arguments for gslider_validate_block: ${message}` }],
+            content: [
+                {
+                    type: 'text',
+                    text: `Invalid arguments for gslider_validate_block: ${message}`,
+                },
+            ],
         };
     }
     try {
         const report = validate(parsed.data);
         return {
             isError: !report.isValid,
-            content: [{ type: 'text', text: JSON.stringify(report, null, 2) }],
+            content: [
+                {
+                    type: 'text',
+                    text: JSON.stringify(report, null, 2),
+                },
+            ],
         };
     }
     catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        return { isError: true, content: [{ type: 'text', text: message }] };
+        return {
+            isError: true,
+            content: [{ type: 'text', text: message }],
+        };
     }
 }
 //# sourceMappingURL=validate-block.js.map
