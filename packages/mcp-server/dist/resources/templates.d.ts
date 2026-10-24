@@ -27,6 +27,7 @@ export declare const SLIDER_TEMPLATES: SliderTemplate[];
 export declare function listTemplates(): SliderTemplate[];
 /**
  * Retrieves a specific slider template by its URI.
+ * @param uri
  */
 export declare function getTemplateByUri(uri: string): SliderTemplate | undefined;
 //# sourceMappingURL=templates.d.ts.map

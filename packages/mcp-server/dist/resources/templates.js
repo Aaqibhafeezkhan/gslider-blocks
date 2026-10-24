@@ -14,12 +14,17 @@ import { BLOCK_ID_PREFIX, getBlockSchema } from '../core/registry.js';
 /**
  * Fills each slide with the block's first default slide item, so templates
  * carry the same per-slide fields the editor writes.
+ * @param slug
+ * @param slides
  */
 function withDefaultSlideFields(slug, slides) {
     const schema = getBlockSchema(slug);
     const defaults = schema.attributes[schema.slideField]?.default;
     const base = Array.isArray(defaults) && defaults.length > 0 ? defaults[0] : {};
-    return slides.map((slide) => ({ ...structuredClone(base), ...slide }));
+    return slides.map((slide) => ({
+        ...structuredClone(base),
+        ...slide,
+    }));
 }
 export const SLIDER_TEMPLATES = [
     {
@@ -225,12 +230,42 @@ export const SLIDER_TEMPLATES = [
             blockId: '',
             blockStyle: '',
             logos: [
-                { id: -1, url: 'https://dummyimage.com/200x80/222/fff.png&text=Google', alt: 'Google', link: '#' },
-                { id: -2, url: 'https://dummyimage.com/200x80/222/fff.png&text=Stripe', alt: 'Stripe', link: '#' },
-                { id: -3, url: 'https://dummyimage.com/200x80/222/fff.png&text=Vercel', alt: 'Vercel', link: '#' },
-                { id: -4, url: 'https://dummyimage.com/200x80/222/fff.png&text=Automattic', alt: 'Automattic', link: '#' },
-                { id: -5, url: 'https://dummyimage.com/200x80/222/fff.png&text=GitHub', alt: 'GitHub', link: '#' },
-                { id: -6, url: 'https://dummyimage.com/200x80/222/fff.png&text=Shopify', alt: 'Shopify', link: '#' },
+                {
+                    id: -1,
+                    url: 'https://dummyimage.com/200x80/222/fff.png&text=Google',
+                    alt: 'Google',
+                    link: '#',
+                },
+                {
+                    id: -2,
+                    url: 'https://dummyimage.com/200x80/222/fff.png&text=Stripe',
+                    alt: 'Stripe',
+                    link: '#',
+                },
+                {
+                    id: -3,
+                    url: 'https://dummyimage.com/200x80/222/fff.png&text=Vercel',
+                    alt: 'Vercel',
+                    link: '#',
+                },
+                {
+                    id: -4,
+                    url: 'https://dummyimage.com/200x80/222/fff.png&text=Automattic',
+                    alt: 'Automattic',
+                    link: '#',
+                },
+                {
+                    id: -5,
+                    url: 'https://dummyimage.com/200x80/222/fff.png&text=GitHub',
+                    alt: 'GitHub',
+                    link: '#',
+                },
+                {
+                    id: -6,
+                    url: 'https://dummyimage.com/200x80/222/fff.png&text=Shopify',
+                    alt: 'Shopify',
+                    link: '#',
+                },
             ],
             carouselPerColumn: { Desktop: 2, Tablet: 2, Mobile: 1 },
             carouselPerColumnGap: { Desktop: 10, Tablet: 10, Mobile: 10 },
@@ -308,6 +343,7 @@ export function listTemplates() {
 }
 /**
  * Retrieves a specific slider template by its URI.
+ * @param uri
  */
 export function getTemplateByUri(uri) {
     return SLIDER_TEMPLATES.find((tpl) => tpl.uri === uri);
