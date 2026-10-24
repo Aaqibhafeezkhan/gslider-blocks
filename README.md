@@ -529,7 +529,7 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
     <img src="https://img.shields.io/badge/--181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
   <a href="https://linkedin.com/in/noruzzaman" title="LinkedIn">
-    <img src="https://img.shields.io/badge/--0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+    <img src="https://img.shields.io/badge/--0A66C2?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xOSAwaC0xNGMtMi43NjIgMC01IDIuMjM4LTUgNXYxNGMwIDIuNzYyIDIuMjM4IDUgNSA1aDE0YzIuNzYyIDAgNS0yLjIzOCA1LTV2LTE0YzAtMi43NjItMi4yMzgtNS01LTV6bS0xMSAxOWgtM3YtMTBoM3YxMHptLTEuNS0xMS4yNjhjLS45NjYgMC0xLjc1LS43OS0xLjc1LTEuNzY0cy43ODQtMS43NjQgMS43NS0xLjc2NCAxLjc1Ljc5IDEuNzUgMS43NjQtLjc4MyAxLjc2NC0xLjc1IDEuNzY0em0xMy41IDExLjI2OGgtM3YtNS42MDRjMC0zLjM2OC00LTMuMTEzLTQtMHY1LjYwNGgtM3YtMTBoM3YxLjMwOWMxLjM5Ni0yLjU4NiA3LTIuNzc3IDcgMi40NzZ2Ni4yMTV6Ii8+PC9zdmc+" alt="LinkedIn">
   </a>
   <a href="https://x.com/Noruzzamanwp" title="X (Twitter)">
     <img src="https://img.shields.io/badge/--000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)">
@@ -538,7 +538,7 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
     <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
   </a>
   <a href="https://wordpress.org/plugins/gslider-blocks/" title="GSlider Blocks on WordPress.org">
-    <img src="https://img.shields.io/badge/--0073AA?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Plugin">
+    <img src="https://ps.w.org/gslider-blocks/assets/icon-256x256.png" height="28" alt="GSlider Blocks" style="border-radius: 4px; vertical-align: middle;">
   </a>
 </p>
 
