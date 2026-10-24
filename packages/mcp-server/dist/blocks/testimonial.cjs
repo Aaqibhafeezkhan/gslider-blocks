@@ -78,7 +78,12 @@ var block_default = {
 };
 
 // ../../src/blocks/testimonial/content-order.js
-var DEFAULT_TESTIMONIAL_CONTENT_ORDER = ["quote", "content", "rating", "author"];
+var DEFAULT_TESTIMONIAL_CONTENT_ORDER = [
+  "quote",
+  "content",
+  "rating",
+  "author"
+];
 var normalizeContentOrder = (order) => {
   if (!Array.isArray(order) || order.length === 0) {
     return [...DEFAULT_TESTIMONIAL_CONTENT_ORDER];
