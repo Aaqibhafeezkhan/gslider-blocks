@@ -25,11 +25,14 @@ export const getBlockSchemaToolDefinition = {
  *
  * Returns raw schema payload directly without wrapper noise.
  * Returns { isError: true } on validation or lookup errors so callers receive clear diagnostics.
+ * @param args
  */
 export async function handleGetBlockSchema(args) {
     const parsed = getBlockSchemaInputZod.safeParse(args);
     if (!parsed.success) {
-        const errorMsg = parsed.error.issues.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ');
+        const errorMsg = parsed.error.issues
+            .map((e) => `${e.path.join('.')}: ${e.message}`)
+            .join(', ');
         return {
             isError: true,
             content: [
@@ -58,7 +61,9 @@ export async function handleGetBlockSchema(args) {
             content: [
                 {
                     type: 'text',
-                    text: error instanceof Error ? error.message : String(error),
+                    text: error instanceof Error
+                        ? error.message
+                        : String(error),
                 },
             ],
         };

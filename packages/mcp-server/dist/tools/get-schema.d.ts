@@ -26,6 +26,7 @@ export declare const getBlockSchemaToolDefinition: {
  *
  * Returns raw schema payload directly without wrapper noise.
  * Returns { isError: true } on validation or lookup errors so callers receive clear diagnostics.
+ * @param args
  */
 export declare function handleGetBlockSchema(args: unknown): Promise<{
     isError: boolean;
