@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary, jsdoc/require-returns-description */
 export const DEFAULT_TESTIMONIAL_CONTENT_ORDER = [
 	'quote',
 	'content',
@@ -10,8 +9,8 @@ export const DEFAULT_TESTIMONIAL_CONTENT_ORDER = [
  * Preserve old saved `contentOrder` values while ensuring the new rating group
  * is always available and defaults to immediately after content.
  *
- * @param {string[]} order
- * @return {string[]}
+ * @param {string[]} order Array of content order keys.
+ * @return {string[]} Normalized content order array.
  */
 export const normalizeContentOrder = ( order ) => {
 	if ( ! Array.isArray( order ) || order.length === 0 ) {
@@ -27,12 +26,13 @@ export const normalizeContentOrder = ( order ) => {
 	if ( ! normalizedOrder.includes( 'rating' ) ) {
 		const contentIndex = normalizedOrder.indexOf( 'content' );
 		const authorIndex = normalizedOrder.indexOf( 'author' );
-		const insertIndex =
-			contentIndex !== -1
-				? contentIndex + 1
-				: authorIndex !== -1
-				? authorIndex
-				: normalizedOrder.length;
+		let insertIndex = normalizedOrder.length;
+
+		if ( contentIndex !== -1 ) {
+			insertIndex = contentIndex + 1;
+		} else if ( authorIndex !== -1 ) {
+			insertIndex = authorIndex;
+		}
 
 		normalizedOrder.splice( insertIndex, 0, 'rating' );
 	}

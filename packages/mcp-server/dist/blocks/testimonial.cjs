@@ -94,7 +94,12 @@ var normalizeContentOrder = (order) => {
   if (!normalizedOrder.includes("rating")) {
     const contentIndex = normalizedOrder.indexOf("content");
     const authorIndex = normalizedOrder.indexOf("author");
-    const insertIndex = contentIndex !== -1 ? contentIndex + 1 : authorIndex !== -1 ? authorIndex : normalizedOrder.length;
+    let insertIndex = normalizedOrder.length;
+    if (contentIndex !== -1) {
+      insertIndex = contentIndex + 1;
+    } else if (authorIndex !== -1) {
+      insertIndex = authorIndex;
+    }
     normalizedOrder.splice(insertIndex, 0, "rating");
   }
   DEFAULT_TESTIMONIAL_CONTENT_ORDER.forEach((key) => {
