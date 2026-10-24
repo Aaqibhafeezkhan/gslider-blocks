@@ -51,14 +51,50 @@ jobs:
                   issue_number: pr.number
                 });
 
-                const alreadyThanked = comments.some(c => c.body && c.body.includes('Thank you for contributing to **GSlider Blocks**'));
-                if (!alreadyThanked) {
-                  await github.rest.issues.createComment({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    issue_number: pr.number,
-                    body: `🎉 **Congratulations @${author}!** Your pull request has been merged into \`main\`.\n\nThank you for contributing to **GSlider Blocks**! If you haven't already, please consider leaving a ⭐ [star on GitHub](https://github.com/noruzzamans/gslider-blocks) to support the project — it helps our community grow and motivates future development.`
-                  });
+                const alreadyCommented = comments.some(c => c.body && c.body.includes(`Congratulations @${author}`));
+                if (!alreadyCommented) {
+                  // Live check: has the contributor already starred this repository?
+                  let hasStarred = false;
+                  try {
+                    const stargazers = await github.paginate(github.rest.activity.listStargazersForRepo, {
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      per_page: 100
+                    });
+                    hasStarred = stargazers.some(s => s && s.login && s.login.toLowerCase() === author.toLowerCase());
+                  } catch (err) {
+                    console.log(`Could not check repository stargazers: ${err.message}`);
+                  }
+
+                  if (!hasStarred) {
+                    try {
+                      const starred = await github.rest.activity.listReposStarredByUser({
+                        username: author,
+                        per_page: 100
+                      });
+                      hasStarred = starred.data.some(r => r && r.full_name && r.full_name.toLowerCase() === `${context.repo.owner}/${context.repo.repo}`.toLowerCase());
+                    } catch (err) {
+                      // Fallback / ignore
+                    }
+                  }
+
+                  if (!hasStarred) {
+                    // Contributor has NOT starred yet: celebrate merge and invite star ⭐
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: pr.number,
+                      body: `🎉 **Congratulations @${author}!** Your pull request has been merged into \`main\`.\n\nThank you for contributing to **GSlider Blocks**! If you haven't already, please consider leaving a ⭐ [star on GitHub](https://github.com/noruzzamans/gslider-blocks) to support the project — it helps our community grow and motivates future development.`
+                    });
+                  } else {
+                    // Contributor ALREADY starred: celebrate merge with warm gratitude, zero star nagging
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: pr.number,
+                      body: `🎉 **Congratulations @${author}!** Your pull request has been merged into \`main\`.\n\nThank you for your fantastic contribution to **GSlider Blocks**! Your continued support means the world to our community. 🚀`
+                    });
+                  }
                 }
               }
               return;
