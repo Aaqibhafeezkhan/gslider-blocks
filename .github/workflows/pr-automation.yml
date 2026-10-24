@@ -2,7 +2,7 @@ name: Pull Request Automation & Labeler
 
 on:
   pull_request_target:
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, synchronize, reopened, edited, closed]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
@@ -35,12 +35,71 @@ jobs:
       - name: Run Intelligent PR Triage
         uses: actions/github-script@v9
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const pr = context.payload.pull_request;
             const author = pr.user.login;
             const title = pr.title;
             const action = context.payload.action;
+
+            // Handle PR closed event
+            if (action === 'closed') {
+              if (pr.merged && author !== 'noruzzamans') {
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number
+                });
+
+                const alreadyCommented = comments.some(c => c.body && c.body.includes(`@${author}`) && c.body.includes(`merged into \`main\``));
+                if (!alreadyCommented) {
+                  // Live check: has the contributor already starred this repository?
+                  let hasStarred = false;
+                  try {
+                    const stargazers = await github.paginate(github.rest.activity.listStargazersForRepo, {
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      per_page: 100
+                    });
+                    hasStarred = stargazers.some(s => s && s.login && s.login.toLowerCase() === author.toLowerCase());
+                  } catch (err) {
+                    console.log(`Could not check repository stargazers: ${err.message}`);
+                  }
+
+                  if (!hasStarred) {
+                    try {
+                      const starred = await github.rest.activity.listReposStarredByUser({
+                        username: author,
+                        per_page: 100
+                      });
+                      hasStarred = starred.data.some(r => r && r.full_name && r.full_name.toLowerCase() === `${context.repo.owner}/${context.repo.repo}`.toLowerCase());
+                    } catch (err) {
+                      // Fallback / ignore
+                    }
+                  }
+
+                  if (!hasStarred) {
+                    // Contributor has NOT starred yet: thank on merge and invite star
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: pr.number,
+                      body: `Thank you for your contribution, @${author}! Your changes are now merged into \`main\`.\n\nIf you find GSlider Blocks valuable, a [star on GitHub](https://github.com/noruzzamans/gslider-blocks) helps us reach more developers. We also have open [good first issue](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [help wanted](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issues if you would like to take on another challenge!\n\nBy the way, if you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X](https://x.com/Noruzzamanwp), feel free to tag me — I would be glad to repost and celebrate your achievement!`
+                    });
+                  } else {
+                    // Contributor ALREADY starred: thank on merge with warm gratitude, zero star nagging
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: pr.number,
+                      body: `Thank you for your fantastic contribution, @${author}! Your changes are now merged into \`main\`.\n\nYour continued support means a lot to our community. Whenever you are ready for your next challenge, feel free to explore our open [good first issue](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [help wanted](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issues!\n\nAlso, if you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X](https://x.com/Noruzzamanwp), feel free to tag me — I would love to repost and celebrate your achievement!`
+                    });
+                  }
+                }
+              }
+              return;
+            }
+
             const labelsToAdd = new Set();
             const labelsToRemove = new Set();
 

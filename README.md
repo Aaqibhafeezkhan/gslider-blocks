@@ -12,6 +12,12 @@
   <a href="https://github.com/noruzzamans/gslider-blocks/releases">
     <img src="https://img.shields.io/badge/Version-1.2.0-orange.svg" alt="Version">
   </a>
+  <a href="https://github.com/noruzzamans/gslider-blocks/stargazers">
+    <img src="https://img.shields.io/github/stars/noruzzamans/gslider-blocks?color=ffb800&label=Stars&logo=github" alt="GitHub Stars">
+  </a>
+  <a href="https://github.com/noruzzamans/gslider-blocks/network/members">
+    <img src="https://img.shields.io/github/forks/noruzzamans/gslider-blocks?color=blue&label=Forks&logo=github" alt="GitHub Forks">
+  </a>
   <a href="https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">
     <img src="https://img.shields.io/github/issues/noruzzamans/gslider-blocks/good%20first%20issue?color=7057ff&label=Good%20First%20Issues" alt="Good First Issues">
   </a>
@@ -46,7 +52,8 @@
   <a href="#-ai-assistant-integration-model-context-protocol---mcp">MCP AI Guide</a> •
   <a href="#-headless-wordpress--nextjs-showcase">Headless</a> •
   <a href="#-local-environment-setup">Setup</a> •
-  <a href="#-contributing--governance">Contributing</a>
+  <a href="#-contributing--governance">Contributing</a> •
+  <a href="#-support-the-project">Support ⭐</a>
 </p>
 
 ---
@@ -461,6 +468,22 @@ the Free Software Foundation; either version 2 of the License, or
 
 ---
 
+## ⭐ Support the Project
+
+If you find **GSlider Blocks** valuable or use it in your projects, please consider giving it a star on GitHub! It takes just a second and helps the project gain visibility across the WordPress & open-source community, attract more contributors, and motivates ongoing active development.
+
+<p align="center">
+  <a href="https://github.com/noruzzamans/gslider-blocks">
+    <img src="https://img.shields.io/badge/⭐_Star_on_GitHub-gslider--blocks-yellow?style=for-the-badge&logo=github" alt="Star on GitHub">
+  </a>
+</p>
+
+- **Star this repository** to bookmark it for future use.
+- **Share it** with fellow WordPress developers, agencies, and friends.
+- **Contribute** code, docs, or ideas to our open [Good First Issues](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+
+---
+
 ## 👥 Contributors
 
 Thank you to all the amazing people who contribute to GSlider Blocks!
@@ -503,6 +526,9 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
   </a>
   <a href="https://linkedin.com/in/noruzzaman">
     <img src="https://img.shields.io/badge/LinkedIn-noruzzaman-0A66C2?logo=linkedin" alt="LinkedIn">
+  </a>
+  <a href="https://x.com/Noruzzamanwp">
+    <img src="https://img.shields.io/badge/X-@Noruzzamanwp-000000?logo=x" alt="X (Twitter)">
   </a>
   <a href="https://profiles.wordpress.org/noruzzaman/">
     <img src="https://img.shields.io/badge/WordPress.org-@noruzzaman-21759B?logo=wordpress" alt="WordPress Profile">

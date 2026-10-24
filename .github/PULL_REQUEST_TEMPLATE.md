@@ -19,3 +19,9 @@ Closes #
 2. Step-by-step UI actions in Gutenberg editor or Storybook sidebar.
 3. Expected results and observable state transitions across Desktop, Tablet, and Mobile.
 -->
+
+---
+
+### Support GSlider Blocks
+- [ ] I have starred the [noruzzamans/gslider-blocks](https://github.com/noruzzamans/gslider-blocks) repository (optional, but appreciated!)
+
