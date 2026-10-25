@@ -90,14 +90,11 @@ export default function Edit( {
 
 		enableLogoLinks,
 		showTooltip,
-		logoLinkTarget,
-		logoLinkRel,
 		logoLinkHoverEffect,
 		logoLinkHoverOpacity,
 		logoLinkHoverScale,
 		logoLinkHoverLift,
 		logoLinkHoverLiftUnits,
-		logoLinkTransitionDuration,
 		enableLazyLoad,
 	} = attributes;
 
