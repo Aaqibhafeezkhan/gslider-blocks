@@ -343,9 +343,8 @@ jobs:
                   }
                 }
 
-                // Format Co-authored-by lines for external contributors (excluding noruzzamans who commits)
+                // Format Co-authored-by lines for all contributors (matching Gutenberg props-bot)
                 const coAuthors = Array.from(contributors.values())
-                  .filter(c => c.login !== 'noruzzamans')
                   .map(c => `Co-authored-by: ${c.name} <${c.email}>`);
 
                 const coAuthoredBlock = coAuthors.length > 0
