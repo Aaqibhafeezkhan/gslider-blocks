@@ -3,9 +3,13 @@ name: Pull Request Automation & Labeler
 on:
   pull_request_target:
     types: [opened, synchronize, reopened, edited, closed]
+  pull_request_review:
+    types: [submitted]
+  issue_comment:
+    types: [created]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.event.issue.number }}
   cancel-in-progress: true
 
 permissions:
@@ -17,6 +21,7 @@ jobs:
   path-based-labeler:
     name: Path-Based Labeler
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request_target'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
@@ -31,13 +36,27 @@ jobs:
   smart-automation:
     name: Metadata, Size & Policy Automation
     runs-on: ubuntu-latest
+    if: github.event_name != 'issue_comment' || github.event.issue.pull_request
     steps:
       - name: Run Intelligent PR Triage
         uses: actions/github-script@v9
         with:
           github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
-            const pr = context.payload.pull_request;
+            const isIssueComment = context.eventName === 'issue_comment';
+            if (isIssueComment && !context.payload.issue?.pull_request) {
+              return; // Ignore comments on regular issues
+            }
+
+            const prNumber = context.payload.pull_request ? context.payload.pull_request.number : context.payload.issue.number;
+            const { data: pr } = context.payload.pull_request 
+              ? { data: context.payload.pull_request } 
+              : await github.rest.pulls.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber
+                });
+
             const author = pr.user.login;
             const title = pr.title;
             const action = context.payload.action;
@@ -122,8 +141,9 @@ jobs:
               return;
             }
 
-            const labelsToAdd = new Set();
-            const labelsToRemove = new Set();
+            if (context.eventName === 'pull_request_target') {
+              const labelsToAdd = new Set();
+              const labelsToRemove = new Set();
 
             // 1. Auto-assign PR author on open
             if ((action === 'opened' || action === 'reopened') && (!pr.assignees || pr.assignees.length === 0)) {
@@ -219,16 +239,145 @@ jobs:
             }
 
             // Apply label removals
-            for (const label of labelsToRemove) {
+              for (const label of labelsToRemove) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: pr.number,
+                    name: label
+                  });
+                } catch (err) {
+                  // Ignore if already removed
+                }
+              }
+            }
+
+            // 7. Contributor Props Bot (Gutenberg & WordPress Core Attribution)
+            if (action !== 'closed') {
+              const PROPS_IDENTIFIER = '<!-- PROPS-BOT-MANAGED-COMMENT -->';
               try {
-                await github.rest.issues.removeLabel({
+                const contributors = new Map();
+
+                // 1. PR Author
+                const authorLogin = pr.user.login;
+                contributors.set(authorLogin.toLowerCase(), {
+                  name: pr.user?.name || authorLogin,
+                  login: authorLogin,
+                  email: `${authorLogin}@users.noreply.github.com`,
+                  roles: new Set(['Author'])
+                });
+
+                // 2. Commit Authors
+                const commits = await github.paginate(github.rest.pulls.listCommits, {
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  issue_number: pr.number,
-                  name: label
+                  pull_number: prNumber,
+                  per_page: 100
                 });
+
+                for (const c of commits) {
+                  const committerLogin = c.author?.login;
+                  const committerName = c.commit?.author?.name || committerLogin;
+                  const committerEmail = c.commit?.author?.email || (committerLogin ? `${committerLogin}@users.noreply.github.com` : null);
+
+                  if (committerLogin && committerLogin !== 'github-actions[bot]') {
+                    const existing = contributors.get(committerLogin.toLowerCase()) || {
+                      name: committerName || committerLogin,
+                      login: committerLogin,
+                      email: committerEmail || `${committerLogin}@users.noreply.github.com`,
+                      roles: new Set()
+                    };
+                    existing.roles.add('Committer');
+                    contributors.set(committerLogin.toLowerCase(), existing);
+                  }
+                }
+
+                // 3. PR Reviewers
+                const reviews = await github.paginate(github.rest.pulls.listReviews, {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                  per_page: 100
+                });
+
+                for (const r of reviews) {
+                  const reviewerLogin = r.user?.login;
+                  if (reviewerLogin && reviewerLogin !== 'github-actions[bot]') {
+                    const existing = contributors.get(reviewerLogin.toLowerCase()) || {
+                      name: reviewerLogin,
+                      login: reviewerLogin,
+                      email: `${reviewerLogin}@users.noreply.github.com`,
+                      roles: new Set()
+                    };
+                    existing.roles.add('Reviewer');
+                    contributors.set(reviewerLogin.toLowerCase(), existing);
+                  }
+                }
+
+                // 4. PR Commenters
+                const allComments = await github.paginate(github.rest.issues.listComments, {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  per_page: 100
+                });
+
+                for (const com of allComments) {
+                  const commenterLogin = com.user?.login;
+                  if (commenterLogin && !commenterLogin.includes('[bot]') && commenterLogin !== 'github-actions') {
+                    const existing = contributors.get(commenterLogin.toLowerCase()) || {
+                      name: commenterLogin,
+                      login: commenterLogin,
+                      email: `${commenterLogin}@users.noreply.github.com`,
+                      roles: new Set()
+                    };
+                    if (!existing.roles.has('Author') && !existing.roles.has('Reviewer') && !existing.roles.has('Committer')) {
+                      existing.roles.add('Contributor');
+                    }
+                    contributors.set(commenterLogin.toLowerCase(), existing);
+                  }
+                }
+
+                // Format participants list
+                const participantList = Array.from(contributors.values())
+                  .map(c => `- @${c.login} (${Array.from(c.roles).join(', ')})`)
+                  .join('\n');
+
+                // Format Co-authored-by lines for external contributors (excluding noruzzamans who commits)
+                const coAuthors = Array.from(contributors.values())
+                  .filter(c => c.login !== 'noruzzamans')
+                  .map(c => `Co-authored-by: ${c.name} <${c.email}>`);
+
+                const coAuthoredBlock = coAuthors.length > 0
+                  ? `\n\nIf you're merging code through this pull request on GitHub, copy and paste the following into the bottom of the merge commit message:\n\n\`\`\`text\n${coAuthors.join('\n')}\n\`\`\``
+                  : '';
+
+                const propsCommentBody = `${PROPS_IDENTIFIER}\n### 👥 Props\n\nThe following accounts have interacted with this PR and/or linked issues:\n\n${participantList}${coAuthoredBlock}`;
+
+                const existingPropsComment = allComments.find(c => c.body && c.body.includes(PROPS_IDENTIFIER));
+
+                if (existingPropsComment) {
+                  if (existingPropsComment.body.trim() !== propsCommentBody.trim()) {
+                    await github.rest.issues.updateComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      comment_id: existingPropsComment.id,
+                      body: propsCommentBody
+                    });
+                    console.log(`Updated Props comment for PR #${prNumber}`);
+                  }
+                } else {
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: prNumber,
+                    body: propsCommentBody
+                  });
+                  console.log(`Created new Props comment for PR #${prNumber}`);
+                }
               } catch (err) {
-                // Ignore if already removed
+                console.log(`Props Bot encountered an error: ${err.message}`);
               }
             }
 

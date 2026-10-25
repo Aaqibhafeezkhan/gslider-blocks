@@ -1,0 +1,24 @@
+name: PR Preview - Build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: pr-preview-build-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Plugin ZIP
+    uses: WordPress/action-wp-playground-pr-preview/.github/workflows/preview-build.yml@v4.0.0
+    with:
+      artifacts: |
+        gslider-blocks=gslider-blocks.zip
+      blueprint-from-build: .github/playground-blueprint.json
+      node-version: '22'
+      build-command: |
+        npm ci
+        npm run build
+        npm run admin:build
+        npm run zip
