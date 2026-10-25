@@ -232,6 +232,78 @@ jobs:
               }
             }
 
+            // 7. Contributor Props Bot (Gutenberg-style Co-authored-by Attribution)
+            if (action !== 'closed' && author !== 'noruzzamans' && author !== 'dependabot[bot]') {
+              const PROPS_IDENTIFIER = '<!-- PROPS-BOT-MANAGED-COMMENT -->';
+              try {
+                const commits = await github.paginate(github.rest.pulls.listCommits, {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: pr.number,
+                  per_page: 100
+                });
+
+                const contributors = new Map();
+
+                contributors.set(author.toLowerCase(), {
+                  name: pr.user?.name || author,
+                  login: author,
+                  email: `${author}@users.noreply.github.com`
+                });
+
+                for (const c of commits) {
+                  const committerLogin = c.author?.login;
+                  const committerName = c.commit?.author?.name || committerLogin;
+                  const committerEmail = c.commit?.author?.email || (committerLogin ? `${committerLogin}@users.noreply.github.com` : null);
+
+                  if (committerLogin && committerLogin !== 'noruzzamans' && committerLogin !== 'github-actions[bot]') {
+                    contributors.set(committerLogin.toLowerCase(), {
+                      name: committerName,
+                      login: committerLogin,
+                      email: committerEmail
+                    });
+                  }
+                }
+
+                const coAuthoredLines = Array.from(contributors.values())
+                  .map(c => `Co-authored-by: ${c.name} <${c.email}>`)
+                  .join('\n');
+
+                const propsCommentBody = `${PROPS_IDENTIFIER}\n### 🎉 Props\n\nIf you're merging code through this pull request on GitHub, copy and paste the following into the bottom of the merge commit message:\n\n\`\`\`text\n${coAuthoredLines}\n\`\`\``;
+
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  per_page: 100
+                });
+
+                const existingPropsComment = comments.find(c => c.body && c.body.includes(PROPS_IDENTIFIER));
+
+                if (existingPropsComment) {
+                  if (existingPropsComment.body.trim() !== propsCommentBody.trim()) {
+                    await github.rest.issues.updateComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      comment_id: existingPropsComment.id,
+                      body: propsCommentBody
+                    });
+                    console.log(`Updated Props comment for PR #${pr.number}`);
+                  }
+                } else {
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: pr.number,
+                    body: propsCommentBody
+                  });
+                  console.log(`Created new Props comment for PR #${pr.number}`);
+                }
+              } catch (err) {
+                console.log(`Props Bot encountered an error: ${err.message}`);
+              }
+            }
+
   auto-contributor:
     name: Auto Add All-Contributor
     runs-on: ubuntu-latest
