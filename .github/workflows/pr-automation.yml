@@ -36,6 +36,7 @@ jobs:
   smart-automation:
     name: Metadata, Size & Policy Automation
     runs-on: ubuntu-latest
+    if: github.event_name != 'issue_comment' || github.event.issue.pull_request
     steps:
       - name: Run Intelligent PR Triage
         uses: actions/github-script@v9
@@ -315,7 +316,7 @@ jobs:
                 }
 
                 // 4. PR Commenters
-                const { data: allComments } = await github.rest.issues.listComments({
+                const allComments = await github.paginate(github.rest.issues.listComments, {
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: prNumber,
