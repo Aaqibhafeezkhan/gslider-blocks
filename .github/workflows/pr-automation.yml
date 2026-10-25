@@ -45,6 +45,8 @@ jobs:
 
       - name: Run Intelligent PR Triage
         uses: actions/github-script@v9
+        env:
+          MAINTAINER_TOKEN: ${{ secrets.MAINTAINER_TOKEN }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -124,22 +126,42 @@ jobs:
                     ? " You have also been added to our [Contributors List](https://github.com/noruzzamans/gslider-blocks#contributors)!" 
                     : "";
 
-                  if (!hasStarred) {
-                    // Contributor has NOT starred yet: thank on merge and invite star
-                    await github.rest.issues.createComment({
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      issue_number: pr.number,
-                      body: `Thank you for your ${isFirstContribution ? 'contribution' : 'continued contribution'}, @${author}! Your changes are now merged into \`main\`.${contributorsCreditText}\n\nIf you find GSlider Blocks valuable, a [star on GitHub](https://github.com/noruzzamans/gslider-blocks) helps us reach more developers. We also have open [good first issue](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [help wanted](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issues if you would like to take on another challenge!\n\nBy the way, if you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X](https://x.com/Noruzzamanwp), feel free to tag me — I would be glad to repost and celebrate your achievement!`
-                    });
-                  } else {
-                    // Contributor ALREADY starred: thank on merge with warm gratitude, zero star nagging
-                    await github.rest.issues.createComment({
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      issue_number: pr.number,
-                      body: `Thank you for your fantastic contribution, @${author}! Your changes are now merged into \`main\`.${contributorsCreditText}\n\nYour continued support means a lot to our community. Whenever you are ready for your next challenge, feel free to explore our open [good first issue](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [help wanted](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issues!\n\nAlso, if you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X](https://x.com/Noruzzamanwp), feel free to tag me — I would love to repost and celebrate your achievement!`
-                    });
+                  const thankYouBody = !hasStarred
+                    ? `Thank you for your ${isFirstContribution ? 'contribution' : 'continued contribution'}, @${author}! Your changes are now merged into \`main\`.${contributorsCreditText}\n\nIf you find GSlider Blocks valuable, a [star on GitHub](https://github.com/noruzzamans/gslider-blocks) helps us reach more developers. We also have open [good first issue](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [help wanted](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issues if you would like to take on another challenge!\n\nBy the way, if you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X](https://x.com/Noruzzamanwp), feel free to tag me — I would be glad to repost and celebrate your achievement!`
+                    : `Thank you for your fantastic contribution, @${author}! Your changes are now merged into \`main\`.${contributorsCreditText}\n\nYour continued support means a lot to our community. Whenever you are ready for your next challenge, feel free to explore our open [good first issue](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) and [help wanted](https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) issues!\n\nAlso, if you share your open-source journey on [LinkedIn](https://linkedin.com/in/noruzzaman) or [X](https://x.com/Noruzzamanwp), feel free to tag me — I would love to repost and celebrate your achievement!`;
+
+                  // Post thank-you message as the repository owner (@noruzzamans) using MAINTAINER_TOKEN
+                  let postedAsOwner = false;
+                  if (process.env.MAINTAINER_TOKEN) {
+                    try {
+                      const ownerOctokit = new github.constructor({ auth: process.env.MAINTAINER_TOKEN });
+                      await ownerOctokit.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: pr.number,
+                        body: thankYouBody
+                      });
+                      postedAsOwner = true;
+                    } catch (err) {
+                      console.log(`Maintainer Octokit comment failed: ${err.message}, falling back to gh CLI...`);
+                    }
+                  }
+
+                  if (!postedAsOwner) {
+                    try {
+                      const { execSync } = require('child_process');
+                      execSync(`gh issue comment ${pr.number} --repo ${context.repo.owner}/${context.repo.repo} --body ${JSON.stringify(thankYouBody)}`, {
+                        env: { ...process.env, GH_TOKEN: process.env.MAINTAINER_TOKEN || process.env.GITHUB_TOKEN },
+                        stdio: 'inherit'
+                      });
+                    } catch (err) {
+                      await github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: pr.number,
+                        body: thankYouBody
+                      });
+                    }
                   }
                 }
               }
