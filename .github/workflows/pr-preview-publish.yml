@@ -34,7 +34,7 @@ jobs:
       - name: Publish Artifact to Release & Update PR Meta
         uses: actions/github-script@v9
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
         with:

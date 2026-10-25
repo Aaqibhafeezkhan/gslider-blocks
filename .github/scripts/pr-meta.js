@@ -46,10 +46,11 @@ function parseCommentSections( body ) {
 		return sections;
 	}
 
+	const normalizedBody = body.replace( /\r\n/g, '\n' );
 	const regex =
 		/<!-- pr-meta:section:([a-z0-9-]+) -->\n([\s\S]*?)\n<!-- \/pr-meta:section:\1 -->/g;
 	let match;
-	while ( ( match = regex.exec( body ) ) !== null ) {
+	while ( ( match = regex.exec( normalizedBody ) ) !== null ) {
 		sections.set( match[ 1 ], match[ 2 ].trim() );
 	}
 	return sections;
@@ -172,7 +173,10 @@ async function updatePrMetaComment( {
 
 	// 6. Update or Create comment
 	if ( prMetaComment ) {
-		if ( prMetaComment.body.trim() !== newBody.trim() ) {
+		const currentNormalizedBody = prMetaComment.body
+			.replace( /\r\n/g, '\n' )
+			.trim();
+		if ( currentNormalizedBody !== newBody.trim() ) {
 			await github.rest.issues.updateComment( {
 				owner,
 				repo,
