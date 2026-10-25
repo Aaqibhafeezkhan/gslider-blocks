@@ -63,9 +63,28 @@ jobs:
             const headSha = match[2];
             console.log(`Processing Playground Preview for PR #${prNumber} at commit ${headSha}`);
 
-            const zipPath = path.join(artifactsDir, bundleName, 'gslider-blocks.zip');
+            // Locate plugin zip (action-wp-playground-pr-preview stores it in zips/ or bundle root)
+            let zipPath = path.join(artifactsDir, bundleName, 'zips', 'gslider-blocks.zip');
             if (!fs.existsSync(zipPath)) {
-              throw new Error(`Plugin zip not found at ${zipPath}`);
+              zipPath = path.join(artifactsDir, bundleName, 'gslider-blocks.zip');
+            }
+            if (!fs.existsSync(zipPath)) {
+              const findZip = (dir) => {
+                for (const file of fs.readdirSync(dir)) {
+                  const full = path.join(dir, file);
+                  if (fs.statSync(full).isDirectory()) {
+                    const found = findZip(full);
+                    if (found) return found;
+                  } else if (file.endsWith('.zip')) {
+                    return full;
+                  }
+                }
+                return null;
+              };
+              zipPath = findZip(path.join(artifactsDir, bundleName));
+            }
+            if (!zipPath || !fs.existsSync(zipPath)) {
+              throw new Error(`Plugin zip not found in ${path.join(artifactsDir, bundleName)}`);
             }
 
             // 2. Upload zip to ci-artifacts release
