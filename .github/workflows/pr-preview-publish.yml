@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
         with:
           sparse-checkout: .github
 
@@ -114,7 +114,7 @@ jobs:
             const playgroundBadge = `[![Preview in WordPress Playground](https://img.shields.io/badge/Preview-WordPress%20Playground-3858e9?logo=wordpress)](${playgroundUrl})`;
 
             // 4. Update section in unified PR meta comment
-            const { updatePrMetaComment } = require('./.github/scripts/pr-meta.js');
+            const { updatePrMetaComment } = require(path.resolve(process.env.GITHUB_WORKSPACE, '.github/scripts/pr-meta.js'));
             await updatePrMetaComment({
               github,
               context,
