@@ -1,14 +1,12 @@
 /* eslint-disable no-unused-vars, react-hooks/exhaustive-deps */
 import { __ } from '@wordpress/i18n';
 import {
-	RichText,
 	useBlockProps,
 	BlockControls,
-	InnerBlocks,
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
-import { Toolbar, ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { useState, useEffect, useRef } from '@wordpress/element';
+import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { useEffect, useRef } from '@wordpress/element';
 import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import Inspector from './inspector';
@@ -59,13 +57,11 @@ export default function Edit( {
 		navigationArrowsIconLeft,
 		navigationArrowsIconLeftImageUrl,
 		navigationArrowsIconLeftImageAlt,
-		navigationArrowsIconLeftImageID,
 
 		navigationArrowsIconRightAlign,
 		navigationArrowsIconRight,
 		navigationArrowsIconRightImageUrl,
 		navigationArrowsIconRightImageAlt,
-		navigationArrowsIconRightImageID,
 
 		layoutHeightSwitcher,
 	} = attributes;
@@ -270,32 +266,6 @@ export default function Edit( {
 			orientation: 'horizontal',
 		}
 	);
-
-	/**
-	 * Renders toolbar controls for slide management
-	 * Provides buttons for adding and duplicating slides
-	 */
-	const renderSliderToolbarControls = () => {
-		return (
-			<BlockControls>
-				<ToolbarGroup>
-					<ToolbarButton
-						icon="plus"
-						label={ __( 'Add New Slide', 'gslider-blocks' ) }
-						onClick={ () => {} }
-					/>
-					<ToolbarButton
-						icon="admin-page"
-						label={ __(
-							'Duplicate Current Slide',
-							'gslider-blocks'
-						) }
-						onClick={ () => {} }
-					/>
-				</ToolbarGroup>
-			</BlockControls>
-		);
-	};
 
 	return (
 		<>
