@@ -5,7 +5,7 @@ import {
 	useBlockProps,
 	BlockControls,
 } from '@wordpress/block-editor';
-import { Toolbar, ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { useState, useEffect, useRef } from '@wordpress/element';
 import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
@@ -75,18 +75,13 @@ export default function Edit( {
 		navigationArrowsIconLeftAlign,
 		navigationArrowsIconLeft,
 		navigationArrowsIconLeftImageUrl,
-		navigationArrowsIconLeftImageAlt,
-		navigationArrowsIconLeftImageID,
 
 		navigationArrowsIconRightAlign,
 		navigationArrowsIconRight,
 		navigationArrowsIconRightImageUrl,
-		navigationArrowsIconRightImageAlt,
-		navigationArrowsIconRightImageID,
 
 		layoutHeightSwitcher,
 		contentOrder,
-		presetStyle,
 		authorPlaceholderUrl,
 	} = attributes;
 
