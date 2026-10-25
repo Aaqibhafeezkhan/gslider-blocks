@@ -6,8 +6,8 @@ on:
     types: [completed]
 
 concurrency:
-  group: pr-preview-publish-${{ github.event.workflow_run.id }}
-  cancel-in-progress: true
+  group: pr-meta-${{ github.event.workflow_run.pull_requests[0].number || github.event.workflow_run.id }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -17,10 +17,108 @@ jobs:
   publish:
     name: Publish Playground Preview
     if: github.event.workflow_run.conclusion == 'success'
-    permissions:
-      contents: write
-      pull-requests: write
-    uses: WordPress/action-wp-playground-pr-preview/.github/workflows/preview-publish.yml@v4.0.0
-    with:
-      blueprint-from-artifact: true
-      mode: comment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: artifacts
+
+      - name: Publish Artifact to Release & Update PR Meta
+        uses: actions/github-script@v9
+        env:
+          GH_TOKEN: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+        with:
+          github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const { execSync } = require('child_process');
+
+            // 1. Identify PR number and artifact folder
+            const artifactsDir = path.resolve('artifacts');
+            if (!fs.existsSync(artifactsDir)) {
+              throw new Error('No artifacts directory found.');
+            }
+
+            const entries = fs.readdirSync(artifactsDir);
+            const bundleName = entries.find(e => /^wp-playground-preview-pr\d+-[0-9a-f]+$/i.test(e));
+            if (!bundleName) {
+              throw new Error(`Expected bundle wp-playground-preview-pr*, found: ${entries.join(', ')}`);
+            }
+
+            const match = bundleName.match(/^wp-playground-preview-pr(\d+)-([0-9a-f]+)$/i);
+            if (!match) throw new Error(`Cannot parse artifact bundle name: ${bundleName}`);
+
+            const prNumber = parseInt(match[1], 10);
+            const headSha = match[2];
+            console.log(`Processing Playground Preview for PR #${prNumber} at commit ${headSha}`);
+
+            const zipPath = path.join(artifactsDir, bundleName, 'gslider-blocks.zip');
+            if (!fs.existsSync(zipPath)) {
+              throw new Error(`Plugin zip not found at ${zipPath}`);
+            }
+
+            // 2. Upload zip to ci-artifacts release
+            const releaseTag = 'ci-artifacts';
+            const releaseZipName = `pr-${prNumber}-${headSha}-gslider-blocks.zip`;
+            const destZipPath = path.join(artifactsDir, releaseZipName);
+            fs.copyFileSync(zipPath, destZipPath);
+
+            // Ensure release exists
+            try {
+              execSync(`gh release view ${releaseTag} --repo ${context.repo.owner}/${context.repo.repo}`, { stdio: 'ignore' });
+            } catch (_) {
+              execSync(`gh release create ${releaseTag} --repo ${context.repo.owner}/${context.repo.repo} --title "CI Artifacts" --notes "Automated CI build artifacts for PR previews"`, { stdio: 'inherit' });
+            }
+
+            // Upload asset
+            execSync(`gh release upload ${releaseTag} "${destZipPath}" --repo ${context.repo.owner}/${context.repo.repo} --clobber`, { stdio: 'inherit' });
+            console.log(`Uploaded ${releaseZipName} to release ${releaseTag}`);
+
+            // 3. Build blueprint and playground URL
+            const artifactUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/releases/download/${releaseTag}/${releaseZipName}`;
+            const blueprint = {
+              $schema: 'https://playground.wordpress.net/blueprint-schema.json',
+              landingPage: '/wp-admin/post-new.php',
+              preferredPHP: '8.2',
+              steps: [
+                {
+                  step: 'login',
+                  username: 'admin',
+                  password: 'password'
+                },
+                {
+                  step: 'installPlugin',
+                  pluginZipFile: {
+                    resource: 'url',
+                    url: artifactUrl
+                  },
+                  options: {
+                    activate: true
+                  }
+                }
+              ]
+            };
+
+            const playgroundUrl = `https://playground.wordpress.net?blueprint-url=data:application/json,${encodeURIComponent(JSON.stringify(blueprint))}`;
+            const playgroundBadge = `[![Preview in WordPress Playground](https://img.shields.io/badge/Preview-WordPress%20Playground-3858e9?logo=wordpress)](${playgroundUrl})`;
+
+            // 4. Update section in unified PR meta comment
+            const { updatePrMetaComment } = require(path.resolve(process.env.GITHUB_WORKSPACE, '.github/scripts/pr-meta.js'));
+            await updatePrMetaComment({
+              github,
+              context,
+              prNumber,
+              sectionId: 'playground',
+              content: playgroundBadge
+            });
