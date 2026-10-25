@@ -46,7 +46,7 @@ jobs:
       - name: Run Intelligent PR Triage
         uses: actions/github-script@v9
         with:
-          github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const isIssueComment = context.eventName === 'issue_comment';
             if (isIssueComment && !context.payload.issue?.pull_request) {
@@ -343,21 +343,18 @@ jobs:
                   }
                 }
 
-                // Format participants list
-                const participantList = Array.from(contributors.values())
-                  .map(c => `- @${c.login} (${Array.from(c.roles).join(', ')})`)
-                  .join('\n');
-
                 // Format Co-authored-by lines for external contributors (excluding noruzzamans who commits)
                 const coAuthors = Array.from(contributors.values())
                   .filter(c => c.login !== 'noruzzamans')
                   .map(c => `Co-authored-by: ${c.name} <${c.email}>`);
 
                 const coAuthoredBlock = coAuthors.length > 0
-                  ? `\n\nIf you're merging code through this pull request on GitHub, copy and paste the following into the bottom of the merge commit message:\n\n\`\`\`text\n${coAuthors.join('\n')}\n\`\`\``
+                  ? `\`\`\`\n${coAuthors.join('\n')}\n\`\`\``
                   : '';
 
-                const propsContent = `The following accounts have interacted with this PR and/or linked issues:\n\n${participantList}${coAuthoredBlock}\n\n<details>\n<summary>Props Bot commands</summary>\n<br />\n\nYou can trigger Props Bot actions by commenting on this PR:\n\n- \`@propsbot add <username>\` to give props to a GitHub user.\n- \`@propsbot remove <username>\` to leave a user out of the props.\n\n</details>\n\n_Updated as activity occurs, without notifying anyone named here._`;
+                const propsContent = coAuthoredBlock
+                  ? `If you're merging code through a pull request on GitHub, copy and paste the following into the bottom of the merge commit message:\n\n${coAuthoredBlock}\n\nTo understand the WordPress project's expectations around crediting contributors, please review the [Contributor Attribution page in the Core Handbook](https://make.wordpress.org/core/handbook/best-practices/contributor-attribution/).\n\n_Updated as activity occurs, without notifying anyone named here. Add the \`props-bot\` label to refresh._`
+                  : `To understand the WordPress project's expectations around crediting contributors, please review the [Contributor Attribution page in the Core Handbook](https://make.wordpress.org/core/handbook/best-practices/contributor-attribution/).\n\n_Updated as activity occurs, without notifying anyone named here. Add the \`props-bot\` label to refresh._`;
 
                 const path = require('path');
                 const { updatePrMetaComment } = require(path.resolve(process.env.GITHUB_WORKSPACE, '.github/scripts/pr-meta.js'));
@@ -368,8 +365,31 @@ jobs:
                   sectionId: 'props',
                   content: propsContent
                 });
+
+                // 8. Gutenberg-Style Type Labels Enforcement in PR Meta
+                const issueLabelsRes = await github.rest.issues.listLabelsOnIssue({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber
+                });
+                const typeLabels = issueLabelsRes.data
+                  .map(l => l.name)
+                  .filter(name => name.startsWith('type:') || name.startsWith('[Type]'));
+
+                let labelsContent = '';
+                if (typeLabels.length === 0) {
+                  labelsContent = `This pull request needs exactly one label indicating its type, and has 0.\n\n• Required: any label starting with \`type:\`.\n• Found: none.\n\nRead more about [Type labels in GSlider Blocks](https://github.com/noruzzamans/gslider-blocks/labels?q=type). If you cannot add labels yourself, a reviewer can do it for you.`;
+                }
+
+                await updatePrMetaComment({
+                  github,
+                  context,
+                  prNumber,
+                  sectionId: 'labels',
+                  content: labelsContent
+                });
               } catch (err) {
-                console.log(`Props Bot encountered an error: ${err.message}`);
+                console.log(`Props or Labels automation encountered an error: ${err.message}`);
               }
             }
 

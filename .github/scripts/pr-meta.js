@@ -123,24 +123,41 @@ async function updatePrMetaComment( {
 		}
 	);
 
-	// 2. Locate existing unified PR meta comment
+	// 2. Locate existing unified PR meta comment (authored by Bot)
 	const prMetaComment = allComments.find(
 		( c ) =>
 			c.body &&
 			typeof c.body === 'string' &&
-			c.body.includes( PR_META_IDENTIFIER )
+			c.body.includes( PR_META_IDENTIFIER ) &&
+			c.user?.type === 'Bot'
 	);
 
-	// 3. Clean up legacy standalone comments (retire old separated bots)
+	// Also check if an older PR meta comment was authored by a non-bot user
+	const nonBotMetaComment = allComments.find(
+		( c ) =>
+			c.body &&
+			typeof c.body === 'string' &&
+			c.body.includes( PR_META_IDENTIFIER ) &&
+			c.user?.type !== 'Bot'
+	);
+
+	// Extract existing sections from bot or non-bot meta comment
+	const existingSource = prMetaComment || nonBotMetaComment;
+	const sections = parseCommentSections(
+		existingSource ? existingSource.body : ''
+	);
+
+	// 3. Clean up legacy standalone comments & any non-bot PR meta comments
 	const legacyComments = allComments.filter(
 		( c ) =>
 			c.body &&
 			typeof c.body === 'string' &&
-			( c.body.includes( '<!-- PROPS-BOT-MANAGED-COMMENT -->' ) ||
+			( ( c.body.includes( PR_META_IDENTIFIER ) && c.user?.type !== 'Bot' ) ||
+				c.body.includes( '<!-- PROPS-BOT-MANAGED-COMMENT -->' ) ||
 				c.body.includes( '<!-- wp-playground-preview-comment -->' ) )
 	);
 
-	for ( const legacy of legacyComments) {
+	for ( const legacy of legacyComments ) {
 		try {
 			await github.rest.issues.deleteComment( {
 				owner,
@@ -148,7 +165,7 @@ async function updatePrMetaComment( {
 				comment_id: legacy.id,
 			} );
 			console.log(
-				`[PR Meta] Retired legacy standalone comment #${ legacy.id }`
+				`[PR Meta] Retired legacy comment #${ legacy.id }`
 			);
 		} catch ( err ) {
 			console.log(
@@ -157,12 +174,7 @@ async function updatePrMetaComment( {
 		}
 	}
 
-	// 4. Parse existing sections from the current unified comment (if any)
-	const sections = parseCommentSections(
-		prMetaComment ? prMetaComment.body : ''
-	);
-
-	// 5. Update the requested section
+	// 4. Update the requested section
 	if ( content && content.trim() ) {
 		sections.set( sectionId, content.trim() );
 	} else {

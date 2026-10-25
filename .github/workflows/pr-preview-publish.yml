@@ -38,7 +38,7 @@ jobs:
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
         with:
-          github-token: ${{ secrets.MAINTAINER_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
             const path = require('path');
