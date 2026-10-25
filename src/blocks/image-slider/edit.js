@@ -15,7 +15,7 @@ import {
 	Button,
 	TextControl,
 } from '@wordpress/components';
-import { useState, useEffect, useRef, useMemo } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import Inspector from './inspector';
@@ -91,14 +91,11 @@ export default function Edit( {
 
 		enableimageLinks,
 		showTooltip,
-		imageLinkTarget,
-		imageLinkRel,
 		imageLinkHoverEffect,
 		imageLinkHoverOpacity,
 		imageLinkHoverScale,
 		imageLinkHoverLift,
 		imageLinkHoverLiftUnits,
-		imageLinkTransitionDuration,
 		enableLazyLoad,
 		enableLightbox,
 	} = attributes;
