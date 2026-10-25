@@ -5,8 +5,9 @@
  * strictly matching the architecture from WordPress/gutenberg (tools/pr-meta).
  *
  * Sections:
- * - playground: Live WordPress Playground interactive preview badge
+ * - welcome: Welcome greeting for new contributors
  * - props: Contributor attribution, props list, and Co-authored-by Git trailers
+ * - labels: Required type labels enforcement
  */
 
 const PR_META_IDENTIFIER = '<!-- gslider-pr-meta -->';
@@ -16,10 +17,6 @@ const PR_META_HEADING = '### 🤖 PR meta 🤖';
  * Known section configuration and fixed render order (matching Gutenberg).
  */
 const SECTIONS_CONFIG = [
-	{
-		id: 'playground',
-		heading: null, // Sits directly below ### 🤖 PR meta 🤖
-	},
 	{
 		id: 'welcome',
 		heading: '👋 Welcome',
