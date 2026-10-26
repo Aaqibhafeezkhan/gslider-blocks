@@ -17,10 +17,6 @@ on:
   pull_request_review:
     types:
       - submitted
-  # Runs when an inline review comment is created.
-  pull_request_review_comment:
-    types:
-      - created
 
 # Serializes runs for the same pull request so PR meta updates don't collide.
 concurrency:
@@ -40,13 +36,13 @@ jobs:
     timeout-minutes: 10
     # The job runs when:
     # 1. A comment is added to a pull request.
-    # 2. A PR review or review comment is created.
+    # 2. A PR review is submitted on an internal (non-fork) PR (fork reviews have read-only tokens).
     # 3. A pull request is opened, synchronized, reopened, or marked ready for review.
     # 4. The `props-bot` label is added to the pull request.
     if: |
       (
         ( github.event_name == 'issue_comment' && github.event.issue.pull_request ) ||
-        contains( fromJSON( '["pull_request_review", "pull_request_review_comment"]' ), github.event_name ) ||
+        ( github.event_name == 'pull_request_review' && github.event.pull_request.head.repo.full_name == github.repository ) ||
         ( github.event_name == 'pull_request_target' && ( github.event.action != 'labeled' || github.event.label.name == 'props-bot' ) )
       )
     steps:
@@ -102,7 +98,7 @@ jobs:
                 const { data: user } = await github.rest.users.getByUsername({ username });
                 const details = {
                   name: user.name || user.login,
-                  email: user.email || `${user.login}@users.noreply.github.com`,
+                  email: `${user.login}@users.noreply.github.com`,
                   login: user.login,
                 };
                 userCache.set(lower, details);
@@ -132,17 +128,12 @@ jobs:
                 entry = {
                   name: details.name || username,
                   login: details.login || username,
-                  email: details.email || `${username}@users.noreply.github.com`,
+                  email: `${details.login || username}@users.noreply.github.com`,
                   roles: new Set(),
                 };
                 contributors.set(lower, entry);
-              } else if (explicitDetails) {
-                if (explicitDetails.name && entry.name === entry.login) {
-                  entry.name = explicitDetails.name;
-                }
-                if (explicitDetails.email && explicitDetails.email.indexOf('@users.noreply') === -1) {
-                  entry.email = explicitDetails.email;
-                }
+              } else if (explicitDetails && explicitDetails.name && entry.name === entry.login) {
+                entry.name = explicitDetails.name;
               }
 
               if (role) {
@@ -171,22 +162,21 @@ jobs:
             for (const c of commits) {
               const committerLogin = c.author?.login;
               const committerName = c.commit?.author?.name;
-              const committerEmail = c.commit?.author?.email;
 
               if (committerLogin) {
                 await addContributor(committerLogin, 'Committer', {
                   name: committerName,
-                  email: committerEmail,
+                  email: `${committerLogin}@users.noreply.github.com`,
                   login: committerLogin,
                 });
-              } else if (committerEmail && committerName) {
-                // Unlinked committer with email
-                const key = committerEmail.toLowerCase();
+              } else if (committerName) {
+                // Unlinked committer with no GitHub username
+                const key = committerName.toLowerCase();
                 if (!contributors.has(key)) {
                   contributors.set(key, {
                     name: committerName,
                     login: committerName,
-                    email: committerEmail,
+                    email: `${committerName.replace(/\s+/g, '').toLowerCase()}@users.noreply.github.com`,
                     roles: new Set(['Committer']),
                   });
                 }
@@ -197,13 +187,16 @@ jobs:
               const coAuthorMatches = [...message.matchAll(/Co-authored-by:\s*([^<\r\n]+)<([^>\r\n]+)>/gi)];
               for (const match of coAuthorMatches) {
                 const name = match[1].trim();
-                const email = match[2].trim();
-                const key = email.toLowerCase();
+                const rawEmail = match[2].trim();
+                const noreplyEmail = rawEmail.endsWith('@users.noreply.github.com')
+                  ? rawEmail
+                  : `${name.replace(/\s+/g, '').toLowerCase()}@users.noreply.github.com`;
+                const key = name.toLowerCase();
                 if (!contributors.has(key)) {
                   contributors.set(key, {
                     name,
                     login: name,
-                    email,
+                    email: noreplyEmail,
                     roles: new Set(['Co-author']),
                   });
                 }
@@ -390,15 +383,22 @@ jobs:
             // 9. Update the unified PR Meta Comment
             const path = require('path');
             const { updatePrMetaComment } = require(path.resolve(process.env.GITHUB_WORKSPACE, '.github/scripts/pr-meta.js'));
-            await updatePrMetaComment({
-              github,
-              context,
-              prNumber,
-              sectionId: 'props',
-              content: propsContent,
-            });
-
-            core.info(`Successfully updated props for PR #${prNumber} with ${contributors.size} contributors.`);
+            try {
+              await updatePrMetaComment({
+                github,
+                context,
+                prNumber,
+                sectionId: 'props',
+                content: propsContent,
+              });
+              core.info(`Successfully updated props for PR #${prNumber} with ${contributors.size} contributors.`);
+            } catch (err) {
+              if (err.status === 403) {
+                core.warning(`Unable to update PR meta comment due to insufficient token permissions: ${err.message}`);
+                return;
+              }
+              throw err;
+            }
 
             // 10. Remove props-bot label if it was present
             try {
