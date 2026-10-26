@@ -141,3 +141,84 @@ GSlider Blocks welcomes contributions assisted by modern AI tooling (Cursor, Cla
 >   - `git push origin --delete <branch>`
 >   - `gh pr merge --delete-branch`
 > - Always leave the feature branch intact after switching back to `main`.
+
+---
+
+## 🔍 7. Automated Discovery Protocol: "Additional Good First Issues Find"
+
+This protocol is activated whenever a maintainer requests to find, audit, or discover new good first issues (e.g. prompts: *"additional good first issues find"*, *"find good first issues"*, *"notun good first issue khuje ber koro"*, or any similar request).
+
+### 🎯 Objective
+To systematically discover simple, beginner-friendly, 100% safe, single-file contribution opportunities across the repository that are **NOT** already tracked by existing open issues or open pull requests.
+
+---
+
+### 🛡️ Non-Negotiable Safety & Scope Guardrails
+1. **Protected Directory Immunity (Rule 8):**
+   - **NEVER** inspect or propose issues for `src/components/`. That directory is exclusively maintainer-only.
+2. **Zero Block Invalidation Risk:**
+   - **NEVER** propose issues modifying `save.js` markup or `block.json` attributes without backward-compatible deprecations.
+   - Focus exclusively on: `edit.js`, `inspector.js`, `sortableItem.js`, `view.js`, SCSS, PHP documentation, or unit test coverage.
+3. **Single-File Scope Rule:**
+   - Every candidate issue MUST be resolvable in exactly **one single file**.
+   - The fix should ideally be under 30–50 lines of diff so it is accessible and clean for new community contributors.
+
+---
+
+### 📋 4-Phase Discovery Workflow
+
+#### Phase 1: Query Current Open Issues & PRs (De-duplication)
+Before examining code, query GitHub to establish the baseline of all active work:
+```bash
+gh issue list --state open --limit 100 --json number,title,labels
+gh pr list --state open --limit 100 --json number,title
+```
+Build an in-memory suppression list of all files, functions, and topics already covered by open issues (e.g., tracking issue `#488`, `#478`, `#473`, `#344`, etc.) so that **ZERO duplicate issues** are ever surfaced.
+
+#### Phase 2: Systematic File-by-File Codebase Audit
+Execute an exhaustive scan across all block modules:
+1. **ESLint Header Suppressions (`eslint-disable` Debt):**
+   Search for single-file suppressions across `src/blocks/`:
+   ```bash
+   git grep "eslint-disable" src/blocks/
+   ```
+   Check for:
+   - `no-unused-vars`: Unused imports or dead destructured variables.
+   - `no-nested-ternary`: Nested ternaries in `styling.js` or `inspector.js` that can be refactored into `||` defaults or small helper functions.
+   - `jsx-a11y/click-events-have-key-events` & `jsx-a11y/no-static-element-interactions`: Interactive elements missing keyboard handlers (`onKeyDown` with Enter/Space, `role="button"`, `tabIndex={0}`).
+   - `@wordpress/no-base-control-with-label-without-id`: `<BaseControl>` components missing an `id` prop.
+   - `no-shadow`: Inner callback arguments colliding with component state variables.
+   - `@wordpress/i18n-hyphenated-range`: Strings using regular hyphens `(1-5)` instead of en-dashes `(1–5)`.
+2. **JSDoc Parameter Completeness:**
+   Check helper functions in `view.js`, `edit.js`, or utility files for missing `@param` or `@return` tags.
+3. **Accessibility (a11y) & Focus Visibility:**
+   Check CSS/SCSS and component markup for missing `aria-label`, missing `:focus-within` selectors on hover-only UI, or missing `prefers-reduced-motion` blocks.
+4. **Localization (i18n):**
+   Check for untranslated strings or missing `__()` / `_x()` wrappers in editor UI labels.
+
+#### Phase 3: Filtering & Verification
+For any candidate found:
+1. Verify it is **NOT** already in the Phase 1 suppression list.
+2. Verify that resolving the issue touches only **1 file**.
+3. Run local lint or tests on the file to confirm the issue is genuine:
+   ```bash
+   npx wp-scripts lint-js <file-path>
+   ```
+
+#### Phase 4: Structured Reporting Format
+Present the findings directly to the maintainer in a standardized structure:
+
+- **Case A: Additional Candidates Found:**
+  Present each issue ready for creation with:
+  - **Proposed Title:** Conventional Commits format (e.g. `refactor(<scope>): ...`, `fix(<scope>): ...`, `docs(<scope>): ...`)
+  - **Target File & Lines:** Exact relative file path and line numbers
+  - **Problem Statement:** What the current code does and why it is a problem
+  - **Audit Snippet:** Exact code snippet showing the issue
+  - **Proposed Fix:** Specific code changes required
+  - **Verification Steps:** Exact commands for contributor to run (`npx wp-scripts lint-js ...`, `npm run build`, `npm run mcp:test`, `composer test`)
+  - **Recommended Labels:** `good first issue`, `help wanted`, `hacktoberfest`, `type: ...`, `focus: ...`
+
+- **Case B: Zero Candidates Found:**
+  If every single file in the repository is clean or all opportunities are already tracked:
+  - Clearly report that an exhaustive file-by-file audit of all block directories was conducted.
+  - State that zero new unaddressed single-file good first issues currently exist in the codebase.
