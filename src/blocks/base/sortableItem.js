@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { __, sprintf } from '@wordpress/i18n';
 import { useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
@@ -48,8 +49,18 @@ export default function SortableItem( {
 			style={ style }
 		>
 			<div className="sortable-header">
-				{ /* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */ }
-				<span className="sortable-title" onClick={ toggleOpen }>
+				<span
+					className="sortable-title"
+					role="button"
+					tabIndex={ 0 }
+					onClick={ toggleOpen }
+					onKeyDown={ ( event ) => {
+						if ( event.key === 'Enter' || event.key === ' ' ) {
+							event.preventDefault();
+							toggleOpen();
+						}
+					} }
+				>
 					{ item.title ||
 						/* translators: %d: slider item number */ sprintf(
 							__( 'Slider Item %d', 'gslider-blocks' ),
@@ -87,8 +98,8 @@ export default function SortableItem( {
 
 			{ isOpen && (
 				<div className="sortable-item-content">
-					{ /* eslint-disable-next-line @wordpress/no-base-control-with-label-without-id */ }
 					<BaseControl
+						id={ `base-slide-content-${ item.id }` }
 						className="gslider-setting-background-color-setting-wrapper"
 						label={ __( 'Slide Content', 'gslider-blocks' ) }
 					>
@@ -96,12 +107,14 @@ export default function SortableItem( {
 							className="gslider-setting-icon-dropdown"
 							contentClassName="gslider-setting-icon-dropdown-content sortable-item-content-dropdown"
 							popoverProps={ { placement: 'bottom-start' } }
-							/* eslint-disable-next-line no-shadow */
-							renderToggle={ ( { isOpen, onToggle } ) => (
+							renderToggle={ ( {
+								isOpen: dropdownIsOpen,
+								onToggle,
+							} ) => (
 								<Button
 									variant="primary"
 									onClick={ onToggle }
-									aria-expanded={ isOpen }
+									aria-expanded={ dropdownIsOpen }
 									className="gslider-setting-icon-btn"
 								>
 									<Dashicon
@@ -291,8 +304,8 @@ export default function SortableItem( {
 							) }
 						/>
 					</BaseControl>
-					{ /* eslint-disable-next-line @wordpress/no-base-control-with-label-without-id */ }
 					<BaseControl
+						id={ `base-background-${ item.id }` }
 						className="gslider-setting-background-color-setting-wrapper"
 						label={ __( 'Background', 'gslider-blocks' ) }
 					>
@@ -300,11 +313,13 @@ export default function SortableItem( {
 							className="gslider-setting-icon-dropdown"
 							contentClassName="gslider-setting-icon-dropdown-content sortable-item-content-dropdown"
 							popoverProps={ { placement: 'bottom-start' } }
-							/* eslint-disable-next-line no-shadow */
-							renderToggle={ ( { isOpen, onToggle } ) => (
+							renderToggle={ ( {
+								isOpen: dropdownIsOpen,
+								onToggle,
+							} ) => (
 								<Button
 									onClick={ onToggle }
-									aria-expanded={ isOpen }
+									aria-expanded={ dropdownIsOpen }
 									className="gslider-setting-icon-btn"
 								>
 									<Dashicon
