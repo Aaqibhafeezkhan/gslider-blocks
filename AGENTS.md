@@ -47,6 +47,7 @@ When developing or modifying code in this repository, reference the dedicated wo
 
 | Skill Name | Purpose & Scope |
 | :--- | :--- |
+| **[`gslider-contribution-workflow`](.agents/skills/gslider-contribution-workflow/SKILL.md)** | Standardized international open-source workflow: PR title & description standards, Conventional Commits, locked core components policy, Use of AI guidelines, good first issue discovery protocol, and maintainer review flow. |
 | **[`gslider-block-development`](.agents/skills/gslider-block-development/SKILL.md)** | Step-by-step procedure for creating new blocks, modifying existing blocks, managing attributes, deprecations, and block lifecycle. |
 | **[`gslider-style-engine`](.agents/skills/gslider-style-engine/SKILL.md)** | Dynamic CSS generation pipeline (`styling.js` -> `blockStyle` attribute -> `StyleGenerator.php`), responsive breakpoints (`Desktop`, `Tablet`, `Mobile`), unit parsing, and custom CSS. |
 | **[`gslider-swiper-integration`](.agents/skills/gslider-swiper-integration/SKILL.md)** | Swiper.js integration in editor (`edit.js` lifecycle with cleanup) and frontend (`save.js` + `view.js`), handling transitions, pagination, navigation, and autoplay. |
