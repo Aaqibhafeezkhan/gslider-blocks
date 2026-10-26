@@ -22,6 +22,10 @@ const SECTIONS_CONFIG = [
 		heading: '👋 Welcome',
 	},
 	{
+		id: 'playground',
+		heading: '🛝 WordPress Playgrounds',
+	},
+	{
 		id: 'props',
 		heading: '🎉 Props',
 	},
@@ -151,7 +155,8 @@ async function updatePrMetaComment( {
 			typeof c.body === 'string' &&
 			( ( c.body.includes( PR_META_IDENTIFIER ) && c.user?.type !== 'Bot' ) ||
 				c.body.includes( '<!-- PROPS-BOT-MANAGED-COMMENT -->' ) ||
-				c.body.includes( '<!-- wp-playground-preview-comment -->' ) )
+				c.body.includes( '<!-- wp-playground-preview-comment -->' ) ||
+				c.body.includes( '<!-- gslider-blocks:playground-preview -->' ) )
 	);
 
 	for ( const legacy of legacyComments ) {

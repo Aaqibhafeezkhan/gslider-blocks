@@ -14,9 +14,9 @@ on:
 permissions: {}
 
 jobs:
-  # Leaves a sticky comment on a pull request with Playground preview links.
+  # Updates the unified PR meta comment with Playground preview links.
   playground-details:
-    name: Post or update Playground preview comment on pull request
+    name: Update Playground preview in PR meta
     runs-on: ubuntu-24.04
     # Only run if the build workflow succeeded and was triggered by a pull_request
     if: >
@@ -31,6 +31,11 @@ jobs:
       issues: write
 
     steps:
+      - name: Checkout Repository Scripts
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+
       - name: Resolve trusted PR metadata
         id: pr-metadata
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -81,13 +86,14 @@ jobs:
           artifact-source-run-id: ${{ github.event.workflow_run.id }}
           artifacts-to-keep: '2'
 
-      - name: Post or update Playground sticky comment
+      - name: Update Playground preview in PR meta
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           PR_NUMBER: ${{ steps.pr-metadata.outputs.pr-number }}
           HEAD_SHA: ${{ steps.pr-metadata.outputs.commit-sha }}
           ARTIFACT_URL: ${{ steps.expose.outputs.artifact-url }}
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const artifactUrl = process.env.ARTIFACT_URL;
             if (!artifactUrl) {
@@ -162,46 +168,26 @@ jobs:
             const multiPageUrl = createPlaygroundUrl({ isMultisite: true, landingPage: '/wp-admin/post-new.php?post_type=page' });
             const multiSettingsUrl = createPlaygroundUrl({ isMultisite: true, landingPage: '/wp-admin/admin.php?page=gslider-blocks' });
 
-            const marker = '<!-- gslider-blocks:playground-preview -->';
-
-            const body = [
-              marker,
-              '### 🛝 WordPress Playgrounds',
-              '',
+            const playgroundContent = [
               `Built from <a href="${commitUrl}"><samp>${shortSha}</samp></a>`,
               '',
               '|  | Post editor | Page editor | Settings |',
               '| --- | --- | --- | --- |',
               `| **Single site** | ${launch(singlePostUrl, 'Launch Post editor in Playground (single site)')} | ${launch(singlePageUrl, 'Launch Page editor in Playground (single site)')} | ${launch(singleSettingsUrl, 'Launch Settings in Playground (single site)')} |`,
               `| **Multisite** | ${launch(multiPostUrl, 'Launch Post editor in Playground (multisite)')} | ${launch(multiPageUrl, 'Launch Page editor in Playground (multisite)')} | ${launch(multiSettingsUrl, 'Launch Settings in Playground (multisite)')} |`,
-              '',
             ].join('\n');
 
-            const comments = await github.paginate(github.rest.issues.listComments, {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-              per_page: 100,
+            const path = require('path');
+            const { updatePrMetaComment } = require(path.resolve(process.env.GITHUB_WORKSPACE, '.github/scripts/pr-meta.js'));
+            await updatePrMetaComment({
+              github,
+              context,
+              prNumber,
+              sectionId: 'playground',
+              content: playgroundContent,
             });
 
-            const existing = comments.find(c => c.body && c.body.includes(marker));
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body,
-              });
-              core.info(`Updated existing Playground preview comment #${existing.id}`);
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber,
-                body,
-              });
-              core.info(`Created new Playground preview comment on PR #${prNumber}`);
-            }
+            core.info(`Updated Playground section in PR meta comment on PR #${prNumber}`);
 
             // Clean any legacy preview section appended to PR description by earlier workflow versions
             try {
