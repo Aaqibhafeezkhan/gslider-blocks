@@ -4150,7 +4150,7 @@ var generateLogoCarouselStyle = (attributes2) => {
                 justify-content: ${verticalAlign.Tablet || "center"};
             }
 
-            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper {
+            .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper:hover {
                 ${logoTabletBackgroundHoverStyles}
             }
 
