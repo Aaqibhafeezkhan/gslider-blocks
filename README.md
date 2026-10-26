@@ -506,6 +506,7 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/p00jitha"><img src="https://avatars.githubusercontent.com/u/129841150?v=4" width="100px;" alt="DASARI PUJITHA"/><br /><sub><b>DASARI PUJITHA</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/huzaifaalmesbah"><img src="https://avatars.githubusercontent.com/u/63150399?v=4" width="100px;" alt="Huzaifa Al Mesbah"/><br /><sub><b>Huzaifa Al Mesbah</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ect2000"><img src="https://avatars.githubusercontent.com/u/107069576?v=4" width="100px;" alt="Emilio Castejón"/><br /><sub><b>Emilio Castejón</b></sub></a></td>
     </tr>
   </tbody>
 </table>
