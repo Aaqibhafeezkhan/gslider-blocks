@@ -1,11 +1,12 @@
 name: PR Playground Cleanup
 
 # Deletes a pull request's Playground preview zips (`pr-NUMBER-SHA.zip`)
-# from the `ci-artifacts` release once the PR is closed or merged.
+# from the `ci-artifacts` release once the PR is closed or merged, and
+# updates the PR preview comment to show an expired notice.
 #
 # Uses pull_request_target so it also runs for PRs from forks (the
 # pull_request token is read-only there). It never checks out PR code and
-# only uses the PR number from the event payload, so this is safe.
+# only uses trusted properties from the event payload, so this is safe.
 on:
   pull_request_target:
     types:
@@ -17,10 +18,12 @@ permissions: {}
 
 jobs:
   cleanup:
-    name: Delete Playground preview zips for the pull request
+    name: Clean up Playground preview for closed pull request
     runs-on: ubuntu-24.04
     permissions:
       contents: write
+      pull-requests: write
+      issues: write
 
     steps:
       - name: Delete release assets
@@ -44,3 +47,70 @@ jobs:
                 echo "Deleting ${asset_name}"
                 gh api --method DELETE "repos/${GH_REPO}/releases/assets/${asset_id}" --silent
               done
+
+      - name: Update Playground comment to expired notice
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          IS_MERGED: ${{ github.event.pull_request.merged }}
+        with:
+          script: |
+            const marker = '<!-- gslider-blocks:playground-preview -->';
+            const prNumber = parseInt(process.env.PR_NUMBER, 10);
+            const isMerged = process.env.IS_MERGED === 'true';
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 100,
+            });
+
+            const existing = comments.find(c => c.body && c.body.includes(marker));
+            if (!existing) {
+              core.info('No playground preview comment found; nothing to update.');
+              return;
+            }
+
+            const stateText = isMerged ? 'merged' : 'closed';
+            const body = [
+              marker,
+              '### 🛝 WordPress Playgrounds',
+              '',
+              '> [!NOTE]',
+              `> **Playground preview expired**`,
+              `> This pull request has been ${stateText} and the preview build has been removed.`,
+              '',
+            ].join('\n');
+
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: existing.id,
+              body,
+            });
+
+            core.info(`Updated Playground comment #${existing.id} to expired notice.`);
+
+            // Clean legacy appended preview from PR description if present
+            try {
+              const pr = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prNumber,
+              });
+              if (pr.data.body && pr.data.body.includes('<!-- action-wp-playground-pr-preview -->')) {
+                const cleanBody = pr.data.body.replace(/\n*<!-- action-wp-playground-pr-preview -->[\s\S]*$/, '').trimEnd();
+                if (cleanBody !== pr.data.body) {
+                  await github.rest.pulls.update({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: prNumber,
+                    body: cleanBody,
+                  });
+                  core.info('Cleaned legacy playground section from PR description.');
+                }
+              }
+            } catch (err) {
+              core.warning(`Could not inspect/clean PR description: ${err.message}`);
+            }
