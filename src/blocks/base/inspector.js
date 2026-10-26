@@ -1,12 +1,6 @@
 /* eslint-disable no-unused-vars, jsdoc/require-param, react-hooks/exhaustive-deps, import/no-unresolved */
 import { __ } from '@wordpress/i18n';
-import {
-	useState,
-	useEffect,
-	useMemo,
-	memo,
-	useCallback,
-} from '@wordpress/element';
+import { useState, useEffect, memo, useCallback } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 import {
@@ -49,7 +43,6 @@ import ResponsiveTypographyControl from '@Components/responsive-typography-contr
 import BoxShadowSettingsControl from '@Components/box-shadow-control';
 import BackgroundControl from '@Components/background-control';
 import LoadGoogleFont from '@Utils/loadGoogleFont';
-import ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import ImageControl from '@Components/image-control';
 import InspectorControl from '@Components/inspector-controls';
 
