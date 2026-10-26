@@ -1,0 +1,414 @@
+name: Props Bot
+
+on:
+  # Runs when a PR is opened, updated, marked ready for review, or labeled (e.g. props-bot).
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+      - ready_for_review
+  # Runs when a comment is posted on a PR.
+  issue_comment:
+    types:
+      - created
+  # Runs when a review is submitted on a PR.
+  pull_request_review:
+    types:
+      - submitted
+  # Runs when an inline review comment is created.
+  pull_request_review_comment:
+    types:
+      - created
+
+# Serializes runs for the same pull request so PR meta updates don't collide.
+concurrency:
+  group: pr-meta-${{ github.event.pull_request.number || github.event.issue.number || github.event.number }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  props-bot:
+    name: Generate contributor props
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    timeout-minutes: 10
+    # The job runs when:
+    # 1. A comment is added to a pull request.
+    # 2. A PR review or review comment is created.
+    # 3. A pull request is opened, synchronized, reopened, or marked ready for review.
+    # 4. The `props-bot` label is added to the pull request.
+    if: |
+      (
+        ( github.event_name == 'issue_comment' && github.event.issue.pull_request ) ||
+        contains( fromJSON( '["pull_request_review", "pull_request_review_comment"]' ), github.event_name ) ||
+        ( github.event_name == 'pull_request_target' && ( github.event.action != 'labeled' || github.event.label.name == 'props-bot' ) )
+      )
+    steps:
+      - name: Checkout Repository Scripts
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+
+      - name: Collect Contributor Props and Update PR Meta
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const isIssueComment = context.eventName === 'issue_comment';
+            if (isIssueComment && !context.payload.issue?.pull_request) {
+              return; // Ignore comments on regular standalone issues
+            }
+
+            const prNumber = context.payload.pull_request
+              ? context.payload.pull_request.number
+              : context.payload.issue.number;
+
+            const { data: pr } = context.payload.pull_request
+              ? { data: context.payload.pull_request }
+              : await github.rest.pulls.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                });
+
+            if (pr.state === 'closed') {
+              core.info(`PR #${prNumber} is closed; skipping props update.`);
+              return;
+            }
+
+            const skippedLogins = new Set([
+              'github-actions[bot]',
+              'github-actions',
+              'dependabot[bot]',
+              'dependabot',
+              'codecov[bot]',
+              'coderabbitai[bot]',
+              'allcontributors[bot]',
+            ]);
+
+            const userCache = new Map();
+            async function getUserDetails(username) {
+              const lower = username.toLowerCase();
+              if (userCache.has(lower)) {
+                return userCache.get(lower);
+              }
+              try {
+                const { data: user } = await github.rest.users.getByUsername({ username });
+                const details = {
+                  name: user.name || user.login,
+                  email: user.email || `${user.login}@users.noreply.github.com`,
+                  login: user.login,
+                };
+                userCache.set(lower, details);
+                return details;
+              } catch (err) {
+                const fallback = {
+                  name: username,
+                  email: `${username}@users.noreply.github.com`,
+                  login: username,
+                };
+                userCache.set(lower, fallback);
+                return fallback;
+              }
+            }
+
+            const contributors = new Map();
+            async function addContributor(username, role, explicitDetails = null) {
+              if (!username) return;
+              const lower = username.toLowerCase();
+              if (skippedLogins.has(lower) || lower.endsWith('[bot]')) {
+                return;
+              }
+
+              let entry = contributors.get(lower);
+              if (!entry) {
+                const details = explicitDetails || await getUserDetails(username);
+                entry = {
+                  name: details.name || username,
+                  login: details.login || username,
+                  email: details.email || `${username}@users.noreply.github.com`,
+                  roles: new Set(),
+                };
+                contributors.set(lower, entry);
+              } else if (explicitDetails) {
+                if (explicitDetails.name && entry.name === entry.login) {
+                  entry.name = explicitDetails.name;
+                }
+                if (explicitDetails.email && explicitDetails.email.indexOf('@users.noreply') === -1) {
+                  entry.email = explicitDetails.email;
+                }
+              }
+
+              if (role) {
+                entry.roles.add(role);
+              }
+            }
+
+            // 1. PR Author
+            const prAuthor = pr.user?.login;
+            if (prAuthor) {
+              await addContributor(prAuthor, 'Author', {
+                name: pr.user?.name || prAuthor,
+                login: prAuthor,
+                email: `${prAuthor}@users.noreply.github.com`,
+              });
+            }
+
+            // 2. Commit Authors and Co-Authors from commit trailers
+            const commits = await github.paginate(github.rest.pulls.listCommits, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+              per_page: 100,
+            });
+
+            for (const c of commits) {
+              const committerLogin = c.author?.login;
+              const committerName = c.commit?.author?.name;
+              const committerEmail = c.commit?.author?.email;
+
+              if (committerLogin) {
+                await addContributor(committerLogin, 'Committer', {
+                  name: committerName,
+                  email: committerEmail,
+                  login: committerLogin,
+                });
+              } else if (committerEmail && committerName) {
+                // Unlinked committer with email
+                const key = committerEmail.toLowerCase();
+                if (!contributors.has(key)) {
+                  contributors.set(key, {
+                    name: committerName,
+                    login: committerName,
+                    email: committerEmail,
+                    roles: new Set(['Committer']),
+                  });
+                }
+              }
+
+              // Check for Co-authored-by trailers in commit message
+              const message = c.commit?.message || '';
+              const coAuthorMatches = [...message.matchAll(/Co-authored-by:\s*([^<\r\n]+)<([^>\r\n]+)>/gi)];
+              for (const match of coAuthorMatches) {
+                const name = match[1].trim();
+                const email = match[2].trim();
+                const key = email.toLowerCase();
+                if (!contributors.has(key)) {
+                  contributors.set(key, {
+                    name,
+                    login: name,
+                    email,
+                    roles: new Set(['Co-author']),
+                  });
+                }
+              }
+            }
+
+            // 3. PR Reviewers
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+              per_page: 100,
+            });
+
+            for (const r of reviews) {
+              if (r.user?.login) {
+                await addContributor(r.user.login, 'Reviewer');
+              }
+            }
+
+            // 4. PR Commenters & Manual Props Commands
+            const manualAdded = new Set();
+            const manualRemoved = new Set();
+
+            const prComments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 100,
+            });
+
+            for (const com of prComments) {
+              const commenterLogin = com.user?.login;
+              if (commenterLogin) {
+                await addContributor(commenterLogin, 'Commenter');
+              }
+
+              const body = com.body || '';
+              // Match manual props additions: `@propsbot add @user` or `+props @user1 @user2`
+              const addMatches = [...body.matchAll(/(?:@props-?bot\s+add|\+props)\s+([^#\n\r]+)/gi)];
+              for (const m of addMatches) {
+                const users = [...m[1].matchAll(/@([a-zA-Z0-9_-]+)/g)].map(u => u[1].toLowerCase());
+                users.forEach(u => manualAdded.add(u));
+              }
+
+              // Match manual props removals: `@propsbot remove @user` or `-props @user`
+              const removeMatches = [...body.matchAll(/(?:@props-?bot\s+remove|-props)\s+([^#\n\r]+)/gi)];
+              for (const m of removeMatches) {
+                const users = [...m[1].matchAll(/@([a-zA-Z0-9_-]+)/g)].map(u => u[1].toLowerCase());
+                users.forEach(u => manualRemoved.add(u));
+              }
+            }
+
+            // 5. Linked Issues (Issue Creator / Reporter & Issue Commenters)
+            const linkedIssueNumbers = new Set();
+
+            // A) Query GitHub GraphQL closingIssuesReferences
+            try {
+              const gqlData = await github.graphql(
+                `query($owner: String!, $repo: String!, $prNumber: Int!) {
+                  repository(owner: $owner, name: $repo) {
+                    pullRequest(number: $prNumber) {
+                      closingIssuesReferences(first: 50) {
+                        nodes {
+                          number
+                          author {
+                            login
+                          }
+                          comments(first: 100) {
+                            nodes {
+                              author {
+                                login
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }`,
+                { owner: context.repo.owner, repo: context.repo.repo, prNumber }
+              );
+
+              const issueNodes = gqlData?.repository?.pullRequest?.closingIssuesReferences?.nodes || [];
+              for (const issue of issueNodes) {
+                linkedIssueNumbers.add(issue.number);
+                if (issue.author?.login) {
+                  await addContributor(issue.author.login, 'Reporter');
+                }
+                const issueComments = issue.comments?.nodes || [];
+                for (const c of issueComments) {
+                  if (c.author?.login) {
+                    await addContributor(c.author.login, 'Issue Commenter');
+                  }
+                }
+              }
+            } catch (err) {
+              core.info(`GraphQL query for linked issues: ${err.message}`);
+            }
+
+            // B) Regex fallback for closing keywords and issue mentions in PR description
+            if (pr.body) {
+              const issueRegex = /(?:close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)?\s*(?:https?:\/\/github\.com\/[^/\s]+\/[^/\s]+\/issues\/|#)(\d+)/gi;
+              let match;
+              while ((match = issueRegex.exec(pr.body)) !== null) {
+                const num = parseInt(match[1], 10);
+                if (num && num !== prNumber && !linkedIssueNumbers.has(num)) {
+                  linkedIssueNumbers.add(num);
+                  try {
+                    const { data: issue } = await github.rest.issues.get({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: num,
+                    });
+
+                    // Ensure it is a regular issue (not another PR)
+                    if (!issue.pull_request) {
+                      if (issue.user?.login) {
+                        await addContributor(issue.user.login, 'Reporter');
+                      }
+                      const comments = await github.paginate(github.rest.issues.listComments, {
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: num,
+                        per_page: 100,
+                      });
+                      for (const c of comments) {
+                        if (c.user?.login) {
+                          await addContributor(c.user.login, 'Issue Commenter');
+                        }
+                      }
+                    }
+                  } catch (err) {
+                    core.info(`Could not fetch referenced issue #${num}: ${err.message}`);
+                  }
+                }
+              }
+            }
+
+            core.info(`Processed linked issues: ${[...linkedIssueNumbers].join(', ') || 'none'}`);
+
+            // 6. Apply manual additions
+            for (const user of manualAdded) {
+              await addContributor(user, 'Manual Added');
+            }
+
+            // 7. Apply manual removals
+            for (const user of manualRemoved) {
+              contributors.delete(user);
+            }
+
+            // 8. Build Co-authored-by block (matching Gutenberg and WordPress Core)
+            const coAuthors = Array.from(contributors.values())
+              .map(c => `Co-authored-by: ${c.name} <${c.email}>`);
+
+            const coAuthoredBlock = coAuthors.length > 0
+              ? `\`\`\`\n${coAuthors.join('\n')}\n\`\`\``
+              : '';
+
+            const propsContent = [
+              "If you're merging code through a pull request on GitHub, copy and paste the following into the bottom of the merge commit message.",
+              '',
+              coAuthoredBlock,
+              '',
+              "**To understand the WordPress project's expectations around crediting contributors, please [review the Contributor Attribution page in the Core Handbook](https://make.wordpress.org/core/handbook/best-practices/contributor-attribution-props/).**",
+              '',
+              '---',
+              '',
+              '<details>',
+              '<summary>Props Bot commands</summary>',
+              '<br />',
+              '',
+              'You can trigger Props Bot actions by commenting on this PR:',
+              '',
+              '- `@propsbot add <username>` or `+props @<username>` to give props to a GitHub user.',
+              '- `@propsbot remove <username>` or `-props @<username>` to leave a user out of the props.',
+              '- Adding the `props-bot` label works too.',
+              '',
+              '</details>',
+              '',
+              '_Updated as activity occurs, without notifying anyone named here. Add the `props-bot` label to refresh._',
+            ].join('\n');
+
+            // 9. Update the unified PR Meta Comment
+            const path = require('path');
+            const { updatePrMetaComment } = require(path.resolve(process.env.GITHUB_WORKSPACE, '.github/scripts/pr-meta.js'));
+            await updatePrMetaComment({
+              github,
+              context,
+              prNumber,
+              sectionId: 'props',
+              content: propsContent,
+            });
+
+            core.info(`Successfully updated props for PR #${prNumber} with ${contributors.size} contributors.`);
+
+            // 10. Remove props-bot label if it was present
+            try {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                name: 'props-bot',
+              });
+              core.info('Removed props-bot label after successful refresh.');
+            } catch (err) {
+              // Ignore if label wasn't attached
+            }

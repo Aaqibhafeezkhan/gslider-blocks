@@ -280,114 +280,9 @@ jobs:
               }
             }
 
-            // 7. Contributor Props Bot (Gutenberg & WordPress Core Attribution)
+            // 7. Gutenberg-Style Type Labels Enforcement in PR Meta
             if (action !== 'closed') {
               try {
-                const contributors = new Map();
-
-                // 1. PR Author
-                const authorLogin = pr.user.login;
-                contributors.set(authorLogin.toLowerCase(), {
-                  name: pr.user?.name || authorLogin,
-                  login: authorLogin,
-                  email: `${authorLogin}@users.noreply.github.com`,
-                  roles: new Set(['Author'])
-                });
-
-                // 2. Commit Authors
-                const commits = await github.paginate(github.rest.pulls.listCommits, {
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  pull_number: prNumber,
-                  per_page: 100
-                });
-
-                for (const c of commits) {
-                  const committerLogin = c.author?.login;
-                  const committerName = c.commit?.author?.name || committerLogin;
-                  const committerEmail = c.commit?.author?.email || (committerLogin ? `${committerLogin}@users.noreply.github.com` : null);
-
-                  if (committerLogin && committerLogin !== 'github-actions[bot]') {
-                    const existing = contributors.get(committerLogin.toLowerCase()) || {
-                      name: committerName || committerLogin,
-                      login: committerLogin,
-                      email: committerEmail || `${committerLogin}@users.noreply.github.com`,
-                      roles: new Set()
-                    };
-                    existing.roles.add('Committer');
-                    contributors.set(committerLogin.toLowerCase(), existing);
-                  }
-                }
-
-                // 3. PR Reviewers
-                const reviews = await github.paginate(github.rest.pulls.listReviews, {
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  pull_number: prNumber,
-                  per_page: 100
-                });
-
-                for (const r of reviews) {
-                  const reviewerLogin = r.user?.login;
-                  if (reviewerLogin && reviewerLogin !== 'github-actions[bot]') {
-                    const existing = contributors.get(reviewerLogin.toLowerCase()) || {
-                      name: reviewerLogin,
-                      login: reviewerLogin,
-                      email: `${reviewerLogin}@users.noreply.github.com`,
-                      roles: new Set()
-                    };
-                    existing.roles.add('Reviewer');
-                    contributors.set(reviewerLogin.toLowerCase(), existing);
-                  }
-                }
-
-                // 4. PR Commenters
-                const allComments = await github.paginate(github.rest.issues.listComments, {
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: prNumber,
-                  per_page: 100
-                });
-
-                for (const com of allComments) {
-                  const commenterLogin = com.user?.login;
-                  if (commenterLogin && !commenterLogin.includes('[bot]') && commenterLogin !== 'github-actions') {
-                    const existing = contributors.get(commenterLogin.toLowerCase()) || {
-                      name: commenterLogin,
-                      login: commenterLogin,
-                      email: `${commenterLogin}@users.noreply.github.com`,
-                      roles: new Set()
-                    };
-                    if (!existing.roles.has('Author') && !existing.roles.has('Reviewer') && !existing.roles.has('Committer')) {
-                      existing.roles.add('Contributor');
-                    }
-                    contributors.set(commenterLogin.toLowerCase(), existing);
-                  }
-                }
-
-                // Format Co-authored-by lines for all contributors (matching Gutenberg props-bot)
-                const coAuthors = Array.from(contributors.values())
-                  .map(c => `Co-authored-by: ${c.name} <${c.email}>`);
-
-                const coAuthoredBlock = coAuthors.length > 0
-                  ? `\`\`\`\n${coAuthors.join('\n')}\n\`\`\``
-                  : '';
-
-                const propsContent = coAuthoredBlock
-                  ? `If you're merging code through a pull request on GitHub, copy and paste the following into the bottom of the merge commit message:\n\n${coAuthoredBlock}\n\nTo understand the WordPress project's expectations around crediting contributors, please review the [Contributor Attribution page in the Core Handbook](https://make.wordpress.org/core/handbook/best-practices/contributor-attribution/).\n\n_Updated as activity occurs, without notifying anyone named here. Add the \`props-bot\` label to refresh._`
-                  : `To understand the WordPress project's expectations around crediting contributors, please review the [Contributor Attribution page in the Core Handbook](https://make.wordpress.org/core/handbook/best-practices/contributor-attribution/).\n\n_Updated as activity occurs, without notifying anyone named here. Add the \`props-bot\` label to refresh._`;
-
-                const path = require('path');
-                const { updatePrMetaComment } = require(path.resolve(process.env.GITHUB_WORKSPACE, '.github/scripts/pr-meta.js'));
-                await updatePrMetaComment({
-                  github,
-                  context,
-                  prNumber,
-                  sectionId: 'props',
-                  content: propsContent
-                });
-
-                // 8. Gutenberg-Style Type Labels Enforcement in PR Meta
                 const issueLabelsRes = await github.rest.issues.listLabelsOnIssue({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
@@ -402,6 +297,8 @@ jobs:
                   labelsContent = `This pull request needs exactly one label indicating its type, and has 0.\n\n• Required: any label starting with \`type:\`.\n• Found: none.\n\nRead more about [Type labels in GSlider Blocks](https://github.com/noruzzamans/gslider-blocks/labels?q=type). If you cannot add labels yourself, a reviewer can do it for you.`;
                 }
 
+                const path = require('path');
+                const { updatePrMetaComment } = require(path.resolve(process.env.GITHUB_WORKSPACE, '.github/scripts/pr-meta.js'));
                 await updatePrMetaComment({
                   github,
                   context,
@@ -410,7 +307,7 @@ jobs:
                   content: labelsContent
                 });
               } catch (err) {
-                console.log(`Props or Labels automation encountered an error: ${err.message}`);
+                console.log(`Labels automation encountered an error: ${err.message}`);
               }
             }
 
