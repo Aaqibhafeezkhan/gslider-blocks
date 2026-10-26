@@ -550,31 +550,33 @@ export default function Edit( {
 									<div className="gslider-content-inner-wrapper">
 										<div className="gslider-list-item">
 											<div className="gslider-list-content">
-												{ showSubTitle &&
-													item.subTitle && (
-														<div className="gslider-subtitle-wrapper">
-															<RichText
-																tagName={
-																	subTitleHtmlTag
-																}
-																className="gslider-subtitle"
-																value={
-																	item.subTitle
-																}
-																onChange={ (
+												{ showSubTitle && (
+													<div className="gslider-subtitle-wrapper">
+														<RichText
+															tagName={
+																subTitleHtmlTag
+															}
+															className="gslider-subtitle"
+															value={
+																item.subTitle
+															}
+															onChange={ (
+																value
+															) =>
+																updateItem(
+																	index,
+																	'subTitle',
 																	value
-																) =>
-																	updateItem(
-																		index,
-																		'subTitle',
-																		value
-																	)
-																}
-																placeholder="Enter subtitle"
-															/>
-														</div>
-													) }
-												{ showTitle && item.title && (
+																)
+															}
+															placeholder={ __(
+																'Enter subtitle',
+																'gslider-blocks'
+															) }
+														/>
+													</div>
+												) }
+												{ showTitle && (
 													<div className="gslider-title-wrapper">
 														<RichText
 															tagName={
@@ -591,34 +593,39 @@ export default function Edit( {
 																	value
 																)
 															}
-															placeholder="Enter title"
+															placeholder={ __(
+																'Enter title',
+																'gslider-blocks'
+															) }
 														/>
 													</div>
 												) }
-												{ showDescription &&
-													item.description && (
-														<div className="gslider-description-wrapper">
-															<RichText
-																tagName={
-																	descriptionHtmlTag
-																}
-																className="gslider-description"
-																value={
-																	item.description
-																}
-																onChange={ (
+												{ showDescription && (
+													<div className="gslider-description-wrapper">
+														<RichText
+															tagName={
+																descriptionHtmlTag
+															}
+															className="gslider-description"
+															value={
+																item.description
+															}
+															onChange={ (
+																value
+															) =>
+																updateItem(
+																	index,
+																	'description',
 																	value
-																) =>
-																	updateItem(
-																		index,
-																		'description',
-																		value
-																	)
-																}
-																placeholder="Enter description"
-															/>
-														</div>
-													) }
+																)
+															}
+															placeholder={ __(
+																'Enter description',
+																'gslider-blocks'
+															) }
+														/>
+													</div>
+												) }
 												{ showButton && (
 													<div className="gslider-btn-wrapper">
 														<div className="gslider-btn-inner-wrapper">
