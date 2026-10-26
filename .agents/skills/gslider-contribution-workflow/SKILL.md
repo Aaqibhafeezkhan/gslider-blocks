@@ -162,6 +162,10 @@ To systematically discover simple, beginner-friendly, 100% safe, single-file con
 3. **Single-File Scope Rule:**
    - Every candidate issue MUST be resolvable in exactly **one single file**.
    - The fix should ideally be under 30–50 lines of diff so it is accessible and clean for new community contributors.
+4. **Single-Problem Atomicity Rule (One Issue = One Problem):**
+   - **NEVER** combine multiple distinct tasks or lint rules into a single issue (e.g. do not combine JSDoc `@param` annotations with `@wordpress/i18n-ellipsis` fixes, or dead JSX with unused attributes).
+   - Keep every issue strictly focused on **ONE single, minimal problem** (resolvable in 5–10 minutes).
+   - This ensures newcomer contributors are not overwhelmed, PR diffs remain micro-surgical, and the project preserves a healthy pipeline of future good first issues.
 
 ---
 
