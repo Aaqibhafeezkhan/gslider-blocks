@@ -1,16 +1,13 @@
-/* eslint-disable no-unused-vars, import/no-unresolved, react-hooks/exhaustive-deps, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions, @wordpress/no-base-control-with-label-without-id, no-shadow, @wordpress/i18n-hyphenated-range */
+/* eslint-disable import/no-unresolved, react-hooks/exhaustive-deps */
 import { __, sprintf } from '@wordpress/i18n';
 import { useState, useEffect } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import {
 	Button,
-	ButtonGroup,
 	BaseControl,
 	Dropdown,
 	Dashicon,
-	ColorPicker,
-	ColorPalette,
 	TextControl,
 	TextareaControl,
 	ToggleControl,
@@ -21,10 +18,8 @@ import {
  * Internal Dependencies
  */
 import BackgroundControl from '@Components/background-control';
-import UrlControl from '@Components/url-control';
 import ImageControl from '@Components/image-control';
 import { ICON_IMAGE_ALIGN } from '@Constants';
-import IconPicker from '@Components/icon-picker';
 import SwitcherControl from '@Components/switcher-control';
 
 export default function SortableItem( {
@@ -72,7 +67,18 @@ export default function SortableItem( {
 			style={ style }
 		>
 			<div className="sortable-header">
-				<span className="sortable-title" onClick={ toggleOpen }>
+				<span
+					className="sortable-title"
+					role="button"
+					tabIndex={ 0 }
+					onClick={ toggleOpen }
+					onKeyDown={ ( event ) => {
+						if ( event.key === 'Enter' || event.key === ' ' ) {
+							event.preventDefault();
+							toggleOpen();
+						}
+					} }
+				>
 					{ item.testimonialTitle ||
 						item.title ||
 						/* translators: %d: testimonial item number */ sprintf(
@@ -112,6 +118,7 @@ export default function SortableItem( {
 			{ isOpen && (
 				<div className="sortable-item-content">
 					<BaseControl
+						id={ `testimonial-slide-content-${ item.id }` }
 						className="gslider-setting-background-color-setting-wrapper"
 						label={ __( 'Slide Content', 'gslider-blocks' ) }
 					>
@@ -119,11 +126,14 @@ export default function SortableItem( {
 							className="gslider-setting-icon-dropdown"
 							contentClassName="gslider-setting-icon-dropdown-content sortable-item-content-dropdown"
 							popoverProps={ { placement: 'bottom-start' } }
-							renderToggle={ ( { isOpen, onToggle } ) => (
+							renderToggle={ ( {
+								isOpen: dropdownIsOpen,
+								onToggle,
+							} ) => (
 								<Button
 									variant="primary"
 									onClick={ onToggle }
-									aria-expanded={ isOpen }
+									aria-expanded={ dropdownIsOpen }
 									className="gslider-setting-icon-btn"
 								>
 									<Dashicon
@@ -331,7 +341,7 @@ export default function SortableItem( {
 											max={ 5 }
 											step={ 1 }
 											help={ __(
-												'Number of images or Svg to display (1-5)',
+												'Number of images or Svg to display (1–5)',
 												'gslider-blocks'
 											) }
 										/>
@@ -341,6 +351,7 @@ export default function SortableItem( {
 						/>
 					</BaseControl>
 					<BaseControl
+						id={ `testimonial-background-${ item.id }` }
 						className="gslider-setting-background-color-setting-wrapper"
 						label={ __( 'Background', 'gslider-blocks' ) }
 					>
@@ -348,10 +359,13 @@ export default function SortableItem( {
 							className="gslider-setting-icon-dropdown"
 							contentClassName="gslider-setting-icon-dropdown-content sortable-item-content-dropdown"
 							popoverProps={ { placement: 'bottom-start' } }
-							renderToggle={ ( { isOpen, onToggle } ) => (
+							renderToggle={ ( {
+								isOpen: dropdownIsOpen,
+								onToggle,
+							} ) => (
 								<Button
 									onClick={ onToggle }
-									aria-expanded={ isOpen }
+									aria-expanded={ dropdownIsOpen }
 									className="gslider-setting-icon-btn"
 								>
 									<Dashicon
