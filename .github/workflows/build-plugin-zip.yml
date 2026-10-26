@@ -1,0 +1,56 @@
+name: Build Plugin Zip
+
+on:
+  pull_request:
+    types: ['opened', 'synchronize', 'reopened', 'edited']
+
+# Cancels all previous workflow runs for pull requests that have not completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name for pull requests
+  # or the commit hash for any other events.
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+# Disable permissions for all available scopes by default.
+# Any needed permissions should be configured at the job level.
+permissions: {}
+
+jobs:
+  build:
+    runs-on: 'ubuntu-24.04'
+    permissions:
+      contents: read
+    outputs:
+      job_status: ${{ job.status }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          show-progress: ${{ runner.debug == '1' && 'true' || 'false' }}
+          persist-credentials: false
+
+      - name: Use desired version of Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+          check-latest: true
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build plugin
+        run: |
+          npm run build
+          npm run admin:build
+
+      - name: Create artifact
+        run: |
+          npm run zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gslider-blocks-zip-pr${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+          path: gslider-blocks.zip
+          if-no-files-found: error

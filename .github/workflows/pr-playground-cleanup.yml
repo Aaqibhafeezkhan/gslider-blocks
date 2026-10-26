@@ -1,0 +1,46 @@
+name: PR Playground Cleanup
+
+# Deletes a pull request's Playground preview zips (`pr-NUMBER-SHA.zip`)
+# from the `ci-artifacts` release once the PR is closed or merged.
+#
+# Uses pull_request_target so it also runs for PRs from forks (the
+# pull_request token is read-only there). It never checks out PR code and
+# only uses the PR number from the event payload, so this is safe.
+on:
+  pull_request_target:
+    types:
+      - closed
+
+# Disable permissions for all available scopes by default.
+# Any needed permissions should be configured at the job level.
+permissions: {}
+
+jobs:
+  cleanup:
+    name: Delete Playground preview zips for the pull request
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+
+    steps:
+      - name: Delete release assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+
+          # Nothing to clean if no preview was ever published.
+          if ! release_id=$(gh api "repos/${GH_REPO}/releases/tags/ci-artifacts" --jq '.id' 2>/dev/null); then
+            echo "No ci-artifacts release; nothing to clean up."
+            exit 0
+          fi
+
+          # The trailing dash keeps PR 1 from matching PR 10, 11, ...
+          gh api --paginate "repos/${GH_REPO}/releases/${release_id}/assets?per_page=100" \
+            --jq ".[] | select(.name | startswith(\"pr-${PR_NUMBER}-\") and endswith(\".zip\")) | \"\(.id) \(.name)\"" \
+            | while read -r asset_id asset_name; do
+                echo "Deleting ${asset_name}"
+                gh api --method DELETE "repos/${GH_REPO}/releases/assets/${asset_id}" --silent
+              done
