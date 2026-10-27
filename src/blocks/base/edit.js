@@ -1,4 +1,4 @@
-/* eslint-disable jsdoc/require-param, @wordpress/i18n-ellipsis */
+/* eslint-disable jsdoc/require-param */
 
 import { __ } from '@wordpress/i18n';
 import {
@@ -674,7 +674,7 @@ export default function Edit( {
 																				)
 																			}
 																			placeholder={ __(
-																				'Enter button text...',
+																				'Enter button text…',
 																				'gslider-blocks'
 																			) }
 																		/>
@@ -695,7 +695,7 @@ export default function Edit( {
 																			)
 																		}
 																		placeholder={ __(
-																			'Enter button text...',
+																			'Enter button text…',
 																			'gslider-blocks'
 																		) }
 																	/>
@@ -746,7 +746,7 @@ export default function Edit( {
 																					)
 																				}
 																				placeholder={ __(
-																					'Enter button text...',
+																					'Enter button text…',
 																					'gslider-blocks'
 																				) }
 																			/>
@@ -767,7 +767,7 @@ export default function Edit( {
 																				)
 																			}
 																			placeholder={ __(
-																				'Enter button text...',
+																				'Enter button text…',
 																				'gslider-blocks'
 																			) }
 																		/>
