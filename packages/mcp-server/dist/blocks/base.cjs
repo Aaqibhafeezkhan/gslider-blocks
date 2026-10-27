@@ -4920,7 +4920,7 @@ var generateBaseSliderStyle = (attributes2) => {
             ${primaryButtonWordSpacing.Desktop && primaryButtonWordSpacingUnits.Desktop ? `word-spacing: ${primaryButtonWordSpacing.Desktop}${primaryButtonWordSpacingUnits.Desktop};` : ""}
             ${primaryButtonColor ? `color: ${primaryButtonColor};` : ""}
             ${primaryButtonNormalBackgroundType === "gradient" ? `  
-                background: ${primaryButtonNormalCustomGradientSwitcher && primaryButtonNormalCustomGradientInputValue ? primaryButtonNormalCustomGradientInputValue : primaryButtonNormalGradientColor ? primaryButtonNormalGradientColor : primaryButtonNormalClassicColor};
+                background: ${primaryButtonNormalCustomGradientSwitcher && primaryButtonNormalCustomGradientInputValue ? primaryButtonNormalCustomGradientInputValue : primaryButtonNormalGradientColor || primaryButtonNormalClassicColor};
             ` : `
                 ${primaryButtonNormalClassicColor ? `background: ${primaryButtonNormalClassicColor};` : ""}
             `}
@@ -4938,7 +4938,7 @@ var generateBaseSliderStyle = (attributes2) => {
         .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn:hover {
             ${primaryButtonColorHover ? `color: ${primaryButtonColorHover};` : ""}
             ${primaryButtonHoverBackgroundType === "gradient" ? `   
-                background: ${primaryButtonHoverCustomGradientSwitcher && primaryButtonHoverCustomGradientInputValue ? primaryButtonHoverCustomGradientInputValue : primaryButtonHoverGradientColor ? primaryButtonHoverGradientColor : primaryButtonHoverClassicColor};
+                background: ${primaryButtonHoverCustomGradientSwitcher && primaryButtonHoverCustomGradientInputValue ? primaryButtonHoverCustomGradientInputValue : primaryButtonHoverGradientColor || primaryButtonHoverClassicColor};
             ` : `
                 ${primaryButtonHoverClassicColor ? `background: ${primaryButtonHoverClassicColor};` : ""}
             `}
@@ -4958,7 +4958,7 @@ var generateBaseSliderStyle = (attributes2) => {
             ${secondaryButtonWordSpacing.Desktop && secondaryButtonWordSpacingUnits.Desktop ? `word-spacing: ${secondaryButtonWordSpacing.Desktop}${secondaryButtonWordSpacingUnits.Desktop};` : ""}
             ${secondaryButtonColor ? `color: ${secondaryButtonColor};` : ""}
             ${secondaryButtonNormalBackgroundType === "gradient" ? `  
-                background: ${secondaryButtonNormalCustomGradientSwitcher && secondaryButtonNormalCustomGradientInputValue ? secondaryButtonNormalCustomGradientInputValue : secondaryButtonNormalGradientColor ? secondaryButtonNormalGradientColor : secondaryButtonNormalClassicColor};
+                background: ${secondaryButtonNormalCustomGradientSwitcher && secondaryButtonNormalCustomGradientInputValue ? secondaryButtonNormalCustomGradientInputValue : secondaryButtonNormalGradientColor || secondaryButtonNormalClassicColor};
             ` : `
                 ${secondaryButtonNormalClassicColor ? `background: ${secondaryButtonNormalClassicColor};` : ""}
             `}
@@ -4976,7 +4976,7 @@ var generateBaseSliderStyle = (attributes2) => {
         .${blockId}.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn:hover {
             ${secondaryButtonColorHover ? `color: ${secondaryButtonColorHover};` : ""}
             ${secondaryButtonHoverBackgroundType === "gradient" ? `   
-                background: ${secondaryButtonHoverCustomGradientSwitcher && secondaryButtonHoverCustomGradientInputValue ? secondaryButtonHoverCustomGradientInputValue : secondaryButtonHoverGradientColor ? secondaryButtonHoverGradientColor : secondaryButtonHoverClassicColor};
+                background: ${secondaryButtonHoverCustomGradientSwitcher && secondaryButtonHoverCustomGradientInputValue ? secondaryButtonHoverCustomGradientInputValue : secondaryButtonHoverGradientColor || secondaryButtonHoverClassicColor};
             ` : `
                 ${secondaryButtonHoverClassicColor ? `background: ${secondaryButtonHoverClassicColor};` : ""}
             `}
@@ -5071,7 +5071,7 @@ var generateBaseSliderStyle = (attributes2) => {
         .${blockId} .swiper-button-next {
             ${navigationArrowColor ? `color: ${navigationArrowColor};` : ""}
             ${navigationArrowNormalBackgroundType === "gradient" ? `  
-                background: ${navigationArrowNormalCustomGradientSwitcher && navigationArrowNormalCustomGradientInputValue ? navigationArrowNormalCustomGradientInputValue : navigationArrowNormalGradientColor ? navigationArrowNormalGradientColor : navigationArrowNormalClassicColor};
+                background: ${navigationArrowNormalCustomGradientSwitcher && navigationArrowNormalCustomGradientInputValue ? navigationArrowNormalCustomGradientInputValue : navigationArrowNormalGradientColor || navigationArrowNormalClassicColor};
             ` : `
                 ${navigationArrowNormalClassicColor ? `background: ${navigationArrowNormalClassicColor};` : ""}
             `}
@@ -5088,7 +5088,7 @@ var generateBaseSliderStyle = (attributes2) => {
         .${blockId} .swiper-button-next:hover {
             ${navigationArrowColorHover ? `color: ${navigationArrowColorHover};` : ""}
             ${navigationArrowHoverBackgroundType === "gradient" ? `
-                background: ${navigationArrowHoverCustomGradientSwitcher && navigationArrowHoverCustomGradientInputValue ? navigationArrowHoverCustomGradientInputValue : navigationArrowHoverGradientColor ? navigationArrowHoverGradientColor : navigationArrowHoverClassicColor};
+                background: ${navigationArrowHoverCustomGradientSwitcher && navigationArrowHoverCustomGradientInputValue ? navigationArrowHoverCustomGradientInputValue : navigationArrowHoverGradientColor || navigationArrowHoverClassicColor};
             ` : `
                 ${navigationArrowHoverClassicColor ? `background: ${navigationArrowHoverClassicColor};` : ""}
             `}
@@ -5120,7 +5120,12 @@ var generateBaseSliderStyle = (attributes2) => {
         }
 
         .${blockId} .swiper-pagination {
-            ${paginationType === "progressbar" ? paginationProgressbarPosition.Desktop ? `top: ${paginationProgressbarPosition.Desktop}${paginationProgressbarPositionUnits.Desktop} !important;` : "" : paginationDotsPosition.Desktop ? `bottom: ${paginationDotsPosition.Desktop}${paginationDotsPositionUnits.Desktop} !important;` : ""}
+            ${(() => {
+    if (paginationType === "progressbar") {
+      return paginationProgressbarPosition.Desktop ? `top: ${paginationProgressbarPosition.Desktop}${paginationProgressbarPositionUnits.Desktop} !important;` : "";
+    }
+    return paginationDotsPosition.Desktop ? `bottom: ${paginationDotsPosition.Desktop}${paginationDotsPositionUnits.Desktop} !important;` : "";
+  })()}
             ${paginationDotsDesktopMarginCssStyle ? `margin: ${paginationDotsDesktopMarginCssStyle};` : ""}
         }
 
@@ -5360,7 +5365,12 @@ var generateBaseSliderStyle = (attributes2) => {
             }
 
             .${blockId} .swiper-pagination {
-                ${paginationType === "progressbar" ? paginationProgressbarPosition.Tablet ? `top: ${paginationProgressbarPosition.Tablet}${paginationProgressbarPositionUnits.Tablet} !important;` : "" : paginationDotsPosition.Tablet ? `bottom: ${paginationDotsPosition.Tablet}${paginationDotsPositionUnits.Tablet} !important;` : ""}
+                ${(() => {
+    if (paginationType === "progressbar") {
+      return paginationProgressbarPosition.Tablet ? `top: ${paginationProgressbarPosition.Tablet}${paginationProgressbarPositionUnits.Tablet} !important;` : "";
+    }
+    return paginationDotsPosition.Tablet ? `bottom: ${paginationDotsPosition.Tablet}${paginationDotsPositionUnits.Tablet} !important;` : "";
+  })()}
                 ${paginationDotsTabletMarginCssStyle ? `margin: ${paginationDotsTabletMarginCssStyle};` : ""}
             }
 
@@ -5394,20 +5404,45 @@ var generateBaseSliderStyle = (attributes2) => {
                 .${blockId}.gslider-base-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
                 .${blockId}.gslider-base-wrapper .swiper-pagination-custom,
                 .${blockId}.gslider-base-wrapper .swiper-pagination-fraction {
-                    bottom: -${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
+                    bottom: -${(() => {
+    if (paginationOutsideOffset?.Tablet) {
+      return `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}`;
+    }
+    if (paginationOutsideOffset?.Desktop) {
+      return `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}`;
+    }
+    return "30px";
+  })()} !important;
                 }
             ` : ""}
 
             ${paginationPositionType === "outside" ? `
-                ${showPagination?.Tablet ? `
+                ${(() => {
+    if (showPagination?.Tablet) {
+      const tabletOffset = (() => {
+        if (paginationOutsideOffset?.Tablet) {
+          return `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}`;
+        }
+        if (paginationOutsideOffset?.Desktop) {
+          return `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}`;
+        }
+        return "30px";
+      })();
+      return `
                     .${blockId}.gslider-base-wrapper.has-pagination {
-                        margin-bottom: ${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
+                        margin-bottom: ${tabletOffset};
                     }
-                ` : showPagination?.Desktop ? `
+                `;
+    }
+    if (showPagination?.Desktop) {
+      return `
                     .${blockId}.gslider-base-wrapper.has-pagination {
                         margin-bottom: 0;
                     }
-                ` : ""}
+                `;
+    }
+    return "";
+  })()}
             ` : ""}
         }
         
@@ -5578,7 +5613,12 @@ var generateBaseSliderStyle = (attributes2) => {
             }
 
             .${blockId} .swiper-pagination {
-                ${paginationType === "progressbar" ? paginationProgressbarPosition.Mobile ? `top: ${paginationProgressbarPosition.Mobile}${paginationProgressbarPositionUnits.Mobile} !important;` : "" : paginationDotsPosition.Mobile ? `bottom: ${paginationDotsPosition.Mobile}${paginationDotsPositionUnits.Mobile} !important;` : ""}
+                ${(() => {
+    if (paginationType === "progressbar") {
+      return paginationProgressbarPosition.Mobile ? `top: ${paginationProgressbarPosition.Mobile}${paginationProgressbarPositionUnits.Mobile} !important;` : "";
+    }
+    return paginationDotsPosition.Mobile ? `bottom: ${paginationDotsPosition.Mobile}${paginationDotsPositionUnits.Mobile} !important;` : "";
+  })()}
                 ${paginationDotsMobileMarginCssStyle ? `margin: ${paginationDotsMobileMarginCssStyle};` : ""}
             }
 
@@ -5607,25 +5647,56 @@ var generateBaseSliderStyle = (attributes2) => {
                 ${paginationProgressbarHeight.Mobile ? `height: ${paginationProgressbarHeight.Mobile}${paginationProgressbarHeightUnits.Mobile};` : ""}
             }
 
-            ${paginationPositionType === "outside" ? `   
+            ${paginationPositionType === "outside" ? `
                 .${blockId}.gslider-base-wrapper .swiper-horizontal>.swiper-pagination-bullets,
                 .${blockId}.gslider-base-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
                 .${blockId}.gslider-base-wrapper .swiper-pagination-custom,
                 .${blockId}.gslider-base-wrapper .swiper-pagination-fraction {
-                    bottom: -${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
+                    bottom: -${(() => {
+    if (paginationOutsideOffset?.Mobile) {
+      return `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}`;
+    }
+    if (paginationOutsideOffset?.Tablet) {
+      return `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}`;
+    }
+    if (paginationOutsideOffset?.Desktop) {
+      return `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}`;
+    }
+    return "30px";
+  })()} !important;
                 }
             ` : ""}
 
             ${paginationPositionType === "outside" ? `
-                ${showPagination?.Mobile ? `
+                ${(() => {
+    if (showPagination?.Mobile) {
+      const mobileOffset = (() => {
+        if (paginationOutsideOffset?.Mobile) {
+          return `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}`;
+        }
+        if (paginationOutsideOffset?.Tablet) {
+          return `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}`;
+        }
+        if (paginationOutsideOffset?.Desktop) {
+          return `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}`;
+        }
+        return "30px";
+      })();
+      return `
                     .${blockId}.gslider-base-wrapper.has-pagination {
-                        margin-bottom: ${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
+                        margin-bottom: ${mobileOffset};
                     }
-                ` : showPagination?.Desktop || showPagination?.Tablet ? `
+                `;
+    }
+    if (showPagination?.Desktop || showPagination?.Tablet) {
+      return `
                     .${blockId}.gslider-base-wrapper.has-pagination {
                         margin-bottom: 0;
                     }
-                ` : ""}
+                `;
+    }
+    return "";
+  })()}
             ` : ""}
         }
     `;

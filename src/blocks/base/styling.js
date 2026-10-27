@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars, no-nested-ternary, jsdoc/require-param, jsdoc/check-tag-names */
+/* eslint-disable no-unused-vars, jsdoc/require-param, jsdoc/check-tag-names */
 /**
  * Base Slider Block - Style Generation
  * Returns Dynamic Generated CSS
@@ -1325,9 +1325,8 @@ const generateBaseSliderStyle = ( attributes ) => {
 					primaryButtonNormalCustomGradientSwitcher &&
 					primaryButtonNormalCustomGradientInputValue
 						? primaryButtonNormalCustomGradientInputValue
-						: primaryButtonNormalGradientColor
-						? primaryButtonNormalGradientColor
-						: primaryButtonNormalClassicColor
+						: primaryButtonNormalGradientColor ||
+						  primaryButtonNormalClassicColor
 				};
             `
 					: `
@@ -1386,9 +1385,8 @@ const generateBaseSliderStyle = ( attributes ) => {
 					primaryButtonHoverCustomGradientSwitcher &&
 					primaryButtonHoverCustomGradientInputValue
 						? primaryButtonHoverCustomGradientInputValue
-						: primaryButtonHoverGradientColor
-						? primaryButtonHoverGradientColor
-						: primaryButtonHoverClassicColor
+						: primaryButtonHoverGradientColor ||
+						  primaryButtonHoverClassicColor
 				};
             `
 					: `
@@ -1469,9 +1467,8 @@ const generateBaseSliderStyle = ( attributes ) => {
 					secondaryButtonNormalCustomGradientSwitcher &&
 					secondaryButtonNormalCustomGradientInputValue
 						? secondaryButtonNormalCustomGradientInputValue
-						: secondaryButtonNormalGradientColor
-						? secondaryButtonNormalGradientColor
-						: secondaryButtonNormalClassicColor
+						: secondaryButtonNormalGradientColor ||
+						  secondaryButtonNormalClassicColor
 				};
             `
 					: `
@@ -1534,9 +1531,8 @@ const generateBaseSliderStyle = ( attributes ) => {
 					secondaryButtonHoverCustomGradientSwitcher &&
 					secondaryButtonHoverCustomGradientInputValue
 						? secondaryButtonHoverCustomGradientInputValue
-						: secondaryButtonHoverGradientColor
-						? secondaryButtonHoverGradientColor
-						: secondaryButtonHoverClassicColor
+						: secondaryButtonHoverGradientColor ||
+						  secondaryButtonHoverClassicColor
 				};
             `
 					: `
@@ -1748,9 +1744,8 @@ const generateBaseSliderStyle = ( attributes ) => {
 					navigationArrowNormalCustomGradientSwitcher &&
 					navigationArrowNormalCustomGradientInputValue
 						? navigationArrowNormalCustomGradientInputValue
-						: navigationArrowNormalGradientColor
-						? navigationArrowNormalGradientColor
-						: navigationArrowNormalClassicColor
+						: navigationArrowNormalGradientColor ||
+						  navigationArrowNormalClassicColor
 				};
             `
 					: `
@@ -1812,9 +1807,8 @@ const generateBaseSliderStyle = ( attributes ) => {
 					navigationArrowHoverCustomGradientSwitcher &&
 					navigationArrowHoverCustomGradientInputValue
 						? navigationArrowHoverCustomGradientInputValue
-						: navigationArrowHoverGradientColor
-						? navigationArrowHoverGradientColor
-						: navigationArrowHoverClassicColor
+						: navigationArrowHoverGradientColor ||
+						  navigationArrowHoverClassicColor
 				};
             `
 					: `
@@ -1885,15 +1879,16 @@ const generateBaseSliderStyle = ( attributes ) => {
         }
 
         .${ blockId } .swiper-pagination {
-            ${
-				paginationType === 'progressbar'
-					? paginationProgressbarPosition.Desktop
+            ${ ( () => {
+				if ( paginationType === 'progressbar' ) {
+					return paginationProgressbarPosition.Desktop
 						? `top: ${ paginationProgressbarPosition.Desktop }${ paginationProgressbarPositionUnits.Desktop } !important;`
-						: ''
-					: paginationDotsPosition.Desktop
+						: '';
+				}
+				return paginationDotsPosition.Desktop
 					? `bottom: ${ paginationDotsPosition.Desktop }${ paginationDotsPositionUnits.Desktop } !important;`
-					: ''
-			}
+					: '';
+			} )() }
             ${
 				paginationDotsDesktopMarginCssStyle
 					? `margin: ${ paginationDotsDesktopMarginCssStyle };`
@@ -2619,15 +2614,16 @@ const generateBaseSliderStyle = ( attributes ) => {
             }
 
             .${ blockId } .swiper-pagination {
-                ${
-					paginationType === 'progressbar'
-						? paginationProgressbarPosition.Tablet
+                ${ ( () => {
+					if ( paginationType === 'progressbar' ) {
+						return paginationProgressbarPosition.Tablet
 							? `top: ${ paginationProgressbarPosition.Tablet }${ paginationProgressbarPositionUnits.Tablet } !important;`
-							: ''
-						: paginationDotsPosition.Tablet
+							: '';
+					}
+					return paginationDotsPosition.Tablet
 						? `bottom: ${ paginationDotsPosition.Tablet }${ paginationDotsPositionUnits.Tablet } !important;`
-						: ''
-				}
+						: '';
+				} )() }
                 ${
 					paginationDotsTabletMarginCssStyle
 						? `margin: ${ paginationDotsTabletMarginCssStyle };`
@@ -2723,18 +2719,19 @@ const generateBaseSliderStyle = ( attributes ) => {
                 .${ blockId }.gslider-base-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
                 .${ blockId }.gslider-base-wrapper .swiper-pagination-custom,
                 .${ blockId }.gslider-base-wrapper .swiper-pagination-fraction {
-                    bottom: -${
-						paginationOutsideOffset?.Tablet
-							? `${ paginationOutsideOffset.Tablet }${
-									paginationOutsideOffsetUnits?.Tablet || 'px'
-							  }`
-							: paginationOutsideOffset?.Desktop
-							? `${ paginationOutsideOffset.Desktop }${
-									paginationOutsideOffsetUnits?.Desktop ||
-									'px'
-							  }`
-							: '30px'
-					} !important;
+                    bottom: -${ ( () => {
+						if ( paginationOutsideOffset?.Tablet ) {
+							return `${ paginationOutsideOffset.Tablet }${
+								paginationOutsideOffsetUnits?.Tablet || 'px'
+							}`;
+						}
+						if ( paginationOutsideOffset?.Desktop ) {
+							return `${ paginationOutsideOffset.Desktop }${
+								paginationOutsideOffsetUnits?.Desktop || 'px'
+							}`;
+						}
+						return '30px';
+					} )() } !important;
                 }
             `
 					: ''
@@ -2743,33 +2740,37 @@ const generateBaseSliderStyle = ( attributes ) => {
             ${
 				paginationPositionType === 'outside'
 					? `
-                ${
-					showPagination?.Tablet
-						? `
+                ${ ( () => {
+					if ( showPagination?.Tablet ) {
+						const tabletOffset = ( () => {
+							if ( paginationOutsideOffset?.Tablet ) {
+								return `${ paginationOutsideOffset.Tablet }${
+									paginationOutsideOffsetUnits?.Tablet || 'px'
+								}`;
+							}
+							if ( paginationOutsideOffset?.Desktop ) {
+								return `${ paginationOutsideOffset.Desktop }${
+									paginationOutsideOffsetUnits?.Desktop ||
+									'px'
+								}`;
+							}
+							return '30px';
+						} )();
+						return `
                     .${ blockId }.gslider-base-wrapper.has-pagination {
-                        margin-bottom: ${
-							paginationOutsideOffset?.Tablet
-								? `${ paginationOutsideOffset.Tablet }${
-										paginationOutsideOffsetUnits?.Tablet ||
-										'px'
-								  }`
-								: paginationOutsideOffset?.Desktop
-								? `${ paginationOutsideOffset.Desktop }${
-										paginationOutsideOffsetUnits?.Desktop ||
-										'px'
-								  }`
-								: '30px'
-						};
+                        margin-bottom: ${ tabletOffset };
                     }
-                `
-						: showPagination?.Desktop
-						? `
+                `;
+					}
+					if ( showPagination?.Desktop ) {
+						return `
                     .${ blockId }.gslider-base-wrapper.has-pagination {
                         margin-bottom: 0;
                     }
-                `
-						: ''
-				}
+                `;
+					}
+					return '';
+				} )() }
             `
 					: ''
 			}
@@ -3280,15 +3281,16 @@ const generateBaseSliderStyle = ( attributes ) => {
             }
 
             .${ blockId } .swiper-pagination {
-                ${
-					paginationType === 'progressbar'
-						? paginationProgressbarPosition.Mobile
+                ${ ( () => {
+					if ( paginationType === 'progressbar' ) {
+						return paginationProgressbarPosition.Mobile
 							? `top: ${ paginationProgressbarPosition.Mobile }${ paginationProgressbarPositionUnits.Mobile } !important;`
-							: ''
-						: paginationDotsPosition.Mobile
+							: '';
+					}
+					return paginationDotsPosition.Mobile
 						? `bottom: ${ paginationDotsPosition.Mobile }${ paginationDotsPositionUnits.Mobile } !important;`
-						: ''
-				}
+						: '';
+				} )() }
                 ${
 					paginationDotsMobileMarginCssStyle
 						? `margin: ${ paginationDotsMobileMarginCssStyle };`
@@ -3379,27 +3381,29 @@ const generateBaseSliderStyle = ( attributes ) => {
 
             ${
 				paginationPositionType === 'outside'
-					? `   
+					? `
                 .${ blockId }.gslider-base-wrapper .swiper-horizontal>.swiper-pagination-bullets,
                 .${ blockId }.gslider-base-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
                 .${ blockId }.gslider-base-wrapper .swiper-pagination-custom,
                 .${ blockId }.gslider-base-wrapper .swiper-pagination-fraction {
-                    bottom: -${
-						paginationOutsideOffset?.Mobile
-							? `${ paginationOutsideOffset.Mobile }${
-									paginationOutsideOffsetUnits?.Mobile || 'px'
-							  }`
-							: paginationOutsideOffset?.Tablet
-							? `${ paginationOutsideOffset.Tablet }${
-									paginationOutsideOffsetUnits?.Tablet || 'px'
-							  }`
-							: paginationOutsideOffset?.Desktop
-							? `${ paginationOutsideOffset.Desktop }${
-									paginationOutsideOffsetUnits?.Desktop ||
-									'px'
-							  }`
-							: '30px'
-					} !important;
+                    bottom: -${ ( () => {
+						if ( paginationOutsideOffset?.Mobile ) {
+							return `${ paginationOutsideOffset.Mobile }${
+								paginationOutsideOffsetUnits?.Mobile || 'px'
+							}`;
+						}
+						if ( paginationOutsideOffset?.Tablet ) {
+							return `${ paginationOutsideOffset.Tablet }${
+								paginationOutsideOffsetUnits?.Tablet || 'px'
+							}`;
+						}
+						if ( paginationOutsideOffset?.Desktop ) {
+							return `${ paginationOutsideOffset.Desktop }${
+								paginationOutsideOffsetUnits?.Desktop || 'px'
+							}`;
+						}
+						return '30px';
+					} )() } !important;
                 }
             `
 					: ''
@@ -3408,38 +3412,42 @@ const generateBaseSliderStyle = ( attributes ) => {
             ${
 				paginationPositionType === 'outside'
 					? `
-                ${
-					showPagination?.Mobile
-						? `
+                ${ ( () => {
+					if ( showPagination?.Mobile ) {
+						const mobileOffset = ( () => {
+							if ( paginationOutsideOffset?.Mobile ) {
+								return `${ paginationOutsideOffset.Mobile }${
+									paginationOutsideOffsetUnits?.Mobile || 'px'
+								}`;
+							}
+							if ( paginationOutsideOffset?.Tablet ) {
+								return `${ paginationOutsideOffset.Tablet }${
+									paginationOutsideOffsetUnits?.Tablet || 'px'
+								}`;
+							}
+							if ( paginationOutsideOffset?.Desktop ) {
+								return `${ paginationOutsideOffset.Desktop }${
+									paginationOutsideOffsetUnits?.Desktop ||
+									'px'
+								}`;
+							}
+							return '30px';
+						} )();
+						return `
                     .${ blockId }.gslider-base-wrapper.has-pagination {
-                        margin-bottom: ${
-							paginationOutsideOffset?.Mobile
-								? `${ paginationOutsideOffset.Mobile }${
-										paginationOutsideOffsetUnits?.Mobile ||
-										'px'
-								  }`
-								: paginationOutsideOffset?.Tablet
-								? `${ paginationOutsideOffset.Tablet }${
-										paginationOutsideOffsetUnits?.Tablet ||
-										'px'
-								  }`
-								: paginationOutsideOffset?.Desktop
-								? `${ paginationOutsideOffset.Desktop }${
-										paginationOutsideOffsetUnits?.Desktop ||
-										'px'
-								  }`
-								: '30px'
-						};
+                        margin-bottom: ${ mobileOffset };
                     }
-                `
-						: showPagination?.Desktop || showPagination?.Tablet
-						? `
+                `;
+					}
+					if ( showPagination?.Desktop || showPagination?.Tablet ) {
+						return `
                     .${ blockId }.gslider-base-wrapper.has-pagination {
                         margin-bottom: 0;
                     }
-                `
-						: ''
-				}
+                `;
+					}
+					return '';
+				} )() }
             `
 					: ''
 			}
