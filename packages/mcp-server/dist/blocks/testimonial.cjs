@@ -5241,7 +5241,7 @@ var generateBaseSliderStyle = (attributes2) => {
       if (gradientValue) {
         const gradientStyle = `.${blockId} .gslider-content-wrapper.${item.id} {
                         background: ${gradientValue};
-                        transition: all .3s ease-in-out;
+                        transition: background .3s ease-in-out, opacity .3s ease-in-out;
                     }`;
         sliderItemColorStyle += gradientStyle;
       }
@@ -5266,13 +5266,13 @@ var generateBaseSliderStyle = (attributes2) => {
                     background-size: ${item.normalBackgroundImageSize.Desktop};`;
       }
       backgroundImageStyle += `
-                    transition: all .3s ease-in-out;
+                    transition: background .3s ease-in-out, opacity .3s ease-in-out;
                 }`;
       sliderItemColorStyle += backgroundImageStyle;
     } else if (item.normalItemClassicColor) {
       const classicStyle = `.${blockId} .gslider-content-wrapper.${item.id} {
                     background: ${item.normalItemClassicColor};
-                    transition: all .3s ease-in-out;
+                    transition: background-color .3s ease-in-out, opacity .3s ease-in-out;
                 }`;
       sliderItemColorStyle += classicStyle;
     }
@@ -5290,7 +5290,7 @@ var generateBaseSliderStyle = (attributes2) => {
                     opacity: ${item.itemBackgroundOverlayOpacity};
                     z-index: -1;
                     pointer-events: none;
-                    transition: all .3s ease-in-out;
+                    transition: opacity .3s ease-in-out;
                 }
                 .${blockId} .gslider-content-wrapper.${item.id} {
                     position: relative;
@@ -5500,7 +5500,7 @@ var generateBaseSliderStyle = (attributes2) => {
             ${authorNameColor ? `color: ${authorNameColor};` : ""}
             ${authorNameDesktopMarginCssStyle ? `margin: ${authorNameDesktopMarginCssStyle};` : ""} 
             ${authorNameDesktopPaddingCssStyle ? `padding: ${authorNameDesktopPaddingCssStyle};` : ""}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
         .${blockId}.gslider-testimonial-wrapper:hover .gslider-testimonial-author-name-wrapper .gslider-testimonial-author-name {
             ${authorNameColorHover ? `color: ${authorNameColorHover};` : ""}
@@ -5519,7 +5519,7 @@ var generateBaseSliderStyle = (attributes2) => {
             ${authorDesignationColor ? `color: ${authorDesignationColor};` : ""}
             ${authorDesignationDesktopMarginCssStyle ? `margin: ${authorDesignationDesktopMarginCssStyle};` : ""} 
             ${authorDesignationDesktopPaddingCssStyle ? `padding: ${authorDesignationDesktopPaddingCssStyle};` : ""}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
         .${blockId}.gslider-testimonial-wrapper:hover .gslider-testimonial-author-designation-wrapper .gslider-testimonial-author-designation {
             ${authorDesignationColorHover ? `color: ${authorDesignationColorHover};` : ""}
@@ -5536,7 +5536,7 @@ var generateBaseSliderStyle = (attributes2) => {
             ${authorImageDesktopMarginCssStyle ? `margin: ${authorImageDesktopMarginCssStyle};` : ""}
             ${authorImageDesktopPaddingCssStyle ? `padding: ${authorImageDesktopPaddingCssStyle};` : ""}
             object-fit: cover;
-            transition: all 0.3s ease-in-out;
+            transition: border-color 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
         .${blockId}.gslider-testimonial-wrapper:hover .gslider-testimonial-author-image-wrapper .gslider-testimonial-author-image {
             ${authorImageBorderHoverColor ? `border-color: ${authorImageBorderHoverColor};` : ""}
@@ -5556,7 +5556,7 @@ var generateBaseSliderStyle = (attributes2) => {
             ${testimonialTitleColor ? `color: ${testimonialTitleColor};` : ""}
             ${testimonialTitleDesktopMarginCssStyle ? `margin: ${testimonialTitleDesktopMarginCssStyle};` : ""}
             ${testimonialTitleDesktopPaddingCssStyle ? `padding: ${testimonialTitleDesktopPaddingCssStyle};` : ""}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
         .${blockId}.gslider-testimonial-wrapper:hover .gslider-testimonial-title-wrapper .gslider-testimonial-title {
             ${testimonialTitleColorHover ? `color: ${testimonialTitleColorHover};` : ""}
@@ -5575,7 +5575,7 @@ var generateBaseSliderStyle = (attributes2) => {
             ${testimonialTextColor ? `color: ${testimonialTextColor};` : ""}
             ${testimonialTextDesktopMarginCssStyle ? `margin: ${testimonialTextDesktopMarginCssStyle};` : ""} 
             ${testimonialTextDesktopPaddingCssStyle ? `padding: ${testimonialTextDesktopPaddingCssStyle};` : ""}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
         .${blockId}.gslider-testimonial-wrapper:hover .gslider-testimonial-text-wrapper .gslider-testimonial-text {
             ${testimonialTextColorHover ? `color: ${testimonialTextColorHover};` : ""}
@@ -5609,7 +5609,7 @@ var generateBaseSliderStyle = (attributes2) => {
                 ${quoteIconPositionLeft.Desktop ? `left: ${quoteIconPositionLeft.Desktop}${quoteIconPositionLeftUnits.Desktop};` : ""}
                 ${quoteIconPositionRight.Desktop ? `right: ${quoteIconPositionRight.Desktop}${quoteIconPositionRightUnits.Desktop};` : ""}
             ` : "position: relative;"}
-            transition: all 0.3s ease-in-out;
+            transition: background 0.3s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
             line-height: 0;
             display: inline-block;
         }
@@ -5629,7 +5629,7 @@ var generateBaseSliderStyle = (attributes2) => {
         .${blockId} .gslider-testimonial-quote-icon-wrapper img {
             ${quoteIconSize.Desktop && quoteIconSizeUnits.Desktop ? `width: ${quoteIconSize.Desktop}${quoteIconSizeUnits.Desktop};` : ""}
             ${quoteIconSize.Desktop && quoteIconSizeUnits.Desktop ? `height: ${quoteIconSize.Desktop}${quoteIconSizeUnits.Desktop};` : ""}
-            transition: all 0.3s ease-in-out;
+            transition: fill 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
 
         .${blockId} .gslider-testimonial-quote-icon-wrapper svg {
@@ -5662,12 +5662,12 @@ var generateBaseSliderStyle = (attributes2) => {
             ${ratingStarSize.Desktop ? `width: ${ratingStarSize.Desktop}${ratingStarSizeUnits.Desktop};` : ""}
             ${ratingStarSize.Desktop ? `height: ${ratingStarSize.Desktop}${ratingStarSizeUnits.Desktop};` : ""}
             fill: ${ratingStarColor};
-            transition: all .3s ease-in-out;
+            transition: fill .3s ease-in-out;
         }
         .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-icon.empty svg,
         .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-star-partial-container > svg {
             fill: ${ratingEmptyStarColor};
-            transition: all .3s ease-in-out;
+            transition: fill .3s ease-in-out;
         }
         .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-star-partial-fill svg {
             ${ratingStarSize.Desktop ? `min-width: ${ratingStarSize.Desktop}${ratingStarSizeUnits.Desktop};` : ""}
@@ -5693,7 +5693,7 @@ var generateBaseSliderStyle = (attributes2) => {
             ${ratingNumberLineHeight.Desktop && ratingNumberLineHeightUnits.Desktop ? `line-height: ${ratingNumberLineHeight.Desktop}${ratingNumberLineHeightUnits.Desktop};` : ""}
             ${ratingNumberLetterSpacing.Desktop && ratingNumberLetterSpacingUnits.Desktop ? `letter-spacing: ${ratingNumberLetterSpacing.Desktop}${ratingNumberLetterSpacingUnits.Desktop};` : ""}
             ${ratingNumberWordSpacing.Desktop && ratingNumberWordSpacingUnits.Desktop ? `word-spacing: ${ratingNumberWordSpacing.Desktop}${ratingNumberWordSpacingUnits.Desktop};` : ""}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
         /* Rating Number Hover Color */
         .${blockId}.gslider-testimonial-wrapper:hover .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-number {
@@ -5807,7 +5807,7 @@ var generateBaseSliderStyle = (attributes2) => {
             cursor: pointer;
             appearance: none;
             -webkit-appearance: none;
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out, transform .3s ease-in-out;
         }
         .${blockId} .swiper-button-prev:focus-visible,
         .${blockId} .swiper-button-next:focus-visible {
@@ -5898,7 +5898,7 @@ var generateBaseSliderStyle = (attributes2) => {
             ${paginationFractionLetterSpacing.Desktop && paginationFractionLetterSpacingUnits.Desktop ? `letter-spacing: ${paginationFractionLetterSpacing.Desktop}${paginationFractionLetterSpacingUnits.Desktop};` : ""}
             ${paginationFractionWordSpacing.Desktop && paginationFractionWordSpacingUnits.Desktop ? `word-spacing: ${paginationFractionWordSpacing.Desktop}${paginationFractionWordSpacingUnits.Desktop};` : ""}
             ${paginationFractionColor ? `color: ${paginationFractionColor};` : ""}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
 
         .${blockId}.gslider-testimonial-wrapper:hover .swiper-pagination-fraction {

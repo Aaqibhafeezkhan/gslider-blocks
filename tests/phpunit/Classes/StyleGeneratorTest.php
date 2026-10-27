@@ -62,6 +62,9 @@ class StyleGeneratorTest {
 		$this->test_lcp_skips_rating_icon();
 		$this->test_lcp_skips_non_slide_markup();
 		$this->test_gslider_lcp_optimize_filter();
+		$this->test_ensure_image_dimensions();
+		$this->test_ensure_image_dimensions_edge_cases();
+		$this->test_ensure_image_dimensions_testimonial_author_image();
 		$this->test_reset_styles();
 
 		echo "\nAll StyleGenerator unit tests passed successfully!\n";
@@ -707,11 +710,306 @@ class StyleGeneratorTest {
 	}
 
 	/**
-	 * Test 10: Verify reset_styles() cleans all internal state.
+	 * Verify ensure_image_dimensions injects width and height on slide images.
+	 *
+	 * @return void
+	 */
+	public function test_ensure_image_dimensions(): void {
+		global $is_admin_mock, $is_feed_mock, $attachment_metadata_mock;
+		$is_admin_mock = false;
+		$is_feed_mock  = false;
+
+		$attachment_metadata_mock = [
+			42 => [
+				'file'   => '2026/01/photo1.jpg',
+				'width'  => 800,
+				'height' => 600,
+			],
+			43 => [
+				'file'   => '2026/01/photo2.jpg',
+				'width'  => 400,
+				'height' => 300,
+			],
+			44 => [
+				'file'   => '2026/01/photo3.jpg',
+				'width'  => 1200,
+				'height' => 800,
+			],
+		];
+
+		$generator = StyleGenerator::getInstance();
+
+		$block = [
+			'blockName' => 'gslider-blocks/image-slider',
+			'attrs'     => [
+				'blockId' => 'gslider-img-test',
+				'images'  => [
+					[
+						'id'  => -1, // Template mock id: must be skipped gracefully
+						'url' => 'https://example.com/template-placeholder.jpg',
+					],
+					[
+						'id'  => 42,
+						'url' => 'https://example.com/wp-content/uploads/2026/01/photo1.jpg',
+					],
+					[
+						'id'  => 43,
+						'url' => 'https://example.com/wp-content/uploads/2026/01/photo2.jpg',
+					],
+					[
+						'id'  => 44,
+						'url' => 'https://example.com/wp-content/uploads/2026/01/photo3.jpg',
+					],
+					[
+						// CodeRabbit safety test: non-string url or malformed item should not trigger TypeError
+						'id'  => 45,
+						'url' => [ 'malformed' => 'array' ],
+					],
+				],
+			],
+		];
+
+		$content = '<div class="wp-block-gslider-blocks-image-slider gslider-image-slider-wrapper">' .
+			'<div class="swiper"><div class="swiper-wrapper">' .
+			'<div class="swiper-slide"><img src="https://example.com/template-placeholder.jpg" alt="Template" /></div>' .
+			'<div class="swiper-slide"><img src="https://example.com/wp-content/uploads/2026/01/photo1.jpg" alt="Photo 1" /></div>' .
+			'<div class="swiper-slide"><img src="https://example.com/wp-content/uploads/2026/01/photo2.jpg" alt="Photo 2" width="500" height="400" /></div>' .
+			'<div class="swiper-slide"><img src="https://example.com/wp-content/uploads/2026/01/photo3.jpg" alt="Photo 3" /></div>' .
+			'</div></div></div>';
+
+		$output = $generator->ensure_image_dimensions( $content, $block );
+
+		// Image 1: dimensions injected.
+		if ( ! preg_match( '/<img(?=[^>]*photo1\.jpg)(?=[^>]*\swidth="800")(?=[^>]*\sheight="600")[^>]*>/i', $output ) ) {
+			fwrite( STDERR, "FAIL: ensure_image_dimensions failed to inject width=\"800\" height=\"600\" on photo1.jpg\n" );
+			exit( 1 );
+		}
+
+		// Image 2: existing dimensions preserved (not overwritten).
+		if ( ! preg_match( '/<img(?=[^>]*photo2\.jpg)(?=[^>]*\swidth="500")(?=[^>]*\sheight="400")[^>]*>/i', $output ) ) {
+			fwrite( STDERR, "FAIL: ensure_image_dimensions failed to preserve existing width=\"500\" height=\"400\" on photo2.jpg\n" );
+			exit( 1 );
+		}
+
+		// Image 3: dimensions injected.
+		if ( ! preg_match( '/<img(?=[^>]*photo3\.jpg)(?=[^>]*\swidth="1200")(?=[^>]*\sheight="800")[^>]*>/i', $output ) ) {
+			fwrite( STDERR, "FAIL: ensure_image_dimensions failed to inject width=\"1200\" height=\"800\" on photo3.jpg\n" );
+			exit( 1 );
+		}
+
+		// Template mock image: no dimensions injected.
+		if ( preg_match( '/<img[^>]*template-placeholder\.jpg[^>]*width=/i', $output ) ) {
+			fwrite( STDERR, "FAIL: ensure_image_dimensions should not inject dimensions for negative attachment IDs\n" );
+			exit( 1 );
+		}
+
+		echo "OK: ensure_image_dimensions injects width/height from attachment metadata\n";
+
+		// Admin bypass test.
+		$is_admin_mock = true;
+		$admin_output  = $generator->ensure_image_dimensions( $content, $block );
+		$is_admin_mock = false;
+		if ( $admin_output !== $content ) {
+			fwrite( STDERR, "FAIL: ensure_image_dimensions should bypass in admin context\n" );
+			exit( 1 );
+		}
+		echo "OK: ensure_image_dimensions bypasses in admin context\n";
+
+		// Feed bypass test.
+		$is_feed_mock = true;
+		$feed_output  = $generator->ensure_image_dimensions( $content, $block );
+		$is_feed_mock = false;
+		if ( $feed_output !== $content ) {
+			fwrite( STDERR, "FAIL: ensure_image_dimensions should bypass in feed context\n" );
+			exit( 1 );
+		}
+		echo "OK: ensure_image_dimensions bypasses in feed context\n";
+	}
+
+	/**
+	 * Verify ensure_image_dimensions edge cases: intermediate sizes, data-* attributes,
+	 * non-slide images and same-basename images from another folder.
+	 *
+	 * @return void
+	 */
+	public function test_ensure_image_dimensions_edge_cases(): void {
+		global $is_admin_mock, $is_feed_mock, $attachment_metadata_mock;
+		$is_admin_mock = false;
+		$is_feed_mock  = false;
+
+		$attachment_metadata_mock = [
+			50 => [
+				'file'   => '2026/02/hero.jpg',
+				'width'  => 2000,
+				'height' => 1000,
+				'sizes'  => [
+					'medium' => [
+						'file'   => 'hero-300x300.jpg',
+						'width'  => 300,
+						'height' => 300,
+					],
+				],
+			],
+			51 => [
+				'file'   => '2026/02/logo.png',
+				'width'  => 640,
+				'height' => 320,
+			],
+		];
+
+		$generator = StyleGenerator::getInstance();
+		$block     = [
+			'blockName' => 'gslider-blocks/image-slider',
+			'attrs'     => [
+				'blockId' => 'gslider-img-edge',
+				'images'  => [
+					[
+						'id'  => 50,
+						'url' => 'https://example.com/wp-content/uploads/2026/02/hero-300x300.jpg',
+					],
+					[
+						'id'  => 51,
+						'url' => 'https://example.com/wp-content/uploads/2026/02/logo.png',
+					],
+				],
+			],
+		];
+
+		$content = '<div class="swiper"><div class="swiper-wrapper">' .
+			'<div class="swiper-slide"><img src="https://example.com/wp-content/uploads/2026/02/hero-300x300.jpg" alt="a > b" /></div>' .
+			'<div class="swiper-slide"><img data-width="9" data-height="9" src="https://example.com/wp-content/uploads/2026/02/logo.png" alt="Logo"></div>' .
+			'<div class="swiper-slide"><img src="https://example.com/wp-content/plugins/x/logo.png" class="nav-icon" alt="Nav"></div>' .
+			'</div></div>';
+
+		$output = $generator->ensure_image_dimensions( $content, $block );
+
+		if ( ! preg_match( '/<img(?=[^>]*hero-300x300\.jpg)(?=[^>]*\swidth="300")(?=[^>]*\sheight="300")/i', $output ) ) {
+			fwrite( STDERR, "FAIL: intermediate size did not get its own 300x300 dimensions. Expected width=\"300\" height=\"300\" on hero-300x300.jpg. Actual: $output\n" );
+			exit( 1 );
+		}
+		if ( false !== strpos( $output, 'width="2000"' ) ) {
+			fwrite( STDERR, "FAIL: full-size dimensions were injected on an intermediate size. Expected no width=\"2000\". Actual: $output\n" );
+			exit( 1 );
+		}
+		if ( ! preg_match( '/<img(?=[^>]*uploads\/2026\/02\/logo\.png)(?=[^>]*\swidth="640")(?=[^>]*\sheight="320")(?=[^>]*data-width="9")/i', $output ) ) {
+			fwrite( STDERR, "FAIL: data-width/data-height blocked real width/height injection. Expected width=\"640\" height=\"320\" and data-width=\"9\". Actual: $output\n" );
+			exit( 1 );
+		}
+		if ( 1 !== substr_count( $output, 'width="640"' ) ) {
+			fwrite( STDERR, "FAIL: same-basename image from another folder got slide dimensions. Expected exactly 1 occurrence of width=\"640\". Actual: $output\n" );
+			exit( 1 );
+		}
+
+		$outside        = '<div class="gslider-nav"><img src="https://example.com/wp-content/uploads/2026/02/logo.png" alt="x"></div>';
+		$outside_actual = $generator->ensure_image_dimensions( $outside, $block );
+		if ( $outside !== $outside_actual ) {
+			fwrite( STDERR, "FAIL: image outside .swiper-slide was modified. Expected: $outside. Actual: $outside_actual\n" );
+			exit( 1 );
+		}
+
+		echo "OK: ensure_image_dimensions handles sizes, data-* attributes and non-slide images\n";
+	}
+
+	/**
+	 * Verify ensure_image_dimensions injects dimensions on testimonial author, quote, and rating images.
+	 *
+	 * @return void
+	 */
+	public function test_ensure_image_dimensions_testimonial_author_image(): void {
+		global $is_admin_mock, $is_feed_mock, $attachment_metadata_mock;
+		$is_admin_mock = false;
+		$is_feed_mock  = false;
+
+		$attachment_metadata_mock = [
+			60 => [
+				'file'   => '2026/02/author.jpg',
+				'width'  => 400,
+				'height' => 400,
+			],
+			61 => [
+				'file'   => '2026/02/quote-mark.png',
+				'width'  => 80,
+				'height' => 80,
+			],
+			62 => [
+				'file'   => '2026/02/star.png',
+				'width'  => 24,
+				'height' => 24,
+			],
+		];
+
+		$generator = StyleGenerator::getInstance();
+		$block     = [
+			'blockName' => 'gslider-blocks/testimonial',
+			'attrs'     => [
+				'blockId'       => 'gslider-test-author',
+				'quoteImageID'  => 61,
+				'quoteImageUrl' => 'https://example.com/wp-content/uploads/2026/02/quote-mark.png',
+				'sliderItems'   => [
+					[
+						'authorName'  => 'Jane Doe',
+						'authorImage' => [
+							'id'  => 60,
+							'url' => 'https://example.com/wp-content/uploads/2026/02/author.jpg',
+						],
+						'ratingImage' => [
+							'id'  => 62,
+							'url' => 'https://example.com/wp-content/uploads/2026/02/star.png',
+						],
+					],
+				],
+			],
+		];
+
+		$content = '<div class="wp-block-gslider-blocks-testimonial gslider-testimonial-wrapper">' .
+			'<div class="swiper"><div class="swiper-wrapper">' .
+			'<div class="swiper-slide">' .
+			'<div class="gslider-testimonial-quote-icon-wrapper">' .
+			'<img src="https://example.com/wp-content/uploads/2026/02/quote-mark.png" alt="Quote" />' .
+			'</div>' .
+			'<div class="gslider-testimonial-author-image-wrapper">' .
+			'<img src="https://example.com/wp-content/uploads/2026/02/author.jpg" alt="Jane" class="gslider-testimonial-author-image" />' .
+			'</div>' .
+			'<div class="gslider-testimonial-rating-wrapper">' .
+			'<div class="gslider-testimonial-rating-icon">' .
+			'<img src="https://example.com/wp-content/uploads/2026/02/star.png" alt="Star" />' .
+			'</div>' .
+			'</div>' .
+			'</div>' .
+			'</div>' .
+			'</div></div></div>';
+
+		$output = $generator->ensure_image_dimensions( $content, $block );
+
+		if ( ! preg_match( '/<img(?=[^>]*author\.jpg)(?=[^>]*\swidth="400")(?=[^>]*\sheight="400")[^>]*>/i', $output ) ) {
+			fwrite( STDERR, "FAIL: Testimonial author image did not receive injected width=\"400\" height=\"400\". Expected dimensions on author.jpg. Actual: $output\n" );
+			exit( 1 );
+		}
+
+		if ( ! preg_match( '/<img(?=[^>]*quote-mark\.png)(?=[^>]*\swidth="80")(?=[^>]*\sheight="80")[^>]*>/i', $output ) ) {
+			fwrite( STDERR, "FAIL: Testimonial quote image did not receive injected width=\"80\" height=\"80\". Expected dimensions on quote-mark.png. Actual: $output\n" );
+			exit( 1 );
+		}
+
+		if ( ! preg_match( '/<img(?=[^>]*star\.png)(?=[^>]*\swidth="24")(?=[^>]*\sheight="24")[^>]*>/i', $output ) ) {
+			fwrite( STDERR, "FAIL: Testimonial rating image did not receive injected width=\"24\" height=\"24\". Expected dimensions on star.png. Actual: $output\n" );
+			exit( 1 );
+		}
+
+		echo "OK: ensure_image_dimensions injects dimensions on testimonial author, quote, and rating images\n";
+	}
+
+	/**
+	 * Test 11: Verify reset_styles() cleans all internal state.
 	 *
 	 * @return void
 	 */
 	public function test_reset_styles(): void {
+		global $is_admin_mock, $is_feed_mock, $is_rest_mock;
+		$is_admin_mock = false;
+		$is_feed_mock  = false;
+		$is_rest_mock  = false;
+
 		$generator = StyleGenerator::getInstance();
 		StyleGenerator::reset_styles();
 
@@ -720,7 +1018,36 @@ class StyleGeneratorTest {
 			fwrite( STDERR, "FAIL: reset_styles() did not clear collected styles\n" );
 			exit( 1 );
 		}
-		echo "OK: reset_styles() clears collected styles and flags\n";
+
+		$block_id = 'gslider-reset-test';
+		$block    = [
+			'blockName' => 'gslider-blocks/image-slider',
+			'attrs'     => [
+				'blockId'    => $block_id,
+				'blockStyle' => ".{$block_id} { background: #fff; }",
+			],
+		];
+		$content  = '<div class="wp-block-gslider-blocks-image-slider ' . $block_id . '">' .
+			'<div class="swiper"><div class="swiper-wrapper">' .
+			'<div class="swiper-slide"><img src="https://example.com/reset.jpg" alt="Reset" loading="lazy" /></div>' .
+			'</div></div></div>';
+
+		// First render sets printed-ID and LCP state.
+		$generator->collect_and_render_dynamic_styles( $content, $block );
+		StyleGenerator::reset_styles();
+
+		// After reset, re-rendering must output the style tag and apply LCP optimization again.
+		$output = $generator->collect_and_render_dynamic_styles( $content, $block );
+		if ( false === strpos( $output, '<style id="gslider-style-' . $block_id . '">' ) ) {
+			fwrite( STDERR, "FAIL: reset_styles() did not clear printed block IDs\n" );
+			exit( 1 );
+		}
+		if ( false === strpos( $output, 'fetchpriority="high"' ) || false === strpos( $output, 'reset.jpg' ) ) {
+			fwrite( STDERR, "FAIL: reset_styles() did not clear the LCP flag\n" );
+			exit( 1 );
+		}
+
+		echo "OK: reset_styles() clears collected styles, printed block IDs, and the LCP flag\n";
 	}
 }
 

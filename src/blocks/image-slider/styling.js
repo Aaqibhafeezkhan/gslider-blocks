@@ -748,7 +748,7 @@ const generateImageSliderStyle = ( attributes ) => {
 			}
             box-sizing: border-box;
             position: relative;
-            transition: all .3s ease-in-out;
+            transition: background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out;
         }
         .${ blockId }.gslider-image-slider-wrapper:hover {
             ${ globalDesktopBackgroundHoverStyles }
@@ -801,7 +801,7 @@ const generateImageSliderStyle = ( attributes ) => {
             display: flex;
             align-items: center;
             justify-content: ${ verticalAlign.Desktop || 'center' };
-            transition: all .3s ease-in-out;
+            transition: background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out;
         }
         .${ blockId }.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper:hover {
             ${
@@ -828,7 +828,11 @@ const generateImageSliderStyle = ( attributes ) => {
 
         .${ blockId }.gslider-image-slider-wrapper .gslider-image-item {
             display: block;
-            transition: all ${
+            transition: transform ${
+				imageLinkTransitionDuration?.Desktop || 300
+			}ms ease, opacity ${
+				imageLinkTransitionDuration?.Desktop || 300
+			}ms ease, filter ${
 				imageLinkTransitionDuration?.Desktop || 300
 			}ms ease;
             --hover-opacity: ${ imageLinkHoverOpacity?.Desktop || 0.8 };
@@ -954,7 +958,7 @@ const generateImageSliderStyle = ( attributes ) => {
 					? `border-color: ${ imageCaptionBorderColor };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out;
         }
 
         .${ blockId }.gslider-image-slider-wrapper .gslider-image-slider-caption:hover {
@@ -1080,7 +1084,7 @@ const generateImageSliderStyle = ( attributes ) => {
 					? `left: ${ imageTooltipLeftPosition.Desktop }${ imageTooltipLeftPositionUnits.Desktop };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: opacity .3s ease-in-out, visibility .3s ease-in-out, transform .3s ease-in-out;
         }
 
         .${ blockId }.gslider-image-slider-wrapper.outside {
@@ -1319,7 +1323,7 @@ const generateImageSliderStyle = ( attributes ) => {
 					? `height: ${ navigationArrowHeight.Desktop }${ navigationArrowHeightUnits.Desktop };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out, transform .3s ease-in-out;
         }
         .${ blockId } .swiper-button-prev:hover,
         .${ blockId } .swiper-button-next:hover {
@@ -1571,7 +1575,7 @@ const generateImageSliderStyle = ( attributes ) => {
 					? `color: ${ paginationFractionColor };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
 
         .${ blockId } .swiper-pagination-fraction:hover {
@@ -1708,7 +1712,11 @@ const generateImageSliderStyle = ( attributes ) => {
 
             .${ blockId }.gslider-image-slider-wrapper .gslider-image-item {
                 display: block;
-                transition: all ${
+                transition: transform ${
+					imageLinkTransitionDuration?.Tablet || 300
+				}ms ease, opacity ${
+					imageLinkTransitionDuration?.Tablet || 300
+				}ms ease, filter ${
 					imageLinkTransitionDuration?.Tablet || 300
 				}ms ease;
                 --hover-opacity: ${ imageLinkHoverOpacity?.Tablet || 0.8 };
@@ -2256,7 +2264,11 @@ const generateImageSliderStyle = ( attributes ) => {
 
             .${ blockId }.gslider-image-slider-wrapper .gslider-image-item {
                 display: block;
-                transition: all ${
+                transition: transform ${
+					imageLinkTransitionDuration?.Mobile || 300
+				}ms ease, opacity ${
+					imageLinkTransitionDuration?.Mobile || 300
+				}ms ease, filter ${
 					imageLinkTransitionDuration?.Mobile || 300
 				}ms ease;
                 --hover-opacity: ${ imageLinkHoverOpacity?.Mobile || 0.8 };

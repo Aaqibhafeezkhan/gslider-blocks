@@ -882,7 +882,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
 			}
             box-sizing: border-box;
             position: relative;
-            transition: all .3s ease-in-out;
+            transition: background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out;
         }
         .${ blockId }.gslider-logo-carousel-wrapper:hover {
             ${ globalDesktopBackgroundHoverStyles }
@@ -936,7 +936,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
             display: flex;
             align-items: center;
             justify-content: ${ verticalAlign.Desktop || 'center' };
-            transition: all .3s ease-in-out;
+            transition: background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out;
         }
         .${ blockId }.gslider-logo-carousel-wrapper .gslider-logo-carousel-content-wrapper:hover {
             ${ logoDesktopBackgroundHoverStyles }
@@ -964,7 +964,11 @@ const generateLogoCarouselStyle = ( attributes ) => {
 
         .${ blockId }.gslider-logo-carousel-wrapper .gslider-logo-item {
             display: block;
-            transition: all ${
+            transition: transform ${
+				logoLinkTransitionDuration?.Desktop || 300
+			}ms ease, opacity ${
+				logoLinkTransitionDuration?.Desktop || 300
+			}ms ease, filter ${
 				logoLinkTransitionDuration?.Desktop || 300
 			}ms ease;
             --hover-opacity: ${ logoLinkHoverOpacity?.Desktop || 0.8 };
@@ -1070,7 +1074,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
 					? `border-color: ${ logoCaptionBorderColor };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out;
         }
 
         .${ blockId }.gslider-logo-carousel-wrapper .gslider-logo-carousel-caption:hover {
@@ -1195,7 +1199,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
 					? `left: ${ logoTooltipLeftPosition.Desktop }${ logoTooltipLeftPositionUnits.Desktop };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: opacity .3s ease-in-out, visibility .3s ease-in-out, transform .3s ease-in-out;
         }
 
         .${ blockId }.gslider-logo-carousel-wrapper.outside {
@@ -1435,7 +1439,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
 					? `height: ${ navigationArrowHeight.Desktop }${ navigationArrowHeightUnits.Desktop };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out, transform .3s ease-in-out;
         }
         .${ blockId } .swiper-button-prev:hover,
         .${ blockId } .swiper-button-next:hover {
@@ -1687,7 +1691,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
 					? `color: ${ paginationFractionColor };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
 
         .${ blockId } .swiper-pagination-fraction:hover {
@@ -1830,7 +1834,11 @@ const generateLogoCarouselStyle = ( attributes ) => {
 
             .${ blockId }.gslider-logo-carousel-wrapper .gslider-logo-item {
                 display: block;
-                transition: all ${
+                transition: transform ${
+					logoLinkTransitionDuration?.Tablet || 300
+				}ms ease, opacity ${
+					logoLinkTransitionDuration?.Tablet || 300
+				}ms ease, filter ${
 					logoLinkTransitionDuration?.Tablet || 300
 				}ms ease;
                 --hover-opacity: ${ logoLinkHoverOpacity?.Tablet || 0.8 };
@@ -2383,7 +2391,11 @@ const generateLogoCarouselStyle = ( attributes ) => {
 
             .${ blockId }.gslider-logo-carousel-wrapper .gslider-logo-item {
                 display: block;
-                transition: all ${
+                transition: transform ${
+					logoLinkTransitionDuration?.Mobile || 300
+				}ms ease, opacity ${
+					logoLinkTransitionDuration?.Mobile || 300
+				}ms ease, filter ${
 					logoLinkTransitionDuration?.Mobile || 300
 				}ms ease;
                 --hover-opacity: ${ logoLinkHoverOpacity?.Mobile || 0.8 };

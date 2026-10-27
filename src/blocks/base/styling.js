@@ -666,7 +666,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 			if ( gradientValue ) {
 				const gradientStyle = `.${ blockId } .gslider-content-wrapper.${ item.id } {
                         background: ${ gradientValue };
-                        transition: all .3s ease-in-out;
+                        transition: background .3s ease-in-out, background-color .3s ease-in-out;
                     }`;
 				sliderItemColorStyle += gradientStyle;
 			}
@@ -698,13 +698,13 @@ const generateBaseSliderStyle = ( attributes ) => {
 			}
 
 			backgroundImageStyle += `
-                    transition: all .3s ease-in-out;
+                    transition: background .3s ease-in-out, background-color .3s ease-in-out;
                 }`;
 			sliderItemColorStyle += backgroundImageStyle;
 		} else if ( item.normalItemClassicColor ) {
 			const classicStyle = `.${ blockId } .gslider-content-wrapper.${ item.id } {
                     background: ${ item.normalItemClassicColor };
-                    transition: all .3s ease-in-out;
+                    transition: background .3s ease-in-out, background-color .3s ease-in-out;
                 }`;
 			sliderItemColorStyle += classicStyle;
 		}
@@ -734,7 +734,7 @@ const generateBaseSliderStyle = ( attributes ) => {
                     opacity: ${ item.itemBackgroundOverlayOpacity };
                     z-index: -1;
                     pointer-events: none;
-                    transition: all .3s ease-in-out;
+                    transition: opacity .3s ease-in-out;
                 }
                 .${ blockId } .gslider-content-wrapper.${ item.id } {
                     position: relative;
@@ -1140,7 +1140,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 					? `padding: ${ subtitleDesktopPaddingCssStyle };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
         .${ blockId }.gslider-base-wrapper .gslider-subtitle-wrapper .gslider-subtitle:hover {
             ${ subtitleColorHover ? `color: ${ subtitleColorHover };` : '' }
@@ -1191,7 +1191,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 					? `padding: ${ titleDesktopPaddingCssStyle };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
         .${ blockId }.gslider-base-wrapper .gslider-title-wrapper .gslider-title:hover {
             ${ titleColorHover ? `color: ${ titleColorHover };` : '' }
@@ -1257,7 +1257,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 					? `padding: ${ descriptionDesktopPaddingCssStyle };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
         .${ blockId }.gslider-base-wrapper .gslider-description-wrapper .gslider-description:hover {
             ${
@@ -1369,7 +1369,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 					: ''
 			}
             display: inline-block;
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out, transform .3s ease-in-out;
         }
 
         .${ blockId }.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.primary-btn:hover {
@@ -1515,7 +1515,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 					: ''
 			}
             display: inline-block;
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out, transform .3s ease-in-out;
         }
 
         .${ blockId }.gslider-base-wrapper .gslider-btn-wrapper .gslider-btn-inner-wrapper .gslider-btn.secondary-btn:hover {
@@ -1791,7 +1791,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 					? `height: ${ navigationArrowHeight.Desktop }${ navigationArrowHeightUnits.Desktop };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out, transform .3s ease-in-out;
         }
         .${ blockId } .swiper-button-prev:hover,
         .${ blockId } .swiper-button-next:hover {
@@ -2043,7 +2043,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 					? `color: ${ paginationFractionColor };`
 					: ''
 			}
-            transition: all .3s ease-in-out;
+            transition: color .3s ease-in-out;
         }
 
         .${ blockId } .swiper-pagination-fraction:hover {

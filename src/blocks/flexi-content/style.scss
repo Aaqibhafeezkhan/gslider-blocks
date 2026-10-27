@@ -18,15 +18,26 @@
 		}
 	}
 
-	.swiper {
-		position: relative !important;
-		overflow: hidden !important;
-	}
-
 	.swiper-backface-hidden {
 
 		.swiper-slide {
 			backface-visibility: visible !important;
+		}
+	}
+
+	.swiper:not(.swiper-initialized) {
+		overflow: hidden;
+
+		.swiper-wrapper {
+			display: flex;
+			flex-wrap: nowrap;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		.swiper-slide {
+			flex-shrink: 0;
+			box-sizing: border-box;
 		}
 	}
 }

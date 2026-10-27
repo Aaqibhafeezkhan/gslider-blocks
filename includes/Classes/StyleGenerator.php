@@ -138,6 +138,9 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
             if ( ! $headless ) {
                 // Apply LCP image priority to the first slide image on the page (frontend only).
                 $block_content = $this->optimize_lcp_image( $block_content );
+
+                // Ensure explicit width and height attributes on slide images to eliminate CLS (#391).
+                $block_content = $this->ensure_image_dimensions( $block_content, $block );
             }
 
             if ( empty( $block['attrs']['blockStyle'] ) ) {
@@ -310,6 +313,200 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
             self::$lcp_optimized = true;
 
             return $optimized ? $processor->get_updated_html() : $block_content;
+        }
+
+        /**
+         * Ensures explicit width and height HTML attributes on slide images to eliminate CLS (#391).
+         *
+         * Uses WP_HTML_Tag_Processor (no regex) and only touches <img> tags inside
+         * .swiper-slide whose src points to the same file as a block image/logo/author/rating item.
+         * Dimensions come from the attachment size that matches the URL (full or an
+         * intermediate size), so cropped sizes keep their real aspect ratio.
+         *
+         * @since 1.2.0
+         *
+         * @param string $block_content The block HTML content.
+         * @param array  $block         The block data and attributes.
+         * @return string Updated block HTML with width/height attributes on slide images.
+         */
+        public function ensure_image_dimensions( string $block_content, array $block ): string {
+            if ( '' === $block_content || empty( $block['attrs'] ) || ! is_array( $block['attrs'] ) ) {
+                return $block_content;
+            }
+
+            if ( is_admin() || self::is_rest_request() || ( function_exists( 'is_feed' ) && is_feed() ) ) {
+                return $block_content;
+            }
+
+            if ( false === stripos( $block_content, '<img' ) || ! class_exists( 'WP_HTML_Tag_Processor' ) ) {
+                return $block_content;
+            }
+
+            $items = [];
+            if ( ! empty( $block['attrs']['images'] ) && is_array( $block['attrs']['images'] ) ) {
+                $items = $block['attrs']['images'];
+            } elseif ( ! empty( $block['attrs']['logos'] ) && is_array( $block['attrs']['logos'] ) ) {
+                $items = $block['attrs']['logos'];
+            } elseif ( ! empty( $block['attrs']['sliderItems'] ) && is_array( $block['attrs']['sliderItems'] ) ) {
+                foreach ( $block['attrs']['sliderItems'] as $slide ) {
+                    if ( ! empty( $slide['authorImage'] ) && is_array( $slide['authorImage'] ) ) {
+                        $items[] = $slide['authorImage'];
+                    }
+                    if ( ! empty( $slide['ratingImage'] ) && is_array( $slide['ratingImage'] ) ) {
+                        $items[] = $slide['ratingImage'];
+                    }
+                }
+                if ( ! empty( $block['attrs']['quoteImageUrl'] ) && ! empty( $block['attrs']['quoteImageID'] ) ) {
+                    $items[] = [
+                        'id'  => $block['attrs']['quoteImageID'],
+                        'url' => $block['attrs']['quoteImageUrl'],
+                    ];
+                }
+            }
+
+            // Map normalized URL path => attachment ID.
+            $lookup = [];
+            foreach ( $items as $item ) {
+                if ( ! is_array( $item ) || empty( $item['id'] ) || ! is_numeric( $item['id'] ) || (int) $item['id'] <= 0 ) {
+                    continue;
+                }
+                if ( empty( $item['url'] ) || ! is_string( $item['url'] ) ) {
+                    continue;
+                }
+                $key = self::normalize_image_url( $item['url'] );
+                if ( '' !== $key && ! isset( $lookup[ $key ] ) ) {
+                    $lookup[ $key ] = (int) $item['id'];
+                }
+            }
+
+            if ( empty( $lookup ) ) {
+                return $block_content;
+            }
+
+            $processor = new \WP_HTML_Tag_Processor( $block_content );
+            $in_slide  = false;
+            $changed   = false;
+
+            while ( $processor->next_tag() ) {
+                if ( $processor->is_tag_closer() ) {
+                    continue;
+                }
+
+                if ( 'IMG' !== $processor->get_tag() ) {
+                    $classes = $processor->get_attribute( 'class' );
+                    if ( is_string( $classes ) && false !== strpos( ' ' . preg_replace( '/\s+/', ' ', $classes ) . ' ', ' swiper-slide ' ) ) {
+                        $in_slide = true;
+                    }
+                    continue;
+                }
+
+                if ( ! $in_slide ) {
+                    continue;
+                }
+
+                $has_width  = null !== $processor->get_attribute( 'width' );
+                $has_height = null !== $processor->get_attribute( 'height' );
+                if ( $has_width && $has_height ) {
+                    continue;
+                }
+
+                $src = $processor->get_attribute( 'src' );
+                if ( ! is_string( $src ) || '' === $src ) {
+                    continue;
+                }
+
+                $key = self::normalize_image_url( $src );
+                if ( ! isset( $lookup[ $key ] ) ) {
+                    continue;
+                }
+
+                $dimensions = self::get_image_dimensions_for_src( $src, $lookup[ $key ] );
+                if ( null === $dimensions ) {
+                    continue;
+                }
+
+                // Only add what is missing; never overwrite author values.
+                if ( ! $has_width ) {
+                    $processor->set_attribute( 'width', (string) $dimensions[0] );
+                }
+                if ( ! $has_height ) {
+                    $processor->set_attribute( 'height', (string) $dimensions[1] );
+                }
+                $changed = true;
+            }
+
+            return $changed ? $processor->get_updated_html() : $block_content;
+        }
+
+        /**
+         * Normalizes an image URL to "host/path" (no scheme, query or fragment) for matching.
+         *
+         * @since 1.2.0
+         *
+         * @param string $url Image URL.
+         * @return string Normalized key, or '' when the URL has no path.
+         */
+        private static function normalize_image_url( string $url ): string {
+            $url   = html_entity_decode( trim( $url ), ENT_QUOTES );
+            $parts = function_exists( 'wp_parse_url' ) ? wp_parse_url( $url ) : parse_url( $url );
+            if ( ! is_array( $parts ) || empty( $parts['path'] ) ) {
+                return '';
+            }
+            $host = isset( $parts['host'] ) ? strtolower( $parts['host'] ) : '';
+            return $host . '/' . ltrim( $parts['path'], '/' );
+        }
+
+        /**
+         * Returns [ width, height ] for the attachment size that the src points to.
+         *
+         * Uses wp_image_src_get_dimensions() (WP 5.5+) which matches the file name
+         * against the full image and every intermediate size. Falls back to the
+         * full-size metadata only when the src file name is the original file.
+         *
+         * @since 1.2.0
+         *
+         * @param string $src           Image src from the markup.
+         * @param int    $attachment_id Attachment ID.
+         * @return int[]|null Width and height, or null when unknown.
+         */
+        private static function get_image_dimensions_for_src( string $src, int $attachment_id ): ?array {
+            if ( ! function_exists( 'wp_get_attachment_metadata' ) ) {
+                return null;
+            }
+            $meta = wp_get_attachment_metadata( $attachment_id );
+            if ( ! is_array( $meta ) ) {
+                return null;
+            }
+
+            $path = function_exists( 'wp_parse_url' ) ? wp_parse_url( $src, PHP_URL_PATH ) : parse_url( $src, PHP_URL_PATH );
+            if ( ! is_string( $path ) || '' === $path ) {
+                return null;
+            }
+            $src_path = $path;
+
+            if ( function_exists( 'wp_image_src_get_dimensions' ) ) {
+                $dims = wp_image_src_get_dimensions( $src_path, $meta, $attachment_id );
+                if ( is_array( $dims ) && ! empty( $dims[0] ) && ! empty( $dims[1] ) ) {
+                    return [ (int) $dims[0], (int) $dims[1] ];
+                }
+                return null;
+            }
+
+            // Fallback: match file names ourselves.
+            $file = basename( $src_path );
+            if ( ! empty( $meta['file'] ) && is_string( $meta['file'] ) && basename( $meta['file'] ) === $file
+                && ! empty( $meta['width'] ) && ! empty( $meta['height'] ) ) {
+                return [ (int) $meta['width'], (int) $meta['height'] ];
+            }
+            if ( ! empty( $meta['sizes'] ) && is_array( $meta['sizes'] ) ) {
+                foreach ( $meta['sizes'] as $size ) {
+                    if ( is_array( $size ) && isset( $size['file'] ) && $size['file'] === $file
+                        && ! empty( $size['width'] ) && ! empty( $size['height'] ) ) {
+                        return [ (int) $size['width'], (int) $size['height'] ];
+                    }
+                }
+            }
+            return null;
         }
 
         /**

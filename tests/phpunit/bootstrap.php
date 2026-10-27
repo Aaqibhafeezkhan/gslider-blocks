@@ -297,6 +297,45 @@ if ( ! function_exists( 'render_block' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wp_get_attachment_metadata' ) ) {
+	function wp_get_attachment_metadata( $attachment_id ) {
+		global $attachment_metadata_mock;
+		return isset( $attachment_metadata_mock[ $attachment_id ] ) ? $attachment_metadata_mock[ $attachment_id ] : false;
+	}
+}
+
+if ( ! function_exists( 'wp_get_attachment_image_src' ) ) {
+	function wp_get_attachment_image_src( $attachment_id, $size = 'thumbnail' ) {
+		global $attachment_image_src_mock;
+		return isset( $attachment_image_src_mock[ $attachment_id ] ) ? $attachment_image_src_mock[ $attachment_id ] : false;
+	}
+}
+
+if ( ! function_exists( 'wp_image_src_get_dimensions' ) ) {
+	/**
+	 * Minimal copy of core wp_image_src_get_dimensions() (WP 5.5+).
+	 *
+	 * @param string $image_src     Image source path or URL.
+	 * @param array  $image_meta    Attachment metadata.
+	 * @param int    $attachment_id Attachment ID.
+	 * @return array|false
+	 */
+	function wp_image_src_get_dimensions( $image_src, $image_meta, $attachment_id = 0 ) {
+		$image_filename = basename( (string) $image_src );
+		if ( isset( $image_meta['file'] ) && basename( $image_meta['file'] ) === $image_filename ) {
+			return array( (int) $image_meta['width'], (int) $image_meta['height'] );
+		}
+		if ( ! empty( $image_meta['sizes'] ) ) {
+			foreach ( $image_meta['sizes'] as $image_size_data ) {
+				if ( $image_filename === $image_size_data['file'] ) {
+					return array( (int) $image_size_data['width'], (int) $image_size_data['height'] );
+				}
+			}
+		}
+		return false;
+	}
+}
+
 if ( ! class_exists( 'WP_REST_Controller' ) ) {
 	class WP_REST_Controller {
 		protected $namespace;
