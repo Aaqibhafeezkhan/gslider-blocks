@@ -139,9 +139,25 @@
 		z-index: 1000;
 	}
 
-	.gslider-image-item:hover .gslider-image-tooltip {
+	.gslider-image-item:hover .gslider-image-tooltip,
+	.gslider-image-item:focus-within .gslider-image-tooltip {
 		opacity: 1;
 		visibility: visible;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+
+		.gslider-image-item,
+		.gslider-image-item img,
+		.gslider-image-link,
+		.gslider-image-tooltip {
+			transition: none !important;
+		}
+
+		.gslider-image-item[data-hover-effect]:hover,
+		.gslider-image-item[data-hover-effect]:hover img {
+			transform: none !important;
+		}
 	}
 }
 

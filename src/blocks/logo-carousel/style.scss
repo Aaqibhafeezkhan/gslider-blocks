@@ -139,9 +139,25 @@
 		z-index: 1000;
 	}
 
-	.gslider-logo-item:hover .gslider-logo-tooltip {
+	.gslider-logo-item:hover .gslider-logo-tooltip,
+	.gslider-logo-item:focus-within .gslider-logo-tooltip {
 		opacity: 1;
 		visibility: visible;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+
+		.gslider-logo-item,
+		.gslider-logo-item img,
+		.gslider-logo-link,
+		.gslider-logo-tooltip {
+			transition: none !important;
+		}
+
+		.gslider-logo-item[data-hover-effect]:hover,
+		.gslider-logo-item[data-hover-effect]:hover img {
+			transform: none !important;
+		}
 	}
 }
 
