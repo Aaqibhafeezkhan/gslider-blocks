@@ -1,4 +1,4 @@
-/* eslint-disable no-console, jsdoc/require-param */
+/* eslint-disable no-console */
 import esbuild from 'esbuild';
 import path from 'path';
 import fs from 'fs';
@@ -213,6 +213,11 @@ function resolveOptions( expression, constants ) {
 /**
  * Reads every `options={...}` control in the block's inspector.js and maps the
  * attribute it writes through setAttributes to the option values it offers.
+ *
+ * @param {string} slug      - Block directory slug.
+ * @param {Object} rawAttrs  - Raw parsed block attributes map.
+ * @param {Object} constants - Shared block constants map.
+ * @return {Object} Allowed values map keyed by attribute name.
  */
 function extractAllowedValues( slug, rawAttrs, constants ) {
 	const inspectorPath = path.resolve(
