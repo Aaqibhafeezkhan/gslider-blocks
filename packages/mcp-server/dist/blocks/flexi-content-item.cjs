@@ -214,8 +214,6 @@ function Save({ attributes: attributes2 }) {
 var generateFlexiContentItemStyle = (attributes2) => {
   const {
     blockId,
-    deviceType,
-    blockStyle,
     /** Start slider Item Background */
     sliderItemNormalBackgroundType,
     sliderItemNormalClassicColor,

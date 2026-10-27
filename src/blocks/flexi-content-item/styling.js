@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars, jsdoc/require-param, jsdoc/check-tag-names */
+/* eslint-disable jsdoc/require-param, jsdoc/check-tag-names */
 /**
  * Flexi Content Item Block - Style Generation
  * Returns Dynamic Generated CSS
@@ -12,8 +12,6 @@
 const generateFlexiContentItemStyle = ( attributes ) => {
 	const {
 		blockId,
-		deviceType,
-		blockStyle,
 
 		/** Start slider Item Background */
 		sliderItemNormalBackgroundType,
