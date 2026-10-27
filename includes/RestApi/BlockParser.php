@@ -11,6 +11,7 @@
 
 namespace GSlider\RestApi;
 
+use GSlider\Classes\StyleGenerator;
 use GSlider\Utils\CssSanitizer;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -711,15 +712,55 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 				$inner_attrs = isset( $inner_block['attrs'] ) && is_array( $inner_block['attrs'] ) ? $inner_block['attrs'] : [];
 				$slide_id    = isset( $inner_attrs['blockId'] ) ? sanitize_key( $inner_attrs['blockId'] ) : ( 'slide-' . ( $index + 1 ) );
 
+				// Render through StyleGenerator so the slide keeps its scoped <style> tags in REST output.
+				$inner_html = class_exists( StyleGenerator::class )
+					? StyleGenerator::render_block_with_styles( $inner_block )
+					: render_block( $inner_block );
+
 				$slides[] = [
 					'id'          => $slide_id,
 					'blockName'   => $inner_name,
-					'innerHtml'   => render_block( $inner_block ),
+					'innerHtml'   => $inner_html,
+					'css'         => self::collect_inner_block_styles( $inner_block ),
 					'innerBlocks' => $inner_block['innerBlocks'] ?? [],
 				];
 			}
 
 			return $slides;
+		}
+
+		/**
+		 * Collects the sanitized blockStyle CSS of a block and all of its nested inner blocks.
+		 *
+		 * Exposed as slides[].css so headless consumers can apply Flexi Content slide styles
+		 * without parsing <style> tags out of innerHtml.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param array $block Parsed block array.
+		 * @return string Concatenated sanitized CSS (empty string when none).
+		 */
+		public static function collect_inner_block_styles( array $block ): string {
+			$css   = [];
+			$attrs = isset( $block['attrs'] ) && is_array( $block['attrs'] ) ? $block['attrs'] : [];
+			$own   = self::extract_block_styles( $attrs );
+
+			if ( '' !== $own ) {
+				$css[] = $own;
+			}
+
+			if ( ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
+				foreach ( $block['innerBlocks'] as $child ) {
+					if ( is_array( $child ) ) {
+						$child_css = self::collect_inner_block_styles( $child );
+						if ( '' !== $child_css ) {
+							$css[] = $child_css;
+						}
+					}
+				}
+			}
+
+			return implode( "\n", $css );
 		}
 
 	}

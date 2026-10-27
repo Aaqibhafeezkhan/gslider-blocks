@@ -8,6 +8,7 @@
  * 3. Stored attribute overrides (e.g. false booleans, custom objects) are preserved without being overwritten.
  * 4. Image, Logo, Testimonial, and Flexi-Content slide structures are parsed with appropriate fields.
  * 5. blockStyle CSS is strictly sanitized to prevent arbitrary code injection for REST consumers.
+ * 6. Flexi Content slides keep their CSS in REST output (slides[].css and <style> in innerHtml).
  *
  * @package GSlider\Tests\RestApi
  */
@@ -107,6 +108,7 @@ class BlockParserTest {
 		$this->test_stored_overrides_and_preservation();
 		$this->test_block_types_normalization();
 		$this->test_css_sanitization();
+		$this->test_flexi_slide_css_in_rest_output();
 
 		fwrite( STDOUT, "\nAll BlockParser tests passed successfully!\n" );
 	}
@@ -353,6 +355,55 @@ class BlockParserTest {
 			'gslider-blocks/base'
 		);
 		$this->assert_true( '.x{color:red}' === $styled['css'] && $styled['css'] === $styled['attrs']['blockStyle'], 'REST css and attrs.blockStyle are sanitized' );
+	}
+
+	/**
+	 * Test 6: Flexi Content slide CSS survives a REST request (headless /gslider API).
+	 *
+	 * @return void
+	 */
+	public function test_flexi_slide_css_in_rest_output(): void {
+		global $is_rest_mock, $is_admin_mock;
+		$is_rest_mock  = true;
+		$is_admin_mock = false;
+
+		$generator = \GSlider\Classes\StyleGenerator::getInstance();
+		\GSlider\Classes\StyleGenerator::reset_styles();
+		$GLOBALS['gslider_render_block_impl'] = static function ( $block ) use ( $generator ) {
+			return $generator->collect_and_render_dynamic_styles( '<div class="flexi-content-item swiper-slide">Slide</div>', $block );
+		};
+
+		$flexi = BlockParser::normalize_block(
+			[
+				'blockName'   => 'gslider-blocks/flexi-content',
+				'attrs'       => [],
+				'innerBlocks' => [
+					[
+						'blockName'   => 'gslider-blocks/flexi-content-item',
+						'attrs'       => [
+							'blockId'    => 'slide-a',
+							'blockStyle' => '.slide-a{color:#abcdef}',
+						],
+						'innerBlocks' => [
+							[
+								'blockName'   => 'gslider-blocks/flexi-content-item',
+								'attrs'       => [
+									'blockId'    => 'slide-a-inner',
+									'blockStyle' => '.slide-a-inner{margin:1px}',
+								],
+								'innerBlocks' => [],
+							],
+						],
+					],
+				],
+			]
+		);
+		unset( $GLOBALS['gslider_render_block_impl'] );
+		$is_rest_mock = false;
+
+		$slide = $flexi['slides'][0];
+		$this->assert_true( false !== strpos( $slide['css'], '.slide-a{color:#abcdef}' ) && false !== strpos( $slide['css'], '.slide-a-inner{margin:1px}' ), 'flexi slides[].css carries own and nested CSS' );
+		$this->assert_true( false !== strpos( $slide['innerHtml'], '<style id="gslider-style-slide-a">' ), 'flexi innerHtml keeps its <style> during REST requests' );
 	}
 }
 

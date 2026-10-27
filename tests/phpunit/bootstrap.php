@@ -84,6 +84,32 @@ if ( ! function_exists( 'apply_filters' ) ) {
 	}
 }
 
+if ( ! function_exists( 'remove_filter' ) ) {
+	function remove_filter( $hook, $callback, $priority = 10 ) {
+		global $wp_filters;
+		if ( ! empty( $wp_filters[ $hook ] ) ) {
+			foreach ( $wp_filters[ $hook ] as $index => $filter ) {
+				if ( $filter['callback'] === $callback && $filter['priority'] === $priority ) {
+					unset( $wp_filters[ $hook ][ $index ] );
+				}
+			}
+		}
+		return true;
+	}
+}
+
+if ( ! function_exists( '__return_true' ) ) {
+	function __return_true() {
+		return true;
+	}
+}
+
+if ( ! function_exists( '__return_false' ) ) {
+	function __return_false() {
+		return false;
+	}
+}
+
 if ( ! function_exists( 'do_action' ) ) {
 	function do_action( $tag, ...$args ) {
 		// Mock do_action.
@@ -136,6 +162,13 @@ if ( ! function_exists( 'is_admin' ) ) {
 	function is_admin() {
 		global $is_admin_mock;
 		return isset( $is_admin_mock ) ? (bool) $is_admin_mock : true;
+	}
+}
+
+if ( ! function_exists( 'is_feed' ) ) {
+	function is_feed() {
+		global $is_feed_mock;
+		return isset( $is_feed_mock ) ? (bool) $is_feed_mock : false;
 	}
 }
 
@@ -257,6 +290,9 @@ if ( ! function_exists( 'wp_kses_post' ) ) {
 
 if ( ! function_exists( 'render_block' ) ) {
 	function render_block( $block ) {
+		if ( isset( $GLOBALS['gslider_render_block_impl'] ) && is_callable( $GLOBALS['gslider_render_block_impl'] ) ) {
+			return call_user_func( $GLOBALS['gslider_render_block_impl'], $block );
+		}
 		return '<p>flexi</p>';
 	}
 }
@@ -480,6 +516,179 @@ if ( ! function_exists( 'wp_register_style' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wp_is_json_request' ) ) {
+	function wp_is_json_request() {
+		global $is_json_mock;
+		return ! empty( $is_json_mock );
+	}
+}
+
+if ( ! function_exists( 'wp_style_is' ) ) {
+	function wp_style_is( $handle, $list = 'enqueued' ) {
+		global $wp_styles, $enqueued_styles;
+		if ( 'registered' === $list ) {
+			return isset( $wp_styles[ $handle ] );
+		}
+		if ( 'enqueued' === $list ) {
+			return in_array( $handle, $enqueued_styles, true );
+		}
+		return false;
+	}
+}
+
+if ( ! function_exists( 'sanitize_file_name' ) ) {
+	function sanitize_file_name( $name ) {
+		return preg_replace( '/[^a-zA-Z0-9_\-\.]/', '', (string) $name );
+	}
+}
+
+if ( ! class_exists( '_WP_Dependency' ) ) {
+	class _WP_Dependency {
+		public $handle;
+		public $src;
+		public $deps = [];
+		public $ver = false;
+		public $args = null;
+		public $extra = [];
+
+		public function __construct( $handle, $src, $deps = [], $ver = false, $args = null ) {
+			$this->handle = $handle;
+			$this->src    = $src;
+			$this->deps   = is_array( $deps ) ? $deps : [];
+			$this->ver    = $ver;
+			$this->args   = $args;
+			$this->extra  = is_array( $args ) && isset( $args['strategy'] ) ? [ 'strategy' => $args['strategy'] ] : [];
+		}
+	}
+}
+
+if ( ! class_exists( 'WP_Scripts' ) ) {
+	class WP_Scripts {
+		public $registered = [];
+	}
+}
+
+global $wp_scripts_obj;
+$wp_scripts_obj = new WP_Scripts();
+
+global $wp_scripts;
+$wp_scripts = [];
+
+if ( ! function_exists( 'wp_scripts' ) ) {
+	function wp_scripts() {
+		global $wp_scripts_obj, $wp_scripts;
+		if ( ! ( $wp_scripts_obj instanceof WP_Scripts ) ) {
+			$wp_scripts_obj = new WP_Scripts();
+		}
+		if ( is_array( $wp_scripts ) ) {
+			foreach ( $wp_scripts as $h => $data ) {
+				if ( ! isset( $wp_scripts_obj->registered[ $h ] ) ) {
+					$wp_scripts_obj->registered[ $h ] = new _WP_Dependency(
+						$h,
+						$data['src'] ?? '',
+						$data['deps'] ?? [],
+						$data['ver'] ?? false,
+						$data['args'] ?? false
+					);
+				}
+			}
+		}
+		return $wp_scripts_obj;
+	}
+}
+
+if ( ! function_exists( 'wp_script_is' ) ) {
+	function wp_script_is( $handle, $list = 'enqueued' ) {
+		global $wp_scripts, $enqueued_scripts;
+		if ( 'registered' === $list ) {
+			return isset( $wp_scripts[ $handle ] ) || ( function_exists( 'wp_scripts' ) && isset( wp_scripts()->registered[ $handle ] ) );
+		}
+		if ( 'enqueued' === $list ) {
+			return in_array( $handle, $enqueued_scripts, true );
+		}
+		return false;
+	}
+}
+
+if ( ! function_exists( 'wp_script_add_data' ) ) {
+	function wp_script_add_data( $handle, $key, $value ) {
+		global $wp_scripts;
+		$scripts = function_exists( 'wp_scripts' ) ? wp_scripts() : null;
+		if ( ! isset( $wp_scripts[ $handle ] ) && ( ! $scripts || ! isset( $scripts->registered[ $handle ] ) ) ) {
+			return false;
+		}
+		if ( ! isset( $wp_scripts[ $handle ] ) ) {
+			$wp_scripts[ $handle ] = [
+				'src'   => '',
+				'deps'  => [],
+				'ver'   => false,
+				'args'  => [],
+				'extra' => [],
+			];
+		}
+		if ( ! isset( $wp_scripts[ $handle ]['extra'] ) ) {
+			$wp_scripts[ $handle ]['extra'] = [];
+		}
+		$wp_scripts[ $handle ]['extra'][ $key ] = $value;
+		if ( 'strategy' === $key ) {
+			if ( ! is_array( $wp_scripts[ $handle ]['args'] ) ) {
+				$wp_scripts[ $handle ]['args'] = [];
+			}
+			$wp_scripts[ $handle ]['args']['strategy'] = $value;
+		}
+		if ( $scripts && isset( $scripts->registered[ $handle ] ) ) {
+			$scripts->registered[ $handle ]->extra[ $key ] = $value;
+			if ( 'strategy' === $key ) {
+				if ( ! is_array( $scripts->registered[ $handle ]->args ) ) {
+					$scripts->registered[ $handle ]->args = [];
+				}
+				$scripts->registered[ $handle ]->args['strategy'] = $value;
+			}
+		}
+		return true;
+	}
+}
+
+if ( ! function_exists( 'wp_register_script' ) ) {
+	function wp_register_script( $handle, $src, $deps = [], $ver = false, $args = false ) {
+		global $wp_scripts;
+		$wp_scripts[ $handle ] = [
+			'src'   => $src,
+			'deps'  => $deps,
+			'ver'   => $ver,
+			'args'  => $args,
+			'extra' => is_array( $args ) && isset( $args['strategy'] ) ? [ 'strategy' => $args['strategy'] ] : [],
+		];
+		if ( function_exists( 'wp_scripts' ) ) {
+			$scripts = wp_scripts();
+			$scripts->registered[ $handle ] = new _WP_Dependency( $handle, $src, $deps, $ver, $args );
+		}
+		return true;
+	}
+}
+
+if ( ! function_exists( 'register_block_type' ) ) {
+	function register_block_type( $file_or_folder, $args = [] ) {
+		global $registered_block_types;
+		if ( ! is_array( $registered_block_types ) ) {
+			$registered_block_types = [];
+		}
+		$registered_block_types[] = $file_or_folder;
+
+		$json_file = is_string( $file_or_folder ) ? rtrim( $file_or_folder, '/' ) . '/block.json' : '';
+		if ( file_exists( $json_file ) ) {
+			$data = json_decode( file_get_contents( $json_file ), true );
+			if ( ! empty( $data['name'] ) ) {
+				$slug   = str_replace( 'gslider-blocks/', '', $data['name'] );
+				$handle = 'gslider-blocks-' . $slug . '-view-script';
+				wp_register_script( $handle, 'view.js', [] );
+			}
+		}
+
+		return (object) [ 'name' => is_string( $file_or_folder ) ? basename( $file_or_folder ) : 'mock-block' ];
+	}
+}
+
 if ( ! function_exists( 'get_queried_object_id' ) ) {
 	function get_queried_object_id() {
 		return 42;
@@ -589,4 +798,34 @@ if ( ! function_exists( 'current_time' ) ) {
 $gslider_autoloader = dirname( __DIR__, 2 ) . '/vendor/autoload.php';
 if ( file_exists( $gslider_autoloader ) ) {
 	require_once $gslider_autoloader;
+}
+
+if ( ! function_exists( 'wp_is_serving_rest_request' ) ) {
+	/**
+	 * Stub for wp_is_serving_rest_request(), controlled via the global $is_rest_mock.
+	 *
+	 * @return bool
+	 */
+	function wp_is_serving_rest_request() {
+		global $is_rest_mock;
+		return ! empty( $is_rest_mock );
+	}
+}
+
+if ( ! function_exists( '_doing_it_wrong' ) ) {
+	/**
+	 * Stub for _doing_it_wrong() used by the bundled HTML API.
+	 *
+	 * @return void
+	 */
+	function _doing_it_wrong( $function_name, $message, $version ) {} // phpcs:ignore
+}
+
+// WordPress 6.3 HTML API (copied verbatim from wordpress-develop 6.3.0, GPLv2+) so
+// StyleGenerator::optimize_lcp_image() is tested against the real WP_HTML_Tag_Processor.
+if ( ! class_exists( 'WP_HTML_Tag_Processor' ) ) {
+	require_once __DIR__ . '/stubs/html-api/class-wp-html-attribute-token.php';
+	require_once __DIR__ . '/stubs/html-api/class-wp-html-span.php';
+	require_once __DIR__ . '/stubs/html-api/class-wp-html-text-replacement.php';
+	require_once __DIR__ . '/stubs/html-api/class-wp-html-tag-processor.php';
 }

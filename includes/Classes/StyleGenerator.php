@@ -45,6 +45,35 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         private static $styles = [];
 
         /**
+         * Track block IDs whose style tags have already been rendered on the current request.
+         *
+         * Prevents duplicate <style> tags for the same block ID (e.g. in query loops or synced patterns).
+         *
+         * @since 1.2.0
+         *
+         * @var array<string, bool>
+         */
+        private static $printed = [];
+
+        /**
+         * Track whether the LCP image priority has been applied to the first slide on the page.
+         *
+         * @since 1.2.0
+         *
+         * @var bool
+         */
+        private static $lcp_optimized = false;
+
+        /**
+         * Depth counter for headless renders that must keep inline styles inside REST responses.
+         *
+         * @since 1.2.0
+         *
+         * @var int
+         */
+        private static $headless_depth = 0;
+
+        /**
          * Registers hooks for style collection, sanitization, and rendering.
          *
          * @since 1.0.0
@@ -89,31 +118,198 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
                 return $block_content;
             }
 
-            if ( false !== strpos( $block['blockName'], 'gslider-blocks/' ) && ! empty( $block['attrs']['blockStyle'] ) ) {
-                $block_id = isset( $block['attrs']['blockId'] ) ?
-                    sanitize_key( $block['attrs']['blockId'] ) :
-                    'gslider-blocks-' . md5( serialize( $block['attrs'] ) );
-
-                $raw_style = is_string( $block['attrs']['blockStyle'] ) ? $block['attrs']['blockStyle'] : '';
-
-                // Strictly sanitize CSS to prevent arbitrary CSS injection.
-                $clean_style = $this->sanitize_css( $raw_style, $block_id );
-
-                if ( ! empty( $clean_style ) ) {
-                    self::$styles[ $block_id ] = $clean_style;
-
-                    // Enqueue via WordPress native inline styles if handle is available.
-                    if ( function_exists( 'wp_style_is' ) && wp_style_is( 'gslider-blocks-dynamic-styles', 'registered' ) ) {
-                        wp_add_inline_style( 'gslider-blocks-dynamic-styles', $clean_style );
-                    }
-
-                    // Render inline style tag directly scoped to this block for zero-FOUC and full compatibility.
-                    $style_tag = '<style id="gslider-style-' . esc_attr( $block_id ) . '">' . $clean_style . '</style>';
-                    return $style_tag . $block_content;
-                }
+            // Never print styles or touch markup inside RSS/Atom feeds (#312).
+            if ( function_exists( 'is_feed' ) && is_feed() ) {
+                return $block_content;
             }
 
-            return $block_content;
+            $headless = self::$headless_depth > 0;
+
+            // Generic REST responses (e.g. content.rendered) get no inline CSS (#312), except
+            // the plugin's own headless renders (BlockParser), which need per-slide CSS.
+            if ( ! $headless && self::is_rest_request() ) {
+                return $block_content;
+            }
+
+            if ( false === strpos( $block['blockName'], 'gslider-blocks/' ) ) {
+                return $block_content;
+            }
+
+            if ( ! $headless ) {
+                // Apply LCP image priority to the first slide image on the page (frontend only).
+                $block_content = $this->optimize_lcp_image( $block_content );
+            }
+
+            if ( empty( $block['attrs']['blockStyle'] ) ) {
+                return $block_content;
+            }
+
+            $block_id = isset( $block['attrs']['blockId'] ) ?
+                sanitize_key( $block['attrs']['blockId'] ) :
+                'gslider-blocks-' . md5( serialize( $block['attrs'] ) );
+
+            $raw_style = is_string( $block['attrs']['blockStyle'] ) ? $block['attrs']['blockStyle'] : '';
+
+            // Strictly sanitize CSS to prevent arbitrary CSS injection.
+            $clean_style = $this->sanitize_css( $raw_style, $block_id );
+
+            if ( empty( $clean_style ) ) {
+                return $block_content;
+            }
+
+            self::$styles[ $block_id ] = $clean_style;
+
+            // Headless slide HTML is consumed piece by piece, so every slide keeps its own style tag.
+            // On normal pages, render the <style> tag only once per unique block ID per request.
+            if ( ! $headless ) {
+                if ( ! empty( self::$printed[ $block_id ] ) ) {
+                    return $block_content;
+                }
+                self::$printed[ $block_id ] = true;
+            }
+
+            $style_tag = '<style id="gslider-style-' . esc_attr( $block_id ) . '">' . $clean_style . '</style>';
+
+            return $style_tag . $block_content;
+        }
+
+        /**
+         * Renders a block for the plugin's headless REST output while keeping its inline styles.
+         *
+         * Used by BlockParser::normalize_flexi_content() so /gslider/v1 consumers still receive
+         * per-slide CSS even though generic REST responses are stripped of inline styles.
+         *
+         * @since 1.2.0
+         *
+         * @param array $block Parsed block array.
+         * @return string Rendered block HTML including scoped <style> tags.
+         */
+        public static function render_block_with_styles( array $block ): string {
+            self::$headless_depth++;
+
+            try {
+                $html = render_block( $block );
+            } finally {
+                self::$headless_depth--;
+            }
+
+            return is_string( $html ) ? $html : '';
+        }
+
+        /**
+         * Determines whether the current request is a WordPress REST API request.
+         *
+         * Deliberately does not use wp_is_json_request(), which is also true for
+         * front-end AJAX loaders that send a JSON Accept header.
+         *
+         * @since 1.2.0
+         *
+         * @return bool True when serving a REST API request.
+         */
+        private static function is_rest_request(): bool {
+            if ( function_exists( 'wp_is_serving_rest_request' ) ) {
+                return (bool) wp_is_serving_rest_request();
+            }
+
+            return defined( 'REST_REQUEST' ) && REST_REQUEST;
+        }
+
+        /**
+         * Prioritizes the first real slide image of the first GSlider slider on the page for LCP.
+         *
+         * Uses WP_HTML_Tag_Processor so attribute values are never rewritten as raw text.
+         * Sets fetchpriority="high" and decoding="async", and switches loading="lazy" to
+         * loading="eager". Images outside a slide and testimonial rating icons are skipped.
+         *
+         * @since 1.2.0
+         *
+         * @param string $block_content The block HTML content.
+         * @return string Optimized block HTML content, or the original HTML when nothing applies.
+         */
+        public function optimize_lcp_image( string $block_content ): string {
+            if ( self::$lcp_optimized || '' === $block_content ) {
+                return $block_content;
+            }
+
+            // Only run on frontend page loads (skip admin, REST requests, and feeds).
+            if ( is_admin() || self::is_rest_request() || ( function_exists( 'is_feed' ) && is_feed() ) ) {
+                return $block_content;
+            }
+
+            if ( false === stripos( $block_content, '<img' ) || false === strpos( $block_content, 'swiper-slide' ) ) {
+                return $block_content;
+            }
+
+            if ( ! class_exists( 'WP_HTML_Tag_Processor' ) ) {
+                return $block_content;
+            }
+
+            /**
+             * Filters whether to optimize the first slider image for LCP on the frontend.
+             *
+             * Return false to disable automatic fetchpriority="high", loading="eager"
+             * and decoding="async" on the first slide image.
+             *
+             * @since 1.2.0
+             *
+             * @param bool   $optimize      Whether to optimize the LCP image. Default true.
+             * @param string $block_content The block HTML content.
+             */
+            if ( ! apply_filters( 'gslider_lcp_optimize', true, $block_content ) ) {
+                return $block_content;
+            }
+
+            $processor    = new \WP_HTML_Tag_Processor( $block_content );
+            $in_slide     = false;
+            $after_rating = false;
+            $optimized    = false;
+
+            while ( $processor->next_tag() ) {
+                if ( $processor->is_tag_closer() ) {
+                    continue;
+                }
+
+                $classes = $processor->get_attribute( 'class' );
+                $classes = is_string( $classes ) ? ' ' . preg_replace( '/\s+/', ' ', $classes ) . ' ' : '';
+
+                if ( 'IMG' !== $processor->get_tag() ) {
+                    if ( false !== strpos( $classes, ' swiper-slide ' ) ) {
+                        $in_slide = true;
+                    }
+                    // Testimonial rating images sit directly inside .gslider-testimonial-rating-icon.
+                    $after_rating = false !== strpos( $classes, 'rating-icon' );
+                    continue;
+                }
+
+                if ( ! $in_slide || $after_rating || false !== strpos( $classes, 'rating' ) ) {
+                    $after_rating = false;
+                    continue;
+                }
+
+                if ( null === $processor->get_attribute( 'fetchpriority' ) ) {
+                    $processor->set_attribute( 'fetchpriority', 'high' );
+                }
+                if ( null === $processor->get_attribute( 'decoding' ) ) {
+                    $processor->set_attribute( 'decoding', 'async' );
+                }
+
+                $loading = $processor->get_attribute( 'loading' );
+                if ( is_string( $loading ) && 'lazy' === strtolower( $loading ) ) {
+                    $processor->set_attribute( 'loading', 'eager' );
+                }
+
+                $optimized = true;
+                break;
+            }
+
+            if ( ! $in_slide ) {
+                return $block_content;
+            }
+
+            // The first slider on the page has been handled (with or without an image).
+            self::$lcp_optimized = true;
+
+            return $optimized ? $processor->get_updated_html() : $block_content;
         }
 
         /**
@@ -272,14 +468,16 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         }
 
         /**
-         * Resets collected styles in memory (primarily for unit testing).
+         * Resets collected styles and optimization flags in memory (primarily for unit testing).
          *
          * @since 1.2.0
          *
          * @return void
          */
         public static function reset_styles(): void {
-            self::$styles = [];
+            self::$styles        = [];
+            self::$printed       = [];
+            self::$lcp_optimized = false;
         }
 
         /**

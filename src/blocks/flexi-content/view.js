@@ -8,6 +8,15 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
 		sliders.forEach( ( sliderContainer ) => {
 			try {
+				const swiperElement =
+					sliderContainer.querySelector( '.swiper' );
+				if (
+					! swiperElement ||
+					swiperElement.classList.contains( 'swiper-initialized' )
+				) {
+					return;
+				}
+
 				// Get the Swiper settings from the data attribute
 				const swiperSettings = sliderContainer.dataset.swiperSettings;
 
@@ -16,8 +25,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
 					// Fix for fade effect: disable initial transition to prevent right-to-left glitch on page load
 					if ( settings.effect === 'fade' ) {
-						const swiperElement =
-							sliderContainer.querySelector( '.swiper' );
 						const wrapper =
 							swiperElement?.querySelector( '.swiper-wrapper' );
 						const slides =
@@ -73,10 +80,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 					}
 
 					// Initialize Swiper with parsed settings
-					new Swiper(
-						sliderContainer.querySelector( '.swiper' ),
-						settings
-					);
+					new Swiper( swiperElement, settings );
 				}
 			} catch ( error ) {
 				// eslint-disable-next-line no-console

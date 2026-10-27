@@ -9,6 +9,14 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
 		sliders.forEach( ( sliderContainer ) => {
 			try {
+				const swiperEl = sliderContainer.querySelector( '.swiper' );
+				if (
+					! swiperEl ||
+					swiperEl.classList.contains( 'swiper-initialized' )
+				) {
+					return;
+				}
+
 				// Get the Swiper settings from the data attribute
 				const swiperSettings = sliderContainer.dataset.swiperSettings;
 
@@ -34,12 +42,10 @@ document.addEventListener( 'DOMContentLoaded', () => {
 					}
 
 					// Initialize Swiper with parsed settings
-					new Swiper(
-						sliderContainer.querySelector( '.swiper' ),
-						settings
-					);
+					new Swiper( swiperEl, settings );
 				}
 			} catch ( error ) {
+				// eslint-disable-next-line no-console
 				console.error( 'Error initializing slider:', error );
 			}
 		} );

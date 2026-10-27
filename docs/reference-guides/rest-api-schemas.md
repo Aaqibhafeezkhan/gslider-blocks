@@ -92,7 +92,7 @@ This document provides exhaustive technical specifications, JSON schema definiti
           },
           "slides": {
             "type": "array",
-            "description": "Normalized slide items array (images, titles, descriptions, etc.)."
+            "description": "Normalized slide items array (images, titles, descriptions, etc.). For Flexi Content, items include 'id', 'blockName', 'innerHtml', 'css' (the slide's own CSS plus its nested blocks' CSS), and 'innerBlocks'."
           },
           "attrs": {
             "type": "object",
@@ -124,6 +124,20 @@ Every block instance returned in `blocks[i].swiperConfig` contains server-compil
 | `allowTouchMove` | `boolean` | `true` | Allows dragging and touch swipe interactions. |
 | `keyboard` | `object \| false` | `{ enabled: true, onlyInViewport: true, pageUpDown: false }` | Keyboard arrow navigation config. |
 | `autoHeight` | `boolean` | `false` | Whether slider automatically adapts its container height. |
+
+---
+
+### `slides` Specification Table (Flexi Content REST Output)
+
+For block-based sliders such as `gslider-blocks/flexi-content`, each element in `blocks[i].slides` represents an individual slide container with the following properties:
+
+| Property | Type | Description |
+| :--- | :---: | :--- |
+| `id` | `string` | Slide identifier or block ID (e.g. `'slide-1'`). |
+| `blockName` | `string` | Canonical block name of the slide item (e.g. `'gslider-blocks/flexi-content-item'`). |
+| `innerHtml` | `string` | Fully rendered HTML markup of the slide. For backward compatibility, the slide's scoped `<style>` tags are also retained inside `innerHtml`. |
+| `css` | `string` | The slide's own scoped CSS plus its nested blocks' CSS. Headless consumers can apply this CSS directly without having to parse `innerHtml`. |
+| `innerBlocks` | `array` | Nested Gutenberg block nodes contained within this slide. |
 
 ---
 

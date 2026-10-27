@@ -1,5 +1,4 @@
 /* global Swiper */
-/* eslint-disable no-console */
 document.addEventListener( 'DOMContentLoaded', () => {
 	const initializeSliders = () => {
 		// Select all slider containers
@@ -9,40 +8,45 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
 		sliders.forEach( ( sliderContainer ) => {
 			try {
-				// Get the Swiper settings from the data attribute
-				const swiperSettings = sliderContainer.dataset.swiperSettings;
+				const swiperEl = sliderContainer.querySelector( '.swiper' );
+				if (
+					swiperEl &&
+					! swiperEl.classList.contains( 'swiper-initialized' )
+				) {
+					// Get the Swiper settings from the data attribute
+					const swiperSettings =
+						sliderContainer.dataset.swiperSettings;
 
-				if ( swiperSettings ) {
-					const settings = JSON.parse( swiperSettings );
+					if ( swiperSettings ) {
+						const settings = JSON.parse( swiperSettings );
 
-					if (
-						settings.navigation &&
-						typeof settings.navigation === 'object'
-					) {
-						const nextEl = sliderContainer.querySelector(
-							'.swiper-button-next'
-						);
-						const prevEl = sliderContainer.querySelector(
-							'.swiper-button-prev'
-						);
-						if ( nextEl ) {
-							settings.navigation.nextEl = nextEl;
+						if (
+							settings.navigation &&
+							typeof settings.navigation === 'object'
+						) {
+							const nextEl = sliderContainer.querySelector(
+								'.swiper-button-next'
+							);
+							const prevEl = sliderContainer.querySelector(
+								'.swiper-button-prev'
+							);
+							if ( nextEl ) {
+								settings.navigation.nextEl = nextEl;
+							}
+							if ( prevEl ) {
+								settings.navigation.prevEl = prevEl;
+							}
 						}
-						if ( prevEl ) {
-							settings.navigation.prevEl = prevEl;
-						}
+
+						// Initialize Swiper with parsed settings
+						new Swiper( swiperEl, settings );
 					}
-
-					// Initialize Swiper with parsed settings
-					new Swiper(
-						sliderContainer.querySelector( '.swiper' ),
-						settings
-					);
 				}
 
 				// Initialize hover effects for logo links
 				initializeLogoLinkHoverEffects( sliderContainer );
 			} catch ( error ) {
+				// eslint-disable-next-line no-console
 				console.error( 'Error initializing slider:', error );
 			}
 		} );
@@ -57,6 +61,11 @@ document.addEventListener( 'DOMContentLoaded', () => {
 		const logoItems = container.querySelectorAll( '.gslider-logo-item' );
 
 		logoItems.forEach( ( item ) => {
+			if ( item.dataset.hoverInitialized === 'true' ) {
+				return;
+			}
+			item.dataset.hoverInitialized = 'true';
+
 			const hoverEffect = item.dataset.hoverEffect;
 			const hoverOpacity = parseFloat( item.dataset.hoverOpacity ) || 0.8;
 			const hoverScale = parseFloat( item.dataset.hoverScale ) || 1.05;
