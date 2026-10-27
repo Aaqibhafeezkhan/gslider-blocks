@@ -1,0 +1,120 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+early_access: false
+
+tone_instructions: |
+  Be concise, objective and actionable; no filler praise.
+  Enforce the 12 Golden Architectural Rules in AGENTS.md.
+  Check that each PR is atomic, surgical and scoped to its linked issue.
+
+reviews:
+  profile: "assertive"
+  poem: false
+  high_level_summary: true
+  collapse_walkthrough: false
+  review_status: false
+
+  # Cross-reference the linked issue and verify scope compliance
+  assess_linked_issues: true
+
+  auto_review:
+    enabled: true
+    drafts: false
+
+  # Ignore compiled artifacts and minified vendor files from line-by-line review
+  path_filters:
+    - "!build/**"
+    - "!dist/**"
+    - "!vendor/**"
+    - "!node_modules/**"
+    - "!packages/*/dist/**"
+    - "!packages/*/node_modules/**"
+    - "!packages/mcp-server/src/core/schemas/**"
+    - "!includes/RestApi/defaults/**"
+    - "!assets/admin/css/**"
+    - "!assets/admin/js/**"
+    - "!**/*.min.*"
+    - "!**/*.bundle.js"
+    - "!**/*.asset.php"
+
+  path_instructions:
+    # 1. Global: Scope, surgical diff, issue alignment, and conventional commits
+    - path: "**/*"
+      instructions: |
+        - Scope & Surgical Diff (Rule 9): Cross-reference the linked issue (Closes #<id> / Fixes #<id>). Flag any changes that go beyond what was specifically requested in the issue (no speculative boilerplate, no unrelated refactoring, and no accidental commits carried over from other branches).
+        - Conventional Commits: Check that PR title and commits follow Conventional Commits format (`feat:`, `fix:`, `refactor:`, `style:`, etc.).
+
+    # 2. Protected Component Directory (Rule 8)
+    - path: "src/components/**"
+      instructions: |
+        CRITICAL ARCHITECTURAL POLICY (Rule 8): `src/components/` is STRICTLY LOCKED to protect 2,000+ live sites.
+        Only plugin author @noruzzamans is authorized to modify or add files in `src/components/`.
+        Contributors are welcome to contribute anywhere else, but ANY PR from an external contributor touching `src/components/` must be IMMEDIATELY FLAGGED as a strict policy violation.
+
+    # 3. Block Development, Swiper Engine, and Build Verification
+    - path: "src/blocks/**/*.{js,jsx}"
+      instructions: |
+        - Swiper Lifecycle (Rule 6): Swiper instances initialized in `useEffect` must have a proper cleanup function returning `swiper.destroy(true, true)` to prevent memory leaks in the Gutenberg editor canvas.
+        - Dynamic Styling Pipeline (Rule 3): Never write hardcoded inline styles in `save.js`. Dynamic styles must be generated via `styling.js`, stored into `blockStyle`, and output through `StyleGenerator.php`.
+        - Responsive Architecture (Rule 5): All visual and layout controls must support responsive objects: `{ Desktop, Tablet, Mobile }`.
+        - Design System Controls (Rule 8): Blocks must exclusively use approved `@Components/*` controls. Raw `@wordpress/components` input controls inside block inspectors are forbidden.
+        - Build Verification:
+          * If block source files are changed: remind the author to run `npm run build` locally to confirm it compiles. Do not ask for `build/` to be committed (it is gitignored); the "build" CI job is the source of truth.
+          * If MCP build inputs (`styling.js`, `attributes.js`, `save.js`, `deprecated.js`, `block.json`, `preset.js`, `inspector.js`) are changed: remind the author to run `npm run mcp:build` and commit the bundle and schemas. Do not judge whether `packages/mcp-server/dist/` was committed (it is path-filtered); the "Block Build & MCP Drift Check" CI job is the source of truth.
+          * If `attributes.js` is changed: remind the author to run `npm run defaults:generate` and commit any updated defaults in `includes/RestApi/defaults/`. Also verify if a `deprecated.js` migration is needed to prevent live block invalidation, and run `npm run mcp:test` to verify zero schema drift.
+
+    # 4. Block Styles and Metadata Build Verification
+    - path: "src/blocks/**/style.scss"
+      instructions: |
+        - Build Verification: Remind the author to run `npm run build` locally to confirm it compiles. `build/` is gitignored; do not ask for it to be committed.
+
+    - path: "src/blocks/**/block.json"
+      instructions: |
+        - Build Verification:
+          * Remind the author to run `npm run build` locally to confirm it compiles (`build/` is gitignored; do not ask for it to be committed).
+          * Remind the author to run `npm run mcp:build` and commit the bundle.
+
+    # 5. Global Constants & Shared Schemas
+    - path: "src/constants/**/*.js"
+      instructions: |
+        - If `src/constants/index.js` is changed: remind the author to run `npm run build` (confirm it compiles locally; `build/` is gitignored) and run `npm run mcp:build` to commit updated MCP schemas. Shared option lists feed the generated block schemas.
+
+    # 6. Block Attributes Schema Standards
+    - path: "src/blocks/**/attributes.js"
+      instructions: |
+        - Spacing Attributes: Must follow the standardized 8-key pattern (`<prefix>PaddingUnits`, `<prefix>PaddingDesktop`, `<prefix>PaddingDesktopCssStyle`, `<prefix>PaddingTablet`, `<prefix>PaddingTabletCssStyle`, `<prefix>PaddingMobile`, `<prefix>PaddingMobileCssStyle`, `<prefix>PaddingLink`).
+        - Typography Attributes: Must follow the standardized 13-key schema.
+        - Mandatory Block Defaults: Verify that required defaults exist: `blockId`, `deviceType`, `blockStyle`, `globalID`, `globalClass`, `globalCustomCSS`, `zIndex`.
+
+    # 7. WordPress PHP Backend Standards & Security
+    - path: "includes/**/*.php"
+      instructions: |
+        - Architecture: Strictly enforce PSR-4 autoloading (`GSlider\` -> `includes/`) and SingletonTrait pattern.
+        - WordPress Security (Rule 7):
+          * All user/request input must be sanitized contextually (`sanitize_text_field`, `sanitize_key`, `absint`).
+          * All HTML/attribute output must be strictly escaped (`esc_html__`, `esc_attr__`, `esc_url`, `wp_kses`).
+          * Verify nonces and capability checks (`current_user_can`) on all administrative and mutation actions.
+          * Use `WP_Filesystem` for direct disk operations.
+        - REST API: Endpoints in `includes/RestApi/` must define strict `permission_callback`, arguments schema, and sanitize callbacks.
+        - Testing: If modifying core logic, verify that zero-dependency PHP unit tests in `tests/` are updated or pass cleanly.
+
+    # 8. Block Patterns & GDPR Compliance
+    - path: "patterns/**/*.php"
+      instructions: |
+        - GDPR Compliance: NEVER hotlink external third-party images. Bundled patterns must strictly use local vector SVGs from `assets/images/patterns/`.
+        - Escaping: Use `esc_url_raw()` inside Gutenberg block delimiter comments (`<!-- wp:... -->`) and `esc_url()` in HTML tag attributes (`<img src="...">`).
+        - Localization: All bundled patterns must have an explicit entry in `RegistrationPatterns::get_pattern_translations()` with literal strings for `title`, `description`, and `keywords` for `make-pot` compatibility.
+
+    # 9. Admin Styles & Centralized Design Tokens
+    - path: "admin/scss/**/*.scss"
+      instructions: |
+        - Design Tokens (Rule 10): Never hardcode raw hex color codes or font families directly in dashboard SCSS.
+        - All dashboard tokens must be imported from `admin/scss/dashboard/_variables.scss` (`@use 'variables' as *;`).
+        - Build Verification: When dashboard SCSS changes, remind the author to run `npm run admin:build` and commit the regenerated `assets/admin/css/` output. Do not judge whether it was committed (it is path-filtered).
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "AGENTS.md"
+      - ".agents/skills/**/SKILL.md"
