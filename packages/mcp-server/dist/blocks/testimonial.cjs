@@ -5656,7 +5656,7 @@ var generateBaseSliderStyle = (attributes2) => {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: ${ratingStarGap.Desktop}px;
+            gap: ${ratingStarGap.Desktop ? `${ratingStarGap.Desktop}${ratingStarGapUnits?.Desktop || "px"}` : "5px"};
         }
         .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-icon svg {
             ${ratingStarSize.Desktop ? `width: ${ratingStarSize.Desktop}${ratingStarSizeUnits.Desktop};` : ""}
@@ -6060,7 +6060,7 @@ var generateBaseSliderStyle = (attributes2) => {
                 gap: ${ratingNumberGap.Tablet ? `${ratingNumberGap.Tablet}${ratingNumberGapUnits.Tablet}` : "10px"};
             }
             .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-inner .gslider-testimonial-rating-wrap {
-                gap: ${ratingStarGap.Tablet ? `${ratingStarGap.Tablet}${ratingStarGapUnits.Tablet}` : "5px"};
+                gap: ${ratingStarGap.Tablet ? `${ratingStarGap.Tablet}${ratingStarGapUnits?.Tablet || "px"}` : "5px"};
             }
             .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-icon svg {
                 ${ratingStarSize.Tablet ? `width: ${ratingStarSize.Tablet}${ratingStarSizeUnits.Tablet};` : ""}
@@ -6341,7 +6341,7 @@ var generateBaseSliderStyle = (attributes2) => {
                 gap: ${ratingNumberGap.Mobile ? `${ratingNumberGap.Mobile}${ratingNumberGapUnits.Mobile}` : "10px"};
             }
             .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-wrap {
-                gap: ${ratingStarGap.Mobile ? `${ratingStarGap.Mobile}${ratingStarGapUnits.Mobile}` : "5px"};
+                gap: ${ratingStarGap.Mobile ? `${ratingStarGap.Mobile}${ratingStarGapUnits?.Mobile || "px"}` : "5px"};
             }
             .${blockId} .gslider-testimonial-rating-wrapper .gslider-testimonial-rating-icon svg {
                 ${ratingStarSize.Mobile ? `width: ${ratingStarSize.Mobile}${ratingStarSizeUnits.Mobile};` : ""}
