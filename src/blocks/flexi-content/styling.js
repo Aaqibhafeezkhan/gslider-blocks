@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars, jsdoc/require-param, jsdoc/check-tag-names */
+/* eslint-disable no-unused-vars, jsdoc/require-param */
 /**
  * Flexi Content Slider Block - Style Generation
  * Returns Dynamic Generated CSS
@@ -63,7 +63,7 @@ const getHasPaginationCss = (
 /**
  * Generate block styles from attributes
  * @param {Object} attributes - Block attributes
- * @returns {string} CSS string
+ * @return {string} CSS string
  */
 const generateFlexiContentStyle = ( attributes ) => {
 	const {
