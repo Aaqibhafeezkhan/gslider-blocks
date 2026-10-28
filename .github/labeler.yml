@@ -1,12 +1,12 @@
 # .github/labeler.yml
-# Configuration for actions/labeler@v5 in GSlider Blocks
+# Configuration for actions/labeler@v7 in GSlider Blocks
 
 'focus: php-backend':
   - changed-files:
       - any-glob-to-any-file:
           - 'includes/**/*.php'
           - 'gslider-blocks.php'
-          - 'uninstall.php'
+          - 'tests/phpunit/**/*'
 
 'focus: blocks':
   - changed-files:
@@ -30,11 +30,7 @@
   - changed-files:
       - any-glob-to-any-file:
           - 'includes/RestApi/**/*'
-          - 'includes/Classes/BlockParser.php'
-          - 'tests/block-parser-base.php'
-          - 'tests/blocks-controller-permissions.php'
-          - 'tests/blocks-field-schema.php'
-          - 'tests/swiper-config-defaults.php'
+          - 'tests/phpunit/RestApi/**/*'
 
 'focus: mcp':
   - changed-files:

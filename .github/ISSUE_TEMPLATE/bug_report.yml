@@ -43,6 +43,7 @@ body:
       label: "Affected Block"
       options:
         - "Image Slider"
+        - "Base Slider"
         - "Testimonial Slider"
         - "Logo Carousel"
         - "Flexi Content"
