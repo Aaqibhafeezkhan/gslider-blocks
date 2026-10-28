@@ -65,8 +65,8 @@
   <a href="#-design-system--component-storybook">Storybook</a> •
   <a href="#-available-blocks">Blocks</a> •
   <a href="#-developer-guides--headless--ai-workflows">Developer Guides</a> •
-  <a href="#-local-environment-setup">Setup</a> •
-  <a href="#-contributing--governance">Contributing</a> •
+  <a href="#-quick-installation">Installation</a> •
+  <a href="#-contributing--local-development">Contributing</a> •
   <a href="#-support-the-project">Support ⭐</a>
 </p>
 
@@ -138,97 +138,25 @@ Looking to extend GSlider Blocks, connect with AI coding assistants, or build mo
 
 ---
 
-## 💻 Local Environment Setup
+## 🚀 Quick Installation
 
-We support both GUI-based workflows (LocalWP) and zero-config containerized workflows (Docker via `@wordpress/env`):
+Getting started with GSlider Blocks takes less than 30 seconds:
 
-### Prerequisites
+1. In your WordPress Admin Dashboard, navigate to **Plugins ➔ Add New Plugin**.
+2. Search for **"GSlider Blocks"**.
+3. Click **Install Now** and then **Activate**.
+4. Open the Gutenberg block editor, type `/gslider` or click the `+` Block Inserter to add any slider block!
 
-| Requirement | Minimum Version | Recommended |
-| :--- | :--- | :--- |
-| **Node.js** | `>= 18.0.0` | `20.x LTS` |
-| **npm** | `>= 9.0.0` | `10.x` |
-| **PHP** | `>= 7.4.0` | `8.2 / 8.3` |
-| **WordPress** | `>= 6.3.0` (required for `apiVersion: 3`) | `6.7+` |
-
----
-
-### Option A: LocalWP (Recommended GUI Workflow)
-
-1. Open [Local](https://localwp.com/) and create a new WordPress site.
-2. Clone this repository directly into the site's plugin directory:
-   ```bash
-   cd ~/Local\ Sites/<site-name>/app/public/wp-content/plugins/
-   git clone https://github.com/noruzzamans/gslider-blocks.git
-   cd gslider-blocks
-   ```
-3. Install dependencies and compile initial block assets (`build/` is gitignored):
-   ```bash
-   npm install
-   npm run build  # Required: compiles block bundles into build/
-   npm run start  # Starts development watch mode
-   ```
-4. Activate **GSlider Blocks** from WP Admin → Plugins.
+> [!TIP]
+> 🌐 **[Try Instant Live Demo in WordPress Playground](https://playground.wordpress.net/?plugin=gslider-blocks)** — Zero installation needed! Test all 5 carousel blocks and 23 controls directly inside your web browser.
+>
+> 📖 **[Read Full Quick Start Guide](docs/getting-started/quick-start.md)** for step-by-step block pattern usage, slash commands, and block configuration.
 
 ---
 
-### Option B: Docker via `@wordpress/env` (Zero-Config CLI)
+## 🤝 Contributing & Local Development
 
-If you have Docker Desktop installed, spin up a complete WordPress instance with GSlider Blocks pre-mounted in one command:
-
-```bash
-# 1. Clone repository
-git clone https://github.com/noruzzamans/gslider-blocks.git
-cd gslider-blocks
-
-# 2. Install dependencies
-npm install
-
-# 3. Build block assets into build/ (Required before starting)
-npm run build
-
-# 4. Start WordPress in Docker (Port 8888)
-npx @wordpress/env start
-```
-
-- **Frontend:** [http://localhost:8888](http://localhost:8888)
-- **WP Admin:** [http://localhost:8888/wp-admin](http://localhost:8888/wp-admin) (`Username: admin`, `Password: password`)
-- **Stop Environment:** `npx @wordpress/env stop`
-
----
-
-## ⚡ Essential NPM Scripts
-
-| Command | Purpose |
-| :--- | :--- |
-| `npm run start` | Starts watch mode for Gutenberg blocks development (`wp-scripts start`) |
-| `npm run build` | Compiles production assets into `build/` |
-| `npm run lint:js` | Runs ESLint across all JavaScript files |
-| `npm run lint:css` | Runs Stylelint across all SCSS/CSS stylesheets |
-| `npm run admin` | Starts watch mode for admin styles |
-| `npm run admin:build` | Compiles admin stylesheets for production |
-| `npm run mcp:build` | Builds the TypeScript MCP server in `packages/mcp-server` |
-| `npm run zip` | Generates a clean, production-ready WordPress.org distributable zip |
-
----
-
-## 🛡️ Testing & Code Quality Matrix
-
-Every pull request runs automated GitHub Actions CI (`.github/workflows/ci.yml`):
-- **Block Build:** Runs `npm run build` for the Gutenberg block bundles. The admin stylesheet (`npm run admin:build`) is not built in CI.
-- **MCP Server Tests:** Installs and builds `packages/mcp-server`, then runs its test suite (`npm test`).
-- **Distribution Zip:** Runs `npm run zip`.
-- **PHP Matrix Testing:** Runs the stub-based scripts in `tests/` on **7 PHP versions**: `PHP 7.4`, `8.0`, `8.1`, `8.2`, `8.3`, `8.4`, and `8.5`.
-
-ESLint and Stylelint are not part of CI yet. `npm run lint:js` and `npm run lint:css` currently report many existing errors, so run them on the files you change.
-
-`.github/workflows/pr-automation.yml` adds type and size labels. When a PR from anyone other than `@noruzzamans` touches `src/components/`, it adds the `needs: changes` label and posts a warning comment.
-
----
-
-## 🤝 Contributing & Governance
-
-Contributions from both human engineers and AI assistants are welcome! Please read our contributing documentation before starting:
+Contributions from both human engineers and AI assistants are welcome! Whether you are building new features, fixing a bug, or polishing documentation:
 
 ### 🌟 First-Time Contributors Welcome!
 Looking to make your first open-source contribution or build your WordPress / React portfolio? We have curated step-by-step beginner-friendly tasks with ready-to-run commands:
@@ -236,6 +164,10 @@ Looking to make your first open-source contribution or build your WordPress / Re
 
 Every contributor with a merged PR is automatically inducted into our [Contributors](#-contributors) hall of fame and mentioned in our official release notes!
 
+### 📚 Developer Resources & Setup
+- 🛠️ **[Local Development Setup Guide](docs/getting-started/local-development.md)**: Setup with LocalWP, Docker (`@wordpress/env`), Composer, and Node.js.
+- ⚡ **[NPM & Build Workflow](docs/getting-started/local-development.md#-daily-development-workflow)**: Watch mode (`npm run start`), production builds, and admin asset compilation.
+- 🧪 **[Testing & Code Quality Matrix](docs/getting-started/local-development.md#-testing-suite--quality-assurance)**: Standalone PHP CLI unit tests (PHP 7.4–8.5 matrix), schema drift tests, and CI checks.
 - 📖 **[CONTRIBUTING.md](CONTRIBUTING.md)**: Forking, branching, PR title conventions, and AI contribution policy.
 - 📚 **[Developer Handbook](docs/README.md)**: Central developer documentation map and technical guides.
 - 🏗️ **[Architecture Guide](docs/explanations/architecture.md)**: Engineering principles, patterns, and pre-flight developer checklist.
