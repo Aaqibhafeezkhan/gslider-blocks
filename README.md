@@ -18,8 +18,8 @@
   <a href="https://wordpress.org/plugins/gslider-blocks/">
     <img src="https://img.shields.io/wordpress/plugin/rating/gslider-blocks?color=ffb800&label=Rating&logo=wordpress" alt="WordPress.org Rating">
   </a>
-  <a href="https://playground.wordpress.net/?plugin=gslider-blocks">
-    <img src="https://img.shields.io/badge/Playground-Try%20Live%20Demo-3858e9?logo=wordpress&logoColor=white" alt="Try Live in WordPress Playground">
+  <a href="https://wordpress.org/plugins/gslider-blocks/?preview=1">
+    <img src="https://img.shields.io/badge/Live%20Preview-WordPress.org-3858e9?logo=wordpress&logoColor=white" alt="Live Preview on WordPress.org">
   </a>
   <a href="https://github.com/noruzzamans/gslider-blocks/actions/workflows/ci.yml">
     <img src="https://github.com/noruzzamans/gslider-blocks/actions/workflows/ci.yml/badge.svg" alt="CI Build Status">
@@ -54,7 +54,7 @@
 </p>
 
 <p align="center">
-  <a href="https://playground.wordpress.net/?plugin=gslider-blocks">🚀 <strong>Try Live in WordPress Playground</strong></a> •
+  <a href="https://wordpress.org/plugins/gslider-blocks/?preview=1">🚀 <strong>Live Preview (WordPress.org)</strong></a> •
   <a href="https://noruzzamans.github.io/gslider-blocks/">🎨 <strong>Component Storybook</strong></a> •
   <a href="https://wordpress.org/plugins/gslider-blocks/">🌟 <strong>WordPress.org Plugin</strong></a> •
   <a href="#-support-the-project">⭐ <strong>Support on GitHub</strong></a>
@@ -148,7 +148,9 @@ Getting started with GSlider Blocks takes less than 30 seconds:
 4. Open the Gutenberg block editor, type `/gslider` or click the `+` Block Inserter to add any slider block!
 
 > [!TIP]
-> 🌐 **[Try Instant Live Demo in WordPress Playground](https://playground.wordpress.net/?plugin=gslider-blocks)** — Zero installation needed! Test all 5 carousel blocks and 23 controls directly inside your web browser.
+> 🌐 **[Live Preview on WordPress.org](https://wordpress.org/plugins/gslider-blocks/?preview=1)** — Official in-browser interactive preview running directly on WordPress.org!
+>
+> ⚡ **[Launch Gutenberg Editor in Playground](https://playground.wordpress.net/#eyJwcmVmZXJyZWRWZXJzaW9ucyI6eyJwaHAiOiJsYXRlc3QiLCJ3cCI6ImxhdGVzdCJ9LCJsb2dpbiI6dHJ1ZSwibGFuZGluZ1BhZ2UiOiIvd3AtYWRtaW4vcG9zdC1uZXcucGhwP3Bvc3RfdHlwZT1wYWdlIiwic3RlcHMiOlt7InN0ZXAiOiJpbnN0YWxsUGx1Z2luIiwicGx1Z2luRGF0YSI6eyJyZXNvdXJjZSI6IndvcmRwcmVzcy5vcmcvcGx1Z2lucyIsInNsdWciOiJnc2xpZGVyLWJsb2NrcyJ9fV19)** — One-click automated setup with WordPress admin auto-login, GSlider pre-activated, and landing straight in the block editor!
 >
 > 📖 **[Read Full Quick Start Guide](docs/getting-started/quick-start.md)** for step-by-step block pattern usage, slash commands, and block configuration.
 
