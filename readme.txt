@@ -7,6 +7,7 @@ Stable tag: 1.2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://github.com/noruzzamans/gslider-blocks
 
 Logo Carousel, Image Slider & Testimonial blocks for Gutenberg. 5 transition effects, responsive design & full customization!
 
@@ -126,6 +127,14 @@ To build and compile the production assets from source:
 0. Clone the repository: `git clone https://github.com/noruzzamans/gslider-blocks`
 1. Install dependencies: `npm install` and `composer install`
 2. Compile production assets: `npm run build`
+
+== Contributing & Community ==
+
+GSlider Blocks is 100% open-source software! We warmly welcome community contributions, bug reports, and feedback:
+
+* GitHub Repository: https://github.com/noruzzamans/gslider-blocks
+* Browse Good First Issues: https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+* Interactive Component Storybook: https://noruzzamans.github.io/gslider-blocks/
 
 == Third-Party Libraries ==
 
