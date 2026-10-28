@@ -510,6 +510,7 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
       <td align="center" valign="top" width="14.28%"><a href="https://www.linuxhostlab.com/"><img src="https://avatars.githubusercontent.com/u/7321834?v=4" width="100px;" alt="Md Abul Bashar"/><br /><sub><b>Md Abul Bashar</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://devnethsara.com/"><img src="https://avatars.githubusercontent.com/u/110768660?v=4" width="100px;" alt="Sasindu Nethsara Karanayaka"/><br /><sub><b>Sasindu Nethsara Karanayaka</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/madhavidayma21"><img src="https://avatars.githubusercontent.com/u/98448374?v=4" width="100px;" alt="Madhavi Dayma"/><br /><sub><b>Madhavi Dayma</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Zhiyilang"><img src="https://avatars.githubusercontent.com/u/154107452?v=4" width="100px;" alt="Zhiyilang"/><br /><sub><b>Zhiyilang</b></sub></a></td>
     </tr>
   </tbody>
 </table>
