@@ -108,16 +108,16 @@ GSlider Blocks features an enterprise **23-component design system** modeled dir
 
 | # | Block | Description | Status |
 | :-: | :--- | :--- | :-: |
-| 1 | 🎯 **Base Slider** | High-impact hero sliders with Title, Subtitle, Description & CTA buttons | ✅ Production |
-| 2 | 📝 **Flexi Content** | Full creative freedom: nest ANY Gutenberg block inside responsive slides | ✅ Production |
-| 3 | 🏢 **Logo Carousel** | Partner/client showcases with hover effects (grayscale-to-color, opacity, scale, move up), links, tooltips, and captions | ✅ Production |
-| 4 | 🖼️ **Image Slider** | Image carousels with lightbox, captions, tooltips, and per-image links | ✅ Production |
-| 5 | ⭐ **Testimonial Carousel** | Customer reviews with fractional star ratings, author avatars, and quote icons | ✅ Production |
-| 6 | 👥 **Team Carousel** | Member profiles with bio, social links, and modal bio triggers | 📋 Roadmap |
-| 7 | 🎥 **Video Carousel** | Self-hosted, YouTube, and Vimeo responsive video carousels | 📋 Roadmap |
-| 8 | 📊 **Stats Carousel** | Animated milestone counters and metric sliders | 📋 Roadmap |
-| 9 | 🏆 **Awards Carousel** | Certification badges and industry recognition carousels | 📋 Roadmap |
-| 10 | 📰 **Post Carousel** | Dynamic WordPress posts & custom post type query slider | 📋 Roadmap |
+| 1 | 🎯 **Base Slider** | High-impact homepage hero sliders with headings, CTAs & custom backgrounds | ✅ Production |
+| 2 | 📝 **Flexi Content** | Full creative freedom: nest any WordPress block inside responsive slides | ✅ Production |
+| 3 | 🏢 **Logo Carousel** | Client & partner brand showcases with grayscale hover animations and links | ✅ Production |
+| 4 | 🖼️ **Image Slider** | Photography & product carousels with built-in Lightbox and captions | ✅ Production |
+| 5 | ⭐ **Testimonial Carousel** | Social proof reviews with fractional star ratings, avatars & quotes | ✅ Production |
+| 6 | 👥 **Team Carousel** | Staff & member profiles with bios, social links, and modal popups | 📋 Roadmap |
+| 7 | 🎥 **Video Carousel** | Responsive video sliders for YouTube, Vimeo & self-hosted MP4 videos | 📋 Roadmap |
+| 8 | 📊 **Stats Carousel** | Animated milestone metric counters and achievement sliders | 📋 Roadmap |
+| 9 | 🏆 **Awards Carousel** | Certification badges, client honors & industry recognition sliders | 📋 Roadmap |
+| 10 | 📰 **Post Carousel** | Dynamic query slider for WordPress blog posts and Custom Post Types | 📋 Roadmap |
 
 > [!TIP]
 > ### ⭐ Love GSlider Blocks? Give it a Star on GitHub!
