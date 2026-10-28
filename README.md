@@ -48,7 +48,7 @@
   <a href="https://noruzzamans.github.io/gslider-blocks/">
     <img src="https://img.shields.io/badge/Storybook-Live%20Explorer-ff4785.svg?logo=storybook" alt="Storybook Design System">
   </a>
-  <a href="#-ai-assistant-integration-model-context-protocol---mcp">
+  <a href="docs/how-to-guides/mcp-server-ai-workflows.md">
     <img src="https://img.shields.io/badge/MCP-Ready-9cf.svg?logo=anthropic" alt="MCP Compatible">
   </a>
 </p>
@@ -62,11 +62,9 @@
 
 <p align="center">
   <a href="#-about--value-proposition">About</a> •
-  <a href="#-system-architecture">Architecture</a> •
   <a href="#-design-system--component-storybook">Storybook</a> •
   <a href="#-available-blocks">Blocks</a> •
-  <a href="#-ai-assistant-integration-model-context-protocol---mcp">MCP AI Guide</a> •
-  <a href="#-headless-wordpress--nextjs-showcase">Headless</a> •
+  <a href="#-developer-guides--headless--ai-workflows">Developer Guides</a> •
   <a href="#-local-environment-setup">Setup</a> •
   <a href="#-contributing--governance">Contributing</a> •
   <a href="#-support-the-project">Support ⭐</a>
@@ -127,100 +125,16 @@ GSlider Blocks features an enterprise **23-component design system** modeled dir
 
 ---
 
-## 🤖 AI Assistant Integration (Model Context Protocol - MCP)
+## 📚 Developer Guides & Headless / AI Workflows
 
-GSlider Blocks ships with an official local **Model Context Protocol (MCP)** server located in `packages/mcp-server`. It lets AI assistants and agentic IDEs (Cursor, Claude Desktop, Windsurf, Antigravity, etc.) list the GSlider blocks, read each block's attribute schema and defaults, and load starter templates, locally with **$0 cloud cost**. Generating block markup is planned ([#33](https://github.com/noruzzamans/gslider-blocks/issues/33)) and not available yet.
+Looking to extend GSlider Blocks, connect with AI coding assistants, or build modern decoupled/headless web applications? Check out our dedicated developer guides:
 
-### 🧠 Model-Agnostic Architecture (OpenAI, Claude, Gemini)
-
-The GSlider MCP Server operates over standard input/output (`stdio`) and is completely **model-agnostic**. You can connect it to any leading foundation model:
-- **OpenAI Ecosystem:** GPT-4o, o1, o3-mini, ChatGPT, and OpenAI-compatible developer agents.
-- **Anthropic Ecosystem:** Claude 3.7 Sonnet, Claude 3.5 Haiku, Claude Desktop.
-- **Google Ecosystem:** Gemini 2.0 Pro, Gemini 2.0 Flash via agentic environments.
-- **Open Weights:** DeepSeek-R1, Llama 3.3 via Ollama or local inference runtimes.
-
----
-
-### ⚡ Quick Client Configuration
-
-Connect GSlider MCP to your AI IDE or assistant in under 60 seconds. Add the following entry to your MCP configuration file:
-
-```json
-{
-  "mcpServers": {
-    "gslider": {
-      "command": "node",
-      "args": [
-        "/absolute/path/to/gslider-blocks/packages/mcp-server/dist/index.js"
-      ]
-    }
-  }
-}
-```
-
-> [!TIP]
-> 👉 **[View Complete AI Assistant Setup Guide](docs/how-to-guides/mcp-server-ai-workflows.md)** for detailed, copy-paste recipes for **Claude Desktop**, **OpenAI Models & ChatGPT (Agent SDK)**, **Cursor IDE**, **Antigravity IDE**, **VS Code (Cline / Roo Code)**, and **Windsurf**.
-
-### Available MCP Tools
-
-| Tool | Purpose | Status |
-| :--- | :--- | :---: |
-| `gslider_ping` | Verifies the MCP server connection and returns the MCP server's own version (not the plugin version) | ✅ Available |
-| `gslider_list_blocks` | Returns all registered blocks and supported visual controls | ✅ Available |
-| `gslider_get_block_schema` | Returns exact attribute schemas and slide data structures | ✅ Available |
-| `gslider_generate_block` | Generates validated Gutenberg markup with automated CSS | 🔜 In Progress |
-
----
-
-## 🌐 Headless WordPress & Next.js Showcase
-
-GSlider Blocks provides dedicated machine-readable REST API endpoints for decoupled and headless architectures. Retrieve structured slider data via the dedicated endpoint `GET /wp-json/gslider/v1/blocks/<post_id>` or via the `gslider_blocks` field on standard `/wp/v2/pages/<id>` and `/wp/v2/posts/<id>`.
-
-Each response holds `{ post_id, post_title, total_sliders, blocks }`. Every entry in `blocks` has this shape:
-
-| Field | Contents |
+| Guide | Description |
 | :--- | :--- |
-| `blockId` | The block's scoped class, for example `gslider-1a2b3c4d`. |
-| `blockName` | For example `gslider-blocks/image-slider`. |
-| `swiperConfig` | Swiper options built by `BlockParser`, with block defaults filled in: `effect`, `loop`, `autoplay`, `keyboard`, `mousewheel`, `navigation.enabled`, `pagination`, and per-breakpoint (`0`, `768`, `1025`) `slidesPerView`, `spaceBetween`, `speed`, and `autoplay.delay`. It has no `navigation.nextEl`/`prevEl` or `pagination.el`; your renderer supplies those. |
-| `slides` | Sanitized slide data. Image and logo slides are `{ id, url, alt, caption, link, tooltipText }`. |
-| `css` | The block's generated CSS, scoped to the WordPress markup (`.gslider-xxxxxxxx.gslider-image-slider-wrapper …`). It only matches if you reproduce the `save.js` wrapper classes. |
-| `attrs` | Every block attribute: the values stored in the block comment, plus the `attributes.js` default for each attribute Gutenberg left out because it was still at its default. Stored values always win. |
-
-On collection requests such as `/wp/v2/posts?per_page=100`, the `gslider_blocks` field parses every post. Use `_fields=` to skip it when you do not need it.
-
-An untouched Base or Testimonial block returns its 3 default slides. The defaults ship as one generated file per block in `includes/RestApi/defaults/`, which `npm run build` regenerates from the MCP schemas. The `gslider_block_attribute_defaults` filter can change them.
-
-### Consuming GSlider in Decoupled Stacks (Next.js, Astro, Remix)
-
-In your decoupled frontend, fetch the structured block payload and pass `swiperConfig` directly into Swiper React:
-
-```tsx
-// 1. Fetch serialized slider payload from WordPress REST API
-const res = await fetch(`https://example.com/wp-json/gslider/v1/blocks/${postId}`);
-const { blocks } = await res.json();
-
-// 2. Render using native Swiper React with pre-compiled config
-export default function Slider({ block }: { block: GSliderBlock }) {
-  return (
-    <Swiper {...block.swiperConfig}>
-      {block.slides.map((slide) => (
-        <SwiperSlide key={slide.id}>
-          <img src={slide.url} alt={slide.alt} loading="lazy" />
-          {slide.caption && <p>{slide.caption}</p>}
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  );
-}
-```
-
-> [!TIP]
-> 👉 **[View Complete Headless Integration Guide](docs/how-to-guides/headless-rest-api.md)** for full Next.js 14/15 App Router code (Server & Client components), complete TypeScript interfaces, Incremental Static Regeneration (ISR), and dynamic CSS scoping.
-
-> [!NOTE]
-> - `slides[].link` is always returned. The WordPress frontend only links an image when the block's `enableimageLinks` setting is on. Check `attrs.enableimageLinks` before rendering the link.
-> - Treat `css` as content written by post authors. Do not inject it into a `<style>` tag unless you trust everyone who can edit the post.
+| 🤖 **[MCP Server & AI Assistant Guide](docs/how-to-guides/mcp-server-ai-workflows.md)** | Connect GSlider to **Claude Desktop**, **Cursor**, **Antigravity**, **ChatGPT**, and **Windsurf** with $0 cloud cost. |
+| 🌐 **[Headless WordPress & REST API Guide](docs/how-to-guides/headless-rest-api.md)** | Consume `/wp-json/gslider/v1/blocks/<id>` in **Next.js 14/15 App Router**, **Astro**, and **Remix** with pre-parsed Swiper configs. |
+| 🏗️ **[System Architecture Guide](docs/explanations/architecture.md)** | Learn about the PSR-4 Singleton backend, dynamic CSS generation pipeline, and zero-invalidation deprecation system. |
+| 🎣 **[PHP Hooks & Filters Reference](docs/reference-guides/php-hooks.md)** | Complete reference of action hooks and filter hooks for customizing slider markup, styles, CSP nonces, and caches. |
 
 ---
 
