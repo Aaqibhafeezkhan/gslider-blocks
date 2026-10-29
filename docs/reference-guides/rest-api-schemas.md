@@ -133,7 +133,7 @@ For block-based sliders such as `gslider-blocks/flexi-content`, each element in 
 
 | Property | Type | Description |
 | :--- | :---: | :--- |
-| `id` | `string` | Slide identifier or block ID (e.g. `'slide-1'`). |
+| `id` | `string` | Slide identifier: the slide's sanitized block ID, or a `slide-<N>` fallback (e.g. `'slide-1'`) when no block ID is set. Not guaranteed to be unique. |
 | `blockName` | `string` | Canonical block name of the slide item (e.g. `'gslider-blocks/flexi-content-item'`). |
 | `innerHtml` | `string` | Fully rendered HTML markup of the slide. For backward compatibility, the slide's scoped `<style>` tags are also retained inside `innerHtml`. |
 | `css` | `string` | The slide's own scoped CSS plus its nested blocks' CSS. Headless consumers can apply this CSS directly without having to parse `innerHtml`. |
