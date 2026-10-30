@@ -3,7 +3,7 @@ Contributors: noruzzaman
 Tags: slider, carousel, logo carousel, slideshow, gutenberg
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -133,8 +133,19 @@ To build and compile the production assets from source:
 GSlider Blocks is 100% open-source software! We warmly welcome community contributions, bug reports, and feedback:
 
 * GitHub Repository: https://github.com/noruzzamans/gslider-blocks
+* Contribution Guide: https://github.com/noruzzamans/gslider-blocks/blob/main/CONTRIBUTING.md
 * Browse Good First Issues: https://github.com/noruzzamans/gslider-blocks/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 * Interactive Component Storybook: https://noruzzamans.github.io/gslider-blocks/
+
+== AI Assistant & Developer Tooling ==
+
+GSlider Blocks provides an official, zero-cloud-cost Model Context Protocol (MCP) server for modern AI coding assistants (Claude Desktop, Cursor IDE, Antigravity, VS Code / Cline).
+
+Developers and designers can inspect block schemas, generate validated slider markup, and load starter design templates locally:
+
+* Official NPM Package: https://www.npmjs.com/package/@gslider/mcp-server
+* Instant NPX Runner: `npx -y @gslider/mcp-server`
+* MCP Developer Documentation: https://github.com/noruzzamans/gslider-blocks/tree/main/packages/mcp-server
 
 == Third-Party Libraries ==
 
@@ -175,6 +186,18 @@ This plugin may connect to or load resources from external third-party services 
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2.1 – October 30, 2026 =
+* Performance: Optimized Largest Contentful Paint (LCP) by injecting high-priority fetch on initial slide images and deferring non-critical assets.
+* Performance: Accelerated slider animations with GPU-enforced CSS transitions and pre-initialized slide flex rows to eliminate Cumulative Layout Shift (CLS).
+* Security: Implemented strict Content Security Policy (CSP) nonce filters for inline styles and scripts, hardening compliance with enterprise security headers.
+* Accessibility: Restored keyboard focus rings on navigation arrows (WCAG 2.4.7) and enhanced screen reader ARIA labels across pagination containers.
+* Accessibility: Added support for prefers-reduced-motion media queries and enabled keyboard focus tooltips (:focus-within) for seamless navigation.
+* Swiper Engine: Fixed active slide desynchronization in infinite loop mode by switching from activeIndex to realIndex for duplicate slides.
+* Block Fixes: Corrected rating star gap unit parsing and fallback handling in Testimonial Slider.
+* Block Fixes: Resolved tablet background hover styling in Logo Carousel and improved button placeholder localization in Base Slider.
+* Admin & Architecture: Cleaned up obsolete dashboard endpoints and hardened REST API routing.
+* MCP AI Ecosystem: Officially published @gslider/mcp-server on NPM with zero-install npx support and GitHub Actions trusted publishing.
 
 = 1.2.0 – October 19, 2026 =
 * Storybook Design System: Integrated 23 isolated Gutenberg UI controls with live interactive explorer (https://noruzzamans.github.io/gslider-blocks/).
