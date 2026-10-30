@@ -2724,8 +2724,12 @@ var generateFlexiContentStyle = (attributes2) => {
             ${navigationArrowBoxShadowCssValue ? `box-shadow: ${navigationArrowBoxShadowCssValue};` : ""}
             ${navigationArrowWidth.Desktop ? `width: ${navigationArrowWidth.Desktop}${navigationArrowWidthUnits.Desktop};` : ""}
             ${navigationArrowHeight.Desktop ? `height: ${navigationArrowHeight.Desktop}${navigationArrowHeightUnits.Desktop};` : ""}
-            outline: none !important;
             transition: color .3s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out, transform .3s ease-in-out;
+        }
+        .${blockId} .swiper-button-prev:focus-visible,
+        .${blockId} .swiper-button-next:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 2px;
         }
         .${blockId} .swiper-button-prev:hover,
         .${blockId} .swiper-button-next:hover {
