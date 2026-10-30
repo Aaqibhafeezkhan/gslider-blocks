@@ -32,7 +32,7 @@ var block_default = {
   $schema: "https://schemas.wp.org/trunk/block.json",
   apiVersion: 3,
   name: "gslider-blocks/testimonial",
-  version: "1.2.1",
+  version: "1.2.0",
   title: "Testimonial",
   category: "gslider-blocks",
   description: "Display customer testimonials in slider, carousel, or grid layout with star ratings.",
