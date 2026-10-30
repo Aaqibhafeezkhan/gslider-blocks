@@ -21,11 +21,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js (Node 24 with latest npm)
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Ensure latest npm for OIDC Trusted Publishing
+        run: npm install -g npm@latest
 
       - name: Install Plugin Dependencies
         run: npm ci
