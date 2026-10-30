@@ -224,8 +224,9 @@ export default function Edit( {
 				},
 			} ),
 			on: {
+				init: ( swiper ) => setSelectedSlideIndex( swiper.realIndex ),
 				slideChange: ( swiper ) =>
-					setSelectedSlideIndex( swiper.activeIndex ),
+					setSelectedSlideIndex( swiper.realIndex ),
 			},
 		};
 
