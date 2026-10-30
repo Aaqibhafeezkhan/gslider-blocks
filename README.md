@@ -82,7 +82,7 @@
 | :--- | :---: | :---: |
 | **Gutenberg Native** | ✅ Direct block canvas editing | ❌ Shortcodes or detached builders |
 | **Performance & Weight** | ✅ Hardware-accelerated Swiper 11, Zero jQuery | ❌ Heavy jQuery, bloated CSS bundles |
-| **Dynamic CSS Pipeline** | ✅ Block-scoped CSS served from a per-page stylesheet instead of `style=""` attributes | ❌ Polluted inline `style=""` attributes |
+| **Dynamic CSS Pipeline** | ✅ Scoped, deduplicated CSS generated via dynamic style engine instead of `style=""` attributes | ❌ Polluted inline `style=""` attributes |
 | **Responsive Architecture** | ✅ Dedicated 3-device controls (Desktop, Tablet, Mobile) | ⚠️ Generic breakpoint guessing |
 | **Local AI Integration** | ✅ Model Context Protocol (MCP) server ($0 cloud cost) | ❌ No AI schema support |
 | **Headless Ready** | ✅ Dedicated REST API JSON endpoints & serialized blocks | ❌ Shortcode regex parsing needed |

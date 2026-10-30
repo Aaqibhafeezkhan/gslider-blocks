@@ -42,6 +42,7 @@ class DashboardControllerTest {
 		$this->test_block_status_listing_and_disabling();
 		$this->test_system_metrics_payload();
 		$this->test_endpoint_response_payload_structure();
+		$this->test_toggle_block_action();
 		$this->test_rest_schema_definition();
 		$this->test_plugin_service_registration();
 
@@ -135,6 +136,12 @@ class DashboardControllerTest {
 			exit( 1 );
 		}
 		echo "OK: REST route /gslider/v1/dashboard is registered\n";
+
+		if ( ! isset( $wp_rest_routes['gslider/v1']['/dashboard/toggle-block'] ) ) {
+			fwrite( STDERR, "FAIL: REST route /gslider/v1/dashboard/toggle-block is not registered\n" );
+			exit( 1 );
+		}
+		echo "OK: REST route /gslider/v1/dashboard/toggle-block is registered\n";
 
 		$endpoint_config = $wp_rest_routes['gslider/v1']['/dashboard'][0];
 
@@ -419,6 +426,128 @@ class DashboardControllerTest {
 			exit( 1 );
 		}
 		echo "OK: Response system has 3 metric fields\n";
+	}
+
+	/**
+	 * Test 8b: Block toggling action and permissions (#319).
+	 *
+	 * @return void
+	 */
+	public function test_toggle_block_action(): void {
+		global $current_caps, $wp_options;
+		$controller = DashboardController::getInstance();
+
+		// 1. Unauthorized toggle attempt fails.
+		$current_caps = [];
+		$request      = new WP_REST_Request( 'POST', '/gslider/v1/dashboard/toggle-block' );
+		$request->set_param( 'slug', 'image-slider' );
+		$request->set_param( 'enabled', false );
+
+		$perm_result = $controller->get_item_permissions_check( $request );
+		if ( ! ( $perm_result instanceof WP_Error ) ) {
+			fwrite( STDERR, "FAIL: Unauthorized toggle-block did not return WP_Error\n" );
+			exit( 1 );
+		}
+		echo "OK: Unauthorized toggle-block is rejected with WP_Error\n";
+
+		// 2. Authorized toggle of single block (disable image-slider).
+		$current_caps['manage_options'] = true;
+		delete_option( 'gslider_disabled_blocks' );
+
+		$response = $controller->toggle_block( $request );
+		$data     = $response->get_data();
+
+		if ( 'success' !== $data['status'] ) {
+			fwrite( STDERR, "FAIL: toggle_block response status is not success\n" );
+			exit( 1 );
+		}
+		if ( ! in_array( 'gslider-blocks/image-slider', $data['disabled_blocks'], true ) ) {
+			fwrite( STDERR, "FAIL: image-slider was not added to disabled_blocks\n" );
+			exit( 1 );
+		}
+		if ( ! in_array( 'gslider-blocks/image-slider', (array) get_option( 'gslider_disabled_blocks' ), true ) ) {
+			fwrite( STDERR, "FAIL: get_option('gslider_disabled_blocks') did not persist disabled image-slider\n" );
+			exit( 1 );
+		}
+		echo "OK: toggle_block disables single block\n";
+
+		// 3. Re-enable block.
+		$request_enable = new WP_REST_Request( 'POST', '/gslider/v1/dashboard/toggle-block' );
+		$request_enable->set_param( 'slug', 'image-slider' );
+		$request_enable->set_param( 'enabled', true );
+
+		$response_enable = $controller->toggle_block( $request_enable );
+		$data_enable     = $response_enable->get_data();
+		if ( in_array( 'gslider-blocks/image-slider', $data_enable['disabled_blocks'], true ) ) {
+			fwrite( STDERR, "FAIL: image-slider was not removed from disabled_blocks\n" );
+			exit( 1 );
+		}
+		if ( in_array( 'gslider-blocks/image-slider', (array) get_option( 'gslider_disabled_blocks' ), true ) ) {
+			fwrite( STDERR, "FAIL: get_option('gslider_disabled_blocks') still contains re-enabled image-slider\n" );
+			exit( 1 );
+		}
+		echo "OK: toggle_block re-enables single block\n";
+
+		// 4. Toggle flexi-content automatically handles flexi-content-item.
+		$request_flexi = new WP_REST_Request( 'POST', '/gslider/v1/dashboard/toggle-block' );
+		$request_flexi->set_param( 'slug', 'flexi-content' );
+		$request_flexi->set_param( 'enabled', false );
+
+		$response_flexi = $controller->toggle_block( $request_flexi );
+		$data_flexi     = $response_flexi->get_data();
+		if ( ! in_array( 'gslider-blocks/flexi-content-item', $data_flexi['disabled_blocks'], true ) ) {
+			fwrite( STDERR, "FAIL: flexi-content-item was not automatically disabled with flexi-content\n" );
+			exit( 1 );
+		}
+		if ( ! in_array( 'gslider-blocks/flexi-content-item', (array) get_option( 'gslider_disabled_blocks' ), true ) ) {
+			fwrite( STDERR, "FAIL: get_option('gslider_disabled_blocks') does not contain cascaded flexi-content-item\n" );
+			exit( 1 );
+		}
+		echo "OK: Disabling flexi-content also disables flexi-content-item child dependency\n";
+
+		// 5. Toggle 'all' disables all blocks.
+		$request_all_off = new WP_REST_Request( 'POST', '/gslider/v1/dashboard/toggle-block' );
+		$request_all_off->set_param( 'slug', 'all' );
+		$request_all_off->set_param( 'enabled', false );
+
+		$response_all_off = $controller->toggle_block( $request_all_off );
+		$data_all_off     = $response_all_off->get_data();
+		$expected_all_disabled = [
+			'gslider-blocks/base',
+			'gslider-blocks/flexi-content',
+			'gslider-blocks/flexi-content-item',
+			'gslider-blocks/image-slider',
+			'gslider-blocks/logo-carousel',
+			'gslider-blocks/testimonial',
+		];
+		if ( $expected_all_disabled !== $data_all_off['disabled_blocks'] ) {
+			fwrite( STDERR, "FAIL: toggle 'all' off expected exact 6 disabled slugs, got: " . json_encode( $data_all_off['disabled_blocks'] ) . "\n" );
+			exit( 1 );
+		}
+		if ( $expected_all_disabled !== get_option( 'gslider_disabled_blocks' ) ) {
+			fwrite( STDERR, "FAIL: get_option('gslider_disabled_blocks') did not match expected all disabled slugs\n" );
+			exit( 1 );
+		}
+		echo "OK: Toggling all off disables all blocks\n";
+
+		// 6. Toggle 'all' enables all blocks.
+		$request_all_on = new WP_REST_Request( 'POST', '/gslider/v1/dashboard/toggle-block' );
+		$request_all_on->set_param( 'slug', 'all' );
+		$request_all_on->set_param( 'enabled', true );
+
+		$response_all_on = $controller->toggle_block( $request_all_on );
+		$data_all_on     = $response_all_on->get_data();
+		if ( ! empty( $data_all_on['disabled_blocks'] ) ) {
+			fwrite( STDERR, "FAIL: toggle 'all' on did not empty disabled_blocks\n" );
+			exit( 1 );
+		}
+		if ( ! empty( get_option( 'gslider_disabled_blocks' ) ) ) {
+			fwrite( STDERR, "FAIL: get_option('gslider_disabled_blocks') is not empty after toggle all on\n" );
+			exit( 1 );
+		}
+		echo "OK: Toggling all on enables all blocks\n";
+
+		delete_option( 'gslider_disabled_blocks' );
 	}
 
 	/**

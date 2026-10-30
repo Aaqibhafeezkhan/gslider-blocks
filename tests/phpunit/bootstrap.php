@@ -84,6 +84,14 @@ if ( ! function_exists( 'apply_filters' ) ) {
 	}
 }
 
+if ( ! function_exists( 'remove_all_filters' ) ) {
+	function remove_all_filters( $tag ) {
+		global $wp_filters;
+		unset( $wp_filters[ $tag ] );
+		return true;
+	}
+}
+
 if ( ! function_exists( 'remove_filter' ) ) {
 	function remove_filter( $hook, $callback, $priority = 10 ) {
 		global $wp_filters;
@@ -98,17 +106,6 @@ if ( ! function_exists( 'remove_filter' ) ) {
 	}
 }
 
-if ( ! function_exists( '__return_true' ) ) {
-	function __return_true() {
-		return true;
-	}
-}
-
-if ( ! function_exists( '__return_false' ) ) {
-	function __return_false() {
-		return false;
-	}
-}
 
 if ( ! function_exists( 'do_action' ) ) {
 	function do_action( $tag, ...$args ) {
@@ -119,6 +116,18 @@ if ( ! function_exists( 'do_action' ) ) {
 if ( ! function_exists( 'trailingslashit' ) ) {
 	function trailingslashit( $string ) {
 		return rtrim( $string, '/\\' ) . '/';
+	}
+}
+
+if ( ! function_exists( '__return_true' ) ) {
+	function __return_true() {
+		return true;
+	}
+}
+
+if ( ! function_exists( '__return_false' ) ) {
+	function __return_false() {
+		return false;
 	}
 }
 
@@ -154,6 +163,12 @@ if ( ! function_exists( 'esc_url' ) ) {
 
 if ( ! function_exists( 'esc_url_raw' ) ) {
 	function esc_url_raw( $url ) {
+		return $url;
+	}
+}
+
+if ( ! function_exists( 'set_url_scheme' ) ) {
+	function set_url_scheme( $url, $scheme = null ) {
 		return $url;
 	}
 }
@@ -335,7 +350,6 @@ if ( ! function_exists( 'wp_image_src_get_dimensions' ) ) {
 		return false;
 	}
 }
-
 if ( ! class_exists( 'WP_REST_Controller' ) ) {
 	class WP_REST_Controller {
 		protected $namespace;
@@ -357,8 +371,13 @@ if ( ! class_exists( 'WP_REST_Server' ) ) {
 if ( ! class_exists( 'WP_REST_Request' ) ) {
 	class WP_REST_Request {
 		public $params = [];
-		public function __construct( array $params = [] ) {
-			$this->params = $params;
+		public function __construct( $method_or_params = [], $route = '', $attributes = [] ) {
+			if ( is_array( $method_or_params ) ) {
+				$this->params = $method_or_params;
+			}
+		}
+		public function set_param( $key, $value ) {
+			$this->params[ $key ] = $value;
 		}
 		public function get_param( $key ) {
 			return $this->params[ $key ] ?? null;
@@ -687,7 +706,6 @@ if ( ! function_exists( 'wp_script_add_data' ) ) {
 		return true;
 	}
 }
-
 if ( ! function_exists( 'wp_register_script' ) ) {
 	function wp_register_script( $handle, $src, $deps = [], $ver = false, $args = false ) {
 		global $wp_scripts;
@@ -727,7 +745,6 @@ if ( ! function_exists( 'register_block_type' ) ) {
 		return (object) [ 'name' => is_string( $file_or_folder ) ? basename( $file_or_folder ) : 'mock-block' ];
 	}
 }
-
 if ( ! function_exists( 'get_queried_object_id' ) ) {
 	function get_queried_object_id() {
 		return 42;
@@ -746,22 +763,25 @@ if ( ! class_exists( 'WP_Post' ) ) {
 }
 
 if ( ! function_exists( 'get_post' ) ) {
-	function get_post( $id ) {
-		global $wp_post_content, $wp_mock_posts;
-		$post_id = (int) ( $id instanceof WP_Post ? $id->ID : $id );
+	function get_post( $id = null ) {
+		global $wp_post_content, $wp_mock_posts, $post;
+		if ( null === $id && ! empty( $post ) ) {
+			return $post;
+		}
+		$post_id = (int) ( $id instanceof WP_Post ? $id->ID : ( $id ?? 1 ) );
 		if ( isset( $wp_mock_posts[ $post_id ] ) ) {
 			return $wp_mock_posts[ $post_id ];
 		}
 		if ( 99 === $post_id ) {
 			return null;
 		}
-		$post               = new WP_Post();
-		$post->ID           = $post_id;
-		$post->post_status  = 'publish';
-		$post->post_type    = 'post';
-		$post->post_title   = 'Post ' . $post_id;
-		$post->post_content = $wp_post_content;
-		return $post;
+		$mock_post               = new WP_Post();
+		$mock_post->ID           = $post_id;
+		$mock_post->post_status  = 'publish';
+		$mock_post->post_type    = 'post';
+		$mock_post->post_title   = 'Post ' . $post_id;
+		$mock_post->post_content = $wp_post_content ?? '';
+		return $mock_post;
 	}
 }
 

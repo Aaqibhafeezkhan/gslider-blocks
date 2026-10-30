@@ -65,7 +65,7 @@ flowchart TD
     subgraph Frontend["🚀 4. Client Runtime (Browser)"]
         ViewJS["view.js (DOM Initializer)"]
         SwiperEngine["Swiper.js v11 (Touch, Effects, a11y)"]
-        ScopedCSS["gslider-blocks-dynamic-styles-{pageId}.min.css (Cached Page CSS)"]
+        ScopedCSS["style id='gslider-style-{blockId}' (Scoped Dynamic CSS)"]
         
         SaveJS --> ViewJS
         StyleGen --> ScopedCSS
@@ -114,7 +114,7 @@ flowchart TD
 - **In GSlider Blocks:**
   1. When an editor modifies visual attributes (margin, typography, colors), React executes `styling.js`.
   2. `styling.js` compiles clean CSS string rules (Desktop, Tablet, Mobile) and updates the block's `blockStyle` attribute.
-  3. On frontend rendering, PHP (`StyleGenerator.php`) parses `blockStyle`, compiles all active block styles into a per-page minified CSS file (`wp-content/uploads/gslider-blocks/css/gslider-blocks-dynamic-styles-{$page_id}.min.css`), and enqueues it cleanly via `wp_enqueue_style()` with `filemtime` cache busting.
+  3. On frontend rendering, PHP (`StyleGenerator.php`) parses `blockStyle`, strictly sanitizes and scopes selectors to the `blockId`, deduplicates identical instances, and renders clean scoped `<style id="gslider-style-{$blockId}">` tags with strict Content Security Policy (CSP) nonce compatibility.
 - **Rule:** *Markup belongs in `save.js`; dynamic styling belongs in `styling.js` and `StyleGenerator.php`.*
 
 ### 4. Scoping & Collision Isolation Principle (`useBlockIdGenerator`)

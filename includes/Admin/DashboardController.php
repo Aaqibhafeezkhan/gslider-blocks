@@ -122,58 +122,6 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 					],
 				]
 			);
-
-			register_rest_route(
-				$this->namespace,
-				'/' . $this->rest_base . '/settings',
-				[
-					[
-						'methods'             => WP_REST_Server::CREATABLE,
-						'callback'            => [ $this, 'save_settings' ],
-						'permission_callback' => [ $this, 'save_settings_permissions_check' ],
-						'args'                => [
-							'google_fonts_privacy' => [
-								'description' => __( 'Whether Google Fonts privacy mode is enabled.', 'gslider-blocks' ),
-								'type'        => 'boolean',
-								'required'    => false,
-								'default'     => false,
-							],
-							'css_delivery'         => [
-								'description'       => __( 'Dynamic CSS delivery method (file or inline).', 'gslider-blocks' ),
-								'type'              => 'string',
-								'enum'              => [ 'file', 'inline' ],
-								'required'          => false,
-								'default'           => 'file',
-								'sanitize_callback' => 'sanitize_key',
-							],
-						],
-					],
-				]
-			);
-
-			register_rest_route(
-				$this->namespace,
-				'/' . $this->rest_base . '/clear-cache',
-				[
-					[
-						'methods'             => WP_REST_Server::CREATABLE,
-						'callback'            => [ $this, 'clear_cache' ],
-						'permission_callback' => [ $this, 'get_item_permissions_check' ],
-					],
-				]
-			);
-
-			register_rest_route(
-				$this->namespace,
-				'/' . $this->rest_base . '/system-report',
-				[
-					[
-						'methods'             => WP_REST_Server::READABLE,
-						'callback'            => [ $this, 'get_system_report' ],
-						'permission_callback' => [ $this, 'get_item_permissions_check' ],
-					],
-				]
-			);
 		}
 
 		/**
@@ -204,32 +152,6 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 		}
 
 		/**
-		 * Checks whether the current user has permission to update dashboard settings.
-		 *
-		 * Requires the 'manage_options' capability.
-		 *
-		 * @since 1.2.0
-		 *
-		 * @param WP_REST_Request $request Full data about the request.
-		 * @return true|WP_Error True if user has manage_options capability, WP_Error otherwise.
-		 */
-		public function save_settings_permissions_check( $request ) {
-			if ( ! current_user_can( 'manage_options' ) ) {
-				$status_code = function_exists( 'rest_authorization_required_code' )
-					? rest_authorization_required_code()
-					: 401;
-
-				return new WP_Error(
-					'rest_forbidden',
-					__( 'Sorry, you are not allowed to manage GSlider settings.', 'gslider-blocks' ),
-					[ 'status' => $status_code ]
-				);
-			}
-
-			return true;
-		}
-
-		/**
 		 * Retrieves dashboard data including system metrics and block status.
 		 *
 		 * @since 1.2.0
@@ -245,8 +167,6 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 				'version'       => $version,
 				'sliders_count' => $this->get_sliders_count(),
 				'blocks'        => $this->get_blocks_status(),
-				'settings'      => $this->get_settings(),
-				'cache'         => \GSlider\Classes\StyleGenerator::getInstance()->get_cache_stats(),
 				'system'        => $this->get_system_metrics(),
 			];
 
@@ -498,264 +418,6 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 		}
 
 		/**
-		 * Retrieves the global plugin settings with backward-compatible defaults.
-		 *
-		 * @since 1.2.0
-		 *
-		 * @return array{google_fonts_privacy: bool, css_delivery: string}
-		 */
-		public function get_settings(): array {
-			$settings = get_option( 'gslider_settings', [] );
-			if ( ! is_array( $settings ) ) {
-				$settings = [];
-			}
-
-			$css_delivery = isset( $settings['css_delivery'] ) && in_array( $settings['css_delivery'], [ 'file', 'inline' ], true )
-				? (string) $settings['css_delivery']
-				: 'file';
-
-			$defaults = [
-				'google_fonts_privacy' => ! empty( $settings['google_fonts_privacy'] ),
-				'css_delivery'         => $css_delivery,
-			];
-
-			/**
-			 * Filters the global GSlider settings array.
-			 *
-			 * @since 1.2.0
-			 *
-			 * @param array $defaults Default settings values.
-			 */
-			return apply_filters( 'gslider_dashboard_settings', $defaults );
-		}
-
-		/**
-		 * Updates global plugin preferences from REST request.
-		 *
-		 * @since 1.2.0
-		 *
-		 * @param WP_REST_Request $request Full data about the request.
-		 * @return WP_REST_Response Response object containing updated settings.
-		 */
-		public function save_settings( $request ) {
-			$existing = get_option( 'gslider_settings', [] );
-			if ( ! is_array( $existing ) ) {
-				$existing = [];
-			}
-
-			$google_fonts_privacy = $request->has_param( 'google_fonts_privacy' )
-				? (bool) $request->get_param( 'google_fonts_privacy' )
-				: ( ! empty( $existing['google_fonts_privacy'] ) );
-
-			$css_delivery = $request->has_param( 'css_delivery' )
-				? sanitize_key( (string) $request->get_param( 'css_delivery' ) )
-				: ( isset( $existing['css_delivery'] ) ? (string) $existing['css_delivery'] : 'file' );
-
-			if ( ! in_array( $css_delivery, [ 'file', 'inline' ], true ) ) {
-				$css_delivery = 'file';
-			}
-
-			$updated = [
-				'google_fonts_privacy' => $google_fonts_privacy,
-				'css_delivery'         => $css_delivery,
-			];
-
-			update_option( 'gslider_settings', $updated );
-
-			return rest_ensure_response( [
-				'status'   => 'success',
-				'message'  => __( 'Settings saved successfully.', 'gslider-blocks' ),
-				'settings' => $this->get_settings(),
-			] );
-		}
-
-		/**
-		 * Purges dynamic CSS cache files from uploads directory.
-		 *
-		 * @since 1.2.0
-		 *
-		 * @param WP_REST_Request $request Full data about the request.
-		 * @return WP_REST_Response Response object with deleted file count and updated cache stats.
-		 */
-		public function clear_cache( $request ) {
-			$style_generator = \GSlider\Classes\StyleGenerator::getInstance();
-			$deleted_count   = $style_generator->clear_dynamic_css_cache();
-
-			return rest_ensure_response( [
-				'status'        => 'success',
-				'message'       => sprintf(
-					/* translators: %d: number of files deleted */
-					_n(
-						'Successfully deleted %d dynamic CSS cache file.',
-						'Successfully deleted %d dynamic CSS cache files.',
-						$deleted_count,
-						'gslider-blocks'
-					),
-					$deleted_count
-				),
-				'deleted'       => $deleted_count,
-				'deleted_files' => $deleted_count,
-				'cache'         => $style_generator->get_cache_stats(),
-			] );
-		}
-
-		/**
-		 * Retrieves formatted diagnostic system report.
-		 *
-		 * @since 1.2.0
-		 *
-		 * @param WP_REST_Request $request Full data about the request.
-		 * @return WP_REST_Response Response object containing diagnostic report.
-		 */
-		public function get_system_report( $request ) {
-			$report = $this->generate_system_report();
-
-			return rest_ensure_response( [
-				'status' => 'success',
-				'data'   => $report,
-				'report' => $report,
-			] );
-		}
-
-		/**
-		 * Generates a sanitized diagnostic system report.
-		 *
-		 * Gathers server environment, WordPress versions, theme info,
-		 * and active plugins without leaking sensitive paths or credentials.
-		 *
-		 * @since 1.2.0
-		 *
-		 * @return array{metrics: array, plugins: array, formatted_text: string}
-		 */
-		public function generate_system_report(): array {
-			$system_metrics = $this->get_system_metrics();
-			$settings       = $this->get_settings();
-			$version        = defined( 'GSLIDER_VERSION' ) ? GSLIDER_VERSION : '1.1.9';
-
-			// Web server software (sanitized)
-			$server_software = isset( $_SERVER['SERVER_SOFTWARE'] )
-				? sanitize_text_field( (string) $_SERVER['SERVER_SOFTWARE'] )
-				: 'Unknown';
-
-			// Theme info
-			$theme_name    = 'Unknown';
-			$theme_version = 'Unknown';
-			$theme_author  = 'Unknown';
-			$is_child      = false;
-			if ( function_exists( 'wp_get_theme' ) ) {
-				$theme = wp_get_theme();
-				if ( is_object( $theme ) && method_exists( $theme, 'exists' ) && $theme->exists() ) {
-					$theme_name    = (string) $theme->get( 'Name' );
-					$theme_version = (string) $theme->get( 'Version' );
-					$theme_author  = (string) $theme->get( 'Author' );
-					$is_child      = function_exists( 'is_child_theme' ) && is_child_theme();
-				}
-			}
-
-			// Active plugins (sanitized name and version, zero server paths)
-			$active_plugins_list = [];
-			$raw_plugins         = (array) get_option( 'active_plugins', [] );
-
-			if ( ! function_exists( 'get_plugin_data' ) && defined( 'ABSPATH' ) ) {
-				$admin_plugin_file = ABSPATH . 'wp-admin/includes/plugin.php';
-				if ( file_exists( $admin_plugin_file ) ) {
-					require_once $admin_plugin_file;
-				}
-			}
-
-			if ( function_exists( 'get_plugin_data' ) && defined( 'WP_PLUGIN_DIR' ) ) {
-				foreach ( $raw_plugins as $plugin_file ) {
-					$full_plugin_path = WP_PLUGIN_DIR . '/' . $plugin_file;
-					if ( file_exists( $full_plugin_path ) ) {
-						$plugin_data = get_plugin_data( $full_plugin_path, false, false );
-						if ( ! empty( $plugin_data['Name'] ) ) {
-							$active_plugins_list[] = [
-								'name'    => sanitize_text_field( (string) $plugin_data['Name'] ),
-								'version' => sanitize_text_field( isset( $plugin_data['Version'] ) ? (string) $plugin_data['Version'] : 'N/A' ),
-								'author'  => sanitize_text_field( isset( $plugin_data['AuthorName'] ) ? (string) $plugin_data['AuthorName'] : 'N/A' ),
-							];
-						}
-					}
-				}
-			}
-
-			$memory_limit = $system_metrics['memory_limit'];
-			$max_execution_time = ini_get( 'max_execution_time' );
-			if ( ! $max_execution_time ) {
-				$max_execution_time = 'N/A';
-			} else {
-				$max_execution_time = $max_execution_time . 's';
-			}
-
-			$delivery_label = ( 'inline' === $settings['css_delivery'] )
-				? __( 'Inline Header Style', 'gslider-blocks' )
-				: __( 'External Generated Stylesheet', 'gslider-blocks' );
-
-			$privacy_label = ! empty( $settings['google_fonts_privacy'] )
-				? __( 'Enabled (GDPR Privacy Compliant)', 'gslider-blocks' )
-				: __( 'Disabled (Google Fonts Allowed)', 'gslider-blocks' );
-
-			$total_sliders = $this->get_sliders_count();
-			$is_multisite  = function_exists( 'is_multisite' ) && is_multisite();
-
-			// Generate clean markdown text for 1-click clipboard copying
-			$timestamp = function_exists( 'current_time' ) ? current_time( 'mysql' ) : gmdate( 'Y-m-d H:i:s' );
-			$report_lines = [
-				'### GSlider Blocks System Diagnostics Report',
-				'- Generated: ' . $timestamp,
-				'',
-				'#### WordPress Environment',
-				'- GSlider Blocks Version: ' . $version,
-				'- WordPress Version: ' . $system_metrics['wp_version'],
-				'- Multisite: ' . ( $is_multisite ? 'Yes' : 'No' ),
-				'- Active Theme: ' . $theme_name . ' (' . $theme_version . ')' . ( $is_child ? ' [Child Theme]' : '' ),
-				'',
-				'#### Server Environment',
-				'- PHP Version: ' . $system_metrics['php_version'],
-				'- Web Server: ' . $server_software,
-				'- Memory Limit: ' . $memory_limit,
-				'- Max Execution Time: ' . $max_execution_time,
-				'',
-				'#### GSlider Configuration',
-				'- Dynamic CSS Delivery: ' . $delivery_label,
-				'- Google Fonts Privacy: ' . $privacy_label,
-				'- Total Published Sliders: ' . $total_sliders,
-				'',
-				'#### Active Plugins (' . count( $active_plugins_list ) . ')',
-			];
-
-			if ( ! empty( $active_plugins_list ) ) {
-				foreach ( $active_plugins_list as $plug ) {
-					$report_lines[] = '- ' . $plug['name'] . ' (v' . $plug['version'] . ')';
-				}
-			} else {
-				$report_lines[] = '- None detected';
-			}
-
-			$formatted_text = implode( "\n", $report_lines );
-
-			return [
-				'metrics' => [
-					'gslider_version'      => $version,
-					'wp_version'           => $system_metrics['wp_version'],
-					'php_version'          => $system_metrics['php_version'],
-					'web_server'           => $server_software,
-					'memory_limit'         => $memory_limit,
-					'max_execution_time'   => $max_execution_time,
-					'is_multisite'         => $is_multisite,
-					'theme_name'           => $theme_name,
-					'theme_version'        => $theme_version,
-					'is_child_theme'       => $is_child,
-					'css_delivery'         => $settings['css_delivery'],
-					'google_fonts_privacy' => $settings['google_fonts_privacy'],
-					'sliders_count'        => $total_sliders,
-				],
-				'plugins'        => $active_plugins_list,
-				'formatted_text' => $formatted_text,
-			];
-		}
-
-		/**
 		 * Retrieves the item schema for the dashboard endpoint.
 		 *
 		 * @since 1.2.0
@@ -810,22 +472,6 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 						],
 						'readonly'    => true,
 					],
-					'settings'      => [
-						'description' => __( 'Global plugin settings and delivery preferences.', 'gslider-blocks' ),
-						'type'        => 'object',
-						'properties'  => [
-							'google_fonts_privacy' => [
-								'type'     => 'boolean',
-								'readonly' => true,
-							],
-							'css_delivery'         => [
-								'type'     => 'string',
-								'enum'     => [ 'file', 'inline' ],
-								'readonly' => true,
-							],
-						],
-						'readonly'    => true,
-					],
 					'system'        => [
 						'description' => __( 'Server and WordPress environment metrics.', 'gslider-blocks' ),
 						'type'        => 'object',
@@ -839,25 +485,6 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 								'readonly' => true,
 							],
 							'memory_limit' => [
-								'type'     => 'string',
-								'readonly' => true,
-							],
-						],
-						'readonly'    => true,
-					],
-					'cache'         => [
-						'description' => __( 'Dynamic CSS cache statistics.', 'gslider-blocks' ),
-						'type'        => 'object',
-						'properties'  => [
-							'files_count'          => [
-								'type'     => 'integer',
-								'readonly' => true,
-							],
-							'total_size_bytes'     => [
-								'type'     => 'integer',
-								'readonly' => true,
-							],
-							'total_size_formatted' => [
 								'type'     => 'string',
 								'readonly' => true,
 							],

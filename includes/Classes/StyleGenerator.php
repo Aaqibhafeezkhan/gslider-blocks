@@ -171,7 +171,9 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
                 self::$printed[ $block_id ] = true;
             }
 
-            $style_tag = '<style id="gslider-style-' . esc_attr( $block_id ) . '">' . $clean_style . '</style>';
+            $nonce      = $this->get_csp_nonce();
+            $nonce_attr = ! empty( $nonce ) ? ' nonce="' . esc_attr( $nonce ) . '"' : '';
+            $style_tag  = '<style id="gslider-style-' . esc_attr( $block_id ) . '"' . $nonce_attr . '>' . $clean_style . '</style>';
 
             return $style_tag . $block_content;
         }
@@ -689,40 +691,59 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         }
 
         /**
-         * Clears collected in-memory styles.
+         * Retrieves the Content Security Policy (CSP) nonce if configured (#314, #391).
+         *
+         * Checks the 'gslider_style_nonce', 'gslider_csp_nonce', and third-party 'wp_csp_nonce' filters.
+         *
+         * Compatibility Note:
+         * 'wp_csp_nonce' is widely used by popular security plugins, but is NOT a standard WordPress core filter.
+         *
+         * CSP Level 3 Consideration:
+         * Injecting nonces onto dynamic <style> tags allows sites to comply
+         * with strict 'style-src' policies without 'unsafe-inline'. However, any block using inline HTML
+         * style="" attributes (such as the star rating width percentage in Testimonial blocks) still requires
+         * 'style-src-attr' (e.g. 'unsafe-inline' or attribute hash) unless rewritten.
          *
          * @since 1.2.0
          *
-         * @return int Number of cached files purged (always 0 since styles are inline).
+         * @return string The sanitized CSP nonce string, or empty string if not set.
          */
-        public function clear_dynamic_css_cache(): int {
-            self::reset_styles();
-            return 0;
-        }
-
-        /**
-         * Retrieves dynamic CSS cache statistics.
-         *
-         * @since 1.2.0
-         *
-         * @return array{files_count: int, total_size_bytes: int, total_size_formatted: string}
-         */
-        public function get_cache_stats(): array {
-            return [
-                'files_count'          => 0,
-                'total_size_bytes'     => 0,
-                'total_size_formatted' => '0 KB',
-            ];
+        public function get_csp_nonce(): string {
+            $nonce = apply_filters( 'gslider_style_nonce', '' );
+            if ( empty( $nonce ) ) {
+                $nonce = apply_filters( 'gslider_csp_nonce', '' );
+            }
+            if ( empty( $nonce ) ) {
+                $nonce = apply_filters( 'wp_csp_nonce', '' );
+            }
+            return is_string( $nonce ) ? sanitize_text_field( $nonce ) : '';
         }
 
         /**
          * Prints any collected dynamic styles in wp_footer as fallback.
+         *
+         * If styles remain collected and CSP nonce is present, injects nonce attribute.
          *
          * @since 1.0.0
          *
          * @return void
          */
         public function print_footer_styles(): void {
+            if ( empty( self::$styles ) ) {
+                return;
+            }
+
+            // Only output dynamic styles that have not already been rendered inline.
+            $unprinted_styles = array_diff_key( self::$styles, self::$printed );
+            if ( ! empty( $unprinted_styles ) ) {
+                $combined_css = implode( "\n", $unprinted_styles );
+                if ( ! empty( $combined_css ) ) {
+                    $nonce      = $this->get_csp_nonce();
+                    $nonce_attr = ! empty( $nonce ) ? ' nonce="' . esc_attr( $nonce ) . '"' : '';
+                    echo '<style id="gslider-blocks-footer-styles"' . $nonce_attr . ">\n" . $combined_css . "\n</style>\n";
+                }
+            }
+
             self::$styles = [];
         }
 

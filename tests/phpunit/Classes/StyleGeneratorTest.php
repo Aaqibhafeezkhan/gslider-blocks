@@ -66,6 +66,8 @@ class StyleGeneratorTest {
 		$this->test_ensure_image_dimensions_edge_cases();
 		$this->test_ensure_image_dimensions_testimonial_author_image();
 		$this->test_reset_styles();
+		$this->test_csp_nonce_injection();
+		$this->test_print_footer_styles_deduplication();
 
 		echo "\nAll StyleGenerator unit tests passed successfully!\n";
 	}
@@ -1049,6 +1051,163 @@ class StyleGeneratorTest {
 
 		echo "OK: reset_styles() clears collected styles, printed block IDs, and the LCP flag\n";
 	}
+	/**
+	 * Test 9: Verify CSP nonce injection on dynamic <style> tags (#314).
+	 *
+	 * @return void
+	 */
+	public function test_csp_nonce_injection(): void {
+		global $is_admin_mock, $is_feed_mock;
+		$is_admin_mock = false;
+		$is_feed_mock  = false;
+
+		remove_all_filters( 'gslider_style_nonce' );
+		remove_all_filters( 'gslider_csp_nonce' );
+		remove_all_filters( 'wp_csp_nonce' );
+
+		StyleGenerator::reset_styles();
+		$generator = StyleGenerator::getInstance();
+
+		// Case 1: Custom gslider_style_nonce filter.
+		add_filter( 'gslider_style_nonce', function() {
+			return 'nonce-gslider-custom-123';
+		} );
+
+		$block_id = 'gslider-csp-block-1';
+		$block    = [
+			'blockName' => 'gslider-blocks/image-slider',
+			'attrs'     => [
+				'blockId'    => $block_id,
+				'blockStyle' => ".{$block_id} { opacity: 1; }",
+			],
+		];
+		$content  = '<div class="gslider-image-slider-wrapper">CSP Test 1</div>';
+
+		$output = $generator->collect_and_render_dynamic_styles( $content, $block );
+		$expected_nonce_tag = '<style id="gslider-style-' . $block_id . '" nonce="nonce-gslider-custom-123">';
+
+		if ( false === strpos( $output, $expected_nonce_tag ) ) {
+			fwrite( STDERR, "FAIL: Inline <style> tag missing expected nonce attribute. Expected: {$expected_nonce_tag}, Got: {$output}\n" );
+			exit( 1 );
+		}
+		echo "OK: Dynamic <style> tag receives nonce from 'gslider_style_nonce' filter\n";
+
+		remove_all_filters( 'gslider_style_nonce' );
+
+		// Case 2: Third-party security compatibility filter 'wp_csp_nonce'.
+		add_filter( 'wp_csp_nonce', function() {
+			return 'nonce-wp-core-456';
+		} );
+
+		StyleGenerator::reset_styles();
+		$block_id_2 = 'gslider-csp-block-2';
+		$block_2    = [
+			'blockName' => 'gslider-blocks/image-slider',
+			'attrs'     => [
+				'blockId'    => $block_id_2,
+				'blockStyle' => ".{$block_id_2} { opacity: 0.8; }",
+			],
+		];
+		$output_2   = $generator->collect_and_render_dynamic_styles( $content, $block_2 );
+		$expected_wp_tag = '<style id="gslider-style-' . $block_id_2 . '" nonce="nonce-wp-core-456">';
+
+		if ( false === strpos( $output_2, $expected_wp_tag ) ) {
+			fwrite( STDERR, "FAIL: Inline <style> tag missing fallback nonce attribute. Expected: {$expected_wp_tag}, Got: {$output_2}\n" );
+			exit( 1 );
+		}
+		echo "OK: Dynamic <style> tag falls back cleanly to 'wp_csp_nonce' compatibility filter\n";
+
+		remove_all_filters( 'wp_csp_nonce' );
+
+		// Case 3: Malicious nonce payload is sanitized and HTML-escaped in both output paths.
+		add_filter( 'gslider_style_nonce', function() {
+			return 'bad-nonce" onload="alert(1)" <script>alert(2)</script>';
+		} );
+
+		StyleGenerator::reset_styles();
+		$block_id_3 = 'gslider-csp-block-3';
+		$block_3    = [
+			'blockName' => 'gslider-blocks/image-slider',
+			'attrs'     => [
+				'blockId'    => $block_id_3,
+				'blockStyle' => ".{$block_id_3} { opacity: 0.5; }",
+			],
+		];
+		$output_3   = $generator->collect_and_render_dynamic_styles( $content, $block_3 );
+
+		if ( false !== strpos( $output_3, '<script' ) || false !== strpos( $output_3, '" onload=' ) ) {
+			fwrite( STDERR, "FAIL: Malicious CSP nonce was not safely contained in inline style tag: $output_3\n" );
+			exit( 1 );
+		}
+		if ( false === strpos( $output_3, 'nonce="bad-nonce&quot; onload=&quot;alert(1)&quot; alert(2)"' ) ) {
+			fwrite( STDERR, "FAIL: Expected escaped nonce attribute not found in inline style tag: $output_3\n" );
+			exit( 1 );
+		}
+		echo "OK: Malicious CSP nonce is safely contained and escaped in inline <style> tag\n";
+
+		// Verify footer output path also sanitizes and escapes malicious nonce.
+		StyleGenerator::reset_styles();
+		$ref_styles = new ReflectionProperty( StyleGenerator::class, 'styles' );
+		if ( PHP_VERSION_ID < 80100 ) {
+			$ref_styles->setAccessible( true );
+		}
+		$ref_styles->setValue( null, [ 'footer-csp-block' => '.footer-csp-block { color: red; }' ] );
+
+		ob_start();
+		$generator->print_footer_styles();
+		$footer_output = ob_get_clean();
+
+		if ( false !== strpos( $footer_output, '<script' ) || false !== strpos( $footer_output, '" onload=' ) ) {
+			fwrite( STDERR, "FAIL: Malicious CSP nonce was not safely contained in footer style tag: $footer_output\n" );
+			exit( 1 );
+		}
+		if ( false === strpos( $footer_output, 'nonce="bad-nonce&quot; onload=&quot;alert(1)&quot; alert(2)"' ) ) {
+			fwrite( STDERR, "FAIL: Expected escaped nonce attribute not found in footer style tag: $footer_output\n" );
+			exit( 1 );
+		}
+		echo "OK: Malicious CSP nonce is safely contained and escaped in footer <style> tag\n";
+
+		remove_all_filters( 'gslider_style_nonce' );
+	}
+
+	/**
+	 * Test 11: Verify print_footer_styles() deduplicates inline printed styles.
+	 *
+	 * @return void
+	 */
+	public function test_print_footer_styles_deduplication(): void {
+		global $is_admin_mock, $is_feed_mock;
+		$is_admin_mock = false;
+		$is_feed_mock  = false;
+
+		StyleGenerator::reset_styles();
+		$generator = StyleGenerator::getInstance();
+
+		$block_id = 'gslider-footer-test';
+		$block    = [
+			'blockName' => 'gslider-blocks/image-slider',
+			'attrs'     => [
+				'blockId'    => $block_id,
+				'blockStyle' => ".{$block_id} { color: red; }",
+			],
+		];
+		$content  = '<div class="gslider-image-slider-wrapper ' . $block_id . '">Slider</div>';
+
+		// Render block inline (it gets printed and stored in self::$printed).
+		$generator->collect_and_render_dynamic_styles( $content, $block );
+
+		// Capture print_footer_styles() output.
+		ob_start();
+		$generator->print_footer_styles();
+		$footer_output = ob_get_clean();
+
+		if ( ! empty( $footer_output ) ) {
+			fwrite( STDERR, "FAIL: print_footer_styles() unexpectedly printed duplicate styles that were already printed inline: $footer_output\n" );
+			exit( 1 );
+		}
+		echo "OK: print_footer_styles() does not duplicate styles already rendered inline\n";
+	}
+
 }
 
 // Standalone execution entrypoint.
