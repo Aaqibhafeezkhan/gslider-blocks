@@ -1,6 +1,6 @@
 {
   "name": "@gslider/mcp-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Official Model Context Protocol (MCP) server for GSlider Blocks — AI-assisted Gutenberg slider & carousel generation and design",
   "license": "GPL-2.0-or-later",
   "homepage": "https://wordpress.org/plugins/gslider-blocks/",
