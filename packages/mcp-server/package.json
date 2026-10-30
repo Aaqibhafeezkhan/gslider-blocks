@@ -1,8 +1,31 @@
 {
   "name": "@gslider/mcp-server",
-  "version": "1.0.0",
-  "description": "Model Context Protocol (MCP) server for GSlider Blocks - AI-assisted slider generation and design",
+  "version": "1.0.1",
+  "description": "Official Model Context Protocol (MCP) server for GSlider Blocks — AI-assisted Gutenberg slider & carousel generation and design",
   "license": "GPL-2.0-or-later",
+  "homepage": "https://wordpress.org/plugins/gslider-blocks/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noruzzamans/gslider-blocks.git",
+    "directory": "packages/mcp-server"
+  },
+  "bugs": {
+    "url": "https://github.com/noruzzamans/gslider-blocks/issues"
+  },
+  "keywords": [
+    "wordpress",
+    "gutenberg",
+    "gslider",
+    "slider",
+    "carousel",
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "cursor",
+    "antigravity",
+    "ai",
+    "blocks"
+  ],
   "engines": {
     "node": ">=22.22.2"
   },
@@ -10,7 +33,10 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "gslider-mcp": "./dist/index.js"
+    "gslider-mcp": "dist/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "dist"

@@ -1,5 +1,11 @@
 # @gslider/mcp-server
 
+[![npm version](https://img.shields.io/npm/v/@gslider/mcp-server.svg?style=flat-square&color=blue)](https://www.npmjs.com/package/@gslider/mcp-server)
+[![License: GPL-2.0](https://img.shields.io/badge/License-GPL--2.0-green.svg?style=flat-square)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![Node.js Version](https://img.shields.io/node/v/@gslider/mcp-server.svg?style=flat-square)](https://nodejs.org)
+[![MCP Compliant](https://img.shields.io/badge/MCP-1.6.1-purple.svg?style=flat-square)](https://modelcontextprotocol.io)
+[![WordPress](https://img.shields.io/badge/WordPress-6.0+-blue.svg?style=flat-square&logo=wordpress)](https://wordpress.org/plugins/gslider-blocks/)
+
 > Official Model Context Protocol (MCP) server for **GSlider Blocks** — lets AI assistants (Claude, OpenAI, Cursor, Antigravity, Copilot, Windsurf, etc.) list the GSlider blocks, read each block's attribute schema and defaults, and load starter templates, locally with **$0 cloud cost**. `gslider_generate_block` can write base, testimonial, image-slider, and logo-carousel markup. `gslider_get_block_schema` also describes the `flexi-content-item` child block.
 
 ---
@@ -19,7 +25,67 @@ By running locally on the developer's computer:
 
 ---
 
-## 🚀 Developer Setup & Quick Start
+## 🚀 Quick Start (Zero-Installation via npx)
+
+The fastest way to use the GSlider MCP server in your AI coding environment without cloning or building:
+
+### 1. Claude Desktop (`claude_desktop_config.json`)
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "npx",
+      "args": ["-y", "@gslider/mcp-server"]
+    }
+  }
+}
+```
+
+### 2. Cursor IDE (`.cursor/mcp.json`)
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "npx",
+      "args": ["-y", "@gslider/mcp-server"]
+    }
+  }
+}
+```
+
+### 3. Google Antigravity IDE (`.antigravity/mcp.json`)
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "npx",
+      "args": ["-y", "@gslider/mcp-server"]
+    }
+  }
+}
+```
+
+### 4. VS Code (Cline / Roo Code)
+In `cline_mcp_settings.json`:
+```json
+{
+  "mcpServers": {
+    "gslider": {
+      "command": "npx",
+      "args": ["-y", "@gslider/mcp-server"]
+    }
+  }
+}
+```
+
+---
+
+## 💻 Local Development Setup (For Contributors)
+
+If you are modifying the MCP server source code or contributing to GSlider Blocks:
 
 ### Step 1: Clone Repository & Install Dependencies
 
@@ -43,13 +109,9 @@ To verify zero schema drift:
 npm run mcp:test
 ```
 
-### Step 3: Configure in your AI Assistant or IDE
+### Step 3: Configure Local Binary in your IDE
 
-Replace `/absolute/path/to/gslider-blocks` with the absolute path to your cloned repository:
-
-#### 1. Claude Desktop (`claude_desktop_config.json`)
-- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+Point `args` directly to your local compiled file:
 ```json
 {
   "mcpServers": {

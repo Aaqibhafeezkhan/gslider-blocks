@@ -1,0 +1,50 @@
+name: Publish GSlider MCP Server
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'mcp-v*'
+      - 'v*'
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish-mcp:
+    name: Build, Verify & Publish to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Plugin Dependencies
+        run: npm ci
+
+      - name: Verify Webpack Block Build
+        run: npm run build
+
+      - name: Install MCP Server Dependencies
+        run: npm --prefix packages/mcp-server ci --ignore-scripts
+
+      - name: Run MCP Schema Drift Test
+        run: npm --prefix packages/mcp-server test
+
+      - name: Build MCP Server
+        run: npm --prefix packages/mcp-server run build
+
+      - name: Run MCP Generation Test
+        run: npm --prefix packages/mcp-server run test:generate
+
+      - name: Publish to NPM Registry (Trusted Publishing OIDC)
+        run: npm publish --provenance --access public
+        working-directory: packages/mcp-server
