@@ -1,0 +1,52 @@
+# Version control and editor configurations
+.git
+.github
+.gitignore
+.gitattributes
+.agents
+.vscode
+.distignore
+.editorconfig
+.eslintrc*
+.stylelint*
+.nvmrc
+.npmrc
+.wp-env.json
+.all-contributorsrc
+.coderabbit.yaml
+.phpunit.result.cache
+jsconfig.json
+
+# Development documentation and contributor guidelines
+.wordpress-org/
+docs/
+*.md
+
+# Automated tests and test suites
+tests/
+phpunit.xml*
+
+# Node dependencies and source code (compiled output is in build/ and assets/admin/)
+node_modules/
+src/
+admin/
+packages/
+scripts/
+storybook/
+storybook-static/
+
+# Build configuration and dependencies manifests
+webpack.config.js
+webpack.config.admin.js
+webpack.zip.js
+package.json
+package-lock.json
+composer.json
+composer.lock
+
+# Archives and operating system artifacts
+*.zip
+*.log
+.DS_Store
+Thumbs.db
+
