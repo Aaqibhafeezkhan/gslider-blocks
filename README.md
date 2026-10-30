@@ -248,6 +248,7 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/irfat-ifti"><img src="https://avatars.githubusercontent.com/u/197045488?v=4" width="100px;" alt="Md. Irfat Uddin Ifti"/><br /><sub><b>Md. Irfat Uddin Ifti</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mahender9390"><img src="https://avatars.githubusercontent.com/u/190497135?v=4" width="100px;" alt="Vennapureddy Mahender"/><br /><sub><b>Vennapureddy Mahender</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tu-lasizzzz"><img src="https://avatars.githubusercontent.com/u/172914448?v=4" width="100px;" alt="Tulasi Sahu"/><br /><sub><b>Tulasi Sahu</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/rejaulalomkhan"><img src="https://avatars.githubusercontent.com/u/123895004?v=4" width="100px;" alt="Rejaul Alom Khan"/><br /><sub><b>Rejaul Alom Khan</b></sub></a></td>
     </tr>
   </tbody>
 </table>
