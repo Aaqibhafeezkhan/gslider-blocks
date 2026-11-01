@@ -241,7 +241,7 @@ class RegistrationPatternsTest {
 				exit( 1 );
 			}
 
-			echo "OK: Pattern '$pattern_name' verified (title, categories, keywords, and valid Gutenberg markup)\n";
+			echo esc_html( "OK: Pattern '$pattern_name' verified (title, categories, keywords, and valid Gutenberg markup)\n" );
 		}
 	}
 
@@ -258,7 +258,7 @@ class RegistrationPatternsTest {
 			fwrite( STDERR, "FAIL: Patterns directory '$patterns_dir' does not exist\n" );
 			exit( 1 );
 		}
-		echo "OK: Patterns directory exists at $patterns_dir\n";
+		echo esc_html( "OK: Patterns directory exists at $patterns_dir\n" );
 
 		$pattern_files = glob( $patterns_dir . '/*.php' );
 		if ( count( $pattern_files ) < 5 ) {
