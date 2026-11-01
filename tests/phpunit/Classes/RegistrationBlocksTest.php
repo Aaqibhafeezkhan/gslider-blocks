@@ -313,7 +313,7 @@ class RegistrationBlocksTest {
 
 		// Register block view script without Swiper script registered.
 		$handle = 'gslider-blocks-test-mock-view-script';
-		wp_register_script( $handle, 'mock-view.js', [ 'dummy-dep' ] );
+		wp_register_script( $handle, 'mock-view.js', [ 'dummy-dep' ], '1.0.0', true );
 
 		// Simulate RegistrationBlocks logic via reflection.
 		$instance = RegistrationBlocks::getInstance();
