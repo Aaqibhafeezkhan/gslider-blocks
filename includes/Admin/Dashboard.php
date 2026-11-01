@@ -126,6 +126,9 @@ if ( ! class_exists( Dashboard::class, false ) ) {
 				true
 			);
 
+			// Register script translations for the dashboard bundle.
+			wp_set_script_translations( 'gslider-dashboard-script', 'gslider-blocks', $plugin_dir . 'languages' );
+
 			// Localize runtime configuration data.
 			$localized_data = [
 				'siteUrl'   => site_url(),

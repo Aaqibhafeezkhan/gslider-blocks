@@ -23,9 +23,14 @@ import {
 } from '../icons';
 
 /**
- * Metadata for all 5 top-level GSlider blocks in alphabetical order.
+ * Returns metadata for all 5 top-level GSlider blocks in alphabetical order.
+ *
+ * Evaluated lazily at call time so the `__()` name and description lookups
+ * run after WordPress has injected the script translations locale data.
+ *
+ * @return {Array} Block metadata items.
  */
-const BLOCKS_METADATA = [
+const getBlocksMetadata = () => [
 	{
 		slug: 'base',
 		name: __( 'Base Slider', 'gslider-blocks' ),
@@ -84,7 +89,7 @@ const BLOCKS_METADATA = [
 const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 	const getInitialBlocks = () => {
 		const serverBlocks = dashboardData?.blocks || [];
-		return BLOCKS_METADATA.map( ( meta ) => {
+		return getBlocksMetadata().map( ( meta ) => {
 			const found = serverBlocks.find( ( b ) => b.slug === meta.slug );
 			return {
 				...meta,
@@ -175,7 +180,7 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 			} );
 
 			if ( response && response.status === 'success' ) {
-				const blockMeta = BLOCKS_METADATA.find(
+				const blockMeta = getBlocksMetadata().find(
 					( b ) => b.slug === slug
 				);
 				const blockName = blockMeta ? blockMeta.name : slug;

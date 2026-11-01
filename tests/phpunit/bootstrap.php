@@ -29,7 +29,7 @@ if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
 }
 
 // Global state registries.
-global $wp_actions, $wp_filters, $wp_menu_pages, $current_caps, $enqueued_styles, $enqueued_scripts, $localized_scripts, $wp_block_patterns, $wp_pattern_categories, $wp_rest_routes, $wp_transients, $wp_options, $wpdb, $wp_styles, $wp_post_content, $wp_current_action, $wp_mock_posts, $password_clear, $can_read, $registered_rest_fields;
+global $wp_actions, $wp_filters, $wp_menu_pages, $current_caps, $enqueued_styles, $enqueued_scripts, $localized_scripts, $script_translations, $wp_block_patterns, $wp_pattern_categories, $wp_rest_routes, $wp_transients, $wp_options, $wpdb, $wp_styles, $wp_post_content, $wp_current_action, $wp_mock_posts, $password_clear, $can_read, $registered_rest_fields;
 $wp_actions            = [];
 $wp_filters            = [];
 $wp_menu_pages         = [];
@@ -37,6 +37,7 @@ $current_caps          = [];
 $enqueued_styles       = [];
 $enqueued_scripts      = [];
 $localized_scripts     = [];
+$script_translations   = [];
 $wp_block_patterns     = [];
 $wp_pattern_categories = [];
 $wp_rest_routes        = [];
@@ -255,6 +256,13 @@ if ( ! function_exists( 'wp_enqueue_script' ) ) {
 			'ver'       => $ver,
 			'in_footer' => $in_footer,
 		];
+		// Mirror core: enqueueing a script with a source registers it first.
+		if ( '' !== $src ) {
+			$scripts = wp_scripts();
+			if ( ! isset( $scripts->registered[ $handle ] ) ) {
+				$scripts->registered[ $handle ] = new _WP_Dependency( $handle, $src, $deps, $ver, $in_footer ? [ 'in_footer' => true ] : false );
+			}
+		}
 	}
 }
 
@@ -262,6 +270,23 @@ if ( ! function_exists( 'wp_localize_script' ) ) {
 	function wp_localize_script( $handle, $object_name, $l10n ) {
 		global $localized_scripts;
 		$localized_scripts[ $handle ][ $object_name ] = $l10n;
+		return true;
+	}
+}
+
+if ( ! function_exists( 'wp_set_script_translations' ) ) {
+	function wp_set_script_translations( $handle, $domain = 'default', $path = '' ) {
+		global $script_translations;
+		$scripts = wp_scripts();
+		// Mirror core: WP_Scripts::set_translations() returns false for an unregistered handle.
+		if ( ! isset( $scripts->registered[ $handle ] ) ) {
+			return false;
+		}
+		$script_translations[ $handle ] = [
+			'domain' => $domain,
+			'path'   => $path,
+		];
+		$scripts->registered[ $handle ]->textdomain = $domain;
 		return true;
 	}
 }
@@ -632,6 +657,7 @@ if ( ! class_exists( '_WP_Dependency' ) ) {
 		public $ver = false;
 		public $args = null;
 		public $extra = [];
+		public $textdomain;
 
 		public function __construct( $handle, $src, $deps = [], $ver = false, $args = null ) {
 			$this->handle = $handle;

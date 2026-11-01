@@ -13,6 +13,7 @@
  * 8. Assets enqueueing is isolated to the dashboard screen hook with capability checks.
  * 9. Assets localization provides all required runtime config keys.
  * 10. Compiled dashboard CSS and JS bundles exist and contain verified selectors and components.
+ * 11. Script translations are registered for the dashboard handle with the plugin text domain.
  *
  * @package GSlider\Tests\Admin
  */
@@ -48,6 +49,7 @@ class DashboardTest {
 		$this->test_compiled_overview_tab_and_rest_integration();
 		$this->test_compiled_blocks_manager_tab();
 		$this->test_streamlined_two_tab_navigation();
+		$this->test_enqueue_registers_script_translations();
 
 		echo "All Admin Dashboard tests passed successfully!\n";
 	}
@@ -604,6 +606,42 @@ class DashboardTest {
 			}
 		}
 		echo "OK: Streamlined 2-tab navigation verified (Overview, Blocks)\n";
+	}
+
+	/**
+	 * Test 21: Script translations registered for the dashboard script handle.
+	 *
+	 * @return void
+	 */
+	public function test_enqueue_registers_script_translations(): void {
+		global $current_caps, $enqueued_scripts, $script_translations;
+		$dashboard = Dashboard::getInstance();
+
+		$enqueued_scripts    = [];
+		$script_translations = [];
+		$GLOBALS['wp_scripts_obj'] = new WP_Scripts();
+		$current_caps['manage_options'] = true;
+		$dashboard->enqueue_dashboard_assets( 'toplevel_page_gslider-blocks' );
+
+		if ( ! isset( $script_translations['gslider-dashboard-script'] ) ) {
+			fwrite( STDERR, "FAIL: wp_set_script_translations was not called for gslider-dashboard-script\n" );
+			exit( 1 );
+		}
+		$registration = $script_translations['gslider-dashboard-script'];
+		if ( $registration['domain'] !== 'gslider-blocks' ) {
+			fwrite( STDERR, "FAIL: Unexpected script translations domain {$registration['domain']}\n" );
+			exit( 1 );
+		}
+		if ( $registration['path'] !== GSLIDER_DIR_PATH . 'languages' ) {
+			fwrite( STDERR, "FAIL: Unexpected script translations path {$registration['path']}\n" );
+			exit( 1 );
+		}
+		$registered = wp_scripts()->registered['gslider-dashboard-script'] ?? null;
+		if ( null === $registered || $registered->textdomain !== 'gslider-blocks' ) {
+			fwrite( STDERR, "FAIL: wp_scripts()->registered['gslider-dashboard-script']->textdomain is not 'gslider-blocks'\n" );
+			exit( 1 );
+		}
+		echo "OK: Script translations registered for gslider-dashboard-script (domain gslider-blocks, languages path)\n";
 	}
 }
 
