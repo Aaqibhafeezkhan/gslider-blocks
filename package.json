@@ -52,11 +52,11 @@
 		"mini-css-extract-plugin": "^2.10.2",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"sass": "^1.105.2",
-		"sass-loader": "^17.0.1",
+		"sass": "^1.107.0",
+		"sass-loader": "^17.1.0",
 		"storybook": "^8.6.19",
 		"style-loader": "^4.0.0",
-		"webpack": "^5.99.8",
+		"webpack": "^5.112.2",
 		"webpack-cli": "^7.2.3"
 	},
 	"dependencies": {
