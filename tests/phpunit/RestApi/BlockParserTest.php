@@ -17,7 +17,7 @@ require_once dirname( __DIR__ ) . '/bootstrap.php';
 
 if ( ! function_exists( 'sanitize_text_field' ) ) {
 	function sanitize_text_field( $text ) {
-		return is_string( $text ) ? trim( strip_tags( $text ) ) : $text;
+		return is_string( $text ) ? trim( wp_strip_all_tags( $text ) ) : $text;
 	}
 }
 
