@@ -762,7 +762,7 @@ if ( ! function_exists( 'register_block_type' ) ) {
 			if ( ! empty( $data['name'] ) ) {
 				$slug   = str_replace( 'gslider-blocks/', '', $data['name'] );
 				$handle = 'gslider-blocks-' . $slug . '-view-script';
-				wp_register_script( $handle, 'view.js', [] );
+				wp_register_script( $handle, 'view.js', [], '1.0.0', true );
 			}
 		}
 
