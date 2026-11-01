@@ -187,7 +187,7 @@ This plugin may connect to or load resources from external third-party services 
 
 == Changelog ==
 
-= 1.2.1 – October 30, 2026 =
+= 1.2.1 – November 1, 2026 =
 * Performance: Optimized Largest Contentful Paint (LCP) with high-priority slide image preloading and deferred non-critical script execution.
 * Performance: Accelerated slider transitions with GPU-enforced CSS hardware acceleration and pre-initialized slide flex rows to eliminate Cumulative Layout Shift (CLS).
 * Security: Implemented strict Content Security Policy (CSP) nonce filters for inline styles and scripts, hardening compliance with enterprise security headers.
