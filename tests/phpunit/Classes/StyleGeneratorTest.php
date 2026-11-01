@@ -415,8 +415,8 @@ class StyleGeneratorTest {
 
 		$content = '<div class="gslider-image-slider-wrapper ' . $block_id . '">' .
 			'<div class="swiper"><div class="swiper-wrapper">' .
-			'<div class="swiper-slide"><img src="https://example.com/slide1.jpg" alt="Slide 1" loading="lazy" /></div>' .
-			'<div class="swiper-slide"><img src="https://example.com/slide2.jpg" alt="Slide 2" loading="lazy"></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/slide1.jpg" alt="Slide 1" loading="lazy" /></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/slide2.jpg" alt="Slide 2" loading="lazy"></div>' .
 			'</div></div></div>';
 
 		$output = $generator->collect_and_render_dynamic_styles( $content, $block );
@@ -475,7 +475,7 @@ class StyleGeneratorTest {
 		];
 		$content_2  = '<div class="gslider-image-slider-wrapper ' . $block_id_2 . '">' .
 			'<div class="swiper"><div class="swiper-wrapper">' .
-			'<div class="swiper-slide"><img src="https://example.com/slide3.jpg" alt="Slide 3" loading="lazy"></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/slide3.jpg" alt="Slide 3" loading="lazy"></div>' .
 			'</div></div></div>';
 
 		$output_2 = $generator->collect_and_render_dynamic_styles( $content_2, $block_2 );
@@ -506,7 +506,7 @@ class StyleGeneratorTest {
 		StyleGenerator::reset_styles();
 		$content_custom = '<div class="gslider-image-slider-wrapper gslider-custom">' .
 			'<div class="swiper"><div class="swiper-wrapper">' .
-			'<div class="swiper-slide"><img src="https://example.com/custom.jpg" alt="Custom" fetchpriority="low" decoding="sync" loading="lazy" /></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/custom.jpg" alt="Custom" fetchpriority="low" decoding="sync" loading="lazy" /></div>' .
 			'</div></div></div>';
 
 		$output_custom = $generator->collect_and_render_dynamic_styles( $content_custom, $this->slider_block( 'gslider-custom' ) );
@@ -529,7 +529,7 @@ class StyleGeneratorTest {
 		StyleGenerator::reset_styles();
 		$content_default = '<div class="gslider-image-slider-wrapper gslider-default">' .
 			'<div class="swiper"><div class="swiper-wrapper">' .
-			'<div class="swiper-slide"><img src="https://example.com/default.jpg" alt="Default" loading="lazy" /></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/default.jpg" alt="Default" loading="lazy" /></div>' .
 			'</div></div></div>';
 
 		$output_default = $generator->collect_and_render_dynamic_styles( $content_default, $this->slider_block( 'gslider-default' ) );
@@ -571,7 +571,7 @@ class StyleGeneratorTest {
 		StyleGenerator::reset_styles();
 
 		$content = '<div class="swiper"><div class="swiper-wrapper"><div class="swiper-slide">' .
-			'<img src="https://example.com/x.jpg" alt="loading=\'lazy\' onerror=alert(1)">' .
+			'<img src="http://localhost/wp-content/uploads/x.jpg" alt="loading=\'lazy\' onerror=alert(1)">' .
 			'</div></div></div>';
 
 		$output = StyleGenerator::getInstance()->collect_and_render_dynamic_styles( $content, $this->slider_block( 'gslider-xss' ) );
@@ -603,8 +603,8 @@ class StyleGeneratorTest {
 		StyleGenerator::reset_styles();
 
 		$content = '<div class="swiper"><div class="swiper-wrapper"><div class="swiper-slide">' .
-			'<div class="gslider-testimonial-rating-icon"><img src="https://example.com/star.png" alt="star" loading="lazy"></div>' .
-			'<div class="gslider-testimonial-image"><img src="https://example.com/avatar.jpg" alt="Jane" loading="lazy"></div>' .
+			'<div class="gslider-testimonial-rating-icon"><img src="http://localhost/wp-content/uploads/star.png" alt="star" loading="lazy"></div>' .
+			'<div class="gslider-testimonial-image"><img src="http://localhost/wp-content/uploads/avatar.jpg" alt="Jane" loading="lazy"></div>' .
 			'</div></div></div>';
 
 		$output = StyleGenerator::getInstance()->collect_and_render_dynamic_styles(
@@ -638,14 +638,14 @@ class StyleGeneratorTest {
 		StyleGenerator::reset_styles();
 		$generator = StyleGenerator::getInstance();
 
-		$no_slide = $generator->collect_and_render_dynamic_styles( '<div><img src="https://example.com/a.jpg" loading="lazy"></div>', $this->slider_block( 'gslider-noslide' ) );
+		$no_slide = $generator->collect_and_render_dynamic_styles( '<div><img src="http://localhost/wp-content/uploads/a.jpg" loading="lazy"></div>', $this->slider_block( 'gslider-noslide' ) );
 		if ( false !== strpos( $no_slide, 'fetchpriority' ) ) {
 			fwrite( STDERR, "FAIL: Image outside .swiper-slide was optimized\n" );
 			exit( 1 );
 		}
 
 		$later = $generator->collect_and_render_dynamic_styles(
-			'<div class="swiper-slide"><img src="https://example.com/b.jpg" loading="lazy"></div>',
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/b.jpg" loading="lazy"></div>',
 			$this->slider_block( 'gslider-slide' )
 		);
 		if ( false === strpos( $later, 'fetchpriority="high"' ) ) {
@@ -683,7 +683,7 @@ class StyleGeneratorTest {
 
 		$content = '<div class="gslider-image-slider-wrapper ' . $block_id . '">' .
 			'<div class="swiper"><div class="swiper-wrapper">' .
-			'<div class="swiper-slide"><img src="https://example.com/filtered.jpg" alt="Filtered" loading="lazy" /></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/filtered.jpg" alt="Filtered" loading="lazy" /></div>' .
 			'</div></div></div>';
 
 		$output = $generator->collect_and_render_dynamic_styles( $content, $block );
@@ -748,19 +748,19 @@ class StyleGeneratorTest {
 				'images'  => [
 					[
 						'id'  => -1, // Template mock id: must be skipped gracefully
-						'url' => 'https://example.com/template-placeholder.jpg',
+						'url' => 'http://localhost/wp-content/uploads/template-placeholder.jpg',
 					],
 					[
 						'id'  => 42,
-						'url' => 'https://example.com/wp-content/uploads/2026/01/photo1.jpg',
+						'url' => 'http://localhost/wp-content/uploads/2026/01/photo1.jpg',
 					],
 					[
 						'id'  => 43,
-						'url' => 'https://example.com/wp-content/uploads/2026/01/photo2.jpg',
+						'url' => 'http://localhost/wp-content/uploads/2026/01/photo2.jpg',
 					],
 					[
 						'id'  => 44,
-						'url' => 'https://example.com/wp-content/uploads/2026/01/photo3.jpg',
+						'url' => 'http://localhost/wp-content/uploads/2026/01/photo3.jpg',
 					],
 					[
 						// CodeRabbit safety test: non-string url or malformed item should not trigger TypeError
@@ -773,10 +773,10 @@ class StyleGeneratorTest {
 
 		$content = '<div class="wp-block-gslider-blocks-image-slider gslider-image-slider-wrapper">' .
 			'<div class="swiper"><div class="swiper-wrapper">' .
-			'<div class="swiper-slide"><img src="https://example.com/template-placeholder.jpg" alt="Template" /></div>' .
-			'<div class="swiper-slide"><img src="https://example.com/wp-content/uploads/2026/01/photo1.jpg" alt="Photo 1" /></div>' .
-			'<div class="swiper-slide"><img src="https://example.com/wp-content/uploads/2026/01/photo2.jpg" alt="Photo 2" width="500" height="400" /></div>' .
-			'<div class="swiper-slide"><img src="https://example.com/wp-content/uploads/2026/01/photo3.jpg" alt="Photo 3" /></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/template-placeholder.jpg" alt="Template" /></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/2026/01/photo1.jpg" alt="Photo 1" /></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/2026/01/photo2.jpg" alt="Photo 2" width="500" height="400" /></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/2026/01/photo3.jpg" alt="Photo 3" /></div>' .
 			'</div></div></div>';
 
 		$output = $generator->ensure_image_dimensions( $content, $block );
@@ -867,20 +867,20 @@ class StyleGeneratorTest {
 				'images'  => [
 					[
 						'id'  => 50,
-						'url' => 'https://example.com/wp-content/uploads/2026/02/hero-300x300.jpg',
+						'url' => 'http://localhost/wp-content/uploads/2026/02/hero-300x300.jpg',
 					],
 					[
 						'id'  => 51,
-						'url' => 'https://example.com/wp-content/uploads/2026/02/logo.png',
+						'url' => 'http://localhost/wp-content/uploads/2026/02/logo.png',
 					],
 				],
 			],
 		];
 
 		$content = '<div class="swiper"><div class="swiper-wrapper">' .
-			'<div class="swiper-slide"><img src="https://example.com/wp-content/uploads/2026/02/hero-300x300.jpg" alt="a > b" /></div>' .
-			'<div class="swiper-slide"><img data-width="9" data-height="9" src="https://example.com/wp-content/uploads/2026/02/logo.png" alt="Logo"></div>' .
-			'<div class="swiper-slide"><img src="https://example.com/wp-content/plugins/x/logo.png" class="nav-icon" alt="Nav"></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/2026/02/hero-300x300.jpg" alt="a > b" /></div>' .
+			'<div class="swiper-slide"><img data-width="9" data-height="9" src="http://localhost/wp-content/uploads/2026/02/logo.png" alt="Logo"></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/plugins/x/logo.png" class="nav-icon" alt="Nav"></div>' .
 			'</div></div>';
 
 		$output = $generator->ensure_image_dimensions( $content, $block );
@@ -902,7 +902,7 @@ class StyleGeneratorTest {
 			exit( 1 );
 		}
 
-		$outside        = '<div class="gslider-nav"><img src="https://example.com/wp-content/uploads/2026/02/logo.png" alt="x"></div>';
+		$outside        = '<div class="gslider-nav"><img src="http://localhost/wp-content/uploads/2026/02/logo.png" alt="x"></div>';
 		$outside_actual = $generator->ensure_image_dimensions( $outside, $block );
 		if ( $outside !== $outside_actual ) {
 			fwrite( STDERR, "FAIL: image outside .swiper-slide was modified. Expected: $outside. Actual: $outside_actual\n" );
@@ -946,17 +946,17 @@ class StyleGeneratorTest {
 			'attrs'     => [
 				'blockId'       => 'gslider-test-author',
 				'quoteImageID'  => 61,
-				'quoteImageUrl' => 'https://example.com/wp-content/uploads/2026/02/quote-mark.png',
+				'quoteImageUrl' => 'http://localhost/wp-content/uploads/2026/02/quote-mark.png',
 				'sliderItems'   => [
 					[
 						'authorName'  => 'Jane Doe',
 						'authorImage' => [
 							'id'  => 60,
-							'url' => 'https://example.com/wp-content/uploads/2026/02/author.jpg',
+							'url' => 'http://localhost/wp-content/uploads/2026/02/author.jpg',
 						],
 						'ratingImage' => [
 							'id'  => 62,
-							'url' => 'https://example.com/wp-content/uploads/2026/02/star.png',
+							'url' => 'http://localhost/wp-content/uploads/2026/02/star.png',
 						],
 					],
 				],
@@ -967,14 +967,14 @@ class StyleGeneratorTest {
 			'<div class="swiper"><div class="swiper-wrapper">' .
 			'<div class="swiper-slide">' .
 			'<div class="gslider-testimonial-quote-icon-wrapper">' .
-			'<img src="https://example.com/wp-content/uploads/2026/02/quote-mark.png" alt="Quote" />' .
+			'<img src="http://localhost/wp-content/uploads/2026/02/quote-mark.png" alt="Quote" />' .
 			'</div>' .
 			'<div class="gslider-testimonial-author-image-wrapper">' .
-			'<img src="https://example.com/wp-content/uploads/2026/02/author.jpg" alt="Jane" class="gslider-testimonial-author-image" />' .
+			'<img src="http://localhost/wp-content/uploads/2026/02/author.jpg" alt="Jane" class="gslider-testimonial-author-image" />' .
 			'</div>' .
 			'<div class="gslider-testimonial-rating-wrapper">' .
 			'<div class="gslider-testimonial-rating-icon">' .
-			'<img src="https://example.com/wp-content/uploads/2026/02/star.png" alt="Star" />' .
+			'<img src="http://localhost/wp-content/uploads/2026/02/star.png" alt="Star" />' .
 			'</div>' .
 			'</div>' .
 			'</div>' .
@@ -1031,7 +1031,7 @@ class StyleGeneratorTest {
 		];
 		$content  = '<div class="wp-block-gslider-blocks-image-slider ' . $block_id . '">' .
 			'<div class="swiper"><div class="swiper-wrapper">' .
-			'<div class="swiper-slide"><img src="https://example.com/reset.jpg" alt="Reset" loading="lazy" /></div>' .
+			'<div class="swiper-slide"><img src="http://localhost/wp-content/uploads/reset.jpg" alt="Reset" loading="lazy" /></div>' .
 			'</div></div></div>';
 
 		// First render sets printed-ID and LCP state.
