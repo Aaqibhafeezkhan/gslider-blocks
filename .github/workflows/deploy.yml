@@ -1,0 +1,124 @@
+name: Deploy to WordPress.org & GitHub Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Simulate SVN deployment in dry-run mode (zero commit to SVN)'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+concurrency:
+  group: wporg-deploy
+  cancel-in-progress: false
+
+# Default read-only workflow token; write access is scoped only to the deploy job
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Build, Verify & Deploy Plugin
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      HAS_SVN_CREDENTIALS: ${{ secrets.SVN_PASSWORD != '' }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js (.nvmrc)
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer:v2
+
+      - name: Install Composer Dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Install NPM Dependencies
+        run: npm ci
+
+      - name: Run PHP Unit Tests
+        run: composer test
+
+      - name: Verify MCP Schema Drift
+        run: npm run mcp:test
+
+      - name: Build Gutenberg Blocks
+        run: npm run build:production
+
+      - name: Build Admin Assets
+        run: npm run admin:build
+
+      - name: Read Plugin Version
+        id: plugin_version
+        run: |
+          echo "version=$(grep -m1 "^[[:space:]]*\*[[:space:]]*Version:" gslider-blocks.php | awk '{print $NF}' | tr -d '\r')" >> "$GITHUB_OUTPUT"
+
+      - name: Validate Manual Trigger Options
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true'
+        run: |
+          echo "::error::Manual live deployment to WordPress.org is disabled. Production releases must be triggered via published GitHub Releases. Please run with dry_run: true to simulate deployment."
+          exit 1
+
+      - name: Validate Release Tag Matches Plugin Version
+        if: github.event_name == 'release'
+        env:
+          REF_NAME: ${{ github.ref_name }}
+          PLUGIN_VERSION: ${{ steps.plugin_version.outputs.version }}
+        run: |
+          TAG="${REF_NAME#v}"
+          README_VERSION=$(grep -m1 "^[[:space:]]*Stable tag:" readme.txt | awk '{print $NF}' | tr -d '\r')
+
+          echo "Validating release version alignment: Tag='$TAG', Plugin='$PLUGIN_VERSION', Readme='$README_VERSION'"
+
+          if [ -z "$PLUGIN_VERSION" ] || [ "$TAG" != "$PLUGIN_VERSION" ]; then
+            echo "::error::Release tag '$TAG' does not match plugin header Version in gslider-blocks.php ('$PLUGIN_VERSION'). Aborting release."
+            exit 1
+          fi
+
+          if [ -z "$README_VERSION" ] || [ "$TAG" != "$README_VERSION" ]; then
+            echo "::error::Release tag '$TAG' does not match Stable tag in readme.txt ('$README_VERSION'). Aborting release."
+            exit 1
+          fi
+
+          echo "✅ Release tag '$TAG' perfectly matches plugin header and readme.txt Stable tag."
+
+      - name: Generate Distributable Plugin ZIP
+        run: npm run zip
+
+      - name: Attach Plugin ZIP to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: gslider-blocks.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to WordPress.org SVN
+        if: env.HAS_SVN_CREDENTIALS == 'true' && ((github.event_name == 'release' && !github.event.release.prerelease) || github.event.inputs.dry_run == 'true')
+        uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2 # 2.3.0
+        with:
+          dry-run: ${{ github.event.inputs.dry_run || 'false' }}
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: 'gslider-blocks'
+          ASSETS_DIR: '.wordpress-org'
+          VERSION: ${{ steps.plugin_version.outputs.version }}

@@ -226,3 +226,21 @@ Present the findings directly to the maintainer in a standardized structure:
   If every single file in the repository is clean or all opportunities are already tracked:
   - Clearly report that an exhaustive file-by-file audit of all block directories was conducted.
   - State that zero new unaddressed single-file good first issues currently exist in the codebase.
+
+---
+
+## 🎖️ 8. Contributor Props & Attribution Standards (WordPress.org First Protocol)
+
+When attributing community contributors, reporting users, or co-authors in release changelogs (`readme.txt`), GitHub Releases, and commit props:
+
+1. **Primary Priority (1st Preference): WordPress.org Profile Username (`profiles.wordpress.org/<username>`)**
+   - In WordPress open-source ecosystem, contributor props are officially tied to their WordPress.org identity for plugin contributor badges, Core credit tracking, and community recognition.
+   - Always verify if the contributor has a known WordPress.org profile username (check their GitHub profile bio, website, commit email, or support forum interactions like `ateliercommodore` or `jrevillini`).
+   - If a WordPress.org username is available, format their handle using that profile: `@wporg_username`.
+2. **Fallback Priority (2nd Preference): GitHub Username (`github.com/<username>`)**
+   - If a contributor does not have a public, linked, or discoverable WordPress.org profile, fall back to their canonical GitHub username: `@github_username`.
+3. **Changelog Formatting Rule (Fresh-Line Clarity):**
+   - Maintain changelog cleanliness: do **NOT** scatter `(props @...)` inline across every individual bullet point.
+   - Keep feature, performance, and bugfix lines 100% focused, clean, and readable.
+   - Place a dedicated, consolidated `Props:` entry at the bottom of the release changelog acknowledging all contributors and forum reporters collectively.
+

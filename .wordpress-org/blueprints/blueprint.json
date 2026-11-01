@@ -1,0 +1,41 @@
+{
+  "landingPage": "/wp-admin/post.php?post=6&action=edit",
+  "preferredVersions": {
+    "php": "8.2",
+    "wp": "latest"
+  },
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "gslider-blocks"
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "GSlider Blocks Demo",
+        "blogdescription": "A demo setup for GSlider Blocks"
+      }
+    },
+    {
+      "step": "importWxr",
+      "file": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/noruzzamans/plugins-demo-content/master/gsliderblocks-demo.xml"
+      }
+    }
+  ]
+}

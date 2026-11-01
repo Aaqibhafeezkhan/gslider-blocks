@@ -32,7 +32,7 @@ var block_default = {
   $schema: "https://schemas.wp.org/trunk/block.json",
   apiVersion: 3,
   name: "gslider-blocks/logo-carousel",
-  version: "1.2.0",
+  version: "1.2.1",
   title: "Logo Carousel",
   category: "gslider-blocks",
   description: "Scrollable carousel for client/brand logos.",

@@ -32,7 +32,7 @@ var block_default = {
   $schema: "https://schemas.wp.org/trunk/block.json",
   apiVersion: 3,
   name: "gslider-blocks/flexi-content",
-  version: "1.2.0",
+  version: "1.2.1",
   title: "Flexi Content",
   category: "gslider-blocks",
   description: "Display any content seamlessly in slide or carousel modes.",

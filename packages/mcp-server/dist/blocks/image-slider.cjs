@@ -32,7 +32,7 @@ var block_default = {
   $schema: "https://schemas.wp.org/trunk/block.json",
   apiVersion: 3,
   name: "gslider-blocks/image-slider",
-  version: "1.2.0",
+  version: "1.2.1",
   title: "Image Slider",
   category: "gslider-blocks",
   description: "Versatile image slider with captions, lightbox, and advanced interactive effects.",

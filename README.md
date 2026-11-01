@@ -228,7 +228,7 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/noruzzamans"><img src="https://avatars.githubusercontent.com/u/46926901?v=4" width="100px;" alt="Noruzzaman"/><br /><sub><b>Noruzzaman</b></sub></a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="devmuhib009"/><br /><sub><b>devmuhib009</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="Muhibul Haque"/><br /><sub><b>Muhibul Haque</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/dbdefault"><img src="https://avatars.githubusercontent.com/u/246079841?v=4" width="100px;" alt="dbdefault"/><br /><sub><b>dbdefault</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Aaqibhafeezkhan"><img src="https://avatars.githubusercontent.com/u/292322256?v=4" width="100px;" alt="Aaqibhafeez Khan"/><br /><sub><b>Aaqibhafeez Khan</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/blank-0007"><img src="https://avatars.githubusercontent.com/u/285468035?v=4" width="100px;" alt="blank-0007"/><br /><sub><b>blank-0007</b></sub></a></td>

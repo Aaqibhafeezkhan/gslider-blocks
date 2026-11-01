@@ -32,7 +32,7 @@ var block_default = {
   $schema: "https://schemas.wp.org/trunk/block.json",
   apiVersion: 3,
   name: "gslider-blocks/base",
-  version: "1.2.0",
+  version: "1.2.1",
   title: "Base",
   category: "gslider-blocks",
   description: "Display fixed content in a sliding or carousel layout.",

@@ -188,16 +188,20 @@ This plugin may connect to or load resources from external third-party services 
 == Changelog ==
 
 = 1.2.1 – October 30, 2026 =
-* Performance: Optimized Largest Contentful Paint (LCP) by injecting high-priority fetch on initial slide images and deferring non-critical assets.
-* Performance: Accelerated slider animations with GPU-enforced CSS transitions and pre-initialized slide flex rows to eliminate Cumulative Layout Shift (CLS).
+* Performance: Optimized Largest Contentful Paint (LCP) with high-priority slide image preloading and deferred non-critical script execution.
+* Performance: Accelerated slider transitions with GPU-enforced CSS hardware acceleration and pre-initialized slide flex rows to eliminate Cumulative Layout Shift (CLS).
 * Security: Implemented strict Content Security Policy (CSP) nonce filters for inline styles and scripts, hardening compliance with enterprise security headers.
-* Accessibility: Restored keyboard focus rings on navigation arrows (WCAG 2.4.7) and enhanced screen reader ARIA labels across pagination containers.
-* Accessibility: Added support for prefers-reduced-motion media queries and enabled keyboard focus tooltips (:focus-within) for seamless navigation.
+* Accessibility: Restored visible keyboard focus rings on navigation arrows per WCAG 2.4.7 guidelines.
+* Accessibility: Added support for prefers-reduced-motion media queries and enabled keyboard focus tooltips on :focus-within.
+* Accessibility: Enhanced screen reader ARIA labels across pagination containers and sortable slider controls.
 * Swiper Engine: Fixed active slide desynchronization in infinite loop mode by switching from activeIndex to realIndex for duplicate slides.
-* Block Fixes: Corrected rating star gap unit parsing and fallback handling in Testimonial Slider.
-* Block Fixes: Resolved tablet background hover styling in Logo Carousel and improved button placeholder localization in Base Slider.
+* Block Fixes: Corrected rating star gap units and desktop fallback handling in Testimonial Slider.
+* Block Fixes: Resolved tablet background hover styling in Logo Carousel and localized button placeholders in Base Slider.
+* Block Fixes: Restored core Additional CSS classes (customClassName) support on frontend wrapper in Image Slider and all blocks.
 * Admin & Architecture: Cleaned up obsolete dashboard endpoints and hardened REST API routing.
-* MCP AI Ecosystem: Officially published @gslider/mcp-server on NPM with zero-install npx support and GitHub Actions trusted publishing.
+* MCP AI Ecosystem: Officially published @gslider/mcp-server on NPM with zero-install npx support, model context protocol tools, and GitHub Actions trusted publishing.
+* Maintenance: Cleaned up unused imports, dead variables, and refined code documentation across block components.
+* Props: Heartfelt thanks to all community contributors and WordPress.org forum reporters who helped shape this release: @huzaifaalmesbah, @hmbashar, @Nethsara14, @Pushkar-Shahi, @rejaulalomkhan, @Zhiyilang, @blank-0007, @p00jitha, @Aaqibhafeezkhan, @Sinkleberg, @dbdefault, @ect2000, @irfat-ifti, @madhavidayma21, @mahender9390, @tu-lasizzzz, @devmuhib, @ateliercommodore, @jrevillini.
 
 = 1.2.0 – October 19, 2026 =
 * Storybook Design System: Integrated 23 isolated Gutenberg UI controls with live interactive explorer (https://noruzzamans.github.io/gslider-blocks/).

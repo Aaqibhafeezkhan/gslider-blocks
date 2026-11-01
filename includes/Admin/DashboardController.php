@@ -274,14 +274,19 @@ if ( ! class_exists( DashboardController::class, false ) ) {
 				return 0;
 			}
 
-			$query = "SELECT post_content FROM {$wpdb->posts}
-				WHERE post_status = 'publish'
-				AND post_type IN ('post', 'page')
-				AND post_content LIKE '%wp:gslider-blocks/%'";
+			$like = '%' . $wpdb->esc_like( 'wp:gslider-blocks/' ) . '%';
 
-			$posts_content = method_exists( $wpdb, 'get_col' )
-				? $wpdb->get_col( $query )
-				: [];
+			// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Raw query needed for block comment search; cached via transient.
+			$posts_content = $wpdb->get_col(
+				$wpdb->prepare(
+					"SELECT post_content FROM {$wpdb->posts}
+					WHERE post_status = 'publish'
+					AND post_type IN ('post', 'page')
+					AND post_content LIKE %s",
+					$like
+				)
+			);
+			// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 
 			$count = 0;
 			if ( is_array( $posts_content ) && ! empty( $posts_content ) ) {

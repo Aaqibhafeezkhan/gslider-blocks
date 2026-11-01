@@ -450,7 +450,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          */
         private static function normalize_image_url( string $url ): string {
             $url   = html_entity_decode( trim( $url ), ENT_QUOTES );
-            $parts = function_exists( 'wp_parse_url' ) ? wp_parse_url( $url ) : parse_url( $url );
+            $parts = wp_parse_url( $url );
             if ( ! is_array( $parts ) || empty( $parts['path'] ) ) {
                 return '';
             }
@@ -480,7 +480,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
                 return null;
             }
 
-            $path = function_exists( 'wp_parse_url' ) ? wp_parse_url( $src, PHP_URL_PATH ) : parse_url( $src, PHP_URL_PATH );
+            $path = wp_parse_url( $src, PHP_URL_PATH );
             if ( ! is_string( $path ) || '' === $path ) {
                 return null;
             }
@@ -714,6 +714,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
                 $nonce = apply_filters( 'gslider_csp_nonce', '' );
             }
             if ( empty( $nonce ) ) {
+                // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Third-party security plugin compatibility filter.
                 $nonce = apply_filters( 'wp_csp_nonce', '' );
             }
             return is_string( $nonce ) ? sanitize_text_field( $nonce ) : '';
@@ -737,10 +738,23 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
             $unprinted_styles = array_diff_key( self::$styles, self::$printed );
             if ( ! empty( $unprinted_styles ) ) {
                 $combined_css = implode( "\n", $unprinted_styles );
-                if ( ! empty( $combined_css ) ) {
-                    $nonce      = $this->get_csp_nonce();
-                    $nonce_attr = ! empty( $nonce ) ? ' nonce="' . esc_attr( $nonce ) . '"' : '';
-                    echo '<style id="gslider-blocks-footer-styles"' . $nonce_attr . ">\n" . $combined_css . "\n</style>\n";
+                $clean_css    = wp_strip_all_tags( $combined_css );
+                if ( ! empty( $clean_css ) ) {
+                    $nonce = $this->get_csp_nonce();
+                    if ( ! empty( $nonce ) ) {
+                        printf(
+                            "<style id=\"gslider-blocks-footer-styles\" nonce=\"%s\">\n%s\n</style>\n",
+                            esc_attr( $nonce ),
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Dynamic CSS is sanitized via CssSanitizer and strip_all_tags; escaping would break CSS selectors and rules.
+                            $clean_css
+                        );
+                    } else {
+                        printf(
+                            "<style id=\"gslider-blocks-footer-styles\">\n%s\n</style>\n",
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Dynamic CSS is sanitized via CssSanitizer and strip_all_tags; escaping would break CSS selectors and rules.
+                            $clean_css
+                        );
+                    }
                 }
             }
 

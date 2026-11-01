@@ -55,6 +55,13 @@ When releasing a new version (e.g., `1.1.9`), the version string MUST be updated
 | **`README.md`** | Version badge: `Version-1.1.9-orange.svg` |
 | **`src/blocks/*/block.json`** | `"version": "1.1.9"` in each block's metadata |
 
+### 📝 `readme.txt` Changelog & Props Protocol
+
+When documenting changes under `== Changelog ==`:
+- **Clean Lines:** Keep each feature, performance improvement, and bugfix on a clean, standalone line without inline props clutter.
+- **Dedicated Props Entry:** Place a consolidated `* Props:` line at the bottom of the version section honoring all contributors and support forum reporters.
+- **Attribution Priority:** Check for the contributor's **WordPress.org profile username** first (`profiles.wordpress.org/<username>`); if unavailable, fall back to their canonical **GitHub username** (`github.com/<username>`).
+
 ---
 
 ## 3. Production Asset Compilation

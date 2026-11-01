@@ -1,7 +1,7 @@
 {
     "name": "noruzzaman/gslider",
     "description": "A slider block plugin for WordPress",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "autoload": {

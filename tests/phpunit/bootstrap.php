@@ -113,6 +113,12 @@ if ( ! function_exists( 'do_action' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wp_parse_url' ) ) {
+	function wp_parse_url( $url, $component = -1 ) {
+		return parse_url( $url, $component );
+	}
+}
+
 if ( ! function_exists( 'trailingslashit' ) ) {
 	function trailingslashit( $string ) {
 		return rtrim( $string, '/\\' ) . '/';
@@ -436,6 +442,18 @@ if ( ! class_exists( 'MockWPDB' ) ) {
 		public function get_col( $query ) {
 			$this->last_query = $query;
 			return $this->return_col;
+		}
+
+		public function esc_like( $text ) {
+			return addcslashes( $text, '_%\\' );
+		}
+
+		public function prepare( $query, ...$args ) {
+			if ( isset( $args[0] ) && is_array( $args[0] ) && 1 === count( $args ) ) {
+				$args = $args[0];
+			}
+			$query = str_replace( '%s', "'%s'", $query );
+			return vsprintf( $query, $args );
 		}
 
 		public function get_var( $query ) {
