@@ -135,7 +135,7 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 		if ( toastTimeoutRef.current ) {
 			clearTimeout( toastTimeoutRef.current );
 		}
-		setToast( { type, message } );
+		setToast( { type, message, id: Date.now() } );
 		toastTimeoutRef.current = setTimeout( () => {
 			setToast( null );
 		}, 3000 );
@@ -462,14 +462,25 @@ const BlocksTab = ( { dashboardData = null, setDashboardData } ) => {
 				) ) }
 			</div>
 
+			{ /* Live regions stay mounted so screen readers catch text changes. The key remounts the text so a repeated message is read again. */ }
+			<div className="screen-reader-text" role="status">
+				{ toast?.type === 'success' && (
+					<span key={ toast.id }>{ toast.message }</span>
+				) }
+			</div>
+			<div className="screen-reader-text" role="alert">
+				{ toast?.type === 'error' && (
+					<span key={ toast.id }>{ toast.message }</span>
+				) }
+			</div>
+
 			{ /* Transient Toast Notification */ }
 			{ toast && (
 				<div
 					className={ `gslider-dashboard-toast ${
 						toast.type === 'error' ? 'is-error' : 'is-success'
 					}` }
-					role="status"
-					aria-live="polite"
+					aria-hidden="true"
 				>
 					{ toast.type === 'success' ? (
 						<ToastSuccessIcon />
