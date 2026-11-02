@@ -251,6 +251,7 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/rejaulalomkhan"><img src="https://avatars.githubusercontent.com/u/123895004?v=4" width="100px;" alt="Rejaul Alom Khan"/><br /><sub><b>Rejaul Alom Khan</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/apps/dependabot"><img src="https://avatars.githubusercontent.com/in/29110?v=4" width="100px;" alt="dependabot[bot]"/><br /><sub><b>dependabot[bot]</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://amerta.pages.dev/"><img src="https://avatars.githubusercontent.com/u/122882415?v=4" width="100px;" alt="ptraaa"/><br /><sub><b>ptraaa</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://faisalahammad.com/"><img src="https://avatars.githubusercontent.com/u/13257516?v=4" width="100px;" alt="Faisal Ahammad"/><br /><sub><b>Faisal Ahammad</b></sub></a></td>
     </tr>
   </tbody>
 </table>
