@@ -3103,6 +3103,39 @@ function Save({ attributes: attributes2 }) {
 }
 
 // ../../src/blocks/logo-carousel/styling.js
+var resolveGradient = (customEnabled, customValue, gradient, classic) => {
+  if (customEnabled && customValue) {
+    return customValue;
+  }
+  if (gradient) {
+    return gradient;
+  }
+  return classic;
+};
+var getPaginationPositionCss = (paginationType, progressbarPosition, progressbarUnits, dotsPosition, dotsUnits, device) => {
+  if (paginationType === "progressbar") {
+    return progressbarPosition[device] ? `top: ${progressbarPosition[device]}${progressbarUnits[device]} !important;` : "";
+  }
+  return dotsPosition[device] ? `bottom: ${dotsPosition[device]}${dotsUnits[device]} !important;` : "";
+};
+var getResponsiveOutsideOffset = (offsetObj, unitObj, devices) => {
+  for (const device of devices) {
+    if (offsetObj?.[device]) {
+      return `${offsetObj[device]}${unitObj?.[device] || "px"}`;
+    }
+  }
+  return "30px";
+};
+var getHasPaginationCss = (blockId, showPagination, device, fallbackDevices, offset) => {
+  const rule = (marginBottom) => `.${blockId}.gslider-logo-carousel-wrapper.has-pagination { margin-bottom: ${marginBottom}; }`;
+  if (showPagination?.[device]) {
+    return rule(offset);
+  }
+  if (fallbackDevices.some((d) => showPagination?.[d])) {
+    return rule("0");
+  }
+  return "";
+};
 var generateLogoCarouselStyle = (attributes2) => {
   const {
     blockId,
@@ -3870,7 +3903,12 @@ var generateLogoCarouselStyle = (attributes2) => {
 
             ${logoCaptionColor ? `color: ${logoCaptionColor};` : ""}
             ${logoCaptionNormalBackgroundType === "gradient" ? `  
-                background: ${logoCaptionNormalCustomGradientSwitcher && logoCaptionNormalCustomGradientInputValue ? logoCaptionNormalCustomGradientInputValue : logoCaptionNormalGradientColor ? logoCaptionNormalGradientColor : logoCaptionNormalClassicColor};
+                background: ${resolveGradient(
+    logoCaptionNormalCustomGradientSwitcher,
+    logoCaptionNormalCustomGradientInputValue,
+    logoCaptionNormalGradientColor,
+    logoCaptionNormalClassicColor
+  )};
             ` : `
                 ${logoCaptionNormalClassicColor ? `background: ${logoCaptionNormalClassicColor};` : ""}
             `}
@@ -3885,7 +3923,12 @@ var generateLogoCarouselStyle = (attributes2) => {
         .${blockId}.gslider-logo-carousel-wrapper .gslider-logo-carousel-caption:hover {
             ${logoCaptionColorHover ? `color: ${logoCaptionColorHover};` : ""}
             ${logoCaptionHoverBackgroundType === "gradient" ? `  
-                background: ${logoCaptionHoverCustomGradientSwitcher && logoCaptionHoverCustomGradientInputValue ? logoCaptionHoverCustomGradientInputValue : logoCaptionHoverGradientColor ? logoCaptionHoverGradientColor : logoCaptionHoverClassicColor};
+                background: ${resolveGradient(
+    logoCaptionHoverCustomGradientSwitcher,
+    logoCaptionHoverCustomGradientInputValue,
+    logoCaptionHoverGradientColor,
+    logoCaptionHoverClassicColor
+  )};
             ` : `
                 ${logoCaptionHoverClassicColor ? `background: ${logoCaptionHoverClassicColor};` : ""}
             `}
@@ -4002,7 +4045,12 @@ var generateLogoCarouselStyle = (attributes2) => {
         .${blockId} .swiper-button-next {
             ${navigationArrowColor ? `color: ${navigationArrowColor};` : ""}
             ${navigationArrowNormalBackgroundType === "gradient" ? `  
-                background: ${navigationArrowNormalCustomGradientSwitcher && navigationArrowNormalCustomGradientInputValue ? navigationArrowNormalCustomGradientInputValue : navigationArrowNormalGradientColor ? navigationArrowNormalGradientColor : navigationArrowNormalClassicColor};
+                background: ${resolveGradient(
+    navigationArrowNormalCustomGradientSwitcher,
+    navigationArrowNormalCustomGradientInputValue,
+    navigationArrowNormalGradientColor,
+    navigationArrowNormalClassicColor
+  )};
             ` : `
                 ${navigationArrowNormalClassicColor ? `background: ${navigationArrowNormalClassicColor};` : ""}
             `}
@@ -4019,7 +4067,12 @@ var generateLogoCarouselStyle = (attributes2) => {
         .${blockId} .swiper-button-next:hover {
             ${navigationArrowColorHover ? `color: ${navigationArrowColorHover};` : ""}
             ${navigationArrowHoverBackgroundType === "gradient" ? `
-                background: ${navigationArrowHoverCustomGradientSwitcher && navigationArrowHoverCustomGradientInputValue ? navigationArrowHoverCustomGradientInputValue : navigationArrowHoverGradientColor ? navigationArrowHoverGradientColor : navigationArrowHoverClassicColor};
+                background: ${resolveGradient(
+    navigationArrowHoverCustomGradientSwitcher,
+    navigationArrowHoverCustomGradientInputValue,
+    navigationArrowHoverGradientColor,
+    navigationArrowHoverClassicColor
+  )};
             ` : `
                 ${navigationArrowHoverClassicColor ? `background: ${navigationArrowHoverClassicColor};` : ""}
             `}
@@ -4051,7 +4104,14 @@ var generateLogoCarouselStyle = (attributes2) => {
         }
 
         .${blockId} .swiper-pagination {
-            ${paginationType === "progressbar" ? paginationProgressbarPosition.Desktop ? `top: ${paginationProgressbarPosition.Desktop}${paginationProgressbarPositionUnits.Desktop} !important;` : "" : paginationDotsPosition.Desktop ? `bottom: ${paginationDotsPosition.Desktop}${paginationDotsPositionUnits.Desktop} !important;` : ""}
+            ${getPaginationPositionCss(
+    paginationType,
+    paginationProgressbarPosition,
+    paginationProgressbarPositionUnits,
+    paginationDotsPosition,
+    paginationDotsPositionUnits,
+    "Desktop"
+  )}
             ${paginationDotsDesktopMarginCssStyle ? `margin: ${paginationDotsDesktopMarginCssStyle};` : ""}
         }
 
@@ -4271,7 +4331,14 @@ var generateLogoCarouselStyle = (attributes2) => {
             }
 
             .${blockId} .swiper-pagination {
-                ${paginationType === "progressbar" ? paginationProgressbarPosition.Tablet ? `top: ${paginationProgressbarPosition.Tablet}${paginationProgressbarPositionUnits.Tablet} !important;` : "" : paginationDotsPosition.Tablet ? `bottom: ${paginationDotsPosition.Tablet}${paginationDotsPositionUnits.Tablet} !important;` : ""}
+                ${getPaginationPositionCss(
+    paginationType,
+    paginationProgressbarPosition,
+    paginationProgressbarPositionUnits,
+    paginationDotsPosition,
+    paginationDotsPositionUnits,
+    "Tablet"
+  )}
                 ${paginationDotsTabletMarginCssStyle ? `margin: ${paginationDotsTabletMarginCssStyle};` : ""}
             }
 
@@ -4305,20 +4372,26 @@ var generateLogoCarouselStyle = (attributes2) => {
                 .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
                 .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-custom,
                 .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-fraction {
-                    bottom: -${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
+                    bottom: -${getResponsiveOutsideOffset(
+    paginationOutsideOffset,
+    paginationOutsideOffsetUnits,
+    ["Tablet", "Desktop"]
+  )} !important;
                 }
             ` : ""}
 
             ${paginationPositionType === "outside" ? `
-                ${showPagination?.Tablet ? `
-                    .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
-                        margin-bottom: ${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
-                    }
-                ` : showPagination?.Desktop ? `
-                    .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
-                        margin-bottom: 0;
-                    }
-                ` : ""}
+                ${getHasPaginationCss(
+    blockId,
+    showPagination,
+    "Tablet",
+    ["Desktop"],
+    getResponsiveOutsideOffset(
+      paginationOutsideOffset,
+      paginationOutsideOffsetUnits,
+      ["Tablet", "Desktop"]
+    )
+  )}
             ` : ""}
         }
         
@@ -4467,7 +4540,14 @@ var generateLogoCarouselStyle = (attributes2) => {
             }
 
             .${blockId} .swiper-pagination {
-                ${paginationType === "progressbar" ? paginationProgressbarPosition.Mobile ? `top: ${paginationProgressbarPosition.Mobile}${paginationProgressbarPositionUnits.Mobile} !important;` : "" : paginationDotsPosition.Mobile ? `bottom: ${paginationDotsPosition.Mobile}${paginationDotsPositionUnits.Mobile} !important;` : ""}
+                ${getPaginationPositionCss(
+    paginationType,
+    paginationProgressbarPosition,
+    paginationProgressbarPositionUnits,
+    paginationDotsPosition,
+    paginationDotsPositionUnits,
+    "Mobile"
+  )}
                 ${paginationDotsMobileMarginCssStyle ? `margin: ${paginationDotsMobileMarginCssStyle};` : ""}
             }
 
@@ -4501,20 +4581,26 @@ var generateLogoCarouselStyle = (attributes2) => {
                 .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal,
                 .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-custom,
                 .${blockId}.gslider-logo-carousel-wrapper .swiper-pagination-fraction {
-                    bottom: -${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
+                    bottom: -${getResponsiveOutsideOffset(
+    paginationOutsideOffset,
+    paginationOutsideOffsetUnits,
+    ["Mobile", "Tablet", "Desktop"]
+  )} !important;
                 }
             ` : ""}
 
             ${paginationPositionType === "outside" ? `
-                ${showPagination?.Mobile ? `
-                    .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
-                        margin-bottom: ${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
-                    }
-                ` : showPagination?.Desktop || showPagination?.Tablet ? `
-                    .${blockId}.gslider-logo-carousel-wrapper.has-pagination {
-                        margin-bottom: 0;
-                    }
-                ` : ""}
+                ${getHasPaginationCss(
+    blockId,
+    showPagination,
+    "Mobile",
+    ["Desktop", "Tablet"],
+    getResponsiveOutsideOffset(
+      paginationOutsideOffset,
+      paginationOutsideOffsetUnits,
+      ["Mobile", "Tablet", "Desktop"]
+    )
+  )}
             ` : ""}
         }
     `;
