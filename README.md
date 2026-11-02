@@ -261,6 +261,9 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
       <td align="center" valign="top" width="14.28%"><a href="https://amerta.pages.dev/"><img src="https://avatars.githubusercontent.com/u/122882415?v=4" width="100px;" alt="ptraaa"/><br /><sub><b>ptraaa</b></sub></a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://faisalahammad.com/"><img src="https://avatars.githubusercontent.com/u/13257516?v=4" width="100px;" alt="Faisal Ahammad"/><br /><sub><b>Faisal Ahammad</b></sub></a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://pralav-singh-portfolio.vercel.app/"><img src="https://avatars.githubusercontent.com/u/174412353?v=4" width="100px;" alt="Pralav Singh"/><br /><sub><b>Pralav Singh</b></sub></a></td>
+    </tr>
   </tbody>
 </table>
 
