@@ -94,6 +94,10 @@ var attributes = {
     type: "string",
     default: "slider"
   },
+  direction: {
+    type: "string",
+    default: "horizontal"
+  },
   carouselPerColumn: {
     type: "object",
     default: {
@@ -219,6 +223,22 @@ var attributes = {
     }
   },
   layoutHeightUnits: {
+    type: "object",
+    default: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    }
+  },
+  verticalHeight: {
+    type: "object",
+    default: {
+      Desktop: "500",
+      Tablet: "420",
+      Mobile: "350"
+    }
+  },
+  verticalHeightUnits: {
     type: "object",
     default: {
       Desktop: "px",
@@ -2039,6 +2059,7 @@ function Save({ attributes: attributes2 }) {
     pauseOnHover,
     stopOnLastSlide,
     reverseDirection,
+    direction,
     carouselEffect,
     slideEffect,
     mousewheelControl,
@@ -2130,7 +2151,9 @@ function Save({ attributes: attributes2 }) {
         pagination: { enabled: paginationEnabled.Desktop }
       }
     },
-    ...layoutHeightSwitcher === "adapt" && {
+    ...direction === "vertical" && { direction: "vertical" },
+    // Vertical slides use the fixed height, autoHeight does not work with it
+    ...layoutHeightSwitcher === "adapt" && direction !== "vertical" && {
       autoHeight: true
     },
     // Common settings
@@ -2164,7 +2187,9 @@ function Save({ attributes: attributes2 }) {
     ...slideEffect === "creative" && {
       creativeEffect: {
         prev: { shadow: true, translate: [0, 0, -400] },
-        next: { translate: ["100%", 0, 0] }
+        next: {
+          translate: direction === "vertical" ? [0, "100%", 0] : ["100%", 0, 0]
+        }
       }
     }
   });
@@ -2436,6 +2461,9 @@ var generateFlexiContentStyle = (attributes2) => {
     layoutHeightSwitcher,
     layoutHeight,
     layoutHeightUnits,
+    verticalHeight,
+    verticalHeightUnits,
+    direction,
     contentWidth,
     contentWidthUnits,
     contentAlignment,
@@ -2876,13 +2904,17 @@ var generateFlexiContentStyle = (attributes2) => {
             ${layoutHeight.Desktop && layoutHeightSwitcher === "fixed" ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : "auto"}
         }
 
+        ${direction === "vertical" && Number(verticalHeight?.Desktop || layoutHeight.Desktop) > 0 && (verticalHeightUnits?.Desktop || layoutHeightUnits.Desktop) !== "%" ? `.${blockId}.gslider-flexi-content-wrapper > .swiper {
+            height: ${verticalHeight?.Desktop || layoutHeight.Desktop}${verticalHeightUnits?.Desktop || layoutHeightUnits.Desktop || "px"};
+        }` : ""}
+
         .${blockId} .swiper-slide{
-            ${layoutHeightSwitcher !== "adapt" ? `height: auto !important;` : ""}
-            ${layoutHeight.Desktop && layoutHeightSwitcher === "fixed" ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : "auto"}
+            ${layoutHeightSwitcher !== "adapt" && direction !== "vertical" ? `height: auto !important;` : ""}
+            ${layoutHeight.Desktop && layoutHeightSwitcher === "fixed" && direction !== "vertical" ? `min-height: ${layoutHeight.Desktop}${layoutHeightUnits.Desktop};` : "auto"}
         }
         
         .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
-            ${layoutHeightSwitcher !== "adapt" ? `height: 100% !important;` : ""}
+            ${layoutHeightSwitcher !== "adapt" || direction === "vertical" ? `height: 100% !important;` : ""}
             ${contentVerticalAlignment?.Desktop ? `justify-content: ${contentVerticalAlignment.Desktop};` : ""}
         }
 
@@ -3151,13 +3183,17 @@ var generateFlexiContentStyle = (attributes2) => {
                 ${layoutHeight.Tablet && layoutHeightSwitcher === "fixed" ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : "auto"}
             }
 
+            ${direction === "vertical" && Number(verticalHeight?.Tablet || layoutHeight.Tablet) > 0 && (verticalHeightUnits?.Tablet || layoutHeightUnits.Tablet) !== "%" ? `.${blockId}.gslider-flexi-content-wrapper > .swiper {
+                height: ${verticalHeight?.Tablet || layoutHeight.Tablet}${verticalHeightUnits?.Tablet || layoutHeightUnits.Tablet || "px"};
+            }` : ""}
+
             .${blockId} .swiper-slide{
-                ${layoutHeightSwitcher !== "adapt" ? `height: auto !important;` : ""}
-                ${layoutHeight.Tablet && layoutHeightSwitcher === "fixed" ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : "auto"}
+                ${layoutHeightSwitcher !== "adapt" && direction !== "vertical" ? `height: auto !important;` : ""}
+                ${layoutHeight.Tablet && layoutHeightSwitcher === "fixed" && direction !== "vertical" ? `min-height: ${layoutHeight.Tablet}${layoutHeightUnits.Tablet};` : "auto"}
             }
             
             .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
-                ${layoutHeightSwitcher !== "adapt" ? `height: 100% !important;` : ""}
+                ${layoutHeightSwitcher !== "adapt" || direction === "vertical" ? `height: 100% !important;` : ""}
                 ${contentVerticalAlignment?.Tablet ? `justify-content: ${contentVerticalAlignment.Tablet};` : ""}
             }
 
@@ -3342,13 +3378,17 @@ var generateFlexiContentStyle = (attributes2) => {
                 ${layoutHeight.Mobile && layoutHeightSwitcher === "fixed" ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : "auto"}
             }
 
+            ${direction === "vertical" && Number(verticalHeight?.Mobile || layoutHeight.Mobile) > 0 && (verticalHeightUnits?.Mobile || layoutHeightUnits.Mobile) !== "%" ? `.${blockId}.gslider-flexi-content-wrapper > .swiper {
+                height: ${verticalHeight?.Mobile || layoutHeight.Mobile}${verticalHeightUnits?.Mobile || layoutHeightUnits.Mobile || "px"};
+            }` : ""}
+
             .${blockId} .swiper-slide{
-                ${layoutHeightSwitcher !== "adapt" ? `height: auto !important;` : ""}
-                ${layoutHeight.Mobile && layoutHeightSwitcher === "fixed" ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : "auto"}
+                ${layoutHeightSwitcher !== "adapt" && direction !== "vertical" ? `height: auto !important;` : ""}
+                ${layoutHeight.Mobile && layoutHeightSwitcher === "fixed" && direction !== "vertical" ? `min-height: ${layoutHeight.Mobile}${layoutHeightUnits.Mobile};` : "auto"}
             }
             
             .${blockId}.gslider-flexi-content-wrapper .gslider-content-wrapper {
-                ${layoutHeightSwitcher !== "adapt" ? `height: 100% !important;` : ""}
+                ${layoutHeightSwitcher !== "adapt" || direction === "vertical" ? `height: 100% !important;` : ""}
                 ${contentVerticalAlignment?.Mobile ? `justify-content: ${contentVerticalAlignment.Mobile};` : ""}
             }
 

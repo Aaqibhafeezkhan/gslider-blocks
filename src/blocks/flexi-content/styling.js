@@ -147,6 +147,9 @@ const generateFlexiContentStyle = ( attributes ) => {
 		layoutHeightSwitcher,
 		layoutHeight,
 		layoutHeightUnits,
+		verticalHeight,
+		verticalHeightUnits,
+		direction,
 		contentWidth,
 		contentWidthUnits,
 		contentAlignment,
@@ -709,14 +712,31 @@ const generateFlexiContentStyle = ( attributes ) => {
 			}
         }
 
+        ${
+			direction === 'vertical' &&
+			Number( verticalHeight?.Desktop || layoutHeight.Desktop ) > 0 &&
+			( verticalHeightUnits?.Desktop || layoutHeightUnits.Desktop ) !==
+				'%'
+				? `.${ blockId }.gslider-flexi-content-wrapper > .swiper {
+            height: ${ verticalHeight?.Desktop || layoutHeight.Desktop }${
+				verticalHeightUnits?.Desktop ||
+				layoutHeightUnits.Desktop ||
+				'px'
+			};
+        }`
+				: ''
+		}
+
         .${ blockId } .swiper-slide{
             ${
-				layoutHeightSwitcher !== 'adapt'
+				layoutHeightSwitcher !== 'adapt' && direction !== 'vertical'
 					? `height: auto !important;`
 					: ''
 			}
             ${
-				layoutHeight.Desktop && layoutHeightSwitcher === 'fixed'
+				layoutHeight.Desktop &&
+				layoutHeightSwitcher === 'fixed' &&
+				direction !== 'vertical'
 					? `min-height: ${ layoutHeight.Desktop }${ layoutHeightUnits.Desktop };`
 					: 'auto'
 			}
@@ -724,7 +744,7 @@ const generateFlexiContentStyle = ( attributes ) => {
         
         .${ blockId }.gslider-flexi-content-wrapper .gslider-content-wrapper {
             ${
-				layoutHeightSwitcher !== 'adapt'
+				layoutHeightSwitcher !== 'adapt' || direction === 'vertical'
 					? `height: 100% !important;`
 					: ''
 			}
@@ -1372,14 +1392,31 @@ const generateFlexiContentStyle = ( attributes ) => {
 				}
             }
 
+            ${
+				direction === 'vertical' &&
+				Number( verticalHeight?.Tablet || layoutHeight.Tablet ) > 0 &&
+				( verticalHeightUnits?.Tablet || layoutHeightUnits.Tablet ) !==
+					'%'
+					? `.${ blockId }.gslider-flexi-content-wrapper > .swiper {
+                height: ${ verticalHeight?.Tablet || layoutHeight.Tablet }${
+					verticalHeightUnits?.Tablet ||
+					layoutHeightUnits.Tablet ||
+					'px'
+				};
+            }`
+					: ''
+			}
+
             .${ blockId } .swiper-slide{
                 ${
-					layoutHeightSwitcher !== 'adapt'
+					layoutHeightSwitcher !== 'adapt' && direction !== 'vertical'
 						? `height: auto !important;`
 						: ''
 				}
                 ${
-					layoutHeight.Tablet && layoutHeightSwitcher === 'fixed'
+					layoutHeight.Tablet &&
+					layoutHeightSwitcher === 'fixed' &&
+					direction !== 'vertical'
 						? `min-height: ${ layoutHeight.Tablet }${ layoutHeightUnits.Tablet };`
 						: 'auto'
 				}
@@ -1387,7 +1424,7 @@ const generateFlexiContentStyle = ( attributes ) => {
             
             .${ blockId }.gslider-flexi-content-wrapper .gslider-content-wrapper {
                 ${
-					layoutHeightSwitcher !== 'adapt'
+					layoutHeightSwitcher !== 'adapt' || direction === 'vertical'
 						? `height: 100% !important;`
 						: ''
 				}
@@ -1827,14 +1864,31 @@ const generateFlexiContentStyle = ( attributes ) => {
 				}
             }
 
+            ${
+				direction === 'vertical' &&
+				Number( verticalHeight?.Mobile || layoutHeight.Mobile ) > 0 &&
+				( verticalHeightUnits?.Mobile || layoutHeightUnits.Mobile ) !==
+					'%'
+					? `.${ blockId }.gslider-flexi-content-wrapper > .swiper {
+                height: ${ verticalHeight?.Mobile || layoutHeight.Mobile }${
+					verticalHeightUnits?.Mobile ||
+					layoutHeightUnits.Mobile ||
+					'px'
+				};
+            }`
+					: ''
+			}
+
             .${ blockId } .swiper-slide{
                 ${
-					layoutHeightSwitcher !== 'adapt'
+					layoutHeightSwitcher !== 'adapt' && direction !== 'vertical'
 						? `height: auto !important;`
 						: ''
 				}
                 ${
-					layoutHeight.Mobile && layoutHeightSwitcher === 'fixed'
+					layoutHeight.Mobile &&
+					layoutHeightSwitcher === 'fixed' &&
+					direction !== 'vertical'
 						? `min-height: ${ layoutHeight.Mobile }${ layoutHeightUnits.Mobile };`
 						: 'auto'
 				}
@@ -1842,7 +1896,7 @@ const generateFlexiContentStyle = ( attributes ) => {
             
             .${ blockId }.gslider-flexi-content-wrapper .gslider-content-wrapper {
                 ${
-					layoutHeightSwitcher !== 'adapt'
+					layoutHeightSwitcher !== 'adapt' || direction === 'vertical'
 						? `height: 100% !important;`
 						: ''
 				}
