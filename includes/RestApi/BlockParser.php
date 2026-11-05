@@ -486,6 +486,12 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 				$config['autoHeight'] = true;
 			}
 
+			if ( 'gslider-blocks/flexi-content' === $block_name ) {
+				$config['observer']       = true;
+				$config['observeParents'] = true;
+				$config['resizeObserver'] = true;
+			}
+
 			return $config;
 		}
 

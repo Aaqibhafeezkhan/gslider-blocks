@@ -537,6 +537,10 @@ document.addEventListener( 'DOMContentLoaded', () => {
 						);
 					}
 
+					settings.observer = true;
+					settings.observeParents = true;
+					settings.resizeObserver = true;
+
 					// Initialize Swiper with parsed settings
 					const swiper = new Swiper( swiperElement, settings );
 

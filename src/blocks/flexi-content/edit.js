@@ -245,6 +245,9 @@ export default function Edit( {
 						clickable: true,
 				  }
 				: false,
+			observer: true,
+			observeParents: true,
+			resizeObserver: true,
 			...( slideEffect === 'creative' && {
 				creativeEffect: {
 					prev: { shadow: true, translate: [ 0, 0, -400 ] },
