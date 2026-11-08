@@ -1,4 +1,4 @@
-/* eslint-disable jsdoc/require-param, jsdoc/check-tag-names */
+/* eslint-disable jsdoc/require-param */
 /**
  * Flexi Content Item Block - Style Generation
  * Returns Dynamic Generated CSS
@@ -7,7 +7,7 @@
 /**
  * Generate block styles from attributes
  * @param {Object} attributes - Block attributes
- * @returns {string} CSS string
+ * @return {string} CSS string
  */
 const generateFlexiContentItemStyle = ( attributes ) => {
 	const {
