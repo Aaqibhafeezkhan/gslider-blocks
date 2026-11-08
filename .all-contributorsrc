@@ -25,7 +25,7 @@
     },
     {
       "login": "faisalahammad",
-      "name": "Faisal&nbsp;Ahammad",
+      "name": "Faisal&nbsp...",
       "avatar_url": "https://avatars.githubusercontent.com/u/13257516?v=4",
       "profile": "https://faisalahammad.com/",
       "contributions": [
@@ -43,7 +43,7 @@
     },
     {
       "login": "huzaifaalmesbah",
-      "name": "Huzaifa&nbsp;Al...",
+      "name": "Huzaifa&nbs...",
       "avatar_url": "https://avatars.githubusercontent.com/u/63150399?v=4",
       "profile": "https://github.com/huzaifaalmesbah",
       "contributions": [
@@ -52,7 +52,7 @@
     },
     {
       "login": "hmbashar",
-      "name": "Md&nbsp;Abul&nbsp;Bashar",
+      "name": "Md&nbsp;Abu...",
       "avatar_url": "https://avatars.githubusercontent.com/u/7321834?v=4",
       "profile": "https://www.linuxhostlab.com/",
       "contributions": [
@@ -61,7 +61,7 @@
     },
     {
       "login": "Nethsara14",
-      "name": "Sasindu&nbsp;Net...",
+      "name": "Sasindu&nbs...",
       "avatar_url": "https://avatars.githubusercontent.com/u/110768660?v=4",
       "profile": "https://devnethsara.com/",
       "contributions": [
@@ -70,7 +70,7 @@
     },
     {
       "login": "Pushkar-Shahi",
-      "name": "Pushkar&nbsp;Shahi",
+      "name": "Pushkar&nbs...",
       "avatar_url": "https://avatars.githubusercontent.com/u/273587221?v=4",
       "profile": "https://portfolio-website.riseinspirethrive2008.workers.dev/",
       "contributions": [
@@ -97,7 +97,7 @@
     },
     {
       "login": "p00jitha",
-      "name": "DASARI&nbsp;PUJITHA",
+      "name": "DASARI&nbsp...",
       "avatar_url": "https://avatars.githubusercontent.com/u/129841150?v=4",
       "profile": "https://github.com/p00jitha",
       "contributions": [
@@ -106,7 +106,7 @@
     },
     {
       "login": "rejaulalomkhan",
-      "name": "Rejaul&nbsp;Alom...",
+      "name": "Rejaul&nbsp...",
       "avatar_url": "https://avatars.githubusercontent.com/u/123895004?v=4",
       "profile": "https://github.com/rejaulalomkhan",
       "contributions": [
@@ -115,7 +115,7 @@
     },
     {
       "login": "shamiulbishal",
-      "name": "Shamiul&nbsp;Bishal",
+      "name": "Shamiul&nbs...",
       "avatar_url": "https://avatars.githubusercontent.com/u/66864143?v=4",
       "profile": "https://github.com/shamiulbishal",
       "contributions": [
@@ -152,7 +152,7 @@
     },
     {
       "login": "devmuhib009",
-      "name": "Muhibul&nbsp;Haque",
+      "name": "Muhibul&nbs...",
       "avatar_url": "https://avatars.githubusercontent.com/u/142894870?v=4",
       "profile": "https://github.com/devmuhib009",
       "contributions": [
@@ -161,7 +161,7 @@
     },
     {
       "login": "ect2000",
-      "name": "Emilio&nbsp;Cast...",
+      "name": "Emilio&nbsp...",
       "avatar_url": "https://avatars.githubusercontent.com/u/107069576?v=4",
       "profile": "https://github.com/ect2000",
       "contributions": [
@@ -170,7 +170,7 @@
     },
     {
       "login": "irfat-ifti",
-      "name": "Md.&nbsp;Irfat&nbsp;U...",
+      "name": "Md.&nbsp;Ir...",
       "avatar_url": "https://avatars.githubusercontent.com/u/197045488?v=4",
       "profile": "https://github.com/irfat-ifti",
       "contributions": [
@@ -179,7 +179,7 @@
     },
     {
       "login": "madhavidayma21",
-      "name": "Madhavi&nbsp;Dayma",
+      "name": "Madhavi&nbs...",
       "avatar_url": "https://avatars.githubusercontent.com/u/98448374?v=4",
       "profile": "https://github.com/madhavidayma21",
       "contributions": [
@@ -197,7 +197,7 @@
     },
     {
       "login": "pralav-25",
-      "name": "Pralav&nbsp;Singh",
+      "name": "Pralav&nbsp...",
       "avatar_url": "https://avatars.githubusercontent.com/u/174412353?v=4",
       "profile": "https://pralav-singh-portfolio.vercel.app/",
       "contributions": [
@@ -215,9 +215,18 @@
     },
     {
       "login": "tu-lasizzzz",
-      "name": "Tulasi&nbsp;Sahu",
+      "name": "Tulasi&nbsp...",
       "avatar_url": "https://avatars.githubusercontent.com/u/172914448?v=4",
       "profile": "https://github.com/tu-lasizzzz",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "harryhawwy69",
+      "name": "harryhawwy69",
+      "avatar_url": "https://avatars.githubusercontent.com/u/316354895?v=4",
+      "profile": "https://github.com/harryhawwy69",
       "contributions": [
         "code"
       ]
