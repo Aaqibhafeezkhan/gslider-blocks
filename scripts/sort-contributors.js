@@ -35,11 +35,11 @@ function truncateName( name, max = 14 ) {
 	if ( ! name ) {
 		return '';
 	}
-	const trimmed = name.trim();
-	if ( trimmed.length <= max ) {
-		return trimmed;
+	let trimmed = name.trim();
+	if ( trimmed.length > max ) {
+		trimmed = trimmed.slice( 0, max - 3 ).trim() + '...';
 	}
-	return trimmed.slice( 0, max - 3 ).trim() + '...';
+	return trimmed.replace( / /g, '&nbsp;' );
 }
 
 async function getContributionCounts() {
