@@ -124,12 +124,30 @@ export default function ResponsiveSpacingControl( {
 	 * @since 1.0.0
 	 */
 	useEffect( () => {
+		const formatSpacingSide = ( value, unit ) =>
+			value === '' || value === undefined || value === null
+				? '0'
+				: `${ value }${ unit }`;
+
 		const spacingFormat = ( spacing, units ) => {
-			return spacing.top ||
-				spacing.right ||
-				spacing.bottom ||
-				spacing.left
-				? `${ spacing.top }${ units } ${ spacing.right }${ units } ${ spacing.bottom }${ units } ${ spacing.left }${ units }`
+			const hasValue = ( v ) => v !== '' && v !== undefined && v !== null;
+			const hasAny =
+				hasValue( spacing.top ) ||
+				hasValue( spacing.right ) ||
+				hasValue( spacing.bottom ) ||
+				hasValue( spacing.left );
+
+			return hasAny
+				? `${ formatSpacingSide(
+						spacing.top,
+						units
+				  ) } ${ formatSpacingSide(
+						spacing.right,
+						units
+				  ) } ${ formatSpacingSide(
+						spacing.bottom,
+						units
+				  ) } ${ formatSpacingSide( spacing.left, units ) }`
 				: '';
 		};
 
