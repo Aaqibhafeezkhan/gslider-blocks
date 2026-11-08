@@ -7,7 +7,7 @@
  * @since 1.2.0
  */
 
-import { __, sprintf } from '@wordpress/i18n';
+import { __, _n, sprintf } from '@wordpress/i18n';
 import MetricCard from '../components/MetricCard';
 import {
 	PlusIcon,
@@ -25,6 +25,7 @@ import {
  * @param {Object}   [props.dashboardData]   REST API dashboard data.
  * @param {boolean}  [props.isLoading=false] Whether data is loading.
  * @param {boolean}  [props.hasError=false]  Whether data fetch resulted in an error.
+ * @param {Function} [props.onRetry]         Callback to retry loading metrics.
  * @return {JSX.Element} The rendered overview tab view.
  */
 const OverviewTab = ( {
@@ -32,6 +33,7 @@ const OverviewTab = ( {
 	dashboardData = null,
 	isLoading = false,
 	hasError = false,
+	onRetry,
 } ) => {
 	const adminUrl =
 		window.GSliderDashboardData?.adminUrl || 'post-new.php?post_type=page';
@@ -40,12 +42,11 @@ const OverviewTab = ( {
 		: `${ adminUrl }/post-new.php?post_type=page`;
 
 	const slidersCount = dashboardData?.sliders_count;
-	const blocksList = dashboardData?.blocks || [];
-	const totalBlocks = blocksList.length || 5;
-	const activeBlocksCount =
-		blocksList.length > 0
-			? blocksList.filter( ( b ) => b.enabled ).length
-			: 5;
+	const blocksList = Array.isArray( dashboardData?.blocks )
+		? dashboardData.blocks
+		: null;
+	const totalBlocks = blocksList?.length;
+	const activeBlocksCount = blocksList?.filter( ( b ) => b.enabled ).length;
 
 	let sliderMetricValue = null;
 	if ( hasError ) {
@@ -57,7 +58,7 @@ const OverviewTab = ( {
 	let sliderEmptyMessage = null;
 	if ( hasError ) {
 		sliderEmptyMessage = __(
-			'Unable to load live metrics. Refresh page to try again.',
+			'Unable to load live metrics.',
 			'gslider-blocks'
 		);
 	} else if ( slidersCount === 0 ) {
@@ -68,11 +69,25 @@ const OverviewTab = ( {
 	}
 
 	let activeBlocksDisplay = '—';
-	if ( ! hasError ) {
+	if ( ! hasError && ! isLoading && blocksList ) {
 		activeBlocksDisplay = sprintf(
 			/* translators: 1: number of active blocks, 2: total number of blocks */
 			__( '%1$d of %2$d Active', 'gslider-blocks' ),
 			activeBlocksCount,
+			totalBlocks
+		);
+	}
+
+	let coreModulesBadge = null;
+	if ( ! hasError && ! isLoading && typeof totalBlocks === 'number' ) {
+		coreModulesBadge = sprintf(
+			/* translators: %d: number of core modules */
+			_n(
+				'%d Core Module',
+				'%d Core Modules',
+				totalBlocks,
+				'gslider-blocks'
+			),
 			totalBlocks
 		);
 	}
@@ -116,6 +131,16 @@ const OverviewTab = ( {
 					</a>
 				</div>
 			</section>
+
+			{ hasError && typeof onRetry === 'function' && (
+				<button
+					type="button"
+					onClick={ onRetry }
+					className="gslider-dashboard-btn gslider-dashboard-btn-primary"
+				>
+					{ __( 'Try again', 'gslider-blocks' ) }
+				</button>
+			) }
 
 			{ /* Section 2: Stat Cards Grid */ }
 			<section
@@ -169,11 +194,7 @@ const OverviewTab = ( {
 						</button>
 					}
 					icon={ <BlocksMetricIcon /> }
-					badge={
-						hasError
-							? null
-							: __( '5 Core Modules', 'gslider-blocks' )
-					}
+					badge={ coreModulesBadge }
 				/>
 
 				{ /* Card 3: Modern Architecture Highlight */ }
