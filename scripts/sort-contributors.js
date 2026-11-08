@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * scripts/sort-contributors.js
  *
