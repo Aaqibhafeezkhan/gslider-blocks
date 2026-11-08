@@ -7,7 +7,7 @@
     "README.md"
   ],
   "imageSize": 100,
-  "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"<%= contributor.name %>\"/><br /><sub><b><%= contributor.name %></b></sub></a>",
+  "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"<%= contributor.name %>\"/></a><br /><sub><b><%= contributor.name %></b></sub>",
   "commit": false,
   "contributors": [
     {
@@ -43,7 +43,7 @@
     },
     {
       "login": "huzaifaalmesbah",
-      "name": "Huzaifa Al Mesbah",
+      "name": "Huzaifa Al...",
       "avatar_url": "https://avatars.githubusercontent.com/u/63150399?v=4",
       "profile": "https://github.com/huzaifaalmesbah",
       "contributions": [
@@ -61,7 +61,7 @@
     },
     {
       "login": "Nethsara14",
-      "name": "Sasindu Nethsara Karanayaka",
+      "name": "Sasindu Net...",
       "avatar_url": "https://avatars.githubusercontent.com/u/110768660?v=4",
       "profile": "https://devnethsara.com/",
       "contributions": [
@@ -106,7 +106,7 @@
     },
     {
       "login": "rejaulalomkhan",
-      "name": "Rejaul Alom Khan",
+      "name": "Rejaul Alom...",
       "avatar_url": "https://avatars.githubusercontent.com/u/123895004?v=4",
       "profile": "https://github.com/rejaulalomkhan",
       "contributions": [
@@ -133,7 +133,7 @@
     },
     {
       "login": "Aaqibhafeezkhan",
-      "name": "Aaqibhafeez Khan",
+      "name": "Aaqibhafeez...",
       "avatar_url": "https://avatars.githubusercontent.com/u/292322256?v=4",
       "profile": "https://github.com/Aaqibhafeezkhan",
       "contributions": [
@@ -161,7 +161,7 @@
     },
     {
       "login": "ect2000",
-      "name": "Emilio Castejón",
+      "name": "Emilio Cast...",
       "avatar_url": "https://avatars.githubusercontent.com/u/107069576?v=4",
       "profile": "https://github.com/ect2000",
       "contributions": [
@@ -170,7 +170,7 @@
     },
     {
       "login": "irfat-ifti",
-      "name": "Md. Irfat Uddin Ifti",
+      "name": "Md. Irfat U...",
       "avatar_url": "https://avatars.githubusercontent.com/u/197045488?v=4",
       "profile": "https://github.com/irfat-ifti",
       "contributions": [
@@ -188,7 +188,7 @@
     },
     {
       "login": "mahender9390",
-      "name": "Vennapureddy Mahender",
+      "name": "Vennapuredd...",
       "avatar_url": "https://avatars.githubusercontent.com/u/190497135?v=4",
       "profile": "https://github.com/mahender9390",
       "contributions": [

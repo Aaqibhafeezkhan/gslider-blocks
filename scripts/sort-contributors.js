@@ -31,6 +31,17 @@ function isExcluded( login ) {
 	return EXCLUDED_PATTERNS.some( ( pattern ) => pattern.test( login ) );
 }
 
+function truncateName( name, max = 14 ) {
+	if ( ! name ) {
+		return '';
+	}
+	const trimmed = name.trim();
+	if ( trimmed.length <= max ) {
+		return trimmed;
+	}
+	return trimmed.slice( 0, max - 3 ).trim() + '...';
+}
+
 async function getContributionCounts() {
 	const token = process.env.PRIVATE_TOKEN || process.env.GITHUB_TOKEN;
 	const countMap = {};
@@ -122,7 +133,12 @@ async function main() {
 		return a.login.localeCompare( b.login );
 	} );
 
-	rc.contributors = owner ? [ owner, ...humans ] : humans;
+	rc.contributors = ( owner ? [ owner, ...humans ] : humans ).map(
+		( c ) => ( {
+			...c,
+			name: truncateName( c.name ),
+		} )
+	);
 
 	fs.writeFileSync( RC_PATH, JSON.stringify( rc, null, 2 ) + '\n', 'utf8' );
 	console.log(
