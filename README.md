@@ -253,7 +253,7 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Aaqibhafeezkhan"><img src="https://avatars.githubusercontent.com/u/292322256?v=4" width="100px;" alt="Aaqibhafeez..."/></a><br /><sub><b>Aaqibhafeez...</b></sub></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ankitavasudev"><img src="https://avatars.githubusercontent.com/u/255383093?v=4" width="100px;" alt="Ankita&nbsp;Salaria"/></a><br /><sub><b>Ankita&nbsp;Salaria</b></sub></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ankitavasudev"><img src="https://avatars.githubusercontent.com/u/255383093?v=4" width="100px;" alt="Ankita&nbsp..."/></a><br /><sub><b>Ankita&nbsp...</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/barkya28"><img src="https://avatars.githubusercontent.com/u/122352361?v=4" width="100px;" alt="barkya28"/></a><br /><sub><b>barkya28</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="Muhibul&nbs..."/></a><br /><sub><b>Muhibul&nbs...</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ect2000"><img src="https://avatars.githubusercontent.com/u/107069576?v=4" width="100px;" alt="Emilio&nbsp..."/></a><br /><sub><b>Emilio&nbsp...</b></sub></td>
