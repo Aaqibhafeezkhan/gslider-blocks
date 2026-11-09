@@ -151,7 +151,11 @@
 	}
 
 	> .swiper.gslider-cursor-active {
-		cursor: none;
+		cursor: none !important;
+
+		> .swiper-wrapper {
+			cursor: none !important;
+		}
 
 		> .gslider-cursor-follower {
 			opacity: 1;

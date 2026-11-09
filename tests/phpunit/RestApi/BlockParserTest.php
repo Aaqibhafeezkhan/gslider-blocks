@@ -11,6 +11,7 @@
  * 6. Flexi Content slides keep their CSS in REST output (slides[].css and <style> in innerHtml).
  * 7. Flexi Content vertical direction reaches swiperConfig and turns off autoHeight.
  * 8. Dynamic observers (observer, observeParents, resizeObserver) are passed in swiperConfig.
+ * 9. Flexi Content grabCursor propagates only when enableGrabCursor and allowTouchMove are enabled.
  *
  * @package GSlider\Tests\RestApi
  */
@@ -116,6 +117,7 @@ class BlockParserTest {
 		$this->test_flexi_slide_css_in_rest_output();
 		$this->test_flexi_vertical_direction();
 		$this->test_swiper_dynamic_observers();
+		$this->test_flexi_grab_cursor();
 
 		fwrite( STDOUT, "\nAll BlockParser tests passed successfully!\n" );
 	}
@@ -471,6 +473,56 @@ class BlockParserTest {
 		$this->assert_true( ! isset( $base['swiperConfig']['observer'] ), 'base swiperConfig does not include observer' );
 		$this->assert_true( ! isset( $base['swiperConfig']['observeParents'] ), 'base swiperConfig does not include observeParents' );
 		$this->assert_true( ! isset( $base['swiperConfig']['resizeObserver'] ), 'base swiperConfig does not include resizeObserver' );
+	}
+
+	/**
+	 * Test 9: Flexi Content grabCursor gating and breakpoint propagation.
+	 *
+	 * Verifies that grabCursor is emitted only when both enableGrabCursor
+	 * and allowTouchMove are enabled, and stays set across all breakpoints.
+	 *
+	 * @return void
+	 */
+	public function test_flexi_grab_cursor(): void {
+		$default = $this->normalize( [], 'gslider-blocks/flexi-content' );
+		$this->assert_true( ! array_key_exists( 'grabCursor', $default['swiperConfig'] ), 'default flexi config omits grabCursor' );
+		foreach ( [ 0, 768, 1025 ] as $breakpoint ) {
+			$this->assert_true(
+				! array_key_exists( 'grabCursor', $default['swiperConfig']['breakpoints'][ $breakpoint ] ),
+				"default flexi breakpoint {$breakpoint} omits grabCursor"
+			);
+		}
+
+		$enabled = $this->normalize(
+			[
+				'enableGrabCursor' => true,
+				'allowTouchMove'   => true,
+			],
+			'gslider-blocks/flexi-content'
+		);
+		$this->assert_true( true === ( $enabled['swiperConfig']['grabCursor'] ?? null ), 'flexi config enables top-level grabCursor when allowTouchMove is true' );
+		foreach ( [ 0, 768, 1025 ] as $breakpoint ) {
+			$this->assert_true(
+				true === ( $enabled['swiperConfig']['breakpoints'][ $breakpoint ]['grabCursor'] ?? null ),
+				"flexi breakpoint {$breakpoint} keeps grabCursor enabled"
+			);
+		}
+
+		$touch_disabled = $this->normalize(
+			[
+				'enableGrabCursor' => true,
+				'allowTouchMove'   => false,
+			],
+			'gslider-blocks/flexi-content'
+		);
+		$this->assert_true( false === $touch_disabled['swiperConfig']['allowTouchMove'], 'allowTouchMove stays false in swiperConfig' );
+		$this->assert_true( ! array_key_exists( 'grabCursor', $touch_disabled['swiperConfig'] ), 'flexi config omits grabCursor when allowTouchMove is false' );
+		foreach ( [ 0, 768, 1025 ] as $breakpoint ) {
+			$this->assert_true(
+				! array_key_exists( 'grabCursor', $touch_disabled['swiperConfig']['breakpoints'][ $breakpoint ] ),
+				"flexi breakpoint {$breakpoint} omits grabCursor when allowTouchMove is false"
+			);
+		}
 	}
 }
 

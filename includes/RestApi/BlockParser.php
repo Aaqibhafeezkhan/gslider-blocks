@@ -51,6 +51,7 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 			'dynamicBullets',
 			'infiniteLoop',
 			'allowTouchMove',
+			'enableGrabCursor',
 			'mousewheelControl',
 			'keyboardNavigation',
 			'pauseOnHover',
@@ -409,7 +410,9 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 				'Tablet'  => $pagi_tablet,
 				'Desktop' => $pagi_desktop,
 			];
-			$breakpoints    = [];
+			$allow_touch_move = ! isset( $attrs['allowTouchMove'] ) || ! empty( $attrs['allowTouchMove'] );
+			$grab_cursor      = ! empty( $attrs['enableGrabCursor'] ) && $allow_touch_move;
+			$breakpoints      = [];
 
 			foreach ( $devices as $width => $device ) {
 				$breakpoint = [
@@ -418,6 +421,10 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 					'navigation' => [ 'enabled' => $nav_by_device[ $device ] ],
 					'pagination' => [ 'enabled' => $pagi_by_device[ $device ] ],
 				];
+
+				if ( $grab_cursor ) {
+					$breakpoint['grabCursor'] = true;
+				}
 
 				if ( $is_carousel ) {
 					$breakpoint = [
@@ -432,7 +439,7 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 			$config = [
 				'effect'         => $effect,
 				'loop'           => ! empty( $attrs['infiniteLoop'] ),
-				'allowTouchMove' => ! isset( $attrs['allowTouchMove'] ) || ! empty( $attrs['allowTouchMove'] ),
+				'allowTouchMove' => $allow_touch_move,
 				'mousewheel'     => ! empty( $attrs['mousewheelControl'] ),
 				'keyboard'       => ! empty( $attrs['keyboardNavigation'] ) ? [
 					'enabled'        => true,
@@ -489,6 +496,10 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 				$config['observer']       = true;
 				$config['observeParents'] = true;
 				$config['resizeObserver'] = true;
+			}
+
+			if ( $grab_cursor ) {
+				$config['grabCursor'] = true;
 			}
 
 			return $config;

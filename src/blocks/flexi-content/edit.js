@@ -39,6 +39,7 @@ export default function Edit( {
 		autoplayProgressPosition,
 		infiniteLoop,
 		allowTouchMove,
+		enableGrabCursor,
 		pauseOnHover,
 		stopOnLastSlide,
 		reverseDirection,
@@ -226,6 +227,8 @@ export default function Edit( {
 			? 0
 			: marqueeSpeed?.[ deviceType ] || 5000;
 
+		const isGrabCursor = Boolean( enableGrabCursor && allowTouchMove );
+
 		// Build Swiper settings
 		const swiperSettings = {
 			// Marquee needs the slide effect, other effects can not move in a line
@@ -235,16 +238,19 @@ export default function Edit( {
 					0: {
 						slidesPerView: carouselPerColumn?.[ deviceType ] || 1,
 						spaceBetween: carouselPerColumnGap?.[ deviceType ] || 0,
+						...( isGrabCursor && { grabCursor: true } ),
 					},
 					768: {
 						slidesPerView: carouselPerColumn?.[ deviceType ] || 2,
 						spaceBetween:
 							carouselPerColumnGap?.[ deviceType ] ?? 20,
+						...( isGrabCursor && { grabCursor: true } ),
 					},
 					1025: {
 						slidesPerView: carouselPerColumn?.[ deviceType ] || 2,
 						spaceBetween:
 							carouselPerColumnGap?.[ deviceType ] ?? 20,
+						...( isGrabCursor && { grabCursor: true } ),
 					},
 				},
 			} ),
@@ -268,6 +274,9 @@ export default function Edit( {
 				? marqueeTransition
 				: speed?.[ deviceType ] || 800,
 			allowTouchMove,
+			...( isGrabCursor && {
+				grabCursor: true,
+			} ),
 			mousewheel: mousewheelControl,
 			keyboard: keyboardNavigation
 				? {
@@ -510,6 +519,7 @@ export default function Edit( {
 		direction,
 		speed,
 		allowTouchMove,
+		enableGrabCursor,
 		mousewheelControl,
 		keyboardNavigation,
 		showNavigation,

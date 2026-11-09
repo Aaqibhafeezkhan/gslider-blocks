@@ -76,6 +76,7 @@ const Inspector = ( { attributes, setAttributes } ) => {
 		autoplayProgressHeight,
 		infiniteLoop,
 		allowTouchMove,
+		enableGrabCursor,
 		pauseOnHover,
 		stopOnLastSlide,
 		reverseDirection,
@@ -837,6 +838,24 @@ const Inspector = ( { attributes, setAttributes } ) => {
 					checked={ allowTouchMove }
 					onChange={ ( value ) =>
 						setAttributes( { allowTouchMove: value } )
+					}
+				/>
+				<ToggleControl
+					label={ __( 'Grab Cursor', 'gslider-blocks' ) }
+					help={
+						allowTouchMove
+							? __(
+									'Displays a grab hand cursor on desktop to indicate the slider is draggable.',
+									'gslider-blocks'
+							  )
+							: __(
+									'Enable Touch Swipe Control to use the grab cursor.',
+									'gslider-blocks'
+							  )
+					}
+					checked={ enableGrabCursor }
+					onChange={ ( value ) =>
+						setAttributes( { enableGrabCursor: value } )
 					}
 				/>
 				<ToggleControl

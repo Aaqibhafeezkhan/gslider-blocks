@@ -85,6 +85,10 @@ const attributes = {
 		type: 'boolean',
 		default: true,
 	},
+	enableGrabCursor: {
+		type: 'boolean',
+		default: false,
+	},
 	allowTouchMove: {
 		type: 'boolean',
 		default: true,
