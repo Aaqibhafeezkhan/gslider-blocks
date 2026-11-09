@@ -253,18 +253,19 @@ Thank you to all the amazing people who contribute to GSlider Blocks!
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Aaqibhafeezkhan"><img src="https://avatars.githubusercontent.com/u/292322256?v=4" width="100px;" alt="Aaqibhafeez..."/></a><br /><sub><b>Aaqibhafeez...</b></sub></td>
     </tr>
     <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ankitavasudev"><img src="https://avatars.githubusercontent.com/u/255383093?v=4" width="100px;" alt="Ankita&nbsp;Salaria"/></a><br /><sub><b>Ankita&nbsp;Salaria</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/barkya28"><img src="https://avatars.githubusercontent.com/u/122352361?v=4" width="100px;" alt="barkya28"/></a><br /><sub><b>barkya28</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/devmuhib009"><img src="https://avatars.githubusercontent.com/u/142894870?v=4" width="100px;" alt="Muhibul&nbs..."/></a><br /><sub><b>Muhibul&nbs...</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ect2000"><img src="https://avatars.githubusercontent.com/u/107069576?v=4" width="100px;" alt="Emilio&nbsp..."/></a><br /><sub><b>Emilio&nbsp...</b></sub></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/harryhawwy69"><img src="https://avatars.githubusercontent.com/u/316354895?v=4" width="100px;" alt="harryhawwy69"/></a><br /><sub><b>harryhawwy69</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/irfat-ifti"><img src="https://avatars.githubusercontent.com/u/197045488?v=4" width="100px;" alt="Md.&nbsp;Ir..."/></a><br /><sub><b>Md.&nbsp;Ir...</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/madhavidayma21"><img src="https://avatars.githubusercontent.com/u/98448374?v=4" width="100px;" alt="Madhavi&nbs..."/></a><br /><sub><b>Madhavi&nbs...</b></sub></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mahender9390"><img src="https://avatars.githubusercontent.com/u/190497135?v=4" width="100px;" alt="Vennapuredd..."/></a><br /><sub><b>Vennapuredd...</b></sub></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://pralav-singh-portfolio.vercel.app/"><img src="https://avatars.githubusercontent.com/u/174412353?v=4" width="100px;" alt="Pralav&nbsp..."/></a><br /><sub><b>Pralav&nbsp...</b></sub></td>
     </tr>
     <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mahender9390"><img src="https://avatars.githubusercontent.com/u/190497135?v=4" width="100px;" alt="Vennapuredd..."/></a><br /><sub><b>Vennapuredd...</b></sub></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://pralav-singh-portfolio.vercel.app/"><img src="https://avatars.githubusercontent.com/u/174412353?v=4" width="100px;" alt="Pralav&nbsp..."/></a><br /><sub><b>Pralav&nbsp...</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Sinkleberg"><img src="https://avatars.githubusercontent.com/u/1676751?v=4" width="100px;" alt="Sgt_Sinky"/></a><br /><sub><b>Sgt_Sinky</b></sub></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tu-lasizzzz"><img src="https://avatars.githubusercontent.com/u/172914448?v=4" width="100px;" alt="Tulasi&nbsp..."/></a><br /><sub><b>Tulasi&nbsp...</b></sub></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/harryhawwy69"><img src="https://avatars.githubusercontent.com/u/316354895?v=4" width="100px;" alt="harryhawwy69"/></a><br /><sub><b>harryhawwy69</b></sub></td>
     </tr>
   </tbody>
 </table>
