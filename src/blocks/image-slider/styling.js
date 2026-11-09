@@ -1710,7 +1710,7 @@ const generateImageSliderStyle = ( attributes ) => {
 				}  
                 ${
 					globalBorderRadiusTabletCssStyle
-						? `border-radius: ${ globalBorderRadiusTabletCssStyle };`
+						? `border-radius: ${ globalBorderRadiusTabletCssStyle } !important;`
 						: ''
 				}
                 ${
@@ -1741,7 +1741,7 @@ const generateImageSliderStyle = ( attributes ) => {
 				}  
                 ${
 					imageBorderRadiusTabletCssStyle
-						? `border-radius: ${ imageBorderRadiusTabletCssStyle };`
+						? `border-radius: ${ imageBorderRadiusTabletCssStyle } !important;`
 						: ''
 				}
                 display: flex;
@@ -2238,7 +2238,7 @@ const generateImageSliderStyle = ( attributes ) => {
 				}  
                 ${
 					globalBorderRadiusMobileCssStyle
-						? `border-radius: ${ globalBorderRadiusMobileCssStyle };`
+						? `border-radius: ${ globalBorderRadiusMobileCssStyle } !important;`
 						: ''
 				}
                 ${
@@ -2269,7 +2269,7 @@ const generateImageSliderStyle = ( attributes ) => {
 				}  
                 ${
 					imageBorderRadiusMobileCssStyle
-						? `border-radius: ${ imageBorderRadiusMobileCssStyle };`
+						? `border-radius: ${ imageBorderRadiusMobileCssStyle } !important;`
 						: ''
 				}
                 display: flex;

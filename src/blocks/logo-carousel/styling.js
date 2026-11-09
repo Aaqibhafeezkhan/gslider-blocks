@@ -1827,7 +1827,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
 				}  
                 ${
 					globalBorderRadiusTabletCssStyle
-						? `border-radius: ${ globalBorderRadiusTabletCssStyle };`
+						? `border-radius: ${ globalBorderRadiusTabletCssStyle } !important;`
 						: ''
 				}
                 ${
@@ -1859,7 +1859,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
 				}  
                 ${
 					logoBorderRadiusTabletCssStyle
-						? `border-radius: ${ logoBorderRadiusTabletCssStyle };`
+						? `border-radius: ${ logoBorderRadiusTabletCssStyle } !important;`
 						: ''
 				}
                 display: flex;
@@ -2360,7 +2360,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
 				}  
                 ${
 					globalBorderRadiusMobileCssStyle
-						? `border-radius: ${ globalBorderRadiusMobileCssStyle };`
+						? `border-radius: ${ globalBorderRadiusMobileCssStyle } !important;`
 						: ''
 				}
                 ${
@@ -2392,7 +2392,7 @@ const generateLogoCarouselStyle = ( attributes ) => {
 				}  
                 ${
 					logoBorderRadiusMobileCssStyle
-						? `border-radius: ${ logoBorderRadiusMobileCssStyle };`
+						? `border-radius: ${ logoBorderRadiusMobileCssStyle } !important;`
 						: ''
 				}
                 display: flex;

@@ -5937,7 +5937,7 @@ var generateBaseSliderStyle = (attributes2) => {
                 ${globalMarginTabletCssStyle ? `margin: ${globalMarginTabletCssStyle};` : ""} 
                 ${globalPaddingTabletCssStyle ? `padding: ${globalPaddingTabletCssStyle};` : ""}
                 ${globalBorderTabletCssStyle ? `border-width: ${globalBorderTabletCssStyle};` : ""}  
-                ${globalBorderRadiusTabletCssStyle ? `border-radius: ${globalBorderRadiusTabletCssStyle};` : ""}
+                ${globalBorderRadiusTabletCssStyle ? `border-radius: ${globalBorderRadiusTabletCssStyle} !important;` : ""}
                 ${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ""}
             }
             .${blockId}.gslider-testimonial-wrapper:hover { 
@@ -6217,7 +6217,7 @@ var generateBaseSliderStyle = (attributes2) => {
                 ${globalMarginMobileCssStyle ? `margin: ${globalMarginMobileCssStyle};` : ""} 
                 ${globalPaddingMobileCssStyle ? `padding: ${globalPaddingMobileCssStyle};` : ""}
                 ${globalBorderMobileCssStyle ? `border-width: ${globalBorderMobileCssStyle};` : ""}  
-                ${globalBorderRadiusMobileCssStyle ? `border-radius: ${globalBorderRadiusMobileCssStyle};` : ""}
+                ${globalBorderRadiusMobileCssStyle ? `border-radius: ${globalBorderRadiusMobileCssStyle} !important;` : ""}
                 ${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ""}
             }
 

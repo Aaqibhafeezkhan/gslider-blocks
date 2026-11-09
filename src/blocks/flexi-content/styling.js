@@ -1487,7 +1487,7 @@ const generateFlexiContentStyle = ( attributes ) => {
 				}  
                 ${
 					globalBorderRadiusTabletCssStyle
-						? `border-radius: ${ globalBorderRadiusTabletCssStyle };`
+						? `border-radius: ${ globalBorderRadiusTabletCssStyle } !important;`
 						: ''
 				}
                 ${
@@ -1966,7 +1966,7 @@ const generateFlexiContentStyle = ( attributes ) => {
 				}  
                 ${
 					globalBorderRadiusMobileCssStyle
-						? `border-radius: ${ globalBorderRadiusMobileCssStyle };`
+						? `border-radius: ${ globalBorderRadiusMobileCssStyle } !important;`
 						: ''
 				}
                 ${

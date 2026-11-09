@@ -2388,7 +2388,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 				}  
                 ${
 					globalBorderRadiusTabletCssStyle
-						? `border-radius: ${ globalBorderRadiusTabletCssStyle };`
+						? `border-radius: ${ globalBorderRadiusTabletCssStyle } !important;`
 						: ''
 				}
                 ${
@@ -3246,7 +3246,7 @@ const generateBaseSliderStyle = ( attributes ) => {
 				}  
                 ${
 					globalBorderRadiusMobileCssStyle
-						? `border-radius: ${ globalBorderRadiusMobileCssStyle };`
+						? `border-radius: ${ globalBorderRadiusMobileCssStyle } !important;`
 						: ''
 				}
                 ${
