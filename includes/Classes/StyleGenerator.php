@@ -596,7 +596,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
 
             // 5. Enforce Block Scoping:
             // Extract media queries and normal rules, ensuring EVERY selector starts at $block_id.
-            $output = '';
+            $media_output = '';
 
             // Handle media queries.
             $media_regex = '/@media[^{]+\{(?:[^{}]*\{[^{}]*\})+[^{}]*\}/i';
@@ -609,16 +609,22 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
 
                     $sanitized_inner = $this->filter_rules_by_scope( $media_inner, $block_id );
                     if ( ! empty( $sanitized_inner ) ) {
-                        $output .= $media_header . ' { ' . $sanitized_inner . " }\n";
+                        $media_output .= $media_header . ' { ' . $sanitized_inner . " }\n";
                     }
                     $css = str_replace( $media_full, '', $css );
                 }
             }
 
-            // Handle remaining standard rules.
+            $output = '';
+
+            // Output standard rules before @media blocks to preserve Desktop -> Tablet -> Mobile cascade (#709).
             $sanitized_normal = $this->filter_rules_by_scope( $css, $block_id );
             if ( ! empty( $sanitized_normal ) ) {
-                $output .= $sanitized_normal;
+                $output .= $sanitized_normal . "\n";
+            }
+
+            if ( ! empty( $media_output ) ) {
+                $output .= $media_output;
             }
 
             return $this->minify_css( $output );
