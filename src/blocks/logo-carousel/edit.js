@@ -117,6 +117,8 @@ export default function Edit( {
 	}, [ attributes, blockId ] );
 	/** End Generate Block Style */
 
+	const trimmedGlobalClass = globalClass?.trim();
+
 	// Block props for container
 	const blockProps = useBlockProps( {
 		className: `gslider-logo-carousel-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
@@ -125,7 +127,7 @@ export default function Edit( {
 			showPagination?.Mobile
 				? 'has-pagination'
 				: ''
-		}`,
+		}${ trimmedGlobalClass ? ` ${ trimmedGlobalClass }` : '' }`,
 	} );
 
 	const onSelectFromPlaceholder = ( selection ) => {
@@ -431,13 +433,13 @@ export default function Edit( {
 						ref={ swiperContainerRef }
 						role="region"
 						aria-label={ __( 'Logo Carousel', 'gslider-blocks' ) }
+						{ ...( globalID && { id: globalID } ) }
 					>
 						<div className="swiper-wrapper">
 							{ logos.map( ( item, index ) => (
 								<div className="swiper-slide" key={ item.id }>
 									<div
-										className={ `gslider-logo-carousel-content-wrapper ${ globalClass }` }
-										{ ...( globalID && { id: globalID } ) }
+										className="gslider-logo-carousel-content-wrapper"
 										ref={ panelRef }
 									>
 										<div

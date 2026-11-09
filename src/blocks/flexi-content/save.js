@@ -94,6 +94,8 @@ export default function Save( { attributes } ) {
 		} )
 		.join( ' ' );
 
+	const trimmedGlobalClass = globalClass?.trim();
+
 	const blockProps = useBlockProps.save( {
 		className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
 			showPagination?.Desktop ||
@@ -101,7 +103,10 @@ export default function Save( { attributes } ) {
 			showPagination?.Mobile
 				? 'has-pagination'
 				: ''
-		}${ marqueeClasses ? ` ${ marqueeClasses }` : '' }`,
+		}${ marqueeClasses ? ` ${ marqueeClasses }` : '' }${
+			trimmedGlobalClass ? ` ${ trimmedGlobalClass }` : ''
+		}`,
+		...( globalID ? { id: globalID } : {} ),
 	} );
 
 	const innerBlocksProps = useInnerBlocksProps.save( {
@@ -291,10 +296,7 @@ export default function Save( { attributes } ) {
 				'data-cursor-follower': cursorFollowerDevices,
 			} ) }
 		>
-			<div
-				className={ `swiper ${ globalClass }` }
-				{ ...( globalID && { id: globalID } ) }
-			>
+			<div className="swiper">
 				<div { ...innerBlocksProps } />
 
 				{ cursorFollowerDevices && (

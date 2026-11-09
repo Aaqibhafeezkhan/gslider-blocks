@@ -50,6 +50,8 @@ export default function Save( { attributes } ) {
 		enableLazyLoad,
 	} = attributes;
 
+	const trimmedGlobalClass = globalClass?.trim();
+
 	const blockProps = useBlockProps.save( {
 		className: `gslider-logo-carousel-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
 			showPagination?.Desktop ||
@@ -57,7 +59,8 @@ export default function Save( { attributes } ) {
 			showPagination?.Mobile
 				? 'has-pagination'
 				: ''
-		}`,
+		}${ trimmedGlobalClass ? ` ${ trimmedGlobalClass }` : '' }`,
+		...( globalID ? { id: globalID } : {} ),
 	} );
 
 	const captionEnabled = {
@@ -180,10 +183,7 @@ export default function Save( { attributes } ) {
 				<div className="swiper-wrapper">
 					{ logos.map( ( item ) => (
 						<div key={ item.id } className={ `swiper-slide` }>
-							<div
-								className={ `gslider-logo-carousel-content-wrapper ${ globalClass }` }
-								{ ...( globalID && { id: globalID } ) }
-							>
+							<div className="gslider-logo-carousel-content-wrapper">
 								<div
 									className="gslider-logo-item"
 									data-hover-effect={ logoLinkHoverEffect }

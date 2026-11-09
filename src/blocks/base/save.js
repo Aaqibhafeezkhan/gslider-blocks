@@ -52,6 +52,8 @@ export default function Save( { attributes } ) {
 		layoutHeightSwitcher,
 	} = attributes;
 
+	const trimmedGlobalClass = globalClass?.trim();
+
 	const blockProps = useBlockProps.save( {
 		className: `gslider-base-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
 			showPagination?.Desktop ||
@@ -59,7 +61,8 @@ export default function Save( { attributes } ) {
 			showPagination?.Mobile
 				? 'has-pagination'
 				: ''
-		}`,
+		}${ trimmedGlobalClass ? ` ${ trimmedGlobalClass }` : '' }`,
+		...( globalID ? { id: globalID } : {} ),
 	} );
 
 	const navigationEnabled = {
@@ -196,8 +199,7 @@ export default function Save( { attributes } ) {
 							}` }
 						>
 							<div
-								className={ `gslider-content-wrapper ${ item.id } ${ globalClass }` }
-								{ ...( globalID && { id: globalID } ) }
+								className={ `gslider-content-wrapper ${ item.id }` }
 							>
 								<div className="gslider-content-inner-wrapper">
 									<div className="gslider-list-item">

@@ -109,6 +109,8 @@ export default function Edit( {
 	}, [ attributes, blockId ] );
 	/** End Generate Block Style */
 
+	const trimmedGlobalClass = globalClass?.trim();
+
 	// Block props for container
 	const blockProps = useBlockProps( {
 		className: `gslider-flexi-content-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
@@ -117,7 +119,9 @@ export default function Edit( {
 			showPagination?.Mobile
 				? 'has-pagination'
 				: ''
-		}${ marqueeEnabled ? ' gslider-marquee-mode' : '' }`,
+		}${ marqueeEnabled ? ' gslider-marquee-mode' : '' }${
+			trimmedGlobalClass ? ` ${ trimmedGlobalClass }` : ''
+		}`,
 	} );
 
 	// Local state management for swiper instance is replaced by useRef
@@ -573,7 +577,7 @@ export default function Edit( {
 
 			<div { ...blockProps }>
 				<div
-					className={ `swiper ${ globalClass }` }
+					className="swiper"
 					ref={ swiperContainerRef }
 					{ ...( globalID && { id: globalID } ) }
 				>
