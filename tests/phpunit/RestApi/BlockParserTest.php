@@ -55,7 +55,10 @@ set_error_handler(
 	}
 );
 
+require_once ABSPATH . 'includes/Interfaces/Registrable.php';
+require_once ABSPATH . 'includes/Traits/SingletonTrait.php';
 require_once ABSPATH . 'includes/Utils/CssSanitizer.php';
+require_once ABSPATH . 'includes/Classes/StyleGenerator.php';
 require_once ABSPATH . 'includes/RestApi/BlockParser.php';
 
 use GSlider\RestApi\BlockParser;
@@ -354,11 +357,30 @@ class BlockParserTest {
 		$styled = $this->normalize(
 			[
 				'blockId'    => 'gslider-base',
-				'blockStyle' => '.x{color:red}@import url(https://evil.example/a.css);</style><script>alert(1)</script>',
+				'blockStyle' => '.gslider-base{color:red}@import url(https://evil.example/a.css);</style><script>alert(1)</script>',
 			],
 			'gslider-blocks/base'
 		);
-		$this->assert_true( '.x{color:red}' === $styled['css'] && $styled['css'] === $styled['attrs']['blockStyle'], 'REST css and attrs.blockStyle are sanitized' );
+		$this->assert_true( false !== strpos( $styled['css'], 'color:red' ) && $styled['css'] === $styled['attrs']['blockStyle'], 'REST css and attrs.blockStyle are sanitized' );
+		$this->assert_true( false === strpos( strtolower( $styled['css'] ), '@import' ), 'REST css still strips @import' );
+
+		$unscoped = $this->normalize(
+			[
+				'blockId'    => 'gslider-base',
+				'blockStyle' => '.x{color:red}',
+			],
+			'gslider-blocks/base'
+		);
+		$this->assert_true( '' === $unscoped['css'] && '' === $unscoped['attrs']['blockStyle'], 'REST css drops selectors that do not start at the block root' );
+
+		$empty_id = $this->normalize(
+			[
+				'blockId'    => '',
+				'blockStyle' => 'body { color: red; }',
+			],
+			'gslider-blocks/base'
+		);
+		$this->assert_true( '' === $empty_id['css'], 'REST css is empty when blockId is invalid' );
 	}
 
 	/**
@@ -385,15 +407,15 @@ class BlockParserTest {
 					[
 						'blockName'   => 'gslider-blocks/flexi-content-item',
 						'attrs'       => [
-							'blockId'    => 'slide-a',
-							'blockStyle' => '.slide-a{color:#abcdef}',
+							'blockId'    => 'gslider-flexi-item-a',
+							'blockStyle' => '.gslider-flexi-item-a{color:#abcdef}',
 						],
 						'innerBlocks' => [
 							[
 								'blockName'   => 'gslider-blocks/flexi-content-item',
 								'attrs'       => [
-									'blockId'    => 'slide-a-inner',
-									'blockStyle' => '.slide-a-inner{margin:1px}',
+									'blockId'    => 'gslider-flexi-item-b',
+									'blockStyle' => '.gslider-flexi-item-b{margin:1px}',
 								],
 								'innerBlocks' => [],
 							],
@@ -406,8 +428,8 @@ class BlockParserTest {
 		$is_rest_mock = false;
 
 		$slide = $flexi['slides'][0];
-		$this->assert_true( false !== strpos( $slide['css'], '.slide-a{color:#abcdef}' ) && false !== strpos( $slide['css'], '.slide-a-inner{margin:1px}' ), 'flexi slides[].css carries own and nested CSS' );
-		$this->assert_true( false !== strpos( $slide['innerHtml'], '<style id="gslider-style-slide-a">' ), 'flexi innerHtml keeps its <style> during REST requests' );
+		$this->assert_true( false !== strpos( $slide['css'], '.gslider-flexi-item-a{color:#abcdef}' ) && false !== strpos( $slide['css'], '.gslider-flexi-item-b{margin:1px}' ), 'flexi slides[].css carries own and nested CSS' );
+		$this->assert_true( false !== strpos( $slide['innerHtml'], '<style id="gslider-style-gslider-flexi-item-a">' ), 'flexi innerHtml keeps its <style> during REST requests' );
 	}
 
 	/**

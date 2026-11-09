@@ -147,9 +147,15 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
                 return $block_content;
             }
 
-            $block_id = isset( $block['attrs']['blockId'] ) ?
-                sanitize_key( $block['attrs']['blockId'] ) :
-                'gslider-blocks-' . md5( serialize( $block['attrs'] ) );
+            $raw_id   = isset( $block['attrs']['blockId'] ) && is_string( $block['attrs']['blockId'] )
+                ? $block['attrs']['blockId']
+                : '';
+            $block_id = sanitize_key( $raw_id );
+
+            // Refuse CSS when the stored ID is empty, too short, or not a GSlider ID.
+            if ( ! self::is_valid_block_id( $block_id ) ) {
+                return $block_content;
+            }
 
             $raw_style = is_string( $block['attrs']['blockStyle'] ) ? $block['attrs']['blockStyle'] : '';
 
@@ -533,7 +539,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          * 3. Blocking of dangerous protocols (javascript, data, expression, behavior, -moz-binding, vbscript).
          * 4. Stripping of risky at-rules (@import, @charset, @namespace, etc.).
          * 5. Sanitization of url() values to only allow safe HTTP/HTTPS image URLs.
-         * 6. Scoping: every selector MUST contain the specific block ID.
+         * 6. Scoping: every selector MUST start at the block class (not merely mention the ID).
          *
          * @since 1.2.0
          *
@@ -543,6 +549,10 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
          */
         public function sanitize_css( $css, $block_id ): string {
             if ( empty( $css ) || ! is_string( $css ) ) {
+                return '';
+            }
+
+            if ( ! is_string( $block_id ) || ! self::is_valid_block_id( $block_id ) ) {
                 return '';
             }
 
@@ -585,7 +595,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
             }, $css );
 
             // 5. Enforce Block Scoping:
-            // Extract media queries and normal rules, ensuring EVERY selector is scoped to $block_id.
+            // Extract media queries and normal rules, ensuring EVERY selector starts at $block_id.
             $output = '';
 
             // Handle media queries.
@@ -615,9 +625,51 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
         }
 
         /**
-         * Filters CSS rules so that only selectors containing the specific block ID are retained.
+         * Whether a sanitized block ID matches the editor generator format.
          *
-         * Drops any selectors that attempt to target outside elements (e.g. body, html, input, *).
+         * IDs are `{prefix}-{clientId.slice(0, 8)}` with prefixes `gslider`,
+         * `gslider-image-slider`, `gslider-logo-carousel`, `gslider-flexi-content`,
+         * and `gslider-flexi-content-item`.
+         *
+         * @since 1.2.2
+         *
+         * @param string $block_id Sanitized block identifier.
+         * @return bool True when the ID is a non-empty GSlider block class.
+         */
+        public static function is_valid_block_id( string $block_id ): bool {
+            return 1 === preg_match( '/^g[a-z0-9-]{5,}$/', $block_id );
+        }
+
+        /**
+         * Whether a CSS selector is anchored to the block wrapper and cannot escape it.
+         *
+         * @since 1.2.2
+         *
+         * @param string $sel      Trimmed CSS selector.
+         * @param string $block_id Validated block identifier.
+         * @return bool True when the selector starts at the block class with a boundary.
+         */
+        private static function is_scoped_selector( string $sel, string $block_id ): bool {
+            $root = '.' . $block_id;
+
+            // Must start with the block class and be followed by a non-identifier boundary.
+            if ( 1 !== preg_match( '/^' . preg_quote( $root, '/' ) . '(?![a-z0-9_-])/i', $sel ) ) {
+                return false;
+            }
+
+            // Relational / negation pseudo-classes and sibling combinators can style outside the block.
+            if ( 1 === preg_match( '/:(has|not|is|where|host|root)\s*\(|[~+]|\\\\/i', $sel ) ) {
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * Filters CSS rules so that only selectors anchored to the block wrapper are retained.
+         *
+         * Drops selectors that merely mention the ID (e.g. inside :has() / :not()),
+         * collide with a longer class name, or use sibling combinators after the root.
          *
          * @since 1.2.0
          *
@@ -652,8 +704,7 @@ if ( ! class_exists( StyleGenerator::class, false ) ) {
 
                 foreach ( $selectors as $sel ) {
                     $sel = trim( $sel );
-                    // Must contain the specific block ID to prevent targeting arbitrary page elements.
-                    if ( false !== strpos( $sel, $block_id ) ) {
+                    if ( self::is_scoped_selector( $sel, $block_id ) ) {
                         $valid_selectors[] = $sel;
                     }
                 }

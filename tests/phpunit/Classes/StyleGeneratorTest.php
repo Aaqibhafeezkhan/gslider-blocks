@@ -5,7 +5,7 @@
  * Verifies that:
  * 1. StyleGenerator implements Registrable interface and SingletonTrait.
  * 2. register() hooks into WordPress 'render_block', 'wp_footer', and 'wp_enqueue_scripts'.
- * 3. Dynamic styles are sanitized and scoped strictly to block IDs.
+ * 3. Dynamic styles are sanitized and scoped strictly to block IDs (#318: selectors must start at the block class).
  * 4. Duplicate <style> tags are prevented for identical block IDs in the same request (#312).
  * 5. <style> tags are completely excluded from RSS feeds (#312).
  * 6. Generic REST responses get no <style>, but the plugin's headless render keeps it,
@@ -51,6 +51,8 @@ class StyleGeneratorTest {
 		$this->test_plugin_services_contains_class();
 		$this->test_register_hooks();
 		$this->test_css_scoping_and_sanitization();
+		$this->test_css_scope_anchor_and_block_id_validation();
+		$this->test_invalid_block_id_skips_style_output();
 		$this->test_dynamic_css_deduplication();
 		$this->test_feed_exclusion();
 		$this->test_rest_request_exclusion();
@@ -188,6 +190,114 @@ class StyleGeneratorTest {
 			exit( 1 );
 		}
 		echo "OK: Unscoped CSS selectors are strictly dropped\n";
+	}
+
+	/**
+	 * Verify selectors must start at the block class and block IDs must be valid (#318).
+	 *
+	 * @return void
+	 */
+	public function test_css_scope_anchor_and_block_id_validation(): void {
+		$generator = StyleGenerator::getInstance();
+		$block_id  = 'gslider-abc';
+		$root      = '.' . $block_id;
+
+		$kept = $generator->sanitize_css(
+			"{$root} { color: #111111; } {$root}.gslider-wrapper { margin: 0; } {$root} .swiper-slide > .inner { padding: 8px; }",
+			$block_id
+		);
+		if ( false === strpos( $kept, 'color:#111111' ) || false === strpos( $kept, 'margin:0' ) || false === strpos( $kept, 'padding:8px' ) ) {
+			fwrite( STDERR, "FAIL: Legitimate generated selectors were stripped: $kept\n" );
+			exit( 1 );
+		}
+		echo "OK: Compound, descendant, and child selectors at the block root are kept\n";
+
+		$media = $generator->sanitize_css(
+			"@media (max-width: 767px) { html:has({$root}) body { color: #ff0000; } {$root} { padding: 4px; } }",
+			$block_id
+		);
+		if ( false !== strpos( $media, 'html' ) || false === strpos( $media, 'padding:4px' ) ) {
+			fwrite( STDERR, "FAIL: Media-query scope filter failed: $media\n" );
+			exit( 1 );
+		}
+		echo "OK: Unscoped selectors inside @media are dropped; rooted rules remain\n";
+
+		$dropped = [
+			"html:has({$root}) body { background: #000000; }",
+			"body:not({$root}) { display: none; }",
+			"{$root}:is(body, html) { color: #ff0000; }",
+			"{$root} ~ header { opacity: 0; }",
+			"{$root} + * { position: static; }",
+			".{$block_id}def { color: #ff0000; }",
+		];
+		foreach ( $dropped as $css ) {
+			$clean = $generator->sanitize_css( $css, $block_id );
+			if ( '' !== $clean ) {
+				fwrite( STDERR, "FAIL: Selector that does not stay inside the block was kept ($css) => $clean\n" );
+				exit( 1 );
+			}
+		}
+		echo "OK: :has()/:not()/:is(), sibling combinators, and prefix collisions are dropped\n";
+
+		if ( ! StyleGenerator::is_valid_block_id( 'gslider-test-block' ) ||
+			! StyleGenerator::is_valid_block_id( 'gslider-flexi-content-item-a1b2c3d4' ) ) {
+			fwrite( STDERR, "FAIL: Editor-format block IDs were rejected\n" );
+			exit( 1 );
+		}
+		if ( StyleGenerator::is_valid_block_id( '' ) ||
+			StyleGenerator::is_valid_block_id( 'g' ) ||
+			StyleGenerator::is_valid_block_id( 'slide-a' ) ) {
+			fwrite( STDERR, "FAIL: Invalid block IDs were accepted\n" );
+			exit( 1 );
+		}
+
+		if ( '' !== $generator->sanitize_css( "{$root} { color: #111111; }", '' ) ||
+			'' !== $generator->sanitize_css( 'body { color: #111111; }', 'g' ) ) {
+			fwrite( STDERR, "FAIL: sanitize_css emitted CSS for an invalid block ID\n" );
+			exit( 1 );
+		}
+		echo "OK: Empty, short, and non-gslider block IDs produce no CSS\n";
+	}
+
+	/**
+	 * Verify collect_and_render_dynamic_styles skips output when blockId is invalid (#318).
+	 *
+	 * @return void
+	 */
+	public function test_invalid_block_id_skips_style_output(): void {
+		StyleGenerator::reset_styles();
+		$generator = StyleGenerator::getInstance();
+
+		$empty = $generator->collect_and_render_dynamic_styles(
+			'<div>Slider</div>',
+			[
+				'blockName' => 'gslider-blocks/image-slider',
+				'attrs'     => [
+					'blockId'    => '',
+					'blockStyle' => 'body { color: #ff0000; }',
+				],
+			]
+		);
+		if ( false !== strpos( $empty, '<style' ) ) {
+			fwrite( STDERR, "FAIL: Empty blockId still printed a style tag: $empty\n" );
+			exit( 1 );
+		}
+
+		$short = $generator->collect_and_render_dynamic_styles(
+			'<div>Slider</div>',
+			[
+				'blockName' => 'gslider-blocks/image-slider',
+				'attrs'     => [
+					'blockId'    => 'ab',
+					'blockStyle' => '.ab { color: #ff0000; }',
+				],
+			]
+		);
+		if ( false !== strpos( $short, '<style' ) ) {
+			fwrite( STDERR, "FAIL: Short blockId still printed a style tag: $short\n" );
+			exit( 1 );
+		}
+		echo "OK: Invalid blockId skips style output\n";
 	}
 
 	/**

@@ -12,7 +12,6 @@
 namespace GSlider\RestApi;
 
 use GSlider\Classes\StyleGenerator;
-use GSlider\Utils\CssSanitizer;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -535,17 +534,27 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 		/**
 		 * Extracts the pre-generated blockStyle CSS string from attributes.
 		 *
+		 * Applies the same block-ID validation and selector scoping as
+		 * StyleGenerator so the REST `css` field cannot carry unscoped rules.
+		 *
 		 * @since 1.1.9
 		 *
 		 * @param array $attrs Block attributes.
-		 * @return string Sanitized CSS stylesheet string.
+		 * @return string Sanitized, scoped CSS stylesheet string.
 		 */
 		public static function extract_block_styles( array $attrs ): string {
-			if ( ! empty( $attrs['blockStyle'] ) && is_string( $attrs['blockStyle'] ) ) {
-				return CssSanitizer::sanitize( $attrs['blockStyle'] );
+			if ( empty( $attrs['blockStyle'] ) || ! is_string( $attrs['blockStyle'] ) ) {
+				return '';
 			}
 
-			return '';
+			$raw_id   = isset( $attrs['blockId'] ) && is_string( $attrs['blockId'] ) ? $attrs['blockId'] : '';
+			$block_id = sanitize_key( $raw_id );
+
+			if ( ! StyleGenerator::is_valid_block_id( $block_id ) ) {
+				return '';
+			}
+
+			return StyleGenerator::getInstance()->sanitize_css( $attrs['blockStyle'], $block_id );
 		}
 
 		/**
