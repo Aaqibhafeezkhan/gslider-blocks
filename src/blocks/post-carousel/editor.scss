@@ -1,0 +1,81 @@
+// Editor-specific styles for Post Carousel
+
+/* Keyframe for shimmer animation */
+@keyframes gsliderShimmer {
+
+	0% {
+		background-position: -468px 0;
+	}
+
+	100% {
+		background-position: 468px 0;
+	}
+}
+
+.gslider-post-carousel-skeleton {
+
+	&-wrapper {
+		display: grid;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	&-card {
+		background: #fff;
+		border: 1px solid #e2e8f0;
+		border-radius: 8px;
+		overflow: hidden;
+		padding: 16px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	}
+}
+
+.gslider-skeleton {
+
+	&-content {
+		margin-top: 16px;
+	}
+
+	&-item {
+		background: #f6f7f8;
+		background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+		background-repeat: no-repeat;
+		background-size: 800px 104px;
+		animation: gsliderShimmer 1.5s linear infinite;
+		border-radius: 4px;
+	}
+
+	&-image {
+		height: 180px;
+		width: 100%;
+		border-radius: 6px;
+	}
+
+	&-category {
+		height: 16px;
+		width: 30%;
+		margin-bottom: 12px;
+	}
+
+	&-title {
+		height: 24px;
+		width: 80%;
+		margin-bottom: 12px;
+	}
+
+	&-text {
+		height: 12px;
+		width: 100%;
+		margin-bottom: 8px;
+
+		&.short {
+			width: 60%;
+			margin-bottom: 16px;
+		}
+	}
+
+	&-meta {
+		height: 14px;
+		width: 45%;
+	}
+}
