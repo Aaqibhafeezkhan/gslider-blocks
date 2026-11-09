@@ -3696,6 +3696,49 @@ var generateImageSliderStyle = (attributes2) => {
   const globalMobileBackgroundHoverStyles = globalBackgroundStyleObjectToString(
     getGlobalBackgroundHoverStyles("Mobile")
   );
+  const getImageBackgroundNormalStyles = () => {
+    const bgType = imageNormalBackgroundType;
+    const bgColor = imageNormalClassicColor;
+    const bgGradient = imageNormalGradientColor;
+    const customGradient = imageNormalCustomGradientInputValue;
+    const customGradientEnabled = imageNormalCustomGradientSwitcher;
+    if (bgType === "gradient") {
+      if (customGradientEnabled && customGradient) {
+        return { background: customGradient };
+      } else if (bgGradient) {
+        return { background: bgGradient };
+      } else if (bgColor) {
+        return { background: bgColor };
+      }
+      return {};
+    }
+    return bgColor ? { background: bgColor } : {};
+  };
+  const getImageBackgroundHoverStyles = () => {
+    const bgType = imageHoverBackgroundType;
+    const bgColor = imageHoverClassicColor;
+    const bgGradient = imageHoverGradientColor;
+    const customGradient = imageHoverCustomGradientInputValue;
+    const customGradientEnabled = imageHoverCustomGradientSwitcher;
+    if (bgType === "gradient") {
+      if (customGradientEnabled && customGradient) {
+        return { background: customGradient };
+      } else if (bgGradient) {
+        return { background: bgGradient };
+      } else if (bgColor) {
+        return { background: bgColor };
+      }
+      return {};
+    }
+    return bgColor ? { background: bgColor } : {};
+  };
+  const imageBackgroundStyleObjectToString = (styleObj) => Object.entries(styleObj).map(([key, value]) => `${key}: ${value};`).join(" ");
+  const imageBackgroundNormalStyles = imageBackgroundStyleObjectToString(
+    getImageBackgroundNormalStyles()
+  );
+  const imageBackgroundHoverStyles = imageBackgroundStyleObjectToString(
+    getImageBackgroundHoverStyles()
+  );
   const imageSliderCSS = `
         .${blockId}.gslider-image-slider-wrapper {
             ${globalDesktopBackgroundNormalStyles}
@@ -3735,8 +3778,10 @@ var generateImageSliderStyle = (attributes2) => {
             align-items: center;
             justify-content: ${verticalAlign.Desktop || "center"};
             transition: background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out;
+            ${imageBackgroundNormalStyles}
         }
         .${blockId}.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper:hover {
+            ${imageBackgroundHoverStyles}
             ${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ""}
             ${imageBoxShadowHoverCssValue ? `box-shadow: ${imageBoxShadowHoverCssValue} !important;` : ""}
         }

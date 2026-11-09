@@ -764,6 +764,72 @@ const generateImageSliderStyle = ( attributes ) => {
 			getGlobalBackgroundHoverStyles( 'Mobile' )
 		);
 
+	/**
+	 * Get image background normal styles
+	 */
+	const getImageBackgroundNormalStyles = () => {
+		const bgType = imageNormalBackgroundType;
+		const bgColor = imageNormalClassicColor;
+		const bgGradient = imageNormalGradientColor;
+		const customGradient = imageNormalCustomGradientInputValue;
+		const customGradientEnabled = imageNormalCustomGradientSwitcher;
+
+		if ( bgType === 'gradient' ) {
+			if ( customGradientEnabled && customGradient ) {
+				return { background: customGradient };
+			} else if ( bgGradient ) {
+				return { background: bgGradient };
+			} else if ( bgColor ) {
+				return { background: bgColor };
+			}
+			return {};
+		}
+
+		return bgColor ? { background: bgColor } : {};
+	};
+
+	/**
+	 * Get image background hover styles
+	 */
+	const getImageBackgroundHoverStyles = () => {
+		const bgType = imageHoverBackgroundType;
+		const bgColor = imageHoverClassicColor;
+		const bgGradient = imageHoverGradientColor;
+		const customGradient = imageHoverCustomGradientInputValue;
+		const customGradientEnabled = imageHoverCustomGradientSwitcher;
+
+		if ( bgType === 'gradient' ) {
+			if ( customGradientEnabled && customGradient ) {
+				return { background: customGradient };
+			} else if ( bgGradient ) {
+				return { background: bgGradient };
+			} else if ( bgColor ) {
+				return { background: bgColor };
+			}
+			return {};
+		}
+
+		return bgColor ? { background: bgColor } : {};
+	};
+
+	/**
+	 * Convert object to string
+	 */
+	const imageBackgroundStyleObjectToString = ( styleObj ) =>
+		Object.entries( styleObj )
+			.map( ( [ key, value ] ) => `${ key }: ${ value };` )
+			.join( ' ' );
+
+	/**
+	 * Get image background styles
+	 */
+	const imageBackgroundNormalStyles = imageBackgroundStyleObjectToString(
+		getImageBackgroundNormalStyles()
+	);
+	const imageBackgroundHoverStyles = imageBackgroundStyleObjectToString(
+		getImageBackgroundHoverStyles()
+	);
+
 	/** Start All Block Style */
 	const imageSliderCSS = `
         .${ blockId }.gslider-image-slider-wrapper {
@@ -858,8 +924,10 @@ const generateImageSliderStyle = ( attributes ) => {
             align-items: center;
             justify-content: ${ verticalAlign.Desktop || 'center' };
             transition: background-color .3s ease-in-out, border-color .3s ease-in-out, box-shadow .3s ease-in-out;
+            ${ imageBackgroundNormalStyles }
         }
         .${ blockId }.gslider-image-slider-wrapper .gslider-image-slider-content-wrapper:hover {
+            ${ imageBackgroundHoverStyles }
             ${
 				imageBorderHoverColor
 					? `border-color: ${ imageBorderHoverColor };`
