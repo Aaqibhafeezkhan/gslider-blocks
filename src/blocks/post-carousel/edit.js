@@ -1,7 +1,11 @@
 /* eslint-disable no-unused-vars, react-hooks/exhaustive-deps, import/no-unresolved, jsdoc/require-param, no-nested-ternary, jsx-a11y/anchor-is-valid */
 import { __, _n, sprintf } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
-import { Placeholder } from '@wordpress/components';
+import { useBlockProps, BlockControls } from '@wordpress/block-editor';
+import {
+	ToolbarGroup,
+	ToolbarButton,
+	ToolbarDropdownMenu,
+} from '@wordpress/components';
 import { Fragment, useEffect, useRef, useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { useMergeRefs } from '@wordpress/compose';
@@ -9,6 +13,9 @@ import renderSVG from '@Components/icon-picker/components/icon-picker/controls/r
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import Inspector from './inspector';
 import NewsroomQueue from './components/NewsroomQueue';
+import SkeletonLoader from './components/SkeletonLoader';
+import EmptyPostsState from './components/EmptyPostsState';
+import POST_CAROUSEL_PRESETS from './preset';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generatePostCarouselStyle from './styling';
 import { normalizeContentOrder } from './content-order';
@@ -827,8 +834,164 @@ export default function Edit( {
 		Math.round( Number( carouselPerColumn?.[ deviceType ] ) || 3 )
 	);
 
+	const handleSelectPreset = ( presetSlug ) => {
+		const preset = POST_CAROUSEL_PRESETS.find(
+			( p ) => p.value === presetSlug
+		);
+		if ( ! preset ) {
+			return;
+		}
+
+		const sides = [ 'top', 'right', 'bottom', 'left' ];
+		const merged = { ...attributes, ...( preset.styles || {} ) };
+		const updates = { presetStyle: presetSlug, ...( preset.styles || {} ) };
+
+		Object.entries( preset.styles || {} ).forEach( ( [ key, value ] ) => {
+			const deviceMatch = key.match( /(Desktop|Tablet|Mobile)/ );
+			if ( ! deviceMatch ) {
+				return;
+			}
+			const device = deviceMatch[ 1 ];
+			if (
+				! value ||
+				typeof value !== 'object' ||
+				Array.isArray( value ) ||
+				! sides.every( ( s ) => s in value )
+			) {
+				return;
+			}
+			const units =
+				merged?.[ `${ key.replace( device, '' ) }Units` ]?.[ device ] ||
+				'px';
+			const fmt = ( v ) =>
+				v === '' || v === undefined || v === null
+					? '0'
+					: `${ v }${ units }`;
+			const hasAny = sides.some(
+				( s ) =>
+					value[ s ] !== '' &&
+					value[ s ] !== undefined &&
+					value[ s ] !== null
+			);
+			updates[ `${ key }CssStyle` ] = hasAny
+				? sides.map( ( s ) => fmt( value[ s ] ) ).join( ' ' )
+				: '';
+		} );
+
+		setAttributes( updates );
+	};
+
+	const rawPostsPerPage = attributes?.postsPerPage;
+	const currentPostCount =
+		typeof rawPostsPerPage === 'object' && rawPostsPerPage !== null
+			? Number(
+					rawPostsPerPage?.[ deviceType ] ??
+						rawPostsPerPage?.Desktop ??
+						6
+			  ) || 6
+			: Number( rawPostsPerPage ) || 6;
+
+	const handleUpdatePostCount = ( delta ) => {
+		const newCount = Math.max(
+			1,
+			Math.min( 30, currentPostCount + delta )
+		);
+		if ( typeof rawPostsPerPage === 'object' && rawPostsPerPage !== null ) {
+			setAttributes( {
+				postsPerPage: {
+					...rawPostsPerPage,
+					[ deviceType || 'Desktop' ]: newCount,
+				},
+			} );
+		} else {
+			setAttributes( { postsPerPage: newCount } );
+		}
+	};
+
+	const hasActiveFilters = Boolean(
+		( attributes?.categories && attributes.categories.length > 0 ) ||
+			( attributes?.tags && attributes.tags.length > 0 ) ||
+			( attributes?.authors && attributes.authors.length > 0 ) ||
+			( typeof attributes?.searchQuery === 'string' &&
+				attributes.searchQuery.trim() !== '' ) ||
+			( typeof attributes?.excludePosts === 'string' &&
+				attributes.excludePosts.trim() !== '' ) ||
+			( typeof attributes?.metaKey === 'string' &&
+				attributes.metaKey.trim() !== '' ) ||
+			( attributes?.dateRange && attributes.dateRange !== 'any' ) ||
+			( attributes?.taxonomyQuery &&
+				typeof attributes.taxonomyQuery === 'object' &&
+				Object.keys( attributes.taxonomyQuery ).length > 0 ) ||
+			( typeof attributes?.offset === 'object' &&
+				( Number( attributes.offset?.Desktop ) > 0 ||
+					Number( attributes.offset?.Tablet ) > 0 ||
+					Number( attributes.offset?.Mobile ) > 0 ) ) ||
+			attributes?.excludeCurrentPost === true
+	);
+
+	const handleResetFilters = () => {
+		setAttributes( {
+			categories: [],
+			tags: [],
+			authors: [],
+			searchQuery: '',
+			excludePosts: '',
+			metaKey: '',
+			metaValue: '',
+			dateRange: 'any',
+			taxonomyQuery: {},
+			offset: { Desktop: 0, Tablet: 0, Mobile: 0 },
+			excludeCurrentPost: false,
+		} );
+	};
+
+	const currentHeroHeight =
+		deviceType === 'Mobile'
+			? attributes?.heroHeightMobile ?? 340
+			: deviceType === 'Tablet'
+			? attributes?.heroHeightTablet ?? 420
+			: attributes?.heroHeightDesktop ?? 520;
+
 	return (
 		<>
+			<BlockControls group="other">
+				<ToolbarDropdownMenu
+					icon="layout"
+					label={ __( 'Card Preset', 'gslider-blocks' ) }
+					controls={ POST_CAROUSEL_PRESETS.map( ( preset ) => ( {
+						title: preset.label,
+						isActive: activePresetStyle === preset.value,
+						onClick: () => handleSelectPreset( preset.value ),
+					} ) ) }
+				/>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon="minus"
+						label={ __( 'Decrease Posts Count', 'gslider-blocks' ) }
+						onClick={ () => handleUpdatePostCount( -1 ) }
+						disabled={ currentPostCount <= 1 }
+					/>
+					<span
+						className="gslider-toolbar-post-count-label"
+						role="status"
+						aria-label={ sprintf(
+							/* translators: %d: number of posts per page */
+							__( 'Posts count: %d', 'gslider-blocks' ),
+							currentPostCount
+						) }
+						title={ __( 'Posts per page', 'gslider-blocks' ) }
+					>
+						{ currentPostCount }
+					</span>
+					<ToolbarButton
+						icon="plus"
+						label={ __( 'Increase Posts Count', 'gslider-blocks' ) }
+						onClick={ () => handleUpdatePostCount( 1 ) }
+						disabled={ currentPostCount >= 30 }
+					/>
+				</ToolbarGroup>
+			</BlockControls>
+
 			<Inspector
 				attributes={ attributes }
 				setAttributes={ setAttributes }
@@ -836,48 +999,19 @@ export default function Edit( {
 
 			<div { ...blockProps } ref={ mergedBlockRef }>
 				{ ( isLoading || ! posts ) && (
-					<div className="gslider-post-carousel-loading-container">
-						<div
-							className="gslider-post-carousel-skeleton-wrapper"
-							style={ {
-								display: 'grid',
-								gridTemplateColumns: `repeat(${ skeletonColumns }, 1fr)`,
-								gap: `${
-									carouselPerColumnGap?.[ deviceType ] ?? 20
-								}px`,
-							} }
-						>
-							{ Array.from( {
-								length: skeletonColumns,
-							} ).map( ( _, idx ) => (
-								<div
-									key={ idx }
-									className="gslider-post-carousel-skeleton-card"
-								>
-									<div className="gslider-skeleton-item gslider-skeleton-image"></div>
-									<div className="gslider-skeleton-content">
-										<div className="gslider-skeleton-item gslider-skeleton-category"></div>
-										<div className="gslider-skeleton-item gslider-skeleton-title"></div>
-										<div className="gslider-skeleton-item gslider-skeleton-text"></div>
-										<div className="gslider-skeleton-item gslider-skeleton-text short"></div>
-										<div className="gslider-skeleton-item gslider-skeleton-meta"></div>
-									</div>
-								</div>
-							) ) }
-						</div>
-					</div>
+					<SkeletonLoader
+						postLayoutMode={ activeLayoutMode }
+						columns={ skeletonColumns }
+						gap={ carouselPerColumnGap?.[ deviceType ] ?? 20 }
+						heroHeight={ currentHeroHeight }
+						newsroomWidth={ newsroomMainWidth }
+					/>
 				) }
 
 				{ ! isLoading && posts && posts.length === 0 && (
-					<Placeholder
-						icon={
-							<span className="dashicons dashicons-admin-post" />
-						}
-						label={ __( 'Post Carousel', 'gslider-blocks' ) }
-						instructions={ __(
-							'No posts found. Create some posts to display in the carousel.',
-							'gslider-blocks'
-						) }
+					<EmptyPostsState
+						hasActiveFilters={ hasActiveFilters }
+						onResetFilters={ handleResetFilters }
 					/>
 				) }
 
