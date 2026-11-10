@@ -50,7 +50,9 @@ if ( ! function_exists( 'gslider_get_responsive_float' ) ) {
 // Extract attributes with defaults
 $block_id            = isset( $attributes['blockId'] ) ? sanitize_html_class( $attributes['blockId'] ) : '';
 $global_id           = isset( $attributes['globalID'] ) ? sanitize_html_class( $attributes['globalID'] ) : '';
-$global_class        = isset( $attributes['globalClass'] ) ? sanitize_html_class( $attributes['globalClass'] ) : '';
+$global_class        = isset( $attributes['globalClass'] ) && is_string( $attributes['globalClass'] )
+    ? implode( ' ', array_filter( array_map( 'sanitize_html_class', preg_split( '/\s+/', trim( $attributes['globalClass'] ) ) ) ) )
+    : '';
 $enable_lazy_load    = ! empty( $attributes['enableLazyLoad'] );
 $post_title_html_tag = isset( $attributes['postTitleHtmlTag'] ) ? sanitize_key( $attributes['postTitleHtmlTag'] ) : 'h3';
 $post_excerpt_html_tag = isset( $attributes['postExcerptHtmlTag'] ) ? sanitize_key( $attributes['postExcerptHtmlTag'] ) : 'p';
@@ -520,6 +522,7 @@ $wrapper_classes = array(
     $block_id,
     $navigation_arrow_position_type,
     $navigation_arrow_position,
+    $global_class,
 );
 
 if ( 'none' !== $card_hover_animation ) {
@@ -534,6 +537,10 @@ $wrapper_data = array(
     'class'                => implode( ' ', array_filter( $wrapper_classes ) ),
     'data-swiper-settings' => $swiper_settings_json,
 );
+
+if ( '' !== $global_id ) {
+    $wrapper_data['id'] = $global_id;
+}
 
 if ( $has_entrance_animation ) {
     $wrapper_data['data-animation-settings'] = $animation_settings_json;
@@ -648,7 +655,7 @@ $has_read_more_image_icon = $read_more_button_icon_switcher && 'image' === $read
                 }
                 ?>
                 <div class="swiper-slide">
-                    <div class="gslider-post-carousel-content-wrapper <?php echo esc_attr( $global_class ); ?>"<?php echo $global_id ? ' id="' . esc_attr( $global_id ) . '"' : ''; ?>>
+                    <div class="gslider-post-carousel-content-wrapper">
                 <article class="gslider-post-carousel-card<?php
                     if ( $has_entrance_animation ) {
                         echo ' animated ' . esc_attr( $card_entrance_animation ) . ' gslider-has-entrance-anim';

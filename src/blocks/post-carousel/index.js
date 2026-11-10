@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { registerBlockType } from '@wordpress/blocks';
 import './style.scss';
 import './editor.scss';
@@ -10,11 +9,11 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
-import { PostCarouselIcon } from '@Utils/icons';
+import icon from './icon';
 
 registerBlockType( metadata.name, {
 	attributes,
 	edit: Edit,
 	save,
-	icon: PostCarouselIcon,
+	icon,
 } );

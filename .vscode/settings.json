@@ -1,4 +1,3 @@
 {
-    "chatgpt.openOnStartup": true,
-    "editor.formatOnSave": false
+    "chatgpt.openOnStartup": true
 }
