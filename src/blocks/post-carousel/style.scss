@@ -1,4 +1,5 @@
 @use "../../components/animation-control/animate";
+@use "styles/card-base";
 
 .gslider-post-carousel-wrapper {
 
@@ -18,53 +19,10 @@
 		flex-direction: column;
 	}
 
-	.gslider-post-carousel-card {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-		overflow: hidden;
-		background: transparent;
-		border: none;
-		box-shadow: none;
-		padding: 0;
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	}
-
-	.gslider-post-carousel-image {
-		position: relative;
-		overflow: hidden;
-		border-radius: 12px;
-		aspect-ratio: 16 / 9;
-		margin: 0 0 24px 0; /* mb-stack-lg */
-		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
-		transition: box-shadow 0.5s ease-in-out;
-
-		a {
-			display: block;
-			width: 100%;
-			height: 100%;
-		}
-
-		img {
-			display: block;
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-		}
-	}
-
-	.gslider-post-carousel-card:hover {
-
-		.gslider-post-carousel-image {
-			box-shadow:
-				0 20px 25px -5px rgba(0, 0, 0, 0.1),
-				0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
-
-			img {
-				transform: scale(1.05);
-			}
-		}
+	.gslider-post-carousel-card:hover .gslider-post-carousel-image {
+		box-shadow:
+			0 20px 25px -5px rgba(0, 0, 0, 0.1),
+			0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
 	}
 
 	/* Card Content padding offset to match px-2 inside card text elements */
@@ -285,7 +243,9 @@
 		.gslider-post-carousel-card,
 		.gslider-post-carousel-image,
 		.gslider-post-carousel-image img,
+		.gslider-post-carousel-placeholder-svg,
 		.gslider-post-carousel-title a,
+		.gslider-post-title-text::after,
 		.gslider-post-carousel-readmore a,
 		.gslider-post-carousel-readmore-btn,
 		.gslider-readmore-icon-wrap,
@@ -309,6 +269,9 @@
 		.gslider-post-carousel-image img,
 		.gslider-post-carousel-image:hover img,
 		.gslider-post-carousel-card:hover .gslider-post-carousel-image img,
+		.gslider-post-carousel-placeholder-svg,
+		.gslider-post-carousel-image:hover .gslider-post-carousel-placeholder-svg,
+		.gslider-post-carousel-card:hover .gslider-post-carousel-placeholder-svg,
 		.gslider-post-carousel-readmore-btn:hover .gslider-readmore-icon-wrap {
 			animation: none !important;
 			transition: none !important;

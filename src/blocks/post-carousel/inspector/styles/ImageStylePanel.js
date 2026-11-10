@@ -1,8 +1,9 @@
 /* eslint-disable import/no-unresolved */
 import { __ } from '@wordpress/i18n';
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import ResponsiveRangeControl from '@Components/responsive-range-control';
 import Select2Control from '@Components/select2-control';
+import ImageControl from '@Components/image-control';
 import {
 	spacingKeys,
 	BoundSpacingControl,
@@ -32,6 +33,7 @@ const OBJECT_POSITION_OPTIONS = [
 
 const HOVER_EFFECT_OPTIONS = [
 	{ label: __( 'None', 'gslider-blocks' ), value: 'none' },
+	{ label: __( 'Zoom In', 'gslider-blocks' ), value: 'zoom-in' },
 	{ label: __( 'Opacity', 'gslider-blocks' ), value: 'opacity' },
 	{ label: __( 'Scale', 'gslider-blocks' ), value: 'scale' },
 	{ label: __( 'Move Up', 'gslider-blocks' ), value: 'move-up' },
@@ -75,6 +77,9 @@ const ImageStylePanel = ( {
 		imageHeightUnits,
 		imageObjectFit,
 		imageObjectPosition,
+		enableFallbackThumbnail,
+		fallbackThumbnailUrl,
+		fallbackThumbnailId,
 		imageHoverEffect,
 		imageHoverOpacity,
 		imageHoverScale,
@@ -93,6 +98,43 @@ const ImageStylePanel = ( {
 			opened={ isOpen }
 			onToggle={ onToggle }
 		>
+			<ToggleControl
+				label={ __( 'Enable Fallback Thumbnail', 'gslider-blocks' ) }
+				checked={ enableFallbackThumbnail ?? true }
+				onChange={ ( value ) =>
+					setAttributes( { enableFallbackThumbnail: value } )
+				}
+				help={ __(
+					'Show a custom fallback image or inline SVG placeholder when a post has no featured image.',
+					'gslider-blocks'
+				) }
+			/>
+
+			{ ( enableFallbackThumbnail ?? true ) && (
+				<ImageControl
+					label={ __( 'Custom Fallback Image', 'gslider-blocks' ) }
+					imageUrl={ fallbackThumbnailUrl }
+					setImageUrl={ ( value ) =>
+						setAttributes( {
+							fallbackThumbnailUrl: value || '',
+						} )
+					}
+					imageAlt=""
+					setImageAlt={ () => {} }
+					imageID={ fallbackThumbnailId }
+					setImageID={ ( value ) =>
+						setAttributes( {
+							fallbackThumbnailId: value ? Number( value ) : 0,
+						} )
+					}
+					isImageSize={ false }
+					helpText={ __(
+						'Leave empty to render the lightweight vector placeholder.',
+						'gslider-blocks'
+					) }
+				/>
+			) }
+
 			<ResponsiveRangeControl
 				label={ __( 'Max Width', 'gslider-blocks' ) }
 				rangeValue={ imageMaxWidth }
@@ -168,6 +210,7 @@ const ImageStylePanel = ( {
 			) }
 
 			{ ( imageHoverEffect === 'scale' ||
+				imageHoverEffect === 'zoom-in' ||
 				imageHoverEffect === 'both' ||
 				imageHoverEffect === 'zoom-out' ||
 				imageHoverEffect === 'zoom-rotate' ) && (
@@ -216,7 +259,8 @@ const ImageStylePanel = ( {
 				/>
 			) }
 
-			{ imageHoverEffect === 'blur-to-clear' && (
+			{ ( imageHoverEffect === 'blur-to-clear' ||
+				imageHoverEffect === 'blur-clear' ) && (
 				<ResponsiveRangeControl
 					min={ 0 }
 					max={ 20 }
@@ -248,7 +292,8 @@ const ImageStylePanel = ( {
 				/>
 			) }
 
-			{ imageHoverEffect === 'grayscale' && (
+			{ ( imageHoverEffect === 'grayscale' ||
+				imageHoverEffect === 'grayscale-to-color' ) && (
 				<ResponsiveRangeControl
 					min={ 0 }
 					max={ 100 }

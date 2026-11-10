@@ -13,7 +13,7 @@
       "coverflow"
     ]
   },
-  "totalAttributes": 924,
+  "totalAttributes": 929,
   "slideItemSchema": {
     "type": "dynamicQuery",
     "source": "WP_Query",
@@ -37,6 +37,7 @@
     ],
     "imageHoverEffect": [
       "none",
+      "zoom-in",
       "opacity",
       "scale",
       "move-up",
@@ -277,6 +278,14 @@
         "Tablet": "center",
         "Mobile": "center"
       }
+    },
+    "equalHeight": {
+      "type": "boolean",
+      "default": true
+    },
+    "enableCardClickableLink": {
+      "type": "boolean",
+      "default": false
     },
     "contentOrder": {
       "type": "array",
@@ -2033,9 +2042,21 @@
       "type": "string",
       "default": ""
     },
+    "enableFallbackThumbnail": {
+      "type": "boolean",
+      "default": true
+    },
+    "fallbackThumbnailUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "fallbackThumbnailId": {
+      "type": "number",
+      "default": 0
+    },
     "imageHoverEffect": {
       "type": "string",
-      "default": "none"
+      "default": "zoom-in"
     },
     "imageHoverOpacity": {
       "type": "object",

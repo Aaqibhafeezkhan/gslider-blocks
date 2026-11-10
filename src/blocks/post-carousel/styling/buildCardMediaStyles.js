@@ -87,6 +87,7 @@ const buildCardHoverPreset = ( attributes ) => {
 export const buildCardDesktop = ( attributes ) => {
 	const {
 		blockId,
+		equalHeight,
 		postCardMarginDesktopCssStyle,
 		postCardPaddingDesktopCssStyle,
 		postCardBorder,
@@ -105,6 +106,7 @@ export const buildCardDesktop = ( attributes ) => {
 		cardHoverGlowSize,
 	} = attributes;
 
+	const isEqualHeight = equalHeight ?? true;
 	const normalBg = buildPostCardBackgroundStyles( attributes, 'Normal' );
 	const hoverBg = buildPostCardBackgroundStyles( attributes, 'Hover' );
 	const duration = cardHoverAnimationDuration?.Desktop || 300;
@@ -113,7 +115,7 @@ export const buildCardDesktop = ( attributes ) => {
         .${ blockId } .gslider-post-carousel-card {
             display: flex;
             flex-direction: column;
-            height: 100%;
+            height: ${ isEqualHeight ? '100%' : 'auto' };
             width: 100%;
             box-sizing: border-box;
             ${ normalBg }
@@ -347,7 +349,8 @@ export const buildImageWrapperDesktop = ( attributes ) => {
 				: ''
 		}
 
-        .${ blockId } .gslider-post-carousel-image:hover {
+        .${ blockId } .gslider-post-carousel-image:hover,
+        .${ blockId } .gslider-post-carousel-card.is-clickable:hover .gslider-post-carousel-image {
             ${ imageBgHover }
             ${
 				imageBorderHoverColor
@@ -456,8 +459,20 @@ export const buildImageTagDesktop = ( attributes ) => {
 		imageHoverEffect,
 	} = attributes;
 
+	const isScaleHover =
+		imageHoverEffect === 'scale' ||
+		imageHoverEffect === 'zoom-in' ||
+		imageHoverEffect === 'both';
+	const isGrayscaleHover =
+		imageHoverEffect === 'grayscale' ||
+		imageHoverEffect === 'grayscale-to-color';
+	const isBlurClearHover =
+		imageHoverEffect === 'blur-to-clear' ||
+		imageHoverEffect === 'blur-clear';
+
 	return `
-        .${ blockId } .gslider-post-carousel-image img {
+        .${ blockId } .gslider-post-carousel-image img,
+        .${ blockId } .gslider-post-carousel-image .gslider-post-carousel-placeholder-svg {
             ${
 				imageMaxWidth.Desktop
 					? `max-width: ${ imageMaxWidth.Desktop }${ imageMaxWidthUnits.Desktop } !important;`
@@ -476,6 +491,7 @@ export const buildImageTagDesktop = ( attributes ) => {
 			}
             display: block;
             width: 100%;
+            will-change: transform;
             transition: all ${
 				imageTransitionDuration?.Desktop || 300
 			}ms ease-in-out;
@@ -489,15 +505,11 @@ export const buildImageTagDesktop = ( attributes ) => {
             --hover-grayscale: ${ imageHoverGrayscale?.Desktop ?? 100 }%;
             --hover-pan: ${ imageHoverPan?.Desktop ?? 5 }%;
             ${
-				imageHoverEffect === 'grayscale'
+				isGrayscaleHover
 					? 'filter: grayscale(var(--hover-grayscale));'
 					: ''
 			}
-            ${
-				imageHoverEffect === 'blur-to-clear'
-					? 'filter: blur(var(--hover-blur));'
-					: ''
-			}
+            ${ isBlurClearHover ? 'filter: blur(var(--hover-blur));' : '' }
             ${
 				imageHoverEffect === 'zoom-out'
 					? 'transform: scale(var(--hover-scale));'
@@ -515,17 +527,16 @@ export const buildImageTagDesktop = ( attributes ) => {
 			}
         }
 
-        .${ blockId } .gslider-post-carousel-image:hover img {
+        .${ blockId } .gslider-post-carousel-image:hover img,
+        .${ blockId } .gslider-post-carousel-image:hover .gslider-post-carousel-placeholder-svg,
+        .${ blockId } .gslider-post-carousel-card.is-clickable:hover .gslider-post-carousel-image img,
+        .${ blockId } .gslider-post-carousel-card.is-clickable:hover .gslider-post-carousel-image .gslider-post-carousel-placeholder-svg {
             ${
 				imageHoverEffect === 'opacity' || imageHoverEffect === 'both'
 					? 'opacity: var(--hover-opacity);'
 					: ''
 			}
-            ${
-				imageHoverEffect === 'scale' || imageHoverEffect === 'both'
-					? 'transform: scale(var(--hover-scale));'
-					: ''
-			}
+            ${ isScaleHover ? 'transform: scale(var(--hover-scale));' : '' }
             ${
 				imageHoverEffect === 'zoom-rotate'
 					? 'transform: scale(var(--hover-scale)) rotate(var(--hover-rotate));'
@@ -537,8 +548,8 @@ export const buildImageTagDesktop = ( attributes ) => {
 					? 'transform: translateY(calc(-1 * var(--hover-lift)));'
 					: ''
 			}
-            ${ imageHoverEffect === 'grayscale' ? 'filter: grayscale(0);' : '' }
-            ${ imageHoverEffect === 'blur-to-clear' ? 'filter: blur(0);' : '' }
+            ${ isGrayscaleHover ? 'filter: grayscale(0);' : '' }
+            ${ isBlurClearHover ? 'filter: blur(0);' : '' }
             ${
 				imageHoverEffect === 'pan-left'
 					? 'transform: scale(var(--hover-scale)) translateX(calc(-1 * var(--hover-pan)));'
@@ -562,6 +573,7 @@ export const buildImageTagDesktop = ( attributes ) => {
                 width: 60%; height: 100%;
                 background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
                 transform: skewX(-20deg);
+                pointer-events: none;
                 transition: left ${
 					imageTransitionDuration?.Desktop || 600
 				}ms ease;
@@ -583,6 +595,7 @@ export const buildImageTagDesktop = ( attributes ) => {
                 top: 0; left: 0; width: 100%; height: 100%;
                 background: rgba(0,0,0,0.4);
                 opacity: 0;
+                pointer-events: none;
                 transition: opacity ${
 					imageTransitionDuration?.Desktop || 300
 				}ms ease;
@@ -604,6 +617,7 @@ export const buildImageTagDesktop = ( attributes ) => {
                 position: absolute;
                 bottom: -100%; left: 0; width: 100%; height: 100%;
                 background: rgba(0,0,0,0.4);
+                pointer-events: none;
                 transition: bottom ${
 					imageTransitionDuration?.Desktop || 300
 				}ms ease;
@@ -641,7 +655,8 @@ export const buildImageTagResponsive = ( attributes, device ) => {
 	} = attributes;
 
 	return `
-        .${ blockId } .gslider-post-carousel-image img {
+        .${ blockId } .gslider-post-carousel-image img,
+        .${ blockId } .gslider-post-carousel-image .gslider-post-carousel-placeholder-svg {
             ${
 				imageMaxWidth[ device ]
 					? `max-width: ${ imageMaxWidth[ device ] }${ imageMaxWidthUnits[ device ] } !important;`

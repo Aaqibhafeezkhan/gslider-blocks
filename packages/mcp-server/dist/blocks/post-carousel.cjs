@@ -364,6 +364,14 @@ var layoutAttributes = {
       Mobile: "center"
     }
   },
+  equalHeight: {
+    type: "boolean",
+    default: true
+  },
+  enableCardClickableLink: {
+    type: "boolean",
+    default: false
+  },
   /** End Layout & Content Setting */
   /** Content Order */
   contentOrder: {
@@ -2201,10 +2209,24 @@ var elementAttributes = {
     default: ""
   },
   /** End image Box Shadow */
+  /** Start Fallback Thumbnail */
+  enableFallbackThumbnail: {
+    type: "boolean",
+    default: true
+  },
+  fallbackThumbnailUrl: {
+    type: "string",
+    default: ""
+  },
+  fallbackThumbnailId: {
+    type: "number",
+    default: 0
+  },
+  /** End Fallback Thumbnail */
   /** Start Image Hover Settings */
   imageHoverEffect: {
     type: "string",
-    default: "none"
+    default: "zoom-in"
   },
   imageHoverOpacity: {
     type: "object",
@@ -5921,6 +5943,7 @@ var buildGlobalDesktop = (attributes2) => {
     device: "Desktop",
     withImage: true
   });
+  const isEqualHeight = attributes2.equalHeight ?? true;
   return `
         .${blockId}.gslider-post-carousel-wrapper {
             ${bgNormal}
@@ -5944,8 +5967,9 @@ var buildGlobalDesktop = (attributes2) => {
 
         .${blockId} .swiper-slide {
             display: flex;
-            align-items: center;
+            align-items: ${isEqualHeight ? "stretch" : "center"};
             justify-content: center;
+            ${isEqualHeight ? "height: auto;" : ""}
         }
 	`;
 };
@@ -5978,13 +6002,23 @@ var buildGlobalResponsive = (attributes2, device) => {
 	`;
 };
 var buildContentWrapperStyles = (attributes2, device) => {
-  const { blockId, layoutHeight, layoutHeightUnits, verticalAlign } = attributes2;
+  const {
+    blockId,
+    layoutHeight,
+    layoutHeightUnits,
+    verticalAlign,
+    equalHeight
+  } = attributes2;
+  const isEqualHeight = equalHeight ?? true;
+  const hasLayoutHeight = Boolean(layoutHeight?.[device]);
   return `
         .${blockId}.gslider-post-carousel-wrapper .gslider-post-carousel-content-wrapper {
-            ${layoutHeight[device] ? `height: ${layoutHeight[device]}${layoutHeightUnits[device]};` : "auto"}
+            ${hasLayoutHeight ? `height: ${layoutHeight[device]}${layoutHeightUnits[device]};` : ""}
             display: flex;
-            align-items: center;
-            justify-content: ${verticalAlign[device] || "center"};
+            align-items: ${isEqualHeight ? "stretch" : "center"};
+            justify-content: ${isEqualHeight ? "flex-start" : verticalAlign?.[device] || "center"};
+            ${isEqualHeight ? "width: 100%;" : ""}
+            ${isEqualHeight && !hasLayoutHeight ? "height: 100%;" : ""}
             ${device === "Desktop" ? "transition: all .3s ease-in-out;" : ""}
         }
 	`;
@@ -6053,6 +6087,7 @@ var buildCardHoverPreset = (attributes2) => {
 var buildCardDesktop = (attributes2) => {
   const {
     blockId,
+    equalHeight,
     postCardMarginDesktopCssStyle,
     postCardPaddingDesktopCssStyle,
     postCardBorder,
@@ -6070,6 +6105,7 @@ var buildCardDesktop = (attributes2) => {
     cardHoverGlowColor,
     cardHoverGlowSize
   } = attributes2;
+  const isEqualHeight = equalHeight ?? true;
   const normalBg = buildPostCardBackgroundStyles(attributes2, "Normal");
   const hoverBg = buildPostCardBackgroundStyles(attributes2, "Hover");
   const duration = cardHoverAnimationDuration?.Desktop || 300;
@@ -6077,7 +6113,7 @@ var buildCardDesktop = (attributes2) => {
         .${blockId} .gslider-post-carousel-card {
             display: flex;
             flex-direction: column;
-            height: 100%;
+            height: ${isEqualHeight ? "100%" : "auto"};
             width: 100%;
             box-sizing: border-box;
             ${normalBg}
@@ -6209,7 +6245,8 @@ var buildImageWrapperDesktop = (attributes2) => {
         ` : ""}
         ` : ""}
 
-        .${blockId} .gslider-post-carousel-image:hover {
+        .${blockId} .gslider-post-carousel-image:hover,
+        .${blockId} .gslider-post-carousel-card.is-clickable:hover .gslider-post-carousel-image {
             ${imageBgHover}
             ${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ""}
             ${imageBoxShadowHoverCssValue ? `box-shadow: ${imageBoxShadowHoverCssValue} !important;` : ""}
@@ -6271,14 +6308,19 @@ var buildImageTagDesktop = (attributes2) => {
     imageHoverPan,
     imageHoverEffect
   } = attributes2;
+  const isScaleHover = imageHoverEffect === "scale" || imageHoverEffect === "zoom-in" || imageHoverEffect === "both";
+  const isGrayscaleHover = imageHoverEffect === "grayscale" || imageHoverEffect === "grayscale-to-color";
+  const isBlurClearHover = imageHoverEffect === "blur-to-clear" || imageHoverEffect === "blur-clear";
   return `
-        .${blockId} .gslider-post-carousel-image img {
+        .${blockId} .gslider-post-carousel-image img,
+        .${blockId} .gslider-post-carousel-image .gslider-post-carousel-placeholder-svg {
             ${imageMaxWidth.Desktop ? `max-width: ${imageMaxWidth.Desktop}${imageMaxWidthUnits.Desktop} !important;` : ""}
             height: 100% !important;
             ${imageObjectFit ? `object-fit: ${imageObjectFit} !important;` : ""}
             ${imageObjectPosition ? `object-position: ${imageObjectPosition} !important;` : ""}
             display: block;
             width: 100%;
+            will-change: transform;
             transition: all ${imageTransitionDuration?.Desktop || 300}ms ease-in-out;
             --hover-opacity: ${imageHoverOpacity?.Desktop || 0.8};
             --hover-scale: ${imageHoverScale?.Desktop || 1.05};
@@ -6287,21 +6329,24 @@ var buildImageTagDesktop = (attributes2) => {
             --hover-rotate: ${imageHoverRotate?.Desktop ?? 3}deg;
             --hover-grayscale: ${imageHoverGrayscale?.Desktop ?? 100}%;
             --hover-pan: ${imageHoverPan?.Desktop ?? 5}%;
-            ${imageHoverEffect === "grayscale" ? "filter: grayscale(var(--hover-grayscale));" : ""}
-            ${imageHoverEffect === "blur-to-clear" ? "filter: blur(var(--hover-blur));" : ""}
+            ${isGrayscaleHover ? "filter: grayscale(var(--hover-grayscale));" : ""}
+            ${isBlurClearHover ? "filter: blur(var(--hover-blur));" : ""}
             ${imageHoverEffect === "zoom-out" ? "transform: scale(var(--hover-scale));" : ""}
             ${imageHoverEffect === "pan-left" ? "transform-origin: right center;" : ""}
             ${imageHoverEffect === "pan-right" ? "transform-origin: left center;" : ""}
         }
 
-        .${blockId} .gslider-post-carousel-image:hover img {
+        .${blockId} .gslider-post-carousel-image:hover img,
+        .${blockId} .gslider-post-carousel-image:hover .gslider-post-carousel-placeholder-svg,
+        .${blockId} .gslider-post-carousel-card.is-clickable:hover .gslider-post-carousel-image img,
+        .${blockId} .gslider-post-carousel-card.is-clickable:hover .gslider-post-carousel-image .gslider-post-carousel-placeholder-svg {
             ${imageHoverEffect === "opacity" || imageHoverEffect === "both" ? "opacity: var(--hover-opacity);" : ""}
-            ${imageHoverEffect === "scale" || imageHoverEffect === "both" ? "transform: scale(var(--hover-scale));" : ""}
+            ${isScaleHover ? "transform: scale(var(--hover-scale));" : ""}
             ${imageHoverEffect === "zoom-rotate" ? "transform: scale(var(--hover-scale)) rotate(var(--hover-rotate));" : ""}
             ${imageHoverEffect === "zoom-out" ? "transform: scale(1);" : ""}
             ${imageHoverEffect === "move-up" ? "transform: translateY(calc(-1 * var(--hover-lift)));" : ""}
-            ${imageHoverEffect === "grayscale" ? "filter: grayscale(0);" : ""}
-            ${imageHoverEffect === "blur-to-clear" ? "filter: blur(0);" : ""}
+            ${isGrayscaleHover ? "filter: grayscale(0);" : ""}
+            ${isBlurClearHover ? "filter: blur(0);" : ""}
             ${imageHoverEffect === "pan-left" ? "transform: scale(var(--hover-scale)) translateX(calc(-1 * var(--hover-pan)));" : ""}
             ${imageHoverEffect === "pan-right" ? "transform: scale(var(--hover-scale)) translateX(var(--hover-pan));" : ""}
         }
@@ -6315,6 +6360,7 @@ var buildImageTagDesktop = (attributes2) => {
                 width: 60%; height: 100%;
                 background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
                 transform: skewX(-20deg);
+                pointer-events: none;
                 transition: left ${imageTransitionDuration?.Desktop || 600}ms ease;
             }
             .${blockId} .gslider-post-carousel-card:hover .gslider-post-carousel-image::after {
@@ -6330,6 +6376,7 @@ var buildImageTagDesktop = (attributes2) => {
                 top: 0; left: 0; width: 100%; height: 100%;
                 background: rgba(0,0,0,0.4);
                 opacity: 0;
+                pointer-events: none;
                 transition: opacity ${imageTransitionDuration?.Desktop || 300}ms ease;
                 z-index: 1;
             }
@@ -6345,6 +6392,7 @@ var buildImageTagDesktop = (attributes2) => {
                 position: absolute;
                 bottom: -100%; left: 0; width: 100%; height: 100%;
                 background: rgba(0,0,0,0.4);
+                pointer-events: none;
                 transition: bottom ${imageTransitionDuration?.Desktop || 300}ms ease;
                 z-index: 1;
             }
@@ -6369,7 +6417,8 @@ var buildImageTagResponsive = (attributes2, device) => {
     imageHoverPan
   } = attributes2;
   return `
-        .${blockId} .gslider-post-carousel-image img {
+        .${blockId} .gslider-post-carousel-image img,
+        .${blockId} .gslider-post-carousel-image .gslider-post-carousel-placeholder-svg {
             ${imageMaxWidth[device] ? `max-width: ${imageMaxWidth[device]}${imageMaxWidthUnits[device]} !important;` : ""}
             height: 100% !important;
             --hover-opacity: ${imageHoverOpacity?.[device] || 0.8};
@@ -6798,7 +6847,7 @@ var buildTitleUnderlineAnim = (attributes2, device) => {
   const speed = postTitleHoverUnderlineTransitionSpeed?.[device] || "0.3";
   if (device !== "Desktop") {
     return `
-            .${blockId} .gslider-post-carousel-title a::after {
+            .${blockId} .gslider-post-carousel-title .gslider-post-title-text::after {
                 bottom: ${bottomOffset}px !important;
                 height: ${height}px !important;
                 transition: transform ${speed}s ease-in-out !important;
@@ -6806,11 +6855,14 @@ var buildTitleUnderlineAnim = (attributes2, device) => {
 		`;
   }
   return `
-        .${blockId} .gslider-post-carousel-title a {
+        .${blockId} .gslider-post-carousel-title .gslider-post-title-text {
             position: relative !important;
+            display: inline-block;
+        }
+        .${blockId} .gslider-post-carousel-title a {
             text-decoration: none !important;
         }
-        .${blockId} .gslider-post-carousel-title a::after {
+        .${blockId} .gslider-post-carousel-title .gslider-post-title-text::after {
             content: '' !important;
             position: absolute !important;
             left: 0 !important;
@@ -6821,8 +6873,9 @@ var buildTitleUnderlineAnim = (attributes2, device) => {
             transform: scaleX(0) !important;
             transform-origin: left !important;
             transition: transform ${speed}s ease-in-out !important;
+            pointer-events: none;
         }
-        .${blockId} .gslider-post-carousel-card:hover .gslider-post-carousel-title a::after {
+        .${blockId} .gslider-post-carousel-card:hover .gslider-post-carousel-title .gslider-post-title-text::after {
             transform: scaleX(1) !important;
         }
 	`;

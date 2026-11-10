@@ -60,6 +60,14 @@ const layoutAttributes = {
 			Mobile: 'center',
 		},
 	},
+	equalHeight: {
+		type: 'boolean',
+		default: true,
+	},
+	enableCardClickableLink: {
+		type: 'boolean',
+		default: false,
+	},
 	/** End Layout & Content Setting */
 
 	/** Content Order */

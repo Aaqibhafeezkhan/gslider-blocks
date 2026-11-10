@@ -55,6 +55,8 @@ return [
 		'Tablet' => 'center',
 		'Mobile' => 'center',
 	],
+	'equalHeight' => true,
+	'enableCardClickableLink' => false,
 	'contentOrder' => [
 		'thumbnail',
 		'categories',
@@ -901,7 +903,10 @@ return [
 	'imageBoxShadowCssValue' => '',
 	'imageBoxShadowHoverValues' => [],
 	'imageBoxShadowHoverCssValue' => '',
-	'imageHoverEffect' => 'none',
+	'enableFallbackThumbnail' => true,
+	'fallbackThumbnailUrl' => '',
+	'fallbackThumbnailId' => 0,
+	'imageHoverEffect' => 'zoom-in',
 	'imageHoverOpacity' => [
 		'Desktop' => 0.8,
 		'Tablet' => 0.8,

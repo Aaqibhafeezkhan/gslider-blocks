@@ -632,10 +632,25 @@ const elementAttributes = {
 	},
 	/** End image Box Shadow */
 
+	/** Start Fallback Thumbnail */
+	enableFallbackThumbnail: {
+		type: 'boolean',
+		default: true,
+	},
+	fallbackThumbnailUrl: {
+		type: 'string',
+		default: '',
+	},
+	fallbackThumbnailId: {
+		type: 'number',
+		default: 0,
+	},
+	/** End Fallback Thumbnail */
+
 	/** Start Image Hover Settings */
 	imageHoverEffect: {
 		type: 'string',
-		default: 'none',
+		default: 'zoom-in',
 	},
 	imageHoverOpacity: {
 		type: 'object',

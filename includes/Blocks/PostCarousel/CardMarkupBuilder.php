@@ -57,6 +57,12 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
             $excerpt         = self::build_excerpt( $post_id, $context );
 
             $article_class = 'gslider-post-carousel-card';
+            if ( ! empty( $context['equal_height'] ) ) {
+                $article_class .= ' has-equal-height';
+            }
+            if ( ! empty( $context['enable_card_clickable_link'] ) ) {
+                $article_class .= ' is-clickable';
+            }
             if ( ! empty( $context['has_entrance_animation'] ) ) {
                 $article_class .= ' animated ' . esc_attr( (string) $context['card_entrance_animation'] ) . ' gslider-has-entrance-anim';
             }
@@ -64,40 +70,77 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
                 $article_class .= ' gslider-has-tilt';
             }
 
-            $elements_html = '';
+            $thumbnail_html             = self::render_thumbnail( $post_id, $taxonomy_markup, $context );
+            $has_image                  = '' !== $thumbnail_html;
+            $has_all_devices_title_link = ! empty( $context['all_title_enabled'] ) && ! empty( $context['enable_post_title_link'] );
+
+            $before_thumb_html = '';
+            $after_thumb_html  = '';
+            $seen_thumbnail    = ( '' === $thumbnail_html );
+
             $content_order = isset( $context['content_order'] ) && is_array( $context['content_order'] )
                 ? $context['content_order']
                 : array();
 
             foreach ( $content_order as $element ) {
-                switch ( $element ) {
-                    case 'thumbnail':
-                        $elements_html .= self::render_thumbnail( $post_id, $taxonomy_markup, $context );
-                        break;
+                if ( 'thumbnail' === $element ) {
+                    $seen_thumbnail = true;
+                    continue;
+                }
 
+                $chunk = '';
+                switch ( $element ) {
                     case 'categories':
-                        $has_image = ! empty( $context['any_image_enabled'] ) && has_post_thumbnail( $post_id );
                         if ( ( empty( $context['enable_taxonomy_badge_overlay'] ) || ! $has_image ) && '' !== $taxonomy_markup ) {
-                            $elements_html .= wp_kses( $taxonomy_markup, self::TAXONOMY_ALLOWED_HTML );
+                            $chunk = wp_kses( $taxonomy_markup, self::TAXONOMY_ALLOWED_HTML );
                         }
                         break;
 
                     case 'title':
-                        $elements_html .= self::render_title( $post_id, $context );
+                        $chunk = self::render_title( $post_id, $context );
                         break;
 
                     case 'excerpt':
-                        $elements_html .= self::render_excerpt( $excerpt, $context );
+                        $chunk = self::render_excerpt( $excerpt, $context );
                         break;
 
                     case 'meta':
-                        $elements_html .= self::render_meta( $post_id, $context );
+                        $chunk = self::render_meta( $post_id, $context );
                         break;
 
                     case 'readmore':
-                        $elements_html .= self::render_readmore( $post_id, $context );
+                        $chunk = self::render_readmore( $post_id, $context );
                         break;
                 }
+
+                if ( '' !== $chunk ) {
+                    if ( $seen_thumbnail ) {
+                        $after_thumb_html .= $chunk;
+                    } else {
+                        $before_thumb_html .= $chunk;
+                    }
+                }
+            }
+
+            if ( '' === $thumbnail_html ) {
+                $elements_html = '            <div class="gslider-post-carousel-body">' . "\n"
+                    . $after_thumb_html
+                    . '            </div>' . "\n";
+            } elseif ( '' === $after_thumb_html && '' !== $before_thumb_html ) {
+                $elements_html = '            <div class="gslider-post-carousel-body">' . "\n"
+                    . $before_thumb_html
+                    . '            </div>' . "\n"
+                    . $thumbnail_html;
+            } else {
+                $elements_html = $before_thumb_html
+                    . $thumbnail_html
+                    . '            <div class="gslider-post-carousel-body">' . "\n"
+                    . $after_thumb_html
+                    . '            </div>' . "\n";
+            }
+
+            if ( ! empty( $context['enable_card_clickable_link'] ) && ! $has_all_devices_title_link ) {
+                $elements_html .= '            <a class="gslider-post-carousel-card-link" href="' . esc_url( get_permalink( $post_id ) ) . '" aria-label="' . esc_attr( get_the_title( $post_id ) ) . '"></a>' . "\n";
             }
 
             return '<div class="swiper-slide">' . "\n"
@@ -213,11 +256,33 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
          * @return string Rendered thumbnail HTML or empty string.
          */
         private static function render_thumbnail( int $post_id, string $taxonomy_markup, array $context ): string {
-            if ( empty( $context['any_image_enabled'] ) || ! has_post_thumbnail( $post_id ) ) {
+            if ( empty( $context['any_image_enabled'] ) ) {
                 return '';
             }
 
-            $enable_lazy_load = ! empty( $context['enable_lazy_load'] );
+            $has_post_thumb  = has_post_thumbnail( $post_id );
+            $allow_fallback  = ! empty( $context['enable_fallback_thumbnail'] );
+
+            if ( ! $has_post_thumb && ! $allow_fallback ) {
+                return '';
+            }
+
+            $enable_lazy_load    = ! empty( $context['enable_lazy_load'] );
+            $raw_fallback_url    = isset( $context['fallback_thumbnail_url'] ) ? (string) $context['fallback_thumbnail_url'] : '';
+            $safe_fallback       = '' !== $raw_fallback_url ? esc_url( $raw_fallback_url ) : '';
+            $fallback_id         = isset( $context['fallback_thumbnail_id'] ) ? (int) $context['fallback_thumbnail_id'] : 0;
+            $fallback_attachment = ( $fallback_id > 0 && function_exists( 'wp_get_attachment_image' ) )
+                ? wp_get_attachment_image(
+                    $fallback_id,
+                    'medium_large',
+                    false,
+                    array(
+                        'class'   => 'gslider-post-carousel-fallback-img',
+                        'loading' => $enable_lazy_load ? 'lazy' : 'eager',
+                        'alt'     => get_the_title( $post_id ),
+                    )
+                )
+                : '';
 
             $img_attributes = array(
                 'loading' => $enable_lazy_load ? 'lazy' : 'eager',
@@ -227,8 +292,21 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
             ob_start();
             ?>
             <div class="gslider-post-carousel-image">
-                <a href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
-                    <?php the_post_thumbnail( 'medium_large', $img_attributes ); ?>
+                <a class="gslider-post-thumb-link" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
+                    <?php if ( $has_post_thumb ) : ?>
+                        <?php the_post_thumbnail( 'medium_large', $img_attributes ); ?>
+                    <?php elseif ( '' !== $fallback_attachment ) : ?>
+                        <?php echo wp_kses_post( $fallback_attachment ); ?>
+                    <?php elseif ( '' !== $safe_fallback ) : ?>
+                        <img class="gslider-post-carousel-fallback-img" src="<?php echo esc_url( $raw_fallback_url ); ?>" alt="<?php echo esc_attr( get_the_title( $post_id ) ); ?>" loading="<?php echo esc_attr( $enable_lazy_load ? 'lazy' : 'eager' ); ?>" />
+                    <?php else : ?>
+                        <svg class="gslider-post-carousel-placeholder-svg" viewBox="0 0 400 225" width="400" height="225" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice">
+                            <rect width="400" height="225" fill="#f1f5f9" />
+                            <rect x="164" y="84" width="72" height="56" rx="8" fill="#cbd5e1" />
+                            <circle cx="184" cy="102" r="6" fill="#94a3b8" />
+                            <path d="M172 132 L194 110 L210 124 L222 114 L232 132 Z" fill="#94a3b8" />
+                        </svg>
+                    <?php endif; ?>
                 </a>
                 <?php if ( ! empty( $context['enable_taxonomy_badge_overlay'] ) && '' !== $taxonomy_markup ) : ?>
                     <div class="gslider-taxonomy-badge-overlay gslider-badge-visibility-<?php echo esc_attr( (string) $context['taxonomy_badge_overlay_visibility'] ); ?> gslider-badge-position-<?php echo esc_attr( (string) $context['taxonomy_badge_overlay_position'] ); ?>">
@@ -291,9 +369,9 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
             <div class="<?php echo esc_attr( $title_wrapper_class ); ?>">
                 <<?php echo esc_attr( $tag ); ?> class="<?php echo esc_attr( $title_class ); ?>">
                     <?php if ( $enable_link ) : ?>
-                        <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>"<?php echo $target ? ' target="_blank"' : ''; ?><?php echo '' !== $rel_attr ? ' rel="' . esc_attr( $rel_attr ) . '"' : ''; ?>><?php echo esc_html( $rendered_title ); ?></a>
+                        <a class="gslider-post-carousel-title-link" href="<?php echo esc_url( get_permalink( $post_id ) ); ?>"<?php echo $target ? ' target="_blank"' : ''; ?><?php echo '' !== $rel_attr ? ' rel="' . esc_attr( $rel_attr ) . '"' : ''; ?>><span class="gslider-post-title-text"><?php echo esc_html( $rendered_title ); ?></span></a>
                     <?php else : ?>
-                        <?php echo esc_html( $rendered_title ); ?>
+                        <span class="gslider-post-title-text"><?php echo esc_html( $rendered_title ); ?></span>
                     <?php endif; ?>
                 </<?php echo esc_attr( $tag ); ?>>
             </div>

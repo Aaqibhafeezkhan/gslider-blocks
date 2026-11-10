@@ -34,6 +34,8 @@ export const buildGlobalDesktop = ( attributes ) => {
 		withImage: true,
 	} );
 
+	const isEqualHeight = attributes.equalHeight ?? true;
+
 	return `
         .${ blockId }.gslider-post-carousel-wrapper {
             ${ bgNormal }
@@ -91,8 +93,9 @@ export const buildGlobalDesktop = ( attributes ) => {
 
         .${ blockId } .swiper-slide {
             display: flex;
-            align-items: center;
+            align-items: ${ isEqualHeight ? 'stretch' : 'center' };
             justify-content: center;
+            ${ isEqualHeight ? 'height: auto;' : '' }
         }
 	`;
 };
@@ -147,19 +150,32 @@ export const buildGlobalResponsive = ( attributes, device ) => {
  * @return {string} CSS string.
  */
 export const buildContentWrapperStyles = ( attributes, device ) => {
-	const { blockId, layoutHeight, layoutHeightUnits, verticalAlign } =
-		attributes;
+	const {
+		blockId,
+		layoutHeight,
+		layoutHeightUnits,
+		verticalAlign,
+		equalHeight,
+	} = attributes;
+	const isEqualHeight = equalHeight ?? true;
+	const hasLayoutHeight = Boolean( layoutHeight?.[ device ] );
 
 	return `
         .${ blockId }.gslider-post-carousel-wrapper .gslider-post-carousel-content-wrapper {
             ${
-				layoutHeight[ device ]
+				hasLayoutHeight
 					? `height: ${ layoutHeight[ device ] }${ layoutHeightUnits[ device ] };`
-					: 'auto'
+					: ''
 			}
             display: flex;
-            align-items: center;
-            justify-content: ${ verticalAlign[ device ] || 'center' };
+            align-items: ${ isEqualHeight ? 'stretch' : 'center' };
+            justify-content: ${
+				isEqualHeight
+					? 'flex-start'
+					: verticalAlign?.[ device ] || 'center'
+			};
+            ${ isEqualHeight ? 'width: 100%;' : '' }
+            ${ isEqualHeight && ! hasLayoutHeight ? 'height: 100%;' : '' }
             ${ device === 'Desktop' ? 'transition: all .3s ease-in-out;' : '' }
         }
 	`;

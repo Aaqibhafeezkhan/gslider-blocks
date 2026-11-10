@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import { __ } from '@wordpress/i18n';
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { VERTICAL_ALIGN, HTML_TAGS } from '@Constants';
 import ResponsiveRangeControl from '@Components/responsive-range-control';
 import ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
@@ -24,8 +24,14 @@ const LayoutContentPanel = ( {
 	isOpen,
 	onToggle,
 } ) => {
-	const { layoutHeight, layoutHeightUnits, verticalAlign, postTitleHtmlTag } =
-		attributes;
+	const {
+		layoutHeight,
+		layoutHeightUnits,
+		verticalAlign,
+		postTitleHtmlTag,
+		equalHeight,
+		enableCardClickableLink,
+	} = attributes;
 
 	return (
 		<PanelBody
@@ -73,6 +79,30 @@ const LayoutContentPanel = ( {
 				onChange={ ( value ) =>
 					setAttributes( { postTitleHtmlTag: value } )
 				}
+			/>
+
+			<ToggleControl
+				label={ __( 'Equal Height Cards', 'gslider-blocks' ) }
+				checked={ !! equalHeight }
+				onChange={ ( value ) =>
+					setAttributes( { equalHeight: value } )
+				}
+				help={ __(
+					'Stretch cards in each row to the same height and align Read More buttons at the bottom.',
+					'gslider-blocks'
+				) }
+			/>
+
+			<ToggleControl
+				label={ __( 'Clickable Whole Card', 'gslider-blocks' ) }
+				checked={ !! enableCardClickableLink }
+				onChange={ ( value ) =>
+					setAttributes( { enableCardClickableLink: value } )
+				}
+				help={ __(
+					'Allow clicking anywhere on the card to open the post while keeping taxonomy and action links interactive.',
+					'gslider-blocks'
+				) }
 			/>
 		</PanelBody>
 	);

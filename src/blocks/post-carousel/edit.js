@@ -2,7 +2,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { Placeholder } from '@wordpress/components';
-import { useEffect, useRef } from '@wordpress/element';
+import { Fragment, useEffect, useRef } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { useMergeRefs } from '@wordpress/compose';
 import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
@@ -78,6 +78,8 @@ export default function Edit( {
 		showMetaAvatar,
 		showMetaDate,
 		showTaxonomy,
+		equalHeight,
+		enableCardClickableLink,
 
 		globalID,
 		globalClass,
@@ -96,6 +98,8 @@ export default function Edit( {
 		navigationArrowsIconRightImageAlt,
 
 		enableLazyLoad,
+		enableFallbackThumbnail,
+		fallbackThumbnailUrl,
 		contentOrder,
 		postTaxonomyDisplay,
 
@@ -195,12 +199,14 @@ export default function Edit( {
 		cardEntranceAnimation && cardEntranceAnimation !== 'none';
 
 	const trimmedGlobalClass = globalClass?.trim();
+	const isEqualHeight = equalHeight ?? true;
+	const isCardClickable = Boolean( enableCardClickableLink );
 
 	/** Block props for container */
 	const blockProps = useBlockProps( {
 		className: `gslider-post-carousel-wrapper ${ blockId } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
-			showPagination ? 'has-pagination' : ''
-		} ${
+			isEqualHeight ? 'has-equal-height ' : ''
+		}${ showPagination ? 'has-pagination' : '' } ${
 			cardHoverAnimation !== 'none'
 				? `gslider-card-hover-${ cardHoverAnimation }`
 				: ''
@@ -679,7 +685,7 @@ export default function Edit( {
 									}
 
 									return (
-										<>
+										<Fragment key="categories">
 											{ hasCat && (
 												<div
 													key="categories-wrap"
@@ -712,9 +718,90 @@ export default function Edit( {
 													) ) }
 												</div>
 											) }
-										</>
+										</Fragment>
 									);
 								};
+
+								const sanitizedFallbackUrl =
+									typeof fallbackThumbnailUrl === 'string' &&
+									/^(?:https?:\/\/|\/)/i.test(
+										fallbackThumbnailUrl.trim()
+									)
+										? fallbackThumbnailUrl.trim()
+										: '';
+								const allowFallback =
+									enableFallbackThumbnail ?? true;
+								const hasThumbnailMedia = Boolean(
+									featuredImageUrl || allowFallback
+								);
+								const hasRenderedThumbnail = Boolean(
+									showFeaturedImage?.[ deviceType ] &&
+										hasThumbnailMedia
+								);
+
+								let thumbnailMedia = null;
+								if ( featuredImageUrl ) {
+									thumbnailMedia = (
+										<img
+											src={ featuredImageUrl }
+											alt={ postTitleText }
+											loading={
+												enableLazyLoad
+													? 'lazy'
+													: undefined
+											}
+										/>
+									);
+								} else if ( sanitizedFallbackUrl ) {
+									thumbnailMedia = (
+										<img
+											className="gslider-post-carousel-fallback-img"
+											src={ sanitizedFallbackUrl }
+											alt={ postTitleText }
+											loading={
+												enableLazyLoad
+													? 'lazy'
+													: undefined
+											}
+										/>
+									);
+								} else {
+									thumbnailMedia = (
+										<svg
+											className="gslider-post-carousel-placeholder-svg"
+											viewBox="0 0 400 225"
+											width="400"
+											height="225"
+											aria-hidden="true"
+											focusable="false"
+											preserveAspectRatio="xMidYMid slice"
+										>
+											<rect
+												width="400"
+												height="225"
+												fill="#f1f5f9"
+											/>
+											<rect
+												x="164"
+												y="84"
+												width="72"
+												height="56"
+												rx="8"
+												fill="#cbd5e1"
+											/>
+											<circle
+												cx="184"
+												cy="102"
+												r="6"
+												fill="#94a3b8"
+											/>
+											<path
+												d="M172 132 L194 110 L210 124 L222 114 L232 132 Z"
+												fill="#94a3b8"
+											/>
+										</svg>
+									);
+								}
 
 								return (
 									<div
@@ -724,6 +811,14 @@ export default function Edit( {
 										<div className="gslider-post-carousel-content-wrapper">
 											<article
 												className={ `gslider-post-carousel-card${
+													isEqualHeight
+														? ' has-equal-height'
+														: ''
+												}${
+													isCardClickable
+														? ' is-clickable'
+														: ''
+												}${
 													hasEntranceAnimation
 														? ` animated ${ cardEntranceAnimation } gslider-has-entrance-anim`
 														: ''
@@ -736,27 +831,27 @@ export default function Edit( {
 												{ ( () => {
 													const renderGroupMap = {
 														thumbnail:
-															showFeaturedImage?.[
-																deviceType
-															] &&
-															featuredImageUrl ? (
+															hasRenderedThumbnail ? (
 																<div
 																	key="thumbnail"
 																	className="gslider-post-carousel-image"
 																>
-																	<img
-																		src={
-																			featuredImageUrl
+																	<a
+																		className="gslider-post-thumb-link"
+																		href="#"
+																		onClick={ (
+																			e
+																		) =>
+																			e.preventDefault()
 																		}
-																		alt={
+																		aria-label={
 																			postTitleText
 																		}
-																		loading={
-																			enableLazyLoad
-																				? 'lazy'
-																				: undefined
+																	>
+																		{
+																			thumbnailMedia
 																		}
-																	/>
+																	</a>
 																	{ enableTaxonomyBadgeOverlay && (
 																		<div
 																			className={ `gslider-taxonomy-badge-overlay gslider-badge-visibility-${ taxonomyBadgeOverlayVisibility } gslider-badge-position-${ taxonomyBadgeOverlayPosition }` }
@@ -769,12 +864,7 @@ export default function Edit( {
 
 														categories:
 															! enableTaxonomyBadgeOverlay ||
-															! (
-																showFeaturedImage?.[
-																	deviceType
-																] &&
-																featuredImageUrl
-															)
+															! hasRenderedThumbnail
 																? renderTaxonomies()
 																: null,
 
@@ -863,6 +953,7 @@ export default function Edit( {
 																			>
 																				{ enablePostTitleLink ? (
 																					<a
+																						className="gslider-post-carousel-title-link"
 																						href="#"
 																						onClick={ (
 																							e
@@ -870,12 +961,18 @@ export default function Edit( {
 																							e.preventDefault()
 																						}
 																					>
+																						<span className="gslider-post-title-text">
+																							{
+																								trimmedTitle
+																							}
+																						</span>
+																					</a>
+																				) : (
+																					<span className="gslider-post-title-text">
 																						{
 																							trimmedTitle
 																						}
-																					</a>
-																				) : (
-																					trimmedTitle
+																					</span>
 																				) }
 																			</TagName>
 																		</div>
@@ -1097,11 +1194,106 @@ export default function Edit( {
 																: null,
 													};
 
-													return normalizedContentOrder.map(
-														( groupKey ) =>
-															renderGroupMap[
-																groupKey
-															] || null
+													const thumbnailEl =
+														renderGroupMap.thumbnail;
+													const beforeThumb = [];
+													const afterThumb = [];
+													let seenThumb =
+														! thumbnailEl;
+
+													normalizedContentOrder.forEach(
+														( groupKey ) => {
+															if (
+																groupKey ===
+																'thumbnail'
+															) {
+																seenThumb = true;
+																return;
+															}
+															const el =
+																renderGroupMap[
+																	groupKey
+																] || null;
+															if ( ! el ) {
+																return;
+															}
+															if ( seenThumb ) {
+																afterThumb.push(
+																	el
+																);
+															} else {
+																beforeThumb.push(
+																	el
+																);
+															}
+														}
+													);
+
+													const hasTitleLink =
+														Boolean(
+															showPostTitle?.[
+																deviceType
+															]
+														) &&
+														Boolean(
+															enablePostTitleLink
+														);
+
+													let bodyAndThumb;
+													if ( ! thumbnailEl ) {
+														bodyAndThumb = (
+															<div className="gslider-post-carousel-body">
+																{ afterThumb }
+															</div>
+														);
+													} else if (
+														afterThumb.length ===
+															0 &&
+														beforeThumb.length > 0
+													) {
+														bodyAndThumb = (
+															<>
+																<div className="gslider-post-carousel-body">
+																	{
+																		beforeThumb
+																	}
+																</div>
+																{ thumbnailEl }
+															</>
+														);
+													} else {
+														bodyAndThumb = (
+															<>
+																{ beforeThumb }
+																{ thumbnailEl }
+																<div className="gslider-post-carousel-body">
+																	{
+																		afterThumb
+																	}
+																</div>
+															</>
+														);
+													}
+
+													return (
+														<>
+															{ bodyAndThumb }
+															{ isCardClickable &&
+																! hasTitleLink && (
+																	<a
+																		className="gslider-post-carousel-card-link"
+																		href="#"
+																		onClick={ (
+																			e
+																		) =>
+																			e.preventDefault()
+																		}
+																		aria-label={
+																			postTitleText
+																		}
+																	/>
+																) }
+														</>
 													);
 												} )() }
 											</article>

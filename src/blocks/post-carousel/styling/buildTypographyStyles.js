@@ -46,7 +46,7 @@ const buildTitleUnderlineAnim = ( attributes, device ) => {
 
 	if ( device !== 'Desktop' ) {
 		return `
-            .${ blockId } .gslider-post-carousel-title a::after {
+            .${ blockId } .gslider-post-carousel-title .gslider-post-title-text::after {
                 bottom: ${ bottomOffset }px !important;
                 height: ${ height }px !important;
                 transition: transform ${ speed }s ease-in-out !important;
@@ -55,11 +55,14 @@ const buildTitleUnderlineAnim = ( attributes, device ) => {
 	}
 
 	return `
-        .${ blockId } .gslider-post-carousel-title a {
+        .${ blockId } .gslider-post-carousel-title .gslider-post-title-text {
             position: relative !important;
+            display: inline-block;
+        }
+        .${ blockId } .gslider-post-carousel-title a {
             text-decoration: none !important;
         }
-        .${ blockId } .gslider-post-carousel-title a::after {
+        .${ blockId } .gslider-post-carousel-title .gslider-post-title-text::after {
             content: '' !important;
             position: absolute !important;
             left: 0 !important;
@@ -74,8 +77,9 @@ const buildTitleUnderlineAnim = ( attributes, device ) => {
             transform: scaleX(0) !important;
             transform-origin: left !important;
             transition: transform ${ speed }s ease-in-out !important;
+            pointer-events: none;
         }
-        .${ blockId } .gslider-post-carousel-card:hover .gslider-post-carousel-title a::after {
+        .${ blockId } .gslider-post-carousel-card:hover .gslider-post-carousel-title .gslider-post-title-text::after {
             transform: scaleX(1) !important;
         }
 	`;

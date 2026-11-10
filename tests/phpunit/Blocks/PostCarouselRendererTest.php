@@ -10,6 +10,7 @@
  * 5. XSS payloads (`javascript:` hrefs, `<script>`/`onclick` inside Read More & custom Nav SVG) are stripped and inside/outside placement classes match.
  * 6. Card content elements, contentOrder, excerpt sources/limits, avatar lazy-loading/placeholder SVG fallback, and removal of global `$gslider_first_image_optimized` LCP state render cleanly.
  * 7. Thin `src/blocks/post-carousel/render.php` bootstrap delegates directly to `PostCarouselRenderer::render()`.
+ * 8. Wave 3 unified `.gslider-post-carousel-body`, `has-equal-height`, fallback thumbnail/SVG/XSS guard, and clickable card links render with zero nested `<a>` tags.
  *
  * @package GSlider\Tests\Blocks
  */
@@ -805,6 +806,7 @@ class PostCarouselRendererTest {
 		$this->test_xss_sanitization_and_navigation_pagination_placements();
 		$this->test_card_elements_lcp_first_image_flag_and_avatar_fallback();
 		$this->test_thin_render_php_delegates_to_post_carousel_renderer();
+		$this->test_wave3_card_body_equal_height_fallback_and_clickable_card();
 
 		echo "\nAll PostCarouselRenderer unit tests passed successfully!\n";
 	}
@@ -1109,6 +1111,142 @@ class PostCarouselRendererTest {
 		$template_html = (string) ob_get_clean();
 
 		$this->assert_same( $direct_html, $template_html, 'Thin render.php output matches PostCarouselRenderer::render() byte-for-byte' );
+	}
+
+	/**
+	 * Test 8: Unified `.gslider-post-carousel-body`, equal-height classes, fallback thumbnails, clickable card links, and zero nested anchors.
+	 *
+	 * @return void
+	 */
+	public function test_wave3_card_body_equal_height_fallback_and_clickable_card(): void {
+		$this->reset_state();
+
+		// 1. Default render: equal height enabled, clickable disabled, .gslider-post-carousel-body present.
+		$default_html = PostCarouselRenderer::render(
+			array(
+				'blockId' => 'gslider-wave3-default',
+			)
+		);
+		$this->assert_true( false !== strpos( $default_html, 'gslider-wave3-default' ) && false !== strpos( $default_html, 'has-equal-height' ), 'Default render adds has-equal-height on wrapper and card' );
+		$this->assert_true( false === strpos( $default_html, 'is-clickable' ), 'Default render omits is-clickable class when enableCardClickableLink is false' );
+		$this->assert_true( 2 === substr_count( $default_html, 'class="gslider-post-carousel-body"' ), 'All rendered cards include .gslider-post-carousel-body' );
+		$this->assert_true( 2 === substr_count( $default_html, 'class="gslider-post-thumb-link"' ), 'Thumbnails use .gslider-post-thumb-link class' );
+		$this->assert_true( 2 === substr_count( $default_html, 'class="gslider-post-carousel-title-link"' ), 'Linked titles use .gslider-post-carousel-title-link class' );
+		$this->assert_true( 2 === substr_count( $default_html, 'class="gslider-post-title-text"' ), 'Titles wrap text inside .gslider-post-title-text span' );
+		$this->assert_true( false === strpos( $default_html, 'gslider-post-carousel-card-link' ), 'Default render omits standalone .gslider-post-carousel-card-link' );
+
+		// 2. equalHeight disabled omits has-equal-height.
+		$this->reset_state();
+		$unequal_html = PostCarouselRenderer::render(
+			array(
+				'blockId'     => 'gslider-wave3-unequal',
+				'equalHeight' => false,
+			)
+		);
+		$this->assert_true( false === strpos( $unequal_html, 'has-equal-height' ), 'equalHeight=false omits has-equal-height class from wrapper and card' );
+
+		// 3. Missing post thumbnail with default enableFallbackThumbnail=true renders SVG placeholder and non-duplicated overlay badge.
+		$this->reset_state();
+		$GLOBALS['gslider_test_post_thumbnails'][101] = false;
+		$svg_fallback_html                           = PostCarouselRenderer::render(
+			array(
+				'blockId'                    => 'gslider-wave3-svg',
+				'enableTaxonomyBadgeOverlay' => true,
+			)
+		);
+		$this->assert_true( 1 === substr_count( $svg_fallback_html, 'class="gslider-post-carousel-placeholder-svg"' ), 'Post without featured image renders inline SVG placeholder' );
+		$this->assert_true( false !== strpos( $svg_fallback_html, 'aria-hidden="true" focusable="false"' ), 'SVG placeholder includes accessibility attributes' );
+		$this->assert_true( 2 === substr_count( $svg_fallback_html, 'class="gslider-taxonomy-badge-overlay' ), 'Overlay taxonomy badge still renders over placeholder thumbnail' );
+		$this->assert_true( 2 === substr_count( $svg_fallback_html, 'gslider-post-carousel-categories' ), 'Taxonomy badges are not duplicated inline when rendered as overlay over fallback thumbnail' );
+
+		// 4. Custom fallbackThumbnailUrl renders custom fallback img; javascript: URI is stripped cleanly to SVG placeholder.
+		$this->reset_state();
+		$GLOBALS['gslider_test_post_thumbnails'][101] = false;
+		$GLOBALS['gslider_test_post_thumbnails'][102] = false;
+		$custom_fallback_html                        = PostCarouselRenderer::render(
+			array(
+				'blockId'              => 'gslider-wave3-fallback-img',
+				'fallbackThumbnailUrl' => 'https://example.org/fallback.jpg',
+			)
+		);
+		$this->assert_true( 2 === substr_count( $custom_fallback_html, 'class="gslider-post-carousel-fallback-img"' ), 'Valid fallbackThumbnailUrl renders custom fallback img' );
+		$this->assert_true( false !== strpos( $custom_fallback_html, 'src="https://example.org/fallback.jpg"' ), 'Custom fallback img outputs escaped URL' );
+
+		$xss_fallback_html = PostCarouselRenderer::render(
+			array(
+				'blockId'              => 'gslider-wave3-fallback-xss',
+				'fallbackThumbnailUrl' => 'javascript:alert(1)',
+			)
+		);
+		$this->assert_true( false === stripos( $xss_fallback_html, 'javascript:' ), 'javascript: URI in fallbackThumbnailUrl is stripped' );
+		$this->assert_true( false === strpos( $xss_fallback_html, 'gslider-post-carousel-fallback-img' ), 'Unsafe fallbackThumbnailUrl does not emit broken img tag' );
+		$this->assert_true( 2 === substr_count( $xss_fallback_html, 'class="gslider-post-carousel-placeholder-svg"' ), 'Unsafe fallbackThumbnailUrl falls back cleanly to SVG placeholder' );
+
+		// 5. enableFallbackThumbnail=false omits thumbnail container and promotes categories inline into body.
+		$no_fallback_html = PostCarouselRenderer::render(
+			array(
+				'blockId'                    => 'gslider-wave3-nofallback',
+				'enableFallbackThumbnail'    => false,
+				'enableTaxonomyBadgeOverlay' => true,
+			)
+		);
+		$this->assert_true( false === strpos( $no_fallback_html, 'gslider-post-carousel-image' ), 'enableFallbackThumbnail=false omits .gslider-post-carousel-image when thumbnail missing' );
+		$this->assert_true( 2 === substr_count( $no_fallback_html, 'gslider-post-carousel-categories' ), 'Categories render inline inside body when no thumbnail or fallback is present' );
+
+		// 6. Clickable whole card: uses title-link when present, standalone card-link when title link absent, with zero nested <a> tags.
+		$this->reset_state();
+		$clickable_with_title = PostCarouselRenderer::render(
+			array(
+				'blockId'                 => 'gslider-wave3-click-title',
+				'enableCardClickableLink' => true,
+				'enablePostTitleLink'     => true,
+			)
+		);
+		$this->assert_true( 2 === substr_count( $clickable_with_title, 'is-clickable' ), 'enableCardClickableLink=true adds is-clickable class to article' );
+		$this->assert_true( false === strpos( $clickable_with_title, 'gslider-post-carousel-card-link' ), 'Standalone card-link omitted when post title link is rendered' );
+
+		$clickable_no_title_link = PostCarouselRenderer::render(
+			array(
+				'blockId'                 => 'gslider-wave3-click-fallback',
+				'enableCardClickableLink' => true,
+				'enablePostTitleLink'     => false,
+			)
+		);
+		$this->assert_true( 2 === substr_count( $clickable_no_title_link, 'class="gslider-post-carousel-card-link"' ), 'Standalone .gslider-post-carousel-card-link rendered when title link is disabled' );
+		$this->assert_true( false === strpos( $clickable_no_title_link, 'gslider-post-carousel-title-link' ), 'Title renders without anchor when enablePostTitleLink=false' );
+
+		$clickable_responsive_title = PostCarouselRenderer::render(
+			array(
+				'blockId'                 => 'gslider-wave3-click-responsive',
+				'enableCardClickableLink' => true,
+				'enablePostTitleLink'     => true,
+				'showPostTitle'           => array( 'Desktop' => true, 'Tablet' => false, 'Mobile' => false ),
+			)
+		);
+		$this->assert_true( 2 === substr_count( $clickable_responsive_title, 'class="gslider-post-carousel-card-link"' ), 'Standalone .gslider-post-carousel-card-link rendered when title is hidden on Tablet/Mobile' );
+
+		foreach ( array( $clickable_with_title, $clickable_no_title_link, $clickable_responsive_title ) as $clickable_html ) {
+			$depth     = 0;
+			$max_depth = 0;
+			preg_match_all( '#<(/?)a\b[^>]*>#i', $clickable_html, $anchor_tags, PREG_SET_ORDER );
+			foreach ( $anchor_tags as $anchor_tag ) {
+				$depth    += ( '' === $anchor_tag[1] ) ? 1 : -1;
+				$max_depth = max( $max_depth, $depth );
+			}
+			$this->assert_same( 1, $max_depth, 'Rendered clickable card HTML contains zero nested <a> elements' );
+		}
+
+		// 7. Custom contentOrder with thumbnail strictly last still wraps preceding content in .gslider-post-carousel-body.
+		$this->reset_state();
+		$thumb_last_html = PostCarouselRenderer::render(
+			array(
+				'blockId'            => 'gslider-wave3-order-last',
+				'showReadMoreButton' => array( 'Desktop' => false, 'Tablet' => false, 'Mobile' => false ),
+				'contentOrder'       => array( 'title', 'excerpt', 'meta', 'categories', 'readmore', 'thumbnail' ),
+			)
+		);
+		$this->assert_true( 2 === substr_count( $thumb_last_html, 'class="gslider-post-carousel-body"' ), 'Thumbnail-last contentOrder still wraps card content in .gslider-post-carousel-body' );
+		$this->assert_true( strpos( $thumb_last_html, 'class="gslider-post-carousel-body"' ) < strpos( $thumb_last_html, 'class="gslider-post-carousel-image"' ), 'Thumbnail-last contentOrder keeps .gslider-post-carousel-body before .gslider-post-carousel-image' );
 	}
 }
 
