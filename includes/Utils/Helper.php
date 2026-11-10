@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'Helper' ) ) {
+if ( ! class_exists( Helper::class, false ) ) {
 
     /**
      * Provides helper services for query compilation and utility helpers.
@@ -143,13 +143,13 @@ if ( ! class_exists( 'Helper' ) ) {
                     break;
                 case 'current_month':
                     $date_query[] = array(
-                        'year'  => date( 'Y' ),
-                        'month' => date( 'm' ),
+                        'year'  => (int) wp_date( 'Y' ),
+                        'month' => (int) wp_date( 'm' ),
                     );
                     break;
                 case 'current_year':
                     $date_query[] = array(
-                        'year' => date( 'Y' ),
+                        'year' => (int) wp_date( 'Y' ),
                     );
                     break;
             }
@@ -168,13 +168,20 @@ if ( ! class_exists( 'Helper' ) ) {
          * @return array Compiled meta_query subarray.
          */
         public static function build_meta_query( string $meta_key, string $meta_value = '', string $meta_compare = '=' ) {
-            if ( empty( $meta_key ) ) {
+            $meta_key = sanitize_text_field( $meta_key );
+            if ( '' === $meta_key ) {
                 return array();
             }
 
+            $allowed_compares = array( '=', '!=', '>', '>=', '<', '<=', 'LIKE', 'NOT LIKE', 'EXISTS', 'NOT EXISTS' );
+            $meta_compare     = strtoupper( sanitize_text_field( $meta_compare ) );
+            if ( ! in_array( $meta_compare, $allowed_compares, true ) ) {
+                $meta_compare = '=';
+            }
+
             $meta_query = array(
-                'key'     => sanitize_text_field( $meta_key ),
-                'compare' => sanitize_text_field( $meta_compare ),
+                'key'     => $meta_key,
+                'compare' => $meta_compare,
             );
 
             if ( '' !== $meta_value && ! in_array( $meta_compare, array( 'EXISTS', 'NOT EXISTS' ), true ) ) {
