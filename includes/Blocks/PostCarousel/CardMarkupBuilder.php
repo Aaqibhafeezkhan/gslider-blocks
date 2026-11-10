@@ -164,7 +164,7 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
          * @param array $context Compiled block rendering context.
          * @return string Prepared excerpt string.
          */
-        private static function build_excerpt( int $post_id, array $context ): string {
+        public static function build_excerpt( int $post_id, array $context ): string {
             $source      = isset( $context['post_excerpt_source'] ) ? (string) $context['post_excerpt_source'] : 'auto';
             $raw_excerpt = '';
 
@@ -205,8 +205,6 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
         /**
          * Renders the card featured thumbnail wrapper and optional taxonomy badge overlay.
          *
-         * Preserves the global `$gslider_first_image_optimized` LCP optimization contract.
-         *
          * @since 1.2.3
          *
          * @param int    $post_id         Current post ID.
@@ -219,18 +217,12 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
                 return '';
             }
 
-            global $gslider_first_image_optimized;
             $enable_lazy_load = ! empty( $context['enable_lazy_load'] );
 
             $img_attributes = array(
-                'loading' => ( ! isset( $gslider_first_image_optimized ) || ! $gslider_first_image_optimized ) ? 'eager' : ( $enable_lazy_load ? 'lazy' : 'eager' ),
+                'loading' => $enable_lazy_load ? 'lazy' : 'eager',
                 'alt'     => get_the_title( $post_id ),
             );
-
-            if ( ! isset( $gslider_first_image_optimized ) || ! $gslider_first_image_optimized ) {
-                $img_attributes['fetchpriority'] = 'high';
-                $gslider_first_image_optimized   = true;
-            }
 
             ob_start();
             ?>
@@ -360,7 +352,7 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
                         $avatar_url = get_avatar_url( $author_id, array( 'size' => 96 ) );
                         if ( $avatar_url ) :
                         ?>
-                            <img class="gslider-post-author-avatar" src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( get_the_author() ); ?>" width="28" height="28" />
+                            <img class="gslider-post-author-avatar" src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( get_the_author() ); ?>" width="28" height="28" loading="lazy" />
                         <?php else : ?>
                             <svg class="gslider-post-author-avatar-placeholder" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                         <?php endif; ?>

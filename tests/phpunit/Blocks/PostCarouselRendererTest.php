@@ -8,7 +8,7 @@
  * 3. Validation & security fallbacks reject unsafe HTML tags, unviewable post types, invalid orderby/order/metaCompare, and meta sorting in related mode.
  * 4. Related Posts query builds category, tag, combined OR, empty-term [0] guard, and post__not_in exclusions accurately.
  * 5. XSS payloads (`javascript:` hrefs, `<script>`/`onclick` inside Read More & custom Nav SVG) are stripped and inside/outside placement classes match.
- * 6. Card content elements, contentOrder, excerpt sources/limits, avatar placeholder SVG fallback, and `$GLOBALS['gslider_first_image_optimized']` LCP flags render cleanly.
+ * 6. Card content elements, contentOrder, excerpt sources/limits, avatar lazy-loading/placeholder SVG fallback, and removal of global `$gslider_first_image_optimized` LCP state render cleanly.
  * 7. Thin `src/blocks/post-carousel/render.php` bootstrap delegates directly to `PostCarouselRenderer::render()`.
  *
  * @package GSlider\Tests\Blocks
@@ -1034,7 +1034,24 @@ class PostCarouselRendererTest {
 	 */
 	public function test_card_elements_lcp_first_image_flag_and_avatar_fallback(): void {
 		$this->reset_state();
-		// Simulate missing avatar URL for author ID 7 -> triggers placeholder inline SVG.
+		// Render once with an author avatar URL available to verify explicit lazy loading on avatars,
+		// then verify missing avatar URL renders placeholder SVG and no global LCP flag is touched.
+		$GLOBALS['gslider_test_avatar_urls'][7] = 'https://example.org/avatar-7.jpg';
+
+		$html_with_avatar = PostCarouselRenderer::render(
+			array(
+				'blockId'        => 'gslider-avatar-lazy',
+				'enableLazyLoad' => false,
+			)
+		);
+
+		$this->assert_true( ! array_key_exists( 'gslider_first_image_optimized', $GLOBALS ), 'Ad-hoc global LCP flag gslider_first_image_optimized is no longer set by CardMarkupBuilder' );
+		$this->assert_true( false === strpos( $html_with_avatar, 'fetchpriority=' ), 'Renderer defers fetchpriority="high" assignment exclusively to StyleGenerator::optimize_lcp_image()' );
+		$this->assert_true( false !== strpos( $html_with_avatar, 'class="gslider-post-author-avatar"' ) && false !== strpos( $html_with_avatar, 'loading="lazy"' ), 'Author avatar img always renders with loading="lazy"' );
+		$this->assert_true( 2 === substr_count( $html_with_avatar, 'loading="eager"' ), 'Card thumbnails respect enableLazyLoad=false with loading="eager"' );
+
+		// Simulate missing avatar URL for author ID 7 -> triggers placeholder inline SVG and enableLazyLoad=true keeps card thumbnails lazy before StyleGenerator.
+		$this->reset_state();
 		$GLOBALS['gslider_test_avatar_urls'][7] = false;
 
 		$html = PostCarouselRenderer::render(
@@ -1056,9 +1073,9 @@ class PostCarouselRendererTest {
 			)
 		);
 
-		$this->assert_true( true === ( $GLOBALS['gslider_first_image_optimized'] ?? false ), 'Global LCP flag gslider_first_image_optimized is marked true after first thumbnail' );
-		$this->assert_true( false !== strpos( $html, 'loading="eager" fetchpriority="high"' ), 'First card image receives loading="eager" and fetchpriority="high"' );
-		$this->assert_true( false !== strpos( $html, 'loading="lazy" />' ), 'Second card image falls back to loading="lazy" when enableLazyLoad is true' );
+		$this->assert_true( ! array_key_exists( 'gslider_first_image_optimized', $GLOBALS ), 'enableLazyLoad=true also avoids setting global gslider_first_image_optimized' );
+		$this->assert_true( false === strpos( $html, 'fetchpriority=' ), 'PostCarouselRenderer does not emit inline fetchpriority attribute directly' );
+		$this->assert_true( 2 === substr_count( $html, 'loading="lazy"' ), 'Card images render loading="lazy" when enableLazyLoad is true so StyleGenerator promotes only first slide' );
 		$this->assert_true( false !== strpos( $html, 'This is sample post content...' ), 'Content excerpt source trims to word limit cleanly' );
 		$this->assert_true( false !== strpos( $html, 'First Caro...' ), 'Character title limit trims cleanly with multibyte safe substring' );
 		$this->assert_true( false !== strpos( $html, 'gslider-post-author-avatar-placeholder' ), 'Missing avatar URL renders inline SVG avatar placeholder' );
@@ -1084,7 +1101,6 @@ class PostCarouselRendererTest {
 
 		$direct_html = PostCarouselRenderer::render( $test_attrs );
 
-		unset( $GLOBALS['gslider_first_image_optimized'] );
 		$attributes = $test_attrs;
 		$content    = '';
 		$block      = null;

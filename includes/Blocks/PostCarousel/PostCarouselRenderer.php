@@ -311,7 +311,7 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
          * @param array $attributes Raw block attributes.
          * @return array<string, mixed> Sanitized query options map.
          */
-        private static function parse_query_options( array $attributes ): array {
+        public static function parse_query_options( array $attributes ): array {
             $default_bool_map = array(
                 'Desktop' => true,
                 'Tablet'  => true,
@@ -401,15 +401,16 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
          *
          * @since 1.2.3
          *
-         * @param array $options Normalized query options from `parse_query_options()`.
+         * @param array $options      Normalized query options from `parse_query_options()`.
+         * @param int   $host_post_id Optional host post ID for REST/headless contexts without global `$post`.
          * @return array<string, mixed> Arguments ready for `WP_Query`.
          */
-        private static function build_query_args( array $options ): array {
+        public static function build_query_args( array $options, int $host_post_id = 0 ): array {
             if ( ! empty( $options['use_related_posts_query'] ) ) {
-                return self::build_related_query_args( $options );
+                return self::build_related_query_args( $options, $host_post_id );
             }
 
-            return self::build_standard_query_args( $options );
+            return self::build_standard_query_args( $options, $host_post_id );
         }
 
         /**
@@ -417,11 +418,12 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
          *
          * @since 1.2.3
          *
-         * @param array $options Normalized query options.
+         * @param array $options      Normalized query options.
+         * @param int   $host_post_id Optional host post ID fallback when `get_the_ID()` is empty.
          * @return array<string, mixed> WP_Query arguments for related posts.
          */
-        private static function build_related_query_args( array $options ): array {
-            $current_post_id    = get_the_ID();
+        private static function build_related_query_args( array $options, int $host_post_id = 0 ): array {
+            $current_post_id    = $host_post_id > 0 ? $host_post_id : (int) get_the_ID();
             $fallback_post_type = (string) $options['post_type'];
             $raw_post_type      = $current_post_id ? get_post_type( $current_post_id ) : $fallback_post_type;
             $resolved_post_type = is_string( $raw_post_type )
@@ -498,10 +500,11 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
          *
          * @since 1.2.3
          *
-         * @param array $options Normalized query options.
+         * @param array $options      Normalized query options.
+         * @param int   $host_post_id Optional host post ID fallback when `get_the_ID()` is empty.
          * @return array<string, mixed> WP_Query arguments for standard queries.
          */
-        private static function build_standard_query_args( array $options ): array {
+        private static function build_standard_query_args( array $options, int $host_post_id = 0 ): array {
             $query_args = array(
                 'post_type'      => $options['post_type'],
                 'posts_per_page' => $options['posts_per_page'],
@@ -533,6 +536,10 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             }
 
             $excluded_ids = Helper::build_excluded_posts( $options['exclude_posts'], $options['exclude_current_post'] );
+            if ( ! empty( $options['exclude_current_post'] ) && $host_post_id > 0 ) {
+                $excluded_ids[] = $host_post_id;
+                $excluded_ids   = array_values( array_unique( array_map( 'intval', $excluded_ids ) ) );
+            }
             if ( ! empty( $excluded_ids ) ) {
                 $query_args['post__not_in'] = $excluded_ids;
             }
@@ -733,7 +740,7 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
          * @param array $attributes Raw block attributes.
          * @return array<string, mixed> Normalized rendering context.
          */
-        private static function build_render_context( array $attributes ): array {
+        public static function build_render_context( array $attributes ): array {
             $default_show = array(
                 'Desktop' => true,
                 'Tablet'  => true,

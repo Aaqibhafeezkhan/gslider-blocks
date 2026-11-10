@@ -573,6 +573,7 @@ class DashboardTest {
 			'Flexi Content Slider',
 			'Image Slider',
 			'Logo Carousel',
+			'Post Carousel',
 			'Testimonial Slider',
 			'Active',
 			'Disabled',
