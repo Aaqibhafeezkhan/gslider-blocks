@@ -97,6 +97,26 @@ const layoutAttributes = {
 		type: 'number',
 		default: 75,
 	},
+	timelineStemColor: {
+		type: 'string',
+		default: '#e2e8f0',
+	},
+	timelineStemThickness: {
+		type: 'number',
+		default: 2,
+	},
+	timelineDotSize: {
+		type: 'number',
+		default: 16,
+	},
+	timelineDotColor: {
+		type: 'string',
+		default: '#007cba',
+	},
+	timelineDatePosition: {
+		type: 'string',
+		default: 'above',
+	},
 	layoutHeight: {
 		type: 'object',
 		default: {

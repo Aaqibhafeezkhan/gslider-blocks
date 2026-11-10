@@ -13,7 +13,8 @@
     "cinematic-hero",
     "minimal-typo",
     "spotlight-center",
-    "newsroom-stage"
+    "newsroom-stage",
+    "changelog-timeline"
   ],
   "allowedEffects": {
     "carouselEffect": [
@@ -21,7 +22,7 @@
       "coverflow"
     ]
   },
-  "totalAttributes": 944,
+  "totalAttributes": 949,
   "slideItemSchema": {
     "type": "dynamicQuery",
     "source": "WP_Query",
@@ -156,7 +157,8 @@
       "horizontal",
       "hero",
       "minimal",
-      "newsroom"
+      "newsroom",
+      "timeline"
     ],
     "postTaxonomyDisplay": [
       "category",
@@ -244,6 +246,10 @@
     "taxonomyBadgeOverlayVisibility": [
       "always",
       "hover"
+    ],
+    "timelineDatePosition": [
+      "above",
+      "below"
     ],
     "verticalAlign": [
       "flex-start",
@@ -343,6 +349,26 @@
     "overlayScrimHeight": {
       "type": "number",
       "default": 75
+    },
+    "timelineStemColor": {
+      "type": "string",
+      "default": "#e2e8f0"
+    },
+    "timelineStemThickness": {
+      "type": "number",
+      "default": 2
+    },
+    "timelineDotSize": {
+      "type": "number",
+      "default": 16
+    },
+    "timelineDotColor": {
+      "type": "string",
+      "default": "#007cba"
+    },
+    "timelineDatePosition": {
+      "type": "string",
+      "default": "above"
     },
     "layoutHeight": {
       "type": "object",

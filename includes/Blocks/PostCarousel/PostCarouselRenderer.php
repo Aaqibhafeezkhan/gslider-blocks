@@ -45,7 +45,7 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
          *
          * @var string[]
          */
-        private const ALLOWED_LAYOUT_MODES = array( 'classic', 'overlay', 'horizontal', 'hero', 'minimal', 'newsroom' );
+        private const ALLOWED_LAYOUT_MODES = array( 'classic', 'overlay', 'horizontal', 'hero', 'minimal', 'newsroom', 'timeline' );
 
         /**
          * Allowlisted newsroom headline queue positions.
@@ -291,6 +291,35 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             }
 
             return implode( ' ', array_filter( array_map( 'sanitize_html_class', $parts ) ) );
+        }
+
+        /**
+         * Sanitizes a CSS color value ensuring valid hex/rgba or safe fallback.
+         *
+         * @since 1.2.3
+         *
+         * @param mixed  $color    Raw attribute color value.
+         * @param string $fallback Fallback color when invalid.
+         * @return string Valid color string or fallback.
+         */
+        private static function sanitize_color_value( $color, string $fallback ): string {
+            if ( ! is_string( $color ) || '' === trim( $color ) ) {
+                return $fallback;
+            }
+            $trimmed = trim( $color );
+            if ( preg_match( '/^#([A-Fa-f0-9]{3}){1,2}$/', $trimmed ) ) {
+                return $trimmed;
+            }
+            if ( preg_match( '/^rgba?\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+\s*(?:,\s*[\d.]+\s*)?\)$/i', $trimmed ) ) {
+                return $trimmed;
+            }
+            if ( preg_match( '/^hsla?\(\s*[\d.]+\s*(?:deg|rad|turn)?\s*,\s*[\d.]+%\s*,\s*[\d.]+%\s*(?:,\s*[\d.]+%?\s*)?\)$/i', $trimmed ) ) {
+                return $trimmed;
+            }
+            if ( preg_match( '/^var\(--[a-zA-Z0-9_-]+\)$/', $trimmed ) ) {
+                return $trimmed;
+            }
+            return $fallback;
         }
 
         /**
@@ -888,6 +917,11 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 'newsroom_queue_position'                => $queue_position,
                 'overlay_gradient_scrim'                 => '' !== $raw_scrim ? $raw_scrim : $default_scrim,
                 'overlay_scrim_height'                   => isset( $attributes['overlayScrimHeight'] ) ? min( 100, max( 40, intval( $attributes['overlayScrimHeight'] ) ) ) : 75,
+                'timeline_stem_color'                    => self::sanitize_color_value( $attributes['timelineStemColor'] ?? null, '#e2e8f0' ),
+                'timeline_stem_thickness'                => isset( $attributes['timelineStemThickness'] ) ? min( 10, max( 1, intval( $attributes['timelineStemThickness'] ) ) ) : 2,
+                'timeline_dot_size'                      => isset( $attributes['timelineDotSize'] ) ? min( 48, max( 8, intval( $attributes['timelineDotSize'] ) ) ) : 16,
+                'timeline_dot_color'                     => self::sanitize_color_value( $attributes['timelineDotColor'] ?? null, '#007cba' ),
+                'timeline_date_position'                 => isset( $attributes['timelineDatePosition'] ) && in_array( $attributes['timelineDatePosition'], array( 'above', 'below' ), true ) ? $attributes['timelineDatePosition'] : 'above',
                 'equal_height'                           => isset( $attributes['equalHeight'] ) ? (bool) $attributes['equalHeight'] : true,
                 'enable_card_clickable_link'             => ! empty( $attributes['enableCardClickableLink'] ),
                 'enable_lazy_load'                       => ! empty( $attributes['enableLazyLoad'] ),

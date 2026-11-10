@@ -6,6 +6,7 @@ import PresetSelector from '@Components/preset-selector';
 import SelectControls from '@Components/select-controls';
 import SwitcherControl from '@Components/switcher-control';
 import GradientColorControl from '@Components/gradient-color-control';
+import ColorControl from '@Components/color-control';
 import InputControls from '@Components/input-control';
 import { POST_CAROUSEL_PRESETS } from '../../preset';
 
@@ -22,6 +23,15 @@ const LAYOUT_MODE_OPTIONS = [
 		label: __( 'Newsroom Stage', 'gslider-blocks' ),
 		value: 'newsroom',
 	},
+	{
+		label: __( 'Timeline Rail', 'gslider-blocks' ),
+		value: 'timeline',
+	},
+];
+
+const TIMELINE_DATE_POSITION_OPTIONS = [
+	{ label: __( 'Above Dot', 'gslider-blocks' ), value: 'above' },
+	{ label: __( 'Below Dot', 'gslider-blocks' ), value: 'below' },
 ];
 
 const NEWSROOM_QUEUE_POSITIONS = [
@@ -104,6 +114,11 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 		horizontalMediaPosition = 'left',
 		overlayGradientScrim = DEFAULT_OVERLAY_SCRIM,
 		overlayScrimHeight = 75,
+		timelineStemColor = '#e2e8f0',
+		timelineStemThickness = 2,
+		timelineDotSize = 16,
+		timelineDotColor = '#007cba',
+		timelineDatePosition = 'above',
 	} = attributes;
 
 	const [ isCustomScrim, setIsCustomScrim ] = useState( false );
@@ -130,6 +145,12 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 	);
 	const [ newsroomWidthDraft, setNewsroomWidthDraft ] = useState(
 		String( newsroomMainWidth )
+	);
+	const [ timelineThicknessDraft, setTimelineThicknessDraft ] = useState(
+		String( timelineStemThickness )
+	);
+	const [ timelineDotSizeDraft, setTimelineDotSizeDraft ] = useState(
+		String( timelineDotSize )
 	);
 
 	useEffect( () => {
@@ -195,6 +216,22 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 				: String( newsroomMainWidth )
 		);
 	}, [ newsroomMainWidth ] );
+
+	useEffect( () => {
+		setTimelineThicknessDraft( ( prev ) =>
+			parseInt( prev, 10 ) === timelineStemThickness
+				? prev
+				: String( timelineStemThickness )
+		);
+	}, [ timelineStemThickness ] );
+
+	useEffect( () => {
+		setTimelineDotSizeDraft( ( prev ) =>
+			parseInt( prev, 10 ) === timelineDotSize
+				? prev
+				: String( timelineDotSize )
+		);
+	}, [ timelineDotSize ] );
 
 	const handleScrimHeightChange = ( raw ) => {
 		setScrimHeightDraft( raw );
@@ -544,8 +581,124 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 				</>
 			) }
 
+			{ postLayoutMode === 'timeline' && (
+				<>
+					<SwitcherControl
+						label={ __( 'Date Position', 'gslider-blocks' ) }
+						options={ TIMELINE_DATE_POSITION_OPTIONS }
+						value={ timelineDatePosition }
+						onChange={ ( value ) =>
+							setAttributes( { timelineDatePosition: value } )
+						}
+					/>
+
+					<div
+						onBlur={ () => {
+							const clamped = clampNumber(
+								timelineThicknessDraft,
+								1,
+								10,
+								2
+							);
+							setTimelineThicknessDraft( String( clamped ) );
+							if ( clamped !== timelineStemThickness ) {
+								setAttributes( {
+									timelineStemThickness: clamped,
+								} );
+							}
+						} }
+					>
+						<InputControls
+							label={ __(
+								'Stem Thickness (px)',
+								'gslider-blocks'
+							) }
+							value={ timelineThicknessDraft }
+							onChangeValue={ ( raw ) => {
+								setTimelineThicknessDraft( raw );
+								const parsed = parseInt( raw, 10 );
+								if (
+									! Number.isNaN( parsed ) &&
+									parsed >= 1 &&
+									parsed <= 10
+								) {
+									setAttributes( {
+										timelineStemThickness: parsed,
+									} );
+								}
+							} }
+							helpText={ __(
+								'Horizontal rail stem line thickness (1–10px).',
+								'gslider-blocks'
+							) }
+						/>
+					</div>
+
+					<div
+						onBlur={ () => {
+							const clamped = clampNumber(
+								timelineDotSizeDraft,
+								8,
+								48,
+								16
+							);
+							setTimelineDotSizeDraft( String( clamped ) );
+							if ( clamped !== timelineDotSize ) {
+								setAttributes( {
+									timelineDotSize: clamped,
+								} );
+							}
+						} }
+					>
+						<InputControls
+							label={ __(
+								'Milestone Dot Size (px)',
+								'gslider-blocks'
+							) }
+							value={ timelineDotSizeDraft }
+							onChangeValue={ ( raw ) => {
+								setTimelineDotSizeDraft( raw );
+								const parsed = parseInt( raw, 10 );
+								if (
+									! Number.isNaN( parsed ) &&
+									parsed >= 8 &&
+									parsed <= 48
+								) {
+									setAttributes( {
+										timelineDotSize: parsed,
+									} );
+								}
+							} }
+							helpText={ __(
+								'Milestone circular node diameter (8–48px).',
+								'gslider-blocks'
+							) }
+						/>
+					</div>
+
+					<ColorControl
+						label={ __( 'Stem Color', 'gslider-blocks' ) }
+						color={ timelineStemColor }
+						defaultColor="#e2e8f0"
+						onChangeColor={ ( value ) =>
+							setAttributes( { timelineStemColor: value } )
+						}
+					/>
+
+					<ColorControl
+						label={ __( 'Milestone Dot Color', 'gslider-blocks' ) }
+						color={ timelineDotColor }
+						defaultColor="#007cba"
+						onChangeColor={ ( value ) =>
+							setAttributes( { timelineDotColor: value } )
+						}
+					/>
+				</>
+			) }
+
 			{ ( ( postLayoutMode !== 'hero' &&
-				postLayoutMode !== 'newsroom' ) ||
+				postLayoutMode !== 'newsroom' &&
+				postLayoutMode !== 'timeline' ) ||
 				enableSpotlight ) && (
 				<ToggleControl
 					__nextHasNoMarginBottom

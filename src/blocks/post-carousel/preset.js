@@ -19,6 +19,9 @@ import presetSpotlightCenter, {
 import presetNewsroomStage, {
 	newsroomStageStyles,
 } from './presets/presetNewsroomStage';
+import presetChangelogTimeline, {
+	changelogTimelineStyles,
+} from './presets/presetChangelogTimeline';
 
 /**
  * Post Carousel Block — Preset Styles Data Object
@@ -33,6 +36,7 @@ export const presetStyles = {
 	'minimal-typo': minimalTypoStyles,
 	'spotlight-center': spotlightCenterStyles,
 	'newsroom-stage': newsroomStageStyles,
+	'changelog-timeline': changelogTimelineStyles,
 };
 
 /**
@@ -48,6 +52,7 @@ export const POST_CAROUSEL_PRESETS = [
 	presetMinimalTypo,
 	presetSpotlightCenter,
 	presetNewsroomStage,
+	presetChangelogTimeline,
 ];
 
 export default POST_CAROUSEL_PRESETS;

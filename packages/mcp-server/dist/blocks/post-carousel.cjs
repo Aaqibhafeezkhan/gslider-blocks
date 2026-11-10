@@ -400,6 +400,26 @@ var layoutAttributes = {
     type: "number",
     default: 75
   },
+  timelineStemColor: {
+    type: "string",
+    default: "#e2e8f0"
+  },
+  timelineStemThickness: {
+    type: "number",
+    default: 2
+  },
+  timelineDotSize: {
+    type: "number",
+    default: 16
+  },
+  timelineDotColor: {
+    type: "string",
+    default: "#007cba"
+  },
+  timelineDatePosition: {
+    type: "string",
+    default: "above"
+  },
   layoutHeight: {
     type: "object",
     default: {
@@ -6158,6 +6178,10 @@ var buildCardDesktop = (attributes2) => {
     horizontalMediaWidth = 45,
     overlayGradientScrim,
     overlayScrimHeight = 75,
+    timelineStemColor = "#e2e8f0",
+    timelineStemThickness = 2,
+    timelineDotSize = 16,
+    timelineDotColor = "#007cba",
     postCardMarginDesktopCssStyle,
     postCardPaddingDesktopCssStyle,
     postCardBorder,
@@ -6201,6 +6225,26 @@ var buildCardDesktop = (attributes2) => {
     80,
     Math.max(50, parseInt(newsroomMainWidth, 10) || 65)
   );
+  const safeStemThickness = Math.min(
+    10,
+    Math.max(1, parseInt(timelineStemThickness, 10) || 2)
+  );
+  const safeDotSize = Math.min(
+    48,
+    Math.max(8, parseInt(timelineDotSize, 10) || 16)
+  );
+  const sanitizeTimelineColor = (val, fallback) => {
+    if (typeof val !== "string" || val.trim() === "") {
+      return fallback;
+    }
+    const cleaned = val.trim();
+    if (/[;{}<>"'\\]|url\(|expression\(/i.test(cleaned)) {
+      return fallback;
+    }
+    return cleaned;
+  };
+  const safeStemColor = sanitizeTimelineColor(timelineStemColor, "#e2e8f0");
+  const safeDotColor = sanitizeTimelineColor(timelineDotColor, "#007cba");
   const rawSpotlightScale = parseFloat(spotlightScaleSide);
   const safeSpotlightScale = Number(
     Math.min(
@@ -6235,6 +6279,10 @@ var buildCardDesktop = (attributes2) => {
             --gslider-spotlight-scale: ${safeSpotlightScale};
             --gslider-spotlight-opacity: ${safeSpotlightOpacity};
             --gslider-newsroom-main-width: ${safeNewsroomMainWidth}%;
+            --gslider-timeline-stem-color: ${safeStemColor};
+            --gslider-timeline-stem-thickness: ${safeStemThickness}px;
+            --gslider-timeline-dot-size: ${safeDotSize}px;
+            --gslider-timeline-dot-color: ${safeDotColor};
         }
 
         .${blockId} .gslider-post-carousel-card {

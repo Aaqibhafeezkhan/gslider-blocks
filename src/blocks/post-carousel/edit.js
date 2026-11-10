@@ -85,6 +85,7 @@ export default function Edit( {
 		enableSpotlight,
 		newsroomMainWidth,
 		newsroomQueuePosition,
+		timelineDatePosition,
 		horizontalMediaPosition,
 		equalHeight,
 		enableCardClickableLink,
@@ -954,6 +955,11 @@ export default function Edit( {
 														  }`
 														: ''
 												}${
+													activeLayoutMode ===
+													'timeline'
+														? ' is-timeline-card'
+														: ''
+												}${
 													hasEntranceAnimation
 														? ` animated ${ cardEntranceAnimation } gslider-has-entrance-anim`
 														: ''
@@ -1433,6 +1439,39 @@ export default function Edit( {
 
 													return (
 														<>
+															{ activeLayoutMode ===
+																'timeline' && (
+																<div
+																	className={ `gslider-timeline-node ${
+																		timelineDatePosition ===
+																		'below'
+																			? 'date-position-below'
+																			: 'date-position-above'
+																	}` }
+																	aria-hidden="true"
+																>
+																	<div className="gslider-timeline-stem"></div>
+																	<div className="gslider-timeline-dot">
+																		<div className="gslider-timeline-dot-inner"></div>
+																	</div>
+																	<time
+																		className="gslider-timeline-date"
+																		dateTime={
+																			post?.date
+																				? String(
+																						post.date
+																				  ).split(
+																						'T'
+																				  )[ 0 ]
+																				: undefined
+																		}
+																	>
+																		{
+																			formattedDate
+																		}
+																	</time>
+																</div>
+															) }
 															{ bodyAndThumb }
 															{ isCardClickable &&
 																! hasTitleLink && (

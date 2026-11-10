@@ -80,6 +80,8 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
                 if ( ! $has_image ) {
                     $article_class .= ' has-no-image';
                 }
+            } elseif ( 'timeline' === ( $context['post_layout_mode'] ?? 'classic' ) ) {
+                $article_class .= ' is-timeline-card';
             }
 
             $before_thumb_html = '';
@@ -157,6 +159,10 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
 
             if ( ! empty( $context['enable_card_clickable_link'] ) && ! $has_all_devices_title_link ) {
                 $elements_html .= '            <a class="gslider-post-carousel-card-link" href="' . esc_url( get_permalink( $post_id ) ) . '" aria-label="' . esc_attr( get_the_title( $post_id ) ) . '"></a>' . "\n";
+            }
+
+            if ( 'timeline' === $layout_mode ) {
+                $elements_html = self::render_timeline_node( $post_id, $context ) . $elements_html;
             }
 
             return '<div class="swiper-slide">' . "\n"
@@ -547,6 +553,29 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
             }
 
             return implode( ' ', $rel_items );
+        }
+
+        /**
+         * Renders the horizontal milestone timeline node header.
+         *
+         * @since 1.2.3
+         *
+         * @param int   $post_id Current post ID.
+         * @param array $context Compiled block rendering context.
+         * @return string Rendered timeline node HTML.
+         */
+        private static function render_timeline_node( int $post_id, array $context ): string {
+            $date_raw       = (string) get_the_date( 'Y-m-d', $post_id );
+            $date_formatted = (string) get_the_date( '', $post_id );
+            $date_pos       = isset( $context['timeline_date_position'] ) && 'below' === $context['timeline_date_position'] ? 'date-position-below' : 'date-position-above';
+
+            return '            <div class="gslider-timeline-node ' . esc_attr( $date_pos ) . '" aria-hidden="true">' . "\n"
+                . '                <div class="gslider-timeline-stem"></div>' . "\n"
+                . '                <div class="gslider-timeline-dot">' . "\n"
+                . '                    <div class="gslider-timeline-dot-inner"></div>' . "\n"
+                . '                </div>' . "\n"
+                . '                <time class="gslider-timeline-date" datetime="' . esc_attr( $date_raw ) . '">' . esc_html( $date_formatted ) . '</time>' . "\n"
+                . '            </div>' . "\n";
         }
     }
 }

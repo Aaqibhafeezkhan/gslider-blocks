@@ -55,6 +55,11 @@ return [
 	'horizontalMediaPosition' => 'left',
 	'overlayGradientScrim' => 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)',
 	'overlayScrimHeight' => 75,
+	'timelineStemColor' => '#e2e8f0',
+	'timelineStemThickness' => 2,
+	'timelineDotSize' => 16,
+	'timelineDotColor' => '#007cba',
+	'timelineDatePosition' => 'above',
 	'layoutHeight' => [
 		'Desktop' => '',
 		'Tablet' => '',
