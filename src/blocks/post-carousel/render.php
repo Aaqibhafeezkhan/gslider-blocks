@@ -233,6 +233,8 @@ if ( isset( $attributes['postsPerPage'] ) ) {
         $posts_per_page = intval( $attributes['postsPerPage'] );
     }
 }
+// Cap the count so a value like -1 cannot load every post.
+$posts_per_page        = max( 1, min( 30, $posts_per_page ) );
 $categories            = isset( $attributes['categories'] ) ? array_map( 'intval', (array) $attributes['categories'] ) : array();
 $category_filter_type  = isset( $attributes['categoryFilterType'] ) ? sanitize_text_field( $attributes['categoryFilterType'] ) : 'include';
 $tags                  = isset( $attributes['tags'] ) ? array_map( 'intval', (array) $attributes['tags'] ) : array();
@@ -389,6 +391,12 @@ if ( $use_related_posts_query ) {
 }
 
 $posts_query = new WP_Query( $query_args );
+
+// Enforce the 1–30 cap even when WP_Query prepends sticky posts beyond posts_per_page.
+if ( is_array( $posts_query->posts ) && count( $posts_query->posts ) > $posts_per_page ) {
+    $posts_query->posts      = array_slice( $posts_query->posts, 0, $posts_per_page );
+    $posts_query->post_count = count( $posts_query->posts );
+}
 
 if ( ! $posts_query->have_posts() ) {
     wp_reset_postdata();
