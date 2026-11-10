@@ -3,6 +3,8 @@
  * Styles for react-select inside Gutenberg sidebar
  */
 
+@use "../../../admin/scss/block-controls/variables" as *;
+
 .gslider-query-settings-panel {
 
 	.gslider-query-select2-control {
@@ -15,7 +17,6 @@
 			border-radius: 4px;
 			background-color: #fff;
 			box-shadow: none;
-			outline: none;
 			transition: border-color 0.15s ease-in-out;
 
 			&:hover {
@@ -23,9 +24,8 @@
 			}
 
 			&.gslider-select2__control--is-focused {
-				border-color: #f0f0f0;
-				box-shadow: none;
-				outline: none;
+				border-color: $primary_color;
+				box-shadow: 0 0 0 1px $primary_color;
 			}
 		}
 
@@ -104,7 +104,7 @@
 			transition: all 0.2s ease;
 
 			&:hover {
-				color: #3858e9;
+				color: $primary_color;
 			}
 
 			svg {
@@ -143,7 +143,7 @@
 			}
 
 			&.gslider-select2__option--is-selected {
-				background-color: #3858e9;
+				background-color: $primary_color;
 				color: #fff;
 			}
 		}

@@ -1,15 +1,22 @@
 import { __ } from '@wordpress/i18n';
-import { useMemo, useCallback } from '@wordpress/element';
+import {
+    useMemo,
+    useCallback,
+    useState,
+    useEffect,
+    useRef,
+} from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
     ToggleControl,
-    TextControl,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
+import apiFetch from '@wordpress/api-fetch';
 import Select from 'react-select';
 import SwitcherControl from '@Components/switcher-control';
 import ResponsiveRangeControl from '@Components/responsive-range-control';
+import InputControls from '@Components/input-control';
 import {
     ORDER_BY_OPTIONS,
     SORT_ORDER_OPTIONS,
@@ -20,6 +27,28 @@ import {
 } from '@Constants/query-constants';
 
 import './editor.scss';
+
+/**
+ * Resolve the WordPress REST API endpoint base for a taxonomy object.
+ *
+ * @param {Object} tax Taxonomy descriptor returned by core-data `getTaxonomies()`.
+ * @return {string} REST base slug (e.g. 'categories', 'tags', or custom rest_base).
+ */
+const getTaxonomyRestBase = (tax) => {
+    if (!tax) {
+        return '';
+    }
+    if (tax.rest_base) {
+        return tax.rest_base;
+    }
+    if (tax.slug === 'category') {
+        return 'categories';
+    }
+    if (tax.slug === 'post_tag') {
+        return 'tags';
+    }
+    return tax.slug;
+};
 
 /**
  * QuerySettingsPanel — Reusable query settings component
@@ -75,13 +104,57 @@ const QuerySettingsPanel = ({
         relatedPostsTaxonomy = 'category',
     } = attributes;
 
+    const isMountedRef = useRef(true);
+    const searchTimersRef = useRef({});
+    const searchRequestSeqRef = useRef({});
+    const hydratedTermKeysRef = useRef(new Set());
+    const hydratedAuthorIdsRef = useRef(new Set());
+
+    const [isMetaEnabled, setIsMetaEnabled] = useState(!!metaKey);
+    const [extraTermsByTax, setExtraTermsByTax] = useState({});
+    const [searchTermsByTax, setSearchTermsByTax] = useState({});
+    const [extraAuthors, setExtraAuthors] = useState({});
+    const [searchAuthors, setSearchAuthors] = useState(null);
+    const [loadingSearches, setLoadingSearches] = useState({});
+
+    useEffect(() => {
+        isMountedRef.current = true;
+        const timers = searchTimersRef.current;
+
+        return () => {
+            isMountedRef.current = false;
+            Object.keys(timers).forEach((key) => {
+                clearTimeout(timers[key]);
+                delete timers[key];
+            });
+        };
+    }, []);
+
+    useEffect(() => {
+        if (metaKey) {
+            setIsMetaEnabled(true);
+        }
+    }, [metaKey]);
+
     /**
-     * Fetch registered post types, taxonomies, terms, and authors from 
+     * Fetch registered post types, taxonomies, terms, and authors from
      * the WordPress REST API dynamically when the selected post type changes.
      */
-    const { postTypes, taxonomies, termsData, allAuthors } = useSelect(
+    const {
+        postTypes,
+        taxonomies,
+        termsData,
+        termsLoaded,
+        allAuthors,
+        authorsLoaded,
+    } = useSelect(
         (select) => {
-            const { getPostTypes, getTaxonomies, getEntityRecords } = select('core');
+            const {
+                getPostTypes,
+                getTaxonomies,
+                getEntityRecords,
+                hasFinishedResolution,
+            } = select('core');
 
             const activePostTypes = getPostTypes() || [];
             const allTax = getTaxonomies() || [];
@@ -93,29 +166,259 @@ const QuerySettingsPanel = ({
 
             // Fetch terms for each taxonomy
             const termsMap = {};
+            const termsLoadedMap = {};
             postTax.forEach((tax) => {
-                termsMap[tax.slug] =
-                    getEntityRecords('taxonomy', tax.slug, {
-                        per_page: 100,
-                        _fields: 'id,name',
-                        context: 'view',
-                    }) || [];
+                const termQueryArgs = {
+                    per_page: 100,
+                    _fields: 'id,name',
+                    context: 'view',
+                };
+                const records = getEntityRecords(
+                    'taxonomy',
+                    tax.slug,
+                    termQueryArgs
+                );
+                const finished =
+                    typeof hasFinishedResolution === 'function'
+                        ? hasFinishedResolution('getEntityRecords', [
+                              'taxonomy',
+                              tax.slug,
+                              termQueryArgs,
+                          ])
+                        : true;
+                termsMap[tax.slug] = records || [];
+                termsLoadedMap[tax.slug] = Array.isArray(records) || finished;
             });
+
+            const authorQueryArgs = {
+                per_page: 100,
+                _fields: 'id,name',
+                context: 'view',
+            };
+            const authorRecords = getEntityRecords(
+                'root',
+                'user',
+                authorQueryArgs
+            );
+            const authorFinished =
+                typeof hasFinishedResolution === 'function'
+                    ? hasFinishedResolution('getEntityRecords', [
+                          'root',
+                          'user',
+                          authorQueryArgs,
+                      ])
+                    : true;
 
             return {
                 postTypes: activePostTypes,
                 taxonomies: postTax,
                 termsData: termsMap,
-                allAuthors:
-                    getEntityRecords('root', 'user', {
-                        per_page: 100,
-                        _fields: 'id,name',
-                        context: 'view',
-                    }) || [],
+                termsLoaded: termsLoadedMap,
+                allAuthors: authorRecords || [],
+                authorsLoaded: Array.isArray(authorRecords) || authorFinished,
             };
         },
         [postType]
     );
+
+    /**
+     * Hydrate any selected taxonomy term IDs that fall outside the initial 100-term page.
+     */
+    useEffect(() => {
+        if (useRelatedPostsQuery || !taxonomies || !taxonomies.length) {
+            return;
+        }
+
+        const requests = [];
+
+        taxonomies.forEach((tax) => {
+            if (!termsLoaded[tax.slug]) {
+                return;
+            }
+
+            let selectedIds = [];
+            if (tax.slug === 'category') {
+                selectedIds = categories || [];
+            } else if (tax.slug === 'post_tag') {
+                selectedIds = tags || [];
+            } else {
+                selectedIds = (taxonomyQuery && taxonomyQuery[tax.slug]) || [];
+            }
+
+            if (!selectedIds.length) {
+                return;
+            }
+
+            const existingIds = new Set(
+                (termsData[tax.slug] || []).map((term) => term.id)
+            );
+            const cachedMap = extraTermsByTax[tax.slug] || {};
+
+            const missingIds = selectedIds.filter((rawId) => {
+                const id = Number(rawId);
+                if (!Number.isInteger(id) || id <= 0) {
+                    return false;
+                }
+                if (existingIds.has(id) || cachedMap[id]) {
+                    return false;
+                }
+                const cacheKey = `${tax.slug}:${id}`;
+                if (hydratedTermKeysRef.current.has(cacheKey)) {
+                    return false;
+                }
+                return true;
+            });
+
+            if (!missingIds.length) {
+                return;
+            }
+
+            const restBase = getTaxonomyRestBase(tax);
+            if (!restBase) {
+                return;
+            }
+            const restNamespace = tax.rest_namespace || 'wp/v2';
+
+            const numericIds = missingIds.map((rawId) => Number(rawId));
+            numericIds.forEach((id) => {
+                hydratedTermKeysRef.current.add(`${tax.slug}:${id}`);
+            });
+
+            requests.push({
+                taxSlug: tax.slug,
+                restNamespace,
+                restBase,
+                ids: numericIds,
+            });
+        });
+
+        if (!requests.length) {
+            return;
+        }
+
+        requests.forEach(({ taxSlug, restNamespace, restBase, ids }) => {
+            for (let i = 0; i < ids.length; i += 100) {
+                const chunk = ids.slice(i, i + 100);
+                apiFetch({
+                    path: `/${restNamespace}/${restBase}?include=${chunk.join(
+                        ','
+                    )}&per_page=100&_fields=id,name`,
+                })
+                    .then((fetchedTerms) => {
+                        if (
+                            !isMountedRef.current ||
+                            !Array.isArray(fetchedTerms) ||
+                            !fetchedTerms.length
+                        ) {
+                            return;
+                        }
+                        setExtraTermsByTax((prev) => {
+                            const prevTaxMap = prev[taxSlug] || {};
+                            const nextTaxMap = { ...prevTaxMap };
+                            fetchedTerms.forEach((term) => {
+                                if (term && term.id !== undefined) {
+                                    nextTaxMap[term.id] = {
+                                        id: term.id,
+                                        name: term.name,
+                                    };
+                                }
+                            });
+                            return {
+                                ...prev,
+                                [taxSlug]: nextTaxMap,
+                            };
+                        });
+                    })
+                    .catch(() => {
+                        chunk.forEach((id) => {
+                            hydratedTermKeysRef.current.delete(`${taxSlug}:${id}`);
+                        });
+                    });
+            }
+        });
+    }, [
+        useRelatedPostsQuery,
+        taxonomies,
+        termsLoaded,
+        termsData,
+        categories,
+        tags,
+        taxonomyQuery,
+        extraTermsByTax,
+    ]);
+
+    /**
+     * Hydrate any selected author IDs that fall outside the initial 100-user page.
+     */
+    useEffect(() => {
+        if (
+            useRelatedPostsQuery ||
+            !authorsLoaded ||
+            !Array.isArray(authors) ||
+            !authors.length
+        ) {
+            return;
+        }
+
+        const existingIds = new Set(allAuthors.map((user) => user.id));
+        const missingIds = authors.filter((rawId) => {
+            const id = Number(rawId);
+            if (!Number.isInteger(id) || id <= 0) {
+                return false;
+            }
+            if (existingIds.has(id) || extraAuthors[id]) {
+                return false;
+            }
+            if (hydratedAuthorIdsRef.current.has(id)) {
+                return false;
+            }
+            return true;
+        });
+
+        if (!missingIds.length) {
+            return;
+        }
+
+        const numericIds = missingIds.map((rawId) => Number(rawId));
+        numericIds.forEach((id) => {
+            hydratedAuthorIdsRef.current.add(id);
+        });
+
+        for (let i = 0; i < numericIds.length; i += 100) {
+            const chunk = numericIds.slice(i, i + 100);
+            apiFetch({
+                path: `/wp/v2/users?include=${chunk.join(
+                    ','
+                )}&per_page=100&_fields=id,name`,
+            })
+                .then((fetchedUsers) => {
+                    if (
+                        !isMountedRef.current ||
+                        !Array.isArray(fetchedUsers) ||
+                        !fetchedUsers.length
+                    ) {
+                        return;
+                    }
+                    setExtraAuthors((prev) => {
+                        const next = { ...prev };
+                        fetchedUsers.forEach((user) => {
+                            if (user && user.id !== undefined) {
+                                next[user.id] = {
+                                    id: user.id,
+                                    name: user.name,
+                                };
+                            }
+                        });
+                        return next;
+                    });
+                })
+                .catch(() => {
+                    chunk.forEach((id) => {
+                        hydratedAuthorIdsRef.current.delete(id);
+                    });
+                });
+        }
+    }, [useRelatedPostsQuery, authorsLoaded, allAuthors, authors, extraAuthors]);
 
     /**
      * Format the fetched post types into select option objects for the dropdown,
@@ -137,12 +440,19 @@ const QuerySettingsPanel = ({
     );
 
     /**
-     * Handle post type changes by saving the new type and clearing out terms and 
+     * Handle post type changes by saving the new type and clearing out terms and
      * taxonomies selected for the previous post type.
      */
     const handlePostTypeChange = useCallback(
         (option) => {
             if (option) {
+                Object.keys(searchTimersRef.current).forEach((timerKey) => {
+                    if (timerKey.startsWith('tax:')) {
+                        clearTimeout(searchTimersRef.current[timerKey]);
+                        delete searchTimersRef.current[timerKey];
+                    }
+                });
+                setSearchTermsByTax({});
                 setAttributes({
                     postType: option.value,
                     categories: [],
@@ -161,8 +471,11 @@ const QuerySettingsPanel = ({
      */
     const getTaxonomyData = useCallback(
         (taxSlug) => {
-            const terms = termsData[taxSlug] || [];
-            const options = terms.map((t) => ({ value: t.id, label: t.name }));
+            const initialTerms = termsData[taxSlug] || [];
+            const cachedMap = extraTermsByTax[taxSlug] || {};
+            const searchResults =
+                (searchTermsByTax[taxSlug] && searchTermsByTax[taxSlug].items) ||
+                [];
 
             let selectedIds = [];
             let filterType = 'include';
@@ -175,19 +488,255 @@ const QuerySettingsPanel = ({
                 filterType = tagFilterType || 'include';
             } else {
                 selectedIds = (taxonomyQuery && taxonomyQuery[taxSlug]) || [];
-                filterType = (taxonomyFilterTypes && taxonomyFilterTypes[taxSlug]) || 'include';
+                filterType =
+                    (taxonomyFilterTypes && taxonomyFilterTypes[taxSlug]) ||
+                    'include';
             }
+
+            const optionMap = new Map();
+            initialTerms.forEach((term) => {
+                if (term && term.id !== undefined) {
+                    optionMap.set(term.id, {
+                        value: term.id,
+                        label: term.name,
+                    });
+                }
+            });
+            Object.values(cachedMap).forEach((term) => {
+                if (term && term.id !== undefined) {
+                    optionMap.set(term.id, {
+                        value: term.id,
+                        label: term.name,
+                    });
+                }
+            });
+            searchResults.forEach((term) => {
+                if (term && term.id !== undefined) {
+                    optionMap.set(term.id, {
+                        value: term.id,
+                        label: term.name,
+                    });
+                }
+            });
 
             const selectedOptions = selectedIds
                 .map((id) => {
-                    const found = options.find((opt) => opt.value === id);
-                    return found || { value: id, label: String( id ) };
+                    const found =
+                        optionMap.get(id) || optionMap.get(Number(id));
+                    return found || { value: id, label: String(id) };
                 })
                 .filter(Boolean);
 
+            const optionsMap = new Map();
+            searchResults.forEach((term) => {
+                if (term && term.id !== undefined) {
+                    optionsMap.set(term.id, {
+                        value: term.id,
+                        label: term.name,
+                    });
+                }
+            });
+            initialTerms.forEach((term) => {
+                if (
+                    term &&
+                    term.id !== undefined &&
+                    !optionsMap.has(term.id)
+                ) {
+                    optionsMap.set(term.id, {
+                        value: term.id,
+                        label: term.name,
+                    });
+                }
+            });
+            selectedOptions.forEach((opt) => {
+                if (!optionsMap.has(opt.value)) {
+                    optionsMap.set(opt.value, opt);
+                }
+            });
+
+            const options = Array.from(optionsMap.values());
+
             return { options, selectedOptions, filterType };
         },
-        [termsData, categories, categoryFilterType, tags, tagFilterType, taxonomyQuery, taxonomyFilterTypes]
+        [
+            termsData,
+            extraTermsByTax,
+            searchTermsByTax,
+            categories,
+            categoryFilterType,
+            tags,
+            tagFilterType,
+            taxonomyQuery,
+            taxonomyFilterTypes,
+        ]
+    );
+
+    /**
+     * Debounced async search handler for taxonomy term dropdowns.
+     */
+    const handleTaxonomyInputChange = useCallback(
+        (tax, inputValue, actionMeta) => {
+            const action = actionMeta && actionMeta.action;
+            const key = `tax:${tax.slug}`;
+
+            if (action === 'menu-close') {
+                if (searchTimersRef.current[key]) {
+                    clearTimeout(searchTimersRef.current[key]);
+                    delete searchTimersRef.current[key];
+                }
+                searchRequestSeqRef.current[key] =
+                    (searchRequestSeqRef.current[key] || 0) + 1;
+                setSearchTermsByTax((prev) => {
+                    if (!prev[tax.slug]) {
+                        return prev;
+                    }
+                    const next = { ...prev };
+                    delete next[tax.slug];
+                    return next;
+                });
+                setLoadingSearches((prev) =>
+                    prev[key] ? { ...prev, [key]: false } : prev
+                );
+                return;
+            }
+
+            if (action !== 'input-change') {
+                return;
+            }
+
+            if (searchTimersRef.current[key]) {
+                clearTimeout(searchTimersRef.current[key]);
+                delete searchTimersRef.current[key];
+            }
+
+            const trimmed = (inputValue || '').trim();
+            if (!trimmed) {
+                searchRequestSeqRef.current[key] =
+                    (searchRequestSeqRef.current[key] || 0) + 1;
+                setSearchTermsByTax((prev) => {
+                    if (!prev[tax.slug]) {
+                        return prev;
+                    }
+                    const next = { ...prev };
+                    delete next[tax.slug];
+                    return next;
+                });
+                setLoadingSearches((prev) =>
+                    prev[key] ? { ...prev, [key]: false } : prev
+                );
+                return;
+            }
+
+            const restBase = getTaxonomyRestBase(tax);
+            if (!restBase) {
+                return;
+            }
+            const restNamespace = tax.rest_namespace || 'wp/v2';
+
+            const nextSeq = (searchRequestSeqRef.current[key] || 0) + 1;
+            searchRequestSeqRef.current[key] = nextSeq;
+
+            searchTimersRef.current[key] = setTimeout(() => {
+                delete searchTimersRef.current[key];
+                if (!isMountedRef.current) {
+                    return;
+                }
+
+                setLoadingSearches((prev) => ({ ...prev, [key]: true }));
+
+                apiFetch({
+                    path: `/${restNamespace}/${restBase}?search=${encodeURIComponent(
+                        trimmed
+                    )}&per_page=20&_fields=id,name`,
+                })
+                    .then((fetchedTerms) => {
+                        if (
+                            !isMountedRef.current ||
+                            searchRequestSeqRef.current[key] !== nextSeq
+                        ) {
+                            return;
+                        }
+
+                        const normalized = Array.isArray(fetchedTerms)
+                            ? fetchedTerms.filter(
+                                  (term) => term && term.id !== undefined
+                              )
+                            : [];
+
+                        setSearchTermsByTax((prev) => ({
+                            ...prev,
+                            [tax.slug]: {
+                                query: trimmed,
+                                items: normalized,
+                            },
+                        }));
+
+                        if (normalized.length) {
+                            setExtraTermsByTax((prev) => {
+                                const prevTaxMap = prev[tax.slug] || {};
+                                const nextTaxMap = { ...prevTaxMap };
+                                normalized.forEach((term) => {
+                                    nextTaxMap[term.id] = {
+                                        id: term.id,
+                                        name: term.name,
+                                    };
+                                });
+                                return {
+                                    ...prev,
+                                    [tax.slug]: nextTaxMap,
+                                };
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        // Ignore REST search failures gracefully.
+                    })
+                    .finally(() => {
+                        if (
+                            isMountedRef.current &&
+                            searchRequestSeqRef.current[key] === nextSeq
+                        ) {
+                            setLoadingSearches((prev) => ({
+                                ...prev,
+                                [key]: false,
+                            }));
+                        }
+                    });
+            }, 250);
+        },
+        []
+    );
+
+    /**
+     * Keep matching remote taxonomy search results visible even if WP matched by slug or diacritics.
+     */
+    const filterTaxonomyOption = useCallback(
+        (taxSlug, option, rawInput) => {
+            const trimmed = (rawInput || '').trim().toLowerCase();
+            if (!trimmed) {
+                return true;
+            }
+            const label = String(option.label || '').toLowerCase();
+            if (label.includes(trimmed)) {
+                return true;
+            }
+            const optionId =
+                option && option.data && option.data.value !== undefined
+                    ? option.data.value
+                    : option.value;
+            const searchEntry = searchTermsByTax[taxSlug];
+            if (
+                searchEntry &&
+                searchEntry.query.toLowerCase() === trimmed &&
+                searchEntry.items.some(
+                    (item) => Number(item.id) === Number(optionId)
+                )
+            ) {
+                return true;
+            }
+            return false;
+        },
+        [searchTermsByTax]
     );
 
     /**
@@ -237,22 +786,212 @@ const QuerySettingsPanel = ({
     );
 
     /**
-     * Transform WordPress users/authors list into dropdown select options.
+     * Build lookup map across initial, cached, and searched authors.
      */
-    const authorOptions = useMemo(
-        () => allAuthors.map((user) => ({ value: user.id, label: user.name })),
-        [allAuthors]
-    );
+    const authorOptionMap = useMemo(() => {
+        const map = new Map();
+        allAuthors.forEach((user) => {
+            if (user && user.id !== undefined) {
+                map.set(user.id, { value: user.id, label: user.name });
+            }
+        });
+        Object.values(extraAuthors).forEach((user) => {
+            if (user && user.id !== undefined) {
+                map.set(user.id, { value: user.id, label: user.name });
+            }
+        });
+        if (searchAuthors && Array.isArray(searchAuthors.items)) {
+            searchAuthors.items.forEach((user) => {
+                if (user && user.id !== undefined) {
+                    map.set(user.id, { value: user.id, label: user.name });
+                }
+            });
+        }
+        return map;
+    }, [allAuthors, extraAuthors, searchAuthors]);
 
     /**
      * Match and return the selected author option objects to populate the dropdown state.
      */
     const selectedAuthorOptions = useMemo(() => {
-        if (!authors || !authorOptions.length) return [];
+        if (!Array.isArray(authors) || !authors.length) {
+            return [];
+        }
         return authors
-            .map((id) => authorOptions.find((opt) => opt.value === id))
+            .map((id) => {
+                const found =
+                    authorOptionMap.get(id) || authorOptionMap.get(Number(id));
+                return found || { value: id, label: String(id) };
+            })
             .filter(Boolean);
-    }, [authors, authorOptions]);
+    }, [authors, authorOptionMap]);
+
+    /**
+     * Transform WordPress users/authors list into dropdown select options,
+     * merging active search results and preserving selected authors.
+     */
+    const authorOptions = useMemo(() => {
+        const optionsMap = new Map();
+        const searchItems =
+            (searchAuthors && Array.isArray(searchAuthors.items)
+                ? searchAuthors.items
+                : []) || [];
+
+        searchItems.forEach((user) => {
+            if (user && user.id !== undefined) {
+                optionsMap.set(user.id, { value: user.id, label: user.name });
+            }
+        });
+        allAuthors.forEach((user) => {
+            if (user && user.id !== undefined && !optionsMap.has(user.id)) {
+                optionsMap.set(user.id, { value: user.id, label: user.name });
+            }
+        });
+        selectedAuthorOptions.forEach((opt) => {
+            if (!optionsMap.has(opt.value)) {
+                optionsMap.set(opt.value, opt);
+            }
+        });
+
+        return Array.from(optionsMap.values());
+    }, [searchAuthors, allAuthors, selectedAuthorOptions]);
+
+    /**
+     * Debounced async search handler for authors dropdown.
+     */
+    const handleAuthorInputChange = useCallback((inputValue, actionMeta) => {
+        const action = actionMeta && actionMeta.action;
+        const key = 'authors';
+
+        if (action === 'menu-close') {
+            if (searchTimersRef.current[key]) {
+                clearTimeout(searchTimersRef.current[key]);
+                delete searchTimersRef.current[key];
+            }
+            searchRequestSeqRef.current[key] =
+                (searchRequestSeqRef.current[key] || 0) + 1;
+            setSearchAuthors(null);
+            setLoadingSearches((prev) =>
+                prev[key] ? { ...prev, [key]: false } : prev
+            );
+            return;
+        }
+
+        if (action !== 'input-change') {
+            return;
+        }
+
+        if (searchTimersRef.current[key]) {
+            clearTimeout(searchTimersRef.current[key]);
+            delete searchTimersRef.current[key];
+        }
+
+        const trimmed = (inputValue || '').trim();
+        if (!trimmed) {
+            searchRequestSeqRef.current[key] =
+                (searchRequestSeqRef.current[key] || 0) + 1;
+            setSearchAuthors(null);
+            setLoadingSearches((prev) =>
+                prev[key] ? { ...prev, [key]: false } : prev
+            );
+            return;
+        }
+
+        const nextSeq = (searchRequestSeqRef.current[key] || 0) + 1;
+        searchRequestSeqRef.current[key] = nextSeq;
+
+        searchTimersRef.current[key] = setTimeout(() => {
+            delete searchTimersRef.current[key];
+            if (!isMountedRef.current) {
+                return;
+            }
+
+            setLoadingSearches((prev) => ({ ...prev, [key]: true }));
+
+            apiFetch({
+                path: `/wp/v2/users?search=${encodeURIComponent(
+                    trimmed
+                )}&per_page=20&_fields=id,name`,
+            })
+                .then((fetchedUsers) => {
+                    if (
+                        !isMountedRef.current ||
+                        searchRequestSeqRef.current[key] !== nextSeq
+                    ) {
+                        return;
+                    }
+
+                    const normalized = Array.isArray(fetchedUsers)
+                        ? fetchedUsers.filter(
+                              (user) => user && user.id !== undefined
+                          )
+                        : [];
+
+                    setSearchAuthors({
+                        query: trimmed,
+                        items: normalized,
+                    });
+
+                    if (normalized.length) {
+                        setExtraAuthors((prev) => {
+                            const next = { ...prev };
+                            normalized.forEach((user) => {
+                                next[user.id] = {
+                                    id: user.id,
+                                    name: user.name,
+                                };
+                            });
+                            return next;
+                        });
+                    }
+                })
+                .catch(() => {
+                    // Ignore REST search failures gracefully.
+                })
+                .finally(() => {
+                    if (
+                        isMountedRef.current &&
+                        searchRequestSeqRef.current[key] === nextSeq
+                    ) {
+                        setLoadingSearches((prev) => ({
+                            ...prev,
+                            [key]: false,
+                        }));
+                    }
+                });
+        }, 250);
+    }, []);
+
+    /**
+     * Keep matching remote author search results visible.
+     */
+    const filterAuthorOption = useCallback(
+        (option, rawInput) => {
+            const trimmed = (rawInput || '').trim().toLowerCase();
+            if (!trimmed) {
+                return true;
+            }
+            const label = String(option.label || '').toLowerCase();
+            if (label.includes(trimmed)) {
+                return true;
+            }
+            const optionId =
+                option && option.data && option.data.value !== undefined
+                    ? option.data.value
+                    : option.value;
+            if (
+                searchAuthors &&
+                searchAuthors.query.toLowerCase() === trimmed &&
+                searchAuthors.items.some(
+                    (item) => Number(item.id) === Number(optionId)
+                )
+            ) {
+                return true;
+            }
+            return false;
+        },
+        [searchAuthors]
+    );
 
     /**
      * Save the chosen author IDs into block attributes.
@@ -421,6 +1160,13 @@ const QuerySettingsPanel = ({
                                     onChange={(selected) =>
                                         handleTaxonomyChange(taxonomy.slug, selected)
                                     }
+                                    onInputChange={(inputValue, actionMeta) =>
+                                        handleTaxonomyInputChange(taxonomy, inputValue, actionMeta)
+                                    }
+                                    filterOption={(option, rawInput) =>
+                                        filterTaxonomyOption(taxonomy.slug, option, rawInput)
+                                    }
+                                    isLoading={!!loadingSearches[`tax:${taxonomy.slug}`]}
                                     isMulti
                                     isClearable
                                     placeholder={__('Select...', 'gslider-blocks')}
@@ -456,6 +1202,9 @@ const QuerySettingsPanel = ({
                                 options={authorOptions}
                                 value={selectedAuthorOptions}
                                 onChange={handleAuthorsChange}
+                                onInputChange={handleAuthorInputChange}
+                                filterOption={filterAuthorOption}
+                                isLoading={!!loadingSearches.authors}
                                 isMulti
                                 isClearable
                                 placeholder={__('Select...', 'gslider-blocks')}
@@ -567,29 +1316,30 @@ const QuerySettingsPanel = ({
                     <>
                         <ToggleControl
                             label={__('Filter by Custom Field (Meta)', 'gslider-blocks')}
-                            checked={!!metaKey}
-                            onChange={(value) => {
-                                if (!value) {
+                            checked={isMetaEnabled}
+                            onChange={(isChecked) => {
+                                if (!isChecked) {
+                                    setIsMetaEnabled(false);
                                     setAttributes({
                                         metaKey: '',
                                         metaValue: '',
                                         metaCompare: '=',
                                     });
                                 } else {
-                                    setAttributes({ metaKey: 'featured' });
+                                    setIsMetaEnabled(true);
                                 }
                             }}
                         />
 
-                        {!!metaKey && (
+                        {isMetaEnabled && (
                             <div className="gslider-meta-query-settings">
-                                <TextControl
+                                <InputControls
                                     label={__('Meta Key', 'gslider-blocks')}
-                                    value={metaKey}
-                                    onChange={(value) =>
-                                        setAttributes({ metaKey: value })
+                                    value={metaKey || ''}
+                                    onChangeValue={(nextVal) =>
+                                        setAttributes({ metaKey: nextVal || '' })
                                     }
-                                    help={__('Enter the custom field name/key.', 'gslider-blocks')}
+                                    helpText={__('Enter the custom field name/key.', 'gslider-blocks')}
                                 />
 
                                 <BaseControl
@@ -608,13 +1358,13 @@ const QuerySettingsPanel = ({
                                 </BaseControl>
 
                                 {!['EXISTS', 'NOT EXISTS'].includes(metaCompare) && (
-                                    <TextControl
+                                    <InputControls
                                         label={__('Meta Value', 'gslider-blocks')}
-                                        value={metaValue}
-                                        onChange={(value) =>
-                                            setAttributes({ metaValue: value })
+                                        value={metaValue || ''}
+                                        onChangeValue={(nextVal) =>
+                                            setAttributes({ metaValue: nextVal || '' })
                                         }
-                                        help={__('Enter the custom field value to compare.', 'gslider-blocks')}
+                                        helpText={__('Enter the custom field value to compare.', 'gslider-blocks')}
                                     />
                                 )}
                             </div>
@@ -624,25 +1374,25 @@ const QuerySettingsPanel = ({
 
                 {/* Search Keyword (Hide if related query active) */}
                 {!useRelatedPostsQuery && showSearchQuery && (
-                    <TextControl
+                    <InputControls
                         label={__('Search Keyword', 'gslider-blocks')}
-                        value={searchQuery}
-                        onChange={(value) =>
-                            setAttributes({ searchQuery: value })
+                        value={searchQuery || ''}
+                        onChangeValue={(nextVal) =>
+                            setAttributes({ searchQuery: nextVal || '' })
                         }
-                        help={__('Filter posts by search terms.', 'gslider-blocks')}
+                        helpText={__('Filter posts by search terms.', 'gslider-blocks')}
                     />
                 )}
 
                 {/* Exclude Post IDs (Hide if related query active) */}
                 {!useRelatedPostsQuery && showExcludePosts && (
-                    <TextControl
+                    <InputControls
                         label={__('Exclude Post IDs', 'gslider-blocks')}
-                        value={excludePosts}
-                        onChange={(value) =>
-                            setAttributes({ excludePosts: value })
+                        value={excludePosts || ''}
+                        onChangeValue={(nextVal) =>
+                            setAttributes({ excludePosts: nextVal || '' })
                         }
-                        help={__('Comma-separated list of post IDs to exclude.', 'gslider-blocks')}
+                        helpText={__('Comma-separated list of post IDs to exclude.', 'gslider-blocks')}
                     />
                 )}
 

@@ -1736,9 +1736,6 @@ const generatePostCarouselStyle = ( attributes ) => {
         ${
 			cardHoverAnimation === 'pop'
 				? `
-            @keyframes gsliderPop {
-                50% { transform: scale(var(--card-hover-pop-scale)); }
-            }
             .${ blockId } .gslider-post-carousel-card:hover {
                 animation: gsliderPop ${
 					cardHoverAnimationDuration?.Desktop || 300
@@ -3590,12 +3587,6 @@ const generatePostCarouselStyle = ( attributes ) => {
         `
 				: ''
 		}
-
-        @keyframes gsliderPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
 
         .${ blockId } .gslider-post-carousel-readmore a.gslider-post-carousel-readmore-btn:focus {
             outline: none;

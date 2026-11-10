@@ -42,15 +42,14 @@ const Select2Control = ({
         control: (base, state) => ({
             ...base,
             backgroundColor: '#fff',
-            borderColor: '#f0f0f0',
+            borderColor: state.isFocused ? '#007cba' : '#f0f0f0',
             borderWidth: '1px',
-            boxShadow: 'none',
+            boxShadow: state.isFocused ? '0 0 0 1px #007cba' : 'none',
             borderRadius: '4px',
             minHeight: '32px',
             height: isMulti ? 'auto' : '32px',
-            outline: 'none',
             '&:hover': {
-                borderColor: '#f0f0f0',
+                borderColor: state.isFocused ? '#007cba' : '#f0f0f0',
             },
         }),
         valueContainer: (base) => ({
@@ -68,12 +67,12 @@ const Select2Control = ({
             minHeight: '32px',
             height: isMulti ? 'auto' : '32px',
         }),
-        dropdownIndicator: (base, state) => ({
+        dropdownIndicator: (base) => ({
             ...base,
             color: '#1e1e1e',
             transition: 'all 0.2s ease',
             '&:hover': {
-                color: '#3858e9',
+                color: '#007cba',
             },
             svg: {
                 width: 16,
@@ -122,12 +121,9 @@ const Select2Control = ({
         }),
         option: (base, state) => ({
             ...base,
-            backgroundColor: state.isSelected
-                ? '#f0f0f0'
-                : state.isFocused
-                ? '#f0f0f0'
-                : '#fff',
-            color: state.isFocused ? '#3858e9' : '#1e1e1e',
+            backgroundColor:
+                state.isSelected || state.isFocused ? '#f0f0f0' : '#fff',
+            color: state.isFocused ? '#006ba1' : '#1e1e1e',
             fontSize: '12px',
             fontWeight: 400,
             lineHeight: 1.3,
@@ -145,7 +141,7 @@ const Select2Control = ({
     return (
         <BaseControl
             className="gslider-select2-control-wrapper"
-            label={label ? __(label, "gslider-blocks") : ''}
+            label={ label }
         >
             <Select
                 options={options}
