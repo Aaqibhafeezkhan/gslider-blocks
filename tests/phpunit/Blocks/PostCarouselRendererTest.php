@@ -916,6 +916,7 @@ class PostCarouselRendererTest {
 		$this->test_wave5b_newsroom_stage_preset_and_queue_rendering();
 		$this->test_wave5c_timeline_rail_preset_rendering();
 		$this->test_wave6_editorial_meta_reading_time_relative_dates_comments_separators_and_badge_cap();
+		$this->test_wave7_marquee_autoplay_progress_and_mobile_only_grid();
 
 		echo "\nAll PostCarouselRenderer unit tests passed successfully!\n";
 	}
@@ -1829,6 +1830,110 @@ class PostCarouselRendererTest {
 		$this->assert_same( 5, $ctx_high['taxonomy_max_count'], 'taxonomyMaxCount clamps 99 to maximum 5' );
 		$this->assert_same( 'relative', $ctx_high['date_format'], 'Valid relative dateFormat is preserved' );
 		$this->assert_same( 'dash', $ctx_high['meta_separator'], 'Valid dash metaSeparator is preserved' );
+	}
+
+	/**
+	 * Test 14: Wave 7 Marquee Ticker, Autoplay Progress Line, and Desktop-Grid / Mobile-Carousel Responsive Mode.
+	 *
+	 * @return void
+	 */
+	public function test_wave7_marquee_autoplay_progress_and_mobile_only_grid(): void {
+		$this->reset_state();
+
+		// 1. Marquee Ticker mode Swiper settings & HTML output
+		$marquee_attrs = array(
+			'blockId'              => 'gslider-test-marquee',
+			'carouselMode'         => 'marquee',
+			'marqueeSpeed'         => 7500,
+			'marqueePauseOnHover'  => false,
+			'showAutoplayProgress' => true,
+		);
+		$marquee_html = PostCarouselRenderer::render( $marquee_attrs );
+		$this->assert_true( false !== strpos( $marquee_html, 'is-mode-marquee' ), 'Marquee mode emits is-mode-marquee wrapper class' );
+		$this->assert_true( false === strpos( $marquee_html, 'has-autoplay-progress' ), 'Marquee mode omits has-autoplay-progress wrapper class' );
+		$this->assert_true( false === strpos( $marquee_html, 'swiper-button-prev' ), 'Marquee mode renders zero navigation buttons' );
+		$this->assert_true( false === strpos( $marquee_html, 'swiper-pagination' ), 'Marquee mode renders zero pagination' );
+		$this->assert_true( false === strpos( $marquee_html, 'gslider-autoplay-progress' ), 'Marquee mode omits autoplay progress line even if showAutoplayProgress is true' );
+
+		preg_match( '/data-swiper-settings="([^"]+)"/', $marquee_html, $marquee_match );
+		$this->assert_true( ! empty( $marquee_match[1] ), 'Marquee render includes serialized data-swiper-settings' );
+		$marquee_settings = json_decode( html_entity_decode( $marquee_match[1] ?? '', ENT_QUOTES, 'UTF-8' ), true );
+
+		$this->assert_same( 'slide', $marquee_settings['effect'], 'Marquee sets slide effect' );
+		$this->assert_true( ! empty( $marquee_settings['freeMode']['enabled'] ), 'Marquee enables freeMode' );
+		$this->assert_same( false, $marquee_settings['freeMode']['momentum'], 'Marquee disables freeMode momentum' );
+		$this->assert_same( 7500, $marquee_settings['speed'], 'Marquee sets custom speed' );
+		$this->assert_same( 0, $marquee_settings['autoplay']['delay'], 'Marquee sets delay to 0 for continuous scroll' );
+		$this->assert_same( false, $marquee_settings['autoplay']['pauseOnMouseEnter'], 'Marquee honors marqueePauseOnHover=false' );
+		$this->assert_true( $marquee_settings['loop'], 'Marquee enables loop' );
+		$this->assert_same( false, $marquee_settings['allowTouchMove'], 'Marquee disables touch move' );
+		$this->assert_same( false, $marquee_settings['breakpoints'][1025]['navigation']['enabled'], 'Marquee disables breakpoint navigation' );
+		$this->assert_same( false, $marquee_settings['breakpoints'][1025]['pagination']['enabled'], 'Marquee disables breakpoint pagination' );
+
+		// 2. Desktop-Grid / Mobile-Carousel mode Swiper settings & HTML output
+		$mobile_only_attrs = array(
+			'blockId'      => 'gslider-test-mobile-only',
+			'carouselMode' => 'mobile-only',
+		);
+		$mobile_only_html = PostCarouselRenderer::render( $mobile_only_attrs );
+		$this->assert_true( false !== strpos( $mobile_only_html, 'is-mode-mobile-only' ), 'Mobile-only mode emits is-mode-mobile-only wrapper class' );
+
+		preg_match( '/data-swiper-settings="([^"]+)"/', $mobile_only_html, $mobile_match );
+		$this->assert_true( ! empty( $mobile_match[1] ), 'Mobile-only render includes serialized data-swiper-settings' );
+		$mobile_only_settings = json_decode( html_entity_decode( $mobile_match[1] ?? '', ENT_QUOTES, 'UTF-8' ), true );
+
+		$this->assert_same( false, $mobile_only_settings['breakpoints'][1025]['enabled'], 'Mobile-only mode disables Swiper on Desktop breakpoint (>=1025px)' );
+
+		// 3. Autoplay Countdown Progress Line (Top & Bottom positions)
+		$progress_top_html = PostCarouselRenderer::render(
+			array(
+				'blockId'                  => 'gslider-progress-top',
+				'showAutoplayProgress'     => true,
+				'autoplayProgressPosition' => 'top',
+			)
+		);
+		$this->assert_true( false !== strpos( $progress_top_html, 'has-autoplay-progress' ), 'Autoplay progress line emits has-autoplay-progress wrapper class' );
+		$this->assert_true( false !== strpos( $progress_top_html, '<div class="gslider-autoplay-progress position-top" aria-hidden="true"><span class="gslider-autoplay-progress-fill"></span></div>' ), 'Autoplay progress line renders at top position before slides' );
+
+		$progress_bottom_html = PostCarouselRenderer::render(
+			array(
+				'blockId'                  => 'gslider-progress-bottom',
+				'showAutoplayProgress'     => true,
+				'autoplayProgressPosition' => 'bottom',
+			)
+		);
+		$this->assert_true( false !== strpos( $progress_bottom_html, '<div class="gslider-autoplay-progress position-bottom" aria-hidden="true"><span class="gslider-autoplay-progress-fill"></span></div>' ), 'Autoplay progress line renders at bottom position after slides' );
+
+		// 4. Clamping and bounds validation
+		$ctx_clamped_low = PostCarouselRenderer::build_render_context(
+			array(
+				'carouselMode'             => 'invalid-mode',
+				'marqueeSpeed'             => 100,
+				'autoplayProgressPosition' => 'invalid-position',
+				'autoplayProgressHeight'   => 0,
+				'desktopGridColumns'       => 0,
+				'desktopGridGap'           => -10,
+			)
+		);
+		$this->assert_same( 'carousel', $ctx_clamped_low['carousel_mode'], 'Invalid carouselMode falls back to carousel' );
+		$this->assert_same( 500, $ctx_clamped_low['marquee_speed'], 'marqueeSpeed clamps 100 to minimum 500ms' );
+		$this->assert_same( 'top', $ctx_clamped_low['autoplay_progress_position'], 'Invalid autoplayProgressPosition falls back to top' );
+		$this->assert_same( 1, $ctx_clamped_low['autoplay_progress_height'], 'autoplayProgressHeight clamps 0 to minimum 1px' );
+		$this->assert_same( 1, $ctx_clamped_low['desktop_grid_columns'], 'desktopGridColumns clamps 0 to minimum 1' );
+		$this->assert_same( 0, $ctx_clamped_low['desktop_grid_gap'], 'desktopGridGap clamps negative to minimum 0px' );
+
+		$ctx_clamped_high = PostCarouselRenderer::build_render_context(
+			array(
+				'marqueeSpeed'           => 50000,
+				'autoplayProgressHeight' => 100,
+				'desktopGridColumns'     => 20,
+				'desktopGridGap'         => 300,
+			)
+		);
+		$this->assert_same( 30000, $ctx_clamped_high['marquee_speed'], 'marqueeSpeed clamps 50000 to maximum 30000ms' );
+		$this->assert_same( 30, $ctx_clamped_high['autoplay_progress_height'], 'autoplayProgressHeight clamps 100 to maximum 30px' );
+		$this->assert_same( 6, $ctx_clamped_high['desktop_grid_columns'], 'desktopGridColumns clamps 20 to maximum 6' );
+		$this->assert_same( 100, $ctx_clamped_high['desktop_grid_gap'], 'desktopGridGap clamps 300 to maximum 100px' );
 	}
 }
 

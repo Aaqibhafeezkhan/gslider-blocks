@@ -38,6 +38,16 @@ export const buildGlobalDesktop = ( attributes ) => {
 
 	return `
         .${ blockId }.gslider-post-carousel-wrapper {
+            --gslider-autoplay-progress-color: ${
+				attributes.autoplayProgressColor || '#007cba'
+			};
+            --gslider-autoplay-progress-height: ${
+				attributes.autoplayProgressHeight || 4
+			}px;
+            --gslider-desktop-grid-columns: ${
+				attributes.desktopGridColumns ?? 3
+			};
+            --gslider-desktop-grid-gap: ${ attributes.desktopGridGap ?? 24 }px;
             ${ bgNormal }
             ${
 				globalMarginDesktopCssStyle

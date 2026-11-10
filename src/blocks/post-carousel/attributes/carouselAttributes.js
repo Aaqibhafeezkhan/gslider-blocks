@@ -80,6 +80,42 @@ const carouselAttributes = {
 		type: 'boolean',
 		default: false,
 	},
+	carouselMode: {
+		type: 'string',
+		default: 'carousel',
+	},
+	marqueeSpeed: {
+		type: 'number',
+		default: 6000,
+	},
+	marqueePauseOnHover: {
+		type: 'boolean',
+		default: true,
+	},
+	showAutoplayProgress: {
+		type: 'boolean',
+		default: false,
+	},
+	autoplayProgressPosition: {
+		type: 'string',
+		default: 'top',
+	},
+	autoplayProgressColor: {
+		type: 'string',
+		default: '#007cba',
+	},
+	autoplayProgressHeight: {
+		type: 'number',
+		default: 4,
+	},
+	desktopGridColumns: {
+		type: 'number',
+		default: 3,
+	},
+	desktopGridGap: {
+		type: 'number',
+		default: 24,
+	},
 	/** End Carousel Settings */
 
 	/** Start Navigation Custom Arrows */

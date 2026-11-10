@@ -160,10 +160,11 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
 
             wp_reset_postdata();
 
-            $nav_inside         = NavigationBuilder::render_navigation( 'inside', $context['navigation'] );
-            $pagination_inside  = NavigationBuilder::render_pagination( 'inside', $context['block_id'], $context['any_pagination_enabled'], $context['pagination_position_type'] );
-            $nav_outside        = NavigationBuilder::render_navigation( 'outside', $context['navigation'] );
-            $pagination_outside = NavigationBuilder::render_pagination( 'outside', $context['block_id'], $context['any_pagination_enabled'], $context['pagination_position_type'] );
+            $is_marquee         = 'marquee' === ( $context['carousel_mode'] ?? 'carousel' );
+            $nav_inside         = ! $is_marquee ? NavigationBuilder::render_navigation( 'inside', $context['navigation'] ) : '';
+            $pagination_inside  = ! $is_marquee ? NavigationBuilder::render_pagination( 'inside', $context['block_id'], $context['any_pagination_enabled'], $context['pagination_position_type'] ) : '';
+            $nav_outside        = ! $is_marquee ? NavigationBuilder::render_navigation( 'outside', $context['navigation'] ) : '';
+            $pagination_outside = ! $is_marquee ? NavigationBuilder::render_pagination( 'outside', $context['block_id'], $context['any_pagination_enabled'], $context['pagination_position_type'] ) : '';
 
             $is_newsroom_layout = 'newsroom' === $context['post_layout_mode'];
             $main_swiper_class  = $is_newsroom_layout ? 'gslider-newsroom-main swiper' : 'swiper';
@@ -175,9 +176,15 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             ?>
 <div <?php echo $wrapper_attributes; ?>>
     <div class="<?php echo esc_attr( $main_swiper_class ); ?>" role="region" aria-label="<?php echo esc_attr( $main_aria_label ); ?>">
+        <?php if ( ! $is_marquee && ! empty( $context['show_autoplay_progress'] ) && 'top' === $context['autoplay_progress_position'] ) : ?>
+            <div class="gslider-autoplay-progress position-top" aria-hidden="true"><span class="gslider-autoplay-progress-fill"></span></div>
+        <?php endif; ?>
         <div class="swiper-wrapper">
             <?php echo $slides_html; ?>
         </div>
+        <?php if ( ! $is_marquee && ! empty( $context['show_autoplay_progress'] ) && 'bottom' === $context['autoplay_progress_position'] ) : ?>
+            <div class="gslider-autoplay-progress position-bottom" aria-hidden="true"><span class="gslider-autoplay-progress-fill"></span></div>
+        <?php endif; ?>
         <?php if ( '' !== $nav_inside ) : ?>
             <?php echo $nav_inside; ?>
         <?php endif; ?>
@@ -662,6 +669,62 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
          * @return array<string, mixed> Swiper configuration array.
          */
         private static function build_swiper_settings( array $attributes, array $context ): array {
+            $carousel_mode = $context['carousel_mode'] ?? 'carousel';
+            if ( 'marquee' === $carousel_mode ) {
+                $marquee_speed           = isset( $context['marquee_speed'] ) ? (int) $context['marquee_speed'] : 6000;
+                $marquee_pause           = ! empty( $context['marquee_pause_on_hover'] );
+                $carousel_per_column     = isset( $attributes['carouselPerColumn'] ) && is_array( $attributes['carouselPerColumn'] )
+                    ? $attributes['carouselPerColumn']
+                    : array( 'Desktop' => 3, 'Tablet' => 2, 'Mobile' => 1 );
+                $carousel_per_column_gap = isset( $attributes['carouselPerColumnGap'] ) && is_array( $attributes['carouselPerColumnGap'] )
+                    ? $attributes['carouselPerColumnGap']
+                    : array( 'Desktop' => 20, 'Tablet' => 20, 'Mobile' => 10 );
+
+                return array(
+                    'effect'         => 'slide',
+                    'freeMode'       => array(
+                        'enabled'  => true,
+                        'momentum' => false,
+                    ),
+                    'loop'           => true,
+                    'allowTouchMove' => false,
+                    'speed'          => $marquee_speed,
+                    'autoplay'       => array(
+                        'delay'                => 0,
+                        'disableOnInteraction' => false,
+                        'pauseOnMouseEnter'    => $marquee_pause,
+                    ),
+                    'breakpoints'    => array(
+                        0    => array(
+                            'slidesPerView' => isset( $carousel_per_column['Mobile'] ) ? (int) $carousel_per_column['Mobile'] : 1,
+                            'spaceBetween'  => isset( $carousel_per_column_gap['Mobile'] ) ? (int) $carousel_per_column_gap['Mobile'] : 0,
+                            'speed'         => $marquee_speed,
+                            'autoplay'      => array( 'delay' => 0 ),
+                            'navigation'    => array( 'enabled' => false ),
+                            'pagination'    => array( 'enabled' => false ),
+                        ),
+                        768  => array(
+                            'slidesPerView' => isset( $carousel_per_column['Tablet'] ) ? (int) $carousel_per_column['Tablet'] : 2,
+                            'spaceBetween'  => isset( $carousel_per_column_gap['Tablet'] ) ? (int) $carousel_per_column_gap['Tablet'] : 20,
+                            'speed'         => $marquee_speed,
+                            'autoplay'      => array( 'delay' => 0 ),
+                            'navigation'    => array( 'enabled' => false ),
+                            'pagination'    => array( 'enabled' => false ),
+                        ),
+                        1025 => array(
+                            'slidesPerView' => isset( $carousel_per_column['Desktop'] ) ? (int) $carousel_per_column['Desktop'] : 3,
+                            'spaceBetween'  => isset( $carousel_per_column_gap['Desktop'] ) ? (int) $carousel_per_column_gap['Desktop'] : 20,
+                            'speed'         => $marquee_speed,
+                            'autoplay'      => array( 'delay' => 0 ),
+                            'navigation'    => array( 'enabled' => false ),
+                            'pagination'    => array( 'enabled' => false ),
+                        ),
+                    ),
+                    'navigation'     => array( 'enabled' => false ),
+                    'pagination'     => array( 'enabled' => false ),
+                );
+            }
+
             $carousel_per_column     = isset( $attributes['carouselPerColumn'] ) && is_array( $attributes['carouselPerColumn'] )
                 ? $attributes['carouselPerColumn']
                 : array( 'Desktop' => 3, 'Tablet' => 2, 'Mobile' => 1 );
@@ -757,6 +820,13 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 $swiper_config['centeredSlides'] = true;
             }
 
+            if ( 'mobile-only' === $carousel_mode ) {
+                $swiper_config['breakpoints'][1025] = array(
+                    'enabled'       => false,
+                    'slidesPerView' => isset( $carousel_per_column['Desktop'] ) ? (int) $carousel_per_column['Desktop'] : 3,
+                );
+            }
+
             return $swiper_config;
         }
 
@@ -775,10 +845,15 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 $context['block_id'],
                 'is-layout-' . $context['post_layout_mode'],
                 'is-preset-' . $context['preset_style'],
+                'is-mode-' . $context['carousel_mode'],
                 $context['navigation']['position_type'],
                 $context['navigation']['arrow_position'],
                 $context['global_class'],
             );
+
+            if ( ! empty( $context['show_autoplay_progress'] ) && 'marquee' !== $context['carousel_mode'] ) {
+                $wrapper_classes[] = 'has-autoplay-progress';
+            }
 
             if ( 'hero' === $context['post_layout_mode'] ) {
                 $wrapper_classes[] = 'hero-align-' . $context['hero_content_alignment'];
@@ -898,13 +973,25 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 ? trim( (string) preg_replace( '/[;{}<>]/', '', $attributes['overlayGradientScrim'] ) )
                 : '';
 
-            $raw_meta_sep       = isset( $attributes['metaSeparator'] ) ? sanitize_key( (string) $attributes['metaSeparator'] ) : 'bullet';
-            $meta_separator     = in_array( $raw_meta_sep, array( 'bullet', 'pipe', 'slash', 'dash', 'none' ), true ) ? $raw_meta_sep : 'bullet';
-            $raw_date_format    = isset( $attributes['dateFormat'] ) ? sanitize_key( (string) $attributes['dateFormat'] ) : 'default';
-            $date_format        = in_array( $raw_date_format, array( 'default', 'relative' ), true ) ? $raw_date_format : 'default';
-            $taxonomy_max_count = isset( $attributes['taxonomyMaxCount'] ) ? min( 5, max( 1, intval( $attributes['taxonomyMaxCount'] ) ) ) : 2;
-            $show_reading_time  = isset( $attributes['showReadingTime'] ) ? (bool) $attributes['showReadingTime'] : true;
-            $show_comment_count = ! empty( $attributes['showCommentCount'] );
+            $raw_meta_sep               = isset( $attributes['metaSeparator'] ) ? sanitize_key( (string) $attributes['metaSeparator'] ) : 'bullet';
+            $meta_separator             = in_array( $raw_meta_sep, array( 'bullet', 'pipe', 'slash', 'dash', 'none' ), true ) ? $raw_meta_sep : 'bullet';
+            $raw_date_format            = isset( $attributes['dateFormat'] ) ? sanitize_key( (string) $attributes['dateFormat'] ) : 'default';
+            $date_format                = in_array( $raw_date_format, array( 'default', 'relative' ), true ) ? $raw_date_format : 'default';
+            $taxonomy_max_count         = isset( $attributes['taxonomyMaxCount'] ) ? min( 5, max( 1, intval( $attributes['taxonomyMaxCount'] ) ) ) : 2;
+            $show_reading_time          = isset( $attributes['showReadingTime'] ) ? (bool) $attributes['showReadingTime'] : true;
+            $show_comment_count         = ! empty( $attributes['showCommentCount'] );
+
+            $raw_mode                   = isset( $attributes['carouselMode'] ) ? sanitize_key( (string) $attributes['carouselMode'] ) : 'carousel';
+            $carousel_mode              = in_array( $raw_mode, array( 'carousel', 'marquee', 'mobile-only' ), true ) ? $raw_mode : 'carousel';
+            $marquee_speed              = isset( $attributes['marqueeSpeed'] ) ? max( 500, min( 30000, intval( $attributes['marqueeSpeed'] ) ) ) : 6000;
+            $marquee_pause_on_hover     = ! isset( $attributes['marqueePauseOnHover'] ) || ! empty( $attributes['marqueePauseOnHover'] );
+            $show_autoplay_progress     = ! empty( $attributes['showAutoplayProgress'] );
+            $raw_progress_pos           = isset( $attributes['autoplayProgressPosition'] ) ? sanitize_key( (string) $attributes['autoplayProgressPosition'] ) : 'top';
+            $autoplay_progress_position = in_array( $raw_progress_pos, array( 'top', 'bottom' ), true ) ? $raw_progress_pos : 'top';
+            $autoplay_progress_color    = self::sanitize_color_value( $attributes['autoplayProgressColor'] ?? null, '#007cba' );
+            $autoplay_progress_height   = isset( $attributes['autoplayProgressHeight'] ) ? max( 1, min( 30, intval( $attributes['autoplayProgressHeight'] ) ) ) : 4;
+            $desktop_grid_columns       = isset( $attributes['desktopGridColumns'] ) ? max( 1, min( 6, intval( $attributes['desktopGridColumns'] ) ) ) : 3;
+            $desktop_grid_gap           = isset( $attributes['desktopGridGap'] ) ? max( 0, min( 100, intval( $attributes['desktopGridGap'] ) ) ) : 24;
 
             return array(
                 'block_id'                               => isset( $attributes['blockId'] ) ? sanitize_html_class( (string) $attributes['blockId'] ) : '',
@@ -988,6 +1075,15 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 'date_format'                            => $date_format,
                 'taxonomy_max_count'                     => $taxonomy_max_count,
                 'meta_separator'                         => $meta_separator,
+                'carousel_mode'                          => $carousel_mode,
+                'marquee_speed'                          => $marquee_speed,
+                'marquee_pause_on_hover'                 => $marquee_pause_on_hover,
+                'show_autoplay_progress'                 => $show_autoplay_progress,
+                'autoplay_progress_position'             => $autoplay_progress_position,
+                'autoplay_progress_color'                => $autoplay_progress_color,
+                'autoplay_progress_height'               => $autoplay_progress_height,
+                'desktop_grid_columns'                   => $desktop_grid_columns,
+                'desktop_grid_gap'                       => $desktop_grid_gap,
                 'any_image_enabled'                      => self::is_any_breakpoint_enabled( $show_featured_image ),
                 'any_title_enabled'                      => self::is_any_breakpoint_enabled( $show_post_title ),
                 'all_title_enabled'                      => ! empty( $show_post_title['Desktop'] ) && ! empty( $show_post_title['Tablet'] ) && ! empty( $show_post_title['Mobile'] ),

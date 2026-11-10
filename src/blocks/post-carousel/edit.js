@@ -70,6 +70,15 @@ export default function Edit( {
 		keyboardNavigation,
 		paginationType,
 		dynamicBullets,
+		carouselMode,
+		marqueeSpeed,
+		marqueePauseOnHover,
+		showAutoplayProgress,
+		autoplayProgressPosition,
+		autoplayProgressColor,
+		autoplayProgressHeight,
+		desktopGridColumns,
+		desktopGridGap,
 
 		paginationPositionType,
 		showNavigation,
@@ -226,9 +235,27 @@ export default function Edit( {
 	const isEqualHeight = equalHeight ?? true;
 	const isCardClickable = Boolean( enableCardClickableLink );
 
+	const activeCarouselMode = carouselMode || 'carousel';
+	const isMobileOnlyDesktop =
+		activeCarouselMode === 'mobile-only' && deviceType === 'Desktop';
+	const canShowNavigation =
+		activeCarouselMode !== 'marquee' &&
+		! isMobileOnlyDesktop &&
+		Boolean( showNavigation?.[ deviceType ] );
+	const canShowPagination =
+		activeCarouselMode !== 'marquee' &&
+		! isMobileOnlyDesktop &&
+		Boolean( showPagination?.[ deviceType ] );
+	const canShowAutoplayProgress =
+		Boolean( showAutoplayProgress ) &&
+		activeCarouselMode !== 'marquee' &&
+		! isMobileOnlyDesktop;
+
 	/** Block props for container */
 	const blockProps = useBlockProps( {
-		className: `gslider-post-carousel-wrapper ${ blockId } is-layout-${ activeLayoutMode } is-preset-${ activePresetStyle }${
+		className: `gslider-post-carousel-wrapper ${ blockId } is-layout-${ activeLayoutMode } is-preset-${ activePresetStyle } is-mode-${ activeCarouselMode }${
+			isMobileOnlyDesktop ? ' editor-device-desktop' : ''
+		}${ canShowAutoplayProgress ? ' has-autoplay-progress' : '' }${
 			activeLayoutMode === 'hero' ? ` hero-align-${ safeHeroAlign }` : ''
 		}${
 			activeLayoutMode === 'newsroom'
@@ -348,6 +375,7 @@ export default function Edit( {
 	/** Refs for vanilla JS Swiper */
 	const swiperContainerRef = useRef( null );
 	const swiperInstanceRef = useRef( null );
+	const autoplayProgressFillRef = useRef( null );
 	const queueContainerRef = useRef( null );
 	const thumbsSwiperRef = useRef( null );
 	const [ activeQueueIndex, setActiveQueueIndex ] = useState( 0 );
@@ -411,71 +439,134 @@ export default function Edit( {
 		resetSwiper();
 
 		// Build Swiper settings based on the current reduced-motion state
-		const createSwiperSettings = ( reduceMotion ) => ( {
-			effect: carouselEffect,
-			...( isSpotlightActive ? { centeredSlides: true } : {} ),
-			breakpoints: {
-				0: {
-					slidesPerView: carouselPerColumn?.[ deviceType ] || 1,
-					spaceBetween: carouselPerColumnGap?.[ deviceType ] ?? 0,
+		const createSwiperSettings = ( reduceMotion ) => {
+			if ( activeCarouselMode === 'marquee' ) {
+				const effectiveMarqueeSpeed = marqueeSpeed || 6000;
+				return {
+					effect: 'slide',
+					freeMode: {
+						enabled: true,
+						momentum: false,
+					},
+					loop: true,
+					allowTouchMove: false,
+					speed: reduceMotion ? 0 : effectiveMarqueeSpeed,
+					autoplay: ! reduceMotion
+						? {
+								delay: 0,
+								disableOnInteraction: false,
+								pauseOnMouseEnter: marqueePauseOnHover ?? true,
+						  }
+						: false,
+					breakpoints: {
+						0: {
+							slidesPerView:
+								carouselPerColumn?.[ deviceType ] || 1,
+							spaceBetween:
+								carouselPerColumnGap?.[ deviceType ] ?? 0,
+							speed: reduceMotion ? 0 : effectiveMarqueeSpeed,
+							autoplay: { delay: 0 },
+							navigation: false,
+							pagination: false,
+						},
+						768: {
+							slidesPerView:
+								carouselPerColumn?.[ deviceType ] || 2,
+							spaceBetween:
+								carouselPerColumnGap?.[ deviceType ] ?? 20,
+							speed: reduceMotion ? 0 : effectiveMarqueeSpeed,
+							autoplay: { delay: 0 },
+							navigation: false,
+							pagination: false,
+						},
+						1025: {
+							slidesPerView:
+								carouselPerColumn?.[ deviceType ] || 3,
+							spaceBetween:
+								carouselPerColumnGap?.[ deviceType ] ?? 20,
+							speed: reduceMotion ? 0 : effectiveMarqueeSpeed,
+							autoplay: { delay: 0 },
+							navigation: false,
+							pagination: false,
+						},
+					},
+					navigation: false,
+					pagination: false,
+				};
+			}
+
+			return {
+				effect: carouselEffect,
+				...( isSpotlightActive ? { centeredSlides: true } : {} ),
+				breakpoints: {
+					0: {
+						slidesPerView: carouselPerColumn?.[ deviceType ] || 1,
+						spaceBetween: carouselPerColumnGap?.[ deviceType ] ?? 0,
+					},
+					768: {
+						slidesPerView: carouselPerColumn?.[ deviceType ] || 2,
+						spaceBetween:
+							carouselPerColumnGap?.[ deviceType ] ?? 20,
+					},
+					1025: {
+						slidesPerView: carouselPerColumn?.[ deviceType ] || 3,
+						spaceBetween:
+							carouselPerColumnGap?.[ deviceType ] ?? 20,
+					},
 				},
-				768: {
-					slidesPerView: carouselPerColumn?.[ deviceType ] || 2,
-					spaceBetween: carouselPerColumnGap?.[ deviceType ] ?? 20,
-				},
-				1025: {
-					slidesPerView: carouselPerColumn?.[ deviceType ] || 3,
-					spaceBetween: carouselPerColumnGap?.[ deviceType ] ?? 20,
-				},
-			},
-			loop: infiniteLoop,
-			autoplay:
-				! reduceMotion && autoplay
+				loop: infiniteLoop,
+				autoplay:
+					! reduceMotion && autoplay
+						? {
+								delay: autoplayDelay?.[ deviceType ] || 1000,
+								pauseOnMouseEnter:
+									pauseOnHover ||
+									enableCardTilt ||
+									cardHoverAnimation !== 'none',
+								disableOnInteraction: false,
+								stopOnLastSlide,
+								reverseDirection,
+						  }
+						: false,
+				speed: reduceMotion ? 0 : speed?.[ deviceType ] || 800,
+				allowTouchMove,
+				mousewheel: mousewheelControl,
+				keyboard: keyboardNavigation
 					? {
-							delay: autoplayDelay?.[ deviceType ] || 1000,
-							pauseOnMouseEnter:
-								pauseOnHover ||
-								enableCardTilt ||
-								cardHoverAnimation !== 'none',
-							disableOnInteraction: false,
-							stopOnLastSlide,
-							reverseDirection,
+							enabled: true,
+							onlyInViewport: true,
+							pageUpDown: false,
 					  }
 					: false,
-			speed: reduceMotion ? 0 : speed?.[ deviceType ] || 800,
-			allowTouchMove,
-			mousewheel: mousewheelControl,
-			keyboard: keyboardNavigation
-				? {
-						enabled: true,
-						onlyInViewport: true,
-						pageUpDown: false,
-				  }
-				: false,
-			navigation: showNavigation?.[ deviceType ]
-				? {
-						prevEl: prevRef.current,
-						nextEl: nextRef.current,
-				  }
-				: false,
-			pagination: showPagination?.[ deviceType ]
-				? {
-						el:
-							paginationPositionType === 'outside'
-								? paginationOutsideRef.current
-								: paginationInsideRef.current,
-						type: paginationType,
-						dynamicBullets:
-							paginationType === 'bullets'
-								? dynamicBullets
-								: false,
-						clickable: true,
-				  }
-				: false,
-		} );
+				navigation: canShowNavigation
+					? {
+							prevEl: prevRef.current,
+							nextEl: nextRef.current,
+					  }
+					: false,
+				pagination: canShowPagination
+					? {
+							el:
+								paginationPositionType === 'outside'
+									? paginationOutsideRef.current
+									: paginationInsideRef.current,
+							type: paginationType,
+							dynamicBullets:
+								paginationType === 'bullets'
+									? dynamicBullets
+									: false,
+							clickable: true,
+					  }
+					: false,
+			};
+		};
 
 		// Helper to initialize Swiper with thumbs in newsroom mode or standard swiper
 		const initSwiperInstance = ( reduceMotion ) => {
+			if ( isMobileOnlyDesktop ) {
+				return null;
+			}
+
 			if (
 				activeLayoutMode === 'newsroom' &&
 				queueContainerRef.current
@@ -525,13 +616,41 @@ export default function Edit( {
 						: mainSwiper.activeIndex;
 					setActiveQueueIndex( realIdx );
 				} );
+				if (
+					canShowAutoplayProgress &&
+					autoplayProgressFillRef.current
+				) {
+					mainSwiper.on(
+						'autoplayTimeLeft',
+						( s, time, progress ) => {
+							if ( autoplayProgressFillRef.current ) {
+								autoplayProgressFillRef.current.style.transform = `scaleX(${
+									1 - progress
+								})`;
+							}
+						}
+					);
+				}
 				return mainSwiper;
 			}
 
-			return new window.Swiper(
+			const standardSwiper = new window.Swiper(
 				swiperContainerRef.current,
 				createSwiperSettings( reduceMotion )
 			);
+			if ( canShowAutoplayProgress && autoplayProgressFillRef.current ) {
+				standardSwiper.on(
+					'autoplayTimeLeft',
+					( s, time, progress ) => {
+						if ( autoplayProgressFillRef.current ) {
+							autoplayProgressFillRef.current.style.transform = `scaleX(${
+								1 - progress
+							})`;
+						}
+					}
+				);
+			}
+			return standardSwiper;
 		};
 
 		// Initialize new Swiper instance
@@ -673,6 +792,15 @@ export default function Edit( {
 		showPagination,
 		paginationType,
 		dynamicBullets,
+		carouselMode,
+		marqueeSpeed,
+		marqueePauseOnHover,
+		showAutoplayProgress,
+		autoplayProgressPosition,
+		autoplayProgressColor,
+		autoplayProgressHeight,
+		desktopGridColumns,
+		desktopGridGap,
 		paginationPositionType,
 		navigationArrowPositionType,
 		navigationArrowPosition,
@@ -769,6 +897,19 @@ export default function Edit( {
 						}
 						key={ posts.map( ( p ) => p.id ).join( '-' ) }
 					>
+						{ canShowAutoplayProgress &&
+							( autoplayProgressPosition === 'top' ||
+								! autoplayProgressPosition ) && (
+								<div
+									className="gslider-autoplay-progress position-top"
+									aria-hidden="true"
+								>
+									<span
+										className="gslider-autoplay-progress-fill"
+										ref={ autoplayProgressFillRef }
+									/>
+								</div>
+							) }
 						<div className="swiper-wrapper">
 							{ posts.map( ( post ) => {
 								const postTitleText =
@@ -1766,7 +1907,20 @@ export default function Edit( {
 							} ) }
 						</div>
 
-						{ showNavigation?.[ deviceType ] &&
+						{ canShowAutoplayProgress &&
+							autoplayProgressPosition === 'bottom' && (
+								<div
+									className="gslider-autoplay-progress position-bottom"
+									aria-hidden="true"
+								>
+									<span
+										className="gslider-autoplay-progress-fill"
+										ref={ autoplayProgressFillRef }
+									/>
+								</div>
+							) }
+
+						{ canShowNavigation &&
 							! navigationArrowsIconSwitcher &&
 							navigationArrowPositionType === 'inside' && (
 								<>
@@ -1797,7 +1951,7 @@ export default function Edit( {
 								</>
 							) }
 
-						{ showNavigation?.[ deviceType ] &&
+						{ canShowNavigation &&
 							navigationArrowsIconSwitcher &&
 							navigationArrowPositionType === 'inside' &&
 							( navigationArrowsIconLeftAlign === 'icon' ||
@@ -1836,7 +1990,7 @@ export default function Edit( {
 								</div>
 							) }
 
-						{ showNavigation?.[ deviceType ] &&
+						{ canShowNavigation &&
 							navigationArrowsIconSwitcher &&
 							navigationArrowPositionType === 'inside' &&
 							( navigationArrowsIconLeftAlign === 'image' ||
@@ -1888,10 +2042,12 @@ export default function Edit( {
 							) }
 
 						{ /* Pagination inside swiper container */ }
-						<div
-							className="swiper-pagination swiper-pagination-post-carousel"
-							ref={ paginationInsideRef }
-						></div>
+						{ canShowPagination && (
+							<div
+								className="swiper-pagination swiper-pagination-post-carousel"
+								ref={ paginationInsideRef }
+							></div>
+						) }
 					</div>
 				) }
 
@@ -1923,7 +2079,7 @@ export default function Edit( {
 						/>
 					) }
 
-				{ showNavigation?.[ deviceType ] &&
+				{ canShowNavigation &&
 					! navigationArrowsIconSwitcher &&
 					navigationArrowPositionType === 'outside' && (
 						<>
@@ -1954,7 +2110,7 @@ export default function Edit( {
 						</>
 					) }
 
-				{ showNavigation?.[ deviceType ] &&
+				{ canShowNavigation &&
 					navigationArrowsIconSwitcher &&
 					navigationArrowPositionType === 'outside' &&
 					( navigationArrowsIconLeftAlign === 'icon' ||
@@ -1989,7 +2145,7 @@ export default function Edit( {
 						</div>
 					) }
 
-				{ showNavigation?.[ deviceType ] &&
+				{ canShowNavigation &&
 					navigationArrowsIconSwitcher &&
 					navigationArrowPositionType === 'outside' &&
 					( navigationArrowsIconLeftAlign === 'image' ||
@@ -2033,11 +2189,16 @@ export default function Edit( {
 					) }
 
 				{ /* Pagination outside swiper container */ }
-				<div
-					className="swiper-pagination swiper-pagination-post-carousel"
-					ref={ paginationOutsideRef }
-					aria-label={ __( 'Carousel pagination', 'gslider-blocks' ) }
-				></div>
+				{ canShowPagination && (
+					<div
+						className="swiper-pagination swiper-pagination-post-carousel"
+						ref={ paginationOutsideRef }
+						aria-label={ __(
+							'Carousel pagination',
+							'gslider-blocks'
+						) }
+					></div>
+				) }
 			</div>
 			<style>{ blockStyle }</style>
 		</>

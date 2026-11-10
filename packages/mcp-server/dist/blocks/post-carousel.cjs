@@ -705,6 +705,42 @@ var carouselAttributes = {
     type: "boolean",
     default: false
   },
+  carouselMode: {
+    type: "string",
+    default: "carousel"
+  },
+  marqueeSpeed: {
+    type: "number",
+    default: 6e3
+  },
+  marqueePauseOnHover: {
+    type: "boolean",
+    default: true
+  },
+  showAutoplayProgress: {
+    type: "boolean",
+    default: false
+  },
+  autoplayProgressPosition: {
+    type: "string",
+    default: "top"
+  },
+  autoplayProgressColor: {
+    type: "string",
+    default: "#007cba"
+  },
+  autoplayProgressHeight: {
+    type: "number",
+    default: 4
+  },
+  desktopGridColumns: {
+    type: "number",
+    default: 3
+  },
+  desktopGridGap: {
+    type: "number",
+    default: 24
+  },
   /** End Carousel Settings */
   /** Start Navigation Custom Arrows */
   navigationArrowsIconSwitcher: {
@@ -6048,6 +6084,10 @@ var buildGlobalDesktop = (attributes2) => {
   const isEqualHeight = attributes2.equalHeight ?? true;
   return `
         .${blockId}.gslider-post-carousel-wrapper {
+            --gslider-autoplay-progress-color: ${attributes2.autoplayProgressColor || "#007cba"};
+            --gslider-autoplay-progress-height: ${attributes2.autoplayProgressHeight || 4}px;
+            --gslider-desktop-grid-columns: ${attributes2.desktopGridColumns ?? 3};
+            --gslider-desktop-grid-gap: ${attributes2.desktopGridGap ?? 24}px;
             ${bgNormal}
             ${globalMarginDesktopCssStyle ? `margin: ${globalMarginDesktopCssStyle};` : ""}
             ${globalPaddingDesktopCssStyle ? `padding: ${globalPaddingDesktopCssStyle};` : ""}

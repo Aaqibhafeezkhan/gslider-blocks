@@ -85,6 +85,22 @@ document.addEventListener( 'DOMContentLoaded', () => {
 								newsroomSettings
 							);
 
+							// Bind Autoplay Countdown Progress Line for Newsroom layout
+							const newsroomProgressFill =
+								sliderContainer.querySelector(
+									'.gslider-autoplay-progress-fill'
+								);
+							if ( newsroomProgressFill ) {
+								mainSwiper.on(
+									'autoplayTimeLeft',
+									( s, time, progress ) => {
+										newsroomProgressFill.style.transform = `scaleX(${
+											1 - progress
+										})`;
+									}
+								);
+							}
+
 							queueElement.addEventListener( 'keydown', ( e ) => {
 								const item = e.target.closest(
 									'.gslider-newsroom-queue-item'
@@ -126,10 +142,25 @@ document.addEventListener( 'DOMContentLoaded', () => {
 						registerReducedMotionSwiper( sliderContainer, Swiper );
 
 						// Initialize Swiper with parsed settings
-						new Swiper(
+						const swiper = new Swiper(
 							sliderContainer.querySelector( '.swiper' ),
 							settings
 						);
+
+						// Bind Autoplay Countdown Progress Line
+						const progressFill = sliderContainer.querySelector(
+							'.gslider-autoplay-progress-fill'
+						);
+						if ( progressFill && swiper ) {
+							swiper.on(
+								'autoplayTimeLeft',
+								( s, time, progress ) => {
+									progressFill.style.transform = `scaleX(${
+										1 - progress
+									})`;
+								}
+							);
+						}
 					}
 				}
 			} catch ( error ) {
