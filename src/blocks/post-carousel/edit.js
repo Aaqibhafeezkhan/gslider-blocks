@@ -26,6 +26,8 @@ import {
 	initCardTilt,
 	initEntranceAnimations,
 	applyStaggerDelays,
+	prefersReducedMotion,
+	onReducedMotionChange,
 } from '@Utils/animation-utils';
 
 export default function Edit( {
@@ -313,30 +315,30 @@ export default function Edit( {
 			return;
 		}
 
-		// Destroy previous instance if exists
-		if ( swiperInstanceRef.current ) {
-			swiperInstanceRef.current.destroy( true, true );
-			swiperInstanceRef.current = null;
-		}
+		// Destroy existing Swiper instance and clear loop duplicates/pagination before init
+		const resetSwiper = () => {
+			if ( swiperInstanceRef.current ) {
+				swiperInstanceRef.current.destroy( true, true );
+				swiperInstanceRef.current = null;
+			}
+			if ( swiperContainerRef.current ) {
+				const duplicates = swiperContainerRef.current.querySelectorAll(
+					'.swiper-slide-duplicate'
+				);
+				duplicates.forEach( ( slide ) => slide.remove() );
+			}
+			if ( paginationInsideRef.current ) {
+				paginationInsideRef.current.innerHTML = '';
+			}
+			if ( paginationOutsideRef.current ) {
+				paginationOutsideRef.current.innerHTML = '';
+			}
+		};
 
-		// Clean up any Swiper loop duplicates from the DOM before re-initialization
-		if ( swiperContainerRef.current ) {
-			const duplicates = swiperContainerRef.current.querySelectorAll(
-				'.swiper-slide-duplicate'
-			);
-			duplicates.forEach( ( slide ) => slide.remove() );
-		}
+		resetSwiper();
 
-		// Clear both pagination elements to prevent stale bullets when switching position
-		if ( paginationInsideRef.current ) {
-			paginationInsideRef.current.innerHTML = '';
-		}
-		if ( paginationOutsideRef.current ) {
-			paginationOutsideRef.current.innerHTML = '';
-		}
-
-		// Build Swiper settings
-		const swiperSettings = {
+		// Build Swiper settings based on the current reduced-motion state
+		const createSwiperSettings = ( reduceMotion ) => ( {
 			effect: carouselEffect,
 			breakpoints: {
 				0: {
@@ -353,19 +355,20 @@ export default function Edit( {
 				},
 			},
 			loop: infiniteLoop,
-			autoplay: autoplay
-				? {
-						delay: autoplayDelay?.[ deviceType ] || 1000,
-						pauseOnMouseEnter:
-							pauseOnHover ||
-							enableCardTilt ||
-							cardHoverAnimation !== 'none',
-						disableOnInteraction: false,
-						stopOnLastSlide,
-						reverseDirection,
-				  }
-				: false,
-			speed: speed?.[ deviceType ] || 800,
+			autoplay:
+				! reduceMotion && autoplay
+					? {
+							delay: autoplayDelay?.[ deviceType ] || 1000,
+							pauseOnMouseEnter:
+								pauseOnHover ||
+								enableCardTilt ||
+								cardHoverAnimation !== 'none',
+							disableOnInteraction: false,
+							stopOnLastSlide,
+							reverseDirection,
+					  }
+					: false,
+			speed: reduceMotion ? 0 : speed?.[ deviceType ] || 800,
 			allowTouchMove,
 			mousewheel: mousewheelControl,
 			keyboard: keyboardNavigation
@@ -395,12 +398,40 @@ export default function Edit( {
 						clickable: true,
 				  }
 				: false,
-		};
+		} );
 
 		// Initialize new Swiper instance
 		swiperInstanceRef.current = new window.Swiper(
 			swiperContainerRef.current,
-			swiperSettings
+			createSwiperSettings( prefersReducedMotion() )
+		);
+
+		const unsubscribeReducedMotion = onReducedMotionChange(
+			( reduceMotion ) => {
+				if ( ! swiperContainerRef.current || ! window.Swiper ) {
+					return;
+				}
+				const currentSwiper = swiperInstanceRef.current;
+				let activeIndex = 0;
+				if ( currentSwiper ) {
+					activeIndex = currentSwiper.params?.loop
+						? currentSwiper.realIndex
+						: currentSwiper.activeIndex;
+				}
+				resetSwiper();
+				const nextSwiper = new window.Swiper(
+					swiperContainerRef.current,
+					createSwiperSettings( reduceMotion )
+				);
+				swiperInstanceRef.current = nextSwiper;
+				if ( typeof activeIndex === 'number' && activeIndex > 0 ) {
+					if ( nextSwiper.params?.loop ) {
+						nextSwiper.slideToLoop( activeIndex, 0, false );
+					} else {
+						nextSwiper.slideTo( activeIndex, 0, false );
+					}
+				}
+			}
 		);
 
 		// Initialize Card Tilt & Entrance Animations in editor
@@ -439,6 +470,7 @@ export default function Edit( {
 
 		// Cleanup on unmount or before re-initialization
 		return () => {
+			unsubscribeReducedMotion();
 			if ( swiperInstanceRef.current ) {
 				swiperInstanceRef.current.destroy( true, true );
 				swiperInstanceRef.current = null;

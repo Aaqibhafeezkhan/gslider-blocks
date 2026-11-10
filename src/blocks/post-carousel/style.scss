@@ -2,6 +2,13 @@
 
 .gslider-post-carousel-wrapper {
 
+	/* Scoped Keyboard Focus Indicators (WCAG 2.4.7) */
+	a:focus-visible {
+		outline: 2px solid #007cba;
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
+
 	.gslider-post-carousel-content-wrapper {
 		box-sizing: border-box;
 		overflow: hidden;
@@ -127,12 +134,13 @@
 				color: #111c2d;
 				text-decoration: none;
 				transition: color 0.2s ease;
-
-				&:focus {
-					outline: none;
-				}
 			}
 		}
+	}
+
+	.gslider-post-carousel-image > a:focus-visible {
+		outline-offset: -2px;
+		border-radius: inherit;
 	}
 
 	.gslider-post-carousel-card:hover .gslider-post-carousel-title a {
@@ -259,30 +267,53 @@
 			transform: scale(1.25);
 		}
 	}
-}
 
-:where(.wp-site-blocks *:focus) {
-	outline-width: 0 !important;
+	.swiper-button-prev:focus-visible,
+	.swiper-button-next:focus-visible,
+	.swiper-pagination-bullet:focus-visible {
+		outline: 2px solid #007cba;
+		outline-offset: 3px;
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {
 
-	.gslider-post-carousel-wrapper .animated {
-		animation: none !important;
-		transition: none !important;
-		opacity: 1 !important;
-		transform: none !important;
-		visibility: visible !important;
-	}
+	.gslider-post-carousel-wrapper {
 
-	.gslider-post-carousel-wrapper .gslider-post-carousel-card {
-		transition: none !important;
-		transform: none !important;
-	}
+		.swiper-wrapper,
+		.swiper-slide,
+		.gslider-post-carousel-card,
+		.gslider-post-carousel-image,
+		.gslider-post-carousel-image img,
+		.gslider-post-carousel-title a,
+		.gslider-post-carousel-readmore a,
+		.gslider-post-carousel-readmore-btn,
+		.gslider-readmore-icon-wrap,
+		.swiper-pagination-bullet {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
 
-	.gslider-post-carousel-wrapper .gslider-post-carousel-image img {
-		transition: none !important;
-		filter: none !important;
-		transform: none !important;
+		.animated {
+			animation: none !important;
+			transition: none !important;
+			opacity: 1 !important;
+			transform: none !important;
+			visibility: visible !important;
+		}
+
+		.gslider-post-carousel-card,
+		.gslider-post-carousel-card:hover,
+		.gslider-post-carousel-image img,
+		.gslider-post-carousel-image:hover img,
+		.gslider-post-carousel-card:hover .gslider-post-carousel-image img,
+		.gslider-post-carousel-readmore-btn:hover .gslider-readmore-icon-wrap {
+			animation: none !important;
+			transition: none !important;
+			transform: none !important;
+			filter: none !important;
+		}
 	}
 }
