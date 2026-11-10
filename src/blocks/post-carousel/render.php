@@ -156,7 +156,7 @@ $show_meta_avatar_raw = isset( $attributes['showMetaAvatar'] ) ? $attributes['sh
 $show_meta_date_raw   = isset( $attributes['showMetaDate'] )   ? $attributes['showMetaDate']   : array( 'Desktop' => true, 'Tablet' => true, 'Mobile' => true );
 $show_taxonomy       = isset( $attributes['showTaxonomy'] )       ? $attributes['showTaxonomy']       : array( 'Desktop' => true, 'Tablet' => true, 'Mobile' => true );
 
-$enable_taxonomy_badge_overlay     = ! empty( $attributes['enableTaxonomyBadgeOverlay'] );
+$enable_taxonomy_badge_overlay     = isset( $attributes['enableTaxonomyBadgeOverlay'] ) ? (bool) $attributes['enableTaxonomyBadgeOverlay'] : true;
 $taxonomy_badge_overlay_position   = isset( $attributes['taxonomyBadgeOverlayPosition'] ) ? sanitize_text_field( $attributes['taxonomyBadgeOverlayPosition'] ) : 'top-left';
 $taxonomy_badge_overlay_visibility = isset( $attributes['taxonomyBadgeOverlayVisibility'] ) ? sanitize_text_field( $attributes['taxonomyBadgeOverlayVisibility'] ) : 'always';
 
@@ -187,26 +187,8 @@ $navigation_arrows_icon_right_html    = isset( $attributes['navigationArrowsIcon
 $navigation_arrows_icon_right_img_url = isset( $attributes['navigationArrowsIconRightImageUrl'] ) ? esc_url_raw( $attributes['navigationArrowsIconRightImageUrl'] ) : '';
 $navigation_arrows_icon_right_img_alt = isset( $attributes['navigationArrowsIconRightImageAlt'] ) ? sanitize_text_field( $attributes['navigationArrowsIconRightImageAlt'] ) : 'Right Arrow';
 
-// Compile left/right arrow inner markup and container class
-$left_arrow_inner = '';
-$right_arrow_inner = '';
-$nav_container_class = 'gslider-navigation-default-icon-wrapper';
-
-if ( $navigation_arrows_icon_switcher ) {
-    $nav_container_class = 'gslider-navigation-custom-icon-wrapper';
-
-    if ( 'icon' === $navigation_arrows_icon_left_align && ! empty( $navigation_arrows_icon_left_html ) ) {
-        $left_arrow_inner = $navigation_arrows_icon_left_html;
-    } elseif ( 'image' === $navigation_arrows_icon_left_align && ! empty( $navigation_arrows_icon_left_img_url ) ) {
-        $left_arrow_inner = '<img src="' . esc_url( $navigation_arrows_icon_left_img_url ) . '" alt="' . esc_attr( $navigation_arrows_icon_left_img_alt ) . '" />';
-    }
-
-    if ( 'icon' === $navigation_arrows_icon_right_align && ! empty( $navigation_arrows_icon_right_html ) ) {
-        $right_arrow_inner = $navigation_arrows_icon_right_html;
-    } elseif ( 'image' === $navigation_arrows_icon_right_align && ! empty( $navigation_arrows_icon_right_img_url ) ) {
-        $right_arrow_inner = '<img src="' . esc_url( $navigation_arrows_icon_right_img_url ) . '" alt="' . esc_attr( $navigation_arrows_icon_right_img_alt ) . '" />';
-    }
-}
+// Resolve navigation container class
+$nav_container_class = $navigation_arrows_icon_switcher ? 'gslider-navigation-custom-icon-wrapper' : 'gslider-navigation-default-icon-wrapper';
 
 // Check if elements enabled
 $any_navigation_enabled       = ! empty( $show_navigation['Desktop'] ) || ! empty( $show_navigation['Tablet'] ) || ! empty( $show_navigation['Mobile'] );
@@ -265,9 +247,53 @@ $exclude_current_post  = ! empty( $attributes['excludeCurrentPost'] );
 $use_related_posts_query = ! empty( $attributes['useRelatedPostsQuery'] );
 $related_posts_taxonomy  = isset( $attributes['relatedPostsTaxonomy'] ) ? sanitize_text_field( $attributes['relatedPostsTaxonomy'] ) : 'category';
 
+// Validate dynamic HTML tags, post type, query bounds, sort order, and meta operator
+$allowed_html_tags   = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div', 'span' );
+$post_title_html_tag = isset( $attributes['postTitleHtmlTag'] ) && is_string( $attributes['postTitleHtmlTag'] ) ? strtolower( sanitize_key( $attributes['postTitleHtmlTag'] ) ) : 'h3';
+if ( ! in_array( $post_title_html_tag, $allowed_html_tags, true ) ) {
+    $post_title_html_tag = 'h3';
+}
+$post_excerpt_html_tag = isset( $attributes['postExcerptHtmlTag'] ) && is_string( $attributes['postExcerptHtmlTag'] ) ? strtolower( sanitize_key( $attributes['postExcerptHtmlTag'] ) ) : 'p';
+if ( ! in_array( $post_excerpt_html_tag, $allowed_html_tags, true ) ) {
+    $post_excerpt_html_tag = 'p';
+}
+
+$post_type = sanitize_key( $post_type );
+if ( '' === $post_type || ! post_type_exists( $post_type ) || ! is_post_type_viewable( $post_type ) ) {
+    $post_type = 'post';
+}
+
+$posts_per_page = max( 1, min( 30, $posts_per_page ) );
+$offset         = max( 0, min( 100, $offset ) );
+
+$allowed_orderby = array( 'date', 'title', 'name', 'id', 'ID', 'author', 'modified', 'relevance', 'rand', 'comment_count', 'menu_order', 'meta_value', 'meta_value_num' );
+if ( ! in_array( $orderby, $allowed_orderby, true ) ) {
+    $orderby = 'date';
+}
+if ( 'id' === $orderby ) {
+    $orderby = 'ID';
+}
+if ( in_array( $orderby, array( 'meta_value', 'meta_value_num' ), true ) && ( '' === $meta_key || $use_related_posts_query ) ) {
+    $orderby = 'date';
+}
+
+$order = strtoupper( $order );
+if ( ! in_array( $order, array( 'ASC', 'DESC' ), true ) ) {
+    $order = 'DESC';
+}
+
+$allowed_meta_compare = array( '=', '!=', '>', '>=', '<', '<=', 'LIKE', 'NOT LIKE', 'EXISTS', 'NOT EXISTS' );
+$meta_compare         = strtoupper( $meta_compare );
+if ( ! in_array( $meta_compare, $allowed_meta_compare, true ) ) {
+    $meta_compare = '=';
+}
+
 if ( $use_related_posts_query ) {
-    $current_post_id = get_the_ID();
+    $current_post_id    = get_the_ID();
     $resolved_post_type = $current_post_id ? get_post_type( $current_post_id ) : $post_type;
+    if ( ! is_string( $resolved_post_type ) || '' === $resolved_post_type || ! post_type_exists( $resolved_post_type ) || ! is_post_type_viewable( $resolved_post_type ) ) {
+        $resolved_post_type = $post_type;
+    }
 
     $query_args = array(
         'post_type'      => $resolved_post_type,
@@ -275,6 +301,7 @@ if ( $use_related_posts_query ) {
         'post_status'    => 'publish',
         'orderby'        => $orderby,
         'order'          => $order,
+        'no_found_rows'  => true,
     );
 
     // Build tax query matching the current post's categories/tags
@@ -337,6 +364,7 @@ if ( $use_related_posts_query ) {
         'post_status'    => 'publish',
         'orderby'        => $orderby,
         'order'          => $order,
+        'no_found_rows'  => true,
     );
 
     // Call Helper methods to compile dynamic options
@@ -523,6 +551,24 @@ if ( $enable_tilt ) {
 
 $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
 
+$taxonomy_allowed_html = array(
+    'div'  => array(
+        'class' => true,
+    ),
+    'span' => array(
+        'class' => true,
+    ),
+    'a'    => array(
+        'href' => true,
+    ),
+);
+
+$read_more_svg_icon_html  = ( $read_more_button_icon_switcher && 'icon' === $read_more_button_icon_type )
+    ? \GSlider\Classes\SupportSVG::sanitize_inline_svg( $read_more_button_icon_html )
+    : '';
+$has_read_more_svg_icon   = '' !== $read_more_svg_icon_html;
+$has_read_more_image_icon = $read_more_button_icon_switcher && 'image' === $read_more_button_icon_type && ! empty( $read_more_button_icon_img_url );
+
 ?>
 <div <?php echo $wrapper_attributes; ?>>
     <div class="swiper" role="region" aria-label="<?php esc_attr_e( 'Post Carousel', 'gslider-blocks' ); ?>">
@@ -634,7 +680,7 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
                                                 </a>
                                                 <?php if ( $enable_taxonomy_badge_overlay && ! empty( $taxonomy_markup ) ) : ?>
                                                     <div class="gslider-taxonomy-badge-overlay gslider-badge-visibility-<?php echo esc_attr( $taxonomy_badge_overlay_visibility ); ?> gslider-badge-position-<?php echo esc_attr( $taxonomy_badge_overlay_position ); ?>">
-                                                        <?php echo $taxonomy_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                                        <?php echo wp_kses( $taxonomy_markup, $taxonomy_allowed_html ); ?>
                                                     </div>
                                                 <?php endif; ?>
                                             </div>
@@ -644,8 +690,8 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
  
                                     case 'categories':
                                         $has_image = $any_image_enabled && has_post_thumbnail( $post_id );
-                                        if ( ! $enable_taxonomy_badge_overlay || ! $has_image ) {
-                                            echo $taxonomy_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                        if ( ( ! $enable_taxonomy_badge_overlay || ! $has_image ) && ! empty( $taxonomy_markup ) ) {
+                                            echo wp_kses( $taxonomy_markup, $taxonomy_allowed_html );
                                         }
                                         break;
  
@@ -667,10 +713,8 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
                                             $title_wrapper_class = 'gslider-post-carousel-title-wrapper' . ( $show_post_title_divider ? ' has-divider' : '' );
                                             $title_class = 'gslider-post-carousel-title' . ( $enable_post_title_hover_underline_anim ? ' hover-underline-anim' : '' );
  
-                                            $title_link_html = '';
+                                            $rel_items = array();
                                             if ( $enable_post_title_link ) {
-                                                $target_attr = $post_title_link_target ? ' target="_blank"' : '';
-                                                $rel_items = array();
                                                 if ( $post_title_link_target ) {
                                                     $rel_items[] = 'noopener';
                                                     $rel_items[] = 'noreferrer';
@@ -681,16 +725,15 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
                                                 if ( $post_title_link_sponsored ) {
                                                     $rel_items[] = 'sponsored';
                                                 }
-                                                $rel_attr = ! empty( $rel_items ) ? ' rel="' . esc_attr( implode( ' ', $rel_items ) ) . '"' : '';
-                                                
-                                                $title_inner = '<a href="' . esc_url( get_permalink() ) . '"' . $target_attr . $rel_attr . '>' . esc_html( $rendered_title ) . '</a>';
-                                            } else {
-                                                $title_inner = esc_html( $rendered_title );
                                             }
                                             ?>
                                             <div class="<?php echo esc_attr( $title_wrapper_class ); ?>">
                                                 <<?php echo esc_attr( $post_title_html_tag ); ?> class="<?php echo esc_attr( $title_class ); ?>">
-                                                    <?php echo $title_inner; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                                    <?php if ( $enable_post_title_link ) : ?>
+                                                        <a href="<?php echo esc_url( get_permalink() ); ?>"<?php if ( $post_title_link_target ) : ?> target="_blank"<?php endif; ?><?php if ( ! empty( $rel_items ) ) : ?> rel="<?php echo esc_attr( implode( ' ', $rel_items ) ); ?>"<?php endif; ?>><?php echo esc_html( $rendered_title ); ?></a>
+                                                    <?php else : ?>
+                                                        <?php echo esc_html( $rendered_title ); ?>
+                                                    <?php endif; ?>
                                                 </<?php echo esc_attr( $post_title_html_tag ); ?>>
                                             </div>
                                             <?php
@@ -731,7 +774,7 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
                                                 <?php endif; ?>
                                                 <?php if ( $any_date_enabled ) : ?>
                                                 <div class="gslider-post-date-wrapper">
-                                                    <div class="gslider-post-date"><?php echo get_the_date(); ?></div>
+                                                    <div class="gslider-post-date"><?php echo esc_html( get_the_date( '', $post_id ) ); ?></div>
                                                 </div>
                                                 <?php endif; ?>
                                             </div>
@@ -744,8 +787,8 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
                                         if ( ! $any_read_more_button_enabled ) {
                                             break;
                                         }
-                                        $read_more_url = ( 'custom' === $read_more_button_link_type ) ? $read_more_button_link : get_permalink( $post_id );
-                                        $rel_items = array();
+                                        $read_more_url = ( 'custom' === $read_more_button_link_type ) ? ( is_string( $read_more_button_link ) ? $read_more_button_link : '#' ) : get_permalink( $post_id );
+                                        $rel_items     = array();
                                         if ( $read_more_button_target_link ) {
                                             $rel_items[] = 'noopener';
                                             $rel_items[] = 'noreferrer';
@@ -756,30 +799,20 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
                                         if ( $read_more_button_sponsored ) {
                                             $rel_items[] = 'sponsored';
                                         }
-                                        $rel_attr = ! empty( $rel_items ) ? ' rel="' . esc_attr( implode( ' ', $rel_items ) ) . '"' : '';
-                                        $target_attr = $read_more_button_target_link ? ' target="_blank"' : '';
-
-                                        // Build icon HTML markup
-                                        $icon_markup = '';
-                                        if ( $read_more_button_icon_switcher ) {
-                                            if ( 'icon' === $read_more_button_icon_type && ! empty( $read_more_button_icon_html ) ) {
-                                                // SVG icon saved as HTML
-                                                $icon_markup = '<span class="gslider-readmore-icon-wrap">' . $read_more_button_icon_html . '</span>';
-                                            } elseif ( 'image' === $read_more_button_icon_type && ! empty( $read_more_button_icon_img_url ) ) {
-                                                // Custom Image icon
-                                                $icon_markup = '<span class="gslider-readmore-icon-wrap"><img src="' . esc_url( $read_more_button_icon_img_url ) . '" alt="' . esc_attr( $read_more_button_icon_img_alt ) . '" /></span>';
-                                            }
-                                        }
                                         ?>
                                         <div class="gslider-post-carousel-readmore">
-                                            <a class="gslider-post-carousel-readmore-btn" href="<?php echo esc_url( $read_more_url ); ?>"<?php echo $target_attr; ?><?php echo $rel_attr; ?>>
-                                                <?php if ( $read_more_button_icon_switcher && 'left' === $read_more_button_icon_position ) {
-                                                    echo $icon_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                                } ?>
+                                            <a class="gslider-post-carousel-readmore-btn" href="<?php echo esc_url( $read_more_url ); ?>"<?php if ( $read_more_button_target_link ) : ?> target="_blank"<?php endif; ?><?php if ( ! empty( $rel_items ) ) : ?> rel="<?php echo esc_attr( implode( ' ', $rel_items ) ); ?>"<?php endif; ?>>
+                                                <?php if ( $has_read_more_svg_icon && 'left' === $read_more_button_icon_position ) : ?>
+                                                    <span class="gslider-readmore-icon-wrap"><?php echo $read_more_svg_icon_html; ?></span>
+                                                <?php elseif ( $has_read_more_image_icon && 'left' === $read_more_button_icon_position ) : ?>
+                                                    <span class="gslider-readmore-icon-wrap"><img src="<?php echo esc_url( $read_more_button_icon_img_url ); ?>" alt="<?php echo esc_attr( $read_more_button_icon_img_alt ); ?>" /></span>
+                                                <?php endif; ?>
                                                 <span class="gslider-readmore-text"><?php echo esc_html( $read_more_button_text ); ?></span>
-                                                <?php if ( $read_more_button_icon_switcher && 'right' === $read_more_button_icon_position ) {
-                                                    echo $icon_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                                } ?>
+                                                <?php if ( $has_read_more_svg_icon && 'right' === $read_more_button_icon_position ) : ?>
+                                                    <span class="gslider-readmore-icon-wrap"><?php echo $read_more_svg_icon_html; ?></span>
+                                                <?php elseif ( $has_read_more_image_icon && 'right' === $read_more_button_icon_position ) : ?>
+                                                    <span class="gslider-readmore-icon-wrap"><img src="<?php echo esc_url( $read_more_button_icon_img_url ); ?>" alt="<?php echo esc_attr( $read_more_button_icon_img_alt ); ?>" /></span>
+                                                <?php endif; ?>
                                             </a>
                                         </div>
                                         <?php
@@ -796,14 +829,30 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
         <?php if ( $any_navigation_enabled && 'inside' === $navigation_arrow_position_type ) : ?>
             <div class="<?php echo esc_attr( $nav_container_class . ' ' . $navigation_arrow_position_type . ' ' . $navigation_arrow_position ); ?>">
                 <div class="swiper-button-prev" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Previous slide', 'gslider-blocks' ); ?>">
-                    <?php if ( $navigation_arrows_icon_switcher ) {
-                        echo $left_arrow_inner; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                    } ?>
+                    <?php
+                    if ( $navigation_arrows_icon_switcher ) {
+                        if ( 'icon' === $navigation_arrows_icon_left_align && ! empty( $navigation_arrows_icon_left_html ) ) {
+                            echo \GSlider\Classes\SupportSVG::sanitize_inline_svg( $navigation_arrows_icon_left_html );
+                        } elseif ( 'image' === $navigation_arrows_icon_left_align && ! empty( $navigation_arrows_icon_left_img_url ) ) {
+                            ?>
+                            <img src="<?php echo esc_url( $navigation_arrows_icon_left_img_url ); ?>" alt="<?php echo esc_attr( $navigation_arrows_icon_left_img_alt ); ?>" />
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
                 <div class="swiper-button-next" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Next slide', 'gslider-blocks' ); ?>">
-                    <?php if ( $navigation_arrows_icon_switcher ) {
-                        echo $right_arrow_inner; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                    } ?>
+                    <?php
+                    if ( $navigation_arrows_icon_switcher ) {
+                        if ( 'icon' === $navigation_arrows_icon_right_align && ! empty( $navigation_arrows_icon_right_html ) ) {
+                            echo \GSlider\Classes\SupportSVG::sanitize_inline_svg( $navigation_arrows_icon_right_html );
+                        } elseif ( 'image' === $navigation_arrows_icon_right_align && ! empty( $navigation_arrows_icon_right_img_url ) ) {
+                            ?>
+                            <img src="<?php echo esc_url( $navigation_arrows_icon_right_img_url ); ?>" alt="<?php echo esc_attr( $navigation_arrows_icon_right_img_alt ); ?>" />
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -816,14 +865,30 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_data );
     <?php if ( $any_navigation_enabled && 'outside' === $navigation_arrow_position_type ) : ?>
         <div class="<?php echo esc_attr( $nav_container_class . ' ' . $navigation_arrow_position_type . ' ' . $navigation_arrow_position ); ?>">
             <div class="swiper-button-prev" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Previous slide', 'gslider-blocks' ); ?>">
-                <?php if ( $navigation_arrows_icon_switcher ) {
-                    echo $left_arrow_inner; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                } ?>
+                <?php
+                if ( $navigation_arrows_icon_switcher ) {
+                    if ( 'icon' === $navigation_arrows_icon_left_align && ! empty( $navigation_arrows_icon_left_html ) ) {
+                        echo \GSlider\Classes\SupportSVG::sanitize_inline_svg( $navigation_arrows_icon_left_html );
+                    } elseif ( 'image' === $navigation_arrows_icon_left_align && ! empty( $navigation_arrows_icon_left_img_url ) ) {
+                        ?>
+                        <img src="<?php echo esc_url( $navigation_arrows_icon_left_img_url ); ?>" alt="<?php echo esc_attr( $navigation_arrows_icon_left_img_alt ); ?>" />
+                        <?php
+                    }
+                }
+                ?>
             </div>
             <div class="swiper-button-next" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Next slide', 'gslider-blocks' ); ?>">
-                <?php if ( $navigation_arrows_icon_switcher ) {
-                    echo $right_arrow_inner; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                } ?>
+                <?php
+                if ( $navigation_arrows_icon_switcher ) {
+                    if ( 'icon' === $navigation_arrows_icon_right_align && ! empty( $navigation_arrows_icon_right_html ) ) {
+                        echo \GSlider\Classes\SupportSVG::sanitize_inline_svg( $navigation_arrows_icon_right_html );
+                    } elseif ( 'image' === $navigation_arrows_icon_right_align && ! empty( $navigation_arrows_icon_right_img_url ) ) {
+                        ?>
+                        <img src="<?php echo esc_url( $navigation_arrows_icon_right_img_url ); ?>" alt="<?php echo esc_attr( $navigation_arrows_icon_right_img_alt ); ?>" />
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
     <?php endif; ?>

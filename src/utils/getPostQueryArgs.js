@@ -1,4 +1,33 @@
 /* eslint-disable jsdoc/require-param-type */
+const ALLOWED_ORDER_BY = [
+	'date',
+	'title',
+	'name',
+	'id',
+	'ID',
+	'author',
+	'modified',
+	'relevance',
+	'rand',
+	'comment_count',
+	'menu_order',
+	'meta_value',
+	'meta_value_num',
+];
+
+const ALLOWED_META_COMPARE = [
+	'=',
+	'!=',
+	'>',
+	'>=',
+	'<',
+	'<=',
+	'LIKE',
+	'NOT LIKE',
+	'EXISTS',
+	'NOT EXISTS',
+];
+
 /**
  * Build dynamic REST API query arguments from block attributes.
  * Supports categories, tags, authors, custom taxonomies, exclusions, date ranges, sticky posts, and search keywords.
@@ -64,16 +93,35 @@ export const getPostQueryArgs = (
 			: parseInt( offset ) || 0;
 
 	// Initial base query
+	let safeOrderBy = ALLOWED_ORDER_BY.includes( orderBy ) ? orderBy : 'date';
+	if ( safeOrderBy === 'name' ) {
+		safeOrderBy = 'slug';
+	} else if ( safeOrderBy === 'ID' ) {
+		safeOrderBy = 'id';
+	}
+	if (
+		[ 'meta_value', 'meta_value_num' ].includes( safeOrderBy ) &&
+		( ! metaKey || useRelatedPostsQuery )
+	) {
+		safeOrderBy = 'date';
+	}
+	const normalizedOrder =
+		typeof order === 'string' ? order.toLowerCase() : '';
+	const safeOrder = [ 'asc', 'desc' ].includes( normalizedOrder )
+		? normalizedOrder
+		: 'desc';
+
 	const queryArgs = {
-		per_page: activePostsPerPage,
+		per_page: Math.min( 30, Math.max( 1, activePostsPerPage ) ),
 		status: 'publish',
-		orderby: orderBy,
-		order,
+		orderby: safeOrderBy,
+		order: safeOrder,
 	};
 
 	// Apply offset
-	if ( activeOffset > 0 ) {
-		queryArgs.offset = activeOffset;
+	const safeOffset = Math.max( 0, Math.min( 100, activeOffset ) );
+	if ( safeOffset > 0 ) {
+		queryArgs.offset = safeOffset;
 	}
 
 	// Exclude posts
@@ -101,10 +149,13 @@ export const getPostQueryArgs = (
 			relatedPostsTaxonomy === 'both'
 		) {
 			if ( currentPostCategories && currentPostCategories.length > 0 ) {
-				queryArgs.categories = currentPostCategories
+				const catIds = currentPostCategories
 					.map( ( id ) => parseInt( id, 10 ) )
 					.filter( ( id ) => ! isNaN( id ) );
-				hasTaxonomyMatch = true;
+				if ( catIds.length > 0 ) {
+					queryArgs.categories = catIds;
+					hasTaxonomyMatch = true;
+				}
 			}
 		}
 
@@ -113,11 +164,23 @@ export const getPostQueryArgs = (
 			relatedPostsTaxonomy === 'both'
 		) {
 			if ( currentPostTags && currentPostTags.length > 0 ) {
-				queryArgs.tags = currentPostTags
+				const tagIds = currentPostTags
 					.map( ( id ) => parseInt( id, 10 ) )
 					.filter( ( id ) => ! isNaN( id ) );
-				hasTaxonomyMatch = true;
+				if ( tagIds.length > 0 ) {
+					queryArgs.tags = tagIds;
+					hasTaxonomyMatch = true;
+				}
 			}
+		}
+
+		if (
+			queryArgs.categories &&
+			queryArgs.categories.length > 0 &&
+			queryArgs.tags &&
+			queryArgs.tags.length > 0
+		) {
+			queryArgs.tax_relation = 'OR';
 		}
 
 		// If 'both' was selected but we only have categories, we queried categories.
@@ -276,12 +339,25 @@ export const getPostQueryArgs = (
 
 		// Custom Fields (Meta query)
 		if ( metaKey ) {
+			const normalizedCompare =
+				typeof metaCompare === 'string'
+					? metaCompare.toUpperCase()
+					: '=';
+			const safeMetaCompare = ALLOWED_META_COMPARE.includes(
+				normalizedCompare
+			)
+				? normalizedCompare
+				: '=';
+
 			queryArgs.meta_key = metaKey;
-			if ( metaValue ) {
-				queryArgs.meta_value = metaValue;
-			}
-			if ( metaCompare ) {
-				queryArgs.meta_compare = metaCompare;
+			queryArgs.meta_compare = safeMetaCompare;
+			if (
+				metaValue !== undefined &&
+				metaValue !== null &&
+				metaValue !== '' &&
+				! [ 'EXISTS', 'NOT EXISTS' ].includes( safeMetaCompare )
+			) {
+				queryArgs.meta_value = String( metaValue );
 			}
 		}
 

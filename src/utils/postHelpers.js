@@ -2,18 +2,34 @@
 import { __ } from '@wordpress/i18n';
 
 /**
+ * Safely extract plain text from HTML or decode HTML entities via DOMParser.
+ *
+ * @param {string} text Raw text or HTML markup.
+ * @return {string} Plain text content.
+ */
+const extractPlainTextFromHtml = ( text ) => {
+	if ( ! text ) {
+		return '';
+	}
+	const rawText = String( text );
+	if (
+		typeof window === 'undefined' ||
+		typeof window.DOMParser !== 'function'
+	) {
+		return rawText.replace( /<[^>]*>/g, '' );
+	}
+	const doc = new window.DOMParser().parseFromString( rawText, 'text/html' );
+	return doc?.body?.textContent || '';
+};
+
+/**
  * Decode HTML entities in text (e.g. converting &amp; to &)
  *
  * @param {string} text Raw text string with HTML entities.
  * @return {string} Decoded plain text string.
  */
 export const decodeHtmlEntities = ( text ) => {
-	if ( ! text ) {
-		return '';
-	}
-	const textArea = document.createElement( 'textarea' );
-	textArea.innerHTML = text;
-	return textArea.value;
+	return extractPlainTextFromHtml( text );
 };
 
 /**
@@ -109,10 +125,7 @@ export const getExcerpt = ( post, wordLimit = 20, options = {} ) => {
 		return '';
 	}
 
-	const div = document.createElement( 'div' );
-	div.innerHTML = text;
-	text = div.textContent || div.innerText || '';
-	text = text.trim();
+	text = extractPlainTextFromHtml( text ).trim();
 
 	if ( options.enablePostExcerptLimit === false ) {
 		return text;
