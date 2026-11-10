@@ -6,6 +6,7 @@ import LayoutModePanel from './LayoutModePanel';
 import ShowHidePanel from './ShowHidePanel';
 import LayoutContentPanel from './LayoutContentPanel';
 import ContentOrderPanel from './ContentOrderPanel';
+import MetaSettingsPanel from './MetaSettingsPanel';
 import CarouselSettingsPanel from './CarouselSettingsPanel';
 import CarouselEffectPanel from './CarouselEffectPanel';
 import ReadMoreSettingsPanel from './ReadMoreSettingsPanel';
@@ -85,6 +86,13 @@ const GeneralTab = ( {
 				normalizedContentOrder={ normalizedContentOrder }
 				isOpen={ openPanel === 'content-order' }
 				onToggle={ () => onTogglePanel( 'content-order' ) }
+			/>
+
+			<MetaSettingsPanel
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+				isOpen={ openPanel === 'meta-settings' }
+				onToggle={ () => onTogglePanel( 'meta-settings' ) }
 			/>
 
 			<CarouselSettingsPanel

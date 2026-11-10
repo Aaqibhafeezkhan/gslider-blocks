@@ -11,6 +11,8 @@
 
 namespace GSlider\Blocks\PostCarousel;
 
+use GSlider\Utils\Helper;
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -36,7 +38,9 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
                 'class' => true,
             ),
             'span' => array(
-                'class' => true,
+                'class'       => true,
+                'aria-label'  => true,
+                'aria-hidden' => true,
             ),
             'a'    => array(
                 'href' => true,
@@ -192,26 +196,39 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
             $post_taxonomy_display = isset( $context['post_taxonomy_display'] ) ? (string) $context['post_taxonomy_display'] : 'category';
             $show_cat              = ( 'category' === $post_taxonomy_display || 'both' === $post_taxonomy_display );
             $show_tag              = ( 'tag' === $post_taxonomy_display || 'both' === $post_taxonomy_display );
+            $max_count             = isset( $context['taxonomy_max_count'] ) ? min( 5, max( 1, (int) $context['taxonomy_max_count'] ) ) : 2;
 
             ob_start();
-            if ( $show_cat && ! empty( $categories ) ) {
+            if ( $show_cat && ! empty( $categories ) && is_array( $categories ) ) {
+                $total_cats   = count( $categories );
+                $sliced_cats  = array_slice( $categories, 0, $max_count );
+                $cat_overflow = $total_cats - count( $sliced_cats );
                 ?>
                 <div class="gslider-post-carousel-categories">
-                    <?php foreach ( $categories as $cat ) : ?>
+                    <?php foreach ( $sliced_cats as $cat ) : ?>
                         <span class="gslider-category-item"><a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>"><?php echo esc_html( $cat->name ); ?></a></span>
                     <?php endforeach; ?>
+                    <?php if ( $cat_overflow > 0 ) : ?>
+                        <span class="gslider-category-item is-more-badge"><span class="screen-reader-text"><?php echo esc_html( sprintf( /* translators: %d: Number of remaining categories. */ _n( '%d more category', '%d more categories', $cat_overflow, 'gslider-blocks' ), $cat_overflow ) ); ?></span><span aria-hidden="true">+<?php echo esc_html( (string) $cat_overflow ); ?></span></span>
+                    <?php endif; ?>
                 </div>
                 <?php
             }
 
             if ( $show_tag ) {
                 $post_tags = get_the_tags( $post_id );
-                if ( ! empty( $post_tags ) ) {
+                if ( ! empty( $post_tags ) && is_array( $post_tags ) ) {
+                    $total_tags   = count( $post_tags );
+                    $sliced_tags  = array_slice( $post_tags, 0, $max_count );
+                    $tag_overflow = $total_tags - count( $sliced_tags );
                     ?>
                     <div class="gslider-post-carousel-tags">
-                        <?php foreach ( $post_tags as $tag ) : ?>
+                        <?php foreach ( $sliced_tags as $tag ) : ?>
                             <span class="gslider-tag-item"><a href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>"><?php echo esc_html( $tag->name ); ?></a></span>
                         <?php endforeach; ?>
+                        <?php if ( $tag_overflow > 0 ) : ?>
+                            <span class="gslider-tag-item is-more-badge"><span class="screen-reader-text"><?php echo esc_html( sprintf( /* translators: %d: Number of remaining tags. */ _n( '%d more tag', '%d more tags', $tag_overflow, 'gslider-blocks' ), $tag_overflow ) ); ?></span><span aria-hidden="true">+<?php echo esc_html( (string) $tag_overflow ); ?></span></span>
+                        <?php endif; ?>
                     </div>
                     <?php
                 }
@@ -433,43 +450,94 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
          * @return string Rendered meta HTML or empty string.
          */
         private static function render_meta( int $post_id, array $context ): string {
-            $show_author = ! empty( $context['any_author_enabled'] );
-            $show_date   = ! empty( $context['any_date_enabled'] );
-
-            if ( empty( $context['any_meta_enabled'] ) || ( ! $show_author && ! $show_date ) ) {
+            if ( empty( $context['any_meta_enabled'] ) ) {
                 return '';
             }
 
-            ob_start();
-            ?>
-            <div class="gslider-post-carousel-meta">
-                <?php if ( $show_author ) : ?>
-                <div class="gslider-post-author-wrapper">
-                    <?php if ( ! empty( $context['any_avatar_enabled'] ) ) : ?>
-                    <div class="gslider-post-author-avatar-wrapper">
-                        <?php
+            $show_author       = ! empty( $context['any_author_enabled'] );
+            $show_date         = ! empty( $context['any_date_enabled'] );
+            $show_reading_time = ! empty( $context['show_reading_time'] );
+            $show_comment      = ! empty( $context['show_comment_count'] );
+
+            if ( ! $show_author && ! $show_date && ! $show_reading_time && ! $show_comment ) {
+                return '';
+            }
+
+            $meta_parts = array();
+
+            if ( $show_author ) {
+                $author_name = get_the_author();
+                if ( '' !== $author_name ) {
+                    $avatar_markup = '';
+                    if ( ! empty( $context['any_avatar_enabled'] ) ) {
                         $author_id  = get_the_author_meta( 'ID' );
                         $avatar_url = get_avatar_url( $author_id, array( 'size' => 96 ) );
-                        if ( $avatar_url ) :
-                        ?>
-                            <img class="gslider-post-author-avatar" src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( get_the_author() ); ?>" width="28" height="28" loading="lazy" />
-                        <?php else : ?>
-                            <svg class="gslider-post-author-avatar-placeholder" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        <?php endif; ?>
-                    </div>
-                    <?php endif; ?>
-                    <div class="gslider-post-author"><?php the_author(); ?></div>
-                </div>
-                <?php endif; ?>
-                <?php if ( $show_date ) : ?>
-                <div class="gslider-post-date-wrapper">
-                    <div class="gslider-post-date"><?php echo esc_html( get_the_date( '', $post_id ) ); ?></div>
-                </div>
-                <?php endif; ?>
-            </div>
-            <?php
+                        if ( $avatar_url ) {
+                            $avatar_markup = '<div class="gslider-post-author-avatar-wrapper"><img class="gslider-post-author-avatar" src="' . esc_url( $avatar_url ) . '" alt="' . esc_attr( $author_name ) . '" width="28" height="28" loading="lazy" /></div>';
+                        } else {
+                            $avatar_markup = '<div class="gslider-post-author-avatar-wrapper"><svg class="gslider-post-author-avatar-placeholder" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+                        }
+                    }
+                    $meta_parts[] = '<div class="gslider-post-author-wrapper">' . $avatar_markup . '<div class="gslider-post-author">' . esc_html( $author_name ) . '</div></div>';
+                }
+            }
 
-            return (string) ob_get_clean();
+            if ( $show_date ) {
+                $date_format = isset( $context['date_format'] ) ? (string) $context['date_format'] : 'default';
+                if ( 'relative' === $date_format ) {
+                    $post_time = (int) get_post_time( 'U', true, $post_id );
+                    $now       = (int) current_time( 'timestamp', true );
+                    $formatted = sprintf(
+                        /* translators: %s: Human-readable relative time difference. */
+                        __( '%s ago', 'gslider-blocks' ),
+                        human_time_diff( $post_time, $now )
+                    );
+                } else {
+                    $formatted = (string) get_the_date( '', $post_id );
+                }
+                $iso_date     = (string) get_the_date( 'c', $post_id );
+                $meta_parts[] = '<div class="gslider-post-date-wrapper"><time class="gslider-post-date" datetime="' . esc_attr( $iso_date ) . '">' . esc_html( $formatted ) . '</time></div>';
+            }
+
+            if ( $show_reading_time ) {
+                $post_content = get_post_field( 'post_content', $post_id );
+                $minutes      = Helper::calculate_reading_time( is_string( $post_content ) ? $post_content : '' );
+                $reading_str  = sprintf(
+                    /* translators: %d: Estimated reading time in minutes. */
+                    _n( '%d min read', '%d min read', $minutes, 'gslider-blocks' ),
+                    $minutes
+                );
+                $meta_parts[] = '<div class="gslider-post-reading-time-wrapper"><span class="gslider-post-reading-time">' . esc_html( $reading_str ) . '</span></div>';
+            }
+
+            if ( $show_comment ) {
+                $comment_count = (int) get_comments_number( $post_id );
+                $comments_text = sprintf(
+                    /* translators: %s: Number of comments. */
+                    _n( '%s comment', '%s comments', $comment_count, 'gslider-blocks' ),
+                    number_format_i18n( $comment_count )
+                );
+                $comments_link = get_comments_link( $post_id );
+                $icon_svg      = '<svg class="gslider-meta-icon" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>';
+                $meta_parts[]  = '<div class="gslider-post-comments-wrapper"><span class="gslider-post-comments">' . $icon_svg . '<a class="gslider-post-comments-link" href="' . esc_url( $comments_link ) . '">' . esc_html( $comments_text ) . '</a></span></div>';
+            }
+
+            if ( empty( $meta_parts ) ) {
+                return '';
+            }
+
+            $meta_sep = isset( $context['meta_separator'] ) ? (string) $context['meta_separator'] : 'bullet';
+            $sep_map  = array(
+                'bullet' => '•',
+                'pipe'   => '|',
+                'slash'  => '/',
+                'dash'   => '—',
+                'none'   => '',
+            );
+            $sep_char = isset( $sep_map[ $meta_sep ] ) ? $sep_map[ $meta_sep ] : '•';
+            $sep_html = '' !== $sep_char ? '<span class="gslider-meta-sep" aria-hidden="true">' . esc_html( $sep_char ) . '</span>' : '';
+
+            return '<div class="gslider-post-carousel-meta">' . implode( $sep_html, $meta_parts ) . '</div>';
         }
 
         /**

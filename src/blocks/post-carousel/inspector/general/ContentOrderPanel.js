@@ -46,6 +46,14 @@ const TAXONOMY_DISPLAY_OPTIONS = [
 	{ label: __( 'None', 'gslider-blocks' ), value: 'none' },
 ];
 
+const TAXONOMY_MAX_OPTIONS = [
+	{ label: '1', value: 1 },
+	{ label: '2', value: 2 },
+	{ label: '3', value: 3 },
+	{ label: '4', value: 4 },
+	{ label: '5', value: 5 },
+];
+
 const BADGE_POSITION_OPTIONS = [
 	{ label: __( 'Top Left', 'gslider-blocks' ), value: 'top-left' },
 	{ label: __( 'Top Right', 'gslider-blocks' ), value: 'top-right' },
@@ -96,6 +104,7 @@ const ContentOrderPanel = ( {
 } ) => {
 	const {
 		postTaxonomyDisplay,
+		taxonomyMaxCount,
 		enableTaxonomyBadgeOverlay,
 		taxonomyBadgeOverlayPosition,
 		taxonomyBadgeOverlayVisibility,
@@ -135,6 +144,20 @@ const ContentOrderPanel = ( {
 
 			{ postTaxonomyDisplay !== 'none' && (
 				<>
+					<Select2Control
+						label={ __(
+							'Max Badges to Display',
+							'gslider-blocks'
+						) }
+						value={ taxonomyMaxCount ?? 2 }
+						options={ TAXONOMY_MAX_OPTIONS }
+						onChange={ ( value ) =>
+							setAttributes( {
+								taxonomyMaxCount: parseInt( value, 10 ),
+							} )
+						}
+					/>
+
 					<ToggleControl
 						label={ __(
 							'Overlay Badge on Image',

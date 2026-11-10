@@ -216,5 +216,50 @@ if ( ! class_exists( Helper::class, false ) ) {
 
             return array_unique( $excluded_ids );
         }
+
+        /**
+         * Calculates multilingual estimated reading time in minutes.
+         *
+         * Strips shortcodes and tags, and applies multi-byte character counting
+         * at 500 chars/min for CJK scripts (Chinese Hanzi/Kanji, Japanese Kana, Korean Hangul),
+         * and 200 words/min for Latin and other space-delimited scripts.
+         *
+         * @since 1.2.3
+         *
+         * @param mixed $content          Post content string.
+         * @param int   $words_per_minute Reading speed in words per minute (default 200).
+         * @return int Estimated reading time in minutes (minimum 1).
+         */
+        public static function calculate_reading_time( $content, int $words_per_minute = 200 ): int {
+            if ( empty( $content ) || ! is_string( $content ) ) {
+                return 1;
+            }
+
+            $clean_content = strip_shortcodes( wp_strip_all_tags( $content ) );
+            $clean_content = trim( $clean_content );
+            if ( '' === $clean_content ) {
+                return 1;
+            }
+
+            // Pattern covering CJK Ideographs (Hanzi/Kanji), Hiragana, Katakana, and Hangul Syllables/Jamo.
+            $cjk_pattern = '/[\x{4e00}-\x{9fa5}\x{3040}-\x{309f}\x{30a0}-\x{30ff}\x{ac00}-\x{d7af}\x{1100}-\x{11ff}\x{3130}-\x{318f}]/u';
+
+            // Match all CJK characters.
+            preg_match_all( $cjk_pattern, $clean_content, $cjk_matches );
+            $cjk_char_count = ! empty( $cjk_matches[0] ) ? count( $cjk_matches[0] ) : 0;
+
+            // Strip CJK characters and count remaining space-separated words.
+            $non_cjk_content = preg_replace( $cjk_pattern, ' ', $clean_content );
+            $words           = preg_split( '/\s+/u', (string) $non_cjk_content, -1, PREG_SPLIT_NO_EMPTY );
+            $word_count      = is_array( $words ) ? count( $words ) : 0;
+
+            // CJK characters at 500 chars/min; Latin/other words at $words_per_minute (default 200).
+            $cjk_wpm    = 500;
+            $cjk_time   = $cjk_char_count / $cjk_wpm;
+            $latin_time = $word_count / max( 1, $words_per_minute );
+            $total_time = $cjk_time + $latin_time;
+
+            return max( 1, (int) ceil( $total_time ) );
+        }
     }
 }

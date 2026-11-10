@@ -469,6 +469,10 @@ var layoutAttributes = {
     type: "string",
     default: "category"
   },
+  taxonomyMaxCount: {
+    type: "number",
+    default: 2
+  },
   enableTaxonomyBadgeOverlay: {
     type: "boolean",
     default: true
@@ -595,8 +599,26 @@ var layoutAttributes = {
       Tablet: true,
       Mobile: true
     }
-  }
+  },
   /** End Element Visibility Toggles */
+  /** Start Editorial Meta Attributes */
+  showReadingTime: {
+    type: "boolean",
+    default: true
+  },
+  showCommentCount: {
+    type: "boolean",
+    default: false
+  },
+  dateFormat: {
+    type: "string",
+    default: "default"
+  },
+  metaSeparator: {
+    type: "string",
+    default: "bullet"
+  }
+  /** End Editorial Meta Attributes */
 };
 var layoutAttributes_default = layoutAttributes;
 

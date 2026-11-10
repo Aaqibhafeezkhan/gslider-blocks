@@ -659,6 +659,9 @@ if ( ! function_exists( 'get_the_date' ) ) {
 	 * @return string Formatted date.
 	 */
 	function get_the_date( $format = '', $post = null ) {
+		if ( 'c' === $format ) {
+			return '2026-11-10T12:00:00+00:00';
+		}
 		if ( 'Y-m-d' === $format ) {
 			return '2026-11-10';
 		}
@@ -912,6 +915,7 @@ class PostCarouselRendererTest {
 		$this->test_wave5a_hero_minimal_spotlight_presets_and_swiper_settings();
 		$this->test_wave5b_newsroom_stage_preset_and_queue_rendering();
 		$this->test_wave5c_timeline_rail_preset_rendering();
+		$this->test_wave6_editorial_meta_reading_time_relative_dates_comments_separators_and_badge_cap();
 
 		echo "\nAll PostCarouselRenderer unit tests passed successfully!\n";
 	}
@@ -1734,6 +1738,97 @@ class PostCarouselRendererTest {
 		$this->assert_same( 10, $ctx_bounds_high['timeline_stem_thickness'], 'timelineStemThickness clamps to maximum 10px' );
 		$this->assert_same( 48, $ctx_bounds_high['timeline_dot_size'], 'timelineDotSize clamps to maximum 48px' );
 		$this->assert_same( 'below', $ctx_bounds_high['timeline_date_position'], 'Valid timelineDatePosition preserves below' );
+	}
+
+	/**
+	 * Test 13: Wave 6 Editorial Meta (Reading Time, Comment Count, Relative Dates, Badge Cap & Meta Separators).
+	 *
+	 * @return void
+	 */
+	public function test_wave6_editorial_meta_reading_time_relative_dates_comments_separators_and_badge_cap(): void {
+		$this->reset_state();
+
+		// 1. Reading Time default (enabled) & Comments (disabled by default) & Default Separator (bullet '•').
+		$default_html = PostCarouselRenderer::render(
+			array(
+				'blockId' => 'gslider-editorial-default',
+			)
+		);
+		$this->assert_true( false !== strpos( $default_html, 'class="gslider-post-reading-time-wrapper"' ), 'Reading time wrapper renders when showReadingTime is default true' );
+		$this->assert_true( false !== strpos( $default_html, 'min read' ), 'Reading time formatted min read string renders' );
+		$this->assert_true( false === strpos( $default_html, 'class="gslider-post-comments-wrapper"' ), 'Comment count wrapper is omitted when showCommentCount is default false' );
+		$this->assert_true( false !== strpos( $default_html, '<span class="gslider-meta-sep" aria-hidden="true">•</span>' ), 'Default meta separator bullet renders between meta items' );
+		$this->assert_true( false !== strpos( $default_html, '<time class="gslider-post-date" datetime="2026-11-10T12:00:00+00:00">November 10, 2026</time>' ), 'Semantic <time> tag wraps standard date with ISO datetime attribute' );
+
+		// 2. Reading Time disabled, Comment Count enabled, Relative Date, Pipe separator ('|').
+		$editorial_html = PostCarouselRenderer::render(
+			array(
+				'blockId'          => 'gslider-editorial-custom',
+				'showReadingTime'  => false,
+				'showCommentCount' => true,
+				'dateFormat'       => 'relative',
+				'metaSeparator'    => 'pipe',
+			)
+		);
+		$this->assert_true( false === strpos( $editorial_html, 'class="gslider-post-reading-time-wrapper"' ), 'Reading time wrapper is omitted when showReadingTime is false' );
+		$this->assert_true( false !== strpos( $editorial_html, 'class="gslider-post-comments-wrapper"' ), 'Comment count wrapper renders when showCommentCount is true' );
+		$this->assert_true( false !== strpos( $editorial_html, '<svg class="gslider-meta-icon" aria-hidden="true"' ), 'Comment count renders speech bubble SVG icon' );
+		$this->assert_true( false !== strpos( $editorial_html, '3 comments' ), 'Comment count renders formatted comments string' );
+		$this->assert_true( false !== strpos( $editorial_html, 'http://example.org/test-post/#comments' ), 'Comment count links to comments section' );
+		$this->assert_true( false !== strpos( $editorial_html, '1 day ago' ), 'Relative date renders human_time_diff string wrapped in %s ago' );
+		$this->assert_true( false !== strpos( $editorial_html, '<span class="gslider-meta-sep" aria-hidden="true">|</span>' ), 'Pipe meta separator renders between active meta items' );
+
+		// 3. Separators: slash, dash, none.
+		$slash_html = PostCarouselRenderer::render( array( 'blockId' => 'gslider-sep-slash', 'metaSeparator' => 'slash' ) );
+		$this->assert_true( false !== strpos( $slash_html, '<span class="gslider-meta-sep" aria-hidden="true">/</span>' ), 'Slash separator renders correctly' );
+
+		$dash_html = PostCarouselRenderer::render( array( 'blockId' => 'gslider-sep-dash', 'metaSeparator' => 'dash' ) );
+		$this->assert_true( false !== strpos( $dash_html, '<span class="gslider-meta-sep" aria-hidden="true">—</span>' ), 'Dash separator renders correctly' );
+
+		$none_html = PostCarouselRenderer::render( array( 'blockId' => 'gslider-sep-none', 'metaSeparator' => 'none' ) );
+		$this->assert_true( false === strpos( $none_html, 'class="gslider-meta-sep"' ), 'Meta separator span is omitted when metaSeparator is none' );
+
+		// 4. Taxonomy Badge Cap: taxonomyMaxCount
+		$GLOBALS['gslider_test_post_categories'][101] = array(
+			(object) array( 'term_id' => 10, 'name' => 'Tech' ),
+			(object) array( 'term_id' => 11, 'name' => 'Design' ),
+			(object) array( 'term_id' => 12, 'name' => 'News' ),
+			(object) array( 'term_id' => 13, 'name' => 'Tutorials' ),
+		);
+		$capped_html = PostCarouselRenderer::render(
+			array(
+				'blockId'          => 'gslider-badge-cap',
+				'taxonomyMaxCount' => 2,
+			)
+		);
+		$this->assert_true( false !== strpos( $capped_html, 'Tech</a>' ), 'First category badge renders within cap' );
+		$this->assert_true( false !== strpos( $capped_html, 'Design</a>' ), 'Second category badge renders within cap' );
+		$this->assert_true( false === strpos( $capped_html, 'News</a>' ), 'Third category badge is truncated by taxonomyMaxCount' );
+		$this->assert_true( false === strpos( $capped_html, 'Tutorials</a>' ), 'Fourth category badge is truncated by taxonomyMaxCount' );
+		$this->assert_true( false !== strpos( $capped_html, '<span class="gslider-category-item is-more-badge"><span class="screen-reader-text">2 more categories</span><span aria-hidden="true">+2</span></span>' ), '+2 overflow badge renders with accessible screen-reader-text and aria-hidden badge' );
+
+		// 5. Context Clamping & Validation
+		$ctx_clamped = PostCarouselRenderer::build_render_context(
+			array(
+				'taxonomyMaxCount' => 0,
+				'dateFormat'       => 'invalid_date_format',
+				'metaSeparator'    => 'invalid_separator',
+			)
+		);
+		$this->assert_same( 1, $ctx_clamped['taxonomy_max_count'], 'taxonomyMaxCount clamps 0 to minimum 1' );
+		$this->assert_same( 'default', $ctx_clamped['date_format'], 'Invalid dateFormat falls back to default' );
+		$this->assert_same( 'bullet', $ctx_clamped['meta_separator'], 'Invalid metaSeparator falls back to bullet' );
+
+		$ctx_high = PostCarouselRenderer::build_render_context(
+			array(
+				'taxonomyMaxCount' => 99,
+				'dateFormat'       => 'relative',
+				'metaSeparator'    => 'dash',
+			)
+		);
+		$this->assert_same( 5, $ctx_high['taxonomy_max_count'], 'taxonomyMaxCount clamps 99 to maximum 5' );
+		$this->assert_same( 'relative', $ctx_high['date_format'], 'Valid relative dateFormat is preserved' );
+		$this->assert_same( 'dash', $ctx_high['meta_separator'], 'Valid dash metaSeparator is preserved' );
 	}
 }
 

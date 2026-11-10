@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars, react-hooks/exhaustive-deps, import/no-unresolved, jsdoc/require-param, no-nested-ternary, jsx-a11y/anchor-is-valid */
-import { __ } from '@wordpress/i18n';
+import { __, _n, sprintf } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { Placeholder } from '@wordpress/components';
 import { Fragment, useEffect, useRef, useState } from '@wordpress/element';
@@ -21,6 +21,9 @@ import {
 	getAuthorName,
 	getAuthorAvatarUrl,
 	getFormattedDate,
+	calculateReadingTime,
+	getRelativeDate,
+	getCommentCount,
 	decodeHtmlEntities,
 } from '@Utils/postHelpers';
 import { getPostQueryArgs } from '@Utils/getPostQueryArgs';
@@ -78,6 +81,11 @@ export default function Edit( {
 		showMetaAuthor,
 		showMetaAvatar,
 		showMetaDate,
+		showReadingTime,
+		showCommentCount,
+		dateFormat,
+		taxonomyMaxCount,
+		metaSeparator,
 		showTaxonomy,
 		postLayoutMode,
 		presetStyle,
@@ -806,6 +814,27 @@ export default function Edit( {
 										return null;
 									}
 
+									const maxCount = Math.min(
+										5,
+										Math.max(
+											1,
+											parseInt( taxonomyMaxCount, 10 ) ||
+												2
+										)
+									);
+									const visibleCats = categories.slice(
+										0,
+										maxCount
+									);
+									const catOverflow =
+										categories.length - visibleCats.length;
+									const visibleTags = tags.slice(
+										0,
+										maxCount
+									);
+									const tagOverflow =
+										tags.length - visibleTags.length;
+
 									return (
 										<Fragment key="categories">
 											{ hasCat && (
@@ -813,7 +842,7 @@ export default function Edit( {
 													key="categories-wrap"
 													className="gslider-post-carousel-categories"
 												>
-													{ categories.map(
+													{ visibleCats.map(
 														( cat ) => (
 															<span
 																key={ `cat-${ cat.id }` }
@@ -823,6 +852,25 @@ export default function Edit( {
 															</span>
 														)
 													) }
+													{ catOverflow > 0 && (
+														<span className="gslider-category-item is-more-badge">
+															<span className="screen-reader-text">
+																{ sprintf(
+																	/* translators: %d: Number of remaining categories. */
+																	_n(
+																		'%d more category',
+																		'%d more categories',
+																		catOverflow,
+																		'gslider-blocks'
+																	),
+																	catOverflow
+																) }
+															</span>
+															<span aria-hidden="true">
+																+{ catOverflow }
+															</span>
+														</span>
+													) }
 												</div>
 											) }
 											{ hasTag && (
@@ -830,14 +878,35 @@ export default function Edit( {
 													key="tags-wrap"
 													className="gslider-post-carousel-tags"
 												>
-													{ tags.map( ( tag ) => (
-														<span
-															key={ `tag-${ tag.id }` }
-															className="gslider-tag-item"
-														>
-															{ tag.name }
+													{ visibleTags.map(
+														( tag ) => (
+															<span
+																key={ `tag-${ tag.id }` }
+																className="gslider-tag-item"
+															>
+																{ tag.name }
+															</span>
+														)
+													) }
+													{ tagOverflow > 0 && (
+														<span className="gslider-tag-item is-more-badge">
+															<span className="screen-reader-text">
+																{ sprintf(
+																	/* translators: %d: Number of remaining tags. */
+																	_n(
+																		'%d more tag',
+																		'%d more tags',
+																		tagOverflow,
+																		'gslider-blocks'
+																	),
+																	tagOverflow
+																) }
+															</span>
+															<span aria-hidden="true">
+																+{ tagOverflow }
+															</span>
 														</span>
-													) ) }
+													) }
 												</div>
 											) }
 										</Fragment>
@@ -1164,30 +1233,50 @@ export default function Edit( {
 																  } )()
 																: null,
 
-														meta:
-															showMeta?.[
-																deviceType
-															] &&
-															( ( ( showMetaAuthor?.[
-																deviceType
-															] ??
-																true ) &&
-																authorName ) ||
-																( ( showMetaDate?.[
-																	deviceType
-																] ??
-																	true ) &&
-																	formattedDate ) ) ? (
-																<div
-																	key="meta"
-																	className="gslider-post-carousel-meta"
-																>
-																	{ ( showMetaAuthor?.[
-																		deviceType
-																	] ??
-																		true ) &&
-																		authorName && (
-																			<div className="gslider-post-author-wrapper">
+														meta: showMeta?.[
+															deviceType
+														]
+															? ( () => {
+																	const canShowAuthor =
+																		( showMetaAuthor?.[
+																			deviceType
+																		] ??
+																			true ) &&
+																		authorName;
+																	const canShowDate =
+																		( showMetaDate?.[
+																			deviceType
+																		] ??
+																			true ) &&
+																		post.date;
+																	const canShowReadingTime =
+																		showReadingTime ??
+																		true;
+																	const canShowCommentCount =
+																		Boolean(
+																			showCommentCount
+																		);
+
+																	if (
+																		! canShowAuthor &&
+																		! canShowDate &&
+																		! canShowReadingTime &&
+																		! canShowCommentCount
+																	) {
+																		return null;
+																	}
+
+																	const metaItems =
+																		[];
+
+																	if (
+																		canShowAuthor
+																	) {
+																		metaItems.push(
+																			<div
+																				key="author"
+																				className="gslider-post-author-wrapper"
+																			>
 																				{ ( showMetaAvatar?.[
 																					deviceType
 																				] ??
@@ -1231,22 +1320,201 @@ export default function Edit( {
 																					}
 																				</div>
 																			</div>
-																		) }
-																	{ ( showMetaDate?.[
-																		deviceType
-																	] ??
-																		true ) &&
-																		formattedDate && (
-																			<div className="gslider-post-date-wrapper">
-																				<div className="gslider-post-date">
-																					{
-																						formattedDate
+																		);
+																	}
+
+																	if (
+																		canShowDate
+																	) {
+																		const rawDate =
+																			post.date_gmt
+																				? `${ post.date_gmt }Z`
+																				: post.date;
+																		const dateText =
+																			dateFormat ===
+																			'relative'
+																				? getRelativeDate(
+																						rawDate
+																				  )
+																				: formattedDate;
+																		metaItems.push(
+																			<div
+																				key="date"
+																				className="gslider-post-date-wrapper"
+																			>
+																				<time
+																					className="gslider-post-date"
+																					dateTime={
+																						post.date
 																					}
-																				</div>
+																				>
+																					{
+																						dateText
+																					}
+																				</time>
 																			</div>
-																		) }
-																</div>
-															) : null,
+																		);
+																	}
+
+																	if (
+																		canShowReadingTime
+																	) {
+																		const rawContent =
+																			post
+																				.content
+																				?.raw ||
+																			post
+																				.content
+																				?.rendered ||
+																			post
+																				.excerpt
+																				?.rendered ||
+																			'';
+																		const minutes =
+																			calculateReadingTime(
+																				rawContent
+																			);
+																		const readingStr =
+																			sprintf(
+																				/* translators: %d: Estimated reading time in minutes. */
+																				_n(
+																					'%d min read',
+																					'%d min read',
+																					minutes,
+																					'gslider-blocks'
+																				),
+																				minutes
+																			);
+																		metaItems.push(
+																			<div
+																				key="reading-time"
+																				className="gslider-post-reading-time-wrapper"
+																			>
+																				<span className="gslider-post-reading-time">
+																					{
+																						readingStr
+																					}
+																				</span>
+																			</div>
+																		);
+																	}
+
+																	if (
+																		canShowCommentCount
+																	) {
+																		const commentNum =
+																			getCommentCount(
+																				post
+																			);
+																		const commentStr =
+																			sprintf(
+																				/* translators: %d: Number of comments. */
+																				_n(
+																					'%d comment',
+																					'%d comments',
+																					commentNum,
+																					'gslider-blocks'
+																				),
+																				commentNum
+																			);
+																		metaItems.push(
+																			<div
+																				key="comments"
+																				className="gslider-post-comments-wrapper"
+																			>
+																				<span className="gslider-post-comments">
+																					<svg
+																						className="gslider-meta-icon"
+																						aria-hidden="true"
+																						width="14"
+																						height="14"
+																						viewBox="0 0 24 24"
+																						fill="none"
+																						stroke="currentColor"
+																						strokeWidth="2"
+																						strokeLinecap="round"
+																						strokeLinejoin="round"
+																					>
+																						<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+																					</svg>
+																					<a
+																						className="gslider-post-comments-link"
+																						href="#"
+																						onClick={ (
+																							e
+																						) =>
+																							e.preventDefault()
+																						}
+																					>
+																						{
+																							commentStr
+																						}
+																					</a>
+																				</span>
+																			</div>
+																		);
+																	}
+
+																	if (
+																		metaItems.length ===
+																		0
+																	) {
+																		return null;
+																	}
+
+																	const sepMap =
+																		{
+																			bullet: '•',
+																			pipe: '|',
+																			slash: '/',
+																			dash: '—',
+																			none: '',
+																		};
+																	const sepChar =
+																		sepMap[
+																			metaSeparator ||
+																				'bullet'
+																		] ??
+																		'•';
+
+																	return (
+																		<div
+																			key="meta"
+																			className="gslider-post-carousel-meta"
+																		>
+																			{ metaItems.map(
+																				(
+																					item,
+																					idx
+																				) => (
+																					<Fragment
+																						key={
+																							item.key
+																						}
+																					>
+																						{ idx >
+																							0 &&
+																							sepChar !==
+																								'' && (
+																								<span
+																									className="gslider-meta-sep"
+																									aria-hidden="true"
+																								>
+																									{
+																										sepChar
+																									}
+																								</span>
+																							) }
+																						{
+																							item
+																						}
+																					</Fragment>
+																				)
+																			) }
+																		</div>
+																	);
+															  } )()
+															: null,
 
 														readmore:
 															showReadMoreButton?.[
@@ -1635,6 +1903,7 @@ export default function Edit( {
 							posts={ posts }
 							queueRef={ queueContainerRef }
 							activeIndex={ activeQueueIndex }
+							showReadingTime={ showReadingTime }
 							onSelectIndex={ ( idx ) => {
 								if ( swiperInstanceRef.current ) {
 									if (

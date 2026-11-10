@@ -22,7 +22,7 @@
       "coverflow"
     ]
   },
-  "totalAttributes": 949,
+  "totalAttributes": 954,
   "slideItemSchema": {
     "type": "dynamicQuery",
     "source": "WP_Query",
@@ -43,6 +43,10 @@
     "carouselEffect": [
       "slide",
       "coverflow"
+    ],
+    "dateFormat": [
+      "default",
+      "relative"
     ],
     "heroContentAlignment": [
       "bottom-left",
@@ -86,6 +90,13 @@
       "right top",
       "left bottom",
       "right bottom"
+    ],
+    "metaSeparator": [
+      "bullet",
+      "pipe",
+      "slash",
+      "dash",
+      "none"
     ],
     "navigationArrowDirection": [
       "row",
@@ -417,6 +428,10 @@
       "type": "string",
       "default": "category"
     },
+    "taxonomyMaxCount": {
+      "type": "number",
+      "default": 2
+    },
     "enableTaxonomyBadgeOverlay": {
       "type": "boolean",
       "default": true
@@ -540,6 +555,22 @@
         "Tablet": true,
         "Mobile": true
       }
+    },
+    "showReadingTime": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCommentCount": {
+      "type": "boolean",
+      "default": false
+    },
+    "dateFormat": {
+      "type": "string",
+      "default": "default"
+    },
+    "metaSeparator": {
+      "type": "string",
+      "default": "bullet"
     },
     "carouselPerColumn": {
       "type": "object",

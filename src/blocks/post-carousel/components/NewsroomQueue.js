@@ -4,6 +4,7 @@ import {
 	getFeaturedImageUrl,
 	getFormattedDate,
 	decodeHtmlEntities,
+	calculateReadingTime,
 } from '@Utils/postHelpers';
 
 /**
@@ -14,13 +15,11 @@ import {
  */
 const getReadingTime = ( post ) => {
 	const rawContent = post?.content?.rendered || '';
-	const cleanText = rawContent.replace( /<[^>]*>/g, '' ).trim();
-	if ( ! cleanText ) {
+	if ( ! rawContent ) {
 		return getFormattedDate( post ) || '';
 	}
 
-	const words = cleanText.split( /\s+/ ).filter( Boolean ).length;
-	const minutes = Math.max( 1, Math.ceil( words / 200 ) );
+	const minutes = calculateReadingTime( rawContent );
 
 	return sprintf(
 		/* translators: %d: Estimated reading time in minutes. */
@@ -35,11 +34,12 @@ const getReadingTime = ( post ) => {
  * Renders the story playlist aside track in Gutenberg editor and
  * coordinates with Swiper Thumbs.
  *
- * @param {Object}   props               Component props.
- * @param {Array}    props.posts         Queried post items.
- * @param {Object}   props.queueRef      React ref for the queue Swiper container.
- * @param {Function} props.onSelectIndex Click callback to navigate the main slider.
- * @param {number}   props.activeIndex   Active slide index.
+ * @param {Object}   props                 Component props.
+ * @param {Array}    props.posts           Queried post items.
+ * @param {Object}   props.queueRef        React ref for the queue Swiper container.
+ * @param {Function} props.onSelectIndex   Click callback to navigate the main slider.
+ * @param {number}   props.activeIndex     Active slide index.
+ * @param {boolean}  props.showReadingTime Whether reading time is enabled.
  * @return {JSX.Element} Rendered aside element.
  */
 export default function NewsroomQueue( {
@@ -47,6 +47,7 @@ export default function NewsroomQueue( {
 	queueRef,
 	onSelectIndex,
 	activeIndex = 0,
+	showReadingTime = true,
 } ) {
 	if ( ! posts || posts.length === 0 ) {
 		return null;
@@ -64,7 +65,9 @@ export default function NewsroomQueue( {
 						decodeHtmlEntities( post?.title?.rendered ) ||
 						__( '(Untitled)', 'gslider-blocks' );
 					const thumbUrl = getFeaturedImageUrl( post );
-					const meta = getReadingTime( post );
+					const meta = showReadingTime
+						? getReadingTime( post )
+						: getFormattedDate( post ) || '';
 					const isActive = activeIndex === index;
 
 					return (

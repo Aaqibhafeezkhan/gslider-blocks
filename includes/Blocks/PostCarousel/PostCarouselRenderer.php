@@ -898,6 +898,14 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 ? trim( (string) preg_replace( '/[;{}<>]/', '', $attributes['overlayGradientScrim'] ) )
                 : '';
 
+            $raw_meta_sep       = isset( $attributes['metaSeparator'] ) ? sanitize_key( (string) $attributes['metaSeparator'] ) : 'bullet';
+            $meta_separator     = in_array( $raw_meta_sep, array( 'bullet', 'pipe', 'slash', 'dash', 'none' ), true ) ? $raw_meta_sep : 'bullet';
+            $raw_date_format    = isset( $attributes['dateFormat'] ) ? sanitize_key( (string) $attributes['dateFormat'] ) : 'default';
+            $date_format        = in_array( $raw_date_format, array( 'default', 'relative' ), true ) ? $raw_date_format : 'default';
+            $taxonomy_max_count = isset( $attributes['taxonomyMaxCount'] ) ? min( 5, max( 1, intval( $attributes['taxonomyMaxCount'] ) ) ) : 2;
+            $show_reading_time  = isset( $attributes['showReadingTime'] ) ? (bool) $attributes['showReadingTime'] : true;
+            $show_comment_count = ! empty( $attributes['showCommentCount'] );
+
             return array(
                 'block_id'                               => isset( $attributes['blockId'] ) ? sanitize_html_class( (string) $attributes['blockId'] ) : '',
                 'global_id'                              => isset( $attributes['globalID'] ) ? sanitize_html_class( (string) $attributes['globalID'] ) : '',
@@ -975,6 +983,11 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 'enable_taxonomy_badge_overlay'          => isset( $attributes['enableTaxonomyBadgeOverlay'] ) ? (bool) $attributes['enableTaxonomyBadgeOverlay'] : true,
                 'taxonomy_badge_overlay_position'        => isset( $attributes['taxonomyBadgeOverlayPosition'] ) ? sanitize_text_field( (string) $attributes['taxonomyBadgeOverlayPosition'] ) : 'top-left',
                 'taxonomy_badge_overlay_visibility'      => isset( $attributes['taxonomyBadgeOverlayVisibility'] ) ? sanitize_text_field( (string) $attributes['taxonomyBadgeOverlayVisibility'] ) : 'always',
+                'show_reading_time'                      => $show_reading_time,
+                'show_comment_count'                     => $show_comment_count,
+                'date_format'                            => $date_format,
+                'taxonomy_max_count'                     => $taxonomy_max_count,
+                'meta_separator'                         => $meta_separator,
                 'any_image_enabled'                      => self::is_any_breakpoint_enabled( $show_featured_image ),
                 'any_title_enabled'                      => self::is_any_breakpoint_enabled( $show_post_title ),
                 'all_title_enabled'                      => ! empty( $show_post_title['Desktop'] ) && ! empty( $show_post_title['Tablet'] ) && ! empty( $show_post_title['Mobile'] ),

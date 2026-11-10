@@ -86,6 +86,7 @@ return [
 		'readmore',
 	],
 	'postTaxonomyDisplay' => 'category',
+	'taxonomyMaxCount' => 2,
 	'enableTaxonomyBadgeOverlay' => true,
 	'taxonomyBadgeOverlayPosition' => 'top-left',
 	'taxonomyBadgeOverlayVisibility' => 'always',
@@ -156,6 +157,10 @@ return [
 		'Tablet' => true,
 		'Mobile' => true,
 	],
+	'showReadingTime' => true,
+	'showCommentCount' => false,
+	'dateFormat' => 'default',
+	'metaSeparator' => 'bullet',
 	'carouselPerColumn' => [
 		'Desktop' => 3,
 		'Tablet' => 2,

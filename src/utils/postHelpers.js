@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars, jsdoc/require-param-type */
-import { __ } from '@wordpress/i18n';
+import { __, _n, sprintf } from '@wordpress/i18n';
 
 /**
  * Safely extract plain text from HTML or decode HTML entities via DOMParser.
@@ -241,4 +241,128 @@ export const getPostTags = ( post ) => {
 		);
 	}
 	return [];
+};
+
+/**
+ * Calculates estimated reading time in minutes for standard Latin and CJK text.
+ *
+ * @param {string} content        Raw HTML or plain text content.
+ * @param {number} wordsPerMinute Reading speed in words per minute (default 200).
+ * @return {number}               Estimated reading minutes (minimum 1).
+ */
+export const calculateReadingTime = ( content, wordsPerMinute = 200 ) => {
+	if ( ! content ) {
+		return 1;
+	}
+	const plainText = extractPlainTextFromHtml( content ).trim();
+	if ( ! plainText ) {
+		return 1;
+	}
+	// Multi-byte character counting for CJK scripts (Chinese Hanzi/Kanji, Japanese Kana, Korean Hangul)
+	const cjkPattern =
+		/[\u4e00-\u9fa5\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af\u1100-\u11ff\u3130-\u318f]/g;
+	const cjkMatches = plainText.match( cjkPattern );
+	const cjkCharCount = cjkMatches ? cjkMatches.length : 0;
+
+	const nonCjkText = plainText.replace( cjkPattern, ' ' );
+	const words = nonCjkText.split( /\s+/ ).filter( Boolean );
+	const wordCount = words.length;
+
+	const cjkWpm = 500;
+	const cjkTime = cjkCharCount / cjkWpm;
+	const latinTime = wordCount / Math.max( 1, wordsPerMinute );
+	const totalTime = cjkTime + latinTime;
+
+	return Math.max( 1, Math.ceil( totalTime ) );
+};
+
+/**
+ * Returns human-friendly relative time difference string (e.g. "2 hours ago").
+ *
+ * @param {string} dateString ISO or date string parseable by Date constructor.
+ * @return {string}           Human-friendly relative date string.
+ */
+export const getRelativeDate = ( dateString ) => {
+	if ( ! dateString ) {
+		return '';
+	}
+	const date = new Date( dateString );
+	if ( Number.isNaN( date.getTime() ) ) {
+		return '';
+	}
+	const now = new Date();
+	const diffInSeconds = Math.max(
+		0,
+		Math.floor( ( now.getTime() - date.getTime() ) / 1000 )
+	);
+
+	if ( diffInSeconds < 60 ) {
+		return __( 'just now', 'gslider-blocks' );
+	}
+	const diffInMinutes = Math.floor( diffInSeconds / 60 );
+	if ( diffInMinutes < 60 ) {
+		return sprintf(
+			/* translators: %d: Number of minutes */
+			_n( '%d min ago', '%d mins ago', diffInMinutes, 'gslider-blocks' ),
+			diffInMinutes
+		);
+	}
+	const diffInHours = Math.floor( diffInMinutes / 60 );
+	if ( diffInHours < 24 ) {
+		return sprintf(
+			/* translators: %d: Number of hours */
+			_n( '%d hour ago', '%d hours ago', diffInHours, 'gslider-blocks' ),
+			diffInHours
+		);
+	}
+	const diffInDays = Math.floor( diffInHours / 24 );
+	if ( diffInDays < 30 ) {
+		return sprintf(
+			/* translators: %d: Number of days */
+			_n( '%d day ago', '%d days ago', diffInDays, 'gslider-blocks' ),
+			diffInDays
+		);
+	}
+	const diffInMonths = Math.floor( diffInDays / 30 );
+	if ( diffInMonths < 12 ) {
+		return sprintf(
+			/* translators: %d: Number of months */
+			_n(
+				'%d month ago',
+				'%d months ago',
+				diffInMonths,
+				'gslider-blocks'
+			),
+			diffInMonths
+		);
+	}
+	const diffInYears = Math.max( 1, Math.floor( diffInDays / 365 ) );
+	return sprintf(
+		/* translators: %d: Number of years */
+		_n( '%d year ago', '%d years ago', diffInYears, 'gslider-blocks' ),
+		diffInYears
+	);
+};
+
+/**
+ * Safely extracts comment count integer from embedded post object.
+ *
+ * @param {Object} post Post REST API entity.
+ * @return {number}     Total comment count.
+ */
+export const getCommentCount = ( post ) => {
+	if ( typeof post?.comments_count === 'number' ) {
+		return post.comments_count;
+	}
+	if ( typeof post?.comment_count === 'number' ) {
+		return post.comment_count;
+	}
+	if (
+		post?._embedded &&
+		Array.isArray( post._embedded.replies ) &&
+		Array.isArray( post._embedded.replies[ 0 ] )
+	) {
+		return post._embedded.replies[ 0 ].length;
+	}
+	return 0;
 };
