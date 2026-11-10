@@ -11,6 +11,7 @@
  * 6. Card content elements, contentOrder, excerpt sources/limits, avatar lazy-loading/placeholder SVG fallback, and removal of global `$gslider_first_image_optimized` LCP state render cleanly.
  * 7. Thin `src/blocks/post-carousel/render.php` bootstrap delegates directly to `PostCarouselRenderer::render()`.
  * 8. Wave 3 unified `.gslider-post-carousel-body`, `has-equal-height`, fallback thumbnail/SVG/XSS guard, and clickable card links render with zero nested `<a>` tags.
+ * 9. Wave 4 Core Layout Presets (`classic-card`, `modern-overlay`, `editorial-split`), layout mode classes, horizontal media position/no-image classes, and context clamping/sanitization.
  *
  * @package GSlider\Tests\Blocks
  */
@@ -807,6 +808,7 @@ class PostCarouselRendererTest {
 		$this->test_card_elements_lcp_first_image_flag_and_avatar_fallback();
 		$this->test_thin_render_php_delegates_to_post_carousel_renderer();
 		$this->test_wave3_card_body_equal_height_fallback_and_clickable_card();
+		$this->test_wave4_core_layout_presets_and_horizontal_overlay_modes();
 
 		echo "\nAll PostCarouselRenderer unit tests passed successfully!\n";
 	}
@@ -1247,6 +1249,113 @@ class PostCarouselRendererTest {
 		);
 		$this->assert_true( 2 === substr_count( $thumb_last_html, 'class="gslider-post-carousel-body"' ), 'Thumbnail-last contentOrder still wraps card content in .gslider-post-carousel-body' );
 		$this->assert_true( strpos( $thumb_last_html, 'class="gslider-post-carousel-body"' ) < strpos( $thumb_last_html, 'class="gslider-post-carousel-image"' ), 'Thumbnail-last contentOrder keeps .gslider-post-carousel-body before .gslider-post-carousel-image' );
+	}
+
+	/**
+	 * Test 9: Wave 4 Core Layout Presets, layout mode classes, horizontal media classes, and context bounds/sanitization.
+	 *
+	 * @return void
+	 */
+	public function test_wave4_core_layout_presets_and_horizontal_overlay_modes(): void {
+		$this->reset_state();
+
+		// 1. Default classic layout and classic-card preset classes.
+		$classic_html = PostCarouselRenderer::render(
+			array(
+				'blockId' => 'gslider-wave4-classic',
+			)
+		);
+		$this->assert_true( false !== strpos( $classic_html, 'is-layout-classic is-preset-classic-card' ), 'Default render emits is-layout-classic and is-preset-classic-card wrapper classes' );
+		$this->assert_true( false === strpos( $classic_html, 'media-position-left' ) && false === strpos( $classic_html, 'media-position-right' ), 'Classic layout omits horizontal media-position classes' );
+
+		// 2. Modern Dark Overlay preset classes + scrim sanitization and height clamping.
+		$overlay_html = PostCarouselRenderer::render(
+			array(
+				'blockId'        => 'gslider-wave4-overlay',
+				'postLayoutMode' => 'overlay',
+				'presetStyle'    => 'modern-overlay',
+			)
+		);
+		$this->assert_true( false !== strpos( $overlay_html, 'is-layout-overlay is-preset-modern-overlay' ), 'Overlay mode emits is-layout-overlay and is-preset-modern-overlay wrapper classes' );
+
+		$overlay_ctx_low = PostCarouselRenderer::build_render_context(
+			array(
+				'postLayoutMode'       => 'overlay',
+				'presetStyle'          => 'modern-overlay',
+				'overlayGradientScrim' => 'linear-gradient(to top, #000, transparent);}</style><script>alert(1)</script>',
+				'overlayScrimHeight'   => 10,
+			)
+		);
+		$this->assert_same( 40, $overlay_ctx_low['overlay_scrim_height'], 'overlayScrimHeight clamps to minimum 40' );
+		$this->assert_true( false === strpos( $overlay_ctx_low['overlay_gradient_scrim'], ';' ) && false === strpos( $overlay_ctx_low['overlay_gradient_scrim'], '<' ), 'overlayGradientScrim strips CSS/HTML injection delimiters' );
+
+		$overlay_ctx_high = PostCarouselRenderer::build_render_context(
+			array(
+				'overlayScrimHeight' => 150,
+			)
+		);
+		$this->assert_same( 100, $overlay_ctx_high['overlay_scrim_height'], 'overlayScrimHeight clamps to maximum 100' );
+
+		// 3. Editorial Horizontal Split preset classes, media-position-left/right, width clamping, and has-no-image fallback.
+		$horizontal_left_html = PostCarouselRenderer::render(
+			array(
+				'blockId'        => 'gslider-wave4-horiz-left',
+				'postLayoutMode' => 'horizontal',
+				'presetStyle'    => 'editorial-split',
+			)
+		);
+		$this->assert_true( false !== strpos( $horizontal_left_html, 'is-layout-horizontal is-preset-editorial-split' ), 'Horizontal mode emits is-layout-horizontal and is-preset-editorial-split wrapper classes' );
+		$this->assert_true( 2 === substr_count( $horizontal_left_html, 'class="gslider-post-carousel-card has-equal-height media-position-left"' ), 'Horizontal mode defaults to media-position-left on cards' );
+		$this->assert_true( false === strpos( $horizontal_left_html, 'has-no-image' ), 'Horizontal mode omits has-no-image when thumbnails exist' );
+
+		$GLOBALS['gslider_test_post_thumbnails'][102] = false;
+		$horizontal_right_html                        = PostCarouselRenderer::render(
+			array(
+				'blockId'                 => 'gslider-wave4-horiz-right',
+				'postLayoutMode'          => 'horizontal',
+				'presetStyle'             => 'editorial-split',
+				'horizontalMediaPosition' => 'right',
+				'enableFallbackThumbnail' => false,
+			)
+		);
+		$this->assert_true( 2 === substr_count( $horizontal_right_html, 'media-position-right' ), 'Horizontal mode applies media-position-right when configured' );
+		$this->assert_true( 1 === substr_count( $horizontal_right_html, 'media-position-right has-no-image' ), 'Horizontal mode adds has-no-image class only on cards without image or fallback' );
+
+		$horiz_ctx_low  = PostCarouselRenderer::build_render_context( array( 'horizontalMediaWidth' => 10 ) );
+		$horiz_ctx_high = PostCarouselRenderer::build_render_context( array( 'horizontalMediaWidth' => 90 ) );
+		$this->assert_same( 30, $horiz_ctx_low['horizontal_media_width'], 'horizontalMediaWidth clamps to minimum 30' );
+		$this->assert_same( 60, $horiz_ctx_high['horizontal_media_width'], 'horizontalMediaWidth clamps to maximum 60' );
+
+		// 4. Invalid or unsupported layout mode, media position, and preset style fall back safely.
+		$invalid_html = PostCarouselRenderer::render(
+			array(
+				'blockId'                 => 'gslider-wave4-invalid',
+				'postLayoutMode'          => 'malicious_mode',
+				'presetStyle'             => 'bad "preset"',
+				'horizontalMediaPosition' => 'top',
+			)
+		);
+		$this->assert_true( false !== strpos( $invalid_html, 'is-layout-classic is-preset-badpreset' ), 'Invalid postLayoutMode falls back to classic and presetStyle is sanitized' );
+
+		$future_mode_html = PostCarouselRenderer::render(
+			array(
+				'blockId'        => 'gslider-wave4-hero-unreleased',
+				'postLayoutMode' => 'hero',
+			)
+		);
+		$this->assert_true( false !== strpos( $future_mode_html, 'is-layout-classic' ) && false === strpos( $future_mode_html, 'is-layout-hero' ), 'Unsupported future postLayoutMode hero falls back to classic until implemented' );
+
+		// 5. Non-classic layout modes keep all text chunks inside .gslider-post-carousel-body even when contentOrder puts elements before thumbnail.
+		$this->reset_state();
+		$horiz_reordered_html = PostCarouselRenderer::render(
+			array(
+				'blockId'        => 'gslider-wave4-horiz-order',
+				'postLayoutMode' => 'horizontal',
+				'contentOrder'   => array( 'title', 'thumbnail', 'excerpt', 'meta', 'categories', 'readmore' ),
+			)
+		);
+		$this->assert_true( 2 === substr_count( $horiz_reordered_html, 'class="gslider-post-carousel-body"' ), 'Horizontal layout with title-before-thumbnail still renders one .gslider-post-carousel-body per card' );
+		$this->assert_true( strpos( $horiz_reordered_html, 'class="gslider-post-carousel-image"' ) < strpos( $horiz_reordered_html, 'class="gslider-post-carousel-body"' ), 'Horizontal layout renders thumbnail container before .gslider-post-carousel-body regardless of contentOrder' );
 	}
 }
 

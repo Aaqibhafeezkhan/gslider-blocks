@@ -40,6 +40,12 @@ return [
 		'Tablet' => true,
 		'Mobile' => true,
 	],
+	'postLayoutMode' => 'classic',
+	'presetStyle' => 'classic-card',
+	'horizontalMediaWidth' => 45,
+	'horizontalMediaPosition' => 'left',
+	'overlayGradientScrim' => 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)',
+	'overlayScrimHeight' => 75,
 	'layoutHeight' => [
 		'Desktop' => '',
 		'Tablet' => '',

@@ -39,6 +39,24 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
         private const ALLOWED_HTML_TAGS = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div', 'span' );
 
         /**
+         * Allowlisted card layout modes.
+         *
+         * @since 1.2.3
+         *
+         * @var string[]
+         */
+        private const ALLOWED_LAYOUT_MODES = array( 'classic', 'overlay', 'horizontal' );
+
+        /**
+         * Allowlisted horizontal media column positions.
+         *
+         * @since 1.2.3
+         *
+         * @var string[]
+         */
+        private const ALLOWED_MEDIA_POSITIONS = array( 'left', 'right' );
+
+        /**
          * Allowlisted WP_Query orderby keys.
          *
          * @since 1.2.3
@@ -684,6 +702,8 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             $wrapper_classes = array(
                 'gslider-post-carousel-wrapper',
                 $context['block_id'],
+                'is-layout-' . $context['post_layout_mode'],
+                'is-preset-' . $context['preset_style'],
                 $context['navigation']['position_type'],
                 $context['navigation']['arrow_position'],
                 $context['global_class'],
@@ -779,10 +799,28 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             $nav_position_type      = isset( $attributes['navigationArrowPositionType'] ) ? sanitize_text_field( (string) $attributes['navigationArrowPositionType'] ) : 'outside';
             $nav_arrow_position     = isset( $attributes['navigationArrowPosition'] ) ? sanitize_text_field( (string) $attributes['navigationArrowPosition'] ) : 'center';
 
+            $raw_layout_mode    = isset( $attributes['postLayoutMode'] ) ? sanitize_key( (string) $attributes['postLayoutMode'] ) : 'classic';
+            $post_layout_mode   = in_array( $raw_layout_mode, self::ALLOWED_LAYOUT_MODES, true ) ? $raw_layout_mode : 'classic';
+            $preset_style       = isset( $attributes['presetStyle'] ) && '' !== sanitize_html_class( (string) $attributes['presetStyle'] )
+                ? sanitize_html_class( (string) $attributes['presetStyle'] )
+                : 'classic-card';
+            $raw_media_position = isset( $attributes['horizontalMediaPosition'] ) ? sanitize_key( (string) $attributes['horizontalMediaPosition'] ) : 'left';
+            $media_position     = in_array( $raw_media_position, self::ALLOWED_MEDIA_POSITIONS, true ) ? $raw_media_position : 'left';
+            $default_scrim      = 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)';
+            $raw_scrim          = isset( $attributes['overlayGradientScrim'] ) && is_string( $attributes['overlayGradientScrim'] )
+                ? trim( (string) preg_replace( '/[;{}<>]/', '', $attributes['overlayGradientScrim'] ) )
+                : '';
+
             return array(
                 'block_id'                               => isset( $attributes['blockId'] ) ? sanitize_html_class( (string) $attributes['blockId'] ) : '',
                 'global_id'                              => isset( $attributes['globalID'] ) ? sanitize_html_class( (string) $attributes['globalID'] ) : '',
                 'global_class'                           => self::sanitize_global_classes( $attributes['globalClass'] ?? '' ),
+                'post_layout_mode'                       => $post_layout_mode,
+                'preset_style'                           => $preset_style,
+                'horizontal_media_width'                 => isset( $attributes['horizontalMediaWidth'] ) ? min( 60, max( 30, intval( $attributes['horizontalMediaWidth'] ) ) ) : 45,
+                'horizontal_media_position'              => $media_position,
+                'overlay_gradient_scrim'                 => '' !== $raw_scrim ? $raw_scrim : $default_scrim,
+                'overlay_scrim_height'                   => isset( $attributes['overlayScrimHeight'] ) ? min( 100, max( 40, intval( $attributes['overlayScrimHeight'] ) ) ) : 75,
                 'equal_height'                           => isset( $attributes['equalHeight'] ) ? (bool) $attributes['equalHeight'] : true,
                 'enable_card_clickable_link'             => ! empty( $attributes['enableCardClickableLink'] ),
                 'enable_lazy_load'                       => ! empty( $attributes['enableLazyLoad'] ),

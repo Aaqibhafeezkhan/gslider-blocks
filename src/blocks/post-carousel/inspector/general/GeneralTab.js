@@ -2,6 +2,7 @@
 import { __ } from '@wordpress/i18n';
 import AnimationControl from '@Components/animation-control';
 import QuerySettingsPanel from '@Components/query-settings-panel';
+import LayoutModePanel from './LayoutModePanel';
 import ShowHidePanel from './ShowHidePanel';
 import LayoutContentPanel from './LayoutContentPanel';
 import ContentOrderPanel from './ContentOrderPanel';
@@ -36,6 +37,13 @@ const GeneralTab = ( {
 
 	return (
 		<>
+			<LayoutModePanel
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+				isOpen={ openPanel === 'layout-presets' }
+				onToggle={ () => onTogglePanel( 'layout-presets' ) }
+			/>
+
 			<ShowHidePanel
 				attributes={ attributes }
 				setAttributes={ setAttributes }

@@ -340,6 +340,30 @@ var layoutAttributes = {
   },
   /** End Show/Hide Elements */
   /** Layout & Content Setting */
+  postLayoutMode: {
+    type: "string",
+    default: "classic"
+  },
+  presetStyle: {
+    type: "string",
+    default: "classic-card"
+  },
+  horizontalMediaWidth: {
+    type: "number",
+    default: 45
+  },
+  horizontalMediaPosition: {
+    type: "string",
+    default: "left"
+  },
+  overlayGradientScrim: {
+    type: "string",
+    default: "linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)"
+  },
+  overlayScrimHeight: {
+    type: "number",
+    default: 75
+  },
   layoutHeight: {
     type: "object",
     default: {
@@ -6088,6 +6112,10 @@ var buildCardDesktop = (attributes2) => {
   const {
     blockId,
     equalHeight,
+    postLayoutMode = "classic",
+    horizontalMediaWidth = 45,
+    overlayGradientScrim,
+    overlayScrimHeight = 75,
     postCardMarginDesktopCssStyle,
     postCardPaddingDesktopCssStyle,
     postCardBorder,
@@ -6106,16 +6134,31 @@ var buildCardDesktop = (attributes2) => {
     cardHoverGlowSize
   } = attributes2;
   const isEqualHeight = equalHeight ?? true;
+  const isHorizontalLayout = postLayoutMode === "horizontal";
+  const safeMediaWidth = Math.min(
+    60,
+    Math.max(30, parseInt(horizontalMediaWidth, 10) || 45)
+  );
+  const safeScrimHeight = Math.min(
+    100,
+    Math.max(40, parseInt(overlayScrimHeight, 10) || 75)
+  );
+  const defaultScrim = "linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)";
+  const strippedScrim = typeof overlayGradientScrim === "string" ? overlayGradientScrim.replace(/[;{}<>]/g, "").trim() : "";
+  const safeOverlayScrim = strippedScrim !== "" ? strippedScrim : defaultScrim;
   const normalBg = buildPostCardBackgroundStyles(attributes2, "Normal");
   const hoverBg = buildPostCardBackgroundStyles(attributes2, "Hover");
   const duration = cardHoverAnimationDuration?.Desktop || 300;
   return `
         .${blockId} .gslider-post-carousel-card {
-            display: flex;
-            flex-direction: column;
+            display: ${isHorizontalLayout ? "grid" : "flex"};
+            ${!isHorizontalLayout ? "flex-direction: column;" : ""}
             height: ${isEqualHeight ? "100%" : "auto"};
             width: 100%;
             box-sizing: border-box;
+            --gslider-media-width: ${safeMediaWidth}%;
+            --gslider-overlay-scrim: ${safeOverlayScrim};
+            --gslider-overlay-scrim-height: ${safeScrimHeight}%;
             ${normalBg}
             ${postCardMarginDesktopCssStyle ? `margin: ${postCardMarginDesktopCssStyle};` : ""}
             ${postCardPaddingDesktopCssStyle ? `padding: ${postCardPaddingDesktopCssStyle};` : ""}

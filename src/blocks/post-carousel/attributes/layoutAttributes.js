@@ -36,6 +36,31 @@ const layoutAttributes = {
 	/** End Show/Hide Elements */
 
 	/** Layout & Content Setting */
+	postLayoutMode: {
+		type: 'string',
+		default: 'classic',
+	},
+	presetStyle: {
+		type: 'string',
+		default: 'classic-card',
+	},
+	horizontalMediaWidth: {
+		type: 'number',
+		default: 45,
+	},
+	horizontalMediaPosition: {
+		type: 'string',
+		default: 'left',
+	},
+	overlayGradientScrim: {
+		type: 'string',
+		default:
+			'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)',
+	},
+	overlayScrimHeight: {
+		type: 'number',
+		default: 75,
+	},
 	layoutHeight: {
 		type: 'object',
 		default: {

@@ -6,14 +6,18 @@
   "category": "gslider-blocks",
   "isDynamic": true,
   "slideField": "",
-  "presets": [],
+  "presets": [
+    "classic-card",
+    "modern-overlay",
+    "editorial-split"
+  ],
   "allowedEffects": {
     "carouselEffect": [
       "slide",
       "coverflow"
     ]
   },
-  "totalAttributes": 929,
+  "totalAttributes": 935,
   "slideItemSchema": {
     "type": "dynamicQuery",
     "source": "WP_Query",
@@ -34,6 +38,10 @@
     "carouselEffect": [
       "slide",
       "coverflow"
+    ],
+    "horizontalMediaPosition": [
+      "left",
+      "right"
     ],
     "imageHoverEffect": [
       "none",
@@ -128,6 +136,11 @@
       "auto",
       "excerpt",
       "content"
+    ],
+    "postLayoutMode": [
+      "classic",
+      "overlay",
+      "horizontal"
     ],
     "postTaxonomyDisplay": [
       "category",
@@ -254,6 +267,30 @@
         "Tablet": true,
         "Mobile": true
       }
+    },
+    "postLayoutMode": {
+      "type": "string",
+      "default": "classic"
+    },
+    "presetStyle": {
+      "type": "string",
+      "default": "classic-card"
+    },
+    "horizontalMediaWidth": {
+      "type": "number",
+      "default": 45
+    },
+    "horizontalMediaPosition": {
+      "type": "string",
+      "default": "left"
+    },
+    "overlayGradientScrim": {
+      "type": "string",
+      "default": "linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)"
+    },
+    "overlayScrimHeight": {
+      "type": "number",
+      "default": 75
     },
     "layoutHeight": {
       "type": "object",

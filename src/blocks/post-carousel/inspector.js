@@ -9,7 +9,7 @@ import AdvancedTab from './inspector/advanced/AdvancedTab';
 import './editor.scss';
 
 const DEFAULT_OPEN_PANELS = {
-	general: 'show-hide-elements',
+	general: 'layout-presets',
 	styles: 'post-card',
 	advanced: 'layout',
 };
