@@ -1,8 +1,9 @@
 /* eslint-disable import/no-unresolved */
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import PresetSelector from '@Components/preset-selector';
+import SelectControls from '@Components/select-controls';
 import SwitcherControl from '@Components/switcher-control';
 import GradientColorControl from '@Components/gradient-color-control';
 import InputControls from '@Components/input-control';
@@ -12,6 +13,17 @@ const LAYOUT_MODE_OPTIONS = [
 	{ label: __( 'Classic', 'gslider-blocks' ), value: 'classic' },
 	{ label: __( 'Overlay', 'gslider-blocks' ), value: 'overlay' },
 	{ label: __( 'Horizontal', 'gslider-blocks' ), value: 'horizontal' },
+	{ label: __( 'Cinematic Hero', 'gslider-blocks' ), value: 'hero' },
+	{
+		label: __( 'Minimal Typographic', 'gslider-blocks' ),
+		value: 'minimal',
+	},
+];
+
+const HERO_ALIGNMENT_OPTIONS = [
+	{ label: __( 'Bottom Left', 'gslider-blocks' ), value: 'bottom-left' },
+	{ label: __( 'Center', 'gslider-blocks' ), value: 'center' },
+	{ label: __( 'Bottom Center', 'gslider-blocks' ), value: 'bottom-center' },
 ];
 
 const MEDIA_POSITION_OPTIONS = [
@@ -23,7 +35,7 @@ const DEFAULT_OVERLAY_SCRIM =
 	'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)';
 
 /**
- * Clamp numeric input within inclusive bounds.
+ * Clamp numeric integer input within inclusive bounds.
  *
  * @param {string|number} raw      Raw input value.
  * @param {number}        min      Minimum allowed value.
@@ -40,6 +52,23 @@ const clampNumber = ( raw, min, max, fallback ) => {
 };
 
 /**
+ * Clamp floating-point input within inclusive bounds.
+ *
+ * @param {string|number} raw      Raw input value.
+ * @param {number}        min      Minimum allowed value.
+ * @param {number}        max      Maximum allowed value.
+ * @param {number}        fallback Default fallback value.
+ * @return {number} Clamped two-decimal float value.
+ */
+const clampFloat = ( raw, min, max, fallback ) => {
+	const parsed = parseFloat( raw );
+	if ( Number.isNaN( parsed ) ) {
+		return fallback;
+	}
+	return Number( Math.min( max, Math.max( min, parsed ) ).toFixed( 2 ) );
+};
+
+/**
  * Inspector panel for curated card layout presets and contextual archetype controls.
  *
  * @param {Object}   props               Component properties.
@@ -53,6 +82,13 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 	const {
 		presetStyle = 'classic-card',
 		postLayoutMode = 'classic',
+		heroHeightDesktop = 520,
+		heroHeightTablet = 420,
+		heroHeightMobile = 340,
+		heroContentAlignment = 'bottom-left',
+		enableSpotlight = false,
+		spotlightScaleSide = 0.92,
+		spotlightOpacitySide = 0.65,
 		horizontalMediaWidth = 45,
 		horizontalMediaPosition = 'left',
 		overlayGradientScrim = DEFAULT_OVERLAY_SCRIM,
@@ -66,14 +102,77 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 	const [ mediaWidthDraft, setMediaWidthDraft ] = useState(
 		String( horizontalMediaWidth )
 	);
+	const [ heroDesktopDraft, setHeroDesktopDraft ] = useState(
+		String( heroHeightDesktop )
+	);
+	const [ heroTabletDraft, setHeroTabletDraft ] = useState(
+		String( heroHeightTablet )
+	);
+	const [ heroMobileDraft, setHeroMobileDraft ] = useState(
+		String( heroHeightMobile )
+	);
+	const [ spotlightScaleDraft, setSpotlightScaleDraft ] = useState(
+		Number( spotlightScaleSide ).toFixed( 2 )
+	);
+	const [ spotlightOpacityDraft, setSpotlightOpacityDraft ] = useState(
+		Number( spotlightOpacitySide ).toFixed( 2 )
+	);
 
 	useEffect( () => {
-		setScrimHeightDraft( String( overlayScrimHeight ) );
+		setScrimHeightDraft( ( prev ) =>
+			parseInt( prev, 10 ) === overlayScrimHeight
+				? prev
+				: String( overlayScrimHeight )
+		);
 	}, [ overlayScrimHeight ] );
 
 	useEffect( () => {
-		setMediaWidthDraft( String( horizontalMediaWidth ) );
+		setMediaWidthDraft( ( prev ) =>
+			parseInt( prev, 10 ) === horizontalMediaWidth
+				? prev
+				: String( horizontalMediaWidth )
+		);
 	}, [ horizontalMediaWidth ] );
+
+	useEffect( () => {
+		setHeroDesktopDraft( ( prev ) =>
+			parseInt( prev, 10 ) === heroHeightDesktop
+				? prev
+				: String( heroHeightDesktop )
+		);
+	}, [ heroHeightDesktop ] );
+
+	useEffect( () => {
+		setHeroTabletDraft( ( prev ) =>
+			parseInt( prev, 10 ) === heroHeightTablet
+				? prev
+				: String( heroHeightTablet )
+		);
+	}, [ heroHeightTablet ] );
+
+	useEffect( () => {
+		setHeroMobileDraft( ( prev ) =>
+			parseInt( prev, 10 ) === heroHeightMobile
+				? prev
+				: String( heroHeightMobile )
+		);
+	}, [ heroHeightMobile ] );
+
+	useEffect( () => {
+		setSpotlightScaleDraft( ( prev ) =>
+			Math.abs( parseFloat( prev ) - spotlightScaleSide ) < 0.0001
+				? prev
+				: Number( spotlightScaleSide ).toFixed( 2 )
+		);
+	}, [ spotlightScaleSide ] );
+
+	useEffect( () => {
+		setSpotlightOpacityDraft( ( prev ) =>
+			Math.abs( parseFloat( prev ) - spotlightOpacitySide ) < 0.0001
+				? prev
+				: Number( spotlightOpacitySide ).toFixed( 2 )
+		);
+	}, [ spotlightOpacitySide ] );
 
 	const handleScrimHeightChange = ( raw ) => {
 		setScrimHeightDraft( raw );
@@ -107,6 +206,58 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 		}
 	};
 
+	const handleHeroHeightChange = ( raw, setter, key ) => {
+		setter( raw );
+		const parsed = parseInt( raw, 10 );
+		if ( ! Number.isNaN( parsed ) && parsed >= 200 && parsed <= 1200 ) {
+			setAttributes( { [ key ]: parsed } );
+		}
+	};
+
+	const commitHeroHeight = ( draft, setter, key, fallback, currentVal ) => {
+		const clamped = clampNumber( draft, 200, 1200, fallback );
+		setter( String( clamped ) );
+		if ( clamped !== currentVal ) {
+			setAttributes( { [ key ]: clamped } );
+		}
+	};
+
+	const handleSpotlightScaleChange = ( raw ) => {
+		setSpotlightScaleDraft( raw );
+		const parsed = parseFloat( raw );
+		if ( ! Number.isNaN( parsed ) && parsed >= 0.8 && parsed <= 0.98 ) {
+			setAttributes( {
+				spotlightScaleSide: Number( parsed.toFixed( 2 ) ),
+			} );
+		}
+	};
+
+	const commitSpotlightScale = () => {
+		const clamped = clampFloat( spotlightScaleDraft, 0.8, 0.98, 0.92 );
+		setSpotlightScaleDraft( clamped.toFixed( 2 ) );
+		if ( Math.abs( clamped - spotlightScaleSide ) >= 0.0001 ) {
+			setAttributes( { spotlightScaleSide: clamped } );
+		}
+	};
+
+	const handleSpotlightOpacityChange = ( raw ) => {
+		setSpotlightOpacityDraft( raw );
+		const parsed = parseFloat( raw );
+		if ( ! Number.isNaN( parsed ) && parsed >= 0.3 && parsed <= 1.0 ) {
+			setAttributes( {
+				spotlightOpacitySide: Number( parsed.toFixed( 2 ) ),
+			} );
+		}
+	};
+
+	const commitSpotlightOpacity = () => {
+		const clamped = clampFloat( spotlightOpacityDraft, 0.3, 1.0, 0.65 );
+		setSpotlightOpacityDraft( clamped.toFixed( 2 ) );
+		if ( Math.abs( clamped - spotlightOpacitySide ) >= 0.0001 ) {
+			setAttributes( { spotlightOpacitySide: clamped } );
+		}
+	};
+
 	return (
 		<PanelBody
 			title={ __( 'Layout & Presets', 'gslider-blocks' ) }
@@ -126,7 +277,7 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 				defaultPresetValue="classic-card"
 			/>
 
-			<SwitcherControl
+			<SelectControls
 				label={ __( 'Layout Archetype', 'gslider-blocks' ) }
 				options={ LAYOUT_MODE_OPTIONS }
 				value={ postLayoutMode }
@@ -134,6 +285,115 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 					setAttributes( { postLayoutMode: value } )
 				}
 			/>
+
+			{ postLayoutMode === 'hero' && (
+				<>
+					<SelectControls
+						label={ __(
+							'Hero Content Alignment',
+							'gslider-blocks'
+						) }
+						options={ HERO_ALIGNMENT_OPTIONS }
+						value={ heroContentAlignment }
+						onChange={ ( value ) =>
+							setAttributes( { heroContentAlignment: value } )
+						}
+					/>
+
+					<div
+						onBlur={ () =>
+							commitHeroHeight(
+								heroDesktopDraft,
+								setHeroDesktopDraft,
+								'heroHeightDesktop',
+								520,
+								heroHeightDesktop
+							)
+						}
+					>
+						<InputControls
+							label={ __(
+								'Hero Min Height Desktop (px)',
+								'gslider-blocks'
+							) }
+							value={ heroDesktopDraft }
+							onChangeValue={ ( raw ) =>
+								handleHeroHeightChange(
+									raw,
+									setHeroDesktopDraft,
+									'heroHeightDesktop'
+								)
+							}
+							helpText={ __(
+								'Minimum hero stage height on desktop (200–1200px).',
+								'gslider-blocks'
+							) }
+						/>
+					</div>
+
+					<div
+						onBlur={ () =>
+							commitHeroHeight(
+								heroTabletDraft,
+								setHeroTabletDraft,
+								'heroHeightTablet',
+								420,
+								heroHeightTablet
+							)
+						}
+					>
+						<InputControls
+							label={ __(
+								'Hero Min Height Tablet (px)',
+								'gslider-blocks'
+							) }
+							value={ heroTabletDraft }
+							onChangeValue={ ( raw ) =>
+								handleHeroHeightChange(
+									raw,
+									setHeroTabletDraft,
+									'heroHeightTablet'
+								)
+							}
+							helpText={ __(
+								'Minimum hero stage height on tablet (200–1200px).',
+								'gslider-blocks'
+							) }
+						/>
+					</div>
+
+					<div
+						onBlur={ () =>
+							commitHeroHeight(
+								heroMobileDraft,
+								setHeroMobileDraft,
+								'heroHeightMobile',
+								340,
+								heroHeightMobile
+							)
+						}
+					>
+						<InputControls
+							label={ __(
+								'Hero Min Height Mobile (px)',
+								'gslider-blocks'
+							) }
+							value={ heroMobileDraft }
+							onChangeValue={ ( raw ) =>
+								handleHeroHeightChange(
+									raw,
+									setHeroMobileDraft,
+									'heroHeightMobile'
+								)
+							}
+							helpText={ __(
+								'Minimum hero stage height on mobile (200–1200px).',
+								'gslider-blocks'
+							) }
+						/>
+					</div>
+				</>
+			) }
 
 			{ postLayoutMode === 'overlay' && (
 				<>
@@ -195,6 +455,52 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 							onChangeValue={ handleMediaWidthChange }
 							helpText={ __(
 								'Image column width percentage on desktop/tablet (30–60%).',
+								'gslider-blocks'
+							) }
+						/>
+					</div>
+				</>
+			) }
+
+			{ ( postLayoutMode !== 'hero' || enableSpotlight ) && (
+				<ToggleControl
+					__nextHasNoMarginBottom
+					label={ __( 'Spotlight Focus Stage', 'gslider-blocks' ) }
+					help={ __(
+						'Emphasize the centered slide while scaling and dimming neighbor slides.',
+						'gslider-blocks'
+					) }
+					checked={ Boolean( enableSpotlight ) }
+					onChange={ ( value ) =>
+						setAttributes( { enableSpotlight: value } )
+					}
+				/>
+			) }
+
+			{ enableSpotlight && (
+				<>
+					<div onBlur={ commitSpotlightScale }>
+						<InputControls
+							label={ __( 'Side Slide Scale', 'gslider-blocks' ) }
+							value={ spotlightScaleDraft }
+							onChangeValue={ handleSpotlightScaleChange }
+							helpText={ __(
+								'Scale factor for adjacent slides (0.80–0.98).',
+								'gslider-blocks'
+							) }
+						/>
+					</div>
+
+					<div onBlur={ commitSpotlightOpacity }>
+						<InputControls
+							label={ __(
+								'Side Slide Opacity',
+								'gslider-blocks'
+							) }
+							value={ spotlightOpacityDraft }
+							onChangeValue={ handleSpotlightOpacityChange }
+							helpText={ __(
+								'Opacity level for adjacent slides (0.30–1.00).',
 								'gslider-blocks'
 							) }
 						/>

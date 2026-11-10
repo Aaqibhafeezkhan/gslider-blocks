@@ -80,6 +80,8 @@ export default function Edit( {
 		showTaxonomy,
 		postLayoutMode,
 		presetStyle,
+		heroContentAlignment,
+		enableSpotlight,
 		horizontalMediaPosition,
 		equalHeight,
 		enableCardClickableLink,
@@ -204,12 +206,21 @@ export default function Edit( {
 	const trimmedGlobalClass = globalClass?.trim();
 	const activeLayoutMode = postLayoutMode || 'classic';
 	const activePresetStyle = presetStyle || 'classic-card';
+	const allowedHeroAlignments = [ 'bottom-left', 'center', 'bottom-center' ];
+	const safeHeroAlign = allowedHeroAlignments.includes( heroContentAlignment )
+		? heroContentAlignment
+		: 'bottom-left';
+	const isSpotlightActive = Boolean( enableSpotlight );
 	const isEqualHeight = equalHeight ?? true;
 	const isCardClickable = Boolean( enableCardClickableLink );
 
 	/** Block props for container */
 	const blockProps = useBlockProps( {
-		className: `gslider-post-carousel-wrapper ${ blockId } is-layout-${ activeLayoutMode } is-preset-${ activePresetStyle } ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
+		className: `gslider-post-carousel-wrapper ${ blockId } is-layout-${ activeLayoutMode } is-preset-${ activePresetStyle }${
+			activeLayoutMode === 'hero' ? ` hero-align-${ safeHeroAlign }` : ''
+		}${
+			isSpotlightActive ? ' is-spotlight' : ''
+		} ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
 			isEqualHeight ? 'has-equal-height ' : ''
 		}${ showPagination ? 'has-pagination' : '' } ${
 			cardHoverAnimation !== 'none'
@@ -373,18 +384,19 @@ export default function Edit( {
 		// Build Swiper settings based on the current reduced-motion state
 		const createSwiperSettings = ( reduceMotion ) => ( {
 			effect: carouselEffect,
+			...( isSpotlightActive ? { centeredSlides: true } : {} ),
 			breakpoints: {
 				0: {
 					slidesPerView: carouselPerColumn?.[ deviceType ] || 1,
-					spaceBetween: carouselPerColumnGap?.[ deviceType ] || 0,
+					spaceBetween: carouselPerColumnGap?.[ deviceType ] ?? 0,
 				},
 				768: {
 					slidesPerView: carouselPerColumn?.[ deviceType ] || 2,
-					spaceBetween: carouselPerColumnGap?.[ deviceType ] || 20,
+					spaceBetween: carouselPerColumnGap?.[ deviceType ] ?? 20,
 				},
 				1025: {
 					slidesPerView: carouselPerColumn?.[ deviceType ] || 3,
-					spaceBetween: carouselPerColumnGap?.[ deviceType ] || 20,
+					spaceBetween: carouselPerColumnGap?.[ deviceType ] ?? 20,
 				},
 			},
 			loop: infiniteLoop,
@@ -578,7 +590,13 @@ export default function Edit( {
 		cardEntranceAnimationEasing,
 		enableStaggerAnimation,
 		cardStaggerDelay,
+		enableSpotlight,
 	] );
+
+	const skeletonColumns = Math.max(
+		1,
+		Math.round( Number( carouselPerColumn?.[ deviceType ] ) || 3 )
+	);
 
 	return (
 		<>
@@ -594,16 +612,14 @@ export default function Edit( {
 							className="gslider-post-carousel-skeleton-wrapper"
 							style={ {
 								display: 'grid',
-								gridTemplateColumns: `repeat(${
-									carouselPerColumn?.[ deviceType ] || 3
-								}, 1fr)`,
+								gridTemplateColumns: `repeat(${ skeletonColumns }, 1fr)`,
 								gap: `${
-									carouselPerColumnGap?.[ deviceType ] || 20
+									carouselPerColumnGap?.[ deviceType ] ?? 20
 								}px`,
 							} }
 						>
 							{ Array.from( {
-								length: carouselPerColumn?.[ deviceType ] || 3,
+								length: skeletonColumns,
 							} ).map( ( _, idx ) => (
 								<div
 									key={ idx }
@@ -1266,8 +1282,12 @@ export default function Edit( {
 															</div>
 														);
 													} else if (
-														activeLayoutMode !==
-														'classic'
+														! [
+															'classic',
+															'minimal',
+														].includes(
+															activeLayoutMode
+														)
 													) {
 														bodyAndThumb = (
 															<>

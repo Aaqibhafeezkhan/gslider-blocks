@@ -809,6 +809,7 @@ class PostCarouselRendererTest {
 		$this->test_thin_render_php_delegates_to_post_carousel_renderer();
 		$this->test_wave3_card_body_equal_height_fallback_and_clickable_card();
 		$this->test_wave4_core_layout_presets_and_horizontal_overlay_modes();
+		$this->test_wave5a_hero_minimal_spotlight_presets_and_swiper_settings();
 
 		echo "\nAll PostCarouselRenderer unit tests passed successfully!\n";
 	}
@@ -1339,11 +1340,11 @@ class PostCarouselRendererTest {
 
 		$future_mode_html = PostCarouselRenderer::render(
 			array(
-				'blockId'        => 'gslider-wave4-hero-unreleased',
-				'postLayoutMode' => 'hero',
+				'blockId'        => 'gslider-wave4-newsroom-unreleased',
+				'postLayoutMode' => 'newsroom',
 			)
 		);
-		$this->assert_true( false !== strpos( $future_mode_html, 'is-layout-classic' ) && false === strpos( $future_mode_html, 'is-layout-hero' ), 'Unsupported future postLayoutMode hero falls back to classic until implemented' );
+		$this->assert_true( false !== strpos( $future_mode_html, 'is-layout-classic' ) && false === strpos( $future_mode_html, 'is-layout-newsroom' ), 'Unsupported postLayoutMode falls back cleanly to classic' );
 
 		// 5. Non-classic layout modes keep all text chunks inside .gslider-post-carousel-body even when contentOrder puts elements before thumbnail.
 		$this->reset_state();
@@ -1356,6 +1357,116 @@ class PostCarouselRendererTest {
 		);
 		$this->assert_true( 2 === substr_count( $horiz_reordered_html, 'class="gslider-post-carousel-body"' ), 'Horizontal layout with title-before-thumbnail still renders one .gslider-post-carousel-body per card' );
 		$this->assert_true( strpos( $horiz_reordered_html, 'class="gslider-post-carousel-image"' ) < strpos( $horiz_reordered_html, 'class="gslider-post-carousel-body"' ), 'Horizontal layout renders thumbnail container before .gslider-post-carousel-body regardless of contentOrder' );
+	}
+
+	/**
+	 * Test 10: Wave 5A Cinematic Hero, Minimal Typographic & Centered Spotlight presets, classes, Swiper settings, and bounds clamping.
+	 *
+	 * @return void
+	 */
+	public function test_wave5a_hero_minimal_spotlight_presets_and_swiper_settings(): void {
+		$this->reset_state();
+
+		// 1. Cinematic Hero preset emits hero layout, hero alignment, and preserves explicit alignment or falls back when invalid.
+		$hero_html = PostCarouselRenderer::render(
+			array(
+				'blockId'              => 'gslider-wave5a-hero',
+				'postLayoutMode'       => 'hero',
+				'presetStyle'          => 'cinematic-hero',
+				'heroContentAlignment' => 'center',
+			)
+		);
+		$this->assert_true( false !== strpos( $hero_html, 'is-layout-hero is-preset-cinematic-hero' ) && false !== strpos( $hero_html, 'hero-align-center' ), 'Hero mode emits is-layout-hero, is-preset-cinematic-hero, and hero-align-center wrapper classes' );
+		$this->assert_true( false === strpos( $hero_html, 'is-spotlight' ), 'Hero preset without spotlight omits is-spotlight wrapper class' );
+
+		$invalid_hero_align_html = PostCarouselRenderer::render(
+			array(
+				'blockId'              => 'gslider-wave5a-hero-invalid-align',
+				'postLayoutMode'       => 'hero',
+				'heroContentAlignment' => 'top-right',
+			)
+		);
+		$this->assert_true( false !== strpos( $invalid_hero_align_html, 'hero-align-bottom-left' ), 'Invalid heroContentAlignment falls back to bottom-left' );
+
+		$hero_ctx_bounds_low = PostCarouselRenderer::build_render_context(
+			array(
+				'postLayoutMode'    => 'hero',
+				'heroHeightDesktop' => 50,
+				'heroHeightTablet'  => 100,
+				'heroHeightMobile'  => -10,
+			)
+		);
+		$this->assert_same( 200, $hero_ctx_bounds_low['hero_height_desktop'], 'heroHeightDesktop clamps to minimum 200' );
+		$this->assert_same( 200, $hero_ctx_bounds_low['hero_height_tablet'], 'heroHeightTablet clamps to minimum 200' );
+		$this->assert_same( 200, $hero_ctx_bounds_low['hero_height_mobile'], 'heroHeightMobile clamps to minimum 200' );
+
+		$hero_ctx_bounds_high = PostCarouselRenderer::build_render_context(
+			array(
+				'heroHeightDesktop' => 5000,
+				'heroHeightTablet'  => 2000,
+				'heroHeightMobile'  => 1800,
+			)
+		);
+		$this->assert_same( 1200, $hero_ctx_bounds_high['hero_height_desktop'], 'heroHeightDesktop clamps to maximum 1200' );
+		$this->assert_same( 1200, $hero_ctx_bounds_high['hero_height_tablet'], 'heroHeightTablet clamps to maximum 1200' );
+		$this->assert_same( 1200, $hero_ctx_bounds_high['hero_height_mobile'], 'heroHeightMobile clamps to maximum 1200' );
+
+		// 2. Minimal Typographic mode emits minimal layout class and follows natural top-to-bottom content order before thumbnail.
+		$minimal_html = PostCarouselRenderer::render(
+			array(
+				'blockId'                    => 'gslider-wave5a-minimal',
+				'postLayoutMode'             => 'minimal',
+				'presetStyle'                => 'minimal-typo',
+				'enableTaxonomyBadgeOverlay' => false,
+				'contentOrder'               => array( 'categories', 'title', 'thumbnail', 'excerpt', 'meta', 'readmore' ),
+			)
+		);
+		$this->assert_true( false !== strpos( $minimal_html, 'is-layout-minimal is-preset-minimal-typo' ), 'Minimal mode emits is-layout-minimal and is-preset-minimal-typo wrapper classes' );
+		$this->assert_true( strpos( $minimal_html, 'gslider-post-carousel-title-wrapper' ) < strpos( $minimal_html, 'gslider-post-carousel-image' ), 'Minimal layout preserves contentOrder flow before thumbnail like Classic layout' );
+
+		// 3. Centered Spotlight emits is-spotlight wrapper class, centeredSlides=true, float slidesPerView, and clamps scale/opacity.
+		$spotlight_html = PostCarouselRenderer::render(
+			array(
+				'blockId'           => 'gslider-wave5a-spotlight',
+				'postLayoutMode'    => 'overlay',
+				'presetStyle'       => 'spotlight-center',
+				'enableSpotlight'   => true,
+				'carouselPerColumn' => array(
+					'Desktop' => 1.6,
+					'Tablet'  => 1.3,
+					'Mobile'  => 1.1,
+				),
+			)
+		);
+		$this->assert_true( false !== strpos( $spotlight_html, 'is-layout-overlay is-preset-spotlight-center' ) && false !== strpos( $spotlight_html, 'is-spotlight' ), 'Spotlight stage adds is-spotlight alongside layout and preset classes' );
+
+		preg_match( '/data-swiper-settings="([^"]+)"/', $spotlight_html, $swiper_match );
+		$this->assert_true( ! empty( $swiper_match[1] ), 'Spotlight render includes serialized data-swiper-settings JSON' );
+		$decoded_swiper = json_decode( html_entity_decode( $swiper_match[1] ?? '', ENT_QUOTES, 'UTF-8' ), true );
+		$this->assert_same( true, $decoded_swiper['centeredSlides'] ?? null, 'Spotlight sets centeredSlides=true in Swiper settings' );
+		$this->assert_same( 1.6, $decoded_swiper['breakpoints'][1025]['slidesPerView'] ?? null, 'Spotlight preserves float Desktop slidesPerView 1.6' );
+		$this->assert_same( 1.3, $decoded_swiper['breakpoints'][768]['slidesPerView'] ?? null, 'Spotlight preserves float Tablet slidesPerView 1.3' );
+		$this->assert_same( 1.1, $decoded_swiper['breakpoints'][0]['slidesPerView'] ?? null, 'Spotlight preserves float Mobile slidesPerView 1.1' );
+
+		$spotlight_ctx_low = PostCarouselRenderer::build_render_context(
+			array(
+				'enableSpotlight'      => true,
+				'spotlightScaleSide'   => 0.2,
+				'spotlightOpacitySide' => 0.05,
+			)
+		);
+		$this->assert_same( 0.8, $spotlight_ctx_low['spotlight_scale_side'], 'spotlightScaleSide clamps to minimum 0.80' );
+		$this->assert_same( 0.3, $spotlight_ctx_low['spotlight_opacity_side'], 'spotlightOpacitySide clamps to minimum 0.30' );
+
+		$spotlight_ctx_high = PostCarouselRenderer::build_render_context(
+			array(
+				'enableSpotlight'      => true,
+				'spotlightScaleSide'   => 1.5,
+				'spotlightOpacitySide' => 2.5,
+			)
+		);
+		$this->assert_same( 0.98, $spotlight_ctx_high['spotlight_scale_side'], 'spotlightScaleSide clamps to maximum 0.98' );
+		$this->assert_same( 1.0, $spotlight_ctx_high['spotlight_opacity_side'], 'spotlightOpacitySide clamps to maximum 1.00' );
 	}
 }
 

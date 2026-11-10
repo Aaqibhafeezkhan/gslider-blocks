@@ -89,6 +89,11 @@ export const buildCardDesktop = ( attributes ) => {
 		blockId,
 		equalHeight,
 		postLayoutMode = 'classic',
+		heroHeightDesktop = 520,
+		heroHeightTablet = 420,
+		heroHeightMobile = 340,
+		spotlightScaleSide = 0.92,
+		spotlightOpacitySide = 0.65,
 		horizontalMediaWidth = 45,
 		overlayGradientScrim,
 		overlayScrimHeight = 75,
@@ -120,6 +125,38 @@ export const buildCardDesktop = ( attributes ) => {
 		100,
 		Math.max( 40, parseInt( overlayScrimHeight, 10 ) || 75 )
 	);
+	const safeHeroHeightDesktop = Math.min(
+		1200,
+		Math.max( 200, parseInt( heroHeightDesktop, 10 ) || 520 )
+	);
+	const safeHeroHeightTablet = Math.min(
+		1200,
+		Math.max( 200, parseInt( heroHeightTablet, 10 ) || 420 )
+	);
+	const safeHeroHeightMobile = Math.min(
+		1200,
+		Math.max( 200, parseInt( heroHeightMobile, 10 ) || 340 )
+	);
+	const rawSpotlightScale = parseFloat( spotlightScaleSide );
+	const safeSpotlightScale = Number(
+		Math.min(
+			0.98,
+			Math.max(
+				0.8,
+				Number.isNaN( rawSpotlightScale ) ? 0.92 : rawSpotlightScale
+			)
+		).toFixed( 2 )
+	);
+	const rawSpotlightOpacity = parseFloat( spotlightOpacitySide );
+	const safeSpotlightOpacity = Number(
+		Math.min(
+			1.0,
+			Math.max(
+				0.3,
+				Number.isNaN( rawSpotlightOpacity ) ? 0.65 : rawSpotlightOpacity
+			)
+		).toFixed( 2 )
+	);
 	const defaultScrim =
 		'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)';
 	const strippedScrim =
@@ -133,6 +170,14 @@ export const buildCardDesktop = ( attributes ) => {
 	const duration = cardHoverAnimationDuration?.Desktop || 300;
 
 	return `
+        .${ blockId }.gslider-post-carousel-wrapper {
+            --gslider-hero-height-desktop: ${ safeHeroHeightDesktop }px;
+            --gslider-hero-height-tablet: ${ safeHeroHeightTablet }px;
+            --gslider-hero-height-mobile: ${ safeHeroHeightMobile }px;
+            --gslider-spotlight-scale: ${ safeSpotlightScale };
+            --gslider-spotlight-opacity: ${ safeSpotlightOpacity };
+        }
+
         .${ blockId } .gslider-post-carousel-card {
             display: ${ isHorizontalLayout ? 'grid' : 'flex' };
             ${ ! isHorizontalLayout ? 'flex-direction: column;' : '' }

@@ -7,6 +7,15 @@ import presetModernOverlay, {
 import presetEditorialSplit, {
 	editorialSplitStyles,
 } from './presets/presetEditorialSplit';
+import presetCinematicHero, {
+	cinematicHeroStyles,
+} from './presets/presetCinematicHero';
+import presetMinimalTypo, {
+	minimalTypoStyles,
+} from './presets/presetMinimalTypo';
+import presetSpotlightCenter, {
+	spotlightCenterStyles,
+} from './presets/presetSpotlightCenter';
 
 /**
  * Post Carousel Block — Preset Styles Data Object
@@ -17,6 +26,9 @@ export const presetStyles = {
 	'classic-card': classicCardStyles,
 	'modern-overlay': modernOverlayStyles,
 	'editorial-split': editorialSplitStyles,
+	'cinematic-hero': cinematicHeroStyles,
+	'minimal-typo': minimalTypoStyles,
+	'spotlight-center': spotlightCenterStyles,
 };
 
 /**
@@ -28,6 +40,9 @@ export const POST_CAROUSEL_PRESETS = [
 	presetClassicCard,
 	presetModernOverlay,
 	presetEditorialSplit,
+	presetCinematicHero,
+	presetMinimalTypo,
+	presetSpotlightCenter,
 ];
 
 export default POST_CAROUSEL_PRESETS;

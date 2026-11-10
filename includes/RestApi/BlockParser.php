@@ -63,6 +63,7 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 			'layoutHeightSwitcher',
 			'enableCardTilt',
 			'cardHoverAnimation',
+			'enableSpotlight',
 		];
 
 		/**
@@ -538,6 +539,10 @@ if ( ! class_exists( BlockParser::class, false ) ) {
 
 			if ( $grab_cursor ) {
 				$config['grabCursor'] = true;
+			}
+
+			if ( 'gslider-blocks/post-carousel' === $block_name && ! empty( $attrs['enableSpotlight'] ) ) {
+				$config['centeredSlides'] = true;
 			}
 
 			return $config;

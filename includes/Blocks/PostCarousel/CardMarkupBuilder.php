@@ -136,7 +136,7 @@ if ( ! class_exists( CardMarkupBuilder::class, false ) ) {
                 $elements_html = '            <div class="gslider-post-carousel-body">' . "\n"
                     . $after_thumb_html
                     . '            </div>' . "\n";
-            } elseif ( 'classic' !== $layout_mode ) {
+            } elseif ( ! in_array( $layout_mode, array( 'classic', 'minimal' ), true ) ) {
                 $elements_html = $thumbnail_html
                     . '            <div class="gslider-post-carousel-body">' . "\n"
                     . $before_thumb_html

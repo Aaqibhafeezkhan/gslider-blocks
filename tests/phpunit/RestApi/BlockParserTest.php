@@ -1100,6 +1100,24 @@ class BlockParserTest {
 		$this->assert_true( 4.0 === $override_config['swiperConfig']['breakpoints'][1025]['slidesPerView'], 'stored desktop columns override reaches swiperConfig' );
 		$this->assert_true( 1.0 === $override_config['swiperConfig']['breakpoints'][0]['slidesPerView'], 'missing mobile breakpoint still backfills default' );
 		$this->assert_true( true === $override_config['swiperConfig']['autoplay']['pauseOnMouseEnter'], 'enableCardTilt enables pauseOnMouseEnter for post-carousel autoplay' );
+		$this->assert_true( ! array_key_exists( 'centeredSlides', $override_config['swiperConfig'] ), 'post-carousel omits centeredSlides unless enableSpotlight is true' );
+
+		$spotlight_config = $this->normalize(
+			[
+				'blockId'           => 'gslider-post-carousel-spotlight',
+				'enableSpotlight'   => true,
+				'carouselPerColumn' => [
+					'Desktop' => 1.6,
+					'Tablet'  => 1.3,
+					'Mobile'  => 1.1,
+				],
+			],
+			'gslider-blocks/post-carousel'
+		);
+		$this->assert_true( true === ( $spotlight_config['swiperConfig']['centeredSlides'] ?? null ), 'enableSpotlight adds centeredSlides=true to post-carousel REST swiperConfig' );
+		$this->assert_true( 1.6 === $spotlight_config['swiperConfig']['breakpoints'][1025]['slidesPerView'], 'spotlight desktop fractional slidesPerView reaches REST swiperConfig' );
+		$this->assert_true( 1.3 === $spotlight_config['swiperConfig']['breakpoints'][768]['slidesPerView'], 'spotlight tablet fractional slidesPerView reaches REST swiperConfig' );
+		$this->assert_true( 1.1 === $spotlight_config['swiperConfig']['breakpoints'][0]['slidesPerView'], 'spotlight mobile fractional slidesPerView reaches REST swiperConfig' );
 
 		$post_one               = new WP_Post();
 		$post_one->ID           = 301;

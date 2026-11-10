@@ -9,7 +9,10 @@
   "presets": [
     "classic-card",
     "modern-overlay",
-    "editorial-split"
+    "editorial-split",
+    "cinematic-hero",
+    "minimal-typo",
+    "spotlight-center"
   ],
   "allowedEffects": {
     "carouselEffect": [
@@ -17,7 +20,7 @@
       "coverflow"
     ]
   },
-  "totalAttributes": 935,
+  "totalAttributes": 942,
   "slideItemSchema": {
     "type": "dynamicQuery",
     "source": "WP_Query",
@@ -38,6 +41,11 @@
     "carouselEffect": [
       "slide",
       "coverflow"
+    ],
+    "heroContentAlignment": [
+      "bottom-left",
+      "center",
+      "bottom-center"
     ],
     "horizontalMediaPosition": [
       "left",
@@ -140,7 +148,9 @@
     "postLayoutMode": [
       "classic",
       "overlay",
-      "horizontal"
+      "horizontal",
+      "hero",
+      "minimal"
     ],
     "postTaxonomyDisplay": [
       "category",
@@ -275,6 +285,34 @@
     "presetStyle": {
       "type": "string",
       "default": "classic-card"
+    },
+    "heroHeightDesktop": {
+      "type": "number",
+      "default": 520
+    },
+    "heroHeightTablet": {
+      "type": "number",
+      "default": 420
+    },
+    "heroHeightMobile": {
+      "type": "number",
+      "default": 340
+    },
+    "heroContentAlignment": {
+      "type": "string",
+      "default": "bottom-left"
+    },
+    "enableSpotlight": {
+      "type": "boolean",
+      "default": false
+    },
+    "spotlightScaleSide": {
+      "type": "number",
+      "default": 0.92
+    },
+    "spotlightOpacitySide": {
+      "type": "number",
+      "default": 0.65
     },
     "horizontalMediaWidth": {
       "type": "number",

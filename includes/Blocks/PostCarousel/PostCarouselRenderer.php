@@ -45,7 +45,16 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
          *
          * @var string[]
          */
-        private const ALLOWED_LAYOUT_MODES = array( 'classic', 'overlay', 'horizontal' );
+        private const ALLOWED_LAYOUT_MODES = array( 'classic', 'overlay', 'horizontal', 'hero', 'minimal' );
+
+        /**
+         * Allowlisted hero content alignments.
+         *
+         * @since 1.2.3
+         *
+         * @var string[]
+         */
+        private const ALLOWED_HERO_ALIGNMENTS = array( 'bottom-left', 'center', 'bottom-center' );
 
         /**
          * Allowlisted horizontal media column positions.
@@ -631,12 +640,15 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             $nav_enabled_data        = $context['navigation_enabled_data'];
             $pagination_enabled_data = $context['pagination_enabled_data'];
             $block_id                = $context['block_id'];
+            $is_spotlight            = ! empty( $context['enable_spotlight'] );
 
-            return array(
+            $swiper_config = array(
                 'effect'         => $carousel_effect,
                 'breakpoints'    => array(
                     0    => array(
-                        'slidesPerView' => isset( $carousel_per_column['Mobile'] ) ? (int) $carousel_per_column['Mobile'] : 1,
+                        'slidesPerView' => isset( $carousel_per_column['Mobile'] )
+                            ? ( $is_spotlight ? round( max( 1.0, (float) $carousel_per_column['Mobile'] ), 2 ) : (int) $carousel_per_column['Mobile'] )
+                            : ( $is_spotlight ? 1.0 : 1 ),
                         'spaceBetween'  => isset( $carousel_per_column_gap['Mobile'] ) ? (int) $carousel_per_column_gap['Mobile'] : 0,
                         'speed'         => isset( $speed['Mobile'] ) ? (int) $speed['Mobile'] : 800,
                         'autoplay'      => $autoplay ? array( 'delay' => isset( $autoplay_delay['Mobile'] ) ? (int) $autoplay_delay['Mobile'] : 1000 ) : false,
@@ -644,7 +656,9 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                         'pagination'    => array( 'enabled' => $pagination_enabled_data['Mobile'] ),
                     ),
                     768  => array(
-                        'slidesPerView' => isset( $carousel_per_column['Tablet'] ) ? (int) $carousel_per_column['Tablet'] : 2,
+                        'slidesPerView' => isset( $carousel_per_column['Tablet'] )
+                            ? ( $is_spotlight ? round( max( 1.0, (float) $carousel_per_column['Tablet'] ), 2 ) : (int) $carousel_per_column['Tablet'] )
+                            : ( $is_spotlight ? 2.0 : 2 ),
                         'spaceBetween'  => isset( $carousel_per_column_gap['Tablet'] ) ? (int) $carousel_per_column_gap['Tablet'] : 20,
                         'speed'         => isset( $speed['Tablet'] ) ? (int) $speed['Tablet'] : 800,
                         'autoplay'      => $autoplay ? array( 'delay' => isset( $autoplay_delay['Tablet'] ) ? (int) $autoplay_delay['Tablet'] : 1000 ) : false,
@@ -652,7 +666,9 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                         'pagination'    => array( 'enabled' => $pagination_enabled_data['Tablet'] ),
                     ),
                     1025 => array(
-                        'slidesPerView' => isset( $carousel_per_column['Desktop'] ) ? (int) $carousel_per_column['Desktop'] : 3,
+                        'slidesPerView' => isset( $carousel_per_column['Desktop'] )
+                            ? ( $is_spotlight ? round( max( 1.0, (float) $carousel_per_column['Desktop'] ), 2 ) : (int) $carousel_per_column['Desktop'] )
+                            : ( $is_spotlight ? 3.0 : 3 ),
                         'spaceBetween'  => isset( $carousel_per_column_gap['Desktop'] ) ? (int) $carousel_per_column_gap['Desktop'] : 20,
                         'speed'         => isset( $speed['Desktop'] ) ? (int) $speed['Desktop'] : 800,
                         'autoplay'      => $autoplay ? array( 'delay' => isset( $autoplay_delay['Desktop'] ) ? (int) $autoplay_delay['Desktop'] : 1000 ) : false,
@@ -687,6 +703,12 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                     'clickable'      => true,
                 ),
             );
+
+            if ( ! empty( $context['enable_spotlight'] ) ) {
+                $swiper_config['centeredSlides'] = true;
+            }
+
+            return $swiper_config;
         }
 
         /**
@@ -708,6 +730,14 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 $context['navigation']['arrow_position'],
                 $context['global_class'],
             );
+
+            if ( 'hero' === $context['post_layout_mode'] ) {
+                $wrapper_classes[] = 'hero-align-' . $context['hero_content_alignment'];
+            }
+
+            if ( ! empty( $context['enable_spotlight'] ) ) {
+                $wrapper_classes[] = 'is-spotlight';
+            }
 
             if ( 'none' !== $context['card_hover_animation'] ) {
                 $wrapper_classes[] = 'gslider-card-hover-' . $context['card_hover_animation'];
@@ -804,6 +834,8 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             $preset_style       = isset( $attributes['presetStyle'] ) && '' !== sanitize_html_class( (string) $attributes['presetStyle'] )
                 ? sanitize_html_class( (string) $attributes['presetStyle'] )
                 : 'classic-card';
+            $raw_hero_align     = isset( $attributes['heroContentAlignment'] ) ? sanitize_key( (string) $attributes['heroContentAlignment'] ) : 'bottom-left';
+            $hero_content_align = in_array( $raw_hero_align, self::ALLOWED_HERO_ALIGNMENTS, true ) ? $raw_hero_align : 'bottom-left';
             $raw_media_position = isset( $attributes['horizontalMediaPosition'] ) ? sanitize_key( (string) $attributes['horizontalMediaPosition'] ) : 'left';
             $media_position     = in_array( $raw_media_position, self::ALLOWED_MEDIA_POSITIONS, true ) ? $raw_media_position : 'left';
             $default_scrim      = 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)';
@@ -817,6 +849,13 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 'global_class'                           => self::sanitize_global_classes( $attributes['globalClass'] ?? '' ),
                 'post_layout_mode'                       => $post_layout_mode,
                 'preset_style'                           => $preset_style,
+                'hero_height_desktop'                    => isset( $attributes['heroHeightDesktop'] ) ? min( 1200, max( 200, intval( $attributes['heroHeightDesktop'] ) ) ) : 520,
+                'hero_height_tablet'                     => isset( $attributes['heroHeightTablet'] ) ? min( 1200, max( 200, intval( $attributes['heroHeightTablet'] ) ) ) : 420,
+                'hero_height_mobile'                     => isset( $attributes['heroHeightMobile'] ) ? min( 1200, max( 200, intval( $attributes['heroHeightMobile'] ) ) ) : 340,
+                'hero_content_alignment'                 => $hero_content_align,
+                'enable_spotlight'                       => ! empty( $attributes['enableSpotlight'] ),
+                'spotlight_scale_side'                   => isset( $attributes['spotlightScaleSide'] ) ? round( min( 0.98, max( 0.80, floatval( $attributes['spotlightScaleSide'] ) ) ), 2 ) : 0.92,
+                'spotlight_opacity_side'                 => isset( $attributes['spotlightOpacitySide'] ) ? round( min( 1.0, max( 0.30, floatval( $attributes['spotlightOpacitySide'] ) ) ), 2 ) : 0.65,
                 'horizontal_media_width'                 => isset( $attributes['horizontalMediaWidth'] ) ? min( 60, max( 30, intval( $attributes['horizontalMediaWidth'] ) ) ) : 45,
                 'horizontal_media_position'              => $media_position,
                 'overlay_gradient_scrim'                 => '' !== $raw_scrim ? $raw_scrim : $default_scrim,

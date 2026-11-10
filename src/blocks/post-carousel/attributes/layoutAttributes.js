@@ -44,6 +44,34 @@ const layoutAttributes = {
 		type: 'string',
 		default: 'classic-card',
 	},
+	heroHeightDesktop: {
+		type: 'number',
+		default: 520,
+	},
+	heroHeightTablet: {
+		type: 'number',
+		default: 420,
+	},
+	heroHeightMobile: {
+		type: 'number',
+		default: 340,
+	},
+	heroContentAlignment: {
+		type: 'string',
+		default: 'bottom-left',
+	},
+	enableSpotlight: {
+		type: 'boolean',
+		default: false,
+	},
+	spotlightScaleSide: {
+		type: 'number',
+		default: 0.92,
+	},
+	spotlightOpacitySide: {
+		type: 'number',
+		default: 0.65,
+	},
 	horizontalMediaWidth: {
 		type: 'number',
 		default: 45,

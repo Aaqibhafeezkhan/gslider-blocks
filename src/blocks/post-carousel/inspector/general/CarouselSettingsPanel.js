@@ -51,7 +51,7 @@ const CarouselSettingsPanel = ( {
 					setAttributes( { carouselPerColumn: value } )
 				}
 				deviceType={ deviceType }
-				step={ 1 }
+				step={ attributes.enableSpotlight ? 0.1 : 1 }
 				resetFallbackValue={ '2' }
 				isRangeUnit={ false }
 			/>
