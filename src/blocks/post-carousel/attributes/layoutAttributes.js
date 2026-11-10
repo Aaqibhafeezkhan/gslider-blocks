@@ -72,6 +72,14 @@ const layoutAttributes = {
 		type: 'number',
 		default: 0.65,
 	},
+	newsroomMainWidth: {
+		type: 'number',
+		default: 65,
+	},
+	newsroomQueuePosition: {
+		type: 'string',
+		default: 'right',
+	},
 	horizontalMediaWidth: {
 		type: 'number',
 		default: 45,

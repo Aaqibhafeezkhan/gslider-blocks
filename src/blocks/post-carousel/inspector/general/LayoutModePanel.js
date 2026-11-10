@@ -18,6 +18,15 @@ const LAYOUT_MODE_OPTIONS = [
 		label: __( 'Minimal Typographic', 'gslider-blocks' ),
 		value: 'minimal',
 	},
+	{
+		label: __( 'Newsroom Stage', 'gslider-blocks' ),
+		value: 'newsroom',
+	},
+];
+
+const NEWSROOM_QUEUE_POSITIONS = [
+	{ label: __( 'Right', 'gslider-blocks' ), value: 'right' },
+	{ label: __( 'Left', 'gslider-blocks' ), value: 'left' },
 ];
 
 const HERO_ALIGNMENT_OPTIONS = [
@@ -89,6 +98,8 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 		enableSpotlight = false,
 		spotlightScaleSide = 0.92,
 		spotlightOpacitySide = 0.65,
+		newsroomMainWidth = 65,
+		newsroomQueuePosition = 'right',
 		horizontalMediaWidth = 45,
 		horizontalMediaPosition = 'left',
 		overlayGradientScrim = DEFAULT_OVERLAY_SCRIM,
@@ -116,6 +127,9 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 	);
 	const [ spotlightOpacityDraft, setSpotlightOpacityDraft ] = useState(
 		Number( spotlightOpacitySide ).toFixed( 2 )
+	);
+	const [ newsroomWidthDraft, setNewsroomWidthDraft ] = useState(
+		String( newsroomMainWidth )
 	);
 
 	useEffect( () => {
@@ -173,6 +187,14 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 				: Number( spotlightOpacitySide ).toFixed( 2 )
 		);
 	}, [ spotlightOpacitySide ] );
+
+	useEffect( () => {
+		setNewsroomWidthDraft( ( prev ) =>
+			parseInt( prev, 10 ) === newsroomMainWidth
+				? prev
+				: String( newsroomMainWidth )
+		);
+	}, [ newsroomMainWidth ] );
 
 	const handleScrimHeightChange = ( raw ) => {
 		setScrimHeightDraft( raw );
@@ -462,7 +484,69 @@ const LayoutModePanel = ( { attributes, setAttributes, isOpen, onToggle } ) => {
 				</>
 			) }
 
-			{ ( postLayoutMode !== 'hero' || enableSpotlight ) && (
+			{ postLayoutMode === 'newsroom' && (
+				<>
+					<div
+						onBlur={ () => {
+							const clamped = clampNumber(
+								newsroomWidthDraft,
+								50,
+								80,
+								65
+							);
+							setNewsroomWidthDraft( String( clamped ) );
+							if ( clamped !== newsroomMainWidth ) {
+								setAttributes( {
+									newsroomMainWidth: clamped,
+								} );
+							}
+						} }
+					>
+						<InputControls
+							label={ __(
+								'Main Stage Width (%)',
+								'gslider-blocks'
+							) }
+							value={ newsroomWidthDraft }
+							onChangeValue={ ( raw ) => {
+								setNewsroomWidthDraft( raw );
+								const parsed = parseInt( raw, 10 );
+								if (
+									! Number.isNaN( parsed ) &&
+									parsed >= 50 &&
+									parsed <= 80
+								) {
+									setAttributes( {
+										newsroomMainWidth: parsed,
+									} );
+								}
+							} }
+							helpText={ __(
+								'Width of the primary story slider on desktop (50–80%).',
+								'gslider-blocks'
+							) }
+						/>
+					</div>
+
+					<SelectControls
+						label={ __(
+							'Headline Queue Position',
+							'gslider-blocks'
+						) }
+						options={ NEWSROOM_QUEUE_POSITIONS }
+						value={ newsroomQueuePosition }
+						onChange={ ( value ) =>
+							setAttributes( {
+								newsroomQueuePosition: value,
+							} )
+						}
+					/>
+				</>
+			) }
+
+			{ ( ( postLayoutMode !== 'hero' &&
+				postLayoutMode !== 'newsroom' ) ||
+				enableSpotlight ) && (
 				<ToggleControl
 					__nextHasNoMarginBottom
 					label={ __( 'Spotlight Focus Stage', 'gslider-blocks' ) }

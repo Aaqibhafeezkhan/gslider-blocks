@@ -49,6 +49,8 @@ return [
 	'enableSpotlight' => false,
 	'spotlightScaleSide' => 0.92,
 	'spotlightOpacitySide' => 0.65,
+	'newsroomMainWidth' => 65,
+	'newsroomQueuePosition' => 'right',
 	'horizontalMediaWidth' => 45,
 	'horizontalMediaPosition' => 'left',
 	'overlayGradientScrim' => 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)',

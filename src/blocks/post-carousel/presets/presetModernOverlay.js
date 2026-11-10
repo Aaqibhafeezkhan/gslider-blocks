@@ -10,6 +10,8 @@ export const modernOverlayStyles = {
 	heroHeightTablet: 420,
 	heroHeightMobile: 340,
 	heroContentAlignment: 'bottom-left',
+	newsroomMainWidth: 65,
+	newsroomQueuePosition: 'right',
 	horizontalMediaWidth: 45,
 	horizontalMediaPosition: 'left',
 	equalHeight: true,

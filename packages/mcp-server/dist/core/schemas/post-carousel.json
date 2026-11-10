@@ -12,7 +12,8 @@
     "editorial-split",
     "cinematic-hero",
     "minimal-typo",
-    "spotlight-center"
+    "spotlight-center",
+    "newsroom-stage"
   ],
   "allowedEffects": {
     "carouselEffect": [
@@ -20,7 +21,7 @@
       "coverflow"
     ]
   },
-  "totalAttributes": 942,
+  "totalAttributes": 944,
   "slideItemSchema": {
     "type": "dynamicQuery",
     "source": "WP_Query",
@@ -104,6 +105,10 @@
       "inside",
       "outside"
     ],
+    "newsroomQueuePosition": [
+      "right",
+      "left"
+    ],
     "paginationDotsSwitcher": [
       "normal",
       "active"
@@ -150,7 +155,8 @@
       "overlay",
       "horizontal",
       "hero",
-      "minimal"
+      "minimal",
+      "newsroom"
     ],
     "postTaxonomyDisplay": [
       "category",
@@ -313,6 +319,14 @@
     "spotlightOpacitySide": {
       "type": "number",
       "default": 0.65
+    },
+    "newsroomMainWidth": {
+      "type": "number",
+      "default": 65
+    },
+    "newsroomQueuePosition": {
+      "type": "string",
+      "default": "right"
     },
     "horizontalMediaWidth": {
       "type": "number",

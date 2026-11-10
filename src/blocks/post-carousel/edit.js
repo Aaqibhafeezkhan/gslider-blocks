@@ -2,12 +2,13 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { Placeholder } from '@wordpress/components';
-import { Fragment, useEffect, useRef } from '@wordpress/element';
+import { Fragment, useEffect, useRef, useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { useMergeRefs } from '@wordpress/compose';
 import renderSVG from '@Components/icon-picker/components/icon-picker/controls/renderIcon';
 import SwitchToBlockSettings from '@Utils/switchToBlockSettings';
 import Inspector from './inspector';
+import NewsroomQueue from './components/NewsroomQueue';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generatePostCarouselStyle from './styling';
 import { normalizeContentOrder } from './content-order';
@@ -82,6 +83,8 @@ export default function Edit( {
 		presetStyle,
 		heroContentAlignment,
 		enableSpotlight,
+		newsroomMainWidth,
+		newsroomQueuePosition,
 		horizontalMediaPosition,
 		equalHeight,
 		enableCardClickableLink,
@@ -219,6 +222,10 @@ export default function Edit( {
 		className: `gslider-post-carousel-wrapper ${ blockId } is-layout-${ activeLayoutMode } is-preset-${ activePresetStyle }${
 			activeLayoutMode === 'hero' ? ` hero-align-${ safeHeroAlign }` : ''
 		}${
+			activeLayoutMode === 'newsroom'
+				? ` queue-position-${ newsroomQueuePosition || 'right' }`
+				: ''
+		}${
 			isSpotlightActive ? ' is-spotlight' : ''
 		} ${ navigationArrowPositionType } ${ navigationArrowPosition } ${
 			isEqualHeight ? 'has-equal-height ' : ''
@@ -332,6 +339,9 @@ export default function Edit( {
 	/** Refs for vanilla JS Swiper */
 	const swiperContainerRef = useRef( null );
 	const swiperInstanceRef = useRef( null );
+	const queueContainerRef = useRef( null );
+	const thumbsSwiperRef = useRef( null );
+	const [ activeQueueIndex, setActiveQueueIndex ] = useState( 0 );
 
 	/** Ref for panel settings focus management */
 	const panelRef = useRef( null );
@@ -365,11 +375,21 @@ export default function Edit( {
 				swiperInstanceRef.current.destroy( true, true );
 				swiperInstanceRef.current = null;
 			}
+			if ( thumbsSwiperRef.current ) {
+				thumbsSwiperRef.current.destroy( true, true );
+				thumbsSwiperRef.current = null;
+			}
 			if ( swiperContainerRef.current ) {
 				const duplicates = swiperContainerRef.current.querySelectorAll(
 					'.swiper-slide-duplicate'
 				);
 				duplicates.forEach( ( slide ) => slide.remove() );
+			}
+			if ( queueContainerRef.current ) {
+				const queueDups = queueContainerRef.current.querySelectorAll(
+					'.swiper-slide-duplicate'
+				);
+				queueDups.forEach( ( slide ) => slide.remove() );
 			}
 			if ( paginationInsideRef.current ) {
 				paginationInsideRef.current.innerHTML = '';
@@ -445,11 +465,73 @@ export default function Edit( {
 				: false,
 		} );
 
+		// Helper to initialize Swiper with thumbs in newsroom mode or standard swiper
+		const initSwiperInstance = ( reduceMotion ) => {
+			if (
+				activeLayoutMode === 'newsroom' &&
+				queueContainerRef.current
+			) {
+				const isDesktop = deviceType === 'Desktop';
+				const thumbsSwiper = new window.Swiper(
+					queueContainerRef.current,
+					{
+						slidesPerView: isDesktop
+							? 4
+							: deviceType === 'Tablet'
+							? 3
+							: 'auto',
+						direction: isDesktop ? 'vertical' : 'horizontal',
+						watchSlidesProgress: true,
+						spaceBetween: 12,
+						slideToClickedSlide: true,
+					}
+				);
+				thumbsSwiperRef.current = thumbsSwiper;
+
+				const baseSettings = createSwiperSettings( reduceMotion );
+				const newsroomSettings = {
+					...baseSettings,
+					slidesPerView: 1,
+					breakpoints: Object.fromEntries(
+						Object.entries( baseSettings.breakpoints || {} ).map(
+							( [ width, bp ] ) => [
+								width,
+								{ ...bp, slidesPerView: 1 },
+							]
+						)
+					),
+					watchSlidesProgress: true,
+					thumbs: {
+						swiper: thumbsSwiper,
+					},
+				};
+
+				const mainSwiper = new window.Swiper(
+					swiperContainerRef.current,
+					newsroomSettings
+				);
+				mainSwiper.on( 'slideChange', () => {
+					const realIdx = mainSwiper.params?.loop
+						? mainSwiper.realIndex
+						: mainSwiper.activeIndex;
+					setActiveQueueIndex( realIdx );
+				} );
+				return mainSwiper;
+			}
+
+			return new window.Swiper(
+				swiperContainerRef.current,
+				createSwiperSettings( reduceMotion )
+			);
+		};
+
 		// Initialize new Swiper instance
-		swiperInstanceRef.current = new window.Swiper(
-			swiperContainerRef.current,
-			createSwiperSettings( prefersReducedMotion() )
+		swiperInstanceRef.current = initSwiperInstance(
+			prefersReducedMotion()
 		);
+		if ( activeLayoutMode === 'newsroom' ) {
+			setActiveQueueIndex( 0 );
+		}
 
 		const unsubscribeReducedMotion = onReducedMotionChange(
 			( reduceMotion ) => {
@@ -464,10 +546,7 @@ export default function Edit( {
 						: currentSwiper.activeIndex;
 				}
 				resetSwiper();
-				const nextSwiper = new window.Swiper(
-					swiperContainerRef.current,
-					createSwiperSettings( reduceMotion )
-				);
+				const nextSwiper = initSwiperInstance( reduceMotion );
 				swiperInstanceRef.current = nextSwiper;
 				if ( typeof activeIndex === 'number' && activeIndex > 0 ) {
 					if ( nextSwiper.params?.loop ) {
@@ -544,16 +623,29 @@ export default function Edit( {
 				swiperInstanceRef.current.destroy( true, true );
 				swiperInstanceRef.current = null;
 			}
+			if ( thumbsSwiperRef.current ) {
+				thumbsSwiperRef.current.destroy( true, true );
+				thumbsSwiperRef.current = null;
+			}
 			if ( swiperContainerRef.current ) {
 				const duplicates = swiperContainerRef.current.querySelectorAll(
 					'.swiper-slide-duplicate'
 				);
 				duplicates.forEach( ( slide ) => slide.remove() );
 			}
+			if ( queueContainerRef.current ) {
+				const queueDups = queueContainerRef.current.querySelectorAll(
+					'.swiper-slide-duplicate'
+				);
+				queueDups.forEach( ( slide ) => slide.remove() );
+			}
 		};
 	}, [
 		blockId,
 		deviceType,
+		activeLayoutMode,
+		newsroomMainWidth,
+		newsroomQueuePosition,
 		posts,
 		carouselEffect,
 		carouselPerColumn,
@@ -654,10 +746,18 @@ export default function Edit( {
 
 				{ ! isLoading && posts && posts.length > 0 && (
 					<div
-						className="swiper"
+						className={
+							activeLayoutMode === 'newsroom'
+								? 'gslider-newsroom-main swiper'
+								: 'swiper'
+						}
 						ref={ swiperContainerRef }
 						role="region"
-						aria-label="Post Carousel"
+						aria-label={
+							activeLayoutMode === 'newsroom'
+								? __( 'Featured Story', 'gslider-blocks' )
+								: __( 'Post Carousel', 'gslider-blocks' )
+						}
 						key={ posts.map( ( p ) => p.id ).join( '-' ) }
 					>
 						<div className="swiper-wrapper">
@@ -1469,6 +1569,33 @@ export default function Edit( {
 						></div>
 					</div>
 				) }
+
+				{ activeLayoutMode === 'newsroom' &&
+					! isLoading &&
+					posts &&
+					posts.length > 0 && (
+						<NewsroomQueue
+							posts={ posts }
+							queueRef={ queueContainerRef }
+							activeIndex={ activeQueueIndex }
+							onSelectIndex={ ( idx ) => {
+								if ( swiperInstanceRef.current ) {
+									if (
+										swiperInstanceRef.current.params?.loop
+									) {
+										swiperInstanceRef.current.slideToLoop(
+											idx
+										);
+									} else {
+										swiperInstanceRef.current.slideTo(
+											idx
+										);
+									}
+								}
+								setActiveQueueIndex( idx );
+							} }
+						/>
+					) }
 
 				{ showNavigation?.[ deviceType ] &&
 					! navigationArrowsIconSwitcher &&

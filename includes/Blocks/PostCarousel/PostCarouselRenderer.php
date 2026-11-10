@@ -45,7 +45,16 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
          *
          * @var string[]
          */
-        private const ALLOWED_LAYOUT_MODES = array( 'classic', 'overlay', 'horizontal', 'hero', 'minimal' );
+        private const ALLOWED_LAYOUT_MODES = array( 'classic', 'overlay', 'horizontal', 'hero', 'minimal', 'newsroom' );
+
+        /**
+         * Allowlisted newsroom headline queue positions.
+         *
+         * @since 1.2.3
+         *
+         * @var string[]
+         */
+        private const ALLOWED_QUEUE_POSITIONS = array( 'right', 'left' );
 
         /**
          * Allowlisted hero content alignments.
@@ -140,11 +149,13 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             $swiper_settings    = self::build_swiper_settings( $attributes, $context );
             $wrapper_attributes = self::build_wrapper_attributes( $context, $swiper_settings );
 
-            $slides_html = '';
+            $slides_html       = '';
+            $rendered_post_ids = array();
             while ( $posts_query->have_posts() ) {
                 $posts_query->the_post();
-                $post_id      = (int) get_the_ID();
-                $slides_html .= CardMarkupBuilder::render_card( $post_id, $context );
+                $post_id             = (int) get_the_ID();
+                $rendered_post_ids[] = $post_id;
+                $slides_html        .= CardMarkupBuilder::render_card( $post_id, $context );
             }
 
             wp_reset_postdata();
@@ -154,10 +165,16 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             $nav_outside        = NavigationBuilder::render_navigation( 'outside', $context['navigation'] );
             $pagination_outside = NavigationBuilder::render_pagination( 'outside', $context['block_id'], $context['any_pagination_enabled'], $context['pagination_position_type'] );
 
+            $is_newsroom_layout = 'newsroom' === $context['post_layout_mode'];
+            $main_swiper_class  = $is_newsroom_layout ? 'gslider-newsroom-main swiper' : 'swiper';
+            $main_aria_label    = $is_newsroom_layout
+                ? __( 'Featured Story', 'gslider-blocks' )
+                : __( 'Post Carousel', 'gslider-blocks' );
+
             ob_start();
             ?>
 <div <?php echo $wrapper_attributes; ?>>
-    <div class="swiper" role="region" aria-label="<?php esc_attr_e( 'Post Carousel', 'gslider-blocks' ); ?>">
+    <div class="<?php echo esc_attr( $main_swiper_class ); ?>" role="region" aria-label="<?php echo esc_attr( $main_aria_label ); ?>">
         <div class="swiper-wrapper">
             <?php echo $slides_html; ?>
         </div>
@@ -168,6 +185,9 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             <?php echo $pagination_inside; ?>
         <?php endif; ?>
     </div>
+    <?php if ( $is_newsroom_layout ) : ?>
+        <?php echo NewsroomBuilder::render_queue( $rendered_post_ids, $context ); ?>
+    <?php endif; ?>
     <?php if ( '' !== $nav_outside ) : ?>
         <?php echo $nav_outside; ?>
     <?php endif; ?>
@@ -735,6 +755,10 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 $wrapper_classes[] = 'hero-align-' . $context['hero_content_alignment'];
             }
 
+            if ( 'newsroom' === $context['post_layout_mode'] ) {
+                $wrapper_classes[] = 'queue-position-' . $context['newsroom_queue_position'];
+            }
+
             if ( ! empty( $context['enable_spotlight'] ) ) {
                 $wrapper_classes[] = 'is-spotlight';
             }
@@ -838,6 +862,8 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
             $hero_content_align = in_array( $raw_hero_align, self::ALLOWED_HERO_ALIGNMENTS, true ) ? $raw_hero_align : 'bottom-left';
             $raw_media_position = isset( $attributes['horizontalMediaPosition'] ) ? sanitize_key( (string) $attributes['horizontalMediaPosition'] ) : 'left';
             $media_position     = in_array( $raw_media_position, self::ALLOWED_MEDIA_POSITIONS, true ) ? $raw_media_position : 'left';
+            $raw_queue_position = isset( $attributes['newsroomQueuePosition'] ) ? sanitize_key( (string) $attributes['newsroomQueuePosition'] ) : 'right';
+            $queue_position     = in_array( $raw_queue_position, self::ALLOWED_QUEUE_POSITIONS, true ) ? $raw_queue_position : 'right';
             $default_scrim      = 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)';
             $raw_scrim          = isset( $attributes['overlayGradientScrim'] ) && is_string( $attributes['overlayGradientScrim'] )
                 ? trim( (string) preg_replace( '/[;{}<>]/', '', $attributes['overlayGradientScrim'] ) )
@@ -858,6 +884,8 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 'spotlight_opacity_side'                 => isset( $attributes['spotlightOpacitySide'] ) ? round( min( 1.0, max( 0.30, floatval( $attributes['spotlightOpacitySide'] ) ) ), 2 ) : 0.65,
                 'horizontal_media_width'                 => isset( $attributes['horizontalMediaWidth'] ) ? min( 60, max( 30, intval( $attributes['horizontalMediaWidth'] ) ) ) : 45,
                 'horizontal_media_position'              => $media_position,
+                'newsroom_main_width'                    => isset( $attributes['newsroomMainWidth'] ) ? min( 80, max( 50, intval( $attributes['newsroomMainWidth'] ) ) ) : 65,
+                'newsroom_queue_position'                => $queue_position,
                 'overlay_gradient_scrim'                 => '' !== $raw_scrim ? $raw_scrim : $default_scrim,
                 'overlay_scrim_height'                   => isset( $attributes['overlayScrimHeight'] ) ? min( 100, max( 40, intval( $attributes['overlayScrimHeight'] ) ) ) : 75,
                 'equal_height'                           => isset( $attributes['equalHeight'] ) ? (bool) $attributes['equalHeight'] : true,

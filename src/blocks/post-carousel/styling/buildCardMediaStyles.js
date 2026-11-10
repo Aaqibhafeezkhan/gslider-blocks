@@ -94,6 +94,7 @@ export const buildCardDesktop = ( attributes ) => {
 		heroHeightMobile = 340,
 		spotlightScaleSide = 0.92,
 		spotlightOpacitySide = 0.65,
+		newsroomMainWidth = 65,
 		horizontalMediaWidth = 45,
 		overlayGradientScrim,
 		overlayScrimHeight = 75,
@@ -137,6 +138,10 @@ export const buildCardDesktop = ( attributes ) => {
 		1200,
 		Math.max( 200, parseInt( heroHeightMobile, 10 ) || 340 )
 	);
+	const safeNewsroomMainWidth = Math.min(
+		80,
+		Math.max( 50, parseInt( newsroomMainWidth, 10 ) || 65 )
+	);
 	const rawSpotlightScale = parseFloat( spotlightScaleSide );
 	const safeSpotlightScale = Number(
 		Math.min(
@@ -176,6 +181,7 @@ export const buildCardDesktop = ( attributes ) => {
             --gslider-hero-height-mobile: ${ safeHeroHeightMobile }px;
             --gslider-spotlight-scale: ${ safeSpotlightScale };
             --gslider-spotlight-opacity: ${ safeSpotlightOpacity };
+            --gslider-newsroom-main-width: ${ safeNewsroomMainWidth }%;
         }
 
         .${ blockId } .gslider-post-carousel-card {

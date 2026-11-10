@@ -12,6 +12,8 @@
  * 7. Thin `src/blocks/post-carousel/render.php` bootstrap delegates directly to `PostCarouselRenderer::render()`.
  * 8. Wave 3 unified `.gslider-post-carousel-body`, `has-equal-height`, fallback thumbnail/SVG/XSS guard, and clickable card links render with zero nested `<a>` tags.
  * 9. Wave 4 Core Layout Presets (`classic-card`, `modern-overlay`, `editorial-split`), layout mode classes, horizontal media position/no-image classes, and context clamping/sanitization.
+ * 10. Wave 5a Layout Presets (`cinematic-hero`, `minimal-typo`, `spotlight-center`), spotlight Swiper settings, and scale/opacity bounds clamping.
+ * 11. Wave 5b Newsroom Stage preset (`newsroom-stage`), synchronized headline queue playlist, and width/position clamping.
  *
  * @package GSlider\Tests\Blocks
  */
@@ -529,11 +531,52 @@ if ( ! function_exists( 'the_title_attribute' ) ) {
 	 * Stub for WordPress the_title_attribute().
 	 *
 	 * @param string|array $args Title attribute args.
-	 * @return void
+	 * @return string|void
 	 */
 	function the_title_attribute( $args = '' ) {
-		unset( $args );
-		echo esc_attr( get_the_title() );
+		$echo = true;
+		$post = 0;
+		if ( is_array( $args ) ) {
+			$echo = isset( $args['echo'] ) ? (bool) $args['echo'] : true;
+			$post = isset( $args['post'] ) ? (int) $args['post'] : 0;
+		}
+		$title = esc_attr( get_the_title( $post ) );
+		if ( $echo ) {
+			echo $title;
+			return;
+		}
+		return $title;
+	}
+}
+
+if ( ! function_exists( 'get_post_thumbnail_id' ) ) {
+	/**
+	 * Stub for WordPress get_post_thumbnail_id().
+	 *
+	 * @param int|null $post Post ID.
+	 * @return int
+	 */
+	function get_post_thumbnail_id( $post = null ) {
+		$id = is_int( $post ) ? $post : get_the_ID();
+		return ! empty( $GLOBALS['gslider_test_post_thumbnails'][ $id ] ) ? (int) $id : 0;
+	}
+}
+
+if ( ! function_exists( 'wp_get_attachment_image' ) ) {
+	/**
+	 * Stub for WordPress wp_get_attachment_image().
+	 *
+	 * @param int          $attachment_id Attachment ID.
+	 * @param string|array $size          Size slug.
+	 * @param bool         $icon          Whether icon.
+	 * @param string|array $attr          Attributes.
+	 * @return string
+	 */
+	function wp_get_attachment_image( $attachment_id, $size = 'thumbnail', $icon = false, $attr = '' ) {
+		unset( $size, $icon );
+		$alt     = is_array( $attr ) && isset( $attr['alt'] ) ? esc_attr( $attr['alt'] ) : '';
+		$loading = is_array( $attr ) && isset( $attr['loading'] ) ? ' loading="' . esc_attr( $attr['loading'] ) . '"' : '';
+		return '<img class="attachment-thumbnail size-thumbnail" src="https://example.org/thumb-' . intval( $attachment_id ) . '.jpg" alt="' . $alt . '"' . $loading . ' />';
 	}
 }
 
@@ -621,6 +664,58 @@ if ( ! function_exists( 'get_the_date' ) ) {
 	}
 }
 
+if ( ! function_exists( 'get_post_field' ) ) {
+	/**
+	 * Stub for WordPress get_post_field().
+	 *
+	 * @param string      $field Field name.
+	 * @param int|WP_Post $post  Post ID or post object.
+	 * @return string
+	 */
+	function get_post_field( $field, $post = null ) {
+		$post_id = is_int( $post ) ? $post : ( is_numeric( $post ) ? (int) $post : get_the_ID() );
+		if ( ! empty( $GLOBALS['gslider_test_render_posts'] ) ) {
+			foreach ( $GLOBALS['gslider_test_render_posts'] as $candidate ) {
+				if ( (int) $candidate->ID === $post_id ) {
+					return isset( $candidate->$field ) ? (string) $candidate->$field : '';
+				}
+			}
+		}
+		if ( isset( $GLOBALS['gslider_test_current_post']->$field ) ) {
+			return (string) $GLOBALS['gslider_test_current_post']->$field;
+		}
+		return '';
+	}
+}
+
+if ( ! function_exists( 'wp_strip_all_tags' ) ) {
+	/**
+	 * Stub for WordPress wp_strip_all_tags().
+	 *
+	 * @param string $string Raw string.
+	 * @return string Stripped string.
+	 */
+	function wp_strip_all_tags( $string ) {
+		return strip_tags( (string) $string );
+	}
+}
+
+if ( ! function_exists( '_n' ) ) {
+	/**
+	 * Stub for WordPress _n().
+	 *
+	 * @param string $single Single form.
+	 * @param string $plural Plural form.
+	 * @param int    $number Number.
+	 * @param string $domain Textdomain.
+	 * @return string
+	 */
+	function _n( $single, $plural, $number, $domain = 'default' ) {
+		unset( $domain );
+		return 1 === (int) $number ? $single : $plural;
+	}
+}
+
 if ( ! class_exists( 'WP_Query' ) ) {
 	/**
 	 * Lightweight WP_Query stub capturing query args and iterating seeded WP_Post instances.
@@ -704,10 +799,12 @@ require_once ABSPATH . 'includes/Classes/SupportSVG.php';
 require_once ABSPATH . 'includes/Utils/Helper.php';
 require_once ABSPATH . 'includes/Blocks/PostCarousel/NavigationBuilder.php';
 require_once ABSPATH . 'includes/Blocks/PostCarousel/CardMarkupBuilder.php';
+require_once ABSPATH . 'includes/Blocks/PostCarousel/NewsroomBuilder.php';
 require_once ABSPATH . 'includes/Blocks/PostCarousel/PostCarouselRenderer.php';
 
 use GSlider\Blocks\PostCarousel\CardMarkupBuilder;
 use GSlider\Blocks\PostCarousel\NavigationBuilder;
+use GSlider\Blocks\PostCarousel\NewsroomBuilder;
 use GSlider\Blocks\PostCarousel\PostCarouselRenderer;
 
 /**
@@ -810,6 +907,7 @@ class PostCarouselRendererTest {
 		$this->test_wave3_card_body_equal_height_fallback_and_clickable_card();
 		$this->test_wave4_core_layout_presets_and_horizontal_overlay_modes();
 		$this->test_wave5a_hero_minimal_spotlight_presets_and_swiper_settings();
+		$this->test_wave5b_newsroom_stage_preset_and_queue_rendering();
 
 		echo "\nAll PostCarouselRenderer unit tests passed successfully!\n";
 	}
@@ -1340,11 +1438,11 @@ class PostCarouselRendererTest {
 
 		$future_mode_html = PostCarouselRenderer::render(
 			array(
-				'blockId'        => 'gslider-wave4-newsroom-unreleased',
-				'postLayoutMode' => 'newsroom',
+				'blockId'        => 'gslider-wave4-unreleased-mode',
+				'postLayoutMode' => 'unsupported_test_mode',
 			)
 		);
-		$this->assert_true( false !== strpos( $future_mode_html, 'is-layout-classic' ) && false === strpos( $future_mode_html, 'is-layout-newsroom' ), 'Unsupported postLayoutMode falls back cleanly to classic' );
+		$this->assert_true( false !== strpos( $future_mode_html, 'is-layout-classic' ) && false === strpos( $future_mode_html, 'is-layout-unsupported_test_mode' ), 'Unsupported postLayoutMode falls back cleanly to classic' );
 
 		// 5. Non-classic layout modes keep all text chunks inside .gslider-post-carousel-body even when contentOrder puts elements before thumbnail.
 		$this->reset_state();
@@ -1467,6 +1565,90 @@ class PostCarouselRendererTest {
 		);
 		$this->assert_same( 0.98, $spotlight_ctx_high['spotlight_scale_side'], 'spotlightScaleSide clamps to maximum 0.98' );
 		$this->assert_same( 1.0, $spotlight_ctx_high['spotlight_opacity_side'], 'spotlightOpacitySide clamps to maximum 1.00' );
+	}
+
+	/**
+	 * Test 11: Newsroom Stage preset, synchronized headline queue playlist, and width/position clamping.
+	 *
+	 * @return void
+	 */
+	public function test_wave5b_newsroom_stage_preset_and_queue_rendering(): void {
+		$this->reset_state();
+
+		$this->assert_true( class_exists( NewsroomBuilder::class, false ), 'NewsroomBuilder class exists via ::class' );
+
+		// 1. Newsroom Stage preset emits layout mode, preset class, queue-position-right, main swiper and queue aside.
+		$newsroom_html = PostCarouselRenderer::render(
+			array(
+				'blockId'               => 'gslider-wave5b-newsroom',
+				'postLayoutMode'        => 'newsroom',
+				'presetStyle'           => 'newsroom-stage',
+				'newsroomQueuePosition' => 'right',
+				'newsroomMainWidth'     => 65,
+			)
+		);
+
+		$this->assert_true( false !== strpos( $newsroom_html, 'is-layout-newsroom is-preset-newsroom-stage' ), 'Newsroom layout emits is-layout-newsroom and is-preset-newsroom-stage wrapper classes' );
+		$this->assert_true( false !== strpos( $newsroom_html, 'queue-position-right' ), 'Newsroom layout defaults to queue-position-right wrapper class' );
+		$this->assert_true( false !== strpos( $newsroom_html, '<div class="gslider-newsroom-main swiper"' ), 'Newsroom layout wraps main slider in gslider-newsroom-main swiper' );
+		$this->assert_true( false !== strpos( $newsroom_html, '<aside class="gslider-newsroom-queue swiper"' ), 'Newsroom layout renders aside queue playlist track' );
+		$this->assert_true( false !== strpos( $newsroom_html, 'gslider-newsroom-queue-item swiper-slide-thumb-active' ), 'First queue item slide carries swiper-slide-thumb-active class' );
+		$this->assert_true( false !== strpos( $newsroom_html, 'class="gslider-queue-active-indicator"' ), 'Queue item contains active bar indicator' );
+		$this->assert_true( false !== strpos( $newsroom_html, 'class="gslider-queue-title"' ), 'Queue item renders headline title' );
+		$this->assert_true( false !== strpos( $newsroom_html, 'class="gslider-queue-meta"' ), 'Queue item renders reading time or date meta' );
+		$this->assert_true( false !== strpos( $newsroom_html, 'min read' ), 'Reading time calculation estimates words into minute reading time' );
+
+		// Reading time with Unicode/accented words calculates cleanly without splitting accented letters.
+		$GLOBALS['gslider_test_render_posts'][0]->post_content = str_repeat( 'crème ', 150 );
+		$this->assert_same( '1 min read', NewsroomBuilder::get_reading_time( 101 ), 'Multibyte and accented words calculate reading time cleanly without splitting accented letters' );
+
+		// 2. Queue position left emits queue-position-left wrapper class.
+		$newsroom_left_html = PostCarouselRenderer::render(
+			array(
+				'blockId'               => 'gslider-wave5b-newsroom-left',
+				'postLayoutMode'        => 'newsroom',
+				'presetStyle'           => 'newsroom-stage',
+				'newsroomQueuePosition' => 'left',
+			)
+		);
+		$this->assert_true( false !== strpos( $newsroom_left_html, 'queue-position-left' ), 'Newsroom layout with queue position left emits queue-position-left class' );
+
+		// 3. Fallback thumbnail in queue items when post has no featured image.
+		$this->reset_state();
+		$GLOBALS['gslider_test_post_thumbnails'][101] = false;
+		$GLOBALS['gslider_test_post_thumbnails'][102] = false;
+
+		$fallback_queue_html = PostCarouselRenderer::render(
+			array(
+				'blockId'              => 'gslider-wave5b-queue-fallback',
+				'postLayoutMode'       => 'newsroom',
+				'presetStyle'          => 'newsroom-stage',
+				'fallbackThumbnailUrl' => 'https://example.org/newsroom-fallback.jpg',
+			)
+		);
+		$this->assert_true( false !== strpos( $fallback_queue_html, 'gslider-queue-fallback-img' ), 'Queue items use fallback thumbnail img when featured image missing' );
+		$this->assert_true( false !== strpos( $fallback_queue_html, 'https://example.org/newsroom-fallback.jpg' ), 'Queue fallback thumbnail emits escaped fallback URL' );
+
+		// 4. Clamping and validation: newsroom_main_width [50, 80] and newsroom_queue_position ['right', 'left'].
+		$ctx_bounds_low = PostCarouselRenderer::build_render_context(
+			array(
+				'postLayoutMode'        => 'newsroom',
+				'newsroomMainWidth'     => 25,
+				'newsroomQueuePosition' => 'invalid_position',
+			)
+		);
+		$this->assert_same( 50, $ctx_bounds_low['newsroom_main_width'], 'newsroomMainWidth clamps to minimum 50%' );
+		$this->assert_same( 'right', $ctx_bounds_low['newsroom_queue_position'], 'Disallowed newsroomQueuePosition falls back to right' );
+
+		$ctx_bounds_high = PostCarouselRenderer::build_render_context(
+			array(
+				'postLayoutMode'        => 'newsroom',
+				'newsroomMainWidth'     => 99,
+				'newsroomQueuePosition' => 'left',
+			)
+		);
+		$this->assert_same( 80, $ctx_bounds_high['newsroom_main_width'], 'newsroomMainWidth clamps to maximum 80%' );
+		$this->assert_same( 'left', $ctx_bounds_high['newsroom_queue_position'], 'newsroomQueuePosition preserves valid left' );
 	}
 }
 

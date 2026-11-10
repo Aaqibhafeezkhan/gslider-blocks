@@ -16,6 +16,9 @@ import presetMinimalTypo, {
 import presetSpotlightCenter, {
 	spotlightCenterStyles,
 } from './presets/presetSpotlightCenter';
+import presetNewsroomStage, {
+	newsroomStageStyles,
+} from './presets/presetNewsroomStage';
 
 /**
  * Post Carousel Block — Preset Styles Data Object
@@ -29,6 +32,7 @@ export const presetStyles = {
 	'cinematic-hero': cinematicHeroStyles,
 	'minimal-typo': minimalTypoStyles,
 	'spotlight-center': spotlightCenterStyles,
+	'newsroom-stage': newsroomStageStyles,
 };
 
 /**
@@ -43,6 +47,7 @@ export const POST_CAROUSEL_PRESETS = [
 	presetCinematicHero,
 	presetMinimalTypo,
 	presetSpotlightCenter,
+	presetNewsroomStage,
 ];
 
 export default POST_CAROUSEL_PRESETS;
