@@ -9,6 +9,44 @@ import {
 } from './styleHelpers';
 
 /**
+ * Check whether the active layout renders the featured image as a full-bleed
+ * background (`position: absolute; inset: 0`) inside the card.
+ *
+ * @param {string} postLayoutMode Active post layout archetype slug.
+ * @return {boolean} True for `overlay` and `hero` layouts.
+ */
+const isFullBleedImageLayout = ( postLayoutMode ) =>
+	postLayoutMode === 'overlay' || postLayoutMode === 'hero';
+
+/**
+ * Build image wrapper positioning rules for image hover pseudo-element effects
+ * without overriding full-bleed `position: absolute` layouts.
+ *
+ * @param {string}  blockId            Scoped block identifier.
+ * @param {string}  postLayoutMode     Active post layout archetype slug.
+ * @param {boolean} withOverflowHidden Whether to append `overflow: hidden;`.
+ * @return {string} Scoped CSS rule or empty string when unnecessary.
+ */
+const getHoverEffectImageWrapperRule = (
+	blockId,
+	postLayoutMode,
+	withOverflowHidden
+) => {
+	const declarations = [];
+	if ( ! isFullBleedImageLayout( postLayoutMode ) ) {
+		declarations.push( 'position: relative;' );
+	}
+	if ( withOverflowHidden ) {
+		declarations.push( 'overflow: hidden;' );
+	}
+	return declarations.length > 0
+		? `.${ blockId } .gslider-post-carousel-image { ${ declarations.join(
+				' '
+		  ) } }`
+		: '';
+};
+
+/**
  * Build Desktop card hover preset CSS rules.
  *
  * @param {Object} attributes Block attributes.
@@ -337,6 +375,7 @@ export const buildCardResponsive = ( attributes, device ) => {
 export const buildImageWrapperDesktop = ( attributes ) => {
 	const {
 		blockId,
+		postLayoutMode = 'classic',
 		imageHeight,
 		imageHeightUnits,
 		imageMarginDesktopCssStyle,
@@ -414,9 +453,13 @@ export const buildImageWrapperDesktop = ( attributes ) => {
         ${
 			enableTaxonomyBadgeOverlay
 				? `
-        .${ blockId } .gslider-post-carousel-image {
+        ${
+			! isFullBleedImageLayout( postLayoutMode )
+				? `.${ blockId } .gslider-post-carousel-image {
             position: relative !important;
-        }
+        }`
+				: ''
+		}
         .${ blockId } .gslider-taxonomy-badge-overlay {
             position: absolute !important;
             z-index: 10 !important;
@@ -546,6 +589,7 @@ export const buildImageWrapperResponsive = ( attributes, device ) => {
 export const buildImageTagDesktop = ( attributes ) => {
 	const {
 		blockId,
+		postLayoutMode = 'classic',
 		imageMaxWidth,
 		imageMaxWidthUnits,
 		imageObjectFit,
@@ -668,7 +712,7 @@ export const buildImageTagDesktop = ( attributes ) => {
         ${
 			imageHoverEffect === 'shine-sweep'
 				? `
-            .${ blockId } .gslider-post-carousel-image { position: relative; overflow: hidden; }
+            ${ getHoverEffectImageWrapperRule( blockId, postLayoutMode, true ) }
             .${ blockId } .gslider-post-carousel-image::after {
                 content: '';
                 position: absolute;
@@ -691,7 +735,11 @@ export const buildImageTagDesktop = ( attributes ) => {
         ${
 			imageHoverEffect === 'overlay-fade'
 				? `
-            .${ blockId } .gslider-post-carousel-image { position: relative; }
+            ${ getHoverEffectImageWrapperRule(
+				blockId,
+				postLayoutMode,
+				false
+			) }
             .${ blockId } .gslider-post-carousel-image::before {
                 content: '';
                 position: absolute;
@@ -714,7 +762,7 @@ export const buildImageTagDesktop = ( attributes ) => {
         ${
 			imageHoverEffect === 'overlay-slide'
 				? `
-            .${ blockId } .gslider-post-carousel-image { position: relative; overflow: hidden; }
+            ${ getHoverEffectImageWrapperRule( blockId, postLayoutMode, true ) }
             .${ blockId } .gslider-post-carousel-image::before {
                 content: '';
                 position: absolute;

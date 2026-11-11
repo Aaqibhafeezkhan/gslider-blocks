@@ -1123,7 +1123,9 @@ export default function Edit( {
 																key={ `cat-${ cat.id }` }
 																className="gslider-category-item"
 															>
-																{ cat.name }
+																{ decodeHtmlEntities(
+																	cat.name
+																) }
 															</span>
 														)
 													) }
@@ -1159,7 +1161,9 @@ export default function Edit( {
 																key={ `tag-${ tag.id }` }
 																className="gslider-tag-item"
 															>
-																{ tag.name }
+																{ decodeHtmlEntities(
+																	tag.name
+																) }
 															</span>
 														)
 													) }

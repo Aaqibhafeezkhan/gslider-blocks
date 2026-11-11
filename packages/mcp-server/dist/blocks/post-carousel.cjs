@@ -6173,6 +6173,19 @@ var buildContentWrapperStyles = (attributes2, device) => {
 };
 
 // ../../src/blocks/post-carousel/styling/buildCardMediaStyles.js
+var isFullBleedImageLayout = (postLayoutMode) => postLayoutMode === "overlay" || postLayoutMode === "hero";
+var getHoverEffectImageWrapperRule = (blockId, postLayoutMode, withOverflowHidden) => {
+  const declarations = [];
+  if (!isFullBleedImageLayout(postLayoutMode)) {
+    declarations.push("position: relative;");
+  }
+  if (withOverflowHidden) {
+    declarations.push("overflow: hidden;");
+  }
+  return declarations.length > 0 ? `.${blockId} .gslider-post-carousel-image { ${declarations.join(
+    " "
+  )} }` : "";
+};
 var buildCardHoverPreset = (attributes2) => {
   const { blockId, cardHoverAnimation, cardHoverAnimationDuration } = attributes2;
   switch (cardHoverAnimation) {
@@ -6420,6 +6433,7 @@ var buildCardResponsive = (attributes2, device) => {
 var buildImageWrapperDesktop = (attributes2) => {
   const {
     blockId,
+    postLayoutMode = "classic",
     imageHeight,
     imageHeightUnits,
     imageMarginDesktopCssStyle,
@@ -6465,9 +6479,9 @@ var buildImageWrapperDesktop = (attributes2) => {
         }
 
         ${enableTaxonomyBadgeOverlay ? `
-        .${blockId} .gslider-post-carousel-image {
+        ${!isFullBleedImageLayout(postLayoutMode) ? `.${blockId} .gslider-post-carousel-image {
             position: relative !important;
-        }
+        }` : ""}
         .${blockId} .gslider-taxonomy-badge-overlay {
             position: absolute !important;
             z-index: 10 !important;
@@ -6539,6 +6553,7 @@ var buildImageWrapperResponsive = (attributes2, device) => {
 var buildImageTagDesktop = (attributes2) => {
   const {
     blockId,
+    postLayoutMode = "classic",
     imageMaxWidth,
     imageMaxWidthUnits,
     imageObjectFit,
@@ -6598,7 +6613,7 @@ var buildImageTagDesktop = (attributes2) => {
         }
 
         ${imageHoverEffect === "shine-sweep" ? `
-            .${blockId} .gslider-post-carousel-image { position: relative; overflow: hidden; }
+            ${getHoverEffectImageWrapperRule(blockId, postLayoutMode, true)}
             .${blockId} .gslider-post-carousel-image::after {
                 content: '';
                 position: absolute;
@@ -6615,7 +6630,11 @@ var buildImageTagDesktop = (attributes2) => {
         ` : ""}
 
         ${imageHoverEffect === "overlay-fade" ? `
-            .${blockId} .gslider-post-carousel-image { position: relative; }
+            ${getHoverEffectImageWrapperRule(
+    blockId,
+    postLayoutMode,
+    false
+  )}
             .${blockId} .gslider-post-carousel-image::before {
                 content: '';
                 position: absolute;
@@ -6632,7 +6651,7 @@ var buildImageTagDesktop = (attributes2) => {
         ` : ""}
 
         ${imageHoverEffect === "overlay-slide" ? `
-            .${blockId} .gslider-post-carousel-image { position: relative; overflow: hidden; }
+            ${getHoverEffectImageWrapperRule(blockId, postLayoutMode, true)}
             .${blockId} .gslider-post-carousel-image::before {
                 content: '';
                 position: absolute;
