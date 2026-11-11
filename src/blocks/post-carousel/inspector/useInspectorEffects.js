@@ -189,6 +189,7 @@ const useInspectorEffects = ( attributes, setAttributes ) => {
 		authorNameFontFamily,
 		postDateFontFamily,
 		readMoreButtonFontFamily,
+		paginationFractionFontFamily,
 		readMoreButtonIcon,
 		navigationArrowsIconLeft,
 		navigationArrowsIconRight,
@@ -200,27 +201,14 @@ const useInspectorEffects = ( attributes, setAttributes ) => {
 		setAttributes( { deviceType: currentDeviceType } );
 	}, [ currentDeviceType, setAttributes ] );
 
-	if ( postTitleFontFamily && postTitleFontFamily !== 'Default' ) {
-		LoadGoogleFont( postTitleFontFamily );
-	}
-	if ( postExcerptFontFamily && postExcerptFontFamily !== 'Default' ) {
-		LoadGoogleFont( postExcerptFontFamily );
-	}
-	if ( postCategoryFontFamily && postCategoryFontFamily !== 'Default' ) {
-		LoadGoogleFont( postCategoryFontFamily );
-	}
-	if ( postTagFontFamily && postTagFontFamily !== 'Default' ) {
-		LoadGoogleFont( postTagFontFamily );
-	}
-	if ( authorNameFontFamily && authorNameFontFamily !== 'Default' ) {
-		LoadGoogleFont( authorNameFontFamily );
-	}
-	if ( postDateFontFamily && postDateFontFamily !== 'Default' ) {
-		LoadGoogleFont( postDateFontFamily );
-	}
-	if ( readMoreButtonFontFamily && readMoreButtonFontFamily !== 'Default' ) {
-		LoadGoogleFont( readMoreButtonFontFamily );
-	}
+	LoadGoogleFont( postTitleFontFamily );
+	LoadGoogleFont( postExcerptFontFamily );
+	LoadGoogleFont( postCategoryFontFamily );
+	LoadGoogleFont( postTagFontFamily );
+	LoadGoogleFont( authorNameFontFamily );
+	LoadGoogleFont( postDateFontFamily );
+	LoadGoogleFont( readMoreButtonFontFamily );
+	LoadGoogleFont( paginationFractionFontFamily );
 
 	const spacingDeps = SPACING_SYNC_SPECS.flatMap(
 		( { cssPrefix, cssSuffix, suffixFirst, unitsKey } ) => [
