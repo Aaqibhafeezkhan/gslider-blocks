@@ -14,6 +14,7 @@
  * 9. Flexi Content grabCursor propagates only when enableGrabCursor and allowTouchMove are enabled.
  * 10. Post Carousel defaults, Swiper config, sticky overflow cap, and queried post slides normalize cleanly.
  * 11. Post Carousel preserves enclosing host post context across multiple carousels and restores prior post state.
+ * 12. Reusable block (synced pattern) expansion only happens for published, unprotected, or readable wp_block posts.
  *
  * @package GSlider\Tests\RestApi
  */
@@ -62,6 +63,20 @@ if ( ! function_exists( 'parse_blocks' ) ) {
 						'blockId'    => 'slider-abc123',
 						'blockStyle' => '.slider-abc123 { border-radius: 8px; }',
 					],
+					'innerBlocks' => [],
+				],
+			];
+		}
+		if ( preg_match( '/<!--\s*wp:block\s+(\{.*?\})\s*\/-->/', (string) $content, $matches ) ) {
+			$attrs   = [];
+			$decoded = json_decode( $matches[1], true );
+			if ( is_array( $decoded ) ) {
+				$attrs = $decoded;
+			}
+			return [
+				[
+					'blockName'   => 'core/block',
+					'attrs'       => $attrs,
 					'innerBlocks' => [],
 				],
 			];
@@ -650,8 +665,10 @@ class BlockParserTest {
 		$this->test_flexi_vertical_direction();
 		$this->test_swiper_dynamic_observers();
 		$this->test_flexi_grab_cursor();
+		$this->test_flexi_grab_cursor();
 		$this->test_post_carousel_normalization();
 		$this->test_post_carousel_host_post_context_and_restoration();
+		$this->test_reusable_block_expansion_gating();
 
 		fwrite( STDOUT, "\nAll BlockParser tests passed successfully!\n" );
 	}
@@ -1058,7 +1075,6 @@ class BlockParserTest {
 			);
 		}
 	}
-
 	/**
 	 * Test 10: Post Carousel defaults, Swiper configuration, sticky slice cap, and post slides.
 	 *
@@ -1345,6 +1361,89 @@ class BlockParserTest {
 		unset( $GLOBALS['wp_mock_posts'][501] );
 		$GLOBALS['post']                         = null;
 		$GLOBALS['gslider_test_bp_current_post'] = null;
+	}
+
+	/**
+	 * Test 12: Reusable block (synced pattern) expansion is gated by status, password, and capability.
+	 *
+	 * @return void
+	 */
+	public function test_reusable_block_expansion_gating(): void {
+		global $wp_mock_posts, $can_read, $password_clear;
+
+		$slider_content = '<!-- wp:gslider-blocks/image-slider {"blockId":"slider-ref"} /-->';
+
+		// Published pattern: expanded for everyone (keeps the previous behavior).
+		$wp_mock_posts[30] = $this->create_mock_post( 30, 'publish', 'wp_block', '', $slider_content );
+		$can_read          = [];
+		$password_clear    = [];
+		$published         = BlockParser::parse_post_blocks( '<!-- wp:block {"ref":30} /-->' );
+		$this->assert_true( 1 === count( $published ), 'Published pattern is expanded anonymously' );
+
+		// Draft pattern: hidden from anonymous users.
+		$wp_mock_posts[31] = $this->create_mock_post( 31, 'draft', 'wp_block', '', $slider_content );
+		$can_read          = [];
+		$draft_anonymous   = BlockParser::parse_post_blocks( '<!-- wp:block {"ref":31} /-->' );
+		$this->assert_true( [] === $draft_anonymous, 'Draft pattern is skipped when logged out' );
+
+		// Private pattern: hidden from anonymous users.
+		$wp_mock_posts[32] = $this->create_mock_post( 32, 'private', 'wp_block', '', $slider_content );
+		$can_read          = [];
+		$private_anonymous = BlockParser::parse_post_blocks( '<!-- wp:block {"ref":32} /-->' );
+		$this->assert_true( [] === $private_anonymous, 'Private pattern is skipped when logged out' );
+
+		// Password-protected pattern: hidden even when published.
+		$wp_mock_posts[33] = $this->create_mock_post( 33, 'publish', 'wp_block', 'secret', $slider_content );
+		$can_read          = [];
+		$password_clear    = [];
+		$password_protected = BlockParser::parse_post_blocks( '<!-- wp:block {"ref":33} /-->' );
+		$this->assert_true( [] === $password_protected, 'Password-protected pattern is skipped when locked' );
+
+		// Draft pattern with read_post cap: expanded for users who can read it.
+		$can_read         = [ 31 => true ];
+		$draft_editor     = BlockParser::parse_post_blocks( '<!-- wp:block {"ref":31} /-->' );
+		$this->assert_true( 1 === count( $draft_editor ), 'Draft pattern is expanded for a user who can read it' );
+
+		// Private pattern with read_post cap: expanded for users who can read it.
+		$can_read           = [ 32 => true ];
+		$private_editor     = BlockParser::parse_post_blocks( '<!-- wp:block {"ref":32} /-->' );
+		$this->assert_true( 1 === count( $private_editor ), 'Private pattern is expanded for a user who can read it' );
+
+		// Non-wp_block posts referenced by core/block are never expanded.
+		$wp_mock_posts[34] = $this->create_mock_post( 34, 'publish', 'post', '', $slider_content );
+		$can_read          = [];
+		$wrong_type        = BlockParser::parse_post_blocks( '<!-- wp:block {"ref":34} /-->' );
+		$this->assert_true( [] === $wrong_type, 'Non-wp_block post is skipped' );
+
+		// Self-referencing pattern terminates via the ref-cycle guard.
+		$wp_mock_posts[35] = $this->create_mock_post( 35, 'publish', 'wp_block', '', '<!-- wp:block {"ref":35} /-->' );
+		$can_read          = [];
+		$cycle             = BlockParser::parse_post_blocks( '<!-- wp:block {"ref":35} /-->' );
+		$this->assert_true( [] === $cycle, 'Self-referencing pattern terminates without infinite loop' );
+
+		$can_read       = [];
+		$password_clear = [];
+	}
+
+	/**
+	 * Creates a mock WP_Post for parsing tests.
+	 *
+	 * @param int    $id       Post ID.
+	 * @param string $status   Post status.
+	 * @param string $type     Post type.
+	 * @param string $password Post password.
+	 * @param string $content  Post content.
+	 * @return WP_Post
+	 */
+	private function create_mock_post( int $id, string $status, string $type, string $password = '', string $content = '' ): WP_Post {
+		$post                = new WP_Post();
+		$post->ID            = $id;
+		$post->post_status   = $status;
+		$post->post_type     = $type;
+		$post->post_password = $password;
+		$post->post_title    = 'Slider post ' . $id;
+		$post->post_content  = $content;
+		return $post;
 	}
 }
 
