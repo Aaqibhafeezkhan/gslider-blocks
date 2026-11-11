@@ -84,6 +84,11 @@ export const changelogTimelineStyles = {
 		Tablet: '1.4',
 		Mobile: '1.4',
 	},
+	postTitleLineHeightUnits: {
+		Desktop: 'em',
+		Tablet: 'em',
+		Mobile: 'em',
+	},
 	postTitleNormalBackgroundType: 'classic',
 	postTitleNormalClassicColor: '#0f172a',
 	postTitleHoverClassicColor: '#007cba',
@@ -104,11 +109,32 @@ export const changelogTimelineStyles = {
 		Tablet: '1.6',
 		Mobile: '1.6',
 	},
+	postExcerptLineHeightUnits: {
+		Desktop: 'em',
+		Tablet: 'em',
+		Mobile: 'em',
+	},
 	postExcerptDesktopMargin: {
 		top: '0',
 		right: '0',
 		bottom: '16',
 		left: '0',
+	},
+	authorNameColor: '#1e293b',
+	postDateColor: '#64748b',
+	postCategoryColor: '',
+	postCategoryColorHover: '',
+	postCategoryFontSize: {
+		Desktop: '13',
+		Tablet: '13',
+		Mobile: '13',
+	},
+	postCategoryFontWeight: '',
+	postCategoryTextTransform: '',
+	postCategoryLetterSpacing: {
+		Desktop: '',
+		Tablet: '',
+		Mobile: '',
 	},
 	readMoreButtonWidth: 'auto',
 	readMoreButtonColor: '#007cba',
@@ -119,6 +145,22 @@ export const changelogTimelineStyles = {
 	readMoreButtonNormalClassicColor: 'transparent',
 	readMoreButtonHoverBackgroundType: 'classic',
 	readMoreButtonHoverClassicColor: 'transparent',
+	readMoreButtonTextDecoration: 'none',
+	readMoreButtonDesktopPadding: {
+		top: '',
+		right: '',
+		bottom: '',
+		left: '',
+	},
+	readMoreButtonDesktopBorderRadius: {
+		top: '',
+		right: '',
+		bottom: '',
+		left: '',
+	},
+	readMoreButtonBoxShadowCssValue: '',
+	readMoreButtonBoxShadowHoverCssValue: '',
+	readMoreButtonHoverAnimation: 'none',
 };
 
 const ChangelogTimelinePreview = () => (

@@ -3,6 +3,7 @@ import { DEFAULT_POST_CAROUSEL_CONTENT_ORDER } from '../content-order';
 
 export const newsroomStageStyles = {
 	postLayoutMode: 'newsroom',
+	presetStyle: 'newsroom-stage',
 	newsroomMainWidth: 65,
 	newsroomQueuePosition: 'right',
 	enableSpotlight: false,
@@ -17,6 +18,11 @@ export const newsroomStageStyles = {
 	overlayGradientScrim:
 		'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)',
 	overlayScrimHeight: 75,
+	timelineStemColor: '#e2e8f0',
+	timelineStemThickness: 2,
+	timelineDotSize: 16,
+	timelineDotColor: '#007cba',
+	timelineDatePosition: 'above',
 	carouselPerColumn: {
 		Desktop: 1,
 		Tablet: 1,
@@ -78,9 +84,42 @@ export const newsroomStageStyles = {
 		Tablet: '1.25',
 		Mobile: '1.25',
 	},
+	postTitleLineHeightUnits: {
+		Desktop: 'em',
+		Tablet: 'em',
+		Mobile: 'em',
+	},
+	postTitleNormalBackgroundType: 'classic',
 	postTitleNormalClassicColor: '#111c2d',
 	postTitleHoverClassicColor: '#007cba',
+	postTitleDesktopMargin: {
+		top: '',
+		right: '',
+		bottom: '',
+		left: '',
+	},
+	postExcerptFontSize: {
+		Desktop: '16',
+		Tablet: '16',
+		Mobile: '16',
+	},
 	postExcerptColor: '#475569',
+	postExcerptLineHeight: {
+		Desktop: '',
+		Tablet: '',
+		Mobile: '',
+	},
+	postExcerptLineHeightUnits: {
+		Desktop: 'px',
+		Tablet: 'px',
+		Mobile: 'px',
+	},
+	postExcerptDesktopMargin: {
+		top: '',
+		right: '',
+		bottom: '',
+		left: '',
+	},
 	authorNameColor: '#1e293b',
 	postDateColor: '#64748b',
 	postCategoryColor: '',
@@ -120,6 +159,8 @@ export const newsroomStageStyles = {
 		left: '6',
 	},
 	readMoreButtonBoxShadowCssValue: '',
+	readMoreButtonBoxShadowHoverCssValue: '',
+	readMoreButtonHoverAnimation: 'none',
 };
 
 const NewsroomStagePreview = () => (

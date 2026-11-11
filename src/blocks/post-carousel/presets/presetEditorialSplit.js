@@ -3,6 +3,7 @@ import { DEFAULT_POST_CAROUSEL_CONTENT_ORDER } from '../content-order';
 
 export const editorialSplitStyles = {
 	postLayoutMode: 'horizontal',
+	presetStyle: 'editorial-split',
 	enableSpotlight: false,
 	spotlightScaleSide: 0.92,
 	spotlightOpacitySide: 0.65,
@@ -17,6 +18,11 @@ export const editorialSplitStyles = {
 	overlayGradientScrim:
 		'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)',
 	overlayScrimHeight: 75,
+	timelineStemColor: '#e2e8f0',
+	timelineStemThickness: 2,
+	timelineDotSize: 16,
+	timelineDotColor: '#007cba',
+	timelineDatePosition: 'above',
 	carouselPerColumn: {
 		Desktop: 3,
 		Tablet: 2,
@@ -78,9 +84,42 @@ export const editorialSplitStyles = {
 		Tablet: '',
 		Mobile: '',
 	},
+	postTitleLineHeightUnits: {
+		Desktop: 'px',
+		Tablet: 'px',
+		Mobile: 'px',
+	},
+	postTitleNormalBackgroundType: 'classic',
 	postTitleNormalClassicColor: '#111c2d',
 	postTitleHoverClassicColor: '#000000',
+	postTitleDesktopMargin: {
+		top: '',
+		right: '',
+		bottom: '',
+		left: '',
+	},
+	postExcerptFontSize: {
+		Desktop: '16',
+		Tablet: '16',
+		Mobile: '16',
+	},
 	postExcerptColor: '#45464d',
+	postExcerptLineHeight: {
+		Desktop: '',
+		Tablet: '',
+		Mobile: '',
+	},
+	postExcerptLineHeightUnits: {
+		Desktop: 'px',
+		Tablet: 'px',
+		Mobile: 'px',
+	},
+	postExcerptDesktopMargin: {
+		top: '',
+		right: '',
+		bottom: '',
+		left: '',
+	},
 	authorNameColor: '#111c2d',
 	postDateColor: '#45464d',
 	postCategoryColor: '',

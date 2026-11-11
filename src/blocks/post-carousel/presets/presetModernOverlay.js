@@ -3,6 +3,7 @@ import { DEFAULT_POST_CAROUSEL_CONTENT_ORDER } from '../content-order';
 
 export const modernOverlayStyles = {
 	postLayoutMode: 'overlay',
+	presetStyle: 'modern-overlay',
 	enableSpotlight: false,
 	spotlightScaleSide: 0.92,
 	spotlightOpacitySide: 0.65,
@@ -20,6 +21,11 @@ export const modernOverlayStyles = {
 	overlayGradientScrim:
 		'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)',
 	overlayScrimHeight: 75,
+	timelineStemColor: '#e2e8f0',
+	timelineStemThickness: 2,
+	timelineDotSize: 16,
+	timelineDotColor: '#007cba',
+	timelineDatePosition: 'above',
 	carouselPerColumn: {
 		Desktop: 3,
 		Tablet: 2,
@@ -78,9 +84,42 @@ export const modernOverlayStyles = {
 		Tablet: '',
 		Mobile: '',
 	},
+	postTitleLineHeightUnits: {
+		Desktop: 'px',
+		Tablet: 'px',
+		Mobile: 'px',
+	},
+	postTitleNormalBackgroundType: 'classic',
 	postTitleNormalClassicColor: '#ffffff',
 	postTitleHoverClassicColor: '#e2e8f0',
+	postTitleDesktopMargin: {
+		top: '',
+		right: '',
+		bottom: '',
+		left: '',
+	},
+	postExcerptFontSize: {
+		Desktop: '16',
+		Tablet: '16',
+		Mobile: '16',
+	},
 	postExcerptColor: 'rgba(255, 255, 255, 0.88)',
+	postExcerptLineHeight: {
+		Desktop: '',
+		Tablet: '',
+		Mobile: '',
+	},
+	postExcerptLineHeightUnits: {
+		Desktop: 'px',
+		Tablet: 'px',
+		Mobile: 'px',
+	},
+	postExcerptDesktopMargin: {
+		top: '',
+		right: '',
+		bottom: '',
+		left: '',
+	},
 	authorNameColor: '#ffffff',
 	postDateColor: 'rgba(255, 255, 255, 0.8)',
 	postCategoryColor: '',
