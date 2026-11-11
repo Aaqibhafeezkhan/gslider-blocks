@@ -1,6 +1,6 @@
 /* Post Carousel - Centered Spotlight Stage Modifier */
 
-.gslider-post-carousel-wrapper.is-spotlight {
+:where(.gslider-post-carousel-wrapper.is-spotlight) {
 
 	.swiper-slide {
 		transition:
@@ -31,7 +31,7 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-	.gslider-post-carousel-wrapper.is-spotlight {
+	:where(.gslider-post-carousel-wrapper.is-spotlight) {
 
 		.swiper-slide {
 			transition: none;

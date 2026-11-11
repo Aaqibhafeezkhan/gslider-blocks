@@ -1,6 +1,8 @@
 /* Post Carousel - Modern Dark Overlay Layout Archetype & Preset */
 
-.gslider-post-carousel-wrapper.is-layout-overlay {
+:where(.gslider-post-carousel-wrapper.is-layout-overlay) {
+	--gslider-meta-color: rgba(255, 255, 255, 0.85);
+	--gslider-meta-sep-color: rgba(255, 255, 255, 0.55);
 
 	.gslider-post-carousel-image {
 		position: absolute;
@@ -67,11 +69,7 @@
 		min-height: 360px;
 		border-radius: 14px;
 
-		&:hover .gslider-post-carousel-title a {
-			color: #e2e8f0;
-		}
-
-		&.is-clickable {
+		&:where(.is-clickable) {
 
 			.gslider-post-carousel-title-link::after,
 			.gslider-post-carousel-card-link::after {
@@ -95,4 +93,8 @@
 	.gslider-post-date {
 		color: rgba(255, 255, 255, 0.85);
 	}
+}
+
+:where(.gslider-post-carousel-wrapper.is-layout-overlay .gslider-post-carousel-card:hover) .gslider-post-carousel-title-wrapper .gslider-post-carousel-title a {
+	color: #e2e8f0;
 }

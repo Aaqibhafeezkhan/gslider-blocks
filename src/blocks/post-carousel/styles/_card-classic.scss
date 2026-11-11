@@ -1,6 +1,6 @@
 /* Post Carousel - Classic Card Layout Archetype & Preset */
 
-.gslider-post-carousel-wrapper.is-layout-classic {
+:where(.gslider-post-carousel-wrapper.is-layout-classic) {
 
 	.gslider-post-carousel-card {
 		display: flex;

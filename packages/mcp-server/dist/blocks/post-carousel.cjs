@@ -7451,20 +7451,20 @@ var buildPostDateStyles = (attributes2, device) => {
   const padding = attributes2[`postDate${device}PaddingCssStyle`];
   return `
         .${blockId} .gslider-post-carousel-meta .gslider-post-date-wrapper {
-            ${isDesktop && postDateColor ? `color: ${postDateColor};` : ""}
             ${margin ? `margin: ${margin};` : ""}
             ${padding ? `padding: ${padding};` : ""}
             ${isDesktop ? "transition: all 0.3s ease-in-out;" : ""}
         }
-        ${isDesktop ? `
-            .${blockId} .gslider-post-carousel-meta .gslider-post-date-wrapper:hover {
-                ${postDateColorHover ? `color: ${postDateColorHover};` : ""}
-            }
-        ` : ""}
         .${blockId} .gslider-post-carousel-meta .gslider-post-date-wrapper .gslider-post-date {
             ${buildTypographyCss(attributes2, "postDate", device)}
+            ${isDesktop && postDateColor ? `color: ${postDateColor};` : ""}
             ${isDesktop ? "transition: all 0.3s ease-in-out;" : ""}
         }
+        ${isDesktop && postDateColorHover ? `
+            .${blockId} .gslider-post-carousel-meta .gslider-post-date-wrapper:hover .gslider-post-date {
+                color: ${postDateColorHover};
+            }
+        ` : ""}
 	`;
 };
 var buildReadMoreHoverAnimRule = (animation) => {

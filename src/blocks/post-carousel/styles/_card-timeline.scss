@@ -2,7 +2,7 @@
 // Chronological Timeline Rail Layout Styles
 // ==========================================================================
 
-.gslider-post-carousel-wrapper.is-layout-timeline {
+:where(.gslider-post-carousel-wrapper.is-layout-timeline) {
 
 	.swiper-wrapper {
 		padding-top: 40px;

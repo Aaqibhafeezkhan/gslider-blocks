@@ -301,24 +301,24 @@ export const buildPostDateStyles = ( attributes, device ) => {
 
 	return `
         .${ blockId } .gslider-post-carousel-meta .gslider-post-date-wrapper {
-            ${ isDesktop && postDateColor ? `color: ${ postDateColor };` : '' }
             ${ margin ? `margin: ${ margin };` : '' }
             ${ padding ? `padding: ${ padding };` : '' }
             ${ isDesktop ? 'transition: all 0.3s ease-in-out;' : '' }
         }
+        .${ blockId } .gslider-post-carousel-meta .gslider-post-date-wrapper .gslider-post-date {
+            ${ buildTypographyCss( attributes, 'postDate', device ) }
+            ${ isDesktop && postDateColor ? `color: ${ postDateColor };` : '' }
+            ${ isDesktop ? 'transition: all 0.3s ease-in-out;' : '' }
+        }
         ${
-			isDesktop
+			isDesktop && postDateColorHover
 				? `
-            .${ blockId } .gslider-post-carousel-meta .gslider-post-date-wrapper:hover {
-                ${ postDateColorHover ? `color: ${ postDateColorHover };` : '' }
+            .${ blockId } .gslider-post-carousel-meta .gslider-post-date-wrapper:hover .gslider-post-date {
+                color: ${ postDateColorHover };
             }
         `
 				: ''
 		}
-        .${ blockId } .gslider-post-carousel-meta .gslider-post-date-wrapper .gslider-post-date {
-            ${ buildTypographyCss( attributes, 'postDate', device ) }
-            ${ isDesktop ? 'transition: all 0.3s ease-in-out;' : '' }
-        }
 	`;
 };
 

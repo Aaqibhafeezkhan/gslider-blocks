@@ -1,6 +1,8 @@
 /* Post Carousel - Cinematic Hero Layout Archetype & Preset */
 
-.gslider-post-carousel-wrapper.is-layout-hero {
+:where(.gslider-post-carousel-wrapper.is-layout-hero) {
+	--gslider-meta-color: rgba(255, 255, 255, 0.85);
+	--gslider-meta-sep-color: rgba(255, 255, 255, 0.55);
 
 	.gslider-post-carousel-image {
 		position: absolute !important;
@@ -118,16 +120,12 @@
 			min-height: var(--gslider-hero-height-mobile, 340px);
 		}
 
-		&:hover .gslider-post-carousel-title a {
-			color: #e2e8f0;
-		}
-
 		&.has-equal-height .gslider-post-carousel-body > .gslider-post-carousel-readmore {
 			margin-top: 20px;
 			padding-top: 0;
 		}
 
-		&.is-clickable {
+		&:where(.is-clickable) {
 
 			.gslider-post-carousel-title-link::after,
 			.gslider-post-carousel-card-link::after {
@@ -183,4 +181,8 @@
 			gap: 16px;
 		}
 	}
+}
+
+:where(.gslider-post-carousel-wrapper.is-layout-hero .gslider-post-carousel-card:hover) .gslider-post-carousel-title-wrapper .gslider-post-carousel-title a {
+	color: #e2e8f0;
 }

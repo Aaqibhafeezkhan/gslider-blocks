@@ -1,6 +1,6 @@
 /* Post Carousel - Card Base, Equal Height, Placeholder & Clickable Card */
 
-.gslider-post-carousel-wrapper {
+:where(.gslider-post-carousel-wrapper) {
 
 	/* Strict Equal-Height Row & CTA Alignment */
 	&.has-equal-height {

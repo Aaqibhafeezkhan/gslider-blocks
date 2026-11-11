@@ -1,6 +1,6 @@
 /* Post Carousel - Minimal Typographic Layout Archetype & Preset */
 
-.gslider-post-carousel-wrapper.is-layout-minimal {
+:where(.gslider-post-carousel-wrapper.is-layout-minimal) {
 
 	.gslider-post-carousel-image {
 		border-radius: 4px;
@@ -88,9 +88,9 @@
 		&:hover .gslider-post-carousel-image {
 			box-shadow: none;
 		}
-
-		&:hover .gslider-post-carousel-title a {
-			color: #007cba;
-		}
 	}
+}
+
+:where(.gslider-post-carousel-wrapper.is-layout-minimal .gslider-post-carousel-card:hover) .gslider-post-carousel-title-wrapper .gslider-post-carousel-title a {
+	color: #007cba;
 }

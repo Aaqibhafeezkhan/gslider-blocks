@@ -1,6 +1,6 @@
 /* Post Carousel - Newsroom Stage Layout Archetype & Preset */
 
-.gslider-post-carousel-wrapper.is-layout-newsroom {
+:where(.gslider-post-carousel-wrapper.is-layout-newsroom) {
 	display: grid;
 	grid-template-columns: var(--gslider-newsroom-main-width, 65%) calc(100% - var(--gslider-newsroom-main-width, 65%) - 24px);
 	gap: 24px;

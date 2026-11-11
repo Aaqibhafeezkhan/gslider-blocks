@@ -1,6 +1,6 @@
 /* Post Carousel - Editorial Horizontal Split Layout Archetype & Preset */
 
-.gslider-post-carousel-wrapper.is-layout-horizontal {
+:where(.gslider-post-carousel-wrapper.is-layout-horizontal) {
 
 	.gslider-post-carousel-image {
 		margin: 0;
@@ -47,7 +47,7 @@
 		}
 
 		.gslider-post-carousel-card {
-			display: flex;
+			display: flex !important;
 			flex-direction: column;
 
 			&.media-position-right:not(.has-no-image) {
