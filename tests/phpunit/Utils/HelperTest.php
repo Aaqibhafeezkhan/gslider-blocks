@@ -90,8 +90,11 @@ class HelperTest {
 		echo "=== GSlider Helper Unit Tests ===\n\n";
 
 		$this->test_class_exists();
+		$this->test_build_tax_query();
+		$this->test_build_author_query();
 		$this->test_build_date_query_site_timezone_and_ranges();
 		$this->test_build_meta_query();
+		$this->test_build_excluded_posts();
 		$this->test_calculate_reading_time();
 
 		echo "\nAll Helper unit tests passed successfully!\n";
@@ -309,6 +312,166 @@ class HelperTest {
 		// Mixed Latin + CJK: 200 English words (1.0 min) + 504 Japanese characters (~1.008 min) = ~2.008 min -> ceil = 3 mins.
 		$mixed_text = str_repeat( 'word ', 200 ) . str_repeat( 'ひらがなカタカナ', 63 );
 		$this->assert_same( 3, Helper::calculate_reading_time( $mixed_text ), 'calculate_reading_time() calculates mixed Latin and CJK text proportionally' );
+
+		// Issue #742 explicit benchmark cases: 800 English words = 4 min read; 1,500 CJK chars = 3 min read.
+		$english_800 = str_repeat( 'word ', 800 );
+		$this->assert_same( 4, Helper::calculate_reading_time( $english_800 ), 'calculate_reading_time() returns 4 minutes for 800 English words' );
+
+		$cjk_1500 = str_repeat( 'テスト日本語', 250 );
+		$this->assert_same( 1500, mb_strlen( $cjk_1500 ), 'CJK test fixture contains exactly 1500 multibyte characters' );
+		$this->assert_same( 3, Helper::calculate_reading_time( $cjk_1500 ), 'calculate_reading_time() returns 3 minutes for 1500 CJK characters' );
+	}
+
+	/**
+	 * Tests Helper::build_tax_query() for include/exclude filters, custom taxonomies, AND relation, and legacy signatures.
+	 *
+	 * @return void
+	 */
+	public function test_build_tax_query(): void {
+		// Empty inputs produce empty tax_query array.
+		$this->assert_same( [], Helper::build_tax_query(), 'build_tax_query() returns empty array when no taxonomy terms are passed' );
+
+		// Single category include omits unnecessary top-level relation key.
+		$this->assert_same(
+			[
+				[
+					'taxonomy' => 'category',
+					'field'    => 'term_id',
+					'terms'    => [ 12, 18 ],
+					'operator' => 'IN',
+				],
+			],
+			Helper::build_tax_query( [ 12, 18 ], 'include' ),
+			'build_tax_query() builds single category IN clause cleanly'
+		);
+
+		// Categories + tags + custom taxonomies combine with AND relation and respect include/exclude modes.
+		$combined = Helper::build_tax_query(
+			[ 3 ],
+			'exclude',
+			[ 7, 8 ],
+			'include',
+			[
+				'genre'  => [ 21, 22 ],
+				'empty'  => [],
+				'series' => [ 31 ],
+			],
+			[
+				'genre'  => 'exclude',
+				'series' => 'include',
+			]
+		);
+
+		$this->assert_same(
+			[
+				[
+					'taxonomy' => 'category',
+					'field'    => 'term_id',
+					'terms'    => [ 3 ],
+					'operator' => 'NOT IN',
+				],
+				[
+					'taxonomy' => 'post_tag',
+					'field'    => 'term_id',
+					'terms'    => [ 7, 8 ],
+					'operator' => 'IN',
+				],
+				[
+					'taxonomy' => 'genre',
+					'field'    => 'term_id',
+					'terms'    => [ 21, 22 ],
+					'operator' => 'NOT IN',
+				],
+				[
+					'taxonomy' => 'series',
+					'field'    => 'term_id',
+					'terms'    => [ 31 ],
+					'operator' => 'IN',
+				],
+				'relation' => 'AND',
+			],
+			$combined,
+			'build_tax_query() combines category, tag, and custom taxonomy clauses with AND relation and skips empty taxonomies'
+		);
+
+		// Backward-compatible legacy 3-arg array signature: (categories, tags, taxonomies).
+		$legacy = Helper::build_tax_query( [ 1 ], [ 2 ], [ 'topic' => [ 9 ] ] );
+		$this->assert_same(
+			[
+				[
+					'taxonomy' => 'category',
+					'field'    => 'term_id',
+					'terms'    => [ 1 ],
+					'operator' => 'IN',
+				],
+				[
+					'taxonomy' => 'post_tag',
+					'field'    => 'term_id',
+					'terms'    => [ 2 ],
+					'operator' => 'IN',
+				],
+				[
+					'taxonomy' => 'topic',
+					'field'    => 'term_id',
+					'terms'    => [ 9 ],
+					'operator' => 'IN',
+				],
+				'relation' => 'AND',
+			],
+			$legacy,
+			'build_tax_query() supports legacy array second-parameter signature'
+		);
+	}
+
+	/**
+	 * Tests Helper::build_author_query() for empty, include, and exclude modes.
+	 *
+	 * @return void
+	 */
+	public function test_build_author_query(): void {
+		$this->assert_same( [], Helper::build_author_query( [] ), 'build_author_query() returns empty array for empty authors list' );
+		$this->assert_same(
+			[ 'author__in' => [ 4, 9 ] ],
+			Helper::build_author_query( [ 4, 9 ], 'include' ),
+			'build_author_query() returns author__in clause for include filter'
+		);
+		$this->assert_same(
+			[ 'author__not_in' => [ 4, 9 ] ],
+			Helper::build_author_query( [ 4, 9 ], 'exclude' ),
+			'build_author_query() returns author__not_in clause for exclude filter'
+		);
+	}
+
+	/**
+	 * Tests Helper::build_excluded_posts() CSV parsing, deduplication, and current post handling.
+	 *
+	 * @return void
+	 */
+	public function test_build_excluded_posts(): void {
+		$this->assert_same( [], Helper::build_excluded_posts( '', false ), 'build_excluded_posts() returns empty array when CSV and excludeCurrentPost are empty/false' );
+
+		$parsed = Helper::build_excluded_posts( ' 12, 34, 12, 56 ', false );
+		$this->assert_same( [ 12, 34, 56 ], array_values( $parsed ), 'build_excluded_posts() parses CSV integer IDs and deduplicates duplicates' );
+
+		if ( ! function_exists( 'get_the_ID' ) ) {
+			/**
+			 * Stub for WordPress get_the_ID() inside standalone HelperTest runs.
+			 *
+			 * @return int Current mocked post ID.
+			 */
+			function get_the_ID() {
+				return (int) ( $GLOBALS['gslider_helper_test_current_id'] ?? 0 );
+			}
+		}
+
+		$GLOBALS['gslider_helper_test_current_id'] = 99;
+		$with_current                              = Helper::build_excluded_posts( '12, 34', true );
+		$this->assert_same( [ 12, 34, 99 ], array_values( $with_current ), 'build_excluded_posts() appends current post ID when exclude_current is true' );
+
+		$deduped_current = Helper::build_excluded_posts( '99, 12', true );
+		$this->assert_same( [ 99, 12 ], array_values( $deduped_current ), 'build_excluded_posts() does not duplicate current post ID if already excluded' );
+
+		unset( $GLOBALS['gslider_helper_test_current_id'] );
 	}
 }
 

@@ -1083,6 +1083,7 @@ class BlockParserTest {
 		$this->assert_true( 2.0 === $untouched['swiperConfig']['breakpoints'][768]['slidesPerView'], 'post-carousel tablet slidesPerView defaults to 2.0' );
 		$this->assert_true( 3.0 === $untouched['swiperConfig']['breakpoints'][1025]['slidesPerView'], 'post-carousel desktop slidesPerView defaults to 3.0' );
 		$this->assert_true( 10 === $untouched['swiperConfig']['breakpoints'][1025]['spaceBetween'], 'post-carousel desktop spaceBetween defaults to 10' );
+		$this->assert_true( true === ( $untouched['attrs']['enableSchemaMarkup'] ?? null ), 'post-carousel enableSchemaMarkup defaults to true' );
 
 		$override_config = $this->normalize(
 			[
