@@ -13,6 +13,7 @@ import ReadMoreSettingsPanel from './ReadMoreSettingsPanel';
 import NavigationSettingsPanel from './NavigationSettingsPanel';
 import PaginationSettingsPanel from './PaginationSettingsPanel';
 import PerformanceSettingsPanel from './PerformanceSettingsPanel';
+import SeoPerformancePanel from './SeoPerformancePanel';
 
 /**
  * Renders the General inspector tab with all modular configuration panels.
@@ -143,6 +144,13 @@ const GeneralTab = ( {
 				setAttributes={ setAttributes }
 				isOpen={ openPanel === 'performance-settings' }
 				onToggle={ () => onTogglePanel( 'performance-settings' ) }
+			/>
+
+			<SeoPerformancePanel
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+				isOpen={ openPanel === 'seo-structured-data' }
+				onToggle={ () => onTogglePanel( 'seo-structured-data' ) }
 			/>
 		</>
 	);

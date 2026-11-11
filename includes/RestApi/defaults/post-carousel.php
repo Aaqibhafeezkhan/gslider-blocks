@@ -2563,6 +2563,7 @@ return [
 	'globalBoxShadowHoverValues' => [],
 	'globalBoxShadowHoverCssValue' => '',
 	'globalCustomCSS' => '',
+	'enableSchemaMarkup' => true,
 	'postType' => 'post',
 	'postsPerPage' => [
 		'Desktop' => 6,

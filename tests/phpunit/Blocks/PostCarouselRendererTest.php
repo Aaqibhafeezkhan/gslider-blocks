@@ -190,8 +190,10 @@ $GLOBALS['gslider_test_post_tags']              = array();
 $GLOBALS['gslider_test_related_cats']           = array();
 $GLOBALS['gslider_test_related_tags']           = array();
 $GLOBALS['gslider_test_post_thumbnails']        = array();
+$GLOBALS['gslider_test_post_thumbnail_urls']    = array();
 $GLOBALS['gslider_test_post_excerpts']          = array();
 $GLOBALS['gslider_test_avatar_urls']            = array();
+$GLOBALS['gslider_test_author_names']           = array();
 $GLOBALS['gslider_test_last_query_args']        = null;
 $GLOBALS['gslider_test_sticky_overflow']        = 0;
 
@@ -598,15 +600,41 @@ if ( ! function_exists( 'the_post_thumbnail' ) ) {
 	}
 }
 
+if ( ! function_exists( 'get_the_post_thumbnail_url' ) ) {
+	/**
+	 * Stub for WordPress get_the_post_thumbnail_url().
+	 *
+	 * @param int|WP_Post|null $post Optional post ID or object.
+	 * @param string           $size Image size slug.
+	 * @return string|false Thumbnail URL or false when absent.
+	 */
+	function get_the_post_thumbnail_url( $post = null, $size = 'post-thumbnail' ) {
+		unset( $size );
+		$id = is_object( $post ) && isset( $post->ID )
+			? (int) $post->ID
+			: ( is_numeric( $post ) ? (int) $post : get_the_ID() );
+		if ( array_key_exists( $id, $GLOBALS['gslider_test_post_thumbnail_urls'] ) ) {
+			return $GLOBALS['gslider_test_post_thumbnail_urls'][ $id ];
+		}
+		return ! empty( $GLOBALS['gslider_test_post_thumbnails'][ $id ] )
+			? 'https://example.org/img-' . $id . '.jpg'
+			: false;
+	}
+}
+
 if ( ! function_exists( 'get_the_author_meta' ) ) {
 	/**
 	 * Stub for WordPress get_the_author_meta().
 	 *
-	 * @param string $field Field key.
-	 * @return int Author ID.
+	 * @param string    $field   Field key.
+	 * @param int|false $user_id Optional user ID.
+	 * @return int|string Author field value.
 	 */
-	function get_the_author_meta( $field = '' ) {
-		unset( $field );
+	function get_the_author_meta( $field = '', $user_id = false ) {
+		if ( 'display_name' === $field ) {
+			$uid = false !== $user_id ? (int) $user_id : 7;
+			return $GLOBALS['gslider_test_author_names'][ $uid ] ?? 'Jane Author';
+		}
 		return 7;
 	}
 }
@@ -667,6 +695,23 @@ if ( ! function_exists( 'get_the_date' ) ) {
 		}
 		unset( $post );
 		return 'November 10, 2026';
+	}
+}
+
+if ( ! function_exists( 'get_the_modified_date' ) ) {
+	/**
+	 * Stub for WordPress get_the_modified_date().
+	 *
+	 * @param string   $format Date format.
+	 * @param int|null $post   Post ID.
+	 * @return string Formatted modified date.
+	 */
+	function get_the_modified_date( $format = '', $post = null ) {
+		unset( $post );
+		if ( 'c' === $format ) {
+			return '2026-11-11T08:30:00+00:00';
+		}
+		return 'November 11, 2026';
 	}
 }
 
@@ -806,12 +851,14 @@ require_once ABSPATH . 'includes/Utils/Helper.php';
 require_once ABSPATH . 'includes/Blocks/PostCarousel/NavigationBuilder.php';
 require_once ABSPATH . 'includes/Blocks/PostCarousel/CardMarkupBuilder.php';
 require_once ABSPATH . 'includes/Blocks/PostCarousel/NewsroomBuilder.php';
+require_once ABSPATH . 'includes/Blocks/PostCarousel/SchemaBuilder.php';
 require_once ABSPATH . 'includes/Blocks/PostCarousel/PostCarouselRenderer.php';
 
 use GSlider\Blocks\PostCarousel\CardMarkupBuilder;
 use GSlider\Blocks\PostCarousel\NavigationBuilder;
 use GSlider\Blocks\PostCarousel\NewsroomBuilder;
 use GSlider\Blocks\PostCarousel\PostCarouselRenderer;
+use GSlider\Blocks\PostCarousel\SchemaBuilder;
 
 /**
  * Test class for GSlider\Blocks\PostCarousel\PostCarouselRenderer and companion builders.
@@ -862,11 +909,13 @@ class PostCarouselRendererTest {
 
 		$p1               = new WP_Post();
 		$p1->ID           = 101;
+		$p1->post_author  = 7;
 		$p1->post_title   = 'First Carousel Post With A Longer Sample Title For Word Trimming';
 		$p1->post_content = 'This is sample post content with enough words to test trimming and excerpt generation cleanly in PHP.';
 
 		$p2               = new WP_Post();
 		$p2->ID           = 102;
+		$p2->post_author  = 8;
 		$p2->post_title   = 'Second Post Title';
 		$p2->post_content = 'Second post body text for character trimming validation.';
 
@@ -885,13 +934,22 @@ class PostCarouselRendererTest {
 		$GLOBALS['gslider_test_related_cats']           = array( 500 => array( 10, 20 ) );
 		$GLOBALS['gslider_test_related_tags']           = array( 500 => array( 30 ) );
 		$GLOBALS['gslider_test_post_thumbnails']        = array( 101 => true, 102 => true );
+		$GLOBALS['gslider_test_post_thumbnail_urls']    = array();
 		$GLOBALS['gslider_test_post_excerpts']          = array(
 			101 => 'Custom explicit excerpt on post one for source tests.',
 			102 => '',
 		);
 		$GLOBALS['gslider_test_avatar_urls']            = array();
+		$GLOBALS['gslider_test_author_names']           = array(
+			7 => 'Jane Author',
+			8 => 'John Editor',
+		);
 		$GLOBALS['gslider_test_last_query_args']        = null;
 		$GLOBALS['gslider_test_sticky_overflow']        = 0;
+		$GLOBALS['is_admin_mock']                       = true;
+		$GLOBALS['is_rest_mock']                        = false;
+		$GLOBALS['is_feed_mock']                        = false;
+		remove_all_filters( 'gslider_post_carousel_schema_data' );
 		unset( $GLOBALS['gslider_first_image_optimized'] );
 	}
 
@@ -917,6 +975,7 @@ class PostCarouselRendererTest {
 		$this->test_wave5c_timeline_rail_preset_rendering();
 		$this->test_wave6_editorial_meta_reading_time_relative_dates_comments_separators_and_badge_cap();
 		$this->test_wave7_marquee_autoplay_progress_and_mobile_only_grid();
+		$this->test_wave8_google_carousel_seo_schema();
 
 		echo "\nAll PostCarouselRenderer unit tests passed successfully!\n";
 	}
@@ -1934,6 +1993,78 @@ class PostCarouselRendererTest {
 		$this->assert_same( 30, $ctx_clamped_high['autoplay_progress_height'], 'autoplayProgressHeight clamps 100 to maximum 30px' );
 		$this->assert_same( 6, $ctx_clamped_high['desktop_grid_columns'], 'desktopGridColumns clamps 20 to maximum 6' );
 		$this->assert_same( 100, $ctx_clamped_high['desktop_grid_gap'], 'desktopGridGap clamps 300 to maximum 100px' );
+	}
+
+	/**
+	 * Test 15: Wave 8 Google Carousel SEO Schema (ItemList + BlogPosting JSON-LD) and frontend-only gating.
+	 *
+	 * @return void
+	 */
+	public function test_wave8_google_carousel_seo_schema(): void {
+		$this->reset_state();
+		$this->assert_true( class_exists( SchemaBuilder::class, false ), 'SchemaBuilder class exists via ::class' );
+
+		// 1. Admin/editor requests must NEVER emit JSON-LD schema markup.
+		$GLOBALS['is_admin_mock'] = true;
+		$admin_html               = PostCarouselRenderer::render(
+			array(
+				'blockId'            => 'gslider-schema-admin',
+				'enableSchemaMarkup' => true,
+			)
+		);
+		$this->assert_true( false === strpos( $admin_html, 'application/ld+json' ), 'Admin/editor context omits JSON-LD schema markup' );
+
+		// 2. REST and feed requests must suppress JSON-LD schema markup even when not in admin.
+		$GLOBALS['is_admin_mock'] = false;
+		$GLOBALS['is_rest_mock']  = true;
+		$rest_html                = PostCarouselRenderer::render( array( 'blockId' => 'gslider-schema-rest' ) );
+		$this->assert_true( false === strpos( $rest_html, 'application/ld+json' ), 'REST preview context omits JSON-LD schema markup' );
+
+		$GLOBALS['is_rest_mock'] = false;
+		$GLOBALS['is_feed_mock'] = true;
+		$feed_html               = PostCarouselRenderer::render( array( 'blockId' => 'gslider-schema-feed' ) );
+		$this->assert_true( false === strpos( $feed_html, 'application/ld+json' ), 'Feed context omits JSON-LD schema markup' );
+
+		// 3. Frontend request renders JSON-LD by default when enableSchemaMarkup is omitted.
+		$GLOBALS['is_feed_mock'] = false;
+		$frontend_html           = PostCarouselRenderer::render( array( 'blockId' => 'gslider-schema-front' ) );
+		$this->assert_true( false !== strpos( $frontend_html, '<script type="application/ld+json">' ), 'Frontend renders JSON-LD script by default when enableSchemaMarkup is omitted' );
+
+		$matched = preg_match( '/<script type="application\/ld\+json">([^<]+)<\/script>/', $frontend_html, $schema_match );
+		$this->assert_same( 1, $matched, 'Single valid application/ld+json script tag renders cleanly' );
+		$decoded = json_decode( $schema_match[1] ?? '', true );
+		$this->assert_true( is_array( $decoded ), 'JSON-LD payload decodes into an associative array' );
+		$this->assert_same( 'https://schema.org', $decoded['@context'] ?? null, 'Schema sets https://schema.org @context' );
+		$this->assert_same( 'ItemList', $decoded['@type'] ?? null, 'Schema sets ItemList @type' );
+		$this->assert_same( 2, count( $decoded['itemListElement'] ?? array() ), 'ItemList includes all rendered posts' );
+		$this->assert_same( 1, $decoded['itemListElement'][0]['position'] ?? null, 'First ListItem starts at 1-based position 1' );
+		$this->assert_same( 2, $decoded['itemListElement'][1]['position'] ?? null, 'Second ListItem advances to position 2' );
+		$this->assert_same( 'BlogPosting', $decoded['itemListElement'][0]['item']['@type'] ?? null, 'Item @type is BlogPosting' );
+		$this->assert_same( 'https://example.org/post-101/#gslider-blogposting', $decoded['itemListElement'][0]['item']['@id'] ?? null, 'First item @id uses #gslider-blogposting fragment' );
+		$this->assert_same( 'https://example.org/post-101/', $decoded['itemListElement'][0]['item']['url'] ?? null, 'First item url matches post permalink' );
+		$this->assert_same( 'Jane Author', $decoded['itemListElement'][0]['item']['author']['name'] ?? null, 'First item author uses post author display_name' );
+		$this->assert_same( 'John Editor', $decoded['itemListElement'][1]['item']['author']['name'] ?? null, 'Second item author resolves second post author' );
+		$this->assert_same( 'https://example.org/img-101.jpg', $decoded['itemListElement'][0]['item']['image'] ?? null, 'First item includes featured image URL' );
+
+		// 4. Toggling enableSchemaMarkup off completely omits JSON-LD tag.
+		$disabled_html = PostCarouselRenderer::render(
+			array(
+				'blockId'            => 'gslider-schema-off',
+				'enableSchemaMarkup' => false,
+			)
+		);
+		$this->assert_true( false === strpos( $disabled_html, 'application/ld+json' ), 'Disabling enableSchemaMarkup removes JSON-LD script completely' );
+
+		// 5. Filter hook gslider_post_carousel_schema_data allows suppression and modification.
+		add_filter( 'gslider_post_carousel_schema_data', '__return_false' );
+		$suppressed_html = PostCarouselRenderer::render( array( 'blockId' => 'gslider-schema-suppressed' ) );
+		$this->assert_true( false === strpos( $suppressed_html, 'application/ld+json' ), 'Returning false from gslider_post_carousel_schema_data suppresses JSON-LD output' );
+		remove_all_filters( 'gslider_post_carousel_schema_data' );
+
+		// Reset global context flags cleanly.
+		$GLOBALS['is_admin_mock'] = true;
+		$GLOBALS['is_rest_mock']  = false;
+		$GLOBALS['is_feed_mock']  = false;
 	}
 }
 

@@ -22,7 +22,7 @@
       "coverflow"
     ]
   },
-  "totalAttributes": 963,
+  "totalAttributes": 964,
   "slideItemSchema": {
     "type": "dynamicQuery",
     "source": "WP_Query",
@@ -5580,6 +5580,10 @@
     "globalCustomCSS": {
       "type": "string",
       "default": ""
+    },
+    "enableSchemaMarkup": {
+      "type": "boolean",
+      "default": true
     },
     "postType": {
       "type": "string",

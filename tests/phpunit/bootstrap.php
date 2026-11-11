@@ -810,6 +810,7 @@ if ( ! function_exists( 'get_queried_object_id' ) ) {
 if ( ! class_exists( 'WP_Post' ) ) {
 	class WP_Post {
 		public $ID;
+		public $post_author;
 		public $post_status;
 		public $post_password;
 		public $post_type;

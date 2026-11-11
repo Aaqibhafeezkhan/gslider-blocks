@@ -172,6 +172,12 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 ? __( 'Featured Story', 'gslider-blocks' )
                 : __( 'Post Carousel', 'gslider-blocks' );
 
+            $schema_markup = '';
+            if ( ! empty( $context['enable_schema_markup'] ) && self::is_frontend_request() ) {
+                $rendered_posts = is_array( $posts_query->posts ) ? $posts_query->posts : array();
+                $schema_markup  = SchemaBuilder::build( $rendered_posts, $attributes, $posts_query );
+            }
+
             ob_start();
             ?>
 <div <?php echo $wrapper_attributes; ?>>
@@ -202,9 +208,41 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
         <?php echo $pagination_outside; ?>
     <?php endif; ?>
 </div>
+<?php if ( '' !== $schema_markup ) : ?>
+    <?php echo $schema_markup; ?>
+<?php endif; ?>
             <?php
 
             return (string) ob_get_clean();
+        }
+
+        /**
+         * Determines whether the current execution context is a public frontend page render.
+         *
+         * Excludes admin screens, Gutenberg REST block previews, and syndication feeds.
+         *
+         * @since 1.2.3
+         *
+         * @return bool True on frontend page requests.
+         */
+        private static function is_frontend_request(): bool {
+            if ( is_admin() ) {
+                return false;
+            }
+
+            if ( function_exists( 'wp_is_serving_rest_request' ) && wp_is_serving_rest_request() ) {
+                return false;
+            }
+
+            if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+                return false;
+            }
+
+            if ( function_exists( 'is_feed' ) && is_feed() ) {
+                return false;
+            }
+
+            return true;
         }
 
         /**
@@ -1020,6 +1058,7 @@ if ( ! class_exists( PostCarouselRenderer::class, false ) ) {
                 'equal_height'                           => isset( $attributes['equalHeight'] ) ? (bool) $attributes['equalHeight'] : true,
                 'enable_card_clickable_link'             => ! empty( $attributes['enableCardClickableLink'] ),
                 'enable_lazy_load'                       => ! empty( $attributes['enableLazyLoad'] ),
+                'enable_schema_markup'                   => SchemaBuilder::is_schema_enabled( $attributes ),
                 'enable_fallback_thumbnail'              => isset( $attributes['enableFallbackThumbnail'] ) ? (bool) $attributes['enableFallbackThumbnail'] : true,
                 'fallback_thumbnail_url'                 => isset( $attributes['fallbackThumbnailUrl'] ) ? esc_url_raw( (string) $attributes['fallbackThumbnailUrl'] ) : '',
                 'fallback_thumbnail_id'                  => isset( $attributes['fallbackThumbnailId'] ) ? max( 0, intval( $attributes['fallbackThumbnailId'] ) ) : 0,

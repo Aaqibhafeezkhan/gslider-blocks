@@ -395,6 +395,13 @@ const globalAttributes = {
 		default: '',
 	},
 	/** End Global Custom CSS */
+
+	/** Start SEO & Structured Data */
+	enableSchemaMarkup: {
+		type: 'boolean',
+		default: true,
+	},
+	/** End SEO & Structured Data */
 };
 
 export default globalAttributes;
