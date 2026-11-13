@@ -1021,6 +1021,7 @@ class BlockParserTest {
 		);
 		$this->assert_true( 'vertical' === $vertical['swiperConfig']['direction'], 'vertical flexi config sets direction' );
 		$this->assert_true( ! isset( $vertical['swiperConfig']['autoHeight'] ), 'vertical flexi config skips autoHeight' );
+		$this->assert_true( 'right' === $vertical['attrs']['verticalPaginationAlignment'], 'vertical flexi defaults verticalPaginationAlignment to right' );
 	}
 
 	/**
@@ -1042,6 +1043,7 @@ class BlockParserTest {
 		);
 		$this->assert_true( 'vertical' === $vertical['swiperConfig']['direction'], 'vertical testimonial config sets direction' );
 		$this->assert_true( ! isset( $vertical['swiperConfig']['autoHeight'] ), 'vertical testimonial config skips autoHeight' );
+		$this->assert_true( 'right' === $vertical['attrs']['verticalPaginationAlignment'], 'vertical testimonial defaults verticalPaginationAlignment to right' );
 	}
 
 	/**

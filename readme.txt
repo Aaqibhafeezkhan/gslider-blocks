@@ -196,6 +196,7 @@ This plugin may connect to or load resources from external third-party services 
 == Changelog ==
 
 = 1.2.3 – November 10, 2026 =
+* Testimonial & Flexi Content: Added Left/Right alignment switcher for vertical slider pagination with responsive offset positioning (upgrades Flexi vertical outside pagination to side placement matching Testimonial).
 * Blocks Manager: Fixed concurrent toggles losing each other's changes. Updates now run behind a database lock (where the database supports it) and re-read the stored value first.
 * Blocks Manager: Toggle errors now show the real failure reason for each block.
 * Blocks Manager: A failed dashboard load now shows an error with a retry button instead of showing every block as enabled.

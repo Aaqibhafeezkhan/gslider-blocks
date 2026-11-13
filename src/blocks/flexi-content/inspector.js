@@ -30,6 +30,7 @@ import {
 	NAVIGATION_ARROW_DIRECTION,
 	LAYOUT_HEIGHT_SWITCHER,
 	PAGINATION_POSITION_TYPE,
+	VERTICAL_PAGINATION_ALIGNMENT,
 	AUTOPLAY_PROGRESS_POSITION,
 	SHAPE_DIVIDER_OPTIONS,
 	FONT_WEIGHT,
@@ -116,6 +117,7 @@ const Inspector = ( { attributes, setAttributes } ) => {
 		cursorFollowerSize,
 		cursorFollowerInnerSize,
 		paginationPositionType,
+		verticalPaginationAlignment,
 		/** End Show/Hide Elements */
 
 		/** Start Layout & Content Setting */
@@ -1689,6 +1691,23 @@ const Inspector = ( { attributes, setAttributes } ) => {
 							setAttributes( { paginationPositionType: value } )
 						}
 					/>
+
+					{ direction === 'vertical' &&
+						paginationType === 'bullets' && (
+							<SwitcherControl
+								label={ __(
+									'Vertical Pagination Alignment',
+									'gslider-blocks'
+								) }
+								options={ VERTICAL_PAGINATION_ALIGNMENT }
+								value={ verticalPaginationAlignment }
+								onChange={ ( value ) =>
+									setAttributes( {
+										verticalPaginationAlignment: value,
+									} )
+								}
+							/>
+						) }
 
 					<SelectControls
 						label={ __( 'Type', 'gslider-blocks' ) }

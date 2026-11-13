@@ -627,6 +627,10 @@ var attributes = {
     type: "string",
     default: "outside"
   },
+  verticalPaginationAlignment: {
+    type: "string",
+    default: "right"
+  },
   /** End Show/Hide Elements */
   /** Layout & Content Setting */
   contentOrder: {
@@ -4711,6 +4715,7 @@ var generateBaseSliderStyle = (attributes2) => {
     showNavigation,
     showPagination,
     paginationPositionType,
+    verticalPaginationAlignment,
     /** End Show/Hide Elements */
     /** Start Layout & Content Setting */
     direction,
@@ -5962,14 +5967,37 @@ var generateBaseSliderStyle = (attributes2) => {
             }
         ` : ""}
 
+        ${paginationPositionType === "inside" && direction === "vertical" && verticalPaginationAlignment === "left" ? `
+            .${blockId}.gslider-testimonial-wrapper .swiper-pagination-bullets.swiper-pagination-vertical,
+            .${blockId}.gslider-testimonial-wrapper .swiper-pagination-vertical.swiper-pagination-bullets {
+                left: 10px !important;
+                right: auto !important;
+            }
+        ` : ""}
+
         ${paginationPositionType === "outside" && direction === "vertical" ? `
             .${blockId}.gslider-testimonial-wrapper .swiper-pagination-bullets.swiper-pagination-vertical,
             .${blockId}.gslider-testimonial-wrapper .swiper-pagination-vertical.swiper-pagination-bullets {
                 top: 50%;
                 bottom: auto !important;
-                left: auto;
-                right: -${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
+                z-index: 100 !important;
+                pointer-events: auto !important;
+                ${verticalPaginationAlignment === "left" ? `left: -${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important; right: auto !important;` : `left: auto; right: -${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;`}
                 transform: translate3d(0, -50%, 0);
+            }
+            .${blockId} .swiper-pagination-vertical.swiper-pagination-clickable .swiper-pagination-bullet {
+                cursor: pointer;
+                pointer-events: auto;
+                position: relative;
+            }
+            .${blockId} .swiper-pagination-vertical.swiper-pagination-clickable .swiper-pagination-bullet::after {
+                content: '';
+                position: absolute;
+                top: -6px;
+                bottom: -6px;
+                left: -10px;
+                right: -10px;
+                pointer-events: auto;
             }
         ` : ""}
 
@@ -5981,7 +6009,7 @@ var generateBaseSliderStyle = (attributes2) => {
 
         ${paginationPositionType === "outside" && showPagination?.Desktop && direction === "vertical" && paginationType === "bullets" ? `
         .${blockId}.gslider-testimonial-wrapper.has-pagination {
-            margin-right: ${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
+            ${verticalPaginationAlignment === "left" ? `margin-left: ${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"}; margin-right: 0;` : `margin-right: ${paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};`}
         }
         ` : ""}
 
@@ -6266,8 +6294,9 @@ var generateBaseSliderStyle = (attributes2) => {
                 .${blockId}.gslider-testimonial-wrapper .swiper-pagination-vertical.swiper-pagination-bullets {
                     top: 50%;
                     bottom: auto !important;
-                    left: auto;
-                    right: -${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
+                    z-index: 100 !important;
+                    pointer-events: auto !important;
+                    ${verticalPaginationAlignment === "left" ? `left: -${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important; right: auto !important;` : `left: auto; right: -${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;`}
                     transform: translate3d(0, -50%, 0);
                 }
             ` : ""}
@@ -6287,11 +6316,11 @@ var generateBaseSliderStyle = (attributes2) => {
             ${paginationPositionType === "outside" && direction === "vertical" && paginationType === "bullets" ? `
                 ${showPagination?.Tablet ? `
                     .${blockId}.gslider-testimonial-wrapper.has-pagination {
-                        margin-right: ${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
+                        ${verticalPaginationAlignment === "left" ? `margin-left: ${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"}; margin-right: 0;` : `margin-right: ${paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};`}
                     }
                 ` : showPagination?.Desktop ? `
                     .${blockId}.gslider-testimonial-wrapper.has-pagination {
-                        margin-right: 0;
+                        ${verticalPaginationAlignment === "left" ? `margin-left: 0;` : `margin-right: 0;`}
                     }
                 ` : ""}
             ` : ""}
@@ -6579,8 +6608,9 @@ var generateBaseSliderStyle = (attributes2) => {
                 .${blockId}.gslider-testimonial-wrapper .swiper-pagination-vertical.swiper-pagination-bullets {
                     top: 50%;
                     bottom: auto !important;
-                    left: auto;
-                    right: -${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;
+                    z-index: 100 !important;
+                    pointer-events: auto !important;
+                    ${verticalPaginationAlignment === "left" ? `left: -${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important; right: auto !important;` : `left: auto; right: -${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"} !important;`}
                     transform: translate3d(0, -50%, 0);
                 }
             ` : ""}
@@ -6600,11 +6630,11 @@ var generateBaseSliderStyle = (attributes2) => {
             ${paginationPositionType === "outside" && direction === "vertical" && paginationType === "bullets" ? `
                 ${showPagination?.Mobile ? `
                     .${blockId}.gslider-testimonial-wrapper.has-pagination {
-                        margin-right: ${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};
+                        ${verticalPaginationAlignment === "left" ? `margin-left: ${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"}; margin-right: 0;` : `margin-right: ${paginationOutsideOffset?.Mobile ? `${paginationOutsideOffset.Mobile}${paginationOutsideOffsetUnits?.Mobile || "px"}` : paginationOutsideOffset?.Tablet ? `${paginationOutsideOffset.Tablet}${paginationOutsideOffsetUnits?.Tablet || "px"}` : paginationOutsideOffset?.Desktop ? `${paginationOutsideOffset.Desktop}${paginationOutsideOffsetUnits?.Desktop || "px"}` : "30px"};`}
                     }
                 ` : showPagination?.Desktop || showPagination?.Tablet ? `
                     .${blockId}.gslider-testimonial-wrapper.has-pagination {
-                        margin-right: 0;
+                        ${verticalPaginationAlignment === "left" ? `margin-left: 0;` : `margin-right: 0;`}
                     }
                 ` : ""}
             ` : ""}

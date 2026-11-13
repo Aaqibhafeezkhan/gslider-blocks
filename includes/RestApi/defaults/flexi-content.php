@@ -139,6 +139,7 @@ return [
 		'Mobile' => '14',
 	],
 	'paginationPositionType' => 'inside',
+	'verticalPaginationAlignment' => 'right',
 	'layoutHeightSwitcher' => 'fixed',
 	'layoutHeight' => [
 		'Desktop' => '350',

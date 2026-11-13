@@ -25,7 +25,7 @@
       "carousel"
     ]
   },
-  "totalAttributes": 564,
+  "totalAttributes": 565,
   "slideItemSchema": {
     "type": "object",
     "properties": {
@@ -455,6 +455,10 @@
       "h6",
       "p",
       "span"
+    ],
+    "verticalPaginationAlignment": [
+      "left",
+      "right"
     ]
   },
   "attributes": {
@@ -1005,6 +1009,10 @@
     "paginationPositionType": {
       "type": "string",
       "default": "outside"
+    },
+    "verticalPaginationAlignment": {
+      "type": "string",
+      "default": "right"
     },
     "contentOrder": {
       "type": "array",

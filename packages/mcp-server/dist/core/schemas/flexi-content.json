@@ -23,7 +23,7 @@
       "carousel"
     ]
   },
-  "totalAttributes": 308,
+  "totalAttributes": 309,
   "slideItemSchema": {
     "type": "childBlock",
     "name": "gslider-blocks/flexi-content-item",
@@ -238,6 +238,10 @@
       "mountains",
       "zigzag",
       "scallops"
+    ],
+    "verticalPaginationAlignment": [
+      "left",
+      "right"
     ]
   },
   "attributes": {
@@ -512,6 +516,10 @@
     "paginationPositionType": {
       "type": "string",
       "default": "inside"
+    },
+    "verticalPaginationAlignment": {
+      "type": "string",
+      "default": "right"
     },
     "layoutHeightSwitcher": {
       "type": "string",

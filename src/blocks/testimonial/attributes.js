@@ -534,6 +534,10 @@ const attributes = {
 		type: 'string',
 		default: 'outside',
 	},
+	verticalPaginationAlignment: {
+		type: 'string',
+		default: 'right',
+	},
 	/** End Show/Hide Elements */
 
 	/** Layout & Content Setting */

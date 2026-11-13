@@ -276,6 +276,10 @@ const attributes = {
 		type: 'string',
 		default: 'inside',
 	},
+	verticalPaginationAlignment: {
+		type: 'string',
+		default: 'right',
+	},
 	/** End Show/Hide Elements */
 
 	/** Layout & Content Setting */

@@ -349,6 +349,114 @@ if (
 }
 console.log( 'ok testimonial vertical fraction outside pagination margin' );
 
+// Testimonial vertical pagination left alignment (issue #776)
+const testimonialLeftInsideStyle = testimonialBlock.styling( {
+	...testimonialDefaults,
+	direction: 'vertical',
+	verticalPaginationAlignment: 'left',
+	paginationPositionType: 'inside',
+} );
+if (
+	! testimonialLeftInsideStyle.includes(
+		'left: 10px !important; right: auto !important;'
+	)
+) {
+	fail( 'testimonial vertical left inside pagination must set left: 10px' );
+}
+
+const testimonialRightOutsideStyle = testimonialBlock.styling( {
+	...testimonialDefaults,
+	direction: 'vertical',
+	verticalPaginationAlignment: 'right',
+	paginationPositionType: 'outside',
+} );
+if (
+	! testimonialRightOutsideStyle.includes( 'right: -30px !important;' ) ||
+	! testimonialRightOutsideStyle.includes(
+		'.gslider-testimonial-wrapper.has-pagination { margin-right: 30px;'
+	)
+) {
+	fail(
+		'testimonial vertical right outside pagination must set right offset and margin-right'
+	);
+}
+console.log( 'ok testimonial vertical right pagination alignment' );
+
+const testimonialLeftOutsideStyle = testimonialBlock.styling( {
+	...testimonialDefaults,
+	direction: 'vertical',
+	verticalPaginationAlignment: 'left',
+	paginationPositionType: 'outside',
+} );
+if (
+	! testimonialLeftOutsideStyle.includes(
+		'left: -30px !important; right: auto !important;'
+	) ||
+	! testimonialLeftOutsideStyle.includes(
+		'.gslider-testimonial-wrapper.has-pagination { margin-left: 30px; margin-right: 0;'
+	)
+) {
+	fail(
+		'testimonial vertical left outside pagination must set left offset and margin-left'
+	);
+}
+console.log( 'ok testimonial vertical left pagination alignment' );
+
+// Flexi-content vertical pagination left alignment (issue #776)
+const flexiBlock = loadBundledBlock( 'flexi-content' );
+const flexiDefaults = attributeDefaults( flexiBlock.attributes );
+const flexiLeftInsideStyle = flexiBlock.styling( {
+	...flexiDefaults,
+	direction: 'vertical',
+	verticalPaginationAlignment: 'left',
+	paginationPositionType: 'inside',
+} );
+if (
+	! flexiLeftInsideStyle.includes(
+		'left: 10px !important; right: auto !important;'
+	)
+) {
+	fail( 'flexi vertical left inside pagination must set left: 10px' );
+}
+
+const flexiRightOutsideStyle = flexiBlock.styling( {
+	...flexiDefaults,
+	direction: 'vertical',
+	verticalPaginationAlignment: 'right',
+	paginationPositionType: 'outside',
+} );
+if (
+	! flexiRightOutsideStyle.includes( 'right: -30px !important;' ) ||
+	! flexiRightOutsideStyle.includes(
+		'.gslider-flexi-content-wrapper.has-pagination { margin-right: 30px;'
+	)
+) {
+	fail(
+		'flexi vertical right outside pagination must set right offset and margin-right'
+	);
+}
+console.log( 'ok flexi-content vertical right pagination alignment' );
+
+const flexiLeftOutsideStyle = flexiBlock.styling( {
+	...flexiDefaults,
+	direction: 'vertical',
+	verticalPaginationAlignment: 'left',
+	paginationPositionType: 'outside',
+} );
+if (
+	! flexiLeftOutsideStyle.includes(
+		'left: -30px !important; right: auto !important;'
+	) ||
+	! flexiLeftOutsideStyle.includes(
+		'.gslider-flexi-content-wrapper.has-pagination { margin-left: 30px; margin-right: 0;'
+	)
+) {
+	fail(
+		'flexi vertical left outside pagination must set left offset and margin-left'
+	);
+}
+console.log( 'ok flexi-content vertical left pagination alignment' );
+
 for ( const slug of slugs ) {
 	await rejects(
 		{

@@ -72,6 +72,7 @@ export default function Edit( {
 		showNavigation,
 		showPagination,
 		paginationPositionType,
+		verticalPaginationAlignment,
 		authorNameHtmlTag,
 		authorDesignationHtmlTag,
 		testimonialTitleHtmlTag,
@@ -331,6 +332,7 @@ export default function Edit( {
 		showNavigation,
 		showPagination,
 		paginationPositionType,
+		verticalPaginationAlignment,
 		paginationType,
 		dynamicBullets,
 		navigationArrowPositionType,
@@ -622,6 +624,36 @@ export default function Edit( {
 		);
 	};
 
+	const isInsidePaginationActive =
+		Boolean( showPagination?.[ deviceType ] ) &&
+		paginationPositionType === 'inside';
+	const isOutsidePaginationActive =
+		Boolean( showPagination?.[ deviceType ] ) &&
+		paginationPositionType === 'outside';
+
+	const getPaginationModifierClasses = ( isActive ) => {
+		if ( ! isActive ) {
+			return '';
+		}
+		const dirClass =
+			direction === 'vertical'
+				? 'swiper-pagination-vertical'
+				: 'swiper-pagination-horizontal';
+
+		let typeClass = '';
+		if ( paginationType === 'bullets' ) {
+			typeClass = dynamicBullets
+				? 'swiper-pagination-bullets swiper-pagination-bullets-dynamic'
+				: 'swiper-pagination-bullets';
+		} else if ( paginationType === 'fraction' ) {
+			typeClass = 'swiper-pagination-fraction';
+		} else if ( paginationType === 'progressbar' ) {
+			typeClass = 'swiper-pagination-progressbar';
+		}
+
+		return `${ dirClass } ${ typeClass } swiper-pagination-clickable`.trim();
+	};
+
 	return (
 		<>
 			<Inspector
@@ -638,7 +670,11 @@ export default function Edit( {
 
 			<div { ...blockProps }>
 				<div
-					className="swiper"
+					className={ `swiper ${
+						direction === 'vertical'
+							? 'swiper-vertical'
+							: 'swiper-horizontal'
+					}` }
 					ref={ swiperContainerRef }
 					{ ...( globalID && { id: globalID } ) }
 				>
@@ -1150,7 +1186,9 @@ export default function Edit( {
 
 					{ /* Pagination inside swiper container */ }
 					<div
-						className="swiper-pagination swiper-pagination-testimonial-slider"
+						className={ `swiper-pagination swiper-pagination-testimonial-slider ${ getPaginationModifierClasses(
+							isInsidePaginationActive
+						) }`.trim() }
 						ref={ paginationInsideRef }
 					></div>
 				</div>
@@ -1245,7 +1283,9 @@ export default function Edit( {
 
 				{ /* Pagination outside swiper container */ }
 				<div
-					className={ `swiper-pagination swiper-pagination-testimonial-slider swiper-pagination-${ blockId }` }
+					className={ `swiper-pagination swiper-pagination-testimonial-slider swiper-pagination-${ blockId } ${ getPaginationModifierClasses(
+						isOutsidePaginationActive
+					) }`.trim() }
 					ref={ paginationOutsideRef }
 					aria-label={ __( 'Slider pagination', 'gslider-blocks' ) }
 				></div>

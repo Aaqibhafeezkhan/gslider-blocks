@@ -39,6 +39,7 @@ import {
 	NAVIGATION_ARROW_DIRECTION,
 	LAYOUT_HEIGHT_SWITCHER,
 	PAGINATION_POSITION_TYPE,
+	VERTICAL_PAGINATION_ALIGNMENT,
 	ICON_IMAGE_ALIGN,
 } from '@Constants';
 
@@ -126,6 +127,7 @@ const Inspector = ( {
 		showNavigation,
 		showPagination,
 		paginationPositionType,
+		verticalPaginationAlignment,
 		/** End Show/Hide Elements */
 
 		/** Start Layout & Content Setting */
@@ -2217,6 +2219,23 @@ const Inspector = ( {
 							setAttributes( { paginationPositionType: value } )
 						}
 					/>
+
+					{ direction === 'vertical' &&
+						paginationType === 'bullets' && (
+							<SwitcherControl
+								label={ __(
+									'Vertical Pagination Alignment',
+									'gslider-blocks'
+								) }
+								options={ VERTICAL_PAGINATION_ALIGNMENT }
+								value={ verticalPaginationAlignment }
+								onChange={ ( value ) =>
+									setAttributes( {
+										verticalPaginationAlignment: value,
+									} )
+								}
+							/>
+						) }
 
 					<SelectControls
 						label={ __( 'Type', 'gslider-blocks' ) }

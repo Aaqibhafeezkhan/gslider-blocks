@@ -310,6 +310,7 @@ return [
 		'Mobile' => true,
 	],
 	'paginationPositionType' => 'outside',
+	'verticalPaginationAlignment' => 'right',
 	'contentOrder' => [
 		'quote',
 		'content',
