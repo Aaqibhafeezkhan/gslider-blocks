@@ -28,15 +28,19 @@ function slideFor( slug ) {
 	return { url: 'https://example.com/slide.jpg', alt: 'Slide' };
 }
 
-function effectIn( markup ) {
-	const match = markup.match( /data-swiper-settings="([^"]*)"/ );
+function swiperSettingsIn( markup ) {
+	const match = markup.match( /data-swiper-settings="([^"]*)"[\s>]/ );
 	if ( ! match ) {
 		fail( 'markup has no data-swiper-settings attribute' );
 	}
 	const decoded = match[ 1 ]
 		.replace( /&quot;/g, '"' )
 		.replace( /&amp;/g, '&' );
-	return JSON.parse( decoded ).effect;
+	return JSON.parse( decoded );
+}
+
+function effectIn( markup ) {
+	return swiperSettingsIn( markup ).effect;
 }
 
 async function generate( input ) {
@@ -189,6 +193,161 @@ console.log(
 if ( new Set( blockIds ).size !== blockIds.length ) {
 	fail( 'generated block ids are not unique' );
 }
+
+// Testimonial vertical direction: the saved Swiper settings must keep the
+// horizontal default free of a direction key, and vertical mode must set
+// direction while dropping autoHeight (issue #648 backward compatibility).
+const testimonialHorizontal = await generate( {
+	blockSlug: 'testimonial',
+	slides: [ slideFor( 'testimonial' ) ],
+} );
+if ( 'direction' in swiperSettingsIn( testimonialHorizontal.markup ) ) {
+	fail( 'testimonial default markup must not include a direction key' );
+}
+const testimonialVertical = await generate( {
+	blockSlug: 'testimonial',
+	slides: [ slideFor( 'testimonial' ) ],
+	attributes: { direction: 'vertical' },
+} );
+const verticalSettings = swiperSettingsIn( testimonialVertical.markup );
+if ( verticalSettings.direction !== 'vertical' ) {
+	fail( 'testimonial vertical markup must set direction to vertical' );
+}
+if ( 'autoHeight' in verticalSettings ) {
+	fail( 'testimonial vertical markup must not include autoHeight' );
+}
+console.log( 'ok testimonial swiper settings direction handling' );
+
+// Testimonial vertical styling must use the dedicated verticalHeight
+// defaults and never fall back to the horizontal layoutHeight attributes.
+const testimonialBlock = loadBundledBlock( 'testimonial' );
+const testimonialDefaults = attributeDefaults( testimonialBlock.attributes );
+const verticalStyle = testimonialBlock.styling( {
+	...testimonialDefaults,
+	direction: 'vertical',
+	layoutHeight: { Desktop: '', Tablet: '', Mobile: '' },
+	layoutHeightUnits: { Desktop: 'px', Tablet: 'px', Mobile: 'px' },
+} );
+const verticalHeights = [
+	...verticalStyle.matchAll(
+		/gslider-testimonial-wrapper > \.swiper \{\s*height: ([^;]+);/g
+	),
+].map( ( match ) => match[ 1 ].trim() );
+if ( ! isDeepStrictEqual( verticalHeights, [ '500px', '420px', '350px' ] ) ) {
+	fail(
+		`testimonial vertical heights ${ JSON.stringify(
+			verticalHeights
+		) } do not use the dedicated verticalHeight defaults`
+	);
+}
+console.log( 'ok testimonial vertical height independence' );
+
+// Vertical sliders using outside pagination must place the bullets outside
+// the slider. Swiper tags the pagination element with swiper-pagination-vertical
+// when the direction is vertical, so the outside offset has to be applied on
+// the vertical axis. Horizontal sliders must keep the horizontal rule only.
+const horizontalPaginationStyle = testimonialBlock.styling( {
+	...testimonialDefaults,
+	paginationPositionType: 'outside',
+} );
+if ( horizontalPaginationStyle.includes( 'swiper-pagination-vertical' ) ) {
+	fail(
+		'testimonial horizontal pagination must not use vertical pagination rules'
+	);
+}
+if (
+	! horizontalPaginationStyle.includes(
+		'.gslider-testimonial-wrapper.has-pagination { margin-bottom:'
+	)
+) {
+	fail(
+		'testimonial horizontal outside pagination must keep the bottom margin'
+	);
+}
+if (
+	horizontalPaginationStyle.includes(
+		'.gslider-testimonial-wrapper.has-pagination { margin-right:'
+	)
+) {
+	fail(
+		'testimonial horizontal outside pagination must not use the right margin'
+	);
+}
+
+const verticalPaginationStyle = testimonialBlock.styling( {
+	...testimonialDefaults,
+	direction: 'vertical',
+	paginationPositionType: 'outside',
+} );
+if (
+	! verticalPaginationStyle.includes(
+		'.swiper-pagination-bullets.swiper-pagination-vertical'
+	)
+) {
+	fail(
+		'testimonial vertical outside pagination must target the vertical pagination class'
+	);
+}
+if (
+	! verticalPaginationStyle.includes(
+		'.gslider-testimonial-wrapper.has-pagination { margin-right:'
+	)
+) {
+	fail(
+		'testimonial vertical outside pagination must reserve space on the right'
+	);
+}
+if (
+	verticalPaginationStyle.includes(
+		'.gslider-testimonial-wrapper.has-pagination { margin-bottom:'
+	)
+) {
+	fail(
+		'testimonial vertical outside pagination must not use the bottom margin'
+	);
+}
+// The generic pagination rule can emit a bottom offset. Vertical bullets are
+// centered with top: 50%, so every breakpoint must reset bottom or the element
+// stretches between both edges.
+const verticalBulletBottomResets = [
+	...verticalPaginationStyle.matchAll(
+		/\.swiper-pagination-vertical\.swiper-pagination-bullets \{ top: 50%; bottom: auto !important;/g
+	),
+];
+if ( verticalBulletBottomResets.length !== 3 ) {
+	fail(
+		`testimonial vertical outside bullets must reset bottom at all 3 breakpoints, found ${ verticalBulletBottomResets.length }`
+	);
+}
+console.log( 'ok testimonial vertical outside pagination positioning' );
+
+// Fraction pagination stays bottom positioned in vertical mode, so only
+// bullets may switch the outside space reservation to the right margin.
+const verticalFractionStyle = testimonialBlock.styling( {
+	...testimonialDefaults,
+	direction: 'vertical',
+	paginationType: 'fraction',
+	paginationPositionType: 'outside',
+} );
+if (
+	! verticalFractionStyle.includes(
+		'.gslider-testimonial-wrapper.has-pagination { margin-bottom:'
+	)
+) {
+	fail(
+		'testimonial vertical fraction outside pagination must keep the bottom margin'
+	);
+}
+if (
+	verticalFractionStyle.includes(
+		'.gslider-testimonial-wrapper.has-pagination { margin-right:'
+	)
+) {
+	fail(
+		'testimonial vertical fraction outside pagination must not reserve right margin'
+	);
+}
+console.log( 'ok testimonial vertical fraction outside pagination margin' );
 
 for ( const slug of slugs ) {
 	await rejects(

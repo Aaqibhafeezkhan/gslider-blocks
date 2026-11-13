@@ -18,6 +18,16 @@ import { normalizeContentOrder } from './content-order';
 // Swiper is loaded globally via FrontendAssets.php (swiper-bundle.min.js)
 // We use vanilla JS Swiper in useEffect instead of swiper/react
 
+/**
+ * Testimonial Slider Gutenberg editor component.
+ *
+ * @param {Object}   props               Block editor component props.
+ * @param {Object}   props.attributes    Current block attributes.
+ * @param {Function} props.setAttributes Attribute setter callback.
+ * @param {string}   props.clientId      Unique block client ID.
+ * @param {boolean}  props.isSelected    Whether the block is selected in the editor.
+ * @return {Element} Rendered block editor element.
+ */
 export default function Edit( {
 	attributes,
 	setAttributes,
@@ -80,6 +90,7 @@ export default function Edit( {
 		navigationArrowsIconRight,
 		navigationArrowsIconRightImageUrl,
 
+		direction,
 		layoutHeightSwitcher,
 		contentOrder,
 		authorPlaceholderUrl,
@@ -221,9 +232,12 @@ export default function Edit( {
 					},
 				},
 			} ),
-			...( layoutHeightSwitcher === 'adapt' && {
-				autoHeight: true,
-			} ),
+			...( direction === 'vertical' && { direction: 'vertical' } ),
+			// Vertical slides use the fixed height, autoHeight does not work with it
+			...( layoutHeightSwitcher === 'adapt' &&
+				direction !== 'vertical' && {
+					autoHeight: true,
+				} ),
 			loop: infiniteLoop,
 			autoplay: autoplay
 				? {
@@ -267,7 +281,12 @@ export default function Edit( {
 			...( slideEffect === 'creative' && {
 				creativeEffect: {
 					prev: { shadow: true, translate: [ 0, 0, -400 ] },
-					next: { translate: [ '100%', 0, 0 ] },
+					next: {
+						translate:
+							direction === 'vertical'
+								? [ 0, '100%', 0 ]
+								: [ '100%', 0, 0 ],
+					},
 				},
 			} ),
 			on: {
@@ -319,6 +338,7 @@ export default function Edit( {
 		navigationArrowsIconSwitcher,
 		navigationArrowsIconLeft,
 		navigationArrowsIconRight,
+		direction,
 		layoutHeightSwitcher,
 	] );
 

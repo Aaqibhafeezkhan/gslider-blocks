@@ -6,6 +6,7 @@ import {
 	useMemo,
 	memo,
 	useCallback,
+	useRef,
 } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
@@ -30,6 +31,7 @@ import {
 	SLIDER_EFFECT_OPTIONS,
 	CAROUSEL_EFFECT_OPTIONS,
 	SLIDER_TYPE,
+	SLIDER_DIRECTION,
 	PAGINATION_TYPE,
 	NORMAL_ACTIVE,
 	NAVIGATION_ARROW_POSITION_TYPE,
@@ -66,6 +68,19 @@ import PresetSelector from '@Components/preset-selector';
 import { TESTIMONIAL_PRESETS } from './preset';
 import { normalizeContentOrder } from './content-order';
 
+/**
+ * Testimonial Slider inspector settings panel.
+ *
+ * @param {Object}   props                     Component props.
+ * @param {Object}   props.attributes          Current block attributes.
+ * @param {Function} props.setAttributes       Attribute setter callback.
+ * @param {Function} props.handleAddItem       Adds a new testimonial slide.
+ * @param {Function} props.handleChangeItem    Updates a testimonial slide.
+ * @param {Function} props.handleDuplicateItem Duplicates a testimonial slide.
+ * @param {Function} props.handleDragEnd       Persists slide reordering.
+ * @param {Function} props.handleDeleteItem    Removes a testimonial slide.
+ * @return {Element} Rendered inspector panel.
+ */
 const Inspector = ( {
 	attributes,
 	setAttributes,
@@ -114,10 +129,13 @@ const Inspector = ( {
 		/** End Show/Hide Elements */
 
 		/** Start Layout & Content Setting */
+		direction,
 		contentOrder,
 		layoutHeightSwitcher,
 		layoutHeight,
 		layoutHeightUnits,
+		verticalHeight,
+		verticalHeightUnits,
 		contentWidth,
 		contentWidthUnits,
 		contentAlignment,
@@ -813,6 +831,36 @@ const Inspector = ( {
 		} ) );
 	}, [] );
 
+	/**
+	 * Percentage height cannot resolve against the slider wrapper, so the
+	 * vertical height control rejects the % unit. The shared unit control
+	 * always writes the clamped value after the unit, so the pending flag
+	 * keeps the stored height untouched when % is picked.
+	 */
+	const skipVerticalHeightUpdateRef = useRef( false );
+
+	const handleVerticalHeightUnitChange = useCallback(
+		( value ) => {
+			if ( value?.[ deviceType ] === '%' ) {
+				skipVerticalHeightUpdateRef.current = true;
+				return;
+			}
+			setAttributes( { verticalHeightUnits: value } );
+		},
+		[ deviceType, setAttributes ]
+	);
+
+	const handleVerticalHeightValueChange = useCallback(
+		( value ) => {
+			if ( skipVerticalHeightUpdateRef.current ) {
+				skipVerticalHeightUpdateRef.current = false;
+				return;
+			}
+			setAttributes( { verticalHeight: value } );
+		},
+		[ setAttributes ]
+	);
+
 	/** Format Spacing */
 	const formatSpacingSide = ( value, unit ) =>
 		value === '' || value === undefined || value === null
@@ -1140,44 +1188,94 @@ const Inspector = ( {
 				}
 			>
 				<SwitcherControl
-					label={ __( 'Layout Height Switcher', 'gslider-blocks' ) }
-					options={ LAYOUT_HEIGHT_SWITCHER }
-					value={ layoutHeightSwitcher }
+					label={ __( 'Slider Direction', 'gslider-blocks' ) }
+					options={ SLIDER_DIRECTION }
+					value={ direction }
 					onChange={ ( value ) =>
-						setAttributes( { layoutHeightSwitcher: value } )
+						setAttributes( { direction: value } )
 					}
 				/>
 
-				{ layoutHeightSwitcher === 'fixed' && (
-					<ResponsiveRangeControl
-						label={ __( 'Minimum Height', 'gslider-blocks' ) }
-						rangeValue={ layoutHeight }
-						onChangeValue={ ( value ) =>
-							setAttributes( { layoutHeight: value } )
-						}
-						onUnitChange={ ( value ) =>
-							setAttributes( { layoutHeightUnits: value } )
-						}
-						deviceType={ deviceType }
-						units={ layoutHeightUnits }
-						resetFallbackValue={ {
-							px:
-								{
-									Desktop: '420',
-									Tablet: '340',
-									Mobile: '260',
-								}[ deviceType ] || '260',
-							'%': '50',
-							vh: '50',
-							vw: '50',
-							em: '20',
-							rem: '20',
-						} }
-					/>
-				) }
+				{ direction === 'vertical' ? (
+					<>
+						<ResponsiveRangeControl
+							label={ __( 'Slider Height', 'gslider-blocks' ) }
+							rangeValue={ verticalHeight }
+							onChangeValue={ handleVerticalHeightValueChange }
+							onUnitChange={ handleVerticalHeightUnitChange }
+							deviceType={ deviceType }
+							units={ verticalHeightUnits }
+							resetFallbackValue={ {
+								px: '500',
+								vh: '60',
+								em: '25',
+								rem: '25',
+							} }
+						/>
 
-				{ layoutHeightSwitcher === 'adapt' && (
-					<p>Slides adapt their height to the inside content.</p>
+						<p>
+							{ __(
+								'Vertical sliders always use this fixed height. Use px, vh, vw, em or rem. A percent height is not supported.',
+								'gslider-blocks'
+							) }
+						</p>
+					</>
+				) : (
+					<>
+						<SwitcherControl
+							label={ __(
+								'Layout Height Switcher',
+								'gslider-blocks'
+							) }
+							options={ LAYOUT_HEIGHT_SWITCHER }
+							value={ layoutHeightSwitcher }
+							onChange={ ( value ) =>
+								setAttributes( { layoutHeightSwitcher: value } )
+							}
+						/>
+
+						{ layoutHeightSwitcher === 'fixed' && (
+							<ResponsiveRangeControl
+								label={ __(
+									'Minimum Height',
+									'gslider-blocks'
+								) }
+								rangeValue={ layoutHeight }
+								onChangeValue={ ( value ) =>
+									setAttributes( { layoutHeight: value } )
+								}
+								onUnitChange={ ( value ) =>
+									setAttributes( {
+										layoutHeightUnits: value,
+									} )
+								}
+								deviceType={ deviceType }
+								units={ layoutHeightUnits }
+								resetFallbackValue={ {
+									px:
+										{
+											Desktop: '420',
+											Tablet: '340',
+											Mobile: '260',
+										}[ deviceType ] || '260',
+									'%': '50',
+									vh: '50',
+									vw: '50',
+									em: '20',
+									rem: '20',
+								} }
+							/>
+						) }
+
+						{ layoutHeightSwitcher === 'adapt' && (
+							<p>
+								{ __(
+									'Slides adapt their height to the inside content.',
+									'gslider-blocks'
+								) }
+							</p>
+						) }
+					</>
 				) }
 
 				<ResponsiveRangeControl
@@ -1203,7 +1301,8 @@ const Inspector = ( {
 					} }
 				/>
 
-				{ layoutHeightSwitcher !== 'adapt' && (
+				{ ( layoutHeightSwitcher !== 'adapt' ||
+					direction === 'vertical' ) && (
 					<ResponsiveAlignmentControl
 						label={ __( 'Vertical Alignment', 'gslider-blocks' ) }
 						options={ VERTICAL_ALIGN }
